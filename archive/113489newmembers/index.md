@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Defining a function by or.elim](07549Definingafunctionbyorelim.html) (59 messages, latest: Dec 04 2019 at 16:20)
+
 * [VS code settings](14262VScodesettings.html) (6 messages, latest: Dec 04 2019 at 14:50)
 
 * [Summing over a range](89483Summingoverarange.html) (3 messages, latest: Dec 04 2019 at 12:22)
@@ -48,8 +50,6 @@ permalink: archive/113489newmembers/index.html
 * [rewrite only first occurrence?](40181rewriteonlyfirstoccurrence.html) (20 messages, latest: Nov 24 2019 at 19:09)
 
 * [Learning Lean and mathlib](06501LearningLeanandmathlib.html) (3 messages, latest: Nov 23 2019 at 14:29)
-
-* [Defining a function by or.elim](07549Definingafunctionbyorelim.html) (58 messages, latest: Nov 23 2019 at 13:52)
 
 * [Application type mismatch](62669Applicationtypemismatch.html) (18 messages, latest: Nov 22 2019 at 16:36)
 

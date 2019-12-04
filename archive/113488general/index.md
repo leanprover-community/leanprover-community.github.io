@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [visualizations](70566visualizations.html) (67 messages, latest: Dec 04 2019 at 13:14)
+* [visualizations](70566visualizations.html) (68 messages, latest: Dec 04 2019 at 16:25)
 
 * [How do you use Lean at command line?](78951HowdoyouuseLeanatcommandline.html) (11 messages, latest: Dec 03 2019 at 23:26)
 

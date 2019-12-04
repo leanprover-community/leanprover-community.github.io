@@ -49,6 +49,82 @@ permalink: archive/116395maths/97259normedspacetimeouts.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182532827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182532827">Sebastien Gouezel (Dec 04 2019 at 07:47)</a>:</h4>
 <p>Is this specific to <code>ℝ</code>? A way out would be to prove the theorem in its right generality, i.e., over any nondiscrete normed field (hint: if a ball in a vector space is compact, then either the dimension is <code>0</code> and the space is indeed finite-dimensional, or the dimension is positive and then one can deduce that the field is locally compact, therefore complete, and all you did on <code>ℝ</code> should go through).</p>
 
+<a name="182571853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182571853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182571853">Kevin Buzzard (Dec 04 2019 at 16:26)</a>:</h4>
+<p><span class="user-mention" data-user-id="248716">@Lambert A'Campo</span> there's your homework ;-)</p>
+
+<a name="182573074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182573074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182573074">Kevin Buzzard (Dec 04 2019 at 16:38)</a>:</h4>
+<p>I have minimised the issue:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">normed_space</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_field</span> <span class="n">k</span><span class="o">]</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">V</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="n">k</span> <span class="n">V</span><span class="o">]</span>
+
+<span class="kn">set_option</span> <span class="n">class</span><span class="bp">.</span><span class="n">instance_max_depth</span> <span class="mi">36</span> <span class="c1">-- 35 gives max class-instance res depth error</span>
+<span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">class_instances</span> <span class="n">true</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">has_scalar</span> <span class="n">k</span> <span class="n">V</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- (message too long, truncated at 262144 characters)</span>
+</pre></div>
+
+
+<p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> it is not specific to <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="double-struck">R</mi></mrow><annotation encoding="application/x-tex">\mathbb{R}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68889em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbb">R</span></span></span></span></span>. Type class resolution is going crazy here. It is a miracle that Lambert got to the end of his proof. He just didn't know that it wasn't supposed to be this horrible. It's one of those situations where every time you write a new line you have to wait for several seconds for the orange bars to disappear. I don't really care why it's happening any more, I have this vague idea that it will all be fixed in Lean 4 and until then I just want to know some way of changing some priority to 37 or 10000 to make it all happen immediately for Lambert.</p>
+
+<a name="182573513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182573513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182573513">Kevin Buzzard (Dec 04 2019 at 16:42)</a>:</h4>
+<p><a href="https://gist.github.com/kbuzzard/8c8ee22162b7f546b94df957538b5d2e" target="_blank" title="https://gist.github.com/kbuzzard/8c8ee22162b7f546b94df957538b5d2e">typeclass trace here</a> (first 262144 characters of it anyway). I still cannot read these mysterious incantations. Is this the one which is a prolog-like search or is that <code>simp</code>? I am still so ignorant of these matters. I just want it to work.</p>
+
+<a name="182574179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182574179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182574179">Sebastien Gouezel (Dec 04 2019 at 16:49)</a>:</h4>
+<p>Maybe <a href="https://github.com/leanprover-community/mathlib/issues/1729" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1729">#1729</a> will make a difference, who knows...</p>
+
+<a name="182574180"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182574180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182574180">Patrick Massot (Dec 04 2019 at 16:49)</a>:</h4>
+<p>This is one more toy for <span class="user-mention" data-user-id="230999">@Daniel Selsam</span> . Note that <code>example : has_scalar k V :=  mul_action.to_has_scalar k V</code> is instantaneous, so this is really this instance that is long to find.</p>
+
+<a name="182574379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182574379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182574379">Kevin Buzzard (Dec 04 2019 at 16:51)</a>:</h4>
+<p>I note that Lean starts off by spending a lot of time trying to prove that the normed group V is (deep breath): a ring, a normed ring, a normed field, a domain, a division ring, a field, a linear_ordered field, a discrete_field, a linear_ordered ring, a linear_ordered_comm_ring, a decidable_linear_ordered_comm_ring, a discrete_linear_ordered_field, an integral_domain, a euclidean_domain, a nondiscrete_normed_field, and it just keeps going. <em>V does not have a multiplication so it is obviously none of these things</em>. There is no <code>has_mul</code>!</p>
+
+<a name="182574758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182574758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182574758">Kevin Buzzard (Dec 04 2019 at 16:54)</a>:</h4>
+<p>A normalisation domain, a gcd_domain, a normed_field, an ordered ring, a comm_ring, a nonzero_comm_ring...</p>
+
+<a name="182575021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182575021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182575021">Floris van Doorn (Dec 04 2019 at 16:56)</a>:</h4>
+<p>Yes, I think <a href="https://github.com/leanprover-community/mathlib/issues/1729" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1729">#1729</a> will improve this. However, we are reaching the limits of the Lean 3 type class inference search here, and the problems will get worse...</p>
+
+<a name="182575064"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182575064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182575064">Kevin Buzzard (Dec 04 2019 at 16:57)</a>:</h4>
+<p>The madness with V starts on line 73 of the typeclass trace link above, and it takes up all the remaining 4000+ lines of the trace.</p>
+
+<a name="182575068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182575068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182575068">Floris van Doorn (Dec 04 2019 at 16:57)</a>:</h4>
+<p>As I describe in <a href="https://github.com/leanprover-community/mathlib/issues/1561" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1561">#1561</a>, I think the problem is even worse for <code>real</code> than for a variable <code>V</code>, because of all the shortcut-instances we have for <code>real</code>.</p>
+
+<a name="182575125"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182575125" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182575125">Patrick Massot (Dec 04 2019 at 16:58)</a>:</h4>
+<p>I guess you mean variable <code>k</code>.</p>
+
+<a name="182575174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182575174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182575174">Kevin Buzzard (Dec 04 2019 at 16:58)</a>:</h4>
+<p>How do I cheat? Patrick has told us the instance I need. How do I just make Lean use that instance and not ask any questions?</p>
+
+<a name="182575204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182575204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182575204">Floris van Doorn (Dec 04 2019 at 16:58)</a>:</h4>
+<p>Oops, yes I meant <code>k</code>.</p>
+
+<a name="182575209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182575209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182575209">Kevin Buzzard (Dec 04 2019 at 16:58)</a>:</h4>
+<p>There might be bubs everywhere in Lambert's code.</p>
+
+<a name="182575318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182575318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182575318">Floris van Doorn (Dec 04 2019 at 16:59)</a>:</h4>
+<p>Does something like the following work (I don't have Lean running right now)</p>
+<div class="codehilite"><pre><span></span>local attribute [instance, priority 0] module.to_has_scalar
+local attribute [instance, priority 200] vector_space.to_module
+</pre></div>
+
 
 {% endraw %}
 
