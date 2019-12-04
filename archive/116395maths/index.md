@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [local fields / nonarchimedean fields](86469localfieldsnonarchimedeanfields.html) (3 messages, latest: Dec 04 2019 at 09:48)
+* [local fields / nonarchimedean fields](86469localfieldsnonarchimedeanfields.html) (16 messages, latest: Dec 04 2019 at 10:37)
 
 * [division_ring'](95004divisionring.html) (1 message, latest: Dec 04 2019 at 09:27)
 
