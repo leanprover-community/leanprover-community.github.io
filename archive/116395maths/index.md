@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [local fields / nonarchimedean fields](86469localfieldsnonarchimedeanfields.html) (17 messages, latest: Dec 04 2019 at 22:49)
+
 * [normed_space timeouts](97259normedspacetimeouts.html) (28 messages, latest: Dec 04 2019 at 19:58)
 
 * [division_ring'](95004divisionring.html) (4 messages, latest: Dec 04 2019 at 18:04)
-
-* [local fields / nonarchimedean fields](86469localfieldsnonarchimedeanfields.html) (16 messages, latest: Dec 04 2019 at 10:37)
 
 * [Span of finite set is sequentially closed](63081Spanoffinitesetissequentiallyclosed.html) (97 messages, latest: Dec 04 2019 at 08:59)
 
