@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [normed_space timeouts](97259normedspacetimeouts.html) (17 messages, latest: Dec 04 2019 at 16:59)
+* [normed_space timeouts](97259normedspacetimeouts.html) (27 messages, latest: Dec 04 2019 at 17:12)
 
 * [division_ring'](95004divisionring.html) (3 messages, latest: Dec 04 2019 at 16:49)
 

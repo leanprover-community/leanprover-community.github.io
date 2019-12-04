@@ -1,0 +1,62 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/24366Namegeneration.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/24366Namegeneration.html">Name generation</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="182576817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Name%20generation/near/182576817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24366Namegeneration.html#182576817">Patrick Massot (Dec 04 2019 at 17:13)</a>:</h4>
+<p>I have a meta-question about name generation. My tactic gets its hands on a type, and needs to choose a name for a term of that type. This is in a maths context so the type would typically be called <code>X</code>, and I would expect my tactic to choose <code>x</code> as a term type, appending some index if there is already <code>x</code> in my tactic state. I already know about <code>get_unused_name</code> so only the first step is really missing. Is there any example I could try to copy? There are bonus points if I can also decide that a term of type <code>α</code> should be called <code>a</code> but this is not mandatory.</p>
+
+<a name="182577339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Name%20generation/near/182577339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24366Namegeneration.html#182577339">Rob Lewis (Dec 04 2019 at 17:18)</a>:</h4>
+<p>Literally mapping <code>X</code> to <code>x</code>? <code>char.to_lower</code> or some version lifted to string? This will work for A-Z at least.</p>
+
+<a name="182577400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Name%20generation/near/182577400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24366Namegeneration.html#182577400">Rob Lewis (Dec 04 2019 at 17:19)</a>:</h4>
+<p>I'm pretty sure there's no function in mathlib to guess variable names more intelligently than that.</p>
+
+<a name="182577470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Name%20generation/near/182577470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24366Namegeneration.html#182577470">Patrick Massot (Dec 04 2019 at 17:19)</a>:</h4>
+<p>It would be better to have a slightly more robustness. The type could be <code>X'</code> for instance.</p>
+
+<a name="182577519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Name%20generation/near/182577519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24366Namegeneration.html#182577519">Patrick Massot (Dec 04 2019 at 17:20)</a>:</h4>
+<p>and then I'd like to get <code>x'</code></p>
+
+<a name="182577540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Name%20generation/near/182577540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24366Namegeneration.html#182577540">Rob Lewis (Dec 04 2019 at 17:20)</a>:</h4>
+<p>You can map <code>to_lower</code> over the string.</p>
+
+<a name="182577657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Name%20generation/near/182577657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24366Namegeneration.html#182577657">Rob Lewis (Dec 04 2019 at 17:21)</a>:</h4>
+<p>But this feels a little un-mathlib to me. Usually, if a user is expected to deal with the local constants created by a tactic, they provide the names explicitly.</p>
+
+<a name="182577738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Name%20generation/near/182577738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24366Namegeneration.html#182577738">Patrick Massot (Dec 04 2019 at 17:22)</a>:</h4>
+<p>I agree, but this is not for mathlib.</p>
+
+<a name="182579019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Name%20generation/near/182579019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24366Namegeneration.html#182579019">Patrick Massot (Dec 04 2019 at 17:35)</a>:</h4>
+<p>Does anyone know how to rewrite in a tactic? All the function I'd like to use are marked as private in Lean core lib.</p>
+
+<a name="182579530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Name%20generation/near/182579530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24366Namegeneration.html#182579530">Patrick Massot (Dec 04 2019 at 17:40)</a>:</h4>
+<p>Nevermind, I found it.</p>
+
+<a name="182579564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Name%20generation/near/182579564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24366Namegeneration.html#182579564">Patrick Massot (Dec 04 2019 at 17:40)</a>:</h4>
+<p>There is a subtle game between <code>rw_*</code> and <code>rewrite_*</code>.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

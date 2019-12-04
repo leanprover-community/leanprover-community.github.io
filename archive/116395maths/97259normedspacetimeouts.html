@@ -125,6 +125,73 @@ permalink: archive/116395maths/97259normedspacetimeouts.html
 local attribute [instance, priority 200] vector_space.to_module
 </pre></div>
 
+<a name="182575388"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182575388" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182575388">Kevin Buzzard (Dec 04 2019 at 17:00)</a>:</h4>
+<p>Can someone remind me of the <code>set_option</code> option for seeing how long code takes to be elaborated/compiled/whatever the thing is that is taking a long time?</p>
+
+<a name="182575423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182575423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182575423">Floris van Doorn (Dec 04 2019 at 17:00)</a>:</h4>
+<p><code>set_option profiler true</code></p>
+
+<a name="182575575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182575575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182575575">Floris van Doorn (Dec 04 2019 at 17:01)</a>:</h4>
+<p>Sorry, I meant</p>
+<div class="codehilite"><pre><span></span>local attribute [instance, priority 0] algebra.to_has_scalar
+local attribute [instance, priority 200] vector_space.to_module
+</pre></div>
+
+<a name="182575763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182575763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182575763">Kevin Buzzard (Dec 04 2019 at 17:03)</a>:</h4>
+<p>Compile time goes down from 453ms to 287ms but still takes over 262144 characters of trace.</p>
+
+<a name="182576068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182576068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182576068">Sebastien Gouezel (Dec 04 2019 at 17:06)</a>:</h4>
+<p>What about</p>
+<div class="codehilite"><pre><span></span><span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">10000</span><span class="o">]</span> <span class="n">mul_action</span><span class="bp">.</span><span class="n">to_has_scalar</span> <span class="n">distrib_mul_action</span><span class="bp">.</span><span class="n">to_mul_action</span>
+<span class="n">semimodule</span><span class="bp">.</span><span class="n">to_distrib_mul_action</span> <span class="n">module</span><span class="bp">.</span><span class="n">to_semimodule</span> <span class="n">vector_space</span><span class="bp">.</span><span class="n">to_module</span> <span class="n">normed_space</span><span class="bp">.</span><span class="n">to_vector_space</span>
+<span class="n">ring</span><span class="bp">.</span><span class="n">to_monoid</span> <span class="n">normed_ring</span><span class="bp">.</span><span class="n">to_ring</span> <span class="n">normed_field</span><span class="bp">.</span><span class="n">to_normed_ring</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">to_add_monoid</span>
+<span class="n">add_comm_group</span><span class="bp">.</span><span class="n">to_add_group</span> <span class="n">normed_group</span><span class="bp">.</span><span class="n">to_add_comm_group</span> <span class="n">ring</span><span class="bp">.</span><span class="n">to_semiring</span> <span class="n">add_comm_group</span><span class="bp">.</span><span class="n">to_add_comm_monoid</span>
+</pre></div>
+
+
+<p>:)</p>
+
+<a name="182576082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182576082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182576082">Rob Lewis (Dec 04 2019 at 17:06)</a>:</h4>
+<p>See <a href="#narrow/stream/113488-general/topic/visualizations/near/178373092" title="#narrow/stream/113488-general/topic/visualizations/near/178373092">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/178373092</a> . There's hope for the future.</p>
+
+<a name="182576201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182576201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182576201">Rob Lewis (Dec 04 2019 at 17:07)</a>:</h4>
+<p>The referenced example is something from the sensitivity proof.</p>
+
+<a name="182576279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182576279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182576279">Rob Lewis (Dec 04 2019 at 17:08)</a>:</h4>
+<p>I think it's the same idea as Kevin's example.</p>
+
+<a name="182576724"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182576724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182576724">Floris van Doorn (Dec 04 2019 at 17:12)</a>:</h4>
+<p>Here is what I found:</p>
+<div class="codehilite"><pre><span></span>local attribute [instance, priority 0] algebra.has_scalar algebra.to_module algebra.to_has_scalar
+local attribute [instance, priority 200] vector_space.to_module normed_group.to_add_comm_group
+  add_comm_group.to_add_comm_monoid
+</pre></div>
+
+
+<p>And yes, the main bottleneck here is the same issue as the one Rob references.</p>
+
+<a name="182576727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/normed_space%20timeouts/near/182576727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97259normedspacetimeouts.html#182576727">Sebastien Gouezel (Dec 04 2019 at 17:12)</a>:</h4>
+<p>Oops, sorry, I forgot one. It should have been</p>
+<div class="codehilite"><pre><span></span><span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">10000</span><span class="o">]</span> <span class="n">mul_action</span><span class="bp">.</span><span class="n">to_has_scalar</span> <span class="n">distrib_mul_action</span><span class="bp">.</span><span class="n">to_mul_action</span>
+<span class="n">semimodule</span><span class="bp">.</span><span class="n">to_distrib_mul_action</span> <span class="n">module</span><span class="bp">.</span><span class="n">to_semimodule</span> <span class="n">vector_space</span><span class="bp">.</span><span class="n">to_module</span> <span class="n">normed_space</span><span class="bp">.</span><span class="n">to_vector_space</span>
+<span class="n">ring</span><span class="bp">.</span><span class="n">to_monoid</span> <span class="n">normed_ring</span><span class="bp">.</span><span class="n">to_ring</span> <span class="n">normed_field</span><span class="bp">.</span><span class="n">to_normed_ring</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">to_add_monoid</span>
+<span class="n">add_comm_group</span><span class="bp">.</span><span class="n">to_add_group</span> <span class="n">normed_group</span><span class="bp">.</span><span class="n">to_add_comm_group</span> <span class="n">ring</span><span class="bp">.</span><span class="n">to_semiring</span> <span class="n">add_comm_group</span><span class="bp">.</span><span class="n">to_add_comm_monoid</span>
+<span class="n">normed_field</span><span class="bp">.</span><span class="n">to_discrete_field</span>
+</pre></div>
+
+
+<p>Then there is no failure at all in the instance search, and it just takes a few lines.</p>
+
 
 {% endraw %}
 
