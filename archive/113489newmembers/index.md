@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [VS code settings](14262VScodesettings.html) (1 message, latest: Dec 04 2019 at 13:05)
+
 * [Summing over a range](89483Summingoverarange.html) (3 messages, latest: Dec 04 2019 at 12:22)
 
 * [Advent of code in Lean](06346AdventofcodeinLean.html) (13 messages, latest: Dec 02 2019 at 22:49)
