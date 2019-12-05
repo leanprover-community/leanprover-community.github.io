@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (207 messages, latest: Dec 05 2019 at 15:29)
+
 * [Advent of code in Lean](06346AdventofcodeinLean.html) (16 messages, latest: Dec 05 2019 at 12:06)
 
 * [Summing over a range](89483Summingoverarange.html) (23 messages, latest: Dec 05 2019 at 11:34)
@@ -46,8 +48,6 @@ permalink: archive/113489newmembers/index.html
 * [multiple assumptions of definitionally equal type](09309multipleassumptionsofdefinitionallyequaltype.html) (43 messages, latest: Nov 26 2019 at 20:07)
 
 * [Type ?M_1](72415TypeM1.html) (5 messages, latest: Nov 26 2019 at 17:59)
-
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (206 messages, latest: Nov 25 2019 at 15:19)
 
 * [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (34 messages, latest: Nov 25 2019 at 07:43)
 

@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [(Group action of) SL(n) in mathlib](89384GroupactionofSLninmathlib.html) (1 message, latest: Dec 05 2019 at 14:59)
+* [(Group action of) SL(n) in mathlib](89384GroupactionofSLninmathlib.html) (5 messages, latest: Dec 05 2019 at 15:13)
 
 * [filters and limits](58431filtersandlimits.html) (3 messages, latest: Dec 05 2019 at 09:48)
 
