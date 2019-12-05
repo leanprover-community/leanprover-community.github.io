@@ -20,6 +20,60 @@ permalink: archive/116395maths/53347compactunitball.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20unit%20ball/near/182620840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53347compactunitball.html#182620840">Kevin Buzzard (Dec 05 2019 at 01:59)</a>:</h4>
 <p><a href="#narrow/stream/116395-maths/topic/normed_space.20timeouts/near/182576727" title="#narrow/stream/116395-maths/topic/normed_space.20timeouts/near/182576727">Sebastien's priority hack</a> cuts the compile down on my machine from 16 seconds to under 1.5.</p>
 
+<a name="182623159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20unit%20ball/near/182623159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53347compactunitball.html#182623159">Kenny Lau (Dec 05 2019 at 02:57)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">normed_space</span><span class="bp">.</span><span class="n">banach</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">normed_space</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">basis</span>
+<span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">dimension</span>
+<span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">finite_dimensional</span>
+<span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">subset_properties</span>
+<span class="kn">import</span> <span class="n">set_theory</span><span class="bp">.</span><span class="n">cardinal</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">sequences</span>
+<span class="kn">import</span> <span class="n">order</span><span class="bp">.</span><span class="n">bounded_lattice</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">specific_limits</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">normed_space</span><span class="bp">.</span><span class="n">finite_dimension</span>
+
+<span class="n">noncomputable</span> <span class="n">theory</span>
+<span class="n">open_locale</span> <span class="n">classical</span>
+
+<span class="kn">open</span> <span class="n">metric</span> <span class="n">set</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">V</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="n">ℝ</span> <span class="n">V</span><span class="o">]</span>
+
+<span class="kn">set_option</span> <span class="n">profiler</span> <span class="n">true</span>
+<span class="n">def</span> <span class="n">test</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">V</span><span class="o">)</span> <span class="o">:</span> <span class="n">V</span> <span class="o">:=</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="err">∥</span><span class="n">v</span><span class="err">∥</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="err">•</span> <span class="n">v</span>
+<span class="kn">set_option</span> <span class="n">profiler</span> <span class="n">false</span>
+</pre></div>
+
+<a name="182623162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20unit%20ball/near/182623162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53347compactunitball.html#182623162">Kenny Lau (Dec 05 2019 at 02:57)</a>:</h4>
+<div class="codehilite"><pre><span></span>elaboration of test took 4.81s
+</pre></div>
+
+<a name="182623168"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20unit%20ball/near/182623168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53347compactunitball.html#182623168">Kenny Lau (Dec 05 2019 at 02:57)</a>:</h4>
+<p>why does this take so long??</p>
+
+<a name="182623173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20unit%20ball/near/182623173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53347compactunitball.html#182623173">Kevin Buzzard (Dec 05 2019 at 02:57)</a>:</h4>
+<p>You have to say the magic words</p>
+
+<a name="182623227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20unit%20ball/near/182623227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53347compactunitball.html#182623227">Kenny Lau (Dec 05 2019 at 02:58)</a>:</h4>
+<p>ok that seems to fix the problem</p>
+
+<a name="182623229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20unit%20ball/near/182623229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53347compactunitball.html#182623229">Kenny Lau (Dec 05 2019 at 02:58)</a>:</h4>
+<p>why?</p>
+
+<a name="182623247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20unit%20ball/near/182623247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53347compactunitball.html#182623247">Kevin Buzzard (Dec 05 2019 at 02:59)</a>:</h4>
+<p><a href="https://github.com/kbuzzard/compact_unit_ball/blob/53cc5b1164aaf3c9978e735fe4f88fca30e4f8a1/src/compact_unit_ball.lean#L7" target="_blank" title="https://github.com/kbuzzard/compact_unit_ball/blob/53cc5b1164aaf3c9978e735fe4f88fca30e4f8a1/src/compact_unit_ball.lean#L7">the magic words</a><br>
+Type class inference just goes crazy trying to prove V is a normed field and 100 other things.</p>
+
 
 {% endraw %}
 
