@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [compact unit ball](53347compactunitball.html) (14 messages, latest: Dec 05 2019 at 03:08)
+* [compact unit ball](53347compactunitball.html) (19 messages, latest: Dec 05 2019 at 08:55)
 
 * [local fields / nonarchimedean fields](86469localfieldsnonarchimedeanfields.html) (17 messages, latest: Dec 04 2019 at 22:49)
 
