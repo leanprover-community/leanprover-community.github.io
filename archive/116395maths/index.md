@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [compact unit ball](53347compactunitball.html) (1 message, latest: Dec 05 2019 at 00:49)
+
 * [local fields / nonarchimedean fields](86469localfieldsnonarchimedeanfields.html) (17 messages, latest: Dec 04 2019 at 22:49)
 
 * [normed_space timeouts](97259normedspacetimeouts.html) (28 messages, latest: Dec 04 2019 at 19:58)

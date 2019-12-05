@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Summing over a range](89483Summingoverarange.html) (8 messages, latest: Dec 04 2019 at 23:52)
+* [TPiL 4.6, Q2](92961TPiL46Q2.html) (4 messages, latest: Dec 05 2019 at 00:59)
 
-* [TPiL 4.6, Q2](92961TPiL46Q2.html) (1 message, latest: Dec 04 2019 at 23:02)
+* [Summing over a range](89483Summingoverarange.html) (14 messages, latest: Dec 05 2019 at 00:40)
 
 * [Hypothetical judgements](40101Hypotheticaljudgements.html) (12 messages, latest: Dec 04 2019 at 19:58)
 
