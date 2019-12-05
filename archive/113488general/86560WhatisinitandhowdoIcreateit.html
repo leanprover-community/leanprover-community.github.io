@@ -1,0 +1,135 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/86560WhatisinitandhowdoIcreateit.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/86560WhatisinitandhowdoIcreateit.html">What is 'init' and how do I create it?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="182623511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20%27init%27%20and%20how%20do%20I%20create%20it%3F/near/182623511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86560WhatisinitandhowdoIcreateit.html#182623511">Daniel Donnelly (Dec 05 2019 at 03:05)</a>:</h4>
+<p>I'm connecting to Lean with python code.  Here's the first server response after synching on an existing file (so yes it's finding test.lean), but not this <code>init</code> requirement:</p>
+<div class="codehilite"><pre><span></span>Lean =&gt;:
+{&#39;msgs&#39;: [{&#39;caption&#39;: &#39;&#39;,
+           &#39;file_name&#39;: &#39;test.lean&#39;,
+           &#39;pos_col&#39;: 0,
+           &#39;pos_line&#39;: 1,
+           &#39;severity&#39;: &#39;error&#39;,
+           &#39;text&#39;: &quot;file &#39;init&#39; not found in the LEAN_PATH&quot;}],
+ &#39;response&#39;: &#39;all_messages&#39;}
+</pre></div>
+
+<a name="182623739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20%27init%27%20and%20how%20do%20I%20create%20it%3F/near/182623739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86560WhatisinitandhowdoIcreateit.html#182623739">Mario Carneiro (Dec 05 2019 at 03:11)</a>:</h4>
+<p><code>init</code> is a folder in the lean repo; it should be at <code>library/init</code> relative to the repo root. Any lean file that does not begin with <code>prelude</code> implicitly starts with <code>import init</code> which loads the file <code>library/init/default.lean</code>. Lean finds this file by navigating from the <code>lean.exe</code> executable location, so if you copy <code>lean.exe</code> out of its directory you get this error</p>
+
+<a name="182623962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20%27init%27%20and%20how%20do%20I%20create%20it%3F/near/182623962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86560WhatisinitandhowdoIcreateit.html#182623962">Daniel Donnelly (Dec 05 2019 at 03:16)</a>:</h4>
+<blockquote>
+<p><code>init</code> is a folder in the lean repo; it should be at <code>library/init</code> relative to the repo root. Any lean file that does not begin with <code>prelude</code> implicitly starts with <code>import init</code> which loads the file <code>library/init/default.lean</code>. Lean finds this file by navigating from the <code>lean.exe</code> executable location, so if you copy <code>lean.exe</code> out of its directory you get this error</p>
+</blockquote>
+<p>I have not done that.  I have copied the entire lean folder into a subfolder <code>lean</code>.  Inside is <code>bin</code> containing <code>lean.exe</code>.  The current working directory that lean is using though is <code>.</code>  So lean is contained in <code>./lean/bin/lean.exe</code> and its using <code>.</code> as to where to find <code>test.lean</code> that I am syncing.  Is there some instructions on setting up a default lean workspace?</p>
+
+<a name="182623987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20%27init%27%20and%20how%20do%20I%20create%20it%3F/near/182623987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86560WhatisinitandhowdoIcreateit.html#182623987">Mario Carneiro (Dec 05 2019 at 03:17)</a>:</h4>
+<p>As far as I can tell from the code, lean does not use the pwd at all for finding the builtin_path</p>
+
+<a name="182624042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20%27init%27%20and%20how%20do%20I%20create%20it%3F/near/182624042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86560WhatisinitandhowdoIcreateit.html#182624042">Daniel Donnelly (Dec 05 2019 at 03:18)</a>:</h4>
+<p>my LEAN_PATH = <code>lean</code> relative to <code>.</code> could this be why?</p>
+
+<a name="182624044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20%27init%27%20and%20how%20do%20I%20create%20it%3F/near/182624044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86560WhatisinitandhowdoIcreateit.html#182624044">Mario Carneiro (Dec 05 2019 at 03:18)</a>:</h4>
+<p>it uses various tricks on win/OSX/linux to find where the executable itself is and navigates from that, so if <code>lean/library/init/default.lean</code> is there then it should work</p>
+
+<a name="182624049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20%27init%27%20and%20how%20do%20I%20create%20it%3F/near/182624049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86560WhatisinitandhowdoIcreateit.html#182624049">Mario Carneiro (Dec 05 2019 at 03:18)</a>:</h4>
+<p>make sure that <code>lean test.lean</code> works</p>
+
+<a name="182624051"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20%27init%27%20and%20how%20do%20I%20create%20it%3F/near/182624051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86560WhatisinitandhowdoIcreateit.html#182624051">Mario Carneiro (Dec 05 2019 at 03:18)</a>:</h4>
+<p>without using the server mode</p>
+
+<a name="182624061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20%27init%27%20and%20how%20do%20I%20create%20it%3F/near/182624061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86560WhatisinitandhowdoIcreateit.html#182624061">Mario Carneiro (Dec 05 2019 at 03:19)</a>:</h4>
+<p>Oh and clear the LEAN_PATH env variable</p>
+
+<a name="182624077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20%27init%27%20and%20how%20do%20I%20create%20it%3F/near/182624077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86560WhatisinitandhowdoIcreateit.html#182624077">Mario Carneiro (Dec 05 2019 at 03:19)</a>:</h4>
+<p>don't ever set it, that's from an old version of lean</p>
+
+<a name="182624108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20%27init%27%20and%20how%20do%20I%20create%20it%3F/near/182624108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86560WhatisinitandhowdoIcreateit.html#182624108">Mario Carneiro (Dec 05 2019 at 03:19)</a>:</h4>
+<p>we really need to fix the error message</p>
+
+<a name="182624170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20%27init%27%20and%20how%20do%20I%20create%20it%3F/near/182624170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86560WhatisinitandhowdoIcreateit.html#182624170">Mario Carneiro (Dec 05 2019 at 03:20)</a>:</h4>
+<p>the "modern" way to set the lean path is to have a <code>leanpkg.path</code> file in some parent of the target lean file, usually created by the <code>leanpkg</code> tool</p>
+
+<a name="182624253"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20%27init%27%20and%20how%20do%20I%20create%20it%3F/near/182624253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86560WhatisinitandhowdoIcreateit.html#182624253">Daniel Donnelly (Dec 05 2019 at 03:23)</a>:</h4>
+<blockquote>
+<p>the "modern" way to set the lean path is to have a <code>leanpkg.path</code> file in some parent of the target lean file, usually created by the <code>leanpkg</code> tool</p>
+</blockquote>
+<p>lean.exe test.lean runs and does nothing so I assume it's working.  I've just put a <code>#check 1</code> in it.</p>
+
+<a name="182624271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20%27init%27%20and%20how%20do%20I%20create%20it%3F/near/182624271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86560WhatisinitandhowdoIcreateit.html#182624271">Mario Carneiro (Dec 05 2019 at 03:24)</a>:</h4>
+<p>I would expect it to print something with that check line though</p>
+
+<a name="182624337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20%27init%27%20and%20how%20do%20I%20create%20it%3F/near/182624337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86560WhatisinitandhowdoIcreateit.html#182624337">Daniel Donnelly (Dec 05 2019 at 03:25)</a>:</h4>
+<blockquote>
+<p>I would expect it to print something with that check line though</p>
+</blockquote>
+<p>How do I get <code>leanpkg</code> to work what do I pass it?  It just sits and does nothing when run without args.</p>
+
+<a name="182624340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20%27init%27%20and%20how%20do%20I%20create%20it%3F/near/182624340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86560WhatisinitandhowdoIcreateit.html#182624340">Daniel Donnelly (Dec 05 2019 at 03:25)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>I would expect it to print something with that check line though</p>
+</blockquote>
+<p>How do I get <code>leanpkg</code> to work what do I pass it?  It just sits and does nothing when run without args.</p>
+</blockquote>
+<p>Nevermind, it finally returned with help!</p>
+
+<a name="182624354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20%27init%27%20and%20how%20do%20I%20create%20it%3F/near/182624354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86560WhatisinitandhowdoIcreateit.html#182624354">Mario Carneiro (Dec 05 2019 at 03:26)</a>:</h4>
+<blockquote>
+<p>Is there some instructions on setting up a default lean workspace?</p>
+</blockquote>
+<p>There is a tutorial project on the mathlib website: <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/install/project.md#working-on-an-existing-package" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/install/project.md#working-on-an-existing-package">https://github.com/leanprover-community/mathlib/blob/master/docs/install/project.md#working-on-an-existing-package</a></p>
+
+<a name="182624396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20%27init%27%20and%20how%20do%20I%20create%20it%3F/near/182624396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86560WhatisinitandhowdoIcreateit.html#182624396">Mario Carneiro (Dec 05 2019 at 03:26)</a>:</h4>
+<p>When it takes forever to return like that, it probably means that the library is not compiled. Run <code>lean --make test.lean</code> instead</p>
+
+<a name="182624402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20%27init%27%20and%20how%20do%20I%20create%20it%3F/near/182624402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86560WhatisinitandhowdoIcreateit.html#182624402">Mario Carneiro (Dec 05 2019 at 03:27)</a>:</h4>
+<p>and it will save <code>.olean</code> files for the core library</p>
+
+<a name="182624403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20%27init%27%20and%20how%20do%20I%20create%20it%3F/near/182624403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86560WhatisinitandhowdoIcreateit.html#182624403">Mario Carneiro (Dec 05 2019 at 03:27)</a>:</h4>
+<p>after that, checking simple things should be fast</p>
+
+<a name="182624544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20%27init%27%20and%20how%20do%20I%20create%20it%3F/near/182624544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86560WhatisinitandhowdoIcreateit.html#182624544">Daniel Donnelly (Dec 05 2019 at 03:31)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>Is there some instructions on setting up a default lean workspace?</p>
+</blockquote>
+<p>There is a tutorial project on the mathlib website: <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/install/project.md#working-on-an-existing-package" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/install/project.md#working-on-an-existing-package">https://github.com/leanprover-community/mathlib/blob/master/docs/install/project.md#working-on-an-existing-package</a></p>
+</blockquote>
+<p>Thanks <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  that's just what I needed.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
