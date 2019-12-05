@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [(Group action of) SL(n) in mathlib](89384GroupactionofSLninmathlib.html) (1 message, latest: Dec 05 2019 at 14:59)
+
 * [filters and limits](58431filtersandlimits.html) (3 messages, latest: Dec 05 2019 at 09:48)
 
 * [compact unit ball](53347compactunitball.html) (21 messages, latest: Dec 05 2019 at 09:06)
