@@ -16,6 +16,10 @@ permalink: archive/113488general/98598Whichfunctioncausesdependencyonanaxiom.htm
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Which%20function%20causes%20dependency%20on%20an%20axiom%3F/near/182633605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98598Whichfunctioncausesdependencyonanaxiom.html#182633605">Yury G. Kudryashov (Dec 05 2019 at 07:08)</a>:</h4>
 <p>How can I find which part of a definition/proof makes the result depend on an axiom?</p>
 
+<a name="182646447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Which%20function%20causes%20dependency%20on%20an%20axiom%3F/near/182646447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98598Whichfunctioncausesdependencyonanaxiom.html#182646447">Rob Lewis (Dec 05 2019 at 10:36)</a>:</h4>
+<p>Unfortunately there's no metaprogramming API for <code>#print axioms</code>. If you need this as a one-time thing, it's probably easiest to start defining subterms manually. The "proper" way would be to write a <code>find_axioms</code> tactic. It should produce an <code>rb_lmap name name</code> that you can then use on the expression tree. There are subtleties in identifying which constants are "really" axioms -- you probably want to ignore things like recursors, inductive type constructors, etc. It would be easier if you know which constants you're looking for at the beginning.</p>
+
 
 {% endraw %}
 

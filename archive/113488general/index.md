@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [cpp 2020](79240cpp2020.html) (2 messages, latest: Dec 05 2019 at 09:33)
+* [norm_cast](53959normcast.html) (5 messages, latest: Dec 05 2019 at 10:59)
 
-* [Which function causes dependency on an axiom?](98598Whichfunctioncausesdependencyonanaxiom.html) (1 message, latest: Dec 05 2019 at 07:08)
+* [Which function causes dependency on an axiom?](98598Whichfunctioncausesdependencyonanaxiom.html) (2 messages, latest: Dec 05 2019 at 10:36)
+
+* [cpp 2020](79240cpp2020.html) (4 messages, latest: Dec 05 2019 at 10:12)
 
 * [What is 'init' and how do I create it?](86560WhatisinitandhowdoIcreateit.html) (21 messages, latest: Dec 05 2019 at 03:31)
 
@@ -824,8 +826,6 @@ permalink: archive/113488general/index.html
 * [deterministic timeouts when file is opened](71768deterministictimeoutswhenfileisopened.html) (4 messages, latest: Jun 12 2019 at 21:52)
 
 * [Requirement for being @\[simp\]](49295Requirementforbeingsimp.html) (4 messages, latest: Jun 12 2019 at 18:53)
-
-* [norm_cast](53959normcast.html) (4 messages, latest: Jun 12 2019 at 15:02)
 
 * [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (255 messages, latest: Jun 12 2019 at 12:34)
 
