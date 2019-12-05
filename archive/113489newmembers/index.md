@@ -9,13 +9,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Summing over a range](89483Summingoverarange.html) (8 messages, latest: Dec 04 2019 at 23:52)
+
+* [TPiL 4.6, Q2](92961TPiL46Q2.html) (1 message, latest: Dec 04 2019 at 23:02)
+
 * [Hypothetical judgements](40101Hypotheticaljudgements.html) (12 messages, latest: Dec 04 2019 at 19:58)
 
 * [Defining a function by or.elim](07549Definingafunctionbyorelim.html) (59 messages, latest: Dec 04 2019 at 16:20)
 
 * [VS code settings](14262VScodesettings.html) (6 messages, latest: Dec 04 2019 at 14:50)
-
-* [Summing over a range](89483Summingoverarange.html) (3 messages, latest: Dec 04 2019 at 12:22)
 
 * [Advent of code in Lean](06346AdventofcodeinLean.html) (13 messages, latest: Dec 02 2019 at 22:49)
 

@@ -1,0 +1,48 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/92961TPiL46Q2.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/92961TPiL46Q2.html">TPiL 4.6, Q2</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="182609844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPiL%204.6%2C%20Q2/near/182609844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92961TPiL46Q2.html#182609844">Luis O'Shea (Dec 04 2019 at 23:02)</a>:</h4>
+<p>Exercise 2 in §4.6 of TPiL asks you to prove three examples. Below is my solution to the second of the three. It type-checks, but it seems long and cumbersome. Shortcomings include:</p>
+<ul>
+<li>I felt I needed to factor out a portion into a lemma (because it was getting a bit long)</li>
+<li>I used <code>or.elim (classical.em r)</code> but I felt it would have been better to use <code>by_cases</code> or <code>cases_on</code> (but couldn't figure it out)</li>
+</ul>
+<p>Could anyone provide some comments, or suggestions on how to improve my mess?</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">{</span><span class="n">r</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span>
+
+<span class="kn">lemma</span> <span class="n">l1</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span> <span class="bp">∨</span> <span class="n">r</span><span class="o">)</span> <span class="o">(</span><span class="n">hnr</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">r</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">x</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">p</span> <span class="n">x</span> <span class="bp">∨</span> <span class="n">r</span><span class="o">,</span> <span class="k">from</span> <span class="n">h</span> <span class="n">x</span><span class="o">,</span> <span class="n">this</span><span class="bp">.</span><span class="n">elim</span>
+  <span class="n">id</span>
+  <span class="o">(</span><span class="k">assume</span> <span class="n">hr</span><span class="o">,</span> <span class="n">absurd</span> <span class="n">hr</span> <span class="n">hnr</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span> <span class="bp">∨</span> <span class="n">r</span><span class="o">)</span> <span class="bp">↔</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">∨</span> <span class="n">r</span> <span class="o">:=</span>
+<span class="bp">⟨</span> <span class="c1">-- forward</span>
+    <span class="k">assume</span> <span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">p</span> <span class="n">x</span> <span class="bp">∨</span> <span class="n">r</span><span class="o">),</span>
+    <span class="n">or</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">em</span> <span class="n">r</span><span class="o">)</span>
+    <span class="n">or</span><span class="bp">.</span><span class="n">inr</span>
+    <span class="o">(</span><span class="k">assume</span> <span class="n">hnr</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="o">(</span><span class="n">l1</span> <span class="n">h</span> <span class="n">hnr</span><span class="o">)),</span>
+<span class="c1">-- converse</span>
+    <span class="k">assume</span> <span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">∨</span> <span class="n">r</span><span class="o">,</span>
+    <span class="k">assume</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">h</span><span class="bp">.</span><span class="n">elim</span>
+        <span class="o">(</span><span class="k">assume</span> <span class="n">h2</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="o">(</span><span class="n">h2</span> <span class="n">x</span><span class="o">))</span>
+        <span class="n">or</span><span class="bp">.</span><span class="n">inr</span>
+<span class="bp">⟩</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
