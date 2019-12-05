@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [compact unit ball](53347compactunitball.html) (19 messages, latest: Dec 05 2019 at 08:55)
+* [filters and limits](58431filtersandlimits.html) (3 messages, latest: Dec 05 2019 at 09:48)
+
+* [compact unit ball](53347compactunitball.html) (21 messages, latest: Dec 05 2019 at 09:06)
 
 * [local fields / nonarchimedean fields](86469localfieldsnonarchimedeanfields.html) (17 messages, latest: Dec 04 2019 at 22:49)
 

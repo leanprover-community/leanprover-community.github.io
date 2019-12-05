@@ -1,0 +1,137 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/58431filtersandlimits.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/58431filtersandlimits.html">filters and limits</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="182642873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filters%20and%20limits/near/182642873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58431filtersandlimits.html#182642873">Johan Commelin (Dec 05 2019 at 09:46)</a>:</h4>
+<p>I have a way of attaching an <code>nnreal</code> to every set in the neighbourhood filter of some point in some space. Now I would like to express the predicate that these <code>nnreal</code>s converge to some limit point for smaller and smaller nhds. The usual <code>tendsto</code> language doesn't seem built for this purpose. How should I do this?</p>
+
+<a name="182642936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filters%20and%20limits/near/182642936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58431filtersandlimits.html#182642936">Johan Commelin (Dec 05 2019 at 09:47)</a>:</h4>
+<p>Short piece of code:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">relative_index</span> <span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">hK</span> <span class="o">:</span> <span class="n">compact</span> <span class="n">K</span><span class="o">)</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">hU</span> <span class="o">:</span> <span class="n">U</span> <span class="err">∈</span> <span class="err">𝓝</span> <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">G</span><span class="o">))</span> <span class="o">:</span> <span class="n">nnreal</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">index</span> <span class="n">U</span> <span class="n">K</span> <span class="n">hU</span> <span class="n">hK</span> <span class="o">:</span> <span class="n">nnreal</span><span class="o">)</span> <span class="bp">/</span> <span class="o">(</span><span class="n">index</span> <span class="n">U</span> <span class="n">A</span> <span class="n">hU</span> <span class="n">hA</span> <span class="o">:</span> <span class="n">nnreal</span><span class="o">)</span>
+</pre></div>
+
+<a name="182642989"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filters%20and%20limits/near/182642989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58431filtersandlimits.html#182642989">Johan Commelin (Dec 05 2019 at 09:48)</a>:</h4>
+<p>My file so far:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">algebra</span><span class="bp">.</span><span class="n">group</span>
+<span class="kn">import</span> <span class="n">measure_theory</span><span class="bp">.</span><span class="n">borel_space</span>
+<span class="kn">import</span> <span class="n">measure_theory</span><span class="bp">.</span><span class="n">measure_space</span>
+<span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="c">/-</span><span class="cm">!</span>
+<span class="cm"># Haar measure</span>
+
+<span class="cm">In this file we define the Haar measure:</span>
+<span class="cm">A left-translation invariant measure on a locally compact topological group.</span>
+
+<span class="cm">## References</span>
+<span class="cm">Alfsen, E. M. A simplified constructive proof of the existence and uniqueness of Haar measure.</span>
+<span class="cm">  Math. Scand. 12 (1963), 106--116. MR0158022</span>
+
+<span class="cm">-/</span>
+
+<span class="n">noncomputable</span> <span class="n">theory</span>
+
+<span class="n">open_locale</span> <span class="n">classical</span> <span class="n">topological_space</span>
+<span class="kn">open</span> <span class="n">measure_theory</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">G</span><span class="o">]</span>
+
+<span class="kn">namespace</span> <span class="n">measure_theory</span>
+<span class="kn">namespace</span> <span class="n">measure</span>
+
+<span class="c">/-</span><span class="cm">- A measure `μ` on a topological group is left invariant if</span>
+<span class="cm">for all measurable sets `s` and all `g`, we have `μ (gs) = μ s`,</span>
+<span class="cm">where `gs` denotes the translate of `s` by left multiplication with `g`. -/</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">to_additive</span> <span class="n">is_left_add_invariant</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">is_left_invariant</span> <span class="o">(</span><span class="n">μ</span> <span class="o">:</span> <span class="n">measure</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="bp">∀</span> <span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">,</span> <span class="n">is_measurable</span> <span class="n">s</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="n">g</span> <span class="o">:</span> <span class="n">G</span><span class="o">,</span>  <span class="n">μ</span> <span class="o">((</span><span class="bp">*</span><span class="o">)</span> <span class="n">g</span> <span class="err">&#39;&#39;</span> <span class="n">s</span><span class="o">)</span> <span class="bp">=</span> <span class="n">μ</span> <span class="n">s</span>
+
+<span class="kn">end</span> <span class="n">measure</span>
+<span class="kn">end</span> <span class="n">measure_theory</span>
+
+<span class="kn">namespace</span> <span class="n">topological_group</span>
+<span class="kn">namespace</span> <span class="n">haar_measure_construction</span>
+<span class="kn">open</span> <span class="n">lattice</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">topological_group</span> <span class="n">G</span><span class="o">]</span>
+
+<span class="c">/-</span><span class="cm">- `index_prop S T` is a predicate</span>
+<span class="cm">asserting that `T` is covered by finitely many left-translates of `S`. -/</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">to_additive</span><span class="o">]</span>
+<span class="kn">lemma</span> <span class="n">index_prop</span> <span class="o">(</span><span class="n">S</span> <span class="n">T</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">hS</span> <span class="o">:</span> <span class="n">S</span> <span class="err">∈</span> <span class="err">𝓝</span> <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">G</span><span class="o">))</span> <span class="o">(</span><span class="n">hT</span> <span class="o">:</span> <span class="n">compact</span> <span class="n">T</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="n">n</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">G</span><span class="o">,</span> <span class="o">(</span><span class="n">T</span> <span class="err">⊆</span> <span class="err">⋃</span> <span class="n">g</span> <span class="err">∈</span> <span class="n">s</span><span class="o">,</span> <span class="o">((</span><span class="bp">*</span><span class="o">)</span> <span class="n">g</span> <span class="err">&#39;&#39;</span> <span class="n">S</span><span class="o">))</span> <span class="bp">∧</span> <span class="n">s</span><span class="bp">.</span><span class="n">card</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">choose</span> <span class="n">U</span> <span class="n">hU</span> <span class="kn">using</span> <span class="n">mem_nhds_sets_iff</span><span class="bp">.</span><span class="mi">1</span> <span class="n">hS</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">ι</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">G</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">g</span><span class="o">,</span> <span class="o">(</span><span class="bp">*</span><span class="o">)</span> <span class="n">g</span> <span class="err">&#39;&#39;</span> <span class="n">U</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">hι</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">g</span> <span class="o">:</span> <span class="n">G</span><span class="o">,</span> <span class="n">g</span> <span class="err">∈</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">univ</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)</span> <span class="bp">→</span> <span class="n">is_open</span> <span class="o">(</span><span class="n">ι</span> <span class="n">g</span><span class="o">),</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">g</span> <span class="n">hg</span><span class="o">,</span>
+    <span class="k">show</span> <span class="n">is_open</span> <span class="o">((</span><span class="bp">*</span><span class="o">)</span> <span class="n">g</span> <span class="err">&#39;&#39;</span> <span class="n">U</span><span class="o">),</span>
+    <span class="n">rw</span> <span class="k">show</span> <span class="o">((</span><span class="bp">*</span><span class="o">)</span> <span class="n">g</span> <span class="err">&#39;&#39;</span> <span class="n">U</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">*</span><span class="o">)</span> <span class="n">g</span><span class="bp">⁻¹</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="n">U</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">ext</span><span class="o">,</span> <span class="n">exact</span> <span class="n">mem_left_coset_iff</span> <span class="n">g</span> <span class="o">},</span>
+    <span class="n">apply</span> <span class="n">continuous_mul_left</span> <span class="n">g</span><span class="bp">⁻¹</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">hU</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span> <span class="o">},</span>
+  <span class="k">obtain</span> <span class="bp">⟨</span><span class="n">s</span><span class="o">,</span> <span class="n">hs</span><span class="o">,</span> <span class="n">s_fin</span><span class="o">,</span> <span class="n">s_cover</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">compact_elim_finite_subcover_image</span> <span class="n">hT</span> <span class="n">hι</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">rcases</span> <span class="n">s_fin</span><span class="bp">.</span><span class="n">exists_finset_coe</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">s</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">refine</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">s</span><span class="o">,</span> <span class="bp">_</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">refine</span> <span class="n">set</span><span class="bp">.</span><span class="n">subset</span><span class="bp">.</span><span class="n">trans</span> <span class="n">s_cover</span> <span class="bp">_</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">set</span><span class="bp">.</span><span class="n">Union_subset_Union</span><span class="o">,</span>
+    <span class="n">intro</span> <span class="n">g</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">set</span><span class="bp">.</span><span class="n">Union_subset_Union</span><span class="o">,</span>
+    <span class="n">intro</span> <span class="n">hg</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">set</span><span class="bp">.</span><span class="n">mono_image</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">hU</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="o">},</span>
+  <span class="n">intros</span> <span class="n">t</span> <span class="n">ht</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_Union</span><span class="o">,</span>
+  <span class="n">use</span> <span class="n">t</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_Union</span><span class="o">,</span>
+  <span class="n">use</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_univ</span> <span class="n">t</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_image</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">⟨</span><span class="mi">1</span><span class="o">,</span> <span class="n">hU</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span> <span class="n">mul_one</span> <span class="n">t</span><span class="bp">⟩</span>
+<span class="kn">end</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">to_additive</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">index</span> <span class="o">(</span><span class="n">S</span> <span class="n">T</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">hS</span> <span class="o">:</span> <span class="n">S</span> <span class="err">∈</span> <span class="err">𝓝</span> <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">G</span><span class="o">))</span> <span class="o">(</span><span class="n">hT</span> <span class="o">:</span> <span class="n">compact</span> <span class="n">T</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">find</span> <span class="o">(</span><span class="n">index_prop</span> <span class="n">S</span> <span class="n">T</span> <span class="n">hS</span> <span class="n">hT</span><span class="o">)</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">hA</span> <span class="o">:</span> <span class="n">compact</span> <span class="n">A</span><span class="o">)</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">to_additive</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">relative_index</span> <span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">hK</span> <span class="o">:</span> <span class="n">compact</span> <span class="n">K</span><span class="o">)</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">hU</span> <span class="o">:</span> <span class="n">U</span> <span class="err">∈</span> <span class="err">𝓝</span> <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">G</span><span class="o">))</span> <span class="o">:</span> <span class="n">nnreal</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">index</span> <span class="n">U</span> <span class="n">K</span> <span class="n">hU</span> <span class="n">hK</span> <span class="o">:</span> <span class="n">nnreal</span><span class="o">)</span> <span class="bp">/</span> <span class="o">(</span><span class="n">index</span> <span class="n">U</span> <span class="n">A</span> <span class="n">hU</span> <span class="n">hA</span> <span class="o">:</span> <span class="n">nnreal</span><span class="o">)</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">to_additive</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">prehaar_of_compact</span> <span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">hK</span> <span class="o">:</span> <span class="n">compact</span> <span class="n">K</span><span class="o">)</span> <span class="o">:</span> <span class="n">ennreal</span> <span class="o">:=</span>
+<span class="bp">_</span>
+
+<span class="kn">variables</span> <span class="o">[</span><span class="n">locally_compact_space</span> <span class="n">G</span><span class="o">]</span>
+
+<span class="kn">end</span> <span class="n">haar_measure_construction</span>
+
+<span class="kn">variables</span> <span class="o">[</span><span class="n">topological_group</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">locally_compact_space</span> <span class="n">G</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">hA</span> <span class="o">:</span> <span class="n">compact</span> <span class="n">A</span><span class="o">)</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">to_additive</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">haar_measure</span> <span class="o">:</span> <span class="n">measure</span> <span class="n">G</span> <span class="o">:=</span>
+<span class="bp">_</span>
+
+<span class="kn">end</span> <span class="n">topological_group</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

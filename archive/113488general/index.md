@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [cpp 2020](79240cpp2020.html) (2 messages, latest: Dec 05 2019 at 09:33)
+
 * [Which function causes dependency on an axiom?](98598Whichfunctioncausesdependencyonanaxiom.html) (1 message, latest: Dec 05 2019 at 07:08)
 
 * [What is 'init' and how do I create it?](86560WhatisinitandhowdoIcreateit.html) (21 messages, latest: Dec 05 2019 at 03:31)
