@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [norm_cast](53959normcast.html) (5 messages, latest: Dec 05 2019 at 10:59)
+* [norm_cast](53959normcast.html) (13 messages, latest: Dec 05 2019 at 11:25)
 
 * [Which function causes dependency on an axiom?](98598Whichfunctioncausesdependencyonanaxiom.html) (2 messages, latest: Dec 05 2019 at 10:36)
 

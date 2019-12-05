@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Summing over a range](89483Summingoverarange.html) (22 messages, latest: Dec 05 2019 at 02:45)
+* [Summing over a range](89483Summingoverarange.html) (23 messages, latest: Dec 05 2019 at 11:34)
 
 * [TPiL 4.6, Q2](92961TPiL46Q2.html) (14 messages, latest: Dec 05 2019 at 01:49)
 

@@ -46,6 +46,40 @@ permalink: archive/113488general/53959normcast.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast/near/182648130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53959normcast.html#182648130">Johan Commelin (Dec 05 2019 at 10:59)</a>:</h4>
 <p>I don't know if this has been asked before. But could we have <code>norm_cast?</code> and friends to report which normalization lemmas are used?</p>
 
+<a name="182648403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast/near/182648403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53959normcast.html#182648403">Rob Lewis (Dec 05 2019 at 11:02)</a>:</h4>
+<p>Future work :) but what's the scenario where you really want this? It's a much less useful report than <code>squeeze_simp</code>.</p>
+
+<a name="182649878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast/near/182649878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53959normcast.html#182649878">Johan Commelin (Dec 05 2019 at 11:22)</a>:</h4>
+<p>Sometimes <code>norm_cast</code> is a bit too aggresive. It doesn't happen often at all. In those cases, one option is to fall back to <code>rw</code></p>
+
+<a name="182649918"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast/near/182649918" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53959normcast.html#182649918">Johan Commelin (Dec 05 2019 at 11:22)</a>:</h4>
+<p>For example, I had the following goal:</p>
+<div class="codehilite"><pre><span></span><span class="err">↑</span><span class="o">((</span><span class="n">multiplicity</span> <span class="err">↑</span><span class="n">p</span> <span class="o">(</span><span class="n">r</span><span class="bp">.</span><span class="n">num</span><span class="o">))</span><span class="bp">.</span><span class="n">get</span> <span class="bp">_</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="o">((</span><span class="n">multiplicity</span> <span class="err">↑</span><span class="n">p</span> <span class="err">↑</span><span class="o">(</span><span class="n">r</span><span class="bp">.</span><span class="n">denom</span><span class="o">))</span><span class="bp">.</span><span class="n">get</span> <span class="bp">_</span><span class="o">)</span>
+</pre></div>
+
+<a name="182650112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast/near/182650112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53959normcast.html#182650112">Johan Commelin (Dec 05 2019 at 11:24)</a>:</h4>
+<p>On the left hand side, <code>r.num</code> is in <code>ℤ</code>, hence the this is multiplicity wrt integer division. On the right, <code>norm_cast</code> reduces to multiplicty of nats. But then you can't apply things like <code>multiplicity_le_multiplicity_iff</code> anymore, because you now have multiplicity wrt different semirings</p>
+
+<a name="182650145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast/near/182650145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53959normcast.html#182650145">Johan Commelin (Dec 05 2019 at 11:24)</a>:</h4>
+<p>One way to solve this is <code>suffices : blah, {norm_cast}</code>, or some hack like that.</p>
+
+<a name="182650162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast/near/182650162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53959normcast.html#182650162">Johan Commelin (Dec 05 2019 at 11:25)</a>:</h4>
+<p>Aha, so this is why I would like <code>norm_cast?</code></p>
+
+<a name="182650169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast/near/182650169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53959normcast.html#182650169">Johan Commelin (Dec 05 2019 at 11:25)</a>:</h4>
+<p>Because it would open the door to <code>norm_cast [-evil_lemma]</code></p>
+
+<a name="182650191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast/near/182650191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53959normcast.html#182650191">Johan Commelin (Dec 05 2019 at 11:25)</a>:</h4>
+<p>And that would allow users to finetune the end result, while keeping the readable and intuitive <code>norm_cast</code> tactic in their script</p>
+
 
 {% endraw %}
 
