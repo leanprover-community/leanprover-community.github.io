@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Advent of code in Lean](06346AdventofcodeinLean.html) (16 messages, latest: Dec 05 2019 at 12:06)
+
 * [Summing over a range](89483Summingoverarange.html) (23 messages, latest: Dec 05 2019 at 11:34)
 
 * [TPiL 4.6, Q2](92961TPiL46Q2.html) (14 messages, latest: Dec 05 2019 at 01:49)
@@ -18,8 +20,6 @@ permalink: archive/113489newmembers/index.html
 * [Defining a function by or.elim](07549Definingafunctionbyorelim.html) (59 messages, latest: Dec 04 2019 at 16:20)
 
 * [VS code settings](14262VScodesettings.html) (6 messages, latest: Dec 04 2019 at 14:50)
-
-* [Advent of code in Lean](06346AdventofcodeinLean.html) (13 messages, latest: Dec 02 2019 at 22:49)
 
 * [Machine learning tooling](90466Machinelearningtooling.html) (19 messages, latest: Dec 02 2019 at 19:33)
 

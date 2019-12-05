@@ -125,6 +125,29 @@ permalink: archive/113489newmembers/06346AdventofcodeinLean.html
 
 <p>I really don't know why I did this, probably fear of not finding sleep if I go to bed...</p>
 
+<a name="182652472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Advent%20of%20code%20in%20Lean/near/182652472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/06346AdventofcodeinLean.html#182652472">Elvorfirilmathredia (Dec 05 2019 at 12:02)</a>:</h4>
+<p>Nice, thanks a lot! I tried to do it myself and ended up with the following:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">fuel_wf</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">fuel</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">m</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">m</span><span class="bp">/</span><span class="mi">3</span> <span class="bp">&lt;</span> <span class="n">m</span><span class="o">,</span> <span class="k">by</span> <span class="o">{</span><span class="n">apply</span> <span class="n">div_lt_self</span> <span class="n">h</span> <span class="bp">_;</span> <span class="n">linarith</span> <span class="o">},</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">m</span><span class="bp">/</span><span class="mi">3</span> <span class="bp">-</span> <span class="mi">2</span> <span class="bp">≤</span> <span class="n">m</span><span class="bp">/</span><span class="mi">3</span><span class="o">,</span> <span class="k">by</span> <span class="o">{</span><span class="n">exact</span> <span class="n">nat</span><span class="bp">.</span><span class="n">sub_le_self</span> <span class="o">(</span><span class="n">m</span><span class="bp">/</span><span class="mi">3</span><span class="o">)</span> <span class="mi">2</span><span class="o">},</span>
+  <span class="n">rw</span> <span class="n">fuel</span><span class="o">,</span>
+  <span class="n">linarith</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Somehow I had a hard time finding <code>sub_le_self</code> ... I also had to prefix it with <code>nat.</code> because otherwise lean tried to use the one for ordered commutative groups, which obviously does not work for nat.</p>
+
+<a name="182652716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Advent%20of%20code%20in%20Lean/near/182652716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/06346AdventofcodeinLean.html#182652716">Rob Lewis (Dec 05 2019 at 12:06)</a>:</h4>
+<p>It's a bug that <code>m/3 - 2 ≤ m/3</code> isn't <code>by omega</code>. Hopefully we get this fixed soon.</p>
+
+<a name="182652732"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Advent%20of%20code%20in%20Lean/near/182652732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/06346AdventofcodeinLean.html#182652732">Rob Lewis (Dec 05 2019 at 12:06)</a>:</h4>
+<p><code>norm_num</code> is more appropriate than <code>linarith</code> in the first <code>have</code>.</p>
+
 
 {% endraw %}
 
