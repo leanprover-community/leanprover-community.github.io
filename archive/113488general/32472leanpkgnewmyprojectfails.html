@@ -30,6 +30,123 @@ failed to start child process
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20new%20my_project%20fails/near/182679499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32472leanpkgnewmyprojectfails.html#182679499">Marc Huisinga (Dec 05 2019 at 16:57)</a>:</h4>
 <p>does it work with git bash?</p>
 
+<a name="182680038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20new%20my_project%20fails/near/182680038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32472leanpkgnewmyprojectfails.html#182680038">Daniel Donnelly (Dec 05 2019 at 17:02)</a>:</h4>
+<p><span class="user-mention" data-user-id="221921">@Marc Huisinga</span>  yes that works:<br>
+FruitfulApproach@DESKTOP-T49RGUJ MINGW64 ~/Desktop/BlocksAndArrows<br>
+$ lean/bin/leanpkg new my_project</p>
+<blockquote>
+<p>mkdir -p my_project<br>
+cd my_project<br>
+mkdir src<br>
+git init -q<br>
+git checkout -b lean-3.4.2<br>
+Switched to a new branch 'lean-3.4.2'<br>
+configuring my_project 0.1</p>
+</blockquote>
+<p>It did not work though when calling using <code>subprocess.check_output()</code> from code.  Seems to have the same issue as non-bash command prompt.</p>
+
+<a name="182680453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20new%20my_project%20fails/near/182680453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32472leanpkgnewmyprojectfails.html#182680453">Daniel Donnelly (Dec 05 2019 at 17:07)</a>:</h4>
+<p>Found this: <a href="https://stackoverflow.com/questions/4256107/running-bash-commands-in-python" target="_blank" title="https://stackoverflow.com/questions/4256107/running-bash-commands-in-python">https://stackoverflow.com/questions/4256107/running-bash-commands-in-python</a></p>
+<p>Will read through it and try some things out with code.</p>
+
+<a name="182680787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20new%20my_project%20fails/near/182680787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32472leanpkgnewmyprojectfails.html#182680787">Andrew Ashworth (Dec 05 2019 at 17:10)</a>:</h4>
+<p>Hmm, I remember having an issue with subprocesses on Windows. I thought it was fixed by <a href="https://github.com/leanprover/lean/commit/34426341813082e0953d323836d8ea193b3f7ffb" target="_blank" title="https://github.com/leanprover/lean/commit/34426341813082e0953d323836d8ea193b3f7ffb">https://github.com/leanprover/lean/commit/34426341813082e0953d323836d8ea193b3f7ffb</a>. Might be a place to start reading if you get stuck; I do not know if this is the same problem you are having without taking a closer look.</p>
+
+<a name="182681025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20new%20my_project%20fails/near/182681025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32472leanpkgnewmyprojectfails.html#182681025">Daniel Donnelly (Dec 05 2019 at 17:13)</a>:</h4>
+<p><span class="user-mention" data-user-id="110025">@Andrew Ashworth</span>  I can't apply any of that code to my problem - it's in a different language from python.</p>
+
+<a name="182681096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20new%20my_project%20fails/near/182681096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32472leanpkgnewmyprojectfails.html#182681096">Andrew Ashworth (Dec 05 2019 at 17:14)</a>:</h4>
+<p>You said you need to get this to work manually, though. Lean is written in C++</p>
+
+<a name="182681176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20new%20my_project%20fails/near/182681176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32472leanpkgnewmyprojectfails.html#182681176">Andrew Ashworth (Dec 05 2019 at 17:14)</a>:</h4>
+<p>This is some problem with operating system process spawning, so somewhere in there is the solution, maybe?</p>
+
+<a name="182681712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20new%20my_project%20fails/near/182681712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32472leanpkgnewmyprojectfails.html#182681712">Daniel Donnelly (Dec 05 2019 at 17:20)</a>:</h4>
+<blockquote>
+<p>This is some problem with operating system process spawning, so somewhere in there is the solution, maybe?</p>
+</blockquote>
+<p>There could be a solution in there, but so far just trying different ways of calling subprocess methods (python library) has brought success.  For example getting standard output from lean was crashing the process, but I just changed that to use the .communicate() method and it worked.  So I will try some more things out before I check out that C++ code.  Thanks though! :D</p>
+
+<a name="182681786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20new%20my_project%20fails/near/182681786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32472leanpkgnewmyprojectfails.html#182681786">Daniel Donnelly (Dec 05 2019 at 17:21)</a>:</h4>
+<blockquote>
+<p>You said you need to get this to work manually, though. Lean is written in C++</p>
+</blockquote>
+<p>It's nice to know that Lean is written in speedy C++, the fastest higher-level language really.</p>
+
+<a name="182681880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20new%20my_project%20fails/near/182681880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32472leanpkgnewmyprojectfails.html#182681880">Daniel Donnelly (Dec 05 2019 at 17:22)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>You said you need to get this to work manually, though. Lean is written in C++</p>
+</blockquote>
+<p>It's nice to know that Lean is written in speedy C++, the fastest higher-level language really.</p>
+</blockquote>
+<p>Other than Nim, Rust and a few others of course!   </p>
+<p>OTOH, when doing a GUI, python is best since there's a pyqt5 binding in existence.  I have been doing pyqt5 apps for over 5 years, and it works great.  When there is a computational part such as computing LED glow effect in one of my apps, I wrote a DLL in C++ that my app connects to using the ctypes library.   It's similar here except we're communicating over stdin/stdout instead of by DLL.</p>
+<p>By the way C++ was over 100 times faster at rendering a single LED than the python code, lol.</p>
+
+<a name="182682368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20new%20my_project%20fails/near/182682368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32472leanpkgnewmyprojectfails.html#182682368">Daniel Donnelly (Dec 05 2019 at 17:27)</a>:</h4>
+<p>Which brings me to the question:  Why don't they write Lean in D?</p>
+
+<a name="182682570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20new%20my_project%20fails/near/182682570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32472leanpkgnewmyprojectfails.html#182682570">Sebastian Ullrich (Dec 05 2019 at 17:28)</a>:</h4>
+<p>I'm fairly sure someone diagnosed the "failed to start child process" error to <code>leanpkg</code> not finding required executables like <code>git</code> (which <em>are</em> available in a Git Bash, of course)</p>
+
+<a name="182682630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20new%20my_project%20fails/near/182682630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32472leanpkgnewmyprojectfails.html#182682630">Daniel Donnelly (Dec 05 2019 at 17:29)</a>:</h4>
+<blockquote>
+<p>I'm fairly sure someone diagnosed the "failed to start child process" error to <code>leanpkg</code> not finding required executables like <code>git</code> (which <em>are</em> available in a Git Bash, of course)</p>
+</blockquote>
+<p>Does that imply that the user of my IDE needs git installed first?</p>
+
+<a name="182682761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20new%20my_project%20fails/near/182682761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32472leanpkgnewmyprojectfails.html#182682761">Sebastian Ullrich (Dec 05 2019 at 17:30)</a>:</h4>
+<p>Basically, yes. And even then the <code>PATH</code> outside of a Git Bash might not be correct, apparently</p>
+
+<a name="182682846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20new%20my_project%20fails/near/182682846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32472leanpkgnewmyprojectfails.html#182682846">Daniel Donnelly (Dec 05 2019 at 17:31)</a>:</h4>
+<blockquote>
+<p>Basically, yes. And even then the <code>PATH</code> outside of a Git Bash might not be correct, apparently</p>
+</blockquote>
+<p>git is present on my regular windows command prompt, when I type <code>where git</code> etc.  So maybe I should see how I can package this with and call the git bash.</p>
+
+<a name="182682870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20new%20my_project%20fails/near/182682870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32472leanpkgnewmyprojectfails.html#182682870">Simon Cruanes (Dec 05 2019 at 17:31)</a>:</h4>
+<blockquote>
+<p>Which brings me to the question:  Why don't they write Lean in D?</p>
+</blockquote>
+<p>I imagine it's because the core developers are C++ veterans, and when Lean was started, D wasn't in gcc yet, its future wasn't that <del>walter</del> bright.</p>
+
+<a name="182683016"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20new%20my_project%20fails/near/182683016" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32472leanpkgnewmyprojectfails.html#182683016">Sebastian Ullrich (Dec 05 2019 at 17:32)</a>:</h4>
+<blockquote>
+<p>git is present on my regular windows command prompt, when I type <code>where git</code> etc.</p>
+</blockquote>
+<p>Interesting. It might be missing some other executable. I don't remember all the ones <code>leanpkg</code> depends on.</p>
+
+<a name="182683436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20new%20my_project%20fails/near/182683436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32472leanpkgnewmyprojectfails.html#182683436">Daniel Donnelly (Dec 05 2019 at 17:37)</a>:</h4>
+<p>It's okay, I've already thought it out:  Either I provide a link in installer to install Git-for-[insert OS / or do nothing for linux], I then do a subprocess call:<br>
+<code>git-bash</code> and beforehand ensure that [on windows] the Path contains git-bash dir.   The hardest part will be automating the setting of Path.</p>
+
+<a name="182683945"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20new%20my_project%20fails/near/182683945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32472leanpkgnewmyprojectfails.html#182683945">Daniel Donnelly (Dec 05 2019 at 17:43)</a>:</h4>
+<p>Would anyone like to test my code on linux / macOS's?</p>
+
+<a name="182684225"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20new%20my_project%20fails/near/182684225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32472leanpkgnewmyprojectfails.html#182684225">Daniel Donnelly (Dec 05 2019 at 17:46)</a>:</h4>
+<p>Looks like I'll be doing this for windows users:<br>
+<a href="https://stackoverflow.com/questions/27901880/how-to-use-python-script-to-automate-software-installation/27923165" target="_blank" title="https://stackoverflow.com/questions/27901880/how-to-use-python-script-to-automate-software-installation/27923165">https://stackoverflow.com/questions/27901880/how-to-use-python-script-to-automate-software-installation/27923165</a></p>
+
 
 {% endraw %}
 

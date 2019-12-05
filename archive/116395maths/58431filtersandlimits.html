@@ -131,6 +131,35 @@ permalink: archive/116395maths/58431filtersandlimits.html
 <span class="kn">end</span> <span class="n">topological_group</span>
 </pre></div>
 
+<a name="182684389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filters%20and%20limits/near/182684389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58431filtersandlimits.html#182684389">Patrick Massot (Dec 05 2019 at 17:49)</a>:</h4>
+<p>I'm not sure what you are trying to express. You seem to be in a topological group context, so I assume that "smaller and smaller neighborhood" refers to the left or right uniform structure. Then you could write something like:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">algebra</span><span class="bp">.</span><span class="n">group</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">nnreal</span>
+
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">topological_group</span> <span class="n">G</span><span class="o">]</span>
+
+<span class="n">open_locale</span> <span class="n">topological_space</span>
+
+<span class="n">def</span> <span class="n">δ</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">×</span> <span class="n">G</span> <span class="bp">→</span> <span class="n">G</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">p</span><span class="o">,</span> <span class="n">p</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">p</span><span class="bp">.</span><span class="mi">1</span><span class="bp">⁻¹</span>
+
+<span class="n">def</span> <span class="n">tendsto</span> <span class="o">(</span><span class="n">φ</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span> <span class="bp">→</span> <span class="n">nnreal</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">nnreal</span><span class="o">)</span> <span class="o">:=</span>
+ <span class="bp">∀</span> <span class="n">ε</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">V</span> <span class="err">∈</span> <span class="err">𝓝</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="bp">∀</span> <span class="n">U</span> <span class="err">∈</span> <span class="err">𝓝</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">set</span><span class="bp">.</span><span class="n">prod</span> <span class="n">U</span> <span class="n">U</span> <span class="err">⊆</span> <span class="n">δ</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="n">V</span> <span class="bp">→</span> <span class="n">abs</span> <span class="o">(</span><span class="n">φ</span> <span class="n">U</span> <span class="bp">-</span> <span class="n">l</span><span class="o">)</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&lt;</span> <span class="n">ε</span>
+</pre></div>
+
+<a name="182684499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filters%20and%20limits/near/182684499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58431filtersandlimits.html#182684499">Patrick Massot (Dec 05 2019 at 17:50)</a>:</h4>
+<p>About your <code>is_left_invariant</code> definition, I think you are missing a great opportunity to use the Giry monad!</p>
+
+<a name="182684571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filters%20and%20limits/near/182684571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58431filtersandlimits.html#182684571">Johan Commelin (Dec 05 2019 at 17:51)</a>:</h4>
+<p>I'll see if I can make that work</p>
+
+<a name="182684701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filters%20and%20limits/near/182684701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58431filtersandlimits.html#182684701">Johan Commelin (Dec 05 2019 at 17:53)</a>:</h4>
+<p>My <code>phi</code> isn't currently defined on all sets...</p>
+
 
 {% endraw %}
 

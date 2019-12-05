@@ -9,11 +9,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [filters and limits](58431filtersandlimits.html) (7 messages, latest: Dec 05 2019 at 17:53)
+
+* [Software verification](56367Softwareverification.html) (5 messages, latest: Dec 05 2019 at 17:26)
+
+* [compact unit ball](53347compactunitball.html) (22 messages, latest: Dec 05 2019 at 17:15)
+
 * [(Group action of) SL(n) in mathlib](89384GroupactionofSLninmathlib.html) (5 messages, latest: Dec 05 2019 at 15:13)
-
-* [filters and limits](58431filtersandlimits.html) (3 messages, latest: Dec 05 2019 at 09:48)
-
-* [compact unit ball](53347compactunitball.html) (21 messages, latest: Dec 05 2019 at 09:06)
 
 * [local fields / nonarchimedean fields](86469localfieldsnonarchimedeanfields.html) (17 messages, latest: Dec 04 2019 at 22:49)
 
@@ -44,8 +46,6 @@ permalink: archive/116395maths/index.html
 * [(non?)commutative linear ordered semirings](62299noncommutativelinearorderedsemirings.html) (3 messages, latest: Nov 26 2019 at 20:16)
 
 * [condensed mathematics](39396condensedmathematics.html) (234 messages, latest: Nov 25 2019 at 14:53)
-
-* [Software verification](56367Softwareverification.html) (2 messages, latest: Nov 24 2019 at 19:35)
 
 * [analysis](03749analysis.html) (86 messages, latest: Nov 24 2019 at 15:13)
 
