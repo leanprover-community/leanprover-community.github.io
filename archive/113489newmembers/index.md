@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [how to convert a rational polynomial into a polynomial oR\[x\]](73570howtoconvertarationalpolynomialintoapolynomialoRx.html) (1 message, latest: Dec 05 2019 at 17:56)
+* [how to convert a rational polynomial into a polynomial oR\[x\]](73570howtoconvertarationalpolynomialintoapolynomialoRx.html) (2 messages, latest: Dec 05 2019 at 18:18)
 
 * [Lattice of Ideals has Bottom](02303LatticeofIdealshasBottom.html) (4 messages, latest: Dec 05 2019 at 17:32)
 
