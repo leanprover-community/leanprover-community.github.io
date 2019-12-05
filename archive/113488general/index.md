@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [mathlib installation](38548mathlibinstallation.html) (9 messages, latest: Dec 05 2019 at 21:34)
+
 * [leanpkg new my_project fails](32472leanpkgnewmyprojectfails.html) (23 messages, latest: Dec 05 2019 at 18:34)
 
 * [Issues on windows for new users](99400Issuesonwindowsfornewusers.html) (1 message, latest: Dec 05 2019 at 18:30)
