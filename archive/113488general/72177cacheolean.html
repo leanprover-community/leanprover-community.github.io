@@ -260,6 +260,38 @@ no cache found
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cache-olean/near/182794419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72177cacheolean.html#182794419">Simon Hudon (Dec 06 2019 at 19:24)</a>:</h4>
 <p>I think instead of going in the direction of picking the right commits to cache the build of, I think getting sccache to support Lean might do a better job. What it does is every time you try to compile one file it checks if this exact file (with its exact contents and the exact content of its dependencies) has been compiled by any other user in the past.</p>
 
+<a name="182798425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cache-olean/near/182798425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72177cacheolean.html#182798425">Rob Lewis (Dec 06 2019 at 20:02)</a>:</h4>
+<blockquote>
+<p>Github actions supports <a href="https://help.github.com/en/actions/automating-your-workflow-with-github-actions/persisting-workflow-data-using-artifacts#uploading-build-and-test-artifacts" target="_blank" title="https://help.github.com/en/actions/automating-your-workflow-with-github-actions/persisting-workflow-data-using-artifacts#uploading-build-and-test-artifacts">attaching downloadable "artifacts"</a> to every build (on every branch), so all this is possible. Probably that can be integrated into the cache-olean script in a clever way too.</p>
+</blockquote>
+<p>I wonder how long they're stored, how predictable the URLs are, and if there's a cap on the artifact size. If those all have reasonable answers, I think this is a great reason to switch.</p>
+
+<a name="182798458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cache-olean/near/182798458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72177cacheolean.html#182798458">Rob Lewis (Dec 06 2019 at 20:03)</a>:</h4>
+<p>Also I've been getting annoyed with the random Travis failures because a PR happened to be merged during the build.</p>
+
+<a name="182798513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cache-olean/near/182798513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72177cacheolean.html#182798513">Rob Lewis (Dec 06 2019 at 20:03)</a>:</h4>
+<p>I don't know the first thing about sccache, that sounds reasonable too.</p>
+
+<a name="182798624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cache-olean/near/182798624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72177cacheolean.html#182798624">Rob Lewis (Dec 06 2019 at 20:04)</a>:</h4>
+<p>But there are independent reasons to switch to GitHub Actions for CI, so if it will let us cache oleans for all PRs without much effort, let's go for it.</p>
+
+<a name="182799280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cache-olean/near/182799280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72177cacheolean.html#182799280">Bryan Gin-ge Chen (Dec 06 2019 at 20:14)</a>:</h4>
+<blockquote>
+<p>I wonder how long they're stored, how predictable the URLs are, and if there's a cap on the artifact size.</p>
+</blockquote>
+<p>According to the page it looks like they're stored for 90 days, which is probably OK for PR's and non-cron master commits. For really old PRs, we would probably want to do a merge commit with master anyways, and that would trigger a new build.</p>
+<p>Not sure about the URLs, but I did see this:</p>
+<blockquote>
+<p>GitHub does not currently offer a REST API to retrieve uploaded artifacts.</p>
+</blockquote>
+<p>So, this might be tricky.</p>
+<p>I couldn't find any info about size caps, so my guess is that we'd be fine.</p>
+
 
 {% endraw %}
 
