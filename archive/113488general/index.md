@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [cache-olean](72177cacheolean.html) (41 messages, latest: Dec 06 2019 at 17:57)
+* [cache-olean](72177cacheolean.html) (43 messages, latest: Dec 06 2019 at 18:55)
+
+* [linter](19343linter.html) (5 messages, latest: Dec 06 2019 at 18:25)
 
 * [Dependent sum with Prop](95370DependentsumwithProp.html) (7 messages, latest: Dec 06 2019 at 00:59)
 
@@ -166,8 +168,6 @@ permalink: archive/113488general/index.html
 * [typeclass or implicit arguments](78731typeclassorimplicitarguments.html) (11 messages, latest: Nov 09 2019 at 00:03)
 
 * [A benchmark of four statements](63622Abenchmarkoffourstatements.html) (58 messages, latest: Nov 08 2019 at 19:07)
-
-* [linter](19343linter.html) (4 messages, latest: Nov 08 2019 at 09:14)
 
 * [Cute instance loop](65569Cuteinstanceloop.html) (96 messages, latest: Nov 08 2019 at 09:09)
 
