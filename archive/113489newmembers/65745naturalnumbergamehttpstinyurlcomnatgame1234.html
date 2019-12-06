@@ -1117,6 +1117,37 @@ I just finished <code>mul_left_cancel</code> and thus the whole game but I'm new
 <p>I also had fun trying to do this problem. I think it goes something like this. How do we prove ab=ac =&gt; b=c by induction? Well, let's try induction on b. Let us say we know the result for b=k and want to show it for b=k+1. More precisely, we know that ak=ac =&gt; k=c and we want to show that a(k+1) = ac =&gt; k+1 = c. But we can't possibly do that; we can expand the antecedent to get ak+a = ac, but even knowing that ak=ac =&gt; k=c doesn't get us anywhere.  The problem is that c has a fixed value.</p>
 <p>Instead, we have to prove a slightly different result, namely: "for all c, ab=ac =&gt; b=c". Now our induction hypothesis becomes "for all c, ak=ac =&gt; k=c" and we want to prove "for all c, a(k+1)=ac =&gt; k+1=c". We can now deal with the two possible cases for c, namely c=0 and c=m+1; the first leads to false =&gt; false (as a and k+1 are both non-zero), and the second gives a(k+1)=a(m+1) =&gt; k+1 = m+1, which can be reduced to ak=am =&gt; k+1=m+1.  Since we know ak=am =&gt; k=m from our induction hypothesis, we can then deduce k+1=m+1.</p>
 
+<a name="182742010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/182742010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#182742010">Julian Gilbey (Dec 06 2019 at 09:20)</a>:</h4>
+<p>Hmm, I'm stuck on Inequality level 16.  Here's where I've got to:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">lt_aux_two</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">)</span> <span class="o">:</span> <span class="n">succ</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">∧</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">b</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">h</span> <span class="k">with</span> <span class="n">c</span> <span class="n">hc</span><span class="o">,</span>
+<span class="n">rw</span> <span class="o">[</span><span class="n">succ_add</span><span class="o">,</span> <span class="err">←</span> <span class="n">add_succ</span><span class="o">]</span> <span class="n">at</span> <span class="n">hc</span><span class="o">,</span>
+<span class="n">split</span><span class="o">,</span>
+  <span class="n">use</span> <span class="n">succ</span> <span class="n">c</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">hc</span><span class="o">,</span>
+<span class="n">intro</span> <span class="n">hb</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">hb</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">hd</span> <span class="n">at</span> <span class="n">hc</span><span class="o">,</span>
+<span class="n">rw</span> <span class="o">[</span><span class="n">add_assoc</span><span class="o">,</span> <span class="n">add_succ</span><span class="o">,</span> <span class="n">add_succ</span><span class="o">,</span> <span class="err">←</span> <span class="n">succ_add</span><span class="o">]</span> <span class="n">at</span> <span class="n">hc</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">hb</span> <span class="o">:=</span> <span class="n">not_succ_le_self</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">sorry</span>
+</pre></div>
+
+
+<p>At this point I have the very helpful state:</p>
+<div class="codehilite"><pre><span></span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">,</span>
+<span class="n">hd</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">d</span><span class="o">,</span>
+<span class="n">hc</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">succ</span> <span class="n">b</span> <span class="bp">+</span> <span class="o">(</span><span class="n">d</span> <span class="bp">+</span> <span class="n">c</span><span class="o">),</span>
+<span class="n">hb</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">succ</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">b</span>
+<span class="err">⊢</span> <span class="n">false</span>
+</pre></div>
+
+
+<p>I really want to turn <code>hc</code> into <code>succ b ≤ b</code>, so I want to do some sort of exists introduction, essentially saying "<code>hc</code> is my proof that <code>succ b ≤ b</code>", but I have no idea how to do so.  (Of course, once I have this, then I just apply <code>hb</code> to it to close the goal.)</p>
+<p>Any suggestions?</p>
+
 
 {% endraw %}
 

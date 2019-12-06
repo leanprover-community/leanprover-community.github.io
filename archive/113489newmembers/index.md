@@ -9,11 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Problems with meta variable in goal](80744Problemswithmetavariableingoal.html) (9 messages, latest: Dec 06 2019 at 09:28)
+
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (208 messages, latest: Dec 06 2019 at 09:20)
+
 * [how to convert a rational polynomial into a polynomial oR\[x\]](73570howtoconvertarationalpolynomialintoapolynomialoRx.html) (2 messages, latest: Dec 05 2019 at 18:18)
 
 * [Lattice of Ideals has Bottom](02303LatticeofIdealshasBottom.html) (4 messages, latest: Dec 05 2019 at 17:32)
-
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (207 messages, latest: Dec 05 2019 at 15:29)
 
 * [Advent of code in Lean](06346AdventofcodeinLean.html) (16 messages, latest: Dec 05 2019 at 12:06)
 
