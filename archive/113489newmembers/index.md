@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Set theory](84808Settheory.html) (9 messages, latest: Dec 06 2019 at 15:20)
+
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (215 messages, latest: Dec 06 2019 at 10:46)
 
 * [Problems with meta variable in goal](80744Problemswithmetavariableingoal.html) (11 messages, latest: Dec 06 2019 at 10:22)
