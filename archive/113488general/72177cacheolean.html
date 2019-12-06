@@ -208,6 +208,30 @@ no cache found
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cache-olean/near/182737290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72177cacheolean.html#182737290">Johan Commelin (Dec 06 2019 at 07:55)</a>:</h4>
 <p>mathlib is moving ever so slightly faster. I'm finding that if one works on a bunch of related PRs, then it's really nice to be able to work on <code>master</code> instead of yesterdays <code>lean-3.4.2</code>. Are there any options on the horizon of publishing binaries for every commit of the last 3 days (say) and only storing 1 set of binaries per day for older versions of master?</p>
 
+<a name="182781215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cache-olean/near/182781215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72177cacheolean.html#182781215">Simon Hudon (Dec 06 2019 at 17:04)</a>:</h4>
+<p>I have not looked into it. I think that's possible but you need every build of master to do a deployment. You can look in the travis file and in <code>scripts/deploy-nightly.sh</code>. <code>scripts/deploy-nightly.sh</code> should be changed a bit so that it does not push to <code>lean-3.4.2</code> when deploying the build. As for deleting old releases, I'm not sure how to do that. We can try with a cron job on travis.</p>
+
+<a name="182781261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cache-olean/near/182781261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72177cacheolean.html#182781261">Simon Hudon (Dec 06 2019 at 17:04)</a>:</h4>
+<p>Another approach would be to look into Github actions. It might be easier to configure</p>
+
+<a name="182784754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cache-olean/near/182784754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72177cacheolean.html#182784754">Johan Commelin (Dec 06 2019 at 17:39)</a>:</h4>
+<p>Are there more people who think it would be useful to increase the frequency of binary releases? If it's just me, I don't think we should spend energy on this change.</p>
+
+<a name="182784832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cache-olean/near/182784832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72177cacheolean.html#182784832">Johan Commelin (Dec 06 2019 at 17:40)</a>:</h4>
+<p>So, thumbs up on this message, if you would like to have binary releases for every commit on master for the last 3 days. And thumbs down if you don't want/need that.</p>
+
+<a name="182785166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cache-olean/near/182785166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72177cacheolean.html#182785166">Patrick Massot (Dec 06 2019 at 17:44)</a>:</h4>
+<p>I even wish PRs buils would be available so that I have at least access to tactic state when reviewing complicated PRs.</p>
+
+<a name="182786340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cache-olean/near/182786340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72177cacheolean.html#182786340">Bryan Gin-ge Chen (Dec 06 2019 at 17:57)</a>:</h4>
+<p>Github actions supports <a href="https://help.github.com/en/actions/automating-your-workflow-with-github-actions/persisting-workflow-data-using-artifacts#uploading-build-and-test-artifacts" target="_blank" title="https://help.github.com/en/actions/automating-your-workflow-with-github-actions/persisting-workflow-data-using-artifacts#uploading-build-and-test-artifacts">attaching downloadable "artifacts"</a> to every build (on every branch), so all this is possible. Probably that can be integrated into the cache-olean script in a clever way too.</p>
+
 
 {% endraw %}
 
