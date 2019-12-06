@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [cache-olean](72177cacheolean.html) (35 messages, latest: Dec 06 2019 at 07:55)
+
 * [Dependent sum with Prop](95370DependentsumwithProp.html) (7 messages, latest: Dec 06 2019 at 00:59)
 
 * [mathlib installation](38548mathlibinstallation.html) (10 messages, latest: Dec 05 2019 at 22:42)
@@ -950,8 +952,6 @@ permalink: archive/113488general/index.html
 * [transitivity](39163transitivity.html) (49 messages, latest: May 25 2019 at 15:33)
 
 * [syntactic equality](15425syntacticequality.html) (44 messages, latest: May 25 2019 at 13:05)
-
-* [cache-olean](72177cacheolean.html) (34 messages, latest: May 24 2019 at 19:29)
 
 * [succ_str](50023succstr.html) (23 messages, latest: May 24 2019 at 18:26)
 
