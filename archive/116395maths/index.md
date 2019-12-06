@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [compact unit ball](53347compactunitball.html) (25 messages, latest: Dec 06 2019 at 00:47)
+
 * [filters and limits](58431filtersandlimits.html) (7 messages, latest: Dec 05 2019 at 17:53)
 
 * [Software verification](56367Softwareverification.html) (5 messages, latest: Dec 05 2019 at 17:26)
-
-* [compact unit ball](53347compactunitball.html) (22 messages, latest: Dec 05 2019 at 17:15)
 
 * [(Group action of) SL(n) in mathlib](89384GroupactionofSLninmathlib.html) (5 messages, latest: Dec 05 2019 at 15:13)
 

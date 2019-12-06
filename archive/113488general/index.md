@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Dependent sum with Prop](95370DependentsumwithProp.html) (7 messages, latest: Dec 06 2019 at 00:59)
+
 * [mathlib installation](38548mathlibinstallation.html) (10 messages, latest: Dec 05 2019 at 22:42)
 
 * [Issues on windows for new users](99400Issuesonwindowsfornewusers.html) (4 messages, latest: Dec 05 2019 at 22:35)
