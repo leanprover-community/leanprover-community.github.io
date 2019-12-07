@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [finite prods from binary prods](89737finiteprodsfrombinaryprods.html) (3 messages, latest: Dec 07 2019 at 15:59)
+* [finite prods from binary prods](89737finiteprodsfrombinaryprods.html) (4 messages, latest: Dec 07 2019 at 16:21)
 
 * [automation in category theory](95474automationincategorytheory.html) (12 messages, latest: Dec 07 2019 at 15:35)
 

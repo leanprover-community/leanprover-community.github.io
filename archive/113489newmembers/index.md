@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [vec.cons in chapter 2](70416vecconsinchapter2.html) (1 message, latest: Dec 07 2019 at 16:47)
+
 * [Clear all](56641Clearall.html) (3 messages, latest: Dec 07 2019 at 09:39)
 
 * [Set theory](84808Settheory.html) (9 messages, latest: Dec 06 2019 at 15:20)
