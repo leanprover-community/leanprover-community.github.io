@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [speeding up category theory](49646speedingupcategorytheory.html) (9 messages, latest: Dec 07 2019 at 09:59)
+* [speeding up category theory](49646speedingupcategorytheory.html) (11 messages, latest: Dec 07 2019 at 10:32)
 
 * [Software verification](56367Softwareverification.html) (6 messages, latest: Dec 06 2019 at 20:36)
 
