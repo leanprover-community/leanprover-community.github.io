@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [automation in category theory](95474automationincategorytheory.html) (3 messages, latest: Dec 07 2019 at 13:59)
+
 * [speeding up category theory](49646speedingupcategorytheory.html) (12 messages, latest: Dec 07 2019 at 11:37)
 
 * [Software verification](56367Softwareverification.html) (6 messages, latest: Dec 06 2019 at 20:36)

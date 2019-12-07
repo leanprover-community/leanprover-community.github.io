@@ -1,0 +1,70 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/95474automationincategorytheory.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/95474automationincategorytheory.html">automation in category theory</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="182845514"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/automation%20in%20category%20theory/near/182845514" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95474automationincategorytheory.html#182845514">Kevin Buzzard (Dec 07 2019 at 13:41)</a>:</h4>
+<p>Hey, I was just comparing notes with <span class="user-mention" data-user-id="132603">@Calle Sönne</span> because we were both trying to prove that equalizer(f,g)=equalizer(g,f). His proof looks like this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">comm_of_equalizer</span> <span class="o">:</span> <span class="n">equalizer</span> <span class="n">f</span> <span class="n">g</span> <span class="err">≅</span> <span class="n">equalizer</span> <span class="n">g</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refine_struct</span> <span class="o">{</span> <span class="n">hom</span> <span class="o">:=</span> <span class="n">equalizer</span><span class="bp">.</span><span class="n">lift</span> <span class="n">g</span> <span class="n">f</span> <span class="o">(</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">ι</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="o">((</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">condition</span><span class="o">)</span> <span class="n">f</span> <span class="n">g</span><span class="o">)),</span>
+  <span class="n">inv</span> <span class="o">:=</span> <span class="n">equalizer</span><span class="bp">.</span><span class="n">lift</span> <span class="n">f</span> <span class="n">g</span> <span class="o">(</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">ι</span> <span class="n">g</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="o">((</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">condition</span><span class="o">)</span> <span class="n">g</span> <span class="n">f</span><span class="o">)),</span> <span class="o">},</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">limit</span><span class="bp">.</span><span class="n">w</span> <span class="o">(</span><span class="n">parallel_pair</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="n">walking_parallel_pair_hom</span><span class="bp">.</span><span class="n">right</span><span class="o">,</span> <span class="n">parallel_pair_map_right</span><span class="o">],</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">limit</span><span class="bp">.</span><span class="n">w</span> <span class="o">(</span><span class="n">parallel_pair</span> <span class="n">g</span> <span class="n">f</span><span class="o">)</span> <span class="n">walking_parallel_pair_hom</span><span class="bp">.</span><span class="n">right</span><span class="o">,</span> <span class="n">parallel_pair_map_right</span><span class="o">],</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>but I've just realised that this proof has non-terminal simps in! The definition of <code>category_theory.iso</code> is</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">iso</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">hom</span> <span class="o">:</span> <span class="n">X</span> <span class="err">⟶</span> <span class="n">Y</span><span class="o">)</span>
+<span class="o">(</span><span class="n">inv</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="n">X</span><span class="o">)</span>
+<span class="o">(</span><span class="n">hom_inv_id&#39;</span> <span class="o">:</span> <span class="n">hom</span> <span class="err">≫</span> <span class="n">inv</span> <span class="bp">=</span> <span class="mi">𝟙</span> <span class="n">X</span> <span class="bp">.</span> <span class="n">obviously</span><span class="o">)</span>
+<span class="o">(</span><span class="n">inv_hom_id&#39;</span> <span class="o">:</span> <span class="n">inv</span> <span class="err">≫</span> <span class="n">hom</span> <span class="bp">=</span> <span class="mi">𝟙</span> <span class="n">Y</span> <span class="bp">.</span> <span class="n">obviously</span><span class="o">)</span>
+</pre></div>
+
+
+<p>and those autoparams fire in both cases, and I believe they apply <code>simp</code> in both cases (and several other things). In neither case does <code>obviously</code> close the goal though, so we have non-terminal simps here. I rewrote as</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">equalizer</span><span class="bp">.</span><span class="n">symm</span><span class="bp">.</span><span class="n">hom</span> <span class="o">:</span> <span class="n">equalizer</span> <span class="n">g</span> <span class="n">f</span> <span class="err">⟶</span> <span class="n">equalizer</span> <span class="n">f</span> <span class="n">g</span> <span class="o">:=</span>
+<span class="n">equalizer</span><span class="bp">.</span><span class="n">lift</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">ι</span> <span class="n">g</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">condition</span> <span class="n">g</span> <span class="n">f</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
+
+<span class="n">def</span> <span class="n">equalizer</span><span class="bp">.</span><span class="n">symm</span> <span class="o">:</span> <span class="n">equalizer</span> <span class="n">f</span> <span class="n">g</span> <span class="err">≅</span> <span class="n">equalizer</span> <span class="n">g</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">hom</span> <span class="o">:=</span> <span class="n">equalizer</span><span class="bp">.</span><span class="n">symm</span><span class="bp">.</span><span class="n">hom</span> <span class="n">g</span> <span class="n">f</span><span class="o">,</span>
+  <span class="n">inv</span> <span class="o">:=</span> <span class="n">equalizer</span><span class="bp">.</span><span class="n">symm</span><span class="bp">.</span><span class="n">hom</span> <span class="n">f</span> <span class="n">g</span><span class="o">,</span>
+  <span class="n">hom_inv_id&#39;</span> <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">suffices</span> <span class="o">:</span> <span class="n">limits</span><span class="bp">.</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">ι</span> <span class="n">f</span> <span class="n">g</span> <span class="err">≫</span> <span class="n">g</span> <span class="bp">=</span> <span class="n">limits</span><span class="bp">.</span><span class="n">limit</span><span class="bp">.</span><span class="n">π</span> <span class="o">(</span><span class="n">limits</span><span class="bp">.</span><span class="n">parallel_pair</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="n">limits</span><span class="bp">.</span><span class="n">walking_parallel_pair</span><span class="bp">.</span><span class="n">one</span><span class="o">,</span>
+      <span class="n">obviously</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">limit</span><span class="bp">.</span><span class="n">w</span> <span class="o">(</span><span class="n">parallel_pair</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="n">walking_parallel_pair_hom</span><span class="bp">.</span><span class="n">right</span><span class="o">,</span> <span class="n">parallel_pair_map_right</span><span class="o">]</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">inv_hom_id&#39;</span> <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">suffices</span> <span class="o">:</span> <span class="n">limits</span><span class="bp">.</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">ι</span> <span class="n">g</span> <span class="n">f</span> <span class="err">≫</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">limits</span><span class="bp">.</span><span class="n">limit</span><span class="bp">.</span><span class="n">π</span> <span class="o">(</span><span class="n">limits</span><span class="bp">.</span><span class="n">parallel_pair</span> <span class="n">g</span> <span class="n">f</span><span class="o">)</span> <span class="n">limits</span><span class="bp">.</span><span class="n">walking_parallel_pair</span><span class="bp">.</span><span class="n">one</span><span class="o">,</span>
+      <span class="n">obviously</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">limit</span><span class="bp">.</span><span class="n">w</span> <span class="o">(</span><span class="n">parallel_pair</span> <span class="n">g</span> <span class="n">f</span><span class="o">)</span> <span class="n">walking_parallel_pair_hom</span><span class="bp">.</span><span class="n">right</span><span class="o">,</span> <span class="n">parallel_pair_map_right</span><span class="o">],</span>
+  <span class="kn">end</span><span class="o">}</span>
+</pre></div>
+
+
+<p>and I think this avoids them. I would never have noticed the non-terminal simps if I'd been reviewing this code. [NB one needs <code>local attribute [tidy] tactic.case_bash</code> for this proof to work]</p>
+
+<a name="182846062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/automation%20in%20category%20theory/near/182846062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95474automationincategorytheory.html#182846062">Johan Commelin (Dec 07 2019 at 13:58)</a>:</h4>
+<p>The second version is what the library code usually looks like</p>
+
+<a name="182846073"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/automation%20in%20category%20theory/near/182846073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95474automationincategorytheory.html#182846073">Johan Commelin (Dec 07 2019 at 13:59)</a>:</h4>
+<p>One red flag is that the first piece of code is a <code>lemma</code> where it should be a <code>def</code>. Once that is fixed, the fact that the data is defined with <code>begin ... end</code> is another reddish flag.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
