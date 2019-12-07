@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [automation in category theory](95474automationincategorytheory.html) (3 messages, latest: Dec 07 2019 at 13:59)
+* [tensors](83279tensors.html) (4 messages, latest: Dec 07 2019 at 14:16)
+
+* [automation in category theory](95474automationincategorytheory.html) (10 messages, latest: Dec 07 2019 at 14:14)
 
 * [speeding up category theory](49646speedingupcategorytheory.html) (12 messages, latest: Dec 07 2019 at 11:37)
 

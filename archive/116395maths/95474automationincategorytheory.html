@@ -64,6 +64,46 @@ permalink: archive/116395maths/95474automationincategorytheory.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/automation%20in%20category%20theory/near/182846073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95474automationincategorytheory.html#182846073">Johan Commelin (Dec 07 2019 at 13:59)</a>:</h4>
 <p>One red flag is that the first piece of code is a <code>lemma</code> where it should be a <code>def</code>. Once that is fixed, the fact that the data is defined with <code>begin ... end</code> is another reddish flag.</p>
 
+<a name="182846119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/automation%20in%20category%20theory/near/182846119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95474automationincategorytheory.html#182846119">Johan Commelin (Dec 07 2019 at 14:00)</a>:</h4>
+<p>Once you start fixing that, by writing down the constructor directly. You converge towards the latter codeblock automatically</p>
+
+<a name="182846191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/automation%20in%20category%20theory/near/182846191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95474automationincategorytheory.html#182846191">Johan Commelin (Dec 07 2019 at 14:02)</a>:</h4>
+<p>One thing you'll notice is that almost every <code>def</code> in the category lib is followed by some simp-lemmas. (Although there are now attributes that take some of this job out of your hands.) Is there a natural simp-lemma that should follow your definitions?</p>
+
+<a name="182846200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/automation%20in%20category%20theory/near/182846200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95474automationincategorytheory.html#182846200">Johan Commelin (Dec 07 2019 at 14:03)</a>:</h4>
+<p>I guess you can tag <code>@[simps]</code> before <code>def equalizer.symm</code> to get some useful simp lemmas.</p>
+
+<a name="182846248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/automation%20in%20category%20theory/near/182846248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95474automationincategorytheory.html#182846248">Johan Commelin (Dec 07 2019 at 14:04)</a>:</h4>
+<p>Also, we should think about whether the stuff following <code>suffices : this_stuff_is_what_I_mean</code> can be simplified further with a suitable simp-lemma.</p>
+
+<a name="182846310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/automation%20in%20category%20theory/near/182846310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95474automationincategorytheory.html#182846310">Johan Commelin (Dec 07 2019 at 14:06)</a>:</h4>
+<p>I think you can write a simp-lemma for that fact that simplifies the RHS to the LHS. Once that is done, you can compress your definition to just the <code>hom</code> and <code>inv</code> parts.</p>
+
+<a name="182846532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/automation%20in%20category%20theory/near/182846532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95474automationincategorytheory.html#182846532">Kevin Buzzard (Dec 07 2019 at 14:12)</a>:</h4>
+<p>Calle asked whether this should be in mathlib and I didn't really know. What I'm learning now is that there's a lot more to getting category theory into mathlib than meets the eye. </p>
+<p>I am constantly running into issues in my future plans which will need category theory so I've got to learn it really. Here is a question which stumped me. At some point in the equalizer proof one needs the following fact: if <code>K : limits.fork f g</code> is the limit cone for the equaliser diagram (two maps f and g from A to B, say) then K is an object X and then the data of maps from X to A and B and some theorems (all packaged up as one natural transformation). I wanted to show that if you took the map from X to A and then made a new cone, it was equal to the original cone:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">equalizer</span><span class="bp">.</span><span class="n">fork</span> <span class="o">:</span> <span class="n">fork</span> <span class="n">f</span> <span class="n">g</span> <span class="o">:=</span> <span class="n">limit</span><span class="bp">.</span><span class="n">cone</span> <span class="bp">_</span>
+
+<span class="kn">theorem</span> <span class="n">fork_of_equalizer_eq_fork</span> <span class="o">:</span>
+  <span class="n">fork</span><span class="bp">.</span><span class="n">of_ι</span> <span class="o">(</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">ι</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">(</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">condition</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="bp">=</span> <span class="n">equalizer</span><span class="bp">.</span><span class="n">fork</span> <span class="n">f</span> <span class="n">g</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Then I realised I was missing some sort of <code>cone.ext</code>. And <em>then</em> I realised that this might be a problematic lemma because it's some equality of dependent types in there somewhere. So I decided not to go down that route.</p>
+
+<a name="182846603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/automation%20in%20category%20theory/near/182846603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95474automationincategorytheory.html#182846603">Kevin Buzzard (Dec 07 2019 at 14:14)</a>:</h4>
+<p>In my application I only needed that a specific map coming from both natural transformations was the same so I could work around it. But it occurred to me that in general one should probably never be attempting to prove that objects are equal, limits are equal, cones are equal...</p>
+
 
 {% endraw %}
 
