@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [vec.cons in chapter 2](70416vecconsinchapter2.html) (1 message, latest: Dec 07 2019 at 16:47)
+* [vec.cons in chapter 2](70416vecconsinchapter2.html) (3 messages, latest: Dec 07 2019 at 17:09)
 
 * [Clear all](56641Clearall.html) (3 messages, latest: Dec 07 2019 at 09:39)
 
