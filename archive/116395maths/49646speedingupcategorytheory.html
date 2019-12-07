@@ -1,0 +1,79 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/49646speedingupcategorytheory.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/49646speedingupcategorytheory.html">speeding up category theory</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="182837840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/speeding%20up%20category%20theory/near/182837840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49646speedingupcategorytheory.html#182837840">Kevin Buzzard (Dec 07 2019 at 09:49)</a>:</h4>
+<p>Every now and then I attempt to engage with the category theory library and I always manage get a bit further in than the time before. And then I usually run into something which frustrates me (e.g. I get muddled about universes) and moan here for a bit and then go and do something else.</p>
+<p>So <span class="user-mention" data-user-id="132603">@Calle Sönne</span>  raised the question of proving that the equalizers of (f,g) and (g,f) are isomorphic. If I write down the map like this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">shapes</span><span class="bp">.</span><span class="n">equalizers</span>
+
+<span class="kn">open</span> <span class="n">category_theory</span>
+<span class="kn">open</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span>
+
+<span class="n">universes</span> <span class="n">v</span> <span class="n">u</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">[</span><span class="n">has_equalizers</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="n">include</span> <span class="err">𝒞</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">A</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)</span>
+
+<span class="kn">set_option</span> <span class="n">profiler</span> <span class="n">true</span>
+<span class="n">def</span> <span class="n">equalizer</span><span class="bp">.</span><span class="n">symm</span><span class="bp">.</span><span class="n">hom</span> <span class="o">:</span> <span class="n">equalizer</span> <span class="n">g</span> <span class="n">f</span> <span class="err">⟶</span> <span class="n">equalizer</span> <span class="n">f</span> <span class="n">g</span> <span class="o">:=</span>
+<span class="n">equalizer</span><span class="bp">.</span><span class="n">lift</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">ι</span> <span class="n">g</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="k">by</span> <span class="n">tidy</span><span class="o">)</span>
+<span class="c1">-- elaboration of equalizer.symm.hom took 794ms</span>
+</pre></div>
+
+
+<p>then things are already slow. I changed <code>tidy</code> to <code>simp</code> and it's still slow. My impression is that in Isabelle you replace <code>by tidy</code> with <code>sledgehammer</code> and then look at the output and use that in your code instead. Is there a way of doing this here?<br>
+Isn't there some way of getting <code>tidy</code> to report <code>tidy says...</code>? I know I can put simp logging on but if I could just get something to cut and paste that would be great.</p>
+
+<a name="182837899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/speeding%20up%20category%20theory/near/182837899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49646speedingupcategorytheory.html#182837899">Patrick Massot (Dec 07 2019 at 09:50)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md#tidy" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md#tidy">https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md#tidy</a></p>
+
+<a name="182837953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/speeding%20up%20category%20theory/near/182837953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49646speedingupcategorytheory.html#182837953">Kevin Buzzard (Dec 07 2019 at 09:52)</a>:</h4>
+<p><em>boggle</em> why do I have to look at this web page? I even read the Lean source for <code>tidy</code>. Shouldn't this be mentioned in the docstring?</p>
+
+<a name="182837966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/speeding%20up%20category%20theory/near/182837966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49646speedingupcategorytheory.html#182837966">Patrick Massot (Dec 07 2019 at 09:52)</a>:</h4>
+<p>Documentation can always be improved, but that one was not so hard to find...</p>
+
+<a name="182837969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/speeding%20up%20category%20theory/near/182837969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49646speedingupcategorytheory.html#182837969">Kevin Buzzard (Dec 07 2019 at 09:52)</a>:</h4>
+<p>If I hover over <code>tidy</code> I get <code>tidy ?? tactic.tidy.cfg?</code></p>
+
+<a name="182837971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/speeding%20up%20category%20theory/near/182837971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49646speedingupcategorytheory.html#182837971">Patrick Massot (Dec 07 2019 at 09:53)</a>:</h4>
+<p>But you can PR a better docstring of course.</p>
+
+<a name="182838043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/speeding%20up%20category%20theory/near/182838043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49646speedingupcategorytheory.html#182838043">Kevin Buzzard (Dec 07 2019 at 09:55)</a>:</h4>
+<blockquote>
+<p>Documentation can always be improved, but that one was not so hard to find...</p>
+</blockquote>
+<p>It's not so hard to find if you remember <em>all</em> the places where you're supposed to be looking to find this information. I tried the docstring, I tried the source code for the file hoping for a module docstring, I tried searching Zulip for <code>tidy says</code>, I then asked here.</p>
+
+<a name="182838152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/speeding%20up%20category%20theory/near/182838152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49646speedingupcategorytheory.html#182838152">Kevin Buzzard (Dec 07 2019 at 09:58)</a>:</h4>
+<p>I can't write this docstring. "Tidy does something. Try <code>tidy?</code> to see what it did."</p>
+
+<a name="182838158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/speeding%20up%20category%20theory/near/182838158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49646speedingupcategorytheory.html#182838158">Kevin Buzzard (Dec 07 2019 at 09:59)</a>:</h4>
+<p>oh wait, I can -- I can just copy from the tactic md file ;-)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

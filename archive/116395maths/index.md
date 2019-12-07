@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [speeding up category theory](49646speedingupcategorytheory.html) (9 messages, latest: Dec 07 2019 at 09:59)
+
 * [Software verification](56367Softwareverification.html) (6 messages, latest: Dec 06 2019 at 20:36)
 
 * [compact unit ball](53347compactunitball.html) (30 messages, latest: Dec 06 2019 at 11:24)
