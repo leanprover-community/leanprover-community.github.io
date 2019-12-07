@@ -9,9 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [tensors](83279tensors.html) (4 messages, latest: Dec 07 2019 at 14:16)
+* [finite prods from binary prods](89737finiteprodsfrombinaryprods.html) (3 messages, latest: Dec 07 2019 at 15:59)
 
-* [automation in category theory](95474automationincategorytheory.html) (10 messages, latest: Dec 07 2019 at 14:14)
+* [automation in category theory](95474automationincategorytheory.html) (12 messages, latest: Dec 07 2019 at 15:35)
+
+* [tensors](83279tensors.html) (4 messages, latest: Dec 07 2019 at 14:16)
 
 * [speeding up category theory](49646speedingupcategorytheory.html) (12 messages, latest: Dec 07 2019 at 11:37)
 

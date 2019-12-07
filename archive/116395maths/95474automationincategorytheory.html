@@ -104,6 +104,21 @@ permalink: archive/116395maths/95474automationincategorytheory.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/automation%20in%20category%20theory/near/182846603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95474automationincategorytheory.html#182846603">Kevin Buzzard (Dec 07 2019 at 14:14)</a>:</h4>
 <p>In my application I only needed that a specific map coming from both natural transformations was the same so I could work around it. But it occurred to me that in general one should probably never be attempting to prove that objects are equal, limits are equal, cones are equal...</p>
 
+<a name="182849495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/automation%20in%20category%20theory/near/182849495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95474automationincategorytheory.html#182849495">Kevin Buzzard (Dec 07 2019 at 15:34)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- The braiding isomorphism which swaps a binary product. -/</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">simps</span><span class="o">]</span> <span class="n">def</span> <span class="n">prod</span><span class="bp">.</span><span class="n">braiding</span> <span class="o">(</span><span class="n">P</span> <span class="n">Q</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="err">⨯</span> <span class="n">Q</span> <span class="err">≅</span> <span class="n">Q</span> <span class="err">⨯</span> <span class="n">P</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">hom</span> <span class="o">:=</span> <span class="n">prod</span><span class="bp">.</span><span class="n">lift</span> <span class="n">prod</span><span class="bp">.</span><span class="n">snd</span> <span class="n">prod</span><span class="bp">.</span><span class="n">fst</span><span class="o">,</span>
+  <span class="n">inv</span> <span class="o">:=</span> <span class="n">prod</span><span class="bp">.</span><span class="n">lift</span> <span class="n">prod</span><span class="bp">.</span><span class="n">snd</span> <span class="n">prod</span><span class="bp">.</span><span class="n">fst</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>Here automation finishes everything (and again <code>local attribute [tidy] tactic.case_bash</code>). This is from <code>category_theory.limits.shapes.binary_products</code>. The reason it doesn't finish the equalizer question is that Lean doesn't know that if you have a cone for an equalizer diagram X -&gt; -&gt; Y then you can reconstruct it from the map to X.</p>
+
+<a name="182849513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/automation%20in%20category%20theory/near/182849513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95474automationincategorytheory.html#182849513">Kevin Buzzard (Dec 07 2019 at 15:35)</a>:</h4>
+<p>I see, so Johan is saying that perhaps the missing steps should be simp lemmas.</p>
+
 
 {% endraw %}
 
