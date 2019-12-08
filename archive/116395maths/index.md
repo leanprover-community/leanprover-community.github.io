@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Proving physical laws](62138Provingphysicallaws.html) (1 message, latest: Dec 08 2019 at 08:37)
+
 * [abel multiplication](00067abelmultiplication.html) (8 messages, latest: Dec 08 2019 at 03:51)
 
 * [automation in category theory](95474automationincategorytheory.html) (13 messages, latest: Dec 07 2019 at 23:25)
