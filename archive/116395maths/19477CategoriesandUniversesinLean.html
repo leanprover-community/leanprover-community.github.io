@@ -17,6 +17,64 @@ permalink: archive/116395maths/19477CategoriesandUniversesinLean.html
 <p>Can someone explain what <code>(K : Type u) [category.{v} K]</code> means mathematically? Here is my attempt at translating it into mathematics based on set theory: First of all, u and v are universes in this sense <a href="https://en.wikipedia.org/wiki/Grothendieck_universe" target="_blank" title="https://en.wikipedia.org/wiki/Grothendieck_universe">https://en.wikipedia.org/wiki/Grothendieck_universe</a>, then K is a category whose objects are elements of u and whose morphisms are elements of v. </p>
 <p>But if this is correct, then how is the category of all sets modeled in lean?</p>
 
+<a name="182896443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182896443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182896443">Reid Barton (Dec 08 2019 at 15:11)</a>:</h4>
+<p>No, the set of objects of K is an element of u and for each pair of objects X and Y, the set Hom(X, Y) is an element of v.</p>
+
+<a name="182897192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182897192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182897192">Lambert A'Campo (Dec 08 2019 at 15:32)</a>:</h4>
+<p>ok, so that means Sets is not a category in lean ?</p>
+
+<a name="182897256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182897256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182897256">Reid Barton (Dec 08 2019 at 15:34)</a>:</h4>
+<p>It is a category</p>
+
+<a name="182897267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182897267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182897267">Reid Barton (Dec 08 2019 at 15:34)</a>:</h4>
+<p>called <code>Type v</code></p>
+
+<a name="182897284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182897284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182897284">Lambert A'Campo (Dec 08 2019 at 15:35)</a>:</h4>
+<p>but there is no set of objects of Sets</p>
+
+<a name="182897292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182897292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182897292">Reid Barton (Dec 08 2019 at 15:35)</a>:</h4>
+<p>Well, I'm assuming "Set" means the category of sets which are elements of some fixed reference universe v</p>
+
+<a name="182897337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182897337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182897337">Reid Barton (Dec 08 2019 at 15:36)</a>:</h4>
+<p>its set of objects is v itself, which is an element of some bigger universe v+1</p>
+
+<a name="182897349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182897349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182897349">Lambert A'Campo (Dec 08 2019 at 15:37)</a>:</h4>
+<p>Yes ok I'm just surprised there is no notion of category of sets without mentioning any universe. But maybe that is just an unnatural thing in type theory.</p>
+
+<a name="182897392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182897392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182897392">Reid Barton (Dec 08 2019 at 15:38)</a>:</h4>
+<p>To be honest, it's not a very good notion in ordinary math, either</p>
+
+<a name="182897401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182897401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182897401">Kenny Lau (Dec 08 2019 at 15:38)</a>:</h4>
+<blockquote>
+<p>Yes ok I'm just surprised there is no notion of category of sets without mentioning any universe. But maybe that is just an unnatural thing in type theory.</p>
+</blockquote>
+<p>yeah that doesn't exist</p>
+
+<a name="182897403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182897403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182897403">Kenny Lau (Dec 08 2019 at 15:38)</a>:</h4>
+<p>everything has a universe</p>
+
+<a name="182897488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182897488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182897488">Lambert A'Campo (Dec 08 2019 at 15:41)</a>:</h4>
+<blockquote>
+<p>To be honest, it's not a very good notion in ordinary math, either</p>
+</blockquote>
+<p>fair enough</p>
+
+<a name="182898018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182898018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182898018">Kevin Buzzard (Dec 08 2019 at 15:58)</a>:</h4>
+<p>In ZFC people would talk about the "category of sets" -- for them, the objects are what ZFCists would call a <em>class</em>, and Hom(X,Y) is a set for all X and Y.</p>
+
 
 {% endraw %}
 
