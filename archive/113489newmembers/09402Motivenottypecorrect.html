@@ -1,0 +1,46 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/09402Motivenottypecorrect.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/09402Motivenottypecorrect.html">Motive not type correct</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="182893861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Motive%20not%20type%20correct/near/182893861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09402Motivenottypecorrect.html#182893861">Bhavik Mehta (Dec 08 2019 at 13:56)</a>:</h4>
+<p>I'm getting the error <code>rewrite tactic failed, motive is not type correct</code>, and I can't figure out why...</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+<span class="kn">open</span> <span class="n">finset</span>
+
+<span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="kn">check</span> <span class="n">true</span>
+
+<span class="kn">lemma</span> <span class="n">test</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">)}</span> <span class="o">:</span> <span class="n">card</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">range</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">q</span> <span class="o">:</span> <span class="n">finset</span><span class="bp">.</span><span class="n">card</span> <span class="o">(</span><span class="n">elems</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">))</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">card_fin</span> <span class="n">n</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">mem_range</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_succ_iff</span><span class="o">,</span> <span class="err">←</span> <span class="n">q</span><span class="o">],</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>The "additional details" from the trace says: <br>
+<code>[check] application type mismatch at
+  card a
+argument type
+  finset (fin n)
+expected type
+  finset (fin _a)</code></p>
+
+<a name="182893976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Motive%20not%20type%20correct/near/182893976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09402Motivenottypecorrect.html#182893976">Mario Carneiro (Dec 08 2019 at 13:59)</a>:</h4>
+<p>The backward rewrite is replacing <code>n</code> inside the expression <code>@card (fin n) a</code>, turning it into <code>@card (fin (finset.card (elems (fin n)))) a</code> which is no longer well typed because <code>a</code> still has the original type <code>finset (fin n)</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
