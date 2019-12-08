@@ -119,6 +119,56 @@ permalink: archive/116395maths/19477CategoriesandUniversesinLean.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182902194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182902194">Bhavik Mehta (Dec 08 2019 at 17:58)</a>:</h4>
 <p>Some experience, yeah</p>
 
+<a name="182902364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182902364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182902364">Kevin Buzzard (Dec 08 2019 at 18:02)</a>:</h4>
+<p>So is the big etale site a site according to PTJ?</p>
+
+<a name="182902434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182902434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182902434">Kevin Buzzard (Dec 08 2019 at 18:04)</a>:</h4>
+<p>Option 1: we stick to schemes S : C where C : Type 1, check Hom(X,Y) : Type, and demand that a cover of S is Cov(S) : Type. This will involve some jiggery-pokery with cardinals.</p>
+
+<a name="182902443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182902443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182902443">Kevin Buzzard (Dec 08 2019 at 18:04)</a>:</h4>
+<p>Option 2: S : C, C : Type 1, Hom(X,Y) : Type, but Cov(S) : Type 1. <span class="user-mention" data-user-id="110032">@Reid Barton</span> can you check my working? With this option no cardinals are necessary.</p>
+
+<a name="182902462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182902462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182902462">Kevin Buzzard (Dec 08 2019 at 18:05)</a>:</h4>
+<p>Option 3: full ZFC. Choose a sufficiently large cardinal, remark that one might occasionally have to increase it. Now S : C, C : Type (not Type 1 any more) and everything is in Type basically, because Type is all we believe in.</p>
+
+<a name="182902522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182902522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182902522">Kevin Buzzard (Dec 08 2019 at 18:07)</a>:</h4>
+<p>Option 4: fully universe polymorphic. C : Type u, Hom(S,T) : Type v, and Cov(S) : Type w. Is this a site? I could envisage the type theorists among us here arguing that this is clearly the correct definition as far as Lean is concerned.</p>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> which one did you use when you did sites?</p>
+
+<a name="182902609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182902609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182902609">Johan Commelin (Dec 08 2019 at 18:09)</a>:</h4>
+<p>I think for me <code>w</code> was equal to <code>u</code> or <code>max u v</code>. I moved back an forth between different things a bit.</p>
+
+<a name="182903142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182903142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182903142">Edward Ayers (Dec 08 2019 at 18:23)</a>:</h4>
+<p>I've been helicoptered in by Bhavik, I had a go at implementing sites a while ago for fun. I implemented them as:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">slice</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">:=</span> <span class="err">Σ</span> <span class="n">Y</span><span class="o">,</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="n">X</span>
+
+<span class="kn">structure</span> <span class="n">sieve</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">arrows</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">slice</span> <span class="n">C</span> <span class="n">X</span><span class="o">))</span>
+<span class="o">(</span><span class="n">subs</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">slice</span> <span class="n">C</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="bp">_</span> <span class="o">:</span> <span class="n">f</span> <span class="err">∈</span> <span class="n">arrows</span><span class="o">)</span> <span class="o">(</span><span class="n">Z</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">Z</span> <span class="err">⟶</span> <span class="n">f</span><span class="bp">.</span><span class="mi">1</span><span class="o">),</span> <span class="o">(</span><span class="n">slice</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">g</span> <span class="err">≫</span> <span class="n">f</span><span class="bp">.</span><span class="mi">2</span><span class="o">))</span> <span class="err">∈</span> <span class="n">arrows</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">sieve_set</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">:=</span>  <span class="bp">Π</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">C</span><span class="o">),</span> <span class="n">set</span> <span class="o">(</span><span class="bp">@</span><span class="n">sieve</span> <span class="n">C</span> <span class="err">𝒞</span> <span class="n">X</span><span class="o">)</span>
+
+<span class="kn">structure</span> <span class="n">Site</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+<span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="o">(</span><span class="n">J</span> <span class="o">:</span> <span class="n">sieve_set</span> <span class="n">C</span><span class="o">)</span>
+<span class="o">[</span><span class="n">g</span> <span class="o">:</span> <span class="bp">@</span><span class="n">grothendieck</span> <span class="n">C</span> <span class="err">𝒞</span> <span class="n">J</span><span class="o">]</span>
+</pre></div>
+
+
+<p>So I think if you can express your category by choosing <code>u</code> and <code>v</code> properly, you can define sites on it and I didn't have any universe problems there. Although I didn't get as far as defining the Etale site.</p>
+
+<a name="182903607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Categories%20and%20Universes%20in%20Lean/near/182903607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19477CategoriesandUniversesinLean.html#182903607">Edward Ayers (Dec 08 2019 at 18:35)</a>:</h4>
+<p>I would also like to say that I don't understand sites and schemes and stuff and this was more of a personal learning exercise.</p>
+
 
 {% endraw %}
 
