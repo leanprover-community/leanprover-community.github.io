@@ -20,6 +20,29 @@ permalink: archive/116395maths/62138Provingphysicallaws.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proving%20physical%20laws/near/182886615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62138Provingphysicallaws.html#182886615">Kevin Buzzard (Dec 08 2019 at 10:16)</a>:</h4>
 <p>What would be the axioms you'd use to prove that theorem?</p>
 
+<a name="182910050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proving%20physical%20laws/near/182910050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62138Provingphysicallaws.html#182910050">Xu Miao (Dec 08 2019 at 21:38)</a>:</h4>
+<p>Something like special relativity? I am not sure how to represent the equation as a type : energy(o) = mass(o) * C^2  and how to generate a proof derived from the special relativity.</p>
+
+<a name="182910310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proving%20physical%20laws/near/182910310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62138Provingphysicallaws.html#182910310">Simon Hudon (Dec 08 2019 at 21:45)</a>:</h4>
+<p>You could declare a structure like:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">physical_object</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">energy</span> <span class="o">:</span> <span class="n">real</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">physical_object</span><span class="bp">.</span><span class="n">mass</span> <span class="o">(</span><span class="n">o</span> <span class="o">:</span> <span class="n">physical_object</span><span class="o">)</span> <span class="o">:</span> <span class="n">real</span> <span class="o">:=</span> <span class="n">o</span><span class="bp">.</span><span class="n">energy</span> <span class="bp">/</span> <span class="n">C</span><span class="err">^</span><span class="mi">2</span>
+</pre></div>
+
+
+<p>or </p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">physical_object</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">energy</span> <span class="n">mass</span> <span class="o">:</span> <span class="n">real</span><span class="o">)</span>
+<span class="o">(</span><span class="n">special_relativity</span> <span class="o">:</span> <span class="n">energy</span> <span class="bp">=</span> <span class="n">mass</span> <span class="bp">*</span> <span class="n">C</span><span class="err">^</span><span class="mi">2</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Because the equation is functional, the second approach is heavier than necessary but if you want it to satisfy more equations by construction and that they're not all functional, this might be necessary</p>
+
 
 {% endraw %}
 

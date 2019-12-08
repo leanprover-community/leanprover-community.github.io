@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Categories and Universes in Lean](19477CategoriesandUniversesinLean.html) (33 messages, latest: Dec 08 2019 at 18:35)
+* [Proving physical laws](62138Provingphysicallaws.html) (4 messages, latest: Dec 08 2019 at 21:45)
 
-* [Proving physical laws](62138Provingphysicallaws.html) (2 messages, latest: Dec 08 2019 at 10:16)
+* [Categories and Universes in Lean](19477CategoriesandUniversesinLean.html) (33 messages, latest: Dec 08 2019 at 18:35)
 
 * [abel multiplication](00067abelmultiplication.html) (8 messages, latest: Dec 08 2019 at 03:51)
 
