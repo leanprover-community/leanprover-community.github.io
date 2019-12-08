@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (216 messages, latest: Dec 08 2019 at 20:26)
+
 * [Motive not type correct](09402Motivenottypecorrect.html) (10 messages, latest: Dec 08 2019 at 16:14)
 
 * [vec.cons in chapter 2](70416vecconsinchapter2.html) (3 messages, latest: Dec 07 2019 at 17:09)
@@ -16,8 +18,6 @@ permalink: archive/113489newmembers/index.html
 * [Clear all](56641Clearall.html) (3 messages, latest: Dec 07 2019 at 09:39)
 
 * [Set theory](84808Settheory.html) (9 messages, latest: Dec 06 2019 at 15:20)
-
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (215 messages, latest: Dec 06 2019 at 10:46)
 
 * [Problems with meta variable in goal](80744Problemswithmetavariableingoal.html) (11 messages, latest: Dec 06 2019 at 10:22)
 
