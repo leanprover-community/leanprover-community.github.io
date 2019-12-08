@@ -46,6 +46,27 @@ permalink: archive/116395maths/00067abelmultiplication.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/abel%20multiplication/near/181587544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00067abelmultiplication.html#181587544">Mario Carneiro (Nov 21 2019 at 21:44)</a>:</h4>
 <p>The intended use is to write out the desired statement directly, and apply the corresponding multiplicative theorem and have defeq work out the differences. <code>algebra.group_power</code> has a few examples with <code>multiplicative</code></p>
 
+<a name="182874580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/abel%20multiplication/near/182874580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00067abelmultiplication.html#182874580">Amelia Livingston (Dec 08 2019 at 03:51)</a>:</h4>
+<p>hm, my bad for resurrecting an old thread out of context and not reading the reply properly, but I'm looking for a good way to workaround the fact that <code>abel</code> can't apply <code>additive</code> to multiplicative problems yet. e.g,</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group</span><span class="bp">.</span><span class="n">type_tags</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">abel</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_monoid</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="c1">--I get that this would work</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">@</span><span class="n">add_assoc</span> <span class="o">(</span><span class="n">additive</span> <span class="n">α</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span>
+
+<span class="c1">--But what if I&#39;m in the middle of a calc block and would want abel in the additive case?</span>
+<span class="kn">lemma</span> <span class="n">to_add</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span>
+  <span class="bp">@</span><span class="n">has_mul</span><span class="bp">.</span><span class="n">mul</span> <span class="n">α</span> <span class="bp">_</span> <span class="bp">=</span> <span class="bp">@</span><span class="n">has_add</span><span class="bp">.</span><span class="n">add</span> <span class="o">(</span><span class="n">additive</span> <span class="n">α</span><span class="o">)</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">to_add</span><span class="o">,</span>
+  <span class="n">abel</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
 

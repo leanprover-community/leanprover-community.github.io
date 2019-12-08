@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [abel multiplication](00067abelmultiplication.html) (8 messages, latest: Dec 08 2019 at 03:51)
+
 * [automation in category theory](95474automationincategorytheory.html) (13 messages, latest: Dec 07 2019 at 23:25)
 
 * [finite prods from binary prods](89737finiteprodsfrombinaryprods.html) (5 messages, latest: Dec 07 2019 at 23:23)
@@ -58,8 +60,6 @@ permalink: archive/116395maths/index.html
 * [analysis](03749analysis.html) (86 messages, latest: Nov 24 2019 at 15:13)
 
 * [decimals in Lean](29882decimalsinLean.html) (11 messages, latest: Nov 23 2019 at 16:59)
-
-* [abel multiplication](00067abelmultiplication.html) (7 messages, latest: Nov 21 2019 at 21:44)
 
 * [image under smul/add/etc](31750imageundersmuladdetc.html) (3 messages, latest: Nov 21 2019 at 20:33)
 
