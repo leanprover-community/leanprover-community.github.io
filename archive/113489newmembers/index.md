@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Motive not type correct](09402Motivenottypecorrect.html) (9 messages, latest: Dec 08 2019 at 16:00)
+* [Motive not type correct](09402Motivenottypecorrect.html) (10 messages, latest: Dec 08 2019 at 16:14)
 
 * [vec.cons in chapter 2](70416vecconsinchapter2.html) (3 messages, latest: Dec 07 2019 at 17:09)
 

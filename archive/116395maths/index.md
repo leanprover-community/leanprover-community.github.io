@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Categories and Universes in Lean](19477CategoriesandUniversesinLean.html) (14 messages, latest: Dec 08 2019 at 15:58)
+* [Categories and Universes in Lean](19477CategoriesandUniversesinLean.html) (22 messages, latest: Dec 08 2019 at 16:27)
 
 * [Proving physical laws](62138Provingphysicallaws.html) (2 messages, latest: Dec 08 2019 at 10:16)
 
