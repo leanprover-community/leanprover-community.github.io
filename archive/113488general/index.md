@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lots of errors in mathlib, is this normal?](07125Lotsoferrorsinmathlibisthisnormal.html) (9 messages, latest: Dec 09 2019 at 17:59)
+* [Lots of errors in mathlib, is this normal?](07125Lotsoferrorsinmathlibisthisnormal.html) (16 messages, latest: Dec 09 2019 at 18:59)
+
+* [automation to fix universe issues](06585automationtofixuniverseissues.html) (1 message, latest: Dec 09 2019 at 18:41)
 
 * [event in Paris](94041eventinParis.html) (2 messages, latest: Dec 07 2019 at 17:51)
 
