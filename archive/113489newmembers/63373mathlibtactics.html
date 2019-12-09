@@ -501,6 +501,30 @@ update-mathlib
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20tactics/near/182975480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63373mathlibtactics.html#182975480">Patrick Massot (Dec 09 2019 at 16:53)</a>:</h4>
 <p>This Rust website explicitly says where it will search: name, parameters or return type.</p>
 
+<a name="182976827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20tactics/near/182976827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63373mathlibtactics.html#182976827">Mario Carneiro (Dec 09 2019 at 17:07)</a>:</h4>
+<p>Okay, so I guess the blurbs are just there to give you some context for list items in the search</p>
+
+<a name="182976906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20tactics/near/182976906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63373mathlibtactics.html#182976906">Mario Carneiro (Dec 09 2019 at 17:08)</a>:</h4>
+<p>If we display name + type (blurb), we could do away with it entirely</p>
+
+<a name="182978471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20tactics/near/182978471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63373mathlibtactics.html#182978471">Rob Lewis (Dec 09 2019 at 17:25)</a>:</h4>
+<p>There are complications with searching types (and parameter types). For instance, the doc generator doesn't know the connection between <code>nat</code> and <code>ℕ</code>. As a start, I think we'd be fine searching just declaration names and doc strings, and displaying declaration name, type, and an initial segment of the doc string. We could filter common words out of the doc strings for indexing. So the search data would be tuples (name, doc string keywords, type, doc string blurb) where the latter two are for display only. I think this would still be a much larger index than the Rust index but I'm not sure.</p>
+
+<a name="182978556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20tactics/near/182978556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63373mathlibtactics.html#182978556">Rob Lewis (Dec 09 2019 at 17:26)</a>:</h4>
+<p>Oh, it also needs the source file. That and declaration name are enough to build a link.</p>
+
+<a name="182979674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20tactics/near/182979674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63373mathlibtactics.html#182979674">Rob Lewis (Dec 09 2019 at 17:36)</a>:</h4>
+<p>Ah, but it also needs to know about module docs. So I think it's two-sorted, "search declarations" or "search files."</p>
+
+<a name="182979694"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20tactics/near/182979694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63373mathlibtactics.html#182979694">Rob Lewis (Dec 09 2019 at 17:37)</a>:</h4>
+<p>This feels more and more like a project for not-me.</p>
+
 
 {% endraw %}
 
