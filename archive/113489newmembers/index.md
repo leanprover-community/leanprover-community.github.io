@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Maths Challenges](65204MathsChallenges.html) (1 message, latest: Dec 09 2019 at 12:55)
+* [Maths Challenges](65204MathsChallenges.html) (3 messages, latest: Dec 09 2019 at 13:25)
 
-* [mathlib tactics](63373mathlibtactics.html) (83 messages, latest: Dec 09 2019 at 12:53)
+* [mathlib tactics](63373mathlibtactics.html) (85 messages, latest: Dec 09 2019 at 13:21)
 
 * [Injectivity of coercions](66669Injectivityofcoercions.html) (5 messages, latest: Dec 09 2019 at 10:28)
 
