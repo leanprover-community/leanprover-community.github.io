@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Injectivity of coercions](66669Injectivityofcoercions.html) (1 message, latest: Dec 09 2019 at 09:46)
+
 * [Scoping notation](18368Scopingnotation.html) (3 messages, latest: Dec 09 2019 at 05:23)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (216 messages, latest: Dec 08 2019 at 20:26)
