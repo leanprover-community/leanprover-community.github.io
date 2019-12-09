@@ -421,6 +421,58 @@ update-mathlib
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20tactics/near/182954213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63373mathlibtactics.html#182954213">Mario Carneiro (Dec 09 2019 at 13:21)</a>:</h4>
 <p>It's marked <code>&lt;script defer src="../../search-index1.39.0.js"&gt;</code> and placed at the end of the file, which is a bit unusual for script tags. I guess there is a lazy loading thing going on</p>
 
+<a name="182968336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20tactics/near/182968336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63373mathlibtactics.html#182968336">Rob Lewis (Dec 09 2019 at 15:47)</a>:</h4>
+<p>Hmm. The JSON file used to generate the docs is ~15mb and compresses to 2.5mb. Not all of that is needed for indexing of course. The Rust js index is a much more reasonable 200kb, and I assume they have more to index. So that pre-computation is definitely important.</p>
+
+<a name="182968598"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20tactics/near/182968598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63373mathlibtactics.html#182968598">Mario Carneiro (Dec 09 2019 at 15:49)</a>:</h4>
+<p>They have full paths for objects plus ~20 characters blurb taken from the docs on the object</p>
+
+<a name="182968772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20tactics/near/182968772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63373mathlibtactics.html#182968772">Mario Carneiro (Dec 09 2019 at 15:50)</a>:</h4>
+<p>I'm thinking we need the full path, the type, and a doc blurb</p>
+
+<a name="182968838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20tactics/near/182968838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63373mathlibtactics.html#182968838">Rob Lewis (Dec 09 2019 at 15:51)</a>:</h4>
+<p>This is effectively what that 15mb json file has. It also has file position info (which we don't need for search) and module docs (which we do).</p>
+
+<a name="182968935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20tactics/near/182968935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63373mathlibtactics.html#182968935">Mario Carneiro (Dec 09 2019 at 15:52)</a>:</h4>
+<p>by blurb I mean cut off at ~20 characters</p>
+
+<a name="182968948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20tactics/near/182968948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63373mathlibtactics.html#182968948">Mario Carneiro (Dec 09 2019 at 15:52)</a>:</h4>
+<p>I don't think you are doing that now</p>
+
+<a name="182969032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20tactics/near/182969032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63373mathlibtactics.html#182969032">Rob Lewis (Dec 09 2019 at 15:53)</a>:</h4>
+<p>Oh, no. But a lot of doc strings contain useful keywords beyond 20 characters...</p>
+
+<a name="182969070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20tactics/near/182969070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63373mathlibtactics.html#182969070">Rob Lewis (Dec 09 2019 at 15:53)</a>:</h4>
+<p>By "blurb," do you mean it's only including important-seeming keywords?</p>
+
+<a name="182969112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20tactics/near/182969112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63373mathlibtactics.html#182969112">Mario Carneiro (Dec 09 2019 at 15:53)</a>:</h4>
+<p>no, it's just the beginning. But they plan for this, and stick important stuff at the beginning</p>
+
+<a name="182969214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20tactics/near/182969214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63373mathlibtactics.html#182969214">Mario Carneiro (Dec 09 2019 at 15:54)</a>:</h4>
+<p>I recall javadoc doing something similar: the first sentence is special and appears in other places so you are encouraged to use it for summary</p>
+
+<a name="182969658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20tactics/near/182969658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63373mathlibtactics.html#182969658">Rob Lewis (Dec 09 2019 at 15:57)</a>:</h4>
+<p>It seems like it would be almost as effective to just strip common words from the strings.</p>
+
+<a name="182969771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20tactics/near/182969771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63373mathlibtactics.html#182969771">Rob Lewis (Dec 09 2019 at 15:58)</a>:</h4>
+<p>The doc strings are probably a relatively small part of the export right now, too, although hopefully they'll grow. The type info takes a lot more space. We could filter a lot of that too before indexing.</p>
+
+<a name="182969824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mathlib%20tactics/near/182969824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63373mathlibtactics.html#182969824">Rob Lewis (Dec 09 2019 at 15:58)</a>:</h4>
+<p>"We." I'm saying this like it's something I'm going to do, but this is a project I'd much rather hand off to someone else, heh.</p>
+
 
 {% endraw %}
 
