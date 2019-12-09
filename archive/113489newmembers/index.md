@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Maths Challenges](65204MathsChallenges.html) (3 messages, latest: Dec 09 2019 at 13:25)
+* [Maths Challenges](65204MathsChallenges.html) (6 messages, latest: Dec 09 2019 at 14:37)
+
+* [Non-empty finsets](78596Nonemptyfinsets.html) (1 message, latest: Dec 09 2019 at 14:22)
 
 * [mathlib tactics](63373mathlibtactics.html) (85 messages, latest: Dec 09 2019 at 13:21)
 
