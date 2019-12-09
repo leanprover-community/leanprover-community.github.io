@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Injectivity of coercions](66669Injectivityofcoercions.html) (1 message, latest: Dec 09 2019 at 09:46)
+* [mathlib tactics](63373mathlibtactics.html) (49 messages, latest: Dec 09 2019 at 11:00)
+
+* [Injectivity of coercions](66669Injectivityofcoercions.html) (5 messages, latest: Dec 09 2019 at 10:28)
 
 * [Scoping notation](18368Scopingnotation.html) (3 messages, latest: Dec 09 2019 at 05:23)
 

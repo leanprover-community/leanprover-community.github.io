@@ -30,6 +30,29 @@ end
 <p>The issue with the second proof is that ↑t doesn't seem equivalent to t.val, which is used in subtype.eq. So how does the first proof work?</p>
 <p>Further, how should this proof be written?</p>
 
+<a name="182939925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Injectivity%20of%20coercions/near/182939925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66669Injectivityofcoercions.html#182939925">Mario Carneiro (Dec 09 2019 at 10:02)</a>:</h4>
+<p><code>↑t</code> is indeed defeq to <code>t.val</code></p>
+
+<a name="182939936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Injectivity%20of%20coercions/near/182939936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66669Injectivityofcoercions.html#182939936">Mario Carneiro (Dec 09 2019 at 10:02)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">t&#39;</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">S</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="err">↑</span><span class="n">s</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">∧</span> <span class="n">n</span> <span class="bp">=</span> <span class="err">↑</span><span class="n">t</span> <span class="bp">→</span> <span class="n">s</span> <span class="bp">=</span> <span class="n">t</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">intros</span> <span class="n">s</span> <span class="n">t</span> <span class="n">n</span> <span class="n">h</span><span class="o">,</span> <span class="n">apply</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">eq</span><span class="o">,</span> <span class="n">exact</span> <span class="n">h</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="n">trans</span> <span class="n">h</span><span class="bp">.</span><span class="mi">2</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="182942062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Injectivity%20of%20coercions/near/182942062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66669Injectivityofcoercions.html#182942062">Kevin Buzzard (Dec 09 2019 at 10:26)</a>:</h4>
+<p>Now the <code>rw</code>s are gone it's a nice exercise to write this proof in term mode.</p>
+
+<a name="182942261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Injectivity%20of%20coercions/near/182942261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66669Injectivityofcoercions.html#182942261">Johan Commelin (Dec 09 2019 at 10:28)</a>:</h4>
+<blockquote>
+<p>The issue with the second proof is that <code>↑t</code> doesn't seem equivalent to <code>t.val</code>, which is used in <code>subtype.eq</code>. So how does the first proof work?</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="243442">@Li Yao'an</span> They are not <em>syntactically</em> equal, but the are <em>definitionally</em> equal.</p>
+
 
 {% endraw %}
 
