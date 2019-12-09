@@ -9,6 +9,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [M40001 term sheet 2](99590M40001termsheet2.html) (1 message, latest: Dec 09 2019 at 22:51)
+
+* [Syntax question about  universal quantification ∀](89565Syntaxquestionaboutuniversalquantification.html) (1 message, latest: Dec 09 2019 at 22:46)
+
 * [Maths Challenges](65204MathsChallenges.html) (11 messages, latest: Dec 09 2019 at 21:36)
 
 * [Non-empty finsets](78596Nonemptyfinsets.html) (10 messages, latest: Dec 09 2019 at 19:35)
