@@ -18,6 +18,33 @@ permalink: archive/113488general/06585automationtofixuniverseissues.html
 <p>Having talked to several other mathematicians about universes really, it has become pretty clear that everyone knows there's some sort of an issue with the set of all sets, but they really don't care about universes. </p>
 <p>I think that what would make mathematicians happy would be the following interface: we just put <code>Type *</code> or <code>Sort *</code> for everything, we let Lean be as polymorphic as possible, we can put <code>blah.{*}</code> or just even <code>blah</code> and tell Lean to do the sensible thing, and at the end of the day if we ever work out the cohomology of the real numbers and it turns out that it is the trivial group in type Type 3 because three times in our argument we took a limit over a thing that wasn't a set, then we don't care but make a mental note that the ZFC people might want to add something here. Is this algorithm going to be available in Lean 4?</p>
 
+<a name="182988418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation%20to%20fix%20universe%20issues/near/182988418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06585automationtofixuniverseissues.html#182988418">Kevin Buzzard (Dec 09 2019 at 19:08)</a>:</h4>
+<p>Then the idea could be that the logicians can just slot in extra stuff into the algorithm if they think they can save a universe</p>
+
+<a name="182992595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation%20to%20fix%20universe%20issues/near/182992595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06585automationtofixuniverseissues.html#182992595">Mario Carneiro (Dec 09 2019 at 19:51)</a>:</h4>
+<p>I thought this was the algorithm</p>
+
+<a name="182992675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation%20to%20fix%20universe%20issues/near/182992675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06585automationtofixuniverseissues.html#182992675">Mario Carneiro (Dec 09 2019 at 19:52)</a>:</h4>
+<p>if by "the sensible thing" you mean inventing a new universe variable for every unresolved metavariable</p>
+
+<a name="182992829"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation%20to%20fix%20universe%20issues/near/182992829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06585automationtofixuniverseissues.html#182992829">Mario Carneiro (Dec 09 2019 at 19:53)</a>:</h4>
+<p>Although, that doesn't always work, for instance you might have to solve the universe equation <code>max 2 ? = 2</code> and the answer isn't uniquely determined (but putting a variable in there wouldn't work)</p>
+
+<a name="182993126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation%20to%20fix%20universe%20issues/near/182993126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06585automationtofixuniverseissues.html#182993126">Mario Carneiro (Dec 09 2019 at 19:56)</a>:</h4>
+<p>You should keep in mind that universe handling is already incredibly rare, so the lean elaborator seems to be working to keep it out of your hair most of the time, like when you just have a bunch of functions to apply. It's only when you actually use universes in a non-default way that they start showing up</p>
+
+<a name="182993262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation%20to%20fix%20universe%20issues/near/182993262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06585automationtofixuniverseissues.html#182993262">Mario Carneiro (Dec 09 2019 at 19:57)</a>:</h4>
+<blockquote>
+<p>Having talked to several other mathematicians about universes really, it has become pretty clear that everyone knows there's some sort of an issue with the set of all sets, but they really don't care about universes. </p>
+</blockquote>
+<p>This doesn't give me the least bit of confidence. This is exactly the sort of situation where I expect a theorem prover to get pedantic on me</p>
+
 
 {% endraw %}
 

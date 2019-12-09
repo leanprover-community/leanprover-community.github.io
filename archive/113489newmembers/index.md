@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Non-empty finsets](78596Nonemptyfinsets.html) (10 messages, latest: Dec 09 2019 at 19:35)
+
 * [mathlib tactics](63373mathlibtactics.html) (111 messages, latest: Dec 09 2019 at 17:37)
 
 * [Maths Challenges](65204MathsChallenges.html) (10 messages, latest: Dec 09 2019 at 15:55)
-
-* [Non-empty finsets](78596Nonemptyfinsets.html) (9 messages, latest: Dec 09 2019 at 15:51)
 
 * [Injectivity of coercions](66669Injectivityofcoercions.html) (5 messages, latest: Dec 09 2019 at 10:28)
 
