@@ -18,6 +18,31 @@ permalink: archive/113489newmembers/89565Syntaxquestionaboutuniversalquantificat
  def prime (n : ℕ) : Prop :=(n &gt; 1) ∧ (∀ k : ℕ,  (k = 1) ∨ ¬(divides n k)). <br>
 It seems like the ∨ part at the end is somewhat burdensome for describing a constraint.   Some of the later exercises such as the Goldbach weak Conjecture were even hairier when using ∨  as a constraint mechanism.</p>
 
+<a name="183011972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Syntax%20question%20about%20%20universal%20quantification%20%E2%88%80/near/183011972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89565Syntaxquestionaboutuniversalquantification.html#183011972">Yury G. Kudryashov (Dec 09 2019 at 23:29)</a>:</h4>
+<p>all k, divides n k -&gt; ...</p>
+
+<a name="183012217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Syntax%20question%20about%20%20universal%20quantification%20%E2%88%80/near/183012217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89565Syntaxquestionaboutuniversalquantification.html#183012217">Marc Huisinga (Dec 09 2019 at 23:33)</a>:</h4>
+<p>you can do the following:<br>
+first, transform to the variant you probably intended (you're missing the k = n case and the order in <code>divides</code> is mixed up)</p>
+<div class="codehilite"><pre><span></span>def prime (n : ℕ) : Prop := (n &gt; 1) ∧ (∀ k : ℕ, (k = 1) ∨ (k = n) ∨ ¬(divides k n))
+</pre></div>
+
+
+<p>then, use implication instead of or (as described by yury). </p>
+<div class="codehilite"><pre><span></span>def prime (n : ℕ) : Prop := (n &gt; 1) ∧ (∀ k : ℕ, divides k n → (k = 1) ∨ (k = n))
+</pre></div>
+
+
+<p>then, using the notation described in TPIL, you can do the following:</p>
+<div class="codehilite"><pre><span></span>def prime (n : ℕ) : Prop := (n &gt; 1) ∧ (∀ k ∣ n, (k = 1) ∨ (k = n))
+</pre></div>
+
+<a name="183012544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Syntax%20question%20about%20%20universal%20quantification%20%E2%88%80/near/183012544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89565Syntaxquestionaboutuniversalquantification.html#183012544">Ender Doe (Dec 09 2019 at 23:37)</a>:</h4>
+<p>Ahh I see thank you very much.</p>
+
 
 {% endraw %}
 

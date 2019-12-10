@@ -20,6 +20,42 @@ hx_w : ℤ,<br>
 hx_h : x = ↑hx_w ∧ x ^ 2 &lt; 3<br>
 ⊢ 3 &gt; hx_w ^ 2</p>
 
+<a name="183009792"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/M40001%20term%20sheet%202/near/183009792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99590M40001termsheet2.html#183009792">Kevin Buzzard (Dec 09 2019 at 23:01)</a>:</h4>
+<p>There's a tactic which does this I think</p>
+
+<a name="183009888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/M40001%20term%20sheet%202/near/183009888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99590M40001termsheet2.html#183009888">Kevin Buzzard (Dec 09 2019 at 23:02)</a>:</h4>
+<p>You could split hx_h into h1 and h2, and then do cases on h1 and then try norm_cast</p>
+
+<a name="183011827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/M40001%20term%20sheet%202/near/183011827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99590M40001termsheet2.html#183011827">Jalex Stark (Dec 09 2019 at 23:26)</a>:</h4>
+<p>These exercises really make one feel like one is learning math for the first time :)</p>
+
+<a name="183011829"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/M40001%20term%20sheet%202/near/183011829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99590M40001termsheet2.html#183011829">Kevin Buzzard (Dec 09 2019 at 23:26)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">hx_w</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span>
+<span class="o">(</span><span class="n">hx_h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="err">↑</span><span class="n">hx_w</span> <span class="bp">∧</span> <span class="n">x</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">&lt;</span> <span class="mi">3</span><span class="o">)</span> <span class="o">:</span>
+<span class="mi">3</span> <span class="bp">&gt;</span> <span class="n">hx_w</span> <span class="err">^</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">hx_h</span> <span class="k">with</span> <span class="n">h1</span> <span class="n">h2</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">h1</span> <span class="n">at</span> <span class="n">h2</span><span class="o">,</span>
+  <span class="n">norm_cast</span> <span class="n">at</span> <span class="n">h2</span><span class="o">,</span>
+  <span class="n">assumption</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="183011852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/M40001%20term%20sheet%202/near/183011852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99590M40001termsheet2.html#183011852">Kevin Buzzard (Dec 09 2019 at 23:27)</a>:</h4>
+<p>yeah, this stuff really opened my eyes and I was the teacher at the time.</p>
+
+<a name="183011862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/M40001%20term%20sheet%202/near/183011862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99590M40001termsheet2.html#183011862">Jalex Stark (Dec 09 2019 at 23:27)</a>:</h4>
+<p>is assumption kind of like exact _?<br>
+edit: answer, yes, see <a href="https://leanprover.github.io/reference/tactics.html" target="_blank" title="https://leanprover.github.io/reference/tactics.html">https://leanprover.github.io/reference/tactics.html</a></p>
+
 
 {% endraw %}
 
