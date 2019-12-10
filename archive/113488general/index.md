@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Typo on natural number game](07428Typoonnaturalnumbergame.html) (1 message, latest: Dec 10 2019 at 19:23)
+* [Typo on natural number game](07428Typoonnaturalnumbergame.html) (2 messages, latest: Dec 10 2019 at 20:04)
 
 * [automation to fix universe issues](06585automationtofixuniverseissues.html) (22 messages, latest: Dec 10 2019 at 15:55)
 
