@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [automation to fix universe issues](06585automationtofixuniverseissues.html) (8 messages, latest: Dec 09 2019 at 20:06)
+* [automation to fix universe issues](06585automationtofixuniverseissues.html) (22 messages, latest: Dec 10 2019 at 15:55)
 
 * [Lots of errors in mathlib, is this normal?](07125Lotsoferrorsinmathlibisthisnormal.html) (17 messages, latest: Dec 09 2019 at 19:07)
 
