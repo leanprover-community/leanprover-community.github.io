@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [decidable disjoint](97522decidabledisjoint.html) (1 message, latest: Dec 11 2019 at 13:13)
+* [decidable disjoint](97522decidabledisjoint.html) (2 messages, latest: Dec 11 2019 at 14:10)
 
 * [What tactic do I use to show squares are non-negative?](50752WhattacticdoIusetoshowsquaresarenonnegative.html) (5 messages, latest: Dec 11 2019 at 07:10)
 
