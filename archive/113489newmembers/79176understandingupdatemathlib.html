@@ -30,6 +30,15 @@ permalink: archive/113489newmembers/79176understandingupdatemathlib.html
 </ul>
 <p>It would be great if someone more familiar with the tooling could verify that this is indeed all that is happening. Is it true that the main reason to use <code>update-mathlib</code> in step 3 above is to avoid compiling <code>mathlib</code> entirely from source (which takes quite a while)?</p>
 
+<a name="183188121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/understanding%20update-mathlib/near/183188121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79176understandingupdatemathlib.html#183188121">Kevin Buzzard (Dec 11 2019 at 18:53)</a>:</h4>
+<p>Yes, the point of <code>update-mathlib</code> is precisely that if you download <code>mathlib</code> from e.g. github and then change directory into <code>src</code> and type <code>lean --make</code>, it will take 15 minutes or more to compile the .lean files into the .olean bytecode. We wanted users to be able to get going more quickly, so people wrote <code>update-mathlib</code> to download some precompiled binaries.</p>
+
+<a name="183188644"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/understanding%20update-mathlib/near/183188644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79176understandingupdatemathlib.html#183188644">Kevin Buzzard (Dec 11 2019 at 18:58)</a>:</h4>
+<p>If you are happy to just make one project <code>foo</code>, download today's mathlib master, compile from source by running <code>lean --make</code> in <code>_target/deps/mathlib/src</code> and then go and have a cup of tea, then you won't need update-mathlib. If you want to make a second project with mathlib as a dependency then you could literally just copy <code>_target</code> over although (a) you would have to be careful with timestamps (i.e. preserve them!) and (b) you would in theory have to edit <code>leanpkg.toml</code> yourself to point to the correct commit (this is what <code>leanpkg add</code> does, as well as cloning the mathlib repo). </p>
+<p>If on the other hand you want to update mathlib to get some new exciting feature, then you'll have to compile again.</p>
+
 
 {% endraw %}
 
