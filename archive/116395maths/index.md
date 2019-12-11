@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [manifolds](86782manifolds.html) (34 messages, latest: Dec 11 2019 at 08:55)
+* [manifolds](86782manifolds.html) (35 messages, latest: Dec 11 2019 at 09:17)
 
 * [Proving physical laws](62138Provingphysicallaws.html) (21 messages, latest: Dec 10 2019 at 03:20)
 
