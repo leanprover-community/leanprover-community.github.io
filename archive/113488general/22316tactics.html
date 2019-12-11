@@ -43,6 +43,44 @@ permalink: archive/113488general/22316tactics.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactics/near/183149624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22316tactics.html#183149624">Rob Lewis (Dec 11 2019 at 11:54)</a>:</h4>
 <p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> I was hoping to find time to try the field_simp tactic today -- it should only take a few lines of code. Not 100% sure I'll have a chance, but if not, I can do it tomorrow. As Gabriel says, the easiest way to do it is just to put together the right information to give to <code>tactic.interactive.simp</code>, or maybe using the definition of <code>tactic.interactive.simp</code> with very minor changes.</p>
 
+<a name="183155798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactics/near/183155798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22316tactics.html#183155798">Rob Lewis (Dec 11 2019 at 13:24)</a>:</h4>
+<p>Okay, here's a sketch of how it would look:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">core</span>
+<span class="kn">open</span> <span class="n">tactic</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="n">mk_simp_attribute</span> <span class="n">newattr</span> <span class="n">none</span>
+<span class="n">setup_tactic_parser</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">newattr</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">k</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">20000</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">badsimp</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">simp_with</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">simp_arg_list</span><span class="o">)</span> <span class="o">(</span><span class="n">attr_names</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">with_ident_list</span><span class="o">)</span>
+              <span class="o">(</span><span class="n">locat</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">location</span><span class="o">)</span> <span class="o">(</span><span class="n">cfg</span> <span class="o">:</span> <span class="n">simp_config_ext</span> <span class="o">:=</span> <span class="o">{})</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="k">let</span> <span class="n">attr_names</span> <span class="o">:=</span> <span class="bp">`</span><span class="n">newattr</span> <span class="bp">::</span> <span class="n">attr_names</span><span class="o">,</span>
+    <span class="n">hs</span> <span class="o">:=</span> <span class="n">simp_arg_type</span><span class="bp">.</span><span class="n">except</span> <span class="bp">`</span><span class="n">badsimp</span> <span class="bp">::</span> <span class="n">hs</span> <span class="k">in</span>
+<span class="n">propagate_tags</span> <span class="o">(</span><span class="n">simp_core</span> <span class="n">cfg</span><span class="bp">.</span><span class="n">to_simp_config</span> <span class="n">cfg</span><span class="bp">.</span><span class="n">discharger</span> <span class="n">ff</span> <span class="n">hs</span> <span class="n">attr_names</span> <span class="n">locat</span><span class="o">)</span>
+
+<span class="c1">-- fail</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span> <span class="n">simp</span> <span class="k">with</span> <span class="n">newattr</span><span class="o">,</span>  <span class="kn">end</span>
+
+<span class="c1">-- work</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span> <span class="n">simp</span> <span class="o">[</span><span class="bp">-</span><span class="n">badsimp</span><span class="o">]</span> <span class="k">with</span> <span class="n">newattr</span><span class="o">,</span>  <span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span> <span class="n">simp_with</span> <span class="kn">end</span>
+</pre></div>
+
+<a name="183155849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactics/near/183155849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22316tactics.html#183155849">Rob Lewis (Dec 11 2019 at 13:24)</a>:</h4>
+<p>I removed the option to write <code>simp_with only [...]</code> because I'm not sure how <code>simp only [-badsimp]</code> behaves. It's probably fine and you could add it back.</p>
+
+<a name="183157179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactics/near/183157179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22316tactics.html#183157179">Sebastien Gouezel (Dec 11 2019 at 13:41)</a>:</h4>
+<p>Thanks!</p>
+
 
 {% endraw %}
 

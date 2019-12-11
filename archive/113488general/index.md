@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [tactics](22316tactics.html) (4 messages, latest: Dec 11 2019 at 11:54)
+* [tactics](22316tactics.html) (7 messages, latest: Dec 11 2019 at 13:41)
 
 * [refine and type class inference](48340refineandtypeclassinference.html) (2 messages, latest: Dec 11 2019 at 09:44)
 

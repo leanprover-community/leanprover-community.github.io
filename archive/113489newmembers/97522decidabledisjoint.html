@@ -1,0 +1,41 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/97522decidabledisjoint.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/97522decidabledisjoint.html">decidable disjoint</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="183154891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/decidable%20disjoint/near/183154891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97522decidabledisjoint.html#183154891">Bhavik Mehta (Dec 11 2019 at 13:13)</a>:</h4>
+<p>When I write:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
+
+<span class="kn">open</span> <span class="n">fintype</span>
+<span class="kn">open</span> <span class="n">finset</span>
+
+<span class="kn">variable</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span>
+<span class="n">local</span> <span class="kn">notation</span> <span class="bp">`</span><span class="n">X</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">fin</span> <span class="n">n</span>
+
+<span class="kn">variable</span> <span class="o">{</span><span class="err">𝒜</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">X</span><span class="o">)}</span>
+
+<span class="n">def</span> <span class="n">compress</span> <span class="o">(</span><span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">disjoint</span> <span class="n">U</span> <span class="n">A</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">V</span> <span class="err">⊆</span> <span class="n">A</span><span class="o">)</span>
+  <span class="k">then</span> <span class="o">(</span><span class="n">A</span> <span class="err">∪</span> <span class="n">U</span><span class="o">)</span> <span class="err">\</span> <span class="n">V</span>
+  <span class="k">else</span> <span class="n">A</span>
+</pre></div>
+
+
+<p>I get an error saying "failed to synthesize type class instance" for "decidable (disjoint U A ∧ V ⊆ A)", but if I rewrite the condition with <code>U ∩ A = ∅</code>,  it's fine... I'd like to keep the definition with disjoint though, since every time I use this definition I found myself converting the empty intersection to disjointness. How could I get around this?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
