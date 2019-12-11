@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Typo on natural number game](07428Typoonnaturalnumbergame.html) (2 messages, latest: Dec 10 2019 at 20:04)
+* [automation to fix universe issues](06585automationtofixuniverseissues.html) (23 messages, latest: Dec 11 2019 at 00:59)
 
-* [automation to fix universe issues](06585automationtofixuniverseissues.html) (22 messages, latest: Dec 10 2019 at 15:55)
+* [Typo on natural number game](07428Typoonnaturalnumbergame.html) (2 messages, latest: Dec 10 2019 at 20:04)
 
 * [Lots of errors in mathlib, is this normal?](07125Lotsoferrorsinmathlibisthisnormal.html) (17 messages, latest: Dec 09 2019 at 19:07)
 
