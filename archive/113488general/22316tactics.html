@@ -1,0 +1,49 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/22316tactics.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/22316tactics.html">tactics</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="183147411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactics/near/183147411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22316tactics.html#183147411">Sebastien Gouezel (Dec 11 2019 at 11:19)</a>:</h4>
+<p>I am struggling to write a super-basic tactic (see <a href="https://github.com/leanprover-community/mathlib/issues/1792" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1792">#1792</a>). Given a string <code>e</code> of the form <code>"simp [-one_div_eq_inv, hx, hy] with field_simps"</code>, say, is there a command to convert it to something one can execute? (I tried <code>[``e]</code> and variations of this, to no avail). </p>
+<p>It may well be an instance of an XY problem, so here is a little bit more context: I want <code>field_simp [hx]</code> to call <code>simp [-one_eq_div_inv, hx] with field_simps</code> (and I don't want to fiddle with <code>simp</code>parsing options are there are just too many of them). My current attempt looks like</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">tactic</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">field_simp</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">list</span> <span class="n">pexpr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="k">let</span> <span class="n">e</span> <span class="o">:=</span> <span class="s2">&quot;simp [-one_div_eq_inv, &quot;</span> <span class="bp">++</span> <span class="n">list</span><span class="bp">.</span><span class="n">to_string_aux</span> <span class="n">tt</span> <span class="n">hs</span> <span class="bp">++</span> <span class="s2">&quot;] with field_simps&quot;</span> <span class="k">in</span>
+<span class="n">trace</span> <span class="n">e</span><span class="bp">;</span> <span class="n">skip</span>
+
+<span class="kn">namespace</span> <span class="n">interactive</span>
+<span class="kn">open</span> <span class="n">interactive</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">types</span> <span class="n">expr</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">field_simp</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">pexpr_list_or_texpr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">tactic</span><span class="bp">.</span><span class="n">field_simp</span> <span class="n">hs</span>
+<span class="kn">end</span> <span class="n">interactive</span>
+<span class="kn">end</span> <span class="n">tactic</span>
+</pre></div>
+
+<a name="183149325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactics/near/183149325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22316tactics.html#183149325">Gabriel Ebner (Dec 11 2019 at 11:48)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="183149445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactics/near/183149445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22316tactics.html#183149445">Gabriel Ebner (Dec 11 2019 at 11:51)</a>:</h4>
+<p>I don't think there's any way to parse a string into an expression inside a tactic.  I think you should just call <code>tactic.interactive.simp</code> directly (it's just a regular function after all).</p>
+
+<a name="183149624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactics/near/183149624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22316tactics.html#183149624">Rob Lewis (Dec 11 2019 at 11:54)</a>:</h4>
+<p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> I was hoping to find time to try the field_simp tactic today -- it should only take a few lines of code. Not 100% sure I'll have a chance, but if not, I can do it tomorrow. As Gabriel says, the easiest way to do it is just to put together the right information to give to <code>tactic.interactive.simp</code>, or maybe using the definition of <code>tactic.interactive.simp</code> with very minor changes.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [tactics](22316tactics.html) (4 messages, latest: Dec 11 2019 at 11:54)
+
 * [refine and type class inference](48340refineandtypeclassinference.html) (2 messages, latest: Dec 11 2019 at 09:44)
 
 * [Typo on natural number game](07428Typoonnaturalnumbergame.html) (4 messages, latest: Dec 11 2019 at 01:11)
