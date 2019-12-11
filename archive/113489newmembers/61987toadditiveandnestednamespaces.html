@@ -1,0 +1,39 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/61987toadditiveandnestednamespaces.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/61987toadditiveandnestednamespaces.html">to_additive and nested namespaces</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="183194900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/to_additive%20and%20nested%20namespaces/near/183194900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61987toadditiveandnestednamespaces.html#183194900">Amelia Livingston (Dec 11 2019 at 19:55)</a>:</h4>
+<p>Hallo - sorry I can't work this out from the documentation in <code>to_additive.lean</code>, but how do I get <code>localization.monoid</code> to transport to <code>add_localization.add_monoid</code> instead?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group</span><span class="bp">.</span><span class="n">to_additive</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">to_additive</span> <span class="n">add_localization</span><span class="o">]</span> <span class="n">def</span> <span class="n">localization</span> <span class="o">:=</span> <span class="n">α</span>
+
+<span class="kn">namespace</span> <span class="n">localization</span><span class="bp">.</span><span class="n">monoid</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">to_additive</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">foo</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span> <span class="n">trivial</span>
+
+<span class="kn">end</span> <span class="n">localization</span><span class="bp">.</span><span class="n">monoid</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">add_localization</span><span class="bp">.</span><span class="n">monoid</span><span class="bp">.</span><span class="n">foo</span> <span class="c1">-- add_localization.monoid.foo : true</span>
+</pre></div>
+
+
+<p>I don't really want to write <code>@[to_additive add_localization.add_monoid.foo]</code> at the beginning of everything, and <code>attribute [to_additive add_localization.add_monoid] localization.monoid</code> doesn't make sense because <code>localization.monoid</code> is an unknown identifier, and those are my only ideas :( Thank you in advance.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

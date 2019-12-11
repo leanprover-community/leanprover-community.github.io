@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [to_additive and nested namespaces](61987toadditiveandnestednamespaces.html) (1 message, latest: Dec 11 2019 at 19:55)
+
 * [understanding update-mathlib](79176understandingupdatemathlib.html) (3 messages, latest: Dec 11 2019 at 18:58)
 
 * [How does polymorphism work in Lean?](26342HowdoespolymorphismworkinLean.html) (11 messages, latest: Dec 11 2019 at 15:12)
