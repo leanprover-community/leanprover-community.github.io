@@ -9,6 +9,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [What tactic do I use to show squares are non-negative?](50752WhattacticdoIusetoshowsquaresarenonnegative.html) (1 message, latest: Dec 11 2019 at 06:58)
+
+* [How does polymorphism work in Lean?](26342HowdoespolymorphismworkinLean.html) (8 messages, latest: Dec 11 2019 at 06:42)
+
 * [Syntax question about  universal quantification ∀](89565Syntaxquestionaboutuniversalquantification.html) (5 messages, latest: Dec 10 2019 at 00:06)
 
 * [M40001 term sheet 2](99590M40001termsheet2.html) (7 messages, latest: Dec 09 2019 at 23:27)

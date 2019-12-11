@@ -1,0 +1,66 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/26342HowdoespolymorphismworkinLean.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/26342HowdoespolymorphismworkinLean.html">How does polymorphism work in Lean?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="183130857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20does%20polymorphism%20work%20in%20Lean%3F/near/183130857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/26342HowdoespolymorphismworkinLean.html#183130857">YH (Dec 11 2019 at 06:23)</a>:</h4>
+<p>For example, if I want to write</p>
+<div class="codehilite"><pre><span></span>lemma tN (a b : ℕ) (a &gt; 0) : (a + b &gt; b) := sorry
+lemma tQ (a b : ℚ) (a &gt; 0) : (a + b &gt; b) := sorry
+lemma tR (a b : ℝ) (a &gt; 0) : (a + b &gt; b) := sorry
+</pre></div>
+
+
+<p>how do I convince Lean that the 2nd <code>+</code> is for ℚ and the 3rd <code>+</code> is for <code>ℝ</code>? Lean doesn't seem happy if I just write it like that. (Same question for <code>&gt;</code>.)</p>
+
+<a name="183131586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20does%20polymorphism%20work%20in%20Lean%3F/near/183131586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/26342HowdoespolymorphismworkinLean.html#183131586">Johan Commelin (Dec 11 2019 at 06:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="249123">@YH</span> This solves your error message:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">tN</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">&gt;</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">lemma</span> <span class="n">tQ</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">&gt;</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">lemma</span> <span class="n">tR</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">&gt;</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="183131591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20does%20polymorphism%20work%20in%20Lean%3F/near/183131591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/26342HowdoespolymorphismworkinLean.html#183131591">Johan Commelin (Dec 11 2019 at 06:39)</a>:</h4>
+<p>The problem was with the positivity assumption</p>
+
+<a name="183131639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20does%20polymorphism%20work%20in%20Lean%3F/near/183131639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/26342HowdoespolymorphismworkinLean.html#183131639">YH (Dec 11 2019 at 06:40)</a>:</h4>
+<p>Oh, OK. Let me check it out.</p>
+
+<a name="183131644"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20does%20polymorphism%20work%20in%20Lean%3F/near/183131644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/26342HowdoespolymorphismworkinLean.html#183131644">Johan Commelin (Dec 11 2019 at 06:40)</a>:</h4>
+<p>Try eg:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">tQ</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- cursor here</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="183131650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20does%20polymorphism%20work%20in%20Lean%3F/near/183131650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/26342HowdoespolymorphismworkinLean.html#183131650">Johan Commelin (Dec 11 2019 at 06:41)</a>:</h4>
+<p>You'll see that the 2nd <code>a</code> in the statement is introduced as a new variable of type <code>nat</code></p>
+
+<a name="183131655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20does%20polymorphism%20work%20in%20Lean%3F/near/183131655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/26342HowdoespolymorphismworkinLean.html#183131655">Johan Commelin (Dec 11 2019 at 06:41)</a>:</h4>
+<p>I don't know why... it looks a bit buggy to me. But explicitly naming the hypothesis solves the issue</p>
+
+<a name="183131663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20does%20polymorphism%20work%20in%20Lean%3F/near/183131663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/26342HowdoespolymorphismworkinLean.html#183131663">YH (Dec 11 2019 at 06:42)</a>:</h4>
+<p>Yes it works, thanks.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
