@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Derivations as computations](80515Derivationsascomputations.html) (1 message, latest: Dec 11 2019 at 17:53)
+
 * [tactics](22316tactics.html) (7 messages, latest: Dec 11 2019 at 13:41)
 
 * [refine and type class inference](48340refineandtypeclassinference.html) (2 messages, latest: Dec 11 2019 at 09:44)

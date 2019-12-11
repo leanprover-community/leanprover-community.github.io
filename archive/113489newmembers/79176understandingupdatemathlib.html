@@ -1,0 +1,36 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/79176understandingupdatemathlib.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/79176understandingupdatemathlib.html">understanding update-mathlib</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="183180050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/understanding%20update-mathlib/near/183180050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79176understandingupdatemathlib.html#183180050">Adam Topaz (Dec 11 2019 at 17:29)</a>:</h4>
+<p>Hi! I've been interested in lean for a while, and I finally have some time to play around with it. </p>
+<p>I'm trying to get mathlib set up on my computer, but I have a fairly uncommon system (based on nixos), so I would like to understand precisely how leanpkg and update-mathlib interact (eventually it would be nice to write a nix derivation that sets everything up automatically using, e.g. <code>nix-shell</code>).  </p>
+<p>Suppose I follow the following (standard?) workflow:</p>
+<ol>
+<li>Use <code>leanpkg new foo &amp;&amp; cd foo</code> to start a new lean project in the folder <code>foo</code> and change to that directory.</li>
+<li>Use <code>leanpkg add leanprover-community/mathlib</code> to add <code>mathlib</code> source to <code>_target/deps/mathlib</code> and update  <code>leanpkg.toml</code> and <code>leanpkg.path</code> accordingly.</li>
+<li>Use <code>update-mathlib</code> to do various things...</li>
+</ol>
+<p>Assume I have used <code>update-mathlib</code> in the past so the directory <code>$HOME/.mathlib</code> already exists, and assume that the <code>.mathlib</code> folder does not contain a cached <code>olean</code> archive of the current version of <code>mathlib</code>. I would like to understand what step 3 above actually does.</p>
+<p>I looked at the <code>update-mathlib</code> python script itself. If I understand correctly, step 3 should be (more-or-less) equivalent to the following:</p>
+<ul>
+<li>Download the olean tarball from <a href="http://github.com/leanprover-community/mathlib-nightly" target="_blank" title="http://github.com/leanprover-community/mathlib-nightly">github.com/leanprover-community/mathlib-nightly</a> corresponding to the commit hash of the current version of mathlib (as defined in <code>leanpkg.toml</code>) and save it in <code>~/.mathlib</code> for future use.</li>
+<li>Extract that tarball into <code>foo/_target/deps/mathlib</code> thereby adding <code>.olean</code> files in <code>foo/_target/deps/mathlib</code> without any actual compilation using lean.</li>
+</ul>
+<p>It would be great if someone more familiar with the tooling could verify that this is indeed all that is happening. Is it true that the main reason to use <code>update-mathlib</code> in step 3 above is to avoid compiling <code>mathlib</code> entirely from source (which takes quite a while)?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

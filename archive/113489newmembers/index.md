@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [understanding update-mathlib](79176understandingupdatemathlib.html) (1 message, latest: Dec 11 2019 at 17:29)
+
 * [How does polymorphism work in Lean?](26342HowdoespolymorphismworkinLean.html) (11 messages, latest: Dec 11 2019 at 15:12)
 
 * [decidable disjoint](97522decidabledisjoint.html) (2 messages, latest: Dec 11 2019 at 14:10)
