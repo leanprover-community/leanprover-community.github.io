@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [manifolds](86782manifolds.html) (34 messages, latest: Dec 11 2019 at 08:55)
+
 * [Proving physical laws](62138Provingphysicallaws.html) (21 messages, latest: Dec 10 2019 at 03:20)
 
 * [Categories and Universes in Lean](19477CategoriesandUniversesinLean.html) (33 messages, latest: Dec 08 2019 at 18:35)
@@ -122,8 +124,6 @@ permalink: archive/116395maths/index.html
 * [algebra.comap](53517algebracomap.html) (13 messages, latest: Oct 28 2019 at 06:59)
 
 * [Single Axiom for Groups](50248SingleAxiomforGroups.html) (15 messages, latest: Oct 28 2019 at 00:45)
-
-* [manifolds](86782manifolds.html) (30 messages, latest: Oct 27 2019 at 22:21)
 
 * [bundling submonoids](35255bundlingsubmonoids.html) (27 messages, latest: Oct 27 2019 at 21:49)
 
