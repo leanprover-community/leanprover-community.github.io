@@ -49,6 +49,110 @@ Doesn't seem to work in this toy case.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20go%20from%20%3C%20to%20%E2%89%A4/near/183233129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42659HowdoIgofromto.html#183233129">Johan Commelin (Dec 12 2019 at 06:57)</a>:</h4>
 <p>So I guess that means that <code>≤</code> is not defined the way you think it is.</p>
 
+<a name="183233286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20go%20from%20%3C%20to%20%E2%89%A4/near/183233286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42659HowdoIgofromto.html#183233286">Kevin Buzzard (Dec 12 2019 at 07:01)</a>:</h4>
+<p>IIRC the definition of &lt; on nat is something like succ a.&lt;= b</p>
+
+<a name="183233337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20go%20from%20%3C%20to%20%E2%89%A4/near/183233337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42659HowdoIgofromto.html#183233337">YH (Dec 12 2019 at 07:02)</a>:</h4>
+<p>OK.</p>
+
+<a name="183233365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20go%20from%20%3C%20to%20%E2%89%A4/near/183233365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42659HowdoIgofromto.html#183233365">YH (Dec 12 2019 at 07:03)</a>:</h4>
+<p>Is the AM-GM inequality proved anywhere in mathlib? I was trying this as an exercise, still lots of frustrations</p>
+
+<a name="183233443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20go%20from%20%3C%20to%20%E2%89%A4/near/183233443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42659HowdoIgofromto.html#183233443">Mario Carneiro (Dec 12 2019 at 07:05)</a>:</h4>
+<p>There is a theorem that says <code>a &lt; b &lt;-&gt; a ≤ b ∧ ¬ (b ≤ a)</code> baked into the definition of <code>preorder</code>, but it is not a definition, it is a constraint on implementations. The actual definition is provided by the particular structure, and many structures have different definitions for this, for example <code>succ a &lt;= b</code> for nat</p>
+
+<a name="183233448"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20go%20from%20%3C%20to%20%E2%89%A4/near/183233448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42659HowdoIgofromto.html#183233448">Mario Carneiro (Dec 12 2019 at 07:06)</a>:</h4>
+<p>If you leave the definition out when defining a preorder, the default definition is <code>a &lt; b := a ≤ b ∧ ¬ (b ≤ a)</code></p>
+
+<a name="183234676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20go%20from%20%3C%20to%20%E2%89%A4/near/183234676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42659HowdoIgofromto.html#183234676">Kevin Buzzard (Dec 12 2019 at 07:37)</a>:</h4>
+<p>I don't recall seeing AM-GM in mathlib, there is a relatively straightforward proof using square roots and the <code>sqrt</code> API is good enough to make implementation not too hard.</p>
+
+<a name="183234827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20go%20from%20%3C%20to%20%E2%89%A4/near/183234827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42659HowdoIgofromto.html#183234827">YH (Dec 12 2019 at 07:41)</a>:</h4>
+<p>Doesn't AM-GM need an nth root API?</p>
+
+<a name="183234839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20go%20from%20%3C%20to%20%E2%89%A4/near/183234839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42659HowdoIgofromto.html#183234839">Kevin Buzzard (Dec 12 2019 at 07:42)</a>:</h4>
+<p>Oh for n variables?</p>
+
+<a name="183234880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20go%20from%20%3C%20to%20%E2%89%A4/near/183234880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42659HowdoIgofromto.html#183234880">YH (Dec 12 2019 at 07:42)</a>:</h4>
+<p>Yeah.</p>
+
+<a name="183234887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20go%20from%20%3C%20to%20%E2%89%A4/near/183234887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42659HowdoIgofromto.html#183234887">Kevin Buzzard (Dec 12 2019 at 07:42)</a>:</h4>
+<p>I'm not sure I know which proof to formalise for n variables. There's a proof that does powers of 2 first and deduces the general case</p>
+
+<a name="183234913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20go%20from%20%3C%20to%20%E2%89%A4/near/183234913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42659HowdoIgofromto.html#183234913">YH (Dec 12 2019 at 07:43)</a>:</h4>
+<p>That is the one I had in mind. But for that one needs to prove some general induction stuff I guess.</p>
+
+<a name="183234981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20go%20from%20%3C%20to%20%E2%89%A4/near/183234981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42659HowdoIgofromto.html#183234981">YH (Dec 12 2019 at 07:44)</a>:</h4>
+<p>But even to go from AG4 to AG3 is kinda painful for me right now.</p>
+
+<a name="183235000"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20go%20from%20%3C%20to%20%E2%89%A4/near/183235000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42659HowdoIgofromto.html#183235000">Kevin Buzzard (Dec 12 2019 at 07:45)</a>:</h4>
+<p>I don't remember the trick. Do you let the dummy variable be the GM?</p>
+
+<a name="183235078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20go%20from%20%3C%20to%20%E2%89%A4/near/183235078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42659HowdoIgofromto.html#183235078">YH (Dec 12 2019 at 07:46)</a>:</h4>
+<p>Yeah. apply AM-GM for <code>a,b,c,d</code> where <code>d = 3√(abc)</code></p>
+
+<a name="183235164"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20go%20from%20%3C%20to%20%E2%89%A4/near/183235164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42659HowdoIgofromto.html#183235164">Kevin Buzzard (Dec 12 2019 at 07:49)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">open</span> <span class="n">real</span>
+
+<span class="kn">theorem</span> <span class="n">AG2</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">hy</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">sqrt</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">≤</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">h</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="o">(</span><span class="n">sqrt</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">sqrt</span> <span class="n">y</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">sqrt</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">sqrt</span> <span class="n">y</span><span class="o">),</span>
+    <span class="n">apply</span> <span class="n">mul_self_nonneg</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">mul_sub</span><span class="o">,</span> <span class="n">sub_mul</span><span class="o">,</span> <span class="n">sub_mul</span><span class="o">,</span> <span class="err">←</span><span class="n">sqrt_mul</span> <span class="n">hx</span><span class="o">,</span> <span class="err">←</span><span class="n">sqrt_mul</span> <span class="n">hx</span><span class="o">,</span>
+      <span class="err">←</span><span class="n">sqrt_mul</span> <span class="n">hy</span><span class="o">,</span> <span class="err">←</span><span class="n">sqrt_mul</span> <span class="n">hy</span><span class="o">,</span> <span class="n">sqrt_mul_self</span> <span class="n">hx</span><span class="o">,</span> <span class="n">sqrt_mul_self</span> <span class="n">hy</span><span class="o">,</span> <span class="n">mul_comm</span><span class="o">]</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">linarith</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>There's 2 ;-) Sorry, I thought that was what we were talking about at first.</p>
+
+<a name="183235167"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20go%20from%20%3C%20to%20%E2%89%A4/near/183235167" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42659HowdoIgofromto.html#183235167">YH (Dec 12 2019 at 07:49)</a>:</h4>
+<p>I was trying <code>lemma ag3 (a b c : nnreal) : 3 * (a * b * c) ≤ a ^ 3 + b ^ 3 + c ^ 3 := sorry</code><br>
+but it seems I will have to write <code>instance : has_pow nnreal ℚ</code> anyway.</p>
+
+<a name="183235216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20go%20from%20%3C%20to%20%E2%89%A4/near/183235216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42659HowdoIgofromto.html#183235216">Kevin Buzzard (Dec 12 2019 at 07:50)</a>:</h4>
+<p>I don't know how well developed things like <code>nnreal</code> are. Does <code>linarith</code> work with them?</p>
+
+<a name="183235218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20go%20from%20%3C%20to%20%E2%89%A4/near/183235218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42659HowdoIgofromto.html#183235218">Kevin Buzzard (Dec 12 2019 at 07:50)</a>:</h4>
+<p>I just stuck to the reals and put non-negativity hypotheses in.</p>
+
+<a name="183235290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20go%20from%20%3C%20to%20%E2%89%A4/near/183235290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42659HowdoIgofromto.html#183235290">YH (Dec 12 2019 at 07:52)</a>:</h4>
+<p>Oh, OK. put non-negativity hypotheses in sounds good. <br>
+(But still need to define <code>has_pow</code> somewhere I guess.)</p>
+
+<a name="183235422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20go%20from%20%3C%20to%20%E2%89%A4/near/183235422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42659HowdoIgofromto.html#183235422">YH (Dec 12 2019 at 07:55)</a>:</h4>
+<blockquote>
+<p>I don't remember the trick. Do you let the dummy variable be the GM?</p>
+</blockquote>
+<p>BTW let the dummy variable be AM works too. But neither seem completely trivial for me as a beginner -- I always got stuck on some seemingly very trivial algebraic operation in Lean.</p>
+
+<a name="183235440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20go%20from%20%3C%20to%20%E2%89%A4/near/183235440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42659HowdoIgofromto.html#183235440">Kevin Buzzard (Dec 12 2019 at 07:55)</a>:</h4>
+<p>I agree that proving it for n variables is a tall order in lean for a beginner</p>
+
 
 {% endraw %}
 

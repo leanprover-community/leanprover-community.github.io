@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [How do I go from < to ≤](42659HowdoIgofromto.html) (8 messages, latest: Dec 12 2019 at 06:57)
+* [How do I go from < to ≤](42659HowdoIgofromto.html) (29 messages, latest: Dec 12 2019 at 07:55)
+
+* [Is there a way to search a particular rewrite?](78809Isthereawaytosearchaparticularrewrite.html) (12 messages, latest: Dec 12 2019 at 07:53)
 
 * [infering values in constructor](15232inferingvaluesinconstructor.html) (6 messages, latest: Dec 12 2019 at 05:08)
 
 * [decidable disjoint](97522decidabledisjoint.html) (3 messages, latest: Dec 12 2019 at 01:39)
-
-* [Is there a way to search a particular rewrite?](78809Isthereawaytosearchaparticularrewrite.html) (10 messages, latest: Dec 12 2019 at 00:55)
 
 * [understanding update-mathlib](79176understandingupdatemathlib.html) (8 messages, latest: Dec 11 2019 at 21:36)
 
