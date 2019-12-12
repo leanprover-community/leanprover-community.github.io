@@ -9,6 +9,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Simple tactic for sum of natural numbers](33415Simpletacticforsumofnaturalnumbers.html) (1 message, latest: Dec 12 2019 at 11:56)
+
+* [Simple Uniform Probability](31724SimpleUniformProbability.html) (1 message, latest: Dec 12 2019 at 11:40)
+
 * [How do I go from < to ≤](42659HowdoIgofromto.html) (29 messages, latest: Dec 12 2019 at 07:55)
 
 * [Is there a way to search a particular rewrite?](78809Isthereawaytosearchaparticularrewrite.html) (12 messages, latest: Dec 12 2019 at 07:53)
