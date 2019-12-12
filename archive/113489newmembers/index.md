@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [decidable disjoint](97522decidabledisjoint.html) (3 messages, latest: Dec 12 2019 at 01:39)
+
 * [infering values in constructor](15232inferingvaluesinconstructor.html) (4 messages, latest: Dec 12 2019 at 00:58)
 
 * [Is there a way to search a particular rewrite?](78809Isthereawaytosearchaparticularrewrite.html) (10 messages, latest: Dec 12 2019 at 00:55)
@@ -18,8 +20,6 @@ permalink: archive/113489newmembers/index.html
 * [to_additive and nested namespaces](61987toadditiveandnestednamespaces.html) (1 message, latest: Dec 11 2019 at 19:55)
 
 * [How does polymorphism work in Lean?](26342HowdoespolymorphismworkinLean.html) (11 messages, latest: Dec 11 2019 at 15:12)
-
-* [decidable disjoint](97522decidabledisjoint.html) (2 messages, latest: Dec 11 2019 at 14:10)
 
 * [What tactic do I use to show squares are non-negative?](50752WhattacticdoIusetoshowsquaresarenonnegative.html) (5 messages, latest: Dec 11 2019 at 07:10)
 
