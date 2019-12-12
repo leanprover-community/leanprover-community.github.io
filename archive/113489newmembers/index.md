@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [decidable disjoint](97522decidabledisjoint.html) (5 messages, latest: Dec 12 2019 at 19:38)
+
+* [infering values in constructor](15232inferingvaluesinconstructor.html) (9 messages, latest: Dec 12 2019 at 19:16)
+
 * [Simple tactic for sum of natural numbers](33415Simpletacticforsumofnaturalnumbers.html) (5 messages, latest: Dec 12 2019 at 17:47)
 
-* [infering values in constructor](15232inferingvaluesinconstructor.html) (8 messages, latest: Dec 12 2019 at 17:46)
-
 * [Simple Uniform Probability](31724SimpleUniformProbability.html) (2 messages, latest: Dec 12 2019 at 13:27)
-
-* [decidable disjoint](97522decidabledisjoint.html) (4 messages, latest: Dec 12 2019 at 13:20)
 
 * [How do I go from < to ≤](42659HowdoIgofromto.html) (29 messages, latest: Dec 12 2019 at 07:55)
 
