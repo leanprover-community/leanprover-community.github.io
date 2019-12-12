@@ -1,0 +1,48 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/01410UsingLeanfromcommandline.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/01410UsingLeanfromcommandline.html">Using Lean from command line</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="183297144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Using%20Lean%20from%20command%20line/near/183297144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01410UsingLeanfromcommandline.html#183297144">Arjun Viswanathan (Dec 12 2019 at 20:13)</a>:</h4>
+<p>I have read this link about  using Lean: <a href="https://leanprover.github.io/reference/using_lean.html" target="_blank" title="https://leanprover.github.io/reference/using_lean.html">https://leanprover.github.io/reference/using_lean.html</a><br>
+and am able to use Lean with VSCode, but I still have questions about using Lean from the command line. </p>
+<ol>
+<li>When I download the lean binaries, there is a lean and leanchecker binary.  What does each one do, and is there any documentation on using them?</li>
+<li>What is LEAN_PATH? I wrote a Lean file that uses the Lean library list type. I want this to to be checked from the command-line, that is when I write a #check command in the file, on VSCode the #check is underlined in blue letting me know that it checks; I want to do the equivalent from the command-line. But when I run the Lean binary on my file, it says 'error: file 'data/list' not found in the LEAN_PATH'. Now, I have the entire Lean repository (<a href="https://github.com/leanprover/lean" target="_blank" title="https://github.com/leanprover/lean">https://github.com/leanprover/lean</a>) in my system and it also contains the built binaries - this is what it took to get Lean to work on VSCode (that and telling VSCode where the head of the repository is). Also, the head of this repository is in my PATH but what does it mean for data/list to be in my LEAN_PATH?</li>
+</ol>
+<p>I'm not able to find documentation for these specifics, most of them talk about using Lean from VSCode or Emacs. If I missed it, please point me to the right resource. Thanks!</p>
+
+<a name="183297602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Using%20Lean%20from%20command%20line/near/183297602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01410UsingLeanfromcommandline.html#183297602">Patrick Massot (Dec 12 2019 at 20:18)</a>:</h4>
+<p>If you create a Lean project the way described in <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/install/project.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/install/project.md">https://github.com/leanprover-community/mathlib/blob/master/docs/install/project.md</a> then there is no need to fiddle with LEAN_PATH. You can simply run <code>lean</code> from the root of your project.</p>
+
+<a name="183299853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Using%20Lean%20from%20command%20line/near/183299853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01410UsingLeanfromcommandline.html#183299853">Arjun Viswanathan (Dec 12 2019 at 20:42)</a>:</h4>
+<p>Thanks, useful as that is, I still want to understand how this works before having the package manager take care of the details for me. So I would still appreciate responses to my questions, if anybody is able to help.</p>
+
+<a name="183300317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Using%20Lean%20from%20command%20line/near/183300317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01410UsingLeanfromcommandline.html#183300317">Reid Barton (Dec 12 2019 at 20:47)</a>:</h4>
+<p><code>lean</code> is Lean. You don't need <code>leanchecker</code>. You should also have <code>leanpkg</code> of course.</p>
+
+<a name="183300344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Using%20Lean%20from%20command%20line/near/183300344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01410UsingLeanfromcommandline.html#183300344">Reid Barton (Dec 12 2019 at 20:47)</a>:</h4>
+<p>There is no <code>data.list</code> in the Lean standard library. Are you trying to use mathlib?</p>
+
+<a name="183300684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Using%20Lean%20from%20command%20line/near/183300684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01410UsingLeanfromcommandline.html#183300684">Patrick Massot (Dec 12 2019 at 20:51)</a>:</h4>
+<p><code>leanpkg</code> will create a <code>leanpkg.path</code> file in your project root folder. <code>lean</code> reads it, and you can read it as well, it's not hard to guess what it says.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

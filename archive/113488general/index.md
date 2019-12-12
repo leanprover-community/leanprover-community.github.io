@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Using Lean from command line](01410UsingLeanfromcommandline.html) (6 messages, latest: Dec 12 2019 at 20:51)
+
 * [library_search](97355librarysearch.html) (54 messages, latest: Dec 12 2019 at 18:59)
 
 * ["missing" theorems](43942missingtheorems.html) (3 messages, latest: Dec 12 2019 at 18:15)
