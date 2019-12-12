@@ -1,0 +1,78 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/78809Isthereawaytosearchaparticularrewrite.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/78809Isthereawaytosearchaparticularrewrite.html">Is there a way to search a particular rewrite?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="183216138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20there%20a%20way%20to%20search%20a%20particular%20rewrite%3F/near/183216138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/78809Isthereawaytosearchaparticularrewrite.html#183216138">YH (Dec 12 2019 at 00:08)</a>:</h4>
+<p>There are some trivial things like <code>(a^b)^c = a^(b*c)</code> that I want to find in the library, but how? I searched for things whose name containing <code>"pow"</code> or <code>"exp"</code> but it doesn't help much.</p>
+
+<a name="183216178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20there%20a%20way%20to%20search%20a%20particular%20rewrite%3F/near/183216178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/78809Isthereawaytosearchaparticularrewrite.html#183216178">Bhavik Mehta (Dec 12 2019 at 00:09)</a>:</h4>
+<p>You can use the tactic <code>library_search</code> for this sort of thing! I think this one is called <code>pow_mul</code></p>
+
+<a name="183216401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20there%20a%20way%20to%20search%20a%20particular%20rewrite%3F/near/183216401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/78809Isthereawaytosearchaparticularrewrite.html#183216401">YH (Dec 12 2019 at 00:12)</a>:</h4>
+<blockquote>
+<p>You can use the tactic <code>library_search</code> for this sort of thing! I think this one is called <code>pow_mul</code></p>
+</blockquote>
+<p>I am aware of <code>library_search</code> but it seems it only search for tactics that handles the whole problem?</p>
+<p>What if I want to find some rewrite <code>x</code> so that I can do <code>rw x at h</code> for a particular <code>h</code>, can I use that one?</p>
+
+<a name="183216617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20there%20a%20way%20to%20search%20a%20particular%20rewrite%3F/near/183216617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/78809Isthereawaytosearchaparticularrewrite.html#183216617">YH (Dec 12 2019 at 00:17)</a>:</h4>
+<p>Let's say after <code>pow_mul</code> I get <code>a^(1/2 + 1/2)</code>, what do I do to make it <code>a^1</code> or <code>a</code>?</p>
+
+<a name="183216803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20there%20a%20way%20to%20search%20a%20particular%20rewrite%3F/near/183216803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/78809Isthereawaytosearchaparticularrewrite.html#183216803">Marc Huisinga (Dec 12 2019 at 00:21)</a>:</h4>
+<p>you can temporarily split off the statement you're looking for into a lemma (or a have-subproof) and then use library_search</p>
+
+<a name="183217706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20there%20a%20way%20to%20search%20a%20particular%20rewrite%3F/near/183217706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/78809Isthereawaytosearchaparticularrewrite.html#183217706">Alex J. Best (Dec 12 2019 at 00:36)</a>:</h4>
+<p>For your specific example what you would split off could just be</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span><span class="bp">/</span><span class="mi">2</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="mi">2</span>  <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">add_halves</span> <span class="mi">1</span> <span class="c1">-- by library_search</span>
+
+<span class="c1">-- so now we can do</span>
+<span class="kn">open</span> <span class="n">real</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">pi</span> <span class="err">^</span> <span class="o">((</span><span class="mi">1</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span><span class="bp">/</span><span class="mi">2</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="mi">2</span><span class="o">)</span> <span class="bp">=</span> <span class="n">pi</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">rw</span> <span class="n">add_halves</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">),</span>
+<span class="n">exact</span> <span class="n">rpow_one</span> <span class="n">pi</span><span class="o">,</span> <span class="c1">-- library_search again</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>but the best way if you have actual numbers is probably <code>example : pi ^ ((1:ℝ)/2 + 1/2) = pi := by norm_num</code></p>
+
+<a name="183217956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20there%20a%20way%20to%20search%20a%20particular%20rewrite%3F/near/183217956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/78809Isthereawaytosearchaparticularrewrite.html#183217956">YH (Dec 12 2019 at 00:40)</a>:</h4>
+<p><code>add_halves</code>? What if I had <code>a^(1/3 + 2/3)</code>?</p>
+
+<a name="183217957"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20there%20a%20way%20to%20search%20a%20particular%20rewrite%3F/near/183217957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/78809Isthereawaytosearchaparticularrewrite.html#183217957">YH (Dec 12 2019 at 00:41)</a>:</h4>
+<p>Not actual numbers, any <code>a:ℝ</code></p>
+
+<a name="183218157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20there%20a%20way%20to%20search%20a%20particular%20rewrite%3F/near/183218157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/78809Isthereawaytosearchaparticularrewrite.html#183218157">Alex J. Best (Dec 12 2019 at 00:44)</a>:</h4>
+<p>Right, library search isn't good for that, it won't find tactics for you just lemmas. Thats why  the <code>norm_num</code> tactic may be better depending on your actual application, the trade -off is that a tactic may take (slightly) longer to do its thing than calling an explicit lemma.</p>
+
+<a name="183218822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20there%20a%20way%20to%20search%20a%20particular%20rewrite%3F/near/183218822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/78809Isthereawaytosearchaparticularrewrite.html#183218822">YH (Dec 12 2019 at 00:55)</a>:</h4>
+<blockquote>
+<p><code>add_halves</code>? What if I had <code>a^(1/3 + 2/3)</code>?</p>
+</blockquote>
+<p>Oh I just realized I can't prove <code>lemma b : 1/2 + 1/2 = 1 := by sorry</code> yet... (where <code>1</code> is not of type <code>ℝ</code>)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

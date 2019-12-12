@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [infering values in constructor](15232inferingvaluesinconstructor.html) (1 message, latest: Dec 11 2019 at 23:07)
+* [infering values in constructor](15232inferingvaluesinconstructor.html) (4 messages, latest: Dec 12 2019 at 00:58)
+
+* [Is there a way to search a particular rewrite?](78809Isthereawaytosearchaparticularrewrite.html) (10 messages, latest: Dec 12 2019 at 00:55)
 
 * [understanding update-mathlib](79176understandingupdatemathlib.html) (8 messages, latest: Dec 11 2019 at 21:36)
 
