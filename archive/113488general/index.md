@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Using Lean from command line](01410UsingLeanfromcommandline.html) (6 messages, latest: Dec 12 2019 at 20:51)
+* [Using Lean from command line](01410UsingLeanfromcommandline.html) (7 messages, latest: Dec 12 2019 at 21:46)
 
 * [library_search](97355librarysearch.html) (54 messages, latest: Dec 12 2019 at 18:59)
 
