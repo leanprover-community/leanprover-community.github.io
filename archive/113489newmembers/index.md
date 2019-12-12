@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Maths Challenges](65204MathsChallenges.html) (12 messages, latest: Dec 12 2019 at 22:37)
+
 * [decidable disjoint](97522decidabledisjoint.html) (5 messages, latest: Dec 12 2019 at 19:38)
 
 * [infering values in constructor](15232inferingvaluesinconstructor.html) (9 messages, latest: Dec 12 2019 at 19:16)
@@ -32,8 +34,6 @@ permalink: archive/113489newmembers/index.html
 * [Syntax question about  universal quantification ∀](89565Syntaxquestionaboutuniversalquantification.html) (5 messages, latest: Dec 10 2019 at 00:06)
 
 * [M40001 term sheet 2](99590M40001termsheet2.html) (7 messages, latest: Dec 09 2019 at 23:27)
-
-* [Maths Challenges](65204MathsChallenges.html) (11 messages, latest: Dec 09 2019 at 21:36)
 
 * [Non-empty finsets](78596Nonemptyfinsets.html) (10 messages, latest: Dec 09 2019 at 19:35)
 
