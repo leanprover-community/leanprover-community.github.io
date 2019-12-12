@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [automation to fix universe issues](06585automationtofixuniverseissues.html) (27 messages, latest: Dec 12 2019 at 09:59)
+
 * [Derivations as computations](80515Derivationsascomputations.html) (1 message, latest: Dec 11 2019 at 17:53)
 
 * [tactics](22316tactics.html) (7 messages, latest: Dec 11 2019 at 13:41)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [refine and type class inference](48340refineandtypeclassinference.html) (2 messages, latest: Dec 11 2019 at 09:44)
 
 * [Typo on natural number game](07428Typoonnaturalnumbergame.html) (4 messages, latest: Dec 11 2019 at 01:11)
-
-* [automation to fix universe issues](06585automationtofixuniverseissues.html) (25 messages, latest: Dec 11 2019 at 01:04)
 
 * [Lots of errors in mathlib, is this normal?](07125Lotsoferrorsinmathlibisthisnormal.html) (17 messages, latest: Dec 09 2019 at 19:07)
 
