@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [infering values in constructor](15232inferingvaluesinconstructor.html) (1 message, latest: Dec 11 2019 at 23:07)
+
 * [understanding update-mathlib](79176understandingupdatemathlib.html) (8 messages, latest: Dec 11 2019 at 21:36)
 
 * [to_additive and nested namespaces](61987toadditiveandnestednamespaces.html) (1 message, latest: Dec 11 2019 at 19:55)

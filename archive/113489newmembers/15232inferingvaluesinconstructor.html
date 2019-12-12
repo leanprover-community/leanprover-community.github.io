@@ -1,0 +1,42 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/15232inferingvaluesinconstructor.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/15232inferingvaluesinconstructor.html">infering values in constructor</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="183211780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/infering%20values%20in%20constructor/near/183211780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/15232inferingvaluesinconstructor.html#183211780">Sean B. (Dec 11 2019 at 23:07)</a>:</h4>
+<p>Hello,<br>
+I am a student who is learning lean through one of my classes as an introduction to function programming and proof assistants.  In one practice problem, we were asked to defined the simple predicate below:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">cool</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">cool_2</span> <span class="o">:</span> <span class="n">cool</span> <span class="mi">2</span>
+<span class="bp">|</span> <span class="n">cool_5</span> <span class="o">:</span> <span class="n">cool</span> <span class="mi">5</span>
+<span class="bp">|</span> <span class="n">cool_sum</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">cool</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">cool</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">cool</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">cool_prod</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">cool</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">cool</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">cool</span> <span class="o">(</span><span class="n">x</span><span class="bp">*</span><span class="n">y</span><span class="o">)</span>
+</pre></div>
+
+
+<p>We were then tasked to prove <code>cool 7</code>.  When creating this proof, I found some odd behavior that I do not understand.  In the statement...</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">cool</span> <span class="mi">7</span> <span class="o">:=</span> <span class="n">cool</span><span class="bp">.</span><span class="n">cool_sum</span> <span class="mi">2</span> <span class="mi">5</span> <span class="n">cool</span><span class="bp">.</span><span class="n">cool_2</span> <span class="n">cool</span><span class="bp">.</span><span class="n">cool_5</span>
+</pre></div>
+
+
+<p>...lean assumes that the first two arguments should be 6 and 1 with respective proofs of the two.  Adding the <code>@</code> token before the constructor seems to remove this assumption.  Note, however, that the product constructor does not infer any values.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">cool</span> <span class="mi">10</span> <span class="o">:=</span> <span class="n">cool</span><span class="bp">.</span><span class="n">cool_prod</span> <span class="mi">2</span> <span class="mi">5</span> <span class="n">cool</span><span class="bp">.</span><span class="n">cool_2</span> <span class="n">cool</span><span class="bp">.</span><span class="n">cool_5</span>
+</pre></div>
+
+
+<p>I went to my professor and he recommended me this forum.  If anyone has an idea on why lean assumes values for the <code>cool_sum</code> constructor, my professor and I would enjoy the information.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
