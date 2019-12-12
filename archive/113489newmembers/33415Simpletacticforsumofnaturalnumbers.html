@@ -50,6 +50,57 @@ Unfortunately this turned out to be way trickier than I expected ...</p>
 <p>To be precise, when executing the tactic lean tells me that <code>rewrite tactic failed, lemma is not an equality nor a iff</code> <span aria-label="shrug" class="emoji emoji-1f937" role="img" title="shrug">:shrug:</span> .</p>
 <p>Any help would be greatly appreciated</p>
 
+<a name="183260447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simple%20tactic%20for%20sum%20of%20natural%20numbers/near/183260447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33415Simpletacticforsumofnaturalnumbers.html#183260447">Patrick Massot (Dec 12 2019 at 13:51)</a>:</h4>
+<p>Hi. First let me give you a couple of practical Zulip advices. What really really help people helping other people is to get code they can copy-paste in a scratch file and run. Both your code snippets fail that criterion. You need to include the imports and name spaces opening. More tricky: it helps a lot if you describe the expected behavior of your tactic. I'll assume for now that you simply want the tactic to write exactly the same proof as what you did by hand, although this will give a very very specialized tactic (but that's fine as an exercise).</p>
+
+<a name="183260695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simple%20tactic%20for%20sum%20of%20natural%20numbers/near/183260695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33415Simpletacticforsumofnaturalnumbers.html#183260695">Patrick Massot (Dec 12 2019 at 13:54)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span>
+
+<span class="kn">open</span> <span class="n">list</span>
+
+<span class="kn">lemma</span> <span class="n">nat_sum</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">sum</span><span class="o">(</span><span class="n">range</span><span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span> <span class="bp">=</span> <span class="n">n</span><span class="bp">*</span><span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">ih</span><span class="o">,</span>
+    <span class="n">refl</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">range_concat</span><span class="o">,</span> <span class="n">sum_append</span><span class="o">,</span> <span class="n">mul_add</span><span class="o">,</span> <span class="n">ih</span><span class="o">],</span>
+  <span class="n">suffices</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">),</span> <span class="k">by</span> <span class="n">simpa</span><span class="o">,</span>
+  <span class="n">ring</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">namespace</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+<span class="kn">open</span> <span class="n">tactic</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">sum_range</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">ctx</span> <span class="err">←</span> <span class="n">local_context</span><span class="o">,</span>
+   <span class="n">ih_name</span> <span class="err">←</span> <span class="n">get_unused_name</span> <span class="bp">`</span><span class="n">ih</span><span class="o">,</span>
+   <span class="n">tactic</span><span class="bp">.</span><span class="n">induction</span> <span class="n">ctx</span><span class="bp">.</span><span class="n">head</span> <span class="o">[</span><span class="bp">`</span><span class="n">n</span><span class="o">,</span> <span class="n">ih_name</span><span class="o">],</span>
+     <span class="n">reflexivity</span><span class="o">,</span>
+   <span class="n">ih_expr</span> <span class="err">←</span> <span class="n">get_local</span> <span class="n">ih_name</span><span class="o">,</span>
+   <span class="n">e</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="bp">```</span><span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">range_concat</span><span class="o">),</span>
+   <span class="n">e&#39;</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="bp">```</span><span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">sum_append</span><span class="o">),</span>
+   <span class="n">e&#39;&#39;</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="bp">```</span><span class="o">(</span><span class="n">mul_add</span><span class="o">),</span>
+   <span class="n">e&#39;&#39;&#39;</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="bp">```</span><span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">add_one</span><span class="o">),</span>
+   <span class="n">rewrite_target</span> <span class="n">e</span><span class="o">,</span>
+   <span class="n">rewrite_target</span> <span class="n">e&#39;</span><span class="o">,</span>
+   <span class="n">rewrite_target</span> <span class="n">e&#39;&#39;</span><span class="o">,</span>
+   <span class="n">rewrite_target</span> <span class="n">ih_expr</span><span class="o">,</span>
+   <span class="bp">`</span><span class="o">[</span><span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">add_zero</span><span class="o">,</span> <span class="n">sum_cons</span><span class="o">,</span> <span class="n">sum_nil</span><span class="o">]],</span>
+   <span class="n">rewrite_target</span> <span class="n">e&#39;&#39;&#39;</span> <span class="o">{</span><span class="n">symm</span><span class="o">:=</span><span class="n">tt</span><span class="o">}</span>
+<span class="kn">end</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">sum</span><span class="o">(</span><span class="n">range</span><span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span> <span class="bp">=</span> <span class="n">n</span><span class="bp">*</span><span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">sum_range</span><span class="o">,</span>
+  <span class="n">ring</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="183260759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simple%20tactic%20for%20sum%20of%20natural%20numbers/near/183260759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33415Simpletacticforsumofnaturalnumbers.html#183260759">Patrick Massot (Dec 12 2019 at 13:55)</a>:</h4>
+<p>The above code works. Did you read <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md">https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md</a> by the way?</p>
+
 
 {% endraw %}
 

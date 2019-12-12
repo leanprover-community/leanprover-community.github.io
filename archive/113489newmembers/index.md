@@ -9,17 +9,17 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Simple tactic for sum of natural numbers](33415Simpletacticforsumofnaturalnumbers.html) (1 message, latest: Dec 12 2019 at 11:56)
+* [Simple tactic for sum of natural numbers](33415Simpletacticforsumofnaturalnumbers.html) (4 messages, latest: Dec 12 2019 at 13:55)
 
-* [Simple Uniform Probability](31724SimpleUniformProbability.html) (1 message, latest: Dec 12 2019 at 11:40)
+* [Simple Uniform Probability](31724SimpleUniformProbability.html) (2 messages, latest: Dec 12 2019 at 13:27)
+
+* [decidable disjoint](97522decidabledisjoint.html) (4 messages, latest: Dec 12 2019 at 13:20)
 
 * [How do I go from < to ≤](42659HowdoIgofromto.html) (29 messages, latest: Dec 12 2019 at 07:55)
 
 * [Is there a way to search a particular rewrite?](78809Isthereawaytosearchaparticularrewrite.html) (12 messages, latest: Dec 12 2019 at 07:53)
 
 * [infering values in constructor](15232inferingvaluesinconstructor.html) (6 messages, latest: Dec 12 2019 at 05:08)
-
-* [decidable disjoint](97522decidabledisjoint.html) (3 messages, latest: Dec 12 2019 at 01:39)
 
 * [understanding update-mathlib](79176understandingupdatemathlib.html) (8 messages, latest: Dec 11 2019 at 21:36)
 
