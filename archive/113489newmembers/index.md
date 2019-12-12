@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [infering values in constructor](15232inferingvaluesinconstructor.html) (5 messages, latest: Dec 12 2019 at 02:20)
+* [infering values in constructor](15232inferingvaluesinconstructor.html) (6 messages, latest: Dec 12 2019 at 05:08)
 
 * [decidable disjoint](97522decidabledisjoint.html) (3 messages, latest: Dec 12 2019 at 01:39)
 

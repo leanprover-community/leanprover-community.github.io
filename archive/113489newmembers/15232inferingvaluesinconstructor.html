@@ -57,6 +57,10 @@ I am a student who is learning lean through one of my classes as an introduction
 <p>In simple mode, it first elaborates <code>2</code> (nat) and <code>5</code> (nat) and <code>cool.cool_2</code> (<code>cool 2</code>) and <code>cool.cool_5</code> (<code>cool 5</code>), then applies <code>cool.cool_sum</code> to this to get a proof of <code>cool (2 + 5)</code>. It then checks that this unifies with the target (<code>cool 7</code>) by doing a little computation to prove <code>2 + 5 = 7</code>,  and succeeds.</p>
 <p>Chris's trick is another way to make this work without using simple mode. The <code>(... : _)</code> signals to lean to forget the expected type, so in the first stage it doesn't know that the type is <code>cool 7</code>, so it doesn't guess <code>?m1 := 6</code> and <code>?m2 := 1</code> that leads to the earlier failure. It holds off on the guess until it sees the arguments, which means it ends up going through the same process as the simple elaboration, eventually finding out that the type of the whole term is <code>cool (2 + 5)</code>. The type ascription then checks this against the real answer, <code>cool 7</code>, resulting in the computation and success.</p>
 
+<a name="183229434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/infering%20values%20in%20constructor/near/183229434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/15232inferingvaluesinconstructor.html#183229434">Johan Commelin (Dec 12 2019 at 05:08)</a>:</h4>
+<p>Wow! So this is actually a really well-designed exercise. Assuming that it was the point to explain how these elaboration strategies differ.</p>
+
 
 {% endraw %}
 
