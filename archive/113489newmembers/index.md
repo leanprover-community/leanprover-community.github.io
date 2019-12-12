@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [decidable disjoint](97522decidabledisjoint.html) (3 messages, latest: Dec 12 2019 at 01:39)
+* [infering values in constructor](15232inferingvaluesinconstructor.html) (5 messages, latest: Dec 12 2019 at 02:20)
 
-* [infering values in constructor](15232inferingvaluesinconstructor.html) (4 messages, latest: Dec 12 2019 at 00:58)
+* [decidable disjoint](97522decidabledisjoint.html) (3 messages, latest: Dec 12 2019 at 01:39)
 
 * [Is there a way to search a particular rewrite?](78809Isthereawaytosearchaparticularrewrite.html) (10 messages, latest: Dec 12 2019 at 00:55)
 
