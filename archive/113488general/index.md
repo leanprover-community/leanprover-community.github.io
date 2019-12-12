@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* ["missing" theorems](43942missingtheorems.html) (2 messages, latest: Dec 12 2019 at 17:28)
+* [library_search](97355librarysearch.html) (54 messages, latest: Dec 12 2019 at 18:59)
+
+* ["missing" theorems](43942missingtheorems.html) (3 messages, latest: Dec 12 2019 at 18:15)
 
 * [automation to fix universe issues](06585automationtofixuniverseissues.html) (28 messages, latest: Dec 12 2019 at 10:45)
 
@@ -84,8 +86,6 @@ permalink: archive/113488general/index.html
 * [Why do we need kernel reduction](35410Whydoweneedkernelreduction.html) (4 messages, latest: Nov 29 2019 at 08:43)
 
 * [finset subtract one](23508finsetsubtractone.html) (4 messages, latest: Nov 28 2019 at 15:29)
-
-* [library_search](97355librarysearch.html) (47 messages, latest: Nov 28 2019 at 15:28)
 
 * [philosophy: the immediate aspect of mathematics](30591philosophytheimmediateaspectofmathematics.html) (41 messages, latest: Nov 27 2019 at 21:56)
 

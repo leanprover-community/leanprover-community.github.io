@@ -273,6 +273,34 @@ In type theory, to each type former, there is a number of rules associated to it
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182117322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182117322">Reid Barton (Nov 28 2019 at 15:28)</a>:</h4>
 <p>Coq also has opt-in definitional eta for structures.</p>
 
+<a name="183284849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/183284849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#183284849">Abhimanyu Pallavi Sudhir (Dec 12 2019 at 18:08)</a>:</h4>
+<p>Does library_search check for every possible paranthetic nesting structure of the hypothesis? Or just superficial combinations and repetitions?</p>
+
+<a name="183285547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/183285547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#183285547">Johan Commelin (Dec 12 2019 at 18:16)</a>:</h4>
+<p>I don't think it does anything with associativity, if that is what you mean. The goal has to match perfectly.</p>
+
+<a name="183285788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/183285788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#183285788">Abhimanyu Pallavi Sudhir (Dec 12 2019 at 18:19)</a>:</h4>
+<p>I mean, if we have hypothesis H1 H2 H3 and goal G, and we have a library theorem L such that L (H1 H2) H3 = G, will the tactic find L?</p>
+
+<a name="183286048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/183286048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#183286048">Patrick Massot (Dec 12 2019 at 18:22)</a>:</h4>
+<p>Yes.</p>
+
+<a name="183286096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/183286096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#183286096">Patrick Massot (Dec 12 2019 at 18:22)</a>:</h4>
+<p>Or maybe I don't understand the question.</p>
+
+<a name="183289794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/183289794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#183289794">Johan Commelin (Dec 12 2019 at 18:58)</a>:</h4>
+<p>I'm actually not sure if <code>library_search</code> will close that. <code>suggest</code> hopefully will do it. But as far as I know <code>library_search</code> only tries to close the immediate hypotheses of <code>L</code> with existing hypotheses in your context. There is no recursion.</p>
+
+<a name="183289883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/183289883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#183289883">Johan Commelin (Dec 12 2019 at 18:59)</a>:</h4>
+<p><code>suggest</code> wouldn't close the goal either, but would hopefully suggest <code>refine L _ H3</code>. And after that <code>suggest</code> and <code>library_search</code> should both close the goal via <code>solve_by_elim</code></p>
+
 
 {% endraw %}
 
