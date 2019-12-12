@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [infering values in constructor](15232inferingvaluesinconstructor.html) (7 messages, latest: Dec 12 2019 at 14:43)
+* [Simple tactic for sum of natural numbers](33415Simpletacticforsumofnaturalnumbers.html) (5 messages, latest: Dec 12 2019 at 17:47)
 
-* [Simple tactic for sum of natural numbers](33415Simpletacticforsumofnaturalnumbers.html) (4 messages, latest: Dec 12 2019 at 13:55)
+* [infering values in constructor](15232inferingvaluesinconstructor.html) (8 messages, latest: Dec 12 2019 at 17:46)
 
 * [Simple Uniform Probability](31724SimpleUniformProbability.html) (2 messages, latest: Dec 12 2019 at 13:27)
 
