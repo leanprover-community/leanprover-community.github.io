@@ -33,6 +33,20 @@ permalink: archive/113489newmembers/61987toadditiveandnestednamespaces.html
 
 <p>I don't really want to write <code>@[to_additive add_localization.add_monoid.foo]</code> at the beginning of everything, and <code>attribute [to_additive add_localization.add_monoid] localization.monoid</code> doesn't make sense because <code>localization.monoid</code> is an unknown identifier, and those are my only ideas :( Thank you in advance.</p>
 
+<a name="183317756"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/to_additive%20and%20nested%20namespaces/near/183317756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61987toadditiveandnestednamespaces.html#183317756">Yury G. Kudryashov (Dec 13 2019 at 00:34)</a>:</h4>
+<p>Indeed this is not documented. Try</p>
+<div class="codehilite"><pre><span></span><span class="n">run_cmd</span> <span class="n">to_additive</span><span class="bp">.</span><span class="n">map_namespace</span> <span class="bp">`</span><span class="n">localization</span><span class="bp">.</span><span class="n">monoid</span> <span class="bp">`</span><span class="n">add_localization</span><span class="bp">.</span><span class="n">add_monoid</span>
+</pre></div>
+
+<a name="183317874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/to_additive%20and%20nested%20namespaces/near/183317874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61987toadditiveandnestednamespaces.html#183317874">Yury G. Kudryashov (Dec 13 2019 at 00:36)</a>:</h4>
+<p>Lean doesn't allow us to have attributes on namespaces, so <code>to_additive.map_namespace</code> creates an auxiliary <code>def</code> named <code>src._to_additive</code>.</p>
+
+<a name="183317903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/to_additive%20and%20nested%20namespaces/near/183317903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61987toadditiveandnestednamespaces.html#183317903">Yury G. Kudryashov (Dec 13 2019 at 00:37)</a>:</h4>
+<p>I should probably review the <code>to_additive</code> documentation, and add it to <code>tactic.md</code>.</p>
+
 
 {% endraw %}
 

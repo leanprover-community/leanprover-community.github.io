@@ -9,11 +9,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [n-fold cartesian product](63580nfoldcartesianproduct.html) (1 message, latest: Dec 12 2019 at 23:44)
+* [Maths Challenges](65204MathsChallenges.html) (13 messages, latest: Dec 13 2019 at 00:50)
+
+* [How do I go from < to ≤](42659HowdoIgofromto.html) (31 messages, latest: Dec 13 2019 at 00:47)
+
+* [to_additive and nested namespaces](61987toadditiveandnestednamespaces.html) (4 messages, latest: Dec 13 2019 at 00:37)
+
+* [n-fold cartesian product](63580nfoldcartesianproduct.html) (3 messages, latest: Dec 13 2019 at 00:05)
 
 * [Cryptic error message](01326Crypticerrormessage.html) (30 messages, latest: Dec 12 2019 at 23:33)
-
-* [Maths Challenges](65204MathsChallenges.html) (12 messages, latest: Dec 12 2019 at 22:37)
 
 * [decidable disjoint](97522decidabledisjoint.html) (5 messages, latest: Dec 12 2019 at 19:38)
 
@@ -23,13 +27,9 @@ permalink: archive/113489newmembers/index.html
 
 * [Simple Uniform Probability](31724SimpleUniformProbability.html) (2 messages, latest: Dec 12 2019 at 13:27)
 
-* [How do I go from < to ≤](42659HowdoIgofromto.html) (29 messages, latest: Dec 12 2019 at 07:55)
-
 * [Is there a way to search a particular rewrite?](78809Isthereawaytosearchaparticularrewrite.html) (12 messages, latest: Dec 12 2019 at 07:53)
 
 * [understanding update-mathlib](79176understandingupdatemathlib.html) (8 messages, latest: Dec 11 2019 at 21:36)
-
-* [to_additive and nested namespaces](61987toadditiveandnestednamespaces.html) (1 message, latest: Dec 11 2019 at 19:55)
 
 * [How does polymorphism work in Lean?](26342HowdoespolymorphismworkinLean.html) (11 messages, latest: Dec 11 2019 at 15:12)
 

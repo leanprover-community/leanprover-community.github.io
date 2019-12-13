@@ -9,6 +9,10 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [abelian categories](41619abeliancategories.html) (12 messages, latest: Dec 13 2019 at 00:54)
+
+* [Jordan–Hölder for groups](27747JordanHlderforgroups.html) (1 message, latest: Dec 13 2019 at 00:52)
+
 * [Proving physical laws](62138Provingphysicallaws.html) (22 messages, latest: Dec 12 2019 at 09:38)
 
 * [manifolds](86782manifolds.html) (35 messages, latest: Dec 11 2019 at 09:17)
@@ -278,8 +282,6 @@ permalink: archive/116395maths/index.html
 * [gluing functions](66720gluingfunctions.html) (149 messages, latest: Jul 24 2019 at 07:40)
 
 * [colimits in Top](44719colimitsinTop.html) (66 messages, latest: Jul 23 2019 at 14:03)
-
-* [abelian categories](41619abeliancategories.html) (11 messages, latest: Jul 22 2019 at 08:20)
 
 * [One-object category](33573Oneobjectcategory.html) (39 messages, latest: Jul 22 2019 at 02:13)
 
