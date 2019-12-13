@@ -9,6 +9,12 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Function that takes a pair](30525Functionthattakesapair.html) (2 messages, latest: Dec 13 2019 at 20:58)
+
+* [Basic algebraic operations](85281Basicalgebraicoperations.html) (5 messages, latest: Dec 13 2019 at 20:32)
+
+* [to_additive and nested namespaces](61987toadditiveandnestednamespaces.html) (5 messages, latest: Dec 13 2019 at 20:28)
+
 * [How is 1,2,3 defined in Lean?](16510Howis123definedinLean.html) (4 messages, latest: Dec 13 2019 at 19:45)
 
 * [How do I "cast" inequalities?](03462HowdoIcastinequalities.html) (4 messages, latest: Dec 13 2019 at 19:00)
@@ -18,8 +24,6 @@ permalink: archive/113489newmembers/index.html
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (217 messages, latest: Dec 13 2019 at 12:08)
 
 * [How do I go from < to ≤](42659HowdoIgofromto.html) (31 messages, latest: Dec 13 2019 at 00:47)
-
-* [to_additive and nested namespaces](61987toadditiveandnestednamespaces.html) (4 messages, latest: Dec 13 2019 at 00:37)
 
 * [n-fold cartesian product](63580nfoldcartesianproduct.html) (3 messages, latest: Dec 13 2019 at 00:05)
 
