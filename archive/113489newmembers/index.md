@@ -9,6 +9,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [n-fold cartesian product](63580nfoldcartesianproduct.html) (1 message, latest: Dec 12 2019 at 23:44)
+
+* [Cryptic error message](01326Crypticerrormessage.html) (30 messages, latest: Dec 12 2019 at 23:33)
+
 * [Maths Challenges](65204MathsChallenges.html) (12 messages, latest: Dec 12 2019 at 22:37)
 
 * [decidable disjoint](97522decidabledisjoint.html) (5 messages, latest: Dec 12 2019 at 19:38)
