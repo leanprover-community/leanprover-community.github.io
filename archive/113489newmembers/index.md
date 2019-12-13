@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (217 messages, latest: Dec 13 2019 at 12:08)
+
 * [Maths Challenges](65204MathsChallenges.html) (26 messages, latest: Dec 13 2019 at 09:39)
 
 * [How do I go from < to ≤](42659HowdoIgofromto.html) (31 messages, latest: Dec 13 2019 at 00:47)
@@ -46,8 +48,6 @@ permalink: archive/113489newmembers/index.html
 * [Injectivity of coercions](66669Injectivityofcoercions.html) (5 messages, latest: Dec 09 2019 at 10:28)
 
 * [Scoping notation](18368Scopingnotation.html) (3 messages, latest: Dec 09 2019 at 05:23)
-
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (216 messages, latest: Dec 08 2019 at 20:26)
 
 * [Motive not type correct](09402Motivenottypecorrect.html) (10 messages, latest: Dec 08 2019 at 16:14)
 
