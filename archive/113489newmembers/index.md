@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Function that takes a pair](30525Functionthattakesapair.html) (7 messages, latest: Dec 13 2019 at 21:21)
+* [Best way to split this cases?](05141Bestwaytosplitthiscases.html) (5 messages, latest: Dec 13 2019 at 22:57)
+
+* [Function that takes a pair](30525Functionthattakesapair.html) (9 messages, latest: Dec 13 2019 at 22:06)
 
 * [Basic algebraic operations](85281Basicalgebraicoperations.html) (5 messages, latest: Dec 13 2019 at 20:32)
 
