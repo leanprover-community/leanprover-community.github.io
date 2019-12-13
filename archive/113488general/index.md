@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* ["missing" theorems](43942missingtheorems.html) (4 messages, latest: Dec 13 2019 at 01:30)
+* ["missing" theorems](43942missingtheorems.html) (6 messages, latest: Dec 13 2019 at 02:32)
 
 * [Using Lean from command line](01410UsingLeanfromcommandline.html) (7 messages, latest: Dec 12 2019 at 21:46)
 
