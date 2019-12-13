@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Monoid ring in Lean](21646MonoidringinLean.html) (3 messages, latest: Dec 13 2019 at 17:35)
+
 * ["missing" theorems](43942missingtheorems.html) (7 messages, latest: Dec 13 2019 at 06:04)
 
 * [Using Lean from command line](01410UsingLeanfromcommandline.html) (7 messages, latest: Dec 12 2019 at 21:46)
