@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* ["missing" theorems](43942missingtheorems.html) (4 messages, latest: Dec 13 2019 at 01:30)
+
 * [Using Lean from command line](01410UsingLeanfromcommandline.html) (7 messages, latest: Dec 12 2019 at 21:46)
 
 * [library_search](97355librarysearch.html) (54 messages, latest: Dec 12 2019 at 18:59)
-
-* ["missing" theorems](43942missingtheorems.html) (3 messages, latest: Dec 12 2019 at 18:15)
 
 * [automation to fix universe issues](06585automationtofixuniverseissues.html) (28 messages, latest: Dec 12 2019 at 10:45)
 
