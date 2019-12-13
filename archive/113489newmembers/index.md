@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (217 messages, latest: Dec 13 2019 at 12:08)
+* [Maths Challenges](65204MathsChallenges.html) (27 messages, latest: Dec 13 2019 at 13:08)
 
-* [Maths Challenges](65204MathsChallenges.html) (26 messages, latest: Dec 13 2019 at 09:39)
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (217 messages, latest: Dec 13 2019 at 12:08)
 
 * [How do I go from < to ≤](42659HowdoIgofromto.html) (31 messages, latest: Dec 13 2019 at 00:47)
 
