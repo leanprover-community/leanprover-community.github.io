@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Monoid ring in Lean](21646MonoidringinLean.html) (3 messages, latest: Dec 13 2019 at 17:35)
+* [Monoid ring in Lean](21646MonoidringinLean.html) (6 messages, latest: Dec 13 2019 at 18:50)
 
 * ["missing" theorems](43942missingtheorems.html) (7 messages, latest: Dec 13 2019 at 06:04)
 

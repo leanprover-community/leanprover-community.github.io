@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [How do I "cast" inequalities?](03462HowdoIcastinequalities.html) (4 messages, latest: Dec 13 2019 at 19:00)
+
 * [Maths Challenges](65204MathsChallenges.html) (27 messages, latest: Dec 13 2019 at 13:08)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (217 messages, latest: Dec 13 2019 at 12:08)
