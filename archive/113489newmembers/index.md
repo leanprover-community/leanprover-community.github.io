@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [How is 1,2,3 defined in Lean?](16510Howis123definedinLean.html) (4 messages, latest: Dec 13 2019 at 19:45)
+
 * [How do I "cast" inequalities?](03462HowdoIcastinequalities.html) (4 messages, latest: Dec 13 2019 at 19:00)
 
 * [Maths Challenges](65204MathsChallenges.html) (27 messages, latest: Dec 13 2019 at 13:08)
