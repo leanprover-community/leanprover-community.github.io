@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Function that takes a pair](30525Functionthattakesapair.html) (10 messages, latest: Dec 14 2019 at 05:36)
+
+* [Best way to split this cases?](05141Bestwaytosplitthiscases.html) (7 messages, latest: Dec 14 2019 at 05:31)
+
 * [Lean act slowly when proof gets long](25534Leanactslowlywhenproofgetslong.html) (9 messages, latest: Dec 14 2019 at 03:32)
 
 * [How do I ask a tactic to only work on one side](83023HowdoIaskatactictoonlyworkononeside.html) (6 messages, latest: Dec 13 2019 at 23:59)
-
-* [Best way to split this cases?](05141Bestwaytosplitthiscases.html) (5 messages, latest: Dec 13 2019 at 22:57)
-
-* [Function that takes a pair](30525Functionthattakesapair.html) (9 messages, latest: Dec 13 2019 at 22:06)
 
 * [Basic algebraic operations](85281Basicalgebraicoperations.html) (5 messages, latest: Dec 13 2019 at 20:32)
 

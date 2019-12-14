@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Monoid ring in Lean](21646MonoidringinLean.html) (10 messages, latest: Dec 13 2019 at 20:50)
+* [Monoid ring in Lean](21646MonoidringinLean.html) (11 messages, latest: Dec 14 2019 at 05:25)
 
 * [Using Lean from command line](01410UsingLeanfromcommandline.html) (11 messages, latest: Dec 13 2019 at 19:43)
 
