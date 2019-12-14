@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Lean act slowly when proof gets long](25534Leanactslowlywhenproofgetslong.html) (1 message, latest: Dec 14 2019 at 00:35)
+* [Lean act slowly when proof gets long](25534Leanactslowlywhenproofgetslong.html) (8 messages, latest: Dec 14 2019 at 01:36)
 
 * [How do I ask a tactic to only work on one side](83023HowdoIaskatactictoonlyworkononeside.html) (6 messages, latest: Dec 13 2019 at 23:59)
 
