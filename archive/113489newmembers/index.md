@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [How does quot work?](96869Howdoesquotwork.html) (11 messages, latest: Dec 14 2019 at 21:53)
+* [How does quot work?](96869Howdoesquotwork.html) (13 messages, latest: Dec 14 2019 at 22:19)
 
 * [Lean act slowly when proof gets long](25534Leanactslowlywhenproofgetslong.html) (52 messages, latest: Dec 14 2019 at 20:10)
 
