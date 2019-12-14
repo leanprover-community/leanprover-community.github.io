@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [arrow font](17283arrowfont.html) (14 messages, latest: Dec 14 2019 at 19:58)
+* [arrow font](17283arrowfont.html) (19 messages, latest: Dec 14 2019 at 20:21)
 
 * [Monoid ring in Lean](21646MonoidringinLean.html) (11 messages, latest: Dec 14 2019 at 05:25)
 
