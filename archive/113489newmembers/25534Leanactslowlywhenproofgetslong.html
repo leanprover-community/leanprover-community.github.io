@@ -80,6 +80,19 @@ OK here is what I had.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183427525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183427525">Alex J. Best (Dec 14 2019 at 06:41)</a>:</h4>
 <p>let remembers the definition of the term whereas have does not, for statements (Props) the definition / proof is not relevant once it is constructed, all that matters is that a term has been constructed. Most of the time if you are introducing terms of Types that are not Prop i.e. some natural or real number you want to remember its definition so that you can later substitute or otherwise work with it.</p>
 
+<a name="183428825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183428825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183428825">Kevin Buzzard (Dec 14 2019 at 07:24)</a>:</h4>
+<p>So as Alex says, usually the problem when Lean gets sluggish like this is that you have used an expensive tactic like <code>simp</code> and the convoluted algorithm which it has discovered to prove your goal (which can involve trying literally thousands of stupid ideas before it finds the right one) gets repeated again and again. The fault is not some inbuilt lean issue, it's an argument which mathematicians would call logically fine and which computer scientists would call bad code. It's normally just one line which is causing the problem. Alex has listed several suggestions but the main idea to fix an issue like this is either to refactor (ie prove your lemmas before your theorems, not as sublemmas) or to replace an expensive tactic with the proof it found. Sometimes it can be the typeclass system though and this can be harder to work around</p>
+
+<a name="183429745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183429745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183429745">Kevin Buzzard (Dec 14 2019 at 07:54)</a>:</h4>
+<p>In particular your original claim "when it gets to 70 lines Lean gets slow" is not an accurate diagnosis of the situation. You can tell this can't be the case because some of the files in mathlib are 1000 lines long. What is happening in those files is that 98% of the proofs are two lines long. It's a bit of a pain to diagnose what's making a 70 line proof slow -- what happens with me in practice is that the moment the proof starts to become slow I stop and try to figure out what I did wrong.</p>
+
+<a name="183429887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183429887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183429887">YH (Dec 14 2019 at 07:59)</a>:</h4>
+<p>OK. I'm looking at Alex's modified version of my proof. <br>
+Actually moving one thing out as a lemma reduces the whole elaboration by 2 seconds. (The one that gets from a ≥ 0 and  ¬(a &gt; 0) to a = 0.) I do believe many things can be improved in that proof.</p>
+
 
 {% endraw %}
 

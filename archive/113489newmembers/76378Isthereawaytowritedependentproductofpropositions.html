@@ -1,0 +1,42 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/76378Isthereawaytowritedependentproductofpropositions.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/76378Isthereawaytowritedependentproductofpropositions.html">Is there a way to write dependent product of propositions?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="183428644"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20there%20a%20way%20to%20write%20dependent%20product%20of%20propositions%3F/near/183428644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/76378Isthereawaytowritedependentproductofpropositions.html#183428644">YH (Dec 14 2019 at 07:18)</a>:</h4>
+<p>Something like <br>
+<code>def square_root (a : ℝ) (ha : 0 ≤ a) : Σ (b : ℝ), (0 ≤ b) ∧ (b ^ 2 = a)</code></p>
+<p>(I tried, won't allow me, seems like it only allows Σ over Types)</p>
+
+<a name="183428717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20there%20a%20way%20to%20write%20dependent%20product%20of%20propositions%3F/near/183428717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/76378Isthereawaytowritedependentproductofpropositions.html#183428717">Johan Commelin (Dec 14 2019 at 07:21)</a>:</h4>
+<p>What's the error you get?</p>
+
+<a name="183428763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20there%20a%20way%20to%20write%20dependent%20product%20of%20propositions%3F/near/183428763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/76378Isthereawaytowritedependentproductofpropositions.html#183428763">Johan Commelin (Dec 14 2019 at 07:22)</a>:</h4>
+<p>Do you want something like</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">square_root</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span> <span class="o">{</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">//</span> <span class="o">(</span><span class="mi">0</span> <span class="bp">≤</span> <span class="n">b</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">b</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span> <span class="o">}</span>
+</pre></div>
+
+<a name="183429416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20there%20a%20way%20to%20write%20dependent%20product%20of%20propositions%3F/near/183429416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/76378Isthereawaytowritedependentproductofpropositions.html#183429416">Simon Hudon (Dec 14 2019 at 07:42)</a>:</h4>
+<p><code>subtype</code> (as pointed out by <span class="user-mention" data-user-id="112680">@Johan Commelin</span>) and <code>Σ'</code> should do it</p>
+
+<a name="183429491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20there%20a%20way%20to%20write%20dependent%20product%20of%20propositions%3F/near/183429491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/76378Isthereawaytowritedependentproductofpropositions.html#183429491">Kevin Buzzard (Dec 14 2019 at 07:45)</a>:</h4>
+<p>This <code>{ ... // ...}</code> notation is for subtypes, which is one of the two ways Lean thinks about what mathematicians call subsets of a set. The difference between the term <code>{x : real | x ^ 2 = 2}</code> and the subtype <code>{x : real // x ^ 2 = 2}</code> is that one is a term and the other is a type, but they both express the idea of the collection of reals whose square is 2. To make a term of the subtype you need to provide a pair -- a real number, and a proof that its square is 2.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

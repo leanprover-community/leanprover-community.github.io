@@ -9,13 +9,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Lean act slowly when proof gets long](25534Leanactslowlywhenproofgetslong.html) (11 messages, latest: Dec 14 2019 at 06:41)
+* [Lean act slowly when proof gets long](25534Leanactslowlywhenproofgetslong.html) (14 messages, latest: Dec 14 2019 at 07:59)
 
-* [Function that takes a pair](30525Functionthattakesapair.html) (10 messages, latest: Dec 14 2019 at 05:36)
+* [Function that takes a pair](30525Functionthattakesapair.html) (12 messages, latest: Dec 14 2019 at 07:49)
+
+* [Is there a way to write dependent product of propositions?](76378Isthereawaytowritedependentproductofpropositions.html) (5 messages, latest: Dec 14 2019 at 07:45)
+
+* [How do I ask a tactic to only work on one side](83023HowdoIaskatactictoonlyworkononeside.html) (7 messages, latest: Dec 14 2019 at 07:27)
 
 * [Best way to split this cases?](05141Bestwaytosplitthiscases.html) (7 messages, latest: Dec 14 2019 at 05:31)
-
-* [How do I ask a tactic to only work on one side](83023HowdoIaskatactictoonlyworkononeside.html) (6 messages, latest: Dec 13 2019 at 23:59)
 
 * [Basic algebraic operations](85281Basicalgebraicoperations.html) (5 messages, latest: Dec 13 2019 at 20:32)
 
