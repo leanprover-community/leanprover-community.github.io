@@ -352,6 +352,22 @@ permalink: archive/113489newmembers/96869Howdoesquotwork.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20does%20quot%20work%3F/near/183453858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96869Howdoesquotwork.html#183453858">Bryan Gin-ge Chen (Dec 14 2019 at 19:08)</a>:</h4>
 <p>(deleted)</p>
 
+<a name="183459072"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20does%20quot%20work%3F/near/183459072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96869Howdoesquotwork.html#183459072">Julian Gilbey (Dec 14 2019 at 21:23)</a>:</h4>
+<blockquote>
+<p>The thing that makes <code>lift_beta</code> work is called the computation rule for <code>quot</code> and it's also magically added by <code>init_quotient</code></p>
+</blockquote>
+<p>Thanks <span class="user-mention" data-user-id="110032">@Reid Barton</span>  - that makes a lot of sense. The relevant section of Theorem Proving in Lean doesn't explain this point, though I've just found that in the <a href="https://leanprover.github.io/reference/expressions.html#axioms" target="_blank" title="https://leanprover.github.io/reference/expressions.html#axioms">reference manual</a>, it says explicitly: <code>quot.mk</code> and <code>quot.lift</code> satisfy the following computation rule:</p>
+<div class="codehilite"><pre><span></span><span class="n">quot</span><span class="bp">.</span><span class="n">lift</span> <span class="n">f</span> <span class="n">h</span> <span class="o">(</span><span class="n">quot</span><span class="bp">.</span><span class="n">mk</span> <span class="n">r</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">a</span>
+</pre></div>
+
+
+<p>So this interpretation does seem to be built into the core (though I couldn't locate the actual code which does so).</p>
+
+<a name="183459992"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20does%20quot%20work%3F/near/183459992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96869Howdoesquotwork.html#183459992">Bryan Gin-ge Chen (Dec 14 2019 at 21:53)</a>:</h4>
+<p>The Lean code is <a href="https://github.com/leanprover-community/lean/blob/ec1613aef1eee72e601f192b16740629c6d49690/library/init/core.lean#L151" target="_blank" title="https://github.com/leanprover-community/lean/blob/ec1613aef1eee72e601f192b16740629c6d49690/library/init/core.lean#L151">here</a>, but as you can see that just calls a special <code>init_quotient</code> function which eventually calls <a href="https://github.com/leanprover/lean/blob/ec1613aef1eee72e601f192b16740629c6d49690/src/kernel/quotient/quotient.cpp#L73" target="_blank" title="https://github.com/leanprover/lean/blob/ec1613aef1eee72e601f192b16740629c6d49690/src/kernel/quotient/quotient.cpp#L73">this C++ function</a>.</p>
+
 
 {% endraw %}
 
