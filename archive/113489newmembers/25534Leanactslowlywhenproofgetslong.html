@@ -93,6 +93,122 @@ OK here is what I had.</p>
 <p>OK. I'm looking at Alex's modified version of my proof. <br>
 Actually moving one thing out as a lemma reduces the whole elaboration by 2 seconds. (The one that gets from a ≥ 0 and  ¬(a &gt; 0) to a = 0.) I do believe many things can be improved in that proof.</p>
 
+<a name="183430184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430184">Kevin Buzzard (Dec 14 2019 at 08:04)</a>:</h4>
+<p>One thing you can do with your 70 line proof is this: Step 1: put <code>set_option profiler true</code> just before the statement of the lemma. Step 2: insert the line <code>repeat {sorry} end #exit</code> as the first line of the proof. Step 3: switch VS Code to "Info View: Display Messages (Ctrl+Shift+Alt+Enter)" (now the Lean Messages window prints debugging information about the entire file rather than just what's going on in the middle of one tactic mode proof). Step 4: move the <code>repeat {sorry} end #exit</code> line around until you spot a big jump in the time taken to elaborate <code>ag3</code>.</p>
+
+<a name="183430244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430244">YH (Dec 14 2019 at 08:06)</a>:</h4>
+<p>Oh cool</p>
+
+<a name="183430251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430251">YH (Dec 14 2019 at 08:06)</a>:</h4>
+<p>Step 2: insert the line repeat {sorry} end #exit as the first line of the proof (or the lemma?).</p>
+
+<a name="183430256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430256">Kevin Buzzard (Dec 14 2019 at 08:07)</a>:</h4>
+<p>This is just a random line which has a good chance of just dumping you out of the proof immediately.</p>
+
+<a name="183430298"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430298">YH (Dec 14 2019 at 08:08)</a>:</h4>
+<p>How do I do step 3 on a Mac?</p>
+
+<a name="183430299"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430299">Kevin Buzzard (Dec 14 2019 at 08:08)</a>:</h4>
+<p>It doesn't always work, e.g. you have a begin/end block within another one and then you'll get syntax errors. This is why it's usually better to catch these things as they happen -- i.e. the <em>moment</em> things start getting slow, stop what you're doing and fix them.</p>
+
+<a name="183430310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430310">Kevin Buzzard (Dec 14 2019 at 08:09)</a>:</h4>
+<p><a href="/user_uploads/3121/KS1bb5dkzJpFrOYjiWRrXS8b/view.png" target="_blank" title="view.png">view.png</a> Click the button that looks like that on VS Code</p>
+<div class="message_inline_image"><a href="/user_uploads/3121/KS1bb5dkzJpFrOYjiWRrXS8b/view.png" target="_blank" title="view.png"><img src="/user_uploads/3121/KS1bb5dkzJpFrOYjiWRrXS8b/view.png"></a></div>
+
+<a name="183430364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430364">YH (Dec 14 2019 at 08:10)</a>:</h4>
+<p><a href="/user_uploads/3121/gf2BcagSHNtaNn8my6kOBtNl/pasted_image.png" target="_blank" title="pasted_image.png">pasted image</a> <br>
+Cannot find any button like that...</p>
+<div class="message_inline_image"><a href="/user_uploads/3121/gf2BcagSHNtaNn8my6kOBtNl/pasted_image.png" target="_blank" title="pasted image"><img src="/user_uploads/3121/gf2BcagSHNtaNn8my6kOBtNl/pasted_image.png"></a></div>
+
+<a name="183430365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430365">Kevin Buzzard (Dec 14 2019 at 08:10)</a>:</h4>
+<p>Try the three dots in the top right?</p>
+
+<a name="183430371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430371">YH (Dec 14 2019 at 08:10)</a>:</h4>
+<p><a href="/user_uploads/3121/-gV233IPu-oDVTGB-3JroVzk/pasted_image.png" target="_blank" title="pasted_image.png">pasted image</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/-gV233IPu-oDVTGB-3JroVzk/pasted_image.png" target="_blank" title="pasted image"><img src="/user_uploads/3121/-gV233IPu-oDVTGB-3JroVzk/pasted_image.png"></a></div>
+
+<a name="183430377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430377">Kevin Buzzard (Dec 14 2019 at 08:11)</a>:</h4>
+<p>You have a tab which says "Lean Messages". If you close it, how can you open it again?</p>
+
+<a name="183430380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430380">Kevin Buzzard (Dec 14 2019 at 08:11)</a>:</h4>
+<p>My guess is that on a mac it will be command+all those other keys I mentioned</p>
+
+<a name="183430381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430381">YH (Dec 14 2019 at 08:11)</a>:</h4>
+<p>Oh yeah close it the button appears</p>
+
+<a name="183430425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430425">Kevin Buzzard (Dec 14 2019 at 08:12)</a>:</h4>
+<p>There are two different windows displaying Lean messages, both helpfully with the title "Lean Messages" and explaining different things :-/</p>
+
+<a name="183430427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430427">YH (Dec 14 2019 at 08:12)</a>:</h4>
+<p><a href="/user_uploads/3121/wOAus7OsRfZr8qjFjC9xO10A/pasted_image.png" target="_blank" title="pasted_image.png">pasted image</a> <br>
+Is this the info view?</p>
+<div class="message_inline_image"><a href="/user_uploads/3121/wOAus7OsRfZr8qjFjC9xO10A/pasted_image.png" target="_blank" title="pasted image"><img src="/user_uploads/3121/wOAus7OsRfZr8qjFjC9xO10A/pasted_image.png"></a></div>
+
+<a name="183430429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430429">Kevin Buzzard (Dec 14 2019 at 08:12)</a>:</h4>
+<p>Yes!</p>
+
+<a name="183430432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430432">YH (Dec 14 2019 at 08:12)</a>:</h4>
+<p>Oh OK. It was always open here...</p>
+
+<a name="183430442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430442">Kevin Buzzard (Dec 14 2019 at 08:13)</a>:</h4>
+<p>Now compile your proof and see if you have something like "elaboration of ag3 took 10 seconds" somewhere</p>
+
+<a name="183430489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430489">YH (Dec 14 2019 at 08:14)</a>:</h4>
+<p><code>elaboration of ag3 took 4.99s</code></p>
+
+<a name="183430500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430500">Kevin Buzzard (Dec 14 2019 at 08:15)</a>:</h4>
+<p>so there's your problem, and there's just one or two bad lines of code in there where you use something like <code>simp</code> to go from a&lt;b to <code>not b&lt;=a</code> and it takes Lean about 2 seconds to do this, and you could cut this down to 0.002 seconds by changing that line to <code>rw lt_iff_not_le</code> or something.</p>
+
+<a name="183430503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430503">Kevin Buzzard (Dec 14 2019 at 08:16)</a>:</h4>
+<p>The problem is that it turns out that maths does not go at infinite speed.</p>
+
+<a name="183430545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430545">Kevin Buzzard (Dec 14 2019 at 08:16)</a>:</h4>
+<p>That's why they have induction as an axiom ;-)</p>
+
+<a name="183430549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430549">Kevin Buzzard (Dec 14 2019 at 08:16)</a>:</h4>
+<p>If we know <code>P 0</code> is true and <code>P n -&gt; P (n + 1)</code> then we can instantly deduce <code>P 10^10^10^10</code></p>
+
+<a name="183430552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430552">YH (Dec 14 2019 at 08:16)</a>:</h4>
+<p>There are some things which I repeated three times. <br>
+Like proving some properties of 4th root of a number.<br>
+I will see if I can write a function into subtypes of ℝ and get a 4th root map together with its properties.</p>
+
+<a name="183430553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430553">Kevin Buzzard (Dec 14 2019 at 08:16)</a>:</h4>
+<p>because we won't ever bother writing the proof down</p>
+
+<a name="183430562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430562">Kevin Buzzard (Dec 14 2019 at 08:17)</a>:</h4>
+<p>These things are a pain to debug though. Sometimes it's just little things building up. There might be some killer line in there somewhere and rewriting it will save you 4 seconds. But it might just be a case of an annoying refactor.</p>
+
+<a name="183430638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183430638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183430638">Alex J. Best (Dec 14 2019 at 08:20)</a>:</h4>
+<p>Is the 4.99s the old one or the one I modified? I think I got it down to 1.2s on my computer (a laptop) so if it's the modified one it could just be that your computer can't run lean that fast.</p>
+
 
 {% endraw %}
 
