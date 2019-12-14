@@ -45,6 +45,28 @@ OK here is what I had.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183417667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183417667">Simon Hudon (Dec 14 2019 at 01:36)</a>:</h4>
 <p>What if you do <code>change _</code>?</p>
 
+<a name="183421702"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20act%20slowly%20when%20proof%20gets%20long/near/183421702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25534Leanactslowlywhenproofgetslong.html#183421702">Alex J. Best (Dec 14 2019 at 03:32)</a>:</h4>
+<p>I have added a modified version of your proof on a gist: <a href="https://gist.github.com/alexjbest/5e21dea71b7ea3c4be346fd89c216951" target="_blank" title="https://gist.github.com/alexjbest/5e21dea71b7ea3c4be346fd89c216951">https://gist.github.com/alexjbest/5e21dea71b7ea3c4be346fd89c216951</a> . The short answer is that the proof is long and complicated and uses lots of tactics. Which is fine but its often better to break things up in some way or other. I'm definitely not an expert speeder-upper but here are some comments in no particular order, maybe not all of them are useful but I hope some of them are:</p>
+<ul>
+<li>Use separate lemmas for subproofs, these won't be re-checked each time you change the main proof, this is probably the most important thing</li>
+<li>You use <code>let</code>  sometimes for Props instead of <code>have</code> which seems unnecessary.</li>
+<li>When you have a lot of hypotheses in the context it can be hard for tactics like linarith to find a contradiction, so you can use <code>linarith only [blah]</code> to tell linarith which things will give a contradiction.</li>
+<li>Alternatively to this (but it is also good in general) you can structure your proof in such a way that when you are done with a statement it drops out of context for instance your <code>h</code> was only used to prove <code>hhhh</code> but it was cluttering up the context after so I moved <code>h</code> into a proof block for <code>hhhh</code> same for <code>hh</code> <code>hhh</code> and <code>LHS_nonneg</code></li>
+<li>After identifying that some <code>linarith</code> calls are just simple contradictions we can replace them e.g. <code>linarith only [hhhh, a]</code> can become</li>
+</ul>
+<div class="codehilite"><pre><span></span>      <span class="n">apply</span> <span class="n">lt_irrefl</span> <span class="o">((</span><span class="n">m</span> <span class="err">^</span> <span class="mi">4</span><span class="o">)</span> <span class="err">^</span> <span class="mi">3</span><span class="o">),</span>
+      <span class="n">exact</span> <span class="n">lt_of_lt_of_le</span> <span class="n">a2</span> <span class="n">hhhh</span><span class="o">,</span>
+</pre></div>
+
+
+<p>or even <code>exact lt_irrefl ((m ^ 4) ^ 3) (lt_of_lt_of_le a2 hhhh),</code></p>
+<ul>
+<li>You can use <code>set_option profiler true</code> to see some profiling information about what is taking time</li>
+<li>Instead of using <code>have blah : blaaaah, begin blah end</code> you can use <code>have  blah : blaaaah := begin  blah end</code>  this makes it easier to use the profiler for one.</li>
+<li>simp is great but once you are happy with the way the proof is it is good to change it to <code>squeeze_simp</code> which will output a string <code>simp only [blah]</code> which should give a more minimal proof.</li>
+</ul>
+
 
 {% endraw %}
 
