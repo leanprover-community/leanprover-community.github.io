@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Function that takes a pair](30525Functionthattakesapair.html) (15 messages, latest: Dec 14 2019 at 15:58)
+* [Function that takes a pair](30525Functionthattakesapair.html) (16 messages, latest: Dec 14 2019 at 16:49)
 
 * [Lean act slowly when proof gets long](25534Leanactslowlywhenproofgetslong.html) (42 messages, latest: Dec 14 2019 at 12:32)
 

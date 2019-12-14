@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Sheaves](28656Sheaves.html) (48 messages, latest: Dec 14 2019 at 16:56)
+
 * [abelian categories](41619abeliancategories.html) (16 messages, latest: Dec 13 2019 at 06:03)
 
 * [Jordan–Hölder for groups](27747JordanHlderforgroups.html) (2 messages, latest: Dec 13 2019 at 06:01)
@@ -390,8 +392,6 @@ permalink: archive/116395maths/index.html
 * [HoTT](75424HoTT.html) (210 messages, latest: Jun 12 2019 at 21:55)
 
 * [group.lean in natural language](40846groupleaninnaturallanguage.html) (15 messages, latest: Jun 12 2019 at 16:51)
-
-* [Sheaves](28656Sheaves.html) (47 messages, latest: Jun 11 2019 at 06:45)
 
 * [algorithms, Fraction in library](27913algorithmsFractioninlibrary.html) (13 messages, latest: Jun 08 2019 at 12:57)
 
