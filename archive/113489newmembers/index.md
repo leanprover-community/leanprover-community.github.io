@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [How do I ask a tactic to only work on one side](83023HowdoIaskatactictoonlyworkononeside.html) (6 messages, latest: Dec 13 2019 at 23:59)
+
 * [Best way to split this cases?](05141Bestwaytosplitthiscases.html) (5 messages, latest: Dec 13 2019 at 22:57)
 
 * [Function that takes a pair](30525Functionthattakesapair.html) (9 messages, latest: Dec 13 2019 at 22:06)
