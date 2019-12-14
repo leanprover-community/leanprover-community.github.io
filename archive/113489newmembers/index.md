@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Function that takes a pair](30525Functionthattakesapair.html) (14 messages, latest: Dec 14 2019 at 08:38)
+* [Lean act slowly when proof gets long](25534Leanactslowlywhenproofgetslong.html) (42 messages, latest: Dec 14 2019 at 12:32)
 
-* [Lean act slowly when proof gets long](25534Leanactslowlywhenproofgetslong.html) (41 messages, latest: Dec 14 2019 at 08:20)
+* [Function that takes a pair](30525Functionthattakesapair.html) (14 messages, latest: Dec 14 2019 at 08:38)
 
 * [Is there a way to write dependent product of propositions?](76378Isthereawaytowritedependentproductofpropositions.html) (5 messages, latest: Dec 14 2019 at 07:45)
 
