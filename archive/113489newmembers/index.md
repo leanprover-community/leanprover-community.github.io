@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Lean act slowly when proof gets long](25534Leanactslowlywhenproofgetslong.html) (1 message, latest: Dec 14 2019 at 00:35)
+
 * [How do I ask a tactic to only work on one side](83023HowdoIaskatactictoonlyworkononeside.html) (6 messages, latest: Dec 13 2019 at 23:59)
 
 * [Best way to split this cases?](05141Bestwaytosplitthiscases.html) (5 messages, latest: Dec 13 2019 at 22:57)
