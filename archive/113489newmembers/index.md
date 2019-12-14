@@ -9,11 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [How does quot work?](96869Howdoesquotwork.html) (8 messages, latest: Dec 14 2019 at 18:52)
+
+* [Lean act slowly when proof gets long](25534Leanactslowlywhenproofgetslong.html) (43 messages, latest: Dec 14 2019 at 18:31)
+
 * [Invalid git url on natural number game](76662Invalidgiturlonnaturalnumbergame.html) (16 messages, latest: Dec 14 2019 at 17:53)
 
 * [Function that takes a pair](30525Functionthattakesapair.html) (16 messages, latest: Dec 14 2019 at 16:49)
-
-* [Lean act slowly when proof gets long](25534Leanactslowlywhenproofgetslong.html) (42 messages, latest: Dec 14 2019 at 12:32)
 
 * [Is there a way to write dependent product of propositions?](76378Isthereawaytowritedependentproductofpropositions.html) (5 messages, latest: Dec 14 2019 at 07:45)
 
