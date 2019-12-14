@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [How does quot work?](96869Howdoesquotwork.html) (8 messages, latest: Dec 14 2019 at 18:52)
+* [Lean act slowly when proof gets long](25534Leanactslowlywhenproofgetslong.html) (51 messages, latest: Dec 14 2019 at 19:55)
 
-* [Lean act slowly when proof gets long](25534Leanactslowlywhenproofgetslong.html) (43 messages, latest: Dec 14 2019 at 18:31)
+* [How does quot work?](96869Howdoesquotwork.html) (9 messages, latest: Dec 14 2019 at 19:08)
 
 * [Invalid git url on natural number game](76662Invalidgiturlonnaturalnumbergame.html) (16 messages, latest: Dec 14 2019 at 17:53)
 
