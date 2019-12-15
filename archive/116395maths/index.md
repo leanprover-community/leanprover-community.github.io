@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Tricky recursive proof](27349Trickyrecursiveproof.html) (24 messages, latest: Dec 15 2019 at 10:26)
+* [Tricky recursive proof](27349Trickyrecursiveproof.html) (25 messages, latest: Dec 15 2019 at 14:46)
 
 * [Cotactic](81291Cotactic.html) (5 messages, latest: Dec 15 2019 at 10:20)
 
