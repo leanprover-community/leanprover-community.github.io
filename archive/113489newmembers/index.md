@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [car and cdr](29475carandcdr.html) (1 message, latest: Dec 15 2019 at 06:27)
+
 * [Lean act slowly when proof gets long](25534Leanactslowlywhenproofgetslong.html) (60 messages, latest: Dec 15 2019 at 02:29)
 
 * [Issue with NNG Multiplication World Level 1?](41799IssuewithNNGMultiplicationWorldLevel1.html) (3 messages, latest: Dec 15 2019 at 01:43)
