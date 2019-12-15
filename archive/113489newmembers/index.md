@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [adding vectors](68494addingvectors.html) (2 messages, latest: Dec 15 2019 at 08:58)
+
 * [How does quot work?](96869Howdoesquotwork.html) (20 messages, latest: Dec 15 2019 at 07:33)
 
 * [car and cdr](29475carandcdr.html) (1 message, latest: Dec 15 2019 at 06:27)
