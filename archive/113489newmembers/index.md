@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Issue with NNG Multiplication World Level 1?](41799IssuewithNNGMultiplicationWorldLevel1.html) (3 messages, latest: Dec 15 2019 at 01:43)
+* [Lean act slowly when proof gets long](25534Leanactslowlywhenproofgetslong.html) (60 messages, latest: Dec 15 2019 at 02:29)
 
-* [Lean act slowly when proof gets long](25534Leanactslowlywhenproofgetslong.html) (56 messages, latest: Dec 15 2019 at 00:29)
+* [Issue with NNG Multiplication World Level 1?](41799IssuewithNNGMultiplicationWorldLevel1.html) (3 messages, latest: Dec 15 2019 at 01:43)
 
 * [How does quot work?](96869Howdoesquotwork.html) (16 messages, latest: Dec 14 2019 at 23:14)
 
