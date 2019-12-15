@@ -376,6 +376,18 @@ permalink: archive/113489newmembers/96869Howdoesquotwork.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20does%20quot%20work%3F/near/183460843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96869Howdoesquotwork.html#183460843">Julian Gilbey (Dec 14 2019 at 22:19)</a>:</h4>
 <p>Yes, I found that C++ function, but I don't understand how the computation rule was implied by it :-(  Anyway, knowing that it is definitionally built into Lean means I can stop worrying about it ;-)</p>
 
+<a name="183462616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20does%20quot%20work%3F/near/183462616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96869Howdoesquotwork.html#183462616">Mario Carneiro (Dec 14 2019 at 23:10)</a>:</h4>
+<p>The computation rule comes from the implementation of <code>quotient_normalizer_extension::operator()</code> in the same file</p>
+
+<a name="183462629"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20does%20quot%20work%3F/near/183462629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96869Howdoesquotwork.html#183462629">Mario Carneiro (Dec 14 2019 at 23:11)</a>:</h4>
+<p>it is an extension to the whnf function that checks if the target has the form <code>@quot.lift α r β f h (@quot.mk α r a)</code> and replaces it with <code>f a</code></p>
+
+<a name="183462737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20does%20quot%20work%3F/near/183462737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96869Howdoesquotwork.html#183462737">Mario Carneiro (Dec 14 2019 at 23:14)</a>:</h4>
+<p>It also reduces <code>@quot.ind α r β f (@quot.mk α r a)</code> to <code>f a</code>, even though this is mostly unnecessary because of proof irrelevance</p>
+
 
 {% endraw %}
 
