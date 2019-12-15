@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Issue with NNG Multiplication World Level 1?](41799IssuewithNNGMultiplicationWorldLevel1.html) (4 messages, latest: Dec 15 2019 at 10:23)
+
 * [adding vectors](68494addingvectors.html) (4 messages, latest: Dec 15 2019 at 09:19)
 
 * [How does quot work?](96869Howdoesquotwork.html) (20 messages, latest: Dec 15 2019 at 07:33)
@@ -16,8 +18,6 @@ permalink: archive/113489newmembers/index.html
 * [car and cdr](29475carandcdr.html) (1 message, latest: Dec 15 2019 at 06:27)
 
 * [Lean act slowly when proof gets long](25534Leanactslowlywhenproofgetslong.html) (60 messages, latest: Dec 15 2019 at 02:29)
-
-* [Issue with NNG Multiplication World Level 1?](41799IssuewithNNGMultiplicationWorldLevel1.html) (3 messages, latest: Dec 15 2019 at 01:43)
 
 * [Invalid git url on natural number game](76662Invalidgiturlonnaturalnumbergame.html) (16 messages, latest: Dec 14 2019 at 17:53)
 
