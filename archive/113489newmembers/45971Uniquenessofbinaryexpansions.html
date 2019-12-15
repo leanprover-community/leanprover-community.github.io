@@ -18,6 +18,82 @@ permalink: archive/113489newmembers/45971Uniquenessofbinaryexpansions.html
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">binary</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">))</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">A</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">pow</span> <span class="mi">2</span> <span class="n">x</span><span class="bp">.</span><span class="n">val</span><span class="o">)</span>
 </pre></div>
 
+<a name="183502459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Uniqueness%20of%20binary%20expansions/near/183502459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45971Uniquenessofbinaryexpansions.html#183502459">Kevin Buzzard (Dec 15 2019 at 20:12)</a>:</h4>
+<p>My instinct would be to do the proofs with a function taking values in int not nat, because subtraction will be involved, and then deduce the nat version from the int version.</p>
+
+<a name="183502530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Uniqueness%20of%20binary%20expansions/near/183502530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45971Uniquenessofbinaryexpansions.html#183502530">Kevin Buzzard (Dec 15 2019 at 20:14)</a>:</h4>
+<p>As for proving it, the 2-adic method would be to find the smallest index i where two different finsets differ and then show that the difference was not a multiple of 2^i and hence can't be zero. The real method would be to find the largest index where they differ and then show that the difference has to be positive and hence non-zero.</p>
+
+<a name="183502582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Uniqueness%20of%20binary%20expansions/near/183502582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45971Uniquenessofbinaryexpansions.html#183502582">Kevin Buzzard (Dec 15 2019 at 20:15)</a>:</h4>
+<p>Maybe another idea would be to define binary expansions of a nat (which might be there already) and prove that i is in A iff the i'th digit is 1.</p>
+
+<a name="183502627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Uniqueness%20of%20binary%20expansions/near/183502627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45971Uniquenessofbinaryexpansions.html#183502627">Kevin Buzzard (Dec 15 2019 at 20:16)</a>:</h4>
+<p>i.e. write a one-sided inverse</p>
+
+<a name="183502629"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Uniqueness%20of%20binary%20expansions/near/183502629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45971Uniquenessofbinaryexpansions.html#183502629">Chris Hughes (Dec 15 2019 at 20:16)</a>:</h4>
+<p>I don't think this will ever be a short proof. Probably there should be some theory of base-n expansions. You'll probably have to write the left inverse to this function and prove it's a left inverse.</p>
+
+<a name="183502636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Uniqueness%20of%20binary%20expansions/near/183502636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45971Uniquenessofbinaryexpansions.html#183502636">Chris Hughes (Dec 15 2019 at 20:16)</a>:</h4>
+<p>Also, I would use <code>finset nat</code> not <code>finset (fin n)</code></p>
+
+<a name="183502983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Uniqueness%20of%20binary%20expansions/near/183502983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45971Uniquenessofbinaryexpansions.html#183502983">YH (Dec 15 2019 at 20:27)</a>:</h4>
+<p>Where is <code>finset.sum</code> defined?</p>
+
+<a name="183503060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Uniqueness%20of%20binary%20expansions/near/183503060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45971Uniquenessofbinaryexpansions.html#183503060">Chris Hughes (Dec 15 2019 at 20:29)</a>:</h4>
+<p><code>algebra.big_operators</code></p>
+
+<a name="183503109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Uniqueness%20of%20binary%20expansions/near/183503109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45971Uniquenessofbinaryexpansions.html#183503109">YH (Dec 15 2019 at 20:30)</a>:</h4>
+<p>Oh found it in <code>data.finsupp</code></p>
+
+<a name="183503248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Uniqueness%20of%20binary%20expansions/near/183503248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45971Uniquenessofbinaryexpansions.html#183503248">Kevin Buzzard (Dec 15 2019 at 20:34)</a>:</h4>
+<p>If you use finset nat you can prove an explicit equiv between that and nat</p>
+
+<a name="183503729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Uniqueness%20of%20binary%20expansions/near/183503729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45971Uniquenessofbinaryexpansions.html#183503729">YH (Dec 15 2019 at 20:46)</a>:</h4>
+<p>I guess we can just write an inverse like</p>
+<div class="codehilite"><pre><span></span>import data.finset data.finsupp
+open finset set
+def binary (A : finset ℕ) : ℕ := A.sum (λ x, pow 2 x)
+
+def binary_reverse : ℕ → finset ℕ
+| 0 := ∅
+| (n+1) :=
+  let A := binary_reverse n in
+</pre></div>
+
+
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>∪</mo><mi>k</mi><mi mathvariant="normal">\</mi><mo stretchy="false">{</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><mi>k</mi><mo>−</mo><mn>1</mn><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">A ∪ {k} \backslash \{0,1,..., k-1\}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∪</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span><span class="mord">\</span><span class="mopen">{</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">}</span></span></span></span> where <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> is the smallest natural number not in <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">N</mi></mrow><annotation encoding="application/x-tex">ℕ</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68889em;vertical-align:0em;"></span><span class="mord amsrm">N</span></span></span></span> (now I need to learn how to write this in Lean...)</p>
+
+<a name="183504130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Uniqueness%20of%20binary%20expansions/near/183504130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45971Uniquenessofbinaryexpansions.html#183504130">Kevin Buzzard (Dec 15 2019 at 20:57)</a>:</h4>
+<p>I think I'd be tempted to do this with <code>num</code> not nat</p>
+
+<a name="183504182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Uniqueness%20of%20binary%20expansions/near/183504182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45971Uniquenessofbinaryexpansions.html#183504182">Kevin Buzzard (Dec 15 2019 at 20:58)</a>:</h4>
+<p>This work must have been done already in essence, when proving nat and num are the same</p>
+
+<a name="183504189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Uniqueness%20of%20binary%20expansions/near/183504189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45971Uniquenessofbinaryexpansions.html#183504189">YH (Dec 15 2019 at 20:58)</a>:</h4>
+<p>What is <code>num</code>?</p>
+
+<a name="183504192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Uniqueness%20of%20binary%20expansions/near/183504192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45971Uniquenessofbinaryexpansions.html#183504192">Kevin Buzzard (Dec 15 2019 at 20:58)</a>:</h4>
+<p>It's in core I think</p>
+
+<a name="183504203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Uniqueness%20of%20binary%20expansions/near/183504203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/45971Uniquenessofbinaryexpansions.html#183504203">Kevin Buzzard (Dec 15 2019 at 20:59)</a>:</h4>
+<p>It's nats but defined as binary sequences</p>
+
 
 {% endraw %}
 
