@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Issue with NNG Multiplication World Level 1?](41799IssuewithNNGMultiplicationWorldLevel1.html) (1 message, latest: Dec 15 2019 at 00:39)
+* [Issue with NNG Multiplication World Level 1?](41799IssuewithNNGMultiplicationWorldLevel1.html) (3 messages, latest: Dec 15 2019 at 01:43)
 
 * [Lean act slowly when proof gets long](25534Leanactslowlywhenproofgetslong.html) (56 messages, latest: Dec 15 2019 at 00:29)
 
