@@ -137,6 +137,35 @@ Instead modify the statement of <code>kruskal_katona_helper</code> to <code>(n :
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Tricky%20recursive%20proof/near/183490872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27349Trickyrecursiveproof.html#183490872">Bhavik Mehta (Dec 15 2019 at 14:46)</a>:</h4>
 <p>Is there a neat way to get the argmin of a function on a finset?</p>
 
+<a name="183492014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Tricky%20recursive%20proof/near/183492014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27349Trickyrecursiveproof.html#183492014">Bhavik Mehta (Dec 15 2019 at 15:18)</a>:</h4>
+<blockquote>
+<p>That can be because you've made a slip and unification can be going crazy with the wrong idea about something instead of failing quickly</p>
+</blockquote>
+<p>Any suggestions on where the slip is here?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
+
+<span class="kn">open</span> <span class="n">fintype</span>
+<span class="kn">open</span> <span class="n">finset</span>
+
+<span class="kn">variable</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span>
+<span class="n">local</span> <span class="kn">notation</span> <span class="bp">`</span><span class="n">X</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">fin</span> <span class="n">n</span>
+
+<span class="n">def</span> <span class="n">gamma</span> <span class="o">:</span> <span class="n">rel</span> <span class="o">(</span><span class="n">finset</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">finset</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">U</span> <span class="n">V</span><span class="o">,</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">HU</span> <span class="o">:</span> <span class="n">U</span> <span class="bp">≠</span> <span class="err">∅</span><span class="o">),</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">HV</span> <span class="o">:</span> <span class="n">V</span> <span class="bp">≠</span> <span class="err">∅</span><span class="o">),</span> <span class="n">disjoint</span> <span class="n">U</span> <span class="n">V</span> <span class="bp">∧</span> <span class="n">finset</span><span class="bp">.</span><span class="n">card</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">card</span> <span class="n">V</span> <span class="bp">∧</span> <span class="n">max&#39;</span> <span class="n">U</span> <span class="n">HU</span> <span class="bp">&lt;</span> <span class="n">max&#39;</span> <span class="n">V</span> <span class="n">HV</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="n">thing</span> <span class="o">(</span><span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="n">decidable</span> <span class="o">(</span><span class="n">gamma</span> <span class="n">U</span> <span class="n">V</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">gamma</span><span class="o">,</span>
+  <span class="n">dsimp</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">@</span><span class="n">exists_prop_decidable</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="183492457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Tricky%20recursive%20proof/near/183492457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27349Trickyrecursiveproof.html#183492457">Bhavik Mehta (Dec 15 2019 at 15:32)</a>:</h4>
+<p>(got it!)</p>
+
 
 {% endraw %}
 
