@@ -1,0 +1,127 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/27349Trickyrecursiveproof.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/27349Trickyrecursiveproof.html">Tricky recursive proof</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="183471534"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Tricky%20recursive%20proof/near/183471534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27349Trickyrecursiveproof.html#183471534">Bhavik Mehta (Dec 15 2019 at 04:15)</a>:</h4>
+<p>TL;DR: <a href="https://github.com/b-mehta/lean-experiments/blob/master/src/kruskal_katona_abstract.lean" target="_blank" title="https://github.com/b-mehta/lean-experiments/blob/master/src/kruskal_katona_abstract.lean">An abstracted version of my problem is here</a>, I'd like to prove the theorem at the bottom and I can't seem to make any serious progress.<br>
+A bit more detail on the problem: we're interested in families 𝒜 of subsets of X={1,...,n} (and each subset has size r) and we'd like to minimise a packing-like quantity: the size of its shadow. (The definitions of these things shouldn't matter for this; the types are in the link above, and the <a href="https://github.com/b-mehta/lean-experiments/blob/master/src/kruskal_katona_rewrite.lean" target="_blank" title="https://github.com/b-mehta/lean-experiments/blob/master/src/kruskal_katona_rewrite.lean">actual definitions are here</a>, if they're needed. I think I've put all the necessary lemmas in the abstracted version though.)<br>
+The goal is to prove that among families of a fixed size, the minimum size of shadow is attained at a particular family (I'll call this C). To do this, we apply "compressions": applying a compression keeps the family the same size and (weakly) decreases the size of its shadow (under certain conditions), and makes the family look a little bit more like C. (Compressions are also idempotent)<br>
+What are these conditions? Compressing using the (fin)sets (U,V) (where |U| = |V|) will decrease the size of the shadow of 𝒜 if 𝒜 is already compressed with respect to every pair (U₁,V₁) such that |U₁| &lt; |U| (again, |U₁|=|V₁|). <br>
+Also, applying a (U,V) compression strictly decreases a particular quantity which I've called the c_measure.<br>
+Putting all this together, we get the following lemma</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">compression_improved</span> <span class="o">(</span><span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="err">𝒜</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">X</span><span class="o">))</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">gamma</span> <span class="n">U</span> <span class="n">V</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">U₁</span> <span class="n">V₁</span><span class="o">,</span> <span class="n">gamma</span> <span class="n">U₁</span> <span class="n">V₁</span> <span class="bp">∧</span> <span class="n">U₁</span><span class="bp">.</span><span class="n">card</span> <span class="bp">&lt;</span> <span class="n">U</span><span class="bp">.</span><span class="n">card</span> <span class="bp">→</span> <span class="n">is_compressed</span> <span class="n">U₁</span> <span class="n">V₁</span> <span class="err">𝒜</span><span class="o">)</span> <span class="o">(</span><span class="n">h₃</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">is_compressed</span> <span class="n">U</span> <span class="n">V</span> <span class="err">𝒜</span><span class="o">):</span>
+  <span class="n">c_measure</span> <span class="o">(</span><span class="n">compress_family</span> <span class="n">U</span> <span class="n">V</span> <span class="err">𝒜</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">c_measure</span> <span class="err">𝒜</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">compress_family</span> <span class="n">U</span> <span class="n">V</span> <span class="err">𝒜</span><span class="o">)</span><span class="bp">.</span><span class="n">card</span> <span class="bp">=</span> <span class="err">𝒜</span><span class="bp">.</span><span class="n">card</span> <span class="bp">∧</span> <span class="o">(</span><span class="err">∂</span> <span class="n">compress_family</span> <span class="n">U</span> <span class="n">V</span> <span class="err">𝒜</span><span class="o">)</span><span class="bp">.</span><span class="n">card</span> <span class="bp">≤</span> <span class="o">(</span><span class="err">∂𝒜</span><span class="o">)</span><span class="bp">.</span><span class="n">card</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>(<code>gamma</code> is a relation which essentially says it's worthwhile to compress using this pair - one of the things in gamma is that |U|=|V|) (∂ is notation for the shadow).<br>
+I'll state also the theorem I'd like to prove from this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">kruskal_katona_helper</span> <span class="o">(</span><span class="err">𝒜</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">X</span><span class="o">))</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="o">(</span><span class="n">ℬ</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">X</span><span class="o">)),</span> <span class="err">𝒜</span><span class="bp">.</span><span class="n">card</span> <span class="bp">=</span> <span class="n">ℬ</span><span class="bp">.</span><span class="n">card</span> <span class="bp">∧</span> <span class="o">(</span><span class="err">∂</span><span class="n">ℬ</span><span class="o">)</span><span class="bp">.</span><span class="n">card</span> <span class="bp">≤</span> <span class="o">(</span><span class="err">∂𝒜</span><span class="o">)</span><span class="bp">.</span><span class="n">card</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">U</span> <span class="n">V</span><span class="o">,</span> <span class="n">gamma</span> <span class="n">U</span> <span class="n">V</span> <span class="bp">→</span> <span class="n">is_compressed</span> <span class="n">U</span> <span class="n">V</span> <span class="n">ℬ</span><span class="o">)</span> <span class="o">:=</span>
+</pre></div>
+
+
+<p>(I'll prove later that ℬ satisfying the last condition means that it is exactly C, but this will do for now.)<br>
+The maths proof looks something like this. Set 𝒜_0 = 𝒜, and we'll construct a (finite) sequence 𝒜_n. If 𝒜_k is already compressed with respect to all (U,V) in gamma, stop. If not, choose (U,V) in gamma such that  𝒜_k isn't (U,V)-compressed, with |U| minimal, and set 𝒜_(k+1) to be the (U,V)-compression of 𝒜_k. This process terminates, since the c_measure is strictly decreasing (and it's always a natural number). Then set ℬ as the final element of this sequence, and we're done.</p>
+<p>This doesn't seem too hard, but I'm pretty muddled on how to prove this in lean. Actually constructing the sequence seems wrong - I'd have to prove that it'll terminate and it's not clear how (I'd kinda like something like Haskell's <code>unfoldr</code>, maybe?). There's the stuff about well founded relations, but I only get stuff about the compression being better if |U| was picked carefully. It's also not immediate that if you (U,V)-compress, then (U',V')-compress then you're still (U,V)-compressed, so inducting on the size of |U| wouldn't work either. Any help appreciated</p>
+
+<a name="183471664"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Tricky%20recursive%20proof/near/183471664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27349Trickyrecursiveproof.html#183471664">Reid Barton (Dec 15 2019 at 04:19)</a>:</h4>
+<p>It sounds like you want to use (strong?) induction on whatever c_measure is</p>
+
+<a name="183471682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Tricky%20recursive%20proof/near/183471682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27349Trickyrecursiveproof.html#183471682">Bhavik Mehta (Dec 15 2019 at 04:19)</a>:</h4>
+<p>I couldn't get that to work because of the thing I mention in the last paragraph - we've got to choose |U| minimal at each stage</p>
+
+<a name="183471842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Tricky%20recursive%20proof/near/183471842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27349Trickyrecursiveproof.html#183471842">Reid Barton (Dec 15 2019 at 04:22)</a>:</h4>
+<p>As far as I can see, that is a separate concern</p>
+
+<a name="183471858"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Tricky%20recursive%20proof/near/183471858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27349Trickyrecursiveproof.html#183471858">Reid Barton (Dec 15 2019 at 04:23)</a>:</h4>
+<p>Unless there is some detail I'm missing. When you construct your sequence, do you need anything about the previous A_k (other than it came from A by some sequence of compressions)?</p>
+
+<a name="183471906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Tricky%20recursive%20proof/near/183471906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27349Trickyrecursiveproof.html#183471906">Reid Barton (Dec 15 2019 at 04:24)</a>:</h4>
+<p>It looks like you should be able to prove the following statement by induction on <code>n : nat</code>: if A is any family with <code>c_measure A = n</code>, then ...</p>
+
+<a name="183471912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Tricky%20recursive%20proof/near/183471912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27349Trickyrecursiveproof.html#183471912">Bhavik Mehta (Dec 15 2019 at 04:24)</a>:</h4>
+<p>Ah I see - yeah I could construct the sequence without the fact that the previous compressions were chosen carefully, but how would I prove anything about the sequence?</p>
+
+<a name="183471919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Tricky%20recursive%20proof/near/183471919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27349Trickyrecursiveproof.html#183471919">Reid Barton (Dec 15 2019 at 04:25)</a>:</h4>
+<p>Don't actually construct the sequence</p>
+
+<a name="183471928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Tricky%20recursive%20proof/near/183471928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27349Trickyrecursiveproof.html#183471928">Bhavik Mehta (Dec 15 2019 at 04:26)</a>:</h4>
+<p>Sure, I'd construct the thing I want to be B using strong induction, but even then how would I prove things about the result?</p>
+
+<a name="183471989"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Tricky%20recursive%20proof/near/183471989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27349Trickyrecursiveproof.html#183471989">Reid Barton (Dec 15 2019 at 04:27)</a>:</h4>
+<p>Well, for example, if n = 0, then you would learn that there can't be any U V for which A is not compressed</p>
+
+<a name="183472047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Tricky%20recursive%20proof/near/183472047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27349Trickyrecursiveproof.html#183472047">Reid Barton (Dec 15 2019 at 04:28)</a>:</h4>
+<p>More generally, either (what I wrote above) or there exists A' obtained by applying some compression with a smaller c_measure, and then apply the inductive hypothesis to A'</p>
+
+<a name="183472117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Tricky%20recursive%20proof/near/183472117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27349Trickyrecursiveproof.html#183472117">Reid Barton (Dec 15 2019 at 04:30)</a>:</h4>
+<blockquote>
+<p>Sure, I'd construct the thing I want to be B using strong induction, but even then how would I prove things about the result?</p>
+</blockquote>
+<p>Oh I see. This is not quite what I was suggesting.<br>
+Instead modify the statement of <code>kruskal_katona_helper</code> to <code>(n : nat) (A : finset (finset X)) (hn : c_measure A = n) : ...</code></p>
+
+<a name="183472133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Tricky%20recursive%20proof/near/183472133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27349Trickyrecursiveproof.html#183472133">Reid Barton (Dec 15 2019 at 04:31)</a>:</h4>
+<p>Try to apply a compression step, if there's none you can apply, use A as B, else you get A' with smaller c_measure, apply the induction hypothesis and use its B as B.</p>
+
+<a name="183472141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Tricky%20recursive%20proof/near/183472141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27349Trickyrecursiveproof.html#183472141">Bhavik Mehta (Dec 15 2019 at 04:31)</a>:</h4>
+<p>This makes sense, thanks!</p>
+
+<a name="183472190"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Tricky%20recursive%20proof/near/183472190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27349Trickyrecursiveproof.html#183472190">Bhavik Mehta (Dec 15 2019 at 04:32)</a>:</h4>
+<p>I'll give it a go now</p>
+
+<a name="183472199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Tricky%20recursive%20proof/near/183472199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27349Trickyrecursiveproof.html#183472199">Reid Barton (Dec 15 2019 at 04:32)</a>:</h4>
+<p>In that case, the fancier but basically equivalent way is to prove <code>kruskal_katona_helper</code> directly by well-founded induction on the order induced by <code>c_measure</code></p>
+
+<a name="183472245"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Tricky%20recursive%20proof/near/183472245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27349Trickyrecursiveproof.html#183472245">Bhavik Mehta (Dec 15 2019 at 04:34)</a>:</h4>
+<p>I think I see where I got stuck - I was trying to use the well-founded fixpoint and getting myself confused</p>
+
+<a name="183472282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Tricky%20recursive%20proof/near/183472282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27349Trickyrecursiveproof.html#183472282">Reid Barton (Dec 15 2019 at 04:35)</a>:</h4>
+<p>We often naturally express proofs like this as a construction but sometimes it can be more convenient to reformulate the proof to avoid the construction for the purpose of formalization</p>
+
+<a name="183472326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Tricky%20recursive%20proof/near/183472326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27349Trickyrecursiveproof.html#183472326">Bhavik Mehta (Dec 15 2019 at 04:36)</a>:</h4>
+<p>Yeah I realised construction wasn't the right way to do this in lean but I couldn't get what the right way was</p>
+
+<a name="183472334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Tricky%20recursive%20proof/near/183472334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27349Trickyrecursiveproof.html#183472334">Bhavik Mehta (Dec 15 2019 at 04:36)</a>:</h4>
+<p>Separating out the minimality of |U| as a concern from <code>c_measure</code> was a key point I missed though</p>
+
+<a name="183472837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Tricky%20recursive%20proof/near/183472837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27349Trickyrecursiveproof.html#183472837">Bhavik Mehta (Dec 15 2019 at 04:51)</a>:</h4>
+<p>I've got the line <code>by_cases (∃ U V, gamma U V ∧ ¬ is_compressed U V A),</code>, and it doesn't like this because the type of the expression isn't decidable - I can use classical logic but it doesn't seem right to just assert locally that the expression I want is decidable. Instead, <code>U</code> and <code>V</code> range over a finite set, not being compressed is definitely decidable and <code>gamma</code> looks like <code>∃ (HU : U ≠ ∅), ∃ (HV : V ≠ ∅), {decidable stuff using HU and HV} as argument</code>, so this thing should be decidable... How can I show this? I've found the definition of decidable and decidable_rel, but it seems like there should be some lemmas to help me out</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Tricky recursive proof](27349Trickyrecursiveproof.html) (21 messages, latest: Dec 15 2019 at 04:51)
+
 * [Cotactic](81291Cotactic.html) (4 messages, latest: Dec 15 2019 at 01:23)
 
 * [Sheaves](28656Sheaves.html) (62 messages, latest: Dec 14 2019 at 19:18)
