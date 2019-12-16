@@ -55,6 +55,21 @@ permalink: archive/113489newmembers/49743TPIL7102a.html
 <p>Is this a good approach? Should I continue on in proving <code>length_cons</code> and use that? Or would you recommend another approach?</p>
 <p>Thanks for any suggestions!</p>
 
+<a name="183523350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%207.10.2.a/near/183523350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/49743TPIL7102a.html#183523350">YH (Dec 16 2019 at 06:48)</a>:</h4>
+<div class="codehilite"><pre><span></span>lemma ex1 {A : Type} {s t : list A} : length (s ++ t) = length s + length t :=
+begin
+induction s with x xs hs,
+unfold length,
+rw list.nil_append,
+rw zero_add,
+rw list.cons_append,
+unfold length,
+rw hs,
+rwa add_assoc,
+end
+</pre></div>
+
 
 {% endraw %}
 

@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Theoretical Mathematics](62661TheoreticalMathematics.html) (2 messages, latest: Dec 16 2019 at 06:56)
+
 * [Using Lean from command line](01410UsingLeanfromcommandline.html) (12 messages, latest: Dec 16 2019 at 01:54)
 
 * [Xena real name?](66289Xenarealname.html) (3 messages, latest: Dec 15 2019 at 10:15)
