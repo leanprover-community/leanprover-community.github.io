@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Theoretical Mathematics](62661TheoreticalMathematics.html) (5 messages, latest: Dec 16 2019 at 07:34)
+* [Theoretical Mathematics](62661TheoreticalMathematics.html) (7 messages, latest: Dec 16 2019 at 08:47)
 
 * [Using Lean from command line](01410UsingLeanfromcommandline.html) (12 messages, latest: Dec 16 2019 at 01:54)
 
