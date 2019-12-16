@@ -43,6 +43,77 @@ It turns out I am wrong: if I remove the first lemma and add the second instead,
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp/near/148273252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79866simp.html#148273252">Sebastien Gouezel (Nov 24 2018 at 11:07)</a>:</h4>
 <p>Yes, of course. I was thinking of the lemma <code>lemma foo (h : a ≤ b) : (a - b = 0) ↔ true</code>, but this is a different rewrite rule.</p>
 
+<a name="183541174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp/near/183541174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79866simp.html#183541174">Kevin Buzzard (Dec 16 2019 at 11:38)</a>:</h4>
+<p>I've never worried too much about <code>simp</code> but I am trying to write some code using the category theory library and I want to get basic automation working on it (my co-authors have always done this for me in the past). </p>
+<p>I don't know if this is enough context, but <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span></span></span> is a topological space, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span></span></span></span> is a category, and after I write this:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">,</span> <span class="n">refl</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">val_eq_coe</span> <span class="o">{</span><span class="n">ℱ</span> <span class="o">:</span> <span class="n">presheaf</span> <span class="n">X</span> <span class="n">C</span><span class="o">}</span> <span class="o">{</span><span class="n">U</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">X</span><span class="o">}</span> <span class="o">:</span> <span class="n">ℱ</span><span class="bp">.</span><span class="n">val</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">ℱ</span> <span class="n">U</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+
+<p>(trying to train <code>simp</code> to change the non-canonical <code>ℱ.val</code> back into the coe-to-fun version <code>⇑ℱ</code>) it still gets stuck, e.g. <code>simp</code> will not solve this:</p>
+<div class="codehilite"><pre><span></span>ℱ : presheaf X C,
+U : opens X
+⊢ 𝟙 (ℱ.val U) = 𝟙 (⇑ℱ U)
+</pre></div>
+
+
+<p>I've never tried to train <code>simp</code> before. Sorry for the hopefully basic questions.</p>
+
+<a name="183541297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp/near/183541297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79866simp.html#183541297">Kevin Buzzard (Dec 16 2019 at 11:40)</a>:</h4>
+<p>gaargh got it</p>
+<div class="codehilite"><pre><span></span>rewrite tactic failed, motive is not type correct
+</pre></div>
+
+<a name="183541352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp/near/183541352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79866simp.html#183541352">Kevin Buzzard (Dec 16 2019 at 11:42)</a>:</h4>
+<p>Can I define a new equality which is equality up to motives not being type correct?</p>
+
+<a name="183541504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp/near/183541504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79866simp.html#183541504">Johan Commelin (Dec 16 2019 at 11:44)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Is this mathlib? Or are you working on another repo?</p>
+
+<a name="183541540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp/near/183541540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79866simp.html#183541540">Kevin Buzzard (Dec 16 2019 at 11:45)</a>:</h4>
+<div class="codehilite"><pre><span></span>dunfold coe_fn has_coe_to_fun.coe, simp
+</pre></div>
+
+
+<p>works!</p>
+<p>Johan -- It's my first day off in weeks and I'm just writing sheaves of categories on a topological space in the mundane way to teach myself about how to use categories in Lean.</p>
+
+<a name="183541593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp/near/183541593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79866simp.html#183541593">Johan Commelin (Dec 16 2019 at 11:46)</a>:</h4>
+<p>Sure, but I'm confused. I don't know what <code>F.val</code> means</p>
+
+<a name="183541604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp/near/183541604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79866simp.html#183541604">Johan Commelin (Dec 16 2019 at 11:46)</a>:</h4>
+<p>And as far as I know mathlib also doesn't have a coe2fun for presheaves</p>
+
+<a name="183541616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp/near/183541616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79866simp.html#183541616">Johan Commelin (Dec 16 2019 at 11:46)</a>:</h4>
+<p>In mathlib it would be <code>F.obj</code>, I guess</p>
+
+<a name="183541725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp/near/183541725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79866simp.html#183541725">Kevin Buzzard (Dec 16 2019 at 11:48)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">topological_space</span><span class="bp">.</span><span class="n">presheaf</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">)</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">X</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">val</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">X</span><span class="o">),</span> <span class="n">C</span><span class="o">)</span> <span class="c1">-- ℱ</span>
+<span class="o">(</span><span class="n">res</span>   <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">U</span> <span class="n">V</span><span class="o">)</span> <span class="o">(</span><span class="n">HVU</span> <span class="o">:</span> <span class="n">V</span> <span class="err">⊆</span> <span class="n">U</span><span class="o">),</span> <span class="n">val</span> <span class="n">U</span> <span class="err">⟶</span> <span class="n">val</span> <span class="n">V</span><span class="o">)</span>
+<span class="o">(</span><span class="n">Hid</span>   <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">U</span><span class="o">),</span> <span class="n">res</span> <span class="n">U</span> <span class="n">U</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">subset</span><span class="bp">.</span><span class="n">refl</span> <span class="n">U</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">𝟙</span> <span class="o">(</span><span class="n">val</span> <span class="n">U</span><span class="o">))</span>
+<span class="o">(</span><span class="n">Hcomp</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">U</span> <span class="n">V</span> <span class="n">W</span><span class="o">)</span> <span class="o">(</span><span class="n">HWV</span> <span class="o">:</span> <span class="n">W</span> <span class="err">⊆</span> <span class="n">V</span><span class="o">)</span> <span class="o">(</span><span class="n">HVU</span> <span class="o">:</span> <span class="n">V</span> <span class="err">⊆</span> <span class="n">U</span><span class="o">),</span>
+  <span class="n">res</span> <span class="n">U</span> <span class="n">W</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">subset</span><span class="bp">.</span><span class="n">trans</span> <span class="n">HWV</span> <span class="n">HVU</span><span class="o">)</span> <span class="bp">=</span> <span class="n">res</span> <span class="n">U</span> <span class="n">V</span> <span class="n">HVU</span> <span class="err">≫</span> <span class="n">res</span> <span class="n">V</span> <span class="n">W</span> <span class="n">HWV</span><span class="o">)</span>
+</pre></div>
+
+<a name="183541745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp/near/183541745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79866simp.html#183541745">Kevin Buzzard (Dec 16 2019 at 11:48)</a>:</h4>
+<p>What should I have called <code>F.val</code>? I was just making it all up.</p>
+
+<a name="183541794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp/near/183541794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79866simp.html#183541794">Johan Commelin (Dec 16 2019 at 11:49)</a>:</h4>
+<p>There is already a definition of <code>presheaf</code> in mathlib</p>
+
 
 {% endraw %}
 

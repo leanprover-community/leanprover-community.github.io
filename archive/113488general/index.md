@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [simp](79866simp.html) (16 messages, latest: Dec 16 2019 at 11:49)
+
 * [Theoretical Mathematics](62661TheoreticalMathematics.html) (7 messages, latest: Dec 16 2019 at 08:47)
 
 * [Using Lean from command line](01410UsingLeanfromcommandline.html) (12 messages, latest: Dec 16 2019 at 01:54)
@@ -2152,8 +2154,6 @@ permalink: archive/113488general/index.html
 * [Summer Internships ETH Zurich](74599SummerInternshipsETHZurich.html) (18 messages, latest: Nov 24 2018 at 15:27)
 
 * [Definitions for binder notations](44791Definitionsforbindernotations.html) (3 messages, latest: Nov 24 2018 at 13:55)
-
-* [simp](79866simp.html) (5 messages, latest: Nov 24 2018 at 11:07)
 
 * [termination](42891termination.html) (25 messages, latest: Nov 23 2018 at 21:36)
 
