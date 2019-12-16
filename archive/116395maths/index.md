@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Sheaves](28656Sheaves.html) (66 messages, latest: Dec 16 2019 at 21:27)
+
 * [category theory tactics](60005categorytheorytactics.html) (28 messages, latest: Dec 16 2019 at 16:31)
 
 * [category theory universes](40670categorytheoryuniverses.html) (12 messages, latest: Dec 16 2019 at 15:55)
@@ -16,8 +18,6 @@ permalink: archive/116395maths/index.html
 * [Tricky recursive proof](27349Trickyrecursiveproof.html) (31 messages, latest: Dec 15 2019 at 16:27)
 
 * [Cotactic](81291Cotactic.html) (5 messages, latest: Dec 15 2019 at 10:20)
-
-* [Sheaves](28656Sheaves.html) (62 messages, latest: Dec 14 2019 at 19:18)
 
 * [abelian categories](41619abeliancategories.html) (16 messages, latest: Dec 13 2019 at 06:03)
 

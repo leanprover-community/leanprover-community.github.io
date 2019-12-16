@@ -1,0 +1,87 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/10664HowdoIshowthatsumoftrivialvectorofiszero.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/10664HowdoIshowthatsumoftrivialvectorofiszero.html">How do I show that sum of trivial vector of ℝ is zero?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="183589992"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20show%20that%20sum%20of%20trivial%20vector%20of%20%E2%84%9D%20is%20zero%3F/near/183589992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10664HowdoIshowthatsumoftrivialvectorofiszero.html#183589992">YH (Dec 16 2019 at 21:00)</a>:</h4>
+<p>OK this feels really dumb but I got stuck on showing</p>
+<div class="codehilite"><pre><span></span>lemma ss0 (a : vector ℝ 0): a.val.sum = 0 :=
+</pre></div>
+
+
+<p>where <code>vector α n</code> is defined as <code>{l : list α // length l = n}</code>.</p>
+
+<a name="183590829"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20show%20that%20sum%20of%20trivial%20vector%20of%20%E2%84%9D%20is%20zero%3F/near/183590829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10664HowdoIshowthatsumoftrivialvectorofiszero.html#183590829">Johan Commelin (Dec 16 2019 at 21:08)</a>:</h4>
+<p>Are there lemmas about that mention <code>vector_zero</code>?</p>
+
+<a name="183590876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20show%20that%20sum%20of%20trivial%20vector%20of%20%E2%84%9D%20is%20zero%3F/near/183590876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10664HowdoIshowthatsumoftrivialvectorofiszero.html#183590876">Johan Commelin (Dec 16 2019 at 21:08)</a>:</h4>
+<p>You would want a lemma that says <code>a.val = []</code></p>
+
+<a name="183590926"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20show%20that%20sum%20of%20trivial%20vector%20of%20%E2%84%9D%20is%20zero%3F/near/183590926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10664HowdoIshowthatsumoftrivialvectorofiszero.html#183590926">Johan Commelin (Dec 16 2019 at 21:09)</a>:</h4>
+<p>So...</p>
+<div class="codehilite"><pre><span></span><span class="k">begin</span>
+  <span class="n">suffices</span> <span class="o">:</span> <span class="n">a</span><span class="bp">.</span><span class="n">val</span> <span class="bp">=</span> <span class="o">[],</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="n">this</span><span class="o">,</span> <span class="n">sorry</span> <span class="o">},</span>
+  <span class="n">library_search</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="183591223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20show%20that%20sum%20of%20trivial%20vector%20of%20%E2%84%9D%20is%20zero%3F/near/183591223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10664HowdoIshowthatsumoftrivialvectorofiszero.html#183591223">YH (Dec 16 2019 at 21:12)</a>:</h4>
+<p>Didn't find any. But I guess I can prove that  anyway.<br>
+Now if my goal is <code>length (a.val) = 0 → a.val = nil</code> how do I generalize it so that it is for all list <code>l</code>, <code>length (l) = 0 → l = nil</code>?</p>
+
+<a name="183591715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20show%20that%20sum%20of%20trivial%20vector%20of%20%E2%84%9D%20is%20zero%3F/near/183591715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10664HowdoIshowthatsumoftrivialvectorofiszero.html#183591715">Joe (Dec 16 2019 at 21:17)</a>:</h4>
+<p><code>length_eq_zero</code></p>
+
+<a name="183591753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20show%20that%20sum%20of%20trivial%20vector%20of%20%E2%84%9D%20is%20zero%3F/near/183591753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10664HowdoIshowthatsumoftrivialvectorofiszero.html#183591753">Joe (Dec 16 2019 at 21:17)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">length_eq_zero</span> <span class="o">{</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">length</span> <span class="n">l</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">↔</span> <span class="n">l</span> <span class="bp">=</span> <span class="o">[]</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">eq_nil_of_length_eq_zero</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">h</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="n">rfl</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="183591777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20show%20that%20sum%20of%20trivial%20vector%20of%20%E2%84%9D%20is%20zero%3F/near/183591777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10664HowdoIshowthatsumoftrivialvectorofiszero.html#183591777">Joe (Dec 16 2019 at 21:17)</a>:</h4>
+<p>You can find this using <code>library_search</code></p>
+
+<a name="183591870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20show%20that%20sum%20of%20trivial%20vector%20of%20%E2%84%9D%20is%20zero%3F/near/183591870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10664HowdoIshowthatsumoftrivialvectorofiszero.html#183591870">Joe (Dec 16 2019 at 21:18)</a>:</h4>
+<p>Though to actually prove this by hand, use induction on the list l.</p>
+
+<a name="183591952"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20show%20that%20sum%20of%20trivial%20vector%20of%20%E2%84%9D%20is%20zero%3F/near/183591952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10664HowdoIshowthatsumoftrivialvectorofiszero.html#183591952">Joe (Dec 16 2019 at 21:19)</a>:</h4>
+<p>That is, if <code>l</code> is <code>nil</code>, then nothing to prove; if <code>l</code> is <code>x :: xs</code>, then there is a contradiction.</p>
+
+<a name="183592249"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20show%20that%20sum%20of%20trivial%20vector%20of%20%E2%84%9D%20is%20zero%3F/near/183592249" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10664HowdoIshowthatsumoftrivialvectorofiszero.html#183592249">Joe (Dec 16 2019 at 21:22)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">foo</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">length</span> <span class="n">l</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">nil</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">l</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">refl</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">contradiction</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="183592267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20show%20that%20sum%20of%20trivial%20vector%20of%20%E2%84%9D%20is%20zero%3F/near/183592267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10664HowdoIshowthatsumoftrivialvectorofiszero.html#183592267">YH (Dec 16 2019 at 21:23)</a>:</h4>
+<p>Great thanks.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

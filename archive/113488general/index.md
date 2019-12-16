@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Modular arithmetic](27935Modulararithmetic.html) (7 messages, latest: Dec 16 2019 at 20:58)
+* [How do you `update-mathlib`](14544Howdoyouupdatemathlib.html) (24 messages, latest: Dec 16 2019 at 21:26)
 
-* [How do you `update-mathlib`](14544Howdoyouupdatemathlib.html) (10 messages, latest: Dec 16 2019 at 20:51)
+* [Modular arithmetic](27935Modulararithmetic.html) (7 messages, latest: Dec 16 2019 at 20:58)
 
 * [Monoid ring in Lean](21646MonoidringinLean.html) (14 messages, latest: Dec 16 2019 at 20:18)
 
