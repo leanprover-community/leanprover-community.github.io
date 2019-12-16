@@ -50,6 +50,60 @@ _inst_1 : topological_space X,
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183555041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183555041">Johan Commelin (Dec 16 2019 at 14:47)</a>:</h4>
 <p>Also, usually <code>simp</code> will solve this, and hence so does <code>tidy</code>.</p>
 
+<a name="183556314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183556314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183556314">Kevin Buzzard (Dec 16 2019 at 15:00)</a>:</h4>
+<p>I've had a great day so far slowly but surely doing <a href="https://github.com/ramonfmir/lean-scheme/commit/5f5072a8c050dd3f4ca71841cbb69c66e60b2e77" target="_blank" title="https://github.com/ramonfmir/lean-scheme/commit/5f5072a8c050dd3f4ca71841cbb69c66e60b2e77">this</a>. I haven't got anywhere yet, but the notation is coming out well at least. I don't understand how to get automation to work, it's like when I was a beginner and I'd just try simp and then cc and then I'd ask Mario or Kenny and get a direct answer in ten seconds flat :-)</p>
+
+<a name="183557012"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183557012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183557012">Johan Commelin (Dec 16 2019 at 15:06)</a>:</h4>
+<p>Does <code>tidy</code> help?</p>
+
+<a name="183557041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183557041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183557041">Kevin Buzzard (Dec 16 2019 at 15:06)</a>:</h4>
+<p>I could never get it to do anything</p>
+
+<a name="183557053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183557053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183557053">Johan Commelin (Dec 16 2019 at 15:06)</a>:</h4>
+<p>Weird</p>
+
+<a name="183557082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183557082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183557082">Kevin Buzzard (Dec 16 2019 at 15:06)</a>:</h4>
+<p>it would just take all the terms apart; I was trying to be really strict with notation, using notation natural for a mathematician.</p>
+
+<a name="183557104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183557104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183557104">Johan Commelin (Dec 16 2019 at 15:07)</a>:</h4>
+<p>This looks very tidyable to me: <a href="https://github.com/ramonfmir/lean-scheme/commit/5f5072a8c050dd3f4ca71841cbb69c66e60b2e77#diff-62dda0355159ecad2596c2c93999a2b8R137-R151" target="_blank" title="https://github.com/ramonfmir/lean-scheme/commit/5f5072a8c050dd3f4ca71841cbb69c66e60b2e77#diff-62dda0355159ecad2596c2c93999a2b8R137-R151">https://github.com/ramonfmir/lean-scheme/commit/5f5072a8c050dd3f4ca71841cbb69c66e60b2e77#diff-62dda0355159ecad2596c2c93999a2b8R137-R151</a></p>
+
+<a name="183557526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183557526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183557526">Kevin Buzzard (Dec 16 2019 at 15:10)</a>:</h4>
+<p>tidy just turns the goal from</p>
+<div class="codehilite"><pre><span></span>𝟙 U ≫ f = f
+</pre></div>
+
+
+<p>into</p>
+<div class="codehilite"><pre><span></span>⊢ (𝟙 U ≫ f).map ⟨x_val, x_property⟩ = f.map ⟨x_val, x_property⟩
+</pre></div>
+
+
+<p>I am at the point where I am still proving the axioms for a category (presheaf X C), but there is another category kicking around (namely C).</p>
+
+<a name="183558002"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183558002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183558002">Johan Commelin (Dec 16 2019 at 15:15)</a>:</h4>
+<p>Right, but <code>𝟙 U ≫ f</code> lives in this other category, doesn't it?</p>
+
+<a name="183558526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183558526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183558526">Kevin Buzzard (Dec 16 2019 at 15:20)</a>:</h4>
+<p>No, <code>f</code> is a morphism in the presheaf category, so we do need to take it apart I guess.</p>
+
+<a name="183558584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183558584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183558584">Kevin Buzzard (Dec 16 2019 at 15:21)</a>:</h4>
+<p>I'd like to hear some automation tips before I embark on presheaves on a basis!</p>
+
+<a name="183558591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183558591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183558591">Kevin Buzzard (Dec 16 2019 at 15:21)</a>:</h4>
+<p>I'm going straight for sheaves now.</p>
+
 
 {% endraw %}
 
