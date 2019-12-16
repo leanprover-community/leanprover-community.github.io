@@ -1,0 +1,47 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/40670categorytheoryuniverses.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/40670categorytheoryuniverses.html">category theory universes</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="183543692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20universes/near/183543692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40670categorytheoryuniverses.html#183543692">Kevin Buzzard (Dec 16 2019 at 12:20)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">v</span> <span class="n">u</span> <span class="n">w</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">X</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">presheaf</span> <span class="n">X</span> <span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="n">v</span> <span class="n">w</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">&lt;</span><span class="n">insert</span> <span class="n">maths</span> <span class="n">here</span><span class="bp">&gt;</span>
+<span class="n">def</span> <span class="o">:</span> <span class="n">large_category</span> <span class="o">(</span><span class="n">presheaf</span> <span class="n">X</span> <span class="n">C</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>gives me</p>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  large_category (presheaf X C)
+term
+  presheaf X C
+has type
+  Type (max u v w) : Type (max (u+1) (v+1) (w+1))
+but is expected to have type
+  Type (?+1) : Type (?+2)
+</pre></div>
+
+
+<p>Seems to me that Lean wants to know that "something is large". The risk is that if C is a small category then there won't be a universe small enough to contain my morphisms! I guess in that case I would rather have had a small category. </p>
+<p>I'm going to make it a small category. A better approach would be to demand u&gt;=1, which is fine here because u=1 in all the examples I care about, butI don't know how to manage that because of the delicate universe category-theory set-up -- I'm only just learning the basics.</p>
+
+<a name="183544355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20universes/near/183544355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40670categorytheoryuniverses.html#183544355">Kevin Buzzard (Dec 16 2019 at 12:31)</a>:</h4>
+<p>Oh this is a nightmare. The morphisms have type <code>max v w</code>. Maybe I should just make a category :-/</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

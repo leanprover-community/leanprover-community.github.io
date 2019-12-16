@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [simp](79866simp.html) (16 messages, latest: Dec 16 2019 at 11:49)
+* [simp](79866simp.html) (19 messages, latest: Dec 16 2019 at 12:04)
 
 * [Theoretical Mathematics](62661TheoreticalMathematics.html) (7 messages, latest: Dec 16 2019 at 08:47)
 
