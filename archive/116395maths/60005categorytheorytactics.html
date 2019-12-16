@@ -1,0 +1,56 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/60005categorytheorytactics.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html">category theory tactics</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="183552744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183552744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183552744">Kevin Buzzard (Dec 16 2019 at 14:24)</a>:</h4>
+<p>What is the tactic which solves goals like</p>
+<div class="codehilite"><pre><span></span>⊢ 𝟙 X ≫ f = f
+</pre></div>
+
+
+<p>or the assertion that composition of morphisms in a category is associative?</p>
+
+<a name="183553474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183553474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183553474">Kevin Buzzard (Dec 16 2019 at 14:31)</a>:</h4>
+<p>Oh it's more universe issues :-/</p>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  category.id_comp C φ
+term
+  φ
+has type
+  ℱ ⟶ 𝒢 : Type (max v w)
+but is expected to have type
+  ?m_1 ⟶ ?m_2 : Type v
+state:
+C : Type u,
+𝒞 : category C,
+X : Type w,
+_inst_1 : topological_space X,
+ℱ 𝒢 : presheaf X C,
+φ : ℱ ⟶ 𝒢
+⊢ 𝟙 ℱ ≫ φ = φ
+</pre></div>
+
+<a name="183555031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183555031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183555031">Johan Commelin (Dec 16 2019 at 14:47)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> <code>φ</code> is not a morphism in <code>C</code>, right? So shouldn't that be <code>category.id_comp _ φ</code>, where <code>_ = presheaf X C</code>?</p>
+
+<a name="183555041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183555041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183555041">Johan Commelin (Dec 16 2019 at 14:47)</a>:</h4>
+<p>Also, usually <code>simp</code> will solve this, and hence so does <code>tidy</code>.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
