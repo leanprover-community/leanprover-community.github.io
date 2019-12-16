@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Using Lean from command line](01410UsingLeanfromcommandline.html) (12 messages, latest: Dec 16 2019 at 01:54)
+
 * [Xena real name?](66289Xenarealname.html) (3 messages, latest: Dec 15 2019 at 10:15)
 
 * [BOF at Conference?](28772BOFatConference.html) (1 message, latest: Dec 15 2019 at 02:48)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [arrow font](17283arrowfont.html) (19 messages, latest: Dec 14 2019 at 20:21)
 
 * [Monoid ring in Lean](21646MonoidringinLean.html) (11 messages, latest: Dec 14 2019 at 05:25)
-
-* [Using Lean from command line](01410UsingLeanfromcommandline.html) (11 messages, latest: Dec 13 2019 at 19:43)
 
 * ["missing" theorems](43942missingtheorems.html) (7 messages, latest: Dec 13 2019 at 06:04)
 
