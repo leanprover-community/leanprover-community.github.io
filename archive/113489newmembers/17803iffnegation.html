@@ -1,0 +1,100 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/17803iffnegation.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/17803iffnegation.html">iff negation</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="183598390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/iff%20negation/near/183598390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17803iffnegation.html#183598390">Bhavik Mehta (Dec 16 2019 at 22:34)</a>:</h4>
+<p>Is there a tactic I can use to make this immediate? </p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">))</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∉</span> <span class="n">A</span> <span class="bp">↔</span> <span class="n">a</span> <span class="err">∉</span> <span class="n">B</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="err">∈</span> <span class="n">A</span> <span class="bp">↔</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">B</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">finish</span>
+</pre></div>
+
+
+<p>I know I can do it by hand if I had to, but this seems like the sort of thing <code>finish</code> ought to be good at so I don't have to think about it</p>
+
+<a name="183598472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/iff%20negation/near/183598472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17803iffnegation.html#183598472">Kevin Buzzard (Dec 16 2019 at 22:35)</a>:</h4>
+<p><code>logic.basic</code> is the place to look for things like this</p>
+
+<a name="183598557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/iff%20negation/near/183598557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17803iffnegation.html#183598557">Kevin Buzzard (Dec 16 2019 at 22:36)</a>:</h4>
+<p>Oh -- you want a tactic?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">tauto</span>
+
+<span class="kn">variable</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">))</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∉</span> <span class="n">A</span> <span class="bp">↔</span> <span class="n">a</span> <span class="err">∉</span> <span class="n">B</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="err">∈</span> <span class="n">A</span> <span class="bp">↔</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">B</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">tauto</span><span class="bp">!</span>
+</pre></div>
+
+<a name="183598569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/iff%20negation/near/183598569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17803iffnegation.html#183598569">Kevin Buzzard (Dec 16 2019 at 22:36)</a>:</h4>
+<p><code>tauto</code> and <code>tauto!</code> are always good for logic nonsense.</p>
+
+<a name="183598579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/iff%20negation/near/183598579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17803iffnegation.html#183598579">Bhavik Mehta (Dec 16 2019 at 22:37)</a>:</h4>
+<p>Yeah I want a tactic so I don't have to get my hands dirty with this sort of thing in the middle of a big proof</p>
+
+<a name="183598604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/iff%20negation/near/183598604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17803iffnegation.html#183598604">Bhavik Mehta (Dec 16 2019 at 22:37)</a>:</h4>
+<p>I tried <code>tauto</code>, <code>finish</code> and <code>finish!</code>, but I didn't think to try <code>tauto!</code>... :(</p>
+
+<a name="183598641"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/iff%20negation/near/183598641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17803iffnegation.html#183598641">Kevin Buzzard (Dec 16 2019 at 22:37)</a>:</h4>
+<p>Yeah, Patrick taught me about <code>tauto!</code></p>
+
+<a name="183598765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/iff%20negation/near/183598765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17803iffnegation.html#183598765">Kevin Buzzard (Dec 16 2019 at 22:38)</a>:</h4>
+<p>Looking at the meta code, what might be going on is that <code>tauto</code> is for constructive logic and <code>tauto!</code> for classical logic?</p>
+
+<a name="183598801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/iff%20negation/near/183598801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17803iffnegation.html#183598801">Bhavik Mehta (Dec 16 2019 at 22:39)</a>:</h4>
+<p>That makes sense!</p>
+
+<a name="183598830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/iff%20negation/near/183598830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17803iffnegation.html#183598830">Bhavik Mehta (Dec 16 2019 at 22:39)</a>:</h4>
+<p>I do wonder still why <code>finish</code> couldn't do it though</p>
+
+<a name="183598903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/iff%20negation/near/183598903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17803iffnegation.html#183598903">Joe (Dec 16 2019 at 22:40)</a>:</h4>
+<p><code>tauto</code> works for me.</p>
+
+<a name="183598919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/iff%20negation/near/183598919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17803iffnegation.html#183598919">Joe (Dec 16 2019 at 22:40)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">tauto</span>
+
+<span class="kn">variable</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">))</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∉</span> <span class="n">A</span> <span class="bp">↔</span> <span class="n">a</span> <span class="err">∉</span> <span class="n">B</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="err">∈</span> <span class="n">A</span> <span class="bp">↔</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">B</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">tauto</span>
+</pre></div>
+
+<a name="183598921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/iff%20negation/near/183598921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17803iffnegation.html#183598921">Bhavik Mehta (Dec 16 2019 at 22:40)</a>:</h4>
+<p>Oh. My mistake then</p>
+
+<a name="183598936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/iff%20negation/near/183598936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17803iffnegation.html#183598936">Kevin Buzzard (Dec 16 2019 at 22:40)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+
+<span class="kn">variable</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">))</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∉</span> <span class="n">A</span> <span class="bp">↔</span> <span class="n">a</span> <span class="err">∉</span> <span class="n">B</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="err">∈</span> <span class="n">A</span> <span class="bp">↔</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">B</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">split</span><span class="bp">;</span><span class="n">finish</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
