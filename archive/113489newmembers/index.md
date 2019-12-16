@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [TPIL 7.10.2.a](49743TPIL7102a.html) (2 messages, latest: Dec 16 2019 at 06:48)
+* [Non zero length vector](93281Nonzerolengthvector.html) (6 messages, latest: Dec 16 2019 at 07:53)
 
-* [Non zero length vector](93281Nonzerolengthvector.html) (2 messages, latest: Dec 16 2019 at 05:26)
+* [TPIL 7.10.2.a](49743TPIL7102a.html) (2 messages, latest: Dec 16 2019 at 06:48)
 
 * [Uniqueness of binary expansions](45971Uniquenessofbinaryexpansions.html) (27 messages, latest: Dec 16 2019 at 02:51)
 

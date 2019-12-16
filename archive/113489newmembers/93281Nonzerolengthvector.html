@@ -26,6 +26,40 @@ permalink: archive/113489newmembers/93281Nonzerolengthvector.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Non%20zero%20length%20vector/near/183520796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93281Nonzerolengthvector.html#183520796">Mukesh Tiwari (Dec 16 2019 at 05:26)</a>:</h4>
 <p>Could some one please tell me what to change in this code to let Lean accept this definition?</p>
 
+<a name="183525814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Non%20zero%20length%20vector/near/183525814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93281Nonzerolengthvector.html#183525814">Simon Hudon (Dec 16 2019 at 07:48)</a>:</h4>
+<p>What definition of vector do you use?</p>
+
+<a name="183525883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Non%20zero%20length%20vector/near/183525883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93281Nonzerolengthvector.html#183525883">Simon Hudon (Dec 16 2019 at 07:50)</a>:</h4>
+<p>This works for me:</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">hidden</span>
+
+<span class="kn">inductive</span> <span class="n">vector</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">nil</span> <span class="o">{}</span> <span class="o">:</span> <span class="n">vector</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="n">cons</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">vector</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">vector</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">prod</span> <span class="o">{</span><span class="n">F</span> <span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}(</span><span class="n">f</span> <span class="o">:</span> <span class="n">F</span> <span class="bp">→</span> <span class="n">G</span> <span class="bp">→</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">→</span> <span class="n">G</span> <span class="bp">→</span> <span class="n">G</span><span class="o">):</span>
+       <span class="bp">Π</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">},</span>
+       <span class="n">vector</span> <span class="n">G</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">→</span>
+       <span class="n">vector</span> <span class="n">F</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">G</span>
+      <span class="bp">|</span> <span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">vector</span><span class="bp">.</span><span class="n">cons</span> <span class="n">h</span> <span class="n">hs</span><span class="o">)</span> <span class="o">(</span><span class="n">vector</span><span class="bp">.</span><span class="n">cons</span> <span class="n">m</span> <span class="n">ms</span><span class="o">)</span> <span class="o">:=</span>  <span class="n">f</span> <span class="n">m</span> <span class="n">h</span>
+      <span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)(</span><span class="n">vector</span><span class="bp">.</span><span class="n">cons</span> <span class="n">h</span> <span class="n">hs</span><span class="o">)</span> <span class="o">(</span><span class="n">vector</span><span class="bp">.</span><span class="n">cons</span> <span class="n">m</span> <span class="n">ms</span><span class="o">)</span> <span class="o">:=</span>
+           <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">m</span> <span class="n">h</span><span class="o">)</span> <span class="o">(</span><span class="n">prod</span> <span class="n">hs</span> <span class="n">ms</span><span class="o">)</span>
+
+<span class="kn">end</span> <span class="n">hidden</span>
+</pre></div>
+
+<a name="183525970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Non%20zero%20length%20vector/near/183525970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93281Nonzerolengthvector.html#183525970">YH (Dec 16 2019 at 07:52)</a>:</h4>
+<p>The definition in mathlib is like </p>
+<div class="codehilite"><pre><span></span>def vector (α : Type u) (n : ℕ) := { l : list α // l.length = n }
+</pre></div>
+
+<a name="183525986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Non%20zero%20length%20vector/near/183525986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93281Nonzerolengthvector.html#183525986">YH (Dec 16 2019 at 07:53)</a>:</h4>
+<p>I was wondering why this was the choice of vector earlier today. Still curious.</p>
+
 
 {% endraw %}
 
