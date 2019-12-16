@@ -9,6 +9,12 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Modular arithmetic](27935Modulararithmetic.html) (7 messages, latest: Dec 16 2019 at 20:58)
+
+* [How do you `update-mathlib`](14544Howdoyouupdatemathlib.html) (10 messages, latest: Dec 16 2019 at 20:51)
+
+* [Monoid ring in Lean](21646MonoidringinLean.html) (14 messages, latest: Dec 16 2019 at 20:18)
+
 * [simp](79866simp.html) (20 messages, latest: Dec 16 2019 at 16:11)
 
 * [Theoretical Mathematics](62661TheoreticalMathematics.html) (7 messages, latest: Dec 16 2019 at 08:47)
@@ -20,8 +26,6 @@ permalink: archive/113488general/index.html
 * [BOF at Conference?](28772BOFatConference.html) (1 message, latest: Dec 15 2019 at 02:48)
 
 * [arrow font](17283arrowfont.html) (19 messages, latest: Dec 14 2019 at 20:21)
-
-* [Monoid ring in Lean](21646MonoidringinLean.html) (11 messages, latest: Dec 14 2019 at 05:25)
 
 * ["missing" theorems](43942missingtheorems.html) (7 messages, latest: Dec 13 2019 at 06:04)
 
