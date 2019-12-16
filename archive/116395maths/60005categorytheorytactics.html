@@ -104,6 +104,61 @@ _inst_1 : topological_space X,
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183558591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183558591">Kevin Buzzard (Dec 16 2019 at 15:21)</a>:</h4>
 <p>I'm going straight for sheaves now.</p>
 
+<a name="183564299"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183564299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183564299">Reid Barton (Dec 16 2019 at 16:17)</a>:</h4>
+<blockquote>
+<p>I am at the point where I am still proving the axioms for a category (presheaf X C), but there is another category kicking around (namely C).</p>
+</blockquote>
+<p>aha, a trick question!</p>
+
+<a name="183564515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183564515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183564515">Kevin Buzzard (Dec 16 2019 at 16:20)</a>:</h4>
+<p>indeed it was!</p>
+
+<a name="183564547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183564547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183564547">Reid Barton (Dec 16 2019 at 16:20)</a>:</h4>
+<p><code>simp</code> can fail on a goal like <code>𝟙 X ≫ f</code> for various reasons, but "because we're in the middle of defining the category instance" was not one I had considered</p>
+
+<a name="183564619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183564619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183564619">Kevin Buzzard (Dec 16 2019 at 16:21)</a>:</h4>
+<p>but when you unravel it all it's just an instance of the same theorem one level down</p>
+
+<a name="183564739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183564739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183564739">Reid Barton (Dec 16 2019 at 16:22)</a>:</h4>
+<p>Well, up to various sorts of extensionality, yes</p>
+
+<a name="183564755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183564755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183564755">Kevin Buzzard (Dec 16 2019 at 16:22)</a>:</h4>
+<p>yeah yeah yeah</p>
+
+<a name="183564783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183564783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183564783">Kevin Buzzard (Dec 16 2019 at 16:22)</a>:</h4>
+<p><code>simp</code> couldn't do <code>⊢ ⇑(𝟙 X_1 ≫ f) x = ⇑f x</code></p>
+
+<a name="183564823"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183564823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183564823">Kevin Buzzard (Dec 16 2019 at 16:23)</a>:</h4>
+<p>but <code>apply category.id_comp,</code> does it fine. That's one of my favourite uses of the <code>apply</code> tactic.</p>
+
+<a name="183564867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183564867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183564867">Reid Barton (Dec 16 2019 at 16:23)</a>:</h4>
+<p>You could also try <code>dsimp, simp</code>. Sometimes that helps</p>
+
+<a name="183564969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183564969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183564969">Kevin Buzzard (Dec 16 2019 at 16:24)</a>:</h4>
+<p>I'm just not sure if I'm supposed to be happy with getting my hands dirty like this.</p>
+
+<a name="183564988"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183564988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183564988">Kevin Buzzard (Dec 16 2019 at 16:24)</a>:</h4>
+<p>I live in a world where all exts are defeq.</p>
+
+<a name="183565182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183565182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183565182">Reid Barton (Dec 16 2019 at 16:26)</a>:</h4>
+<p>Oh, you rolled a lot of your own stuff</p>
+
+<a name="183565699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20tactics/near/183565699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60005categorytheorytactics.html#183565699">Reid Barton (Dec 16 2019 at 16:31)</a>:</h4>
+<p>If you replace the whole proof of <code>id_comp'</code> by <code>begin tidy, end</code> how does it get stuck?</p>
+
 
 {% endraw %}
 

@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [category theory universes](40670categorytheoryuniverses.html) (12 messages, latest: Dec 16 2019 at 15:55)
+* [category theory tactics](60005categorytheorytactics.html) (28 messages, latest: Dec 16 2019 at 16:31)
 
-* [category theory tactics](60005categorytheorytactics.html) (15 messages, latest: Dec 16 2019 at 15:21)
+* [category theory universes](40670categorytheoryuniverses.html) (12 messages, latest: Dec 16 2019 at 15:55)
 
 * [Tricky recursive proof](27349Trickyrecursiveproof.html) (31 messages, latest: Dec 15 2019 at 16:27)
 

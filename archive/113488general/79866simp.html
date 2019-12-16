@@ -126,6 +126,26 @@ U : opens X
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp/near/183542756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79866simp.html#183542756">Kevin Buzzard (Dec 16 2019 at 12:04)</a>:</h4>
 <p>I am already stuck ;-) I'll start another thread.</p>
 
+<a name="183563725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp/near/183563725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/79866simp.html#183563725">Reid Barton (Dec 16 2019 at 16:11)</a>:</h4>
+<blockquote>
+<p>I've never worried too much about <code>simp</code> but I am trying to write some code using the category theory library and I want to get basic automation working on it (my co-authors have always done this for me in the past). </p>
+<p>I don't know if this is enough context, but <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span></span></span> is a topological space, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span></span></span></span> is a category, and after I write this:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">,</span> <span class="n">refl</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">val_eq_coe</span> <span class="o">{</span><span class="n">ℱ</span> <span class="o">:</span> <span class="n">presheaf</span> <span class="n">X</span> <span class="n">C</span><span class="o">}</span> <span class="o">{</span><span class="n">U</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">X</span><span class="o">}</span> <span class="o">:</span> <span class="n">ℱ</span><span class="bp">.</span><span class="n">val</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">ℱ</span> <span class="n">U</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+
+<p>(trying to train <code>simp</code> to change the non-canonical <code>ℱ.val</code> back into the coe-to-fun version <code>⇑ℱ</code>) it still gets stuck, e.g. <code>simp</code> will not solve this:</p>
+</blockquote>
+<p>ℱ : presheaf X C,<br>
+U : opens X<br>
+⊢ 𝟙 (ℱ.val U) = 𝟙 (⇑ℱ U)</p>
+<div class="codehilite"><pre><span></span>I&#39;ve never tried to train `simp` before. Sorry for the hopefully basic questions.
+</pre></div>
+
+
+<p>Use <code>dsimp</code></p>
+
 
 {% endraw %}
 
