@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [TPIL 7.10.2.a](49743TPIL7102a.html) (5 messages, latest: Dec 16 2019 at 16:26)
+* [TPIL 7.10.2.a](49743TPIL7102a.html) (6 messages, latest: Dec 16 2019 at 17:39)
 
 * [Non zero length vector](93281Nonzerolengthvector.html) (13 messages, latest: Dec 16 2019 at 11:31)
 
