@@ -50,6 +50,22 @@ permalink: archive/113489newmembers/49795cacheoleanuserconfusion.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cache-olean%20user%20confusion%3F/near/183596516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/49795cacheoleanuserconfusion.html#183596516">Oliver Nash (Dec 16 2019 at 22:10)</a>:</h4>
 <p>I will report back here if/when I figure it out, hopefully at the weekend. In the meantime, I will rename this thread as I think it could mislead people.</p>
 
+<a name="183690602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cache-olean%20user%20confusion%3F/near/183690602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/49795cacheoleanuserconfusion.html#183690602">Oliver Nash (Dec 17 2019 at 20:56)</a>:</h4>
+<p>I managed to find a few minutes to look into this again this evening, and I believe I now understand. Here is where <code>cache-olean --fetch</code> clobbers my local changes:</p>
+<div class="codehilite"><pre><span></span>    with DelayedInterrupt([signal.SIGTERM, signal.SIGINT]):
+        ar = tarfile.open(os.path.join(mathlib_dir, asset.name))
+        ar.extractall(&#39;.&#39;)  # Specifically this line!
+        print(&quot;... successfully extracted olean archive.&quot;)
+</pre></div>
+
+
+<p>(<a href="https://github.com/leanprover-community/mathlib-tools/blob/f126b0df53a1769a02eb6c972e1d2c0574d4fb28/scripts/cache-olean.py#L73" target="_blank" title="https://github.com/leanprover-community/mathlib-tools/blob/f126b0df53a1769a02eb6c972e1d2c0574d4fb28/scripts/cache-olean.py#L73">https://github.com/leanprover-community/mathlib-tools/blob/f126b0df53a1769a02eb6c972e1d2c0574d4fb28/scripts/cache-olean.py#L73</a>)</p>
+
+<a name="183690710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cache-olean%20user%20confusion%3F/near/183690710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/49795cacheoleanuserconfusion.html#183690710">Oliver Nash (Dec 17 2019 at 20:57)</a>:</h4>
+<p>The reason is that the tar file which it is unpacking contains not just all the <code>.olean</code> files but also all the <code>.lean</code> source files. So that means that if you have any unstaged changes to <code>.lean</code> files then they'll be blown away by this step, as happened to me.</p>
+
 
 {% endraw %}
 

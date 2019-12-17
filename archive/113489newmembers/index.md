@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [cache-olean user confusion?](49795cacheoleanuserconfusion.html) (10 messages, latest: Dec 17 2019 at 20:57)
+
 * [TPIL 7.10.2.a](49743TPIL7102a.html) (17 messages, latest: Dec 17 2019 at 04:51)
 
 * [iff negation](17803iffnegation.html) (14 messages, latest: Dec 16 2019 at 22:40)
-
-* [cache-olean user confusion?](49795cacheoleanuserconfusion.html) (8 messages, latest: Dec 16 2019 at 22:10)
 
 * [cache-olean dangerous?](08888cacheoleandangerous.html) (8 messages, latest: Dec 16 2019 at 21:59)
 
