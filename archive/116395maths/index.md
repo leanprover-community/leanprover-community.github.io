@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [category theory tactics](60005categorytheorytactics.html) (30 messages, latest: Dec 17 2019 at 01:31)
+* [category theory tactics](60005categorytheorytactics.html) (31 messages, latest: Dec 17 2019 at 05:30)
 
-* [Sheaves](28656Sheaves.html) (78 messages, latest: Dec 17 2019 at 01:27)
+* [Sheaves](28656Sheaves.html) (79 messages, latest: Dec 17 2019 at 05:29)
 
 * [category theory universes](40670categorytheoryuniverses.html) (12 messages, latest: Dec 16 2019 at 15:55)
 
