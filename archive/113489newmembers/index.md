@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [TPIL 7.10.2.a](49743TPIL7102a.html) (12 messages, latest: Dec 17 2019 at 02:53)
+
 * [iff negation](17803iffnegation.html) (14 messages, latest: Dec 16 2019 at 22:40)
 
 * [cache-olean user confusion?](49795cacheoleanuserconfusion.html) (8 messages, latest: Dec 16 2019 at 22:10)
@@ -16,8 +18,6 @@ permalink: archive/113489newmembers/index.html
 * [cache-olean dangerous?](08888cacheoleandangerous.html) (8 messages, latest: Dec 16 2019 at 21:59)
 
 * [How do I show that sum of trivial vector of ℝ is zero?](10664HowdoIshowthatsumoftrivialvectorofiszero.html) (12 messages, latest: Dec 16 2019 at 21:23)
-
-* [TPIL 7.10.2.a](49743TPIL7102a.html) (6 messages, latest: Dec 16 2019 at 17:39)
 
 * [Non zero length vector](93281Nonzerolengthvector.html) (13 messages, latest: Dec 16 2019 at 11:31)
 
