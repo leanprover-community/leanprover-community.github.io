@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [TPIL 7.10.2.a](49743TPIL7102a.html) (12 messages, latest: Dec 17 2019 at 02:53)
+* [TPIL 7.10.2.a](49743TPIL7102a.html) (14 messages, latest: Dec 17 2019 at 03:32)
 
 * [iff negation](17803iffnegation.html) (14 messages, latest: Dec 16 2019 at 22:40)
 
