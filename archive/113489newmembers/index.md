@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [cache-olean user confusion?](49795cacheoleanuserconfusion.html) (10 messages, latest: Dec 17 2019 at 20:57)
+* [Uniqueness of binary expansions](45971Uniquenessofbinaryexpansions.html) (30 messages, latest: Dec 17 2019 at 21:51)
+
+* [cache-olean user confusion?](49795cacheoleanuserconfusion.html) (21 messages, latest: Dec 17 2019 at 21:05)
 
 * [TPIL 7.10.2.a](49743TPIL7102a.html) (17 messages, latest: Dec 17 2019 at 04:51)
 
@@ -20,8 +22,6 @@ permalink: archive/113489newmembers/index.html
 * [How do I show that sum of trivial vector of ℝ is zero?](10664HowdoIshowthatsumoftrivialvectorofiszero.html) (12 messages, latest: Dec 16 2019 at 21:23)
 
 * [Non zero length vector](93281Nonzerolengthvector.html) (13 messages, latest: Dec 16 2019 at 11:31)
-
-* [Uniqueness of binary expansions](45971Uniquenessofbinaryexpansions.html) (27 messages, latest: Dec 16 2019 at 02:51)
 
 * [Issue with NNG Multiplication World Level 1?](41799IssuewithNNGMultiplicationWorldLevel1.html) (4 messages, latest: Dec 15 2019 at 10:23)
 
