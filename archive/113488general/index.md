@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [markdown module docstrings](07338markdownmoduledocstrings.html) (242 messages, latest: Dec 17 2019 at 12:57)
+
+* [ATP in the news](89243ATPinthenews.html) (1 message, latest: Dec 17 2019 at 12:55)
+
 * [lean in emacs](35233leaninemacs.html) (3 messages, latest: Dec 17 2019 at 04:06)
 
 * [How do you `update-mathlib`](14544Howdoyouupdatemathlib.html) (24 messages, latest: Dec 16 2019 at 21:26)
@@ -70,8 +74,6 @@ permalink: archive/113488general/index.html
 * [VScode extension](56578VScodeextension.html) (421 messages, latest: Dec 05 2019 at 03:15)
 
 * [Any reason why reading stdout should fail?](06544Anyreasonwhyreadingstdoutshouldfail.html) (2 messages, latest: Dec 05 2019 at 02:58)
-
-* [markdown module docstrings](07338markdownmoduledocstrings.html) (239 messages, latest: Dec 04 2019 at 21:47)
 
 * [Can lean print its JSON traffic?](15208CanleanprintitsJSONtraffic.html) (44 messages, latest: Dec 04 2019 at 21:23)
 
