@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [segment partitions for integrals](06257segmentpartitionsforintegrals.html) (2 messages, latest: Dec 17 2019 at 18:58)
+
 * [category theory tactics](60005categorytheorytactics.html) (31 messages, latest: Dec 17 2019 at 05:30)
 
 * [Sheaves](28656Sheaves.html) (79 messages, latest: Dec 17 2019 at 05:29)
