@@ -7,7 +7,75 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">tactic.localized</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/localized.lean">(view source on GitHub)</a></div><a href="#get_localized">get_localized</a><br>
+<a href="#localized_attr">localized_attr</a><br>
+<a href="#localized_cmd">localized_cmd</a><br>
+<a href="#open_locale_cmd">open_locale_cmd</a><br>
+<a href="#print_localized_commands">print_localized_commands</a><br>
+<a href="#string_hash">string_hash</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="mod_doc">
+<h1>Localized notation</h1>
+
+<p>This consists of two user-commands which allow you to declare notation and commands localized to a namespace.</p>
+
+<ul>
+<li>Declare notation which is localized to a namespace using:</li>
+</ul>
+
+<pre><code>localized "infix ` ⊹ `:60 := my_add" in my.add
+</code></pre>
+
+<ul>
+<li>After this command it will be available in the same section/namespace/file, just as if you wrote <code>local infix</code> ⊹ <code>:60 := my_add</code></li>
+<li>You can open it in other places. The following command will declare the notation again as local notation in that section/namespace/files:</li>
+</ul>
+
+<pre><code>open_locale my.add
+</code></pre>
+
+<ul>
+<li>More generally, the following will declare all localized notation in the specified namespaces.</li>
+</ul>
+
+<pre><code>open_locale namespace1 namespace2 ...
+</code></pre>
+
+<ul>
+<li>You can also declare other localized commands, like local attributes</li>
+</ul>
+
+<pre><code>localized "attribute [simp] le_refl" in le
+</code></pre>
+
+<p>The code is inspired by code from Gabriel Ebner from the hott3 repository.</p>
+</div><div class="decl def" id="localized_attr">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/localized.lean#L39">localized_attr</a></span>  <span class="decl_args">:</span>     <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/attribute.html#user_attribute">user_attribute</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/rb_map.html#native.rb_lmap">native.rb_lmap</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a>))</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="get_localized">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/localized.lean#L47">get_localized</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a>)</div></div>
+   <p>Get all commands in the given notation namespace and return them as a list of strings</p>
+ </ul></div><div class="decl def" id="open_locale_cmd">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/localized.lean#L52">open_locale_cmd</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.decl_meta_info">interactive.decl_meta_info</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.tk">lean.parser.tk</a> "open_locale") →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Execute all commands in the given notation namespace</p>
+ </ul></div><div class="decl def" id="string_hash">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/localized.lean#L58">string_hash</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="localized_cmd">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/localized.lean#L64">localized_cmd</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.decl_meta_info">interactive.decl_meta_info</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.tk">lean.parser.tk</a> "localized") →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Add a new command to a notation namespace and execute it right now.
+ The new command is added as a declaration to the environment with name <code>_localized_decl.&lt;number&gt;</code>.
+ This declaration has attribute <code>_localized</code> and as value a name-string pair.</p>
+ </ul></div><div class="decl def" id="print_localized_commands">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/localized.lean#L79">print_localized_commands</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Print all commands in a given notation namespace</p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +875,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1103,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,99 +1226,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="mod_doc">
-<h1>Localized notation</h1>
-
-<p>This consists of two user-commands which allow you to declare notation and commands localized to a namespace.</p>
-
-<ul>
-<li>Declare notation which is localized to a namespace using:</li>
-</ul>
-
-<pre><code>localized "infix ` ⊹ `:60 := my_add" in my.add
-</code></pre>
-
-<ul>
-<li>After this command it will be available in the same section/namespace/file, just as if you wrote <code>local infix</code> ⊹ <code>:60 := my_add</code></li>
-<li>You can open it in other places. The following command will declare the notation again as local notation in that section/namespace/files:</li>
-</ul>
-
-<pre><code>open_locale my.add
-</code></pre>
-
-<ul>
-<li>More generally, the following will declare all localized notation in the specified namespaces.</li>
-</ul>
-
-<pre><code>open_locale namespace1 namespace2 ...
-</code></pre>
-
-<ul>
-<li>You can also declare other localized commands, like local attributes</li>
-</ul>
-
-<pre><code>localized "attribute [simp] le_refl" in le
-</code></pre>
-
-<p>The code is inspired by code from Gabriel Ebner from the hott3 repository.</p>
-</div><div class="def"><a id="localized_attr"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/localized.lean#L39">localized_attr</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/attribute.html#user_attribute">user_attribute</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/rb_map.html#native.rb_lmap">native.rb_lmap</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a>))</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="get_localized"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/localized.lean#L47">get_localized</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a>)</div>
-<p>Get all commands in the given notation namespace and return them as a list of strings</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="open_locale_cmd"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/localized.lean#L52">open_locale_cmd</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.decl_meta_info">interactive.decl_meta_info</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.tk">lean.parser.tk</a> "open_locale") → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Execute all commands in the given notation namespace</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="string_hash"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/localized.lean#L58">string_hash</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a> → ℕ</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="localized_cmd"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/localized.lean#L64">localized_cmd</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.decl_meta_info">interactive.decl_meta_info</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.tk">lean.parser.tk</a> "localized") → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Add a new command to a notation namespace and execute it right now.
- The new command is added as a declaration to the environment with name <code>_localized_decl.&lt;number&gt;</code>.
- This declaration has attribute <code>_localized</code> and as value a name-string pair.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="print_localized_commands"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/localized.lean#L79">print_localized_commands</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Print all commands in a given notation namespace</p>
-       <ul>
-
-
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">tactic.localized</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/localized.lean">(view source on GitHub)</a></div><a href="#get_localized">get_localized</a><br>
-<a href="#localized_attr">localized_attr</a><br>
-<a href="#localized_cmd">localized_cmd</a><br>
-<a href="#open_locale_cmd">open_locale_cmd</a><br>
-<a href="#print_localized_commands">print_localized_commands</a><br>
-<a href="#string_hash">string_hash</a><br>
 </div></div>
 
         </div>

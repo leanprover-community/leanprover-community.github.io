@@ -7,7 +7,253 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">algebra.continued_fractions.basic</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean">(view source on GitHub)</a></div><a href="#continued_fraction">continued_fraction</a><br>
+<a href="#continued_fraction.coe_to_generalized_continued_fraction">continued_fraction.coe_to_generalized_continued_fraction</a><br>
+<a href="#continued_fraction.coe_to_simple_continued_fraction">continued_fraction.coe_to_simple_continued_fraction</a><br>
+<a href="#continued_fraction.has_coe_to_generalized_continued_fraction">continued_fraction.has_coe_to_generalized_continued_fraction</a><br>
+<a href="#continued_fraction.has_coe_to_simple_continued_fraction">continued_fraction.has_coe_to_simple_continued_fraction</a><br>
+<a href="#generalized_continued_fraction">generalized_continued_fraction</a><br>
+<a href="#generalized_continued_fraction.coe_to_generalized_continued_fraction">generalized_continued_fraction.coe_to_generalized_continued_fraction</a><br>
+<a href="#generalized_continued_fraction.coe_to_generalized_continued_fraction.reversed">generalized_continued_fraction.coe_to_generalized_continued_fraction.reversed</a><br>
+<a href="#generalized_continued_fraction.continuants">generalized_continued_fraction.continuants</a><br>
+<a href="#generalized_continued_fraction.continuants_aux">generalized_continued_fraction.continuants_aux</a><br>
+<a href="#generalized_continued_fraction.convergents">generalized_continued_fraction.convergents</a><br>
+<a href="#generalized_continued_fraction.convergents'">generalized_continued_fraction.convergents'</a><br>
+<a href="#generalized_continued_fraction.convergents'_aux">generalized_continued_fraction.convergents'_aux</a><br>
+<a href="#generalized_continued_fraction.denominators">generalized_continued_fraction.denominators</a><br>
+<a href="#generalized_continued_fraction.ext">generalized_continued_fraction.ext</a><br>
+<a href="#generalized_continued_fraction.ext_iff">generalized_continued_fraction.ext_iff</a><br>
+<a href="#generalized_continued_fraction.has_coe_to_generalized_continued_fraction">generalized_continued_fraction.has_coe_to_generalized_continued_fraction</a><br>
+<a href="#generalized_continued_fraction.is_simple_continued_fraction">generalized_continued_fraction.is_simple_continued_fraction</a><br>
+<a href="#generalized_continued_fraction.next_continuants">generalized_continued_fraction.next_continuants</a><br>
+<a href="#generalized_continued_fraction.next_denominator">generalized_continued_fraction.next_denominator</a><br>
+<a href="#generalized_continued_fraction.next_numerator">generalized_continued_fraction.next_numerator</a><br>
+<a href="#generalized_continued_fraction.numerators">generalized_continued_fraction.numerators</a><br>
+<a href="#generalized_continued_fraction.pair">generalized_continued_fraction.pair</a><br>
+<a href="#generalized_continued_fraction.pair.coe_to_generalized_continued_fraction_pair">generalized_continued_fraction.pair.coe_to_generalized_continued_fraction_pair</a><br>
+<a href="#generalized_continued_fraction.pair.coe_to_generalized_continued_fraction_pair.reversed">generalized_continued_fraction.pair.coe_to_generalized_continued_fraction_pair.reversed</a><br>
+<a href="#generalized_continued_fraction.pair.has_coe_to_generalized_continued_fraction_pair">generalized_continued_fraction.pair.has_coe_to_generalized_continued_fraction_pair</a><br>
+<a href="#generalized_continued_fraction.pair.has_repr">generalized_continued_fraction.pair.has_repr</a><br>
+<a href="#generalized_continued_fraction.partial_denominators">generalized_continued_fraction.partial_denominators</a><br>
+<a href="#generalized_continued_fraction.partial_numerators">generalized_continued_fraction.partial_numerators</a><br>
+<a href="#generalized_continued_fraction.seq.coe_to_seq">generalized_continued_fraction.seq.coe_to_seq</a><br>
+<a href="#generalized_continued_fraction.terminated_at">generalized_continued_fraction.terminated_at</a><br>
+<a href="#generalized_continued_fraction.terminated_at_decidable">generalized_continued_fraction.terminated_at_decidable</a><br>
+<a href="#generalized_continued_fraction.terminates">generalized_continued_fraction.terminates</a><br>
+<a href="#simple_continued_fraction">simple_continued_fraction</a><br>
+<a href="#simple_continued_fraction.coe_to_generalized_continued_fraction">simple_continued_fraction.coe_to_generalized_continued_fraction</a><br>
+<a href="#simple_continued_fraction.has_coe_to_generalized_continued_fraction">simple_continued_fraction.has_coe_to_generalized_continued_fraction</a><br>
+<a href="#simple_continued_fraction.is_regular_continued_fraction">simple_continued_fraction.is_regular_continued_fraction</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="mod_doc">
+<h1>Basic Definitions/Theorems for Continued Fractions</h1>
+
+<h2>Summary</h2>
+
+<p>We define generalised, simple, and regular continued fractions and functions to evaluate their
+convergents. We follow the naming conventions from Wikipedia and [wall2018analytic], Chapter 1.</p>
+
+<h2>Main definitions</h2>
+
+<ol>
+<li>Generalised continued fractions (gcfs)</li>
+<li>Simple continued fractions (scfs)</li>
+<li>(Regular) continued fractions ((r)cfs)</li>
+<li>Computation of convergents using the recurrence relation in <code>convergents</code>.</li>
+<li>Computation of convergents by directly evaluating the fraction described by the gcf in
+<code>convergents'</code>.</li>
+</ol>
+
+<h2>Implementation notes</h2>
+
+<ol>
+<li>The most commonly used kind of continued fractions in the literature are regular continued
+fractions. We hence just call them <code>continued_fractions</code> in the library.</li>
+<li>We use sequences from <code>data.seq</code> to encode potentially infinite sequences.</li>
+</ol>
+
+<h2>References</h2>
+
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Generalized_continued_fraction">https://en.wikipedia.org/wiki/Generalized_continued_fraction</a></li>
+<li>[Wall, H.S., <em>Analytic Theory of Continued Fractions</em>][wall2018analytic]</li>
+</ul>
+
+<h2>Tags</h2>
+
+<p>numerics, number theory, approximations, fractions</p>
+</div><div class="decl structure" id="generalized_continued_fraction.pair">     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L44">generalized_continued_fraction.pair</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type u_1 → Type u_1</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="generalized_continued_fraction.pair.a">a : α</li>
+<li class="structure_field" id="generalized_continued_fraction.pair.b">b : α</li>
+</ul>  <p>We collect a partial numerator <code>aᵢ</code> and partial denominator <code>bᵢ</code> in a pair <code>⟨aᵢ,bᵢ⟩</code>.</p>
+ </ul></div><div class="decl def" id="generalized_continued_fraction.pair.has_repr"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L51">generalized_continued_fraction.pair.has_repr</a></span> <span class="decl_args">(α : Type u_1)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/repr.html#has_repr">has_repr</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/repr.html#has_repr">has_repr</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair">generalized_continued_fraction.pair</a> α)</div></div>
+   <p>Make a gcf.pair printable.</p>
+ </ul></div><div class="decl def" id="generalized_continued_fraction.pair.has_coe_to_generalized_continued_fraction_pair"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L59">generalized_continued_fraction.pair.has_coe_to_generalized_continued_fraction_pair</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> α β]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair">generalized_continued_fraction.pair</a> α)
+  (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair">generalized_continued_fraction.pair</a> β)</div></div>
+   <p>Coerce a pair by elementwise coercion.</p>
+ </ul></div><div class="decl theorem" id="generalized_continued_fraction.pair.coe_to_generalized_continued_fraction_pair.reversed">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L63">generalized_continued_fraction.pair.coe_to_generalized_continued_fraction_pair.reversed</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> α β]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><span title="generalized_continued_fraction.pair.mk">{</span><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair.a" title="generalized_continued_fraction.pair.a">a</a> := <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>a,
+   <a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair.b" title="generalized_continued_fraction.pair.b">b</a> := <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>b} <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a><span title="generalized_continued_fraction.pair.mk">{</span><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair.a" title="generalized_continued_fraction.pair.a">a</a> := a,
+     <a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair.b" title="generalized_continued_fraction.pair.b">b</a> := b}</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="generalized_continued_fraction.pair.coe_to_generalized_continued_fraction_pair"><div class="attributes">@[simp, move_cast]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L63">generalized_continued_fraction.pair.coe_to_generalized_continued_fraction_pair</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> α β]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a><span title="generalized_continued_fraction.pair.mk">{</span><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair.a" title="generalized_continued_fraction.pair.a">a</a> := a,
+     <a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair.b" title="generalized_continued_fraction.pair.b">b</a> := b} <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <span title="generalized_continued_fraction.pair.mk">{</span><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair.a" title="generalized_continued_fraction.pair.a">a</a> := <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>a,
+   <a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair.b" title="generalized_continued_fraction.pair.b">b</a> := <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>b}</div></div>
+   <p></p>
+ </ul></div><div class="decl structure" id="generalized_continued_fraction">     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L89">generalized_continued_fraction</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type u_1 → Type u_1</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="generalized_continued_fraction.h">h : α</li>
+<li class="structure_field" id="generalized_continued_fraction.s">s : <a href="https://leanprover-community.github.io/mathlib_docs/data/seq/seq.html#seq">seq</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair">generalized_continued_fraction.pair</a> α)</li>
+</ul>  <p>A <em>generalised continued fraction</em> (gcf) is a potentially infinite expression of the form</p>
+
+<pre><code>                            a₀
+            h + --------------------------
+                              a₁
+                  b₀ + --------------------
+                                a₂
+                        b₁ + --------------
+                                    a₃
+                              b₂ + --------
+                                  b₃ + ...
+</code></pre>
+
+<p>where <code>h</code> is called the <em>head term</em> or <em>integer part</em>, the <code>aᵢ</code> are called the
+<em>partial numerators</em> and the <code>bᵢ</code> the <em>partial denominators</em> of the gcf.
+We store the sequence of partial numerators and denominators in a sequence of
+generalized_continued_fraction.pairs <code>s</code>.
+For convenience, one often writes <code>[h; (a₀, b₀), (a₁, b₁), (a₂, b₂),...]</code>.</p>
+ </ul></div><div class="decl def" id="generalized_continued_fraction.partial_numerators">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L98">generalized_continued_fraction.partial_numerators</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/data/seq/seq.html#seq">seq</a> α</div></div>
+   <p>Returns the sequence of partial numerators <code>aᵢ</code> of <code>g</code>.</p>
+ </ul></div><div class="decl def" id="generalized_continued_fraction.partial_denominators">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L100">generalized_continued_fraction.partial_denominators</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/data/seq/seq.html#seq">seq</a> α</div></div>
+   <p>Returns the sequence of partial denominators <code>bᵢ</code> of <code>g</code>.</p>
+ </ul></div><div class="decl def" id="generalized_continued_fraction.terminated_at">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L103">generalized_continued_fraction.terminated_at</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a> → Prop</div></div>
+   <p>A gcf terminated at position <code>n</code> if its sequence terminates at position <code>n</code>.</p>
+ </ul></div><div class="decl def" id="generalized_continued_fraction.terminated_at_decidable"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L106">generalized_continued_fraction.terminated_at_decidable</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="decl_args">(g : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α)</span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable">decidable</a>
+  (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.terminated_at">generalized_continued_fraction.terminated_at</a> g n)</div></div>
+   <p>It is decidable whether a gcf terminated at a given position.</p>
+ </ul></div><div class="decl def" id="generalized_continued_fraction.terminates">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L110">generalized_continued_fraction.terminates</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α → Prop</div></div>
+   <p>A gcf terminates if its sequence terminates.</p>
+ </ul></div><div class="decl def" id="generalized_continued_fraction.seq.coe_to_seq">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L118">generalized_continued_fraction.seq.coe_to_seq</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> α β]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/seq/seq.html#seq">seq</a> α) (<a href="https://leanprover-community.github.io/mathlib_docs/data/seq/seq.html#seq">seq</a> β)</div></div>
+   <p>Coerce a sequence by elementwise coercion.</p>
+ </ul></div><div class="decl def" id="generalized_continued_fraction.has_coe_to_generalized_continued_fraction"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L123">generalized_continued_fraction.has_coe_to_generalized_continued_fraction</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> α β]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α)
+  (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> β)</div></div>
+   <p>Coerce a gcf by elementwise coercion.</p>
+ </ul></div><div class="decl theorem" id="generalized_continued_fraction.coe_to_generalized_continued_fraction"><div class="attributes">@[simp, move_cast]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L127">generalized_continued_fraction.coe_to_generalized_continued_fraction</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> α β]</span></span> <span class="impl_arg"><span class="decl_args">{g : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>g <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <span title="generalized_continued_fraction.mk">{</span><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.h" title="generalized_continued_fraction.h">h</a> := <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>(g.<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.h" title="generalized_continued_fraction.h">h</a>),
+   <a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.s" title="generalized_continued_fraction.s">s</a> := <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>(g.<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.s" title="generalized_continued_fraction.s">s</a>)}</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="generalized_continued_fraction.coe_to_generalized_continued_fraction.reversed">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L127">generalized_continued_fraction.coe_to_generalized_continued_fraction.reversed</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> α β]</span></span> <span class="impl_arg"><span class="decl_args">{g : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><span title="generalized_continued_fraction.mk">{</span><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.h" title="generalized_continued_fraction.h">h</a> := <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>(g.<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.h" title="generalized_continued_fraction.h">h</a>),
+   <a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.s" title="generalized_continued_fraction.s">s</a> := <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>(g.<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.s" title="generalized_continued_fraction.s">s</a>)} <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>g</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="generalized_continued_fraction.is_simple_continued_fraction">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L149">generalized_continued_fraction.is_simple_continued_fraction</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="decl_args">(g : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type">Prop</div></div>
+   <p>A generalized continued fraction is a <em>simple continued fraction</em> if all partial numerators are
+equal to one.</p>
+
+<pre><code>                            1
+            h + --------------------------
+                              1
+                  b₀ + --------------------
+                                1
+                        b₁ + --------------
+                                    1
+                              b₂ + --------
+                                  b₃ + ...
+</code></pre>
+ </ul></div><div class="decl def" id="simple_continued_fraction">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L172">simple_continued_fraction</a></span> <span class="decl_args">(α : Type u_1)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type">Type u_1</div></div>
+   <p>A <em>simple continued fraction</em> (scf) is a generalized continued fraction (gcf) whose partial
+numerators are equal to one.</p>
+
+<pre><code>                            1
+            h + --------------------------
+                              1
+                  b₀ + --------------------
+                                1
+                        b₁ + --------------
+                                    1
+                              b₂ + --------
+                                  b₃ + ...
+</code></pre>
+
+<p>For convenience, one often writes <code>[h; b₀, b₁, b₂,...]</code>.
+It is encoded as the subtype of gcfs that satisfy
+<code>generalized_continued_fraction.is_simple_continued_fraction</code>.</p>
+ </ul></div><div class="decl def" id="simple_continued_fraction.has_coe_to_generalized_continued_fraction"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L183">simple_continued_fraction.has_coe_to_generalized_continued_fraction</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#simple_continued_fraction">simple_continued_fraction</a> α)
+  (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α)</div></div>
+   <p>Lift a scf to a gcf using the inclusion map.</p>
+ </ul></div><div class="decl theorem" id="simple_continued_fraction.coe_to_generalized_continued_fraction"><div class="attributes">@[simp, elim_cast]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L187">simple_continued_fraction.coe_to_generalized_continued_fraction</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{s : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#simple_continued_fraction">simple_continued_fraction</a> α}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>s <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> s.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#subtype.val" title="subtype.val">val</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="simple_continued_fraction.is_regular_continued_fraction">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L195">simple_continued_fraction.is_regular_continued_fraction</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_zero">has_zero</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt">has_lt</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#simple_continued_fraction">simple_continued_fraction</a> α → Prop</div></div>
+   <p>A simple continued fraction is a <em>(regular) continued fraction</em> ((r)cf) if all partial denominators
+<code>bᵢ</code> are positive, i.e. <code>0 &lt; bᵢ</code>.</p>
+ </ul></div><div class="decl def" id="continued_fraction">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L207">continued_fraction</a></span> <span class="decl_args">(α : Type u_1)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_zero">has_zero</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt">has_lt</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type">Type u_1</div></div>
+   <p>A <em>(regular) continued fraction</em> ((r)cf) is a simple continued fraction (scf) whose partial
+denominators are all positive. It is the subtype of scfs that satisfy
+<code>simple_continued_fraction.is_regular_continued_fraction</code>.</p>
+ </ul></div><div class="decl def" id="continued_fraction.has_coe_to_simple_continued_fraction"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L220">continued_fraction.has_coe_to_simple_continued_fraction</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_zero">has_zero</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt">has_lt</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#continued_fraction">continued_fraction</a> α)
+  (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#simple_continued_fraction">simple_continued_fraction</a> α)</div></div>
+   <p>Lift a cf to a scf using the inclusion map.</p>
+ </ul></div><div class="decl theorem" id="continued_fraction.coe_to_simple_continued_fraction"><div class="attributes">@[simp, elim_cast]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L224">continued_fraction.coe_to_simple_continued_fraction</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_zero">has_zero</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt">has_lt</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{c : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#continued_fraction">continued_fraction</a> α}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>c <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> c.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#subtype.val" title="subtype.val">val</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="continued_fraction.has_coe_to_generalized_continued_fraction"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L227">continued_fraction.has_coe_to_generalized_continued_fraction</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_zero">has_zero</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt">has_lt</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#continued_fraction">continued_fraction</a> α)
+  (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α)</div></div>
+   <p>Lift a cf to a scf using the inclusion map.</p>
+ </ul></div><div class="decl theorem" id="continued_fraction.coe_to_generalized_continued_fraction"><div class="attributes">@[simp, elim_cast]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L230">continued_fraction.coe_to_generalized_continued_fraction</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_zero">has_zero</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt">has_lt</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{c : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#continued_fraction">continued_fraction</a> α}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>c <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>(c.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#subtype.val" title="subtype.val">val</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="generalized_continued_fraction.next_numerator">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L260">generalized_continued_fraction.next_numerator</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/field.html#division_ring">division_ring</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type">α → α → α → α → α</div></div>
+   <p>Returns the next numerator <code>Aₙ = bₙ-₁ * Aₙ₋₁ + aₙ-₁ * Aₙ₋₂</code>, where <code>predA</code> is <code>Aₙ₋₁</code>,
+<code>ppredA</code> is <code>Aₙ₋₂</code>, <code>a</code> is <code>aₙ₋₁</code>, and <code>b</code> is <code>bₙ₋₁</code>.</p>
+ </ul></div><div class="decl def" id="generalized_continued_fraction.next_denominator">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L266">generalized_continued_fraction.next_denominator</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/field.html#division_ring">division_ring</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type">α → α → α → α → α</div></div>
+   <p>Returns the next denominator <code>Bₙ = bₙ-₁ * Bₙ₋₁ + aₙ-₁ * Bₙ₋₂``, where</code>predB<code>is</code>Bₙ₋₁<code>and
+</code>ppredB<code>is</code>Bₙ₋₂<code>,</code>a<code>is</code>aₙ₋₁<code>, and</code>b<code>is</code>bₙ₋₁`.</p>
+ </ul></div><div class="decl def" id="generalized_continued_fraction.next_continuants">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L272">generalized_continued_fraction.next_continuants</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/field.html#division_ring">division_ring</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type">α →
+α →
+<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair">generalized_continued_fraction.pair</a> α →
+<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair">generalized_continued_fraction.pair</a> α →
+<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair">generalized_continued_fraction.pair</a> α</div></div>
+   <p>Returns the next continuants <code>⟨Aₙ, Bₙ⟩</code> using <code>next_numerator</code> and <code>next_denominator</code>, where <code>pred</code>
+is <code>⟨Aₙ₋₁, Bₙ₋₁⟩</code>, <code>ppred</code> is <code>⟨Aₙ₋₂, Bₙ₋₂⟩</code>, <code>a</code> is <code>aₙ₋₁</code>, and <code>b</code> is <code>bₙ₋₁</code>.</p>
+ </ul></div><div class="decl def" id="generalized_continued_fraction.continuants_aux">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L276">generalized_continued_fraction.continuants_aux</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/field.html#division_ring">division_ring</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/data/stream.html#stream">stream</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair">generalized_continued_fraction.pair</a> α)</div></div>
+   <p>Returns the continuants <code>⟨Aₙ₋₁, Bₙ₋₁⟩</code> of <code>g</code>.</p>
+ </ul></div><div class="decl def" id="generalized_continued_fraction.continuants">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L286">generalized_continued_fraction.continuants</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/field.html#division_ring">division_ring</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/data/stream.html#stream">stream</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair">generalized_continued_fraction.pair</a> α)</div></div>
+   <p>Returns the continuants <code>⟨Aₙ, Bₙ⟩</code> of <code>g</code>.</p>
+ </ul></div><div class="decl def" id="generalized_continued_fraction.numerators">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L289">generalized_continued_fraction.numerators</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/field.html#division_ring">division_ring</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/stream.html#stream">stream</a> α</div></div>
+   <p>Returns the numerators <code>Aₙ</code> of <code>g</code>.</p>
+ </ul></div><div class="decl def" id="generalized_continued_fraction.denominators">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L292">generalized_continued_fraction.denominators</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/field.html#division_ring">division_ring</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/stream.html#stream">stream</a> α</div></div>
+   <p>Returns the denominators <code>Bₙ</code> of <code>g</code>.</p>
+ </ul></div><div class="decl def" id="generalized_continued_fraction.convergents">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L295">generalized_continued_fraction.convergents</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/field.html#division_ring">division_ring</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/stream.html#stream">stream</a> α</div></div>
+   <p>Returns the convergents <code>Aₙ / Bₙ</code> of <code>g</code>, where <code>Aₙ, Bₙ</code> are the nth continuants of <code>g</code>.</p>
+ </ul></div><div class="decl def" id="generalized_continued_fraction.convergents'_aux">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L302">generalized_continued_fraction.convergents'_aux</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/field.html#division_ring">division_ring</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/seq/seq.html#seq">seq</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair">generalized_continued_fraction.pair</a> α) →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a> → α</div></div>
+   <p>Returns the approximation of the fraction described by the given sequence up to a given position n.
+For example, <code>convergents'_aux [(1, 2), (3, 4), (5, 6)] 2 = 1 / (2 + 3 / 4)</code> and
+<code>convergents'_aux [(1, 2), (3, 4), (5, 6)] 0 = 0</code>.</p>
+ </ul></div><div class="decl def" id="generalized_continued_fraction.convergents'">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L314">generalized_continued_fraction.convergents'</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/field.html#division_ring">division_ring</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a> → α</div></div>
+   <p>Returns the convergents of <code>g</code> by evaluating the fraction described by <code>g</code> up to a given
+position <code>n</code>. For example, <code>convergents' [9; (1, 2), (3, 4), (5, 6)] 2 = 9 + 1 / (2 + 3 / 4)</code> and
+<code>convergents' [9; (1, 2), (3, 4), (5, 6)] 0 = 9</code></p>
+ </ul></div><div class="decl theorem" id="generalized_continued_fraction.ext_iff">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L323">generalized_continued_fraction.ext_iff</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{g g' : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">g <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> g' <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a>
+  g.<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.h" title="generalized_continued_fraction.h">h</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+      g'.<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.h" title="generalized_continued_fraction.h">h</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a>
+    g.<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.s" title="generalized_continued_fraction.s">s</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> g'.<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.s" title="generalized_continued_fraction.s">s</a></div></div>
+   <p>Two gcfs <code>g</code> and <code>g'</code> are equal if and only if their components are equal.</p>
+ </ul></div><div class="decl theorem" id="generalized_continued_fraction.ext"><div class="attributes">@[ext]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/continued_fractions/basic.lean#L327">generalized_continued_fraction.ext</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{g g' : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">g.<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.h" title="generalized_continued_fraction.h">h</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> g'.<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.h" title="generalized_continued_fraction.h">h</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a>
+  g.<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.s" title="generalized_continued_fraction.s">s</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> g'.<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.s" title="generalized_continued_fraction.s">s</a> →
+g <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> g'</div></div>
+   <p></p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner" id="algebra">
@@ -807,6 +1053,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1281,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,413 +1404,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="mod_doc">
-<h1>Basic Definitions/Theorems for Continued Fractions</h1>
-
-<h2>Summary</h2>
-
-<p>We define generalised, simple, and regular continued fractions and functions to evaluate their
-convergents. We follow the naming conventions from Wikipedia and [wall2018analytic], Chapter 1.</p>
-
-<h2>Main definitions</h2>
-
-<ol>
-<li>Generalised continued fractions (gcfs)</li>
-<li>Simple continued fractions (scfs)</li>
-<li>(Regular) continued fractions ((r)cfs)</li>
-<li>Computation of convergents using the recurrence relation in <code>convergents</code>.</li>
-<li>Computation of convergents by directly evaluating the fraction described by the gcf in
-<code>convergents'</code>.</li>
-</ol>
-
-<h2>Implementation notes</h2>
-
-<ol>
-<li>The most commonly used kind of continued fractions in the literature are regular continued
-fractions. We hence just call them <code>continued_fractions</code> in the library.</li>
-<li>We use sequences from <code>data.seq</code> to encode potentially infinite sequences.</li>
-</ol>
-
-<h2>References</h2>
-
-<ul>
-<li><a href="https://en.wikipedia.org/wiki/Generalized_continued_fraction">https://en.wikipedia.org/wiki/Generalized_continued_fraction</a></li>
-<li>[Wall, H.S., <em>Analytic Theory of Continued Fractions</em>][wall2018analytic]</li>
-</ul>
-
-<h2>Tags</h2>
-
-<p>numerics, number theory, approximations, fractions</p>
-</div><div class="structure"><a id="generalized_continued_fraction.pair"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L44">generalized_continued_fraction.pair</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type u_1 → Type u_1</div>
-<p>We collect a partial numerator <code>aᵢ</code> and partial denominator <code>bᵢ</code> in a pair <code>⟨aᵢ,bᵢ⟩</code>.</p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">generalized_continued_fraction.pair.a : α</div></li>
-<li><div class="structure_field">generalized_continued_fraction.pair.b : α</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="generalized_continued_fraction.pair.has_repr"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L51">generalized_continued_fraction.pair.has_repr</a></span> <span class="decl_args">(α : Type u_1)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/repr.html#has_repr">has_repr</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair">generalized_continued_fraction.pair</a> α)</div>
-<p>Make a gcf.pair printable.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/repr.html#has_repr">has_repr</a> α]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="generalized_continued_fraction.pair.has_coe_to_generalized_continued_fraction_pair"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L59">generalized_continued_fraction.pair.has_coe_to_generalized_continued_fraction_pair</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair">generalized_continued_fraction.pair</a> α) (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair">generalized_continued_fraction.pair</a> β)</div>
-<p>Coerce a pair by elementwise coercion.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{β : Type u_2}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> α β]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="thm"><a id="generalized_continued_fraction.pair.coe_to_generalized_continued_fraction_pair.reversed"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L63">generalized_continued_fraction.pair.coe_to_generalized_continued_fraction_pair.reversed</a></span>  <span class="decl_args">:</span>       <div class="decl_type">{a := ↑a, b := ↑b} = ↑{a := a, b := b}</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{β : Type u_2}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> α β]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="generalized_continued_fraction.pair.coe_to_generalized_continued_fraction_pair"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L63">generalized_continued_fraction.pair.coe_to_generalized_continued_fraction_pair</a></span>  <span class="decl_args">:</span>       <div class="decl_type">↑{a := a, b := b} = {a := ↑a, b := ↑b}</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{β : Type u_2}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> α β]</span> <span class="impl_arg">{a b : α}</span></li>
-<li>Attributes: simp, move_cast</li>
-
-
-</ul></div><div class="structure"><a id="generalized_continued_fraction"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L89">generalized_continued_fraction</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type u_1 → Type u_1</div>
-<p>A <em>generalised continued fraction</em> (gcf) is a potentially infinite expression of the form</p>
-
-<pre><code>                            a₀
-            h + --------------------------
-                              a₁
-                  b₀ + --------------------
-                                a₂
-                        b₁ + --------------
-                                    a₃
-                              b₂ + --------
-                                  b₃ + ...
-</code></pre>
-
-<p>where <code>h</code> is called the <em>head term</em> or <em>integer part</em>, the <code>aᵢ</code> are called the
-<em>partial numerators</em> and the <code>bᵢ</code> the <em>partial denominators</em> of the gcf.
-We store the sequence of partial numerators and denominators in a sequence of
-generalized_continued_fraction.pairs <code>s</code>.
-For convenience, one often writes <code>[h; (a₀, b₀), (a₁, b₁), (a₂, b₂),...]</code>.</p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">generalized_continued_fraction.h : α</div></li>
-<li><div class="structure_field">generalized_continued_fraction.s : <a href="https://leanprover-community.github.io/mathlib_docs/data/seq/seq.html#seq">seq</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair">generalized_continued_fraction.pair</a> α)</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="generalized_continued_fraction.partial_numerators"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L98">generalized_continued_fraction.partial_numerators</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/data/seq/seq.html#seq">seq</a> α</div>
-<p>Returns the sequence of partial numerators <code>aᵢ</code> of <code>g</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span></li>
-
-
-
-</ul></div><div class="def"><a id="generalized_continued_fraction.partial_denominators"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L100">generalized_continued_fraction.partial_denominators</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/data/seq/seq.html#seq">seq</a> α</div>
-<p>Returns the sequence of partial denominators <code>bᵢ</code> of <code>g</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span></li>
-
-
-
-</ul></div><div class="def"><a id="generalized_continued_fraction.terminated_at"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L103">generalized_continued_fraction.terminated_at</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α → ℕ → Prop</div>
-<p>A gcf terminated at position <code>n</code> if its sequence terminates at position <code>n</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span></li>
-
-
-
-</ul></div><div class="def"><a id="generalized_continued_fraction.terminated_at_decidable"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L106">generalized_continued_fraction.terminated_at_decidable</a></span> <span class="decl_args">(g : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α)</span> <span class="decl_args">(n : ℕ)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable">decidable</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.terminated_at">generalized_continued_fraction.terminated_at</a> g n)</div>
-<p>It is decidable whether a gcf terminated at a given position.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="generalized_continued_fraction.terminates"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L110">generalized_continued_fraction.terminates</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α → Prop</div>
-<p>A gcf terminates if its sequence terminates.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span></li>
-
-
-
-</ul></div><div class="def"><a id="generalized_continued_fraction.seq.coe_to_seq"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L118">generalized_continued_fraction.seq.coe_to_seq</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/seq/seq.html#seq">seq</a> α) (<a href="https://leanprover-community.github.io/mathlib_docs/data/seq/seq.html#seq">seq</a> β)</div>
-<p>Coerce a sequence by elementwise coercion.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{β : Type u_2}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> α β]</span></li>
-
-
-
-</ul></div><div class="def"><a id="generalized_continued_fraction.has_coe_to_generalized_continued_fraction"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L123">generalized_continued_fraction.has_coe_to_generalized_continued_fraction</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α) (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> β)</div>
-<p>Coerce a gcf by elementwise coercion.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{β : Type u_2}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> α β]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="thm"><a id="generalized_continued_fraction.coe_to_generalized_continued_fraction"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L127">generalized_continued_fraction.coe_to_generalized_continued_fraction</a></span>  <span class="decl_args">:</span>       <div class="decl_type">↑g = {h := ↑(g.h), s := ↑(g.s)}</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{β : Type u_2}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> α β]</span> <span class="impl_arg">{g : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α}</span></li>
-<li>Attributes: simp, move_cast</li>
-
-
-</ul></div><div class="thm"><a id="generalized_continued_fraction.coe_to_generalized_continued_fraction.reversed"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L127">generalized_continued_fraction.coe_to_generalized_continued_fraction.reversed</a></span>  <span class="decl_args">:</span>       <div class="decl_type">{h := ↑(g.h), s := ↑(g.s)} = ↑g</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{β : Type u_2}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> α β]</span> <span class="impl_arg">{g : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α}</span></li>
-
-
-
-</ul></div><div class="def"><a id="generalized_continued_fraction.is_simple_continued_fraction"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L149">generalized_continued_fraction.is_simple_continued_fraction</a></span> <span class="decl_args">(g : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α)</span> <span class="decl_args">:</span>       <div class="decl_type">Prop</div>
-<p>A generalized continued fraction is a <em>simple continued fraction</em> if all partial numerators are
-equal to one.</p>
-
-<pre><code>                            1
-            h + --------------------------
-                              1
-                  b₀ + --------------------
-                                1
-                        b₁ + --------------
-                                    1
-                              b₂ + --------
-                                  b₃ + ...
-</code></pre>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="simple_continued_fraction"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L172">simple_continued_fraction</a></span> <span class="decl_args">(α : Type u_1)</span> <span class="decl_args">:</span>       <div class="decl_type">Type u_1</div>
-<p>A <em>simple continued fraction</em> (scf) is a generalized continued fraction (gcf) whose partial
-numerators are equal to one.</p>
-
-<pre><code>                            1
-            h + --------------------------
-                              1
-                  b₀ + --------------------
-                                1
-                        b₁ + --------------
-                                    1
-                              b₂ + --------
-                                  b₃ + ...
-</code></pre>
-
-<p>For convenience, one often writes <code>[h; b₀, b₁, b₂,...]</code>.
-It is encoded as the subtype of gcfs that satisfy
-<code>generalized_continued_fraction.is_simple_continued_fraction</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="simple_continued_fraction.has_coe_to_generalized_continued_fraction"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L183">simple_continued_fraction.has_coe_to_generalized_continued_fraction</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#simple_continued_fraction">simple_continued_fraction</a> α) (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α)</div>
-<p>Lift a scf to a gcf using the inclusion map.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> α]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="thm"><a id="simple_continued_fraction.coe_to_generalized_continued_fraction"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L187">simple_continued_fraction.coe_to_generalized_continued_fraction</a></span>  <span class="decl_args">:</span>       <div class="decl_type">↑s = s.val</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> α]</span> <span class="impl_arg">{s : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#simple_continued_fraction">simple_continued_fraction</a> α}</span></li>
-<li>Attributes: simp, elim_cast</li>
-
-
-</ul></div><div class="def"><a id="simple_continued_fraction.is_regular_continued_fraction"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L195">simple_continued_fraction.is_regular_continued_fraction</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#simple_continued_fraction">simple_continued_fraction</a> α → Prop</div>
-<p>A simple continued fraction is a <em>(regular) continued fraction</em> ((r)cf) if all partial denominators
-<code>bᵢ</code> are positive, i.e. <code>0 &lt; bᵢ</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_zero">has_zero</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt">has_lt</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="continued_fraction"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L207">continued_fraction</a></span> <span class="decl_args">(α : Type u_1)</span> <span class="decl_args">:</span>       <div class="decl_type">Type u_1</div>
-<p>A <em>(regular) continued fraction</em> ((r)cf) is a simple continued fraction (scf) whose partial
-denominators are all positive. It is the subtype of scfs that satisfy
-<code>simple_continued_fraction.is_regular_continued_fraction</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_zero">has_zero</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt">has_lt</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="continued_fraction.has_coe_to_simple_continued_fraction"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L220">continued_fraction.has_coe_to_simple_continued_fraction</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#continued_fraction">continued_fraction</a> α) (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#simple_continued_fraction">simple_continued_fraction</a> α)</div>
-<p>Lift a cf to a scf using the inclusion map.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_zero">has_zero</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt">has_lt</a> α]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="thm"><a id="continued_fraction.coe_to_simple_continued_fraction"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L224">continued_fraction.coe_to_simple_continued_fraction</a></span>  <span class="decl_args">:</span>       <div class="decl_type">↑c = c.val</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_zero">has_zero</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt">has_lt</a> α]</span> <span class="impl_arg">{c : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#continued_fraction">continued_fraction</a> α}</span></li>
-<li>Attributes: simp, elim_cast</li>
-
-
-</ul></div><div class="def"><a id="continued_fraction.has_coe_to_generalized_continued_fraction"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L227">continued_fraction.has_coe_to_generalized_continued_fraction</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#continued_fraction">continued_fraction</a> α) (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α)</div>
-<p>Lift a cf to a scf using the inclusion map.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_zero">has_zero</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt">has_lt</a> α]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="thm"><a id="continued_fraction.coe_to_generalized_continued_fraction"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L230">continued_fraction.coe_to_generalized_continued_fraction</a></span>  <span class="decl_args">:</span>       <div class="decl_type">↑c = ↑(c.val)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_zero">has_zero</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt">has_lt</a> α]</span> <span class="impl_arg">{c : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#continued_fraction">continued_fraction</a> α}</span></li>
-<li>Attributes: simp, elim_cast</li>
-
-
-</ul></div><div class="def"><a id="generalized_continued_fraction.next_numerator"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L260">generalized_continued_fraction.next_numerator</a></span>  <span class="decl_args">:</span>       <div class="decl_type">α → α → α → α → α</div>
-<p>Returns the next numerator <code>Aₙ = bₙ-₁ * Aₙ₋₁ + aₙ-₁ * Aₙ₋₂</code>, where <code>predA</code> is <code>Aₙ₋₁</code>,
-<code>ppredA</code> is <code>Aₙ₋₂</code>, <code>a</code> is <code>aₙ₋₁</code>, and <code>b</code> is <code>bₙ₋₁</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/field.html#division_ring">division_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="generalized_continued_fraction.next_denominator"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L266">generalized_continued_fraction.next_denominator</a></span>  <span class="decl_args">:</span>       <div class="decl_type">α → α → α → α → α</div>
-<p>Returns the next denominator <code>Bₙ = bₙ-₁ * Bₙ₋₁ + aₙ-₁ * Bₙ₋₂``, where</code>predB<code>is</code>Bₙ₋₁<code>and
-</code>ppredB<code>is</code>Bₙ₋₂<code>,</code>a<code>is</code>aₙ₋₁<code>, and</code>b<code>is</code>bₙ₋₁`.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/field.html#division_ring">division_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="generalized_continued_fraction.next_continuants"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L272">generalized_continued_fraction.next_continuants</a></span>  <span class="decl_args">:</span>       <div class="decl_type">α →
-α →
-<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair">generalized_continued_fraction.pair</a> α →
-<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair">generalized_continued_fraction.pair</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair">generalized_continued_fraction.pair</a> α</div>
-<p>Returns the next continuants <code>⟨Aₙ, Bₙ⟩</code> using <code>next_numerator</code> and <code>next_denominator</code>, where <code>pred</code>
-is <code>⟨Aₙ₋₁, Bₙ₋₁⟩</code>, <code>ppred</code> is <code>⟨Aₙ₋₂, Bₙ₋₂⟩</code>, <code>a</code> is <code>aₙ₋₁</code>, and <code>b</code> is <code>bₙ₋₁</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/field.html#division_ring">division_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="generalized_continued_fraction.continuants_aux"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L276">generalized_continued_fraction.continuants_aux</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/stream.html#stream">stream</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair">generalized_continued_fraction.pair</a> α)</div>
-<p>Returns the continuants <code>⟨Aₙ₋₁, Bₙ₋₁⟩</code> of <code>g</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/field.html#division_ring">division_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="generalized_continued_fraction.continuants"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L286">generalized_continued_fraction.continuants</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/stream.html#stream">stream</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair">generalized_continued_fraction.pair</a> α)</div>
-<p>Returns the continuants <code>⟨Aₙ, Bₙ⟩</code> of <code>g</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/field.html#division_ring">division_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="generalized_continued_fraction.numerators"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L289">generalized_continued_fraction.numerators</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/stream.html#stream">stream</a> α</div>
-<p>Returns the numerators <code>Aₙ</code> of <code>g</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/field.html#division_ring">division_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="generalized_continued_fraction.denominators"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L292">generalized_continued_fraction.denominators</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/stream.html#stream">stream</a> α</div>
-<p>Returns the denominators <code>Bₙ</code> of <code>g</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/field.html#division_ring">division_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="generalized_continued_fraction.convergents"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L295">generalized_continued_fraction.convergents</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/stream.html#stream">stream</a> α</div>
-<p>Returns the convergents <code>Aₙ / Bₙ</code> of <code>g</code>, where <code>Aₙ, Bₙ</code> are the nth continuants of <code>g</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/field.html#division_ring">division_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="generalized_continued_fraction.convergents'_aux"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L302">generalized_continued_fraction.convergents'_aux</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/seq/seq.html#seq">seq</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction.pair">generalized_continued_fraction.pair</a> α) → ℕ → α</div>
-<p>Returns the approximation of the fraction described by the given sequence up to a given position n.
-For example, <code>convergents'_aux [(1, 2), (3, 4), (5, 6)] 2 = 1 / (2 + 3 / 4)</code> and
-<code>convergents'_aux [(1, 2), (3, 4), (5, 6)] 0 = 0</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/field.html#division_ring">division_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="generalized_continued_fraction.convergents'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L314">generalized_continued_fraction.convergents'</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α → ℕ → α</div>
-<p>Returns the convergents of <code>g</code> by evaluating the fraction described by <code>g</code> up to a given
-position <code>n</code>. For example, <code>convergents' [9; (1, 2), (3, 4), (5, 6)] 2 = 9 + 1 / (2 + 3 / 4)</code> and
-<code>convergents' [9; (1, 2), (3, 4), (5, 6)] 0 = 9</code></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/field.html#division_ring">division_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="generalized_continued_fraction.ext_iff"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L323">generalized_continued_fraction.ext_iff</a></span>  <span class="decl_args">:</span>       <div class="decl_type">g = g' ↔ g.h = g'.h ∧ g.s = g'.s</div>
-<p>Two gcfs <code>g</code> and <code>g'</code> are equal if and only if their components are equal.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{g g' : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="generalized_continued_fraction.ext"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean#L327">generalized_continued_fraction.ext</a></span>  <span class="decl_args">:</span>       <div class="decl_type">g.h = g'.h ∧ g.s = g'.s → g = g'</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{g g' : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/continued_fractions/basic.html#generalized_continued_fraction">generalized_continued_fraction</a> α}</span></li>
-<li>Attributes: ext</li>
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">algebra.continued_fractions.basic</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/continued_fractions/basic.lean">(view source on GitHub)</a></div><a href="#continued_fraction">continued_fraction</a><br>
-<a href="#continued_fraction.coe_to_generalized_continued_fraction">continued_fraction.coe_to_generalized_continued_fraction</a><br>
-<a href="#continued_fraction.coe_to_simple_continued_fraction">continued_fraction.coe_to_simple_continued_fraction</a><br>
-<a href="#continued_fraction.has_coe_to_generalized_continued_fraction">continued_fraction.has_coe_to_generalized_continued_fraction</a><br>
-<a href="#continued_fraction.has_coe_to_simple_continued_fraction">continued_fraction.has_coe_to_simple_continued_fraction</a><br>
-<a href="#generalized_continued_fraction">generalized_continued_fraction</a><br>
-<a href="#generalized_continued_fraction.coe_to_generalized_continued_fraction">generalized_continued_fraction.coe_to_generalized_continued_fraction</a><br>
-<a href="#generalized_continued_fraction.coe_to_generalized_continued_fraction.reversed">generalized_continued_fraction.coe_to_generalized_continued_fraction.reversed</a><br>
-<a href="#generalized_continued_fraction.continuants">generalized_continued_fraction.continuants</a><br>
-<a href="#generalized_continued_fraction.continuants_aux">generalized_continued_fraction.continuants_aux</a><br>
-<a href="#generalized_continued_fraction.convergents">generalized_continued_fraction.convergents</a><br>
-<a href="#generalized_continued_fraction.convergents'">generalized_continued_fraction.convergents'</a><br>
-<a href="#generalized_continued_fraction.convergents'_aux">generalized_continued_fraction.convergents'_aux</a><br>
-<a href="#generalized_continued_fraction.denominators">generalized_continued_fraction.denominators</a><br>
-<a href="#generalized_continued_fraction.ext">generalized_continued_fraction.ext</a><br>
-<a href="#generalized_continued_fraction.ext_iff">generalized_continued_fraction.ext_iff</a><br>
-<a href="#generalized_continued_fraction.has_coe_to_generalized_continued_fraction">generalized_continued_fraction.has_coe_to_generalized_continued_fraction</a><br>
-<a href="#generalized_continued_fraction.is_simple_continued_fraction">generalized_continued_fraction.is_simple_continued_fraction</a><br>
-<a href="#generalized_continued_fraction.next_continuants">generalized_continued_fraction.next_continuants</a><br>
-<a href="#generalized_continued_fraction.next_denominator">generalized_continued_fraction.next_denominator</a><br>
-<a href="#generalized_continued_fraction.next_numerator">generalized_continued_fraction.next_numerator</a><br>
-<a href="#generalized_continued_fraction.numerators">generalized_continued_fraction.numerators</a><br>
-<a href="#generalized_continued_fraction.pair">generalized_continued_fraction.pair</a><br>
-<a href="#generalized_continued_fraction.pair.coe_to_generalized_continued_fraction_pair">generalized_continued_fraction.pair.coe_to_generalized_continued_fraction_pair</a><br>
-<a href="#generalized_continued_fraction.pair.coe_to_generalized_continued_fraction_pair.reversed">generalized_continued_fraction.pair.coe_to_generalized_continued_fraction_pair.reversed</a><br>
-<a href="#generalized_continued_fraction.pair.has_coe_to_generalized_continued_fraction_pair">generalized_continued_fraction.pair.has_coe_to_generalized_continued_fraction_pair</a><br>
-<a href="#generalized_continued_fraction.pair.has_repr">generalized_continued_fraction.pair.has_repr</a><br>
-<a href="#generalized_continued_fraction.partial_denominators">generalized_continued_fraction.partial_denominators</a><br>
-<a href="#generalized_continued_fraction.partial_numerators">generalized_continued_fraction.partial_numerators</a><br>
-<a href="#generalized_continued_fraction.seq.coe_to_seq">generalized_continued_fraction.seq.coe_to_seq</a><br>
-<a href="#generalized_continued_fraction.terminated_at">generalized_continued_fraction.terminated_at</a><br>
-<a href="#generalized_continued_fraction.terminated_at_decidable">generalized_continued_fraction.terminated_at_decidable</a><br>
-<a href="#generalized_continued_fraction.terminates">generalized_continued_fraction.terminates</a><br>
-<a href="#simple_continued_fraction">simple_continued_fraction</a><br>
-<a href="#simple_continued_fraction.coe_to_generalized_continued_fraction">simple_continued_fraction.coe_to_generalized_continued_fraction</a><br>
-<a href="#simple_continued_fraction.has_coe_to_generalized_continued_fraction">simple_continued_fraction.has_coe_to_generalized_continued_fraction</a><br>
-<a href="#simple_continued_fraction.is_regular_continued_fraction">simple_continued_fraction.is_regular_continued_fraction</a><br>
 </div></div>
 
         </div>

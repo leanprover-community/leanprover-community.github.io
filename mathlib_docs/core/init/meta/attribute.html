@@ -7,7 +7,129 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">core.init.meta.attribute</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/attribute.lean">(view source on GitHub)</a></div><a href="#attribute.fingerprint">attribute.fingerprint</a><br>
+<a href="#attribute.get_instances">attribute.get_instances</a><br>
+<a href="#attribute.register">attribute.register</a><br>
+<a href="#get_attribute_cache_dyn">get_attribute_cache_dyn</a><br>
+<a href="#get_name_set_for_attr">get_name_set_for_attr</a><br>
+<a href="#mk_name_set_attr">mk_name_set_attr</a><br>
+<a href="#register_attribute">register_attribute</a><br>
+<a href="#user_attribute">user_attribute</a><br>
+<a href="#user_attribute.dflt_cache_cfg">user_attribute.dflt_cache_cfg</a><br>
+<a href="#user_attribute.dflt_parser">user_attribute.dflt_parser</a><br>
+<a href="#user_attribute.get_cache">user_attribute.get_cache</a><br>
+<a href="#user_attribute.get_param">user_attribute.get_param</a><br>
+<a href="#user_attribute.get_param_untyped">user_attribute.get_param_untyped</a><br>
+<a href="#user_attribute.parse_reflect">user_attribute.parse_reflect</a><br>
+<a href="#user_attribute.set">user_attribute.set</a><br>
+<a href="#user_attribute.set_untyped">user_attribute.set_untyped</a><br>
+<a href="#user_attribute_cache_cfg">user_attribute_cache_cfg</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="decl constant" id="attribute.get_instances">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/attribute.lean#L12">attribute.get_instances</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a>)</div></div>
+   <p>Get all of the declaration names that have the given attribute.
+Eg. <code>get_instances `simp</code> returns a list with the names of all of the lemmas in the environment tagged with the <code>@[simp]</code> attribute.</p>
+ </ul></div><div class="decl constant" id="attribute.fingerprint">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/attribute.lean#L14">attribute.fingerprint</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a></div></div>
+   <p>Returns a hash of <code>get_instances</code>. You can use this to tell if your attribute instances have changed.</p>
+ </ul></div><div class="decl structure" id="user_attribute_cache_cfg">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/attribute.lean#L21">user_attribute_cache_cfg</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type → Type</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="user_attribute_cache_cfg.mk_cache">mk_cache : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> cache_ty</li>
+<li class="structure_field" id="user_attribute_cache_cfg.dependencies">dependencies : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></li>
+</ul>  <p>Configuration for a user attribute cache. For example, the <code>simp</code> attribute has a cache of type simp_lemmas.</p>
+
+<ul>
+<li><code>mk_cache</code> is a function where you are given all of the declarations tagged with your attribute and you return the new value for the cache.
+   That is, <code>mk_cache</code> makes the object you want to be cached.</li>
+<li><code>dependencies</code> [TODO] is a list of other attributes whose caches need to be computed first.</li>
+</ul>
+ </ul></div><div class="decl def" id="user_attribute.dflt_cache_cfg">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/attribute.lean#L26">user_attribute.dflt_cache_cfg</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Close the current goal by filling it with the trivial <code>user_attribute_cache_cfg unit</code>.</p>
+ </ul></div><div class="decl def" id="user_attribute.dflt_parser">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/attribute.lean#L28">user_attribute.dflt_parser</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p></p>
+ </ul></div><div class="decl structure" id="user_attribute">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/attribute.lean#L54">user_attribute</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> Type <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> Type <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a> → Type</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="user_attribute.name">name : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></li>
+<li class="structure_field" id="user_attribute.descr">descr : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a></li>
+<li class="structure_field" id="user_attribute.after_set">after_set : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a>
+  (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a>)</li>
+<li class="structure_field" id="user_attribute.before_unset">before_unset : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a>)</li>
+<li class="structure_field" id="user_attribute.cache_cfg">cache_cfg : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#auto_param">auto_param</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/attribute.html#user_attribute_cache_cfg">user_attribute_cache_cfg</a> cache_ty)
+  (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name.mk_string">name.mk_string</a> "dflt_cache_cfg"
+     (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name.mk_string">name.mk_string</a> "user_attribute" <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name.anonymous">name.anonymous</a>))</li>
+<li class="structure_field" id="user_attribute.reflect_param">reflect_param : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/has_reflect.html#has_reflect">has_reflect</a> param_ty</li>
+<li class="structure_field" id="user_attribute.parser">parser : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#auto_param">auto_param</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> param_ty)
+  (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name.mk_string">name.mk_string</a> "dflt_parser"
+     (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name.mk_string">name.mk_string</a> "user_attribute" <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name.anonymous">name.anonymous</a>))</li>
+</ul>  <p>A __user attribute__ is an attribute defined by the user (ie, not built in to Lean).</p>
+
+<h3>Type parameters</h3>
+
+<ul>
+<li><code>cache_ty</code> is the type of a cached VM object that is computed from all of the declarations in the environment tagged with this attribute.</li>
+<li><code>param_ty</code> is an argument for the attribute when it is used. For instance with <code>param_ty</code> being <code>ℕ</code> you could write <code>@[my_attribute 4]</code>.</li>
+</ul>
+
+<h3>Data</h3>
+
+<p>A <code>user_attribute</code> consists of the following pieces of data:</p>
+
+<ul>
+<li><code>name</code> is the name of the attribute, eg <code>simp</code></li>
+<li><code>descr</code> is a plaintext description of the attribute for humans.</li>
+<li><code>after_set</code> is an optional handler that will be called after the attribute has been applied to a declaration.
+Failing the tactic will fail the entire <code>attribute/def/...</code> command, i.e. the attribute will
+not be applied after all.
+Declaring an <code>after_set</code> handler without a <code>before_unset</code> handler will make the attribute
+non-removable.</li>
+<li><code>before_unset</code> Optional handler that will be called before the attribute is removed from a declaration.</li>
+<li><code>cache_cfg</code> describes how to construct the user attribute's cache. See docstring for <code>user_attribute_cache_cfg</code></li>
+<li><code>reflect_param</code> demands that <code>param_ty</code> can be reflected.
+This means we have a function from <code>param_ty</code> to an expr.
+See the docstring for <code>has_reflect</code>.</li>
+<li><code>parser</code> Parser that will be invoked after parsing the attribute's name. The parse result will be reflected
+and stored and can be retrieved with <code>user_attribute.get_param</code>.</li>
+</ul>
+ </ul></div><div class="decl def" id="attribute.register">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/attribute.lean#L65">attribute.register</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Registers a new user-defined attribute. The argument must be the name of a definition of type
+  <code>user_attribute α β</code>. Once registered, you may tag declarations with this attribute.</p>
+ </ul></div><div class="decl constant" id="user_attribute.get_cache">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/attribute.lean#L69">user_attribute.get_cache</a></span> <span class="impl_arg"><span class="decl_args">{α β : Type}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/attribute.html#user_attribute">user_attribute</a> α β → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> α</div></div>
+   <p>Returns the attribute cache for the given user attribute.</p>
+ </ul></div><div class="decl def" id="user_attribute.parse_reflect">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/attribute.lean#L71">user_attribute.parse_reflect</a></span> <span class="impl_arg"><span class="decl_args">{α β : Type}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/attribute.html#user_attribute">user_attribute</a> α β → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl constant" id="user_attribute.get_param_untyped">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/attribute.lean#L74">user_attribute.get_param_untyped</a></span> <span class="impl_arg"><span class="decl_args">{α β : Type}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/attribute.html#user_attribute">user_attribute</a> α β → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl constant" id="user_attribute.set_untyped">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/attribute.lean#L76">user_attribute.set_untyped</a></span> <span class="impl_arg"><span class="decl_args">{α β : Type}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#reflected">reflected</a> β]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/attribute.html#user_attribute">user_attribute</a> α β →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option.none">option.none</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="user_attribute.get_param">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/attribute.lean#L80">user_attribute.get_param</a></span> <span class="impl_arg"><span class="decl_args">{α β : Type}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#reflected">reflected</a> β]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/attribute.html#user_attribute">user_attribute</a> α β → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> β</div></div>
+   <p>Get the value of the parameter for the attribute on a given declatation. Will fail if the attribute does not exist.</p>
+ </ul></div><div class="decl def" id="user_attribute.set">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/attribute.lean#L83">user_attribute.set</a></span> <span class="impl_arg"><span class="decl_args">{α β : Type}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#reflected">reflected</a> β]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/attribute.html#user_attribute">user_attribute</a> α β →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> →
+β →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option.none">option.none</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="register_attribute">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/attribute.lean#L90">register_attribute</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Alias for attribute.register</p>
+ </ul></div><div class="decl def" id="get_attribute_cache_dyn">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/attribute.lean#L92">get_attribute_cache_dyn</a></span> <span class="impl_arg"><span class="decl_args">{α : Type}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#reflected">reflected</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> α</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="mk_name_set_attr">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/attribute.lean#L98">mk_name_set_attr</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="get_name_set_for_attr">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/attribute.lean#L108">get_name_set_for_attr</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/rb_map.html#name_set">name_set</a></div></div>
+   <p></p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +929,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1157,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,200 +1280,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="cnst"><a id="attribute.get_instances"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/attribute.lean#L12">attribute.get_instances</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a>)</div>
-<p>Get all of the declaration names that have the given attribute.
-Eg. <code>get_instances `simp</code> returns a list with the names of all of the lemmas in the environment tagged with the <code>@[simp]</code> attribute.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="cnst"><a id="attribute.fingerprint"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/attribute.lean#L14">attribute.fingerprint</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> ℕ</div>
-<p>Returns a hash of <code>get_instances</code>. You can use this to tell if your attribute instances have changed.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="structure"><a id="user_attribute_cache_cfg"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/attribute.lean#L21">user_attribute_cache_cfg</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type → Type</div>
-<p>Configuration for a user attribute cache. For example, the <code>simp</code> attribute has a cache of type simp_lemmas.</p>
-
-<ul>
-<li><code>mk_cache</code> is a function where you are given all of the declarations tagged with your attribute and you return the new value for the cache.
-   That is, <code>mk_cache</code> makes the object you want to be cached.</li>
-<li><code>dependencies</code> [TODO] is a list of other attributes whose caches need to be computed first.</li>
-</ul>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">user_attribute_cache_cfg.mk_cache : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> cache_ty</div></li>
-<li><div class="structure_field">user_attribute_cache_cfg.dependencies : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="user_attribute.dflt_cache_cfg"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/attribute.lean#L26">user_attribute.dflt_cache_cfg</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Close the current goal by filling it with the trivial <code>user_attribute_cache_cfg unit</code>.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="user_attribute.dflt_parser"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/attribute.lean#L28">user_attribute.dflt_parser</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="structure"><a id="user_attribute"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/attribute.lean#L54">user_attribute</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> Type <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> Type <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a> → Type</div>
-<p>A __user attribute__ is an attribute defined by the user (ie, not built in to Lean).</p>
-
-<h3>Type parameters</h3>
-
-<ul>
-<li><code>cache_ty</code> is the type of a cached VM object that is computed from all of the declarations in the environment tagged with this attribute.</li>
-<li><code>param_ty</code> is an argument for the attribute when it is used. For instance with <code>param_ty</code> being <code>ℕ</code> you could write <code>@[my_attribute 4]</code>.</li>
-</ul>
-
-<h3>Data</h3>
-
-<p>A <code>user_attribute</code> consists of the following pieces of data:</p>
-
-<ul>
-<li><code>name</code> is the name of the attribute, eg <code>simp</code></li>
-<li><code>descr</code> is a plaintext description of the attribute for humans.</li>
-<li><code>after_set</code> is an optional handler that will be called after the attribute has been applied to a declaration.
-Failing the tactic will fail the entire <code>attribute/def/...</code> command, i.e. the attribute will
-not be applied after all.
-Declaring an <code>after_set</code> handler without a <code>before_unset</code> handler will make the attribute
-non-removable.</li>
-<li><code>before_unset</code> Optional handler that will be called before the attribute is removed from a declaration.</li>
-<li><code>cache_cfg</code> describes how to construct the user attribute's cache. See docstring for <code>user_attribute_cache_cfg</code></li>
-<li><code>reflect_param</code> demands that <code>param_ty</code> can be reflected.
-This means we have a function from <code>param_ty</code> to an expr.
-See the docstring for <code>has_reflect</code>.</li>
-<li><code>parser</code> Parser that will be invoked after parsing the attribute's name. The parse result will be reflected
-and stored and can be retrieved with <code>user_attribute.get_param</code>.</li>
-</ul>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">user_attribute.name : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></div></li>
-<li><div class="structure_field">user_attribute.descr : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a></div></li>
-<li><div class="structure_field">user_attribute.after_set : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → ℕ → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a>)</div></li>
-<li><div class="structure_field">user_attribute.before_unset : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a>)</div></li>
-<li><div class="structure_field">user_attribute.cache_cfg : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#auto_param">auto_param</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/attribute.html#user_attribute_cache_cfg">user_attribute_cache_cfg</a> cache_ty)
-  (name.mk_string "dflt_cache_cfg" (name.mk_string "user_attribute" name.anonymous))</div></li>
-<li><div class="structure_field">user_attribute.reflect_param : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/has_reflect.html#has_reflect">has_reflect</a> param_ty</div></li>
-<li><div class="structure_field">user_attribute.parser : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#auto_param">auto_param</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> param_ty) (name.mk_string "dflt_parser" (name.mk_string "user_attribute" name.anonymous))</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="attribute.register"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/attribute.lean#L65">attribute.register</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Registers a new user-defined attribute. The argument must be the name of a definition of type
-  <code>user_attribute α β</code>. Once registered, you may tag declarations with this attribute.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="cnst"><a id="user_attribute.get_cache"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/attribute.lean#L69">user_attribute.get_cache</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/attribute.html#user_attribute">user_attribute</a> α β → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> α</div>
-<p>Returns the attribute cache for the given user attribute.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α β : Type}</span></li>
-
-
-
-</ul></div><div class="def"><a id="user_attribute.parse_reflect"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/attribute.lean#L71">user_attribute.parse_reflect</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/attribute.html#user_attribute">user_attribute</a> α β → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α β : Type}</span></li>
-
-
-
-</ul></div><div class="cnst"><a id="user_attribute.get_param_untyped"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/attribute.lean#L74">user_attribute.get_param_untyped</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/attribute.html#user_attribute">user_attribute</a> α β → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α β : Type}</span></li>
-
-
-
-</ul></div><div class="cnst"><a id="user_attribute.set_untyped"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/attribute.lean#L76">user_attribute.set_untyped</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/attribute.html#user_attribute">user_attribute</a> α β → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> ℕ) option.none → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α β : Type}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#reflected">reflected</a> β]</span></li>
-
-
-
-</ul></div><div class="def"><a id="user_attribute.get_param"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/attribute.lean#L80">user_attribute.get_param</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/attribute.html#user_attribute">user_attribute</a> α β → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> β</div>
-<p>Get the value of the parameter for the attribute on a given declatation. Will fail if the attribute does not exist.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α β : Type}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#reflected">reflected</a> β]</span></li>
-
-
-
-</ul></div><div class="def"><a id="user_attribute.set"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/attribute.lean#L83">user_attribute.set</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/attribute.html#user_attribute">user_attribute</a> α β → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → β → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> ℕ) option.none → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α β : Type}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#reflected">reflected</a> β]</span></li>
-
-
-
-</ul></div><div class="def"><a id="register_attribute"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/attribute.lean#L90">register_attribute</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Alias for attribute.register</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="get_attribute_cache_dyn"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/attribute.lean#L92">get_attribute_cache_dyn</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> α</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#reflected">reflected</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="mk_name_set_attr"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/attribute.lean#L98">mk_name_set_attr</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="get_name_set_for_attr"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/attribute.lean#L108">get_name_set_for_attr</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/rb_map.html#name_set">name_set</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">core.init.meta.attribute</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/attribute.lean">(view source on GitHub)</a></div><a href="#attribute.fingerprint">attribute.fingerprint</a><br>
-<a href="#attribute.get_instances">attribute.get_instances</a><br>
-<a href="#attribute.register">attribute.register</a><br>
-<a href="#get_attribute_cache_dyn">get_attribute_cache_dyn</a><br>
-<a href="#get_name_set_for_attr">get_name_set_for_attr</a><br>
-<a href="#mk_name_set_attr">mk_name_set_attr</a><br>
-<a href="#register_attribute">register_attribute</a><br>
-<a href="#user_attribute">user_attribute</a><br>
-<a href="#user_attribute.dflt_cache_cfg">user_attribute.dflt_cache_cfg</a><br>
-<a href="#user_attribute.dflt_parser">user_attribute.dflt_parser</a><br>
-<a href="#user_attribute.get_cache">user_attribute.get_cache</a><br>
-<a href="#user_attribute.get_param">user_attribute.get_param</a><br>
-<a href="#user_attribute.get_param_untyped">user_attribute.get_param_untyped</a><br>
-<a href="#user_attribute.parse_reflect">user_attribute.parse_reflect</a><br>
-<a href="#user_attribute.set">user_attribute.set</a><br>
-<a href="#user_attribute.set_untyped">user_attribute.set_untyped</a><br>
-<a href="#user_attribute_cache_cfg">user_attribute_cache_cfg</a><br>
 </div></div>
 
         </div>

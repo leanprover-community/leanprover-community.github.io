@@ -7,7 +7,101 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">topology.uniform_space.compare_reals</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/uniform_space/compare_reals.lean">(view source on GitHub)</a></div><a href="#compare_reals.Bourbaki_pkg">compare_reals.Bourbaki_pkg</a><br>
+<a href="#compare_reals.Bourbakiℝ">compare_reals.Bourbakiℝ</a><br>
+<a href="#compare_reals.Q">compare_reals.Q</a><br>
+<a href="#compare_reals.Q.comm_ring_1">compare_reals.Q.comm_ring_1</a><br>
+<a href="#compare_reals.bourbaki.uniform_space">compare_reals.bourbaki.uniform_space</a><br>
+<a href="#compare_reals.compare_equiv">compare_reals.compare_equiv</a><br>
+<a href="#compare_reals.compare_uc">compare_reals.compare_uc</a><br>
+<a href="#compare_reals.compare_uc_symm">compare_reals.compare_uc_symm</a><br>
+<a href="#compare_reals.uniform_space">compare_reals.uniform_space</a><br>
+<a href="#rat.uniform_space_eq">rat.uniform_space_eq</a><br>
+<a href="#rational_cau_seq_pkg">rational_cau_seq_pkg</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="mod_doc">
+<h1>Comparison of Cauchy reals and Bourbaki reals</h1>
+
+<p>In <code>data.real.basic</code> real numbers are defined using the so called Cauchy construction (although
+it is due to Georg Cantor). More precisely, this construction applies to commutative rings equipped
+with an absolute value with values in a linear ordered field.</p>
+
+<p>On the other hand, in the <code>uniform_space</code> folder, we construct completions of general uniform
+spaces, which allows to construct the Bourbaki real numbers. In this file we build uniformly
+continuous bijections from Cauchy reals to Bourbaki reals and back. This is a cross sanity check of
+both constructions. Of course those two constructions are variations on the completion idea, simply
+with different level of generality. Comparing with Dedekind cuts or quasi-morphisms would be of a
+completely different nature.</p>
+
+<p>Note that <code>metric_space/cau_seq_filter</code> also relates the notions of Cauchy sequences in metric
+spaces and Cauchy filters in general uniform spaces, and <code>metric_space/completion</code> makes sure
+the completion (as a uniform space) of a metric space is a metric space.</p>
+
+<p>Historical note: mathlib used to define real numbers in an intermediate way, using completion
+of uniform spaces but extending multiplication in an ad-hoc way.</p>
+
+<p>TODO:</p>
+
+<ul>
+<li>Upgrade this isomorphism to a topological ring isomorphism.</li>
+<li>Do the same comparison for p-adic numbers</li>
+</ul>
+
+<h2>Implementation notes</h2>
+
+<p>The heavy work is done in <code>topology/uniform_space/abstract_completion</code> which provides an abstract
+caracterization of completions of uniform spaces, and isomorphisms between them. The only work left
+here is to prove the uniform space structure coming from the absolute value on ℚ (with values in ℚ,
+not referring to ℝ) coincides with the one coming from the metric space structure (which of course
+does use ℝ).</p>
+
+<h2>References</h2>
+
+<ul>
+<li>[N. Bourbaki, <em>Topologie générale</em>][bourbaki1966]</li>
+</ul>
+
+<h2>Tags</h2>
+
+<p>real numbers, completion, uniform spaces</p>
+</div><div class="decl theorem" id="rat.uniform_space_eq">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/uniform_space/compare_reals.lean#L57">rat.uniform_space_eq</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/absolute_value.html#is_absolute_value.uniform_space">is_absolute_value.uniform_space</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/functions.html#abs">abs</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space.to_uniform_space'">metric_space.to_uniform_space'</a></div></div>
+   <p>The metric space uniform structure on ℚ (which presupposes the existence
+of real numbers) agrees with the one coming directly from (abs : ℚ → ℚ).</p>
+ </ul></div><div class="decl def" id="rational_cau_seq_pkg">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/uniform_space/compare_reals.lean#L79">rational_cau_seq_pkg</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/abstract_completion.html#abstract_completion">abstract_completion</a> <a href="https://leanprover-community.github.io/mathlib_docs/data/rat/basic.html#rat" title="rat">ℚ</a></div></div>
+   <p>Cauchy reals packaged as a completion of ℚ using the absolute value route.</p>
+ </ul></div><div class="decl def" id="compare_reals.Q.comm_ring_1"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/uniform_space/compare_reals.lean#L94">compare_reals.Q.comm_ring_1</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_ring">comm_ring</a> <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/compare_reals.html#compare_reals.Q">compare_reals.Q</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="compare_reals.Q">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/uniform_space/compare_reals.lean#L94">compare_reals.Q</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+   <p>Type wrapper around ℚ to make sure the absolute value uniform space instance is picked up
+instead of the metric space one. We proved in rat.uniform_space_eq that they are equal,
+but they are not definitionaly equal, so it would confuse the type class system (and probably
+also human readers).</p>
+ </ul></div><div class="decl def" id="compare_reals.uniform_space"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/uniform_space/compare_reals.lean#L96">compare_reals.uniform_space</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/basic.html#uniform_space">uniform_space</a> <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/compare_reals.html#compare_reals.Q">compare_reals.Q</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="compare_reals.Bourbakiℝ">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/uniform_space/compare_reals.lean#L99">compare_reals.Bourbakiℝ</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+   <p>Real numbers constructed as in Bourbaki.</p>
+ </ul></div><div class="decl def" id="compare_reals.bourbaki.uniform_space"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/uniform_space/compare_reals.lean#L101">compare_reals.bourbaki.uniform_space</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/basic.html#uniform_space">uniform_space</a> <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/compare_reals.html#compare_reals.Bourbakiℝ">compare_reals.Bourbakiℝ</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="compare_reals.Bourbaki_pkg">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/uniform_space/compare_reals.lean#L104">compare_reals.Bourbaki_pkg</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/abstract_completion.html#abstract_completion">abstract_completion</a> <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/compare_reals.html#compare_reals.Q">compare_reals.Q</a></div></div>
+   <p>Bourbaki reals packaged as a completion of Q using the general theory.</p>
+ </ul></div><div class="decl def" id="compare_reals.compare_equiv">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/uniform_space/compare_reals.lean#L107">compare_reals.compare_equiv</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/compare_reals.html#compare_reals.Bourbakiℝ">compare_reals.Bourbakiℝ</a> <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/basic.html#equiv" title="equiv">≃</a> <a href="https://leanprover-community.github.io/mathlib_docs/data/real/basic.html#real" title="real">ℝ</a></div></div>
+   <p>The equivalence between Bourbaki and Cauchy reals</p>
+ </ul></div><div class="decl theorem" id="compare_reals.compare_uc">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/uniform_space/compare_reals.lean#L110">compare_reals.compare_uc</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/basic.html#uniform_continuous">uniform_continuous</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/compare_reals.html#compare_reals.compare_equiv">compare_reals.compare_equiv</a></div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="compare_reals.compare_uc_symm">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/uniform_space/compare_reals.lean#L113">compare_reals.compare_uc_symm</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/basic.html#uniform_continuous">uniform_continuous</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>(<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/basic.html#equiv.symm">equiv.symm</a> <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/compare_reals.html#compare_reals.compare_equiv">compare_reals.compare_equiv</a>)</div></div>
+   <p></p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +901,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1129,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,151 +1252,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="mod_doc">
-<h1>Comparison of Cauchy reals and Bourbaki reals</h1>
-
-<p>In <code>data.real.basic</code> real numbers are defined using the so called Cauchy construction (although
-it is due to Georg Cantor). More precisely, this construction applies to commutative rings equipped
-with an absolute value with values in a linear ordered field.</p>
-
-<p>On the other hand, in the <code>uniform_space</code> folder, we construct completions of general uniform
-spaces, which allows to construct the Bourbaki real numbers. In this file we build uniformly
-continuous bijections from Cauchy reals to Bourbaki reals and back. This is a cross sanity check of
-both constructions. Of course those two constructions are variations on the completion idea, simply
-with different level of generality. Comparing with Dedekind cuts or quasi-morphisms would be of a
-completely different nature.</p>
-
-<p>Note that <code>metric_space/cau_seq_filter</code> also relates the notions of Cauchy sequences in metric
-spaces and Cauchy filters in general uniform spaces, and <code>metric_space/completion</code> makes sure
-the completion (as a uniform space) of a metric space is a metric space.</p>
-
-<p>Historical note: mathlib used to define real numbers in an intermediate way, using completion
-of uniform spaces but extending multiplication in an ad-hoc way.</p>
-
-<p>TODO:</p>
-
-<ul>
-<li>Upgrade this isomorphism to a topological ring isomorphism.</li>
-<li>Do the same comparison for p-adic numbers</li>
-</ul>
-
-<h2>Implementation notes</h2>
-
-<p>The heavy work is done in <code>topology/uniform_space/abstract_completion</code> which provides an abstract
-caracterization of completions of uniform spaces, and isomorphisms between them. The only work left
-here is to prove the uniform space structure coming from the absolute value on ℚ (with values in ℚ,
-not referring to ℝ) coincides with the one coming from the metric space structure (which of course
-does use ℝ).</p>
-
-<h2>References</h2>
-
-<ul>
-<li>[N. Bourbaki, <em>Topologie générale</em>][bourbaki1966]</li>
-</ul>
-
-<h2>Tags</h2>
-
-<p>real numbers, completion, uniform spaces</p>
-</div><div class="thm"><a id="rat.uniform_space_eq"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/uniform_space/compare_reals.lean#L57">rat.uniform_space_eq</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/absolute_value.html#is_absolute_value.uniform_space">is_absolute_value.uniform_space</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/functions.html#abs">abs</a> = <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space.to_uniform_space'">metric_space.to_uniform_space'</a></div>
-<p>The metric space uniform structure on ℚ (which presupposes the existence
-of real numbers) agrees with the one coming directly from (abs : ℚ → ℚ).</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="rational_cau_seq_pkg"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/uniform_space/compare_reals.lean#L79">rational_cau_seq_pkg</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/abstract_completion.html#abstract_completion">abstract_completion</a> ℚ</div>
-<p>Cauchy reals packaged as a completion of ℚ using the absolute value route.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="compare_reals.Q"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/uniform_space/compare_reals.lean#L94">compare_reals.Q</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p>Type wrapper around ℚ to make sure the absolute value uniform space instance is picked up
-instead of the metric space one. We proved in rat.uniform_space_eq that they are equal,
-but they are not definitionaly equal, so it would confuse the type class system (and probably
-also human readers).</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="compare_reals.Q.comm_ring_1"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/uniform_space/compare_reals.lean#L94">compare_reals.Q.comm_ring_1</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_ring">comm_ring</a> <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/compare_reals.html#compare_reals.Q">compare_reals.Q</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="compare_reals.uniform_space"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/uniform_space/compare_reals.lean#L96">compare_reals.uniform_space</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/basic.html#uniform_space">uniform_space</a> <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/compare_reals.html#compare_reals.Q">compare_reals.Q</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="compare_reals.Bourbakiℝ"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/uniform_space/compare_reals.lean#L99">compare_reals.Bourbakiℝ</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p>Real numbers constructed as in Bourbaki.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="compare_reals.bourbaki.uniform_space"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/uniform_space/compare_reals.lean#L101">compare_reals.bourbaki.uniform_space</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/basic.html#uniform_space">uniform_space</a> <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/compare_reals.html#compare_reals.Bourbakiℝ">compare_reals.Bourbakiℝ</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="compare_reals.Bourbaki_pkg"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/uniform_space/compare_reals.lean#L104">compare_reals.Bourbaki_pkg</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/abstract_completion.html#abstract_completion">abstract_completion</a> <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/compare_reals.html#compare_reals.Q">compare_reals.Q</a></div>
-<p>Bourbaki reals packaged as a completion of Q using the general theory.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="compare_reals.compare_equiv"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/uniform_space/compare_reals.lean#L107">compare_reals.compare_equiv</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/compare_reals.html#compare_reals.Bourbakiℝ">compare_reals.Bourbakiℝ</a> ≃ ℝ</div>
-<p>The equivalence between Bourbaki and Cauchy reals</p>
-       <ul>
-
-
-
-
-</ul></div><div class="thm"><a id="compare_reals.compare_uc"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/uniform_space/compare_reals.lean#L110">compare_reals.compare_uc</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/basic.html#uniform_continuous">uniform_continuous</a> ⇑compare_reals.compare_equiv</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="thm"><a id="compare_reals.compare_uc_symm"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/uniform_space/compare_reals.lean#L113">compare_reals.compare_uc_symm</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/basic.html#uniform_continuous">uniform_continuous</a> ⇑(<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/basic.html#equiv.symm">equiv.symm</a> <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/compare_reals.html#compare_reals.compare_equiv">compare_reals.compare_equiv</a>)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">topology.uniform_space.compare_reals</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/uniform_space/compare_reals.lean">(view source on GitHub)</a></div><a href="#compare_reals.Bourbaki_pkg">compare_reals.Bourbaki_pkg</a><br>
-<a href="#compare_reals.Bourbakiℝ">compare_reals.Bourbakiℝ</a><br>
-<a href="#compare_reals.Q">compare_reals.Q</a><br>
-<a href="#compare_reals.Q.comm_ring_1">compare_reals.Q.comm_ring_1</a><br>
-<a href="#compare_reals.bourbaki.uniform_space">compare_reals.bourbaki.uniform_space</a><br>
-<a href="#compare_reals.compare_equiv">compare_reals.compare_equiv</a><br>
-<a href="#compare_reals.compare_uc">compare_reals.compare_uc</a><br>
-<a href="#compare_reals.compare_uc_symm">compare_reals.compare_uc_symm</a><br>
-<a href="#compare_reals.uniform_space">compare_reals.uniform_space</a><br>
-<a href="#rat.uniform_space_eq">rat.uniform_space_eq</a><br>
-<a href="#rational_cau_seq_pkg">rational_cau_seq_pkg</a><br>
 </div></div>
 
         </div>

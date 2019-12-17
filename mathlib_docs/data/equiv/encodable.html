@@ -7,7 +7,276 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">data.equiv.encodable</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean">(view source on GitHub)</a></div><a href="#encodable">encodable</a><br>
+<a href="#encodable.axiom_of_choice">encodable.axiom_of_choice</a><br>
+<a href="#encodable.bool">encodable.bool</a><br>
+<a href="#encodable.choose">encodable.choose</a><br>
+<a href="#encodable.choose_spec">encodable.choose_spec</a><br>
+<a href="#encodable.choose_x">encodable.choose_x</a><br>
+<a href="#encodable.decidable_eq_of_encodable">encodable.decidable_eq_of_encodable</a><br>
+<a href="#encodable.decidable_range_encode">encodable.decidable_range_encode</a><br>
+<a href="#encodable.decode2">encodable.decode2</a><br>
+<a href="#encodable.decode2_inj">encodable.decode2_inj</a><br>
+<a href="#encodable.decode2_is_partial_inv">encodable.decode2_is_partial_inv</a><br>
+<a href="#encodable.decode_ge_two">encodable.decode_ge_two</a><br>
+<a href="#encodable.decode_nat">encodable.decode_nat</a><br>
+<a href="#encodable.decode_of_equiv">encodable.decode_of_equiv</a><br>
+<a href="#encodable.decode_one">encodable.decode_one</a><br>
+<a href="#encodable.decode_option_succ">encodable.decode_option_succ</a><br>
+<a href="#encodable.decode_option_zero">encodable.decode_option_zero</a><br>
+<a href="#encodable.decode_prod_val">encodable.decode_prod_val</a><br>
+<a href="#encodable.decode_sigma">encodable.decode_sigma</a><br>
+<a href="#encodable.decode_sigma_val">encodable.decode_sigma_val</a><br>
+<a href="#encodable.decode_subtype">encodable.decode_subtype</a><br>
+<a href="#encodable.decode_sum">encodable.decode_sum</a><br>
+<a href="#encodable.decode_sum_val">encodable.decode_sum_val</a><br>
+<a href="#encodable.decode_unit_succ">encodable.decode_unit_succ</a><br>
+<a href="#encodable.decode_unit_zero">encodable.decode_unit_zero</a><br>
+<a href="#encodable.decode_zero">encodable.decode_zero</a><br>
+<a href="#encodable.empty">encodable.empty</a><br>
+<a href="#encodable.encode_ff">encodable.encode_ff</a><br>
+<a href="#encodable.encode_injective">encodable.encode_injective</a><br>
+<a href="#encodable.encode_inl">encodable.encode_inl</a><br>
+<a href="#encodable.encode_inr">encodable.encode_inr</a><br>
+<a href="#encodable.encode_nat">encodable.encode_nat</a><br>
+<a href="#encodable.encode_none">encodable.encode_none</a><br>
+<a href="#encodable.encode_of_equiv">encodable.encode_of_equiv</a><br>
+<a href="#encodable.encode_prod_val">encodable.encode_prod_val</a><br>
+<a href="#encodable.encode_sigma">encodable.encode_sigma</a><br>
+<a href="#encodable.encode_sigma_val">encodable.encode_sigma_val</a><br>
+<a href="#encodable.encode_some">encodable.encode_some</a><br>
+<a href="#encodable.encode_star">encodable.encode_star</a><br>
+<a href="#encodable.encode_subtype">encodable.encode_subtype</a><br>
+<a href="#encodable.encode_sum">encodable.encode_sum</a><br>
+<a href="#encodable.encode_tt">encodable.encode_tt</a><br>
+<a href="#encodable.encodek2">encodable.encodek2</a><br>
+<a href="#encodable.equiv_range_encode">encodable.equiv_range_encode</a><br>
+<a href="#encodable.fin">encodable.fin</a><br>
+<a href="#encodable.int">encodable.int</a><br>
+<a href="#encodable.mem_decode2">encodable.mem_decode2</a><br>
+<a href="#encodable.mem_decode2'">encodable.mem_decode2'</a><br>
+<a href="#encodable.nat">encodable.nat</a><br>
+<a href="#encodable.of_equiv">encodable.of_equiv</a><br>
+<a href="#encodable.of_inj">encodable.of_inj</a><br>
+<a href="#encodable.of_left_injection">encodable.of_left_injection</a><br>
+<a href="#encodable.of_left_inverse">encodable.of_left_inverse</a><br>
+<a href="#encodable.option">encodable.option</a><br>
+<a href="#encodable.plift">encodable.plift</a><br>
+<a href="#encodable.prod">encodable.prod</a><br>
+<a href="#encodable.sigma">encodable.sigma</a><br>
+<a href="#encodable.skolem">encodable.skolem</a><br>
+<a href="#encodable.subtype">encodable.subtype</a><br>
+<a href="#encodable.sum">encodable.sum</a><br>
+<a href="#encodable.ulift">encodable.ulift</a><br>
+<a href="#encodable.unit">encodable.unit</a><br>
+<a href="#quot.encodable_quotient">quot.encodable_quotient</a><br>
+<a href="#quot.rep">quot.rep</a><br>
+<a href="#quot.rep_spec">quot.rep_spec</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="decl structure" id="encodable"><div class="attributes">@[class]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L16">encodable</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type u_1 → Type u_1</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="encodable.encode">encode : α → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a></li>
+<li class="structure_field" id="encodable.decode">decode : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> α</li>
+<li class="structure_field" id="encodable.encodek">encodek : ∀ (a : α),
+  <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode">encodable.decode</a> α (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a> a) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option.some">option.some</a> a</li>
+</ul>  <p>An encodable type is a "constructively countable" type. This is where
+ we have an explicit injection <code>encode : α → nat</code> and a partial inverse
+ <code>decode : nat → option α</code>. This makes the range of <code>encode</code> decidable,
+ although it is not decidable if <code>α</code> is finite or not.</p>
+ <details class="instances"><summary>Instances</summary><ul><li><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/denumerable.html#denumerable.to_encodable">denumerable.to_encodable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/computability/primrec.html#primcodable.to_encodable">primcodable.to_encodable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.nat">encodable.nat</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.empty">encodable.empty</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.unit">encodable.unit</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.option">encodable.option</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.sum">encodable.sum</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.bool">encodable.bool</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.sigma">encodable.sigma</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.prod">encodable.prod</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.subtype">encodable.subtype</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.fin">encodable.fin</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.int">encodable.int</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.ulift">encodable.ulift</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.plift">encodable.plift</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/rat/basic.html#rat.encodable">rat.encodable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/list.html#encodable.list">encodable.list</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/list.html#encodable.multiset">encodable.multiset</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/list.html#encodable.vector">encodable.vector</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/list.html#encodable.fin_arrow">encodable.fin_arrow</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/list.html#encodable.fin_pi">encodable.fin_pi</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/list.html#encodable.array">encodable.array</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/list.html#encodable.finset">encodable.finset</a></li></ul></details></ul></div><div class="decl theorem" id="encodable.encode_injective">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L24">encodable.encode_injective</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/function.html#function.injective">function.injective</a> <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.decidable_eq_of_encodable">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L29">encodable.decidable_eq_of_encodable</a></span> <span class="decl_args">(α : Type u_1)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_eq">decidable_eq</a> α</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.of_left_injection">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L32">encodable.of_left_injection</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="decl_args">(f : β → α)</span> <span class="decl_args">(finv : α → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> β)</span> <span class="decl_args">:</span>     <div class="decl_type">(∀ (b : β), finv (f b) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option.some">option.some</a> b) → <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.of_left_inverse">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L38">encodable.of_left_inverse</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="decl_args">(f : β → α)</span> <span class="decl_args">(finv : α → β)</span> <span class="decl_args">:</span>     <div class="decl_type">(∀ (b : β), finv (f b) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> b) → <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.of_equiv">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L42">encodable.of_equiv</a></span> <span class="impl_arg"><span class="decl_args">{β : Type u_2}</span></span> <span class="decl_args">(α : Type u_1)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type">β <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/basic.html#equiv" title="equiv">≃</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.encode_of_equiv"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L45">encodable.encode_of_equiv</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="decl_args">(e : β <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/basic.html#equiv" title="equiv">≃</a> α)</span> <span class="decl_args">(b : β)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>e b)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.decode_of_equiv"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L48">encodable.decode_of_equiv</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="decl_args">(e : β <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/basic.html#equiv" title="equiv">≃</a> α)</span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode">encodable.decode</a> β n <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/option/basic.html#option.map">option.map</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>(<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/basic.html#equiv.symm">equiv.symm</a> e)
+    (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode">encodable.decode</a> α n)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.nat"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L51">encodable.nat</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a></div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.encode_nat"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L54">encodable.encode_nat</a></span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a> n <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> n</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.decode_nat"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L55">encodable.decode_nat</a></span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode">encodable.decode</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a> n <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option.some">option.some</a> n</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.empty"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L57">encodable.empty</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#empty">empty</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.unit"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L60">encodable.unit</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit">punit</a></div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.encode_star"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L63">encodable.encode_star</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit.star">punit.star</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> 0</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.decode_unit_zero"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L65">encodable.decode_unit_zero</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode">encodable.decode</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit">punit</a> 0 <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option.some">option.some</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit.star">punit.star</a></div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.decode_unit_succ"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L66">encodable.decode_unit_succ</a></span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode">encodable.decode</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit">punit</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat.succ">nat.succ</a> n) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option.none">option.none</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.option"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L68">encodable.option</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[h : <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> α)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.encode_none"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L73">encodable.encode_none</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option.none">option.none</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> 0</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.encode_some"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L74">encodable.encode_some</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="decl_args">(a : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option.some">option.some</a> a) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat.succ">nat.succ</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a> a)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.decode_option_zero"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L77">encodable.decode_option_zero</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode">encodable.decode</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> α) 0 <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option.some">option.some</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option.none">option.none</a></div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.decode_option_succ"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L78">encodable.decode_option_succ</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode">encodable.decode</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> α) (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat.succ">nat.succ</a> n) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/option/basic.html#option.map">option.map</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option.some">option.some</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode">encodable.decode</a> α n)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.decode2">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L81">encodable.decode2</a></span> <span class="decl_args">(α : Type u_1)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> α</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.mem_decode2'">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L84">encodable.mem_decode2'</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>}</span></span> <span class="impl_arg"><span class="decl_args">{a : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode2">encodable.decode2</a> α n <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a>
+  a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode">encodable.decode</a> α n <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a> a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> n</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.mem_decode2">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L89">encodable.mem_decode2</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>}</span></span> <span class="impl_arg"><span class="decl_args">{a : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode2">encodable.decode2</a> α n <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a> a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> n</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.decode2_is_partial_inv">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L93">encodable.decode2_is_partial_inv</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/logic/function.html#function.is_partial_inv">function.is_partial_inv</a> <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a>
+  (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode2">encodable.decode2</a> α)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.decode2_inj">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L96">encodable.decode2_inj</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>}</span></span> <span class="impl_arg"><span class="decl_args">{a₁ a₂ : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a₁ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode2">encodable.decode2</a> α n →
+a₂ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode2">encodable.decode2</a> α n → a₁ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> a₂</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.encodek2">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L100">encodable.encodek2</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="decl_args">(a : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode2">encodable.decode2</a> α (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a> a) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option.some">option.some</a> a</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.decidable_range_encode">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L103">encodable.decidable_range_encode</a></span> <span class="decl_args">(α : Type u_1)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_pred">decidable_pred</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/set/basic.html#set.range">set.range</a> <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.equiv_range_encode">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L108">encodable.equiv_range_encode</a></span> <span class="decl_args">(α : Type u_1)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type">α <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/basic.html#equiv" title="equiv">≃</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_sort" title="coe_sort">↥</a>(<a href="https://leanprover-community.github.io/mathlib_docs/data/set/basic.html#set.range">set.range</a> <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.encode_sum">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L124">encodable.encode_sum</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β]</span></span> <span class="decl_args">:</span>     <div class="decl_type">α <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sum" title="sum">⊕</a> β → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.decode_sum">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L128">encodable.decode_sum</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> (α <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sum" title="sum">⊕</a> β)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.sum"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L134">encodable.sum</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (α <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sum" title="sum">⊕</a> β)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.encode_inl"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L138">encodable.encode_inl</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β]</span></span> <span class="decl_args">(a : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sum.inl">sum.inl</a> a) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bit0">bit0</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a> a)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.encode_inr"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L140">encodable.encode_inr</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β]</span></span> <span class="decl_args">(b : β)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sum.inr">sum.inr</a> b) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bit1">bit1</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a> b)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.decode_sum_val"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L142">encodable.decode_sum_val</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β]</span></span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode">encodable.decode</a> (α <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sum" title="sum">⊕</a> β) n <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode_sum">encodable.decode_sum</a> n</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.bool"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L147">encodable.bool</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.encode_tt"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L150">encodable.encode_tt</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool.tt">bool.tt</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> 1</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.encode_ff"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L151">encodable.encode_ff</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool.ff">bool.ff</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> 0</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.decode_zero"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L153">encodable.decode_zero</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode">encodable.decode</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> 0 <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option.some">option.some</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool.ff">bool.ff</a></div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.decode_one"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L154">encodable.decode_one</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode">encodable.decode</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> 1 <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option.some">option.some</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool.tt">bool.tt</a></div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.decode_ge_two">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L156">encodable.decode_ge_two</a></span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">:</span>     <div class="decl_type">2 <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> n →
+<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode">encodable.decode</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> n <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option.none">option.none</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.encode_sigma">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L170">encodable.encode_sigma</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{γ : α → Type u_3}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[Π (a : α), <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (γ a)]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sigma">sigma</a> γ → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.decode_sigma">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L173">encodable.decode_sigma</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{γ : α → Type u_3}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[Π (a : α), <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (γ a)]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sigma">sigma</a> γ)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.sigma"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L177">encodable.sigma</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{γ : α → Type u_3}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[Π (a : α), <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (γ a)]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sigma">sigma</a> γ)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.decode_sigma_val"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L181">encodable.decode_sigma_val</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{γ : α → Type u_3}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[Π (a : α), <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (γ a)]</span></span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode">encodable.decode</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sigma">sigma</a> γ) n <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/option/basic.html#option.bind">option.bind</a>
+    (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode">encodable.decode</a> α ((<a href="https://leanprover-community.github.io/mathlib_docs/data/nat/pairing.html#nat.unpair">nat.unpair</a> n).<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod.fst" title="prod.fst">fst</a>))
+    (λ (a : α),
+       <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/option/basic.html#option.map">option.map</a> (sigma.mk a)
+         (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode">encodable.decode</a> (γ a) ((<a href="https://leanprover-community.github.io/mathlib_docs/data/nat/pairing.html#nat.unpair">nat.unpair</a> n).<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod.snd" title="prod.snd">snd</a>)))</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.encode_sigma_val"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L185">encodable.encode_sigma_val</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{γ : α → Type u_3}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[Π (a : α), <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (γ a)]</span></span> <span class="decl_args">(a : α)</span> <span class="decl_args">(b : γ a)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a> <span title="sigma.mk">⟨</span>a, b⟩ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/data/nat/pairing.html#nat.mkpair">nat.mkpair</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a> a)
+    (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a> b)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.prod"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L193">encodable.prod</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (α <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> β)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.decode_prod_val"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L196">encodable.decode_prod_val</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β]</span></span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode">encodable.decode</a> (α <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> β) n <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/option/basic.html#option.bind">option.bind</a>
+    (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode">encodable.decode</a> α ((<a href="https://leanprover-community.github.io/mathlib_docs/data/nat/pairing.html#nat.unpair">nat.unpair</a> n).<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod.fst" title="prod.fst">fst</a>))
+    (λ (a : α),
+       <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/option/basic.html#option.map">option.map</a> (prod.mk a)
+         (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode">encodable.decode</a> β ((<a href="https://leanprover-community.github.io/mathlib_docs/data/nat/pairing.html#nat.unpair">nat.unpair</a> n).<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod.snd" title="prod.snd">snd</a>)))</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.encode_prod_val"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L202">encodable.encode_prod_val</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β]</span></span> <span class="decl_args">(a : α)</span> <span class="decl_args">(b : β)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a> (a, b) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/data/nat/pairing.html#nat.mkpair">nat.mkpair</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a> a)
+    (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.encode">encodable.encode</a> b)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.encode_subtype">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L214">encodable.encode_subtype</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{P : α → Prop}</span></span> <span class="impl_arg"><span class="decl_args">[encA : <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type">{a // P a} → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.decode_subtype">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L218">encodable.decode_subtype</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{P : α → Prop}</span></span> <span class="impl_arg"><span class="decl_args">[encA : <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[decP : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_pred">decidable_pred</a> P]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> {a // P a}</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.subtype"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L222">encodable.subtype</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{P : α → Prop}</span></span> <span class="impl_arg"><span class="decl_args">[encA : <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[decP : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_pred">decidable_pred</a> P]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> {a // P a}</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.fin"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L227">encodable.fin</a></span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/fin/basic.html#fin">fin</a> n)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.int"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L230">encodable.int</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.ulift"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L233">encodable.ulift</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#ulift">ulift</a> α)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.plift"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L236">encodable.plift</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#plift">plift</a> α)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.of_inj">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L239">encodable.of_inj</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β]</span></span> <span class="decl_args">(f : α → β)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/function.html#function.injective">function.injective</a> f → <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.choose_x">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L267">encodable.choose_x</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{p : α → Prop}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_pred">decidable_pred</a> p]</span></span> <span class="decl_args">:</span>     <div class="decl_type">(∃ (x : α), p x) → {a // p a}</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="encodable.choose">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L274">encodable.choose</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{p : α → Prop}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_pred">decidable_pred</a> p]</span></span> <span class="decl_args">:</span>     <div class="decl_type">(∃ (x : α), p x) → α</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.choose_spec">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L276">encodable.choose_spec</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{p : α → Prop}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_pred">decidable_pred</a> p]</span></span> <span class="decl_args">(h : ∃ (x : α), p x)</span> <span class="decl_args">:</span>     <div class="decl_type">p (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.choose">encodable.choose</a> h)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.axiom_of_choice">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L280">encodable.axiom_of_choice</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{β : α → Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">{R : Π (x : α), β x → Prop}</span></span> <span class="impl_arg"><span class="decl_args">[Π (a : α), <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (β a)]</span></span> <span class="impl_arg"><span class="decl_args">[Π (x : α) (y : β x), <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable">decidable</a> (R x y)]</span></span> <span class="decl_args">:</span>     <div class="decl_type">(∀ (x : α), ∃ (y : β x), R x y) → (∃ (f : Π (a : α), β a), ∀ (x : α), R x (f x))</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="encodable.skolem">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L285">encodable.skolem</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{β : α → Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">{P : Π (x : α), β x → Prop}</span></span> <span class="impl_arg"><span class="decl_args">[c : Π (a : α), <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (β a)]</span></span> <span class="impl_arg"><span class="decl_args">[d : Π (x : α) (y : β x), <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable">decidable</a> (P x y)]</span></span> <span class="decl_args">:</span>     <div class="decl_type">(∀ (x : α), ∃ (y : β x), P x y) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a> ∃ (f : Π (a : α), β a), ∀ (x : α), P x (f x)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="quot.rep">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L297">quot.rep</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{s : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/setoid.html#setoid">setoid</a> α}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_rel">decidable_rel</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_equiv.equiv">has_equiv.equiv</a>]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/quot.html#quotient">quotient</a> s → α</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="quot.rep_spec">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L300">quot.rep_spec</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{s : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/setoid.html#setoid">setoid</a> α}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_rel">decidable_rel</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_equiv.equiv">has_equiv.equiv</a>]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="decl_args">(q : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/quot.html#quotient">quotient</a> s)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/quot.html#quotient.mk" title="quotient.mk">⟦</a><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#quot.rep">quot.rep</a> q<a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/quot.html#quotient.mk" title="quotient.mk">⟧</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> q</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="quot.encodable_quotient">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/data/equiv/encodable.lean#L303">quot.encodable_quotient</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{s : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/setoid.html#setoid">setoid</a> α}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_rel">decidable_rel</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_equiv.equiv">has_equiv.equiv</a>]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/quot.html#quotient">quotient</a> s)</div></div>
+   <p></p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +1076,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1304,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,546 +1427,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="structure"><a id="encodable"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L16">encodable</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type u_1 → Type u_1</div>
-<p>An encodable type is a "constructively countable" type. This is where
- we have an explicit injection <code>encode : α → nat</code> and a partial inverse
- <code>decode : nat → option α</code>. This makes the range of <code>encode</code> decidable,
- although it is not decidable if <code>α</code> is finite or not.</p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">encodable.encode : α → ℕ</div></li>
-<li><div class="structure_field">encodable.decode : ℕ → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> α</div></li>
-<li><div class="structure_field">encodable.encodek : ∀ (a : α), encodable.decode α (encodable.encode a) = option.some a</div></li>
-</ul></li>
-
-</ul></div><div class="thm"><a id="encodable.encode_injective"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L24">encodable.encode_injective</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/function.html#function.injective">function.injective</a> encodable.encode</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="encodable.decidable_eq_of_encodable"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L29">encodable.decidable_eq_of_encodable</a></span> <span class="decl_args">(α : Type u_1)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_eq">decidable_eq</a> α</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="encodable.of_left_injection"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L32">encodable.of_left_injection</a></span> <span class="decl_args">(f : β → α)</span> <span class="decl_args">(finv : α → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> β)</span> <span class="decl_args">:</span>       <div class="decl_type">(∀ (b : β), finv (f b) = option.some b) → <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{β : Type u_2}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="encodable.of_left_inverse"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L38">encodable.of_left_inverse</a></span> <span class="decl_args">(f : β → α)</span> <span class="decl_args">(finv : α → β)</span> <span class="decl_args">:</span>       <div class="decl_type">(∀ (b : β), finv (f b) = b) → <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{β : Type u_2}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="encodable.of_equiv"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L42">encodable.of_equiv</a></span> <span class="decl_args">(α : Type u_1)</span> <span class="decl_args">:</span>       <div class="decl_type">β ≃ α → <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{β : Type u_2}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="encodable.encode_of_equiv"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L45">encodable.encode_of_equiv</a></span> <span class="decl_args">(e : β ≃ α)</span> <span class="decl_args">(b : β)</span> <span class="decl_args">:</span>       <div class="decl_type">encodable.encode b = encodable.encode (⇑e b)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{β : Type u_2}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="encodable.decode_of_equiv"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L48">encodable.decode_of_equiv</a></span> <span class="decl_args">(e : β ≃ α)</span> <span class="decl_args">(n : ℕ)</span> <span class="decl_args">:</span>       <div class="decl_type">encodable.decode β n = <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/option/basic.html#option.map">option.map</a> ⇑(<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/basic.html#equiv.symm">equiv.symm</a> e) (encodable.decode α n)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{β : Type u_2}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="def"><a id="encodable.nat"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L51">encodable.nat</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> ℕ</div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="thm"><a id="encodable.encode_nat"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L54">encodable.encode_nat</a></span> <span class="decl_args">(n : ℕ)</span> <span class="decl_args">:</span>       <div class="decl_type">encodable.encode n = n</div>
-<p></p>
-       <ul>
-
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="encodable.decode_nat"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L55">encodable.decode_nat</a></span> <span class="decl_args">(n : ℕ)</span> <span class="decl_args">:</span>       <div class="decl_type">encodable.decode ℕ n = option.some n</div>
-<p></p>
-       <ul>
-
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="def"><a id="encodable.empty"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L57">encodable.empty</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#empty">empty</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="encodable.unit"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L60">encodable.unit</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit">punit</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="thm"><a id="encodable.encode_star"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L63">encodable.encode_star</a></span>  <span class="decl_args">:</span>       <div class="decl_type">encodable.encode punit.star = 0</div>
-<p></p>
-       <ul>
-
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="encodable.decode_unit_zero"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L65">encodable.decode_unit_zero</a></span>  <span class="decl_args">:</span>       <div class="decl_type">encodable.decode <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit">punit</a> 0 = option.some punit.star</div>
-<p></p>
-       <ul>
-
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="encodable.decode_unit_succ"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L66">encodable.decode_unit_succ</a></span> <span class="decl_args">(n : ℕ)</span> <span class="decl_args">:</span>       <div class="decl_type">encodable.decode <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit">punit</a> (nat.succ n) = option.none</div>
-<p></p>
-       <ul>
-
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="def"><a id="encodable.option"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L68">encodable.option</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> α)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[h : <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="thm"><a id="encodable.encode_none"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L73">encodable.encode_none</a></span>  <span class="decl_args">:</span>       <div class="decl_type">encodable.encode option.none = 0</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="encodable.encode_some"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L74">encodable.encode_some</a></span> <span class="decl_args">(a : α)</span> <span class="decl_args">:</span>       <div class="decl_type">encodable.encode (option.some a) = nat.succ (encodable.encode a)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="encodable.decode_option_zero"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L77">encodable.decode_option_zero</a></span>  <span class="decl_args">:</span>       <div class="decl_type">encodable.decode (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> α) 0 = option.some option.none</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="encodable.decode_option_succ"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L78">encodable.decode_option_succ</a></span> <span class="decl_args">(n : ℕ)</span> <span class="decl_args">:</span>       <div class="decl_type">encodable.decode (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> α) (nat.succ n) = <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/option/basic.html#option.map">option.map</a> option.some (encodable.decode α n)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="def"><a id="encodable.decode2"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L81">encodable.decode2</a></span> <span class="decl_args">(α : Type u_1)</span> <span class="decl_args">:</span>       <div class="decl_type">ℕ → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> α</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="encodable.mem_decode2'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L84">encodable.mem_decode2'</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a ∈ <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode2">encodable.decode2</a> α n ↔ a ∈ encodable.decode α n ∧ encodable.encode a = n</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span> <span class="impl_arg">{n : ℕ}</span> <span class="impl_arg">{a : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="encodable.mem_decode2"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L89">encodable.mem_decode2</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a ∈ <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode2">encodable.decode2</a> α n ↔ encodable.encode a = n</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span> <span class="impl_arg">{n : ℕ}</span> <span class="impl_arg">{a : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="encodable.decode2_is_partial_inv"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L93">encodable.decode2_is_partial_inv</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/logic/function.html#function.is_partial_inv">function.is_partial_inv</a> encodable.encode (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode2">encodable.decode2</a> α)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="encodable.decode2_inj"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L96">encodable.decode2_inj</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a₁ ∈ <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode2">encodable.decode2</a> α n → a₂ ∈ <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode2">encodable.decode2</a> α n → a₁ = a₂</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span> <span class="impl_arg">{n : ℕ}</span> <span class="impl_arg">{a₁ a₂ : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="encodable.encodek2"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L100">encodable.encodek2</a></span> <span class="decl_args">(a : α)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode2">encodable.decode2</a> α (encodable.encode a) = option.some a</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="encodable.decidable_range_encode"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L103">encodable.decidable_range_encode</a></span> <span class="decl_args">(α : Type u_1)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_pred">decidable_pred</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/set/basic.html#set.range">set.range</a> encodable.encode)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="encodable.equiv_range_encode"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L108">encodable.equiv_range_encode</a></span> <span class="decl_args">(α : Type u_1)</span> <span class="decl_args">:</span>       <div class="decl_type">α ≃ ↥(<a href="https://leanprover-community.github.io/mathlib_docs/data/set/basic.html#set.range">set.range</a> encodable.encode)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="encodable.encode_sum"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L124">encodable.encode_sum</a></span>  <span class="decl_args">:</span>       <div class="decl_type">α ⊕ β → ℕ</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{β : Type u_2}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β]</span></li>
-
-
-
-</ul></div><div class="def"><a id="encodable.decode_sum"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L128">encodable.decode_sum</a></span>  <span class="decl_args">:</span>       <div class="decl_type">ℕ → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> (α ⊕ β)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{β : Type u_2}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β]</span></li>
-
-
-
-</ul></div><div class="def"><a id="encodable.sum"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L134">encodable.sum</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (α ⊕ β)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{β : Type u_2}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="thm"><a id="encodable.encode_inl"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L138">encodable.encode_inl</a></span> <span class="decl_args">(a : α)</span> <span class="decl_args">:</span>       <div class="decl_type">encodable.encode (sum.inl a) = <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bit0">bit0</a> (encodable.encode a)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{β : Type u_2}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="encodable.encode_inr"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L140">encodable.encode_inr</a></span> <span class="decl_args">(b : β)</span> <span class="decl_args">:</span>       <div class="decl_type">encodable.encode (sum.inr b) = <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bit1">bit1</a> (encodable.encode b)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{β : Type u_2}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="encodable.decode_sum_val"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L142">encodable.decode_sum_val</a></span> <span class="decl_args">(n : ℕ)</span> <span class="decl_args">:</span>       <div class="decl_type">encodable.decode (α ⊕ β) n = <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.decode_sum">encodable.decode_sum</a> n</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{β : Type u_2}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="def"><a id="encodable.bool"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L147">encodable.bool</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="thm"><a id="encodable.encode_tt"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L150">encodable.encode_tt</a></span>  <span class="decl_args">:</span>       <div class="decl_type">encodable.encode bool.tt = 1</div>
-<p></p>
-       <ul>
-
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="encodable.encode_ff"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L151">encodable.encode_ff</a></span>  <span class="decl_args">:</span>       <div class="decl_type">encodable.encode bool.ff = 0</div>
-<p></p>
-       <ul>
-
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="encodable.decode_zero"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L153">encodable.decode_zero</a></span>  <span class="decl_args">:</span>       <div class="decl_type">encodable.decode <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> 0 = option.some bool.ff</div>
-<p></p>
-       <ul>
-
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="encodable.decode_one"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L154">encodable.decode_one</a></span>  <span class="decl_args">:</span>       <div class="decl_type">encodable.decode <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> 1 = option.some bool.tt</div>
-<p></p>
-       <ul>
-
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="encodable.decode_ge_two"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L156">encodable.decode_ge_two</a></span> <span class="decl_args">(n : ℕ)</span> <span class="decl_args">:</span>       <div class="decl_type">2 ≤ n → encodable.decode <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> n = option.none</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="encodable.encode_sigma"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L170">encodable.encode_sigma</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sigma">sigma</a> γ → ℕ</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{γ : α → Type u_3}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span> <span class="impl_arg">[Π (a : α), <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (γ a)]</span></li>
-
-
-
-</ul></div><div class="def"><a id="encodable.decode_sigma"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L173">encodable.decode_sigma</a></span>  <span class="decl_args">:</span>       <div class="decl_type">ℕ → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sigma">sigma</a> γ)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{γ : α → Type u_3}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span> <span class="impl_arg">[Π (a : α), <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (γ a)]</span></li>
-
-
-
-</ul></div><div class="def"><a id="encodable.sigma"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L177">encodable.sigma</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sigma">sigma</a> γ)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{γ : α → Type u_3}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span> <span class="impl_arg">[Π (a : α), <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (γ a)]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="thm"><a id="encodable.decode_sigma_val"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L181">encodable.decode_sigma_val</a></span> <span class="decl_args">(n : ℕ)</span> <span class="decl_args">:</span>       <div class="decl_type">encodable.decode (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sigma">sigma</a> γ) n =
-  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/option/basic.html#option.bind">option.bind</a> (encodable.decode α ((<a href="https://leanprover-community.github.io/mathlib_docs/data/nat/pairing.html#nat.unpair">nat.unpair</a> n).fst))
-    (λ (a : α), <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/option/basic.html#option.map">option.map</a> (sigma.mk a) (encodable.decode (γ a) ((<a href="https://leanprover-community.github.io/mathlib_docs/data/nat/pairing.html#nat.unpair">nat.unpair</a> n).snd)))</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{γ : α → Type u_3}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span> <span class="impl_arg">[Π (a : α), <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (γ a)]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="encodable.encode_sigma_val"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L185">encodable.encode_sigma_val</a></span> <span class="decl_args">(a : α)</span> <span class="decl_args">(b : γ a)</span> <span class="decl_args">:</span>       <div class="decl_type">encodable.encode ⟨a, b⟩ = <a href="https://leanprover-community.github.io/mathlib_docs/data/nat/pairing.html#nat.mkpair">nat.mkpair</a> (encodable.encode a) (encodable.encode b)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{γ : α → Type u_3}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span> <span class="impl_arg">[Π (a : α), <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (γ a)]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="def"><a id="encodable.prod"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L193">encodable.prod</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (α × β)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{β : Type u_2}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="thm"><a id="encodable.decode_prod_val"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L196">encodable.decode_prod_val</a></span> <span class="decl_args">(n : ℕ)</span> <span class="decl_args">:</span>       <div class="decl_type">encodable.decode (α × β) n =
-  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/option/basic.html#option.bind">option.bind</a> (encodable.decode α ((<a href="https://leanprover-community.github.io/mathlib_docs/data/nat/pairing.html#nat.unpair">nat.unpair</a> n).fst))
-    (λ (a : α), <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/option/basic.html#option.map">option.map</a> (prod.mk a) (encodable.decode β ((<a href="https://leanprover-community.github.io/mathlib_docs/data/nat/pairing.html#nat.unpair">nat.unpair</a> n).snd)))</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{β : Type u_2}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="encodable.encode_prod_val"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L202">encodable.encode_prod_val</a></span> <span class="decl_args">(a : α)</span> <span class="decl_args">(b : β)</span> <span class="decl_args">:</span>       <div class="decl_type">encodable.encode (a, b) = <a href="https://leanprover-community.github.io/mathlib_docs/data/nat/pairing.html#nat.mkpair">nat.mkpair</a> (encodable.encode a) (encodable.encode b)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{β : Type u_2}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="def"><a id="encodable.encode_subtype"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L214">encodable.encode_subtype</a></span>  <span class="decl_args">:</span>       <div class="decl_type">{a // P a} → ℕ</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{P : α → Prop}</span> <span class="impl_arg">[encA : <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="encodable.decode_subtype"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L218">encodable.decode_subtype</a></span>  <span class="decl_args">:</span>       <div class="decl_type">ℕ → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> {a // P a}</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{P : α → Prop}</span> <span class="impl_arg">[encA : <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span> <span class="impl_arg">[decP : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_pred">decidable_pred</a> P]</span></li>
-
-
-
-</ul></div><div class="def"><a id="encodable.subtype"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L222">encodable.subtype</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> {a // P a}</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{P : α → Prop}</span> <span class="impl_arg">[encA : <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span> <span class="impl_arg">[decP : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_pred">decidable_pred</a> P]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="encodable.fin"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L227">encodable.fin</a></span> <span class="decl_args">(n : ℕ)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/fin/basic.html#fin">fin</a> n)</div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="encodable.int"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L230">encodable.int</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> ℤ</div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="encodable.ulift"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L233">encodable.ulift</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#ulift">ulift</a> α)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="encodable.plift"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L236">encodable.plift</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#plift">plift</a> α)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="encodable.of_inj"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L239">encodable.of_inj</a></span> <span class="decl_args">(f : α → β)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/function.html#function.injective">function.injective</a> f → <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{β : Type u_2}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> β]</span></li>
-
-
-
-</ul></div><div class="def"><a id="encodable.choose_x"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L267">encodable.choose_x</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(∃ (x : α), p x) → {a // p a}</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{p : α → Prop}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_pred">decidable_pred</a> p]</span></li>
-
-
-
-</ul></div><div class="def"><a id="encodable.choose"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L274">encodable.choose</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(∃ (x : α), p x) → α</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{p : α → Prop}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_pred">decidable_pred</a> p]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="encodable.choose_spec"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L276">encodable.choose_spec</a></span> <span class="decl_args">(h : ∃ (x : α), p x)</span> <span class="decl_args">:</span>       <div class="decl_type">p (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable.choose">encodable.choose</a> h)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{p : α → Prop}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_pred">decidable_pred</a> p]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="encodable.axiom_of_choice"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L280">encodable.axiom_of_choice</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(∀ (x : α), ∃ (y : β x), R x y) → (∃ (f : Π (a : α), β a), ∀ (x : α), R x (f x))</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{β : α → Type u_2}</span> <span class="impl_arg">{R : Π (x : α), β x → Prop}</span> <span class="impl_arg">[Π (a : α), <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (β a)]</span> <span class="impl_arg">[Π (x : α) (y : β x), <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable">decidable</a> (R x y)]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="encodable.skolem"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L285">encodable.skolem</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(∀ (x : α), ∃ (y : β x), P x y) ↔ ∃ (f : Π (a : α), β a), ∀ (x : α), P x (f x)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{β : α → Type u_2}</span> <span class="impl_arg">{P : Π (x : α), β x → Prop}</span> <span class="impl_arg">[c : Π (a : α), <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (β a)]</span> <span class="impl_arg">[d : Π (x : α) (y : β x), <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable">decidable</a> (P x y)]</span></li>
-
-
-
-</ul></div><div class="def"><a id="quot.rep"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L297">quot.rep</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/quot.html#quotient">quotient</a> s → α</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{s : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/setoid.html#setoid">setoid</a> α}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_rel">decidable_rel</a> has_equiv.equiv]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="quot.rep_spec"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L300">quot.rep_spec</a></span> <span class="decl_args">(q : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/quot.html#quotient">quotient</a> s)</span> <span class="decl_args">:</span>       <div class="decl_type">⟦quot.rep q⟧ = q</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{s : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/setoid.html#setoid">setoid</a> α}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_rel">decidable_rel</a> has_equiv.equiv]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="quot.encodable_quotient"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean#L303">quot.encodable_quotient</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/quot.html#quotient">quotient</a> s)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{s : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/setoid.html#setoid">setoid</a> α}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_rel">decidable_rel</a> has_equiv.equiv]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/encodable.html#encodable">encodable</a> α]</span></li>
-
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">data.equiv.encodable</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/data/equiv/encodable.lean">(view source on GitHub)</a></div><a href="#encodable">encodable</a><br>
-<a href="#encodable.axiom_of_choice">encodable.axiom_of_choice</a><br>
-<a href="#encodable.bool">encodable.bool</a><br>
-<a href="#encodable.choose">encodable.choose</a><br>
-<a href="#encodable.choose_spec">encodable.choose_spec</a><br>
-<a href="#encodable.choose_x">encodable.choose_x</a><br>
-<a href="#encodable.decidable_eq_of_encodable">encodable.decidable_eq_of_encodable</a><br>
-<a href="#encodable.decidable_range_encode">encodable.decidable_range_encode</a><br>
-<a href="#encodable.decode2">encodable.decode2</a><br>
-<a href="#encodable.decode2_inj">encodable.decode2_inj</a><br>
-<a href="#encodable.decode2_is_partial_inv">encodable.decode2_is_partial_inv</a><br>
-<a href="#encodable.decode_ge_two">encodable.decode_ge_two</a><br>
-<a href="#encodable.decode_nat">encodable.decode_nat</a><br>
-<a href="#encodable.decode_of_equiv">encodable.decode_of_equiv</a><br>
-<a href="#encodable.decode_one">encodable.decode_one</a><br>
-<a href="#encodable.decode_option_succ">encodable.decode_option_succ</a><br>
-<a href="#encodable.decode_option_zero">encodable.decode_option_zero</a><br>
-<a href="#encodable.decode_prod_val">encodable.decode_prod_val</a><br>
-<a href="#encodable.decode_sigma">encodable.decode_sigma</a><br>
-<a href="#encodable.decode_sigma_val">encodable.decode_sigma_val</a><br>
-<a href="#encodable.decode_subtype">encodable.decode_subtype</a><br>
-<a href="#encodable.decode_sum">encodable.decode_sum</a><br>
-<a href="#encodable.decode_sum_val">encodable.decode_sum_val</a><br>
-<a href="#encodable.decode_unit_succ">encodable.decode_unit_succ</a><br>
-<a href="#encodable.decode_unit_zero">encodable.decode_unit_zero</a><br>
-<a href="#encodable.decode_zero">encodable.decode_zero</a><br>
-<a href="#encodable.empty">encodable.empty</a><br>
-<a href="#encodable.encode_ff">encodable.encode_ff</a><br>
-<a href="#encodable.encode_injective">encodable.encode_injective</a><br>
-<a href="#encodable.encode_inl">encodable.encode_inl</a><br>
-<a href="#encodable.encode_inr">encodable.encode_inr</a><br>
-<a href="#encodable.encode_nat">encodable.encode_nat</a><br>
-<a href="#encodable.encode_none">encodable.encode_none</a><br>
-<a href="#encodable.encode_of_equiv">encodable.encode_of_equiv</a><br>
-<a href="#encodable.encode_prod_val">encodable.encode_prod_val</a><br>
-<a href="#encodable.encode_sigma">encodable.encode_sigma</a><br>
-<a href="#encodable.encode_sigma_val">encodable.encode_sigma_val</a><br>
-<a href="#encodable.encode_some">encodable.encode_some</a><br>
-<a href="#encodable.encode_star">encodable.encode_star</a><br>
-<a href="#encodable.encode_subtype">encodable.encode_subtype</a><br>
-<a href="#encodable.encode_sum">encodable.encode_sum</a><br>
-<a href="#encodable.encode_tt">encodable.encode_tt</a><br>
-<a href="#encodable.encodek2">encodable.encodek2</a><br>
-<a href="#encodable.equiv_range_encode">encodable.equiv_range_encode</a><br>
-<a href="#encodable.fin">encodable.fin</a><br>
-<a href="#encodable.int">encodable.int</a><br>
-<a href="#encodable.mem_decode2">encodable.mem_decode2</a><br>
-<a href="#encodable.mem_decode2'">encodable.mem_decode2'</a><br>
-<a href="#encodable.nat">encodable.nat</a><br>
-<a href="#encodable.of_equiv">encodable.of_equiv</a><br>
-<a href="#encodable.of_inj">encodable.of_inj</a><br>
-<a href="#encodable.of_left_injection">encodable.of_left_injection</a><br>
-<a href="#encodable.of_left_inverse">encodable.of_left_inverse</a><br>
-<a href="#encodable.option">encodable.option</a><br>
-<a href="#encodable.plift">encodable.plift</a><br>
-<a href="#encodable.prod">encodable.prod</a><br>
-<a href="#encodable.sigma">encodable.sigma</a><br>
-<a href="#encodable.skolem">encodable.skolem</a><br>
-<a href="#encodable.subtype">encodable.subtype</a><br>
-<a href="#encodable.sum">encodable.sum</a><br>
-<a href="#encodable.ulift">encodable.ulift</a><br>
-<a href="#encodable.unit">encodable.unit</a><br>
-<a href="#quot.encodable_quotient">quot.encodable_quotient</a><br>
-<a href="#quot.rep">quot.rep</a><br>
-<a href="#quot.rep_spec">quot.rep_spec</a><br>
 </div></div>
 
         </div>

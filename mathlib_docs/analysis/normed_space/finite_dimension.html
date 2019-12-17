@@ -7,7 +7,78 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">analysis.normed_space.finite_dimension</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/analysis/normed_space/finite_dimension.lean">(view source on GitHub)</a></div><a href="#continuous_equiv_fun_basis">continuous_equiv_fun_basis</a><br>
+<a href="#finite_dimensional.complete">finite_dimensional.complete</a><br>
+<a href="#finite_dimensional.proper">finite_dimensional.proper</a><br>
+<a href="#finite_dimensional.proper_real">finite_dimensional.proper_real</a><br>
+<a href="#linear_map.continuous_of_finite_dimensional">linear_map.continuous_of_finite_dimensional</a><br>
+<a href="#linear_map.continuous_on_pi">linear_map.continuous_on_pi</a><br>
+<a href="#submodule.closed_of_finite_dimensional">submodule.closed_of_finite_dimensional</a><br>
+<a href="#submodule.complete_of_finite_dimensional">submodule.complete_of_finite_dimensional</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="mod_doc">
+<h1>Finite dimensional normed spaces over complete fields</h1>
+
+<p>Over a complete nondiscrete field, in finite dimension, all norms are equivalent and all linear maps
+are continuous. Moreover, a finite-dimensional subspace is always complete and closed.</p>
+
+<h2>Main results:</h2>
+
+<ul>
+<li><code>linear_map.continuous_of_finite_dimensional</code> : a linear map on a finite-dimensional space over a
+complete field is continuous.</li>
+<li><code>finite_dimensional.complete</code> : a finite-dimensional space over a complete field is complete. This
+is not registered as an instance, as the field would be an unknown metavariable in typeclass
+resolution.</li>
+<li><code>submodule.closed_of_finite_dimensional</code> : a finite-dimensional subspace over a complete field is
+closed</li>
+<li><code>finite_dimensional.proper</code> : a finite-dimensional space over a proper field is proper. This
+is not registered as an instance, as the field would be an unknown metavariable in typeclass
+resolution. It is however registered as an instance for <code>𝕜 = ℝ</code> and <code>𝕜 = ℂ</code>. As properness
+implies completeness, there is no need to also register <code>finite_dimensional.complete</code> on <code>ℝ</code> or
+<code>ℂ</code>.</li>
+</ul>
+
+<h2>Implementation notes</h2>
+
+<p>The fact that all norms are equivalent is not written explicitly, as it would mean having two norms
+on a single space, which is not the way type classes work. However, if one has a
+finite-dimensional vector space <code>E</code> with a norm, and a copy <code>E'</code> of this type with another norm,
+then the identities from <code>E</code> to <code>E'</code> and from <code>E'</code>to <code>E</code> are continuous thanks to
+<code>linear_map.continuous_of_finite_dimensional</code>. This gives the desired norm equivalence.</p>
+</div><div class="decl theorem" id="linear_map.continuous_on_pi">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/analysis/normed_space/finite_dimension.lean#L53">linear_map.continuous_on_pi</a></span> <span class="impl_arg"><span class="decl_args">{ι : Type w}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/fintype.html#fintype">fintype</a> ι]</span></span> <span class="impl_arg"><span class="decl_args">{𝕜 : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_field">normed_field</a> 𝕜]</span></span> <span class="impl_arg"><span class="decl_args">{E : Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_group">normed_group</a> E]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_space">normed_space</a> 𝕜 E]</span></span> <span class="decl_args">(f : (ι → 𝕜) <a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#linear_map" title="linear_map">→ₗ[</a>𝕜<a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#linear_map" title="linear_map">]</a> E)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#continuous">continuous</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>f</div></div>
+   <p>A linear map on <code>ι → 𝕜</code> (where <code>ι</code> is a fintype) is continuous</p>
+ </ul></div><div class="decl theorem" id="continuous_equiv_fun_basis">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/analysis/normed_space/finite_dimension.lean#L81">continuous_equiv_fun_basis</a></span> <span class="impl_arg"><span class="decl_args">{𝕜 : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#nondiscrete_normed_field">nondiscrete_normed_field</a> 𝕜]</span></span> <span class="impl_arg"><span class="decl_args">{E : Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_group">normed_group</a> E]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_space">normed_space</a> 𝕜 E]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/cauchy.html#complete_space">complete_space</a> 𝕜]</span></span> <span class="impl_arg"><span class="decl_args">{n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>}</span></span> <span class="impl_arg"><span class="decl_args">{ι : Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/fintype.html#fintype">fintype</a> ι]</span></span> <span class="decl_args">(ξ : ι → E)</span> <span class="decl_args">(hn : <a href="https://leanprover-community.github.io/mathlib_docs/data/fintype.html#fintype.card">fintype.card</a> ι <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> n)</span> <span class="decl_args">(hξ : <a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/basis.html#is_basis">is_basis</a> 𝕜 ξ)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#continuous">continuous</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>(<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/basis.html#equiv_fun_basis">equiv_fun_basis</a> hξ)</div></div>
+   <p>In finite dimension over a complete field, the canonical identification (in terms of a basis)
+with <code>𝕜^n</code> together with its sup norm is continuous. This is the nontrivial part in the fact that
+all norms are equivalent in finite dimension.
+Do not use this statement as its formulation is awkward (in terms of the dimension <code>n</code>, as the proof
+is done by induction over <code>n</code>) and it is superceded by the fact that every linear map on a
+finite-dimensional space is continuous, in <code>linear_map.continuous_of_finite_dimensional</code>.</p>
+ </ul></div><div class="decl theorem" id="linear_map.continuous_of_finite_dimensional">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/analysis/normed_space/finite_dimension.lean#L160">linear_map.continuous_of_finite_dimensional</a></span> <span class="impl_arg"><span class="decl_args">{𝕜 : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#nondiscrete_normed_field">nondiscrete_normed_field</a> 𝕜]</span></span> <span class="impl_arg"><span class="decl_args">{E : Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_group">normed_group</a> E]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_space">normed_space</a> 𝕜 E]</span></span> <span class="impl_arg"><span class="decl_args">{F : Type w}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_group">normed_group</a> F]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_space">normed_space</a> 𝕜 F]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/cauchy.html#complete_space">complete_space</a> 𝕜]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/finite_dimensional.html#finite_dimensional">finite_dimensional</a> 𝕜 E]</span></span> <span class="decl_args">(f : E <a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#linear_map" title="linear_map">→ₗ[</a>𝕜<a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#linear_map" title="linear_map">]</a> F)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#continuous">continuous</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>f</div></div>
+   <p>Any linear map on a finite dimensional space over a complete field is continuous.</p>
+ </ul></div><div class="decl theorem" id="finite_dimensional.complete">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/analysis/normed_space/finite_dimension.lean#L184">finite_dimensional.complete</a></span> <span class="decl_args">(𝕜 : Type u)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#nondiscrete_normed_field">nondiscrete_normed_field</a> 𝕜]</span></span> <span class="decl_args">(E : Type v)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_group">normed_group</a> E]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_space">normed_space</a> 𝕜 E]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/cauchy.html#complete_space">complete_space</a> 𝕜]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/finite_dimensional.html#finite_dimensional">finite_dimensional</a> 𝕜 E]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/cauchy.html#complete_space">complete_space</a> E</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="submodule.complete_of_finite_dimensional">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/analysis/normed_space/finite_dimension.lean#L199">submodule.complete_of_finite_dimensional</a></span> <span class="impl_arg"><span class="decl_args">{𝕜 : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#nondiscrete_normed_field">nondiscrete_normed_field</a> 𝕜]</span></span> <span class="impl_arg"><span class="decl_args">{E : Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_group">normed_group</a> E]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_space">normed_space</a> 𝕜 E]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/cauchy.html#complete_space">complete_space</a> 𝕜]</span></span> <span class="decl_args">(s : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#submodule">submodule</a> 𝕜 E)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/finite_dimensional.html#finite_dimensional">finite_dimensional</a> 𝕜 <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_sort" title="coe_sort">↥</a>s]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/cauchy.html#is_complete">is_complete</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>s</div></div>
+   <p>A finite-dimensional subspace is complete.</p>
+ </ul></div><div class="decl theorem" id="submodule.closed_of_finite_dimensional">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/analysis/normed_space/finite_dimension.lean#L211">submodule.closed_of_finite_dimensional</a></span> <span class="impl_arg"><span class="decl_args">{𝕜 : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#nondiscrete_normed_field">nondiscrete_normed_field</a> 𝕜]</span></span> <span class="impl_arg"><span class="decl_args">{E : Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_group">normed_group</a> E]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_space">normed_space</a> 𝕜 E]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/cauchy.html#complete_space">complete_space</a> 𝕜]</span></span> <span class="decl_args">(s : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#submodule">submodule</a> 𝕜 E)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/finite_dimensional.html#finite_dimensional">finite_dimensional</a> 𝕜 <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_sort" title="coe_sort">↥</a>s]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#is_closed">is_closed</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>s</div></div>
+   <p>A finite-dimensional subspace is closed.</p>
+ </ul></div><div class="decl theorem" id="finite_dimensional.proper">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/analysis/normed_space/finite_dimension.lean#L225">finite_dimensional.proper</a></span> <span class="decl_args">(𝕜 : Type u)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#nondiscrete_normed_field">nondiscrete_normed_field</a> 𝕜]</span></span> <span class="decl_args">(E : Type v)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_group">normed_group</a> E]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_space">normed_space</a> 𝕜 E]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#proper_space">proper_space</a> 𝕜]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/finite_dimensional.html#finite_dimensional">finite_dimensional</a> 𝕜 E]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#proper_space">proper_space</a> E</div></div>
+   <p>Any finite-dimensional vector space over a proper field is proper.
+We do not register this as an instance to avoid an instance loop when trying to prove the
+properness of <code>𝕜</code>, and the search for <code>𝕜</code> as an unknown metavariable. Declare the instance
+explicitly when needed.</p>
+ </ul></div><div class="decl def" id="finite_dimensional.proper_real"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/analysis/normed_space/finite_dimension.lean#L246">finite_dimensional.proper_real</a></span> <span class="decl_args">(E : Type u)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_group">normed_group</a> E]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_space">normed_space</a> <a href="https://leanprover-community.github.io/mathlib_docs/data/real/basic.html#real" title="real">ℝ</a> E]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/finite_dimensional.html#finite_dimensional">finite_dimensional</a> <a href="https://leanprover-community.github.io/mathlib_docs/data/real/basic.html#real" title="real">ℝ</a> E]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#proper_space">proper_space</a> E</div></div>
+   <p></p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +878,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1106,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,120 +1229,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="mod_doc">
-<h1>Finite dimensional normed spaces over complete fields</h1>
-
-<p>Over a complete nondiscrete field, in finite dimension, all norms are equivalent and all linear maps
-are continuous. Moreover, a finite-dimensional subspace is always complete and closed.</p>
-
-<h2>Main results:</h2>
-
-<ul>
-<li><code>linear_map.continuous_of_finite_dimensional</code> : a linear map on a finite-dimensional space over a
-complete field is continuous.</li>
-<li><code>finite_dimensional.complete</code> : a finite-dimensional space over a complete field is complete. This
-is not registered as an instance, as the field would be an unknown metavariable in typeclass
-resolution.</li>
-<li><code>submodule.closed_of_finite_dimensional</code> : a finite-dimensional subspace over a complete field is
-closed</li>
-<li><code>finite_dimensional.proper</code> : a finite-dimensional space over a proper field is proper. This
-is not registered as an instance, as the field would be an unknown metavariable in typeclass
-resolution. It is however registered as an instance for <code>𝕜 = ℝ</code> and <code>𝕜 = ℂ</code>. As properness
-implies completeness, there is no need to also register <code>finite_dimensional.complete</code> on <code>ℝ</code> or
-<code>ℂ</code>.</li>
-</ul>
-
-<h2>Implementation notes</h2>
-
-<p>The fact that all norms are equivalent is not written explicitly, as it would mean having two norms
-on a single space, which is not the way type classes work. However, if one has a
-finite-dimensional vector space <code>E</code> with a norm, and a copy <code>E'</code> of this type with another norm,
-then the identities from <code>E</code> to <code>E'</code> and from <code>E'</code>to <code>E</code> are continuous thanks to
-<code>linear_map.continuous_of_finite_dimensional</code>. This gives the desired norm equivalence.</p>
-
-<p>The proofs rely on linear equivalences, which are only defined in mathlib for types in the same
-universe. Therefore, all the results in this file are restricted to spaces living in the same
-universe as their base field.</p>
-</div><div class="thm"><a id="linear_map.continuous_on_pi"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/analysis/normed_space/finite_dimension.lean#L57">linear_map.continuous_on_pi</a></span> <span class="decl_args">(f : (ι → 𝕜) →ₗ[𝕜] E)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#continuous">continuous</a> ⇑f</div>
-<p>A linear map on <code>ι → 𝕜</code> (where <code>ι</code> is a fintype) is continuous</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{ι : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/fintype.html#fintype">fintype</a> ι]</span> <span class="impl_arg">{𝕜 : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_field">normed_field</a> 𝕜]</span> <span class="impl_arg">{E : Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_group">normed_group</a> E]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_space">normed_space</a> 𝕜 E]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="continuous_equiv_fun_basis"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/analysis/normed_space/finite_dimension.lean#L86">continuous_equiv_fun_basis</a></span> <span class="decl_args">(ξ : ι → E)</span> <span class="decl_args">(hn : <a href="https://leanprover-community.github.io/mathlib_docs/data/fintype.html#fintype.card">fintype.card</a> ι = n)</span> <span class="decl_args">(hξ : <a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/basis.html#is_basis">is_basis</a> 𝕜 ξ)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#continuous">continuous</a> ⇑(<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/basis.html#equiv_fun_basis">equiv_fun_basis</a> hξ)</div>
-<p>In finite dimension over a complete field, the canonical identification (in terms of a basis)
-with 𝕜^n together with its sup norm is continuous. This is the nontrivial part in the fact that all
-norms are equivalent in finite dimension.
-Do not use this statement as its formulation is awkward (in terms of the dimension n, as the proof
-is done by induction over n) and it is superceded by the fact that every linear map on a
-finite-dimensional space is continuous, in <code>linear_map.continuous_of_finite_dimensional</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{𝕜 : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#nondiscrete_normed_field">nondiscrete_normed_field</a> 𝕜]</span> <span class="impl_arg">{E : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_group">normed_group</a> E]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_space">normed_space</a> 𝕜 E]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/cauchy.html#complete_space">complete_space</a> 𝕜]</span> <span class="impl_arg">{n : ℕ}</span> <span class="impl_arg">{ι : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/fintype.html#fintype">fintype</a> ι]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="linear_map.continuous_of_finite_dimensional"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/analysis/normed_space/finite_dimension.lean#L165">linear_map.continuous_of_finite_dimensional</a></span> <span class="decl_args">(f : E →ₗ[𝕜] F)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#continuous">continuous</a> ⇑f</div>
-<p>Any linear map on a finite dimensional space over a complete field is continuous.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{𝕜 : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#nondiscrete_normed_field">nondiscrete_normed_field</a> 𝕜]</span> <span class="impl_arg">{E : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_group">normed_group</a> E]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_space">normed_space</a> 𝕜 E]</span> <span class="impl_arg">{F : Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_group">normed_group</a> F]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_space">normed_space</a> 𝕜 F]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/cauchy.html#complete_space">complete_space</a> 𝕜]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/finite_dimensional.html#finite_dimensional">finite_dimensional</a> 𝕜 E]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="finite_dimensional.complete"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/analysis/normed_space/finite_dimension.lean#L189">finite_dimensional.complete</a></span> <span class="decl_args">(𝕜 : Type u)</span> <span class="decl_args">(E : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/cauchy.html#complete_space">complete_space</a> E</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#nondiscrete_normed_field">nondiscrete_normed_field</a> 𝕜]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_group">normed_group</a> E]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_space">normed_space</a> 𝕜 E]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/cauchy.html#complete_space">complete_space</a> 𝕜]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/finite_dimensional.html#finite_dimensional">finite_dimensional</a> 𝕜 E]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="submodule.complete_of_finite_dimensional"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/analysis/normed_space/finite_dimension.lean#L204">submodule.complete_of_finite_dimensional</a></span> <span class="decl_args">(s : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#submodule">submodule</a> 𝕜 E)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/cauchy.html#is_complete">is_complete</a> ↑s</div>
-<p>A finite-dimensional subspace is complete.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{𝕜 : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#nondiscrete_normed_field">nondiscrete_normed_field</a> 𝕜]</span> <span class="impl_arg">{E : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_group">normed_group</a> E]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_space">normed_space</a> 𝕜 E]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/cauchy.html#complete_space">complete_space</a> 𝕜]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/finite_dimensional.html#finite_dimensional">finite_dimensional</a> 𝕜 ↥s]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="submodule.closed_of_finite_dimensional"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/analysis/normed_space/finite_dimension.lean#L216">submodule.closed_of_finite_dimensional</a></span> <span class="decl_args">(s : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#submodule">submodule</a> 𝕜 E)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#is_closed">is_closed</a> ↑s</div>
-<p>A finite-dimensional subspace is closed.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{𝕜 : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#nondiscrete_normed_field">nondiscrete_normed_field</a> 𝕜]</span> <span class="impl_arg">{E : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_group">normed_group</a> E]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_space">normed_space</a> 𝕜 E]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/cauchy.html#complete_space">complete_space</a> 𝕜]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/finite_dimensional.html#finite_dimensional">finite_dimensional</a> 𝕜 ↥s]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="finite_dimensional.proper"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/analysis/normed_space/finite_dimension.lean#L231">finite_dimensional.proper</a></span> <span class="decl_args">(𝕜 : Type u)</span> <span class="decl_args">(E : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#proper_space">proper_space</a> E</div>
-<p>Any finite-dimensional vector space over a proper field is proper.
-We do not register this as an instance to avoid an instance loop when trying to prove the
-properness of 𝕜, and the search for 𝕜 as an unknown metavariable. Declare the instance explicitly
-when needed.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#nondiscrete_normed_field">nondiscrete_normed_field</a> 𝕜]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_group">normed_group</a> E]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_space">normed_space</a> 𝕜 E]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#proper_space">proper_space</a> 𝕜]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/finite_dimensional.html#finite_dimensional">finite_dimensional</a> 𝕜 E]</span></li>
-
-
-
-</ul></div><div class="def"><a id="finite_dimensional.proper_real"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/analysis/normed_space/finite_dimension.lean#L252">finite_dimensional.proper_real</a></span> <span class="decl_args">(E : Type)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#proper_space">proper_space</a> E</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_group">normed_group</a> E]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/analysis/normed_space/basic.html#normed_space">normed_space</a> ℝ E]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/finite_dimensional.html#finite_dimensional">finite_dimensional</a> ℝ E]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">analysis.normed_space.finite_dimension</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/analysis/normed_space/finite_dimension.lean">(view source on GitHub)</a></div><a href="#continuous_equiv_fun_basis">continuous_equiv_fun_basis</a><br>
-<a href="#finite_dimensional.complete">finite_dimensional.complete</a><br>
-<a href="#finite_dimensional.proper">finite_dimensional.proper</a><br>
-<a href="#finite_dimensional.proper_real">finite_dimensional.proper_real</a><br>
-<a href="#linear_map.continuous_of_finite_dimensional">linear_map.continuous_of_finite_dimensional</a><br>
-<a href="#linear_map.continuous_on_pi">linear_map.continuous_on_pi</a><br>
-<a href="#submodule.closed_of_finite_dimensional">submodule.closed_of_finite_dimensional</a><br>
-<a href="#submodule.complete_of_finite_dimensional">submodule.complete_of_finite_dimensional</a><br>
 </div></div>
 
         </div>

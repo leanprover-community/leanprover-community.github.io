@@ -7,7 +7,101 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">tactic.lift</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/lift.lean">(view source on GitHub)</a></div><a href="#can_lift">can_lift</a><br>
+<a href="#can_lift_attr">can_lift_attr</a><br>
+<a href="#nat.can_lift">nat.can_lift</a><br>
+<a href="#pi.can_lift">pi.can_lift</a><br>
+<a href="#tactic.get_lift_prf">tactic.get_lift_prf</a><br>
+<a href="#tactic.interactive.lift">tactic.interactive.lift</a><br>
+<a href="#tactic.lift">tactic.lift</a><br>
+<a href="#tactic.to_texpr">tactic.to_texpr</a><br>
+<a href="#tactic.using_texpr">tactic.using_texpr</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="mod_doc">
+<h1>lift tactic</h1>
+
+<p>This file defines the lift tactic, allowing the user to lift elements from one type to another
+under a specified condition.</p>
+
+<h2>Tags</h2>
+
+<p>lift, tactic</p>
+</div><div class="decl structure" id="can_lift"><div class="attributes">@[class]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/lift.lean#L22">can_lift</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type u → Type v → Type (max u v)</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="can_lift.coe">coe : β → α</li>
+<li class="structure_field" id="can_lift.cond">cond : α → Prop</li>
+<li class="structure_field" id="can_lift.prf">prf : ∀ (x : α),
+  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/lift.html#can_lift.cond">can_lift.cond</a> β x → (∃ (y : β), <a href="https://leanprover-community.github.io/mathlib_docs/tactic/lift.html#can_lift.coe">can_lift.coe</a> α y <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> x)</li>
+</ul>  <p>A class specifying that you can lift elements from <code>α</code> to <code>β</code> assuming <code>cond</code> is true.
+ Used by the tactic <code>lift</code>.</p>
+ <details class="instances"><summary>Instances</summary><ul><li><a href="https://leanprover-community.github.io/mathlib_docs/tactic/lift.html#nat.can_lift">nat.can_lift</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/tactic/lift.html#pi.can_lift">pi.can_lift</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/rat/basic.html#rat.can_lift">rat.can_lift</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/set/finite.html#set.can_lift">set.can_lift</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/real/nnreal.html#nnreal.can_lift">nnreal.can_lift</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/real/ennreal.html#ennreal.can_lift">ennreal.can_lift</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/set_theory/cardinal.html#cardinal.can_lift_cardinal_nat">cardinal.can_lift_cardinal_nat</a></li></ul></details></ul></div><div class="decl def" id="can_lift_attr">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/lift.lean#L30">can_lift_attr</a></span>  <span class="decl_args">:</span>     <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/attribute.html#user_attribute">user_attribute</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a>))</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="nat.can_lift"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/lift.lean#L40">nat.can_lift</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/lift.html#can_lift">can_lift</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="pi.can_lift"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/lift.lean#L44">pi.can_lift</a></span> <span class="decl_args">(ι : Type u)</span> <span class="decl_args">(α : ι → Type v)</span> <span class="decl_args">(β : ι → Type w)</span> <span class="impl_arg"><span class="decl_args">[Π (i : ι), <a href="https://leanprover-community.github.io/mathlib_docs/tactic/lift.html#can_lift">can_lift</a> (α i) (β i)]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/lift.html#can_lift">can_lift</a> (Π (i : ι), α i) (Π (i : ι), β i)</div></div>
+   <p>Enable automatic handling of pi types in <code>can_lift</code>.</p>
+ </ul></div><div class="decl def" id="tactic.get_lift_prf">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/lift.lean#L63">tactic.get_lift_prf</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/simp_tactic.html#simp_lemmas">simp_lemmas</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.lift">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/lift.lean#L80">tactic.lift</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Lift the expression <code>p</code> to the type <code>t</code>, with proof obligation given by <code>h</code>.
+ The list <code>n</code> is used for the two newly generated names, and to specify whether <code>h</code> should
+ remain in the local context. See the doc string of <code>tactic.interactive.lift</code> for more information.</p>
+ </ul></div><div class="decl def" id="tactic.using_texpr">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/lift.lean#L127">tactic.using_texpr</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.to_texpr">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/lift.lean#L129">tactic.to_texpr</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.interactive.lift">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/lift.lean#L154">tactic.interactive.lift</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.types.texpr">interactive.types.texpr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/lift.html#tactic.to_texpr">tactic.to_texpr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/lift.html#tactic.using_texpr">tactic.using_texpr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.types.with_ident_list">interactive.types.with_ident_list</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Lift an expression to another type.</p>
+
+<ul>
+<li>Usage: <code>'lift' expr 'to' expr ('using' expr)? ('with' id (id id?)?)?</code>.</li>
+<li>If <code>n : ℤ</code> and <code>hn : n ≥ 0</code> then the tactic <code>lift n to ℕ using hn</code> creates a new
+constant of type ℕ, also named <code>n</code> and replaces all occurrences of the old variable <code>(n : ℤ)</code>
+with <code>↑n</code> (where <code>n</code> in the new variable). It will remove <code>n</code> and <code>hn</code> from the context.</li>
+<li>The argument <code>using hn</code> is optional, the tactic <code>lift n to ℕ</code> does the same, but also creates a
+new subgoal that <code>n ≥ 0</code> (where <code>n</code> is the old variable).</li>
+<li>You can also use <code>lift n to ℕ using e</code> where <code>e</code> is any expression of type <code>n ≥ 0</code>.</li>
+<li>Use <code>lift n to ℕ with k</code> to specify the name of the new variable.</li>
+<li>Use <code>lift n to ℕ with k hk</code> to also specify the name of the equality <code>↑k = n</code>. In this case, <code>n</code>
+will remain in the context. You can use <code>rfl</code> for the name of <code>hk</code> to substitute it away.</li>
+<li>You can also use <code>lift e to ℕ with k hk</code> where <code>e</code> is any expression of type <code>ℤ</code>.
+In this case, the <code>hk</code> will always stay in the context, but it will be used to rewrite <code>e</code> in
+all hypotheses and the target.</li>
+<li>The tactic <code>lift n to ℕ using h</code> will remove <code>h</code> from the context. If you want to keep it,
+specify it again as the third argument to <code>with</code>, like this: <code>lift n to ℕ using h with n rfl h</code>.</li>
+<li>More generally, this can lift an expression from <code>α</code> to <code>β</code> assuming that there is an instance
+of <code>can_lift α β</code>. In this case the proof obligation is specified by <code>can_lift.cond</code>.</li>
+<li>Given an instance <code>can_lift β γ</code>, it can also lift <code>α → β</code> to <code>α → γ</code>, and similarly for
+general pi types, see <code>pi.can_lift</code>.</li>
+</ul>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +901,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1129,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,127 +1252,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="mod_doc">
-<h1>lift tactic</h1>
-
-<p>This file defines the lift tactic, allowing the user to lift elements from one type to another
-under a specified condition.</p>
-
-<h2>Tags</h2>
-
-<p>lift, tactic</p>
-</div><div class="structure"><a id="can_lift"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/lift.lean#L22">can_lift</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type u → Type v → Type (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/functions.html#max">max</a> u v)</div>
-<p>A class specifying that you can lift elements from <code>α</code> to <code>β</code> assuming <code>cond</code> is true.
- Used by the tactic <code>lift</code>.</p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">can_lift.coe : β → α</div></li>
-<li><div class="structure_field">can_lift.cond : α → Prop</div></li>
-<li><div class="structure_field">can_lift.prf : ∀ (x : α), can_lift.cond β x → (∃ (y : β), can_lift.coe α y = x)</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="can_lift_attr"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/lift.lean#L30">can_lift_attr</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/attribute.html#user_attribute">user_attribute</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a>))</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="nat.can_lift"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/lift.lean#L40">nat.can_lift</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/lift.html#can_lift">can_lift</a> ℤ ℕ</div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="pi.can_lift"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/lift.lean#L44">pi.can_lift</a></span> <span class="decl_args">(ι : Type u)</span> <span class="decl_args">(α : ι → Type v)</span> <span class="decl_args">(β : ι → Type w)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/lift.html#can_lift">can_lift</a> (Π (i : ι), α i) (Π (i : ι), β i)</div>
-<p>Enable automatic handling of pi types in <code>can_lift</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[Π (i : ι), <a href="https://leanprover-community.github.io/mathlib_docs/tactic/lift.html#can_lift">can_lift</a> (α i) (β i)]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="tactic.get_lift_prf"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/lift.lean#L63">tactic.get_lift_prf</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/simp_tactic.html#simp_lemmas">simp_lemmas</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.lift"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/lift.lean#L80">tactic.lift</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Lift the expression <code>p</code> to the type <code>t</code>, with proof obligation given by <code>h</code>.
- The list <code>n</code> is used for the two newly generated names, and to specify whether <code>h</code> should
- remain in the local context. See the doc string of <code>tactic.interactive.lift</code> for more information.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.using_texpr"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/lift.lean#L127">tactic.using_texpr</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a>)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.to_texpr"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/lift.lean#L129">tactic.to_texpr</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.interactive.lift"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/lift.lean#L154">tactic.interactive.lift</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.types.texpr">interactive.types.texpr</a> →
-<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/lift.html#tactic.to_texpr">tactic.to_texpr</a> →
-<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/lift.html#tactic.using_texpr">tactic.using_texpr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.types.with_ident_list">interactive.types.with_ident_list</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Lift an expression to another type.</p>
-
-<ul>
-<li>Usage: <code>'lift' expr 'to' expr ('using' expr)? ('with' id (id id?)?)?</code>.</li>
-<li>If <code>n : ℤ</code> and <code>hn : n ≥ 0</code> then the tactic <code>lift n to ℕ using hn</code> creates a new
-constant of type ℕ, also named <code>n</code> and replaces all occurrences of the old variable <code>(n : ℤ)</code>
-with <code>↑n</code> (where <code>n</code> in the new variable). It will remove <code>n</code> and <code>hn</code> from the context.</li>
-<li>The argument <code>using hn</code> is optional, the tactic <code>lift n to ℕ</code> does the same, but also creates a
-new subgoal that <code>n ≥ 0</code> (where <code>n</code> is the old variable).</li>
-<li>You can also use <code>lift n to ℕ using e</code> where <code>e</code> is any expression of type <code>n ≥ 0</code>.</li>
-<li>Use <code>lift n to ℕ with k</code> to specify the name of the new variable.</li>
-<li>Use <code>lift n to ℕ with k hk</code> to also specify the name of the equality <code>↑k = n</code>. In this case, <code>n</code>
-will remain in the context. You can use <code>rfl</code> for the name of <code>hk</code> to substitute it away.</li>
-<li>You can also use <code>lift e to ℕ with k hk</code> where <code>e</code> is any expression of type <code>ℤ</code>.
-In this case, the <code>hk</code> will always stay in the context, but it will be used to rewrite <code>e</code> in
-all hypotheses and the target.</li>
-<li>The tactic <code>lift n to ℕ using h</code> will remove <code>h</code> from the context. If you want to keep it,
-specify it again as the third argument to <code>with</code>, like this: <code>lift n to ℕ using h with n rfl h</code>.</li>
-<li>More generally, this can lift an expression from <code>α</code> to <code>β</code> assuming that there is an instance
-of <code>can_lift α β</code>. In this case the proof obligation is specified by <code>can_lift.cond</code>.</li>
-<li>Given an instance <code>can_lift β γ</code>, it can also lift <code>α → β</code> to <code>α → γ</code>, and similarly for
-general pi types, see <code>pi.can_lift</code>.</li>
-</ul>
-       <ul>
-
-
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">tactic.lift</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/lift.lean">(view source on GitHub)</a></div><a href="#can_lift">can_lift</a><br>
-<a href="#can_lift_attr">can_lift_attr</a><br>
-<a href="#nat.can_lift">nat.can_lift</a><br>
-<a href="#pi.can_lift">pi.can_lift</a><br>
-<a href="#tactic.get_lift_prf">tactic.get_lift_prf</a><br>
-<a href="#tactic.interactive.lift">tactic.interactive.lift</a><br>
-<a href="#tactic.lift">tactic.lift</a><br>
-<a href="#tactic.to_texpr">tactic.to_texpr</a><br>
-<a href="#tactic.using_texpr">tactic.using_texpr</a><br>
 </div></div>
 
         </div>

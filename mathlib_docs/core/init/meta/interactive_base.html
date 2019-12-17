@@ -7,7 +7,152 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">core.init.meta.interactive_base</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean">(view source on GitHub)</a></div><a href="#format_macro">format_macro</a><br>
+<a href="#interactive.decl_attributes">interactive.decl_attributes</a><br>
+<a href="#interactive.decl_attributes.apply">interactive.decl_attributes.apply</a><br>
+<a href="#interactive.decl_meta_info">interactive.decl_meta_info</a><br>
+<a href="#interactive.decl_modifiers">interactive.decl_modifiers</a><br>
+<a href="#interactive.inductive_decl">interactive.inductive_decl</a><br>
+<a href="#interactive.inductive_decl.parse">interactive.inductive_decl.parse</a><br>
+<a href="#interactive.loc">interactive.loc</a><br>
+<a href="#interactive.loc.apply">interactive.loc.apply</a><br>
+<a href="#interactive.loc.get_locals">interactive.loc.get_locals</a><br>
+<a href="#interactive.loc.include_goal">interactive.loc.include_goal</a><br>
+<a href="#interactive.loc.try_apply">interactive.loc.try_apply</a><br>
+<a href="#interactive.param_desc">interactive.param_desc</a><br>
+<a href="#interactive.parse">interactive.parse</a><br>
+<a href="#interactive.parse_binders">interactive.parse_binders</a><br>
+<a href="#interactive.parse_binders_core">interactive.parse_binders_core</a><br>
+<a href="#interactive.single_inductive_decl">interactive.single_inductive_decl</a><br>
+<a href="#interactive.single_inductive_decl.name">interactive.single_inductive_decl.name</a><br>
+<a href="#interactive.types.brackets">interactive.types.brackets</a><br>
+<a href="#interactive.types.ident_">interactive.types.ident_</a><br>
+<a href="#interactive.types.list_of">interactive.types.list_of</a><br>
+<a href="#interactive.types.location">interactive.types.location</a><br>
+<a href="#interactive.types.only_flag">interactive.types.only_flag</a><br>
+<a href="#interactive.types.opt_pexpr_list">interactive.types.opt_pexpr_list</a><br>
+<a href="#interactive.types.pexpr_list">interactive.types.pexpr_list</a><br>
+<a href="#interactive.types.pexpr_list_or_texpr">interactive.types.pexpr_list_or_texpr</a><br>
+<a href="#interactive.types.tac_rbp">interactive.types.tac_rbp</a><br>
+<a href="#interactive.types.texpr">interactive.types.texpr</a><br>
+<a href="#interactive.types.using_ident">interactive.types.using_ident</a><br>
+<a href="#interactive.types.with_ident_list">interactive.types.with_ident_list</a><br>
+<a href="#interactive.types.without_ident_list">interactive.types.without_ident_list</a><br>
+<a href="#interactive.with_desc">interactive.with_desc</a><br>
+<a href="#sformat_macro">sformat_macro</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="decl def" id="interactive.parse">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L21">interactive.parse</a></span> <span class="impl_arg"><span class="decl_args">{α : Type}</span></span> <span class="decl_args">(p : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> α)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.reflectable">lean.parser.reflectable</a> p]</span></span> <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+   <p>(parse p) as the parameter type of an interactive tactic will instruct the Lean parser
+   to run <code>p</code> when parsing the parameter and to pass the parsed value as an argument
+   to the tactic.</p>
+ </ul></div><div class="decl inductive" id="interactive.loc">     <div class="decl_header impl_collapsed">        <span class="decl_kind">inductive</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L24">interactive.loc</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+  <ul class="constructors">
+<li class="constructor" id="interactive.loc.wildcard">wildcard : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.loc">interactive.loc</a></li>
+<li class="constructor" id="interactive.loc.ns">ns : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a>) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.loc">interactive.loc</a></li>
+</ul> <p>A <code>loc</code> is either a 'wildcard', which means "everywhere", or a list of <code>option name</code>s. <code>none</code> means <code>target</code> and <code>some n</code> means <code>n</code> in the local context.</p>
+ </ul></div><div class="decl def" id="interactive.loc.include_goal">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L28">interactive.loc.include_goal</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.loc">interactive.loc</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="interactive.loc.get_locals">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L32">interactive.loc.get_locals</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.loc">interactive.loc</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="interactive.loc.apply">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L39">interactive.loc.apply</a></span>  <span class="decl_args">:</span>     <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a>) →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.loc">interactive.loc</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="interactive.loc.try_apply">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L44">interactive.loc.try_apply</a></span>  <span class="decl_args">:</span>     <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a>) →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.loc">interactive.loc</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="interactive.with_desc">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L50">interactive.with_desc</a></span> <span class="impl_arg"><span class="decl_args">{α : Type}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/format.html#format">format</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> α</div></div>
+   <p>Use <code>desc</code> as the interactive description of <code>p</code>.</p>
+ </ul></div><div class="decl def" id="interactive.types.brackets">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L56">interactive.types.brackets</a></span> <span class="impl_arg"><span class="decl_args">{α : Type}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> α</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="interactive.types.list_of">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L58">interactive.types.list_of</a></span> <span class="impl_arg"><span class="decl_args">{α : Type}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> α)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="interactive.types.tac_rbp">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L66">interactive.types.tac_rbp</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a></div></div>
+   <p>The right-binding power 2 will terminate expressions by
+   '&lt;|&gt;' (rbp 2), ';' (rbp 1), and ',' (rbp 0). It should be used for any (potentially)
+   trailing expression parameters.</p>
+ </ul></div><div class="decl def" id="interactive.types.texpr">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L71">interactive.types.texpr</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a></div></div>
+   <p>A 'tactic expression', which uses right-binding power 2 so that it is terminated by
+   '&lt;|&gt;' (rbp 2), ';' (rbp 1), and ',' (rbp 0). It should be used for any (potentially)
+   trailing expression parameters.</p>
+ </ul></div><div class="decl def" id="interactive.types.ident_">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L73">interactive.types.ident_</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></div></div>
+   <p>Parse an identifier or a '_'</p>
+ </ul></div><div class="decl def" id="interactive.types.using_ident">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L74">interactive.types.using_ident</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="interactive.types.with_ident_list">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L75">interactive.types.with_ident_list</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="interactive.types.without_ident_list">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L76">interactive.types.without_ident_list</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="interactive.types.location">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L77">interactive.types.location</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.loc">interactive.loc</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="interactive.types.pexpr_list">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L79">interactive.types.pexpr_list</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="interactive.types.opt_pexpr_list">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L80">interactive.types.opt_pexpr_list</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="interactive.types.pexpr_list_or_texpr">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L81">interactive.types.pexpr_list_or_texpr</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="interactive.types.only_flag">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L82">interactive.types.only_flag</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="interactive.param_desc">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L156">interactive.param_desc</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/format.html#format">format</a></div></div>
+   <p></p>
+ </ul></div><div class="decl constant" id="interactive.parse_binders_core">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L164">interactive.parse_binders_core</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="interactive.parse_binders">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L165">interactive.parse_binders</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#std.prec.max">std.prec.max</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl constant" id="interactive.decl_attributes">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L167">interactive.decl_attributes</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+   <p></p>
+ </ul></div><div class="decl constant" id="interactive.decl_attributes.apply">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L169">interactive.decl_attributes.apply</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.decl_attributes">interactive.decl_attributes</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p></p>
+ </ul></div><div class="decl structure" id="interactive.decl_modifiers">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L171">interactive.decl_modifiers</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="interactive.decl_modifiers.is_private">is_private : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></li>
+<li class="structure_field" id="interactive.decl_modifiers.is_protected">is_protected : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></li>
+<li class="structure_field" id="interactive.decl_modifiers.is_meta">is_meta : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></li>
+<li class="structure_field" id="interactive.decl_modifiers.is_mutual">is_mutual : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></li>
+<li class="structure_field" id="interactive.decl_modifiers.is_noncomputable">is_noncomputable : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></li>
+</ul>  <p></p>
+ </ul></div><div class="decl structure" id="interactive.decl_meta_info">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L178">interactive.decl_meta_info</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="interactive.decl_meta_info.attrs">attrs : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.decl_attributes">interactive.decl_attributes</a></li>
+<li class="structure_field" id="interactive.decl_meta_info.modifiers">modifiers : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.decl_modifiers">interactive.decl_modifiers</a></li>
+<li class="structure_field" id="interactive.decl_meta_info.doc_string">doc_string : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a></li>
+</ul>  <p></p>
+ </ul></div><div class="decl structure" id="interactive.single_inductive_decl">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L184">interactive.single_inductive_decl</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="interactive.single_inductive_decl.attrs">attrs : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.decl_attributes">interactive.decl_attributes</a></li>
+<li class="structure_field" id="interactive.single_inductive_decl.sig">sig : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></li>
+<li class="structure_field" id="interactive.single_inductive_decl.intros">intros : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></li>
+</ul>  <p></p>
+ </ul></div><div class="decl def" id="interactive.single_inductive_decl.name">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L189">interactive.single_inductive_decl.name</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.single_inductive_decl">interactive.single_inductive_decl</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></div></div>
+   <p></p>
+ </ul></div><div class="decl structure" id="interactive.inductive_decl">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L192">interactive.inductive_decl</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="interactive.inductive_decl.u_names">u_names : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></li>
+<li class="structure_field" id="interactive.inductive_decl.params">params : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></li>
+<li class="structure_field" id="interactive.inductive_decl.decls">decls : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.single_inductive_decl">interactive.single_inductive_decl</a></li>
+</ul>  <p></p>
+ </ul></div><div class="decl constant" id="interactive.inductive_decl.parse">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L198">interactive.inductive_decl.parse</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.decl_meta_info">interactive.decl_meta_info</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.inductive_decl">interactive.inductive_decl</a></div></div>
+   <p>Parses and elaborates a single or multiple mutual inductive declarations (without the <code>inductive</code> keyword), depending on <code>is_mutual</code></p>
+ </ul></div><div class="decl def" id="format_macro">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L221">format_macro</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.tk">lean.parser.tk</a> "format!") →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="sformat_macro">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/interactive_base.lean#L236">sformat_macro</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.tk">lean.parser.tk</a> "sformat!") →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a></div></div>
+   <p></p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +952,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1180,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,310 +1303,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="def"><a id="interactive.parse"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L21">interactive.parse</a></span> <span class="decl_args">(p : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> α)</span> <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p>(parse p) as the parameter type of an interactive tactic will instruct the Lean parser
-   to run <code>p</code> when parsing the parameter and to pass the parsed value as an argument
-   to the tactic.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.reflectable">lean.parser.reflectable</a> p]</span></li>
-
-
-
-</ul></div><div class="inductive"><a id="interactive.loc"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L24">interactive.loc</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p>A <code>loc</code> is either a 'wildcard', which means "everywhere", or a list of <code>option name</code>s. <code>none</code> means <code>target</code> and <code>some n</code> means <code>n</code> in the local context.</p>
-       <ul>
-
-
-
-<li class="structure_fields">
-Constructors:
-<ul><li><div class="structure_field">interactive.loc.wildcard : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.loc">interactive.loc</a></div></li>
-<li><div class="structure_field">interactive.loc.ns : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a>) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.loc">interactive.loc</a></div></li>
-</ul></li>
-</ul></div><div class="def"><a id="interactive.loc.include_goal"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L28">interactive.loc.include_goal</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.loc">interactive.loc</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="interactive.loc.get_locals"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L32">interactive.loc.get_locals</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.loc">interactive.loc</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="interactive.loc.apply"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L39">interactive.loc.apply</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a>) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.loc">interactive.loc</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="interactive.loc.try_apply"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L44">interactive.loc.try_apply</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a>) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.loc">interactive.loc</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="interactive.with_desc"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L50">interactive.with_desc</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/format.html#format">format</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> α</div>
-<p>Use <code>desc</code> as the interactive description of <code>p</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type}</span></li>
-
-
-
-</ul></div><div class="def"><a id="interactive.types.brackets"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L56">interactive.types.brackets</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> α</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type}</span></li>
-
-
-
-</ul></div><div class="def"><a id="interactive.types.list_of"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L58">interactive.types.list_of</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> α)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type}</span></li>
-
-
-
-</ul></div><div class="def"><a id="interactive.types.tac_rbp"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L66">interactive.types.tac_rbp</a></span>  <span class="decl_args">:</span>       <div class="decl_type">ℕ</div>
-<p>The right-binding power 2 will terminate expressions by
-   '&lt;|&gt;' (rbp 2), ';' (rbp 1), and ',' (rbp 0). It should be used for any (potentially)
-   trailing expression parameters.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="interactive.types.texpr"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L71">interactive.types.texpr</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a></div>
-<p>A 'tactic expression', which uses right-binding power 2 so that it is terminated by
-   '&lt;|&gt;' (rbp 2), ';' (rbp 1), and ',' (rbp 0). It should be used for any (potentially)
-   trailing expression parameters.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="interactive.types.ident_"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L73">interactive.types.ident_</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></div>
-<p>Parse an identifier or a '_'</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="interactive.types.using_ident"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L74">interactive.types.using_ident</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a>)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="interactive.types.with_ident_list"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L75">interactive.types.with_ident_list</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a>)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="interactive.types.without_ident_list"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L76">interactive.types.without_ident_list</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a>)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="interactive.types.location"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L77">interactive.types.location</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.loc">interactive.loc</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="interactive.types.pexpr_list"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L79">interactive.types.pexpr_list</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a>)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="interactive.types.opt_pexpr_list"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L80">interactive.types.opt_pexpr_list</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a>)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="interactive.types.pexpr_list_or_texpr"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L81">interactive.types.pexpr_list_or_texpr</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a>)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="interactive.types.only_flag"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L82">interactive.types.only_flag</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="interactive.param_desc"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L156">interactive.param_desc</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/format.html#format">format</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="cnst"><a id="interactive.parse_binders_core"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L164">interactive.parse_binders_core</a></span>  <span class="decl_args">:</span>       <div class="decl_type">ℕ → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a>)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="interactive.parse_binders"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L165">interactive.parse_binders</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> ℕ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#std.prec.max">std.prec.max</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a>)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="cnst"><a id="interactive.decl_attributes"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L167">interactive.decl_attributes</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="cnst"><a id="interactive.decl_attributes.apply"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L169">interactive.decl_attributes.apply</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.decl_attributes">interactive.decl_attributes</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="structure"><a id="interactive.decl_modifiers"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L171">interactive.decl_modifiers</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p></p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">interactive.decl_modifiers.is_private : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></div></li>
-<li><div class="structure_field">interactive.decl_modifiers.is_protected : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></div></li>
-<li><div class="structure_field">interactive.decl_modifiers.is_meta : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></div></li>
-<li><div class="structure_field">interactive.decl_modifiers.is_mutual : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></div></li>
-<li><div class="structure_field">interactive.decl_modifiers.is_noncomputable : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></div></li>
-</ul></li>
-
-</ul></div><div class="structure"><a id="interactive.decl_meta_info"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L178">interactive.decl_meta_info</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p></p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">interactive.decl_meta_info.attrs : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.decl_attributes">interactive.decl_attributes</a></div></li>
-<li><div class="structure_field">interactive.decl_meta_info.modifiers : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.decl_modifiers">interactive.decl_modifiers</a></div></li>
-<li><div class="structure_field">interactive.decl_meta_info.doc_string : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a></div></li>
-</ul></li>
-
-</ul></div><div class="structure"><a id="interactive.single_inductive_decl"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L184">interactive.single_inductive_decl</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p></p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">interactive.single_inductive_decl.attrs : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.decl_attributes">interactive.decl_attributes</a></div></li>
-<li><div class="structure_field">interactive.single_inductive_decl.sig : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></li>
-<li><div class="structure_field">interactive.single_inductive_decl.intros : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="interactive.single_inductive_decl.name"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L189">interactive.single_inductive_decl.name</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.single_inductive_decl">interactive.single_inductive_decl</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="structure"><a id="interactive.inductive_decl"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L192">interactive.inductive_decl</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p></p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">interactive.inductive_decl.u_names : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></div></li>
-<li><div class="structure_field">interactive.inductive_decl.params : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></li>
-<li><div class="structure_field">interactive.inductive_decl.decls : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.single_inductive_decl">interactive.single_inductive_decl</a></div></li>
-</ul></li>
-
-</ul></div><div class="cnst"><a id="interactive.inductive_decl.parse"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L198">interactive.inductive_decl.parse</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.decl_meta_info">interactive.decl_meta_info</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.inductive_decl">interactive.inductive_decl</a></div>
-<p>Parses and elaborates a single or multiple mutual inductive declarations (without the <code>inductive</code> keyword), depending on <code>is_mutual</code></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="format_macro"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L221">format_macro</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.tk">lean.parser.tk</a> "format!") → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="sformat_macro"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean#L236">sformat_macro</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.tk">lean.parser.tk</a> "sformat!") → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">core.init.meta.interactive_base</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/interactive_base.lean">(view source on GitHub)</a></div><a href="#format_macro">format_macro</a><br>
-<a href="#interactive.decl_attributes">interactive.decl_attributes</a><br>
-<a href="#interactive.decl_attributes.apply">interactive.decl_attributes.apply</a><br>
-<a href="#interactive.decl_meta_info">interactive.decl_meta_info</a><br>
-<a href="#interactive.decl_modifiers">interactive.decl_modifiers</a><br>
-<a href="#interactive.inductive_decl">interactive.inductive_decl</a><br>
-<a href="#interactive.inductive_decl.parse">interactive.inductive_decl.parse</a><br>
-<a href="#interactive.loc">interactive.loc</a><br>
-<a href="#interactive.loc.apply">interactive.loc.apply</a><br>
-<a href="#interactive.loc.get_locals">interactive.loc.get_locals</a><br>
-<a href="#interactive.loc.include_goal">interactive.loc.include_goal</a><br>
-<a href="#interactive.loc.try_apply">interactive.loc.try_apply</a><br>
-<a href="#interactive.param_desc">interactive.param_desc</a><br>
-<a href="#interactive.parse">interactive.parse</a><br>
-<a href="#interactive.parse_binders">interactive.parse_binders</a><br>
-<a href="#interactive.parse_binders_core">interactive.parse_binders_core</a><br>
-<a href="#interactive.single_inductive_decl">interactive.single_inductive_decl</a><br>
-<a href="#interactive.single_inductive_decl.name">interactive.single_inductive_decl.name</a><br>
-<a href="#interactive.types.brackets">interactive.types.brackets</a><br>
-<a href="#interactive.types.ident_">interactive.types.ident_</a><br>
-<a href="#interactive.types.list_of">interactive.types.list_of</a><br>
-<a href="#interactive.types.location">interactive.types.location</a><br>
-<a href="#interactive.types.only_flag">interactive.types.only_flag</a><br>
-<a href="#interactive.types.opt_pexpr_list">interactive.types.opt_pexpr_list</a><br>
-<a href="#interactive.types.pexpr_list">interactive.types.pexpr_list</a><br>
-<a href="#interactive.types.pexpr_list_or_texpr">interactive.types.pexpr_list_or_texpr</a><br>
-<a href="#interactive.types.tac_rbp">interactive.types.tac_rbp</a><br>
-<a href="#interactive.types.texpr">interactive.types.texpr</a><br>
-<a href="#interactive.types.using_ident">interactive.types.using_ident</a><br>
-<a href="#interactive.types.with_ident_list">interactive.types.with_ident_list</a><br>
-<a href="#interactive.types.without_ident_list">interactive.types.without_ident_list</a><br>
-<a href="#interactive.with_desc">interactive.with_desc</a><br>
-<a href="#sformat_macro">sformat_macro</a><br>
 </div></div>
 
         </div>

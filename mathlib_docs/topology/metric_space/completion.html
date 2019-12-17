@@ -7,7 +7,90 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">topology.metric_space.completion</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/metric_space/completion.lean">(view source on GitHub)</a></div><a href="#metric.completion.coe_isometry">metric.completion.coe_isometry</a><br>
+<a href="#metric.completion.dist_comm">metric.completion.dist_comm</a><br>
+<a href="#metric.completion.dist_eq">metric.completion.dist_eq</a><br>
+<a href="#metric.completion.dist_self">metric.completion.dist_self</a><br>
+<a href="#metric.completion.dist_triangle">metric.completion.dist_triangle</a><br>
+<a href="#metric.completion.eq_of_dist_eq_zero">metric.completion.eq_of_dist_eq_zero</a><br>
+<a href="#metric.completion.mem_uniformity_dist">metric.completion.mem_uniformity_dist</a><br>
+<a href="#metric.completion.metric_space">metric.completion.metric_space</a><br>
+<a href="#metric.completion.uniform_continuous_dist">metric.completion.uniform_continuous_dist</a><br>
+<a href="#metric.completion.uniformity_dist">metric.completion.uniformity_dist</a><br>
+<a href="#metric.completion.uniformity_dist'">metric.completion.uniformity_dist'</a><br>
+<a href="#metric.has_dist">metric.has_dist</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="mod_doc">
+<h1>The completion of a metric space</h1>
+
+<p>Completion of uniform spaces are already defined in <code>topology.uniform_space.completion</code>. We show
+here that the uniform space completion of a metric space inherits a metric space structure,
+by extending the distance to the completion and checking that it is indeed a distance, and that
+it defines the same uniformity as the already defined uniform structure on the completion</p>
+</div><div class="decl def" id="metric.has_dist"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/metric_space/completion.lean#L28">metric.has_dist</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist">has_dist</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α)</div></div>
+   <p>The distance on the completion is obtained by extending the distance on the original space,
+by uniform continuity.</p>
+ </ul></div><div class="decl theorem" id="metric.completion.uniform_continuous_dist">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/metric_space/completion.lean#L32">metric.completion.uniform_continuous_dist</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/basic.html#uniform_continuous">uniform_continuous</a>
+  (λ
+   (p :
+     <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a>
+       <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α),
+     <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist.dist">has_dist.dist</a> (p.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod.fst" title="prod.fst">fst</a>) (p.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod.snd" title="prod.snd">snd</a>))</div></div>
+   <p>The new distance is uniformly continuous.</p>
+ </ul></div><div class="decl theorem" id="metric.completion.dist_eq">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/metric_space/completion.lean#L37">metric.completion.dist_eq</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span></span> <span class="decl_args">(x y : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist.dist">has_dist.dist</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>y <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist.dist">has_dist.dist</a> x y</div></div>
+   <p>The new distance is an extension of the original distance.</p>
+ </ul></div><div class="decl theorem" id="metric.completion.dist_self">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/metric_space/completion.lean#L42">metric.completion.dist_self</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span></span> <span class="decl_args">(x : <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist.dist">has_dist.dist</a> x x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> 0</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="metric.completion.dist_comm">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/metric_space/completion.lean#L52">metric.completion.dist_comm</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span></span> <span class="decl_args">(x y : <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist.dist">has_dist.dist</a> x y <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist.dist">has_dist.dist</a> y x</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="metric.completion.dist_triangle">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/metric_space/completion.lean#L61">metric.completion.dist_triangle</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span></span> <span class="decl_args">(x y z : <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist.dist">has_dist.dist</a> x z <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist.dist">has_dist.dist</a> x y <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist.dist">has_dist.dist</a> y z</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="metric.completion.mem_uniformity_dist">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/metric_space/completion.lean#L82">metric.completion.mem_uniformity_dist</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span></span> <span class="decl_args">(s : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/set.html#set">set</a>
+  (<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a>
+     <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α))</span> <span class="decl_args">:</span>     <div class="decl_type">s <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/basic.html#uniformity">uniformity</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a>
+  ∃ (ε : <a href="https://leanprover-community.github.io/mathlib_docs/data/real/basic.html#real" title="real">ℝ</a>) (H : ε <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#gt" title="gt">></a> 0),
+    ∀ {a b : <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α},
+      <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist.dist">has_dist.dist</a> a b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> ε → (a, b) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> s</div></div>
+   <p>Elements of the uniformity (defined generally for completions) can be characterized in terms
+of the distance.</p>
+ </ul></div><div class="decl theorem" id="metric.completion.eq_of_dist_eq_zero">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/metric_space/completion.lean#L140">metric.completion.eq_of_dist_eq_zero</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span></span> <span class="decl_args">(x y : <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist.dist">has_dist.dist</a> x y <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> 0 → x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> y</div></div>
+   <p>If two points are at distance 0, then they coincide.</p>
+ </ul></div><div class="decl theorem" id="metric.completion.uniformity_dist'">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/metric_space/completion.lean#L153">metric.completion.uniformity_dist'</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/basic.html#uniformity">uniformity</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  ⨅ (ε : {ε // ε <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#gt" title="gt">></a> 0}),
+    <a href="https://leanprover-community.github.io/mathlib_docs/order/filter/basic.html#filter.principal">filter.principal</a>
+      {p :
+         <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a>
+           <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α | <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist.dist">has_dist.dist</a>
+           (p.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod.fst" title="prod.fst">fst</a>)
+           (p.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod.snd" title="prod.snd">snd</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a>
+         ε.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#subtype.val" title="subtype.val">val</a>}</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="metric.completion.uniformity_dist">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/metric_space/completion.lean#L163">metric.completion.uniformity_dist</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/basic.html#uniformity">uniformity</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  ⨅ (ε : <a href="https://leanprover-community.github.io/mathlib_docs/data/real/basic.html#real" title="real">ℝ</a>) (H : ε <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#gt" title="gt">></a> 0),
+    <a href="https://leanprover-community.github.io/mathlib_docs/order/filter/basic.html#filter.principal">filter.principal</a>
+      {p :
+         <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a>
+           <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α | <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist.dist">has_dist.dist</a>
+           (p.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod.fst" title="prod.fst">fst</a>)
+           (p.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod.snd" title="prod.snd">snd</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a>
+         ε}</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="metric.completion.metric_space"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/metric_space/completion.lean#L168">metric.completion.metric_space</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α)</div></div>
+   <p>Metric space structure on the completion of a metric space.</p>
+ </ul></div><div class="decl theorem" id="metric.completion.coe_isometry">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/metric_space/completion.lean#L177">metric.completion.coe_isometry</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/isometry.html#isometry">isometry</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe">coe</a></div></div>
+   <p>The embedding of a metric space in its completion is an isometry.</p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +890,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1118,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,126 +1241,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="mod_doc">
-<h1>The completion of a metric space</h1>
-
-<p>Completion of uniform spaces are already defined in <code>topology.uniform_space.completion</code>. We show
-here that the uniform space completion of a metric space inherits a metric space structure,
-by extending the distance to the completion and checking that it is indeed a distance, and that
-it defines the same uniformity as the already defined uniform structure on the completion</p>
-</div><div class="def"><a id="metric.has_dist"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/metric_space/completion.lean#L28">metric.has_dist</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist">has_dist</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α)</div>
-<p>The distance on the completion is obtained by extending the distance on the original space,
-by uniform continuity.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="thm"><a id="metric.completion.uniform_continuous_dist"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/metric_space/completion.lean#L32">metric.completion.uniform_continuous_dist</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/basic.html#uniform_continuous">uniform_continuous</a> (λ (p : <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α × <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α), has_dist.dist (p.fst) (p.snd))</div>
-<p>The new distance is uniformly continuous.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="metric.completion.dist_eq"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/metric_space/completion.lean#L37">metric.completion.dist_eq</a></span> <span class="decl_args">(x y : α)</span> <span class="decl_args">:</span>       <div class="decl_type">has_dist.dist ↑x ↑y = has_dist.dist x y</div>
-<p>The new distance is an extension of the original distance.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="metric.completion.dist_self"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/metric_space/completion.lean#L42">metric.completion.dist_self</a></span> <span class="decl_args">(x : <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α)</span> <span class="decl_args">:</span>       <div class="decl_type">has_dist.dist x x = 0</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="metric.completion.dist_comm"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/metric_space/completion.lean#L52">metric.completion.dist_comm</a></span> <span class="decl_args">(x y : <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α)</span> <span class="decl_args">:</span>       <div class="decl_type">has_dist.dist x y = has_dist.dist y x</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="metric.completion.dist_triangle"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/metric_space/completion.lean#L61">metric.completion.dist_triangle</a></span> <span class="decl_args">(x y z : <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α)</span> <span class="decl_args">:</span>       <div class="decl_type">has_dist.dist x z ≤ has_dist.dist x y + has_dist.dist y z</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="metric.completion.mem_uniformity_dist"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/metric_space/completion.lean#L82">metric.completion.mem_uniformity_dist</a></span> <span class="decl_args">(s : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/set.html#set">set</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α × <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α))</span> <span class="decl_args">:</span>       <div class="decl_type">s ∈ <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/basic.html#uniformity">uniformity</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α) ↔
-  ∃ (ε : ℝ) (H : ε > 0), ∀ {a b : <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α}, has_dist.dist a b < ε → (a, b) ∈ s</div>
-<p>Elements of the uniformity (defined generally for completions) can be characterized in terms
-of the distance.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="metric.completion.eq_of_dist_eq_zero"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/metric_space/completion.lean#L140">metric.completion.eq_of_dist_eq_zero</a></span> <span class="decl_args">(x y : <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α)</span> <span class="decl_args">:</span>       <div class="decl_type">has_dist.dist x y = 0 → x = y</div>
-<p>If two points are at distance 0, then they coincide.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="metric.completion.uniformity_dist'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/metric_space/completion.lean#L153">metric.completion.uniformity_dist'</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/basic.html#uniformity">uniformity</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α) =
-  ⨅ (ε : {ε // ε > 0}),
-    <a href="https://leanprover-community.github.io/mathlib_docs/order/filter/basic.html#filter.principal">filter.principal</a>
-      {p : <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α × <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α | has_dist.dist (p.fst) (p.snd) < ε.val}</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="metric.completion.uniformity_dist"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/metric_space/completion.lean#L163">metric.completion.uniformity_dist</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/basic.html#uniformity">uniformity</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α) =
-  ⨅ (ε : ℝ) (H : ε > 0),
-    <a href="https://leanprover-community.github.io/mathlib_docs/order/filter/basic.html#filter.principal">filter.principal</a>
-      {p : <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α × <a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α | has_dist.dist (p.fst) (p.snd) < ε}</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="metric.completion.metric_space"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/metric_space/completion.lean#L168">metric.completion.metric_space</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/completion.html#uniform_space.completion">uniform_space.completion</a> α)</div>
-<p>Metric space structure on the completion of a metric space.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="thm"><a id="metric.completion.coe_isometry"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/metric_space/completion.lean#L177">metric.completion.coe_isometry</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/isometry.html#isometry">isometry</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe">coe</a></div>
-<p>The embedding of a metric space in its completion is an isometry.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span></li>
-
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">topology.metric_space.completion</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/metric_space/completion.lean">(view source on GitHub)</a></div><a href="#metric.completion.coe_isometry">metric.completion.coe_isometry</a><br>
-<a href="#metric.completion.dist_comm">metric.completion.dist_comm</a><br>
-<a href="#metric.completion.dist_eq">metric.completion.dist_eq</a><br>
-<a href="#metric.completion.dist_self">metric.completion.dist_self</a><br>
-<a href="#metric.completion.dist_triangle">metric.completion.dist_triangle</a><br>
-<a href="#metric.completion.eq_of_dist_eq_zero">metric.completion.eq_of_dist_eq_zero</a><br>
-<a href="#metric.completion.mem_uniformity_dist">metric.completion.mem_uniformity_dist</a><br>
-<a href="#metric.completion.metric_space">metric.completion.metric_space</a><br>
-<a href="#metric.completion.uniform_continuous_dist">metric.completion.uniform_continuous_dist</a><br>
-<a href="#metric.completion.uniformity_dist">metric.completion.uniformity_dist</a><br>
-<a href="#metric.completion.uniformity_dist'">metric.completion.uniformity_dist'</a><br>
-<a href="#metric.has_dist">metric.has_dist</a><br>
 </div></div>
 
         </div>

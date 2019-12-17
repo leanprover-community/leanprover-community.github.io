@@ -7,7 +7,243 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">algebra.floor</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean">(view source on GitHub)</a></div><a href="#abs_sub_lt_one_of_floor_eq_floor">abs_sub_lt_one_of_floor_eq_floor</a><br>
+<a href="#ceil">ceil</a><br>
+<a href="#ceil_add_int">ceil_add_int</a><br>
+<a href="#ceil_coe">ceil_coe</a><br>
+<a href="#ceil_le">ceil_le</a><br>
+<a href="#ceil_le_floor_add_one">ceil_le_floor_add_one</a><br>
+<a href="#ceil_lt_add_one">ceil_lt_add_one</a><br>
+<a href="#ceil_mono">ceil_mono</a><br>
+<a href="#ceil_nonneg">ceil_nonneg</a><br>
+<a href="#ceil_pos">ceil_pos</a><br>
+<a href="#ceil_sub_int">ceil_sub_int</a><br>
+<a href="#ceil_zero">ceil_zero</a><br>
+<a href="#floor">floor</a><br>
+<a href="#floor_add_fract">floor_add_fract</a><br>
+<a href="#floor_add_int">floor_add_int</a><br>
+<a href="#floor_coe">floor_coe</a><br>
+<a href="#floor_eq_iff">floor_eq_iff</a><br>
+<a href="#floor_fract">floor_fract</a><br>
+<a href="#floor_le">floor_le</a><br>
+<a href="#floor_lt">floor_lt</a><br>
+<a href="#floor_mono">floor_mono</a><br>
+<a href="#floor_nonneg">floor_nonneg</a><br>
+<a href="#floor_one">floor_one</a><br>
+<a href="#floor_ring">floor_ring</a><br>
+<a href="#floor_ring_unique">floor_ring_unique</a><br>
+<a href="#floor_sub_int">floor_sub_int</a><br>
+<a href="#floor_zero">floor_zero</a><br>
+<a href="#fract">fract</a><br>
+<a href="#fract_add">fract_add</a><br>
+<a href="#fract_add_floor">fract_add_floor</a><br>
+<a href="#fract_coe">fract_coe</a><br>
+<a href="#fract_eq_fract">fract_eq_fract</a><br>
+<a href="#fract_eq_iff">fract_eq_iff</a><br>
+<a href="#fract_floor">fract_floor</a><br>
+<a href="#fract_fract">fract_fract</a><br>
+<a href="#fract_lt_one">fract_lt_one</a><br>
+<a href="#fract_mul_nat">fract_mul_nat</a><br>
+<a href="#fract_nonneg">fract_nonneg</a><br>
+<a href="#fract_zero">fract_zero</a><br>
+<a href="#int.floor_ring">int.floor_ring</a><br>
+<a href="#le_ceil">le_ceil</a><br>
+<a href="#le_floor">le_floor</a><br>
+<a href="#le_nat_ceil">le_nat_ceil</a><br>
+<a href="#le_of_nat_ceil_le">le_of_nat_ceil_le</a><br>
+<a href="#lt_ceil">lt_ceil</a><br>
+<a href="#lt_floor_add_one">lt_floor_add_one</a><br>
+<a href="#lt_nat_ceil">lt_nat_ceil</a><br>
+<a href="#lt_of_nat_ceil_lt">lt_of_nat_ceil_lt</a><br>
+<a href="#lt_succ_floor">lt_succ_floor</a><br>
+<a href="#nat_ceil">nat_ceil</a><br>
+<a href="#nat_ceil_add_nat">nat_ceil_add_nat</a><br>
+<a href="#nat_ceil_coe">nat_ceil_coe</a><br>
+<a href="#nat_ceil_le">nat_ceil_le</a><br>
+<a href="#nat_ceil_lt_add_one">nat_ceil_lt_add_one</a><br>
+<a href="#nat_ceil_mono">nat_ceil_mono</a><br>
+<a href="#nat_ceil_zero">nat_ceil_zero</a><br>
+<a href="#sub_one_lt_floor">sub_one_lt_floor</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="mod_doc">
+<h1>Floor and Ceil</h1>
+
+<h2>Summary</h2>
+
+<p>We define <code>floor</code>, <code>ceil</code>, and <code>nat_ceil</code> functions on linear ordered rings.</p>
+
+<h2>Main Definitions</h2>
+
+<ul>
+<li><code>floor_ring</code> is a linear ordered ring with floor function.</li>
+<li><code>floor x</code> is the greatest integer <code>z</code> such that <code>z ≤ x</code>.</li>
+<li><code>fract x</code> is the fractional part of x, that is <code>x - <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor">floor</a> x</code>.</li>
+<li><code>ceil x</code> is the smallest integer <code>z</code> such that <code>x ≤ z</code>.</li>
+<li><code>nat_ceil x</code> is the smallest nonnegative integer <code>n</code> with <code>x ≤ n</code>.</li>
+</ul>
+
+<h2>Notations</h2>
+
+<ul>
+<li><code>⌊x⌋</code> is <code>floor x</code>.</li>
+<li><code>⌈x⌉</code> is <code>ceil x</code>.</li>
+</ul>
+
+<h2>Tags</h2>
+
+<p>rounding</p>
+</div><div class="decl structure" id="floor_ring"><div class="attributes">@[class]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L39">floor_ring</a></span> <span class="decl_args">(α : Type u_2)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type">Type u_2</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="floor_ring.floor">floor : α → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a></li>
+<li class="structure_field" id="floor_ring.le_floor">le_floor : ∀ (z : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>) (x : α),
+  z <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring.floor">floor_ring.floor</a> x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>z <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> x</li>
+</ul>  <p>A <code>floor_ring</code> is a linear ordered ring over <code>α</code> with a function
+<code>floor : α → ℤ</code> satisfying <code>∀ (z : ℤ) (x : α), z ≤ floor x ↔ (z : α) ≤ x)</code>.</p>
+ <details class="instances"><summary>Instances</summary><ul><li><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#int.floor_ring">int.floor_ring</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/rat/floor.html#rat.floor_ring">rat.floor_ring</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/real/basic.html#real.floor_ring">real.floor_ring</a></li></ul></details></ul></div><div class="decl def" id="int.floor_ring"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L43">int.floor_ring</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="floor">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L48">floor</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type">α → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a></div></div>
+   <p><code>floor x</code> is the greatest integer <code>z</code> such that <code>z ≤ x</code></p>
+ </ul></div><div class="decl theorem" id="le_floor">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L52">le_floor</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{z : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>}</span></span> <span class="impl_arg"><span class="decl_args">{x : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">z <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌊</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌋</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>z <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> x</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="floor_lt">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L55">floor_lt</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{x : α}</span></span> <span class="impl_arg"><span class="decl_args">{z : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌊</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌋</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> z <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a> x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>z</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="floor_le">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L58">floor_le</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌊</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌋</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> x</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="floor_nonneg">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L61">floor_nonneg</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{x : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">0 <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌊</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌋</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a> 0 <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> x</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="lt_succ_floor">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L64">lt_succ_floor</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>     <div class="decl_type">x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>(<a href="https://leanprover-community.github.io/mathlib_docs/data/int/basic.html#int.succ">int.succ</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌊</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌋</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="lt_floor_add_one">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L67">lt_floor_add_one</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>     <div class="decl_type">x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌊</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌋</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> 1</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="sub_one_lt_floor">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L70">sub_one_lt_floor</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>     <div class="decl_type">x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_sub.sub" title="has_sub.sub">-</a> 1 <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌊</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌋</a></div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="floor_coe"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L73">floor_coe</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">(z : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌊</a><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>z<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌋</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> z</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="floor_zero"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L76">floor_zero</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌊</a>0<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌋</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> 0</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="floor_one"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L78">floor_one</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌊</a>1<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌋</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> 1</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="floor_mono">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L81">floor_mono</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b →
+<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌊</a>a<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌋</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌊</a>b<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌋</a></div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="floor_add_int"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L84">floor_add_int</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">(x : α)</span> <span class="decl_args">(z : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌊</a>x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>z<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌋</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌊</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌋</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> z</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="floor_sub_int">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L88">floor_sub_int</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">(x : α)</span> <span class="decl_args">(z : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌊</a>x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_sub.sub" title="has_sub.sub">-</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>z<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌋</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌊</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌋</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_sub.sub" title="has_sub.sub">-</a> z</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="abs_sub_lt_one_of_floor_eq_floor">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L91">abs_sub_lt_one_of_floor_eq_floor</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#decidable_linear_ordered_comm_ring">decidable_linear_ordered_comm_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{x y : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌊</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌋</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌊</a>y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌋</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/functions.html#abs">abs</a> (x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_sub.sub" title="has_sub.sub">-</a> y) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> 1</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="floor_eq_iff">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L102">floor_eq_iff</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{r : α}</span></span> <span class="impl_arg"><span class="decl_args">{z : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌊</a>r<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌋</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> z <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>z <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> r <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a>
+    r <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>z <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> 1</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="floor_ring_unique">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L107">floor_ring_unique</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="decl_args">(inst1 inst2 : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor">floor</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor">floor</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="fract">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L116">fract</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type">α → α</div></div>
+   <p>The fractional part fract r of r is just r - ⌊r⌋</p>
+ </ul></div><div class="decl theorem" id="floor_add_fract"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L120">floor_add_fract</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">(r : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌊</a>r<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌋</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> r <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> r</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="fract_add_floor"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L122">fract_add_floor</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">(r : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> r <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌊</a>r<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌋</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> r</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="fract_nonneg">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L124">fract_nonneg</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">(r : α)</span> <span class="decl_args">:</span>     <div class="decl_type">0 <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> r</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="fract_lt_one">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L127">fract_lt_one</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">(r : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> r <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> 1</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="fract_zero"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L130">fract_zero</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> 0 <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> 0</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="fract_coe"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L132">fract_coe</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">(z : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>z <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> 0</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="fract_floor"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L135">fract_floor</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">(r : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌊</a>r<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌋</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> 0</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="floor_fract"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L137">floor_fract</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">(r : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌊</a><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> r<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌋</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> 0</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="fract_eq_iff">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L141">fract_eq_iff</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{r s : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> r <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> s <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a>
+  0 <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> s <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a>
+    s <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> 1 <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a>
+      ∃ (z : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>), r <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_sub.sub" title="has_sub.sub">-</a> s <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>z</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="fract_eq_fract">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L152">fract_eq_fract</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{r s : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> r <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> s <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a>
+  ∃ (z : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>), r <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_sub.sub" title="has_sub.sub">-</a> s <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>z</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="fract_fract"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L166">fract_fract</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">(r : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> r) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> r</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="fract_add">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L169">fract_add</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">(r s : α)</span> <span class="decl_args">:</span>     <div class="decl_type">∃ (z : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>),
+  <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> (r <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> s) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_sub.sub" title="has_sub.sub">-</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> r <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_sub.sub" title="has_sub.sub">-</a>
+      <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> s <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>z</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="fract_mul_nat">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L172">fract_mul_nat</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">(r : α)</span> <span class="decl_args">(b : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">:</span>     <div class="decl_type">∃ (z : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>),
+  <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> r <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mul.mul" title="has_mul.mul">*</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_sub.sub" title="has_sub.sub">-</a>
+      <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> (r <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mul.mul" title="has_mul.mul">*</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>b) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>z</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="ceil">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L185">ceil</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type">α → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a></div></div>
+   <p><code>ceil x</code> is the smallest integer <code>z</code> such that <code>x ≤ z</code></p>
+ </ul></div><div class="decl theorem" id="ceil_le">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L189">ceil_le</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{z : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>}</span></span> <span class="impl_arg"><span class="decl_args">{x : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌈</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌉</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> z <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a> x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>z</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="lt_ceil">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L192">lt_ceil</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{x : α}</span></span> <span class="impl_arg"><span class="decl_args">{z : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>}</span></span> <span class="decl_args">:</span>     <div class="decl_type">z <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌈</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌉</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>z <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> x</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="ceil_le_floor_add_one">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L195">ceil_le_floor_add_one</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌈</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌉</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌊</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor" title="floor">⌋</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> 1</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="le_ceil">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L198">le_ceil</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>     <div class="decl_type">x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌈</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌉</a></div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="ceil_coe"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L201">ceil_coe</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">(z : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌈</a><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>z<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌉</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> z</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="ceil_mono">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L204">ceil_mono</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b → <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌈</a>a<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌉</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌈</a>b<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌉</a></div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="ceil_add_int"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L207">ceil_add_int</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">(x : α)</span> <span class="decl_args">(z : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌈</a>x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>z<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌉</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌈</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌉</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> z</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="ceil_sub_int">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L210">ceil_sub_int</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">(x : α)</span> <span class="decl_args">(z : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌈</a>x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_sub.sub" title="has_sub.sub">-</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>z<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌉</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌈</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌉</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_sub.sub" title="has_sub.sub">-</a> z</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="ceil_lt_add_one">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L213">ceil_lt_add_one</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌈</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌉</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> 1</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="ceil_pos">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L216">ceil_pos</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">0 <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌈</a>a<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌉</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a> 0 <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> a</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="ceil_zero"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L222">ceil_zero</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌈</a>0<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌉</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> 0</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="ceil_nonneg">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L224">ceil_nonneg</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_rel">decidable_rel</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt">has_lt.lt</a>]</span></span> <span class="impl_arg"><span class="decl_args">{q : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">0 <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> q → 0 <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌈</a>q<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#ceil" title="ceil">⌉</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="nat_ceil">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L232">nat_ceil</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type">α → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a></div></div>
+   <p><code>nat_ceil x</code> is the smallest nonnegative integer <code>n</code> with <code>x ≤ n</code>.
+It is the same as <code>⌈q⌉</code> when <code>q ≥ 0</code>, otherwise it is <code>0</code>.</p>
+ </ul></div><div class="decl theorem" id="nat_ceil_le">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L234">nat_ceil_le</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a : α}</span></span> <span class="impl_arg"><span class="decl_args">{n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> n <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a> a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>n</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="lt_nat_ceil">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L237">lt_nat_ceil</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a : α}</span></span> <span class="impl_arg"><span class="decl_args">{n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable">decidable</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>n <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> a)]</span></span> <span class="decl_args">:</span>     <div class="decl_type">n <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>n <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> a</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="le_nat_ceil">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L240">le_nat_ceil</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">(a : α)</span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>(<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> a)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="nat_ceil_mono">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L242">nat_ceil_mono</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a₁ a₂ : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a₁ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> a₂ → <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> a₁ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> a₂</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="nat_ceil_coe"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L245">nat_ceil_coe</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>n <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> n</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="nat_ceil_zero"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L248">nat_ceil_zero</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> 0 <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> 0</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="nat_ceil_add_nat">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L250">nat_ceil_add_nat</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a : α}</span></span> <span class="decl_args">(a_nonneg : 0 <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> a)</span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> (a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>n) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> n</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="nat_ceil_lt_add_one">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L260">nat_ceil_lt_add_one</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a : α}</span></span> <span class="decl_args">(a_nonneg : 0 <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> a)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable">decidable</a>
+  (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>(<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> a) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> 1)]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>(<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> a) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> 1</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="lt_of_nat_ceil_lt">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L266">lt_of_nat_ceil_lt</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{x : α}</span></span> <span class="impl_arg"><span class="decl_args">{n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> n → x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>n</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="le_of_nat_ceil_le">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/floor.lean#L269">le_of_nat_ceil_le</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{x : α}</span></span> <span class="impl_arg"><span class="decl_args">{n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> n → x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>n</div></div>
+   <p></p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner" id="algebra">
@@ -807,6 +1043,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1271,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,503 +1394,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="mod_doc">
-<h1>Floor and Ceil</h1>
-
-<h2>Summary</h2>
-
-<p>We define <code>floor</code>, <code>ceil</code>, and <code>nat_ceil</code> functions on linear ordered rings.</p>
-
-<h2>Main Definitions</h2>
-
-<ul>
-<li><code>floor_ring</code> is a linear ordered ring with floor function.</li>
-<li><code>floor x</code> is the greatest integer <code>z</code> such that <code>z ≤ x</code>.</li>
-<li><code>fract x</code> is the fractional part of x, that is <code>x - <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor">floor</a> x</code>.</li>
-<li><code>ceil x</code> is the smallest integer <code>z</code> such that <code>x ≤ z</code>.</li>
-<li><code>nat_ceil x</code> is the smallest nonnegative integer <code>n</code> with <code>x ≤ n</code>.</li>
-</ul>
-
-<h2>Notations</h2>
-
-<ul>
-<li><code>⌊x⌋</code> is <code>floor x</code>.</li>
-<li><code>⌈x⌉</code> is <code>ceil x</code>.</li>
-</ul>
-
-<h2>Tags</h2>
-
-<p>rounding</p>
-</div><div class="structure"><a id="floor_ring"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L39">floor_ring</a></span> <span class="decl_args">(α : Type u_2)</span> <span class="decl_args">:</span>       <div class="decl_type">Type u_2</div>
-<p>A <code>floor_ring</code> is a linear ordered ring over <code>α</code> with a function
-<code>floor : α → ℤ</code> satisfying <code>∀ (z : ℤ) (x : α), z ≤ floor x ↔ (z : α) ≤ x)</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></li>
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">floor_ring.floor : α → ℤ</div></li>
-<li><div class="structure_field">floor_ring.le_floor : ∀ (z : ℤ) (x : α), z ≤ floor_ring.floor x ↔ ↑z ≤ x</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="int.floor_ring"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L43">int.floor_ring</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> ℤ</div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="floor"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L48">floor</a></span>  <span class="decl_args">:</span>       <div class="decl_type">α → ℤ</div>
-<p><code>floor x</code> is the greatest integer <code>z</code> such that <code>z ≤ x</code></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="le_floor"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L52">le_floor</a></span>  <span class="decl_args">:</span>       <div class="decl_type">z ≤ ⌊x⌋ ↔ ↑z ≤ x</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span> <span class="impl_arg">{z : ℤ}</span> <span class="impl_arg">{x : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="floor_lt"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L55">floor_lt</a></span>  <span class="decl_args">:</span>       <div class="decl_type">⌊x⌋ < z ↔ x < ↑z</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span> <span class="impl_arg">{x : α}</span> <span class="impl_arg">{z : ℤ}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="floor_le"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L58">floor_le</a></span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>       <div class="decl_type">↑⌊x⌋ ≤ x</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="floor_nonneg"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L61">floor_nonneg</a></span>  <span class="decl_args">:</span>       <div class="decl_type">0 ≤ ⌊x⌋ ↔ 0 ≤ x</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span> <span class="impl_arg">{x : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="lt_succ_floor"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L64">lt_succ_floor</a></span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>       <div class="decl_type">x < ↑(<a href="https://leanprover-community.github.io/mathlib_docs/data/int/basic.html#int.succ">int.succ</a> ⌊x⌋)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="lt_floor_add_one"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L67">lt_floor_add_one</a></span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>       <div class="decl_type">x < ↑⌊x⌋ + 1</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="sub_one_lt_floor"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L70">sub_one_lt_floor</a></span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>       <div class="decl_type">x - 1 < ↑⌊x⌋</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="floor_coe"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L73">floor_coe</a></span> <span class="decl_args">(z : ℤ)</span> <span class="decl_args">:</span>       <div class="decl_type">⌊↑z⌋ = z</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="floor_zero"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L76">floor_zero</a></span>  <span class="decl_args">:</span>       <div class="decl_type">⌊0⌋ = 0</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="floor_one"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L78">floor_one</a></span>  <span class="decl_args">:</span>       <div class="decl_type">⌊1⌋ = 1</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="floor_mono"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L81">floor_mono</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a ≤ b → ⌊a⌋ ≤ ⌊b⌋</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="floor_add_int"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L84">floor_add_int</a></span> <span class="decl_args">(x : α)</span> <span class="decl_args">(z : ℤ)</span> <span class="decl_args">:</span>       <div class="decl_type">⌊x + ↑z⌋ = ⌊x⌋ + z</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="floor_sub_int"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L88">floor_sub_int</a></span> <span class="decl_args">(x : α)</span> <span class="decl_args">(z : ℤ)</span> <span class="decl_args">:</span>       <div class="decl_type">⌊x - ↑z⌋ = ⌊x⌋ - z</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="abs_sub_lt_one_of_floor_eq_floor"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L91">abs_sub_lt_one_of_floor_eq_floor</a></span>  <span class="decl_args">:</span>       <div class="decl_type">⌊x⌋ = ⌊y⌋ → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/functions.html#abs">abs</a> (x - y) < 1</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#decidable_linear_ordered_comm_ring">decidable_linear_ordered_comm_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span> <span class="impl_arg">{x y : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="floor_eq_iff"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L102">floor_eq_iff</a></span>  <span class="decl_args">:</span>       <div class="decl_type">⌊r⌋ = z ↔ ↑z ≤ r ∧ r < ↑z + 1</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span> <span class="impl_arg">{r : α}</span> <span class="impl_arg">{z : ℤ}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="floor_ring_unique"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L107">floor_ring_unique</a></span> <span class="decl_args">(inst1 inst2 : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor">floor</a> = <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor">floor</a></div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="fract"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L116">fract</a></span>  <span class="decl_args">:</span>       <div class="decl_type">α → α</div>
-<p>The fractional part fract r of r is just r - ⌊r⌋</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="floor_add_fract"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L120">floor_add_fract</a></span> <span class="decl_args">(r : α)</span> <span class="decl_args">:</span>       <div class="decl_type">↑⌊r⌋ + <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> r = r</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="fract_add_floor"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L122">fract_add_floor</a></span> <span class="decl_args">(r : α)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> r + ↑⌊r⌋ = r</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="fract_nonneg"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L124">fract_nonneg</a></span> <span class="decl_args">(r : α)</span> <span class="decl_args">:</span>       <div class="decl_type">0 ≤ <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> r</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="fract_lt_one"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L127">fract_lt_one</a></span> <span class="decl_args">(r : α)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> r < 1</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="fract_zero"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L130">fract_zero</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> 0 = 0</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="fract_coe"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L132">fract_coe</a></span> <span class="decl_args">(z : ℤ)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> ↑z = 0</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="fract_floor"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L135">fract_floor</a></span> <span class="decl_args">(r : α)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> ↑⌊r⌋ = 0</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="floor_fract"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L137">floor_fract</a></span> <span class="decl_args">(r : α)</span> <span class="decl_args">:</span>       <div class="decl_type">⌊fract r⌋ = 0</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="fract_eq_iff"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L141">fract_eq_iff</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> r = s ↔ 0 ≤ s ∧ s < 1 ∧ ∃ (z : ℤ), r - s = ↑z</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span> <span class="impl_arg">{r s : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="fract_eq_fract"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L152">fract_eq_fract</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> r = <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> s ↔ ∃ (z : ℤ), r - s = ↑z</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span> <span class="impl_arg">{r s : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="fract_fract"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L166">fract_fract</a></span> <span class="decl_args">(r : α)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> r) = <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> r</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="fract_add"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L169">fract_add</a></span> <span class="decl_args">(r s : α)</span> <span class="decl_args">:</span>       <div class="decl_type">∃ (z : ℤ), <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> (r + s) - <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> r - <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> s = ↑z</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="fract_mul_nat"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L172">fract_mul_nat</a></span> <span class="decl_args">(r : α)</span> <span class="decl_args">(b : ℕ)</span> <span class="decl_args">:</span>       <div class="decl_type">∃ (z : ℤ), <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> r * ↑b - <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#fract">fract</a> (r * ↑b) = ↑z</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="ceil"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L185">ceil</a></span>  <span class="decl_args">:</span>       <div class="decl_type">α → ℤ</div>
-<p><code>ceil x</code> is the smallest integer <code>z</code> such that <code>x ≤ z</code></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="ceil_le"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L189">ceil_le</a></span>  <span class="decl_args">:</span>       <div class="decl_type">⌈x⌉ ≤ z ↔ x ≤ ↑z</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span> <span class="impl_arg">{z : ℤ}</span> <span class="impl_arg">{x : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="lt_ceil"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L192">lt_ceil</a></span>  <span class="decl_args">:</span>       <div class="decl_type">z < ⌈x⌉ ↔ ↑z < x</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span> <span class="impl_arg">{x : α}</span> <span class="impl_arg">{z : ℤ}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="ceil_le_floor_add_one"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L195">ceil_le_floor_add_one</a></span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>       <div class="decl_type">⌈x⌉ ≤ ⌊x⌋ + 1</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="le_ceil"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L198">le_ceil</a></span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>       <div class="decl_type">x ≤ ↑⌈x⌉</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="ceil_coe"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L201">ceil_coe</a></span> <span class="decl_args">(z : ℤ)</span> <span class="decl_args">:</span>       <div class="decl_type">⌈↑z⌉ = z</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="ceil_mono"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L204">ceil_mono</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a ≤ b → ⌈a⌉ ≤ ⌈b⌉</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="ceil_add_int"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L207">ceil_add_int</a></span> <span class="decl_args">(x : α)</span> <span class="decl_args">(z : ℤ)</span> <span class="decl_args">:</span>       <div class="decl_type">⌈x + ↑z⌉ = ⌈x⌉ + z</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="ceil_sub_int"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L210">ceil_sub_int</a></span> <span class="decl_args">(x : α)</span> <span class="decl_args">(z : ℤ)</span> <span class="decl_args">:</span>       <div class="decl_type">⌈x - ↑z⌉ = ⌈x⌉ - z</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="ceil_lt_add_one"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L213">ceil_lt_add_one</a></span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>       <div class="decl_type">↑⌈x⌉ < x + 1</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="ceil_pos"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L216">ceil_pos</a></span>  <span class="decl_args">:</span>       <div class="decl_type">0 < ⌈a⌉ ↔ 0 < a</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span> <span class="impl_arg">{a : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="ceil_zero"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L222">ceil_zero</a></span>  <span class="decl_args">:</span>       <div class="decl_type">⌈0⌉ = 0</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="ceil_nonneg"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L224">ceil_nonneg</a></span>  <span class="decl_args">:</span>       <div class="decl_type">0 ≤ q → 0 ≤ ⌈q⌉</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_rel">decidable_rel</a> has_lt.lt]</span> <span class="impl_arg">{q : α}</span></li>
-
-
-
-</ul></div><div class="def"><a id="nat_ceil"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L232">nat_ceil</a></span>  <span class="decl_args">:</span>       <div class="decl_type">α → ℕ</div>
-<p><code>nat_ceil x</code> is the smallest nonnegative integer <code>n</code> with <code>x ≤ n</code>.
-It is the same as <code>⌈q⌉</code> when <code>q ≥ 0</code>, otherwise it is <code>0</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="nat_ceil_le"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L234">nat_ceil_le</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> a ≤ n ↔ a ≤ ↑n</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span> <span class="impl_arg">{a : α}</span> <span class="impl_arg">{n : ℕ}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="lt_nat_ceil"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L237">lt_nat_ceil</a></span>  <span class="decl_args">:</span>       <div class="decl_type">n < <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> a ↔ ↑n < a</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span> <span class="impl_arg">{a : α}</span> <span class="impl_arg">{n : ℕ}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable">decidable</a> (↑n < a)]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="le_nat_ceil"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L240">le_nat_ceil</a></span> <span class="decl_args">(a : α)</span> <span class="decl_args">:</span>       <div class="decl_type">a ≤ ↑(<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> a)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="nat_ceil_mono"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L242">nat_ceil_mono</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a₁ ≤ a₂ → <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> a₁ ≤ <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> a₂</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span> <span class="impl_arg">{a₁ a₂ : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="nat_ceil_coe"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L245">nat_ceil_coe</a></span> <span class="decl_args">(n : ℕ)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> ↑n = n</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="nat_ceil_zero"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L248">nat_ceil_zero</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> 0 = 0</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="nat_ceil_add_nat"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L250">nat_ceil_add_nat</a></span> <span class="decl_args">(a_nonneg : 0 ≤ a)</span> <span class="decl_args">(n : ℕ)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> (a + ↑n) = <a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> a + n</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span> <span class="impl_arg">{a : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="nat_ceil_lt_add_one"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L260">nat_ceil_lt_add_one</a></span> <span class="decl_args">(a_nonneg : 0 ≤ a)</span> <span class="decl_args">:</span>       <div class="decl_type">↑(<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> a) < a + 1</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span> <span class="impl_arg">{a : α}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable">decidable</a> (↑(<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> a) < a + 1)]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="lt_of_nat_ceil_lt"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L266">lt_of_nat_ceil_lt</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> x < n → x < ↑n</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span> <span class="impl_arg">{x : α}</span> <span class="impl_arg">{n : ℕ}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="le_of_nat_ceil_le"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean#L269">le_of_nat_ceil_le</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#nat_ceil">nat_ceil</a> x ≤ n → x ≤ ↑n</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring">linear_ordered_ring</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/floor.html#floor_ring">floor_ring</a> α]</span> <span class="impl_arg">{x : α}</span> <span class="impl_arg">{n : ℕ}</span></li>
-
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">algebra.floor</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/floor.lean">(view source on GitHub)</a></div><a href="#abs_sub_lt_one_of_floor_eq_floor">abs_sub_lt_one_of_floor_eq_floor</a><br>
-<a href="#ceil">ceil</a><br>
-<a href="#ceil_add_int">ceil_add_int</a><br>
-<a href="#ceil_coe">ceil_coe</a><br>
-<a href="#ceil_le">ceil_le</a><br>
-<a href="#ceil_le_floor_add_one">ceil_le_floor_add_one</a><br>
-<a href="#ceil_lt_add_one">ceil_lt_add_one</a><br>
-<a href="#ceil_mono">ceil_mono</a><br>
-<a href="#ceil_nonneg">ceil_nonneg</a><br>
-<a href="#ceil_pos">ceil_pos</a><br>
-<a href="#ceil_sub_int">ceil_sub_int</a><br>
-<a href="#ceil_zero">ceil_zero</a><br>
-<a href="#floor">floor</a><br>
-<a href="#floor_add_fract">floor_add_fract</a><br>
-<a href="#floor_add_int">floor_add_int</a><br>
-<a href="#floor_coe">floor_coe</a><br>
-<a href="#floor_eq_iff">floor_eq_iff</a><br>
-<a href="#floor_fract">floor_fract</a><br>
-<a href="#floor_le">floor_le</a><br>
-<a href="#floor_lt">floor_lt</a><br>
-<a href="#floor_mono">floor_mono</a><br>
-<a href="#floor_nonneg">floor_nonneg</a><br>
-<a href="#floor_one">floor_one</a><br>
-<a href="#floor_ring">floor_ring</a><br>
-<a href="#floor_ring_unique">floor_ring_unique</a><br>
-<a href="#floor_sub_int">floor_sub_int</a><br>
-<a href="#floor_zero">floor_zero</a><br>
-<a href="#fract">fract</a><br>
-<a href="#fract_add">fract_add</a><br>
-<a href="#fract_add_floor">fract_add_floor</a><br>
-<a href="#fract_coe">fract_coe</a><br>
-<a href="#fract_eq_fract">fract_eq_fract</a><br>
-<a href="#fract_eq_iff">fract_eq_iff</a><br>
-<a href="#fract_floor">fract_floor</a><br>
-<a href="#fract_fract">fract_fract</a><br>
-<a href="#fract_lt_one">fract_lt_one</a><br>
-<a href="#fract_mul_nat">fract_mul_nat</a><br>
-<a href="#fract_nonneg">fract_nonneg</a><br>
-<a href="#fract_zero">fract_zero</a><br>
-<a href="#int.floor_ring">int.floor_ring</a><br>
-<a href="#le_ceil">le_ceil</a><br>
-<a href="#le_floor">le_floor</a><br>
-<a href="#le_nat_ceil">le_nat_ceil</a><br>
-<a href="#le_of_nat_ceil_le">le_of_nat_ceil_le</a><br>
-<a href="#lt_ceil">lt_ceil</a><br>
-<a href="#lt_floor_add_one">lt_floor_add_one</a><br>
-<a href="#lt_nat_ceil">lt_nat_ceil</a><br>
-<a href="#lt_of_nat_ceil_lt">lt_of_nat_ceil_lt</a><br>
-<a href="#lt_succ_floor">lt_succ_floor</a><br>
-<a href="#nat_ceil">nat_ceil</a><br>
-<a href="#nat_ceil_add_nat">nat_ceil_add_nat</a><br>
-<a href="#nat_ceil_coe">nat_ceil_coe</a><br>
-<a href="#nat_ceil_le">nat_ceil_le</a><br>
-<a href="#nat_ceil_lt_add_one">nat_ceil_lt_add_one</a><br>
-<a href="#nat_ceil_mono">nat_ceil_mono</a><br>
-<a href="#nat_ceil_zero">nat_ceil_zero</a><br>
-<a href="#sub_one_lt_floor">sub_one_lt_floor</a><br>
 </div></div>
 
         </div>

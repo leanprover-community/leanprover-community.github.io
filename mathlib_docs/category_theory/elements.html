@@ -7,7 +7,162 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">category_theory.elements</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/elements.lean">(view source on GitHub)</a></div><a href="#category_theory.category_of_elements">category_theory.category_of_elements</a><br>
+<a href="#category_theory.category_of_elements.comma_equivalence">category_theory.category_of_elements.comma_equivalence</a><br>
+<a href="#category_theory.category_of_elements.from_comma">category_theory.category_of_elements.from_comma</a><br>
+<a href="#category_theory.category_of_elements.from_comma_map">category_theory.category_of_elements.from_comma_map</a><br>
+<a href="#category_theory.category_of_elements.from_comma_obj">category_theory.category_of_elements.from_comma_obj</a><br>
+<a href="#category_theory.category_of_elements.to_comma">category_theory.category_of_elements.to_comma</a><br>
+<a href="#category_theory.category_of_elements.to_comma_map">category_theory.category_of_elements.to_comma_map</a><br>
+<a href="#category_theory.category_of_elements.to_comma_obj">category_theory.category_of_elements.to_comma_obj</a><br>
+<a href="#category_theory.category_of_elements.π">category_theory.category_of_elements.π</a><br>
+<a href="#category_theory.category_of_elements.π_map">category_theory.category_of_elements.π_map</a><br>
+<a href="#category_theory.category_of_elements.π_obj">category_theory.category_of_elements.π_obj</a><br>
+<a href="#category_theory.functor.elements">category_theory.functor.elements</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="mod_doc">
+<h1>The category of elements</h1>
+
+<p>This file defines the category of elements, also known as (a special case of) the Grothendieck construction.</p>
+
+<p>Given a functor <code>F : C ⥤ Type</code>, an object of <code>F.elements</code> is a pair <code>(X : C, x : F.obj X)</code>.
+A morphism <code>(X, x) ⟶ (Y, y)</code> is a morphism <code>f : X ⟶ Y</code> in <code>C</code>, so <code>F.map f</code> takes <code>x</code> to <code>y</code>.</p>
+
+<h2>Implementation notes</h2>
+
+<p>This construction is equivalent to a special case of a comma construction, so this is mostly just
+a more convenient API. We prove the equivalence in <code>category_theory.category_of_elements.comma_equivalence</code>.</p>
+
+<h2>References</h2>
+
+<ul>
+<li>[Emily Riehl, <em>Category Theory in Context</em>, Section 2.4][riehl2017]</li>
+<li><a href="https://en.wikipedia.org/wiki/Category_of_elements">https://en.wikipedia.org/wiki/Category_of_elements</a></li>
+<li><a href="https://ncatlab.org/nlab/show/category+of+elements">https://ncatlab.org/nlab/show/category+of+elements</a></li>
+</ul>
+
+<h2>Tags</h2>
+
+<p>category of elements, Grothendieck construction, comma category</p>
+</div><div class="decl def" id="category_theory.functor.elements">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/elements.lean#L39">category_theory.functor.elements</a></span> <span class="impl_arg"><span class="decl_args">{C : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span></span> <span class="decl_args">:</span>     <div class="decl_type">C <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor" title="category_theory.functor">⥤</a> Type u → Type u</div></div>
+   <p>The type of objects for the category of elements of a functor <code>F : C ⥤ Type</code> is a pair <code>(X : C, x : F.obj X)</code>.</p>
+ </ul></div><div class="decl def" id="category_theory.category_of_elements"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/elements.lean#L44">category_theory.category_of_elements</a></span> <span class="impl_arg"><span class="decl_args">{C : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span></span> <span class="decl_args">(F : C <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor" title="category_theory.functor">⥤</a> Type u)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a>
+  (<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.functor.elements">category_theory.functor.elements</a> F)</div></div>
+   <p>The category structure on <code>F.elements</code>, for <code>F : C ⥤ Type</code>.
+   A morphism <code>(X, x) ⟶ (Y, y)</code> is a morphism <code>f : X ⟶ Y</code> in <code>C</code>, so <code>F.map f</code> takes <code>x</code> to <code>y</code>.</p>
+ </ul></div><div class="decl def" id="category_theory.category_of_elements.π">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/elements.lean#L53">category_theory.category_of_elements.π</a></span> <span class="impl_arg"><span class="decl_args">{C : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span></span> <span class="decl_args">(F : C <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor" title="category_theory.functor">⥤</a> Type u)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.functor.elements">category_theory.functor.elements</a> F <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor" title="category_theory.functor">⥤</a> C</div></div>
+   <p>The functor out of the category of elements which forgets the element.</p>
+ </ul></div><div class="decl theorem" id="category_theory.category_of_elements.π_obj"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/elements.lean#L57">category_theory.category_of_elements.π_obj</a></span> <span class="impl_arg"><span class="decl_args">{C : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span></span> <span class="decl_args">(F : C <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor" title="category_theory.functor">⥤</a> Type u)</span> <span class="decl_args">(X : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.functor.elements">category_theory.functor.elements</a> F)</span> <span class="decl_args">:</span>     <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.category_of_elements.π">category_theory.category_of_elements.π</a>
+     F).<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor.obj" title="category_theory.functor.obj">obj</a>
+    X <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  X.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sigma.fst" title="sigma.fst">fst</a></div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="category_theory.category_of_elements.π_map"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/elements.lean#L58">category_theory.category_of_elements.π_map</a></span> <span class="impl_arg"><span class="decl_args">{C : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span></span> <span class="decl_args">(F : C <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor" title="category_theory.functor">⥤</a> Type u)</span> <span class="impl_arg"><span class="decl_args">{X Y : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.functor.elements">category_theory.functor.elements</a> F}</span></span> <span class="decl_args">(f : X <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.has_hom.hom" title="category_theory.has_hom.hom">⟶</a> Y)</span> <span class="decl_args">:</span>     <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.category_of_elements.π">category_theory.category_of_elements.π</a>
+     F).<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor.map" title="category_theory.functor.map">map</a>
+    f <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  f.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#subtype.val" title="subtype.val">val</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="category_theory.category_of_elements.to_comma">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/elements.lean#L61">category_theory.category_of_elements.to_comma</a></span> <span class="impl_arg"><span class="decl_args">{C : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span></span> <span class="decl_args">(F : C <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor" title="category_theory.functor">⥤</a> Type u)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.functor.elements">category_theory.functor.elements</a> F <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor" title="category_theory.functor">⥤</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/comma.html#category_theory.comma">category_theory.comma</a>
+    (<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/punit.html#category_theory.functor.of">category_theory.functor.of</a>.<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor.obj" title="category_theory.functor.obj">obj</a>
+       <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit">punit</a>)
+    F</div></div>
+   <p>The forward direction of the equivalence <code>F.elements ≅ (*, F)</code>.</p>
+ </ul></div><div class="decl theorem" id="category_theory.category_of_elements.to_comma_obj"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/elements.lean#L65">category_theory.category_of_elements.to_comma_obj</a></span> <span class="impl_arg"><span class="decl_args">{C : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span></span> <span class="decl_args">(F : C <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor" title="category_theory.functor">⥤</a> Type u)</span> <span class="decl_args">(X : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.functor.elements">category_theory.functor.elements</a> F)</span> <span class="decl_args">:</span>     <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.category_of_elements.to_comma">category_theory.category_of_elements.to_comma</a>
+     F).<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor.obj" title="category_theory.functor.obj">obj</a>
+    X <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <span title="category_theory.comma.mk">{</span><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/comma.html#category_theory.comma.left" title="category_theory.comma.left">left</a> := <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit.star">punit.star</a>,
+   <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/comma.html#category_theory.comma.right" title="category_theory.comma.right">right</a> := X.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sigma.fst" title="sigma.fst">fst</a>,
+   <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/comma.html#category_theory.comma.hom" title="category_theory.comma.hom">hom</a> := λ
+          (_x : (λ (j : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit">punit</a>), <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit">punit</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit.star">punit.star</a>),
+            X.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sigma.snd" title="sigma.snd">snd</a>}</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="category_theory.category_of_elements.to_comma_map"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/elements.lean#L67">category_theory.category_of_elements.to_comma_map</a></span> <span class="impl_arg"><span class="decl_args">{C : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span></span> <span class="decl_args">(F : C <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor" title="category_theory.functor">⥤</a> Type u)</span> <span class="impl_arg"><span class="decl_args">{X Y : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.functor.elements">category_theory.functor.elements</a> F}</span></span> <span class="decl_args">(f : X <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.has_hom.hom" title="category_theory.has_hom.hom">⟶</a> Y)</span> <span class="decl_args">:</span>     <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.category_of_elements.to_comma">category_theory.category_of_elements.to_comma</a>
+     F).<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor.map" title="category_theory.functor.map">map</a>
+    f <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <span title="category_theory.comma_morphism.mk">{</span><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/comma.html#category_theory.comma_morphism.left" title="category_theory.comma_morphism.left">left</a> := subtype.cases_on
+             f
+             (λ (f_val : X.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sigma.fst" title="sigma.fst">fst</a> <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.has_hom.hom" title="category_theory.has_hom.hom">⟶</a> Y.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sigma.fst" title="sigma.fst">fst</a>)
+              (f_property :
+                F.<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor.map" title="category_theory.functor.map">map</a> f_val (X.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sigma.snd" title="sigma.snd">snd</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+                  Y.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sigma.snd" title="sigma.snd">snd</a>),
+                sigma.cases_on Y
+                  (λ (Y_fst : C) (Y_snd : F.<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor.obj" title="category_theory.functor.obj">obj</a> Y_fst)
+                   (f_val :
+                     X.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sigma.fst" title="sigma.fst">fst</a> <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.has_hom.hom" title="category_theory.has_hom.hom">⟶</a>
+                       <span title="sigma.mk">⟨</span>Y_fst, Y_snd⟩.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sigma.fst" title="sigma.fst">fst</a>)
+                   (f_property :
+                     F.<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor.map" title="category_theory.functor.map">map</a> f_val (X.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sigma.snd" title="sigma.snd">snd</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+                       <span title="sigma.mk">⟨</span>Y_fst, Y_snd⟩.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sigma.snd" title="sigma.snd">snd</a>),
+                     sigma.cases_on X
+                       (λ (X_fst : C) (X_snd : F.<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor.obj" title="category_theory.functor.obj">obj</a> X_fst)
+                        (f_val :
+                          <span title="sigma.mk">⟨</span>X_fst, X_snd⟩.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sigma.fst" title="sigma.fst">fst</a> <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.has_hom.hom" title="category_theory.has_hom.hom">⟶</a>
+                            <span title="sigma.mk">⟨</span>Y_fst, Y_snd⟩.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sigma.fst" title="sigma.fst">fst</a>)
+                        (f_property :
+                          F.<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor.map" title="category_theory.functor.map">map</a> f_val
+                              (<span title="sigma.mk">⟨</span>X_fst, X_snd⟩.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sigma.snd" title="sigma.snd">snd</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+                            <span title="sigma.mk">⟨</span>Y_fst, Y_snd⟩.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sigma.snd" title="sigma.snd">snd</a>),
+                          <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#id">id</a>
+                            (λ (F : C <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor" title="category_theory.functor">⥤</a> Type u) (Y_fst : C)
+                             (Y_snd : F.<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor.obj" title="category_theory.functor.obj">obj</a> Y_fst) (X_fst : C)
+                             (X_snd : F.<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor.obj" title="category_theory.functor.obj">obj</a> X_fst)
+                             (f_val : X_fst <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.has_hom.hom" title="category_theory.has_hom.hom">⟶</a> Y_fst)
+                             (f_property : F.<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor.map" title="category_theory.functor.map">map</a> f_val X_snd <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> Y_snd),
+                               eq.drec <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit.star">punit.star</a> f_property)
+                            F
+                            Y_fst
+                            Y_snd
+                            X_fst
+                            X_snd
+                            f_val
+                            f_property)
+                       f_val
+                       f_property)
+                  f_val
+                  f_property),
+   <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/comma.html#category_theory.comma_morphism.right" title="category_theory.comma_morphism.right">right</a> := f.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#subtype.val" title="subtype.val">val</a>,
+   <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/comma.html#category_theory.comma_morphism.w'" title="category_theory.comma_morphism.w'">w'</a> := _}</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="category_theory.category_of_elements.from_comma">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/elements.lean#L71">category_theory.category_of_elements.from_comma</a></span> <span class="impl_arg"><span class="decl_args">{C : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span></span> <span class="decl_args">(F : C <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor" title="category_theory.functor">⥤</a> Type u)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/comma.html#category_theory.comma">category_theory.comma</a>
+    (<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/punit.html#category_theory.functor.of">category_theory.functor.of</a>.<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor.obj" title="category_theory.functor.obj">obj</a>
+       <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit">punit</a>)
+    F <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor" title="category_theory.functor">⥤</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.functor.elements">category_theory.functor.elements</a> F</div></div>
+   <p>The reverse direction of the equivalence <code>F.elements ≅ (*, F)</code>.</p>
+ </ul></div><div class="decl theorem" id="category_theory.category_of_elements.from_comma_obj"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/elements.lean#L75">category_theory.category_of_elements.from_comma_obj</a></span> <span class="impl_arg"><span class="decl_args">{C : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span></span> <span class="decl_args">(F : C <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor" title="category_theory.functor">⥤</a> Type u)</span> <span class="decl_args">(X : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/comma.html#category_theory.comma">category_theory.comma</a>
+  (<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/punit.html#category_theory.functor.of">category_theory.functor.of</a>.<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor.obj" title="category_theory.functor.obj">obj</a>
+     <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit">punit</a>)
+  F)</span> <span class="decl_args">:</span>     <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.category_of_elements.from_comma">category_theory.category_of_elements.from_comma</a>
+     F).<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor.obj" title="category_theory.functor.obj">obj</a>
+    X <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <span title="sigma.mk">⟨</span>X.<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/comma.html#category_theory.comma.right" title="category_theory.comma.right">right</a>,
+   X.<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/comma.html#category_theory.comma.hom" title="category_theory.comma.hom">hom</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit.star">punit.star</a>⟩</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="category_theory.category_of_elements.from_comma_map"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/elements.lean#L77">category_theory.category_of_elements.from_comma_map</a></span> <span class="impl_arg"><span class="decl_args">{C : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span></span> <span class="decl_args">(F : C <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor" title="category_theory.functor">⥤</a> Type u)</span> <span class="impl_arg"><span class="decl_args">{X Y : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/comma.html#category_theory.comma">category_theory.comma</a>
+  (<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/punit.html#category_theory.functor.of">category_theory.functor.of</a>.<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor.obj" title="category_theory.functor.obj">obj</a>
+     <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit">punit</a>)
+  F}</span></span> <span class="decl_args">(f : X <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.has_hom.hom" title="category_theory.has_hom.hom">⟶</a> Y)</span> <span class="decl_args">:</span>     <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.category_of_elements.from_comma">category_theory.category_of_elements.from_comma</a>
+     F).<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor.map" title="category_theory.functor.map">map</a>
+    f <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <span title="subtype.mk">⟨</span>f.<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/comma.html#category_theory.comma_morphism.right" title="category_theory.comma_morphism.right">right</a>, _⟩</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="category_theory.category_of_elements.comma_equivalence">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/elements.lean#L82">category_theory.category_of_elements.comma_equivalence</a></span> <span class="impl_arg"><span class="decl_args">{C : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span></span> <span class="decl_args">(F : C <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor" title="category_theory.functor">⥤</a> Type u)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.functor.elements">category_theory.functor.elements</a> F <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/equivalence.html#category_theory.equivalence" title="category_theory.equivalence">≌</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/comma.html#category_theory.comma">category_theory.comma</a>
+    (<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/punit.html#category_theory.functor.of">category_theory.functor.of</a>.<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor.obj" title="category_theory.functor.obj">obj</a>
+       <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit">punit</a>)
+    F</div></div>
+   <p>The equivalence between the category of elements <code>F.elements</code>
+   and the comma category <code>(*, F)</code>.</p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +962,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1190,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,162 +1313,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="mod_doc">
-<h1>The category of elements</h1>
-
-<p>This file defines the category of elements, also known as (a special case of) the Grothendieck construction.</p>
-
-<p>Given a functor <code>F : C ⥤ Type</code>, an object of <code>F.elements</code> is a pair <code>(X : C, x : F.obj X)</code>.
-A morphism <code>(X, x) ⟶ (Y, y)</code> is a morphism <code>f : X ⟶ Y</code> in <code>C</code>, so <code>F.map f</code> takes <code>x</code> to <code>y</code>.</p>
-
-<h2>Implementation notes</h2>
-
-<p>This construction is equivalent to a special case of a comma construction, so this is mostly just
-a more convenient API. We prove the equivalence in <code>category_theory.category_of_elements.comma_equivalence</code>.</p>
-
-<h2>References</h2>
-
-<ul>
-<li>[Emily Riehl, <em>Category Theory in Context</em>, Section 2.4][riehl2017]</li>
-<li><a href="https://en.wikipedia.org/wiki/Category_of_elements">https://en.wikipedia.org/wiki/Category_of_elements</a></li>
-<li><a href="https://ncatlab.org/nlab/show/category+of+elements">https://ncatlab.org/nlab/show/category+of+elements</a></li>
-</ul>
-
-<h2>Tags</h2>
-
-<p>category of elements, Grothendieck construction, comma category</p>
-</div><div class="def"><a id="category_theory.functor.elements"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/elements.lean#L39">category_theory.functor.elements</a></span>  <span class="decl_args">:</span>       <div class="decl_type">C ⥤ Type u → Type u</div>
-<p>The type of objects for the category of elements of a functor <code>F : C ⥤ Type</code> is a pair <code>(X : C, x : F.obj X)</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{C : Type u}</span> <span class="impl_arg">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span></li>
-
-
-
-</ul></div><div class="def"><a id="category_theory.category_of_elements"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/elements.lean#L44">category_theory.category_of_elements</a></span> <span class="decl_args">(F : C ⥤ Type u)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> (<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.functor.elements">category_theory.functor.elements</a> F)</div>
-<p>The category structure on <code>F.elements</code>, for <code>F : C ⥤ Type</code>.
-   A morphism <code>(X, x) ⟶ (Y, y)</code> is a morphism <code>f : X ⟶ Y</code> in <code>C</code>, so <code>F.map f</code> takes <code>x</code> to <code>y</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{C : Type u}</span> <span class="impl_arg">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="category_theory.category_of_elements.π"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/elements.lean#L53">category_theory.category_of_elements.π</a></span> <span class="decl_args">(F : C ⥤ Type u)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.functor.elements">category_theory.functor.elements</a> F ⥤ C</div>
-<p>The functor out of the category of elements which forgets the element.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{C : Type u}</span> <span class="impl_arg">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="category_theory.category_of_elements.π_obj"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/elements.lean#L57">category_theory.category_of_elements.π_obj</a></span> <span class="decl_args">(F : C ⥤ Type u)</span> <span class="decl_args">(X : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.functor.elements">category_theory.functor.elements</a> F)</span> <span class="decl_args">:</span>       <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.category_of_elements.π">category_theory.category_of_elements.π</a> F).obj X = X.fst</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{C : Type u}</span> <span class="impl_arg">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="category_theory.category_of_elements.π_map"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/elements.lean#L58">category_theory.category_of_elements.π_map</a></span> <span class="decl_args">(F : C ⥤ Type u)</span> <span class="decl_args">(f : X ⟶ Y)</span> <span class="decl_args">:</span>       <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.category_of_elements.π">category_theory.category_of_elements.π</a> F).map f = f.val</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{C : Type u}</span> <span class="impl_arg">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span> <span class="impl_arg">{X Y : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.functor.elements">category_theory.functor.elements</a> F}</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="def"><a id="category_theory.category_of_elements.to_comma"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/elements.lean#L61">category_theory.category_of_elements.to_comma</a></span> <span class="decl_args">(F : C ⥤ Type u)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.functor.elements">category_theory.functor.elements</a> F ⥤ <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/comma.html#category_theory.comma">category_theory.comma</a> (category_theory.functor.of.obj <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit">punit</a>) F</div>
-<p>The forward direction of the equivalence <code>F.elements ≅ (*, F)</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{C : Type u}</span> <span class="impl_arg">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="category_theory.category_of_elements.to_comma_obj"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/elements.lean#L65">category_theory.category_of_elements.to_comma_obj</a></span> <span class="decl_args">(F : C ⥤ Type u)</span> <span class="decl_args">(X : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.functor.elements">category_theory.functor.elements</a> F)</span> <span class="decl_args">:</span>       <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.category_of_elements.to_comma">category_theory.category_of_elements.to_comma</a> F).obj X =
-  {left := punit.star, right := X.fst, hom := λ (_x : (λ (j : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit">punit</a>), <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit">punit</a>) punit.star), X.snd}</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{C : Type u}</span> <span class="impl_arg">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="category_theory.category_of_elements.to_comma_map"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/elements.lean#L67">category_theory.category_of_elements.to_comma_map</a></span> <span class="decl_args">(F : C ⥤ Type u)</span> <span class="decl_args">(f : X ⟶ Y)</span> <span class="decl_args">:</span>       <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.category_of_elements.to_comma">category_theory.category_of_elements.to_comma</a> F).map f =
-  {left := subtype.cases_on f
-             (λ (f_val : X.fst ⟶ Y.fst) (f_property : F.map f_val (X.snd) = Y.snd),
-                sigma.cases_on Y
-                  (λ (Y_fst : C) (Y_snd : F.obj Y_fst) (f_val : X.fst ⟶ ⟨Y_fst, Y_snd⟩.fst)
-                   (f_property : F.map f_val (X.snd) = ⟨Y_fst, Y_snd⟩.snd),
-                     sigma.cases_on X
-                       (λ (X_fst : C) (X_snd : F.obj X_fst) (f_val : ⟨X_fst, X_snd⟩.fst ⟶ ⟨Y_fst, Y_snd⟩.fst)
-                        (f_property : F.map f_val (⟨X_fst, X_snd⟩.snd) = ⟨Y_fst, Y_snd⟩.snd),
-                          <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#id">id</a>
-                            (λ (F : C ⥤ Type u) (Y_fst : C) (Y_snd : F.obj Y_fst) (X_fst : C) (X_snd : F.obj X_fst)
-                             (f_val : X_fst ⟶ Y_fst) (f_property : F.map f_val X_snd = Y_snd),
-                               eq.drec punit.star f_property)
-                            F
-                            Y_fst
-                            Y_snd
-                            X_fst
-                            X_snd
-                            f_val
-                            f_property)
-                       f_val
-                       f_property)
-                  f_val
-                  f_property),
-   right := f.val,
-   w' := _}</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{C : Type u}</span> <span class="impl_arg">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span> <span class="impl_arg">{X Y : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.functor.elements">category_theory.functor.elements</a> F}</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="def"><a id="category_theory.category_of_elements.from_comma"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/elements.lean#L71">category_theory.category_of_elements.from_comma</a></span> <span class="decl_args">(F : C ⥤ Type u)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/comma.html#category_theory.comma">category_theory.comma</a> (category_theory.functor.of.obj <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit">punit</a>) F ⥤ <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.functor.elements">category_theory.functor.elements</a> F</div>
-<p>The reverse direction of the equivalence <code>F.elements ≅ (*, F)</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{C : Type u}</span> <span class="impl_arg">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="category_theory.category_of_elements.from_comma_obj"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/elements.lean#L75">category_theory.category_of_elements.from_comma_obj</a></span> <span class="decl_args">(F : C ⥤ Type u)</span> <span class="decl_args">(X : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/comma.html#category_theory.comma">category_theory.comma</a> (category_theory.functor.of.obj <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit">punit</a>) F)</span> <span class="decl_args">:</span>       <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.category_of_elements.from_comma">category_theory.category_of_elements.from_comma</a> F).obj X = ⟨X.right, X.hom punit.star⟩</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{C : Type u}</span> <span class="impl_arg">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="category_theory.category_of_elements.from_comma_map"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/elements.lean#L77">category_theory.category_of_elements.from_comma_map</a></span> <span class="decl_args">(F : C ⥤ Type u)</span> <span class="decl_args">(f : X ⟶ Y)</span> <span class="decl_args">:</span>       <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.category_of_elements.from_comma">category_theory.category_of_elements.from_comma</a> F).map f = ⟨f.right, _⟩</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{C : Type u}</span> <span class="impl_arg">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span> <span class="impl_arg">{X Y : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/comma.html#category_theory.comma">category_theory.comma</a> (category_theory.functor.of.obj <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit">punit</a>) F}</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="def"><a id="category_theory.category_of_elements.comma_equivalence"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/elements.lean#L82">category_theory.category_of_elements.comma_equivalence</a></span> <span class="decl_args">(F : C ⥤ Type u)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/elements.html#category_theory.functor.elements">category_theory.functor.elements</a> F ≌ <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/comma.html#category_theory.comma">category_theory.comma</a> (category_theory.functor.of.obj <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit">punit</a>) F</div>
-<p>The equivalence between the category of elements <code>F.elements</code>
-   and the comma category <code>(*, F)</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{C : Type u}</span> <span class="impl_arg">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span></li>
-
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">category_theory.elements</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/elements.lean">(view source on GitHub)</a></div><a href="#category_theory.category_of_elements">category_theory.category_of_elements</a><br>
-<a href="#category_theory.category_of_elements.comma_equivalence">category_theory.category_of_elements.comma_equivalence</a><br>
-<a href="#category_theory.category_of_elements.from_comma">category_theory.category_of_elements.from_comma</a><br>
-<a href="#category_theory.category_of_elements.from_comma_map">category_theory.category_of_elements.from_comma_map</a><br>
-<a href="#category_theory.category_of_elements.from_comma_obj">category_theory.category_of_elements.from_comma_obj</a><br>
-<a href="#category_theory.category_of_elements.to_comma">category_theory.category_of_elements.to_comma</a><br>
-<a href="#category_theory.category_of_elements.to_comma_map">category_theory.category_of_elements.to_comma_map</a><br>
-<a href="#category_theory.category_of_elements.to_comma_obj">category_theory.category_of_elements.to_comma_obj</a><br>
-<a href="#category_theory.category_of_elements.π">category_theory.category_of_elements.π</a><br>
-<a href="#category_theory.category_of_elements.π_map">category_theory.category_of_elements.π_map</a><br>
-<a href="#category_theory.category_of_elements.π_obj">category_theory.category_of_elements.π_obj</a><br>
-<a href="#category_theory.functor.elements">category_theory.functor.elements</a><br>
 </div></div>
 
         </div>

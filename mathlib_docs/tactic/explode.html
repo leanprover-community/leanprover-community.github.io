@@ -7,7 +7,93 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">tactic.explode</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/explode.lean">(view source on GitHub)</a></div><a href="#tactic.explode">tactic.explode</a><br>
+<a href="#tactic.explode.append_dep">tactic.explode.append_dep</a><br>
+<a href="#tactic.explode.entries">tactic.explode.entries</a><br>
+<a href="#tactic.explode.entries.add">tactic.explode.entries.add</a><br>
+<a href="#tactic.explode.entries.find">tactic.explode.entries.find</a><br>
+<a href="#tactic.explode.entries.head">tactic.explode.entries.head</a><br>
+<a href="#tactic.explode.entries.size">tactic.explode.entries.size</a><br>
+<a href="#tactic.explode.entry">tactic.explode.entry</a><br>
+<a href="#tactic.explode.format_aux">tactic.explode.format_aux</a><br>
+<a href="#tactic.explode.has_to_tactic_format">tactic.explode.has_to_tactic_format</a><br>
+<a href="#tactic.explode.head'">tactic.explode.head'</a><br>
+<a href="#tactic.explode.inhabited">tactic.explode.inhabited</a><br>
+<a href="#tactic.explode.may_be_proof">tactic.explode.may_be_proof</a><br>
+<a href="#tactic.explode.pad_right">tactic.explode.pad_right</a><br>
+<a href="#tactic.explode.status">tactic.explode.status</a><br>
+<a href="#tactic.explode_cmd">tactic.explode_cmd</a><br>
+<a href="#tactic.explode_expr">tactic.explode_expr</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="decl def" id="tactic.explode.head'"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/explode.lean#L16">tactic.explode.head'</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> α</div></div>
+   <p></p>
+ </ul></div><div class="decl inductive" id="tactic.explode.status">     <div class="decl_header impl_collapsed">        <span class="decl_kind">inductive</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/explode.lean#L20">tactic.explode.status</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+  <ul class="constructors">
+<li class="constructor" id="tactic.explode.status.reg">reg : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.status">tactic.explode.status</a></li>
+<li class="constructor" id="tactic.explode.status.intro">intro : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.status">tactic.explode.status</a></li>
+<li class="constructor" id="tactic.explode.status.lam">lam : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.status">tactic.explode.status</a></li>
+<li class="constructor" id="tactic.explode.status.sintro">sintro : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.status">tactic.explode.status</a></li>
+</ul> <p></p>
+ </ul></div><div class="decl structure" id="tactic.explode.entry">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/explode.lean#L22">tactic.explode.entry</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="tactic.explode.entry.expr">expr : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></li>
+<li class="structure_field" id="tactic.explode.entry.line">line : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a></li>
+<li class="structure_field" id="tactic.explode.entry.depth">depth : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a></li>
+<li class="structure_field" id="tactic.explode.entry.status">status : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.status">tactic.explode.status</a></li>
+<li class="structure_field" id="tactic.explode.entry.thm">thm : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a></li>
+<li class="structure_field" id="tactic.explode.entry.deps">deps : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a></li>
+</ul>  <p></p>
+ </ul></div><div class="decl def" id="tactic.explode.pad_right">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/explode.lean#L30">tactic.explode.pad_right</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a></div></div>
+   <p></p>
+ </ul></div><div class="decl structure" id="tactic.explode.entries">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/explode.lean#L34">tactic.explode.entries</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="tactic.explode.entries.s">s : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr_map">expr_map</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entry">tactic.explode.entry</a></li>
+<li class="structure_field" id="tactic.explode.entries.l">l : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entry">tactic.explode.entry</a></li>
+</ul>  <p></p>
+ </ul></div><div class="decl def" id="tactic.explode.entries.find">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/explode.lean#L38">tactic.explode.entries.find</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entries">tactic.explode.entries</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entry">tactic.explode.entry</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.explode.entries.size">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/explode.lean#L39">tactic.explode.entries.size</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entries">tactic.explode.entries</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.explode.entries.add">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/explode.lean#L41">tactic.explode.entries.add</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entries">tactic.explode.entries</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entry">tactic.explode.entry</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entries">tactic.explode.entries</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.explode.entries.head">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/explode.lean#L44">tactic.explode.entries.head</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entries">tactic.explode.entries</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entry">tactic.explode.entry</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.explode.inhabited"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/explode.lean#L46">tactic.explode.inhabited</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#inhabited">inhabited</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entries">tactic.explode.entries</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.explode.format_aux">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/explode.lean#L48">tactic.explode.format_aux</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entry">tactic.explode.entry</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/format.html#format">format</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.explode.has_to_tactic_format"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/explode.lean#L64">tactic.explode.has_to_tactic_format</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#has_to_tactic_format">has_to_tactic_format</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entries">tactic.explode.entries</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.explode.append_dep">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/explode.lean#L71">tactic.explode.append_dep</a></span>  <span class="decl_args">:</span>     <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a>) →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entries">tactic.explode.entries</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.explode.may_be_proof">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/explode.lean#L78">tactic.explode.may_be_proof</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.explode_expr">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/explode.lean#L123">tactic.explode_expr</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool.tt">bool.tt</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entries">tactic.explode.entries</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.explode">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/explode.lean#L127">tactic.explode</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.explode_cmd">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/explode.lean#L141">tactic.explode_cmd</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.tk">lean.parser.tk</a> "#explode") →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p></p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +893,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1121,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,168 +1244,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="def"><a id="tactic.explode.head'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/explode.lean#L16">tactic.explode.head'</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> α</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="inductive"><a id="tactic.explode.status"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/explode.lean#L20">tactic.explode.status</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p></p>
-       <ul>
-
-
-
-<li class="structure_fields">
-Constructors:
-<ul><li><div class="structure_field">tactic.explode.status.reg : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.status">tactic.explode.status</a></div></li>
-<li><div class="structure_field">tactic.explode.status.intro : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.status">tactic.explode.status</a></div></li>
-<li><div class="structure_field">tactic.explode.status.lam : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.status">tactic.explode.status</a></div></li>
-<li><div class="structure_field">tactic.explode.status.sintro : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.status">tactic.explode.status</a></div></li>
-</ul></li>
-</ul></div><div class="structure"><a id="tactic.explode.entry"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/explode.lean#L22">tactic.explode.entry</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p></p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">tactic.explode.entry.expr : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></li>
-<li><div class="structure_field">tactic.explode.entry.line : ℕ</div></li>
-<li><div class="structure_field">tactic.explode.entry.depth : ℕ</div></li>
-<li><div class="structure_field">tactic.explode.entry.status : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.status">tactic.explode.status</a></div></li>
-<li><div class="structure_field">tactic.explode.entry.thm : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a></div></li>
-<li><div class="structure_field">tactic.explode.entry.deps : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> ℕ</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="tactic.explode.pad_right"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/explode.lean#L30">tactic.explode.pad_right</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="structure"><a id="tactic.explode.entries"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/explode.lean#L34">tactic.explode.entries</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p></p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">tactic.explode.entries.s : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr_map">expr_map</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entry">tactic.explode.entry</a></div></li>
-<li><div class="structure_field">tactic.explode.entries.l : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entry">tactic.explode.entry</a></div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="tactic.explode.entries.find"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/explode.lean#L38">tactic.explode.entries.find</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entries">tactic.explode.entries</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entry">tactic.explode.entry</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.explode.entries.size"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/explode.lean#L39">tactic.explode.entries.size</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entries">tactic.explode.entries</a> → ℕ</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.explode.entries.add"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/explode.lean#L41">tactic.explode.entries.add</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entries">tactic.explode.entries</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entry">tactic.explode.entry</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entries">tactic.explode.entries</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.explode.entries.head"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/explode.lean#L44">tactic.explode.entries.head</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entries">tactic.explode.entries</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entry">tactic.explode.entry</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.explode.inhabited"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/explode.lean#L46">tactic.explode.inhabited</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#inhabited">inhabited</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entries">tactic.explode.entries</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="tactic.explode.format_aux"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/explode.lean#L48">tactic.explode.format_aux</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entry">tactic.explode.entry</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/format.html#format">format</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.explode.has_to_tactic_format"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/explode.lean#L64">tactic.explode.has_to_tactic_format</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#has_to_tactic_format">has_to_tactic_format</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entries">tactic.explode.entries</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="tactic.explode.append_dep"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/explode.lean#L71">tactic.explode.append_dep</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a>) → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entries">tactic.explode.entries</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> ℕ → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> ℕ)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.explode.may_be_proof"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/explode.lean#L78">tactic.explode.may_be_proof</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.explode_expr"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/explode.lean#L123">tactic.explode_expr</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> bool.tt → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/explode.html#tactic.explode.entries">tactic.explode.entries</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.explode"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/explode.lean#L127">tactic.explode</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.explode_cmd"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/explode.lean#L141">tactic.explode_cmd</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.tk">lean.parser.tk</a> "#explode") → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">tactic.explode</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/explode.lean">(view source on GitHub)</a></div><a href="#tactic.explode">tactic.explode</a><br>
-<a href="#tactic.explode.append_dep">tactic.explode.append_dep</a><br>
-<a href="#tactic.explode.entries">tactic.explode.entries</a><br>
-<a href="#tactic.explode.entries.add">tactic.explode.entries.add</a><br>
-<a href="#tactic.explode.entries.find">tactic.explode.entries.find</a><br>
-<a href="#tactic.explode.entries.head">tactic.explode.entries.head</a><br>
-<a href="#tactic.explode.entries.size">tactic.explode.entries.size</a><br>
-<a href="#tactic.explode.entry">tactic.explode.entry</a><br>
-<a href="#tactic.explode.format_aux">tactic.explode.format_aux</a><br>
-<a href="#tactic.explode.has_to_tactic_format">tactic.explode.has_to_tactic_format</a><br>
-<a href="#tactic.explode.head'">tactic.explode.head'</a><br>
-<a href="#tactic.explode.inhabited">tactic.explode.inhabited</a><br>
-<a href="#tactic.explode.may_be_proof">tactic.explode.may_be_proof</a><br>
-<a href="#tactic.explode.pad_right">tactic.explode.pad_right</a><br>
-<a href="#tactic.explode.status">tactic.explode.status</a><br>
-<a href="#tactic.explode_cmd">tactic.explode_cmd</a><br>
-<a href="#tactic.explode_expr">tactic.explode_expr</a><br>
 </div></div>
 
         </div>

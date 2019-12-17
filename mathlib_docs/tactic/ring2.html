@@ -7,7 +7,270 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">tactic.ring2</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean">(view source on GitHub)</a></div><a href="#conv.interactive.ring2">conv.interactive.ring2</a><br>
+<a href="#tactic.interactive.ring2">tactic.interactive.ring2</a><br>
+<a href="#tactic.ring2.correctness">tactic.ring2.correctness</a><br>
+<a href="#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a><br>
+<a href="#tactic.ring2.csring_expr.eval">tactic.ring2.csring_expr.eval</a><br>
+<a href="#tactic.ring2.csring_expr.has_reflect">tactic.ring2.csring_expr.has_reflect</a><br>
+<a href="#tactic.ring2.csring_expr.replace">tactic.ring2.csring_expr.replace</a><br>
+<a href="#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a><br>
+<a href="#tactic.ring2.horner_expr.add">tactic.ring2.horner_expr.add</a><br>
+<a href="#tactic.ring2.horner_expr.add_aux">tactic.ring2.horner_expr.add_aux</a><br>
+<a href="#tactic.ring2.horner_expr.add_const">tactic.ring2.horner_expr.add_const</a><br>
+<a href="#tactic.ring2.horner_expr.atom">tactic.ring2.horner_expr.atom</a><br>
+<a href="#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a><br>
+<a href="#tactic.ring2.horner_expr.cseval_add">tactic.ring2.horner_expr.cseval_add</a><br>
+<a href="#tactic.ring2.horner_expr.cseval_add_const">tactic.ring2.horner_expr.cseval_add_const</a><br>
+<a href="#tactic.ring2.horner_expr.cseval_atom">tactic.ring2.horner_expr.cseval_atom</a><br>
+<a href="#tactic.ring2.horner_expr.cseval_horner'">tactic.ring2.horner_expr.cseval_horner'</a><br>
+<a href="#tactic.ring2.horner_expr.cseval_mul">tactic.ring2.horner_expr.cseval_mul</a><br>
+<a href="#tactic.ring2.horner_expr.cseval_mul_const">tactic.ring2.horner_expr.cseval_mul_const</a><br>
+<a href="#tactic.ring2.horner_expr.cseval_of_csexpr">tactic.ring2.horner_expr.cseval_of_csexpr</a><br>
+<a href="#tactic.ring2.horner_expr.cseval_pow">tactic.ring2.horner_expr.cseval_pow</a><br>
+<a href="#tactic.ring2.horner_expr.decidable_eq">tactic.ring2.horner_expr.decidable_eq</a><br>
+<a href="#tactic.ring2.horner_expr.has_add">tactic.ring2.horner_expr.has_add</a><br>
+<a href="#tactic.ring2.horner_expr.has_mul">tactic.ring2.horner_expr.has_mul</a><br>
+<a href="#tactic.ring2.horner_expr.has_neg">tactic.ring2.horner_expr.has_neg</a><br>
+<a href="#tactic.ring2.horner_expr.has_one">tactic.ring2.horner_expr.has_one</a><br>
+<a href="#tactic.ring2.horner_expr.has_to_string">tactic.ring2.horner_expr.has_to_string</a><br>
+<a href="#tactic.ring2.horner_expr.has_zero">tactic.ring2.horner_expr.has_zero</a><br>
+<a href="#tactic.ring2.horner_expr.horner'">tactic.ring2.horner_expr.horner'</a><br>
+<a href="#tactic.ring2.horner_expr.inv">tactic.ring2.horner_expr.inv</a><br>
+<a href="#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a><br>
+<a href="#tactic.ring2.horner_expr.mul">tactic.ring2.horner_expr.mul</a><br>
+<a href="#tactic.ring2.horner_expr.mul_aux">tactic.ring2.horner_expr.mul_aux</a><br>
+<a href="#tactic.ring2.horner_expr.mul_const">tactic.ring2.horner_expr.mul_const</a><br>
+<a href="#tactic.ring2.horner_expr.neg">tactic.ring2.horner_expr.neg</a><br>
+<a href="#tactic.ring2.horner_expr.of_csexpr">tactic.ring2.horner_expr.of_csexpr</a><br>
+<a href="#tactic.ring2.horner_expr.pow">tactic.ring2.horner_expr.pow</a><br>
+<a href="#tactic.ring2.horner_expr.to_string">tactic.ring2.horner_expr.to_string</a><br>
+<a href="#tactic.ring2.reflect_expr">tactic.ring2.reflect_expr</a><br>
+<a href="#tree.get_or_zero">tree.get_or_zero</a><br>
+<a href="#tree.reflect'">tree.reflect'</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="mod_doc">
+<h1>ring2</h1>
+
+<p>An experimental variant on the <code>ring</code> tactic that uses computational
+reflection instead of proof generation. Useful for kernel benchmarking.</p>
+</div><div class="decl def" id="tree.reflect'">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L22">tree.reflect'</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/level.html#level">level</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></div>
+   <p><code>(reflect' t u α)</code> quasiquotes a tree <code>(t: tree expr)</code> of quoted
+values of type <code>α</code> at level <code>u</code> into an <code>expr</code> which reifies to a <code>tree α</code>
+containing the reifications of the <code>expr</code>s from the original <code>t</code>.</p>
+ </ul></div><div class="decl def" id="tree.get_or_zero">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L29">tree.get_or_zero</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_zero">has_zero</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#pos_num">pos_num</a> → α</div></div>
+   <p>Returns an element indexed by <code>n</code>, or zero if <code>n</code> isn't a valid index.
+See <code>tree.get</code>.</p>
+ </ul></div><div class="decl def" id="tactic.ring2.csring_expr.has_reflect"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L40">tactic.ring2.csring_expr.has_reflect</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/has_reflect.html#has_reflect">has_reflect</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl inductive" id="tactic.ring2.csring_expr">     <div class="decl_header impl_collapsed">        <span class="decl_kind">inductive</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L40">tactic.ring2.csring_expr</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+  <ul class="constructors">
+<li class="constructor" id="tactic.ring2.csring_expr.atom">atom : <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#pos_num">pos_num</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a></li>
+<li class="constructor" id="tactic.ring2.csring_expr.const">const : <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num">num</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a></li>
+<li class="constructor" id="tactic.ring2.csring_expr.add">add : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a></li>
+<li class="constructor" id="tactic.ring2.csring_expr.mul">mul : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a></li>
+<li class="constructor" id="tactic.ring2.csring_expr.pow">pow : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num">num</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a></li>
+</ul> <p>A reflected/meta representation of an expression in a commutative
+semiring. This representation is a direct translation of such
+expressions - see <code>horner_expr</code> for a normal form.</p>
+ </ul></div><div class="decl def" id="tactic.ring2.csring_expr.eval">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L57">tactic.ring2.csring_expr.eval</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_semiring">comm_semiring</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a> → α</div></div>
+   <p>Evaluates a reflected <code>csring_expr</code> into an element of the
+original <code>comm_semiring</code> type <code>α</code>, retrieving opaque elements
+(atoms) from the tree <code>t</code>.</p>
+ </ul></div><div class="decl inductive" id="tactic.ring2.horner_expr">     <div class="decl_header impl_collapsed">        <span class="decl_kind">inductive</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L72">tactic.ring2.horner_expr</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+  <ul class="constructors">
+<li class="constructor" id="tactic.ring2.horner_expr.const">const : <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#znum">znum</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></li>
+<li class="constructor" id="tactic.ring2.horner_expr.horner">horner : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#pos_num">pos_num</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num">num</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></li>
+</ul> <p>An efficient representation of expressions in a commutative
+semiring using the sparse Horner normal form. This type admits
+non-optimal instantiations (e.g. <code>P</code> can be represented as <code>P+0+0</code>),
+so to get good performance out of it, care must be taken to maintain
+an optimal, <em>canonical</em> form.</p>
+ </ul></div><div class="decl def" id="tactic.ring2.horner_expr.decidable_eq"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L72">tactic.ring2.horner_expr.decidable_eq</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_eq">decidable_eq</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.ring2.horner_expr.is_cs">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L84">tactic.ring2.horner_expr.is_cs</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → Prop</div></div>
+   <p>True iff the <code>horner_expr</code> argument is a valid <code>csring_expr</code>.
+For that to be the case, all its constants must be non-negative.</p>
+ </ul></div><div class="decl def" id="tactic.ring2.horner_expr.has_zero"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L88">tactic.ring2.horner_expr.has_zero</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_zero">has_zero</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.ring2.horner_expr.has_one"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L89">tactic.ring2.horner_expr.has_one</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.ring2.horner_expr.atom">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L92">tactic.ring2.horner_expr.atom</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#pos_num">pos_num</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div></div>
+   <p>Represent a <code>csring_expr.atom</code> in Horner form.</p>
+ </ul></div><div class="decl def" id="tactic.ring2.horner_expr.to_string">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L94">tactic.ring2.horner_expr.to_string</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.ring2.horner_expr.has_to_string"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L99">tactic.ring2.horner_expr.has_to_string</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/to_string.html#has_to_string">has_to_string</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.ring2.horner_expr.horner'">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L103">tactic.ring2.horner_expr.horner'</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#pos_num">pos_num</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num">num</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div></div>
+   <p>Alternative constructor for (horner a x n b) which maintains canonical
+form by simplifying special cases of <code>a</code>.</p>
+ </ul></div><div class="decl def" id="tactic.ring2.horner_expr.add_const">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L112">tactic.ring2.horner_expr.add_const</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#znum">znum</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.ring2.horner_expr.add_aux">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L119">tactic.ring2.horner_expr.add_aux</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> →
+(<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> →
+ <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a>) →
+<a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#pos_num">pos_num</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num">num</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> →
+(<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> →
+ <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a>) →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.ring2.horner_expr.add">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L135">tactic.ring2.horner_expr.add</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.ring2.horner_expr.neg">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L159">tactic.ring2.horner_expr.neg</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.ring2.horner_expr.mul_const">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L166">tactic.ring2.horner_expr.mul_const</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#znum">znum</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.ring2.horner_expr.mul_aux">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L173">tactic.ring2.horner_expr.mul_aux</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#pos_num">pos_num</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num">num</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> →
+(<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> →
+ <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a>) →
+(<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> →
+ <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a>) →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.ring2.horner_expr.mul">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L184">tactic.ring2.horner_expr.mul</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.ring2.horner_expr.has_add"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L202">tactic.ring2.horner_expr.has_add</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add">has_add</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.ring2.horner_expr.has_neg"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L203">tactic.ring2.horner_expr.has_neg</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_neg">has_neg</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.ring2.horner_expr.has_mul"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L204">tactic.ring2.horner_expr.has_mul</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mul">has_mul</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.ring2.horner_expr.pow">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L206">tactic.ring2.horner_expr.pow</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num">num</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.ring2.horner_expr.inv">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L215">tactic.ring2.horner_expr.inv</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.ring2.horner_expr.of_csexpr">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L218">tactic.ring2.horner_expr.of_csexpr</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div></div>
+   <p>Brings expressions into Horner normal form.</p>
+ </ul></div><div class="decl def" id="tactic.ring2.horner_expr.cseval">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L226">tactic.ring2.horner_expr.cseval</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_semiring">comm_semiring</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → α</div></div>
+   <p>Evaluates a reflected <code>horner_expr</code> - see <code>csring_expr.eval</code>.</p>
+ </ul></div><div class="decl theorem" id="tactic.ring2.horner_expr.cseval_atom">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L230">tactic.ring2.horner_expr.cseval_atom</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_semiring">comm_semiring</a> α]</span></span> <span class="decl_args">(t : <a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> α)</span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#pos_num">pos_num</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a>
+    (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.atom">tactic.ring2.horner_expr.atom</a> n) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t
+      (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.atom">tactic.ring2.horner_expr.atom</a> n) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tree.get_or_zero">tree.get_or_zero</a> t n</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.ring2.horner_expr.cseval_add_const">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L234">tactic.ring2.horner_expr.cseval_add_const</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_semiring">comm_semiring</a> α]</span></span> <span class="decl_args">(t : <a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> α)</span> <span class="decl_args">(k : <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num">num</a>)</span> <span class="impl_arg"><span class="decl_args">{e : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a>}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> e →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a>
+    (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.add_const">tactic.ring2.horner_expr.add_const</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num.to_znum">num.to_znum</a> k)
+       e) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t
+      (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.add_const">tactic.ring2.horner_expr.add_const</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num.to_znum">num.to_znum</a> k)
+         e) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>k <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a>
+      <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t e</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.ring2.horner_expr.cseval_horner'">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L250">tactic.ring2.horner_expr.cseval_horner'</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_semiring">comm_semiring</a> α]</span></span> <span class="decl_args">(t : <a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> α)</span> <span class="decl_args">(a : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a>)</span> <span class="decl_args">(x : <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#pos_num">pos_num</a>)</span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num">num</a>)</span> <span class="decl_args">(b : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> a →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> b →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a>
+    (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.horner'">tactic.ring2.horner_expr.horner'</a> a x n b) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t
+      (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.horner'">tactic.ring2.horner_expr.horner'</a> a x n b) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html#tactic.ring.horner">tactic.ring.horner</a>
+      (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t a)
+      (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tree.get_or_zero">tree.get_or_zero</a> t x)
+      <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>n
+      (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t b)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.ring2.horner_expr.cseval_add">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L263">tactic.ring2.horner_expr.cseval_add</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_semiring">comm_semiring</a> α]</span></span> <span class="decl_args">(t : <a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> α)</span> <span class="impl_arg"><span class="decl_args">{e₁ e₂ : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a>}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> e₁ →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> e₂ →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a>
+    (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.add">tactic.ring2.horner_expr.add</a> e₁ e₂) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t
+      (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.add">tactic.ring2.horner_expr.add</a> e₁ e₂) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t e₁ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a>
+      <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t e₂</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.ring2.horner_expr.cseval_mul_const">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L323">tactic.ring2.horner_expr.cseval_mul_const</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_semiring">comm_semiring</a> α]</span></span> <span class="decl_args">(t : <a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> α)</span> <span class="decl_args">(k : <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num">num</a>)</span> <span class="impl_arg"><span class="decl_args">{e : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a>}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> e →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a>
+    (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.mul_const">tactic.ring2.horner_expr.mul_const</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num.to_znum">num.to_znum</a> k)
+       e) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t
+      (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.mul_const">tactic.ring2.horner_expr.mul_const</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num.to_znum">num.to_znum</a> k)
+         e) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t e <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mul.mul" title="has_mul.mul">*</a>
+      <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>k</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.ring2.horner_expr.cseval_mul">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L343">tactic.ring2.horner_expr.cseval_mul</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_semiring">comm_semiring</a> α]</span></span> <span class="decl_args">(t : <a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> α)</span> <span class="impl_arg"><span class="decl_args">{e₁ e₂ : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a>}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> e₁ →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> e₂ →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a>
+    (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.mul">tactic.ring2.horner_expr.mul</a> e₁ e₂) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t
+      (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.mul">tactic.ring2.horner_expr.mul</a> e₁ e₂) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t e₁ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mul.mul" title="has_mul.mul">*</a>
+      <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t e₂</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.ring2.horner_expr.cseval_pow">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L377">tactic.ring2.horner_expr.cseval_pow</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_semiring">comm_semiring</a> α]</span></span> <span class="decl_args">(t : <a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> α)</span> <span class="impl_arg"><span class="decl_args">{x : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a>}</span></span> <span class="decl_args">(cs : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> x)</span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num">num</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a>
+    (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.pow">tactic.ring2.horner_expr.pow</a> x n) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t
+      (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.pow">tactic.ring2.horner_expr.pow</a> x n) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_pow.pow" title="has_pow.pow">^</a>
+      <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>n</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.ring2.horner_expr.cseval_of_csexpr">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L397">tactic.ring2.horner_expr.cseval_of_csexpr</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_semiring">comm_semiring</a> α]</span></span> <span class="decl_args">(t : <a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> α)</span> <span class="decl_args">(r : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a>
+    (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.of_csexpr">tactic.ring2.horner_expr.of_csexpr</a> r) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t
+      (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.of_csexpr">tactic.ring2.horner_expr.of_csexpr</a> r) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr.eval">tactic.ring2.csring_expr.eval</a> t r</div></div>
+   <p>For any given tree <code>t</code> of atoms and any reflected expression <code>r</code>,
+the Horner form of <code>r</code> is a valid csring expression, and under <code>t</code>,
+the Horner form evaluates to the same thing as <code>r</code>.</p>
+ </ul></div><div class="decl theorem" id="tactic.ring2.correctness">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L419">tactic.ring2.correctness</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_semiring">comm_semiring</a> α]</span></span> <span class="decl_args">(t : <a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> α)</span> <span class="decl_args">(r₁ r₂ : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.of_csexpr">tactic.ring2.horner_expr.of_csexpr</a> r₁ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.of_csexpr">tactic.ring2.horner_expr.of_csexpr</a> r₂ →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr.eval">tactic.ring2.csring_expr.eval</a> t r₁ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr.eval">tactic.ring2.csring_expr.eval</a> t r₂</div></div>
+   <p>The main proof-by-reflection theorem. Given reflected csring expressions
+<code>r₁</code> and <code>r₂</code> plus a storage <code>t</code> of atoms, if both expressions go to the
+same Horner normal form, then the original non-reflected expressions are
+equal. <code>H</code> follows from kernel reduction and is therefore <code>rfl</code>.</p>
+ </ul></div><div class="decl def" id="tactic.ring2.reflect_expr">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L427">tactic.ring2.reflect_expr</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></div>
+   <p>Reflects a csring expression into a <code>csring_expr</code>, together
+with a dlist of atoms, i.e. opaque variables over which the
+expression is a polynomial.</p>
+ </ul></div><div class="decl def" id="tactic.ring2.csring_expr.replace">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L457">tactic.ring2.csring_expr.replace</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/state.html#state_t">state_t</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a></div></div>
+   <p>In the output of <code>reflect_expr</code>, <code>atom</code>s are initialized with incorrect indices.
+The indices cannot be computed until the whole tree is built, so another pass over
+the expressions is needed - this is what <code>replace</code> does. The computation (expressed
+in the state monad) fixes up <code>atom</code>s to match their positions in the atom tree.
+The initial state is a list of all atom occurrences in the goal, left-to-right.</p>
+ </ul></div><div class="decl def" id="tactic.interactive.ring2">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L480">tactic.interactive.ring2</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Tactic for solving equations in the language of rings.
+ This variant on the <code>ring</code> tactic uses kernel computation instead
+ of proof generation.</p>
+ </ul></div><div class="decl def" id="conv.interactive.ring2">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ring2.lean#L508">conv.interactive.ring2</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/converter/conv.html#conv">conv</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p></p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +1070,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1298,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file visible" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,417 +1421,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="mod_doc">
-<h1>ring2</h1>
-
-<p>An experimental variant on the <code>ring</code> tactic that uses computational
-reflection instead of proof generation. Useful for kernel benchmarking.</p>
-</div><div class="def"><a id="tree.reflect'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L22">tree.reflect'</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/level.html#level">level</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div>
-<p><code>(reflect' t u α)</code> quasiquotes a tree <code>(t: tree expr)</code> of quoted
-values of type <code>α</code> at level <code>u</code> into an <code>expr</code> which reifies to a <code>tree α</code>
-containing the reifications of the <code>expr</code>s from the original <code>t</code>.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tree.get_or_zero"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L29">tree.get_or_zero</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#pos_num">pos_num</a> → α</div>
-<p>Returns an element indexed by <code>n</code>, or zero if <code>n</code> isn't a valid index.
-See <code>tree.get</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_zero">has_zero</a> α]</span></li>
-
-
-
-</ul></div><div class="inductive"><a id="tactic.ring2.csring_expr"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L40">tactic.ring2.csring_expr</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p>A reflected/meta representation of an expression in a commutative
-semiring. This representation is a direct translation of such
-expressions - see <code>horner_expr</code> for a normal form.</p>
-       <ul>
-
-
-
-<li class="structure_fields">
-Constructors:
-<ul><li><div class="structure_field">tactic.ring2.csring_expr.atom : <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#pos_num">pos_num</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a></div></li>
-<li><div class="structure_field">tactic.ring2.csring_expr.const : <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num">num</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a></div></li>
-<li><div class="structure_field">tactic.ring2.csring_expr.add : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a></div></li>
-<li><div class="structure_field">tactic.ring2.csring_expr.mul : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a></div></li>
-<li><div class="structure_field">tactic.ring2.csring_expr.pow : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num">num</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a></div></li>
-</ul></li>
-</ul></div><div class="def"><a id="tactic.ring2.csring_expr.has_reflect"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L40">tactic.ring2.csring_expr.has_reflect</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/has_reflect.html#has_reflect">has_reflect</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="tactic.ring2.csring_expr.eval"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L57">tactic.ring2.csring_expr.eval</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a> → α</div>
-<p>Evaluates a reflected <code>csring_expr</code> into an element of the
-original <code>comm_semiring</code> type <code>α</code>, retrieving opaque elements
-(atoms) from the tree <code>t</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_semiring">comm_semiring</a> α]</span></li>
-
-
-
-</ul></div><div class="inductive"><a id="tactic.ring2.horner_expr"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L72">tactic.ring2.horner_expr</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p>An efficient representation of expressions in a commutative
-semiring using the sparse Horner normal form. This type admits
-non-optimal instantiations (e.g. <code>P</code> can be represented as <code>P+0+0</code>),
-so to get good performance out of it, care must be taken to maintain
-an optimal, <em>canonical</em> form.</p>
-       <ul>
-
-
-
-<li class="structure_fields">
-Constructors:
-<ul><li><div class="structure_field">tactic.ring2.horner_expr.const : <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#znum">znum</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div></li>
-<li><div class="structure_field">tactic.ring2.horner_expr.horner : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#pos_num">pos_num</a> → <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num">num</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div></li>
-</ul></li>
-</ul></div><div class="def"><a id="tactic.ring2.horner_expr.decidable_eq"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L72">tactic.ring2.horner_expr.decidable_eq</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_eq">decidable_eq</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="tactic.ring2.horner_expr.is_cs"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L84">tactic.ring2.horner_expr.is_cs</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → Prop</div>
-<p>True iff the <code>horner_expr</code> argument is a valid <code>csring_expr</code>.
-For that to be the case, all its constants must be non-negative.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.ring2.horner_expr.has_zero"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L88">tactic.ring2.horner_expr.has_zero</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_zero">has_zero</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="tactic.ring2.horner_expr.has_one"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L89">tactic.ring2.horner_expr.has_one</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="tactic.ring2.horner_expr.atom"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L92">tactic.ring2.horner_expr.atom</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#pos_num">pos_num</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div>
-<p>Represent a <code>csring_expr.atom</code> in Horner form.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.ring2.horner_expr.to_string"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L94">tactic.ring2.horner_expr.to_string</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.ring2.horner_expr.has_to_string"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L99">tactic.ring2.horner_expr.has_to_string</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/to_string.html#has_to_string">has_to_string</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="tactic.ring2.horner_expr.horner'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L103">tactic.ring2.horner_expr.horner'</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#pos_num">pos_num</a> → <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num">num</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div>
-<p>Alternative constructor for (horner a x n b) which maintains canonical
-form by simplifying special cases of <code>a</code>.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.ring2.horner_expr.add_const"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L112">tactic.ring2.horner_expr.add_const</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#znum">znum</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.ring2.horner_expr.add_aux"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L119">tactic.ring2.horner_expr.add_aux</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> →
-(<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a>) →
-<a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#pos_num">pos_num</a> →
-<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> →
-<a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num">num</a> →
-<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a>) → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.ring2.horner_expr.add"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L135">tactic.ring2.horner_expr.add</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.ring2.horner_expr.neg"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L159">tactic.ring2.horner_expr.neg</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.ring2.horner_expr.mul_const"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L166">tactic.ring2.horner_expr.mul_const</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#znum">znum</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.ring2.horner_expr.mul_aux"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L173">tactic.ring2.horner_expr.mul_aux</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> →
-<a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#pos_num">pos_num</a> →
-<a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num">num</a> →
-<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> →
-(<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a>) →
-(<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a>) → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.ring2.horner_expr.mul"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L184">tactic.ring2.horner_expr.mul</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.ring2.horner_expr.has_add"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L202">tactic.ring2.horner_expr.has_add</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add">has_add</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="tactic.ring2.horner_expr.has_neg"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L203">tactic.ring2.horner_expr.has_neg</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_neg">has_neg</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="tactic.ring2.horner_expr.has_mul"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L204">tactic.ring2.horner_expr.has_mul</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mul">has_mul</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="tactic.ring2.horner_expr.pow"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L206">tactic.ring2.horner_expr.pow</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num">num</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.ring2.horner_expr.inv"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L215">tactic.ring2.horner_expr.inv</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.ring2.horner_expr.of_csexpr"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L218">tactic.ring2.horner_expr.of_csexpr</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a></div>
-<p>Brings expressions into Horner normal form.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.ring2.horner_expr.cseval"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L226">tactic.ring2.horner_expr.cseval</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a> → α</div>
-<p>Evaluates a reflected <code>horner_expr</code> - see <code>csring_expr.eval</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_semiring">comm_semiring</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.ring2.horner_expr.cseval_atom"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L230">tactic.ring2.horner_expr.cseval_atom</a></span> <span class="decl_args">(t : <a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> α)</span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#pos_num">pos_num</a>)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.atom">tactic.ring2.horner_expr.atom</a> n) ∧
-  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.atom">tactic.ring2.horner_expr.atom</a> n) = <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tree.get_or_zero">tree.get_or_zero</a> t n</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_semiring">comm_semiring</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.ring2.horner_expr.cseval_add_const"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L234">tactic.ring2.horner_expr.cseval_add_const</a></span> <span class="decl_args">(t : <a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> α)</span> <span class="decl_args">(k : <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num">num</a>)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> e →
-<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.add_const">tactic.ring2.horner_expr.add_const</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num.to_znum">num.to_znum</a> k) e) ∧
-  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.add_const">tactic.ring2.horner_expr.add_const</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num.to_znum">num.to_znum</a> k) e) =
-    ↑k + <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t e</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_semiring">comm_semiring</a> α]</span> <span class="impl_arg">{e : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a>}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.ring2.horner_expr.cseval_horner'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L250">tactic.ring2.horner_expr.cseval_horner'</a></span> <span class="decl_args">(t : <a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> α)</span> <span class="decl_args">(a : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a>)</span> <span class="decl_args">(x : <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#pos_num">pos_num</a>)</span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num">num</a>)</span> <span class="decl_args">(b : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a>)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> a →
-<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> b →
-<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.horner'">tactic.ring2.horner_expr.horner'</a> a x n b) ∧
-  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.horner'">tactic.ring2.horner_expr.horner'</a> a x n b) =
-    <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html#tactic.ring.horner">tactic.ring.horner</a> (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t a) (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tree.get_or_zero">tree.get_or_zero</a> t x) ↑n
-      (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t b)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_semiring">comm_semiring</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.ring2.horner_expr.cseval_add"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L263">tactic.ring2.horner_expr.cseval_add</a></span> <span class="decl_args">(t : <a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> α)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> e₁ →
-<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> e₂ →
-<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.add">tactic.ring2.horner_expr.add</a> e₁ e₂) ∧
-  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.add">tactic.ring2.horner_expr.add</a> e₁ e₂) =
-    <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t e₁ + <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t e₂</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_semiring">comm_semiring</a> α]</span> <span class="impl_arg">{e₁ e₂ : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a>}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.ring2.horner_expr.cseval_mul_const"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L323">tactic.ring2.horner_expr.cseval_mul_const</a></span> <span class="decl_args">(t : <a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> α)</span> <span class="decl_args">(k : <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num">num</a>)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> e →
-<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.mul_const">tactic.ring2.horner_expr.mul_const</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num.to_znum">num.to_znum</a> k) e) ∧
-  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.mul_const">tactic.ring2.horner_expr.mul_const</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num.to_znum">num.to_znum</a> k) e) =
-    <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t e * ↑k</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_semiring">comm_semiring</a> α]</span> <span class="impl_arg">{e : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a>}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.ring2.horner_expr.cseval_mul"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L343">tactic.ring2.horner_expr.cseval_mul</a></span> <span class="decl_args">(t : <a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> α)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> e₁ →
-<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> e₂ →
-<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.mul">tactic.ring2.horner_expr.mul</a> e₁ e₂) ∧
-  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.mul">tactic.ring2.horner_expr.mul</a> e₁ e₂) =
-    <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t e₁ * <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t e₂</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_semiring">comm_semiring</a> α]</span> <span class="impl_arg">{e₁ e₂ : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a>}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.ring2.horner_expr.cseval_pow"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L377">tactic.ring2.horner_expr.cseval_pow</a></span> <span class="decl_args">(t : <a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> α)</span> <span class="decl_args">(cs : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> x)</span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/data/num/basic.html#num">num</a>)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.pow">tactic.ring2.horner_expr.pow</a> x n) ∧
-  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.pow">tactic.ring2.horner_expr.pow</a> x n) = <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t x ^ ↑n</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_semiring">comm_semiring</a> α]</span> <span class="impl_arg">{x : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a>}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.ring2.horner_expr.cseval_of_csexpr"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L397">tactic.ring2.horner_expr.cseval_of_csexpr</a></span> <span class="decl_args">(t : <a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> α)</span> <span class="decl_args">(r : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a>)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a> (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.of_csexpr">tactic.ring2.horner_expr.of_csexpr</a> r) ∧
-  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a> t (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.of_csexpr">tactic.ring2.horner_expr.of_csexpr</a> r) = <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr.eval">tactic.ring2.csring_expr.eval</a> t r</div>
-<p>For any given tree <code>t</code> of atoms and any reflected expression <code>r</code>,
-the Horner form of <code>r</code> is a valid csring expression, and under <code>t</code>,
-the Horner form evaluates to the same thing as <code>r</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_semiring">comm_semiring</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.ring2.correctness"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L419">tactic.ring2.correctness</a></span> <span class="decl_args">(t : <a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> α)</span> <span class="decl_args">(r₁ r₂ : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a>)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.of_csexpr">tactic.ring2.horner_expr.of_csexpr</a> r₁ = <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.horner_expr.of_csexpr">tactic.ring2.horner_expr.of_csexpr</a> r₂ →
-<a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr.eval">tactic.ring2.csring_expr.eval</a> t r₁ = <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr.eval">tactic.ring2.csring_expr.eval</a> t r₂</div>
-<p>The main proof-by-reflection theorem. Given reflected csring expressions
-<code>r₁</code> and <code>r₂</code> plus a storage <code>t</code> of atoms, if both expressions go to the
-same Horner normal form, then the original non-reflected expressions are
-equal. <code>H</code> follows from kernel reduction and is therefore <code>rfl</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_semiring">comm_semiring</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="tactic.ring2.reflect_expr"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L427">tactic.ring2.reflect_expr</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div>
-<p>Reflects a csring expression into a <code>csring_expr</code>, together
-with a dlist of atoms, i.e. opaque variables over which the
-expression is a polynomial.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.ring2.csring_expr.replace"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L457">tactic.ring2.csring_expr.replace</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/tree.html#tree">tree</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/state.html#state_t">state_t</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a></div>
-<p>In the output of <code>reflect_expr</code>, <code>atom</code>s are initialized with incorrect indices.
-The indices cannot be computed until the whole tree is built, so another pass over
-the expressions is needed - this is what <code>replace</code> does. The computation (expressed
-in the state monad) fixes up <code>atom</code>s to match their positions in the atom tree.
-The initial state is a list of all atom occurrences in the goal, left-to-right.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.interactive.ring2"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L480">tactic.interactive.ring2</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Tactic for solving equations in the language of rings.
- This variant on the <code>ring</code> tactic uses kernel computation instead
- of proof generation.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="conv.interactive.ring2"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean#L508">conv.interactive.ring2</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/converter/conv.html#conv">conv</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">tactic.ring2</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ring2.lean">(view source on GitHub)</a></div><a href="#conv.interactive.ring2">conv.interactive.ring2</a><br>
-<a href="#tactic.interactive.ring2">tactic.interactive.ring2</a><br>
-<a href="#tactic.ring2.correctness">tactic.ring2.correctness</a><br>
-<a href="#tactic.ring2.csring_expr">tactic.ring2.csring_expr</a><br>
-<a href="#tactic.ring2.csring_expr.eval">tactic.ring2.csring_expr.eval</a><br>
-<a href="#tactic.ring2.csring_expr.has_reflect">tactic.ring2.csring_expr.has_reflect</a><br>
-<a href="#tactic.ring2.csring_expr.replace">tactic.ring2.csring_expr.replace</a><br>
-<a href="#tactic.ring2.horner_expr">tactic.ring2.horner_expr</a><br>
-<a href="#tactic.ring2.horner_expr.add">tactic.ring2.horner_expr.add</a><br>
-<a href="#tactic.ring2.horner_expr.add_aux">tactic.ring2.horner_expr.add_aux</a><br>
-<a href="#tactic.ring2.horner_expr.add_const">tactic.ring2.horner_expr.add_const</a><br>
-<a href="#tactic.ring2.horner_expr.atom">tactic.ring2.horner_expr.atom</a><br>
-<a href="#tactic.ring2.horner_expr.cseval">tactic.ring2.horner_expr.cseval</a><br>
-<a href="#tactic.ring2.horner_expr.cseval_add">tactic.ring2.horner_expr.cseval_add</a><br>
-<a href="#tactic.ring2.horner_expr.cseval_add_const">tactic.ring2.horner_expr.cseval_add_const</a><br>
-<a href="#tactic.ring2.horner_expr.cseval_atom">tactic.ring2.horner_expr.cseval_atom</a><br>
-<a href="#tactic.ring2.horner_expr.cseval_horner'">tactic.ring2.horner_expr.cseval_horner'</a><br>
-<a href="#tactic.ring2.horner_expr.cseval_mul">tactic.ring2.horner_expr.cseval_mul</a><br>
-<a href="#tactic.ring2.horner_expr.cseval_mul_const">tactic.ring2.horner_expr.cseval_mul_const</a><br>
-<a href="#tactic.ring2.horner_expr.cseval_of_csexpr">tactic.ring2.horner_expr.cseval_of_csexpr</a><br>
-<a href="#tactic.ring2.horner_expr.cseval_pow">tactic.ring2.horner_expr.cseval_pow</a><br>
-<a href="#tactic.ring2.horner_expr.decidable_eq">tactic.ring2.horner_expr.decidable_eq</a><br>
-<a href="#tactic.ring2.horner_expr.has_add">tactic.ring2.horner_expr.has_add</a><br>
-<a href="#tactic.ring2.horner_expr.has_mul">tactic.ring2.horner_expr.has_mul</a><br>
-<a href="#tactic.ring2.horner_expr.has_neg">tactic.ring2.horner_expr.has_neg</a><br>
-<a href="#tactic.ring2.horner_expr.has_one">tactic.ring2.horner_expr.has_one</a><br>
-<a href="#tactic.ring2.horner_expr.has_to_string">tactic.ring2.horner_expr.has_to_string</a><br>
-<a href="#tactic.ring2.horner_expr.has_zero">tactic.ring2.horner_expr.has_zero</a><br>
-<a href="#tactic.ring2.horner_expr.horner'">tactic.ring2.horner_expr.horner'</a><br>
-<a href="#tactic.ring2.horner_expr.inv">tactic.ring2.horner_expr.inv</a><br>
-<a href="#tactic.ring2.horner_expr.is_cs">tactic.ring2.horner_expr.is_cs</a><br>
-<a href="#tactic.ring2.horner_expr.mul">tactic.ring2.horner_expr.mul</a><br>
-<a href="#tactic.ring2.horner_expr.mul_aux">tactic.ring2.horner_expr.mul_aux</a><br>
-<a href="#tactic.ring2.horner_expr.mul_const">tactic.ring2.horner_expr.mul_const</a><br>
-<a href="#tactic.ring2.horner_expr.neg">tactic.ring2.horner_expr.neg</a><br>
-<a href="#tactic.ring2.horner_expr.of_csexpr">tactic.ring2.horner_expr.of_csexpr</a><br>
-<a href="#tactic.ring2.horner_expr.pow">tactic.ring2.horner_expr.pow</a><br>
-<a href="#tactic.ring2.horner_expr.to_string">tactic.ring2.horner_expr.to_string</a><br>
-<a href="#tactic.ring2.reflect_expr">tactic.ring2.reflect_expr</a><br>
-<a href="#tree.get_or_zero">tree.get_or_zero</a><br>
-<a href="#tree.reflect'">tree.reflect'</a><br>
 </div></div>
 
         </div>

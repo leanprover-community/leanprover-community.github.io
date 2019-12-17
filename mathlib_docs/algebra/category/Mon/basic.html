@@ -7,7 +7,197 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">algebra.category.Mon.basic</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean">(view source on GitHub)</a></div><a href="#AddCommMon">AddCommMon</a><br>
+<a href="#AddCommMon.add_comm_monoid">AddCommMon.add_comm_monoid</a><br>
+<a href="#AddCommMon.category_theory.concrete_category">AddCommMon.category_theory.concrete_category</a><br>
+<a href="#AddCommMon.has_coe_to_sort">AddCommMon.has_coe_to_sort</a><br>
+<a href="#AddCommMon.has_forget_to_AddMon">AddCommMon.has_forget_to_AddMon</a><br>
+<a href="#AddCommMon.of">AddCommMon.of</a><br>
+<a href="#AddMon">AddMon</a><br>
+<a href="#AddMon.add_monoid">AddMon.add_monoid</a><br>
+<a href="#AddMon.bundled_hom">AddMon.bundled_hom</a><br>
+<a href="#AddMon.category_theory.concrete_category">AddMon.category_theory.concrete_category</a><br>
+<a href="#AddMon.has_coe_to_sort">AddMon.has_coe_to_sort</a><br>
+<a href="#AddMon.of">AddMon.of</a><br>
+<a href="#CommMon">CommMon</a><br>
+<a href="#CommMon.category_theory.concrete_category">CommMon.category_theory.concrete_category</a><br>
+<a href="#CommMon.comm_monoid">CommMon.comm_monoid</a><br>
+<a href="#CommMon.has_coe_to_sort">CommMon.has_coe_to_sort</a><br>
+<a href="#CommMon.has_forget_to_Mon">CommMon.has_forget_to_Mon</a><br>
+<a href="#CommMon.of">CommMon.of</a><br>
+<a href="#Mon">Mon</a><br>
+<a href="#Mon.bundled_hom">Mon.bundled_hom</a><br>
+<a href="#Mon.category_theory.concrete_category">Mon.category_theory.concrete_category</a><br>
+<a href="#Mon.has_coe_to_sort">Mon.has_coe_to_sort</a><br>
+<a href="#Mon.monoid">Mon.monoid</a><br>
+<a href="#Mon.of">Mon.of</a><br>
+<a href="#add_equiv.to_AddCommMon_iso">add_equiv.to_AddCommMon_iso</a><br>
+<a href="#add_equiv.to_AddCommMon_iso_hom">add_equiv.to_AddCommMon_iso_hom</a><br>
+<a href="#add_equiv.to_AddCommMon_iso_inv">add_equiv.to_AddCommMon_iso_inv</a><br>
+<a href="#add_equiv.to_AddMon_iso">add_equiv.to_AddMon_iso</a><br>
+<a href="#add_equiv.to_AddMon_iso_hom">add_equiv.to_AddMon_iso_hom</a><br>
+<a href="#add_equiv.to_AddMon_iso_inv">add_equiv.to_AddMon_iso_inv</a><br>
+<a href="#add_equiv_iso_AddCommMon_iso">add_equiv_iso_AddCommMon_iso</a><br>
+<a href="#add_equiv_iso_AddMon_iso">add_equiv_iso_AddMon_iso</a><br>
+<a href="#category_theory.iso.AddCommMon_iso_to_add_equiv">category_theory.iso.AddCommMon_iso_to_add_equiv</a><br>
+<a href="#category_theory.iso.AddMond_iso_to_add_equiv">category_theory.iso.AddMond_iso_to_add_equiv</a><br>
+<a href="#category_theory.iso.CommMon_iso_to_mul_equiv">category_theory.iso.CommMon_iso_to_mul_equiv</a><br>
+<a href="#category_theory.iso.Mon_iso_to_mul_equiv">category_theory.iso.Mon_iso_to_mul_equiv</a><br>
+<a href="#mul_equiv.to_CommMon_iso">mul_equiv.to_CommMon_iso</a><br>
+<a href="#mul_equiv.to_CommMon_iso_hom">mul_equiv.to_CommMon_iso_hom</a><br>
+<a href="#mul_equiv.to_CommMon_iso_inv">mul_equiv.to_CommMon_iso_inv</a><br>
+<a href="#mul_equiv.to_Mon_iso">mul_equiv.to_Mon_iso</a><br>
+<a href="#mul_equiv.to_Mon_iso_hom">mul_equiv.to_Mon_iso_hom</a><br>
+<a href="#mul_equiv.to_Mon_iso_inv">mul_equiv.to_Mon_iso_inv</a><br>
+<a href="#mul_equiv_iso_CommMon_iso">mul_equiv_iso_CommMon_iso</a><br>
+<a href="#mul_equiv_iso_Mon_iso">mul_equiv_iso_Mon_iso</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="mod_doc">
+<h1>Category instances for monoid, add_monoid, comm_monoid, and add_comm_monoid.</h1>
+
+<p>We introduce the bundled categories:</p>
+
+<ul>
+<li><code>Mon</code></li>
+<li><code>AddMon</code></li>
+<li><code>CommMon</code></li>
+<li><code>AddCommMon</code>
+along with the relevant forgetful functors between them.</li>
+</ul>
+
+<h2>Implementation notes</h2>
+
+<h3>Note [locally reducible category instances]</h3>
+
+<p>We make SemiRing (and the other categories) locally reducible in order
+to define its instances. This is because writing, for example,</p>
+
+<p>instance : concrete_category SemiRing := by { delta SemiRing, apply_instance }</p>
+
+<p>results in an instance of the form <code>id (bundled_hom.concrete_category _)</code>
+and this <code>id</code>, not being [reducible], prevents a later instance search
+(once SemiRing is no longer reducible) from seeing that the morphisms of
+SemiRing are really semiring morphisms (<code>→+*</code>), and therefore have a coercion
+to functions, for example. It's especially important that the <code>has_coe_to_sort</code>
+instance not contain an extra <code>id</code> as we want the <code>semiring ↥R</code> instance to
+also apply to <code>semiring R.α</code> (it seems to be impractical to guarantee that
+we always access <code>R.α</code> through the coercion rather than directly).</p>
+
+<p>TODO: Probably @[derive] should be able to create instances of the
+required form (without <code>id</code>), and then we could use that instead of
+this obscure <code>local attribute [reducible]</code> method.</p>
+</div><div class="decl def" id="Mon">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L50">Mon</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type (u+1)</div></div>
+   <p>The category of monoids and monoid morphisms.</p>
+ </ul></div><div class="decl def" id="AddMon">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L50">AddMon</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type (u+1)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="Mon.of">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L56">Mon.of</a></span> <span class="decl_args">(M : Type u)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> M]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#Mon">Mon</a></div></div>
+   <p>Construct a bundled Mon from the underlying type and typeclass.</p>
+ </ul></div><div class="decl def" id="AddMon.of">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L56">AddMon.of</a></span> <span class="decl_args">(M : Type u)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_monoid">add_monoid</a> M]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddMon">AddMon</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="AddMon.has_coe_to_sort"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L61">AddMon.has_coe_to_sort</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe_to_sort">has_coe_to_sort</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddMon">AddMon</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="Mon.has_coe_to_sort"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L61">Mon.has_coe_to_sort</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe_to_sort">has_coe_to_sort</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#Mon">Mon</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="AddMon.add_monoid"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L64">AddMon.add_monoid</a></span> <span class="decl_args">(M : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddMon">AddMon</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_monoid">add_monoid</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_sort" title="coe_sort">↥</a>M</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="Mon.monoid"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L64">Mon.monoid</a></span> <span class="decl_args">(M : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#Mon">Mon</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_sort" title="coe_sort">↥</a>M</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="AddMon.bundled_hom"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L67">AddMon.bundled_hom</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/concrete_category/bundled_hom.html#category_theory.bundled_hom">category_theory.bundled_hom</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/hom.html#add_monoid_hom">add_monoid_hom</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="Mon.bundled_hom"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L67">Mon.bundled_hom</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/concrete_category/bundled_hom.html#category_theory.bundled_hom">category_theory.bundled_hom</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/hom.html#monoid_hom">monoid_hom</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="Mon.category_theory.concrete_category"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L71">Mon.category_theory.concrete_category</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/concrete_category/basic.html#category_theory.concrete_category">category_theory.concrete_category</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#Mon">Mon</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="AddMon.category_theory.concrete_category"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L71">AddMon.category_theory.concrete_category</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/concrete_category/basic.html#category_theory.concrete_category">category_theory.concrete_category</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddMon">AddMon</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="CommMon">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L77">CommMon</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type (u+1)</div></div>
+   <p>The category of commutative monoids and monoid morphisms.</p>
+ </ul></div><div class="decl def" id="AddCommMon">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L77">AddCommMon</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type (u+1)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="AddCommMon.of">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L83">AddCommMon.of</a></span> <span class="decl_args">(M : Type u)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> M]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddCommMon">AddCommMon</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="CommMon.of">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L83">CommMon.of</a></span> <span class="decl_args">(M : Type u)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#comm_monoid">comm_monoid</a> M]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#CommMon">CommMon</a></div></div>
+   <p>Construct a bundled CommMon from the underlying type and typeclass.</p>
+ </ul></div><div class="decl def" id="AddCommMon.has_coe_to_sort"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L88">AddCommMon.has_coe_to_sort</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe_to_sort">has_coe_to_sort</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddCommMon">AddCommMon</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="CommMon.has_coe_to_sort"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L88">CommMon.has_coe_to_sort</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe_to_sort">has_coe_to_sort</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#CommMon">CommMon</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="AddCommMon.add_comm_monoid"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L91">AddCommMon.add_comm_monoid</a></span> <span class="decl_args">(M : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddCommMon">AddCommMon</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_sort" title="coe_sort">↥</a>M</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="CommMon.comm_monoid"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L91">CommMon.comm_monoid</a></span> <span class="decl_args">(M : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#CommMon">CommMon</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#comm_monoid">comm_monoid</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_sort" title="coe_sort">↥</a>M</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="AddCommMon.category_theory.concrete_category"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L94">AddCommMon.category_theory.concrete_category</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/concrete_category/basic.html#category_theory.concrete_category">category_theory.concrete_category</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddCommMon">AddCommMon</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="CommMon.category_theory.concrete_category"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L94">CommMon.category_theory.concrete_category</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/concrete_category/basic.html#category_theory.concrete_category">category_theory.concrete_category</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#CommMon">CommMon</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="AddCommMon.has_forget_to_AddMon"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L97">AddCommMon.has_forget_to_AddMon</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/concrete_category/basic.html#category_theory.has_forget₂">category_theory.has_forget₂</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddCommMon">AddCommMon</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddMon">AddMon</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="CommMon.has_forget_to_Mon"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L97">CommMon.has_forget_to_Mon</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/concrete_category/basic.html#category_theory.has_forget₂">category_theory.has_forget₂</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#CommMon">CommMon</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#Mon">Mon</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="mul_equiv.to_Mon_iso">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L113">mul_equiv.to_Mon_iso</a></span> <span class="impl_arg"><span class="decl_args">{X Y : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> X]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> Y]</span></span> <span class="decl_args">:</span>     <div class="decl_type">X <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#mul_equiv" title="mul_equiv">≃*</a> Y → (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#Mon.of">Mon.of</a> X <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso" title="category_theory.iso">≅</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#Mon.of">Mon.of</a> Y)</div></div>
+   <p>Build an isomorphism in the category <code>Mon</code> from a <code>mul_equiv</code> between <code>monoid</code>s.</p>
+ </ul></div><div class="decl def" id="add_equiv.to_AddMon_iso">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L113">add_equiv.to_AddMon_iso</a></span> <span class="impl_arg"><span class="decl_args">{X Y : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_monoid">add_monoid</a> X]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_monoid">add_monoid</a> Y]</span></span> <span class="decl_args">:</span>     <div class="decl_type">X <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#add_equiv" title="add_equiv">≃+</a> Y →
+(<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddMon.of">AddMon.of</a> X <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso" title="category_theory.iso">≅</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddMon.of">AddMon.of</a> Y)</div></div>
+   <p>Build an isomorphism in the category <code>AddMon</code> from a <code>add_equiv</code> between <code>add_monoid</code>s.</p>
+ </ul></div><div class="decl theorem" id="add_equiv.to_AddMon_iso_hom"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L118">add_equiv.to_AddMon_iso_hom</a></span> <span class="impl_arg"><span class="decl_args">{X Y : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_monoid">add_monoid</a> X]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_monoid">add_monoid</a> Y]</span></span> <span class="impl_arg"><span class="decl_args">{e : X <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#add_equiv" title="add_equiv">≃+</a> Y}</span></span> <span class="decl_args">:</span>     <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#add_equiv.to_AddMon_iso">add_equiv.to_AddMon_iso</a> e).<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso.hom" title="category_theory.iso.hom">hom</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#add_equiv.to_add_monoid_hom">add_equiv.to_add_monoid_hom</a> e</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="mul_equiv.to_Mon_iso_hom"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L118">mul_equiv.to_Mon_iso_hom</a></span> <span class="impl_arg"><span class="decl_args">{X Y : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> X]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> Y]</span></span> <span class="impl_arg"><span class="decl_args">{e : X <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#mul_equiv" title="mul_equiv">≃*</a> Y}</span></span> <span class="decl_args">:</span>     <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#mul_equiv.to_Mon_iso">mul_equiv.to_Mon_iso</a> e).<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso.hom" title="category_theory.iso.hom">hom</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#mul_equiv.to_monoid_hom">mul_equiv.to_monoid_hom</a> e</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="mul_equiv.to_Mon_iso_inv"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L120">mul_equiv.to_Mon_iso_inv</a></span> <span class="impl_arg"><span class="decl_args">{X Y : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> X]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> Y]</span></span> <span class="impl_arg"><span class="decl_args">{e : X <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#mul_equiv" title="mul_equiv">≃*</a> Y}</span></span> <span class="decl_args">:</span>     <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#mul_equiv.to_Mon_iso">mul_equiv.to_Mon_iso</a> e).<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso.inv" title="category_theory.iso.inv">inv</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#mul_equiv.to_monoid_hom">mul_equiv.to_monoid_hom</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#mul_equiv.symm">mul_equiv.symm</a> e)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="add_equiv.to_AddMon_iso_inv"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L120">add_equiv.to_AddMon_iso_inv</a></span> <span class="impl_arg"><span class="decl_args">{X Y : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_monoid">add_monoid</a> X]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_monoid">add_monoid</a> Y]</span></span> <span class="impl_arg"><span class="decl_args">{e : X <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#add_equiv" title="add_equiv">≃+</a> Y}</span></span> <span class="decl_args">:</span>     <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#add_equiv.to_AddMon_iso">add_equiv.to_AddMon_iso</a> e).<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso.inv" title="category_theory.iso.inv">inv</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#add_equiv.to_add_monoid_hom">add_equiv.to_add_monoid_hom</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#add_equiv.symm">add_equiv.symm</a> e)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="mul_equiv.to_CommMon_iso">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L128">mul_equiv.to_CommMon_iso</a></span> <span class="impl_arg"><span class="decl_args">{X Y : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#comm_monoid">comm_monoid</a> X]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#comm_monoid">comm_monoid</a> Y]</span></span> <span class="decl_args">:</span>     <div class="decl_type">X <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#mul_equiv" title="mul_equiv">≃*</a> Y →
+(<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#CommMon.of">CommMon.of</a> X <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso" title="category_theory.iso">≅</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#CommMon.of">CommMon.of</a> Y)</div></div>
+   <p>Build an isomorphism in the category <code>CommMon</code> from a <code>mul_equiv</code> between <code>comm_monoid</code>s.</p>
+ </ul></div><div class="decl def" id="add_equiv.to_AddCommMon_iso">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L128">add_equiv.to_AddCommMon_iso</a></span> <span class="impl_arg"><span class="decl_args">{X Y : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> X]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> Y]</span></span> <span class="decl_args">:</span>     <div class="decl_type">X <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#add_equiv" title="add_equiv">≃+</a> Y →
+(<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddCommMon.of">AddCommMon.of</a> X <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso" title="category_theory.iso">≅</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddCommMon.of">AddCommMon.of</a> Y)</div></div>
+   <p>Build an isomorphism in the category <code>AddCommMon</code> from a <code>add_equiv</code> between <code>add_comm_monoid</code>s.</p>
+ </ul></div><div class="decl theorem" id="add_equiv.to_AddCommMon_iso_hom"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L133">add_equiv.to_AddCommMon_iso_hom</a></span> <span class="impl_arg"><span class="decl_args">{X Y : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> X]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> Y]</span></span> <span class="impl_arg"><span class="decl_args">{e : X <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#add_equiv" title="add_equiv">≃+</a> Y}</span></span> <span class="decl_args">:</span>     <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#add_equiv.to_AddCommMon_iso">add_equiv.to_AddCommMon_iso</a> e).<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso.hom" title="category_theory.iso.hom">hom</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#add_equiv.to_add_monoid_hom">add_equiv.to_add_monoid_hom</a> e</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="mul_equiv.to_CommMon_iso_hom"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L133">mul_equiv.to_CommMon_iso_hom</a></span> <span class="impl_arg"><span class="decl_args">{X Y : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#comm_monoid">comm_monoid</a> X]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#comm_monoid">comm_monoid</a> Y]</span></span> <span class="impl_arg"><span class="decl_args">{e : X <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#mul_equiv" title="mul_equiv">≃*</a> Y}</span></span> <span class="decl_args">:</span>     <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#mul_equiv.to_CommMon_iso">mul_equiv.to_CommMon_iso</a> e).<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso.hom" title="category_theory.iso.hom">hom</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#mul_equiv.to_monoid_hom">mul_equiv.to_monoid_hom</a> e</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="add_equiv.to_AddCommMon_iso_inv"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L135">add_equiv.to_AddCommMon_iso_inv</a></span> <span class="impl_arg"><span class="decl_args">{X Y : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> X]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> Y]</span></span> <span class="impl_arg"><span class="decl_args">{e : X <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#add_equiv" title="add_equiv">≃+</a> Y}</span></span> <span class="decl_args">:</span>     <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#add_equiv.to_AddCommMon_iso">add_equiv.to_AddCommMon_iso</a> e).<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso.inv" title="category_theory.iso.inv">inv</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#add_equiv.to_add_monoid_hom">add_equiv.to_add_monoid_hom</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#add_equiv.symm">add_equiv.symm</a> e)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="mul_equiv.to_CommMon_iso_inv"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L135">mul_equiv.to_CommMon_iso_inv</a></span> <span class="impl_arg"><span class="decl_args">{X Y : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#comm_monoid">comm_monoid</a> X]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#comm_monoid">comm_monoid</a> Y]</span></span> <span class="impl_arg"><span class="decl_args">{e : X <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#mul_equiv" title="mul_equiv">≃*</a> Y}</span></span> <span class="decl_args">:</span>     <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#mul_equiv.to_CommMon_iso">mul_equiv.to_CommMon_iso</a> e).<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso.inv" title="category_theory.iso.inv">inv</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#mul_equiv.to_monoid_hom">mul_equiv.to_monoid_hom</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#mul_equiv.symm">mul_equiv.symm</a> e)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="category_theory.iso.AddMond_iso_to_add_equiv">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L142">category_theory.iso.AddMond_iso_to_add_equiv</a></span> <span class="impl_arg"><span class="decl_args">{X Y : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddMon">AddMon</a>}</span></span> <span class="decl_args">:</span>     <div class="decl_type">(X <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso" title="category_theory.iso">≅</a> Y) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_sort" title="coe_sort">↥</a>X <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#add_equiv" title="add_equiv">≃+</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_sort" title="coe_sort">↥</a>Y</div></div>
+   <p>Build an <code>add_equiv</code> from an isomorphism in the category <code>AddMon</code>.</p>
+ </ul></div><div class="decl def" id="category_theory.iso.Mon_iso_to_mul_equiv">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L142">category_theory.iso.Mon_iso_to_mul_equiv</a></span> <span class="impl_arg"><span class="decl_args">{X Y : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#Mon">Mon</a>}</span></span> <span class="decl_args">:</span>     <div class="decl_type">(X <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso" title="category_theory.iso">≅</a> Y) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_sort" title="coe_sort">↥</a>X <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#mul_equiv" title="mul_equiv">≃*</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_sort" title="coe_sort">↥</a>Y</div></div>
+   <p>Build a <code>mul_equiv</code> from an isomorphism in the category <code>Mon</code>.</p>
+ </ul></div><div class="decl def" id="category_theory.iso.CommMon_iso_to_mul_equiv">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L151">category_theory.iso.CommMon_iso_to_mul_equiv</a></span> <span class="impl_arg"><span class="decl_args">{X Y : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#CommMon">CommMon</a>}</span></span> <span class="decl_args">:</span>     <div class="decl_type">(X <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso" title="category_theory.iso">≅</a> Y) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_sort" title="coe_sort">↥</a>X <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#mul_equiv" title="mul_equiv">≃*</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_sort" title="coe_sort">↥</a>Y</div></div>
+   <p>Build a <code>mul_equiv</code> from an isomorphism in the category <code>CommMon</code>.</p>
+ </ul></div><div class="decl def" id="category_theory.iso.AddCommMon_iso_to_add_equiv">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L151">category_theory.iso.AddCommMon_iso_to_add_equiv</a></span> <span class="impl_arg"><span class="decl_args">{X Y : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddCommMon">AddCommMon</a>}</span></span> <span class="decl_args">:</span>     <div class="decl_type">(X <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso" title="category_theory.iso">≅</a> Y) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_sort" title="coe_sort">↥</a>X <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#add_equiv" title="add_equiv">≃+</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_sort" title="coe_sort">↥</a>Y</div></div>
+   <p>Build an <code>add_equiv</code> from an isomorphism in the category <code>AddCommMon</code>.</p>
+ </ul></div><div class="decl def" id="mul_equiv_iso_Mon_iso">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L162">mul_equiv_iso_Mon_iso</a></span> <span class="impl_arg"><span class="decl_args">{X Y : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> X]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> Y]</span></span> <span class="decl_args">:</span>     <div class="decl_type">X <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#mul_equiv" title="mul_equiv">≃*</a> Y <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso" title="category_theory.iso">≅</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#Mon.of">Mon.of</a> X <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso" title="category_theory.iso">≅</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#Mon.of">Mon.of</a> Y</div></div>
+   <p>multiplicative equivalences between <code>monoid</code>s are the same as (isomorphic to) isomorphisms in <code>Mon</code></p>
+ </ul></div><div class="decl def" id="add_equiv_iso_AddMon_iso">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L162">add_equiv_iso_AddMon_iso</a></span> <span class="impl_arg"><span class="decl_args">{X Y : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_monoid">add_monoid</a> X]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_monoid">add_monoid</a> Y]</span></span> <span class="decl_args">:</span>     <div class="decl_type">X <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#add_equiv" title="add_equiv">≃+</a> Y <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso" title="category_theory.iso">≅</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddMon.of">AddMon.of</a> X <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso" title="category_theory.iso">≅</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddMon.of">AddMon.of</a> Y</div></div>
+   <p>additive equivalences between <code>add_monoid</code>s are the same as (isomorphic to) isomorphisms in <code>AddMon</code></p>
+ </ul></div><div class="decl def" id="add_equiv_iso_AddCommMon_iso">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L169">add_equiv_iso_AddCommMon_iso</a></span> <span class="impl_arg"><span class="decl_args">{X Y : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> X]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> Y]</span></span> <span class="decl_args">:</span>     <div class="decl_type">X <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#add_equiv" title="add_equiv">≃+</a> Y <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso" title="category_theory.iso">≅</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddCommMon.of">AddCommMon.of</a> X <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso" title="category_theory.iso">≅</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddCommMon.of">AddCommMon.of</a> Y</div></div>
+   <p>additive equivalences between <code>add_comm_monoid</code>s are the same as (isomorphic to) isomorphisms in <code>AddCommMon</code></p>
+ </ul></div><div class="decl def" id="mul_equiv_iso_CommMon_iso">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/category/Mon/basic.lean#L169">mul_equiv_iso_CommMon_iso</a></span> <span class="impl_arg"><span class="decl_args">{X Y : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#comm_monoid">comm_monoid</a> X]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#comm_monoid">comm_monoid</a> Y]</span></span> <span class="decl_args">:</span>     <div class="decl_type">X <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#mul_equiv" title="mul_equiv">≃*</a> Y <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso" title="category_theory.iso">≅</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#CommMon.of">CommMon.of</a> X <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso" title="category_theory.iso">≅</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#CommMon.of">CommMon.of</a> Y</div></div>
+   <p>multiplicative equivalences between <code>comm_monoid</code>s are the same as (isomorphic to) isomorphisms in <code>CommMon</code></p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner" id="algebra">
@@ -807,6 +997,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1225,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,400 +1348,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="mod_doc">
-<h1>Category instances for monoid, add_monoid, comm_monoid, and add_comm_monoid.</h1>
-
-<p>We introduce the bundled categories:</p>
-
-<ul>
-<li><code>Mon</code></li>
-<li><code>AddMon</code></li>
-<li><code>CommMon</code></li>
-<li><code>AddCommMon</code>
-along with the relevant forgetful functors between them.</li>
-</ul>
-
-<h2>Implementation notes</h2>
-
-<h3>Note [locally reducible category instances]</h3>
-
-<p>We make SemiRing (and the other categories) locally reducible in order
-to define its instances. This is because writing, for example,</p>
-
-<p>instance : concrete_category SemiRing := by { delta SemiRing, apply_instance }</p>
-
-<p>results in an instance of the form <code>id (bundled_hom.concrete_category _)</code>
-and this <code>id</code>, not being [reducible], prevents a later instance search
-(once SemiRing is no longer reducible) from seeing that the morphisms of
-SemiRing are really semiring morphisms (<code>→+*</code>), and therefore have a coercion
-to functions, for example. It's especially important that the <code>has_coe_to_sort</code>
-instance not contain an extra <code>id</code> as we want the <code>semiring ↥R</code> instance to
-also apply to <code>semiring R.α</code> (it seems to be impractical to guarantee that
-we always access <code>R.α</code> through the coercion rather than directly).</p>
-
-<p>TODO: Probably @[derive] should be able to create instances of the
-required form (without <code>id</code>), and then we could use that instead of
-this obscure <code>local attribute [reducible]</code> method.</p>
-</div><div class="def"><a id="AddMon"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L50">AddMon</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type (u+1)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="Mon"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L50">Mon</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type (u+1)</div>
-<p>The category of monoids and monoid morphisms.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="Mon.of"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L56">Mon.of</a></span> <span class="decl_args">(M : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#Mon">Mon</a></div>
-<p>Construct a bundled Mon from the underlying type and typeclass.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> M]</span></li>
-
-
-
-</ul></div><div class="def"><a id="AddMon.of"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L56">AddMon.of</a></span> <span class="decl_args">(M : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddMon">AddMon</a></div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_monoid">add_monoid</a> M]</span></li>
-
-
-
-</ul></div><div class="def"><a id="Mon.has_coe_to_sort"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L61">Mon.has_coe_to_sort</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe_to_sort">has_coe_to_sort</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#Mon">Mon</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="AddMon.has_coe_to_sort"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L61">AddMon.has_coe_to_sort</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe_to_sort">has_coe_to_sort</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddMon">AddMon</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="AddMon.add_monoid"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L64">AddMon.add_monoid</a></span> <span class="decl_args">(M : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddMon">AddMon</a>)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_monoid">add_monoid</a> ↥M</div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="Mon.monoid"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L64">Mon.monoid</a></span> <span class="decl_args">(M : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#Mon">Mon</a>)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> ↥M</div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="AddMon.bundled_hom"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L67">AddMon.bundled_hom</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/concrete_category/bundled_hom.html#category_theory.bundled_hom">category_theory.bundled_hom</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/hom.html#add_monoid_hom">add_monoid_hom</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="Mon.bundled_hom"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L67">Mon.bundled_hom</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/concrete_category/bundled_hom.html#category_theory.bundled_hom">category_theory.bundled_hom</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/hom.html#monoid_hom">monoid_hom</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="Mon.category_theory.concrete_category"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L71">Mon.category_theory.concrete_category</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/concrete_category/basic.html#category_theory.concrete_category">category_theory.concrete_category</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#Mon">Mon</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="AddMon.category_theory.concrete_category"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L71">AddMon.category_theory.concrete_category</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/concrete_category/basic.html#category_theory.concrete_category">category_theory.concrete_category</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddMon">AddMon</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="CommMon"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L77">CommMon</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type (u+1)</div>
-<p>The category of commutative monoids and monoid morphisms.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="AddCommMon"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L77">AddCommMon</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type (u+1)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="AddCommMon.of"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L83">AddCommMon.of</a></span> <span class="decl_args">(M : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddCommMon">AddCommMon</a></div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> M]</span></li>
-
-
-
-</ul></div><div class="def"><a id="CommMon.of"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L83">CommMon.of</a></span> <span class="decl_args">(M : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#CommMon">CommMon</a></div>
-<p>Construct a bundled CommMon from the underlying type and typeclass.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#comm_monoid">comm_monoid</a> M]</span></li>
-
-
-
-</ul></div><div class="def"><a id="AddCommMon.has_coe_to_sort"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L88">AddCommMon.has_coe_to_sort</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe_to_sort">has_coe_to_sort</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddCommMon">AddCommMon</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="CommMon.has_coe_to_sort"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L88">CommMon.has_coe_to_sort</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe_to_sort">has_coe_to_sort</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#CommMon">CommMon</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="CommMon.comm_monoid"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L91">CommMon.comm_monoid</a></span> <span class="decl_args">(M : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#CommMon">CommMon</a>)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#comm_monoid">comm_monoid</a> ↥M</div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="AddCommMon.add_comm_monoid"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L91">AddCommMon.add_comm_monoid</a></span> <span class="decl_args">(M : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddCommMon">AddCommMon</a>)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> ↥M</div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="AddCommMon.category_theory.concrete_category"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L94">AddCommMon.category_theory.concrete_category</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/concrete_category/basic.html#category_theory.concrete_category">category_theory.concrete_category</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddCommMon">AddCommMon</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="CommMon.category_theory.concrete_category"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L94">CommMon.category_theory.concrete_category</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/concrete_category/basic.html#category_theory.concrete_category">category_theory.concrete_category</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#CommMon">CommMon</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="AddCommMon.has_forget_to_AddMon"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L97">AddCommMon.has_forget_to_AddMon</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/concrete_category/basic.html#category_theory.has_forget₂">category_theory.has_forget₂</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddCommMon">AddCommMon</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddMon">AddMon</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="CommMon.has_forget_to_Mon"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L97">CommMon.has_forget_to_Mon</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/concrete_category/basic.html#category_theory.has_forget₂">category_theory.has_forget₂</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#CommMon">CommMon</a> <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#Mon">Mon</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="mul_equiv.to_Mon_iso"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L113">mul_equiv.to_Mon_iso</a></span>  <span class="decl_args">:</span>       <div class="decl_type">X ≃* Y → (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#Mon.of">Mon.of</a> X ≅ <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#Mon.of">Mon.of</a> Y)</div>
-<p>Build an isomorphism in the category <code>Mon</code> from a <code>mul_equiv</code> between <code>monoid</code>s.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> X]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> Y]</span></li>
-
-
-
-</ul></div><div class="def"><a id="add_equiv.to_AddMon_iso"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L113">add_equiv.to_AddMon_iso</a></span>  <span class="decl_args">:</span>       <div class="decl_type">X ≃+ Y → (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddMon.of">AddMon.of</a> X ≅ <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddMon.of">AddMon.of</a> Y)</div>
-<p>Build an isomorphism in the category <code>AddMon</code> from a <code>add_equiv</code> between <code>add_monoid</code>s.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_monoid">add_monoid</a> X]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_monoid">add_monoid</a> Y]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="mul_equiv.to_Mon_iso_hom"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L118">mul_equiv.to_Mon_iso_hom</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#mul_equiv.to_Mon_iso">mul_equiv.to_Mon_iso</a> e).hom = <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#mul_equiv.to_monoid_hom">mul_equiv.to_monoid_hom</a> e</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> X]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> Y]</span> <span class="impl_arg">{e : X ≃* Y}</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="add_equiv.to_AddMon_iso_hom"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L118">add_equiv.to_AddMon_iso_hom</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#add_equiv.to_AddMon_iso">add_equiv.to_AddMon_iso</a> e).hom = <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#add_equiv.to_add_monoid_hom">add_equiv.to_add_monoid_hom</a> e</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_monoid">add_monoid</a> X]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_monoid">add_monoid</a> Y]</span> <span class="impl_arg">{e : X ≃+ Y}</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="add_equiv.to_AddMon_iso_inv"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L120">add_equiv.to_AddMon_iso_inv</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#add_equiv.to_AddMon_iso">add_equiv.to_AddMon_iso</a> e).inv = <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#add_equiv.to_add_monoid_hom">add_equiv.to_add_monoid_hom</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#add_equiv.symm">add_equiv.symm</a> e)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_monoid">add_monoid</a> X]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_monoid">add_monoid</a> Y]</span> <span class="impl_arg">{e : X ≃+ Y}</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="mul_equiv.to_Mon_iso_inv"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L120">mul_equiv.to_Mon_iso_inv</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#mul_equiv.to_Mon_iso">mul_equiv.to_Mon_iso</a> e).inv = <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#mul_equiv.to_monoid_hom">mul_equiv.to_monoid_hom</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#mul_equiv.symm">mul_equiv.symm</a> e)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> X]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> Y]</span> <span class="impl_arg">{e : X ≃* Y}</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="def"><a id="mul_equiv.to_CommMon_iso"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L128">mul_equiv.to_CommMon_iso</a></span>  <span class="decl_args">:</span>       <div class="decl_type">X ≃* Y → (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#CommMon.of">CommMon.of</a> X ≅ <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#CommMon.of">CommMon.of</a> Y)</div>
-<p>Build an isomorphism in the category <code>CommMon</code> from a <code>mul_equiv</code> between <code>comm_monoid</code>s.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#comm_monoid">comm_monoid</a> X]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#comm_monoid">comm_monoid</a> Y]</span></li>
-
-
-
-</ul></div><div class="def"><a id="add_equiv.to_AddCommMon_iso"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L128">add_equiv.to_AddCommMon_iso</a></span>  <span class="decl_args">:</span>       <div class="decl_type">X ≃+ Y → (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddCommMon.of">AddCommMon.of</a> X ≅ <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddCommMon.of">AddCommMon.of</a> Y)</div>
-<p>Build an isomorphism in the category <code>AddCommMon</code> from a <code>add_equiv</code> between <code>add_comm_monoid</code>s.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> X]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> Y]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="add_equiv.to_AddCommMon_iso_hom"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L133">add_equiv.to_AddCommMon_iso_hom</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#add_equiv.to_AddCommMon_iso">add_equiv.to_AddCommMon_iso</a> e).hom = <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#add_equiv.to_add_monoid_hom">add_equiv.to_add_monoid_hom</a> e</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> X]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> Y]</span> <span class="impl_arg">{e : X ≃+ Y}</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="mul_equiv.to_CommMon_iso_hom"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L133">mul_equiv.to_CommMon_iso_hom</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#mul_equiv.to_CommMon_iso">mul_equiv.to_CommMon_iso</a> e).hom = <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#mul_equiv.to_monoid_hom">mul_equiv.to_monoid_hom</a> e</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#comm_monoid">comm_monoid</a> X]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#comm_monoid">comm_monoid</a> Y]</span> <span class="impl_arg">{e : X ≃* Y}</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="add_equiv.to_AddCommMon_iso_inv"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L135">add_equiv.to_AddCommMon_iso_inv</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#add_equiv.to_AddCommMon_iso">add_equiv.to_AddCommMon_iso</a> e).inv = <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#add_equiv.to_add_monoid_hom">add_equiv.to_add_monoid_hom</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#add_equiv.symm">add_equiv.symm</a> e)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> X]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> Y]</span> <span class="impl_arg">{e : X ≃+ Y}</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="mul_equiv.to_CommMon_iso_inv"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L135">mul_equiv.to_CommMon_iso_inv</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#mul_equiv.to_CommMon_iso">mul_equiv.to_CommMon_iso</a> e).inv = <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#mul_equiv.to_monoid_hom">mul_equiv.to_monoid_hom</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#mul_equiv.symm">mul_equiv.symm</a> e)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#comm_monoid">comm_monoid</a> X]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#comm_monoid">comm_monoid</a> Y]</span> <span class="impl_arg">{e : X ≃* Y}</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="def"><a id="category_theory.iso.AddMond_iso_to_add_equiv"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L142">category_theory.iso.AddMond_iso_to_add_equiv</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(X ≅ Y) → ↥X ≃+ ↥Y</div>
-<p>Build an <code>add_equiv</code> from an isomorphism in the category <code>AddMon</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddMon">AddMon</a>}</span></li>
-
-
-
-</ul></div><div class="def"><a id="category_theory.iso.Mon_iso_to_mul_equiv"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L142">category_theory.iso.Mon_iso_to_mul_equiv</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(X ≅ Y) → ↥X ≃* ↥Y</div>
-<p>Build a <code>mul_equiv</code> from an isomorphism in the category <code>Mon</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#Mon">Mon</a>}</span></li>
-
-
-
-</ul></div><div class="def"><a id="category_theory.iso.CommMon_iso_to_mul_equiv"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L151">category_theory.iso.CommMon_iso_to_mul_equiv</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(X ≅ Y) → ↥X ≃* ↥Y</div>
-<p>Build a <code>mul_equiv</code> from an isomorphism in the category <code>CommMon</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#CommMon">CommMon</a>}</span></li>
-
-
-
-</ul></div><div class="def"><a id="category_theory.iso.AddCommMon_iso_to_add_equiv"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L151">category_theory.iso.AddCommMon_iso_to_add_equiv</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(X ≅ Y) → ↥X ≃+ ↥Y</div>
-<p>Build an <code>add_equiv</code> from an isomorphism in the category <code>AddCommMon</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddCommMon">AddCommMon</a>}</span></li>
-
-
-
-</ul></div><div class="def"><a id="mul_equiv_iso_Mon_iso"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L162">mul_equiv_iso_Mon_iso</a></span>  <span class="decl_args">:</span>       <div class="decl_type">X ≃* Y ≅ <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#Mon.of">Mon.of</a> X ≅ <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#Mon.of">Mon.of</a> Y</div>
-<p>multiplicative equivalences between <code>monoid</code>s are the same as (isomorphic to) isomorphisms in <code>Mon</code></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> X]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> Y]</span></li>
-
-
-
-</ul></div><div class="def"><a id="add_equiv_iso_AddMon_iso"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L162">add_equiv_iso_AddMon_iso</a></span>  <span class="decl_args">:</span>       <div class="decl_type">X ≃+ Y ≅ <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddMon.of">AddMon.of</a> X ≅ <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddMon.of">AddMon.of</a> Y</div>
-<p>additive equivalences between <code>add_monoid</code>s are the same as (isomorphic to) isomorphisms in <code>AddMon</code></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_monoid">add_monoid</a> X]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_monoid">add_monoid</a> Y]</span></li>
-
-
-
-</ul></div><div class="def"><a id="mul_equiv_iso_CommMon_iso"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L169">mul_equiv_iso_CommMon_iso</a></span>  <span class="decl_args">:</span>       <div class="decl_type">X ≃* Y ≅ <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#CommMon.of">CommMon.of</a> X ≅ <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#CommMon.of">CommMon.of</a> Y</div>
-<p>multiplicative equivalences between <code>comm_monoid</code>s are the same as (isomorphic to) isomorphisms in <code>CommMon</code></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#comm_monoid">comm_monoid</a> X]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#comm_monoid">comm_monoid</a> Y]</span></li>
-
-
-
-</ul></div><div class="def"><a id="add_equiv_iso_AddCommMon_iso"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean#L169">add_equiv_iso_AddCommMon_iso</a></span>  <span class="decl_args">:</span>       <div class="decl_type">X ≃+ Y ≅ <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddCommMon.of">AddCommMon.of</a> X ≅ <a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#AddCommMon.of">AddCommMon.of</a> Y</div>
-<p>additive equivalences between <code>add_comm_monoid</code>s are the same as (isomorphic to) isomorphisms in <code>AddCommMon</code></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> X]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> Y]</span></li>
-
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">algebra.category.Mon.basic</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/category/Mon/basic.lean">(view source on GitHub)</a></div><a href="#AddCommMon">AddCommMon</a><br>
-<a href="#AddCommMon.add_comm_monoid">AddCommMon.add_comm_monoid</a><br>
-<a href="#AddCommMon.category_theory.concrete_category">AddCommMon.category_theory.concrete_category</a><br>
-<a href="#AddCommMon.has_coe_to_sort">AddCommMon.has_coe_to_sort</a><br>
-<a href="#AddCommMon.has_forget_to_AddMon">AddCommMon.has_forget_to_AddMon</a><br>
-<a href="#AddCommMon.of">AddCommMon.of</a><br>
-<a href="#AddMon">AddMon</a><br>
-<a href="#AddMon.add_monoid">AddMon.add_monoid</a><br>
-<a href="#AddMon.bundled_hom">AddMon.bundled_hom</a><br>
-<a href="#AddMon.category_theory.concrete_category">AddMon.category_theory.concrete_category</a><br>
-<a href="#AddMon.has_coe_to_sort">AddMon.has_coe_to_sort</a><br>
-<a href="#AddMon.of">AddMon.of</a><br>
-<a href="#CommMon">CommMon</a><br>
-<a href="#CommMon.category_theory.concrete_category">CommMon.category_theory.concrete_category</a><br>
-<a href="#CommMon.comm_monoid">CommMon.comm_monoid</a><br>
-<a href="#CommMon.has_coe_to_sort">CommMon.has_coe_to_sort</a><br>
-<a href="#CommMon.has_forget_to_Mon">CommMon.has_forget_to_Mon</a><br>
-<a href="#CommMon.of">CommMon.of</a><br>
-<a href="#Mon">Mon</a><br>
-<a href="#Mon.bundled_hom">Mon.bundled_hom</a><br>
-<a href="#Mon.category_theory.concrete_category">Mon.category_theory.concrete_category</a><br>
-<a href="#Mon.has_coe_to_sort">Mon.has_coe_to_sort</a><br>
-<a href="#Mon.monoid">Mon.monoid</a><br>
-<a href="#Mon.of">Mon.of</a><br>
-<a href="#add_equiv.to_AddCommMon_iso">add_equiv.to_AddCommMon_iso</a><br>
-<a href="#add_equiv.to_AddCommMon_iso_hom">add_equiv.to_AddCommMon_iso_hom</a><br>
-<a href="#add_equiv.to_AddCommMon_iso_inv">add_equiv.to_AddCommMon_iso_inv</a><br>
-<a href="#add_equiv.to_AddMon_iso">add_equiv.to_AddMon_iso</a><br>
-<a href="#add_equiv.to_AddMon_iso_hom">add_equiv.to_AddMon_iso_hom</a><br>
-<a href="#add_equiv.to_AddMon_iso_inv">add_equiv.to_AddMon_iso_inv</a><br>
-<a href="#add_equiv_iso_AddCommMon_iso">add_equiv_iso_AddCommMon_iso</a><br>
-<a href="#add_equiv_iso_AddMon_iso">add_equiv_iso_AddMon_iso</a><br>
-<a href="#category_theory.iso.AddCommMon_iso_to_add_equiv">category_theory.iso.AddCommMon_iso_to_add_equiv</a><br>
-<a href="#category_theory.iso.AddMond_iso_to_add_equiv">category_theory.iso.AddMond_iso_to_add_equiv</a><br>
-<a href="#category_theory.iso.CommMon_iso_to_mul_equiv">category_theory.iso.CommMon_iso_to_mul_equiv</a><br>
-<a href="#category_theory.iso.Mon_iso_to_mul_equiv">category_theory.iso.Mon_iso_to_mul_equiv</a><br>
-<a href="#mul_equiv.to_CommMon_iso">mul_equiv.to_CommMon_iso</a><br>
-<a href="#mul_equiv.to_CommMon_iso_hom">mul_equiv.to_CommMon_iso_hom</a><br>
-<a href="#mul_equiv.to_CommMon_iso_inv">mul_equiv.to_CommMon_iso_inv</a><br>
-<a href="#mul_equiv.to_Mon_iso">mul_equiv.to_Mon_iso</a><br>
-<a href="#mul_equiv.to_Mon_iso_hom">mul_equiv.to_Mon_iso_hom</a><br>
-<a href="#mul_equiv.to_Mon_iso_inv">mul_equiv.to_Mon_iso_inv</a><br>
-<a href="#mul_equiv_iso_CommMon_iso">mul_equiv_iso_CommMon_iso</a><br>
-<a href="#mul_equiv_iso_Mon_iso">mul_equiv_iso_Mon_iso</a><br>
 </div></div>
 
         </div>

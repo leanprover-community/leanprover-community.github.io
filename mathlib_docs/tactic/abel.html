@@ -7,7 +7,264 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">tactic.abel</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean">(view source on GitHub)</a></div><a href="#tactic.abel.add_g">tactic.abel.add_g</a><br>
+<a href="#tactic.abel.cache">tactic.abel.cache</a><br>
+<a href="#tactic.abel.cache.app">tactic.abel.cache.app</a><br>
+<a href="#tactic.abel.cache.iapp">tactic.abel.cache.iapp</a><br>
+<a href="#tactic.abel.cache.int_to_expr">tactic.abel.cache.int_to_expr</a><br>
+<a href="#tactic.abel.cache.mk_app">tactic.abel.cache.mk_app</a><br>
+<a href="#tactic.abel.cache.mk_term">tactic.abel.cache.mk_term</a><br>
+<a href="#tactic.abel.const_add_term">tactic.abel.const_add_term</a><br>
+<a href="#tactic.abel.const_add_termg">tactic.abel.const_add_termg</a><br>
+<a href="#tactic.abel.eval">tactic.abel.eval</a><br>
+<a href="#tactic.abel.eval'">tactic.abel.eval'</a><br>
+<a href="#tactic.abel.eval_add">tactic.abel.eval_add</a><br>
+<a href="#tactic.abel.eval_atom">tactic.abel.eval_atom</a><br>
+<a href="#tactic.abel.eval_neg">tactic.abel.eval_neg</a><br>
+<a href="#tactic.abel.eval_smul">tactic.abel.eval_smul</a><br>
+<a href="#tactic.abel.has_coe">tactic.abel.has_coe</a><br>
+<a href="#tactic.abel.has_to_tactic_format">tactic.abel.has_to_tactic_format</a><br>
+<a href="#tactic.abel.mk_cache">tactic.abel.mk_cache</a><br>
+<a href="#tactic.abel.normal_expr">tactic.abel.normal_expr</a><br>
+<a href="#tactic.abel.normal_expr.e">tactic.abel.normal_expr.e</a><br>
+<a href="#tactic.abel.normal_expr.pp">tactic.abel.normal_expr.pp</a><br>
+<a href="#tactic.abel.normal_expr.refl_conv">tactic.abel.normal_expr.refl_conv</a><br>
+<a href="#tactic.abel.normal_expr.term'">tactic.abel.normal_expr.term'</a><br>
+<a href="#tactic.abel.normal_expr.to_list">tactic.abel.normal_expr.to_list</a><br>
+<a href="#tactic.abel.normal_expr.to_string">tactic.abel.normal_expr.to_string</a><br>
+<a href="#tactic.abel.normal_expr.zero'">tactic.abel.normal_expr.zero'</a><br>
+<a href="#tactic.abel.normalize">tactic.abel.normalize</a><br>
+<a href="#tactic.abel.normalize_mode">tactic.abel.normalize_mode</a><br>
+<a href="#tactic.abel.normalize_mode.has_reflect">tactic.abel.normalize_mode.has_reflect</a><br>
+<a href="#tactic.abel.smul">tactic.abel.smul</a><br>
+<a href="#tactic.abel.smulg">tactic.abel.smulg</a><br>
+<a href="#tactic.abel.subst_into_smul">tactic.abel.subst_into_smul</a><br>
+<a href="#tactic.abel.subst_into_smulg">tactic.abel.subst_into_smulg</a><br>
+<a href="#tactic.abel.term">tactic.abel.term</a><br>
+<a href="#tactic.abel.term_add_const">tactic.abel.term_add_const</a><br>
+<a href="#tactic.abel.term_add_constg">tactic.abel.term_add_constg</a><br>
+<a href="#tactic.abel.term_add_term">tactic.abel.term_add_term</a><br>
+<a href="#tactic.abel.term_add_termg">tactic.abel.term_add_termg</a><br>
+<a href="#tactic.abel.term_atom">tactic.abel.term_atom</a><br>
+<a href="#tactic.abel.term_atomg">tactic.abel.term_atomg</a><br>
+<a href="#tactic.abel.term_neg">tactic.abel.term_neg</a><br>
+<a href="#tactic.abel.term_smul">tactic.abel.term_smul</a><br>
+<a href="#tactic.abel.term_smulg">tactic.abel.term_smulg</a><br>
+<a href="#tactic.abel.termg">tactic.abel.termg</a><br>
+<a href="#tactic.abel.unfold_gsmul">tactic.abel.unfold_gsmul</a><br>
+<a href="#tactic.abel.unfold_smul">tactic.abel.unfold_smul</a><br>
+<a href="#tactic.abel.unfold_smulg">tactic.abel.unfold_smulg</a><br>
+<a href="#tactic.abel.unfold_sub">tactic.abel.unfold_sub</a><br>
+<a href="#tactic.abel.zero_smul">tactic.abel.zero_smul</a><br>
+<a href="#tactic.abel.zero_smulg">tactic.abel.zero_smulg</a><br>
+<a href="#tactic.abel.zero_term">tactic.abel.zero_term</a><br>
+<a href="#tactic.abel.zero_termg">tactic.abel.zero_termg</a><br>
+<a href="#tactic.interactive.abel">tactic.interactive.abel</a><br>
+<a href="#tactic.interactive.abel.mode">tactic.interactive.abel.mode</a><br>
+<a href="#tactic.interactive.abel1">tactic.interactive.abel1</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="decl structure" id="tactic.abel.cache">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L13">tactic.abel.cache</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="tactic.abel.cache.α">α : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></li>
+<li class="structure_field" id="tactic.abel.cache.univ">univ : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/level.html#level">level</a></li>
+<li class="structure_field" id="tactic.abel.cache.α0">α0 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></li>
+<li class="structure_field" id="tactic.abel.cache.is_group">is_group : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></li>
+<li class="structure_field" id="tactic.abel.cache.inst">inst : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></li>
+</ul>  <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.mk_cache">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L20">tactic.abel.mk_cache</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.cache.app">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L33">tactic.abel.cache.app</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.cache.mk_app">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L36">tactic.abel.cache.mk_app</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.add_g">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L39">tactic.abel.add_g</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.cache.iapp">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L43">tactic.abel.cache.iapp</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.term">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L46">tactic.abel.term</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a> → α → α → α</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.termg">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L47">tactic.abel.termg</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a> → α → α → α</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.cache.mk_term">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L49">tactic.abel.cache.mk_term</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.cache.int_to_expr">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L51">tactic.abel.cache.int_to_expr</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl inductive" id="tactic.abel.normal_expr">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">inductive</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L54">tactic.abel.normal_expr</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+  <ul class="constructors">
+<li class="constructor" id="tactic.abel.normal_expr.zero">zero : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a></li>
+<li class="constructor" id="tactic.abel.normal_expr.nterm">nterm : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a></li>
+</ul> <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.normal_expr.e">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L58">tactic.abel.normal_expr.e</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.has_coe"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L62">tactic.abel.has_coe</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.normal_expr.term'">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L64">tactic.abel.normal_expr.term'</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.normal_expr.zero'">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L67">tactic.abel.normal_expr.zero'</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.normal_expr.to_list">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L69">tactic.abel.normal_expr.to_list</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.normal_expr.to_string">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L75">tactic.abel.normal_expr.to_string</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.normal_expr.pp">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L79">tactic.abel.normal_expr.pp</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/format.html#format">format</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.has_to_tactic_format"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L84">tactic.abel.has_to_tactic_format</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#has_to_tactic_format">has_to_tactic_format</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.normal_expr.refl_conv">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L86">tactic.abel.normal_expr.refl_conv</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.abel.const_add_term">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L89">tactic.abel.const_add_term</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> α]</span></span> <span class="decl_args">(k : α)</span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">(x a a' : α)</span> <span class="decl_args">:</span>     <div class="decl_type">k <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> a' →
+k <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.term">tactic.abel.term</a> n x a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.term">tactic.abel.term</a> n x a'</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.abel.const_add_termg">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L92">tactic.abel.const_add_termg</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></span> <span class="decl_args">(k : α)</span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>)</span> <span class="decl_args">(x a a' : α)</span> <span class="decl_args">:</span>     <div class="decl_type">k <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> a' →
+k <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.termg">tactic.abel.termg</a> n x a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.termg">tactic.abel.termg</a> n x a'</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.abel.term_add_const">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L95">tactic.abel.term_add_const</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> α]</span></span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">(x a k a' : α)</span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> k <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> a' →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.term">tactic.abel.term</a> n x a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> k <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.term">tactic.abel.term</a> n x a'</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.abel.term_add_constg">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L98">tactic.abel.term_add_constg</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>)</span> <span class="decl_args">(x a k a' : α)</span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> k <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> a' →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.termg">tactic.abel.termg</a> n x a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> k <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.termg">tactic.abel.termg</a> n x a'</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.abel.term_add_term">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L101">tactic.abel.term_add_term</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> α]</span></span> <span class="decl_args">(n₁ : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">(x a₁ : α)</span> <span class="decl_args">(n₂ : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">(a₂ : α)</span> <span class="decl_args">(n' : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">(a' : α)</span> <span class="decl_args">:</span>     <div class="decl_type">n₁ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> n₂ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> n' →
+a₁ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> a₂ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> a' →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.term">tactic.abel.term</a> n₁ x a₁ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.term">tactic.abel.term</a> n₂ x a₂ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.term">tactic.abel.term</a> n' x a'</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.abel.term_add_termg">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L106">tactic.abel.term_add_termg</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></span> <span class="decl_args">(n₁ : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>)</span> <span class="decl_args">(x a₁ : α)</span> <span class="decl_args">(n₂ : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>)</span> <span class="decl_args">(a₂ : α)</span> <span class="decl_args">(n' : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>)</span> <span class="decl_args">(a' : α)</span> <span class="decl_args">:</span>     <div class="decl_type">n₁ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> n₂ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> n' →
+a₁ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> a₂ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> a' →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.termg">tactic.abel.termg</a> n₁ x a₁ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.termg">tactic.abel.termg</a> n₂ x a₂ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.termg">tactic.abel.termg</a> n' x a'</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.abel.zero_term">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L111">tactic.abel.zero_term</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> α]</span></span> <span class="decl_args">(x a : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.term">tactic.abel.term</a> 0 x a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> a</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.abel.zero_termg">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L114">tactic.abel.zero_termg</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></span> <span class="decl_args">(x a : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.termg">tactic.abel.termg</a> 0 x a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> a</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.eval_add">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L117">tactic.abel.eval_add</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.abel.term_neg">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L141">tactic.abel.term_neg</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>)</span> <span class="decl_args">(x a : α)</span> <span class="decl_args">(n' : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>)</span> <span class="decl_args">(a' : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_neg.neg" title="has_neg.neg">-</a>n <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> n' →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_neg.neg" title="has_neg.neg">-</a>a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> a' →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_neg.neg" title="has_neg.neg">-</a><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.termg">tactic.abel.termg</a> n x a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.termg">tactic.abel.termg</a> n' x a'</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.eval_neg">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L146">tactic.abel.eval_neg</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.smul">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L156">tactic.abel.smul</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a> → α → α</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.smulg">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L157">tactic.abel.smulg</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a> → α → α</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.abel.zero_smul">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L159">tactic.abel.zero_smul</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> α]</span></span> <span class="decl_args">(c : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smul">tactic.abel.smul</a> c 0 <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> 0</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.abel.zero_smulg">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L162">tactic.abel.zero_smulg</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></span> <span class="decl_args">(c : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smulg">tactic.abel.smulg</a> c 0 <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> 0</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.abel.term_smul">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L165">tactic.abel.term_smul</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> α]</span></span> <span class="decl_args">(c n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">(x a : α)</span> <span class="decl_args">(n' : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">(a' : α)</span> <span class="decl_args">:</span>     <div class="decl_type">c <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mul.mul" title="has_mul.mul">*</a> n <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> n' →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smul">tactic.abel.smul</a> c a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> a' →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smul">tactic.abel.smul</a> c (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.term">tactic.abel.term</a> n x a) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.term">tactic.abel.term</a> n' x a'</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.abel.term_smulg">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L170">tactic.abel.term_smulg</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></span> <span class="decl_args">(c n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>)</span> <span class="decl_args">(x a : α)</span> <span class="decl_args">(n' : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>)</span> <span class="decl_args">(a' : α)</span> <span class="decl_args">:</span>     <div class="decl_type">c <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mul.mul" title="has_mul.mul">*</a> n <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> n' →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smulg">tactic.abel.smulg</a> c a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> a' →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smulg">tactic.abel.smulg</a> c (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.termg">tactic.abel.termg</a> n x a) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.termg">tactic.abel.termg</a> n' x a'</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.eval_smul">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L175">tactic.abel.eval_smul</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.abel.term_atom">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L184">tactic.abel.term_atom</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> α]</span></span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>     <div class="decl_type">x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.term">tactic.abel.term</a> 1 x 0</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.abel.term_atomg">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L187">tactic.abel.term_atomg</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>     <div class="decl_type">x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.termg">tactic.abel.termg</a> 1 x 0</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.eval_atom">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L190">tactic.abel.eval_atom</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.abel.unfold_sub">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L194">tactic.abel.unfold_sub</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_group">add_group</a> α]</span></span> <span class="decl_args">(a b c : α)</span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_neg.neg" title="has_neg.neg">-</a>b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> c → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_sub.sub" title="has_sub.sub">-</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> c</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.abel.unfold_smul">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L197">tactic.abel.unfold_smul</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> α]</span></span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">(x y : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smul">tactic.abel.smul</a> n x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> y →
+<a href="https://leanprover-community.github.io/mathlib_docs/algebra/group_power.html#add_monoid.smul">add_monoid.smul</a> n x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> y</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.abel.unfold_smulg">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L200">tactic.abel.unfold_smulg</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">(x y : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smulg">tactic.abel.smulg</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int.of_nat">int.of_nat</a> n) x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> y →
+<a href="https://leanprover-community.github.io/mathlib_docs/algebra/group_power.html#add_monoid.smul">add_monoid.smul</a> n x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> y</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.abel.unfold_gsmul">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L203">tactic.abel.unfold_gsmul</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>)</span> <span class="decl_args">(x y : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smulg">tactic.abel.smulg</a> n x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> y → <a href="https://leanprover-community.github.io/mathlib_docs/algebra/group_power.html#gsmul">gsmul</a> n x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> y</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.abel.subst_into_smul">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L206">tactic.abel.subst_into_smul</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> α]</span></span> <span class="decl_args">(l : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">(r : α)</span> <span class="decl_args">(tl : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</span> <span class="decl_args">(tr t : α)</span> <span class="decl_args">:</span>     <div class="decl_type">l <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> tl →
+r <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> tr →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smul">tactic.abel.smul</a> tl tr <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> t →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smul">tactic.abel.smul</a> l r <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> t</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="tactic.abel.subst_into_smulg">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L211">tactic.abel.subst_into_smulg</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></span> <span class="decl_args">(l : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>)</span> <span class="decl_args">(r : α)</span> <span class="decl_args">(tl : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>)</span> <span class="decl_args">(tr t : α)</span> <span class="decl_args">:</span>     <div class="decl_type">l <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> tl →
+r <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> tr →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smulg">tactic.abel.smulg</a> tl tr <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> t →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smulg">tactic.abel.smulg</a> l r <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> t</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.eval">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L216">tactic.abel.eval</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.eval'">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L256">tactic.abel.eval'</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.normalize_mode.has_reflect"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L260">tactic.abel.normalize_mode.has_reflect</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/has_reflect.html#has_reflect">has_reflect</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normalize_mode">tactic.abel.normalize_mode</a></div></div>
+   <p></p>
+ </ul></div><div class="decl inductive" id="tactic.abel.normalize_mode">     <div class="decl_header impl_collapsed">        <span class="decl_kind">inductive</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L260">tactic.abel.normalize_mode</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+  <ul class="constructors">
+<li class="constructor" id="tactic.abel.normalize_mode.raw">raw : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normalize_mode">tactic.abel.normalize_mode</a></li>
+<li class="constructor" id="tactic.abel.normalize_mode.term">term : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normalize_mode">tactic.abel.normalize_mode</a></li>
+</ul> <p></p>
+ </ul></div><div class="decl def" id="tactic.abel.normalize">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L262">tactic.abel.normalize</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normalize_mode">tactic.abel.normalize_mode</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normalize_mode.term">tactic.abel.normalize_mode.term</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.interactive.abel1">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L295">tactic.interactive.abel1</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Tactic for solving equations in the language of
+ <em>additive</em>, commutative monoids and groups.
+ This version of <code>abel</code> fails if the target is not an equality
+ that is provable by the axioms of commutative monoids/groups.</p>
+ </ul></div><div class="decl def" id="tactic.interactive.abel.mode">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L304">tactic.interactive.abel.mode</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normalize_mode">tactic.abel.normalize_mode</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.interactive.abel">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/abel.lean#L319">tactic.interactive.abel</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.interactive.abel.mode">tactic.interactive.abel.mode</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.types.location">interactive.types.location</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Tactic for solving equations in the language of
+ <em>additive</em>, commutative monoids and groups.
+ Attempts to prove the goal outright if there is no <code>at</code>
+ specifier and the target is an equality, but if this
+ fails it falls back to rewriting all monoid expressions
+ into a normal form.</p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +1064,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1292,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,479 +1415,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="structure"><a id="tactic.abel.cache"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L13">tactic.abel.cache</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p></p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">tactic.abel.cache.α : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></li>
-<li><div class="structure_field">tactic.abel.cache.univ : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/level.html#level">level</a></div></li>
-<li><div class="structure_field">tactic.abel.cache.α0 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></li>
-<li><div class="structure_field">tactic.abel.cache.is_group : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></div></li>
-<li><div class="structure_field">tactic.abel.cache.inst : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="tactic.abel.mk_cache"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L20">tactic.abel.mk_cache</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.abel.cache.app"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L33">tactic.abel.cache.app</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.abel.cache.mk_app"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L36">tactic.abel.cache.mk_app</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.abel.add_g"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L39">tactic.abel.add_g</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.abel.cache.iapp"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L43">tactic.abel.cache.iapp</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.abel.term"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L46">tactic.abel.term</a></span>  <span class="decl_args">:</span>       <div class="decl_type">ℕ → α → α → α</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="tactic.abel.termg"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L47">tactic.abel.termg</a></span>  <span class="decl_args">:</span>       <div class="decl_type">ℤ → α → α → α</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="tactic.abel.cache.mk_term"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L49">tactic.abel.cache.mk_term</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.abel.cache.int_to_expr"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L51">tactic.abel.cache.int_to_expr</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> → ℤ → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="inductive"><a id="tactic.abel.normal_expr"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L54">tactic.abel.normal_expr</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p></p>
-       <ul>
-
-
-
-<li class="structure_fields">
-Constructors:
-<ul><li><div class="structure_field">tactic.abel.normal_expr.zero : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a></div></li>
-<li><div class="structure_field">tactic.abel.normal_expr.nterm : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> × ℤ → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a></div></li>
-</ul></li>
-</ul></div><div class="def"><a id="tactic.abel.normal_expr.e"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L58">tactic.abel.normal_expr.e</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.abel.has_coe"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L62">tactic.abel.has_coe</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe">has_coe</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="tactic.abel.normal_expr.term'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L64">tactic.abel.normal_expr.term'</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> × ℤ → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.abel.normal_expr.zero'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L67">tactic.abel.normal_expr.zero'</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.abel.normal_expr.to_list"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L69">tactic.abel.normal_expr.to_list</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (ℤ × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.abel.normal_expr.to_string"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L75">tactic.abel.normal_expr.to_string</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.abel.normal_expr.pp"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L79">tactic.abel.normal_expr.pp</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/format.html#format">format</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.abel.has_to_tactic_format"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L84">tactic.abel.has_to_tactic_format</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#has_to_tactic_format">has_to_tactic_format</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="tactic.abel.normal_expr.refl_conv"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L86">tactic.abel.normal_expr.refl_conv</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="thm"><a id="tactic.abel.const_add_term"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L89">tactic.abel.const_add_term</a></span> <span class="decl_args">(k : α)</span> <span class="decl_args">(n : ℕ)</span> <span class="decl_args">(x a a' : α)</span> <span class="decl_args">:</span>       <div class="decl_type">k + a = a' → k + <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.term">tactic.abel.term</a> n x a = <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.term">tactic.abel.term</a> n x a'</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.abel.const_add_termg"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L92">tactic.abel.const_add_termg</a></span> <span class="decl_args">(k : α)</span> <span class="decl_args">(n : ℤ)</span> <span class="decl_args">(x a a' : α)</span> <span class="decl_args">:</span>       <div class="decl_type">k + a = a' → k + <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.termg">tactic.abel.termg</a> n x a = <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.termg">tactic.abel.termg</a> n x a'</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.abel.term_add_const"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L95">tactic.abel.term_add_const</a></span> <span class="decl_args">(n : ℕ)</span> <span class="decl_args">(x a k a' : α)</span> <span class="decl_args">:</span>       <div class="decl_type">a + k = a' → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.term">tactic.abel.term</a> n x a + k = <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.term">tactic.abel.term</a> n x a'</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.abel.term_add_constg"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L98">tactic.abel.term_add_constg</a></span> <span class="decl_args">(n : ℤ)</span> <span class="decl_args">(x a k a' : α)</span> <span class="decl_args">:</span>       <div class="decl_type">a + k = a' → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.termg">tactic.abel.termg</a> n x a + k = <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.termg">tactic.abel.termg</a> n x a'</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.abel.term_add_term"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L101">tactic.abel.term_add_term</a></span> <span class="decl_args">(n₁ : ℕ)</span> <span class="decl_args">(x a₁ : α)</span> <span class="decl_args">(n₂ : ℕ)</span> <span class="decl_args">(a₂ : α)</span> <span class="decl_args">(n' : ℕ)</span> <span class="decl_args">(a' : α)</span> <span class="decl_args">:</span>       <div class="decl_type">n₁ + n₂ = n' →
-a₁ + a₂ = a' → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.term">tactic.abel.term</a> n₁ x a₁ + <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.term">tactic.abel.term</a> n₂ x a₂ = <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.term">tactic.abel.term</a> n' x a'</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.abel.term_add_termg"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L106">tactic.abel.term_add_termg</a></span> <span class="decl_args">(n₁ : ℤ)</span> <span class="decl_args">(x a₁ : α)</span> <span class="decl_args">(n₂ : ℤ)</span> <span class="decl_args">(a₂ : α)</span> <span class="decl_args">(n' : ℤ)</span> <span class="decl_args">(a' : α)</span> <span class="decl_args">:</span>       <div class="decl_type">n₁ + n₂ = n' →
-a₁ + a₂ = a' → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.termg">tactic.abel.termg</a> n₁ x a₁ + <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.termg">tactic.abel.termg</a> n₂ x a₂ = <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.termg">tactic.abel.termg</a> n' x a'</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.abel.zero_term"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L111">tactic.abel.zero_term</a></span> <span class="decl_args">(x a : α)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.term">tactic.abel.term</a> 0 x a = a</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.abel.zero_termg"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L114">tactic.abel.zero_termg</a></span> <span class="decl_args">(x a : α)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.termg">tactic.abel.termg</a> 0 x a = a</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="tactic.abel.eval_add"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L117">tactic.abel.eval_add</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="thm"><a id="tactic.abel.term_neg"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L141">tactic.abel.term_neg</a></span> <span class="decl_args">(n : ℤ)</span> <span class="decl_args">(x a : α)</span> <span class="decl_args">(n' : ℤ)</span> <span class="decl_args">(a' : α)</span> <span class="decl_args">:</span>       <div class="decl_type">-n = n' → -a = a' → -tactic.abel.termg n x a = <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.termg">tactic.abel.termg</a> n' x a'</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="tactic.abel.eval_neg"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L146">tactic.abel.eval_neg</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.abel.smul"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L156">tactic.abel.smul</a></span>  <span class="decl_args">:</span>       <div class="decl_type">ℕ → α → α</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="tactic.abel.smulg"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L157">tactic.abel.smulg</a></span>  <span class="decl_args">:</span>       <div class="decl_type">ℤ → α → α</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.abel.zero_smul"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L159">tactic.abel.zero_smul</a></span> <span class="decl_args">(c : ℕ)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smul">tactic.abel.smul</a> c 0 = 0</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.abel.zero_smulg"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L162">tactic.abel.zero_smulg</a></span> <span class="decl_args">(c : ℤ)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smulg">tactic.abel.smulg</a> c 0 = 0</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.abel.term_smul"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L165">tactic.abel.term_smul</a></span> <span class="decl_args">(c n : ℕ)</span> <span class="decl_args">(x a : α)</span> <span class="decl_args">(n' : ℕ)</span> <span class="decl_args">(a' : α)</span> <span class="decl_args">:</span>       <div class="decl_type">c * n = n' → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smul">tactic.abel.smul</a> c a = a' → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smul">tactic.abel.smul</a> c (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.term">tactic.abel.term</a> n x a) = <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.term">tactic.abel.term</a> n' x a'</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.abel.term_smulg"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L170">tactic.abel.term_smulg</a></span> <span class="decl_args">(c n : ℤ)</span> <span class="decl_args">(x a : α)</span> <span class="decl_args">(n' : ℤ)</span> <span class="decl_args">(a' : α)</span> <span class="decl_args">:</span>       <div class="decl_type">c * n = n' → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smulg">tactic.abel.smulg</a> c a = a' → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smulg">tactic.abel.smulg</a> c (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.termg">tactic.abel.termg</a> n x a) = <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.termg">tactic.abel.termg</a> n' x a'</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="tactic.abel.eval_smul"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L175">tactic.abel.eval_smul</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> × ℤ → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="thm"><a id="tactic.abel.term_atom"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L184">tactic.abel.term_atom</a></span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>       <div class="decl_type">x = <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.term">tactic.abel.term</a> 1 x 0</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.abel.term_atomg"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L187">tactic.abel.term_atomg</a></span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>       <div class="decl_type">x = <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.termg">tactic.abel.termg</a> 1 x 0</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="tactic.abel.eval_atom"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L190">tactic.abel.eval_atom</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="thm"><a id="tactic.abel.unfold_sub"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L194">tactic.abel.unfold_sub</a></span> <span class="decl_args">(a b c : α)</span> <span class="decl_args">:</span>       <div class="decl_type">a + -b = c → a - b = c</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_group">add_group</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.abel.unfold_smul"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L197">tactic.abel.unfold_smul</a></span> <span class="decl_args">(n : ℕ)</span> <span class="decl_args">(x y : α)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smul">tactic.abel.smul</a> n x = y → <a href="https://leanprover-community.github.io/mathlib_docs/algebra/group_power.html#add_monoid.smul">add_monoid.smul</a> n x = y</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.abel.unfold_smulg"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L200">tactic.abel.unfold_smulg</a></span> <span class="decl_args">(n : ℕ)</span> <span class="decl_args">(x y : α)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smulg">tactic.abel.smulg</a> (int.of_nat n) x = y → <a href="https://leanprover-community.github.io/mathlib_docs/algebra/group_power.html#add_monoid.smul">add_monoid.smul</a> n x = y</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.abel.unfold_gsmul"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L203">tactic.abel.unfold_gsmul</a></span> <span class="decl_args">(n : ℤ)</span> <span class="decl_args">(x y : α)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smulg">tactic.abel.smulg</a> n x = y → <a href="https://leanprover-community.github.io/mathlib_docs/algebra/group_power.html#gsmul">gsmul</a> n x = y</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.abel.subst_into_smul"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L206">tactic.abel.subst_into_smul</a></span> <span class="decl_args">(l : ℕ)</span> <span class="decl_args">(r : α)</span> <span class="decl_args">(tl : ℕ)</span> <span class="decl_args">(tr t : α)</span> <span class="decl_args">:</span>       <div class="decl_type">l = tl → r = tr → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smul">tactic.abel.smul</a> tl tr = t → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smul">tactic.abel.smul</a> l r = t</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_monoid">add_comm_monoid</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="tactic.abel.subst_into_smulg"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L211">tactic.abel.subst_into_smulg</a></span> <span class="decl_args">(l : ℤ)</span> <span class="decl_args">(r : α)</span> <span class="decl_args">(tl : ℤ)</span> <span class="decl_args">(tr t : α)</span> <span class="decl_args">:</span>       <div class="decl_type">l = tl → r = tr → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smulg">tactic.abel.smulg</a> tl tr = t → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.smulg">tactic.abel.smulg</a> l r = t</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="tactic.abel.eval"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L216">tactic.abel.eval</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normal_expr">tactic.abel.normal_expr</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.abel.eval'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L256">tactic.abel.eval'</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.cache">tactic.abel.cache</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.abel.normalize_mode.has_reflect"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L260">tactic.abel.normalize_mode.has_reflect</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/has_reflect.html#has_reflect">has_reflect</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normalize_mode">tactic.abel.normalize_mode</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="inductive"><a id="tactic.abel.normalize_mode"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L260">tactic.abel.normalize_mode</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p></p>
-       <ul>
-
-
-
-<li class="structure_fields">
-Constructors:
-<ul><li><div class="structure_field">tactic.abel.normalize_mode.raw : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normalize_mode">tactic.abel.normalize_mode</a></div></li>
-<li><div class="structure_field">tactic.abel.normalize_mode.term : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normalize_mode">tactic.abel.normalize_mode</a></div></li>
-</ul></li>
-</ul></div><div class="def"><a id="tactic.abel.normalize"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L262">tactic.abel.normalize</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normalize_mode">tactic.abel.normalize_mode</a> tactic.abel.normalize_mode.term → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.interactive.abel1"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L295">tactic.interactive.abel1</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Tactic for solving equations in the language of
- <em>additive</em>, commutative monoids and groups.
- This version of <code>abel</code> fails if the target is not an equality
- that is provable by the axioms of commutative monoids/groups.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.interactive.abel.mode"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L304">tactic.interactive.abel.mode</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.abel.normalize_mode">tactic.abel.normalize_mode</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.interactive.abel"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean#L319">tactic.interactive.abel</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/abel.html#tactic.interactive.abel.mode">tactic.interactive.abel.mode</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.types.location">interactive.types.location</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Tactic for solving equations in the language of
- <em>additive</em>, commutative monoids and groups.
- Attempts to prove the goal outright if there is no <code>at</code>
- specifier and the target is an equality, but if this
- fails it falls back to rewriting all monoid expressions
- into a normal form.</p>
-       <ul>
-
-
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">tactic.abel</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/abel.lean">(view source on GitHub)</a></div><a href="#tactic.abel.add_g">tactic.abel.add_g</a><br>
-<a href="#tactic.abel.cache">tactic.abel.cache</a><br>
-<a href="#tactic.abel.cache.app">tactic.abel.cache.app</a><br>
-<a href="#tactic.abel.cache.iapp">tactic.abel.cache.iapp</a><br>
-<a href="#tactic.abel.cache.int_to_expr">tactic.abel.cache.int_to_expr</a><br>
-<a href="#tactic.abel.cache.mk_app">tactic.abel.cache.mk_app</a><br>
-<a href="#tactic.abel.cache.mk_term">tactic.abel.cache.mk_term</a><br>
-<a href="#tactic.abel.const_add_term">tactic.abel.const_add_term</a><br>
-<a href="#tactic.abel.const_add_termg">tactic.abel.const_add_termg</a><br>
-<a href="#tactic.abel.eval">tactic.abel.eval</a><br>
-<a href="#tactic.abel.eval'">tactic.abel.eval'</a><br>
-<a href="#tactic.abel.eval_add">tactic.abel.eval_add</a><br>
-<a href="#tactic.abel.eval_atom">tactic.abel.eval_atom</a><br>
-<a href="#tactic.abel.eval_neg">tactic.abel.eval_neg</a><br>
-<a href="#tactic.abel.eval_smul">tactic.abel.eval_smul</a><br>
-<a href="#tactic.abel.has_coe">tactic.abel.has_coe</a><br>
-<a href="#tactic.abel.has_to_tactic_format">tactic.abel.has_to_tactic_format</a><br>
-<a href="#tactic.abel.mk_cache">tactic.abel.mk_cache</a><br>
-<a href="#tactic.abel.normal_expr">tactic.abel.normal_expr</a><br>
-<a href="#tactic.abel.normal_expr.e">tactic.abel.normal_expr.e</a><br>
-<a href="#tactic.abel.normal_expr.pp">tactic.abel.normal_expr.pp</a><br>
-<a href="#tactic.abel.normal_expr.refl_conv">tactic.abel.normal_expr.refl_conv</a><br>
-<a href="#tactic.abel.normal_expr.term'">tactic.abel.normal_expr.term'</a><br>
-<a href="#tactic.abel.normal_expr.to_list">tactic.abel.normal_expr.to_list</a><br>
-<a href="#tactic.abel.normal_expr.to_string">tactic.abel.normal_expr.to_string</a><br>
-<a href="#tactic.abel.normal_expr.zero'">tactic.abel.normal_expr.zero'</a><br>
-<a href="#tactic.abel.normalize">tactic.abel.normalize</a><br>
-<a href="#tactic.abel.normalize_mode">tactic.abel.normalize_mode</a><br>
-<a href="#tactic.abel.normalize_mode.has_reflect">tactic.abel.normalize_mode.has_reflect</a><br>
-<a href="#tactic.abel.smul">tactic.abel.smul</a><br>
-<a href="#tactic.abel.smulg">tactic.abel.smulg</a><br>
-<a href="#tactic.abel.subst_into_smul">tactic.abel.subst_into_smul</a><br>
-<a href="#tactic.abel.subst_into_smulg">tactic.abel.subst_into_smulg</a><br>
-<a href="#tactic.abel.term">tactic.abel.term</a><br>
-<a href="#tactic.abel.term_add_const">tactic.abel.term_add_const</a><br>
-<a href="#tactic.abel.term_add_constg">tactic.abel.term_add_constg</a><br>
-<a href="#tactic.abel.term_add_term">tactic.abel.term_add_term</a><br>
-<a href="#tactic.abel.term_add_termg">tactic.abel.term_add_termg</a><br>
-<a href="#tactic.abel.term_atom">tactic.abel.term_atom</a><br>
-<a href="#tactic.abel.term_atomg">tactic.abel.term_atomg</a><br>
-<a href="#tactic.abel.term_neg">tactic.abel.term_neg</a><br>
-<a href="#tactic.abel.term_smul">tactic.abel.term_smul</a><br>
-<a href="#tactic.abel.term_smulg">tactic.abel.term_smulg</a><br>
-<a href="#tactic.abel.termg">tactic.abel.termg</a><br>
-<a href="#tactic.abel.unfold_gsmul">tactic.abel.unfold_gsmul</a><br>
-<a href="#tactic.abel.unfold_smul">tactic.abel.unfold_smul</a><br>
-<a href="#tactic.abel.unfold_smulg">tactic.abel.unfold_smulg</a><br>
-<a href="#tactic.abel.unfold_sub">tactic.abel.unfold_sub</a><br>
-<a href="#tactic.abel.zero_smul">tactic.abel.zero_smul</a><br>
-<a href="#tactic.abel.zero_smulg">tactic.abel.zero_smulg</a><br>
-<a href="#tactic.abel.zero_term">tactic.abel.zero_term</a><br>
-<a href="#tactic.abel.zero_termg">tactic.abel.zero_termg</a><br>
-<a href="#tactic.interactive.abel">tactic.interactive.abel</a><br>
-<a href="#tactic.interactive.abel.mode">tactic.interactive.abel.mode</a><br>
-<a href="#tactic.interactive.abel1">tactic.interactive.abel1</a><br>
 </div></div>
 
         </div>

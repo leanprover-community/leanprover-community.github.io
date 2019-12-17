@@ -7,7 +7,207 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">tactic.scc</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/scc.lean">(view source on GitHub)</a></div><a href="#tactic.closure">tactic.closure</a><br>
+<a href="#tactic.closure.assign_preorder">tactic.closure.assign_preorder</a><br>
+<a href="#tactic.closure.has_to_tactic_format">tactic.closure.has_to_tactic_format</a><br>
+<a href="#tactic.closure.is_eqv">tactic.closure.is_eqv</a><br>
+<a href="#tactic.closure.merge">tactic.closure.merge</a><br>
+<a href="#tactic.closure.merge_intl">tactic.closure.merge_intl</a><br>
+<a href="#tactic.closure.prove_eqv">tactic.closure.prove_eqv</a><br>
+<a href="#tactic.closure.prove_impl">tactic.closure.prove_impl</a><br>
+<a href="#tactic.closure.root">tactic.closure.root</a><br>
+<a href="#tactic.closure.to_tactic_format">tactic.closure.to_tactic_format</a><br>
+<a href="#tactic.closure.with_new_closure">tactic.closure.with_new_closure</a><br>
+<a href="#tactic.impl_graph">tactic.impl_graph</a><br>
+<a href="#tactic.impl_graph.add_edge">tactic.impl_graph.add_edge</a><br>
+<a href="#tactic.impl_graph.collapse">tactic.impl_graph.collapse</a><br>
+<a href="#tactic.impl_graph.collapse'">tactic.impl_graph.collapse'</a><br>
+<a href="#tactic.impl_graph.dfs_at">tactic.impl_graph.dfs_at</a><br>
+<a href="#tactic.impl_graph.merge_path">tactic.impl_graph.merge_path</a><br>
+<a href="#tactic.impl_graph.mk_scc">tactic.impl_graph.mk_scc</a><br>
+<a href="#tactic.interactive.scc">tactic.interactive.scc</a><br>
+<a href="#tactic.interactive.scc'">tactic.interactive.scc'</a><br>
+<a href="#tactic.prove_eqv_target">tactic.prove_eqv_target</a><br>
+<a href="#tactic.with_impl_graph">tactic.with_impl_graph</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="mod_doc">
+<h1>Strongly Connected Components</h1>
+
+<p>This file defines tactics to construct proofs of equivalences between a set of mutually equivalent
+propositions. The tactics use implications transitively to find sets of equivalent propositions.</p>
+
+<h2>Implementation notes</h2>
+
+<p>The tactics use a strongly connected components algorithm on a graph where propositions are
+vertices and edges are proofs that the source implies the target. The strongly connected components
+are therefore sets of propositions that are pairwise equivalent to each other.</p>
+
+<p>The resulting strongly connected components are encoded in a disjoint set data structure to
+facilitate the construction of equivalence proofs between two arbitrary members of an equivalence
+class.</p>
+
+<h2>Possible generalizations</h2>
+
+<p>Instead of reasoning about implications and equivalence, we could generalize the machinery to
+reason about arbitrary partial orders.</p>
+
+<h2>References</h2>
+
+<ul>
+<li>Tarjan, R. E. (1972), "Depth-first search and linear graph algorithms",
+SIAM Journal on Computing, 1 (2): 146–160, doi:10.1137/0201010</li>
+<li>Dijkstra, Edsger (1976), A Discipline of Programming, NJ: Prentice Hall, Ch. 25.</li>
+<li><a href="https://en.wikipedia.org/wiki/Disjoint-set_data_structure">https://en.wikipedia.org/wiki/Disjoint-set_data_structure</a></li>
+</ul>
+
+<h2>Tags</h2>
+
+<p>graphs, tactic, strongly connected components, disjoint sets</p>
+</div><div class="decl def" id="tactic.closure">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/scc.lean#L91">tactic.closure</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+   <p><code>closure</code> implements a disjoint set data structure using path compression
+optimization. For the sake of the scc algorithm, it also stores the preorder
+numbering of the equivalence graph of the local assumptions.</p>
+
+<p>The <code>expr_map</code> encodes a directed forest by storing for every non-root
+node, a reference to its parent and a proof of equivalence between
+that node's expression and its parent's expression. Given that data
+structure, checking that two nodes belong to the same tree is easy and
+fast by repeatedly following the parent references until a root is reached.
+If both nodes have the same root, they belong to the same tree, i.e. their
+expressions are equivalent. The proof of equivalence can be formed by
+composing the proofs along the edges of the paths to the root.</p>
+
+<p>More concretely, if we ignore preorder numbering, the set
+<code>{ {e₀,e₁,e₂,e₃}, {e₄,e₅} }</code> is represented as:</p>
+
+<pre><code>e₀ → ⊥      -- no parent, i.e. e₀ is a root
+e₁ → e₀, p₁ -- with p₁ : e₁ ↔ e₀
+e₂ → e₁, p₂ -- with p₂ : e₂ ↔ e₁
+e₃ → e₀, p₃ -- with p₃ : e₃ ↔ e₀
+e₄ → ⊥      -- no parent, i.e. e₄ is a root
+e₅ → e₄, p₅ -- with p₅ : e₅ ↔ e₄
+</code></pre>
+
+<p>We can check that <code>e₂</code> and <code>e₃</code> are equivalent by seeking the root of
+the tree of each. The parent of <code>e₂</code> is <code>e₁</code>, the parent of <code>e₁</code> is
+<code>e₀</code> and <code>e₀</code> does not have a parent, and thus, this is the root of its tree.
+The parent of <code>e₃</code> is <code>e₀</code> and it's also the root, the same as for <code>e₂</code> and
+they are therefore equivalent. We can build a proof of that equivalence by using
+transitivity on <code>p₂</code>, <code>p₁</code> and <code>p₃.symm</code> in that order.</p>
+
+<p>Similarly, we can discover that <code>e₂</code> and <code>e₅</code> aren't equivalent.</p>
+
+<p>A description of the path compression optimization can be found at:
+<a href="https://en.wikipedia.org/wiki/Disjoint-set_data_structure#Path_compression">https://en.wikipedia.org/wiki/Disjoint-set_data_structure#Path_compression</a></p>
+ </ul></div><div class="decl def" id="tactic.closure.with_new_closure">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/scc.lean#L97">tactic.closure.with_new_closure</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="decl_args">:</span>     <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> α) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> α</div></div>
+   <p><code>with_new_closure f</code> creates an empty <code>closure</code> <code>c</code>, executes <code>f</code> on <code>c</code>, and then deletes <code>c</code>,
+returning the output of <code>f</code>.</p>
+ </ul></div><div class="decl def" id="tactic.closure.to_tactic_format">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/scc.lean#L105">tactic.closure.to_tactic_format</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/format.html#format">format</a></div></div>
+   <p><code>to_tactic_format cl</code> pretty-prints the <code>closure</code> <code>cl</code> as a list. Assuming <code>cl</code> was built by
+<code>dfs_at</code>, each element corresponds to a node <code>pᵢ : expr</code> and is one of the folllowing:</p>
+
+<ul>
+<li>if <code>pᵢ</code> is a root: <code>"pᵢ ⇐ i"</code>, where <code>i</code> is the preorder number of <code>pᵢ</code>,</li>
+<li>otherwise: <code>"(pᵢ, pⱼ) : P"</code>, where <code>P</code> is <code>pᵢ ↔ pⱼ</code>.
+Useful for debugging.</li>
+</ul>
+ </ul></div><div class="decl def" id="tactic.closure.has_to_tactic_format"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/scc.lean#L114">tactic.closure.has_to_tactic_format</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#has_to_tactic_format">has_to_tactic_format</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.closure.root">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/scc.lean#L118">tactic.closure.root</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div></div>
+   <p><code>(n,r,p) ← root cl e</code> returns <code>r</code> the root of the tree that <code>e</code> is a part of (which might be
+itself) along with <code>p</code> a proof of <code>e ↔ r</code> and <code>n</code>, the preorder numbering of the root.</p>
+ </ul></div><div class="decl def" id="tactic.closure.merge_intl">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/scc.lean#L135">tactic.closure.merge_intl</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>(Implementation of <code>merge</code>.)</p>
+ </ul></div><div class="decl def" id="tactic.closure.merge">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/scc.lean#L147">tactic.closure.merge</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p><code>merge cl p</code>, with <code>p</code> a proof of <code>e₀ ↔ e₁</code> for some <code>e₀</code> and <code>e₁</code>,
+merges the trees of <code>e₀</code> and <code>e₁</code> and keeps the root with the smallest preorder
+number as the root. This ensures that, in the depth-first traversal of the graph,
+when encountering an edge going into a vertex whose equivalence class includes
+a vertex that originated the current search, that vertex will be the root of
+the corresponding tree.</p>
+ </ul></div><div class="decl def" id="tactic.closure.assign_preorder">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/scc.lean#L158">tactic.closure.assign_preorder</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Sequentially assign numbers to the nodes of the graph as they are being visited.</p>
+ </ul></div><div class="decl def" id="tactic.closure.prove_eqv">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/scc.lean#L163">tactic.closure.prove_eqv</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></div>
+   <p><code>prove_eqv cl e₀ e₁</code> constructs a proof of equivalence of <code>e₀</code> and <code>e₁</code> if
+they are equivalent.</p>
+ </ul></div><div class="decl def" id="tactic.closure.prove_impl">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/scc.lean#L171">tactic.closure.prove_impl</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></div>
+   <p><code>prove_impl cl e₀ e₁</code> constructs a proof of <code>e₀ -&gt; e₁</code> if they are equivalent.</p>
+ </ul></div><div class="decl def" id="tactic.closure.is_eqv">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/scc.lean#L175">tactic.closure.is_eqv</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></div></div>
+   <p><code>is_eqv cl e₀ e₁</code> checks whether <code>e₀</code> and <code>e₁</code> are equivalent without building a proof.</p>
+ </ul></div><div class="decl def" id="tactic.impl_graph">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/scc.lean#L184">tactic.impl_graph</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+   <p>mutable graphs between local propositions that imply each other with the proof of implication</p>
+ </ul></div><div class="decl def" id="tactic.with_impl_graph">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/scc.lean#L188">tactic.with_impl_graph</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="decl_args">:</span>     <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.impl_graph">tactic.impl_graph</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> α) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> α</div></div>
+   <p><code>with_impl_graph f</code> creates an empty <code>impl_graph</code> <code>g</code>, executes <code>f</code> on <code>g</code>, and then deletes
+<code>g</code>, returning the output of <code>f</code>.</p>
+ </ul></div><div class="decl def" id="tactic.impl_graph.add_edge">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/scc.lean#L195">tactic.impl_graph.add_edge</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.impl_graph">tactic.impl_graph</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p><code>add_edge g p</code>, with <code>p</code> a proof of <code>v₀ → v₁</code> or <code>v₀ ↔ v₁</code>, adds an edge to the implication
+graph <code>g</code>.</p>
+ </ul></div><div class="decl def" id="tactic.impl_graph.merge_path">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/scc.lean#L220">tactic.impl_graph.merge_path</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>) →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p><code>merge_path path e</code>, where <code>path</code> and <code>e</code> forms a cycle with proofs of implication between
+consecutive vertices. The proofs are compiled into proofs of equivalences and added to the closure
+structure. <code>e</code> and the first vertex of <code>path</code> do not have to be the same but they have to be
+in the same equivalence class.</p>
+ </ul></div><div class="decl def" id="tactic.impl_graph.collapse'">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/scc.lean#L233">tactic.impl_graph.collapse'</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>) →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>) →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>(implementation of <code>collapse</code>)</p>
+ </ul></div><div class="decl def" id="tactic.impl_graph.collapse">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/scc.lean#L246">tactic.impl_graph.collapse</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>) →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p><code>collapse path v</code>, where <code>v</code> is a vertex that originated the current search
+(or a vertex in the same equivalence class as the one that originated the current search).
+It or its equivalent should be found in <code>path</code>. Since the vertices following <code>v</code> in the path
+form a cycle with <code>v</code>, they can all be added to an equivalence class.</p>
+ </ul></div><div class="decl def" id="tactic.impl_graph.dfs_at">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/scc.lean#L261">tactic.impl_graph.dfs_at</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr_map">expr_map</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)) →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/ref.html#tactic.ref">tactic.ref</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr_map">expr_map</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a>) →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>) →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Strongly connected component algorithm inspired by Tarjan's and
+Dijkstra's scc algorithm. Whereas they return strongly connected
+components by enumerating them, this algorithm returns a disjoint set
+data structure using path compression. This is a compact
+representation that allows us, after the fact, to construct a proof of
+equivalence between any two members of an equivalence class.</p>
+
+<ul>
+<li>Tarjan, R. E. (1972), "Depth-first search and linear graph algorithms",
+SIAM Journal on Computing, 1 (2): 146–160, doi:10.1137/0201010</li>
+<li>Dijkstra, Edsger (1976), A Discipline of Programming, NJ: Prentice Hall, Ch. 25.</li>
+</ul>
+ </ul></div><div class="decl def" id="tactic.impl_graph.mk_scc">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/scc.lean#L283">tactic.impl_graph.mk_scc</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a>
+  (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr_map">expr_map</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)))</div></div>
+   <p>Use the local assumptions to create a set of equivalence classes.</p>
+ </ul></div><div class="decl def" id="tactic.prove_eqv_target">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/scc.lean#L294">tactic.prove_eqv_target</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.interactive.scc">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/scc.lean#L300">tactic.interactive.scc</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Use the available equivalences and implications to prove
+a goal of the form <code>p ↔ q</code>.</p>
+ </ul></div><div class="decl def" id="tactic.interactive.scc'">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/scc.lean#L309">tactic.interactive.scc'</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Collect all the available equivalences and implications and
+add assumptions for every equivalence that can be proven using the
+strongly connected components technique. Mostly useful for testing.</p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +1007,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1235,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file visible" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,295 +1358,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="mod_doc">
-<h1>Strongly Connected Components</h1>
-
-<p>This file defines tactics to construct proofs of equivalences between a set of mutually equivalent
-propositions. The tactics use implications transitively to find sets of equivalent propositions.</p>
-
-<h2>Implementation notes</h2>
-
-<p>The tactics use a strongly connected components algorithm on a graph where propositions are
-vertices and edges are proofs that the source implies the target. The strongly connected components
-are therefore sets of propositions that are pairwise equivalent to each other.</p>
-
-<p>The resulting strongly connected components are encoded in a disjoint set data structure to
-facilitate the construction of equivalence proofs between two arbitrary members of an equivalence
-class.</p>
-
-<h2>Possible generalizations</h2>
-
-<p>Instead of reasoning about implications and equivalence, we could generalize the machinery to
-reason about arbitrary partial orders.</p>
-
-<h2>References</h2>
-
-<ul>
-<li>Tarjan, R. E. (1972), "Depth-first search and linear graph algorithms",
-SIAM Journal on Computing, 1 (2): 146–160, doi:10.1137/0201010</li>
-<li>Dijkstra, Edsger (1976), A Discipline of Programming, NJ: Prentice Hall, Ch. 25.</li>
-<li><a href="https://en.wikipedia.org/wiki/Disjoint-set_data_structure">https://en.wikipedia.org/wiki/Disjoint-set_data_structure</a></li>
-</ul>
-
-<h2>Tags</h2>
-
-<p>graphs, tactic, strongly connected components, disjoint sets</p>
-</div><div class="def"><a id="tactic.closure"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/scc.lean#L91">tactic.closure</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p><code>closure</code> implements a disjoint set data structure using path compression
-optimization. For the sake of the scc algorithm, it also stores the preorder
-numbering of the equivalence graph of the local assumptions.</p>
-
-<p>The <code>expr_map</code> encodes a directed forest by storing for every non-root
-node, a reference to its parent and a proof of equivalence between
-that node's expression and its parent's expression. Given that data
-structure, checking that two nodes belong to the same tree is easy and
-fast by repeatedly following the parent references until a root is reached.
-If both nodes have the same root, they belong to the same tree, i.e. their
-expressions are equivalent. The proof of equivalence can be formed by
-composing the proofs along the edges of the paths to the root.</p>
-
-<p>More concretely, if we ignore preorder numbering, the set
-<code>{ {e₀,e₁,e₂,e₃}, {e₄,e₅} }</code> is represented as:</p>
-
-<pre><code>e₀ → ⊥      -- no parent, i.e. e₀ is a root
-e₁ → e₀, p₁ -- with p₁ : e₁ ↔ e₀
-e₂ → e₁, p₂ -- with p₂ : e₂ ↔ e₁
-e₃ → e₀, p₃ -- with p₃ : e₃ ↔ e₀
-e₄ → ⊥      -- no parent, i.e. e₄ is a root
-e₅ → e₄, p₅ -- with p₅ : e₅ ↔ e₄
-</code></pre>
-
-<p>We can check that <code>e₂</code> and <code>e₃</code> are equivalent by seeking the root of
-the tree of each. The parent of <code>e₂</code> is <code>e₁</code>, the parent of <code>e₁</code> is
-<code>e₀</code> and <code>e₀</code> does not have a parent, and thus, this is the root of its tree.
-The parent of <code>e₃</code> is <code>e₀</code> and it's also the root, the same as for <code>e₂</code> and
-they are therefore equivalent. We can build a proof of that equivalence by using
-transitivity on <code>p₂</code>, <code>p₁</code> and <code>p₃.symm</code> in that order.</p>
-
-<p>Similarly, we can discover that <code>e₂</code> and <code>e₅</code> aren't equivalent.</p>
-
-<p>A description of the path compression optimization can be found at:
-<a href="https://en.wikipedia.org/wiki/Disjoint-set_data_structure#Path_compression">https://en.wikipedia.org/wiki/Disjoint-set_data_structure#Path_compression</a></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.closure.with_new_closure"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/scc.lean#L97">tactic.closure.with_new_closure</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> α) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> α</div>
-<p><code>with_new_closure f</code> creates an empty <code>closure</code> <code>c</code>, executes <code>f</code> on <code>c</code>, and then deletes <code>c</code>,
-returning the output of <code>f</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span></li>
-
-
-
-</ul></div><div class="def"><a id="tactic.closure.to_tactic_format"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/scc.lean#L105">tactic.closure.to_tactic_format</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/format.html#format">format</a></div>
-<p><code>to_tactic_format cl</code> pretty-prints the <code>closure</code> <code>cl</code> as a list. Assuming <code>cl</code> was built by
-<code>dfs_at</code>, each element corresponds to a node <code>pᵢ : expr</code> and is one of the folllowing:</p>
-
-<ul>
-<li>if <code>pᵢ</code> is a root: <code>"pᵢ ⇐ i"</code>, where <code>i</code> is the preorder number of <code>pᵢ</code>,</li>
-<li>otherwise: <code>"(pᵢ, pⱼ) : P"</code>, where <code>P</code> is <code>pᵢ ↔ pⱼ</code>.
-Useful for debugging.</li>
-</ul>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.closure.has_to_tactic_format"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/scc.lean#L114">tactic.closure.has_to_tactic_format</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#has_to_tactic_format">has_to_tactic_format</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="tactic.closure.root"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/scc.lean#L118">tactic.closure.root</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (ℕ × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div>
-<p><code>(n,r,p) ← root cl e</code> returns <code>r</code> the root of the tree that <code>e</code> is a part of (which might be
-itself) along with <code>p</code> a proof of <code>e ↔ r</code> and <code>n</code>, the preorder numbering of the root.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.closure.merge_intl"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/scc.lean#L135">tactic.closure.merge_intl</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>(Implementation of <code>merge</code>.)</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.closure.merge"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/scc.lean#L147">tactic.closure.merge</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p><code>merge cl p</code>, with <code>p</code> a proof of <code>e₀ ↔ e₁</code> for some <code>e₀</code> and <code>e₁</code>,
-merges the trees of <code>e₀</code> and <code>e₁</code> and keeps the root with the smallest preorder
-number as the root. This ensures that, in the depth-first traversal of the graph,
-when encountering an edge going into a vertex whose equivalence class includes
-a vertex that originated the current search, that vertex will be the root of
-the corresponding tree.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.closure.assign_preorder"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/scc.lean#L158">tactic.closure.assign_preorder</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Sequentially assign numbers to the nodes of the graph as they are being visited.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.closure.prove_eqv"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/scc.lean#L163">tactic.closure.prove_eqv</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div>
-<p><code>prove_eqv cl e₀ e₁</code> constructs a proof of equivalence of <code>e₀</code> and <code>e₁</code> if
-they are equivalent.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.closure.prove_impl"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/scc.lean#L171">tactic.closure.prove_impl</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div>
-<p><code>prove_impl cl e₀ e₁</code> constructs a proof of <code>e₀ -&gt; e₁</code> if they are equivalent.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.closure.is_eqv"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/scc.lean#L175">tactic.closure.is_eqv</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></div>
-<p><code>is_eqv cl e₀ e₁</code> checks whether <code>e₀</code> and <code>e₁</code> are equivalent without building a proof.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.impl_graph"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/scc.lean#L184">tactic.impl_graph</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p>mutable graphs between local propositions that imply each other with the proof of implication</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.with_impl_graph"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/scc.lean#L188">tactic.with_impl_graph</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.impl_graph">tactic.impl_graph</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> α) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> α</div>
-<p><code>with_impl_graph f</code> creates an empty <code>impl_graph</code> <code>g</code>, executes <code>f</code> on <code>g</code>, and then deletes
-<code>g</code>, returning the output of <code>f</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span></li>
-
-
-
-</ul></div><div class="def"><a id="tactic.impl_graph.add_edge"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/scc.lean#L195">tactic.impl_graph.add_edge</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.impl_graph">tactic.impl_graph</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p><code>add_edge g p</code>, with <code>p</code> a proof of <code>v₀ → v₁</code> or <code>v₀ ↔ v₁</code>, adds an edge to the implication
-graph <code>g</code>.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.impl_graph.merge_path"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/scc.lean#L220">tactic.impl_graph.merge_path</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p><code>merge_path path e</code>, where <code>path</code> and <code>e</code> forms a cycle with proofs of implication between
-consecutive vertices. The proofs are compiled into proofs of equivalences and added to the closure
-structure. <code>e</code> and the first vertex of <code>path</code> do not have to be the same but they have to be
-in the same equivalence class.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.impl_graph.collapse'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/scc.lean#L233">tactic.impl_graph.collapse'</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>(implementation of <code>collapse</code>)</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.impl_graph.collapse"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/scc.lean#L246">tactic.impl_graph.collapse</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p><code>collapse path v</code>, where <code>v</code> is a vertex that originated the current search
-(or a vertex in the same equivalence class as the one that originated the current search).
-It or its equivalent should be found in <code>path</code>. Since the vertices following <code>v</code> in the path
-form a cycle with <code>v</code>, they can all be added to an equivalence class.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.impl_graph.dfs_at"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/scc.lean#L261">tactic.impl_graph.dfs_at</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr_map">expr_map</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)) →
-<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/ref.html#tactic.ref">tactic.ref</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr_map">expr_map</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a>) → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Strongly connected component algorithm inspired by Tarjan's and
-Dijkstra's scc algorithm. Whereas they return strongly connected
-components by enumerating them, this algorithm returns a disjoint set
-data structure using path compression. This is a compact
-representation that allows us, after the fact, to construct a proof of
-equivalence between any two members of an equivalence class.</p>
-
-<ul>
-<li>Tarjan, R. E. (1972), "Depth-first search and linear graph algorithms",
-SIAM Journal on Computing, 1 (2): 146–160, doi:10.1137/0201010</li>
-<li>Dijkstra, Edsger (1976), A Discipline of Programming, NJ: Prentice Hall, Ch. 25.</li>
-</ul>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.impl_graph.mk_scc"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/scc.lean#L283">tactic.impl_graph.mk_scc</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr_map">expr_map</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)))</div>
-<p>Use the local assumptions to create a set of equivalence classes.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.prove_eqv_target"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/scc.lean#L294">tactic.prove_eqv_target</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html#tactic.closure">tactic.closure</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.interactive.scc"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/scc.lean#L300">tactic.interactive.scc</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Use the available equivalences and implications to prove
-a goal of the form <code>p ↔ q</code>.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.interactive.scc'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/scc.lean#L309">tactic.interactive.scc'</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Collect all the available equivalences and implications and
-add assumptions for every equivalence that can be proven using the
-strongly connected components technique. Mostly useful for testing.</p>
-       <ul>
-
-
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">tactic.scc</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/scc.lean">(view source on GitHub)</a></div><a href="#tactic.closure">tactic.closure</a><br>
-<a href="#tactic.closure.assign_preorder">tactic.closure.assign_preorder</a><br>
-<a href="#tactic.closure.has_to_tactic_format">tactic.closure.has_to_tactic_format</a><br>
-<a href="#tactic.closure.is_eqv">tactic.closure.is_eqv</a><br>
-<a href="#tactic.closure.merge">tactic.closure.merge</a><br>
-<a href="#tactic.closure.merge_intl">tactic.closure.merge_intl</a><br>
-<a href="#tactic.closure.prove_eqv">tactic.closure.prove_eqv</a><br>
-<a href="#tactic.closure.prove_impl">tactic.closure.prove_impl</a><br>
-<a href="#tactic.closure.root">tactic.closure.root</a><br>
-<a href="#tactic.closure.to_tactic_format">tactic.closure.to_tactic_format</a><br>
-<a href="#tactic.closure.with_new_closure">tactic.closure.with_new_closure</a><br>
-<a href="#tactic.impl_graph">tactic.impl_graph</a><br>
-<a href="#tactic.impl_graph.add_edge">tactic.impl_graph.add_edge</a><br>
-<a href="#tactic.impl_graph.collapse">tactic.impl_graph.collapse</a><br>
-<a href="#tactic.impl_graph.collapse'">tactic.impl_graph.collapse'</a><br>
-<a href="#tactic.impl_graph.dfs_at">tactic.impl_graph.dfs_at</a><br>
-<a href="#tactic.impl_graph.merge_path">tactic.impl_graph.merge_path</a><br>
-<a href="#tactic.impl_graph.mk_scc">tactic.impl_graph.mk_scc</a><br>
-<a href="#tactic.interactive.scc">tactic.interactive.scc</a><br>
-<a href="#tactic.interactive.scc'">tactic.interactive.scc'</a><br>
-<a href="#tactic.prove_eqv_target">tactic.prove_eqv_target</a><br>
-<a href="#tactic.with_impl_graph">tactic.with_impl_graph</a><br>
 </div></div>
 
         </div>

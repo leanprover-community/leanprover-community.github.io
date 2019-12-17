@@ -7,7 +7,79 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">core.data.dlist</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/data/dlist.lean">(view source on GitHub)</a></div><a href="#dlist">dlist</a><br>
+<a href="#dlist.append">dlist.append</a><br>
+<a href="#dlist.concat">dlist.concat</a><br>
+<a href="#dlist.cons">dlist.cons</a><br>
+<a href="#dlist.empty">dlist.empty</a><br>
+<a href="#dlist.has_append">dlist.has_append</a><br>
+<a href="#dlist.lazy_of_list">dlist.lazy_of_list</a><br>
+<a href="#dlist.of_list">dlist.of_list</a><br>
+<a href="#dlist.of_list_to_list">dlist.of_list_to_list</a><br>
+<a href="#dlist.singleton">dlist.singleton</a><br>
+<a href="#dlist.to_list">dlist.to_list</a><br>
+<a href="#dlist.to_list_append">dlist.to_list_append</a><br>
+<a href="#dlist.to_list_concat">dlist.to_list_concat</a><br>
+<a href="#dlist.to_list_cons">dlist.to_list_cons</a><br>
+<a href="#dlist.to_list_empty">dlist.to_list_empty</a><br>
+<a href="#dlist.to_list_of_list">dlist.to_list_of_list</a><br>
+<a href="#dlist.to_list_singleton">dlist.to_list_singleton</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="decl structure" id="dlist">     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/data/dlist.lean#L14">dlist</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type u → Type u</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="dlist.apply">apply : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> α</li>
+<li class="structure_field" id="dlist.invariant">invariant : ∀ (l : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> α),
+  c.<a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.apply" title="dlist.apply">apply</a> l <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+    c.<a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.apply" title="dlist.apply">apply</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list.nil">list.nil</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_append.append" title="has_append.append">++</a> l</li>
+</ul>  <p>A difference list is a function that, given a list, returns the original
+contents of the difference list prepended to the given list.</p>
+
+<p>This structure supports <code>O(1)</code> <code>append</code> and <code>concat</code> operations on lists, making it
+useful for append-heavy uses such as logging and pretty printing.</p>
+ </ul></div><div class="decl def" id="dlist.of_list">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/data/dlist.lean#L25">dlist.of_list</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α</div></div>
+   <p>Convert a list to a dlist</p>
+ </ul></div><div class="decl def" id="dlist.lazy_of_list">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/data/dlist.lean#L29">dlist.lazy_of_list</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#thunk">thunk</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> α) → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α</div></div>
+   <p>Convert a lazily-evaluated list to a dlist</p>
+ </ul></div><div class="decl def" id="dlist.to_list">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/data/dlist.lean#L33">dlist.to_list</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> α</div></div>
+   <p>Convert a dlist to a list</p>
+ </ul></div><div class="decl def" id="dlist.empty">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/data/dlist.lean#L37">dlist.empty</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α</div></div>
+   <p>Create a dlist containing no elements</p>
+ </ul></div><div class="decl def" id="dlist.singleton">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/data/dlist.lean#L43">dlist.singleton</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="decl_args">:</span>     <div class="decl_type">α → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α</div></div>
+   <p>Create dlist with a single element</p>
+ </ul></div><div class="decl def" id="dlist.cons">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/data/dlist.lean#L49">dlist.cons</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="decl_args">:</span>     <div class="decl_type">α → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α</div></div>
+   <p><code>O(1)</code> Prepend a single element to a dlist</p>
+ </ul></div><div class="decl def" id="dlist.concat">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/data/dlist.lean#L53">dlist.concat</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="decl_args">:</span>     <div class="decl_type">α → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α</div></div>
+   <p><code>O(1)</code> Append a single element to a dlist</p>
+ </ul></div><div class="decl def" id="dlist.append">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/data/dlist.lean#L57">dlist.append</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α</div></div>
+   <p><code>O(1)</code> Append dlists</p>
+ </ul></div><div class="decl def" id="dlist.has_append"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/data/dlist.lean#L60">dlist.has_append</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_append">has_append</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="dlist.to_list_of_list">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/data/dlist.lean#L65">dlist.to_list_of_list</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="decl_args">(l : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.to_list">dlist.to_list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.of_list">dlist.of_list</a> l) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> l</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="dlist.of_list_to_list">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/data/dlist.lean#L68">dlist.of_list_to_list</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="decl_args">(l : <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.of_list">dlist.of_list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.to_list">dlist.to_list</a> l) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> l</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="dlist.to_list_empty">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/data/dlist.lean#L76">dlist.to_list_empty</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.to_list">dlist.to_list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.empty">dlist.empty</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list.nil">list.nil</a></div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="dlist.to_list_singleton">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/data/dlist.lean#L79">dlist.to_list_singleton</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.to_list">dlist.to_list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.singleton">dlist.singleton</a> x) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> [x]</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="dlist.to_list_append">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/data/dlist.lean#L82">dlist.to_list_append</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="decl_args">(l₁ l₂ : <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.to_list">dlist.to_list</a> (l₁ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_append.append" title="has_append.append">++</a> l₂) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.to_list">dlist.to_list</a> l₁ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_append.append" title="has_append.append">++</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.to_list">dlist.to_list</a> l₂</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="dlist.to_list_cons">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/data/dlist.lean#L86">dlist.to_list_cons</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="decl_args">(x : α)</span> <span class="decl_args">(l : <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.to_list">dlist.to_list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.cons">dlist.cons</a> x l) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list.cons" title="list.cons">::</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.to_list">dlist.to_list</a> l</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="dlist.to_list_concat">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/data/dlist.lean#L89">dlist.to_list_concat</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="decl_args">(x : α)</span> <span class="decl_args">(l : <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.to_list">dlist.to_list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.concat">dlist.concat</a> x l) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.to_list">dlist.to_list</a> l <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_append.append" title="has_append.append">++</a> [x]</div></div>
+   <p></p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +879,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1107,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,158 +1230,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="structure"><a id="dlist"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/data/dlist.lean#L14">dlist</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type u → Type u</div>
-<p>A difference list is a function that, given a list, returns the original
-contents of the difference list prepended to the given list.</p>
-
-<p>This structure supports <code>O(1)</code> <code>append</code> and <code>concat</code> operations on lists, making it
-useful for append-heavy uses such as logging and pretty printing.</p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">dlist.apply : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> α</div></li>
-<li><div class="structure_field">dlist.invariant : ∀ (l : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> α), c.apply l = c.apply list.nil ++ l</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="dlist.of_list"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/data/dlist.lean#L25">dlist.of_list</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α</div>
-<p>Convert a list to a dlist</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span></li>
-
-
-
-</ul></div><div class="def"><a id="dlist.lazy_of_list"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/data/dlist.lean#L29">dlist.lazy_of_list</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#thunk">thunk</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> α) → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α</div>
-<p>Convert a lazily-evaluated list to a dlist</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span></li>
-
-
-
-</ul></div><div class="def"><a id="dlist.to_list"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/data/dlist.lean#L33">dlist.to_list</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> α</div>
-<p>Convert a dlist to a list</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span></li>
-
-
-
-</ul></div><div class="def"><a id="dlist.empty"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/data/dlist.lean#L37">dlist.empty</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α</div>
-<p>Create a dlist containing no elements</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span></li>
-
-
-
-</ul></div><div class="def"><a id="dlist.singleton"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/data/dlist.lean#L43">dlist.singleton</a></span>  <span class="decl_args">:</span>       <div class="decl_type">α → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α</div>
-<p>Create dlist with a single element</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span></li>
-
-
-
-</ul></div><div class="def"><a id="dlist.cons"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/data/dlist.lean#L49">dlist.cons</a></span>  <span class="decl_args">:</span>       <div class="decl_type">α → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α</div>
-<p><code>O(1)</code> Prepend a single element to a dlist</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span></li>
-
-
-
-</ul></div><div class="def"><a id="dlist.concat"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/data/dlist.lean#L53">dlist.concat</a></span>  <span class="decl_args">:</span>       <div class="decl_type">α → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α</div>
-<p><code>O(1)</code> Append a single element to a dlist</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span></li>
-
-
-
-</ul></div><div class="def"><a id="dlist.append"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/data/dlist.lean#L57">dlist.append</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α → <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α</div>
-<p><code>O(1)</code> Append dlists</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span></li>
-
-
-
-</ul></div><div class="def"><a id="dlist.has_append"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/data/dlist.lean#L60">dlist.has_append</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_append">has_append</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="thm"><a id="dlist.to_list_of_list"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/data/dlist.lean#L65">dlist.to_list_of_list</a></span> <span class="decl_args">(l : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> α)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.to_list">dlist.to_list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.of_list">dlist.of_list</a> l) = l</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="dlist.of_list_to_list"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/data/dlist.lean#L68">dlist.of_list_to_list</a></span> <span class="decl_args">(l : <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.of_list">dlist.of_list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.to_list">dlist.to_list</a> l) = l</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="dlist.to_list_empty"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/data/dlist.lean#L76">dlist.to_list_empty</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.to_list">dlist.to_list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.empty">dlist.empty</a> = list.nil</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="dlist.to_list_singleton"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/data/dlist.lean#L79">dlist.to_list_singleton</a></span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.to_list">dlist.to_list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.singleton">dlist.singleton</a> x) = [x]</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="dlist.to_list_append"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/data/dlist.lean#L82">dlist.to_list_append</a></span> <span class="decl_args">(l₁ l₂ : <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.to_list">dlist.to_list</a> (l₁ ++ l₂) = <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.to_list">dlist.to_list</a> l₁ ++ <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.to_list">dlist.to_list</a> l₂</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="dlist.to_list_cons"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/data/dlist.lean#L86">dlist.to_list_cons</a></span> <span class="decl_args">(x : α)</span> <span class="decl_args">(l : <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.to_list">dlist.to_list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.cons">dlist.cons</a> x l) = x :: <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.to_list">dlist.to_list</a> l</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="dlist.to_list_concat"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/data/dlist.lean#L89">dlist.to_list_concat</a></span> <span class="decl_args">(x : α)</span> <span class="decl_args">(l : <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist">dlist</a> α)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.to_list">dlist.to_list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.concat">dlist.concat</a> x l) = <a href="https://leanprover-community.github.io/mathlib_docs/core/data/dlist.html#dlist.to_list">dlist.to_list</a> l ++ [x]</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span></li>
-
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">core.data.dlist</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/data/dlist.lean">(view source on GitHub)</a></div><a href="#dlist">dlist</a><br>
-<a href="#dlist.append">dlist.append</a><br>
-<a href="#dlist.concat">dlist.concat</a><br>
-<a href="#dlist.cons">dlist.cons</a><br>
-<a href="#dlist.empty">dlist.empty</a><br>
-<a href="#dlist.has_append">dlist.has_append</a><br>
-<a href="#dlist.lazy_of_list">dlist.lazy_of_list</a><br>
-<a href="#dlist.of_list">dlist.of_list</a><br>
-<a href="#dlist.of_list_to_list">dlist.of_list_to_list</a><br>
-<a href="#dlist.singleton">dlist.singleton</a><br>
-<a href="#dlist.to_list">dlist.to_list</a><br>
-<a href="#dlist.to_list_append">dlist.to_list_append</a><br>
-<a href="#dlist.to_list_concat">dlist.to_list_concat</a><br>
-<a href="#dlist.to_list_cons">dlist.to_list_cons</a><br>
-<a href="#dlist.to_list_empty">dlist.to_list_empty</a><br>
-<a href="#dlist.to_list_of_list">dlist.to_list_of_list</a><br>
-<a href="#dlist.to_list_singleton">dlist.to_list_singleton</a><br>
 </div></div>
 
         </div>

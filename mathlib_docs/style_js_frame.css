@@ -17,13 +17,13 @@ body {
   }
 
 /* note: .left and .right are flipped */
-  .left {
+  .right {
       position: fixed;
       top: 0;
       right: 0;
   }
 
-  .right {
+  .left {
       position: fixed;
       top: 0;
       left: 0;
@@ -31,8 +31,9 @@ body {
 
   .left, .right {
     width: 20vw;
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: auto;
+    z-index: 0;
   }
 
   .middle {
@@ -43,6 +44,7 @@ body {
       overflow-y: auto;
       overflow-x: auto;
   }
+
 
 .mod_doc h1 {
     margin-top: 0;
@@ -89,60 +91,31 @@ body {
 }
 
 
-.def, .thm, .ax, .cnst, .structure, .inductive, .mod_doc, .index_body {
+.decl, .mod_doc, .index_body {
     overflow-x: auto;
     padding-left: 8px;
 }
 
-.def, .thm, .ax, .cnst, .structure, .inductive {
-    padding: 8px 8px 8px 8px;
-    border-radius: 8px;
-    /* margin-top: 10px; */
-    margin-bottom: 10px;
+.decl, .inductive {
+    padding-right: 8px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .def {
-    background-color: #DAE0F2;
+    border-left: 10px solid #92dce5;
 }
 
-.def .decl_name:before {
-    content: "def "
+.theorem {
+    border-left: 10px solid #8fe388;
 }
 
-.thm {
-    background-color:#DACEE0;
-}
-
-.thm .decl_name:before {
-    content: "theorem "
-}
-
-.ax {
-    background-color:#88A0A8;
-}
-
-.ax .decl_name:before {
-    content: "axiom "
-}
-
-.cnst {
-    background-color: #88A0A8;
-}
-
-.cnst .decl_name:before {
-    content: "constant "
+.axiom, .constant {
+    border-left: 10px solid #f44708;
 }
 
 .structure, .inductive {
-    background-color: #92AFD7;
-}
-
-.structure .decl_name:before {
-    content: "structure "
-}
-
-.inductive .decl_name:before {
-    content: "inductive "
+    border-left: 10px solid #f0a202;
 }
 
 .decl_name, .decl_args {
@@ -180,19 +153,26 @@ ul {
     color: darkslategray;
 }
 
-.decl_name, .decl_args {
-    font-size: 15px;
+.decl_header, .attributes {
     font-weight: bold;
+    line-height: 1.5;
+}
+
+.decl_header {
+    font-size: 15px;
+}
+
+.decl_header {
+    /* indent everything but first line twice as much as decl_type */
+    text-indent: -8ex; padding-left: 8ex;
 }
 
 .decl_type {
-    font-size:15px;
-    padding: 10px 0px 0px 0px;
+    margin-top: 2px;
+    margin-left: 4ex; /* extra indentation */
 }
 
-code, .decl_name, .decl_args, .decl_type,
- .structure .structure_fields .structure_field,
- .inductive .structure_fields .structure_field {
+code, .decl_header, .attributes, .structure_field, .constructor, .instances li {
     font-family: monospace;
 }
 
@@ -200,14 +180,39 @@ code {
     font-size: 15px;
 }
 
+.structure_fields, .constructors {
+    display: block;
+    padding-inline-start: 0;
+    margin-top: 1ex;
+    font-size: 15px;
+}
+
+.structure_field {
+    display: block;
+}
+.structure_field:before {
+    content: '(';
+    color: gray;
+}
+.structure_field:after {
+    content: ')';
+    color: gray;
+}
+
+.constructor {
+    display: block;
+}
+.constructor:before {
+    content: '| ';
+    color: gray;
+}
+
 code a:link, code a:visited, code a:active,
-.decl_type a:link, .decl_type a:visited, .decl_type a:active,
-.decl_name a:link, .decl_name a:visited, .decl_name a:active,
-.structure_field a:link, .structure_field a:visited, .structure_field a:active {
+.decl a:link, .decl a:visited, .decl a:active {
     color: black;
 }
 
-code a:hover, .decl_type a:hover, .decl_name a:hover, .structure_field a:hover {
+code a:hover, .decl a:hover {
     color: darkslategray;
 }
 
@@ -241,4 +246,22 @@ a.file:link, a.file:visited, a.file:active {
 
 .internal_nav .gh_link {
     padding-bottom: 1.5em;
+}
+
+.decl_header.impl_collapsed .impl_arg > span {
+    display: none;
+}
+
+.decl_header.impl_collapsed .impl_arg ~ .impl_arg {
+    display: none;
+}
+
+.decl_header.impl_collapsed .impl_arg:after {
+    cursor: pointer;
+    content: '{…}';
+}
+
+.impl_arg {
+    font-style: italic;
+    font-weight: normal;
 }

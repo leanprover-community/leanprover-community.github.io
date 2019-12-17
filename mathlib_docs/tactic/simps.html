@@ -7,7 +7,97 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">tactic.simps</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/simps.lean">(view source on GitHub)</a></div><a href="#simps_add_projection">simps_add_projection</a><br>
+<a href="#simps_add_projections">simps_add_projections</a><br>
+<a href="#simps_attr">simps_attr</a><br>
+<a href="#simps_parser">simps_parser</a><br>
+<a href="#simps_tac">simps_tac</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="mod_doc">
+<h1>simps attribute</h1>
+
+<p>This file defines the <code>@[simps]</code> attribute, to automatically generate simp-lemmas
+reducing a definition when projections are applied to it.</p>
+
+<h2>Tags</h2>
+
+<p>structures, projections, simp, simplifier, generates declarations</p>
+</div><div class="decl def" id="simps_add_projection">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/simps.lean#L21">simps_add_projection</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Add a lemma with <code>nm</code> stating that <code>lhs = rhs</code>. <code>type</code> is the type of both <code>lhs</code> and <code>rhs</code>,
+ <code>args</code> is the list of local constants occurring, and <code>univs</code> is the list of universe variables.
+ If <code>add_simp</code> then we make the resulting lemma a simp-lemma.</p>
+ </ul></div><div class="decl def" id="simps_add_projections">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/simps.lean#L35">simps_add_projections</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/environment.html#environment">environment</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Derive lemmas specifying the projections of the declaration.
+ If <code>todo</code> is non-empty, it will generate exactly the names in <code>todo</code>.</p>
+ </ul></div><div class="decl def" id="simps_tac">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/simps.lean#L99">simps_tac</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool.ff">bool.ff</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list.nil">list.nil</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p><code>simps_tac</code> derives simp-lemmas for all (nested) non-Prop projections of the declaration.
+ If <code>todo</code> is non-empty, it will generate exactly the names in <code>todo</code>.
+ If <code>short_nm</code> is true, the generated names will only use the last projection name.</p>
+ </ul></div><div class="decl def" id="simps_parser">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/simps.lean#L112">simps_parser</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a>
+  (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a>)</div></div>
+   <p>The parser for simps. Pattern: <code>'lemmas_only'? ident*</code></p>
+ </ul></div><div class="decl def" id="simps_attr">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/simps.lean#L150">simps_attr</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/attribute.html#user_attribute">user_attribute</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a>
+  (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a>)</div></div>
+   <ul>
+<li>Automatically derive lemmas specifying the projections of this declaration.</li>
+<li>Example: (note that the forward and reverse functions are specified differently!)
+<code>lean
+@[simps] def refl (α) : α ≃ α := ⟨id, λ x, x, λ x, rfl, λ x, rfl⟩
+</code>
+derives two simp-lemmas:
+<code>lean
+@[simp] lemma refl_to_fun (α) (x : α) : (refl α).to_fun x = id x
+@[simp] lemma refl_inv_fun (α) (x : α) : (refl α).inv_fun x = x
+</code></li>
+<li>It does not derive simp-lemmas for the prop-valued projections.</li>
+<li>It will automatically reduce newly created beta-redexes, but not unfold any definitions.</li>
+<li>If one of the fields itself is a structure, this command will recursively create
+simp-lemmas for all fields in that structure.</li>
+<li>You can use <code>@[simps proj1 proj2 ...]</code> to only generate the projection lemmas for the specified
+projections. For example:
+<code>lean
+attribute [simps to_fun] refl
+</code></li>
+<li>If one of the values is an eta-expanded structure, we will eta-reduce this structure.</li>
+<li>You can use <code>@[simps lemmas_only]</code> to derive the lemmas, but not mark them
+as simp-lemmas.</li>
+<li>You can use <code>@[simps short_name]</code> to only use the name of the last projection for the name of the
+generated lemmas.</li>
+<li>The precise syntax is <code>('simps' 'lemmas_only'? 'short_name'? ident*)</code>.</li>
+<li>If one of the projections is marked as a coercion, the generated lemmas do <em>not</em> use this
+coercion.</li>
+<li><code>@[simps]</code> reduces let-expressions where necessary.</li>
+<li>If one of the fields is a partially applied constructor, we will eta-expand it
+(this likely never happens).</li>
+</ul>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +897,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1125,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file visible" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,101 +1248,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="mod_doc">
-<h1>simps attribute</h1>
-
-<p>This file defines the <code>@[simps]</code> attribute, to automatically generate simp-lemmas
-reducing a definition when projections are applied to it.</p>
-
-<h2>Tags</h2>
-
-<p>structures, projections, simp, simplifier, generates declarations</p>
-</div><div class="def"><a id="simps_add_projection"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/simps.lean#L21">simps_add_projection</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Add a lemma with <code>nm</code> stating that <code>lhs = rhs</code>. <code>type</code> is the type of both <code>lhs</code> and <code>rhs</code>,
- <code>args</code> is the list of local constants occurring, and <code>univs</code> is the list of universe variables.
- If <code>add_simp</code> then we make the resulting lemma a simp-lemma.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="simps_add_projections"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/simps.lean#L35">simps_add_projections</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/environment.html#environment">environment</a> →
-<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> →
-<a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Derive lemmas specifying the projections of the declaration.
- If <code>todo</code> is non-empty, it will generate exactly the names in <code>todo</code>.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="simps_tac"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/simps.lean#L99">simps_tac</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> bool.ff → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a>) list.nil → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p><code>simps_tac</code> derives simp-lemmas for all (nested) non-Prop projections of the declaration.
- If <code>todo</code> is non-empty, it will generate exactly the names in <code>todo</code>.
- If <code>short_nm</code> is true, the generated names will only use the last projection name.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="simps_parser"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/simps.lean#L112">simps_parser</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a>)</div>
-<p>The parser for simps. Pattern: <code>'lemmas_only'? ident*</code></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="simps_attr"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/simps.lean#L150">simps_attr</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/attribute.html#user_attribute">user_attribute</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a>)</div>
-<ul>
-<li>Automatically derive lemmas specifying the projections of this declaration.</li>
-<li>Example: (note that the forward and reverse functions are specified differently!)
-<code>lean
-@[simps] def refl (α) : α ≃ α := ⟨id, λ x, x, λ x, rfl, λ x, rfl⟩
-</code>
-derives two simp-lemmas:
-<code>lean
-@[simp] lemma refl_to_fun (α) (x : α) : (refl α).to_fun x = id x
-@[simp] lemma refl_inv_fun (α) (x : α) : (refl α).inv_fun x = x
-</code></li>
-<li>It does not derive simp-lemmas for the prop-valued projections.</li>
-<li>It will automatically reduce newly created beta-redexes, but not unfold any definitions.</li>
-<li>If one of the fields itself is a structure, this command will recursively create
-simp-lemmas for all fields in that structure.</li>
-<li>You can use <code>@[simps proj1 proj2 ...]</code> to only generate the projection lemmas for the specified
-projections. For example:
-<code>lean
-attribute [simps to_fun] refl
-</code></li>
-<li>If one of the values is an eta-expanded structure, we will eta-reduce this structure.</li>
-<li>You can use <code>@[simps lemmas_only]</code> to derive the lemmas, but not mark them
-as simp-lemmas.</li>
-<li>You can use <code>@[simps short_name]</code> to only use the name of the last projection for the name of the
-generated lemmas.</li>
-<li>The precise syntax is <code>('simps' 'lemmas_only'? 'short_name'? ident*)</code>.</li>
-<li>If one of the projections is marked as a coercion, the generated lemmas do <em>not</em> use this
-coercion.</li>
-<li><code>@[simps]</code> reduces let-expressions where necessary.</li>
-<li>If one of the fields is a partially applied constructor, we will eta-expand it
-(this likely never happens).</li>
-</ul>
-       <ul>
-
-
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">tactic.simps</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/simps.lean">(view source on GitHub)</a></div><a href="#simps_add_projection">simps_add_projection</a><br>
-<a href="#simps_add_projections">simps_add_projections</a><br>
-<a href="#simps_attr">simps_attr</a><br>
-<a href="#simps_parser">simps_parser</a><br>
-<a href="#simps_tac">simps_tac</a><br>
 </div></div>
 
         </div>

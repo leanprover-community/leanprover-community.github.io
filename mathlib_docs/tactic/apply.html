@@ -7,7 +7,113 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">tactic.apply</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/apply.lean">(view source on GitHub)</a></div><a href="#tactic.apply'">tactic.apply'</a><br>
+<a href="#tactic.eapply'">tactic.eapply'</a><br>
+<a href="#tactic.fapply'">tactic.fapply'</a><br>
+<a href="#tactic.interactive.apply'">tactic.interactive.apply'</a><br>
+<a href="#tactic.interactive.apply_with'">tactic.interactive.apply_with'</a><br>
+<a href="#tactic.interactive.eapply'">tactic.interactive.eapply'</a><br>
+<a href="#tactic.interactive.fapply'">tactic.interactive.fapply'</a><br>
+<a href="#tactic.interactive.mapply'">tactic.interactive.mapply'</a><br>
+<a href="#tactic.interactive.refl'">tactic.interactive.refl'</a><br>
+<a href="#tactic.interactive.reflexivity'">tactic.interactive.reflexivity'</a><br>
+<a href="#tactic.interactive.symmetry'">tactic.interactive.symmetry'</a><br>
+<a href="#tactic.interactive.transitivity'">tactic.interactive.transitivity'</a><br>
+<a href="#tactic.reflexivity'">tactic.reflexivity'</a><br>
+<a href="#tactic.reorder_goals">tactic.reorder_goals</a><br>
+<a href="#tactic.symmetry'">tactic.symmetry'</a><br>
+<a href="#tactic.transitivity'">tactic.transitivity'</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="mod_doc">
+<p>This file provides an alternative implementation for <code>apply</code> to fix the so-called "apply bug".</p>
+
+<p>The issue arises when the goals is a Π-type -- whether it is visible or hidden behind a definition.</p>
+
+<p>For instance, consider the following proof:</p>
+
+<pre><code>example {α β} (x y z : α → β) (h₀ : x ≤ y) (h₁ : y ≤ z) : x ≤ z :=
+begin
+  apply le_trans,
+end
+</code></pre>
+
+<p>Because <code>x ≤ z</code> is definitionally equal to <code>∀ i, x i ≤ z i</code>, <code>apply</code> will fail. The alternative definition,
+<code>apply'</code> fixes this. When <code>apply</code> would work, <code>apply</code> is used and otherwise, a different strategy is deployed</p>
+</div><div class="decl def" id="tactic.reorder_goals">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/apply.lean#L31">tactic.reorder_goals</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> α) →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.new_goals">tactic.new_goals</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> α</div></div>
+   <p>With <code>gs</code> a list of proof goals, <code>reorder_goals gs new_g</code> will use the <code>new_goals</code> policy <code>new_g</code> to rearrange the
+   dependent goals to either drop them, push them to the end of the list or leave them in place. The <code>bool</code> values in
+   <code>gs</code> indicates whether the goal is dependent or not.</p>
+ </ul></div><div class="decl def" id="tactic.apply'">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/apply.lean#L78">tactic.apply'</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.apply_cfg">tactic.apply_cfg</a>
+  <span title="tactic.apply_cfg.mk">{</span><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.apply_cfg.md" title="tactic.apply_cfg.md">md</a> := <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency.semireducible">tactic.transparency.semireducible</a>,
+   <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.apply_cfg.approx" title="tactic.apply_cfg.approx">approx</a> := <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool.tt">bool.tt</a>,
+   <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.apply_cfg.new_goals" title="tactic.apply_cfg.new_goals">new_goals</a> := <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.new_goals.non_dep_first">tactic.new_goals.non_dep_first</a>,
+   <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.apply_cfg.instances" title="tactic.apply_cfg.instances">instances</a> := <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool.tt">bool.tt</a>,
+   <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.apply_cfg.auto_param" title="tactic.apply_cfg.auto_param">auto_param</a> := <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool.tt">bool.tt</a>,
+   <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.apply_cfg.opt_param" title="tactic.apply_cfg.opt_param">opt_param</a> := <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool.tt">bool.tt</a>,
+   <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.apply_cfg.unify" title="tactic.apply_cfg.unify">unify</a> := <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool.tt">bool.tt</a>} →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>))</div></div>
+   <p><code>apply'</code> mimics the behavior of <code>apply_core</code>. When
+<code>apply_core</code> fails, it is retried by providing the term with meta
+variables as additional arguments. The meta variables can then
+become new goals depending on the <code>cfg.new_goals</code> policy.</p>
+
+<p><code>apply'</code> also finds instances and applies opt_params and auto_params.</p>
+ </ul></div><div class="decl def" id="tactic.fapply'">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/apply.lean#L84">tactic.fapply'</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>))</div></div>
+   <p>Same as <code>apply'</code> but __all__ arguments that weren't inferred are added to goal list.</p>
+ </ul></div><div class="decl def" id="tactic.eapply'">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/apply.lean#L87">tactic.eapply'</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>))</div></div>
+   <p>Same as <code>apply'</code> but only goals that don't depend on other goals are added to goal list.</p>
+ </ul></div><div class="decl def" id="tactic.reflexivity'">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/apply.lean#L103">tactic.reflexivity'</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency.semireducible">tactic.transparency.semireducible</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Similar to <code>reflexivity</code> with the difference that <code>apply'</code> is used instead of <code>apply</code></p>
+ </ul></div><div class="decl def" id="tactic.symmetry'">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/apply.lean#L107">tactic.symmetry'</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency.semireducible">tactic.transparency.semireducible</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Similar to <code>symmetry</code> with the difference that <code>apply'</code> is used instead of <code>apply</code></p>
+ </ul></div><div class="decl def" id="tactic.transitivity'">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/apply.lean#L111">tactic.transitivity'</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency.semireducible">tactic.transparency.semireducible</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Similar to <code>transitivity</code> with the difference that <code>apply'</code> is used instead of <code>apply</code></p>
+ </ul></div><div class="decl def" id="tactic.interactive.apply'">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/apply.lean#L123">tactic.interactive.apply'</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.types.texpr">interactive.types.texpr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Similarly to <code>apply</code>, the <code>apply'</code> tactic tries to match the current goal against the conclusion of the type of term.</p>
+
+<p>It differs from <code>apply</code> in that it does not unfold definition in order to find out what the assumptions of the provided term is. It is especially useful when defining relations on function spaces (e.g. <code>≤</code>) so that rules like transitivity on <code>le : (α → β) → (α → β) → (α → β)</code> will be considered to have three parameters and two assumptions (i.e. <code>f g h : α → β</code>, <code>H₀ : f ≤ g</code>, <code>H₁ : g ≤ h</code>) instead of three parameters, two assumptions and then one more parameter (i.e. <code>f g h : α → β</code>, <code>H₀ : f ≤ g</code>, <code>H₁ : g ≤ h</code>, <code>x : α</code>). Whereas <code>apply</code> would expect the goal <code>f x ≤ h x</code>, <code>apply'</code> will work with the goal <code>f ≤ h</code>.</p>
+ </ul></div><div class="decl def" id="tactic.interactive.fapply'">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/apply.lean#L129">tactic.interactive.fapply'</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.types.texpr">interactive.types.texpr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Similar to the <code>apply'</code> tactic, but does not reorder goals.</p>
+ </ul></div><div class="decl def" id="tactic.interactive.eapply'">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/apply.lean#L135">tactic.interactive.eapply'</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.types.texpr">interactive.types.texpr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Similar to the <code>apply'</code> tactic, but only creates subgoals for non-dependent premises that have not been fixed by type inference or type class resolution.</p>
+ </ul></div><div class="decl def" id="tactic.interactive.apply_with'">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/apply.lean#L141">tactic.interactive.apply_with'</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.pexpr">lean.parser.pexpr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.apply_cfg">tactic.apply_cfg</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Similar to the <code>apply'</code> tactic, but allows the user to provide a <code>apply_cfg</code> configuration object.</p>
+ </ul></div><div class="decl def" id="tactic.interactive.mapply'">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/apply.lean#L148">tactic.interactive.mapply'</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.types.texpr">interactive.types.texpr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Similar to the <code>apply'</code> tactic, but uses matching instead of unification.
+<code>mapply' t</code> is equivalent to <code>apply_with' t {unify := ff}</code></p>
+ </ul></div><div class="decl def" id="tactic.interactive.reflexivity'">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/apply.lean#L155">tactic.interactive.reflexivity'</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Similar to <code>reflexivity</code> with the difference that <code>apply'</code> is used instead of <code>apply</code>.</p>
+ </ul></div><div class="decl def" id="tactic.interactive.refl'">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/apply.lean#L161">tactic.interactive.refl'</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Shorter name for the tactic <code>reflexivity'</code>.</p>
+ </ul></div><div class="decl def" id="tactic.interactive.symmetry'">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/apply.lean#L167">tactic.interactive.symmetry'</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.types.location">interactive.types.location</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p><code>symmetry'</code> behaves like <code>symmetry</code> but also offers the option <code>symmetry' at h</code> to apply symmetry to assumption <code>h</code></p>
+ </ul></div><div class="decl def" id="tactic.interactive.transitivity'">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/apply.lean#L174">tactic.interactive.transitivity'</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a>
+  (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/alternative.html#optional">optional</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.types.texpr">interactive.types.texpr</a>) →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Similar to <code>transitivity</code> with the difference that <code>apply'</code> is used instead of <code>apply</code>.</p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +913,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1141,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,176 +1264,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="mod_doc">
-<p>This file provides an alternative implementation for <code>apply</code> to fix the so-called "apply bug".</p>
-
-<p>The issue arises when the goals is a Π-type -- whether it is visible or hidden behind a definition.</p>
-
-<p>For instance, consider the following proof:</p>
-
-<pre><code>example {α β} (x y z : α → β) (h₀ : x ≤ y) (h₁ : y ≤ z) : x ≤ z :=
-begin
-  apply le_trans,
-end
-</code></pre>
-
-<p>Because <code>x ≤ z</code> is definitionally equal to <code>∀ i, x i ≤ z i</code>, <code>apply</code> will fail. The alternative definition,
-<code>apply'</code> fixes this. When <code>apply</code> would work, <code>apply</code> is used and otherwise, a different strategy is deployed</p>
-</div><div class="def"><a id="tactic.reorder_goals"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/apply.lean#L31">tactic.reorder_goals</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> × α) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.new_goals">tactic.new_goals</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> α</div>
-<p>With <code>gs</code> a list of proof goals, <code>reorder_goals gs new_g</code> will use the <code>new_goals</code> policy <code>new_g</code> to rearrange the
-   dependent goals to either drop them, push them to the end of the list or leave them in place. The <code>bool</code> values in
-   <code>gs</code> indicates whether the goal is dependent or not.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span></li>
-
-
-
-</ul></div><div class="def"><a id="tactic.apply'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/apply.lean#L78">tactic.apply'</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
-<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.apply_cfg">tactic.apply_cfg</a>
-  {md := tactic.transparency.semireducible,
-   approx := bool.tt,
-   new_goals := tactic.new_goals.non_dep_first,
-   instances := bool.tt,
-   <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#auto_param">auto_param</a> := bool.tt,
-   <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> := bool.tt,
-   unify := bool.tt} →
-<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>))</div>
-<p><code>apply'</code> mimics the behavior of <code>apply_core</code>. When
-<code>apply_core</code> fails, it is retried by providing the term with meta
-variables as additional arguments. The meta variables can then
-become new goals depending on the <code>cfg.new_goals</code> policy.</p>
-
-<p><code>apply'</code> also finds instances and applies opt_params and auto_params.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.fapply'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/apply.lean#L84">tactic.fapply'</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>))</div>
-<p>Same as <code>apply'</code> but __all__ arguments that weren't inferred are added to goal list.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.eapply'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/apply.lean#L87">tactic.eapply'</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>))</div>
-<p>Same as <code>apply'</code> but only goals that don't depend on other goals are added to goal list.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.reflexivity'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/apply.lean#L103">tactic.reflexivity'</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a> tactic.transparency.semireducible → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Similar to <code>reflexivity</code> with the difference that <code>apply'</code> is used instead of <code>apply</code></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.symmetry'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/apply.lean#L107">tactic.symmetry'</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a> tactic.transparency.semireducible → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Similar to <code>symmetry</code> with the difference that <code>apply'</code> is used instead of <code>apply</code></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.transitivity'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/apply.lean#L111">tactic.transitivity'</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a> tactic.transparency.semireducible → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Similar to <code>transitivity</code> with the difference that <code>apply'</code> is used instead of <code>apply</code></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.interactive.apply'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/apply.lean#L123">tactic.interactive.apply'</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.types.texpr">interactive.types.texpr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Similarly to <code>apply</code>, the <code>apply'</code> tactic tries to match the current goal against the conclusion of the type of term.</p>
-
-<p>It differs from <code>apply</code> in that it does not unfold definition in order to find out what the assumptions of the provided term is. It is especially useful when defining relations on function spaces (e.g. <code>≤</code>) so that rules like transitivity on <code>le : (α → β) → (α → β) → (α → β)</code> will be considered to have three parameters and two assumptions (i.e. <code>f g h : α → β</code>, <code>H₀ : f ≤ g</code>, <code>H₁ : g ≤ h</code>) instead of three parameters, two assumptions and then one more parameter (i.e. <code>f g h : α → β</code>, <code>H₀ : f ≤ g</code>, <code>H₁ : g ≤ h</code>, <code>x : α</code>). Whereas <code>apply</code> would expect the goal <code>f x ≤ h x</code>, <code>apply'</code> will work with the goal <code>f ≤ h</code>.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.interactive.fapply'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/apply.lean#L129">tactic.interactive.fapply'</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.types.texpr">interactive.types.texpr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Similar to the <code>apply'</code> tactic, but does not reorder goals.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.interactive.eapply'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/apply.lean#L135">tactic.interactive.eapply'</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.types.texpr">interactive.types.texpr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Similar to the <code>apply'</code> tactic, but only creates subgoals for non-dependent premises that have not been fixed by type inference or type class resolution.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.interactive.apply_with'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/apply.lean#L141">tactic.interactive.apply_with'</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.pexpr">lean.parser.pexpr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.apply_cfg">tactic.apply_cfg</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Similar to the <code>apply'</code> tactic, but allows the user to provide a <code>apply_cfg</code> configuration object.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.interactive.mapply'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/apply.lean#L148">tactic.interactive.mapply'</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.types.texpr">interactive.types.texpr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Similar to the <code>apply'</code> tactic, but uses matching instead of unification.
-<code>mapply' t</code> is equivalent to <code>apply_with' t {unify := ff}</code></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.interactive.reflexivity'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/apply.lean#L155">tactic.interactive.reflexivity'</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Similar to <code>reflexivity</code> with the difference that <code>apply'</code> is used instead of <code>apply</code>.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.interactive.refl'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/apply.lean#L161">tactic.interactive.refl'</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Shorter name for the tactic <code>reflexivity'</code>.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.interactive.symmetry'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/apply.lean#L167">tactic.interactive.symmetry'</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.types.location">interactive.types.location</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p><code>symmetry'</code> behaves like <code>symmetry</code> but also offers the option <code>symmetry' at h</code> to apply symmetry to assumption <code>h</code></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.interactive.transitivity'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/apply.lean#L174">tactic.interactive.transitivity'</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/alternative.html#optional">optional</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.types.texpr">interactive.types.texpr</a>) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Similar to <code>transitivity</code> with the difference that <code>apply'</code> is used instead of <code>apply</code>.</p>
-       <ul>
-
-
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">tactic.apply</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/apply.lean">(view source on GitHub)</a></div><a href="#tactic.apply'">tactic.apply'</a><br>
-<a href="#tactic.eapply'">tactic.eapply'</a><br>
-<a href="#tactic.fapply'">tactic.fapply'</a><br>
-<a href="#tactic.interactive.apply'">tactic.interactive.apply'</a><br>
-<a href="#tactic.interactive.apply_with'">tactic.interactive.apply_with'</a><br>
-<a href="#tactic.interactive.eapply'">tactic.interactive.eapply'</a><br>
-<a href="#tactic.interactive.fapply'">tactic.interactive.fapply'</a><br>
-<a href="#tactic.interactive.mapply'">tactic.interactive.mapply'</a><br>
-<a href="#tactic.interactive.refl'">tactic.interactive.refl'</a><br>
-<a href="#tactic.interactive.reflexivity'">tactic.interactive.reflexivity'</a><br>
-<a href="#tactic.interactive.symmetry'">tactic.interactive.symmetry'</a><br>
-<a href="#tactic.interactive.transitivity'">tactic.interactive.transitivity'</a><br>
-<a href="#tactic.reflexivity'">tactic.reflexivity'</a><br>
-<a href="#tactic.reorder_goals">tactic.reorder_goals</a><br>
-<a href="#tactic.symmetry'">tactic.symmetry'</a><br>
-<a href="#tactic.transitivity'">tactic.transitivity'</a><br>
 </div></div>
 
         </div>

@@ -7,7 +7,364 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">core.init.algebra.order</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean">(view source on GitHub)</a></div><a href="#decidable_eq_of_decidable_le">decidable_eq_of_decidable_le</a><br>
+<a href="#decidable_linear_order">decidable_linear_order</a><br>
+<a href="#decidable_linear_order.to_linear_order">decidable_linear_order.to_linear_order</a><br>
+<a href="#decidable_lt_of_decidable_le">decidable_lt_of_decidable_le</a><br>
+<a href="#eq.decidable">eq.decidable</a><br>
+<a href="#eq_or_lt_of_not_lt">eq_or_lt_of_not_lt</a><br>
+<a href="#ge_trans">ge_trans</a><br>
+<a href="#gt.trans">gt.trans</a><br>
+<a href="#gt_irrefl">gt_irrefl</a><br>
+<a href="#gt_of_ge_of_gt">gt_of_ge_of_gt</a><br>
+<a href="#gt_of_gt_of_ge">gt_of_gt_of_ge</a><br>
+<a href="#gt_trans">gt_trans</a><br>
+<a href="#has_le.le.decidable">has_le.le.decidable</a><br>
+<a href="#has_le.le.is_total_preorder">has_le.le.is_total_preorder</a><br>
+<a href="#has_lt.lt.decidable">has_lt.lt.decidable</a><br>
+<a href="#is_strict_total_order_of_decidable_linear_order">is_strict_total_order_of_decidable_linear_order</a><br>
+<a href="#is_strict_weak_order_of_decidable_linear_order">is_strict_weak_order_of_decidable_linear_order</a><br>
+<a href="#le_antisymm">le_antisymm</a><br>
+<a href="#le_antisymm_iff">le_antisymm_iff</a><br>
+<a href="#le_iff_lt_or_eq">le_iff_lt_or_eq</a><br>
+<a href="#le_not_le_of_lt">le_not_le_of_lt</a><br>
+<a href="#le_of_eq">le_of_eq</a><br>
+<a href="#le_of_eq_or_lt">le_of_eq_or_lt</a><br>
+<a href="#le_of_lt">le_of_lt</a><br>
+<a href="#le_of_lt_or_eq">le_of_lt_or_eq</a><br>
+<a href="#le_of_not_ge">le_of_not_ge</a><br>
+<a href="#le_of_not_gt">le_of_not_gt</a><br>
+<a href="#le_of_not_le">le_of_not_le</a><br>
+<a href="#le_or_gt">le_or_gt</a><br>
+<a href="#le_refl">le_refl</a><br>
+<a href="#le_total">le_total</a><br>
+<a href="#le_trans">le_trans</a><br>
+<a href="#linear_order">linear_order</a><br>
+<a href="#linear_order.to_partial_order">linear_order.to_partial_order</a><br>
+<a href="#lt.trans">lt.trans</a><br>
+<a href="#lt_asymm">lt_asymm</a><br>
+<a href="#lt_iff_le_not_le">lt_iff_le_not_le</a><br>
+<a href="#lt_iff_not_ge">lt_iff_not_ge</a><br>
+<a href="#lt_irrefl">lt_irrefl</a><br>
+<a href="#lt_of_le_not_le">lt_of_le_not_le</a><br>
+<a href="#lt_of_le_of_lt">lt_of_le_of_lt</a><br>
+<a href="#lt_of_le_of_ne">lt_of_le_of_ne</a><br>
+<a href="#lt_of_lt_of_le">lt_of_lt_of_le</a><br>
+<a href="#lt_of_not_ge">lt_of_not_ge</a><br>
+<a href="#lt_or_eq_of_le">lt_or_eq_of_le</a><br>
+<a href="#lt_or_ge">lt_or_ge</a><br>
+<a href="#lt_or_gt_of_ne">lt_or_gt_of_ne</a><br>
+<a href="#lt_trans">lt_trans</a><br>
+<a href="#lt_trichotomy">lt_trichotomy</a><br>
+<a href="#ne_iff_lt_or_gt">ne_iff_lt_or_gt</a><br>
+<a href="#ne_of_gt">ne_of_gt</a><br>
+<a href="#ne_of_lt">ne_of_lt</a><br>
+<a href="#not_le_of_gt">not_le_of_gt</a><br>
+<a href="#not_lt_of_ge">not_lt_of_ge</a><br>
+<a href="#not_lt_of_gt">not_lt_of_gt</a><br>
+<a href="#partial_order">partial_order</a><br>
+<a href="#partial_order.to_preorder">partial_order.to_preorder</a><br>
+<a href="#preorder">preorder</a><br>
+<a href="#preorder.to_has_le">preorder.to_has_le</a><br>
+<a href="#preorder.to_has_lt">preorder.to_has_lt</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="decl structure" id="preorder"><div class="attributes">@[class]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L19">preorder</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type u → Type u</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="preorder.le">le : α → α → Prop</li>
+<li class="structure_field" id="preorder.lt">lt : α → α → Prop</li>
+<li class="structure_field" id="preorder.le_refl">le_refl : ∀ (a : α), a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> a</li>
+<li class="structure_field" id="preorder.le_trans">le_trans : ∀ (a b c_1 : α), a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b → b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> c_1 → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> c_1</li>
+<li class="structure_field" id="preorder.lt_iff_le_not_le">lt_iff_le_not_le : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#auto_param">auto_param</a>
+  (∀ (a b : α),
+     a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a>
+       a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#not" title="not">¬</a>b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> a)
+  (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name.mk_string">name.mk_string</a> "order_laws_tac" <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name.anonymous">name.anonymous</a>)</li>
+</ul>  <p>A preorder is a reflexive, transitive relation <code>≤</code> with <code>a &lt; b</code> defined in the obvious way.</p>
+ <details class="instances"><summary>Instances</summary><ul><li><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#partial_order.to_preorder">partial_order.to_preorder</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/basic.html#directed_order.to_preorder">directed_order.to_preorder</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/basic.html#order_dual.preorder">order_dual.preorder</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/basic.html#pi.preorder">pi.preorder</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/basic.html#subtype.preorder">subtype.preorder</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/basic.html#prod.preorder">prod.preorder</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/bounded_lattice.html#with_bot.preorder">with_bot.preorder</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/bounded_lattice.html#with_top.preorder">with_top.preorder</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/algebra/ordered_group.html#units.preorder">units.preorder</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/algebra/ordered_group.html#with_zero.preorder">with_zero.preorder</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/rat/order.html#rat.preorder">rat.preorder</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/algebra/associated.html#associates.preorder">associates.preorder</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/finsupp.html#finsupp.preorder">finsupp.preorder</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/real/cau_seq.html#cau_seq.preorder">cau_seq.preorder</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/real/basic.html#real.preorder">real.preorder</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/measure_theory/integration.html#measure_theory.simple_func.preorder">measure_theory.simple_func.preorder</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/measure_theory/ae_eq_fun.html#measure_theory.ae_eq_fun.preorder">measure_theory.ae_eq_fun.preorder</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/zsqrtd/basic.html#zsqrtd.preorder">zsqrtd.preorder</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/lexicographic.html#lex_preorder">lex_preorder</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/lexicographic.html#dlex_preorder">dlex_preorder</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/filter/filter_product.html#filter.filter_product.preorder">filter.filter_product.preorder</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/set_theory/surreal.html#surreal.preorder">surreal.preorder</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/set_theory/ordinal_notation.html#onote.preorder">onote.preorder</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/set_theory/ordinal_notation.html#nonote.preorder">nonote.preorder</a></li></ul></details></ul></div><div class="decl def" id="preorder.to_has_le"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L19">preorder.to_has_le</a></span> <span class="decl_args">(α : Type u)</span> <span class="impl_arg"><span class="decl_args">[s : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le">has_le</a> α</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="preorder.to_has_lt"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L19">preorder.to_has_lt</a></span> <span class="decl_args">(α : Type u)</span> <span class="impl_arg"><span class="decl_args">[s : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt">has_lt</a> α</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="partial_order.to_preorder"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L26">partial_order.to_preorder</a></span> <span class="decl_args">(α : Type u)</span> <span class="impl_arg"><span class="decl_args">[s : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#partial_order">partial_order</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α</div></div>
+   <p></p>
+ </ul></div><div class="decl structure" id="partial_order"><div class="attributes">@[class]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L26">partial_order</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type u → Type u</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="partial_order.le">le : α → α → Prop</li>
+<li class="structure_field" id="partial_order.lt">lt : α → α → Prop</li>
+<li class="structure_field" id="partial_order.le_refl">le_refl : ∀ (a : α), a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> a</li>
+<li class="structure_field" id="partial_order.le_trans">le_trans : ∀ (a b c_1 : α), a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b → b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> c_1 → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> c_1</li>
+<li class="structure_field" id="partial_order.lt_iff_le_not_le">lt_iff_le_not_le : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#auto_param">auto_param</a>
+  (∀ (a b : α),
+     a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a>
+       a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#not" title="not">¬</a>b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> a)
+  (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name.mk_string">name.mk_string</a> "order_laws_tac" <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name.anonymous">name.anonymous</a>)</li>
+<li class="structure_field" id="partial_order.le_antisymm">le_antisymm : ∀ (a b : α), a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b → b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> a → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> b</li>
+</ul>  <p>A partial order is a reflexive, transitive, antisymmetric relation <code>≤</code>.</p>
+ <details class="instances"><summary>Instances</summary><ul><li><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order.to_partial_order">linear_order.to_partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_group.html#ordered_cancel_comm_monoid.to_partial_order">ordered_cancel_comm_monoid.to_partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_group.html#ordered_comm_group.to_partial_order">ordered_comm_group.to_partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/lattice.html#lattice.semilattice_sup.to_partial_order">lattice.semilattice_sup.to_partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/lattice.html#lattice.semilattice_inf.to_partial_order">lattice.semilattice_inf.to_partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/bounded_lattice.html#lattice.order_top.to_partial_order">lattice.order_top.to_partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/bounded_lattice.html#lattice.order_bot.to_partial_order">lattice.order_bot.to_partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/algebra/ordered_group.html#ordered_comm_monoid.to_partial_order">ordered_comm_monoid.to_partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/basic.html#order_dual.partial_order">order_dual.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/basic.html#pi.partial_order">pi.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/basic.html#subtype.partial_order">subtype.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/basic.html#prod.partial_order">prod.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/bounded_lattice.html#with_bot.partial_order">with_bot.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/bounded_lattice.html#with_top.partial_order">with_top.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/algebra/ordered_group.html#units.partial_order">units.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/algebra/ordered_group.html#with_zero.partial_order">with_zero.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/multiset.html#multiset.partial_order">multiset.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/finset.html#finset.partial_order">finset.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/rat/order.html#rat.partial_order">rat.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/nat/enat.html#enat.partial_order">enat.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/filter/basic.html#filter.partial_order">filter.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/topology/order.html#topological_space.partial_order">topological_space.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/topology/opens.html#topological_space.opens.partial_order">topological_space.opens.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/algebra/associated.html#associates.partial_order">associates.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/group_theory/submonoid.html#submonoid.partial_order">submonoid.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/group_theory/submonoid.html#add_submonoid.partial_order">add_submonoid.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/finsupp.html#finsupp.partial_order">finsupp.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/basic.html#submodule.partial_order">submodule.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/real/basic.html#real.partial_order">real.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/ring_theory/algebra.html#subalgebra.partial_order">subalgebra.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/setoid.html#setoid.partition.partial_order">setoid.partition.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/measure_theory/measurable_space.html#measurable_space.partial_order">measurable_space.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/measure_theory/measurable_space.html#measurable_space.dynkin_system.partial_order">measurable_space.dynkin_system.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/basic.html#uniform_space.partial_order">uniform_space.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/measure_theory/measure_space.html#measure_theory.measure.partial_order">measure_theory.measure.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/measure_theory/integration.html#measure_theory.simple_func.partial_order">measure_theory.simple_func.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/measure_theory/ae_eq_fun.html#measure_theory.ae_eq_fun.partial_order">measure_theory.ae_eq_fun.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/set_theory/ordinal.html#ordinal.partial_order">ordinal.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/lexicographic.html#lex_partial_order">lex_partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/lexicographic.html#dlex_partial_order">dlex_partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/filter/filter_product.html#filter.filter_product.partial_order">filter.filter_product.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/pilex.html#pilex.partial_order">pilex.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid.partial_order">structure_groupoid.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/set_theory/surreal.html#surreal.partial_order">surreal.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/pequiv.html#pequiv.partial_order">pequiv.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/semiquot.html#semiquot.partial_order">semiquot.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/topology/algebra/open_subgroup.html#open_subgroup.partial_order">open_subgroup.partial_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/topology/algebra/open_subgroup.html#open_add_subgroup.partial_order">open_add_subgroup.partial_order</a></li></ul></details></ul></div><div class="decl def" id="linear_order.to_partial_order"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L30">linear_order.to_partial_order</a></span> <span class="decl_args">(α : Type u)</span> <span class="impl_arg"><span class="decl_args">[s : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#partial_order">partial_order</a> α</div></div>
+   <p></p>
+ </ul></div><div class="decl structure" id="linear_order"><div class="attributes">@[class]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L30">linear_order</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type u → Type u</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="linear_order.le">le : α → α → Prop</li>
+<li class="structure_field" id="linear_order.lt">lt : α → α → Prop</li>
+<li class="structure_field" id="linear_order.le_refl">le_refl : ∀ (a : α), a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> a</li>
+<li class="structure_field" id="linear_order.le_trans">le_trans : ∀ (a b c_1 : α), a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b → b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> c_1 → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> c_1</li>
+<li class="structure_field" id="linear_order.lt_iff_le_not_le">lt_iff_le_not_le : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#auto_param">auto_param</a>
+  (∀ (a b : α),
+     a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a>
+       a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#not" title="not">¬</a>b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> a)
+  (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name.mk_string">name.mk_string</a> "order_laws_tac" <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name.anonymous">name.anonymous</a>)</li>
+<li class="structure_field" id="linear_order.le_antisymm">le_antisymm : ∀ (a b : α), a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b → b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> a → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> b</li>
+<li class="structure_field" id="linear_order.le_total">le_total : ∀ (a b : α), a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#or" title="or">∨</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> a</li>
+</ul>  <p>A linear order is reflexive, transitive, antisymmetric and total relation <code>≤</code>.</p>
+ <details class="instances"><summary>Instances</summary><ul><li><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#decidable_linear_order.to_linear_order">decidable_linear_order.to_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_semiring.to_linear_order">linear_ordered_semiring.to_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#linear_ordered_ring.to_linear_order">linear_ordered_ring.to_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/algebra/ordered_ring.html#linear_nonneg_ring.to_linear_order">linear_nonneg_ring.to_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/nat/lemmas.html#nat.linear_order">nat.linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/basic.html#order_dual.linear_order">order_dual.linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/basic.html#subtype.linear_order">subtype.linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/bounded_lattice.html#with_bot.linear_order">with_bot.linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/bounded_lattice.html#with_top.linear_order">with_top.linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/algebra/ordered_group.html#units.linear_order">units.linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/algebra/ordered_group.html#with_zero.linear_order">with_zero.linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/list/basic.html#list.linear_order">list.linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/rat/order.html#rat.linear_order">rat.linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/real/basic.html#real.linear_order">real.linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/set_theory/cardinal.html#cardinal.linear_order">cardinal.linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/lexicographic.html#lex_linear_order">lex_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/lexicographic.html#dlex_linear_order">dlex_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/filter/filter_product.html#filter.filter_product.linear_order">filter.filter_product.linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/pilex.html#pilex.linear_order">pilex.linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/set_theory/surreal.html#surreal.linear_order">surreal.linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/set_theory/ordinal_notation.html#nonote.linear_order">nonote.linear_order</a></li></ul></details></ul></div><div class="decl theorem" id="le_refl">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L33">le_refl</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="decl_args">(a : α)</span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> a</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="le_trans">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L36">le_trans</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b c : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b → b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> c → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> c</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="lt_iff_le_not_le">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L39">lt_iff_le_not_le</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a>
+  a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#not" title="not">¬</a>b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> a</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="lt_of_le_not_le">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L42">lt_of_le_not_le</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#not" title="not">¬</a>b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> a → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="le_not_le_of_lt">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L45">le_not_le_of_lt</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#not" title="not">¬</a>b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> a</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="le_antisymm">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L48">le_antisymm</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#partial_order">partial_order</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b → b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> a → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> b</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="le_of_eq">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L51">le_of_eq</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> b → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="le_antisymm_iff">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L54">le_antisymm_iff</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#partial_order">partial_order</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a> a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> a</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="ge_trans">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L57">ge_trans</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b c : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#ge" title="ge">≥</a> b → b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#ge" title="ge">≥</a> c → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#ge" title="ge">≥</a> c</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="le_total">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L60">le_total</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span></span> <span class="decl_args">(a b : α)</span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#or" title="or">∨</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> a</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="le_of_not_ge">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L63">le_of_not_ge</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#not" title="not">¬</a>a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#ge" title="ge">≥</a> b → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="le_of_not_le">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L66">le_of_not_le</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#not" title="not">¬</a>a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b → b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> a</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="lt_irrefl">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L69">lt_irrefl</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="decl_args">(a : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#not" title="not">¬</a>a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> a</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="gt_irrefl">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L74">gt_irrefl</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="decl_args">(a : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#not" title="not">¬</a>a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#gt" title="gt">></a> a</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="lt_trans">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L77">lt_trans</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b c : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b → b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> c → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> c</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="lt.trans">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L83">lt.trans</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b c : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b → b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> c → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> c</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="gt_trans">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L85">gt_trans</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b c : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#gt" title="gt">></a> b → b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#gt" title="gt">></a> c → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#gt" title="gt">></a> c</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="gt.trans">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L88">gt.trans</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b c : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#gt" title="gt">></a> b → b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#gt" title="gt">></a> c → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#gt" title="gt">></a> c</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="ne_of_lt">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L90">ne_of_lt</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#ne" title="ne">≠</a> b</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="ne_of_gt">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L93">ne_of_gt</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#gt" title="gt">></a> b → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#ne" title="ne">≠</a> b</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="lt_asymm">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L96">lt_asymm</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#not" title="not">¬</a>b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> a</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="not_lt_of_gt">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L99">not_lt_of_gt</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#gt" title="gt">></a> b → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#not" title="not">¬</a>a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="le_of_lt">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L102">le_of_lt</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="lt_of_lt_of_le">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L105">lt_of_lt_of_le</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b c : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b → b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> c → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> c</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="lt_of_le_of_lt">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L110">lt_of_le_of_lt</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b c : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b → b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> c → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> c</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="gt_of_gt_of_ge">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L115">gt_of_gt_of_ge</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b c : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#gt" title="gt">></a> b → b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#ge" title="ge">≥</a> c → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#gt" title="gt">></a> c</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="gt_of_ge_of_gt">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L118">gt_of_ge_of_gt</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b c : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#ge" title="ge">≥</a> b → b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#gt" title="gt">></a> c → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#gt" title="gt">></a> c</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="not_le_of_gt">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L121">not_le_of_gt</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#gt" title="gt">></a> b → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#not" title="not">¬</a>a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="not_lt_of_ge">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L124">not_lt_of_ge</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#ge" title="ge">≥</a> b → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#not" title="not">¬</a>a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="lt_or_eq_of_le">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L127">lt_or_eq_of_le</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#partial_order">partial_order</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#or" title="or">∨</a> a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> b</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="le_of_lt_or_eq">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L132">le_of_lt_or_eq</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#or" title="or">∨</a> a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> b → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="le_iff_lt_or_eq">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L136">le_iff_lt_or_eq</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#partial_order">partial_order</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a> a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#or" title="or">∨</a> a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> b</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="lt_of_le_of_ne">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L139">lt_of_le_of_ne</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#partial_order">partial_order</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#ne" title="ne">≠</a> b → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="lt_trichotomy">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L142">lt_trichotomy</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span></span> <span class="decl_args">(a b : α)</span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#or" title="or">∨</a> a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#or" title="or">∨</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> a</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="le_of_not_gt">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L151">le_of_not_gt</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#not" title="not">¬</a>a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#gt" title="gt">></a> b → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="lt_of_not_ge">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L158">lt_of_not_ge</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#not" title="not">¬</a>a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#ge" title="ge">≥</a> b → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="lt_or_ge">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L165">lt_or_ge</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span></span> <span class="decl_args">(a b : α)</span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#or" title="or">∨</a> a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#ge" title="ge">≥</a> b</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="le_or_gt">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L172">le_or_gt</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span></span> <span class="decl_args">(a b : α)</span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#or" title="or">∨</a> a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#gt" title="gt">></a> b</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="lt_or_gt_of_ne">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L175">lt_or_gt_of_ne</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#ne" title="ne">≠</a> b → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#or" title="or">∨</a> a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#gt" title="gt">></a> b</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="le_of_eq_or_lt">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L182">le_of_eq_or_lt</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#or" title="or">∨</a> a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="ne_iff_lt_or_gt">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L185">ne_iff_lt_or_gt</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#ne" title="ne">≠</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a> a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#or" title="or">∨</a> a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#gt" title="gt">></a> b</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="lt_iff_not_ge">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L188">lt_iff_not_ge</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span></span> <span class="decl_args">(x y : α)</span> <span class="decl_args">:</span>     <div class="decl_type">x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> y <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#not" title="not">¬</a>x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#ge" title="ge">≥</a> y</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="decidable_lt_of_decidable_le"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L191">decidable_lt_of_decidable_le</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_rel">decidable_rel</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le">has_le.le</a>]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_rel">decidable_rel</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt">has_lt.lt</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="decidable_eq_of_decidable_le"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L203">decidable_eq_of_decidable_le</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#partial_order">partial_order</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_rel">decidable_rel</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le">has_le.le</a>]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_eq">decidable_eq</a> α</div></div>
+   <p></p>
+ </ul></div><div class="decl structure" id="decidable_linear_order"><div class="attributes">@[class]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L215">decidable_linear_order</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type u → Type u</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="decidable_linear_order.le">le : α → α → Prop</li>
+<li class="structure_field" id="decidable_linear_order.lt">lt : α → α → Prop</li>
+<li class="structure_field" id="decidable_linear_order.le_refl">le_refl : ∀ (a : α), a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> a</li>
+<li class="structure_field" id="decidable_linear_order.le_trans">le_trans : ∀ (a b c_1 : α), a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b → b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> c_1 → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> c_1</li>
+<li class="structure_field" id="decidable_linear_order.lt_iff_le_not_le">lt_iff_le_not_le : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#auto_param">auto_param</a>
+  (∀ (a b : α),
+     a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a>
+       a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#not" title="not">¬</a>b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> a)
+  (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name.mk_string">name.mk_string</a> "order_laws_tac" <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name.anonymous">name.anonymous</a>)</li>
+<li class="structure_field" id="decidable_linear_order.le_antisymm">le_antisymm : ∀ (a b : α), a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b → b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> a → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> b</li>
+<li class="structure_field" id="decidable_linear_order.le_total">le_total : ∀ (a b : α), a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#or" title="or">∨</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> a</li>
+<li class="structure_field" id="decidable_linear_order.decidable_le">decidable_le : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_rel">decidable_rel</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le">has_le.le</a></li>
+<li class="structure_field" id="decidable_linear_order.decidable_eq">decidable_eq : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_eq">decidable_eq</a> α</li>
+<li class="structure_field" id="decidable_linear_order.decidable_lt">decidable_lt : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_rel">decidable_rel</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt">has_lt.lt</a></li>
+</ul>  <p></p>
+ <details class="instances"><summary>Instances</summary><ul><li><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_group.html#decidable_linear_ordered_comm_group.to_decidable_linear_order">decidable_linear_ordered_comm_group.to_decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_group.html#decidable_linear_ordered_cancel_comm_monoid.to_decidable_linear_order">decidable_linear_ordered_cancel_comm_monoid.to_decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ordered_ring.html#decidable_linear_ordered_semiring.to_decidable_linear_order">decidable_linear_ordered_semiring.to_decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/complete_lattice.html#lattice.complete_linear_order.to_decidable_linear_order">lattice.complete_linear_order.to_decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/conditionally_complete_lattice.html#lattice.conditionally_complete_linear_order.to_decidable_linear_order">lattice.conditionally_complete_linear_order.to_decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/conditionally_complete_lattice.html#lattice.conditionally_complete_linear_order_bot.to_decidable_linear_order">lattice.conditionally_complete_linear_order_bot.to_decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/basic.html#order_dual.decidable_linear_order">order_dual.decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/basic.html#subtype.decidable_linear_order">subtype.decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/bounded_lattice.html#with_bot.decidable_linear_order">with_bot.decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/bounded_lattice.html#with_top.decidable_linear_order">with_top.decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/algebra/ordered_group.html#units.decidable_linear_order">units.decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/algebra/ordered_group.html#with_zero.decidable_linear_order">with_zero.decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/fin.html#fin.decidable_linear_order">fin.decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/list/basic.html#list.decidable_linear_order">list.decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/char.html#char.decidable_linear_order">char.decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/string/basic.html#string.decidable_linear_order">string.decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/pnat/basic.html#pnat.decidable_linear_order">pnat.decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/rat/order.html#rat.decidable_linear_order">rat.decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/nat/enat.html#enat.decidable_linear_order">enat.decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/real/basic.html#real.decidable_linear_order">real.decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/real/nnreal.html#nnreal.decidable_linear_order">nnreal.decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/zsqrtd/basic.html#zsqrtd.decidable_linear_order">zsqrtd.decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/set_theory/cardinal.html#cardinal.decidable_linear_order">cardinal.decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/set_theory/ordinal.html#ordinal.decidable_linear_order">ordinal.decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/lexicographic.html#lex_decidable_linear_order">lex_decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/lexicographic.html#dlex_decidable_linear_order">dlex_decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/order/filter/filter_product.html#filter.filter_product.decidable_linear_order">filter.filter_product.decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/set_theory/ordinal_notation.html#nonote.decidable_linear_order">nonote.decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/num/lemmas.html#pos_num.decidable_linear_order">pos_num.decidable_linear_order</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/num/lemmas.html#znum.decidable_linear_order">znum.decidable_linear_order</a></li></ul></details></ul></div><div class="decl def" id="decidable_linear_order.to_linear_order"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L215">decidable_linear_order.to_linear_order</a></span> <span class="decl_args">(α : Type u)</span> <span class="impl_arg"><span class="decl_args">[s : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#decidable_linear_order">decidable_linear_order</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="has_lt.lt.decidable"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L221">has_lt.lt.decidable</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#decidable_linear_order">decidable_linear_order</a> α]</span></span> <span class="decl_args">(a b : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable">decidable</a> (a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="has_le.le.decidable"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L224">has_le.le.decidable</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#decidable_linear_order">decidable_linear_order</a> α]</span></span> <span class="decl_args">(a b : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable">decidable</a> (a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> b)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="eq.decidable"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L227">eq.decidable</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#decidable_linear_order">decidable_linear_order</a> α]</span></span> <span class="decl_args">(a b : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable">decidable</a> (a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> b)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="eq_or_lt_of_not_lt">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L230">eq_or_lt_of_not_lt</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#decidable_linear_order">decidable_linear_order</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{a b : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#not" title="not">¬</a>a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> b → a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#or" title="or">∨</a> b <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt" title="has_lt.lt"><</a> a</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="has_le.le.is_total_preorder"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L234">has_le.le.is_total_preorder</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#decidable_linear_order">decidable_linear_order</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/classes.html#is_total_preorder">is_total_preorder</a> α <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le">has_le.le</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="is_strict_weak_order_of_decidable_linear_order"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L238">is_strict_weak_order_of_decidable_linear_order</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#decidable_linear_order">decidable_linear_order</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/classes.html#is_strict_weak_order">is_strict_weak_order</a> α <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt">has_lt.lt</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="is_strict_total_order_of_decidable_linear_order"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/algebra/order.lean#L242">is_strict_total_order_of_decidable_linear_order</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#decidable_linear_order">decidable_linear_order</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/classes.html#is_strict_total_order">is_strict_total_order</a> α <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt.lt">has_lt.lt</a></div></div>
+   <p></p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +1164,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1392,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,530 +1515,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="structure"><a id="preorder"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L19">preorder</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type u → Type u</div>
-<p>A preorder is a reflexive, transitive relation <code>≤</code> with <code>a &lt; b</code> defined in the obvious way.</p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">preorder.le : α → α → Prop</div></li>
-<li><div class="structure_field">preorder.lt : α → α → Prop</div></li>
-<li><div class="structure_field">preorder.le_refl : ∀ (a : α), a ≤ a</div></li>
-<li><div class="structure_field">preorder.le_trans : ∀ (a b c_1 : α), a ≤ b → b ≤ c_1 → a ≤ c_1</div></li>
-<li><div class="structure_field">preorder.lt_iff_le_not_le : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#auto_param">auto_param</a> (∀ (a b : α), a < b ↔ a ≤ b ∧ ¬b ≤ a) (name.mk_string "order_laws_tac" name.anonymous)</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="preorder.to_has_le"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L19">preorder.to_has_le</a></span> <span class="decl_args">(α : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le">has_le</a> α</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[s : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="preorder.to_has_lt"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L19">preorder.to_has_lt</a></span> <span class="decl_args">(α : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_lt">has_lt</a> α</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[s : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="structure"><a id="partial_order"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L26">partial_order</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type u → Type u</div>
-<p>A partial order is a reflexive, transitive, antisymmetric relation <code>≤</code>.</p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">partial_order.le : α → α → Prop</div></li>
-<li><div class="structure_field">partial_order.lt : α → α → Prop</div></li>
-<li><div class="structure_field">partial_order.le_refl : ∀ (a : α), a ≤ a</div></li>
-<li><div class="structure_field">partial_order.le_trans : ∀ (a b c_1 : α), a ≤ b → b ≤ c_1 → a ≤ c_1</div></li>
-<li><div class="structure_field">partial_order.lt_iff_le_not_le : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#auto_param">auto_param</a> (∀ (a b : α), a < b ↔ a ≤ b ∧ ¬b ≤ a) (name.mk_string "order_laws_tac" name.anonymous)</div></li>
-<li><div class="structure_field">partial_order.le_antisymm : ∀ (a b : α), a ≤ b → b ≤ a → a = b</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="partial_order.to_preorder"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L26">partial_order.to_preorder</a></span> <span class="decl_args">(α : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[s : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#partial_order">partial_order</a> α]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="structure"><a id="linear_order"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L30">linear_order</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type u → Type u</div>
-<p>A linear order is reflexive, transitive, antisymmetric and total relation <code>≤</code>.</p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">linear_order.le : α → α → Prop</div></li>
-<li><div class="structure_field">linear_order.lt : α → α → Prop</div></li>
-<li><div class="structure_field">linear_order.le_refl : ∀ (a : α), a ≤ a</div></li>
-<li><div class="structure_field">linear_order.le_trans : ∀ (a b c_1 : α), a ≤ b → b ≤ c_1 → a ≤ c_1</div></li>
-<li><div class="structure_field">linear_order.lt_iff_le_not_le : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#auto_param">auto_param</a> (∀ (a b : α), a < b ↔ a ≤ b ∧ ¬b ≤ a) (name.mk_string "order_laws_tac" name.anonymous)</div></li>
-<li><div class="structure_field">linear_order.le_antisymm : ∀ (a b : α), a ≤ b → b ≤ a → a = b</div></li>
-<li><div class="structure_field">linear_order.le_total : ∀ (a b : α), a ≤ b ∨ b ≤ a</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="linear_order.to_partial_order"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L30">linear_order.to_partial_order</a></span> <span class="decl_args">(α : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#partial_order">partial_order</a> α</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[s : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="thm"><a id="le_refl"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L33">le_refl</a></span> <span class="decl_args">(a : α)</span> <span class="decl_args">:</span>       <div class="decl_type">a ≤ a</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="le_trans"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L36">le_trans</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a ≤ b → b ≤ c → a ≤ c</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span> <span class="impl_arg">{a b c : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="lt_iff_le_not_le"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L39">lt_iff_le_not_le</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a < b ↔ a ≤ b ∧ ¬b ≤ a</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="lt_of_le_not_le"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L42">lt_of_le_not_le</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a ≤ b → ¬b ≤ a → a < b</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="le_not_le_of_lt"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L45">le_not_le_of_lt</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a < b → a ≤ b ∧ ¬b ≤ a</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="le_antisymm"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L48">le_antisymm</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a ≤ b → b ≤ a → a = b</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#partial_order">partial_order</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="le_of_eq"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L51">le_of_eq</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a = b → a ≤ b</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="le_antisymm_iff"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L54">le_antisymm_iff</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a = b ↔ a ≤ b ∧ b ≤ a</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#partial_order">partial_order</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="ge_trans"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L57">ge_trans</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a ≥ b → b ≥ c → a ≥ c</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span> <span class="impl_arg">{a b c : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="le_total"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L60">le_total</a></span> <span class="decl_args">(a b : α)</span> <span class="decl_args">:</span>       <div class="decl_type">a ≤ b ∨ b ≤ a</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="le_of_not_ge"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L63">le_of_not_ge</a></span>  <span class="decl_args">:</span>       <div class="decl_type">¬a ≥ b → a ≤ b</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="le_of_not_le"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L66">le_of_not_le</a></span>  <span class="decl_args">:</span>       <div class="decl_type">¬a ≤ b → b ≤ a</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="lt_irrefl"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L69">lt_irrefl</a></span> <span class="decl_args">(a : α)</span> <span class="decl_args">:</span>       <div class="decl_type">¬a < a</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="gt_irrefl"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L74">gt_irrefl</a></span> <span class="decl_args">(a : α)</span> <span class="decl_args">:</span>       <div class="decl_type">¬a > a</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="lt_trans"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L77">lt_trans</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a < b → b < c → a < c</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span> <span class="impl_arg">{a b c : α}</span></li>
-
-
-
-</ul></div><div class="def"><a id="lt.trans"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L83">lt.trans</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a < b → b < c → a < c</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span> <span class="impl_arg">{a b c : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="gt_trans"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L85">gt_trans</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a > b → b > c → a > c</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span> <span class="impl_arg">{a b c : α}</span></li>
-
-
-
-</ul></div><div class="def"><a id="gt.trans"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L88">gt.trans</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a > b → b > c → a > c</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span> <span class="impl_arg">{a b c : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="ne_of_lt"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L90">ne_of_lt</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a < b → a ≠ b</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="ne_of_gt"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L93">ne_of_gt</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a > b → a ≠ b</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="lt_asymm"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L96">lt_asymm</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a < b → ¬b < a</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="not_lt_of_gt"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L99">not_lt_of_gt</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a > b → ¬a < b</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="le_of_lt"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L102">le_of_lt</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a < b → a ≤ b</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="lt_of_lt_of_le"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L105">lt_of_lt_of_le</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a < b → b ≤ c → a < c</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span> <span class="impl_arg">{a b c : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="lt_of_le_of_lt"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L110">lt_of_le_of_lt</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a ≤ b → b < c → a < c</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span> <span class="impl_arg">{a b c : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="gt_of_gt_of_ge"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L115">gt_of_gt_of_ge</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a > b → b ≥ c → a > c</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span> <span class="impl_arg">{a b c : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="gt_of_ge_of_gt"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L118">gt_of_ge_of_gt</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a ≥ b → b > c → a > c</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span> <span class="impl_arg">{a b c : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="not_le_of_gt"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L121">not_le_of_gt</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a > b → ¬a ≤ b</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="not_lt_of_ge"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L124">not_lt_of_ge</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a ≥ b → ¬a < b</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="lt_or_eq_of_le"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L127">lt_or_eq_of_le</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a ≤ b → a < b ∨ a = b</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#partial_order">partial_order</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="le_of_lt_or_eq"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L132">le_of_lt_or_eq</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a < b ∨ a = b → a ≤ b</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="le_iff_lt_or_eq"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L136">le_iff_lt_or_eq</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a ≤ b ↔ a < b ∨ a = b</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#partial_order">partial_order</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="lt_of_le_of_ne"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L139">lt_of_le_of_ne</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a ≤ b → a ≠ b → a < b</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#partial_order">partial_order</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="lt_trichotomy"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L142">lt_trichotomy</a></span> <span class="decl_args">(a b : α)</span> <span class="decl_args">:</span>       <div class="decl_type">a < b ∨ a = b ∨ b < a</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="le_of_not_gt"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L151">le_of_not_gt</a></span>  <span class="decl_args">:</span>       <div class="decl_type">¬a > b → a ≤ b</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="lt_of_not_ge"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L158">lt_of_not_ge</a></span>  <span class="decl_args">:</span>       <div class="decl_type">¬a ≥ b → a < b</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="lt_or_ge"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L165">lt_or_ge</a></span> <span class="decl_args">(a b : α)</span> <span class="decl_args">:</span>       <div class="decl_type">a < b ∨ a ≥ b</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="le_or_gt"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L172">le_or_gt</a></span> <span class="decl_args">(a b : α)</span> <span class="decl_args">:</span>       <div class="decl_type">a ≤ b ∨ a > b</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="lt_or_gt_of_ne"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L175">lt_or_gt_of_ne</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a ≠ b → a < b ∨ a > b</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="le_of_eq_or_lt"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L182">le_of_eq_or_lt</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a = b ∨ a < b → a ≤ b</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="ne_iff_lt_or_gt"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L185">ne_iff_lt_or_gt</a></span>  <span class="decl_args">:</span>       <div class="decl_type">a ≠ b ↔ a < b ∨ a > b</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="lt_iff_not_ge"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L188">lt_iff_not_ge</a></span> <span class="decl_args">(x y : α)</span> <span class="decl_args">:</span>       <div class="decl_type">x < y ↔ ¬x ≥ y</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="decidable_lt_of_decidable_le"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L191">decidable_lt_of_decidable_le</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_rel">decidable_rel</a> has_lt.lt</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#preorder">preorder</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_rel">decidable_rel</a> has_le.le]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="decidable_eq_of_decidable_le"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L203">decidable_eq_of_decidable_le</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_eq">decidable_eq</a> α</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#partial_order">partial_order</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_rel">decidable_rel</a> has_le.le]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="structure"><a id="decidable_linear_order"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L215">decidable_linear_order</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type u → Type u</div>
-<p></p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">decidable_linear_order.le : α → α → Prop</div></li>
-<li><div class="structure_field">decidable_linear_order.lt : α → α → Prop</div></li>
-<li><div class="structure_field">decidable_linear_order.le_refl : ∀ (a : α), a ≤ a</div></li>
-<li><div class="structure_field">decidable_linear_order.le_trans : ∀ (a b c_1 : α), a ≤ b → b ≤ c_1 → a ≤ c_1</div></li>
-<li><div class="structure_field">decidable_linear_order.lt_iff_le_not_le : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#auto_param">auto_param</a> (∀ (a b : α), a < b ↔ a ≤ b ∧ ¬b ≤ a) (name.mk_string "order_laws_tac" name.anonymous)</div></li>
-<li><div class="structure_field">decidable_linear_order.le_antisymm : ∀ (a b : α), a ≤ b → b ≤ a → a = b</div></li>
-<li><div class="structure_field">decidable_linear_order.le_total : ∀ (a b : α), a ≤ b ∨ b ≤ a</div></li>
-<li><div class="structure_field">decidable_linear_order.decidable_le : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_rel">decidable_rel</a> has_le.le</div></li>
-<li><div class="structure_field">decidable_linear_order.decidable_eq : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_eq">decidable_eq</a> α</div></li>
-<li><div class="structure_field">decidable_linear_order.decidable_lt : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_rel">decidable_rel</a> has_lt.lt</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="decidable_linear_order.to_linear_order"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L215">decidable_linear_order.to_linear_order</a></span> <span class="decl_args">(α : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#linear_order">linear_order</a> α</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[s : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#decidable_linear_order">decidable_linear_order</a> α]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="has_lt.lt.decidable"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L221">has_lt.lt.decidable</a></span> <span class="decl_args">(a b : α)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable">decidable</a> (a < b)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#decidable_linear_order">decidable_linear_order</a> α]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="has_le.le.decidable"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L224">has_le.le.decidable</a></span> <span class="decl_args">(a b : α)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable">decidable</a> (a ≤ b)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#decidable_linear_order">decidable_linear_order</a> α]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="eq.decidable"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L227">eq.decidable</a></span> <span class="decl_args">(a b : α)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable">decidable</a> (a = b)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#decidable_linear_order">decidable_linear_order</a> α]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="thm"><a id="eq_or_lt_of_not_lt"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L230">eq_or_lt_of_not_lt</a></span>  <span class="decl_args">:</span>       <div class="decl_type">¬a < b → a = b ∨ b < a</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#decidable_linear_order">decidable_linear_order</a> α]</span> <span class="impl_arg">{a b : α}</span></li>
-
-
-
-</ul></div><div class="def"><a id="has_le.le.is_total_preorder"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L234">has_le.le.is_total_preorder</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/classes.html#is_total_preorder">is_total_preorder</a> α has_le.le</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#decidable_linear_order">decidable_linear_order</a> α]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="is_strict_weak_order_of_decidable_linear_order"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L238">is_strict_weak_order_of_decidable_linear_order</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/classes.html#is_strict_weak_order">is_strict_weak_order</a> α has_lt.lt</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#decidable_linear_order">decidable_linear_order</a> α]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="is_strict_total_order_of_decidable_linear_order"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean#L242">is_strict_total_order_of_decidable_linear_order</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/classes.html#is_strict_total_order">is_strict_total_order</a> α has_lt.lt</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#decidable_linear_order">decidable_linear_order</a> α]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">core.init.algebra.order</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/algebra/order.lean">(view source on GitHub)</a></div><a href="#decidable_eq_of_decidable_le">decidable_eq_of_decidable_le</a><br>
-<a href="#decidable_linear_order">decidable_linear_order</a><br>
-<a href="#decidable_linear_order.to_linear_order">decidable_linear_order.to_linear_order</a><br>
-<a href="#decidable_lt_of_decidable_le">decidable_lt_of_decidable_le</a><br>
-<a href="#eq.decidable">eq.decidable</a><br>
-<a href="#eq_or_lt_of_not_lt">eq_or_lt_of_not_lt</a><br>
-<a href="#ge_trans">ge_trans</a><br>
-<a href="#gt.trans">gt.trans</a><br>
-<a href="#gt_irrefl">gt_irrefl</a><br>
-<a href="#gt_of_ge_of_gt">gt_of_ge_of_gt</a><br>
-<a href="#gt_of_gt_of_ge">gt_of_gt_of_ge</a><br>
-<a href="#gt_trans">gt_trans</a><br>
-<a href="#has_le.le.decidable">has_le.le.decidable</a><br>
-<a href="#has_le.le.is_total_preorder">has_le.le.is_total_preorder</a><br>
-<a href="#has_lt.lt.decidable">has_lt.lt.decidable</a><br>
-<a href="#is_strict_total_order_of_decidable_linear_order">is_strict_total_order_of_decidable_linear_order</a><br>
-<a href="#is_strict_weak_order_of_decidable_linear_order">is_strict_weak_order_of_decidable_linear_order</a><br>
-<a href="#le_antisymm">le_antisymm</a><br>
-<a href="#le_antisymm_iff">le_antisymm_iff</a><br>
-<a href="#le_iff_lt_or_eq">le_iff_lt_or_eq</a><br>
-<a href="#le_not_le_of_lt">le_not_le_of_lt</a><br>
-<a href="#le_of_eq">le_of_eq</a><br>
-<a href="#le_of_eq_or_lt">le_of_eq_or_lt</a><br>
-<a href="#le_of_lt">le_of_lt</a><br>
-<a href="#le_of_lt_or_eq">le_of_lt_or_eq</a><br>
-<a href="#le_of_not_ge">le_of_not_ge</a><br>
-<a href="#le_of_not_gt">le_of_not_gt</a><br>
-<a href="#le_of_not_le">le_of_not_le</a><br>
-<a href="#le_or_gt">le_or_gt</a><br>
-<a href="#le_refl">le_refl</a><br>
-<a href="#le_total">le_total</a><br>
-<a href="#le_trans">le_trans</a><br>
-<a href="#linear_order">linear_order</a><br>
-<a href="#linear_order.to_partial_order">linear_order.to_partial_order</a><br>
-<a href="#lt.trans">lt.trans</a><br>
-<a href="#lt_asymm">lt_asymm</a><br>
-<a href="#lt_iff_le_not_le">lt_iff_le_not_le</a><br>
-<a href="#lt_iff_not_ge">lt_iff_not_ge</a><br>
-<a href="#lt_irrefl">lt_irrefl</a><br>
-<a href="#lt_of_le_not_le">lt_of_le_not_le</a><br>
-<a href="#lt_of_le_of_lt">lt_of_le_of_lt</a><br>
-<a href="#lt_of_le_of_ne">lt_of_le_of_ne</a><br>
-<a href="#lt_of_lt_of_le">lt_of_lt_of_le</a><br>
-<a href="#lt_of_not_ge">lt_of_not_ge</a><br>
-<a href="#lt_or_eq_of_le">lt_or_eq_of_le</a><br>
-<a href="#lt_or_ge">lt_or_ge</a><br>
-<a href="#lt_or_gt_of_ne">lt_or_gt_of_ne</a><br>
-<a href="#lt_trans">lt_trans</a><br>
-<a href="#lt_trichotomy">lt_trichotomy</a><br>
-<a href="#ne_iff_lt_or_gt">ne_iff_lt_or_gt</a><br>
-<a href="#ne_of_gt">ne_of_gt</a><br>
-<a href="#ne_of_lt">ne_of_lt</a><br>
-<a href="#not_le_of_gt">not_le_of_gt</a><br>
-<a href="#not_lt_of_ge">not_lt_of_ge</a><br>
-<a href="#not_lt_of_gt">not_lt_of_gt</a><br>
-<a href="#partial_order">partial_order</a><br>
-<a href="#partial_order.to_preorder">partial_order.to_preorder</a><br>
-<a href="#preorder">preorder</a><br>
-<a href="#preorder.to_has_le">preorder.to_has_le</a><br>
-<a href="#preorder.to_has_lt">preorder.to_has_lt</a><br>
 </div></div>
 
         </div>

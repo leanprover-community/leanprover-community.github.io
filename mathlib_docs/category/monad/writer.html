@@ -7,7 +7,134 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">category.monad.writer</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean">(view source on GitHub)</a></div><a href="#except_t.monad_writer">except_t.monad_writer</a><br>
+<a href="#except_t.pass_aux">except_t.pass_aux</a><br>
+<a href="#monad_writer">monad_writer</a><br>
+<a href="#monad_writer_adapter">monad_writer_adapter</a><br>
+<a href="#monad_writer_adapter_trans">monad_writer_adapter_trans</a><br>
+<a href="#option_t.monad_writer">option_t.monad_writer</a><br>
+<a href="#option_t.pass_aux">option_t.pass_aux</a><br>
+<a href="#reader_t.monad_writer">reader_t.monad_writer</a><br>
+<a href="#state_t.monad_writer">state_t.monad_writer</a><br>
+<a href="#swap_right">swap_right</a><br>
+<a href="#writer">writer</a><br>
+<a href="#writer_t">writer_t</a><br>
+<a href="#writer_t.adapt">writer_t.adapt</a><br>
+<a href="#writer_t.bind">writer_t.bind</a><br>
+<a href="#writer_t.ext">writer_t.ext</a><br>
+<a href="#writer_t.has_monad_lift">writer_t.has_monad_lift</a><br>
+<a href="#writer_t.is_lawful_monad">writer_t.is_lawful_monad</a><br>
+<a href="#writer_t.lift">writer_t.lift</a><br>
+<a href="#writer_t.listen">writer_t.listen</a><br>
+<a href="#writer_t.monad">writer_t.monad</a><br>
+<a href="#writer_t.monad_except">writer_t.monad_except</a><br>
+<a href="#writer_t.monad_functor">writer_t.monad_functor</a><br>
+<a href="#writer_t.monad_map">writer_t.monad_map</a><br>
+<a href="#writer_t.monad_run">writer_t.monad_run</a><br>
+<a href="#writer_t.monad_writer">writer_t.monad_writer</a><br>
+<a href="#writer_t.monad_writer_adapter">writer_t.monad_writer_adapter</a><br>
+<a href="#writer_t.pass">writer_t.pass</a><br>
+<a href="#writer_t.pure">writer_t.pure</a><br>
+<a href="#writer_t.tell">writer_t.tell</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="decl structure" id="writer_t">     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L13">writer_t</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type u → (Type u → Type v) → Type u → Type (max u v)</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="writer_t.run">run : m (α <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> ω)</li>
+</ul>  <p></p>
+ </ul></div><div class="decl def" id="writer">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L16">writer</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type u → Type u → Type u</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="writer_t.ext"><div class="attributes">@[ext]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L29">writer_t.ext</a></span> <span class="impl_arg"><span class="decl_args">{ω : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{m : Type u → Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="decl_args">(x x' : <a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m α)</span> <span class="decl_args">:</span>     <div class="decl_type">x.<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t.run" title="writer_t.run">run</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> x'.<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t.run" title="writer_t.run">run</a> → x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> x'</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="writer_t.tell">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L33">writer_t.tell</a></span> <span class="impl_arg"><span class="decl_args">{ω : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{m : Type u → Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span></span> <span class="decl_args">:</span>     <div class="decl_type">ω → <a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit">punit</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="writer_t.listen">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L36">writer_t.listen</a></span> <span class="impl_arg"><span class="decl_args">{ω : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{m : Type u → Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m α → <a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m (α <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> ω)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="writer_t.pass">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L39">writer_t.pass</a></span> <span class="impl_arg"><span class="decl_args">{ω : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{m : Type u → Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m (α <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> (ω → ω)) → <a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m α</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="writer_t.pure">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L42">writer_t.pure</a></span> <span class="impl_arg"><span class="decl_args">{ω : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{m : Type u → Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> ω]</span></span> <span class="decl_args">:</span>     <div class="decl_type">α → <a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m α</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="writer_t.bind">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L45">writer_t.bind</a></span> <span class="impl_arg"><span class="decl_args">{ω : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{m : Type u → Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span></span> <span class="impl_arg"><span class="decl_args">{α β : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mul">has_mul</a> ω]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m α → (α → <a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m β) → <a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m β</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="writer_t.monad"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L50">writer_t.monad</a></span> <span class="impl_arg"><span class="decl_args">{ω : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{m : Type u → Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> ω]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mul">has_mul</a> ω]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> (<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="writer_t.is_lawful_monad"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L53">writer_t.is_lawful_monad</a></span> <span class="impl_arg"><span class="decl_args">{ω : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{m : Type u → Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> ω]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_monad">is_lawful_monad</a> m]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_monad">is_lawful_monad</a> (<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="writer_t.lift">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L58">writer_t.lift</a></span> <span class="impl_arg"><span class="decl_args">{ω : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{m : Type u → Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> ω]</span></span> <span class="decl_args">:</span>     <div class="decl_type">m α → <a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m α</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="writer_t.has_monad_lift"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L61">writer_t.has_monad_lift</a></span> <span class="impl_arg"><span class="decl_args">{ω : Type u}</span></span> <span class="decl_args">(m : Type u → Type u_1)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> ω]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lift.html#has_monad_lift">has_monad_lift</a> m (<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="writer_t.monad_map">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L64">writer_t.monad_map</a></span> <span class="impl_arg"><span class="decl_args">{ω : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{m : Type u → Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{m' : Type u → Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m']</span></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="decl_args">:</span>     <div class="decl_type">(Π {α : Type u}, m α → m' α) → <a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m α → <a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m' α</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="writer_t.monad_functor"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L67">writer_t.monad_functor</a></span> <span class="impl_arg"><span class="decl_args">{ω : Type u}</span></span> <span class="decl_args">(m m' : Type u → Type u_1)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m']</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lift.html#monad_functor">monad_functor</a> m m' (<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m) (<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m')</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="writer_t.adapt">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L70">writer_t.adapt</a></span> <span class="impl_arg"><span class="decl_args">{ω : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{m : Type u → Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span></span> <span class="impl_arg"><span class="decl_args">{ω' α : Type u}</span></span> <span class="decl_args">:</span>     <div class="decl_type">(ω → ω') → <a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m α → <a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω' m α</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="writer_t.monad_except"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L73">writer_t.monad_except</a></span> <span class="impl_arg"><span class="decl_args">{ω : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{m : Type u → Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span></span> <span class="decl_args">(ε : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#out_param">out_param</a> (Type u_1))</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> ω]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/except.html#monad_except">monad_except</a> ε m]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/except.html#monad_except">monad_except</a> ε (<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m)</div></div>
+   <p></p>
+ </ul></div><div class="decl structure" id="monad_writer"><div class="attributes">@[class]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L90">monad_writer</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#out_param">out_param</a> (Type u) → (Type u → Type v) → Type (max (u+1) v)</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="monad_writer.tell">tell : ω → m <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit">punit</a></li>
+<li class="structure_field" id="monad_writer.listen">listen : Π {α : Type ?}, m α → m (α <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> ω)</li>
+<li class="structure_field" id="monad_writer.pass">pass : Π {α : Type ?}, m (α <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> (ω → ω)) → m α</li>
+</ul>  <p>An implementation of <a href="https://hackage.haskell.org/package/mtl-2.2.2/docs/Control-Monad-Reader-Class.html#t:MonadReader">MonadReader</a>.
+   It does not contain <code>local</code> because this function cannot be lifted using <code>monad_lift</code>.
+   Instead, the <code>monad_reader_adapter</code> class provides the more general <code>adapt_reader</code> function.</p>
+
+<p>Note: This class can be seen as a simplification of the more "principled" definition
+   <code>lean
+   class monad_reader (ρ : out_param (Type u)) (n : Type u → Type u) :=
+   (lift {} {α : Type u} : (∀ {m : Type u → Type u} [monad m], reader_t ρ m α) → n α)
+</code></p>
+ <details class="instances"><summary>Instances</summary><ul><li><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t.monad_writer">writer_t.monad_writer</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#reader_t.monad_writer">reader_t.monad_writer</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#state_t.monad_writer">state_t.monad_writer</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#except_t.monad_writer">except_t.monad_writer</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#option_t.monad_writer">option_t.monad_writer</a></li></ul></details></ul></div><div class="decl def" id="writer_t.monad_writer"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L97">writer_t.monad_writer</a></span> <span class="impl_arg"><span class="decl_args">{ω : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{m : Type u → Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#monad_writer">monad_writer</a> ω (<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="reader_t.monad_writer"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L102">reader_t.monad_writer</a></span> <span class="impl_arg"><span class="decl_args">{ω ρ : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{m : Type u → Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#monad_writer">monad_writer</a> ω m]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#monad_writer">monad_writer</a> ω (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/reader.html#reader_t">reader_t</a> ρ m)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="swap_right">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L107">swap_right</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">{γ : Type u_3}</span></span> <span class="decl_args">:</span>     <div class="decl_type">(α <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> β) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> γ → (α <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> γ) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> β</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="state_t.monad_writer"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L110">state_t.monad_writer</a></span> <span class="impl_arg"><span class="decl_args">{ω σ : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{m : Type u → Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#monad_writer">monad_writer</a> ω m]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#monad_writer">monad_writer</a> ω (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/state.html#state_t">state_t</a> σ m)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="except_t.pass_aux">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L116">except_t.pass_aux</a></span> <span class="impl_arg"><span class="decl_args">{ε : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{α : Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">{ω : Type u_3}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/except.html#except">except</a> ε (α <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> (ω → ω)) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/except.html#except">except</a> ε α <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> (ω → ω)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="except_t.monad_writer"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L120">except_t.monad_writer</a></span> <span class="impl_arg"><span class="decl_args">{ω ε : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{m : Type u → Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#monad_writer">monad_writer</a> ω m]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#monad_writer">monad_writer</a> ω (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/except.html#except_t">except_t</a> ε m)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="option_t.pass_aux">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L125">option_t.pass_aux</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{ω : Type u_2}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> (α <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> (ω → ω)) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> α <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> (ω → ω)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="option_t.monad_writer"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L129">option_t.monad_writer</a></span> <span class="impl_arg"><span class="decl_args">{ω : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{m : Type u → Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#monad_writer">monad_writer</a> ω m]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#monad_writer">monad_writer</a> ω (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/option.html#option_t">option_t</a> m)</div></div>
+   <p></p>
+ </ul></div><div class="decl structure" id="monad_writer_adapter"><div class="attributes">@[class]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L144">monad_writer_adapter</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#out_param">out_param</a> (Type u) →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#out_param">out_param</a> (Type u) → (Type u → Type v) → (Type u → Type v) → Type (max (u+1) v)</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="monad_writer_adapter.adapt_writer">adapt_writer : Π {α : Type ?}, (ω → ω') → m α → m' α</li>
+</ul>  <p>Adapt a monad stack, changing the type of its top-most environment.</p>
+
+<p>This class is comparable to <a href="https://hackage.haskell.org/package/lens-4.15.4/docs/Control-Lens-Zoom.html#t:Magnify">Control.Lens.Magnify</a>, but does not use lenses (why would it), and is derived automatically for any transformer implementing <code>monad_functor</code>.</p>
+
+<p>Note: This class can be seen as a simplification of the more "principled" definition
+   <code>lean
+   class monad_reader_functor (ρ ρ' : out_param (Type u)) (n n' : Type u → Type u) :=
+   (map {} {α : Type u} : (∀ {m : Type u → Type u} [monad m], reader_t ρ m α → reader_t ρ' m α) → n α → n' α)
+</code></p>
+ <details class="instances"><summary>Instances</summary><ul><li><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#monad_writer_adapter_trans">monad_writer_adapter_trans</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t.monad_writer_adapter">writer_t.monad_writer_adapter</a></li></ul></details></ul></div><div class="decl def" id="monad_writer_adapter_trans"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L152">monad_writer_adapter_trans</a></span> <span class="impl_arg"><span class="decl_args">{ω ω' : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{m m' n n' : Type u → Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lift.html#monad_functor">monad_functor</a> m m' n n']</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#monad_writer_adapter">monad_writer_adapter</a> ω ω' m m']</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#monad_writer_adapter">monad_writer_adapter</a> ω ω' n n'</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="writer_t.monad_writer_adapter"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L155">writer_t.monad_writer_adapter</a></span> <span class="impl_arg"><span class="decl_args">{ω ω' : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{m : Type u → Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#monad_writer_adapter">monad_writer_adapter</a> ω ω' (<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m)
+  (<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω' m)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="writer_t.monad_run"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/monad/writer.lean#L159">writer_t.monad_run</a></span> <span class="decl_args">(ω : Type u)</span> <span class="decl_args">(m : Type u → Type (max u u_1))</span> <span class="decl_args">(out : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#out_param">out_param</a> (Type u → Type (max u u_1)))</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lift.html#monad_run">monad_run</a> out m]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lift.html#monad_run">monad_run</a> (λ (α : Type u), out (α <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> ω)) (<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m)</div></div>
+   <p></p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +934,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1162,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,273 +1285,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="structure"><a id="writer_t"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L13">writer_t</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type u → (Type u → Type v) → Type u → Type (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/functions.html#max">max</a> u v)</div>
-<p></p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">writer_t.run : m (α × ω)</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="writer"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L16">writer</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type u → Type u → Type u</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="thm"><a id="writer_t.ext"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L29">writer_t.ext</a></span> <span class="decl_args">(x x' : <a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m α)</span> <span class="decl_args">:</span>       <div class="decl_type">x.run = x'.run → x = x'</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{ω : Type u}</span> <span class="impl_arg">{m : Type u → Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span> <span class="impl_arg">{α : Type u}</span></li>
-<li>Attributes: ext</li>
-
-
-</ul></div><div class="def"><a id="writer_t.tell"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L33">writer_t.tell</a></span>  <span class="decl_args">:</span>       <div class="decl_type">ω → <a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit">punit</a></div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{ω : Type u}</span> <span class="impl_arg">{m : Type u → Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span></li>
-
-
-
-</ul></div><div class="def"><a id="writer_t.listen"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L36">writer_t.listen</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m α → <a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m (α × ω)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{ω : Type u}</span> <span class="impl_arg">{m : Type u → Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span> <span class="impl_arg">{α : Type u}</span></li>
-
-
-
-</ul></div><div class="def"><a id="writer_t.pass"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L39">writer_t.pass</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m (α × (ω → ω)) → <a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m α</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{ω : Type u}</span> <span class="impl_arg">{m : Type u → Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span> <span class="impl_arg">{α : Type u}</span></li>
-
-
-
-</ul></div><div class="def"><a id="writer_t.pure"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L42">writer_t.pure</a></span>  <span class="decl_args">:</span>       <div class="decl_type">α → <a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m α</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{ω : Type u}</span> <span class="impl_arg">{m : Type u → Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span> <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> ω]</span></li>
-
-
-
-</ul></div><div class="def"><a id="writer_t.bind"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L45">writer_t.bind</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m α → (α → <a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m β) → <a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m β</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{ω : Type u}</span> <span class="impl_arg">{m : Type u → Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span> <span class="impl_arg">{α β : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mul">has_mul</a> ω]</span></li>
-
-
-
-</ul></div><div class="def"><a id="writer_t.monad"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L50">writer_t.monad</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> (<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{ω : Type u}</span> <span class="impl_arg">{m : Type u → Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> ω]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mul">has_mul</a> ω]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="writer_t.is_lawful_monad"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L53">writer_t.is_lawful_monad</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_monad">is_lawful_monad</a> (<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{ω : Type u}</span> <span class="impl_arg">{m : Type u → Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> ω]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_monad">is_lawful_monad</a> m]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="writer_t.lift"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L58">writer_t.lift</a></span>  <span class="decl_args">:</span>       <div class="decl_type">m α → <a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m α</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{ω : Type u}</span> <span class="impl_arg">{m : Type u → Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span> <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> ω]</span></li>
-
-
-
-</ul></div><div class="def"><a id="writer_t.has_monad_lift"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L61">writer_t.has_monad_lift</a></span> <span class="decl_args">(m : Type u → Type u_1)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lift.html#has_monad_lift">has_monad_lift</a> m (<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{ω : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> ω]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="writer_t.monad_map"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L64">writer_t.monad_map</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(Π {α : Type u}, m α → m' α) → <a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m α → <a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m' α</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{ω : Type u}</span> <span class="impl_arg">{m : Type u → Type u_1}</span> <span class="impl_arg">{m' : Type u → Type u_2}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m']</span> <span class="impl_arg">{α : Type u}</span></li>
-
-
-
-</ul></div><div class="def"><a id="writer_t.monad_functor"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L67">writer_t.monad_functor</a></span> <span class="decl_args">(m m' : Type u → Type u_1)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lift.html#monad_functor">monad_functor</a> m m' (<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m) (<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m')</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{ω : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m']</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="writer_t.adapt"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L70">writer_t.adapt</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(ω → ω') → <a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m α → <a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω' m α</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{ω : Type u}</span> <span class="impl_arg">{m : Type u → Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span> <span class="impl_arg">{ω' α : Type u}</span></li>
-
-
-
-</ul></div><div class="def"><a id="writer_t.monad_except"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L73">writer_t.monad_except</a></span> <span class="decl_args">(ε : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#out_param">out_param</a> (Type u_1))</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/except.html#monad_except">monad_except</a> ε (<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{ω : Type u}</span> <span class="impl_arg">{m : Type u → Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> ω]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/except.html#monad_except">monad_except</a> ε m]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="structure"><a id="monad_writer"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L90">monad_writer</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#out_param">out_param</a> (Type u) → (Type u → Type v) → Type (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/functions.html#max">max</a> (u+1) v)</div>
-<p>An implementation of <a href="https://hackage.haskell.org/package/mtl-2.2.2/docs/Control-Monad-Reader-Class.html#t:MonadReader">MonadReader</a>.
-   It does not contain <code>local</code> because this function cannot be lifted using <code>monad_lift</code>.
-   Instead, the <code>monad_reader_adapter</code> class provides the more general <code>adapt_reader</code> function.</p>
-
-<p>Note: This class can be seen as a simplification of the more "principled" definition
-   <code>lean
-   class monad_reader (ρ : out_param (Type u)) (n : Type u → Type u) :=
-   (lift {} {α : Type u} : (∀ {m : Type u → Type u} [monad m], reader_t ρ m α) → n α)
-</code></p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">monad_writer.tell : ω → m <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit">punit</a></div></li>
-<li><div class="structure_field">monad_writer.listen : Π {α : Type ?}, m α → m (α × ω)</div></li>
-<li><div class="structure_field">monad_writer.pass : Π {α : Type ?}, m (α × (ω → ω)) → m α</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="writer_t.monad_writer"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L97">writer_t.monad_writer</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#monad_writer">monad_writer</a> ω (<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{ω : Type u}</span> <span class="impl_arg">{m : Type u → Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="reader_t.monad_writer"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L102">reader_t.monad_writer</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#monad_writer">monad_writer</a> ω (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/reader.html#reader_t">reader_t</a> ρ m)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{ω ρ : Type u}</span> <span class="impl_arg">{m : Type u → Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#monad_writer">monad_writer</a> ω m]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="swap_right"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L107">swap_right</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(α × β) × γ → (α × γ) × β</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{β : Type u_2}</span> <span class="impl_arg">{γ : Type u_3}</span></li>
-
-
-
-</ul></div><div class="def"><a id="state_t.monad_writer"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L110">state_t.monad_writer</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#monad_writer">monad_writer</a> ω (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/state.html#state_t">state_t</a> σ m)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{ω σ : Type u}</span> <span class="impl_arg">{m : Type u → Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#monad_writer">monad_writer</a> ω m]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="except_t.pass_aux"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L116">except_t.pass_aux</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/except.html#except">except</a> ε (α × (ω → ω)) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/except.html#except">except</a> ε α × (ω → ω)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{ε : Type u_1}</span> <span class="impl_arg">{α : Type u_2}</span> <span class="impl_arg">{ω : Type u_3}</span></li>
-
-
-
-</ul></div><div class="def"><a id="except_t.monad_writer"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L120">except_t.monad_writer</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#monad_writer">monad_writer</a> ω (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/except.html#except_t">except_t</a> ε m)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{ω ε : Type u}</span> <span class="impl_arg">{m : Type u → Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#monad_writer">monad_writer</a> ω m]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="option_t.pass_aux"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L125">option_t.pass_aux</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> (α × (ω → ω)) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> α × (ω → ω)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{ω : Type u_2}</span></li>
-
-
-
-</ul></div><div class="def"><a id="option_t.monad_writer"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L129">option_t.monad_writer</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#monad_writer">monad_writer</a> ω (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/option.html#option_t">option_t</a> m)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{ω : Type u}</span> <span class="impl_arg">{m : Type u → Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#monad_writer">monad_writer</a> ω m]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="structure"><a id="monad_writer_adapter"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L144">monad_writer_adapter</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#out_param">out_param</a> (Type u) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#out_param">out_param</a> (Type u) → (Type u → Type v) → (Type u → Type v) → Type (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/functions.html#max">max</a> (u+1) v)</div>
-<p>Adapt a monad stack, changing the type of its top-most environment.</p>
-
-<p>This class is comparable to <a href="https://hackage.haskell.org/package/lens-4.15.4/docs/Control-Lens-Zoom.html#t:Magnify">Control.Lens.Magnify</a>, but does not use lenses (why would it), and is derived automatically for any transformer implementing <code>monad_functor</code>.</p>
-
-<p>Note: This class can be seen as a simplification of the more "principled" definition
-   <code>lean
-   class monad_reader_functor (ρ ρ' : out_param (Type u)) (n n' : Type u → Type u) :=
-   (map {} {α : Type u} : (∀ {m : Type u → Type u} [monad m], reader_t ρ m α → reader_t ρ' m α) → n α → n' α)
-</code></p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">monad_writer_adapter.adapt_writer : Π {α : Type ?}, (ω → ω') → m α → m' α</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="monad_writer_adapter_trans"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L152">monad_writer_adapter_trans</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#monad_writer_adapter">monad_writer_adapter</a> ω ω' n n'</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{ω ω' : Type u}</span> <span class="impl_arg">{m m' n n' : Type u → Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lift.html#monad_functor">monad_functor</a> m m' n n']</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#monad_writer_adapter">monad_writer_adapter</a> ω ω' m m']</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="writer_t.monad_writer_adapter"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L155">writer_t.monad_writer_adapter</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#monad_writer_adapter">monad_writer_adapter</a> ω ω' (<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m) (<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω' m)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{ω ω' : Type u}</span> <span class="impl_arg">{m : Type u → Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/monad.html#monad">monad</a> m]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="writer_t.monad_run"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean#L159">writer_t.monad_run</a></span> <span class="decl_args">(ω : Type u)</span> <span class="decl_args">(m : Type u → Type (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/functions.html#max">max</a> u u_1))</span> <span class="decl_args">(out : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#out_param">out_param</a> (Type u → Type (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/functions.html#max">max</a> u u_1)))</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lift.html#monad_run">monad_run</a> (λ (α : Type u), out (α × ω)) (<a href="https://leanprover-community.github.io/mathlib_docs/category/monad/writer.html#writer_t">writer_t</a> ω m)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lift.html#monad_run">monad_run</a> out m]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">category.monad.writer</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/monad/writer.lean">(view source on GitHub)</a></div><a href="#except_t.monad_writer">except_t.monad_writer</a><br>
-<a href="#except_t.pass_aux">except_t.pass_aux</a><br>
-<a href="#monad_writer">monad_writer</a><br>
-<a href="#monad_writer_adapter">monad_writer_adapter</a><br>
-<a href="#monad_writer_adapter_trans">monad_writer_adapter_trans</a><br>
-<a href="#option_t.monad_writer">option_t.monad_writer</a><br>
-<a href="#option_t.pass_aux">option_t.pass_aux</a><br>
-<a href="#reader_t.monad_writer">reader_t.monad_writer</a><br>
-<a href="#state_t.monad_writer">state_t.monad_writer</a><br>
-<a href="#swap_right">swap_right</a><br>
-<a href="#writer">writer</a><br>
-<a href="#writer_t">writer_t</a><br>
-<a href="#writer_t.adapt">writer_t.adapt</a><br>
-<a href="#writer_t.bind">writer_t.bind</a><br>
-<a href="#writer_t.ext">writer_t.ext</a><br>
-<a href="#writer_t.has_monad_lift">writer_t.has_monad_lift</a><br>
-<a href="#writer_t.is_lawful_monad">writer_t.is_lawful_monad</a><br>
-<a href="#writer_t.lift">writer_t.lift</a><br>
-<a href="#writer_t.listen">writer_t.listen</a><br>
-<a href="#writer_t.monad">writer_t.monad</a><br>
-<a href="#writer_t.monad_except">writer_t.monad_except</a><br>
-<a href="#writer_t.monad_functor">writer_t.monad_functor</a><br>
-<a href="#writer_t.monad_map">writer_t.monad_map</a><br>
-<a href="#writer_t.monad_run">writer_t.monad_run</a><br>
-<a href="#writer_t.monad_writer">writer_t.monad_writer</a><br>
-<a href="#writer_t.monad_writer_adapter">writer_t.monad_writer_adapter</a><br>
-<a href="#writer_t.pass">writer_t.pass</a><br>
-<a href="#writer_t.pure">writer_t.pure</a><br>
-<a href="#writer_t.tell">writer_t.tell</a><br>
 </div></div>
 
         </div>

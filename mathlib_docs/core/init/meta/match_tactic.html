@@ -7,7 +7,132 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">core.init.meta.match_tactic</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/match_tactic.lean">(view source on GitHub)</a></div><a href="#tactic.has_to_tactic_format">tactic.has_to_tactic_format</a><br>
+<a href="#tactic.match_expr">tactic.match_expr</a><br>
+<a href="#tactic.match_hypothesis">tactic.match_hypothesis</a><br>
+<a href="#tactic.match_pattern">tactic.match_pattern</a><br>
+<a href="#tactic.match_subexpr">tactic.match_subexpr</a><br>
+<a href="#tactic.match_target">tactic.match_target</a><br>
+<a href="#tactic.match_target_subexpr">tactic.match_target_subexpr</a><br>
+<a href="#tactic.mk_pattern">tactic.mk_pattern</a><br>
+<a href="#tactic.pattern">tactic.pattern</a><br>
+<a href="#tactic.pexpr_to_pattern">tactic.pexpr_to_pattern</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="decl structure" id="tactic.pattern">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/match_tactic.lean#L36">tactic.pattern</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="tactic.pattern.target">target : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></li>
+<li class="structure_field" id="tactic.pattern.uoutput">uoutput : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/level.html#level">level</a></li>
+<li class="structure_field" id="tactic.pattern.moutput">moutput : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></li>
+<li class="structure_field" id="tactic.pattern.nuvars">nuvars : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a></li>
+<li class="structure_field" id="tactic.pattern.nmvars">nmvars : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a></li>
+</ul>  <p>A pattern is an expression <code>target</code> containing temporary metavariables.
+A pattern also contains a list of <code>outputs</code> which also depend on these temporary metavariables.
+When we run <code>match p e</code>, the system will match <code>p.target</code> with <code>e</code> and assign
+the temporary metavariables. It then returns the outputs with the assigned variables.</p>
+
+<h2>Fields</h2>
+
+<ul>
+<li><code>target</code> Term to match. Contains temporary metavariables.</li>
+<li><code>uoutput</code> List of universes that are returned on a successful match.</li>
+<li><code>moutput</code> List of expressions that are returned on a successful match.</li>
+<li><code>nuvars</code> Number of (temporary) universe metavariables in this pattern.</li>
+<li><code>nmvars</code> Number of (temporary) metavariables in this pattern.</li>
+</ul>
+
+<h2>Example</h2>
+
+<p>The pattern for <code>list.cons h t</code> returning <code>h</code> and <code>t</code> would be</p>
+
+<pre><code>{ target  := `(@list.cons ?x_0 ?x_1 ?x_2),
+  uoutput := [],
+  moutput := [?x_1,?x_2],
+  nuvars  := 0,
+  nmvars  := 3
+}
+</code></pre>
+ </ul></div><div class="decl constant" id="tactic.mk_pattern">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/match_tactic.lean#L61">tactic.mk_pattern</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/level.html#level">level</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/level.html#level">level</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/match_tactic.html#tactic.pattern">tactic.pattern</a></div></div>
+   <p><code>mk_pattern umetas emetas target uoutput eoutput</code> creates a new pattern. The arguments are</p>
+
+<ul>
+<li><code>umetas</code> a list of level params to be replaced with temporary universe metavariables.</li>
+<li><code>emetas</code> a list of local constants to be replaced with temporary metavariables.</li>
+<li><code>target</code> the expression to be matched.</li>
+<li><code>uoutput</code> a list of levels to return upon matching. Fails if this depends on metavariables.</li>
+<li><code>eoutput</code> a list of expressions to return upon matching. Fails if this depends on metavariables.</li>
+</ul>
+
+<p>The procedure is as follows:</p>
+
+<ol>
+<li>Convert all metavariables in <code>target</code> to temporary metavariables.</li>
+<li>For each item in <code>umetas</code> amd <code>emetas</code>, create a temporary
+metavariable and replace each instance of the item in <code>target</code> with a temporary metavariable</li>
+<li>Replace these instances in <code>uoutput</code> and <code>eoutput</code> too.</li>
+<li>Return these replaced versions as a <code>pattern</code>.</li>
+</ol>
+
+<h2>Example</h2>
+
+<p>Let <code>h</code>,<code>t</code> be exprs with types <code>α</code> and <code>list α</code> respectively.
+Then <code>mk_pattern [] [α,h,t]</code>(@list.cons α h t) [] [h,t]<code>would</code>match_pattern` against any expr which is a list.cons constructor and return the head and tail arguments.</p>
+ </ul></div><div class="decl constant" id="tactic.match_pattern">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/match_tactic.lean#L65">tactic.match_pattern</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/match_tactic.html#tactic.pattern">tactic.pattern</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency.reducible">tactic.transparency.reducible</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/level.html#level">level</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div></div>
+   <p><code>mk_pattern p e m</code> matches (pattern.target p) and e using transparency m.
+  If the matching is successful, then return the instantiation of <code>pattern.output p</code>.
+  The tactic fails if not all (temporary) meta-variables are assigned.</p>
+ </ul></div><div class="decl def" id="tactic.pexpr_to_pattern">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/match_tactic.lean#L80">tactic.pexpr_to_pattern</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/match_tactic.html#tactic.pattern">tactic.pattern</a></div></div>
+   <p>Given a pre-term of the form <code>λ x₁ ... xₙ, t[x₁, ..., xₙ]</code>, converts it
+  into the pattern <code>t[?x₁, ..., ?xₙ]</code> with outputs <code>[?x₁, ..., ?xₙ]</code></p>
+ </ul></div><div class="decl def" id="tactic.match_expr">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/match_tactic.lean#L90">tactic.match_expr</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency.reducible">tactic.transparency.reducible</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div></div>
+   <p>Convert pre-term into a pattern and try to match e.
+  Given p of the form <code>λ x₁ ... xₙ, t[x₁, ..., xₙ]</code>, a successful
+  match will produce a list of length n.</p>
+ </ul></div><div class="decl def" id="tactic.match_subexpr">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/match_tactic.lean#L106">tactic.match_subexpr</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency.reducible">tactic.transparency.reducible</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div></div>
+   <p>Similar to match_expr, but it tries to match a subexpression of e.
+  Remark: the procedure does not go inside binders.</p>
+ </ul></div><div class="decl def" id="tactic.match_target">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/match_tactic.lean#L111">tactic.match_target</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency.reducible">tactic.transparency.reducible</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div></div>
+   <p>Match the main goal target.</p>
+ </ul></div><div class="decl def" id="tactic.match_target_subexpr">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/match_tactic.lean#L115">tactic.match_target_subexpr</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency.reducible">tactic.transparency.reducible</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div></div>
+   <p>Match a subterm in the main goal target.</p>
+ </ul></div><div class="decl def" id="tactic.match_hypothesis">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/match_tactic.lean#L128">tactic.match_hypothesis</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency.reducible">tactic.transparency.reducible</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div></div>
+   <p>Match hypothesis in the main goal target.
+  The result is pair (hypothesis, substitution).</p>
+ </ul></div><div class="decl def" id="tactic.has_to_tactic_format"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/match_tactic.lean#L133">tactic.has_to_tactic_format</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#has_to_tactic_format">has_to_tactic_format</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/match_tactic.html#tactic.pattern">tactic.pattern</a></div></div>
+   <p></p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +932,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1160,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,157 +1283,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="structure"><a id="tactic.pattern"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/match_tactic.lean#L36">tactic.pattern</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p>A pattern is an expression <code>target</code> containing temporary metavariables.
-A pattern also contains a list of <code>outputs</code> which also depend on these temporary metavariables.
-When we run <code>match p e</code>, the system will match <code>p.target</code> with <code>e</code> and assign
-the temporary metavariables. It then returns the outputs with the assigned variables.</p>
-
-<h2>Fields</h2>
-
-<ul>
-<li><code>target</code> Term to match. Contains temporary metavariables.</li>
-<li><code>uoutput</code> List of universes that are returned on a successful match.</li>
-<li><code>moutput</code> List of expressions that are returned on a successful match.</li>
-<li><code>nuvars</code> Number of (temporary) universe metavariables in this pattern.</li>
-<li><code>nmvars</code> Number of (temporary) metavariables in this pattern.</li>
-</ul>
-
-<h2>Example</h2>
-
-<p>The pattern for <code>list.cons h t</code> returning <code>h</code> and <code>t</code> would be</p>
-
-<pre><code>{ target  := `(@list.cons ?x_0 ?x_1 ?x_2),
-  uoutput := [],
-  moutput := [?x_1,?x_2],
-  nuvars  := 0,
-  nmvars  := 3
-}
-</code></pre>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">tactic.pattern.target : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></li>
-<li><div class="structure_field">tactic.pattern.uoutput : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/level.html#level">level</a></div></li>
-<li><div class="structure_field">tactic.pattern.moutput : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></li>
-<li><div class="structure_field">tactic.pattern.nuvars : ℕ</div></li>
-<li><div class="structure_field">tactic.pattern.nmvars : ℕ</div></li>
-</ul></li>
-
-</ul></div><div class="cnst"><a id="tactic.mk_pattern"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/match_tactic.lean#L61">tactic.mk_pattern</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/level.html#level">level</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/level.html#level">level</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/match_tactic.html#tactic.pattern">tactic.pattern</a></div>
-<p><code>mk_pattern umetas emetas target uoutput eoutput</code> creates a new pattern. The arguments are</p>
-
-<ul>
-<li><code>umetas</code> a list of level params to be replaced with temporary universe metavariables.</li>
-<li><code>emetas</code> a list of local constants to be replaced with temporary metavariables.</li>
-<li><code>target</code> the expression to be matched.</li>
-<li><code>uoutput</code> a list of levels to return upon matching. Fails if this depends on metavariables.</li>
-<li><code>eoutput</code> a list of expressions to return upon matching. Fails if this depends on metavariables.</li>
-</ul>
-
-<p>The procedure is as follows:</p>
-
-<ol>
-<li>Convert all metavariables in <code>target</code> to temporary metavariables.</li>
-<li>For each item in <code>umetas</code> amd <code>emetas</code>, create a temporary
-metavariable and replace each instance of the item in <code>target</code> with a temporary metavariable</li>
-<li>Replace these instances in <code>uoutput</code> and <code>eoutput</code> too.</li>
-<li>Return these replaced versions as a <code>pattern</code>.</li>
-</ol>
-
-<h2>Example</h2>
-
-<p>Let <code>h</code>,<code>t</code> be exprs with types <code>α</code> and <code>list α</code> respectively.
-Then <code>mk_pattern [] [α,h,t]</code>(@list.cons α h t) [] [h,t]<code>would</code>match_pattern` against any expr which is a list.cons constructor and return the head and tail arguments.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="cnst"><a id="tactic.match_pattern"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/match_tactic.lean#L65">tactic.match_pattern</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/match_tactic.html#tactic.pattern">tactic.pattern</a> →
-<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a> tactic.transparency.reducible → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/level.html#level">level</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div>
-<p><code>mk_pattern p e m</code> matches (pattern.target p) and e using transparency m.
-  If the matching is successful, then return the instantiation of <code>pattern.output p</code>.
-  The tactic fails if not all (temporary) meta-variables are assigned.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.pexpr_to_pattern"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/match_tactic.lean#L80">tactic.pexpr_to_pattern</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/match_tactic.html#tactic.pattern">tactic.pattern</a></div>
-<p>Given a pre-term of the form <code>λ x₁ ... xₙ, t[x₁, ..., xₙ]</code>, converts it
-  into the pattern <code>t[?x₁, ..., ?xₙ]</code> with outputs <code>[?x₁, ..., ?xₙ]</code></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.match_expr"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/match_tactic.lean#L90">tactic.match_expr</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a> tactic.transparency.reducible → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div>
-<p>Convert pre-term into a pattern and try to match e.
-  Given p of the form <code>λ x₁ ... xₙ, t[x₁, ..., xₙ]</code>, a successful
-  match will produce a list of length n.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.match_subexpr"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/match_tactic.lean#L106">tactic.match_subexpr</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a> tactic.transparency.reducible → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div>
-<p>Similar to match_expr, but it tries to match a subexpression of e.
-  Remark: the procedure does not go inside binders.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.match_target"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/match_tactic.lean#L111">tactic.match_target</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a> tactic.transparency.reducible → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div>
-<p>Match the main goal target.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.match_target_subexpr"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/match_tactic.lean#L115">tactic.match_target_subexpr</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a> tactic.transparency.reducible → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div>
-<p>Match a subterm in the main goal target.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.match_hypothesis"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/match_tactic.lean#L128">tactic.match_hypothesis</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html#pexpr">pexpr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a> tactic.transparency.reducible → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div>
-<p>Match hypothesis in the main goal target.
-  The result is pair (hypothesis, substitution).</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.has_to_tactic_format"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/match_tactic.lean#L133">tactic.has_to_tactic_format</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#has_to_tactic_format">has_to_tactic_format</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/match_tactic.html#tactic.pattern">tactic.pattern</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">core.init.meta.match_tactic</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/match_tactic.lean">(view source on GitHub)</a></div><a href="#tactic.has_to_tactic_format">tactic.has_to_tactic_format</a><br>
-<a href="#tactic.match_expr">tactic.match_expr</a><br>
-<a href="#tactic.match_hypothesis">tactic.match_hypothesis</a><br>
-<a href="#tactic.match_pattern">tactic.match_pattern</a><br>
-<a href="#tactic.match_subexpr">tactic.match_subexpr</a><br>
-<a href="#tactic.match_target">tactic.match_target</a><br>
-<a href="#tactic.match_target_subexpr">tactic.match_target_subexpr</a><br>
-<a href="#tactic.mk_pattern">tactic.mk_pattern</a><br>
-<a href="#tactic.pattern">tactic.pattern</a><br>
-<a href="#tactic.pexpr_to_pattern">tactic.pexpr_to_pattern</a><br>
 </div></div>
 
         </div>

@@ -7,7 +7,197 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">tactic.ext</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ext.lean">(view source on GitHub)</a></div><a href="#derive_struct_ext_lemma">derive_struct_ext_lemma</a><br>
+<a href="#equiv_type_constr">equiv_type_constr</a><br>
+<a href="#ext_param">ext_param</a><br>
+<a href="#ext_param_type">ext_param_type</a><br>
+<a href="#extensional_attribute">extensional_attribute</a><br>
+<a href="#get_ext_subject">get_ext_subject</a><br>
+<a href="#opt_minus">opt_minus</a><br>
+<a href="#plift.ext">plift.ext</a><br>
+<a href="#saturate_fun">saturate_fun</a><br>
+<a href="#tactic.ext">tactic.ext</a><br>
+<a href="#tactic.ext1">tactic.ext1</a><br>
+<a href="#tactic.interactive.ext">tactic.interactive.ext</a><br>
+<a href="#tactic.interactive.ext1">tactic.interactive.ext1</a><br>
+<a href="#tactic.try_intros">tactic.try_intros</a><br>
+<a href="#ulift.ext">ulift.ext</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="decl def" id="derive_struct_ext_lemma">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ext.lean#L35">derive_struct_ext_lemma</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></div></div>
+   <p><code>derive_struct_ext_lemma n</code> generates two extensionality lemmas based on
+the equality of all non-propositional projections.</p>
+
+<p>On the following:</p>
+
+<pre><code>@[ext]
+structure foo (α : Type*) :=
+(x y : ℕ)
+(z : {z // z &lt; x})
+(k : α)
+(h : x &lt; y)
+</code></pre>
+
+<p><code>derive_struct_lemma</code> generates:</p>
+
+<pre><code>lemma foo.ext : ∀ {α : Type u_1} (x y : foo α), x.x = y.x → x.y = y.y → x.z == y.z → x.k = y.k → x = y
+lemma foo.ext_iff : ∀ {α : Type u_1} (x y : foo α), x = y ↔ x.x = y.x ∧ x.y = y.y ∧ x.z == y.z ∧ x.k = y.k
+</code></pre>
+ </ul></div><div class="decl def" id="get_ext_subject">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ext.lean#L102">get_ext_subject</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="ext_param_type">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ext.lean#L122">ext_param_type</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="opt_minus">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ext.lean#L124">opt_minus</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ext.html#ext_param_type">ext_param_type</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="ext_param">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ext.lean#L127">ext_param</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ext.html#ext_param_type">ext_param_type</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="saturate_fun">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ext.lean#L132">saturate_fun</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="equiv_type_constr">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ext.lean#L145">equiv_type_constr</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="extensional_attribute">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ext.lean#L233">extensional_attribute</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/attribute.html#user_attribute">user_attribute</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/rb_map.html#name_map">name_map</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a>)
+  (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a>
+     <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ext.html#ext_param_type">ext_param_type</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a>
+       <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a>
+         <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a>))</div></div>
+   <p>Tag lemmas of the form:</p>
+
+<pre><code>@[ext]
+lemma my_collection.ext (a b : my_collection)
+  (h : ∀ x, a.lookup x = b.lookup y) :
+  a = b := ...
+</code></pre>
+
+<p>The attribute indexes extensionality lemma using the type of the
+objects (i.e. <code>my_collection</code>) which it gets from the statement of
+the lemma.  In some cases, the same lemma can be used to state the
+extensionality of multiple types that are definitionally equivalent.</p>
+
+<pre><code>attribute [ext [(→),thunk,stream]] funext
+</code></pre>
+
+<p>Those parameters are cumulative. The following are equivalent:</p>
+
+<pre><code>attribute [ext [(→),thunk]] funext
+attribute [ext [stream]] funext
+</code></pre>
+
+<p>and</p>
+
+<pre><code>attribute [ext [(→),thunk,stream]] funext
+</code></pre>
+
+<p>One removes type names from the list for one lemma with:</p>
+
+<pre><code>attribute [ext [-stream,-thunk]] funext
+ ```
+
+Also, the following:
+
+```lean
+@[ext]
+lemma my_collection.ext (a b : my_collection)
+  (h : ∀ x, a.lookup x = b.lookup y) :
+  a = b := ...
+</code></pre>
+
+<p>is equivalent to</p>
+
+<pre><code>@[ext *]
+lemma my_collection.ext (a b : my_collection)
+  (h : ∀ x, a.lookup x = b.lookup y) :
+  a = b := ...
+</code></pre>
+
+<p>This allows us specify type synonyms along with the type
+that referred to in the lemma statement.</p>
+
+<pre><code>@[ext [*,my_type_synonym]]
+lemma my_collection.ext (a b : my_collection)
+  (h : ∀ x, a.lookup x = b.lookup y) :
+  a = b := ...
+</code></pre>
+
+<p>Attribute <code>ext</code> can be applied to a structure to generate its extensionality lemma:</p>
+
+<pre><code>@[ext]
+structure foo (α : Type*) :=
+(x y : ℕ)
+(z : {z // z &lt; x})
+(k : α)
+(h : x &lt; y)
+</code></pre>
+
+<p>will generate:</p>
+
+<pre><code>@[ext] lemma foo.ext : ∀ {α : Type u_1} (x y : foo α), x.x = y.x → x.y = y.y → x.z == y.z → x.k = y.k → x = y
+lemma foo.ext_iff : ∀ {α : Type u_1} (x y : foo α), x = y ↔ x.x = y.x ∧ x.y = y.y ∧ x.z == y.z ∧ x.k = y.k
+</code></pre>
+ </ul></div><div class="decl theorem" id="ulift.ext"><div class="attributes">@[ext]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ext.lean#L264">ulift.ext</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u₁}</span></span> <span class="decl_args">(X Y : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#ulift">ulift</a> α)</span> <span class="decl_args">:</span>     <div class="decl_type">X.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#ulift.down" title="ulift.down">down</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> Y.<a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#ulift.down" title="ulift.down">down</a> → X <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> Y</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="plift.ext"><div class="attributes">@[ext]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ext.lean#L271">plift.ext</a></span> <span class="impl_arg"><span class="decl_args">{P : Prop}</span></span> <span class="decl_args">(a b : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#plift">plift</a> P)</span> <span class="decl_args">:</span>     <div class="decl_type">a <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> b</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.try_intros">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ext.lean#L279">tactic.try_intros</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/rcases.html#tactic.ext_patt">tactic.ext_patt</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/rcases.html#tactic.ext_patt">tactic.ext_patt</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.ext1">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ext.lean#L287">tactic.ext1</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/rcases.html#tactic.ext_patt">tactic.ext_patt</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.apply_cfg">tactic.apply_cfg</a>
+  <span title="tactic.apply_cfg.mk">{</span><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.apply_cfg.md" title="tactic.apply_cfg.md">md</a> := <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency.semireducible">tactic.transparency.semireducible</a>,
+   <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.apply_cfg.approx" title="tactic.apply_cfg.approx">approx</a> := <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool.tt">bool.tt</a>,
+   <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.apply_cfg.new_goals" title="tactic.apply_cfg.new_goals">new_goals</a> := <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.new_goals.non_dep_first">tactic.new_goals.non_dep_first</a>,
+   <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.apply_cfg.instances" title="tactic.apply_cfg.instances">instances</a> := <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool.tt">bool.tt</a>,
+   <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.apply_cfg.auto_param" title="tactic.apply_cfg.auto_param">auto_param</a> := <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool.tt">bool.tt</a>,
+   <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.apply_cfg.opt_param" title="tactic.apply_cfg.opt_param">opt_param</a> := <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool.tt">bool.tt</a>,
+   <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.apply_cfg.unify" title="tactic.apply_cfg.unify">unify</a> := <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool.tt">bool.tt</a>} →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/rcases.html#tactic.ext_patt">tactic.ext_patt</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.ext">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ext.lean#L297">tactic.ext</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/rcases.html#tactic.ext_patt">tactic.ext_patt</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.interactive.ext1">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ext.lean#L312">tactic.interactive.ext1</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/rcases.html#tactic.ext_parse">tactic.ext_parse</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p><code>ext1 id</code> selects and apply one extensionality lemma (with attribute
+<code>ext</code>), using <code>id</code>, if provided, to name a local constant
+introduced by the lemma. If <code>id</code> is omitted, the local constant is
+named automatically, as per <code>intro</code>.</p>
+ </ul></div><div class="decl def" id="tactic.interactive.ext">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/ext.lean#L342">tactic.interactive.ext</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/rcases.html#tactic.ext_parse">tactic.ext_parse</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a>
+  (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/alternative.html#optional">optional</a>
+     (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.tk">lean.parser.tk</a> ":" <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#has_seq_right.seq_right" title="has_seq_right.seq_right">*></a>
+        <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.small_nat">lean.parser.small_nat</a>)) →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <ul>
+<li><code>ext</code> applies as many extensionality lemmas as possible;</li>
+<li><code>ext ids</code>, with <code>ids</code> a list of identifiers, finds extentionality and applies them
+until it runs out of identifiers in <code>ids</code> to name the local constants.</li>
+</ul>
+
+<p>When trying to prove:</p>
+
+<pre><code>α β : Type,
+f g : α → set β
+⊢ f = g
+</code></pre>
+
+<p>applying <code>ext x y</code> yields:</p>
+
+<pre><code>α β : Type,
+f g : α → set β,
+x : α,
+y : β
+⊢ y ∈ f x ↔ y ∈ f x
+</code></pre>
+
+<p>by applying functional extensionality and set extensionality.</p>
+
+<p>A maximum depth can be provided with <code>ext x y z : 3</code>.</p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +997,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1225,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,260 +1348,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="def"><a id="derive_struct_ext_lemma"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ext.lean#L35">derive_struct_ext_lemma</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></div>
-<p><code>derive_struct_ext_lemma n</code> generates two extensionality lemmas based on
-the equality of all non-propositional projections.</p>
-
-<p>On the following:</p>
-
-<pre><code>@[ext]
-structure foo (α : Type*) :=
-(x y : ℕ)
-(z : {z // z &lt; x})
-(k : α)
-(h : x &lt; y)
-</code></pre>
-
-<p><code>derive_struct_lemma</code> generates:</p>
-
-<pre><code>lemma foo.ext : ∀ {α : Type u_1} (x y : foo α), x.x = y.x → x.y = y.y → x.z == y.z → x.k = y.k → x = y
-lemma foo.ext_iff : ∀ {α : Type u_1} (x y : foo α), x = y ↔ x.x = y.x ∧ x.y = y.y ∧ x.z == y.z ∧ x.k = y.k
-</code></pre>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="get_ext_subject"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ext.lean#L102">get_ext_subject</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="ext_param_type"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ext.lean#L122">ext_param_type</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="opt_minus"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ext.lean#L124">opt_minus</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ext.html#ext_param_type">ext_param_type</a>)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="ext_param"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ext.lean#L127">ext_param</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ext.html#ext_param_type">ext_param_type</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="saturate_fun"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ext.lean#L132">saturate_fun</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="equiv_type_constr"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ext.lean#L145">equiv_type_constr</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="extensional_attribute"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ext.lean#L233">extensional_attribute</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/attribute.html#user_attribute">user_attribute</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/rb_map.html#name_map">name_map</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a>) (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/ext.html#ext_param_type">ext_param_type</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a>))</div>
-<p>Tag lemmas of the form:</p>
-
-<pre><code>@[ext]
-lemma my_collection.ext (a b : my_collection)
-  (h : ∀ x, a.lookup x = b.lookup y) :
-  a = b := ...
-</code></pre>
-
-<p>The attribute indexes extensionality lemma using the type of the
-objects (i.e. <code>my_collection</code>) which it gets from the statement of
-the lemma.  In some cases, the same lemma can be used to state the
-extensionality of multiple types that are definitionally equivalent.</p>
-
-<pre><code>attribute [ext [(→),thunk,stream]] funext
-</code></pre>
-
-<p>Those parameters are cumulative. The following are equivalent:</p>
-
-<pre><code>attribute [ext [(→),thunk]] funext
-attribute [ext [stream]] funext
-</code></pre>
-
-<p>and</p>
-
-<pre><code>attribute [ext [(→),thunk,stream]] funext
-</code></pre>
-
-<p>One removes type names from the list for one lemma with:</p>
-
-<pre><code>attribute [ext [-stream,-thunk]] funext
- ```
-
-Also, the following:
-
-```lean
-@[ext]
-lemma my_collection.ext (a b : my_collection)
-  (h : ∀ x, a.lookup x = b.lookup y) :
-  a = b := ...
-</code></pre>
-
-<p>is equivalent to</p>
-
-<pre><code>@[ext *]
-lemma my_collection.ext (a b : my_collection)
-  (h : ∀ x, a.lookup x = b.lookup y) :
-  a = b := ...
-</code></pre>
-
-<p>This allows us specify type synonyms along with the type
-that referred to in the lemma statement.</p>
-
-<pre><code>@[ext [*,my_type_synonym]]
-lemma my_collection.ext (a b : my_collection)
-  (h : ∀ x, a.lookup x = b.lookup y) :
-  a = b := ...
-</code></pre>
-
-<p>Attribute <code>ext</code> can be applied to a structure to generate its extensionality lemma:</p>
-
-<pre><code>@[ext]
-structure foo (α : Type*) :=
-(x y : ℕ)
-(z : {z // z &lt; x})
-(k : α)
-(h : x &lt; y)
-</code></pre>
-
-<p>will generate:</p>
-
-<pre><code>@[ext] lemma foo.ext : ∀ {α : Type u_1} (x y : foo α), x.x = y.x → x.y = y.y → x.z == y.z → x.k = y.k → x = y
-lemma foo.ext_iff : ∀ {α : Type u_1} (x y : foo α), x = y ↔ x.x = y.x ∧ x.y = y.y ∧ x.z == y.z ∧ x.k = y.k
-</code></pre>
-       <ul>
-
-
-
-
-</ul></div><div class="thm"><a id="ulift.ext"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ext.lean#L264">ulift.ext</a></span> <span class="decl_args">(X Y : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#ulift">ulift</a> α)</span> <span class="decl_args">:</span>       <div class="decl_type">X.down = Y.down → X = Y</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u₁}</span></li>
-<li>Attributes: ext</li>
-
-
-</ul></div><div class="thm"><a id="plift.ext"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ext.lean#L271">plift.ext</a></span> <span class="decl_args">(a b : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#plift">plift</a> P)</span> <span class="decl_args">:</span>       <div class="decl_type">a = b</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{P : Prop}</span></li>
-<li>Attributes: ext</li>
-
-
-</ul></div><div class="def"><a id="tactic.try_intros"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ext.lean#L279">tactic.try_intros</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/rcases.html#tactic.ext_patt">tactic.ext_patt</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/rcases.html#tactic.ext_patt">tactic.ext_patt</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.ext1"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ext.lean#L287">tactic.ext1</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/rcases.html#tactic.ext_patt">tactic.ext_patt</a> →
-<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.apply_cfg">tactic.apply_cfg</a>
-  {md := tactic.transparency.semireducible,
-   approx := bool.tt,
-   new_goals := tactic.new_goals.non_dep_first,
-   instances := bool.tt,
-   <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#auto_param">auto_param</a> := bool.tt,
-   <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> := bool.tt,
-   unify := bool.tt} →
-<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/rcases.html#tactic.ext_patt">tactic.ext_patt</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.ext"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ext.lean#L297">tactic.ext</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/rcases.html#tactic.ext_patt">tactic.ext_patt</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> ℕ → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.interactive.ext1"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ext.lean#L312">tactic.interactive.ext1</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/rcases.html#tactic.ext_parse">tactic.ext_parse</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p><code>ext1 id</code> selects and apply one extensionality lemma (with attribute
-<code>ext</code>), using <code>id</code>, if provided, to name a local constant
-introduced by the lemma. If <code>id</code> is omitted, the local constant is
-named automatically, as per <code>intro</code>.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.interactive.ext"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ext.lean#L342">tactic.interactive.ext</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/rcases.html#tactic.ext_parse">tactic.ext_parse</a> →
-<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/alternative.html#optional">optional</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.tk">lean.parser.tk</a> ":" *> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.small_nat">lean.parser.small_nat</a>)) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<ul>
-<li><code>ext</code> applies as many extensionality lemmas as possible;</li>
-<li><code>ext ids</code>, with <code>ids</code> a list of identifiers, finds extentionality and applies them
-until it runs out of identifiers in <code>ids</code> to name the local constants.</li>
-</ul>
-
-<p>When trying to prove:</p>
-
-<pre><code>α β : Type,
-f g : α → set β
-⊢ f = g
-</code></pre>
-
-<p>applying <code>ext x y</code> yields:</p>
-
-<pre><code>α β : Type,
-f g : α → set β,
-x : α,
-y : β
-⊢ y ∈ f x ↔ y ∈ f x
-</code></pre>
-
-<p>by applying functional extensionality and set extensionality.</p>
-
-<p>A maximum depth can be provided with <code>ext x y z : 3</code>.</p>
-       <ul>
-
-
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">tactic.ext</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/ext.lean">(view source on GitHub)</a></div><a href="#derive_struct_ext_lemma">derive_struct_ext_lemma</a><br>
-<a href="#equiv_type_constr">equiv_type_constr</a><br>
-<a href="#ext_param">ext_param</a><br>
-<a href="#ext_param_type">ext_param_type</a><br>
-<a href="#extensional_attribute">extensional_attribute</a><br>
-<a href="#get_ext_subject">get_ext_subject</a><br>
-<a href="#opt_minus">opt_minus</a><br>
-<a href="#plift.ext">plift.ext</a><br>
-<a href="#saturate_fun">saturate_fun</a><br>
-<a href="#tactic.ext">tactic.ext</a><br>
-<a href="#tactic.ext1">tactic.ext1</a><br>
-<a href="#tactic.interactive.ext">tactic.interactive.ext</a><br>
-<a href="#tactic.interactive.ext1">tactic.interactive.ext1</a><br>
-<a href="#tactic.try_intros">tactic.try_intros</a><br>
-<a href="#ulift.ext">ulift.ext</a><br>
 </div></div>
 
         </div>

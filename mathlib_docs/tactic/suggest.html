@@ -7,7 +7,164 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">tactic.suggest</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/suggest.lean">(view source on GitHub)</a></div><a href="#tactic.interactive.library_search">tactic.interactive.library_search</a><br>
+<a href="#tactic.interactive.suggest">tactic.interactive.suggest</a><br>
+<a href="#tactic.library_search">tactic.library_search</a><br>
+<a href="#tactic.library_search_hole_cmd">tactic.library_search_hole_cmd</a><br>
+<a href="#tactic.suggest">tactic.suggest</a><br>
+<a href="#tactic.suggest.application">tactic.suggest.application</a><br>
+<a href="#tactic.suggest.apply_and_solve">tactic.suggest.apply_and_solve</a><br>
+<a href="#tactic.suggest.apply_declaration">tactic.suggest.apply_declaration</a><br>
+<a href="#tactic.suggest.decl_data">tactic.suggest.decl_data</a><br>
+<a href="#tactic.suggest.head_symbol">tactic.suggest.head_symbol</a><br>
+<a href="#tactic.suggest.head_symbol_match">tactic.suggest.head_symbol_match</a><br>
+<a href="#tactic.suggest.head_symbol_match.to_string">tactic.suggest.head_symbol_match.to_string</a><br>
+<a href="#tactic.suggest.library_defs">tactic.suggest.library_defs</a><br>
+<a href="#tactic.suggest.match_head_symbol">tactic.suggest.match_head_symbol</a><br>
+<a href="#tactic.suggest.message">tactic.suggest.message</a><br>
+<a href="#tactic.suggest.process_declaration">tactic.suggest.process_declaration</a><br>
+<a href="#tactic.suggest.replace_mvars">tactic.suggest.replace_mvars</a><br>
+<a href="#tactic.suggest.tactic_statement">tactic.suggest.tactic_statement</a><br>
+<a href="#tactic.suggest.unfold_head_symbol">tactic.suggest.unfold_head_symbol</a><br>
+<a href="#tactic.suggest_core">tactic.suggest_core</a><br>
+<a href="#tactic.suggest_scripts">tactic.suggest_scripts</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="mod_doc">
+<p><code>suggest</code> and <code>library_search</code> are a pair of tactics for applying lemmas from the library to the
+current goal.</p>
+
+<ul>
+<li><code>suggest</code> prints a list of <code>exact ...</code> or <code>refine ...</code> statements, which may produce new goals</li>
+<li><code>library_search</code> prints a single <code>exact ...</code> which closes the goal, or fails</li>
+</ul>
+</div><div class="decl def" id="tactic.suggest.head_symbol">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/suggest.lean#L26">tactic.suggest.head_symbol</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></div></div>
+   <p>compute the head symbol of an expression, but normalise <code>&gt;</code> to <code>&lt;</code> and <code>≥</code> to <code>≤</code></p>
+ </ul></div><div class="decl inductive" id="tactic.suggest.head_symbol_match">     <div class="decl_header impl_collapsed">        <span class="decl_kind">inductive</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/suggest.lean#L45">tactic.suggest.head_symbol_match</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+  <ul class="constructors">
+<li class="constructor" id="tactic.suggest.head_symbol_match.ex">ex : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/suggest.html#tactic.suggest.head_symbol_match">tactic.suggest.head_symbol_match</a></li>
+<li class="constructor" id="tactic.suggest.head_symbol_match.mp">mp : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/suggest.html#tactic.suggest.head_symbol_match">tactic.suggest.head_symbol_match</a></li>
+<li class="constructor" id="tactic.suggest.head_symbol_match.mpr">mpr : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/suggest.html#tactic.suggest.head_symbol_match">tactic.suggest.head_symbol_match</a></li>
+<li class="constructor" id="tactic.suggest.head_symbol_match.both">both : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/suggest.html#tactic.suggest.head_symbol_match">tactic.suggest.head_symbol_match</a></li>
+</ul> <p>A declaration can match the head symbol of the current goal in four possible ways:</p>
+
+<ul>
+<li><code>ex</code>  : an exact match</li>
+<li><code>mp</code>  : the declaration returns an <code>iff</code>, and the right hand side matches the goal</li>
+<li><code>mpr</code> : the declaration returns an <code>iff</code>, and the left hand side matches the goal</li>
+<li><code>both</code>: the declaration returns an <code>iff</code>, and the both sides match the goal</li>
+</ul>
+ </ul></div><div class="decl def" id="tactic.suggest.head_symbol_match.to_string">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/suggest.lean#L51">tactic.suggest.head_symbol_match.to_string</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/suggest.html#tactic.suggest.head_symbol_match">tactic.suggest.head_symbol_match</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a></div></div>
+   <p>a textual representation of a <code>head_symbol_match</code>, for trace debugging.</p>
+ </ul></div><div class="decl def" id="tactic.suggest.unfold_head_symbol">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/suggest.lean#L63">tactic.suggest.unfold_head_symbol</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></div></div>
+   <p>When we are determining if a given declaration is potentially relevant for the current goal,
+we compute <code>unfold_head_symbol</code> on the head symbol of the declaration, producing a list of names.
+We consider the declaration potentially relevant if the head symbol of the goal appears in this list.</p>
+ </ul></div><div class="decl def" id="tactic.suggest.match_head_symbol">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/suggest.lean#L68">tactic.suggest.match_head_symbol</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/suggest.html#tactic.suggest.head_symbol_match">tactic.suggest.head_symbol_match</a></div></div>
+   <p>Determine if, and in which way, a given expression matches the specified head symbol.</p>
+ </ul></div><div class="decl structure" id="tactic.suggest.decl_data">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/suggest.lean#L82">tactic.suggest.decl_data</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="tactic.suggest.decl_data.d">d : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></li>
+<li class="structure_field" id="tactic.suggest.decl_data.n">n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></li>
+<li class="structure_field" id="tactic.suggest.decl_data.m">m : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/suggest.html#tactic.suggest.head_symbol_match">tactic.suggest.head_symbol_match</a></li>
+<li class="structure_field" id="tactic.suggest.decl_data.l">l : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a></li>
+</ul>  <p></p>
+ </ul></div><div class="decl def" id="tactic.suggest.process_declaration">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/suggest.lean#L94">tactic.suggest.process_declaration</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/suggest.html#tactic.suggest.decl_data">tactic.suggest.decl_data</a></div></div>
+   <p>Generate a <code>decl_data</code> from the given declaration if
+it matches the head symbol <code>hs</code> for the current goal.</p>
+ </ul></div><div class="decl def" id="tactic.suggest.library_defs">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/suggest.lean#L102">tactic.suggest.library_defs</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/suggest.html#tactic.suggest.decl_data">tactic.suggest.decl_data</a>)</div></div>
+   <p>Retrieve all library definitions with a given head symbol.</p>
+ </ul></div><div class="decl def" id="tactic.suggest.apply_and_solve">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/suggest.lean#L114">tactic.suggest.apply_and_solve</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Apply the lemma <code>e</code>, then attempt to close all goals using <code>solve_by_elim { discharger := discharger }</code>,
+failing if <code>close_goals = tt</code> and there are any goals remaining.</p>
+ </ul></div><div class="decl def" id="tactic.suggest.apply_declaration">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/suggest.lean#L136">tactic.suggest.apply_declaration</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/tactic/suggest.html#tactic.suggest.decl_data">tactic.suggest.decl_data</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Apply the declaration <code>d</code> (or the forward and backward implications separately, if it is an <code>iff</code>),
+and then attempt to solve the goal using <code>apply_and_solve</code>.</p>
+ </ul></div><div class="decl def" id="tactic.suggest.replace_mvars">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/suggest.lean#L152">tactic.suggest.replace_mvars</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></div>
+   <p>Replace any metavariables in the expression with underscores, in preparation for printing
+<code>refine ...</code> statements.</p>
+ </ul></div><div class="decl def" id="tactic.suggest.tactic_statement">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/suggest.lean#L158">tactic.suggest.tactic_statement</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a></div></div>
+   <p>Construct a <code>refine ...</code> or <code>exact ...</code> string which would construct <code>g</code>.</p>
+ </ul></div><div class="decl def" id="tactic.suggest.message">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/suggest.lean#L169">tactic.suggest.message</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic_state">tactic_state</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a></div></div>
+   <p>Assuming that a goal <code>g</code> has been (partially) solved in the tactic_state <code>l</code>,
+this function prepares a string of the form <code>exact ...</code> or <code>refine ...</code> (possibly with underscores)
+that will reproduce that result.</p>
+ </ul></div><div class="decl structure" id="tactic.suggest.application">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/suggest.lean#L177">tactic.suggest.application</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="tactic.suggest.application.state">state : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic_state">tactic_state</a></li>
+<li class="structure_field" id="tactic.suggest.application.script">script : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a></li>
+<li class="structure_field" id="tactic.suggest.application.decl">decl : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></li>
+<li class="structure_field" id="tactic.suggest.application.num_goals">num_goals : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a></li>
+<li class="structure_field" id="tactic.suggest.application.hyps_used">hyps_used : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a></li>
+</ul>  <p>An <code>application</code> records the result of a successful application of a library lemma.</p>
+ </ul></div><div class="decl def" id="tactic.suggest_core">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/suggest.lean#L247">tactic.suggest_core</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.done">tactic.done</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/data/mllist.html#tactic.mllist">tactic.mllist</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/suggest.html#tactic.suggest.application">tactic.suggest.application</a></div></div>
+   <p>The core <code>suggest</code> tactic.
+It attempts to apply a declaration from the library,
+then solve new goals using <code>solve_by_elim</code>.</p>
+
+<p>It returns a list of <code>application</code>s consisting of fields:</p>
+
+<ul>
+<li><code>state</code>, a tactic state resulting from the successful application of a declaration from the library,</li>
+<li><code>script</code>, a string of the form <code>refine ...</code> or <code>exact ...</code> which will reproduce that tactic state,</li>
+<li><code>decl</code>, an <code>option declaration</code> indicating the declaration that was applied (or none, if <code>solve_by_elim</code> succeeded),</li>
+<li><code>num_goals</code>, the number of remaining goals, and</li>
+<li><code>hyps_used</code>, the number of local hypotheses used in the solution.</li>
+</ul>
+ </ul></div><div class="decl def" id="tactic.suggest">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/suggest.lean#L256">tactic.suggest</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option.none">option.none</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.done">tactic.done</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/suggest.html#tactic.suggest.application">tactic.suggest.application</a>)</div></div>
+   <p>See <code>suggest_core</code>.</p>
+
+<p>Returns a list of at most <code>limit</code> <code>application</code>s,
+sorted by number of goals, and then (reverse) number of hypotheses used.</p>
+ </ul></div><div class="decl def" id="tactic.suggest_scripts">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/suggest.lean#L267">tactic.suggest_scripts</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option.none">option.none</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.done">tactic.done</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a>)</div></div>
+   <p>Returns a list of at most <code>limit</code> strings, of the form <code>exact ...</code> or <code>refine ...</code>, which make
+progress on the current goal using a declaration from the library.</p>
+ </ul></div><div class="decl def" id="tactic.library_search">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/suggest.lean#L274">tactic.library_search</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.done">tactic.done</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a></div></div>
+   <p>Returns a string of the form <code>exact ...</code>, which closes the current goal.</p>
+ </ul></div><div class="decl def" id="tactic.interactive.suggest">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/suggest.lean#L298">tactic.interactive.suggest</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a>
+  (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/alternative.html#optional">optional</a>
+     (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.with_desc">interactive.with_desc</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>"n"
+        <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.small_nat">lean.parser.small_nat</a>)) →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p><code>suggest</code> tries to apply suitable theorems/defs from the library, and generates
+a list of <code>exact ...</code> or <code>refine ...</code> scripts that could be used at this step.
+It leaves the tactic state unchanged. It is intended as a complement of the search
+function in your editor, the <code>#find</code> tactic, and <code>library_search</code>.</p>
+
+<p><code>suggest</code> takes an optional natural number <code>num</code> as input and returns the first <code>num</code>
+(or less, if all possibilities are exhausted) possibilities ordered by length of lemma names.
+The default for <code>num</code> is <code>50</code>.
+For performance reasons <code>suggest</code> uses monadic lazy lists (<code>mllist</code>). This means that
+<code>suggest</code> might miss some results if <code>num</code> is not large enough. However, because
+<code>suggest</code> uses monadic lazy lists, smaller values of <code>num</code> run faster than larger values.</p>
+ </ul></div><div class="decl def" id="tactic.interactive.library_search">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/suggest.lean#L317">tactic.interactive.library_search</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p><code>library_search</code> attempts to apply every definition in the library whose head symbol
+matches the goal, and then discharge any new goals using <code>solve_by_elim</code>.</p>
+
+<p>If it succeeds, it prints a trace message <code>exact ...</code> which can replace the invocation
+of <code>library_search</code>.</p>
+ </ul></div><div class="decl def" id="tactic.library_search_hole_cmd">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/suggest.lean#L326">tactic.library_search_hole_cmd</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/hole_command.html#hole_command">hole_command</a></div></div>
+   <p></p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +964,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1192,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,254 +1315,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="mod_doc">
-<p><code>suggest</code> and <code>library_search</code> are a pair of tactics for applying lemmas from the library to the
-current goal.</p>
-
-<ul>
-<li><code>suggest</code> prints a list of <code>exact ...</code> or <code>refine ...</code> statements, which may produce new goals</li>
-<li><code>library_search</code> prints a single <code>exact ...</code> which closes the goal, or fails</li>
-</ul>
-</div><div class="def"><a id="tactic.suggest.head_symbol"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/suggest.lean#L26">tactic.suggest.head_symbol</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></div>
-<p>compute the head symbol of an expression, but normalise <code>&gt;</code> to <code>&lt;</code> and <code>≥</code> to <code>≤</code></p>
-       <ul>
-
-
-
-
-</ul></div><div class="inductive"><a id="tactic.suggest.head_symbol_match"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/suggest.lean#L45">tactic.suggest.head_symbol_match</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p>A declaration can match the head symbol of the current goal in four possible ways:</p>
-
-<ul>
-<li><code>ex</code>  : an exact match</li>
-<li><code>mp</code>  : the declaration returns an <code>iff</code>, and the right hand side matches the goal</li>
-<li><code>mpr</code> : the declaration returns an <code>iff</code>, and the left hand side matches the goal</li>
-<li><code>both</code>: the declaration returns an <code>iff</code>, and the both sides match the goal</li>
-</ul>
-       <ul>
-
-
-
-<li class="structure_fields">
-Constructors:
-<ul><li><div class="structure_field">tactic.suggest.head_symbol_match.ex : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/suggest.html#tactic.suggest.head_symbol_match">tactic.suggest.head_symbol_match</a></div></li>
-<li><div class="structure_field">tactic.suggest.head_symbol_match.mp : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/suggest.html#tactic.suggest.head_symbol_match">tactic.suggest.head_symbol_match</a></div></li>
-<li><div class="structure_field">tactic.suggest.head_symbol_match.mpr : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/suggest.html#tactic.suggest.head_symbol_match">tactic.suggest.head_symbol_match</a></div></li>
-<li><div class="structure_field">tactic.suggest.head_symbol_match.both : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/suggest.html#tactic.suggest.head_symbol_match">tactic.suggest.head_symbol_match</a></div></li>
-</ul></li>
-</ul></div><div class="def"><a id="tactic.suggest.head_symbol_match.to_string"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/suggest.lean#L51">tactic.suggest.head_symbol_match.to_string</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/tactic/suggest.html#tactic.suggest.head_symbol_match">tactic.suggest.head_symbol_match</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a></div>
-<p>a textual representation of a <code>head_symbol_match</code>, for trace debugging.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.suggest.unfold_head_symbol"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/suggest.lean#L63">tactic.suggest.unfold_head_symbol</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></div>
-<p>When we are determining if a given declaration is potentially relevant for the current goal,
-we compute <code>unfold_head_symbol</code> on the head symbol of the declaration, producing a list of names.
-We consider the declaration potentially relevant if the head symbol of the goal appears in this list.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.suggest.match_head_symbol"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/suggest.lean#L68">tactic.suggest.match_head_symbol</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/suggest.html#tactic.suggest.head_symbol_match">tactic.suggest.head_symbol_match</a></div>
-<p>Determine if, and in which way, a given expression matches the specified head symbol.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="structure"><a id="tactic.suggest.decl_data"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/suggest.lean#L82">tactic.suggest.decl_data</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p></p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">tactic.suggest.decl_data.d : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></div></li>
-<li><div class="structure_field">tactic.suggest.decl_data.n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></div></li>
-<li><div class="structure_field">tactic.suggest.decl_data.m : <a href="https://leanprover-community.github.io/mathlib_docs/tactic/suggest.html#tactic.suggest.head_symbol_match">tactic.suggest.head_symbol_match</a></div></li>
-<li><div class="structure_field">tactic.suggest.decl_data.l : ℕ</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="tactic.suggest.process_declaration"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/suggest.lean#L94">tactic.suggest.process_declaration</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/suggest.html#tactic.suggest.decl_data">tactic.suggest.decl_data</a></div>
-<p>Generate a <code>decl_data</code> from the given declaration if
-it matches the head symbol <code>hs</code> for the current goal.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.suggest.library_defs"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/suggest.lean#L102">tactic.suggest.library_defs</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/suggest.html#tactic.suggest.decl_data">tactic.suggest.decl_data</a>)</div>
-<p>Retrieve all library definitions with a given head symbol.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.suggest.apply_and_solve"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/suggest.lean#L114">tactic.suggest.apply_and_solve</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Apply the lemma <code>e</code>, then attempt to close all goals using <code>solve_by_elim { discharger := discharger }</code>,
-failing if <code>close_goals = tt</code> and there are any goals remaining.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.suggest.apply_declaration"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/suggest.lean#L136">tactic.suggest.apply_declaration</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a> → <a href="https://leanprover-community.github.io/mathlib_docs/tactic/suggest.html#tactic.suggest.decl_data">tactic.suggest.decl_data</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Apply the declaration <code>d</code> (or the forward and backward implications separately, if it is an <code>iff</code>),
-and then attempt to solve the goal using <code>apply_and_solve</code>.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.suggest.replace_mvars"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/suggest.lean#L152">tactic.suggest.replace_mvars</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div>
-<p>Replace any metavariables in the expression with underscores, in preparation for printing
-<code>refine ...</code> statements.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.suggest.tactic_statement"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/suggest.lean#L158">tactic.suggest.tactic_statement</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a></div>
-<p>Construct a <code>refine ...</code> or <code>exact ...</code> string which would construct <code>g</code>.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.suggest.message"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/suggest.lean#L169">tactic.suggest.message</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic_state">tactic_state</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a></div>
-<p>Assuming that a goal <code>g</code> has been (partially) solved in the tactic_state <code>l</code>,
-this function prepares a string of the form <code>exact ...</code> or <code>refine ...</code> (possibly with underscores)
-that will reproduce that result.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="structure"><a id="tactic.suggest.application"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/suggest.lean#L177">tactic.suggest.application</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p>An <code>application</code> records the result of a successful application of a library lemma.</p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">tactic.suggest.application.state : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic_state">tactic_state</a></div></li>
-<li><div class="structure_field">tactic.suggest.application.script : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a></div></li>
-<li><div class="structure_field">tactic.suggest.application.decl : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></div></li>
-<li><div class="structure_field">tactic.suggest.application.num_goals : ℕ</div></li>
-<li><div class="structure_field">tactic.suggest.application.hyps_used : ℕ</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="tactic.suggest_core"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/suggest.lean#L247">tactic.suggest_core</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.done">tactic.done</a> → <a href="https://leanprover-community.github.io/mathlib_docs/data/mllist.html#tactic.mllist">tactic.mllist</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/suggest.html#tactic.suggest.application">tactic.suggest.application</a></div>
-<p>The core <code>suggest</code> tactic.
-It attempts to apply a declaration from the library,
-then solve new goals using <code>solve_by_elim</code>.</p>
-
-<p>It returns a list of <code>application</code>s consisting of fields:</p>
-
-<ul>
-<li><code>state</code>, a tactic state resulting from the successful application of a declaration from the library,</li>
-<li><code>script</code>, a string of the form <code>refine ...</code> or <code>exact ...</code> which will reproduce that tactic state,</li>
-<li><code>decl</code>, an <code>option declaration</code> indicating the declaration that was applied (or none, if <code>solve_by_elim</code> succeeded),</li>
-<li><code>num_goals</code>, the number of remaining goals, and</li>
-<li><code>hyps_used</code>, the number of local hypotheses used in the solution.</li>
-</ul>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.suggest"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/suggest.lean#L256">tactic.suggest</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> ℕ) option.none → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.done">tactic.done</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/tactic/suggest.html#tactic.suggest.application">tactic.suggest.application</a>)</div>
-<p>See <code>suggest_core</code>.</p>
-
-<p>Returns a list of at most <code>limit</code> <code>application</code>s,
-sorted by number of goals, and then (reverse) number of hypotheses used.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.suggest_scripts"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/suggest.lean#L267">tactic.suggest_scripts</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> ℕ) option.none → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.done">tactic.done</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a>)</div>
-<p>Returns a list of at most <code>limit</code> strings, of the form <code>exact ...</code> or <code>refine ...</code>, which make
-progress on the current goal using a declaration from the library.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.library_search"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/suggest.lean#L274">tactic.library_search</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.done">tactic.done</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/string/basic.html#string">string</a></div>
-<p>Returns a string of the form <code>exact ...</code>, which closes the current goal.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.interactive.suggest"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/suggest.lean#L298">tactic.interactive.suggest</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/alternative.html#optional">optional</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.with_desc">interactive.with_desc</a> ↑"n" <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.small_nat">lean.parser.small_nat</a>)) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p><code>suggest</code> tries to apply suitable theorems/defs from the library, and generates
-a list of <code>exact ...</code> or <code>refine ...</code> scripts that could be used at this step.
-It leaves the tactic state unchanged. It is intended as a complement of the search
-function in your editor, the <code>#find</code> tactic, and <code>library_search</code>.</p>
-
-<p><code>suggest</code> takes an optional natural number <code>num</code> as input and returns the first <code>num</code>
-(or less, if all possibilities are exhausted) possibilities ordered by length of lemma names.
-The default for <code>num</code> is <code>50</code>.
-For performance reasons <code>suggest</code> uses monadic lazy lists (<code>mllist</code>). This means that
-<code>suggest</code> might miss some results if <code>num</code> is not large enough. However, because
-<code>suggest</code> uses monadic lazy lists, smaller values of <code>num</code> run faster than larger values.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.interactive.library_search"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/suggest.lean#L317">tactic.interactive.library_search</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p><code>library_search</code> attempts to apply every definition in the library whose head symbol
-matches the goal, and then discharge any new goals using <code>solve_by_elim</code>.</p>
-
-<p>If it succeeds, it prints a trace message <code>exact ...</code> which can replace the invocation
-of <code>library_search</code>.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.library_search_hole_cmd"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/suggest.lean#L326">tactic.library_search_hole_cmd</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/hole_command.html#hole_command">hole_command</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">tactic.suggest</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/suggest.lean">(view source on GitHub)</a></div><a href="#tactic.interactive.library_search">tactic.interactive.library_search</a><br>
-<a href="#tactic.interactive.suggest">tactic.interactive.suggest</a><br>
-<a href="#tactic.library_search">tactic.library_search</a><br>
-<a href="#tactic.library_search_hole_cmd">tactic.library_search_hole_cmd</a><br>
-<a href="#tactic.suggest">tactic.suggest</a><br>
-<a href="#tactic.suggest.application">tactic.suggest.application</a><br>
-<a href="#tactic.suggest.apply_and_solve">tactic.suggest.apply_and_solve</a><br>
-<a href="#tactic.suggest.apply_declaration">tactic.suggest.apply_declaration</a><br>
-<a href="#tactic.suggest.decl_data">tactic.suggest.decl_data</a><br>
-<a href="#tactic.suggest.head_symbol">tactic.suggest.head_symbol</a><br>
-<a href="#tactic.suggest.head_symbol_match">tactic.suggest.head_symbol_match</a><br>
-<a href="#tactic.suggest.head_symbol_match.to_string">tactic.suggest.head_symbol_match.to_string</a><br>
-<a href="#tactic.suggest.library_defs">tactic.suggest.library_defs</a><br>
-<a href="#tactic.suggest.match_head_symbol">tactic.suggest.match_head_symbol</a><br>
-<a href="#tactic.suggest.message">tactic.suggest.message</a><br>
-<a href="#tactic.suggest.process_declaration">tactic.suggest.process_declaration</a><br>
-<a href="#tactic.suggest.replace_mvars">tactic.suggest.replace_mvars</a><br>
-<a href="#tactic.suggest.tactic_statement">tactic.suggest.tactic_statement</a><br>
-<a href="#tactic.suggest.unfold_head_symbol">tactic.suggest.unfold_head_symbol</a><br>
-<a href="#tactic.suggest_core">tactic.suggest_core</a><br>
-<a href="#tactic.suggest_scripts">tactic.suggest_scripts</a><br>
 </div></div>
 
         </div>

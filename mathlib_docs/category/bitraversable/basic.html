@@ -7,7 +7,96 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">category.bitraversable.basic</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/bitraversable/basic.lean">(view source on GitHub)</a></div><a href="#bisequence">bisequence</a><br>
+<a href="#bitraversable">bitraversable</a><br>
+<a href="#is_lawful_bitraversable">is_lawful_bitraversable</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="mod_doc">
+<h1>Bitraversable type class</h1>
+
+<p>Type class for traversing bifunctors. The concepts and laws are taken from
+<a href="https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-Bitraversable.html">https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-Bitraversable.html</a></p>
+
+<p>Simple examples of <code>bitraversable</code> are <code>prod</code> and <code>sum</code>. A more elaborate example is
+to define an a-list as:</p>
+
+<pre><code>def <a href="https://leanprover-community.github.io/mathlib_docs/data/list/alist.html#alist">alist</a> (key val : Type) := <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (key × val)
+</code></pre>
+
+<p>Then we can use <code>f : key → <a href="https://leanprover-community.github.io/mathlib_docs/core/system/io.html#io">io</a> key'</code> and <code>g : val → <a href="https://leanprover-community.github.io/mathlib_docs/core/system/io.html#io">io</a> val'</code> to manipulate the <code>alist</code>'s key
+and value respectively with <code>bitraverse f g : <a href="https://leanprover-community.github.io/mathlib_docs/data/list/alist.html#alist">alist</a> key val → <a href="https://leanprover-community.github.io/mathlib_docs/core/system/io.html#io">io</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/list/alist.html#alist">alist</a> key' val')</code></p>
+
+<h2>Main definitions</h2>
+
+<ul>
+<li>bitraversable - exposes the <code>bitraverse</code> function</li>
+<li>is_lawful_bitraversable - laws similar to is_lawful_traversable</li>
+</ul>
+
+<h2>Tags</h2>
+
+<p>traversable bitraversable iterator functor bifunctor applicative</p>
+</div><div class="decl structure" id="bitraversable"><div class="attributes">@[class]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/bitraversable/basic.lean#L42">bitraversable</a></span>  <span class="decl_args">:</span>     <div class="decl_type">(Type u → Type u → Type u) → Type (u+1)</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="bitraversable.to_bifunctor">to_bifunctor : <a href="https://leanprover-community.github.io/mathlib_docs/category/bifunctor.html#bifunctor">bifunctor</a> t</li>
+<li class="structure_field" id="bitraversable.bitraverse">bitraverse : Π {m : Type ? → Type ?} [_inst_1 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> m] {α α' β β' : Type ?},
+  (α → m α') → (β → m β') → t α β → m (t α' β')</li>
+</ul>  <p></p>
+ <details class="instances"><summary>Instances</summary><ul><li><a href="https://leanprover-community.github.io/mathlib_docs/category/bitraversable/instances.html#prod.bitraversable">prod.bitraversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/category/bitraversable/instances.html#sum.bitraversable">sum.bitraversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/category/bitraversable/instances.html#bitraversable.const">bitraversable.const</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/category/bitraversable/instances.html#bitraversable.flip">bitraversable.flip</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/category/bitraversable/instances.html#function.bicompl.bitraversable">function.bicompl.bitraversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/category/bitraversable/instances.html#function.bicompr.bitraversable">function.bicompr.bitraversable</a></li></ul></details></ul></div><div class="decl def" id="bisequence">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/bitraversable/basic.lean#L49">bisequence</a></span> <span class="impl_arg"><span class="decl_args">{t : Type u_1 → Type u_1 → Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{m : Type u_1 → Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/category/bitraversable/basic.html#bitraversable">bitraversable</a> t]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> m]</span></span> <span class="impl_arg"><span class="decl_args">{α β : Type u_1}</span></span> <span class="decl_args">:</span>     <div class="decl_type">t (m α) (m β) → m (t α β)</div></div>
+   <p></p>
+ </ul></div><div class="decl structure" id="is_lawful_bitraversable"><div class="attributes">@[class]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/bitraversable/basic.lean#L56">is_lawful_bitraversable</a></span> <span class="decl_args">(t : Type u → Type u → Type u)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/category/bitraversable/basic.html#bitraversable">bitraversable</a> t]</span></span> <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="is_lawful_bitraversable.to_is_lawful_bifunctor">to_is_lawful_bifunctor : <a href="https://leanprover-community.github.io/mathlib_docs/category/bifunctor.html#is_lawful_bifunctor">is_lawful_bifunctor</a> t</li>
+<li class="structure_field" id="is_lawful_bitraversable.id_bitraverse">id_bitraverse : ∀ {α β : Type ?} (x : t α β),
+  <a href="https://leanprover-community.github.io/mathlib_docs/category/bitraversable/basic.html#bitraversable.bitraverse">bitraversable.bitraverse</a> <a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#id.mk">id.mk</a> <a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#id.mk">id.mk</a> x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#id.mk">id.mk</a> x</li>
+<li class="structure_field" id="is_lawful_bitraversable.comp_bitraverse">comp_bitraverse : ∀ {F G : Type ? → Type ?} [_inst_1_1 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> F]
+[_inst_2 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> G] [_inst_3 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> F]
+[_inst_4 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> G] {α α' β β' γ γ' : Type ?} (f : β → F γ)
+(f' : β' → F γ') (g : α → G β) (g' : α' → G β') (x : t α α'),
+  <a href="https://leanprover-community.github.io/mathlib_docs/category/bitraversable/basic.html#bitraversable.bitraverse">bitraversable.bitraverse</a>
+      (<a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#functor.comp.mk">functor.comp.mk</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/function.html#function.comp" title="function.comp">∘</a>
+         <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/functor.html#functor.map">functor.map</a> f <a href="https://leanprover-community.github.io/mathlib_docs/core/init/function.html#function.comp" title="function.comp">∘</a> g)
+      (<a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#functor.comp.mk">functor.comp.mk</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/function.html#function.comp" title="function.comp">∘</a>
+         <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/functor.html#functor.map">functor.map</a> f' <a href="https://leanprover-community.github.io/mathlib_docs/core/init/function.html#function.comp" title="function.comp">∘</a> g')
+      x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#functor.comp.mk">functor.comp.mk</a>
+      (<a href="https://leanprover-community.github.io/mathlib_docs/category/bitraversable/basic.html#bitraversable.bitraverse">bitraversable.bitraverse</a> f f' <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/functor.html#functor.map" title="functor.map"><$></a>
+         <a href="https://leanprover-community.github.io/mathlib_docs/category/bitraversable/basic.html#bitraversable.bitraverse">bitraversable.bitraverse</a> g g' x)</li>
+<li class="structure_field" id="is_lawful_bitraversable.bitraverse_eq_bimap_id">bitraverse_eq_bimap_id : ∀ {α α' β β' : Type ?} (f : α → β) (f' : α' → β') (x : t α α'),
+  <a href="https://leanprover-community.github.io/mathlib_docs/category/bitraversable/basic.html#bitraversable.bitraverse">bitraversable.bitraverse</a> (<a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#id.mk">id.mk</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/function.html#function.comp" title="function.comp">∘</a> f)
+      (<a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#id.mk">id.mk</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/function.html#function.comp" title="function.comp">∘</a> f')
+      x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#id.mk">id.mk</a> (<a href="https://leanprover-community.github.io/mathlib_docs/category/bifunctor.html#bifunctor.bimap">bifunctor.bimap</a> f f' x)</li>
+<li class="structure_field" id="is_lawful_bitraversable.binaturality">binaturality : ∀ {F G : Type ? → Type ?} [_inst_1_1 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> F]
+[_inst_2 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> G] [_inst_3 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> F]
+[_inst_4 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> G]
+(η : <a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#applicative_transformation">applicative_transformation</a> F G) {α α' β β' : Type ?} (f : α → F β)
+(f' : α' → F β') (x : t α α'),
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>η (<a href="https://leanprover-community.github.io/mathlib_docs/category/bitraversable/basic.html#bitraversable.bitraverse">bitraversable.bitraverse</a> f f' x) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/category/bitraversable/basic.html#bitraversable.bitraverse">bitraversable.bitraverse</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>η <a href="https://leanprover-community.github.io/mathlib_docs/core/init/function.html#function.comp" title="function.comp">∘</a> f)
+      (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>η <a href="https://leanprover-community.github.io/mathlib_docs/core/init/function.html#function.comp" title="function.comp">∘</a> f')
+      x</li>
+</ul>  <p></p>
+ <details class="instances"><summary>Instances</summary><ul><li><a href="https://leanprover-community.github.io/mathlib_docs/category/bitraversable/instances.html#prod.is_lawful_bitraversable">prod.is_lawful_bitraversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/category/bitraversable/instances.html#sum.is_lawful_bitraversable">sum.is_lawful_bitraversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/category/bitraversable/instances.html#is_lawful_bitraversable.const">is_lawful_bitraversable.const</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/category/bitraversable/instances.html#is_lawful_bitraversable.flip">is_lawful_bitraversable.flip</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/category/bitraversable/instances.html#function.bicompl.is_lawful_bitraversable">function.bicompl.is_lawful_bitraversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/category/bitraversable/instances.html#function.bicompr.is_lawful_bitraversable">function.bicompr.is_lawful_bitraversable</a></li></ul></details></ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +896,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1124,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,83 +1247,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="mod_doc">
-<h1>Bitraversable type class</h1>
-
-<p>Type class for traversing bifunctors. The concepts and laws are taken from
-<a href="https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-Bitraversable.html">https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-Bitraversable.html</a></p>
-
-<p>Simple examples of <code>bitraversable</code> are <code>prod</code> and <code>sum</code>. A more elaborate example is
-to define an a-list as:</p>
-
-<pre><code>def <a href="https://leanprover-community.github.io/mathlib_docs/data/list/alist.html#alist">alist</a> (key val : Type) := <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (key × val)
-</code></pre>
-
-<p>Then we can use <code>f : key → <a href="https://leanprover-community.github.io/mathlib_docs/core/system/io.html#io">io</a> key'</code> and <code>g : val → <a href="https://leanprover-community.github.io/mathlib_docs/core/system/io.html#io">io</a> val'</code> to manipulate the <code>alist</code>'s key
-and value respectively with <code>bitraverse f g : <a href="https://leanprover-community.github.io/mathlib_docs/data/list/alist.html#alist">alist</a> key val → <a href="https://leanprover-community.github.io/mathlib_docs/core/system/io.html#io">io</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/list/alist.html#alist">alist</a> key' val')</code></p>
-
-<h2>Main definitions</h2>
-
-<ul>
-<li>bitraversable - exposes the <code>bitraverse</code> function</li>
-<li>is_lawful_bitraversable - laws similar to is_lawful_traversable</li>
-</ul>
-
-<h2>Tags</h2>
-
-<p>traversable bitraversable iterator functor bifunctor applicative</p>
-</div><div class="structure"><a id="bitraversable"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/bitraversable/basic.lean#L42">bitraversable</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(Type u → Type u → Type u) → Type (u+1)</div>
-<p></p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">bitraversable.to_bifunctor : <a href="https://leanprover-community.github.io/mathlib_docs/category/bifunctor.html#bifunctor">bifunctor</a> t</div></li>
-<li><div class="structure_field">bitraversable.bitraverse : Π {m : Type ? → Type ?} [_inst_1 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> m] {α α' β β' : Type ?},
-  (α → m α') → (β → m β') → t α β → m (t α' β')</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="bisequence"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/bitraversable/basic.lean#L49">bisequence</a></span>  <span class="decl_args">:</span>       <div class="decl_type">t (m α) (m β) → m (t α β)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{t : Type u_1 → Type u_1 → Type u_1}</span> <span class="impl_arg">{m : Type u_1 → Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/category/bitraversable/basic.html#bitraversable">bitraversable</a> t]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> m]</span> <span class="impl_arg">{α β : Type u_1}</span></li>
-
-
-
-</ul></div><div class="structure"><a id="is_lawful_bitraversable"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/bitraversable/basic.lean#L56">is_lawful_bitraversable</a></span> <span class="decl_args">(t : Type u → Type u → Type u)</span> <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/category/bitraversable/basic.html#bitraversable">bitraversable</a> t]</span></li>
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">is_lawful_bitraversable.to_is_lawful_bifunctor : <a href="https://leanprover-community.github.io/mathlib_docs/category/bifunctor.html#is_lawful_bifunctor">is_lawful_bifunctor</a> t</div></li>
-<li><div class="structure_field">is_lawful_bitraversable.id_bitraverse : ∀ {α β : Type ?} (x : t α β), bitraversable.bitraverse <a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#id.mk">id.mk</a> <a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#id.mk">id.mk</a> x = <a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#id.mk">id.mk</a> x</div></li>
-<li><div class="structure_field">is_lawful_bitraversable.comp_bitraverse : ∀ {F G : Type ? → Type ?} [_inst_1_1 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> F] [_inst_2 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> G] [_inst_3 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> F]
-[_inst_4 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> G] {α α' β β' γ γ' : Type ?} (f : β → F γ) (f' : β' → F γ')
-(g : α → G β) (g' : α' → G β') (x : t α α'),
-  bitraversable.bitraverse (<a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#functor.comp.mk">functor.comp.mk</a> ∘ functor.map f ∘ g) (<a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#functor.comp.mk">functor.comp.mk</a> ∘ functor.map f' ∘ g') x =
-    <a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#functor.comp.mk">functor.comp.mk</a> (bitraversable.bitraverse f f' <$> bitraversable.bitraverse g g' x)</div></li>
-<li><div class="structure_field">is_lawful_bitraversable.bitraverse_eq_bimap_id : ∀ {α α' β β' : Type ?} (f : α → β) (f' : α' → β') (x : t α α'),
-  bitraversable.bitraverse (<a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#id.mk">id.mk</a> ∘ f) (<a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#id.mk">id.mk</a> ∘ f') x = <a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#id.mk">id.mk</a> (bifunctor.bimap f f' x)</div></li>
-<li><div class="structure_field">is_lawful_bitraversable.binaturality : ∀ {F G : Type ? → Type ?} [_inst_1_1 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> F] [_inst_2 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> G] [_inst_3 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> F]
-[_inst_4 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> G] (η : <a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#applicative_transformation">applicative_transformation</a> F G) {α α' β β' : Type ?} (f : α → F β)
-(f' : α' → F β') (x : t α α'),
-  ⇑η (bitraversable.bitraverse f f' x) = bitraversable.bitraverse (⇑η ∘ f) (⇑η ∘ f') x</div></li>
-</ul></li>
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">category.bitraversable.basic</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/bitraversable/basic.lean">(view source on GitHub)</a></div><a href="#bisequence">bisequence</a><br>
-<a href="#bitraversable">bitraversable</a><br>
-<a href="#is_lawful_bitraversable">is_lawful_bitraversable</a><br>
 </div></div>
 
         </div>

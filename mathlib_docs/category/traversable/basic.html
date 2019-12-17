@@ -7,7 +7,161 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">category.traversable.basic</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/traversable/basic.lean">(view source on GitHub)</a></div><a href="#applicative_transformation">applicative_transformation</a><br>
+<a href="#applicative_transformation.has_coe_to_fun">applicative_transformation.has_coe_to_fun</a><br>
+<a href="#applicative_transformation.preserves_map">applicative_transformation.preserves_map</a><br>
+<a href="#applicative_transformation.preserves_pure">applicative_transformation.preserves_pure</a><br>
+<a href="#applicative_transformation.preserves_seq">applicative_transformation.preserves_seq</a><br>
+<a href="#id.is_lawful_traversable">id.is_lawful_traversable</a><br>
+<a href="#id.traversable">id.traversable</a><br>
+<a href="#is_lawful_traversable">is_lawful_traversable</a><br>
+<a href="#list.traversable">list.traversable</a><br>
+<a href="#option.traversable">option.traversable</a><br>
+<a href="#sequence">sequence</a><br>
+<a href="#sum.traversable">sum.traversable</a><br>
+<a href="#sum.traverse">sum.traverse</a><br>
+<a href="#traversable">traversable</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="mod_doc">
+<h1>Traversable type class</h1>
+
+<p>Type classes for traversing collections. The concepts and laws are taken from
+<a href="http://hackage.haskell.org/package/base-4.11.1.0/docs/Data-Traversable.html">http://hackage.haskell.org/package/base-4.11.1.0/docs/Data-Traversable.html</a></p>
+
+<p>Traversable collections are a generalization of functors. Whereas
+functors (such as <code>list</code>) allow us to apply a function to every
+element, it does not allow functions which external effects encoded in
+a monad. Consider for instance a functor <code>invite : email → <a href="https://leanprover-community.github.io/mathlib_docs/core/system/io.html#io">io</a> response</code>
+that takes an email address, sends an email and waits for a
+response. If we have a list <code>guests : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> email</code>, using calling
+<code>invite</code> using <code>map</code> gives us the following: <code>map invite guests : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a>
+(<a href="https://leanprover-community.github.io/mathlib_docs/core/system/io.html#io">io</a> response)</code>.  It is not what we need. We need something of type <code>io
+(<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> response)</code>. Instead of using <code>map</code>, we can use <code>traverse</code> to
+send all the invites: <code>traverse invite guests : <a href="https://leanprover-community.github.io/mathlib_docs/core/system/io.html#io">io</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> response)</code>.
+<code>traverse</code> applies <code>invite</code> to every element of <code>guests</code> and combines
+all the resulting effects. In the example, the effect is encoded in the
+monad <code>io</code> but any applicative functor is accepted by <code>traverse</code>.</p>
+
+<p>For more on how to use traversable, consider the Haskell tutorial:
+<a href="https://en.wikibooks.org/wiki/Haskell/Traversable">https://en.wikibooks.org/wiki/Haskell/Traversable</a></p>
+
+<h2>Main definitions</h2>
+
+<ul>
+<li><code>traversable</code> type class - exposes the <code>traverse</code> function</li>
+<li><code>sequence</code> - based on <code>traverse</code>, turns a collection of effects into an effect returning a collection</li>
+<li>is_lawful_traversable - laws</li>
+</ul>
+
+<h2>Tags</h2>
+
+<p>traversable iterator functor applicative</p>
+
+<h2>References</h2>
+
+<ul>
+<li>"Applicative Programming with Effects", by Conor McBride and Ross Paterson, Journal of Functional Programming 18:1 (2008) 1-13, online at <a href="http://www.soi.city.ac.uk/~ross/papers/Applicative.html">http://www.soi.city.ac.uk/~ross/papers/Applicative.html</a></li>
+<li>"The Essence of the Iterator Pattern", by Jeremy Gibbons and Bruno Oliveira, in Mathematically-Structured Functional Programming, 2006, online at <a href="http://web.comlab.ox.ac.uk/oucl/work/jeremy.gibbons/publications/#iterator">http://web.comlab.ox.ac.uk/oucl/work/jeremy.gibbons/publications/#iterator</a></li>
+<li>"An Investigation of the Laws of Traversals", by Mauro Jaskelioff and Ondrej Rypacek, in Mathematically-Structured Functional Programming, 2012, online at <a href="http://arxiv.org/pdf/1202.2919">http://arxiv.org/pdf/1202.2919</a>
+Synopsis</li>
+</ul>
+</div><div class="decl structure" id="applicative_transformation">     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/traversable/basic.lean#L61">applicative_transformation</a></span> <span class="decl_args">(F : Type u → Type v)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> F]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> F _inst_1]</span></span> <span class="decl_args">(G : Type u → Type w)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> G]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> G _inst_3]</span></span> <span class="decl_args">:</span>     <div class="decl_type">Type (max (u+1) v w)</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="applicative_transformation.app">app : Π (α : Type ?), F α → G α</li>
+<li class="structure_field" id="applicative_transformation.preserves_pure'">preserves_pure' : ∀ {α : Type ?} (x : α),
+  c.<a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#applicative_transformation.app" title="applicative_transformation.app">app</a> α (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#has_pure.pure">has_pure.pure</a> x) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#has_pure.pure">has_pure.pure</a> x</li>
+<li class="structure_field" id="applicative_transformation.preserves_seq'">preserves_seq' : ∀ {α β : Type ?} (x : F (α → β)) (y : F α),
+  c.<a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#applicative_transformation.app" title="applicative_transformation.app">app</a> β (x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#has_seq.seq" title="has_seq.seq"><*></a> y) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+    c.<a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#applicative_transformation.app" title="applicative_transformation.app">app</a> (α → β) x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#has_seq.seq" title="has_seq.seq"><*></a>
+      c.<a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#applicative_transformation.app" title="applicative_transformation.app">app</a> α y</li>
+</ul>  <p></p>
+ </ul></div><div class="decl def" id="applicative_transformation.has_coe_to_fun"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/traversable/basic.lean#L73">applicative_transformation.has_coe_to_fun</a></span> <span class="decl_args">(F : Type u → Type v)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> F]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> F]</span></span> <span class="decl_args">(G : Type u → Type w)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> G]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> G]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe_to_fun">has_coe_to_fun</a> (<a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#applicative_transformation">applicative_transformation</a> F G)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="applicative_transformation.preserves_pure">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/traversable/basic.lean#L81">applicative_transformation.preserves_pure</a></span> <span class="impl_arg"><span class="decl_args">{F : Type u → Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> F]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> F]</span></span> <span class="impl_arg"><span class="decl_args">{G : Type u → Type w}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> G]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> G]</span></span> <span class="decl_args">(η : <a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#applicative_transformation">applicative_transformation</a> F G)</span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>η (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#has_pure.pure">has_pure.pure</a> x) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#has_pure.pure">has_pure.pure</a> x</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="applicative_transformation.preserves_seq">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/traversable/basic.lean#L84">applicative_transformation.preserves_seq</a></span> <span class="impl_arg"><span class="decl_args">{F : Type u → Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> F]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> F]</span></span> <span class="impl_arg"><span class="decl_args">{G : Type u → Type w}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> G]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> G]</span></span> <span class="decl_args">(η : <a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#applicative_transformation">applicative_transformation</a> F G)</span> <span class="impl_arg"><span class="decl_args">{α β : Type u}</span></span> <span class="decl_args">(x : F (α → β))</span> <span class="decl_args">(y : F α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>η (x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#has_seq.seq" title="has_seq.seq"><*></a> y) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>η x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#has_seq.seq" title="has_seq.seq"><*></a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>η y</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="applicative_transformation.preserves_map">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/traversable/basic.lean#L89">applicative_transformation.preserves_map</a></span> <span class="impl_arg"><span class="decl_args">{F : Type u → Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> F]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> F]</span></span> <span class="impl_arg"><span class="decl_args">{G : Type u → Type w}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> G]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> G]</span></span> <span class="decl_args">(η : <a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#applicative_transformation">applicative_transformation</a> F G)</span> <span class="impl_arg"><span class="decl_args">{α β : Type u}</span></span> <span class="decl_args">(x : α → β)</span> <span class="decl_args">(y : F α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>η (x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/functor.html#functor.map" title="functor.map"><$></a> y) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/functor.html#functor.map" title="functor.map"><$></a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>η y</div></div>
+   <p></p>
+ </ul></div><div class="decl structure" id="traversable"><div class="attributes">@[class]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/traversable/basic.lean#L98">traversable</a></span>  <span class="decl_args">:</span>     <div class="decl_type">(Type u → Type u) → Type (u+1)</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="traversable.to_functor">to_functor : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/functor.html#functor">functor</a> t</li>
+<li class="structure_field" id="traversable.traverse">traverse : Π {m : Type ? → Type ?} [_inst_1 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> m] {α β : Type ?},
+  (α → m β) → t α → m (t β)</li>
+</ul>  <p></p>
+ <details class="instances"><summary>Instances</summary><ul><li><a href="https://leanprover-community.github.io/mathlib_docs/category/bitraversable/instances.html#bitraversable.traversable">bitraversable.traversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#id.traversable">id.traversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#option.traversable">option.traversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#list.traversable">list.traversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#sum.traversable">sum.traversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/vector2.html#vector.traversable">vector.traversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/array/lemmas.html#array.traversable">array.traversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/algebra/free.html#free_magma.traversable">free_magma.traversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/algebra/free.html#free_semigroup.traversable">free_semigroup.traversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/tactic/monotonicity/interactive.html#tactic.interactive.ac_mono_ctx'.traversable">tactic.interactive.ac_mono_ctx'.traversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/lazy_list2.html#lazy_list.traversable">lazy_list.traversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/dlist/instances.html#dlist.traversable">dlist.traversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/buffer/basic.html#buffer.traversable">buffer.traversable</a></li></ul></details></ul></div><div class="decl def" id="sequence">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/traversable/basic.lean#L116">sequence</a></span> <span class="impl_arg"><span class="decl_args">{t : Type u → Type u}</span></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{f : Type u → Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> f]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#traversable">traversable</a> t]</span></span> <span class="decl_args">:</span>     <div class="decl_type">t (f α) → f (t α)</div></div>
+   <p></p>
+ </ul></div><div class="decl structure" id="is_lawful_traversable"><div class="attributes">@[class]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/traversable/basic.lean#L122">is_lawful_traversable</a></span> <span class="decl_args">(t : Type u → Type u)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#traversable">traversable</a> t]</span></span> <span class="decl_args">:</span>     <div class="decl_type">Type (u+1)</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="is_lawful_traversable.to_is_lawful_functor">to_is_lawful_functor : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_functor">is_lawful_functor</a> t</li>
+<li class="structure_field" id="is_lawful_traversable.id_traverse">id_traverse : ∀ {α : Type ?} (x : t α), <a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#traversable.traverse">traversable.traverse</a> <a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#id.mk">id.mk</a> x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> x</li>
+<li class="structure_field" id="is_lawful_traversable.comp_traverse">comp_traverse : ∀ {F G : Type ? → Type ?} [_inst_1_1 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> F]
+[_inst_2 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> G] [_inst_3 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> F]
+[_inst_4 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> G] {α β γ : Type ?} (f : β → F γ)
+(g : α → G β) (x : t α),
+  <a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#traversable.traverse">traversable.traverse</a>
+      (<a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#functor.comp.mk">functor.comp.mk</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/function.html#function.comp" title="function.comp">∘</a>
+         <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/functor.html#functor.map">functor.map</a> f <a href="https://leanprover-community.github.io/mathlib_docs/core/init/function.html#function.comp" title="function.comp">∘</a> g)
+      x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#functor.comp.mk">functor.comp.mk</a>
+      (<a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#traversable.traverse">traversable.traverse</a> f <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/functor.html#functor.map" title="functor.map"><$></a>
+         <a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#traversable.traverse">traversable.traverse</a> g x)</li>
+<li class="structure_field" id="is_lawful_traversable.traverse_eq_map_id">traverse_eq_map_id : ∀ {α β : Type ?} (f : α → β) (x : t α),
+  <a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#traversable.traverse">traversable.traverse</a> (<a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#id.mk">id.mk</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/function.html#function.comp" title="function.comp">∘</a> f) x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#id.mk">id.mk</a> (f <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/functor.html#functor.map" title="functor.map"><$></a> x)</li>
+<li class="structure_field" id="is_lawful_traversable.naturality">naturality : ∀ {F G : Type ? → Type ?} [_inst_1_1 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> F]
+[_inst_2 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> G] [_inst_3 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> F]
+[_inst_4 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> G]
+(η : <a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#applicative_transformation">applicative_transformation</a> F G) {α β : Type ?} (f : α → F β) (x : t α),
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>η (<a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#traversable.traverse">traversable.traverse</a> f x) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#traversable.traverse">traversable.traverse</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>η <a href="https://leanprover-community.github.io/mathlib_docs/core/init/function.html#function.comp" title="function.comp">∘</a> f) x</li>
+</ul>  <p></p>
+ <details class="instances"><summary>Instances</summary><ul><li><a href="https://leanprover-community.github.io/mathlib_docs/category/bitraversable/instances.html#bitraversable.is_lawful_traversable">bitraversable.is_lawful_traversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#id.is_lawful_traversable">id.is_lawful_traversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/instances.html#option.is_lawful_traversable">option.is_lawful_traversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/instances.html#list.is_lawful_traversable">list.is_lawful_traversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/instances.html#sum.is_lawful_traversable">sum.is_lawful_traversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/vector2.html#vector.is_lawful_traversable">vector.is_lawful_traversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/array/lemmas.html#array.is_lawful_traversable">array.is_lawful_traversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/algebra/free.html#free_magma.is_lawful_traversable">free_magma.is_lawful_traversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/algebra/free.html#free_semigroup.is_lawful_traversable">free_semigroup.is_lawful_traversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/lazy_list2.html#lazy_list.is_lawful_traversable">lazy_list.is_lawful_traversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/dlist/instances.html#dlist.is_lawful_traversable">dlist.is_lawful_traversable</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/data/buffer/basic.html#buffer.is_lawful_traversable">buffer.is_lawful_traversable</a></li></ul></details></ul></div><div class="decl def" id="id.traversable"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/traversable/basic.lean#L138">id.traversable</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#traversable">traversable</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#id">id</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="id.is_lawful_traversable"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/traversable/basic.lean#L139">id.is_lawful_traversable</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#is_lawful_traversable">is_lawful_traversable</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#id">id</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="option.traversable"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/traversable/basic.lean#L145">option.traversable</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#traversable">traversable</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="list.traversable"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/traversable/basic.lean#L147">list.traversable</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#traversable">traversable</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="sum.traverse">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/traversable/basic.lean#L157">sum.traverse</a></span> <span class="impl_arg"><span class="decl_args">{σ : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{F : Type u → Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> F]</span></span> <span class="impl_arg"><span class="decl_args">{α : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type u}</span></span> <span class="decl_args">:</span>     <div class="decl_type">(α → F β) → σ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sum" title="sum">⊕</a> α → F (σ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sum" title="sum">⊕</a> β)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="sum.traversable"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category/traversable/basic.lean#L163">sum.traversable</a></span> <span class="impl_arg"><span class="decl_args">{σ : Type u}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#traversable">traversable</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sum">sum</a> σ)</div></div>
+   <p></p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +961,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1189,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,190 +1312,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="mod_doc">
-<h1>Traversable type class</h1>
-
-<p>Type classes for traversing collections. The concepts and laws are taken from
-<a href="http://hackage.haskell.org/package/base-4.11.1.0/docs/Data-Traversable.html">http://hackage.haskell.org/package/base-4.11.1.0/docs/Data-Traversable.html</a></p>
-
-<p>Traversable collections are a generalization of functors. Whereas
-functors (such as <code>list</code>) allow us to apply a function to every
-element, it does not allow functions which external effects encoded in
-a monad. Consider for instance a functor <code>invite : email → <a href="https://leanprover-community.github.io/mathlib_docs/core/system/io.html#io">io</a> response</code>
-that takes an email address, sends an email and waits for a
-response. If we have a list <code>guests : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> email</code>, using calling
-<code>invite</code> using <code>map</code> gives us the following: <code>map invite guests : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a>
-(<a href="https://leanprover-community.github.io/mathlib_docs/core/system/io.html#io">io</a> response)</code>.  It is not what we need. We need something of type <code>io
-(<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> response)</code>. Instead of using <code>map</code>, we can use <code>traverse</code> to
-send all the invites: <code>traverse invite guests : <a href="https://leanprover-community.github.io/mathlib_docs/core/system/io.html#io">io</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> response)</code>.
-<code>traverse</code> applies <code>invite</code> to every element of <code>guests</code> and combines
-all the resulting effects. In the example, the effect is encoded in the
-monad <code>io</code> but any applicative functor is accepted by <code>traverse</code>.</p>
-
-<p>For more on how to use traversable, consider the Haskell tutorial:
-<a href="https://en.wikibooks.org/wiki/Haskell/Traversable">https://en.wikibooks.org/wiki/Haskell/Traversable</a></p>
-
-<h2>Main definitions</h2>
-
-<ul>
-<li><code>traversable</code> type class - exposes the <code>traverse</code> function</li>
-<li><code>sequence</code> - based on <code>traverse</code>, turns a collection of effects into an effect returning a collection</li>
-<li>is_lawful_traversable - laws</li>
-</ul>
-
-<h2>Tags</h2>
-
-<p>traversable iterator functor applicative</p>
-
-<h2>References</h2>
-
-<ul>
-<li>"Applicative Programming with Effects", by Conor McBride and Ross Paterson, Journal of Functional Programming 18:1 (2008) 1-13, online at <a href="http://www.soi.city.ac.uk/~ross/papers/Applicative.html">http://www.soi.city.ac.uk/~ross/papers/Applicative.html</a></li>
-<li>"The Essence of the Iterator Pattern", by Jeremy Gibbons and Bruno Oliveira, in Mathematically-Structured Functional Programming, 2006, online at <a href="http://web.comlab.ox.ac.uk/oucl/work/jeremy.gibbons/publications/#iterator">http://web.comlab.ox.ac.uk/oucl/work/jeremy.gibbons/publications/#iterator</a></li>
-<li>"An Investigation of the Laws of Traversals", by Mauro Jaskelioff and Ondrej Rypacek, in Mathematically-Structured Functional Programming, 2012, online at <a href="http://arxiv.org/pdf/1202.2919">http://arxiv.org/pdf/1202.2919</a>
-Synopsis</li>
-</ul>
-</div><div class="structure"><a id="applicative_transformation"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/traversable/basic.lean#L61">applicative_transformation</a></span> <span class="decl_args">(F : Type u → Type v)</span> <span class="decl_args">(G : Type u → Type w)</span> <span class="decl_args">:</span>       <div class="decl_type">Type (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/functions.html#max">max</a> (u+1) v w)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> F]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> F _inst_1]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> G]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> G _inst_3]</span></li>
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">applicative_transformation.app : Π (α : Type ?), F α → G α</div></li>
-<li><div class="structure_field">applicative_transformation.preserves_pure' : ∀ {α : Type ?} (x : α), c.app α (has_pure.pure x) = has_pure.pure x</div></li>
-<li><div class="structure_field">applicative_transformation.preserves_seq' : ∀ {α β : Type ?} (x : F (α → β)) (y : F α), c.app β (x <*> y) = c.app (α → β) x <*> c.app α y</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="applicative_transformation.has_coe_to_fun"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/traversable/basic.lean#L73">applicative_transformation.has_coe_to_fun</a></span> <span class="decl_args">(F : Type u → Type v)</span> <span class="decl_args">(G : Type u → Type w)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#has_coe_to_fun">has_coe_to_fun</a> (<a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#applicative_transformation">applicative_transformation</a> F G)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> F]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> F]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> G]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> G]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="thm"><a id="applicative_transformation.preserves_pure"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/traversable/basic.lean#L81">applicative_transformation.preserves_pure</a></span> <span class="decl_args">(η : <a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#applicative_transformation">applicative_transformation</a> F G)</span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>       <div class="decl_type">⇑η (has_pure.pure x) = has_pure.pure x</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{F : Type u → Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> F]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> F]</span> <span class="impl_arg">{G : Type u → Type w}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> G]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> G]</span> <span class="impl_arg">{α : Type u}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="applicative_transformation.preserves_seq"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/traversable/basic.lean#L84">applicative_transformation.preserves_seq</a></span> <span class="decl_args">(η : <a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#applicative_transformation">applicative_transformation</a> F G)</span> <span class="decl_args">(x : F (α → β))</span> <span class="decl_args">(y : F α)</span> <span class="decl_args">:</span>       <div class="decl_type">⇑η (x <*> y) = ⇑η x <*> ⇑η y</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{F : Type u → Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> F]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> F]</span> <span class="impl_arg">{G : Type u → Type w}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> G]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> G]</span> <span class="impl_arg">{α β : Type u}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="applicative_transformation.preserves_map"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/traversable/basic.lean#L89">applicative_transformation.preserves_map</a></span> <span class="decl_args">(η : <a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#applicative_transformation">applicative_transformation</a> F G)</span> <span class="decl_args">(x : α → β)</span> <span class="decl_args">(y : F α)</span> <span class="decl_args">:</span>       <div class="decl_type">⇑η (x <$> y) = x <$> ⇑η y</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{F : Type u → Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> F]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> F]</span> <span class="impl_arg">{G : Type u → Type w}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> G]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> G]</span> <span class="impl_arg">{α β : Type u}</span></li>
-
-
-
-</ul></div><div class="structure"><a id="traversable"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/traversable/basic.lean#L98">traversable</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(Type u → Type u) → Type (u+1)</div>
-<p></p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">traversable.to_functor : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/functor.html#functor">functor</a> t</div></li>
-<li><div class="structure_field">traversable.traverse : Π {m : Type ? → Type ?} [_inst_1 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> m] {α β : Type ?}, (α → m β) → t α → m (t β)</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="sequence"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/traversable/basic.lean#L116">sequence</a></span>  <span class="decl_args">:</span>       <div class="decl_type">t (f α) → f (t α)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{t : Type u → Type u}</span> <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">{f : Type u → Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> f]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#traversable">traversable</a> t]</span></li>
-
-
-
-</ul></div><div class="structure"><a id="is_lawful_traversable"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/traversable/basic.lean#L122">is_lawful_traversable</a></span> <span class="decl_args">(t : Type u → Type u)</span> <span class="decl_args">:</span>       <div class="decl_type">Type (u+1)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#traversable">traversable</a> t]</span></li>
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">is_lawful_traversable.to_is_lawful_functor : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_functor">is_lawful_functor</a> t</div></li>
-<li><div class="structure_field">is_lawful_traversable.id_traverse : ∀ {α : Type ?} (x : t α), traversable.traverse <a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#id.mk">id.mk</a> x = x</div></li>
-<li><div class="structure_field">is_lawful_traversable.comp_traverse : ∀ {F G : Type ? → Type ?} [_inst_1_1 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> F] [_inst_2 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> G] [_inst_3 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> F]
-[_inst_4 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> G] {α β γ : Type ?} (f : β → F γ) (g : α → G β) (x : t α),
-  traversable.traverse (<a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#functor.comp.mk">functor.comp.mk</a> ∘ functor.map f ∘ g) x =
-    <a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#functor.comp.mk">functor.comp.mk</a> (traversable.traverse f <$> traversable.traverse g x)</div></li>
-<li><div class="structure_field">is_lawful_traversable.traverse_eq_map_id : ∀ {α β : Type ?} (f : α → β) (x : t α), traversable.traverse (<a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#id.mk">id.mk</a> ∘ f) x = <a href="https://leanprover-community.github.io/mathlib_docs/category/functor.html#id.mk">id.mk</a> (f <$> x)</div></li>
-<li><div class="structure_field">is_lawful_traversable.naturality : ∀ {F G : Type ? → Type ?} [_inst_1_1 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> F] [_inst_2 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> G] [_inst_3 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> F]
-[_inst_4 : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_applicative">is_lawful_applicative</a> G] (η : <a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#applicative_transformation">applicative_transformation</a> F G) {α β : Type ?} (f : α → F β) (x : t α),
-  ⇑η (traversable.traverse f x) = traversable.traverse (⇑η ∘ f) x</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="id.traversable"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/traversable/basic.lean#L138">id.traversable</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#traversable">traversable</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#id">id</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="id.is_lawful_traversable"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/traversable/basic.lean#L139">id.is_lawful_traversable</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#is_lawful_traversable">is_lawful_traversable</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#id">id</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="option.traversable"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/traversable/basic.lean#L145">option.traversable</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#traversable">traversable</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="list.traversable"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/traversable/basic.lean#L147">list.traversable</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#traversable">traversable</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="sum.traverse"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/traversable/basic.lean#L157">sum.traverse</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(α → F β) → σ ⊕ α → F (σ ⊕ β)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{σ : Type u}</span> <span class="impl_arg">{F : Type u → Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/applicative.html#applicative">applicative</a> F]</span> <span class="impl_arg">{α : Type u_1}</span> <span class="impl_arg">{β : Type u}</span></li>
-
-
-
-</ul></div><div class="def"><a id="sum.traversable"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/traversable/basic.lean#L163">sum.traversable</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category/traversable/basic.html#traversable">traversable</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#sum">sum</a> σ)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{σ : Type u}</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">category.traversable.basic</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category/traversable/basic.lean">(view source on GitHub)</a></div><a href="#applicative_transformation">applicative_transformation</a><br>
-<a href="#applicative_transformation.has_coe_to_fun">applicative_transformation.has_coe_to_fun</a><br>
-<a href="#applicative_transformation.preserves_map">applicative_transformation.preserves_map</a><br>
-<a href="#applicative_transformation.preserves_pure">applicative_transformation.preserves_pure</a><br>
-<a href="#applicative_transformation.preserves_seq">applicative_transformation.preserves_seq</a><br>
-<a href="#id.is_lawful_traversable">id.is_lawful_traversable</a><br>
-<a href="#id.traversable">id.traversable</a><br>
-<a href="#is_lawful_traversable">is_lawful_traversable</a><br>
-<a href="#list.traversable">list.traversable</a><br>
-<a href="#option.traversable">option.traversable</a><br>
-<a href="#sequence">sequence</a><br>
-<a href="#sum.traversable">sum.traversable</a><br>
-<a href="#sum.traverse">sum.traverse</a><br>
-<a href="#traversable">traversable</a><br>
 </div></div>
 
         </div>

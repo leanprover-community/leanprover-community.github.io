@@ -7,7 +7,118 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">core.init.meta.declaration</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/declaration.lean">(view source on GitHub)</a></div><a href="#declaration">declaration</a><br>
+<a href="#declaration.instantiate_type_univ_params">declaration.instantiate_type_univ_params</a><br>
+<a href="#declaration.instantiate_value_univ_params">declaration.instantiate_value_univ_params</a><br>
+<a href="#declaration.is_definition">declaration.is_definition</a><br>
+<a href="#declaration.is_trusted">declaration.is_trusted</a><br>
+<a href="#declaration.map_value">declaration.map_value</a><br>
+<a href="#declaration.to_definition">declaration.to_definition</a><br>
+<a href="#declaration.to_name">declaration.to_name</a><br>
+<a href="#declaration.type">declaration.type</a><br>
+<a href="#declaration.univ_params">declaration.univ_params</a><br>
+<a href="#declaration.update_name">declaration.update_name</a><br>
+<a href="#declaration.update_type">declaration.update_type</a><br>
+<a href="#declaration.update_value">declaration.update_value</a><br>
+<a href="#declaration.update_value_task">declaration.update_value_task</a><br>
+<a href="#declaration.value">declaration.value</a><br>
+<a href="#declaration.value_task">declaration.value_task</a><br>
+<a href="#mk_definition">mk_definition</a><br>
+<a href="#reducibility_hints">reducibility_hints</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="decl inductive" id="reducibility_hints">     <div class="decl_header impl_collapsed">        <span class="decl_kind">inductive</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/declaration.lean#L41">reducibility_hints</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+  <ul class="constructors">
+<li class="constructor" id="reducibility_hints.opaque">opaque : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#reducibility_hints">reducibility_hints</a></li>
+<li class="constructor" id="reducibility_hints.abbrev">abbrev : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#reducibility_hints">reducibility_hints</a></li>
+<li class="constructor" id="reducibility_hints.regular">regular : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#reducibility_hints">reducibility_hints</a></li>
+</ul> <p>Reducibility hints are used in the convertibility checker.
+When trying to solve a constraint such a</p>
+
+<pre><code>       (f ...) =?= (g ...)
+</code></pre>
+
+<p>where f and g are definitions, the checker has to decide which one will be unfolded.
+  If      f (g) is opaque,     then g (f) is unfolded if it is also not marked as opaque,
+  Else if f (g) is abbrev,     then f (g) is unfolded if g (f) is also not marked as abbrev,
+  Else if f and g are regular, then we unfold the one with the biggest definitional height.
+  Otherwise both are unfolded.</p>
+
+<p>The arguments of the <code>regular</code> constructor are: the definitional height and the flag <code>self_opt</code>.</p>
+
+<p>The definitional height is by default computed by the kernel. It only takes into account
+other regular definitions used in a definition. When creating declarations using meta-programming,
+we can specify the definitional depth manually.</p>
+
+<p>For definitions marked as regular, we also have a hint for constraints such as</p>
+
+<pre><code>      (f a) =?= (f b)
+</code></pre>
+
+<p>if self_opt == true, then checker will first try to solve (a =?= b), only if it fails,
+it unfolds f.</p>
+
+<p>Remark: the hint only affects performance. None of the hints prevent the kernel from unfolding a
+declaration during type checking.</p>
+
+<p>Remark: the reducibility_hints are not related to the attributes: reducible/irrelevance/semireducible.
+These attributes are used by the elaborator. The reducibility_hints are used by the kernel (and elaborator).
+Moreover, the reducibility_hints cannot be changed after a declaration is added to the kernel.</p>
+ </ul></div><div class="decl inductive" id="declaration">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">inductive</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/declaration.lean#L47">declaration</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+  <ul class="constructors">
+<li class="constructor" id="declaration.defn">defn : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#reducibility_hints">reducibility_hints</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></li>
+<li class="constructor" id="declaration.thm">thm : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/task.html#task">task</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></li>
+<li class="constructor" id="declaration.cnst">cnst : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></li>
+<li class="constructor" id="declaration.ax">ax : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></li>
+</ul> <p>Reflect a C++ declaration object. The VM replaces it with the C++ implementation.</p>
+ </ul></div><div class="decl def" id="mk_definition">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/declaration.lean#L59">mk_definition</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="declaration.to_name">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/declaration.lean#L64">declaration.to_name</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="declaration.univ_params">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/declaration.lean#L70">declaration.univ_params</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="declaration.type">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/declaration.lean#L76">declaration.type</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="declaration.value">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/declaration.lean#L82">declaration.value</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="declaration.value_task">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/declaration.lean#L87">declaration.value_task</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/task.html#task">task</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="declaration.is_trusted">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/declaration.lean#L92">declaration.is_trusted</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="declaration.update_type">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/declaration.lean#L97">declaration.update_type</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="declaration.update_name">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/declaration.lean#L103">declaration.update_name</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="declaration.update_value">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/declaration.lean#L109">declaration.update_value</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="declaration.update_value_task">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/declaration.lean#L114">declaration.update_value_task</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/task.html#task">task</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="declaration.map_value">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/declaration.lean#L119">declaration.map_value</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="declaration.to_definition">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/declaration.lean#L124">declaration.to_definition</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="declaration.is_definition">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/declaration.lean#L129">declaration.is_definition</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></div></div>
+   <p></p>
+ </ul></div><div class="decl constant" id="declaration.instantiate_type_univ_params">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/declaration.lean#L134">declaration.instantiate_type_univ_params</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/level.html#level">level</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></div>
+   <p>Instantiate a universe polymorphic declaration type with the given universes.</p>
+ </ul></div><div class="decl constant" id="declaration.instantiate_value_univ_params">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/declaration.lean#L137">declaration.instantiate_value_univ_params</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/level.html#level">level</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></div>
+   <p>Instantiate a universe polymorphic declaration value with the given universes.</p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +918,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1146,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,200 +1269,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="inductive"><a id="reducibility_hints"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/declaration.lean#L41">reducibility_hints</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p>Reducibility hints are used in the convertibility checker.
-When trying to solve a constraint such a</p>
-
-<pre><code>       (f ...) =?= (g ...)
-</code></pre>
-
-<p>where f and g are definitions, the checker has to decide which one will be unfolded.
-  If      f (g) is opaque,     then g (f) is unfolded if it is also not marked as opaque,
-  Else if f (g) is abbrev,     then f (g) is unfolded if g (f) is also not marked as abbrev,
-  Else if f and g are regular, then we unfold the one with the biggest definitional height.
-  Otherwise both are unfolded.</p>
-
-<p>The arguments of the <code>regular</code> constructor are: the definitional height and the flag <code>self_opt</code>.</p>
-
-<p>The definitional height is by default computed by the kernel. It only takes into account
-other regular definitions used in a definition. When creating declarations using meta-programming,
-we can specify the definitional depth manually.</p>
-
-<p>For definitions marked as regular, we also have a hint for constraints such as</p>
-
-<pre><code>      (f a) =?= (f b)
-</code></pre>
-
-<p>if self_opt == true, then checker will first try to solve (a =?= b), only if it fails,
-it unfolds f.</p>
-
-<p>Remark: the hint only affects performance. None of the hints prevent the kernel from unfolding a
-declaration during type checking.</p>
-
-<p>Remark: the reducibility_hints are not related to the attributes: reducible/irrelevance/semireducible.
-These attributes are used by the elaborator. The reducibility_hints are used by the kernel (and elaborator).
-Moreover, the reducibility_hints cannot be changed after a declaration is added to the kernel.</p>
-       <ul>
-
-
-
-<li class="structure_fields">
-Constructors:
-<ul><li><div class="structure_field">reducibility_hints.opaque : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#reducibility_hints">reducibility_hints</a></div></li>
-<li><div class="structure_field">reducibility_hints.abbrev : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#reducibility_hints">reducibility_hints</a></div></li>
-<li><div class="structure_field">reducibility_hints.regular : ℕ → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#reducibility_hints">reducibility_hints</a></div></li>
-</ul></li>
-</ul></div><div class="inductive"><a id="declaration"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/declaration.lean#L47">declaration</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p>Reflect a C++ declaration object. The VM replaces it with the C++ implementation.</p>
-       <ul>
-
-
-
-<li class="structure_fields">
-Constructors:
-<ul><li><div class="structure_field">declaration.defn : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#reducibility_hints">reducibility_hints</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></div></li>
-<li><div class="structure_field">declaration.thm : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/task.html#task">task</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></div></li>
-<li><div class="structure_field">declaration.cnst : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></div></li>
-<li><div class="structure_field">declaration.ax : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></div></li>
-</ul></li>
-</ul></div><div class="def"><a id="mk_definition"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/declaration.lean#L59">mk_definition</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="declaration.to_name"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/declaration.lean#L64">declaration.to_name</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="declaration.univ_params"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/declaration.lean#L70">declaration.univ_params</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="declaration.type"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/declaration.lean#L76">declaration.type</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="declaration.value"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/declaration.lean#L82">declaration.value</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="declaration.value_task"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/declaration.lean#L87">declaration.value_task</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/task.html#task">task</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="declaration.is_trusted"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/declaration.lean#L92">declaration.is_trusted</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="declaration.update_type"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/declaration.lean#L97">declaration.update_type</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="declaration.update_name"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/declaration.lean#L103">declaration.update_name</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="declaration.update_value"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/declaration.lean#L109">declaration.update_value</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="declaration.update_value_task"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/declaration.lean#L114">declaration.update_value_task</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/task.html#task">task</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="declaration.map_value"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/declaration.lean#L119">declaration.map_value</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="declaration.to_definition"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/declaration.lean#L124">declaration.to_definition</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="declaration.is_definition"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/declaration.lean#L129">declaration.is_definition</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="cnst"><a id="declaration.instantiate_type_univ_params"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/declaration.lean#L134">declaration.instantiate_type_univ_params</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/level.html#level">level</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div>
-<p>Instantiate a universe polymorphic declaration type with the given universes.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="cnst"><a id="declaration.instantiate_value_univ_params"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/declaration.lean#L137">declaration.instantiate_value_univ_params</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/declaration.html#declaration">declaration</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/level.html#level">level</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div>
-<p>Instantiate a universe polymorphic declaration value with the given universes.</p>
-       <ul>
-
-
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">core.init.meta.declaration</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/declaration.lean">(view source on GitHub)</a></div><a href="#declaration">declaration</a><br>
-<a href="#declaration.instantiate_type_univ_params">declaration.instantiate_type_univ_params</a><br>
-<a href="#declaration.instantiate_value_univ_params">declaration.instantiate_value_univ_params</a><br>
-<a href="#declaration.is_definition">declaration.is_definition</a><br>
-<a href="#declaration.is_trusted">declaration.is_trusted</a><br>
-<a href="#declaration.map_value">declaration.map_value</a><br>
-<a href="#declaration.to_definition">declaration.to_definition</a><br>
-<a href="#declaration.to_name">declaration.to_name</a><br>
-<a href="#declaration.type">declaration.type</a><br>
-<a href="#declaration.univ_params">declaration.univ_params</a><br>
-<a href="#declaration.update_name">declaration.update_name</a><br>
-<a href="#declaration.update_type">declaration.update_type</a><br>
-<a href="#declaration.update_value">declaration.update_value</a><br>
-<a href="#declaration.update_value_task">declaration.update_value_task</a><br>
-<a href="#declaration.value">declaration.value</a><br>
-<a href="#declaration.value_task">declaration.value_task</a><br>
-<a href="#mk_definition">mk_definition</a><br>
-<a href="#reducibility_hints">reducibility_hints</a><br>
 </div></div>
 
         </div>

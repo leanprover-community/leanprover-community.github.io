@@ -7,7 +7,54 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">topology.metric_space.premetric_space</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/metric_space/premetric_space.lean">(view source on GitHub)</a></div><a href="#premetric.dist_nonneg">premetric.dist_nonneg</a><br>
+<a href="#premetric.dist_setoid">premetric.dist_setoid</a><br>
+<a href="#premetric.has_dist_metric_quot">premetric.has_dist_metric_quot</a><br>
+<a href="#premetric.metric_quot">premetric.metric_quot</a><br>
+<a href="#premetric.metric_quot_dist_eq">premetric.metric_quot_dist_eq</a><br>
+<a href="#premetric.metric_space_quot">premetric.metric_space_quot</a><br>
+<a href="#premetric_space">premetric_space</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="mod_doc">
+<h1>Premetric spaces</h1>
+
+<p>Metric spaces are often defined as quotients of spaces endowed with a "distance"
+function satisfying the triangular inequality, but for which <code>dist x y = 0</code> does
+not imply x = y. We call such a space a premetric space.
+<code>dist x y = 0</code> defines an equivalence relation, and the quotient
+is canonically a metric space.</p>
+</div><div class="decl structure" id="premetric_space"><div class="attributes">@[class]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/metric_space/premetric_space.lean#L28">premetric_space</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type u → Type u</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="premetric_space.to_has_dist">to_has_dist : <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist">has_dist</a> α</li>
+<li class="structure_field" id="premetric_space.dist_self">dist_self : ∀ (x : α), <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist.dist">has_dist.dist</a> x x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> 0</li>
+<li class="structure_field" id="premetric_space.dist_comm">dist_comm : ∀ (x y : α), <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist.dist">has_dist.dist</a> x y <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist.dist">has_dist.dist</a> y x</li>
+<li class="structure_field" id="premetric_space.dist_triangle">dist_triangle : ∀ (x y z : α),
+  <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist.dist">has_dist.dist</a> x z <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist.dist">has_dist.dist</a> x y <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist.dist">has_dist.dist</a> y z</li>
+</ul>  <p></p>
+ </ul></div><div class="decl theorem" id="premetric.dist_nonneg">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/metric_space/premetric_space.lean#L37">premetric.dist_nonneg</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/premetric_space.html#premetric_space">premetric_space</a> α]</span></span> <span class="impl_arg"><span class="decl_args">{x y : α}</span></span> <span class="decl_args">:</span>     <div class="decl_type">0 <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist.dist">has_dist.dist</a> x y</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="premetric.dist_setoid">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/metric_space/premetric_space.lean#L47">premetric.dist_setoid</a></span> <span class="decl_args">(α : Type u)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/premetric_space.html#premetric_space">premetric_space</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/setoid.html#setoid">setoid</a> α</div></div>
+   <p>The canonical equivalence relation on a premetric space.</p>
+ </ul></div><div class="decl def" id="premetric.metric_quot">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/metric_space/premetric_space.lean#L64">premetric.metric_quot</a></span> <span class="decl_args">(α : Type u)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/premetric_space.html#premetric_space">premetric_space</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type">Type u</div></div>
+   <p>The canonical quotient of a premetric space, identifying points at distance 0.</p>
+ </ul></div><div class="decl def" id="premetric.has_dist_metric_quot"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/metric_space/premetric_space.lean#L67">premetric.has_dist_metric_quot</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/premetric_space.html#premetric_space">premetric_space</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist">has_dist</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/premetric_space.html#premetric.metric_quot">premetric.metric_quot</a> α)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="premetric.metric_quot_dist_eq">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/metric_space/premetric_space.lean#L86">premetric.metric_quot_dist_eq</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/premetric_space.html#premetric_space">premetric_space</a> α]</span></span> <span class="decl_args">(p q : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist.dist">has_dist.dist</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/quot.html#quotient.mk" title="quotient.mk">⟦</a>p<a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/quot.html#quotient.mk" title="quotient.mk">⟧</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/quot.html#quotient.mk" title="quotient.mk">⟦</a>q<a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/quot.html#quotient.mk" title="quotient.mk">⟧</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist.dist">has_dist.dist</a> p q</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="premetric.metric_space_quot"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/topology/metric_space/premetric_space.lean#L88">premetric.metric_space_quot</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/premetric_space.html#premetric_space">premetric_space</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/premetric_space.html#premetric.metric_quot">premetric.metric_quot</a> α)</div></div>
+   <p></p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +854,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1082,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,84 +1205,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="mod_doc">
-<h1>Premetric spaces</h1>
-
-<p>Metric spaces are often defined as quotients of spaces endowed with a "distance"
-function satisfying the triangular inequality, but for which <code>dist x y = 0</code> does
-not imply x = y. We call such a space a premetric space.
-<code>dist x y = 0</code> defines an equivalence relation, and the quotient
-is canonically a metric space.</p>
-</div><div class="structure"><a id="premetric_space"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/metric_space/premetric_space.lean#L28">premetric_space</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type u → Type u</div>
-<p></p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">premetric_space.to_has_dist : <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist">has_dist</a> α</div></li>
-<li><div class="structure_field">premetric_space.dist_self : ∀ (x : α), has_dist.dist x x = 0</div></li>
-<li><div class="structure_field">premetric_space.dist_comm : ∀ (x y : α), has_dist.dist x y = has_dist.dist y x</div></li>
-<li><div class="structure_field">premetric_space.dist_triangle : ∀ (x y z : α), has_dist.dist x z ≤ has_dist.dist x y + has_dist.dist y z</div></li>
-</ul></li>
-
-</ul></div><div class="thm"><a id="premetric.dist_nonneg"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/metric_space/premetric_space.lean#L37">premetric.dist_nonneg</a></span>  <span class="decl_args">:</span>       <div class="decl_type">0 ≤ has_dist.dist x y</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/premetric_space.html#premetric_space">premetric_space</a> α]</span> <span class="impl_arg">{x y : α}</span></li>
-
-
-
-</ul></div><div class="def"><a id="premetric.dist_setoid"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/metric_space/premetric_space.lean#L47">premetric.dist_setoid</a></span> <span class="decl_args">(α : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/setoid.html#setoid">setoid</a> α</div>
-<p>The canonical equivalence relation on a premetric space.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/premetric_space.html#premetric_space">premetric_space</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="premetric.metric_quot"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/metric_space/premetric_space.lean#L64">premetric.metric_quot</a></span> <span class="decl_args">(α : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type">Type u</div>
-<p>The canonical quotient of a premetric space, identifying points at distance 0.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/premetric_space.html#premetric_space">premetric_space</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="premetric.has_dist_metric_quot"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/metric_space/premetric_space.lean#L67">premetric.has_dist_metric_quot</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#has_dist">has_dist</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/premetric_space.html#premetric.metric_quot">premetric.metric_quot</a> α)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/premetric_space.html#premetric_space">premetric_space</a> α]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="thm"><a id="premetric.metric_quot_dist_eq"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/metric_space/premetric_space.lean#L86">premetric.metric_quot_dist_eq</a></span> <span class="decl_args">(p q : α)</span> <span class="decl_args">:</span>       <div class="decl_type">has_dist.dist ⟦p⟧ ⟦q⟧ = has_dist.dist p q</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/premetric_space.html#premetric_space">premetric_space</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="premetric.metric_space_quot"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/metric_space/premetric_space.lean#L88">premetric.metric_space_quot</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/premetric_space.html#premetric.metric_quot">premetric.metric_quot</a> α)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/premetric_space.html#premetric_space">premetric_space</a> α]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">topology.metric_space.premetric_space</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/topology/metric_space/premetric_space.lean">(view source on GitHub)</a></div><a href="#premetric.dist_nonneg">premetric.dist_nonneg</a><br>
-<a href="#premetric.dist_setoid">premetric.dist_setoid</a><br>
-<a href="#premetric.has_dist_metric_quot">premetric.has_dist_metric_quot</a><br>
-<a href="#premetric.metric_quot">premetric.metric_quot</a><br>
-<a href="#premetric.metric_quot_dist_eq">premetric.metric_quot_dist_eq</a><br>
-<a href="#premetric.metric_space_quot">premetric.metric_space_quot</a><br>
-<a href="#premetric_space">premetric_space</a><br>
 </div></div>
 
         </div>

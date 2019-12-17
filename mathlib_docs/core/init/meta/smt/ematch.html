@@ -7,7 +7,150 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">core.init.meta.smt.ematch</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean">(view source on GitHub)</a></div><a href="#ematch_config">ematch_config</a><br>
+<a href="#ematch_state">ematch_state</a><br>
+<a href="#ematch_state.internalize">ematch_state.internalize</a><br>
+<a href="#ematch_state.mk">ematch_state.mk</a><br>
+<a href="#get_hinst_lemmas_for_attr">get_hinst_lemmas_for_attr</a><br>
+<a href="#hinst_lemma">hinst_lemma</a><br>
+<a href="#hinst_lemma.has_to_tactic_format">hinst_lemma.has_to_tactic_format</a><br>
+<a href="#hinst_lemma.id">hinst_lemma.id</a><br>
+<a href="#hinst_lemma.mk">hinst_lemma.mk</a><br>
+<a href="#hinst_lemma.mk_core">hinst_lemma.mk_core</a><br>
+<a href="#hinst_lemma.mk_from_decl">hinst_lemma.mk_from_decl</a><br>
+<a href="#hinst_lemma.mk_from_decl_core">hinst_lemma.mk_from_decl_core</a><br>
+<a href="#hinst_lemma.pp">hinst_lemma.pp</a><br>
+<a href="#hinst_lemmas">hinst_lemmas</a><br>
+<a href="#hinst_lemmas.add">hinst_lemmas.add</a><br>
+<a href="#hinst_lemmas.fold">hinst_lemmas.fold</a><br>
+<a href="#hinst_lemmas.has_to_tactic_format">hinst_lemmas.has_to_tactic_format</a><br>
+<a href="#hinst_lemmas.merge">hinst_lemmas.merge</a><br>
+<a href="#hinst_lemmas.mk">hinst_lemmas.mk</a><br>
+<a href="#hinst_lemmas.pp">hinst_lemmas.pp</a><br>
+<a href="#merge_hinst_lemma_attrs">merge_hinst_lemma_attrs</a><br>
+<a href="#mk_hinst_lemma_attr_core">mk_hinst_lemma_attr_core</a><br>
+<a href="#mk_hinst_lemma_attr_set">mk_hinst_lemma_attr_set</a><br>
+<a href="#mk_hinst_lemma_attrs_core">mk_hinst_lemma_attrs_core</a><br>
+<a href="#mk_hinst_singleton">mk_hinst_singleton</a><br>
+<a href="#tactic.ematch">tactic.ematch</a><br>
+<a href="#tactic.ematch_all">tactic.ematch_all</a><br>
+<a href="#tactic.ematch_all_core">tactic.ematch_all_core</a><br>
+<a href="#tactic.ematch_core">tactic.ematch_core</a><br>
+<a href="#to_hinst_lemmas_core">to_hinst_lemmas_core</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="decl constant" id="hinst_lemma">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L13">hinst_lemma</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+   <p>Heuristic instantiation lemma</p>
+ </ul></div><div class="decl constant" id="hinst_lemmas">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L15">hinst_lemmas</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+   <p></p>
+ </ul></div><div class="decl constant" id="hinst_lemma.mk_core">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L20">hinst_lemma.mk_core</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a></div></div>
+   <p><code>mk_core m e as_simp</code>, m is used to decide which definitions will be unfolded in patterns.
+  If as_simp is tt, then this tactic will try to use the left-hand-side of the conclusion
+  as a pattern.</p>
+ </ul></div><div class="decl constant" id="hinst_lemma.mk_from_decl_core">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L21">hinst_lemma.mk_from_decl_core</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a></div></div>
+   <p></p>
+ </ul></div><div class="decl constant" id="hinst_lemma.pp">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L22">hinst_lemma.pp</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/format.html#format">format</a></div></div>
+   <p></p>
+ </ul></div><div class="decl constant" id="hinst_lemma.id">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L23">hinst_lemma.id</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="hinst_lemma.has_to_tactic_format"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L25">hinst_lemma.has_to_tactic_format</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#has_to_tactic_format">has_to_tactic_format</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="hinst_lemma.mk">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L28">hinst_lemma.mk</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="hinst_lemma.mk_from_decl">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L31">hinst_lemma.mk_from_decl</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a></div></div>
+   <p></p>
+ </ul></div><div class="decl constant" id="hinst_lemmas.mk">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L34">hinst_lemmas.mk</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a></div></div>
+   <p></p>
+ </ul></div><div class="decl constant" id="hinst_lemmas.add">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L35">hinst_lemmas.add</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a></div></div>
+   <p></p>
+ </ul></div><div class="decl constant" id="hinst_lemmas.fold">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L36">hinst_lemmas.fold</a></span> <span class="impl_arg"><span class="decl_args">{α : Type}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a> → α → (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a> → α → α) → α</div></div>
+   <p></p>
+ </ul></div><div class="decl constant" id="hinst_lemmas.merge">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L37">hinst_lemmas.merge</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="mk_hinst_singleton">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L39">mk_hinst_singleton</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="hinst_lemmas.pp">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L42">hinst_lemmas.pp</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/format.html#format">format</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="hinst_lemmas.has_to_tactic_format"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L53">hinst_lemmas.has_to_tactic_format</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#has_to_tactic_format">has_to_tactic_format</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="to_hinst_lemmas_core">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L61">to_hinst_lemmas_core</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="mk_hinst_lemma_attr_core">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L81">mk_hinst_lemma_attr_core</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="mk_hinst_lemma_attrs_core">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L96">mk_hinst_lemma_attrs_core</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="merge_hinst_lemma_attrs">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L107">merge_hinst_lemma_attrs</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="mk_hinst_lemma_attr_set">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L121">mk_hinst_lemma_attr_set</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>Create a new "cached" attribute (attr_name : user_attribute hinst_lemmas).
+It also creates "cached" attributes for each attr_names and simp_attr_names if they have not been defined
+yet. Moreover, the hinst_lemmas for attr_name will be the union of the lemmas tagged with
+    attr_name, attrs_name, and simp_attr_names.
+For the ones in simp_attr_names, we use the left-hand-side of the conclusion as the pattern.</p>
+ </ul></div><div class="decl def" id="get_hinst_lemmas_for_attr">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L141">get_hinst_lemmas_for_attr</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a></div></div>
+   <p></p>
+ </ul></div><div class="decl structure" id="ematch_config">     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L144">ematch_config</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="ematch_config.max_instances">max_instances : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a></li>
+<li class="structure_field" id="ematch_config.max_generation">max_generation : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a></li>
+</ul>  <p></p>
+ </ul></div><div class="decl constant" id="ematch_state">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L149">ematch_state</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type</div></div>
+   <p></p>
+ </ul></div><div class="decl constant" id="ematch_state.mk">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L150">ematch_state.mk</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#ematch_config">ematch_config</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#ematch_state">ematch_state</a></div></div>
+   <p></p>
+ </ul></div><div class="decl constant" id="ematch_state.internalize">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L151">ematch_state.internalize</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#ematch_state">ematch_state</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#ematch_state">ematch_state</a></div></div>
+   <p></p>
+ </ul></div><div class="decl constant" id="tactic.ematch_core">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L154">tactic.ematch_core</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/congruence_closure.html#cc_state">cc_state</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#ematch_state">ematch_state</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a>
+  (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a>
+     <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/congruence_closure.html#cc_state">cc_state</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#ematch_state">ematch_state</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl constant" id="tactic.ematch_all_core">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">constant</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L155">tactic.ematch_all_core</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/congruence_closure.html#cc_state">cc_state</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#ematch_state">ematch_state</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a>
+  (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a>
+     <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/congruence_closure.html#cc_state">cc_state</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#ematch_state">ematch_state</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.ematch">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L157">tactic.ematch</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/congruence_closure.html#cc_state">cc_state</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#ematch_state">ematch_state</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a>
+  (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a>
+     <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/congruence_closure.html#cc_state">cc_state</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#ematch_state">ematch_state</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.ematch_all">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/6a4a62b7f03a55be0ee2a0163606e745e2dbd14e/library/init/meta/smt/ematch.lean#L160">tactic.ematch_all</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/congruence_closure.html#cc_state">cc_state</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#ematch_state">ematch_state</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a>
+  (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a>
+     <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/congruence_closure.html#cc_state">cc_state</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#ematch_state">ematch_state</a>)</div></div>
+   <p></p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +950,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1178,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,266 +1301,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="cnst"><a id="hinst_lemma"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L13">hinst_lemma</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p>Heuristic instantiation lemma</p>
-       <ul>
-
-
-
-
-</ul></div><div class="cnst"><a id="hinst_lemmas"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L15">hinst_lemmas</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="cnst"><a id="hinst_lemma.mk_core"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L20">hinst_lemma.mk_core</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a></div>
-<p><code>mk_core m e as_simp</code>, m is used to decide which definitions will be unfolded in patterns.
-  If as_simp is tt, then this tactic will try to use the left-hand-side of the conclusion
-  as a pattern.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="cnst"><a id="hinst_lemma.mk_from_decl_core"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L21">hinst_lemma.mk_from_decl_core</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="cnst"><a id="hinst_lemma.pp"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L22">hinst_lemma.pp</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/format.html#format">format</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="cnst"><a id="hinst_lemma.id"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L23">hinst_lemma.id</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="hinst_lemma.has_to_tactic_format"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L25">hinst_lemma.has_to_tactic_format</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#has_to_tactic_format">has_to_tactic_format</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="hinst_lemma.mk"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L28">hinst_lemma.mk</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="hinst_lemma.mk_from_decl"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L31">hinst_lemma.mk_from_decl</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="cnst"><a id="hinst_lemmas.mk"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L34">hinst_lemmas.mk</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="cnst"><a id="hinst_lemmas.add"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L35">hinst_lemmas.add</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="cnst"><a id="hinst_lemmas.fold"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L36">hinst_lemmas.fold</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a> → α → (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a> → α → α) → α</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type}</span></li>
-
-
-
-</ul></div><div class="cnst"><a id="hinst_lemmas.merge"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L37">hinst_lemmas.merge</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="mk_hinst_singleton"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L39">mk_hinst_singleton</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="hinst_lemmas.pp"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L42">hinst_lemmas.pp</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/format.html#format">format</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="hinst_lemmas.has_to_tactic_format"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L53">hinst_lemmas.has_to_tactic_format</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#has_to_tactic_format">has_to_tactic_format</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="to_hinst_lemmas_core"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L61">to_hinst_lemmas_core</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="mk_hinst_lemma_attr_core"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L81">mk_hinst_lemma_attr_core</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="mk_hinst_lemma_attrs_core"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L96">mk_hinst_lemma_attrs_core</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="merge_hinst_lemma_attrs"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L107">merge_hinst_lemma_attrs</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="mk_hinst_lemma_attr_set"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L121">mk_hinst_lemma_attr_set</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>Create a new "cached" attribute (attr_name : user_attribute hinst_lemmas).
-It also creates "cached" attributes for each attr_names and simp_attr_names if they have not been defined
-yet. Moreover, the hinst_lemmas for attr_name will be the union of the lemmas tagged with
-    attr_name, attrs_name, and simp_attr_names.
-For the ones in simp_attr_names, we use the left-hand-side of the conclusion as the pattern.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="get_hinst_lemmas_for_attr"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L141">get_hinst_lemmas_for_attr</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemmas">hinst_lemmas</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="structure"><a id="ematch_config"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L144">ematch_config</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p></p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">ematch_config.max_instances : ℕ</div></li>
-<li><div class="structure_field">ematch_config.max_generation : ℕ</div></li>
-</ul></li>
-
-</ul></div><div class="cnst"><a id="ematch_state"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L149">ematch_state</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="cnst"><a id="ematch_state.mk"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L150">ematch_state.mk</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#ematch_config">ematch_config</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#ematch_state">ematch_state</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="cnst"><a id="ematch_state.internalize"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L151">ematch_state.internalize</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#ematch_state">ematch_state</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#ematch_state">ematch_state</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="cnst"><a id="tactic.ematch_core"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L154">tactic.ematch_core</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a> →
-<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/congruence_closure.html#cc_state">cc_state</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#ematch_state">ematch_state</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>) × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/congruence_closure.html#cc_state">cc_state</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#ematch_state">ematch_state</a>)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="cnst"><a id="tactic.ematch_all_core"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L155">tactic.ematch_all_core</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic.transparency">tactic.transparency</a> →
-<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/congruence_closure.html#cc_state">cc_state</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#ematch_state">ematch_state</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>) × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/congruence_closure.html#cc_state">cc_state</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#ematch_state">ematch_state</a>)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.ematch"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L157">tactic.ematch</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/congruence_closure.html#cc_state">cc_state</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#ematch_state">ematch_state</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>) × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/congruence_closure.html#cc_state">cc_state</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#ematch_state">ematch_state</a>)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.ematch_all"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean#L160">tactic.ematch_all</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/congruence_closure.html#cc_state">cc_state</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#ematch_state">ematch_state</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#hinst_lemma">hinst_lemma</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>) × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/congruence_closure.html#cc_state">cc_state</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/smt/ematch.html#ematch_state">ematch_state</a>)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">core.init.meta.smt.ematch</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/library/init/meta/smt/ematch.lean">(view source on GitHub)</a></div><a href="#ematch_config">ematch_config</a><br>
-<a href="#ematch_state">ematch_state</a><br>
-<a href="#ematch_state.internalize">ematch_state.internalize</a><br>
-<a href="#ematch_state.mk">ematch_state.mk</a><br>
-<a href="#get_hinst_lemmas_for_attr">get_hinst_lemmas_for_attr</a><br>
-<a href="#hinst_lemma">hinst_lemma</a><br>
-<a href="#hinst_lemma.has_to_tactic_format">hinst_lemma.has_to_tactic_format</a><br>
-<a href="#hinst_lemma.id">hinst_lemma.id</a><br>
-<a href="#hinst_lemma.mk">hinst_lemma.mk</a><br>
-<a href="#hinst_lemma.mk_core">hinst_lemma.mk_core</a><br>
-<a href="#hinst_lemma.mk_from_decl">hinst_lemma.mk_from_decl</a><br>
-<a href="#hinst_lemma.mk_from_decl_core">hinst_lemma.mk_from_decl_core</a><br>
-<a href="#hinst_lemma.pp">hinst_lemma.pp</a><br>
-<a href="#hinst_lemmas">hinst_lemmas</a><br>
-<a href="#hinst_lemmas.add">hinst_lemmas.add</a><br>
-<a href="#hinst_lemmas.fold">hinst_lemmas.fold</a><br>
-<a href="#hinst_lemmas.has_to_tactic_format">hinst_lemmas.has_to_tactic_format</a><br>
-<a href="#hinst_lemmas.merge">hinst_lemmas.merge</a><br>
-<a href="#hinst_lemmas.mk">hinst_lemmas.mk</a><br>
-<a href="#hinst_lemmas.pp">hinst_lemmas.pp</a><br>
-<a href="#merge_hinst_lemma_attrs">merge_hinst_lemma_attrs</a><br>
-<a href="#mk_hinst_lemma_attr_core">mk_hinst_lemma_attr_core</a><br>
-<a href="#mk_hinst_lemma_attr_set">mk_hinst_lemma_attr_set</a><br>
-<a href="#mk_hinst_lemma_attrs_core">mk_hinst_lemma_attrs_core</a><br>
-<a href="#mk_hinst_singleton">mk_hinst_singleton</a><br>
-<a href="#tactic.ematch">tactic.ematch</a><br>
-<a href="#tactic.ematch_all">tactic.ematch_all</a><br>
-<a href="#tactic.ematch_all_core">tactic.ematch_all_core</a><br>
-<a href="#tactic.ematch_core">tactic.ematch_core</a><br>
-<a href="#to_hinst_lemmas_core">to_hinst_lemmas_core</a><br>
 </div></div>
 
         </div>

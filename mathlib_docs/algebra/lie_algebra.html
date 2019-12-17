@@ -7,7 +7,185 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">algebra.lie_algebra</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean">(view source on GitHub)</a></div><a href="#add_lie">add_lie</a><br>
+<a href="#gsmul_lie">gsmul_lie</a><br>
+<a href="#has_bracket">has_bracket</a><br>
+<a href="#lie_add">lie_add</a><br>
+<a href="#lie_algebra">lie_algebra</a><br>
+<a href="#lie_algebra.Ad">lie_algebra.Ad</a><br>
+<a href="#lie_algebra.bil_lie">lie_algebra.bil_lie</a><br>
+<a href="#lie_algebra.of_associative_algebra">lie_algebra.of_associative_algebra</a><br>
+<a href="#lie_algebra.of_endomorphism_algebra">lie_algebra.of_endomorphism_algebra</a><br>
+<a href="#lie_gsmul">lie_gsmul</a><br>
+<a href="#lie_neg">lie_neg</a><br>
+<a href="#lie_ring">lie_ring</a><br>
+<a href="#lie_ring.of_associative_ring">lie_ring.of_associative_ring</a><br>
+<a href="#lie_self">lie_self</a><br>
+<a href="#lie_skew">lie_skew</a><br>
+<a href="#lie_smul">lie_smul</a><br>
+<a href="#lie_zero">lie_zero</a><br>
+<a href="#matrix.lie_algebra">matrix.lie_algebra</a><br>
+<a href="#neg_lie">neg_lie</a><br>
+<a href="#ring_commutator.add_left">ring_commutator.add_left</a><br>
+<a href="#ring_commutator.add_right">ring_commutator.add_right</a><br>
+<a href="#ring_commutator.alternate">ring_commutator.alternate</a><br>
+<a href="#ring_commutator.commutator">ring_commutator.commutator</a><br>
+<a href="#ring_commutator.jacobi">ring_commutator.jacobi</a><br>
+<a href="#smul_lie">smul_lie</a><br>
+<a href="#zero_lie">zero_lie</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="mod_doc">
+<h1>Lie algebras</h1>
+
+<p>This file defines Lie rings, and Lie algebras over a commutative ring. It shows how these arise from
+associative rings and algebras via the ring commutator. In particular it defines the Lie algebra
+of endomorphisms of a module as well as of the algebra of square matrices over a commutative ring.</p>
+
+<h2>Notations</h2>
+
+<p>We introduce the notation ⁅x, y⁆ for the Lie bracket. Note that these are the Unicode "square with
+quill" brackets rather than the usual square brackets.</p>
+
+<h2>Implementation notes</h2>
+
+<p>Lie algebras are defined as modules with a compatible Lie ring structure, and thus are partially
+unbundled. Since they extend Lie rings, these are also partially unbundled.</p>
+
+<h2>References</h2>
+
+<ul>
+<li>[N. Bourbaki, <em>Lie Groups and Lie Algebras, Chapters 1--3</em>][bourbaki1975]</li>
+</ul>
+
+<h2>Tags</h2>
+
+<p>lie bracket, ring commutator, jacobi identity, lie ring, lie algebra</p>
+</div><div class="decl structure" id="has_bracket"><div class="attributes">@[class]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L38">has_bracket</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type v → Type v</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="has_bracket.bracket">bracket : L → L → L</li>
+</ul>  <p>A binary operation, intended use in Lie algebras and similar structures.</p>
+ <details class="instances"><summary>Instances</summary><ul><li><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_ring.to_has_bracket">lie_ring.to_has_bracket</a></li></ul></details></ul></div><div class="decl def" id="ring_commutator.commutator">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L50">ring_commutator.commutator</a></span> <span class="impl_arg"><span class="decl_args">{A : Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#ring">ring</a> A]</span></span> <span class="decl_args">:</span>     <div class="decl_type">A → A → A</div></div>
+   <p>The ring commutator captures the extent to which a ring is commutative. It is identically zero
+exactly when the ring is commutative.</p>
+ </ul></div><div class="decl theorem" id="ring_commutator.add_left"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L54">ring_commutator.add_left</a></span> <span class="impl_arg"><span class="decl_args">{A : Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#ring">ring</a> A]</span></span> <span class="decl_args">(x y z : A)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> (x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> y) z <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> x z <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> y z</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="ring_commutator.add_right"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L58">ring_commutator.add_right</a></span> <span class="impl_arg"><span class="decl_args">{A : Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#ring">ring</a> A]</span></span> <span class="decl_args">(x y z : A)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> z (x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a> y) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> z x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> z y</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="ring_commutator.alternate"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L62">ring_commutator.alternate</a></span> <span class="impl_arg"><span class="decl_args">{A : Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#ring">ring</a> A]</span></span> <span class="decl_args">(x : A)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> x x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> 0</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="ring_commutator.jacobi">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L66">ring_commutator.jacobi</a></span> <span class="impl_arg"><span class="decl_args">{A : Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#ring">ring</a> A]</span></span> <span class="decl_args">(x y z : A)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> x
+        (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> y z) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a>
+      <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> y
+        (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> z x) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> z
+      (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> x y) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  0</div></div>
+   <p></p>
+ </ul></div><div class="decl structure" id="lie_ring"><div class="attributes">@[class]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L88">lie_ring</a></span> <span class="decl_args">(L : Type v)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span></span> <span class="decl_args">:</span>     <div class="decl_type">Type v</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="lie_ring.to_has_bracket">to_has_bracket : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket">has_bracket</a> L</li>
+<li class="structure_field" id="lie_ring.add_lie">add_lie : ∀ (x y z : L),
+  <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a>
+        y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>z<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>z<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a>
+      <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>z<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a></li>
+<li class="structure_field" id="lie_ring.lie_add">lie_add : ∀ (x y z : L),
+  <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>z<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a>
+        y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>z<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a>
+      <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>z<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a></li>
+<li class="structure_field" id="lie_ring.lie_self">lie_self : ∀ (x : L),
+  <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> 0</li>
+<li class="structure_field" id="lie_ring.jacobi">jacobi : ∀ (x y z : L),
+  <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>z<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a>
+        <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>z<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a>
+      <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>z<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+    0</li>
+</ul>  <p>A Lie ring is an additive group with compatible product, known as the bracket, satisfying the
+Jacobi identity. The bracket is not associative unless it is identically zero.</p>
+ <details class="instances"><summary>Instances</summary><ul><li><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_algebra.to_lie_ring">lie_algebra.to_lie_ring</a></li></ul></details></ul></div><div class="decl theorem" id="add_lie"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L99">add_lie</a></span> <span class="impl_arg"><span class="decl_args">{L : Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_ring">lie_ring</a> L]</span></span> <span class="decl_args">(x y z : L)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a>
+      y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>z<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>z<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>z<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a></div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="lie_add"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L100">lie_add</a></span> <span class="impl_arg"><span class="decl_args">{L : Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_ring">lie_ring</a> L]</span></span> <span class="decl_args">(x y z : L)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>z<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a>
+      y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>z<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_add.add" title="has_add.add">+</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>z<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a></div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="lie_self"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L101">lie_self</a></span> <span class="impl_arg"><span class="decl_args">{L : Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_ring">lie_ring</a> L]</span></span> <span class="decl_args">(x : L)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> 0</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="lie_skew"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L103">lie_skew</a></span> <span class="impl_arg"><span class="decl_args">{L : Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_ring">lie_ring</a> L]</span></span> <span class="decl_args">(x y : L)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_neg.neg" title="has_neg.neg">-</a><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a></div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="lie_zero"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L113">lie_zero</a></span> <span class="impl_arg"><span class="decl_args">{L : Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_ring">lie_ring</a> L]</span></span> <span class="decl_args">(x : L)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>0<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> 0</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="zero_lie"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L120">zero_lie</a></span> <span class="impl_arg"><span class="decl_args">{L : Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_ring">lie_ring</a> L]</span></span> <span class="decl_args">(x : L)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>0<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> 0</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="neg_lie"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L123">neg_lie</a></span> <span class="impl_arg"><span class="decl_args">{L : Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_ring">lie_ring</a> L]</span></span> <span class="decl_args">(x y : L)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_neg.neg" title="has_neg.neg">-</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_neg.neg" title="has_neg.neg">-</a><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a></div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="lie_neg"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L126">lie_neg</a></span> <span class="impl_arg"><span class="decl_args">{L : Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_ring">lie_ring</a> L]</span></span> <span class="decl_args">(x y : L)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_neg.neg" title="has_neg.neg">-</a>y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_neg.neg" title="has_neg.neg">-</a><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a></div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="gsmul_lie"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L129">gsmul_lie</a></span> <span class="impl_arg"><span class="decl_args">{L : Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_ring">lie_ring</a> L]</span></span> <span class="decl_args">(x y : L)</span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>n <a href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html#has_scalar.smul" title="has_scalar.smul">•</a>
+      x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  n <a href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html#has_scalar.smul" title="has_scalar.smul">•</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a></div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="lie_gsmul"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L137">lie_gsmul</a></span> <span class="impl_arg"><span class="decl_args">{L : Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_ring">lie_ring</a> L]</span></span> <span class="decl_args">(x y : L)</span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/int/basic.html#int" title="int">ℤ</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>n <a href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html#has_scalar.smul" title="has_scalar.smul">•</a>
+      y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  n <a href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html#has_scalar.smul" title="has_scalar.smul">•</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="lie_ring.of_associative_ring">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L147">lie_ring.of_associative_ring</a></span> <span class="decl_args">(A : Type v)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#ring">ring</a> A]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_ring">lie_ring</a> A</div></div>
+   <p>An associative ring gives rise to a Lie ring by taking the bracket to be the ring commutator.</p>
+ </ul></div><div class="decl structure" id="lie_algebra"><div class="attributes">@[class]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L162">lie_algebra</a></span> <span class="decl_args">(R : Type u)</span> <span class="decl_args">(L : Type v)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_ring">comm_ring</a> R]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span></span> <span class="decl_args">:</span>     <div class="decl_type">Type (max u v)</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="lie_algebra.to_module">to_module : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#module">module</a> R L</li>
+<li class="structure_field" id="lie_algebra.to_lie_ring">to_lie_ring : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_ring">lie_ring</a> L</li>
+<li class="structure_field" id="lie_algebra.lie_smul">lie_smul : ∀ (t : R) (x y : L),
+  <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>t <a href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html#has_scalar.smul" title="has_scalar.smul">•</a>
+        y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+    t <a href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html#has_scalar.smul" title="has_scalar.smul">•</a>
+      <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a></li>
+</ul>  <p>A Lie algebra is a module with compatible product, known as the bracket, satisfying the Jacobi
+identity. Forgetting the scalar multiplication, every Lie algebra is a Lie ring.</p>
+ </ul></div><div class="decl theorem" id="lie_smul"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L167">lie_smul</a></span> <span class="decl_args">(R : Type u)</span> <span class="decl_args">(L : Type v)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_ring">comm_ring</a> R]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_algebra">lie_algebra</a> R L]</span></span> <span class="decl_args">(t : R)</span> <span class="decl_args">(x y : L)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>t <a href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html#has_scalar.smul" title="has_scalar.smul">•</a>
+      y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  t <a href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html#has_scalar.smul" title="has_scalar.smul">•</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a></div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="smul_lie"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L171">smul_lie</a></span> <span class="decl_args">(R : Type u)</span> <span class="decl_args">(L : Type v)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_ring">comm_ring</a> R]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_algebra">lie_algebra</a> R L]</span></span> <span class="decl_args">(t : R)</span> <span class="decl_args">(x y : L)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>t <a href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html#has_scalar.smul" title="has_scalar.smul">•</a>
+      x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  t <a href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html#has_scalar.smul" title="has_scalar.smul">•</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁅</a>x<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">,</a>y<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket.bracket" title="has_bracket.bracket">⁆</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="lie_algebra.Ad">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L182">lie_algebra.Ad</a></span> <span class="decl_args">(R : Type u)</span> <span class="decl_args">(L : Type v)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_ring">comm_ring</a> R]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_algebra">lie_algebra</a> R L]</span></span> <span class="decl_args">:</span>     <div class="decl_type">L → (L <a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#linear_map" title="linear_map">→ₗ[</a>R<a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#linear_map" title="linear_map">]</a> L)</div></div>
+   <p>The adjoint action of a Lie algebra on itself.</p>
+ </ul></div><div class="decl def" id="lie_algebra.bil_lie">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L190">lie_algebra.bil_lie</a></span> <span class="decl_args">(R : Type u)</span> <span class="decl_args">(L : Type v)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_ring">comm_ring</a> R]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_algebra">lie_algebra</a> R L]</span></span> <span class="decl_args">:</span>     <div class="decl_type">L <a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#linear_map" title="linear_map">→ₗ[</a>R<a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#linear_map" title="linear_map">]</a> L <a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#linear_map" title="linear_map">→ₗ[</a>R<a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#linear_map" title="linear_map">]</a> L</div></div>
+   <p>The bracket of a Lie algebra as a bilinear map.</p>
+ </ul></div><div class="decl def" id="lie_algebra.of_associative_algebra">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L198">lie_algebra.of_associative_algebra</a></span> <span class="decl_args">(R : Type u)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_ring">comm_ring</a> R]</span></span> <span class="decl_args">(A : Type v)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#ring">ring</a> A]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/ring_theory/algebra.html#algebra">algebra</a> R A]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_algebra">lie_algebra</a> R A</div></div>
+   <p>An associative algebra gives rise to a Lie algebra by taking the bracket to be the ring commutator.</p>
+ </ul></div><div class="decl def" id="lie_algebra.of_endomorphism_algebra">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L208">lie_algebra.of_endomorphism_algebra</a></span> <span class="decl_args">(R : Type u)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_ring">comm_ring</a> R]</span></span> <span class="decl_args">(M : Type v)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> M]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#module">module</a> R M]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_algebra">lie_algebra</a> R (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#module.End">module.End</a> R M)</div></div>
+   <p>An important class of Lie algebras are those arising from the associative algebra structure on
+module endomorphisms.</p>
+ </ul></div><div class="decl def" id="matrix.lie_algebra">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/algebra/lie_algebra.lean#L218">matrix.lie_algebra</a></span> <span class="decl_args">(n : Type u)</span> <span class="decl_args">(R : Type v)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/data/fintype.html#fintype">fintype</a> n]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_eq">decidable_eq</a> n]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_ring">comm_ring</a> R]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_algebra">lie_algebra</a> R (<a href="https://leanprover-community.github.io/mathlib_docs/data/matrix/basic.html#matrix">matrix</a> n n R)</div></div>
+   <p>An important class of Lie algebras are those arising from the associative algebra structure on
+square matrices over a commutative ring.</p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner" id="algebra">
@@ -807,6 +985,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1213,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,271 +1336,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="mod_doc">
-<h1>Lie algebras</h1>
-
-<p>This file defines Lie rings, and Lie algebras over a commutative ring. It shows how these arise from
-associative rings and algebras via the ring commutator. In particular it defines the Lie algebra
-of endomorphisms of a module as well as of the algebra of square matrices over a commutative ring.</p>
-
-<h2>Notations</h2>
-
-<p>We introduce the notation ⁅x, y⁆ for the Lie bracket. Note that these are the Unicode "square with
-quill" brackets rather than the usual square brackets.</p>
-
-<h2>Implementation notes</h2>
-
-<p>Lie algebras are defined as modules with a compatible Lie ring structure, and thus are partially
-unbundled. Since they extend Lie rings, these are also partially unbundled.</p>
-
-<h2>References</h2>
-
-<ul>
-<li>[N. Bourbaki, <em>Lie Groups and Lie Algebras, Chapters 1--3</em>][bourbaki1975]</li>
-</ul>
-
-<h2>Tags</h2>
-
-<p>lie bracket, ring commutator, jacobi identity, lie ring, lie algebra</p>
-</div><div class="structure"><a id="has_bracket"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L38">has_bracket</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type v → Type v</div>
-<p>A binary operation, intended use in Lie algebras and similar structures.</p>
-       <ul>
-
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">has_bracket.bracket : L → L → L</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="ring_commutator.commutator"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L50">ring_commutator.commutator</a></span>  <span class="decl_args">:</span>       <div class="decl_type">A → A → A</div>
-<p>The ring commutator captures the extent to which a ring is commutative. It is identically zero
-exactly when the ring is commutative.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{A : Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#ring">ring</a> A]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="ring_commutator.add_left"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L54">ring_commutator.add_left</a></span> <span class="decl_args">(x y z : A)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> (x + y) z = <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> x z + <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> y z</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{A : Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#ring">ring</a> A]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="ring_commutator.add_right"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L58">ring_commutator.add_right</a></span> <span class="decl_args">(x y z : A)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> z (x + y) = <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> z x + <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> z y</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{A : Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#ring">ring</a> A]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="ring_commutator.alternate"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L62">ring_commutator.alternate</a></span> <span class="decl_args">(x : A)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> x x = 0</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{A : Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#ring">ring</a> A]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="ring_commutator.jacobi"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L66">ring_commutator.jacobi</a></span> <span class="decl_args">(x y z : A)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> x (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> y z) +
-      <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> y (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> z x) +
-    <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> z (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#ring_commutator.commutator">ring_commutator.commutator</a> x y) =
-  0</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{A : Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#ring">ring</a> A]</span></li>
-
-
-
-</ul></div><div class="structure"><a id="lie_ring"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L88">lie_ring</a></span> <span class="decl_args">(L : Type v)</span> <span class="decl_args">:</span>       <div class="decl_type">Type v</div>
-<p>A Lie ring is an additive group with compatible product, known as the bracket, satisfying the
-Jacobi identity. The bracket is not associative unless it is identically zero.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span></li>
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">lie_ring.to_has_bracket : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#has_bracket">has_bracket</a> L</div></li>
-<li><div class="structure_field">lie_ring.add_lie : ∀ (x y z : L), ⁅x + y,z⁆ = ⁅x,z⁆ + ⁅y,z⁆</div></li>
-<li><div class="structure_field">lie_ring.lie_add : ∀ (x y z : L), ⁅z,x + y⁆ = ⁅z,x⁆ + ⁅z,y⁆</div></li>
-<li><div class="structure_field">lie_ring.lie_self : ∀ (x : L), ⁅x,x⁆ = 0</div></li>
-<li><div class="structure_field">lie_ring.jacobi : ∀ (x y z : L), ⁅x,⁅y,z⁆⁆ + ⁅y,⁅z,x⁆⁆ + ⁅z,⁅x,y⁆⁆ = 0</div></li>
-</ul></li>
-
-</ul></div><div class="thm"><a id="add_lie"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L99">add_lie</a></span> <span class="decl_args">(x y z : L)</span> <span class="decl_args">:</span>       <div class="decl_type">⁅x + y,z⁆ = ⁅x,z⁆ + ⁅y,z⁆</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{L : Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_ring">lie_ring</a> L]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="lie_add"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L100">lie_add</a></span> <span class="decl_args">(x y z : L)</span> <span class="decl_args">:</span>       <div class="decl_type">⁅z,x + y⁆ = ⁅z,x⁆ + ⁅z,y⁆</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{L : Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_ring">lie_ring</a> L]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="lie_self"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L101">lie_self</a></span> <span class="decl_args">(x : L)</span> <span class="decl_args">:</span>       <div class="decl_type">⁅x,x⁆ = 0</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{L : Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_ring">lie_ring</a> L]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="lie_skew"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L103">lie_skew</a></span> <span class="decl_args">(x y : L)</span> <span class="decl_args">:</span>       <div class="decl_type">-⁅y,x⁆ = ⁅x,y⁆</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{L : Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_ring">lie_ring</a> L]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="lie_zero"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L113">lie_zero</a></span> <span class="decl_args">(x : L)</span> <span class="decl_args">:</span>       <div class="decl_type">⁅x,0⁆ = 0</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{L : Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_ring">lie_ring</a> L]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="zero_lie"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L120">zero_lie</a></span> <span class="decl_args">(x : L)</span> <span class="decl_args">:</span>       <div class="decl_type">⁅0,x⁆ = 0</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{L : Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_ring">lie_ring</a> L]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="neg_lie"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L123">neg_lie</a></span> <span class="decl_args">(x y : L)</span> <span class="decl_args">:</span>       <div class="decl_type">⁅-x,y⁆ = -⁅x,y⁆</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{L : Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_ring">lie_ring</a> L]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="lie_neg"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L126">lie_neg</a></span> <span class="decl_args">(x y : L)</span> <span class="decl_args">:</span>       <div class="decl_type">⁅x,-y⁆ = -⁅x,y⁆</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{L : Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_ring">lie_ring</a> L]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="gsmul_lie"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L129">gsmul_lie</a></span> <span class="decl_args">(x y : L)</span> <span class="decl_args">(n : ℤ)</span> <span class="decl_args">:</span>       <div class="decl_type">⁅n • x,y⁆ = n • ⁅x,y⁆</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{L : Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_ring">lie_ring</a> L]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="lie_gsmul"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L137">lie_gsmul</a></span> <span class="decl_args">(x y : L)</span> <span class="decl_args">(n : ℤ)</span> <span class="decl_args">:</span>       <div class="decl_type">⁅x,n • y⁆ = n • ⁅x,y⁆</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{L : Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_ring">lie_ring</a> L]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="def"><a id="lie_ring.of_associative_ring"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L147">lie_ring.of_associative_ring</a></span> <span class="decl_args">(A : Type v)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_ring">lie_ring</a> A</div>
-<p>An associative ring gives rise to a Lie ring by taking the bracket to be the ring commutator.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#ring">ring</a> A]</span></li>
-
-
-
-</ul></div><div class="structure"><a id="lie_algebra"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L162">lie_algebra</a></span> <span class="decl_args">(R : Type u)</span> <span class="decl_args">(L : Type v)</span> <span class="decl_args">:</span>       <div class="decl_type">Type (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/functions.html#max">max</a> u v)</div>
-<p>A Lie algebra is a module with compatible product, known as the bracket, satisfying the Jacobi
-identity. Forgetting the scalar multiplication, every Lie algebra is a Lie ring.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_ring">comm_ring</a> R]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span></li>
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">lie_algebra.to_module : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#module">module</a> R L</div></li>
-<li><div class="structure_field">lie_algebra.to_lie_ring : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_ring">lie_ring</a> L</div></li>
-<li><div class="structure_field">lie_algebra.lie_smul : ∀ (t : R) (x y : L), ⁅x,t • y⁆ = t • ⁅x,y⁆</div></li>
-</ul></li>
-
-</ul></div><div class="thm"><a id="lie_smul"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L167">lie_smul</a></span> <span class="decl_args">(R : Type u)</span> <span class="decl_args">(L : Type v)</span> <span class="decl_args">(t : R)</span> <span class="decl_args">(x y : L)</span> <span class="decl_args">:</span>       <div class="decl_type">⁅x,t • y⁆ = t • ⁅x,y⁆</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_ring">comm_ring</a> R]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_algebra">lie_algebra</a> R L]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="smul_lie"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L171">smul_lie</a></span> <span class="decl_args">(R : Type u)</span> <span class="decl_args">(L : Type v)</span> <span class="decl_args">(t : R)</span> <span class="decl_args">(x y : L)</span> <span class="decl_args">:</span>       <div class="decl_type">⁅t • x,y⁆ = t • ⁅x,y⁆</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_ring">comm_ring</a> R]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_algebra">lie_algebra</a> R L]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="def"><a id="lie_algebra.Ad"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L182">lie_algebra.Ad</a></span> <span class="decl_args">(R : Type u)</span> <span class="decl_args">(L : Type v)</span> <span class="decl_args">:</span>       <div class="decl_type">L → (L →ₗ[R] L)</div>
-<p>The adjoint action of a Lie algebra on itself.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_ring">comm_ring</a> R]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_algebra">lie_algebra</a> R L]</span></li>
-
-
-
-</ul></div><div class="def"><a id="lie_algebra.bil_lie"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L190">lie_algebra.bil_lie</a></span> <span class="decl_args">(R : Type u)</span> <span class="decl_args">(L : Type v)</span> <span class="decl_args">:</span>       <div class="decl_type">L →ₗ[R] L →ₗ[R] L</div>
-<p>The bracket of a Lie algebra as a bilinear map.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_ring">comm_ring</a> R]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> L]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_algebra">lie_algebra</a> R L]</span></li>
-
-
-
-</ul></div><div class="def"><a id="lie_algebra.of_associative_algebra"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L198">lie_algebra.of_associative_algebra</a></span> <span class="decl_args">(R : Type u)</span> <span class="decl_args">(A : Type v)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_algebra">lie_algebra</a> R A</div>
-<p>An associative algebra gives rise to a Lie algebra by taking the bracket to be the ring commutator.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_ring">comm_ring</a> R]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#ring">ring</a> A]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/ring_theory/algebra.html#algebra">algebra</a> R A]</span></li>
-
-
-
-</ul></div><div class="def"><a id="lie_algebra.of_endomorphism_algebra"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L208">lie_algebra.of_endomorphism_algebra</a></span> <span class="decl_args">(R : Type u)</span> <span class="decl_args">(M : Type v)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_algebra">lie_algebra</a> R (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#module.End">module.End</a> R M)</div>
-<p>An important class of Lie algebras are those arising from the associative algebra structure on
-module endomorphisms.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_ring">comm_ring</a> R]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#add_comm_group">add_comm_group</a> M]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/algebra/module.html#module">module</a> R M]</span></li>
-
-
-
-</ul></div><div class="def"><a id="matrix.lie_algebra"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean#L218">matrix.lie_algebra</a></span> <span class="decl_args">(n : Type u)</span> <span class="decl_args">(R : Type v)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/lie_algebra.html#lie_algebra">lie_algebra</a> R (<a href="https://leanprover-community.github.io/mathlib_docs/data/matrix/basic.html#matrix">matrix</a> n n R)</div>
-<p>An important class of Lie algebras are those arising from the associative algebra structure on
-square matrices over a commutative ring.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/data/fintype.html#fintype">fintype</a> n]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#decidable_eq">decidable_eq</a> n]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/ring.html#comm_ring">comm_ring</a> R]</span></li>
-
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">algebra.lie_algebra</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/algebra/lie_algebra.lean">(view source on GitHub)</a></div><a href="#add_lie">add_lie</a><br>
-<a href="#gsmul_lie">gsmul_lie</a><br>
-<a href="#has_bracket">has_bracket</a><br>
-<a href="#lie_add">lie_add</a><br>
-<a href="#lie_algebra">lie_algebra</a><br>
-<a href="#lie_algebra.Ad">lie_algebra.Ad</a><br>
-<a href="#lie_algebra.bil_lie">lie_algebra.bil_lie</a><br>
-<a href="#lie_algebra.of_associative_algebra">lie_algebra.of_associative_algebra</a><br>
-<a href="#lie_algebra.of_endomorphism_algebra">lie_algebra.of_endomorphism_algebra</a><br>
-<a href="#lie_gsmul">lie_gsmul</a><br>
-<a href="#lie_neg">lie_neg</a><br>
-<a href="#lie_ring">lie_ring</a><br>
-<a href="#lie_ring.of_associative_ring">lie_ring.of_associative_ring</a><br>
-<a href="#lie_self">lie_self</a><br>
-<a href="#lie_skew">lie_skew</a><br>
-<a href="#lie_smul">lie_smul</a><br>
-<a href="#lie_zero">lie_zero</a><br>
-<a href="#matrix.lie_algebra">matrix.lie_algebra</a><br>
-<a href="#neg_lie">neg_lie</a><br>
-<a href="#ring_commutator.add_left">ring_commutator.add_left</a><br>
-<a href="#ring_commutator.add_right">ring_commutator.add_right</a><br>
-<a href="#ring_commutator.alternate">ring_commutator.alternate</a><br>
-<a href="#ring_commutator.commutator">ring_commutator.commutator</a><br>
-<a href="#ring_commutator.jacobi">ring_commutator.jacobi</a><br>
-<a href="#smul_lie">smul_lie</a><br>
-<a href="#zero_lie">zero_lie</a><br>
 </div></div>
 
         </div>

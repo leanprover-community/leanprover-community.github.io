@@ -7,7 +7,329 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">geometry.manifold.manifold</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean">(view source on GitHub)</a></div><a href="#chart_at_model_space_eq">chart_at_model_space_eq</a><br>
+<a href="#continuous_groupoid">continuous_groupoid</a><br>
+<a href="#groupoid_of_pregroupoid_le">groupoid_of_pregroupoid_le</a><br>
+<a href="#has_groupoid">has_groupoid</a><br>
+<a href="#has_groupoid_continuous_groupoid">has_groupoid_continuous_groupoid</a><br>
+<a href="#has_groupoid_model_space">has_groupoid_model_space</a><br>
+<a href="#has_groupoid_of_le">has_groupoid_of_le</a><br>
+<a href="#has_groupoid_of_pregroupoid">has_groupoid_of_pregroupoid</a><br>
+<a href="#id_groupoid">id_groupoid</a><br>
+<a href="#manifold">manifold</a><br>
+<a href="#manifold_core">manifold_core</a><br>
+<a href="#manifold_core.local_homeomorph">manifold_core.local_homeomorph</a><br>
+<a href="#manifold_core.open_source'">manifold_core.open_source'</a><br>
+<a href="#manifold_core.open_target">manifold_core.open_target</a><br>
+<a href="#manifold_core.to_manifold">manifold_core.to_manifold</a><br>
+<a href="#manifold_core.to_topological_space">manifold_core.to_topological_space</a><br>
+<a href="#manifold_model_space">manifold_model_space</a><br>
+<a href="#mem_groupoid_of_pregroupoid">mem_groupoid_of_pregroupoid</a><br>
+<a href="#mem_pregroupoid_of_eq_on_source">mem_pregroupoid_of_eq_on_source</a><br>
+<a href="#model_space_atlas">model_space_atlas</a><br>
+<a href="#pregroupoid">pregroupoid</a><br>
+<a href="#pregroupoid.groupoid">pregroupoid.groupoid</a><br>
+<a href="#structomorph">structomorph</a><br>
+<a href="#structomorph.refl">structomorph.refl</a><br>
+<a href="#structomorph.symm">structomorph.symm</a><br>
+<a href="#structomorph.trans">structomorph.trans</a><br>
+<a href="#structure_groupoid">structure_groupoid</a><br>
+<a href="#structure_groupoid.has_mem">structure_groupoid.has_mem</a><br>
+<a href="#structure_groupoid.lattice.order_bot">structure_groupoid.lattice.order_bot</a><br>
+<a href="#structure_groupoid.lattice.order_top">structure_groupoid.lattice.order_top</a><br>
+<a href="#structure_groupoid.partial_order">structure_groupoid.partial_order</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="mod_doc">
+<h1>Manifolds</h1>
+
+<p>A manifold is a topological space M locally modelled on a model space H, i.e., the manifold is
+covered by open subsets on which there are local homeomorphisms (the charts) going to H. If the
+changes of charts satisfy some additional property (for instance if they are smooth), then M
+inherits additional structure (it makes sense to talk about smooth manifolds). There are therefore
+two different ingredients in a manifold:</p>
+
+<ul>
+<li>the set of charts, which is data</li>
+<li>the fact that changes of charts belong to some group (in fact groupoid), which is additional Prop.</li>
+</ul>
+
+<p>We separate these two parts in the definition: the manifold structure is just the set of charts, and
+then the different smoothness requirements (smooth manifold, orientable manifold, contact manifold,
+and so on) are additional properties of these charts. These properties are formalized through the
+notion of structure groupoid, i.e., a set of local homeomorphisms stable under composition and
+inverse, to which the change of coordinates should belong.</p>
+
+<h2>Main definitions</h2>
+
+<p><code>structure_groupoid H</code>   : a subset of local homeomorphisms of <code>H</code> stable under composition, inverse
+                           and restriction (ex: local diffeos)
+<code>pregroupoid H</code>          : a subset of local homeomorphisms of <code>H</code> stable under composition and
+                           restriction, but not inverse (ex: smooth maps)
+<code>groupoid_of_pregroupoid</code>: construct a groupoid from a pregroupoid, by requiring that a map and its
+                           inverse both belong to the pregroupoid (ex: construct diffeos from smooth
+                           maps)
+<code>continuous_groupoid H</code>  : the groupoid of all local homeomorphisms of <code>H</code></p>
+
+<p><code>manifold H M</code>           : manifold structure on M modelled on H, given by an atlas of local
+                           homeomorphisms from M to H whose sources cover M. This is a type class.
+<code>has_groupoid M G</code>       : when <code>G</code> is a structure groupoid on <code>H</code> and <code>M</code> is a manifold modelled on
+                           <code>H</code>, require that all coordinate changes belong to <code>G</code>. This is a type
+                           class
+<code>atlas H M</code>              : when <code>M</code> is a manifold modelled on <code>H</code>, the atlas of this manifold
+                           structure, i.e., the set of charts
+<code>structomorph G M M'</code>    : the set of diffeomorphisms between the manifolds M and M' for the
+                           groupoid G. We avoid the word diffeomorphisms, keeping it for the
+                           smooth category.</p>
+
+<p>As a basic example, we give the instance
+<code>instance <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold_model_space">manifold_model_space</a> (H : Type*) [<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H] : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H H</code>
+saying that a topological space is a manifold over itself, with the identity as unique chart. This
+manifold structure is compatible with any groupoid.</p>
+
+<h2>Implementation notes</h2>
+
+<p>The atlas in a manifold is <em>not</em> a maximal atlas in general: the notion of maximality depends on the
+groupoid one considers, and changing groupoids changes the maximal atlas. With the current
+formalization, it makes sense first to choose the atlas, and then to ask whether this precise atlas
+defines a smooth manifold, an orientable manifold, and so on. A consequence is that structomorphisms
+between M and M' do <em>not</em> induce a bijection between the atlases of M and M': the definition is only
+that, read in charts, the structomorphism locally belongs to the groupoid under consideration.
+(This is equivalent to inducing a bijection between elements of the maximal atlas). A consequence
+is that the invariance under structomorphisms of properties defined in terms of the atlas is not
+obvious in general, and could require some work in theory (amounting to the fact that these
+properties only depend on the maximal atlas, for instance). In practice, this does not create any
+real difficulty.</p>
+
+<p>We use the letter <code>H</code> for the model space thinking of the case of manifolds with boundary, where the
+model space is a half space.</p>
+
+<p>Manifolds are sometimes defined as topological spaces with an atlas of local diffeomorphisms, and
+sometimes as spaces with an atlas from which a topology is deduced. We use the former approach:
+otherwise, there would be an instance from manifolds to topological spaces, which means that any
+instance search for topological spaces would try to find manifold structures involving a yet
+unknown model space, leading to problems. However, we also introduce the latter approach,
+through a structure <code>manifold_core</code> making it possible to construct a topology out of a set of local
+equivs with compatibility conditions (but we do not register it as an instance).</p>
+
+<p>In the definition of a manifold, the model space is written as an explicit parameter as there can be
+several model spaces for a given topological space. For instance, a complex manifold (modelled over
+ℂ^n) will also be seen sometimes as a real manifold modelled over ℝ^(2n).</p>
+</div><div class="decl structure" id="structure_groupoid">     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L119">structure_groupoid</a></span> <span class="decl_args">(H : Type u)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="decl_args">:</span>     <div class="decl_type">Type u</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="structure_groupoid.members">members : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/set.html#set">set</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> H H)</li>
+<li class="structure_field" id="structure_groupoid.comp">comp : ∀ (e e' : <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> H H),
+  e <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid.members" title="structure_groupoid.members">members</a> →
+  e' <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid.members" title="structure_groupoid.members">members</a> →
+  <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.trans">local_homeomorph.trans</a> e e' <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a>
+    c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid.members" title="structure_groupoid.members">members</a></li>
+<li class="structure_field" id="structure_groupoid.inv">inv : ∀ (e : <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> H H),
+  e <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid.members" title="structure_groupoid.members">members</a> →
+  <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.symm">local_homeomorph.symm</a> e <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a>
+    c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid.members" title="structure_groupoid.members">members</a></li>
+<li class="structure_field" id="structure_groupoid.id_mem">id_mem : <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.refl">local_homeomorph.refl</a> H <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a>
+  c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid.members" title="structure_groupoid.members">members</a></li>
+<li class="structure_field" id="structure_groupoid.locality">locality : ∀ (e : <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> H H),
+  (∀ (x : H),
+     x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a>
+       (e.<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.to_local_equiv" title="local_homeomorph.to_local_equiv">to_local_equiv</a>).<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.source" title="local_equiv.source">source</a> →
+     (∃ (s : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/set.html#set">set</a> H),
+        <a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#is_open">is_open</a> s <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a>
+          x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> s <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a>
+            <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.restr">local_homeomorph.restr</a> e s <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a>
+              c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid.members" title="structure_groupoid.members">members</a>)) →
+  e <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid.members" title="structure_groupoid.members">members</a></li>
+<li class="structure_field" id="structure_groupoid.eq_on_source">eq_on_source : ∀ (e e' : <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> H H),
+  e <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid.members" title="structure_groupoid.members">members</a> →
+  e' <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_equiv.equiv" title="has_equiv.equiv">≈</a> e → e' <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid.members" title="structure_groupoid.members">members</a></li>
+</ul>  <p>A structure groupoid is a set of local homeomorphisms of a topological space stable under
+composition and inverse. They appear in the definition of the smoothness class of a manifold.</p>
+ </ul></div><div class="decl def" id="structure_groupoid.has_mem"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L130">structure_groupoid.has_mem</a></span> <span class="impl_arg"><span class="decl_args">{H : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem">has_mem</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> H H)
+  (<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="structure_groupoid.partial_order"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L134">structure_groupoid.partial_order</a></span> <span class="impl_arg"><span class="decl_args">{H : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#partial_order">partial_order</a> (<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H)</div></div>
+   <p>Partial order on the set of groupoids, given by inclusion of the members of the groupoid</p>
+ </ul></div><div class="decl def" id="id_groupoid">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L140">id_groupoid</a></span> <span class="decl_args">(H : Type u)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H</div></div>
+   <p>The trivial groupoid, containing only the identity (and maps with empty source, as this is
+necessary from the definition)</p>
+ </ul></div><div class="decl def" id="structure_groupoid.lattice.order_bot"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L191">structure_groupoid.lattice.order_bot</a></span> <span class="impl_arg"><span class="decl_args">{H : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/order/bounded_lattice.html#lattice.order_bot">lattice.order_bot</a> (<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H)</div></div>
+   <p>Every structure groupoid contains the identity groupoid</p>
+ </ul></div><div class="decl structure" id="pregroupoid">     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L211">pregroupoid</a></span> <span class="decl_args">(H : Type u_4)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="decl_args">:</span>     <div class="decl_type">Type u_4</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="pregroupoid.property">property : (H → H) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/set.html#set">set</a> H → Prop</li>
+<li class="structure_field" id="pregroupoid.comp">comp : ∀ {f g : H → H} {u v : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/set.html#set">set</a> H},
+  c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid.property" title="pregroupoid.property">property</a> f u →
+  c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid.property" title="pregroupoid.property">property</a> g v →
+  <a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#is_open">is_open</a> (u <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_inter.inter" title="has_inter.inter">∩</a> f <a href="https://leanprover-community.github.io/mathlib_docs/data/set/basic.html#set.preimage" title="set.preimage">⁻¹'</a> v) →
+  c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid.property" title="pregroupoid.property">property</a> (g <a href="https://leanprover-community.github.io/mathlib_docs/core/init/function.html#function.comp" title="function.comp">∘</a> f)
+    (u <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_inter.inter" title="has_inter.inter">∩</a> f <a href="https://leanprover-community.github.io/mathlib_docs/data/set/basic.html#set.preimage" title="set.preimage">⁻¹'</a> v)</li>
+<li class="structure_field" id="pregroupoid.id_mem">id_mem : c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid.property" title="pregroupoid.property">property</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#id">id</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/set.html#set.univ">set.univ</a></li>
+<li class="structure_field" id="pregroupoid.locality">locality : ∀ {f : H → H} {u : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/set.html#set">set</a> H},
+  <a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#is_open">is_open</a> u →
+  (∀ (x : H),
+     x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> u →
+     (∃ (v : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/set.html#set">set</a> H),
+        <a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#is_open">is_open</a> v <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a>
+          x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> v <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a>
+            c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid.property" title="pregroupoid.property">property</a> f (u <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_inter.inter" title="has_inter.inter">∩</a> v))) →
+  c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid.property" title="pregroupoid.property">property</a> f u</li>
+<li class="structure_field" id="pregroupoid.congr">congr : ∀ {f g : H → H} {u : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/set.html#set">set</a> H},
+  <a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#is_open">is_open</a> u →
+  (∀ (x : H), x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> u → g x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> f x) →
+  c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid.property" title="pregroupoid.property">property</a> f u → c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid.property" title="pregroupoid.property">property</a> g u</li>
+</ul>  <p>To construct a groupoid, one may consider classes of local homeos such that both the function
+and its inverse have some property. If this property is stable under composition,
+one gets a groupoid. <code>pregroupoid</code> bundles the properties needed for this construction, with the
+groupoid of smooth functions with smooth inverses as an application.</p>
+ </ul></div><div class="decl def" id="pregroupoid.groupoid">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L221">pregroupoid.groupoid</a></span> <span class="impl_arg"><span class="decl_args">{H : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid">pregroupoid</a> H → <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H</div></div>
+   <p>Construct a groupoid of local homeos for which the map and its inverse have some property,
+from a pregroupoid asserting that this property is stable under composition.</p>
+ </ul></div><div class="decl theorem" id="mem_groupoid_of_pregroupoid">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L258">mem_groupoid_of_pregroupoid</a></span> <span class="impl_arg"><span class="decl_args">{H : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="decl_args">(PG : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid">pregroupoid</a> H)</span> <span class="decl_args">(e : <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> H H)</span> <span class="decl_args">:</span>     <div class="decl_type">e <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid.groupoid">pregroupoid.groupoid</a> PG <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a>
+  PG.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid.property" title="pregroupoid.property">property</a>
+      ((e.<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.to_local_equiv" title="local_homeomorph.to_local_equiv">to_local_equiv</a>).<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.to_fun" title="local_equiv.to_fun">to_fun</a>)
+      ((e.<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.to_local_equiv" title="local_homeomorph.to_local_equiv">to_local_equiv</a>).<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.source" title="local_equiv.source">source</a>) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#and" title="and">∧</a>
+    PG.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid.property" title="pregroupoid.property">property</a>
+      ((e.<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.to_local_equiv" title="local_homeomorph.to_local_equiv">to_local_equiv</a>).<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.inv_fun" title="local_equiv.inv_fun">inv_fun</a>)
+      ((e.<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.to_local_equiv" title="local_homeomorph.to_local_equiv">to_local_equiv</a>).<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.target" title="local_equiv.target">target</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="groupoid_of_pregroupoid_le">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L262">groupoid_of_pregroupoid_le</a></span> <span class="impl_arg"><span class="decl_args">{H : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="decl_args">(PG₁ PG₂ : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid">pregroupoid</a> H)</span> <span class="decl_args">:</span>     <div class="decl_type">(∀ (f : H → H) (s : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/set.html#set">set</a> H),
+   PG₁.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid.property" title="pregroupoid.property">property</a> f s → PG₂.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid.property" title="pregroupoid.property">property</a> f s) →
+<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid.groupoid">pregroupoid.groupoid</a> PG₁ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid.groupoid">pregroupoid.groupoid</a> PG₂</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="mem_pregroupoid_of_eq_on_source">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L271">mem_pregroupoid_of_eq_on_source</a></span> <span class="impl_arg"><span class="decl_args">{H : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="decl_args">(PG : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid">pregroupoid</a> H)</span> <span class="impl_arg"><span class="decl_args">{e e' : <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> H H}</span></span> <span class="decl_args">:</span>     <div class="decl_type">e <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_equiv.equiv" title="has_equiv.equiv">≈</a> e' →
+PG.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid.property" title="pregroupoid.property">property</a>
+  ((e.<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.to_local_equiv" title="local_homeomorph.to_local_equiv">to_local_equiv</a>).<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.to_fun" title="local_equiv.to_fun">to_fun</a>)
+  ((e.<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.to_local_equiv" title="local_homeomorph.to_local_equiv">to_local_equiv</a>).<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.source" title="local_equiv.source">source</a>) →
+PG.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid.property" title="pregroupoid.property">property</a>
+  ((e'.<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.to_local_equiv" title="local_homeomorph.to_local_equiv">to_local_equiv</a>).<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.to_fun" title="local_equiv.to_fun">to_fun</a>)
+  ((e'.<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.to_local_equiv" title="local_homeomorph.to_local_equiv">to_local_equiv</a>).<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.source" title="local_equiv.source">source</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="continuous_groupoid">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L280">continuous_groupoid</a></span> <span class="decl_args">(H : Type u_1)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H</div></div>
+   <p>The groupoid of all local homeomorphisms on a topological space H</p>
+ </ul></div><div class="decl def" id="structure_groupoid.lattice.order_top"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L289">structure_groupoid.lattice.order_top</a></span> <span class="impl_arg"><span class="decl_args">{H : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/order/bounded_lattice.html#lattice.order_top">lattice.order_top</a> (<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H)</div></div>
+   <p>Every structure groupoid is contained in the groupoid of all local homeomorphisms</p>
+ </ul></div><div class="decl structure" id="manifold"><div class="attributes">@[class]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L305">manifold</a></span> <span class="decl_args">(H : Type u_4)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="decl_args">(M : Type u_5)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M]</span></span> <span class="decl_args">:</span>     <div class="decl_type">Type (max u_4 u_5)</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="manifold.atlas">atlas : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/set.html#set">set</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> M H)</li>
+<li class="structure_field" id="manifold.chart_at">chart_at : M → <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> M H</li>
+<li class="structure_field" id="manifold.mem_chart_source">mem_chart_source : ∀ (x : M),
+  x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a>
+    ((<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold.chart_at">manifold.chart_at</a> H
+        x).<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.to_local_equiv" title="local_homeomorph.to_local_equiv">to_local_equiv</a>).<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.source" title="local_equiv.source">source</a></li>
+<li class="structure_field" id="manifold.chart_mem_atlas">chart_mem_atlas : ∀ (x : M),
+  <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold.chart_at">manifold.chart_at</a> H x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold.atlas">manifold.atlas</a> H M</li>
+</ul>  <p>A manifold is a topological space endowed with an atlas, i.e., a set of local homeomorphisms
+taking value in a model space H, called charts, such that the domains of the charts cover the whole
+space. We express the covering property by chosing for each x a member <code>chart_at x</code> of the atlas
+containing x in its source: in the smooth case, this is convenient to construct the tangent bundle
+in an efficient way.
+The model space is written as an explicit parameter as there can be several model spaces for a
+given topological space. For instance, a complex manifold (modelled over ℂ^n) will also be seen
+sometimes as a real manifold over ℝ^(2n).</p>
+ <details class="instances"><summary>Instances</summary><ul><li><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold_model_space">manifold_model_space</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/real_instances.html#Icc_manifold">Icc_manifold</a></li></ul></details></ul></div><div class="decl def" id="manifold_model_space"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L317">manifold_model_space</a></span> <span class="decl_args">(H : Type u_1)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H H</div></div>
+   <p>Any space is a manifold modelled over itself, by just using the identity chart</p>
+ </ul></div><div class="decl theorem" id="model_space_atlas"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L325">model_space_atlas</a></span> <span class="impl_arg"><span class="decl_args">{H : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="impl_arg"><span class="decl_args">{e : <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> H H}</span></span> <span class="decl_args">:</span>     <div class="decl_type">e <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold.atlas">manifold.atlas</a> H H <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#iff" title="iff">↔</a>
+  e <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.refl">local_homeomorph.refl</a> H</div></div>
+   <p>In the trivial manifold structure of a space modelled over itself through the identity, the
+atlas members are just the identity</p>
+ </ul></div><div class="decl theorem" id="chart_at_model_space_eq"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L330">chart_at_model_space_eq</a></span> <span class="impl_arg"><span class="decl_args">{H : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="impl_arg"><span class="decl_args">{x : H}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold.chart_at">manifold.chart_at</a> H x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.refl">local_homeomorph.refl</a> H</div></div>
+   <p>In the model space, chart_at is always the identity</p>
+ </ul></div><div class="decl structure" id="manifold_core">     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L340">manifold_core</a></span> <span class="decl_args">(H : Type u_4)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="decl_args">:</span>     <div class="decl_type">Type u_5 → Type (max u_4 u_5)</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="manifold_core.atlas">atlas : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/set.html#set">set</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv">local_equiv</a> M H)</li>
+<li class="structure_field" id="manifold_core.chart_at">chart_at : M → <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv">local_equiv</a> M H</li>
+<li class="structure_field" id="manifold_core.mem_chart_source">mem_chart_source : ∀ (x : M), x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> (c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold_core.chart_at" title="manifold_core.chart_at">chart_at</a> x).<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.source" title="local_equiv.source">source</a></li>
+<li class="structure_field" id="manifold_core.chart_mem_atlas">chart_mem_atlas : ∀ (x : M), c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold_core.chart_at" title="manifold_core.chart_at">chart_at</a> x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold_core.atlas" title="manifold_core.atlas">atlas</a></li>
+<li class="structure_field" id="manifold_core.open_source">open_source : ∀ (e e' : <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv">local_equiv</a> M H),
+  e <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold_core.atlas" title="manifold_core.atlas">atlas</a> →
+  e' <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold_core.atlas" title="manifold_core.atlas">atlas</a> →
+  <a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#is_open">is_open</a>
+    ((<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.trans">local_equiv.trans</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.symm">local_equiv.symm</a> e)
+        e').<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.source" title="local_equiv.source">source</a>)</li>
+<li class="structure_field" id="manifold_core.continuous_to_fun">continuous_to_fun : ∀ (e e' : <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv">local_equiv</a> M H),
+  e <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold_core.atlas" title="manifold_core.atlas">atlas</a> →
+  e' <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold_core.atlas" title="manifold_core.atlas">atlas</a> →
+  <a href="https://leanprover-community.github.io/mathlib_docs/topology/continuous_on.html#continuous_on">continuous_on</a>
+    ((<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.trans">local_equiv.trans</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.symm">local_equiv.symm</a> e)
+        e').<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.to_fun" title="local_equiv.to_fun">to_fun</a>)
+    ((<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.trans">local_equiv.trans</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.symm">local_equiv.symm</a> e)
+        e').<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.source" title="local_equiv.source">source</a>)</li>
+</ul>  <p>Sometimes, one may want to construct a manifold structure on a space which does not yet have
+a topological structure, where the topology would come from the charts. For this, one needs charts
+that are only local equivs, and continuity properties for their composition.
+This is formalised in <code>manifold_core</code>.</p>
+ </ul></div><div class="decl def" id="manifold_core.to_topological_space">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L354">manifold_core.to_topological_space</a></span> <span class="impl_arg"><span class="decl_args">{H : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{M : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold_core">manifold_core</a> H M → <a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M</div></div>
+   <p>Topology generated by a set of charts on a Type.</p>
+ </ul></div><div class="decl theorem" id="manifold_core.open_source'">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L358">manifold_core.open_source'</a></span> <span class="impl_arg"><span class="decl_args">{H : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{M : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="decl_args">(c : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold_core">manifold_core</a> H M)</span> <span class="impl_arg"><span class="decl_args">{e : <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv">local_equiv</a> M H}</span></span> <span class="decl_args">:</span>     <div class="decl_type">e <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold_core.atlas" title="manifold_core.atlas">atlas</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#is_open">is_open</a> (e.<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.source" title="local_equiv.source">source</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="manifold_core.open_target">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L366">manifold_core.open_target</a></span> <span class="impl_arg"><span class="decl_args">{H : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{M : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="decl_args">(c : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold_core">manifold_core</a> H M)</span> <span class="impl_arg"><span class="decl_args">{e : <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv">local_equiv</a> M H}</span></span> <span class="decl_args">:</span>     <div class="decl_type">e <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold_core.atlas" title="manifold_core.atlas">atlas</a> →
+<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#is_open">is_open</a> (e.<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.target" title="local_equiv.target">target</a>)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="manifold_core.local_homeomorph">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L374">manifold_core.local_homeomorph</a></span> <span class="impl_arg"><span class="decl_args">{H : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{M : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="decl_args">(c : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold_core">manifold_core</a> H M)</span> <span class="decl_args">(e : <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv">local_equiv</a> M H)</span> <span class="decl_args">:</span>     <div class="decl_type">e <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold_core.atlas" title="manifold_core.atlas">atlas</a> → <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> M H</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="manifold_core.to_manifold">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L405">manifold_core.to_manifold</a></span> <span class="impl_arg"><span class="decl_args">{H : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{M : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="decl_args">(c : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold_core">manifold_core</a> H M)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M</div></div>
+   <p></p>
+ </ul></div><div class="decl structure" id="has_groupoid"><div class="attributes">@[class]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L420">has_groupoid</a></span> <span class="impl_arg"><span class="decl_args">{H : Type u_4}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="decl_args">(M : Type u_5)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H → Prop</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="has_groupoid.compatible">compatible : ∀ {e e' : <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> M H},
+  e <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold.atlas">manifold.atlas</a> H M →
+  e' <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold.atlas">manifold.atlas</a> H M →
+  <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.trans">local_homeomorph.trans</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.symm">local_homeomorph.symm</a> e)
+      e' <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a>
+    G</li>
+</ul>  <p>A manifold has an atlas in a groupoid G if the change of coordinates belong to the groupoid</p>
+ <details class="instances"><summary>Instances</summary><ul><li><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#has_groupoid_model_space">has_groupoid_model_space</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#has_groupoid_continuous_groupoid">has_groupoid_continuous_groupoid</a></li>
+<li><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/smooth_manifold_with_corners.html#smooth_manifold_with_corners.to_has_groupoid">smooth_manifold_with_corners.to_has_groupoid</a></li></ul></details></ul></div><div class="decl theorem" id="has_groupoid_of_le">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L424">has_groupoid_of_le</a></span> <span class="impl_arg"><span class="decl_args">{H : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{M : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M]</span></span> <span class="impl_arg"><span class="decl_args">{G₁ G₂ : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#has_groupoid">has_groupoid</a> M G₁ →
+G₁ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_le.le" title="has_le.le">≤</a> G₂ → <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#has_groupoid">has_groupoid</a> M G₂</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="has_groupoid_of_pregroupoid">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L428">has_groupoid_of_pregroupoid</a></span> <span class="impl_arg"><span class="decl_args">{H : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{M : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M]</span></span> <span class="decl_args">(PG : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid">pregroupoid</a> H)</span> <span class="decl_args">:</span>     <div class="decl_type">(∀ {e e' : <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> M H},
+   e <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold.atlas">manifold.atlas</a> H M →
+   e' <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold.atlas">manifold.atlas</a> H M →
+   PG.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid.property" title="pregroupoid.property">property</a>
+     (((<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.trans">local_homeomorph.trans</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.symm">local_homeomorph.symm</a> e)
+          e').<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.to_local_equiv" title="local_homeomorph.to_local_equiv">to_local_equiv</a>).<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.to_fun" title="local_equiv.to_fun">to_fun</a>)
+     (((<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.trans">local_homeomorph.trans</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.symm">local_homeomorph.symm</a> e)
+          e').<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.to_local_equiv" title="local_homeomorph.to_local_equiv">to_local_equiv</a>).<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.source" title="local_equiv.source">source</a>)) →
+<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#has_groupoid">has_groupoid</a> M (<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid.groupoid">pregroupoid.groupoid</a> PG)</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="has_groupoid_model_space"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L435">has_groupoid_model_space</a></span> <span class="decl_args">(H : Type u_1)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="decl_args">(G : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#has_groupoid">has_groupoid</a> H G</div></div>
+   <p>The trivial manifold structure on the model space is compatible with any groupoid</p>
+ </ul></div><div class="decl def" id="has_groupoid_continuous_groupoid"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L445">has_groupoid_continuous_groupoid</a></span> <span class="impl_arg"><span class="decl_args">{H : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{M : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#has_groupoid">has_groupoid</a> M (<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#continuous_groupoid">continuous_groupoid</a> H)</div></div>
+   <p>Any manifold structure is compatible with the groupoid of all local homeomorphisms</p>
+ </ul></div><div class="decl structure" id="structomorph">     <div class="decl_header impl_collapsed">        <span class="decl_kind">structure</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L455">structomorph</a></span> <span class="impl_arg"><span class="decl_args">{H : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="decl_args">(G : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H)</span> <span class="decl_args">(M : Type u_4)</span> <span class="decl_args">(M' : Type u_5)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M']</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M']</span></span> <span class="decl_args">:</span>     <div class="decl_type">Type (max u_4 u_5)</div></div>
+ <ul class="structure_fields">
+<li class="structure_field" id="structomorph.to_homeomorph">to_homeomorph : M <a href="https://leanprover-community.github.io/mathlib_docs/topology/homeomorph.html#homeomorph" title="homeomorph">≃ₜ</a> M'</li>
+<li class="structure_field" id="structomorph.to_fun_mem_groupoid">to_fun_mem_groupoid : ∀ (c_1 : <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> M H) (c' : <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> M' H),
+  c_1 <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold.atlas">manifold.atlas</a> H M →
+  c' <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a> <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold.atlas">manifold.atlas</a> H M' →
+  <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.trans">local_homeomorph.trans</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.symm">local_homeomorph.symm</a> c_1)
+      (<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.trans">local_homeomorph.trans</a>
+         (<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#homeomorph.to_local_homeomorph">homeomorph.to_local_homeomorph</a>
+            (c.<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structomorph.to_homeomorph" title="structomorph.to_homeomorph">to_homeomorph</a>))
+         c') <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem.mem" title="has_mem.mem">∈</a>
+    G</li>
+</ul>  <p>A G-diffeomorphism between two manifolds is a homeomorphism which, when read in the charts,
+belongs to G. We avoid the word diffeomorph as it is too related to the smooth category, and use
+structomorph instead.</p>
+ </ul></div><div class="decl def" id="structomorph.refl">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L465">structomorph.refl</a></span> <span class="impl_arg"><span class="decl_args">{H : Type u}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="impl_arg"><span class="decl_args">{G : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H}</span></span> <span class="decl_args">(M : Type u_1)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#has_groupoid">has_groupoid</a> M G]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structomorph">structomorph</a> G M M</div></div>
+   <p>The identity is a diffeomorphism of any manifold, for any groupoid.</p>
+ </ul></div><div class="decl def" id="structomorph.symm">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L475">structomorph.symm</a></span> <span class="impl_arg"><span class="decl_args">{H : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{M : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{M' : Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M']</span></span> <span class="impl_arg"><span class="decl_args">{G : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M']</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structomorph">structomorph</a> G M M' → <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structomorph">structomorph</a> G M' M</div></div>
+   <p>The inverse of a structomorphism is a structomorphism</p>
+ </ul></div><div class="decl def" id="structomorph.trans">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/geometry/manifold/manifold.lean#L487">structomorph.trans</a></span> <span class="impl_arg"><span class="decl_args">{H : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{M : Type u_1}</span></span> <span class="impl_arg"><span class="decl_args">{M' : Type u_2}</span></span> <span class="impl_arg"><span class="decl_args">{M'' : Type u_3}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M']</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M'']</span></span> <span class="impl_arg"><span class="decl_args">{G : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M']</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M'']</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structomorph">structomorph</a> G M M' →
+<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structomorph">structomorph</a> G M' M'' → <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structomorph">structomorph</a> G M M''</div></div>
+   <p>The composition of structomorphisms is a structomorphism</p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +1129,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1357,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,421 +1480,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="mod_doc">
-<h1>Manifolds</h1>
-
-<p>A manifold is a topological space M locally modelled on a model space H, i.e., the manifold is
-covered by open subsets on which there are local homeomorphisms (the charts) going to H. If the
-changes of charts satisfy some additional property (for instance if they are smooth), then M
-inherits additional structure (it makes sense to talk about smooth manifolds). There are therefore
-two different ingredients in a manifold:</p>
-
-<ul>
-<li>the set of charts, which is data</li>
-<li>the fact that changes of charts belong to some group (in fact groupoid), which is additional Prop.</li>
-</ul>
-
-<p>We separate these two parts in the definition: the manifold structure is just the set of charts, and
-then the different smoothness requirements (smooth manifold, orientable manifold, contact manifold,
-and so on) are additional properties of these charts. These properties are formalized through the
-notion of structure groupoid, i.e., a set of local homeomorphisms stable under composition and
-inverse, to which the change of coordinates should belong.</p>
-
-<h2>Main definitions</h2>
-
-<p><code>structure_groupoid H</code>   : a subset of local homeomorphisms of <code>H</code> stable under composition, inverse
-                           and restriction (ex: local diffeos)
-<code>pregroupoid H</code>          : a subset of local homeomorphisms of <code>H</code> stable under composition and
-                           restriction, but not inverse (ex: smooth maps)
-<code>groupoid_of_pregroupoid</code>: construct a groupoid from a pregroupoid, by requiring that a map and its
-                           inverse both belong to the pregroupoid (ex: construct diffeos from smooth
-                           maps)
-<code>continuous_groupoid H</code>  : the groupoid of all local homeomorphisms of <code>H</code></p>
-
-<p><code>manifold H M</code>           : manifold structure on M modelled on H, given by an atlas of local
-                           homeomorphisms from M to H whose sources cover M. This is a type class.
-<code>has_groupoid M G</code>       : when <code>G</code> is a structure groupoid on <code>H</code> and <code>M</code> is a manifold modelled on
-                           <code>H</code>, require that all coordinate changes belong to <code>G</code>. This is a type
-                           class
-<code>atlas H M</code>              : when <code>M</code> is a manifold modelled on <code>H</code>, the atlas of this manifold
-                           structure, i.e., the set of charts
-<code>structomorph G M M'</code>    : the set of diffeomorphisms between the manifolds M and M' for the
-                           groupoid G. We avoid the word diffeomorphisms, keeping it for the
-                           smooth category.</p>
-
-<p>As a basic example, we give the instance
-<code>instance <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold_model_space">manifold_model_space</a> (H : Type*) [<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H] : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H H</code>
-saying that a topological space is a manifold over itself, with the identity as unique chart. This
-manifold structure is compatible with any groupoid.</p>
-
-<h2>Implementation notes</h2>
-
-<p>The atlas in a manifold is <em>not</em> a maximal atlas in general: the notion of maximality depends on the
-groupoid one considers, and changing groupoids changes the maximal atlas. With the current
-formalization, it makes sense first to choose the atlas, and then to ask whether this precise atlas
-defines a smooth manifold, an orientable manifold, and so on. A consequence is that structomorphisms
-between M and M' do <em>not</em> induce a bijection between the atlases of M and M': the definition is only
-that, read in charts, the structomorphism locally belongs to the groupoid under consideration.
-(This is equivalent to inducing a bijection between elements of the maximal atlas). A consequence
-is that the invariance under structomorphisms of properties defined in terms of the atlas is not
-obvious in general, and could require some work in theory (amounting to the fact that these
-properties only depend on the maximal atlas, for instance). In practice, this does not create any
-real difficulty.</p>
-
-<p>We use the letter <code>H</code> for the model space thinking of the case of manifolds with boundary, where the
-model space is a half space.</p>
-
-<p>Manifolds are sometimes defined as topological spaces with an atlas of local diffeomorphisms, and
-sometimes as spaces with an atlas from which a topology is deduced. We use the former approach:
-otherwise, there would be an instance from manifolds to topological spaces, which means that any
-instance search for topological spaces would try to find manifold structures involving a yet
-unknown model space, leading to problems. However, we also introduce the latter approach,
-through a structure <code>manifold_core</code> making it possible to construct a topology out of a set of local
-equivs with compatibility conditions (but we do not register it as an instance).</p>
-
-<p>In the definition of a manifold, the model space is written as an explicit parameter as there can be
-several model spaces for a given topological space. For instance, a complex manifold (modelled over
-ℂ^n) will also be seen sometimes as a real manifold modelled over ℝ^(2n).</p>
-</div><div class="structure"><a id="structure_groupoid"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L119">structure_groupoid</a></span> <span class="decl_args">(H : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type">Type u</div>
-<p>A structure groupoid is a set of local homeomorphisms of a topological space stable under
-composition and inverse. They appear in the definition of the smoothness class of a manifold.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></li>
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">structure_groupoid.members : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/set.html#set">set</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> H H)</div></li>
-<li><div class="structure_field">structure_groupoid.comp : ∀ (e e' : <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> H H), e ∈ c.members → e' ∈ c.members → <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.trans">local_homeomorph.trans</a> e e' ∈ c.members</div></li>
-<li><div class="structure_field">structure_groupoid.inv : ∀ (e : <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> H H), e ∈ c.members → <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.symm">local_homeomorph.symm</a> e ∈ c.members</div></li>
-<li><div class="structure_field">structure_groupoid.id_mem : <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.refl">local_homeomorph.refl</a> H ∈ c.members</div></li>
-<li><div class="structure_field">structure_groupoid.locality : ∀ (e : <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> H H),
-  (∀ (x : H),
-     x ∈ (e.to_local_equiv).source →
-     (∃ (s : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/set.html#set">set</a> H), <a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#is_open">is_open</a> s ∧ x ∈ s ∧ <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.restr">local_homeomorph.restr</a> e s ∈ c.members)) →
-  e ∈ c.members</div></li>
-<li><div class="structure_field">structure_groupoid.eq_on_source : ∀ (e e' : <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> H H), e ∈ c.members → e' ≈ e → e' ∈ c.members</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="structure_groupoid.has_mem"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L130">structure_groupoid.has_mem</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mem">has_mem</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> H H) (<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{H : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="structure_groupoid.partial_order"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L134">structure_groupoid.partial_order</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/order.html#partial_order">partial_order</a> (<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H)</div>
-<p>Partial order on the set of groupoids, given by inclusion of the members of the groupoid</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{H : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="id_groupoid"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L140">id_groupoid</a></span> <span class="decl_args">(H : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H</div>
-<p>The trivial groupoid, containing only the identity (and maps with empty source, as this is
-necessary from the definition)</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></li>
-
-
-
-</ul></div><div class="def"><a id="structure_groupoid.lattice.order_bot"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L191">structure_groupoid.lattice.order_bot</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/order/bounded_lattice.html#lattice.order_bot">lattice.order_bot</a> (<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H)</div>
-<p>Every structure groupoid contains the identity groupoid</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{H : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="structure"><a id="pregroupoid"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L211">pregroupoid</a></span> <span class="decl_args">(H : Type u_4)</span> <span class="decl_args">:</span>       <div class="decl_type">Type u_4</div>
-<p>To construct a groupoid, one may consider classes of local homeos such that both the function
-and its inverse have some property. If this property is stable under composition,
-one gets a groupoid. <code>pregroupoid</code> bundles the properties needed for this construction, with the
-groupoid of smooth functions with smooth inverses as an application.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></li>
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">pregroupoid.property : (H → H) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/set.html#set">set</a> H → Prop</div></li>
-<li><div class="structure_field">pregroupoid.comp : ∀ {f g : H → H} {u v : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/set.html#set">set</a> H},
-  c.property f u → c.property g v → <a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#is_open">is_open</a> (u ∩ f ⁻¹' v) → c.property (g ∘ f) (u ∩ f ⁻¹' v)</div></li>
-<li><div class="structure_field">pregroupoid.id_mem : c.property <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#id">id</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/set.html#set.univ">set.univ</a></div></li>
-<li><div class="structure_field">pregroupoid.locality : ∀ {f : H → H} {u : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/set.html#set">set</a> H},
-  <a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#is_open">is_open</a> u →
-  (∀ (x : H), x ∈ u → (∃ (v : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/set.html#set">set</a> H), <a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#is_open">is_open</a> v ∧ x ∈ v ∧ c.property f (u ∩ v))) → c.property f u</div></li>
-<li><div class="structure_field">pregroupoid.congr : ∀ {f g : H → H} {u : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/set.html#set">set</a> H},
-  <a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#is_open">is_open</a> u → (∀ (x : H), x ∈ u → g x = f x) → c.property f u → c.property g u</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="pregroupoid.groupoid"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L221">pregroupoid.groupoid</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid">pregroupoid</a> H → <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H</div>
-<p>Construct a groupoid of local homeos for which the map and its inverse have some property,
-from a pregroupoid asserting that this property is stable under composition.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{H : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="mem_groupoid_of_pregroupoid"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L258">mem_groupoid_of_pregroupoid</a></span> <span class="decl_args">(PG : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid">pregroupoid</a> H)</span> <span class="decl_args">(e : <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> H H)</span> <span class="decl_args">:</span>       <div class="decl_type">e ∈ <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid.groupoid">pregroupoid.groupoid</a> PG ↔
-  PG.property ((e.to_local_equiv).to_fun) ((e.to_local_equiv).source) ∧
-    PG.property ((e.to_local_equiv).inv_fun) ((e.to_local_equiv).target)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{H : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="groupoid_of_pregroupoid_le"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L262">groupoid_of_pregroupoid_le</a></span> <span class="decl_args">(PG₁ PG₂ : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid">pregroupoid</a> H)</span> <span class="decl_args">:</span>       <div class="decl_type">(∀ (f : H → H) (s : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/set.html#set">set</a> H), PG₁.property f s → PG₂.property f s) →
-<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid.groupoid">pregroupoid.groupoid</a> PG₁ ≤ <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid.groupoid">pregroupoid.groupoid</a> PG₂</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{H : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="mem_pregroupoid_of_eq_on_source"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L271">mem_pregroupoid_of_eq_on_source</a></span> <span class="decl_args">(PG : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid">pregroupoid</a> H)</span> <span class="decl_args">:</span>       <div class="decl_type">e ≈ e' →
-PG.property ((e.to_local_equiv).to_fun) ((e.to_local_equiv).source) →
-PG.property ((e'.to_local_equiv).to_fun) ((e'.to_local_equiv).source)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{H : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span> <span class="impl_arg">{e e' : <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> H H}</span></li>
-
-
-
-</ul></div><div class="def"><a id="continuous_groupoid"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L280">continuous_groupoid</a></span> <span class="decl_args">(H : Type u_1)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H</div>
-<p>The groupoid of all local homeomorphisms on a topological space H</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></li>
-
-
-
-</ul></div><div class="def"><a id="structure_groupoid.lattice.order_top"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L289">structure_groupoid.lattice.order_top</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/order/bounded_lattice.html#lattice.order_top">lattice.order_top</a> (<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H)</div>
-<p>Every structure groupoid is contained in the groupoid of all local homeomorphisms</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{H : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="structure"><a id="manifold"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L305">manifold</a></span> <span class="decl_args">(H : Type u_4)</span> <span class="decl_args">(M : Type u_5)</span> <span class="decl_args">:</span>       <div class="decl_type">Type (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/functions.html#max">max</a> u_4 u_5)</div>
-<p>A manifold is a topological space endowed with an atlas, i.e., a set of local homeomorphisms
-taking value in a model space H, called charts, such that the domains of the charts cover the whole
-space. We express the covering property by chosing for each x a member <code>chart_at x</code> of the atlas
-containing x in its source: in the smooth case, this is convenient to construct the tangent bundle
-in an efficient way.
-The model space is written as an explicit parameter as there can be several model spaces for a
-given topological space. For instance, a complex manifold (modelled over ℂ^n) will also be seen
-sometimes as a real manifold over ℝ^(2n).</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M]</span></li>
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">manifold.atlas : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/set.html#set">set</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> M H)</div></li>
-<li><div class="structure_field">manifold.chart_at : M → <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> M H</div></li>
-<li><div class="structure_field">manifold.mem_chart_source : ∀ (x : M), x ∈ ((manifold.chart_at H x).to_local_equiv).source</div></li>
-<li><div class="structure_field">manifold.chart_mem_atlas : ∀ (x : M), manifold.chart_at H x ∈ manifold.atlas H M</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="manifold_model_space"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L317">manifold_model_space</a></span> <span class="decl_args">(H : Type u_1)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H H</div>
-<p>Any space is a manifold modelled over itself, by just using the identity chart</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="thm"><a id="model_space_atlas"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L325">model_space_atlas</a></span>  <span class="decl_args">:</span>       <div class="decl_type">e ∈ manifold.atlas H H ↔ e = <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.refl">local_homeomorph.refl</a> H</div>
-<p>In the trivial manifold structure of a space modelled over itself through the identity, the
-atlas members are just the identity</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{H : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span> <span class="impl_arg">{e : <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> H H}</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="chart_at_model_space_eq"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L330">chart_at_model_space_eq</a></span>  <span class="decl_args">:</span>       <div class="decl_type">manifold.chart_at H x = <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.refl">local_homeomorph.refl</a> H</div>
-<p>In the model space, chart_at is always the identity</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{H : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span> <span class="impl_arg">{x : H}</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="structure"><a id="manifold_core"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L340">manifold_core</a></span> <span class="decl_args">(H : Type u_4)</span> <span class="decl_args">:</span>       <div class="decl_type">Type u_5 → Type (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/functions.html#max">max</a> u_4 u_5)</div>
-<p>Sometimes, one may want to construct a manifold structure on a space which does not yet have
-a topological structure, where the topology would come from the charts. For this, one needs charts
-that are only local equivs, and continuity properties for their composition.
-This is formalised in <code>manifold_core</code>.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></li>
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">manifold_core.atlas : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/set.html#set">set</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv">local_equiv</a> M H)</div></li>
-<li><div class="structure_field">manifold_core.chart_at : M → <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv">local_equiv</a> M H</div></li>
-<li><div class="structure_field">manifold_core.mem_chart_source : ∀ (x : M), x ∈ (c.chart_at x).source</div></li>
-<li><div class="structure_field">manifold_core.chart_mem_atlas : ∀ (x : M), c.chart_at x ∈ c.atlas</div></li>
-<li><div class="structure_field">manifold_core.open_source : ∀ (e e' : <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv">local_equiv</a> M H),
-  e ∈ c.atlas → e' ∈ c.atlas → <a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#is_open">is_open</a> ((<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.trans">local_equiv.trans</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.symm">local_equiv.symm</a> e) e').source)</div></li>
-<li><div class="structure_field">manifold_core.continuous_to_fun : ∀ (e e' : <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv">local_equiv</a> M H),
-  e ∈ c.atlas →
-  e' ∈ c.atlas →
-  <a href="https://leanprover-community.github.io/mathlib_docs/topology/continuous_on.html#continuous_on">continuous_on</a> ((<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.trans">local_equiv.trans</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.symm">local_equiv.symm</a> e) e').to_fun)
-    ((<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.trans">local_equiv.trans</a> (<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv.symm">local_equiv.symm</a> e) e').source)</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="manifold_core.to_topological_space"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L354">manifold_core.to_topological_space</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold_core">manifold_core</a> H M → <a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M</div>
-<p>Topology generated by a set of charts on a Type.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{H : Type u}</span> <span class="impl_arg">{M : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="manifold_core.open_source'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L358">manifold_core.open_source'</a></span> <span class="decl_args">(c : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold_core">manifold_core</a> H M)</span> <span class="decl_args">:</span>       <div class="decl_type">e ∈ c.atlas → <a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#is_open">is_open</a> (e.source)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{H : Type u}</span> <span class="impl_arg">{M : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span> <span class="impl_arg">{e : <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv">local_equiv</a> M H}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="manifold_core.open_target"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L366">manifold_core.open_target</a></span> <span class="decl_args">(c : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold_core">manifold_core</a> H M)</span> <span class="decl_args">:</span>       <div class="decl_type">e ∈ c.atlas → <a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#is_open">is_open</a> (e.target)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{H : Type u}</span> <span class="impl_arg">{M : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span> <span class="impl_arg">{e : <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv">local_equiv</a> M H}</span></li>
-
-
-
-</ul></div><div class="def"><a id="manifold_core.local_homeomorph"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L374">manifold_core.local_homeomorph</a></span> <span class="decl_args">(c : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold_core">manifold_core</a> H M)</span> <span class="decl_args">(e : <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/local_equiv.html#local_equiv">local_equiv</a> M H)</span> <span class="decl_args">:</span>       <div class="decl_type">e ∈ c.atlas → <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> M H</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{H : Type u}</span> <span class="impl_arg">{M : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></li>
-
-
-
-</ul></div><div class="def"><a id="manifold_core.to_manifold"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L405">manifold_core.to_manifold</a></span> <span class="decl_args">(c : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold_core">manifold_core</a> H M)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{H : Type u}</span> <span class="impl_arg">{M : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></li>
-
-
-
-</ul></div><div class="structure"><a id="has_groupoid"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L420">has_groupoid</a></span> <span class="decl_args">(M : Type u_5)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H → Prop</div>
-<p>A manifold has an atlas in a groupoid G if the change of coordinates belong to the groupoid</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{H : Type u_4}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M]</span></li>
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">has_groupoid.compatible : ∀ {e e' : <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> M H},
-  e ∈ manifold.atlas H M → e' ∈ manifold.atlas H M → <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.trans">local_homeomorph.trans</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.symm">local_homeomorph.symm</a> e) e' ∈ G</div></li>
-</ul></li>
-
-</ul></div><div class="thm"><a id="has_groupoid_of_le"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L424">has_groupoid_of_le</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#has_groupoid">has_groupoid</a> M G₁ → G₁ ≤ G₂ → <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#has_groupoid">has_groupoid</a> M G₂</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{H : Type u}</span> <span class="impl_arg">{M : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M]</span> <span class="impl_arg">{G₁ G₂ : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="has_groupoid_of_pregroupoid"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L428">has_groupoid_of_pregroupoid</a></span> <span class="decl_args">(PG : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid">pregroupoid</a> H)</span> <span class="decl_args">:</span>       <div class="decl_type">(∀ {e e' : <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> M H},
-   e ∈ manifold.atlas H M →
-   e' ∈ manifold.atlas H M →
-   PG.property (((<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.trans">local_homeomorph.trans</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.symm">local_homeomorph.symm</a> e) e').to_local_equiv).to_fun)
-     (((<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.trans">local_homeomorph.trans</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.symm">local_homeomorph.symm</a> e) e').to_local_equiv).source)) →
-<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#has_groupoid">has_groupoid</a> M (<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#pregroupoid.groupoid">pregroupoid.groupoid</a> PG)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{H : Type u}</span> <span class="impl_arg">{M : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M]</span></li>
-
-
-
-</ul></div><div class="def"><a id="has_groupoid_model_space"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L435">has_groupoid_model_space</a></span> <span class="decl_args">(H : Type u_1)</span> <span class="decl_args">(G : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#has_groupoid">has_groupoid</a> H G</div>
-<p>The trivial manifold structure on the model space is compatible with any groupoid</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="has_groupoid_continuous_groupoid"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L445">has_groupoid_continuous_groupoid</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#has_groupoid">has_groupoid</a> M (<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#continuous_groupoid">continuous_groupoid</a> H)</div>
-<p>Any manifold structure is compatible with the groupoid of all local homeomorphisms</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{H : Type u}</span> <span class="impl_arg">{M : Type u_1}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="structure"><a id="structomorph"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L455">structomorph</a></span> <span class="decl_args">(G : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H)</span> <span class="decl_args">(M : Type u_4)</span> <span class="decl_args">(M' : Type u_5)</span> <span class="decl_args">:</span>       <div class="decl_type">Type (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/functions.html#max">max</a> u_4 u_5)</div>
-<p>A G-diffeomorphism between two manifolds is a homeomorphism which, when read in the charts,
-belongs to G. We avoid the word diffeomorph as it is too related to the smooth category, and use
-structomorph instead.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{H : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M']</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M']</span></li>
-
-<li class="structure_fields">
-Fields:
-<ul><li><div class="structure_field">structomorph.to_homeomorph : M ≃ₜ M'</div></li>
-<li><div class="structure_field">structomorph.to_fun_mem_groupoid : ∀ (c_1 : <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> M H) (c' : <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph">local_homeomorph</a> M' H),
-  c_1 ∈ manifold.atlas H M →
-  c' ∈ manifold.atlas H M' →
-  <a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.trans">local_homeomorph.trans</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.symm">local_homeomorph.symm</a> c_1)
-      (<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#local_homeomorph.trans">local_homeomorph.trans</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html#homeomorph.to_local_homeomorph">homeomorph.to_local_homeomorph</a> (c.to_homeomorph)) c') ∈
-    G</div></li>
-</ul></li>
-
-</ul></div><div class="def"><a id="structomorph.refl"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L465">structomorph.refl</a></span> <span class="decl_args">(M : Type u_1)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structomorph">structomorph</a> G M M</div>
-<p>The identity is a diffeomorphism of any manifold, for any groupoid.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{H : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span> <span class="impl_arg">{G : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#has_groupoid">has_groupoid</a> M G]</span></li>
-
-
-
-</ul></div><div class="def"><a id="structomorph.symm"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L475">structomorph.symm</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structomorph">structomorph</a> G M M' → <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structomorph">structomorph</a> G M' M</div>
-<p>The inverse of a structomorphism is a structomorphism</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{H : Type u}</span> <span class="impl_arg">{M : Type u_1}</span> <span class="impl_arg">{M' : Type u_2}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M']</span> <span class="impl_arg">{G : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M']</span></li>
-
-
-
-</ul></div><div class="def"><a id="structomorph.trans"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean#L487">structomorph.trans</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structomorph">structomorph</a> G M M' → <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structomorph">structomorph</a> G M' M'' → <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structomorph">structomorph</a> G M M''</div>
-<p>The composition of structomorphisms is a structomorphism</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{H : Type u}</span> <span class="impl_arg">{M : Type u_1}</span> <span class="impl_arg">{M' : Type u_2}</span> <span class="impl_arg">{M'' : Type u_3}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> H]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M']</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> M'']</span> <span class="impl_arg">{G : <a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#structure_groupoid">structure_groupoid</a> H}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M']</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html#manifold">manifold</a> H M'']</span></li>
-
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">geometry.manifold.manifold</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/geometry/manifold/manifold.lean">(view source on GitHub)</a></div><a href="#chart_at_model_space_eq">chart_at_model_space_eq</a><br>
-<a href="#continuous_groupoid">continuous_groupoid</a><br>
-<a href="#groupoid_of_pregroupoid_le">groupoid_of_pregroupoid_le</a><br>
-<a href="#has_groupoid">has_groupoid</a><br>
-<a href="#has_groupoid_continuous_groupoid">has_groupoid_continuous_groupoid</a><br>
-<a href="#has_groupoid_model_space">has_groupoid_model_space</a><br>
-<a href="#has_groupoid_of_le">has_groupoid_of_le</a><br>
-<a href="#has_groupoid_of_pregroupoid">has_groupoid_of_pregroupoid</a><br>
-<a href="#id_groupoid">id_groupoid</a><br>
-<a href="#manifold">manifold</a><br>
-<a href="#manifold_core">manifold_core</a><br>
-<a href="#manifold_core.local_homeomorph">manifold_core.local_homeomorph</a><br>
-<a href="#manifold_core.open_source'">manifold_core.open_source'</a><br>
-<a href="#manifold_core.open_target">manifold_core.open_target</a><br>
-<a href="#manifold_core.to_manifold">manifold_core.to_manifold</a><br>
-<a href="#manifold_core.to_topological_space">manifold_core.to_topological_space</a><br>
-<a href="#manifold_model_space">manifold_model_space</a><br>
-<a href="#mem_groupoid_of_pregroupoid">mem_groupoid_of_pregroupoid</a><br>
-<a href="#mem_pregroupoid_of_eq_on_source">mem_pregroupoid_of_eq_on_source</a><br>
-<a href="#model_space_atlas">model_space_atlas</a><br>
-<a href="#pregroupoid">pregroupoid</a><br>
-<a href="#pregroupoid.groupoid">pregroupoid.groupoid</a><br>
-<a href="#structomorph">structomorph</a><br>
-<a href="#structomorph.refl">structomorph.refl</a><br>
-<a href="#structomorph.symm">structomorph.symm</a><br>
-<a href="#structomorph.trans">structomorph.trans</a><br>
-<a href="#structure_groupoid">structure_groupoid</a><br>
-<a href="#structure_groupoid.has_mem">structure_groupoid.has_mem</a><br>
-<a href="#structure_groupoid.lattice.order_bot">structure_groupoid.lattice.order_bot</a><br>
-<a href="#structure_groupoid.lattice.order_top">structure_groupoid.lattice.order_top</a><br>
-<a href="#structure_groupoid.partial_order">structure_groupoid.partial_order</a><br>
 </div></div>
 
         </div>

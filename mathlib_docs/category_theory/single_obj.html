@@ -7,7 +7,126 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">category_theory.single_obj</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/single_obj.lean">(view source on GitHub)</a></div><a href="#Mon.to_Cat">Mon.to_Cat</a><br>
+<a href="#Mon.to_Cat_faithful">Mon.to_Cat_faithful</a><br>
+<a href="#Mon.to_Cat_full">Mon.to_Cat_full</a><br>
+<a href="#category_theory.single_obj">category_theory.single_obj</a><br>
+<a href="#category_theory.single_obj.category">category_theory.single_obj.category</a><br>
+<a href="#category_theory.single_obj.category_struct">category_theory.single_obj.category_struct</a><br>
+<a href="#category_theory.single_obj.groupoid">category_theory.single_obj.groupoid</a><br>
+<a href="#category_theory.single_obj.map_hom">category_theory.single_obj.map_hom</a><br>
+<a href="#category_theory.single_obj.map_hom_comp">category_theory.single_obj.map_hom_comp</a><br>
+<a href="#category_theory.single_obj.map_hom_id">category_theory.single_obj.map_hom_id</a><br>
+<a href="#category_theory.single_obj.star">category_theory.single_obj.star</a><br>
+<a href="#category_theory.single_obj.to_End">category_theory.single_obj.to_End</a><br>
+<a href="#category_theory.single_obj.to_End_def">category_theory.single_obj.to_End_def</a><br>
+<a href="#monoid_hom.comp_to_functor">monoid_hom.comp_to_functor</a><br>
+<a href="#monoid_hom.id_to_functor">monoid_hom.id_to_functor</a><br>
+<a href="#monoid_hom.to_functor">monoid_hom.to_functor</a><br>
+<a href="#units.to_Aut">units.to_Aut</a><br>
+<a href="#units.to_Aut_hom">units.to_Aut_hom</a><br>
+<a href="#units.to_Aut_inv">units.to_Aut_inv</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="mod_doc">
+<h1>Single-object category</h1>
+
+<p>Single object category with a given monoid of endomorphisms.  It is defined to facilitate transfering
+some definitions and lemmas (e.g., conjugacy etc.) from category theory to monoids and groups.</p>
+
+<h2>Main definitions</h2>
+
+<p>Given a type <code>α</code> with a monoid structure, <code>single_obj α</code> is <code>unit</code> type with <code>category</code> structure
+such that <code>End (single_obj α).star</code> is the monoid <code>α</code>.  This can be extended to a functor <code>Mon ⥤
+Cat</code>.</p>
+
+<p>If <code>α</code> is a group, then <code>single_obj α</code> is a groupoid.</p>
+
+<p>An element <code>x : α</code> can be reinterpreted as an element of <code>End (single_obj.star α)</code> using
+<code>single_obj.to_End</code>.</p>
+
+<h2>Implementation notes</h2>
+
+<ul>
+<li><p><code>category_struct.comp</code> on <code>End (single_obj.star α)</code> is <code>flip (*)</code>, not <code>(*)</code>. This way
+multiplication on <code>End</code> agrees with the multiplication on <code>α</code>.</p></li>
+<li><p>By default, Lean puts instances into <code>category_theory</code> namespace instead of
+<code>category_theory.single_obj</code>, so we give all names explicitly.</p></li>
+</ul>
+</div><div class="decl def" id="category_theory.single_obj">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/single_obj.lean#L43">category_theory.single_obj</a></span>  <span class="decl_args">:</span>     <div class="decl_type">Type u → Type</div></div>
+   <p>Type tag on <code>unit</code> used to define single-object categories and groupoids.</p>
+ </ul></div><div class="decl def" id="category_theory.single_obj.category_struct"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/single_obj.lean#L50">category_theory.single_obj.category_struct</a></span> <span class="decl_args">(α : Type u)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mul">has_mul</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category_struct">category_theory.category_struct</a>
+  (<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj">category_theory.single_obj</a> α)</div></div>
+   <p>One and <code>flip (*)</code> become <code>id</code> and <code>comp</code> for morphisms of the single object category.</p>
+ </ul></div><div class="decl def" id="category_theory.single_obj.category"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/single_obj.lean#L56">category_theory.single_obj.category</a></span> <span class="decl_args">(α : Type u)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a>
+  (<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj">category_theory.single_obj</a> α)</div></div>
+   <p>Monoid laws become category laws for the single object category.</p>
+ </ul></div><div class="decl def" id="category_theory.single_obj.groupoid"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/single_obj.lean#L62">category_theory.single_obj.groupoid</a></span> <span class="decl_args">(α : Type u)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#group">group</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/groupoid.html#category_theory.groupoid">category_theory.groupoid</a>
+  (<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj">category_theory.single_obj</a> α)</div></div>
+   <p>Groupoid structure on <code>single_obj α</code></p>
+ </ul></div><div class="decl def" id="category_theory.single_obj.star">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/single_obj.lean#L67">category_theory.single_obj.star</a></span> <span class="decl_args">(α : Type u)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj">category_theory.single_obj</a> α</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="category_theory.single_obj.to_End">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/single_obj.lean#L71">category_theory.single_obj.to_End</a></span> <span class="decl_args">(α : Type u)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type">α <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#mul_equiv" title="mul_equiv">≃*</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/endomorphism.html#category_theory.End">category_theory.End</a>
+    (<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj.star">category_theory.single_obj.star</a> α)</div></div>
+   <p>The endomorphisms monoid of the only object in <code>single_obj α</code> is equivalent to the original
+    monoid α.</p>
+ </ul></div><div class="decl theorem" id="category_theory.single_obj.to_End_def">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/single_obj.lean#L75">category_theory.single_obj.to_End_def</a></span> <span class="decl_args">(α : Type u)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> α]</span></span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj.to_End">category_theory.single_obj.to_End</a> α) x <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a> x</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="category_theory.single_obj.map_hom">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/single_obj.lean#L80">category_theory.single_obj.map_hom</a></span> <span class="decl_args">(α : Type u)</span> <span class="decl_args">(β : Type v)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> β]</span></span> <span class="decl_args">:</span>     <div class="decl_type">(α <a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/hom.html#monoid_hom" title="monoid_hom">→*</a> β) <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/basic.html#equiv" title="equiv">≃</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj">category_theory.single_obj</a> α <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor" title="category_theory.functor">⥤</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj">category_theory.single_obj</a> β</div></div>
+   <p>There is a 1-1 correspondence between monoid homomorphisms <code>α → β</code> and functors between the
+   corresponding single-object categories. It means that <code>single_obj</code> is a fully faithful
+   functor.</p>
+ </ul></div><div class="decl theorem" id="category_theory.single_obj.map_hom_id">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/single_obj.lean#L94">category_theory.single_obj.map_hom_id</a></span> <span class="decl_args">(α : Type u)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj.map_hom">category_theory.single_obj.map_hom</a> α α)
+    (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/hom.html#monoid_hom.id">monoid_hom.id</a> α) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor.id" title="category_theory.functor.id">𝟭</a> (<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj">category_theory.single_obj</a> α)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="category_theory.single_obj.map_hom_comp">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/single_obj.lean#L96">category_theory.single_obj.map_hom_comp</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> β]</span></span> <span class="decl_args">(f : α <a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/hom.html#monoid_hom" title="monoid_hom">→*</a> β)</span> <span class="impl_arg"><span class="decl_args">{γ : Type w}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> γ]</span></span> <span class="decl_args">(g : β <a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/hom.html#monoid_hom" title="monoid_hom">→*</a> γ)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj.map_hom">category_theory.single_obj.map_hom</a> α γ)
+    (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/hom.html#monoid_hom.comp">monoid_hom.comp</a> g f) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj.map_hom">category_theory.single_obj.map_hom</a> α β)
+      f <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor.comp" title="category_theory.functor.comp">⋙</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj.map_hom">category_theory.single_obj.map_hom</a> β γ) g</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="monoid_hom.to_functor">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/single_obj.lean#L111">monoid_hom.to_functor</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> β]</span></span> <span class="decl_args">:</span>     <div class="decl_type">(α <a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/hom.html#monoid_hom" title="monoid_hom">→*</a> β) →
+<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj">category_theory.single_obj</a> α <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor" title="category_theory.functor">⥤</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj">category_theory.single_obj</a> β</div></div>
+   <p>Reinterpret a monoid homomorphism <code>f : α → β</code> as a functor <code>(single_obj α) ⥤ (single_obj β)</code>.
+See also <code>category_theory.single_obj.map_hom</code> for an equivalence between these types.</p>
+ </ul></div><div class="decl theorem" id="monoid_hom.id_to_functor"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/single_obj.lean#L115">monoid_hom.id_to_functor</a></span> <span class="decl_args">(α : Type u)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#monoid_hom.to_functor">monoid_hom.to_functor</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/hom.html#monoid_hom.id">monoid_hom.id</a> α) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor.id" title="category_theory.functor.id">𝟭</a> (<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj">category_theory.single_obj</a> α)</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="monoid_hom.comp_to_functor"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/single_obj.lean#L116">monoid_hom.comp_to_functor</a></span> <span class="impl_arg"><span class="decl_args">{α : Type u}</span></span> <span class="impl_arg"><span class="decl_args">{β : Type v}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> α]</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> β]</span></span> <span class="decl_args">(f : α <a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/hom.html#monoid_hom" title="monoid_hom">→*</a> β)</span> <span class="impl_arg"><span class="decl_args">{γ : Type w}</span></span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> γ]</span></span> <span class="decl_args">(g : β <a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/hom.html#monoid_hom" title="monoid_hom">→*</a> γ)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#monoid_hom.to_functor">monoid_hom.to_functor</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/hom.html#monoid_hom.comp">monoid_hom.comp</a> g f) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#monoid_hom.to_functor">monoid_hom.to_functor</a> f <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor.comp" title="category_theory.functor.comp">⋙</a>
+    <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#monoid_hom.to_functor">monoid_hom.to_functor</a> g</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="units.to_Aut">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/single_obj.lean#L130">units.to_Aut</a></span> <span class="decl_args">(α : Type u)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> α]</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/units.html#units">units</a> α <a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/algebra.html#mul_equiv" title="mul_equiv">≃*</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/endomorphism.html#category_theory.Aut">category_theory.Aut</a>
+    (<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj.star">category_theory.single_obj.star</a> α)</div></div>
+   <p>The units in a monoid are (multiplicatively) equivalent to
+the automorphisms of <code>star</code> when we think of the monoid as a single-object category.</p>
+ </ul></div><div class="decl theorem" id="units.to_Aut_hom"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/single_obj.lean#L134">units.to_Aut_hom</a></span> <span class="decl_args">(α : Type u)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> α]</span></span> <span class="decl_args">(x : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/units.html#units">units</a> α)</span> <span class="decl_args">:</span>     <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#units.to_Aut">units.to_Aut</a> α) x).<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso.hom" title="category_theory.iso.hom">hom</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj.to_End">category_theory.single_obj.to_End</a> α) <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>x</div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="units.to_Aut_inv"><div class="attributes">@[simp]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/single_obj.lean#L135">units.to_Aut_inv</a></span> <span class="decl_args">(α : Type u)</span> <span class="impl_arg"><span class="decl_args">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> α]</span></span> <span class="decl_args">(x : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/units.html#units">units</a> α)</span> <span class="decl_args">:</span>     <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#units.to_Aut">units.to_Aut</a> α) x).<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/isomorphism.html#category_theory.iso.inv" title="category_theory.iso.inv">inv</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#eq" title="eq">=</a>
+  <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe_fn" title="coe_fn">⇑</a>(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj.to_End">category_theory.single_obj.to_End</a> α)
+    <a href="https://leanprover-community.github.io/mathlib_docs/core/init/coe.html#coe" title="coe">↑</a>x<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_inv.inv" title="has_inv.inv">⁻¹</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="Mon.to_Cat">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/single_obj.lean#L145">Mon.to_Cat</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#Mon">Mon</a> <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/functor.html#category_theory.functor" title="category_theory.functor">⥤</a> <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/Cat.html#category_theory.Cat">category_theory.Cat</a></div></div>
+   <p>The fully faithful functor from <code>Mon</code> to <code>Cat</code>.</p>
+ </ul></div><div class="decl def" id="Mon.to_Cat_full"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/single_obj.lean#L149">Mon.to_Cat_full</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/fully_faithful.html#category_theory.full">category_theory.full</a> <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#Mon.to_Cat">Mon.to_Cat</a></div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="Mon.to_Cat_faithful"><div class="attributes">@[instance]</div>     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/category_theory/single_obj.lean#L153">Mon.to_Cat_faithful</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/fully_faithful.html#category_theory.faithful">category_theory.faithful</a> <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#Mon.to_Cat">Mon.to_Cat</a></div></div>
+   <p></p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +926,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1154,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,197 +1277,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="mod_doc">
-<h1>Single-object category</h1>
-
-<p>Single object category with a given monoid of endomorphisms.  It is defined to facilitate transfering
-some definitions and lemmas (e.g., conjugacy etc.) from category theory to monoids and groups.</p>
-
-<h2>Main definitions</h2>
-
-<p>Given a type <code>α</code> with a monoid structure, <code>single_obj α</code> is <code>unit</code> type with <code>category</code> structure
-such that <code>End (single_obj α).star</code> is the monoid <code>α</code>.  This can be extended to a functor <code>Mon ⥤
-Cat</code>.</p>
-
-<p>If <code>α</code> is a group, then <code>single_obj α</code> is a groupoid.</p>
-
-<p>An element <code>x : α</code> can be reinterpreted as an element of <code>End (single_obj.star α)</code> using
-<code>single_obj.to_End</code>.</p>
-
-<h2>Implementation notes</h2>
-
-<ul>
-<li><p><code>category_struct.comp</code> on <code>End (single_obj.star α)</code> is <code>flip (*)</code>, not <code>(*)</code>. This way
-multiplication on <code>End</code> agrees with the multiplication on <code>α</code>.</p></li>
-<li><p>By default, Lean puts instances into <code>category_theory</code> namespace instead of
-<code>category_theory.single_obj</code>, so we give all names explicitly.</p></li>
-</ul>
-</div><div class="def"><a id="category_theory.single_obj"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/single_obj.lean#L43">category_theory.single_obj</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type u → Type</div>
-<p>Type tag on <code>unit</code> used to define single-object categories and groupoids.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="category_theory.single_obj.category_struct"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/single_obj.lean#L50">category_theory.single_obj.category_struct</a></span> <span class="decl_args">(α : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category_struct">category_theory.category_struct</a> (<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj">category_theory.single_obj</a> α)</div>
-<p>One and <code>flip (*)</code> become <code>id</code> and <code>comp</code> for morphisms of the single object category.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_one">has_one</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_mul">has_mul</a> α]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="category_theory.single_obj.category"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/single_obj.lean#L56">category_theory.single_obj.category</a></span> <span class="decl_args">(α : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> (<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj">category_theory.single_obj</a> α)</div>
-<p>Monoid laws become category laws for the single object category.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> α]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="category_theory.single_obj.groupoid"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/single_obj.lean#L62">category_theory.single_obj.groupoid</a></span> <span class="decl_args">(α : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/groupoid.html#category_theory.groupoid">category_theory.groupoid</a> (<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj">category_theory.single_obj</a> α)</div>
-<p>Groupoid structure on <code>single_obj α</code></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#group">group</a> α]</span></li>
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="category_theory.single_obj.star"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/single_obj.lean#L67">category_theory.single_obj.star</a></span> <span class="decl_args">(α : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj">category_theory.single_obj</a> α</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="category_theory.single_obj.to_End"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/single_obj.lean#L71">category_theory.single_obj.to_End</a></span> <span class="decl_args">(α : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type">α ≃* <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/endomorphism.html#category_theory.End">category_theory.End</a> (<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj.star">category_theory.single_obj.star</a> α)</div>
-<p>The endomorphisms monoid of the only object in <code>single_obj α</code> is equivalent to the original
-    monoid α.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="category_theory.single_obj.to_End_def"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/single_obj.lean#L75">category_theory.single_obj.to_End_def</a></span> <span class="decl_args">(α : Type u)</span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>       <div class="decl_type">⇑(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj.to_End">category_theory.single_obj.to_End</a> α) x = x</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> α]</span></li>
-
-
-
-</ul></div><div class="def"><a id="category_theory.single_obj.map_hom"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/single_obj.lean#L80">category_theory.single_obj.map_hom</a></span> <span class="decl_args">(α : Type u)</span> <span class="decl_args">(β : Type v)</span> <span class="decl_args">:</span>       <div class="decl_type">(α →* β) ≃ <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj">category_theory.single_obj</a> α ⥤ <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj">category_theory.single_obj</a> β</div>
-<p>There is a 1-1 correspondence between monoid homomorphisms <code>α → β</code> and functors between the
-   corresponding single-object categories. It means that <code>single_obj</code> is a fully faithful
-   functor.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> β]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="category_theory.single_obj.map_hom_id"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/single_obj.lean#L94">category_theory.single_obj.map_hom_id</a></span> <span class="decl_args">(α : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type">⇑(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj.map_hom">category_theory.single_obj.map_hom</a> α α) (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/hom.html#monoid_hom.id">monoid_hom.id</a> α) = 𝟭 (<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj">category_theory.single_obj</a> α)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="category_theory.single_obj.map_hom_comp"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/single_obj.lean#L96">category_theory.single_obj.map_hom_comp</a></span> <span class="decl_args">(f : α →* β)</span> <span class="decl_args">(g : β →* γ)</span> <span class="decl_args">:</span>       <div class="decl_type">⇑(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj.map_hom">category_theory.single_obj.map_hom</a> α γ) (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/hom.html#monoid_hom.comp">monoid_hom.comp</a> g f) =
-  ⇑(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj.map_hom">category_theory.single_obj.map_hom</a> α β) f ⋙ ⇑(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj.map_hom">category_theory.single_obj.map_hom</a> β γ) g</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">{β : Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> β]</span> <span class="impl_arg">{γ : Type w}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> γ]</span></li>
-
-
-
-</ul></div><div class="def"><a id="monoid_hom.to_functor"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/single_obj.lean#L111">monoid_hom.to_functor</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(α →* β) → <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj">category_theory.single_obj</a> α ⥤ <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj">category_theory.single_obj</a> β</div>
-<p>Reinterpret a monoid homomorphism <code>f : α → β</code> as a functor <code>(single_obj α) ⥤ (single_obj β)</code>.
-See also <code>category_theory.single_obj.map_hom</code> for an equivalence between these types.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">{β : Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> β]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="monoid_hom.id_to_functor"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/single_obj.lean#L115">monoid_hom.id_to_functor</a></span> <span class="decl_args">(α : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#monoid_hom.to_functor">monoid_hom.to_functor</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/hom.html#monoid_hom.id">monoid_hom.id</a> α) = 𝟭 (<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj">category_theory.single_obj</a> α)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> α]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="monoid_hom.comp_to_functor"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/single_obj.lean#L116">monoid_hom.comp_to_functor</a></span> <span class="decl_args">(f : α →* β)</span> <span class="decl_args">(g : β →* γ)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#monoid_hom.to_functor">monoid_hom.to_functor</a> (<a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/hom.html#monoid_hom.comp">monoid_hom.comp</a> g f) = <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#monoid_hom.to_functor">monoid_hom.to_functor</a> f ⋙ <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#monoid_hom.to_functor">monoid_hom.to_functor</a> g</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">{β : Type v}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> β]</span> <span class="impl_arg">{γ : Type w}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> γ]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="def"><a id="units.to_Aut"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/single_obj.lean#L130">units.to_Aut</a></span> <span class="decl_args">(α : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/units.html#units">units</a> α ≃* <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/endomorphism.html#category_theory.Aut">category_theory.Aut</a> (<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj.star">category_theory.single_obj.star</a> α)</div>
-<p>The units in a monoid are (multiplicatively) equivalent to
-the automorphisms of <code>star</code> when we think of the monoid as a single-object category.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> α]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="units.to_Aut_hom"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/single_obj.lean#L134">units.to_Aut_hom</a></span> <span class="decl_args">(α : Type u)</span> <span class="decl_args">(x : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/units.html#units">units</a> α)</span> <span class="decl_args">:</span>       <div class="decl_type">(⇑(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#units.to_Aut">units.to_Aut</a> α) x).hom = ⇑(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj.to_End">category_theory.single_obj.to_End</a> α) ↑x</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> α]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="units.to_Aut_inv"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/single_obj.lean#L135">units.to_Aut_inv</a></span> <span class="decl_args">(α : Type u)</span> <span class="decl_args">(x : <a href="https://leanprover-community.github.io/mathlib_docs/algebra/group/units.html#units">units</a> α)</span> <span class="decl_args">:</span>       <div class="decl_type">(⇑(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#units.to_Aut">units.to_Aut</a> α) x).inv = ⇑(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#category_theory.single_obj.to_End">category_theory.single_obj.to_End</a> α) ↑x⁻¹</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/group.html#monoid">monoid</a> α]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="def"><a id="Mon.to_Cat"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/single_obj.lean#L145">Mon.to_Cat</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/algebra/category/Mon/basic.html#Mon">Mon</a> ⥤ <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/Cat.html#category_theory.Cat">category_theory.Cat</a></div>
-<p>The fully faithful functor from <code>Mon</code> to <code>Cat</code>.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="Mon.to_Cat_full"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/single_obj.lean#L149">Mon.to_Cat_full</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/fully_faithful.html#category_theory.full">category_theory.full</a> <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#Mon.to_Cat">Mon.to_Cat</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="Mon.to_Cat_faithful"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/single_obj.lean#L153">Mon.to_Cat_faithful</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/fully_faithful.html#category_theory.faithful">category_theory.faithful</a> <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html#Mon.to_Cat">Mon.to_Cat</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">category_theory.single_obj</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/category_theory/single_obj.lean">(view source on GitHub)</a></div><a href="#Mon.to_Cat">Mon.to_Cat</a><br>
-<a href="#Mon.to_Cat_faithful">Mon.to_Cat_faithful</a><br>
-<a href="#Mon.to_Cat_full">Mon.to_Cat_full</a><br>
-<a href="#category_theory.single_obj">category_theory.single_obj</a><br>
-<a href="#category_theory.single_obj.category">category_theory.single_obj.category</a><br>
-<a href="#category_theory.single_obj.category_struct">category_theory.single_obj.category_struct</a><br>
-<a href="#category_theory.single_obj.groupoid">category_theory.single_obj.groupoid</a><br>
-<a href="#category_theory.single_obj.map_hom">category_theory.single_obj.map_hom</a><br>
-<a href="#category_theory.single_obj.map_hom_comp">category_theory.single_obj.map_hom_comp</a><br>
-<a href="#category_theory.single_obj.map_hom_id">category_theory.single_obj.map_hom_id</a><br>
-<a href="#category_theory.single_obj.star">category_theory.single_obj.star</a><br>
-<a href="#category_theory.single_obj.to_End">category_theory.single_obj.to_End</a><br>
-<a href="#category_theory.single_obj.to_End_def">category_theory.single_obj.to_End_def</a><br>
-<a href="#monoid_hom.comp_to_functor">monoid_hom.comp_to_functor</a><br>
-<a href="#monoid_hom.id_to_functor">monoid_hom.id_to_functor</a><br>
-<a href="#monoid_hom.to_functor">monoid_hom.to_functor</a><br>
-<a href="#units.to_Aut">units.to_Aut</a><br>
-<a href="#units.to_Aut_hom">units.to_Aut_hom</a><br>
-<a href="#units.to_Aut_inv">units.to_Aut_inv</a><br>
 </div></div>
 
         </div>

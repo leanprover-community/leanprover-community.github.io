@@ -7,7 +7,122 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">tactic.reassoc_axiom</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/reassoc_axiom.lean">(view source on GitHub)</a></div><a href="#category_theory.reassoc_of">category_theory.reassoc_of</a><br>
+<a href="#tactic.calculated_Prop">tactic.calculated_Prop</a><br>
+<a href="#tactic.derive_reassoc_proof">tactic.derive_reassoc_proof</a><br>
+<a href="#tactic.get_cat_inst">tactic.get_cat_inst</a><br>
+<a href="#tactic.interactive.reassoc">tactic.interactive.reassoc</a><br>
+<a href="#tactic.prove_reassoc">tactic.prove_reassoc</a><br>
+<a href="#tactic.reassoc_attr">tactic.reassoc_attr</a><br>
+<a href="#tactic.reassoc_axiom">tactic.reassoc_axiom</a><br>
+<a href="#tactic.reassoc_cmd">tactic.reassoc_cmd</a><br>
+</div></div>
+<div class="column middle"><div class="content">
+<a id="top"></a><div class="mod_doc">
+<p>Reformulate category-theoretic axioms in a more associativity-friendly way.</p>
+
+<h2>The <code>reassoc</code> attribute</h2>
+
+<p>The <code>reassoc</code> attribute can be applied to a lemma</p>
+
+<pre><code>@[reassoc]
+lemma some_lemma : foo ≫ bar = baz := ...
+</code></pre>
+
+<p>and produce</p>
+
+<pre><code>lemma some_lemma_assoc {Y : C} (f : X ⟶ Y) : foo ≫ bar ≫ f = baz ≫ f := ...
+</code></pre>
+
+<p>The name of the produced lemma can be specified with <code>@[reassoc other_lemma_name]</code>. If
+<code>simp</code> is added first, the generated lemma will also have the <code>simp</code> attribute.</p>
+
+<h2>The <code>reassoc_axiom</code> command</h2>
+
+<p>When declaring a class of categories, the axioms can be reformulated to be more amenable
+to manipulation in right associated expressions:</p>
+
+<pre><code>class some_class (C : Type) [category C] :=
+(foo : Π X : C, X ⟶ X)
+(bar : ∀ {X Y : C} (f : X ⟶ Y), foo X ≫ f = f ≫ foo Y)
+
+reassoc_axiom some_class.bar
+</code></pre>
+
+<p>Here too, the <code>reassoc</code> attribute can be used instead. It works well when combined with
+<code>simp</code>:</p>
+
+<pre><code>attribute [simp, reassoc] some_class.bar
+</code></pre>
+</div><div class="decl def" id="tactic.get_cat_inst">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/reassoc_axiom.lean#L55">tactic.get_cat_inst</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></div>
+   <p>From an expression <code>f ≫ g</code>, extract the expression representing the category instance.</p>
+ </ul></div><div class="decl def" id="tactic.prove_reassoc">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/reassoc_axiom.lean#L63">tactic.prove_reassoc</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div></div>
+   <p>(internals for <code>@[reassoc]</code>)
+Given a lemma of the form <code>f ≫ g = h</code>, proves a new lemma of the form <code>h : ∀ {W} (k), f ≫ (g ≫ k) = h ≫ k</code>,
+and returns the type and proof of this lemma.</p>
+ </ul></div><div class="decl def" id="tactic.reassoc_axiom">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/reassoc_axiom.lean#L92">tactic.reassoc_axiom</a></span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a>)</span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> (<a href="https://leanprover-community.github.io/mathlib_docs/meta/expr.html#name.append_suffix">name.append_suffix</a> n "_assoc") →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p>(implementation for <code>@[reassoc]</code>)
+Given a declaration named <code>n</code> of the form <code>f ≫ g = h</code>, proves a new lemma named <code>n'</code> of the form <code>∀ {W} (k), f ≫ (g ≫ k) = h ≫ k</code>.</p>
+ </ul></div><div class="decl def" id="tactic.reassoc_attr">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/reassoc_axiom.lean#L115">tactic.reassoc_attr</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/attribute.html#user_attribute">user_attribute</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a>)</div></div>
+   <p>On the following lemma:</p>
+
+<pre><code>@[reassoc]
+lemma foo_bar : foo ≫ bar = foo := ...
+</code></pre>
+
+<p>generates</p>
+
+<pre><code>lemma foo_bar_assoc {Z} {x : Y ⟶ Z} : foo ≫ bar ≫ x = foo ≫ x := ...
+</code></pre>
+
+<p>The name of <code>foo_bar_assoc</code> can also be selected with @[reassoc new_name]</p>
+ </ul></div><div class="decl def" id="tactic.reassoc_cmd">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/reassoc_axiom.lean#L132">tactic.reassoc_cmd</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.tk">lean.parser.tk</a> "reassoc_axiom") →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <pre><code>reassoc_axiom my_axiom
+</code></pre>
+
+<p>produces the lemma <code>my_axiom_assoc</code> which transforms a statement of the
+form <code>x ≫ y = z</code> into <code>x ≫ y ≫ k = z ≫ k</code>.</p>
+ </ul></div><div class="decl def" id="tactic.interactive.reassoc">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/reassoc_axiom.lean#L146">tactic.interactive.reassoc</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/alternative.html#optional">optional</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.tk">lean.parser.tk</a> "!")) →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a>
+  (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.many">lean.parser.many</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.ident">lean.parser.ident</a>) →
+<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p><code>reassoc h</code>, for assumption <code>h : x ≫ y = z</code>, creates a new assumption <code>h : ∀ {W} (f : Z ⟶ W), x ≫ y ≫ f = z ≫ f</code>.
+    <code>reassoc! h</code>, does the same but deletes the initial <code>h</code> assumption.
+(You can also add the attribute <code>@[reassoc]</code> to lemmas to generate new declarations generalized in this way.)</p>
+ </ul></div><div class="decl def" id="tactic.calculated_Prop">     <div class="decl_header impl_collapsed">        <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/reassoc_axiom.lean#L155">tactic.calculated_Prop</a></span> <span class="impl_arg"><span class="decl_args">{α : Sort u_1}</span></span> <span class="decl_args">:</span>     <div class="decl_type">Prop → α → Prop</div></div>
+   <p></p>
+ </ul></div><div class="decl def" id="tactic.derive_reassoc_proof">     <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/reassoc_axiom.lean#L157">tactic.derive_reassoc_proof</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div></div>
+   <p></p>
+ </ul></div><div class="decl theorem" id="category_theory.reassoc_of">     <div class="decl_header impl_collapsed">        <span class="decl_kind">theorem</span>       <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/699da421ea1a19c3b024bf8c02d6f1dd1d7e89d3/src/tactic/reassoc_axiom.lean#L182">category_theory.reassoc_of</a></span> <span class="impl_arg"><span class="decl_args">{α : Sort u_1}</span></span> <span class="decl_args">(hh : α)</span> <span class="impl_arg"><span class="decl_args">{β : Prop}</span></span> <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#auto_param">auto_param</a> (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/reassoc_axiom.html#tactic.calculated_Prop">tactic.calculated_Prop</a> β hh)
+  (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name.mk_string">name.mk_string</a> "derive_reassoc_proof"
+     (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name.mk_string">name.mk_string</a> "tactic" <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name.anonymous">name.anonymous</a>)) →
+β</div></div>
+   <p>With <code>h : x ≫ y ≫ z = x</code> (with universal quantifiers tolerated),
+   <code>reassoc_of h : ∀ {X'} (f : W ⟶ X'), x ≫ y ≫ z ≫ f = x ≫ f</code>.</p>
+
+<p>The type and proof of <code>reassoc_of h</code> is generated by <code>tactic.derive_reassoc_proof</code>
+   which make <code>reassoc_of</code> meta-programming adjacent. It is not called as a tactic but as
+   an expression. The goal is to avoid creating assumptions to dismiss after one use:</p>
+
+<p><code>lean
+   example (X Y Z W : C) (x : X ⟶ Y) (y : Y ⟶ Z) (z z' : Z ⟶ W) (w : X ⟶ Z)
+     (h : x ≫ y = w)
+     (h' : y ≫ z = y ≫ z') :
+     x ≫ y ≫ z = w ≫ z' :=
+   begin
+     rw [h',reassoc_of h],
+   end
+</code></p>
+ </ul></div>
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
 <a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
@@ -807,6 +922,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -1034,6 +1150,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1156,160 +1273,6 @@
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="mod_doc">
-<p>Reformulate category-theoretic axioms in a more associativity-friendly way.</p>
-
-<h2>The <code>reassoc</code> attribute</h2>
-
-<p>The <code>reassoc</code> attribute can be applied to a lemma</p>
-
-<pre><code>@[reassoc]
-lemma some_lemma : foo ≫ bar = baz := ...
-</code></pre>
-
-<p>and produce</p>
-
-<pre><code>lemma some_lemma_assoc {Y : C} (f : X ⟶ Y) : foo ≫ bar ≫ f = baz ≫ f := ...
-</code></pre>
-
-<p>The name of the produced lemma can be specified with <code>@[reassoc other_lemma_name]</code>. If
-<code>simp</code> is added first, the generated lemma will also have the <code>simp</code> attribute.</p>
-
-<h2>The <code>reassoc_axiom</code> command</h2>
-
-<p>When declaring a class of categories, the axioms can be reformulated to be more amenable
-to manipulation in right associated expressions:</p>
-
-<pre><code>class some_class (C : Type) [category C] :=
-(foo : Π X : C, X ⟶ X)
-(bar : ∀ {X Y : C} (f : X ⟶ Y), foo X ≫ f = f ≫ foo Y)
-
-reassoc_axiom some_class.bar
-</code></pre>
-
-<p>Here too, the <code>reassoc</code> attribute can be used instead. It works well when combined with
-<code>simp</code>:</p>
-
-<pre><code>attribute [simp, reassoc] some_class.bar
-</code></pre>
-</div><div class="def"><a id="tactic.get_cat_inst"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/reassoc_axiom.lean#L55">tactic.get_cat_inst</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div>
-<p>From an expression <code>f ≫ g</code>, extract the expression representing the category instance.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.prove_reassoc"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/reassoc_axiom.lean#L63">tactic.prove_reassoc</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> × <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a>)</div>
-<p>(internals for <code>@[reassoc]</code>)
-Given a lemma of the form <code>f ≫ g = h</code>, proves a new lemma of the form <code>h : ∀ {W} (k), f ≫ (g ≫ k) = h ≫ k</code>,
-and returns the type and proof of this lemma.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.reassoc_axiom"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/reassoc_axiom.lean#L92">tactic.reassoc_axiom</a></span> <span class="decl_args">(n : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a>)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#opt_param">opt_param</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> (<a href="https://leanprover-community.github.io/mathlib_docs/meta/expr.html#name.append_suffix">name.append_suffix</a> n "_assoc") → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p>(implementation for <code>@[reassoc]</code>)
-Given a declaration named <code>n</code> of the form <code>f ≫ g = h</code>, proves a new lemma named <code>n'</code> of the form <code>∀ {W} (k), f ≫ (g ≫ k) = h ≫ k</code>.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.reassoc_attr"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/reassoc_axiom.lean#L115">tactic.reassoc_attr</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/attribute.html#user_attribute">user_attribute</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#option">option</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a>)</div>
-<p>On the following lemma:</p>
-
-<pre><code>@[reassoc]
-lemma foo_bar : foo ≫ bar = foo := ...
-</code></pre>
-
-<p>generates</p>
-
-<pre><code>lemma foo_bar_assoc {Z} {x : Y ⟶ Z} : foo ≫ bar ≫ x = foo ≫ x := ...
-</code></pre>
-
-<p>The name of <code>foo_bar_assoc</code> can also be selected with @[reassoc new_name]</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.reassoc_cmd"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/reassoc_axiom.lean#L132">tactic.reassoc_cmd</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.tk">lean.parser.tk</a> "reassoc_axiom") → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser">lean.parser</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<pre><code>reassoc_axiom my_axiom
-</code></pre>
-
-<p>produces the lemma <code>my_axiom_assoc</code> which transforms a statement of the
-form <code>x ≫ y = z</code> into <code>x ≫ y ≫ k = z ≫ k</code>.</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.interactive.reassoc"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/reassoc_axiom.lean#L146">tactic.interactive.reassoc</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/alternative.html#optional">optional</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.tk">lean.parser.tk</a> "!")) →
-<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/interactive_base.html#interactive.parse">interactive.parse</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.many">lean.parser.many</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/lean/parser.html#lean.parser.ident">lean.parser.ident</a>) → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p><code>reassoc h</code>, for assumption <code>h : x ≫ y = z</code>, creates a new assumption <code>h : ∀ {W} (f : Z ⟶ W), x ≫ y ≫ f = z ≫ f</code>.
-    <code>reassoc! h</code>, does the same but deletes the initial <code>h</code> assumption.
-(You can also add the attribute <code>@[reassoc]</code> to lemmas to generate new declarations generalized in this way.)</p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="tactic.calculated_Prop"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/reassoc_axiom.lean#L155">tactic.calculated_Prop</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Prop → α → Prop</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Sort u_1}</span></li>
-
-
-
-</ul></div><div class="def"><a id="tactic.derive_reassoc_proof"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/reassoc_axiom.lean#L157">tactic.derive_reassoc_proof</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#unit">unit</a></div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="thm"><a id="category_theory.reassoc_of"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/reassoc_axiom.lean#L182">category_theory.reassoc_of</a></span> <span class="decl_args">(hh : α)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#auto_param">auto_param</a> (<a href="https://leanprover-community.github.io/mathlib_docs/tactic/reassoc_axiom.html#tactic.calculated_Prop">tactic.calculated_Prop</a> β hh)
-  (name.mk_string "derive_reassoc_proof" (name.mk_string "tactic" name.anonymous)) →
-β</div>
-<p>With <code>h : x ≫ y ≫ z = x</code> (with universal quantifiers tolerated),
-   <code>reassoc_of h : ∀ {X'} (f : W ⟶ X'), x ≫ y ≫ z ≫ f = x ≫ f</code>.</p>
-
-<p>The type and proof of <code>reassoc_of h</code> is generated by <code>tactic.derive_reassoc_proof</code>
-   which make <code>reassoc_of</code> meta-programming adjacent. It is not called as a tactic but as
-   an expression. The goal is to avoid creating assumptions to dismiss after one use:</p>
-
-<p><code>lean
-   example (X Y Z W : C) (x : X ⟶ Y) (y : Y ⟶ Z) (z z' : Z ⟶ W) (w : X ⟶ Z)
-     (h : x ≫ y = w)
-     (h' : y ≫ z = y ≫ z') :
-     x ≫ y ≫ z = w ≫ z' :=
-   begin
-     rw [h',reassoc_of h],
-   end
-</code></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{α : Sort u_1}</span> <span class="impl_arg">{β : Prop}</span></li>
-
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">tactic.reassoc_axiom</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/acd769af1ee9f01b3e30ac51629a15696d8793a3/src/tactic/reassoc_axiom.lean">(view source on GitHub)</a></div><a href="#category_theory.reassoc_of">category_theory.reassoc_of</a><br>
-<a href="#tactic.calculated_Prop">tactic.calculated_Prop</a><br>
-<a href="#tactic.derive_reassoc_proof">tactic.derive_reassoc_proof</a><br>
-<a href="#tactic.get_cat_inst">tactic.get_cat_inst</a><br>
-<a href="#tactic.interactive.reassoc">tactic.interactive.reassoc</a><br>
-<a href="#tactic.prove_reassoc">tactic.prove_reassoc</a><br>
-<a href="#tactic.reassoc_attr">tactic.reassoc_attr</a><br>
-<a href="#tactic.reassoc_axiom">tactic.reassoc_axiom</a><br>
-<a href="#tactic.reassoc_cmd">tactic.reassoc_cmd</a><br>
 </div></div>
 
         </div>
