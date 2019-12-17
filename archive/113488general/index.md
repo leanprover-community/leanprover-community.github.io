@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [lean in emacs](35233leaninemacs.html) (2 messages, latest: Dec 17 2019 at 03:27)
+* [lean in emacs](35233leaninemacs.html) (3 messages, latest: Dec 17 2019 at 04:06)
 
 * [How do you `update-mathlib`](14544Howdoyouupdatemathlib.html) (24 messages, latest: Dec 16 2019 at 21:26)
 
