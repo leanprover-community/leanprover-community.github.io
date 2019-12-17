@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Sheaves](28656Sheaves.html) (73 messages, latest: Dec 16 2019 at 23:50)
+* [Sheaves](28656Sheaves.html) (76 messages, latest: Dec 17 2019 at 00:34)
 
 * [category theory tactics](60005categorytheorytactics.html) (28 messages, latest: Dec 16 2019 at 16:31)
 
