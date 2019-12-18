@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [a concrete group](48802aconcretegroup.html) (18 messages, latest: Dec 18 2019 at 07:56)
+* [a concrete group](48802aconcretegroup.html) (34 messages, latest: Dec 18 2019 at 08:40)
 
 * [case splitting the wrong way](20762casesplittingthewrongway.html) (3 messages, latest: Dec 18 2019 at 06:54)
 
