@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Interface for algebras](46074Interfaceforalgebras.html) (3 messages, latest: Dec 18 2019 at 11:36)
+
 * [Is there code for X already somewhere?](81055IstherecodeforXalreadysomewhere.html) (4 messages, latest: Dec 18 2019 at 10:34)
 
 * [segment partitions for integrals](06257segmentpartitionsforintegrals.html) (54 messages, latest: Dec 18 2019 at 09:12)
