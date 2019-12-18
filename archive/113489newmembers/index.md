@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [case splitting the wrong way](20762casesplittingthewrongway.html) (1 message, latest: Dec 18 2019 at 02:46)
+
 * [How do I do induction with `length t` here](47233HowdoIdoinductionwithlengththere.html) (17 messages, latest: Dec 18 2019 at 00:22)
 
 * [Help with lean install (windows)](65113Helpwithleaninstallwindows.html) (17 messages, latest: Dec 17 2019 at 23:56)
