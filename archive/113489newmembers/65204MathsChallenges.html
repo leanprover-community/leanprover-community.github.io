@@ -150,6 +150,62 @@ permalink: archive/113489newmembers/65204MathsChallenges.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Maths%20Challenges/near/183788876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65204MathsChallenges.html#183788876">YH (Dec 18 2019 at 20:49)</a>:</h4>
 <p>The tactic <code>norm_num</code> does it but I'm not sure what exactly proof term behind is.</p>
 
+<a name="183795370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Maths%20Challenges/near/183795370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65204MathsChallenges.html#183795370">Mario Carneiro (Dec 18 2019 at 22:06)</a>:</h4>
+<p>Basically, a linear ordered field is characteristic zero so <code>bit0</code> and <code>bit1</code> are injective and disjoint</p>
+
+<a name="183795395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Maths%20Challenges/near/183795395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65204MathsChallenges.html#183795395">Etienne Laurin (Dec 18 2019 at 22:06)</a>:</h4>
+<p>Rob thanks, that works. How do you come up with something like <code>add_sub_cancel'</code>? I had a hard time even understanding how <code>a + b - a = b</code> matched <code>(5 - (2 + 2) = 1)</code></p>
+
+<a name="183795432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Maths%20Challenges/near/183795432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65204MathsChallenges.html#183795432">Mario Carneiro (Dec 18 2019 at 22:07)</a>:</h4>
+<p><code>5</code> unfolds to <code>2 + 2 + 1</code> by definition</p>
+
+<a name="183795445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Maths%20Challenges/near/183795445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65204MathsChallenges.html#183795445">Mario Carneiro (Dec 18 2019 at 22:07)</a>:</h4>
+<p>because it is <code>bit1 2</code></p>
+
+<a name="183795516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Maths%20Challenges/near/183795516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65204MathsChallenges.html#183795516">Patrick Massot (Dec 18 2019 at 22:08)</a>:</h4>
+<p>There can be only one conclusion: we want a tactic to do that without telling us the proof term. The good part is it already exists <span aria-label="smiley" class="emoji emoji-1f603" role="img" title="smiley">:smiley:</span></p>
+
+<a name="183795542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Maths%20Challenges/near/183795542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65204MathsChallenges.html#183795542">Mario Carneiro (Dec 18 2019 at 22:08)</a>:</h4>
+<p>If you use specially prepared theorems, the proof is easy: <code>bit0_ne_bit1</code></p>
+
+<a name="183795575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Maths%20Challenges/near/183795575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65204MathsChallenges.html#183795575">Mario Carneiro (Dec 18 2019 at 22:09)</a>:</h4>
+<p>that's what <code>norm_num</code> does</p>
+
+<a name="183795915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Maths%20Challenges/near/183795915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65204MathsChallenges.html#183795915">Rob Lewis (Dec 18 2019 at 22:14)</a>:</h4>
+<p>Right, the trick is knowing how numerals are defined. There are only a few important components here: 5 is defined to be (2 + 2) + 1, and the "canonical" disequality is <code>zero_ne_one</code>. You can combine those in various ways to prove it. Here's one without a lambda: <code>ne.symm $ sub_ne_zero.1 $ ne_of_eq_of_ne (add_sub_cancel' _ _) one_ne_zero</code>.</p>
+
+<a name="183796021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Maths%20Challenges/near/183796021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65204MathsChallenges.html#183796021">Etienne Laurin (Dec 18 2019 at 22:15)</a>:</h4>
+<p>Is there an easy way to see the bit representation? I've discovered <code>unfold has_one.one</code> but it doesn't seem ideal</p>
+
+<a name="183796026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Maths%20Challenges/near/183796026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65204MathsChallenges.html#183796026">Patrick Massot (Dec 18 2019 at 22:15)</a>:</h4>
+<p>Beauty is in the eye of the beholder.</p>
+
+<a name="183796085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Maths%20Challenges/near/183796085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65204MathsChallenges.html#183796085">Patrick Massot (Dec 18 2019 at 22:16)</a>:</h4>
+<p>I feel <code>by norm_num</code> is the only appropriate answer.</p>
+
+<a name="183796133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Maths%20Challenges/near/183796133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65204MathsChallenges.html#183796133">Rob Lewis (Dec 18 2019 at 22:17)</a>:</h4>
+<p><code>set_option pp.numerals false</code></p>
+
+<a name="183796184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Maths%20Challenges/near/183796184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65204MathsChallenges.html#183796184">Rob Lewis (Dec 18 2019 at 22:18)</a>:</h4>
+<p>I'm not sure anyone is claiming these proofs are more beautiful than <code>norm_num</code>. But someone had to know these proofs to implement <code>norm_num</code>.</p>
+
+<a name="183796218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Maths%20Challenges/near/183796218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65204MathsChallenges.html#183796218">Patrick Massot (Dec 18 2019 at 22:18)</a>:</h4>
+<p>Sure. We'll always need experts.</p>
+
 
 {% endraw %}
 

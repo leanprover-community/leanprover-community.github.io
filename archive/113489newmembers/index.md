@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Maths Challenges](65204MathsChallenges.html) (33 messages, latest: Dec 18 2019 at 20:49)
+* [Maths Challenges](65204MathsChallenges.html) (47 messages, latest: Dec 18 2019 at 22:18)
 
 * [error when using theorem/lemma instead of def](58110errorwhenusingtheoremlemmainsteadofdef.html) (12 messages, latest: Dec 18 2019 at 18:11)
 
