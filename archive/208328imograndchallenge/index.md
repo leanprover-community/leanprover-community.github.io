@@ -9,9 +9,9 @@ permalink: archive/208328IMOgrandchallenge/index.html
 
 ### Topics:
 
-* [general discussion](95555generaldiscussion.html) (72 messages, latest: Oct 25 2019 at 00:33)
+* [Reading list/sample AI](10546ReadinglistsampleAI.html) (22 messages, latest: Dec 18 2019 at 05:50)
 
-* [Reading list/sample AI](10546ReadinglistsampleAI.html) (16 messages, latest: Oct 24 2019 at 20:56)
+* [general discussion](95555generaldiscussion.html) (72 messages, latest: Oct 25 2019 at 00:33)
 
 * [Intermediate Language](92224IntermediateLanguage.html) (8 messages, latest: Oct 23 2019 at 23:01)
 
