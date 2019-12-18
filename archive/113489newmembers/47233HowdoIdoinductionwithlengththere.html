@@ -59,6 +59,85 @@ hn : length (reverse t) = n
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20do%20induction%20with%20%60length%20t%60%20here/near/183705176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47233HowdoIdoinductionwithlengththere.html#183705176">Kevin Buzzard (Dec 17 2019 at 23:54)</a>:</h4>
 <p>You'll need some intermediate lemmas but this is the way to do it</p>
 
+<a name="183705583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20do%20induction%20with%20%60length%20t%60%20here/near/183705583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47233HowdoIdoinductionwithlengththere.html#183705583">Marc Huisinga (Dec 18 2019 at 00:01)</a>:</h4>
+<p>if you want to see a oneliner-solution i can post it, but it's a nice small exercise</p>
+
+<a name="183705714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20do%20induction%20with%20%60length%20t%60%20here/near/183705714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47233HowdoIdoinductionwithlengththere.html#183705714">YH (Dec 18 2019 at 00:03)</a>:</h4>
+<p>I just finished my 23-liner. Show me the oneliner please.</p>
+
+<a name="183705722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20do%20induction%20with%20%60length%20t%60%20here/near/183705722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47233HowdoIdoinductionwithlengththere.html#183705722">YH (Dec 18 2019 at 00:03)</a>:</h4>
+<div class="codehilite"><pre><span></span>lemma ex2 {t : list A} : length (reverse t) = length t :=
+begin
+induction t with x xs hs,
+unfold reverse,
+unfold reverse_core,
+unfold reverse,
+unfold reverse_core,
+unfold length,
+have l : ∀ s t : list A, length (reverse_core s t) = length s + length t,
+  intro s,
+  induction s with y ys h1,
+  unfold reverse_core,
+  unfold length,
+  intro t,
+  rw zero_add,
+unfold reverse_core,
+intro t,
+rw h1 (y :: t),
+unfold length,
+simp,
+rw l _ _,
+unfold length,
+simp,
+end
+</pre></div>
+
+<a name="183705782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20do%20induction%20with%20%60length%20t%60%20here/near/183705782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47233HowdoIdoinductionwithlengththere.html#183705782">Marc Huisinga (Dec 18 2019 at 00:04)</a>:</h4>
+<p>it does use some basic intermediate list lemmas.</p>
+<div class="codehilite"><pre><span></span>lemma ex : length (reverse t) = length t :=
+by induction t; simpa only [list.reverse_cons, list.length_append, list.length, add_right_inj]
+</pre></div>
+
+<a name="183705802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20do%20induction%20with%20%60length%20t%60%20here/near/183705802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47233HowdoIdoinductionwithlengththere.html#183705802">YH (Dec 18 2019 at 00:05)</a>:</h4>
+<p>OK. <code>reverse_cons</code> is the one I didn't know.</p>
+
+<a name="183705937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20do%20induction%20with%20%60length%20t%60%20here/near/183705937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47233HowdoIdoinductionwithlengththere.html#183705937">YH (Dec 18 2019 at 00:07)</a>:</h4>
+<p>what is <code>simpa</code>, lean cannot find it.</p>
+
+<a name="183705951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20do%20induction%20with%20%60length%20t%60%20here/near/183705951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47233HowdoIdoinductionwithlengththere.html#183705951">Marc Huisinga (Dec 18 2019 at 00:07)</a>:</h4>
+<p>you can find a description of most mathlib tactics here: <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md">https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md</a></p>
+
+<a name="183706084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20do%20induction%20with%20%60length%20t%60%20here/near/183706084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47233HowdoIdoinductionwithlengththere.html#183706084">YH (Dec 18 2019 at 00:09)</a>:</h4>
+<div class="codehilite"><pre><span></span>⊢ length (reverse (t_hd :: t_tl)) = length (t_hd :: t_tl)
+</pre></div>
+
+
+<p>Still have this goal.</p>
+
+<a name="183706382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20do%20induction%20with%20%60length%20t%60%20here/near/183706382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47233HowdoIdoinductionwithlengththere.html#183706382">Marc Huisinga (Dec 18 2019 at 00:14)</a>:</h4>
+<p>did you import <code>data.list</code>?</p>
+
+<a name="183706427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20do%20induction%20with%20%60length%20t%60%20here/near/183706427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47233HowdoIdoinductionwithlengththere.html#183706427">YH (Dec 18 2019 at 00:15)</a>:</h4>
+<p><code>import data.list.basic</code></p>
+
+<a name="183706487"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20do%20induction%20with%20%60length%20t%60%20here/near/183706487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47233HowdoIdoinductionwithlengththere.html#183706487">Marc Huisinga (Dec 18 2019 at 00:16)</a>:</h4>
+<p>works for me <span aria-label="shrug" class="emoji emoji-1f937" role="img" title="shrug">:shrug:</span></p>
+
+<a name="183706818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20do%20induction%20with%20%60length%20t%60%20here/near/183706818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47233HowdoIdoinductionwithlengththere.html#183706818">YH (Dec 18 2019 at 00:22)</a>:</h4>
+<p>Oh my bad, I defined my own length in this hidden name space. facepalm.</p>
+
 
 {% endraw %}
 
