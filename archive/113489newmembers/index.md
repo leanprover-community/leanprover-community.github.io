@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [error when using theorem/lemma instead of def](58110errorwhenusingtheoremlemmainsteadofdef.html) (11 messages, latest: Dec 18 2019 at 17:59)
+* [error when using theorem/lemma instead of def](58110errorwhenusingtheoremlemmainsteadofdef.html) (12 messages, latest: Dec 18 2019 at 18:11)
 
 * [a concrete group](48802aconcretegroup.html) (34 messages, latest: Dec 18 2019 at 08:40)
 
