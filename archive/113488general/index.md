@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Theoretical Mathematics](62661TheoreticalMathematics.html) (10 messages, latest: Dec 18 2019 at 20:48)
+
 * [mathlib-scripts](42935mathlibscripts.html) (2 messages, latest: Dec 17 2019 at 21:02)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (242 messages, latest: Dec 17 2019 at 12:57)
@@ -24,8 +26,6 @@ permalink: archive/113488general/index.html
 * [Monoid ring in Lean](21646MonoidringinLean.html) (14 messages, latest: Dec 16 2019 at 20:18)
 
 * [simp](79866simp.html) (20 messages, latest: Dec 16 2019 at 16:11)
-
-* [Theoretical Mathematics](62661TheoreticalMathematics.html) (7 messages, latest: Dec 16 2019 at 08:47)
 
 * [Using Lean from command line](01410UsingLeanfromcommandline.html) (12 messages, latest: Dec 16 2019 at 01:54)
 

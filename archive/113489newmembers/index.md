@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Maths Challenges](65204MathsChallenges.html) (33 messages, latest: Dec 18 2019 at 20:49)
+
 * [error when using theorem/lemma instead of def](58110errorwhenusingtheoremlemmainsteadofdef.html) (12 messages, latest: Dec 18 2019 at 18:11)
 
 * [a concrete group](48802aconcretegroup.html) (34 messages, latest: Dec 18 2019 at 08:40)
@@ -60,8 +62,6 @@ permalink: archive/113489newmembers/index.html
 * [How is 1,2,3 defined in Lean?](16510Howis123definedinLean.html) (4 messages, latest: Dec 13 2019 at 19:45)
 
 * [How do I "cast" inequalities?](03462HowdoIcastinequalities.html) (4 messages, latest: Dec 13 2019 at 19:00)
-
-* [Maths Challenges](65204MathsChallenges.html) (27 messages, latest: Dec 13 2019 at 13:08)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (217 messages, latest: Dec 13 2019 at 12:08)
 
