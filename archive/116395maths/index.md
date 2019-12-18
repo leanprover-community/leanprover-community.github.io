@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [segment partitions for integrals](06257segmentpartitionsforintegrals.html) (56 messages, latest: Dec 18 2019 at 15:27)
+
 * [Interface for algebras](46074Interfaceforalgebras.html) (9 messages, latest: Dec 18 2019 at 13:15)
 
 * [Is there code for X already somewhere?](81055IstherecodeforXalreadysomewhere.html) (6 messages, latest: Dec 18 2019 at 13:13)
-
-* [segment partitions for integrals](06257segmentpartitionsforintegrals.html) (54 messages, latest: Dec 18 2019 at 09:12)
 
 * [category theory tactics](60005categorytheorytactics.html) (31 messages, latest: Dec 17 2019 at 05:30)
 
