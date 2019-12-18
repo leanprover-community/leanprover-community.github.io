@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [a concrete group](48802aconcretegroup.html) (4 messages, latest: Dec 18 2019 at 04:15)
+
 * [case splitting the wrong way](20762casesplittingthewrongway.html) (2 messages, latest: Dec 18 2019 at 03:38)
 
 * [How do I do induction with `length t` here](47233HowdoIdoinductionwithlengththere.html) (17 messages, latest: Dec 18 2019 at 00:22)
