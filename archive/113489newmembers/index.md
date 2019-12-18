@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [error when using theorem/lemma instead of def](58110errorwhenusingtheoremlemmainsteadofdef.html) (11 messages, latest: Dec 18 2019 at 17:59)
+
 * [a concrete group](48802aconcretegroup.html) (34 messages, latest: Dec 18 2019 at 08:40)
 
 * [case splitting the wrong way](20762casesplittingthewrongway.html) (3 messages, latest: Dec 18 2019 at 06:54)
