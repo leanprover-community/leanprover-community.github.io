@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [segment partitions for integrals](06257segmentpartitionsforintegrals.html) (53 messages, latest: Dec 18 2019 at 08:45)
+* [segment partitions for integrals](06257segmentpartitionsforintegrals.html) (54 messages, latest: Dec 18 2019 at 09:12)
 
 * [category theory tactics](60005categorytheorytactics.html) (31 messages, latest: Dec 17 2019 at 05:30)
 
