@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Interface for algebras](46074Interfaceforalgebras.html) (3 messages, latest: Dec 18 2019 at 11:36)
+* [Interface for algebras](46074Interfaceforalgebras.html) (8 messages, latest: Dec 18 2019 at 12:57)
 
 * [Is there code for X already somewhere?](81055IstherecodeforXalreadysomewhere.html) (4 messages, latest: Dec 18 2019 at 10:34)
 
