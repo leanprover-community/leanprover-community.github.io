@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [local ring diamond?](97591localringdiamond.html) (5 messages, latest: Dec 19 2019 at 11:26)
+* [local ring diamond?](97591localringdiamond.html) (7 messages, latest: Dec 19 2019 at 12:35)
 
 * [Theoretical Mathematics](62661TheoreticalMathematics.html) (16 messages, latest: Dec 18 2019 at 22:38)
 
