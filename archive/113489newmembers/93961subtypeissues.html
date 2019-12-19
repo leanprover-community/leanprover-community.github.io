@@ -1,0 +1,52 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/93961subtypeissues.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html">subtype issues</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="183888391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183888391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183888391">Adam Topaz (Dec 19 2019 at 21:45)</a>:</h4>
+<p>Hi,<br>
+I'm having some issues working with propositions involving terms in a subtype.</p>
+<p>For example, I've been playing around with subsets of fields, and I came across the following goal:</p>
+<div class="codehilite"><pre><span></span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_1</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">discrete_field</span> <span class="n">F</span><span class="o">,</span>
+<span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">F</span><span class="o">,</span>
+<span class="n">a_val</span> <span class="o">:</span> <span class="n">F</span><span class="o">,</span>
+<span class="n">a_property</span> <span class="o">:</span> <span class="n">a_val</span> <span class="err">∈</span> <span class="n">S</span><span class="o">,</span>
+<span class="n">h</span> <span class="o">:</span> <span class="bp">⟨</span><span class="n">a_val</span><span class="o">,</span> <span class="n">a_property</span><span class="bp">⟩</span> <span class="bp">=</span> <span class="mi">0</span>
+<span class="err">⊢</span> <span class="n">a_val</span> <span class="bp">=</span> <span class="mi">0</span>
+</pre></div>
+
+
+<p>This should be a tautology, but the <code>assumption</code> tactic doesn't work.<br>
+If I understand correctly the issue stems from the fact that <code>⟨a_val, a_property⟩</code> is of type <code>{ x : F // x ∈ S }</code>. There must be some really simple way to rewrite <code>h</code> as <code>a_val = 0</code>. Any help would me much appreciated!</p>
+
+<a name="183888614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183888614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183888614">Kevin Buzzard (Dec 19 2019 at 21:48)</a>:</h4>
+<p>I wonder what that 0 is on the RHS of h?</p>
+
+<a name="183888630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183888630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183888630">Kevin Buzzard (Dec 19 2019 at 21:48)</a>:</h4>
+<p>There's some coercion going on?</p>
+
+<a name="183888798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183888798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183888798">Kevin Buzzard (Dec 19 2019 at 21:51)</a>:</h4>
+<p>It's difficult for me to figure out the type of both sides of h. In theory that zero could be defined in a completely wacky way and have nothing to do with F's zero, although this is unlikely unless you did it maliciously or by accident. Can you post the code which generated this?</p>
+
+<a name="183889049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183889049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183889049">Kevin Buzzard (Dec 19 2019 at 21:54)</a>:</h4>
+<p>I guess you could do <code>unfold zero at h</code> to find out what's going on. Does <code>cases h</code> help?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
