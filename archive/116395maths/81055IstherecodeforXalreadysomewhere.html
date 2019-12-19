@@ -51,6 +51,43 @@ permalink: archive/116395maths/81055IstherecodeforXalreadysomewhere.html
 
 <p>Is this already in mathlib?</p>
 
+<a name="183824144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20there%20code%20for%20X%20already%20somewhere%3F/near/183824144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/81055IstherecodeforXalreadysomewhere.html#183824144">Johan Commelin (Dec 19 2019 at 08:07)</a>:</h4>
+<p>We really need to be able to write</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">kitchen_sink</span>
+
+<span class="c">/-</span><span class="cm">- `replace_at f i₀ x` is the function equal to `f`, except at `i₀` where it is equal to `x`. -/</span>
+<span class="n">def</span> <span class="n">replace_at</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">i₀</span> <span class="o">:</span> <span class="n">ι</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">ι</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">library_search</span>
+</pre></div>
+
+
+<p>in some scratch file.</p>
+
+<a name="183824149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20there%20code%20for%20X%20already%20somewhere%3F/near/183824149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/81055IstherecodeforXalreadysomewhere.html#183824149">Johan Commelin (Dec 19 2019 at 08:07)</a>:</h4>
+<p>Don't these <code>mk_all.sh</code> scripts allow us to do that?</p>
+
+<a name="183824343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20there%20code%20for%20X%20already%20somewhere%3F/near/183824343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/81055IstherecodeforXalreadysomewhere.html#183824343">Sebastien Gouezel (Dec 19 2019 at 08:11)</a>:</h4>
+<p>Except that here <code>library_search</code> will not help, because it doesn't know what I want to do. For instance, <code>suggest</code> could give me the answer <code>f i</code>. Or  <code>x</code>. Or <code>f i₀</code>. This is really a question where automated tools will not help you, and where you need human beings.</p>
+
+<a name="183825723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20there%20code%20for%20X%20already%20somewhere%3F/near/183825723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/81055IstherecodeforXalreadysomewhere.html#183825723">Johan Commelin (Dec 19 2019 at 08:37)</a>:</h4>
+<p>Well, a list of all existing terms of that type would still be helpful, right?</p>
+
+<a name="183826188"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20there%20code%20for%20X%20already%20somewhere%3F/near/183826188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/81055IstherecodeforXalreadysomewhere.html#183826188">Sebastien Gouezel (Dec 19 2019 at 08:45)</a>:</h4>
+<p>Of that exact type (i.e., using the same parameters and not a subset of them), up to permutation, yes this would definitely be useful.</p>
+
+<a name="183826243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20there%20code%20for%20X%20already%20somewhere%3F/near/183826243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/81055IstherecodeforXalreadysomewhere.html#183826243">Marc Huisinga (Dec 19 2019 at 08:46)</a>:</h4>
+<p>function.update?</p>
+
+<a name="183826896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20there%20code%20for%20X%20already%20somewhere%3F/near/183826896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/81055IstherecodeforXalreadysomewhere.html#183826896">Sebastien Gouezel (Dec 19 2019 at 08:58)</a>:</h4>
+<p>Thanks!</p>
+
 
 {% endraw %}
 
