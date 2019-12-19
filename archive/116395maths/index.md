@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Is there code for X already somewhere?](81055IstherecodeforXalreadysomewhere.html) (31 messages, latest: Dec 19 2019 at 17:46)
+* [Is there code for X already somewhere?](81055IstherecodeforXalreadysomewhere.html) (33 messages, latest: Dec 19 2019 at 18:57)
 
 * [segment partitions for integrals](06257segmentpartitionsforintegrals.html) (56 messages, latest: Dec 18 2019 at 15:27)
 
