@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [see Note \[default priority\]](84243seeNotedefaultpriority.html) (1 message, latest: Dec 19 2019 at 19:51)
+* [see Note \[default priority\]](84243seeNotedefaultpriority.html) (6 messages, latest: Dec 19 2019 at 20:11)
 
 * [local ring diamond?](97591localringdiamond.html) (9 messages, latest: Dec 19 2019 at 19:49)
 
