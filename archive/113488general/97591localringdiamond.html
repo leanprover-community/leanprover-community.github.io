@@ -1,0 +1,57 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/97591localringdiamond.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/97591localringdiamond.html">local ring diamond?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="183833859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20ring%20diamond%3F/near/183833859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97591localringdiamond.html#183833859">Kenny Lau (Dec 19 2019 at 10:39)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">associated</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">basic</span> <span class="n">order</span><span class="bp">.</span><span class="n">zorn</span>
+
+<span class="n">universes</span> <span class="n">u</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+
+<span class="kn">section</span> <span class="n">prio</span>
+<span class="kn">set_option</span> <span class="n">default_priority</span> <span class="mi">100</span> <span class="c1">-- see Note [default priority]</span>
+<span class="n">class</span> <span class="n">local_ring</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">nonzero_comm_ring</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">is_local</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="o">(</span><span class="n">is_unit</span> <span class="n">a</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="n">is_unit</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">-</span> <span class="n">a</span><span class="o">)))</span>
+<span class="kn">end</span> <span class="n">prio</span>
+
+<span class="n">def</span> <span class="n">is_local_ring</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">((</span><span class="mi">0</span><span class="o">:</span><span class="n">α</span><span class="o">)</span> <span class="bp">≠</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">∧</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="o">(</span><span class="n">is_unit</span> <span class="n">a</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="n">is_unit</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">-</span> <span class="n">a</span><span class="o">))</span>
+
+<span class="n">def</span> <span class="n">local_of_is_local_ring</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">is_local_ring</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">local_ring</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">zero_ne_one</span> <span class="o">:=</span> <span class="n">h</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+  <span class="n">is_local</span> <span class="o">:=</span> <span class="n">h</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+  <span class="bp">..</span> <span class="err">‹</span><span class="n">comm_ring</span> <span class="n">α</span><span class="err">›</span> <span class="o">}</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">hr</span> <span class="o">:</span> <span class="n">is_local_ring</span> <span class="n">R</span><span class="o">)</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="n">rfl</span> <span class="o">:</span> <span class="bp">_</span><span class="n">inst_1</span> <span class="bp">=</span> <span class="bp">@</span><span class="n">nonzero_comm_ring</span><span class="bp">.</span><span class="n">to_comm_ring</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">R</span>
+    <span class="o">(</span><span class="bp">@</span><span class="n">local_ring</span><span class="bp">.</span><span class="n">to_nonzero_comm_ring</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">R</span> <span class="o">(</span><span class="bp">@</span><span class="n">local_of_is_local_ring</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">R</span> <span class="bp">_</span><span class="n">inst_1</span> <span class="n">hr</span><span class="o">)))</span>
+</pre></div>
+
+<a name="183833878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20ring%20diamond%3F/near/183833878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97591localringdiamond.html#183833878">Kenny Lau (Dec 19 2019 at 10:39)</a>:</h4>
+<p>the <code>rfl</code> errors because <code>local_of_is_local_ring</code> eta-expands <code>_inst_1</code></p>
+
+<a name="183833892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20ring%20diamond%3F/near/183833892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97591localringdiamond.html#183833892">Kenny Lau (Dec 19 2019 at 10:39)</a>:</h4>
+<p>which is necessary because <code>nonzero_comm_ring</code> uses <code>old_structure_cmd</code></p>
+
+<a name="183833902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20ring%20diamond%3F/near/183833902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97591localringdiamond.html#183833902">Kenny Lau (Dec 19 2019 at 10:40)</a>:</h4>
+<p>so <code>nonzero_comm_ring.mk</code> takes in all the parameters of <code>comm_ring</code> instead of just one parameter for <code>comm_ring</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
