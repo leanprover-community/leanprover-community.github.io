@@ -16,6 +16,20 @@ permalink: archive/113489newmembers/25956mod2problem.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mod%202%20problem/near/183808418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25956mod2problem.html#183808418">Lucas Allen (Dec 19 2019 at 01:38)</a>:</h4>
 <p>Hi, I want to show that  <code>¬(2 ^ k * a + b) % 2 = 0</code>, given the hypotheses <code>h₀ : 1 ≤ k</code> and <code>¬b % 2 = 0</code> or <code>b % 2 = 1</code>. I looked a little in mathlib and tried <code>library_search</code> with no luck. How might I prove this?</p>
 
+<a name="183809705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/mod%202%20problem/near/183809705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/25956mod2problem.html#183809705">Alex J. Best (Dec 19 2019 at 02:05)</a>:</h4>
+<p>There are some useful lemmas in data.nat.parity so if you import data.nat.parity you can do</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">nat</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">k</span> <span class="n">a</span>  <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h₀</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">≤</span> <span class="n">k</span><span class="o">)</span> <span class="o">(</span> <span class="n">hh</span> <span class="o">:</span> <span class="n">b</span> <span class="err">%</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">((</span><span class="mi">2</span> <span class="err">^</span> <span class="n">k</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="err">%</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">rw</span> <span class="err">←</span> <span class="n">not_even_iff</span> <span class="n">at</span> <span class="n">hh</span><span class="o">,</span>
+<span class="n">rw</span> <span class="err">←</span> <span class="n">even_iff</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+<span class="n">simp</span> <span class="o">[</span><span class="n">hh</span><span class="o">]</span> <span class="k">with</span> <span class="n">parity_simps</span><span class="o">,</span>
+<span class="n">exact</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="o">(</span><span class="n">ne</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">ne_of_lt</span> <span class="n">h₀</span><span class="o">)),</span>
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
 
