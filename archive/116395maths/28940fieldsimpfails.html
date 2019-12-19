@@ -1,0 +1,42 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/28940fieldsimpfails.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/28940fieldsimpfails.html">field_simp fails</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="183890772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/field_simp%20fails/near/183890772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/28940fieldsimpfails.html#183890772">Yury G. Kudryashov (Dec 19 2019 at 22:14)</a>:</h4>
+<p>Hi, <code>field_simp</code> fails to simplify <code>y = (y - x) / (z - x) * z + (1 - (y - x) / (z - x)) * x</code>. It gives <code>y = (y + -x) * z / (z + -x) + (1 + (x + -y) / (z + -x)) * x</code>. It seems that it lacks <code>a + b / c = (a * c + b) / c</code> rule.</p>
+
+<a name="183891060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/field_simp%20fails/near/183891060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/28940fieldsimpfails.html#183891060">Yury G. Kudryashov (Dec 19 2019 at 22:18)</a>:</h4>
+<p>Sorry, adding <code>h : z + -x ≠ 0</code> did the trick (didn't work with <code>z - x ≠ 0</code>).</p>
+
+<a name="183891324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/field_simp%20fails/near/183891324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/28940fieldsimpfails.html#183891324">Kevin Buzzard (Dec 19 2019 at 22:22)</a>:</h4>
+<p>aah, the dreaded <code>sub_eq_add_neg</code> strikes again!</p>
+
+<a name="183891451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/field_simp%20fails/near/183891451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/28940fieldsimpfails.html#183891451">Yury G. Kudryashov (Dec 19 2019 at 22:24)</a>:</h4>
+<p>Possibly <code>field_simp</code> should (partially) simplify its arguments first.</p>
+
+<a name="183891480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/field_simp%20fails/near/183891480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/28940fieldsimpfails.html#183891480">Yury G. Kudryashov (Dec 19 2019 at 22:24)</a>:</h4>
+<p>Without <code>sub_eq_add_neg</code> we would need separate lemmas for <code>a - b / c</code> etc.</p>
+
+<a name="183891501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/field_simp%20fails/near/183891501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/28940fieldsimpfails.html#183891501">Kevin Buzzard (Dec 19 2019 at 22:25)</a>:</h4>
+<p>Yes, it is somehow a necessary evil sometimes</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

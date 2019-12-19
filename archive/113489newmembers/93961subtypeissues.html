@@ -46,6 +46,269 @@ If I understand correctly the issue stems from the fact that <code>⟨a_val, a_p
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183889049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183889049">Kevin Buzzard (Dec 19 2019 at 21:54)</a>:</h4>
 <p>I guess you could do <code>unfold zero at h</code> to find out what's going on. Does <code>cases h</code> help?</p>
 
+<a name="183889503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183889503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183889503">Adam Topaz (Dec 19 2019 at 22:00)</a>:</h4>
+<p>Sure! I'm playing around trying to define the typeclass of multiplicative subgroups of a field, and define a group instance given something in that typeclass.<br>
+The code is below. <br>
+<code>unfold zero at h</code> doesn't work, and <code>cases h</code> doesn't work either...</p>
+<p>While I'm at it, it's unclear to me why <code>tactic.unfreeze_local_instances</code> is needed. I just followed lean's suggestion here as the first step...<br>
+Also, I suppose there is a much more efficient way to go about doing this, so please forgive my naivety -- I'm still very much a beginner at this.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">subring</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">F</span><span class="o">]</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">F</span><span class="o">)</span>
+
+<span class="n">class</span> <span class="n">is_mult_subgroup</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">mul_closed</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">F</span><span class="o">},</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">S</span> <span class="bp">→</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">S</span> <span class="bp">→</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">S</span><span class="o">)</span>
+<span class="o">(</span><span class="n">one_mem</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">F</span><span class="o">)</span> <span class="err">∈</span> <span class="n">S</span><span class="o">)</span>
+<span class="o">(</span><span class="n">inv_mem</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">F</span><span class="o">},</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">S</span> <span class="bp">→</span> <span class="n">x</span><span class="bp">⁻¹</span> <span class="err">∈</span> <span class="n">S</span><span class="o">)</span>
+<span class="o">(</span><span class="n">zero_nmem</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">F</span><span class="o">)</span> <span class="err">∉</span> <span class="n">S</span><span class="o">)</span>
+
+
+<span class="kn">instance</span> <span class="n">is_mult_subgroup</span><span class="bp">.</span><span class="n">group</span> <span class="o">[</span><span class="n">ms</span> <span class="o">:</span> <span class="n">is_mult_subgroup</span> <span class="n">S</span><span class="o">]</span> <span class="o">:</span> <span class="n">group</span> <span class="n">S</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">tactic</span><span class="bp">.</span><span class="n">unfreeze_local_instances</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">ms</span><span class="o">,</span>
+<span class="n">split</span><span class="o">,</span>
+<span class="n">intro</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">a</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">division_ring</span><span class="bp">.</span><span class="n">inv_mul_cancel</span><span class="o">,</span>
+<span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="183889967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183889967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183889967">Kevin Buzzard (Dec 19 2019 at 22:04)</a>:</h4>
+<p>You're constructing data so you don't really want to be using tactic mode. You probably want to be doing something like this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">is_mult_subgroup</span><span class="bp">.</span><span class="n">group</span> <span class="o">[</span><span class="n">ms</span> <span class="o">:</span> <span class="n">is_mult_subgroup</span> <span class="n">S</span><span class="o">]</span> <span class="o">:</span> <span class="n">group</span> <span class="n">S</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">mul</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">mul_assoc</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">one</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">one_mul</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">mul_one</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">inv</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">mul_left_inv</span> <span class="o">:=</span> <span class="bp">_</span> <span class="o">}</span>
+</pre></div>
+
+<a name="183890134"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183890134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183890134">Kevin Buzzard (Dec 19 2019 at 22:06)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">is_mult_subgroup</span><span class="bp">.</span><span class="n">group</span> <span class="o">[</span><span class="n">is_mult_subgroup</span> <span class="n">S</span><span class="o">]</span> <span class="o">:</span> <span class="n">group</span> <span class="n">S</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">mul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">y</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">mul_closed</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span> <span class="n">y</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">mul_assoc</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">one</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">one_mul</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">mul_one</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">inv</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">mul_left_inv</span> <span class="o">:=</span> <span class="bp">_</span> <span class="o">}</span>
+</pre></div>
+
+<a name="183890730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183890730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183890730">Adam Topaz (Dec 19 2019 at 22:14)</a>:</h4>
+<p>I agree... But suppose I want to do the following:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo</span> <span class="o">:=</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">F</span> <span class="bp">//</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">S</span><span class="o">}</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">foo</span> <span class="n">S</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">x</span><span class="bp">.</span><span class="n">val</span> <span class="bp">=</span> <span class="n">y</span><span class="bp">.</span><span class="n">val</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>Wouldn't similar issues pop up here?</p>
+
+<a name="183890749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183890749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183890749">Kevin Buzzard (Dec 19 2019 at 22:14)</a>:</h4>
+<p>That's <code>subtype.ext.2</code></p>
+
+<a name="183890763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183890763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183890763">Kevin Buzzard (Dec 19 2019 at 22:14)</a>:</h4>
+<p>no, it's <code>subtype.ext.1</code></p>
+
+<a name="183890773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183890773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183890773">Kevin Buzzard (Dec 19 2019 at 22:14)</a>:</h4>
+<p>but I agree that this is trivial. Cases on x and y should do this.</p>
+
+<a name="183890908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183890908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183890908">Kevin Buzzard (Dec 19 2019 at 22:16)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">foo</span> <span class="n">S</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">x</span><span class="bp">.</span><span class="n">val</span> <span class="bp">=</span> <span class="n">y</span><span class="bp">.</span><span class="n">val</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">h</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="183890950"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183890950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183890950">Kevin Buzzard (Dec 19 2019 at 22:17)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo</span> <span class="o">:=</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">F</span> <span class="bp">//</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">S</span><span class="o">}</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">foo</span> <span class="n">S</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">x</span><span class="bp">.</span><span class="n">val</span> <span class="bp">=</span> <span class="n">y</span><span class="bp">.</span><span class="n">val</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">exact</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">ext</span><span class="bp">.</span><span class="mi">1</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="183891102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183891102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183891102">Kevin Buzzard (Dec 19 2019 at 22:19)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">foo</span> <span class="n">S</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">x</span><span class="bp">.</span><span class="n">val</span> <span class="bp">=</span> <span class="n">y</span><span class="bp">.</span><span class="n">val</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">cases</span> <span class="n">x</span><span class="bp">;</span> <span class="n">cases</span> <span class="n">y</span><span class="bp">;</span> <span class="n">simp</span>
+</pre></div>
+
+<a name="183891234"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183891234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183891234">Kevin Buzzard (Dec 19 2019 at 22:21)</a>:</h4>
+<p>But this is a different question to your earlier question, because <code>x</code> is not definitionally equal to <code>⟨x.1, x.2⟩</code></p>
+
+<a name="183891256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183891256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183891256">Kevin Buzzard (Dec 19 2019 at 22:21)</a>:</h4>
+<p>They're equal because of a theorem.</p>
+
+<a name="183891393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183891393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183891393">Adam Topaz (Dec 19 2019 at 22:23)</a>:</h4>
+<p>Right... I'm trying to concoct a similar example to illustrate the coercion issue using <code>has_zero</code>.</p>
+
+<a name="183891474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183891474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183891474">Kevin Buzzard (Dec 19 2019 at 22:24)</a>:</h4>
+<p>With your has_zero example you didn't have <code>x</code> and <code>x.val</code>, you had <code>&lt;a_val,a_property&gt;</code> and <code>a_val</code> which is different</p>
+
+<a name="183891542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183891542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183891542">Kevin Buzzard (Dec 19 2019 at 22:25)</a>:</h4>
+<p>If you have x you can rewrite with it</p>
+
+<a name="183891693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183891693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183891693">Adam Topaz (Dec 19 2019 at 22:27)</a>:</h4>
+<p>Suppose I have <code>foo = { x : F // x \in S }</code> and an assumption <code>h : (0 : F) \in S</code> which can then be used to create an instance of <code>has_zero</code> for <code>foo</code> as <code>(0 : foo) := &lt; (0 : F), h &gt;</code>, I should then be able to prove <code>example (x : foo) : (x = 0) \to x.val = 0</code>. Wouldn't this cause similar issues?</p>
+
+<a name="183891831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183891831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183891831">Kevin Buzzard (Dec 19 2019 at 22:29)</a>:</h4>
+<p>Again this is just <code>subtype.ext.1</code></p>
+
+<a name="183891852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183891852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183891852">Kevin Buzzard (Dec 19 2019 at 22:29)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">F</span><span class="o">]</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">F</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">foo</span> <span class="o">:=</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">F</span> <span class="bp">//</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">S</span><span class="o">}</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">F</span><span class="o">)</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">S</span><span class="o">)</span> <span class="o">(</span><span class="n">hy</span> <span class="o">:</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">S</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="bp">⟨</span><span class="n">x</span><span class="o">,</span><span class="n">hx</span><span class="bp">⟩</span> <span class="o">:</span> <span class="n">foo</span> <span class="n">S</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span><span class="n">hy</span><span class="bp">⟩</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">exact</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">ext</span><span class="bp">.</span><span class="mi">1</span> <span class="n">h</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="183891949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183891949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183891949">Kevin Buzzard (Dec 19 2019 at 22:30)</a>:</h4>
+<p>which boils down to <code>congr_arg</code></p>
+
+<a name="183892063"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183892063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183892063">Kevin Buzzard (Dec 19 2019 at 22:32)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">F</span><span class="o">)</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">S</span><span class="o">)</span> <span class="o">(</span><span class="n">hy</span> <span class="o">:</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">S</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="bp">⟨</span><span class="n">x</span><span class="o">,</span><span class="n">hx</span><span class="bp">⟩</span> <span class="o">:</span> <span class="n">foo</span> <span class="n">S</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span><span class="n">hy</span><span class="bp">⟩</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+ <span class="n">congr_arg</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">val</span> <span class="n">h</span>
+</pre></div>
+
+<a name="183892364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183892364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183892364">Kevin Buzzard (Dec 19 2019 at 22:37)</a>:</h4>
+<p>I agree that somehow it looks like it should be "more tautological". I guess a simpler example would just be products. If <code>(x1,y1)=(x2,y2)</code> then why does <code>x1=x2</code>? This feels like it should be true by definition but somehow the proof relies on a case analysis, you do need to apply the recursor, which is an axiom.</p>
+
+<a name="183892447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183892447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183892447">Kevin Buzzard (Dec 19 2019 at 22:38)</a>:</h4>
+<p><code>congr_arg</code> is the same, it looks like it should be true by definition but the proof involves induction on <code>=</code></p>
+
+<a name="183892472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183892472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183892472">Kevin Buzzard (Dec 19 2019 at 22:38)</a>:</h4>
+<p>For stuff like this it's all just beyond my comprehension in some sense; this is foundational sludge and you just learn your way around it.</p>
+
+<a name="183892594"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183892594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183892594">Adam Topaz (Dec 19 2019 at 22:40)</a>:</h4>
+<p>Yes, I completely understand now. </p>
+<p>Perhaps a more general (but related) question is the following: If <code>T</code> is a structure type, for example of the following form:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">T</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">t1</span> <span class="o">:</span> <span class="n">T1</span><span class="o">)</span>
+<span class="o">(</span><span class="n">t2</span> <span class="o">:</span> <span class="n">T2</span><span class="o">)</span>
+<span class="o">(</span><span class="n">t3</span> <span class="o">:</span> <span class="n">T3</span><span class="o">)</span>
+</pre></div>
+
+
+<p>And I have a hypotheses of the form</p>
+<div class="codehilite"><pre><span></span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">T</span>
+<span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span>
+</pre></div>
+
+
+<p>Is there a tactic which automatically extracts the following?</p>
+<div class="codehilite"><pre><span></span><span class="n">h1</span> <span class="o">:</span> <span class="n">x</span><span class="bp">.</span><span class="n">t1</span> <span class="bp">=</span> <span class="n">y</span><span class="bp">.</span><span class="n">t1</span>
+<span class="n">h2</span> <span class="o">:</span> <span class="n">x</span><span class="bp">.</span><span class="n">t2</span> <span class="bp">=</span> <span class="n">y</span><span class="bp">.</span><span class="n">t2</span>
+<span class="n">h3</span> <span class="o">:</span> <span class="n">x</span><span class="bp">.</span><span class="n">t3</span> <span class="bp">=</span> <span class="n">y</span><span class="bp">.</span><span class="n">t3</span>
+</pre></div>
+
+<a name="183892703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183892703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183892703">Kevin Buzzard (Dec 19 2019 at 22:42)</a>:</h4>
+<p>All of those can be proved with <code>rw h</code></p>
+
+<a name="183892751"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183892751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183892751">Kevin Buzzard (Dec 19 2019 at 22:43)</a>:</h4>
+<p>Or by <code>congr_arg</code>.</p>
+
+<a name="183892822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183892822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183892822">Kevin Buzzard (Dec 19 2019 at 22:44)</a>:</h4>
+<p>Usually tactics prove one thing not three. The way this is dealt with usually is that this sort of thing is proved very quickly after defining the structure</p>
+
+<a name="183893198"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183893198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183893198">Kevin Buzzard (Dec 19 2019 at 22:49)</a>:</h4>
+<p>Check out the beginning of <code>data.complex.basic</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">complex</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">re</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">im</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span>
+
+<span class="kn">notation</span> <span class="bp">`</span><span class="n">ℂ</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">complex</span>
+
+<span class="kn">namespace</span> <span class="n">complex</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">eta</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">z</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">,</span> <span class="n">complex</span><span class="bp">.</span><span class="n">mk</span> <span class="n">z</span><span class="bp">.</span><span class="n">re</span> <span class="n">z</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="n">z</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kn">theorem</span> <span class="n">ext</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">z</span> <span class="n">w</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">},</span> <span class="n">z</span><span class="bp">.</span><span class="n">re</span> <span class="bp">=</span> <span class="n">w</span><span class="bp">.</span><span class="n">re</span> <span class="bp">→</span> <span class="n">z</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="n">w</span><span class="bp">.</span><span class="n">im</span> <span class="bp">→</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">w</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="n">zr</span><span class="o">,</span> <span class="n">zi</span><span class="bp">⟩</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="bp">_⟩</span> <span class="n">rfl</span> <span class="n">rfl</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kn">theorem</span> <span class="n">ext_iff</span> <span class="o">{</span><span class="n">z</span> <span class="n">w</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">}</span> <span class="o">:</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">w</span> <span class="bp">↔</span> <span class="n">z</span><span class="bp">.</span><span class="n">re</span> <span class="bp">=</span> <span class="n">w</span><span class="bp">.</span><span class="n">re</span> <span class="bp">∧</span> <span class="n">z</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="n">w</span><span class="bp">.</span><span class="n">im</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">H</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">H</span><span class="o">],</span> <span class="n">and</span><span class="bp">.</span><span class="n">rec</span> <span class="n">ext</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="183893202"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183893202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183893202">Adam Topaz (Dec 19 2019 at 22:49)</a>:</h4>
+<p>I see... I tried <code>rw h</code> in such an example with no luck, but of course congr_arg works. It might be nice to have some automation here, like how <code>cases x</code> can automatically provide</p>
+<div class="codehilite"><pre><span></span><span class="n">x_t1</span> <span class="o">:</span> <span class="n">T1</span>
+<span class="n">x_t2</span> <span class="o">:</span> <span class="n">T2</span>
+<span class="n">x_t3</span> <span class="o">:</span> <span class="n">T3</span>
+<span class="n">h</span> <span class="o">:</span> <span class="o">{</span> <span class="n">t1</span> <span class="o">:=</span> <span class="n">x_t1</span><span class="o">,</span> <span class="n">t2</span> <span class="o">:=</span> <span class="n">x_t2</span><span class="o">,</span> <span class="n">t3</span> <span class="o">:=</span> <span class="n">x_t3</span> <span class="o">}</span> <span class="bp">=</span> <span class="n">y</span>
+</pre></div>
+
+<a name="183893286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183893286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183893286">Kevin Buzzard (Dec 19 2019 at 22:50)</a>:</h4>
+<p>It's difficult to know exactly what you want.</p>
+
+<a name="183893313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183893313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183893313">Kevin Buzzard (Dec 19 2019 at 22:50)</a>:</h4>
+<p>There are several similar fiddly things. If you're making your own structure it's your job to make a good interface to it.</p>
+
+<a name="183893366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183893366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183893366">Adam Topaz (Dec 19 2019 at 22:51)</a>:</h4>
+<p>Gotcha! Thanks very much for the help! I'll keep playing around :)</p>
+
+<a name="183893388"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183893388" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183893388">Kevin Buzzard (Dec 19 2019 at 22:51)</a>:</h4>
+<p>Note the first three theorems of <code>data.complex.basic</code> -- all completely trivial but you need them a lot.</p>
+
+<a name="183893445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183893445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183893445">Kevin Buzzard (Dec 19 2019 at 22:52)</a>:</h4>
+<p>When I was learning this stuff, making the complex numbers taught me a lot.</p>
+
+<a name="183893463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183893463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183893463">Kevin Buzzard (Dec 19 2019 at 22:52)</a>:</h4>
+<p>I might have some teaching materials about this stuff lying around somewhere...</p>
+
+<a name="183893503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183893503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183893503">Kevin Buzzard (Dec 19 2019 at 22:53)</a>:</h4>
+<p><a href="https://github.com/kbuzzard/xena/blob/master/lean_together/complex.lean" target="_blank" title="https://github.com/kbuzzard/xena/blob/master/lean_together/complex.lean">https://github.com/kbuzzard/xena/blob/master/lean_together/complex.lean</a></p>
+
+<a name="183893616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183893616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183893616">Kevin Buzzard (Dec 19 2019 at 22:55)</a>:</h4>
+<p>My definition of <code>conj</code> in that file is bad, I think: it should send z to <code>\&lt;z.1,-z.2\&gt;</code></p>
+
+<a name="183893630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20issues/near/183893630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93961subtypeissues.html#183893630">Kevin Buzzard (Dec 19 2019 at 22:55)</a>:</h4>
+<p>Slightly different but probably easier to use.</p>
+
 
 {% endraw %}
 
