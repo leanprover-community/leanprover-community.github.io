@@ -1,0 +1,38 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/81261DTT.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/81261DTT.html">DTT</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="183970542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/DTT/near/183970542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81261DTT.html#183970542">Sebastien Gouezel (Dec 20 2019 at 20:34)</a>:</h4>
+<p>Trying my hands on multilinear forms with dependent types, as <span class="user-mention" data-user-id="210574">@Patrick Massot</span> asked when reviewing <a href="https://github.com/leanprover-community/mathlib/issues/1814" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1814">#1814</a>. Very quickly, I run into issues such as the following one.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">open</span> <span class="n">function</span> <span class="n">fin</span> <span class="n">set</span>
+<span class="c">/-</span><span class="cm">- Embedding a type `α` in a type `β`, covering all of `β` but one element `i` called the hole. -/</span>
+<span class="kn">structure</span> <span class="n">embed_but_one</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">to_fun</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+<span class="o">(</span><span class="n">inj_to_fun</span> <span class="o">:</span> <span class="n">injective</span> <span class="n">to_fun</span><span class="o">)</span>
+<span class="o">(</span><span class="n">hole</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span>
+<span class="o">(</span><span class="n">range</span> <span class="o">:</span> <span class="n">range</span> <span class="n">to_fun</span> <span class="bp">=</span> <span class="n">univ</span> <span class="bp">-</span> <span class="o">{</span><span class="n">hole</span><span class="o">})</span>
+
+<span class="n">def</span> <span class="n">cons</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">}</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">embed_but_one</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">Π</span><span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">γ</span> <span class="o">(</span><span class="n">e</span> <span class="n">a</span><span class="o">))</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">γ</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="n">hole</span><span class="o">))</span> <span class="o">:</span> <span class="bp">Π</span><span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">),</span> <span class="n">γ</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="bp">λ</span><span class="n">b</span><span class="o">,</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>I have an injective map from <code>α</code> to <code>β</code> whose range is everything but a hole. I want to glue together a map on <code>α</code> and a value on the hole, to get a map on <code>β</code>. If my target is a single type, this is easy to do. But if it goes in a dependent type, then one needs to convince at every step Lean that one is in the right type, using casts all over the place. Is there a nice way to do this, or should I just drop dependent types because usually multilinear maps are defined on <code>n</code> copies of the same space?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
