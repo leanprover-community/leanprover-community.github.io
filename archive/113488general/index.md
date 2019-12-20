@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Reusing `finset.prod` facts for lists](93009Reusingfinsetprodfactsforlists.html) (3 messages, latest: Dec 20 2019 at 13:28)
+
 * [type checker plug and play](43449typecheckerplugandplay.html) (27 messages, latest: Dec 20 2019 at 12:24)
 
 * [see Note \[default priority\]](84243seeNotedefaultpriority.html) (6 messages, latest: Dec 19 2019 at 20:11)
