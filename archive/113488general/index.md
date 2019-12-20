@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [markdown module docstrings](07338markdownmoduledocstrings.html) (247 messages, latest: Dec 20 2019 at 16:44)
+* [Reusing `finset.prod` facts for lists](93009Reusingfinsetprodfactsforlists.html) (10 messages, latest: Dec 20 2019 at 17:39)
 
-* [Reusing `finset.prod` facts for lists](93009Reusingfinsetprodfactsforlists.html) (8 messages, latest: Dec 20 2019 at 16:42)
+* [markdown module docstrings](07338markdownmoduledocstrings.html) (247 messages, latest: Dec 20 2019 at 16:44)
 
 * [type checker plug and play](43449typecheckerplugandplay.html) (27 messages, latest: Dec 20 2019 at 12:24)
 
