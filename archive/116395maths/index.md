@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [bundling submonoids](35255bundlingsubmonoids.html) (28 messages, latest: Dec 20 2019 at 18:39)
+
 * [field_simp fails](28940fieldsimpfails.html) (6 messages, latest: Dec 19 2019 at 22:25)
 
 * [Is there code for X already somewhere?](81055IstherecodeforXalreadysomewhere.html) (33 messages, latest: Dec 19 2019 at 18:57)
@@ -146,8 +148,6 @@ permalink: archive/116395maths/index.html
 * [algebra.comap](53517algebracomap.html) (13 messages, latest: Oct 28 2019 at 06:59)
 
 * [Single Axiom for Groups](50248SingleAxiomforGroups.html) (15 messages, latest: Oct 28 2019 at 00:45)
-
-* [bundling submonoids](35255bundlingsubmonoids.html) (27 messages, latest: Oct 27 2019 at 21:49)
 
 * [Proof by algorithm](86601Proofbyalgorithm.html) (346 messages, latest: Oct 27 2019 at 12:08)
 
