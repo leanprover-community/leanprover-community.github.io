@@ -3,12 +3,163 @@
     <head>
         <link rel="stylesheet" href="https://leanprover-community.github.io/mathlib_docs/style_js_frame.css">
         <link rel="shortcut icon" href="https://leanprover-community.github.io/assets/img/lean.ico">
-        <title>mathlib docs: topology.whoa</title>
+        <title>mathlib docs: hole_commands</title>
         <meta charset="UTF-8">
     </head>
     <body>
-        <div class="row"><div class="column left"><div class="nav">
-<a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br><br>
+        <div class="row"><div class="column left"><div class="internal_nav">
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">hole_commands</a></h2><a href="#eqn_stub">eqn_stub</a><br>
+<a href="#instance_stub">instance_stub</a><br>
+<a href="#library_search">library_search</a><br>
+<a href="#lint">lint</a><br>
+<a href="#match_stub">match_stub</a><br>
+<a href="#tidy">tidy</a><br>
+</div></div>
+<div class="column middle"><div class="content docfile">
+<h1>Hole commands</h1>
+
+<p>Both VS Code and emacs support integration for 'hole commands'.</p>
+
+<p>In VS Code, if you enter <code>{! !}</code>, a small light bulb symbol will appear, and
+clicking on it gives a drop down menu of available hole commands. Running one
+of these will replace the <code>{! !}</code> with whatever text that hole command provides.</p>
+
+<p>In emacs, you can do something similar with <code>C-c SPC</code>.</p>
+
+<p>Many of these commands are available whenever <code>tactic.core</code> is imported.
+Commands that require additional imports are noted below.
+All should be available with <code>import tactic</code>.</p>
+<div class="tactic">
+<h2 id="eqn_stub"><a href="#eqn_stub">eqn_stub</a></h2>
+<p>Invoking hole command <code>Equations Stub</code> ("Generate a list of equations for a recursive definition") in</p>
+
+<pre><code>meta def foo : {! expr → tactic unit !} -- `:=` is omitted
+</code></pre>
+
+<p>produces:</p>
+
+<pre><code>meta def foo : expr → tactic unit
+| (expr.var a) := _
+| (expr.sort a) := _
+| (expr.const a a_1) := _
+| (expr.mvar a a_1 a_2) := _
+| (expr.local_const a a_1 a_2 a_3) := _
+| (expr.app a a_1) := _
+| (expr.lam a a_1 a_2 a_3) := _
+| (expr.pi a a_1 a_2 a_3) := _
+| (expr.elet a a_1 a_2 a_3) := _
+| (expr.macro a a_1) := _
+</code></pre>
+
+<p>A similar result can be obtained by invoking <code>Equations Stub</code> on the following:</p>
+
+<pre><code>meta def foo : expr → tactic unit := -- do not forget to write `:=`!!
+{! !}
+</code></pre>
+
+<pre><code>meta def foo : expr → tactic unit := -- don't forget to erase `:=`!!
+| (expr.var a) := _
+| (expr.sort a) := _
+| (expr.const a a_1) := _
+| (expr.mvar a a_1 a_2) := _
+| (expr.local_const a a_1 a_2 a_3) := _
+| (expr.app a a_1) := _
+| (expr.lam a a_1 a_2 a_3) := _
+| (expr.pi a a_1 a_2 a_3) := _
+| (expr.elet a a_1 a_2 a_3) := _
+| (expr.macro a a_1) := _
+</code></pre>
+</div>
+<div class="tactic">
+<h2 id="instance_stub"><a href="#instance_stub">instance_stub</a></h2>
+<p>Invoking the hole command <code>Instance Stub</code> ("Generate a skeleton for the structure under construction") on</p>
+
+<pre><code>instance : monad id :=
+{! !}
+</code></pre>
+
+<p>produces</p>
+
+<pre><code>instance : monad id :=
+{ map := _,
+  map_const := _,
+  pure := _,
+  seq := _,
+  seq_left := _,
+  seq_right := _,
+  bind := _ }
+</code></pre>
+</div>
+<div class="tactic">
+<h2 id="library_search"><a href="#library_search">library_search</a></h2>
+<p>(Requires <code>import tactic.suggest</code>.)</p>
+
+<p>Invoking the hole command <code>library_search</code> ("Use <code>library_search</code> to complete the goal") calls the tactic <code>library_search</code> to produce a proof term with the type of the hole.</p>
+
+<p>Running it on</p>
+
+<pre><code>example : 0 &lt; 1 :=
+{!!}
+</code></pre>
+
+<p>produces</p>
+
+<pre><code>example : 0 &lt; 1 :=
+nat.one_pos
+</code></pre>
+</div>
+<div class="tactic">
+<h2 id="lint"><a href="#lint">lint</a></h2>
+<p>(Requires <code>import tactic.lint</code>.)</p>
+
+<p>Invoking the hole command <code>lint</code> ("Find common mistakes in current file") will print text that
+indicates mistakes made in the file above the command. It is equivalent to copying and pasting the
+output of <code>#lint</code>. On large files, it may take some time before the output appears.</p>
+</div>
+<div class="tactic">
+<h2 id="match_stub"><a href="#match_stub">match_stub</a></h2>
+<p>invoking hole command <code>Match Stub</code> ("Generate a list of equations for a <code>match</code> expression") in</p>
+
+<pre><code>meta def foo (e : expr) : tactic unit :=
+{! e !}
+</code></pre>
+
+<p>produces:</p>
+
+<pre><code>meta def foo (e : expr) : tactic unit :=
+match e with
+| (expr.var a) := _
+| (expr.sort a) := _
+| (expr.const a a_1) := _
+| (expr.mvar a a_1 a_2) := _
+| (expr.local_const a a_1 a_2 a_3) := _
+| (expr.app a a_1) := _
+| (expr.lam a a_1 a_2 a_3) := _
+| (expr.pi a a_1 a_2 a_3) := _
+| (expr.elet a a_1 a_2 a_3) := _
+| (expr.macro a a_1) := _
+end
+</code></pre>
+</div>
+<div class="tactic">
+<h2 id="tidy"><a href="#tidy">tidy</a></h2>
+<p>(Requires <code>import tactic.tidy</code>.)</p>
+
+<p>Invoking the hole command <code>tidy</code> ("Use <code>tidy</code> to complete the goal") runs the tactic of the same name,
+replacing the hole with the tactic script <code>tidy</code> produces.</p>
+</div>
+
+</div></div>
+<div class="column right"><div class="nav">
+<div class="search">
+<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
+<div class="gcse-search"></div>
+</div>
+<a href="https://leanprover-community.github.io/mathlib_docs/">index</a><br>
+<a href="https://leanprover-community.github.io/mathlib_docs/tactics.html">tactics</a><br>
+<a href="https://leanprover-community.github.io/mathlib_docs/commands.html">commands</a><br>
+<a href="https://leanprover-community.github.io/mathlib_docs/hole_commands.html">hole commands</a><br>
+<a href="https://leanprover-community.github.io/mathlib_docs/notes.html">notes</a><br><br>
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="algebra">
 <div class="nav_sect">category</div>
@@ -107,6 +258,7 @@
 
 </div><div class="nav_sect">complex</div>
 <div class="nav_sect_inner hidden" id="analysis/complex">
+<a class="nav_file" id="analysis/complex/basic.html" href="https://leanprover-community.github.io/mathlib_docs/analysis/complex/basic.html">basic</a><br>
 <a class="nav_file" id="analysis/complex/exponential.html" href="https://leanprover-community.github.io/mathlib_docs/analysis/complex/exponential.html">exponential</a><br>
 <a class="nav_file" id="analysis/complex/polynomial.html" href="https://leanprover-community.github.io/mathlib_docs/analysis/complex/polynomial.html">polynomial</a><br>
 
@@ -631,6 +783,7 @@
 <a class="nav_file" id="data/nat/fib.html" href="https://leanprover-community.github.io/mathlib_docs/data/nat/fib.html">fib</a><br>
 <a class="nav_file" id="data/nat/gcd.html" href="https://leanprover-community.github.io/mathlib_docs/data/nat/gcd.html">gcd</a><br>
 <a class="nav_file" id="data/nat/modeq.html" href="https://leanprover-community.github.io/mathlib_docs/data/nat/modeq.html">modeq</a><br>
+<a class="nav_file" id="data/nat/multiplicity.html" href="https://leanprover-community.github.io/mathlib_docs/data/nat/multiplicity.html">multiplicity</a><br>
 <a class="nav_file" id="data/nat/pairing.html" href="https://leanprover-community.github.io/mathlib_docs/data/nat/pairing.html">pairing</a><br>
 <a class="nav_file" id="data/nat/parity.html" href="https://leanprover-community.github.io/mathlib_docs/data/nat/parity.html">parity</a><br>
 <a class="nav_file" id="data/nat/prime.html" href="https://leanprover-community.github.io/mathlib_docs/data/nat/prime.html">prime</a><br>
@@ -699,13 +852,18 @@
 
 </div><div class="nav_sect">set</div>
 <div class="nav_sect_inner hidden" id="data/set">
-<a class="nav_file" id="data/set/basic.html" href="https://leanprover-community.github.io/mathlib_docs/data/set/basic.html">basic</a><br>
+<div class="nav_sect">intervals</div>
+<div class="nav_sect_inner hidden" id="data/set/intervals">
+<a class="nav_file" id="data/set/intervals/basic.html" href="https://leanprover-community.github.io/mathlib_docs/data/set/intervals/basic.html">basic</a><br>
+<a class="nav_file" id="data/set/intervals/disjoint.html" href="https://leanprover-community.github.io/mathlib_docs/data/set/intervals/disjoint.html">disjoint</a><br>
+
+
+</div><a class="nav_file" id="data/set/basic.html" href="https://leanprover-community.github.io/mathlib_docs/data/set/basic.html">basic</a><br>
 <a class="nav_file" id="data/set/countable.html" href="https://leanprover-community.github.io/mathlib_docs/data/set/countable.html">countable</a><br>
 <a class="nav_file" id="data/set/disjointed.html" href="https://leanprover-community.github.io/mathlib_docs/data/set/disjointed.html">disjointed</a><br>
 <a class="nav_file" id="data/set/enumerate.html" href="https://leanprover-community.github.io/mathlib_docs/data/set/enumerate.html">enumerate</a><br>
 <a class="nav_file" id="data/set/finite.html" href="https://leanprover-community.github.io/mathlib_docs/data/set/finite.html">finite</a><br>
 <a class="nav_file" id="data/set/function.html" href="https://leanprover-community.github.io/mathlib_docs/data/set/function.html">function</a><br>
-<a class="nav_file" id="data/set/intervals.html" href="https://leanprover-community.github.io/mathlib_docs/data/set/intervals.html">intervals</a><br>
 <a class="nav_file" id="data/set/lattice.html" href="https://leanprover-community.github.io/mathlib_docs/data/set/lattice.html">lattice</a><br>
 
 
@@ -1010,6 +1168,7 @@
 <a class="nav_file" id="tactic/finish.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/finish.html">finish</a><br>
 <a class="nav_file" id="tactic/generalize_proofs.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/generalize_proofs.html">generalize_proofs</a><br>
 <a class="nav_file" id="tactic/interactive.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/interactive.html">interactive</a><br>
+<a class="nav_file" id="tactic/library_note.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/library_note.html">library_note</a><br>
 <a class="nav_file" id="tactic/lift.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/lift.html">lift</a><br>
 <a class="nav_file" id="tactic/linarith.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/linarith.html">linarith</a><br>
 <a class="nav_file" id="tactic/lint.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/lint.html">lint</a><br>
@@ -1027,6 +1186,7 @@
 <a class="nav_file" id="tactic/rewrite.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/rewrite.html">rewrite</a><br>
 <a class="nav_file" id="tactic/ring.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring.html">ring</a><br>
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
+<a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
@@ -1047,7 +1207,7 @@
 
 
 </div><div class="nav_sect">topology</div>
-<div class="nav_sect_inner" id="topology">
+<div class="nav_sect_inner hidden" id="topology">
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="topology/algebra">
 <a class="nav_file" id="topology/algebra/continuous_functions.html" href="https://leanprover-community.github.io/mathlib_docs/topology/algebra/continuous_functions.html">continuous_functions</a><br>
@@ -1095,6 +1255,7 @@
 <a class="nav_file" id="topology/metric_space/cau_seq_filter.html" href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/cau_seq_filter.html">cau_seq_filter</a><br>
 <a class="nav_file" id="topology/metric_space/closeds.html" href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/closeds.html">closeds</a><br>
 <a class="nav_file" id="topology/metric_space/completion.html" href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/completion.html">completion</a><br>
+<a class="nav_file" id="topology/metric_space/contracting.html" href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html">contracting</a><br>
 <a class="nav_file" id="topology/metric_space/emetric_space.html" href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/emetric_space.html">emetric_space</a><br>
 <a class="nav_file" id="topology/metric_space/gluing.html" href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/gluing.html">gluing</a><br>
 <a class="nav_file" id="topology/metric_space/gromov_hausdorff.html" href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/gromov_hausdorff.html">gromov_hausdorff</a><br>
@@ -1144,75 +1305,10 @@
 <a class="nav_file" id="topology/stone_cech.html" href="https://leanprover-community.github.io/mathlib_docs/topology/stone_cech.html">stone_cech</a><br>
 <a class="nav_file" id="topology/subset_properties.html" href="https://leanprover-community.github.io/mathlib_docs/topology/subset_properties.html">subset_properties</a><br>
 <a class="nav_file" id="topology/topological_fiber_bundle.html" href="https://leanprover-community.github.io/mathlib_docs/topology/topological_fiber_bundle.html">topological_fiber_bundle</a><br>
-<a class="nav_file visible" id="topology/whoa.html" href="https://leanprover-community.github.io/mathlib_docs/topology/whoa.html">whoa</a><br>
 
 
 </div>
 
-</div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="mod_doc">
-<h1>Whoa!</h1>
-
-<p>This file has an upper level module doc and</p>
-
-<pre><code>def code_snippets : Type :=
-ℕ
-</code></pre>
-
-<h2>And an h2 here</h2>
-
-<p>For testing purposes.</p>
-</div><div class="def"><a id="bignum"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/3f9c4d886493afe2dbaada17d25e486b1872e047/src/topology/whoa.lean#L17">bignum</a></span>  <span class="decl_args">:</span>       <div class="decl_type">ℕ</div>
-<p>this is a really important number</p>
-       <ul>
-
-
-
-
-</ul></div><div class="mod_doc">
-<h3>A section developing the theory of <code>g</code>.</h3>
-</div><div class="thm"><a id="important"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/3f9c4d886493afe2dbaada17d25e486b1872e047/src/topology/whoa.lean#L25">important</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/whoa.html#bignum">bignum</a> = 2</div>
-<p><code>bignum</code> is so important</p>
-       <ul>
-
-
-
-
-</ul></div><div class="thm"><a id="also_important"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/3f9c4d886493afe2dbaada17d25e486b1872e047/src/topology/whoa.lean#L27">also_important</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/whoa.html#bignum">bignum</a> > 1</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="mod_doc">
-<h3>A section on other things</h3>
-</div><div class="def"><a id="otherval"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/3f9c4d886493afe2dbaada17d25e486b1872e047/src/topology/whoa.lean#L33">otherval</a></span>  <span class="decl_args">:</span>       <div class="decl_type">ℕ</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="and_another"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/3f9c4d886493afe2dbaada17d25e486b1872e047/src/topology/whoa.lean#L35">and_another</a></span>  <span class="decl_args">:</span>       <div class="decl_type">ℕ → ℕ</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div>
-</div></div>
-<div class="column right"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
-<script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
-<div class="gcse-search"></div>
-</div><h2><a href="#top">whoa</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/3f9c4d886493afe2dbaada17d25e486b1872e047/src/topology/whoa.lean">(view source on GitHub)</a></div><a href="#also_important">also_important</a><br>
-<a href="#and_another">and_another</a><br>
-<a href="#bignum">bignum</a><br>
-<a href="#important">important</a><br>
-<a href="#otherval">otherval</a><br>
 </div></div>
 
         </div>

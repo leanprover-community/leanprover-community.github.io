@@ -3,45 +3,1420 @@
     <head>
         <link rel="stylesheet" href="https://leanprover-community.github.io/mathlib_docs/style_js_frame.css">
         <link rel="shortcut icon" href="https://leanprover-community.github.io/assets/img/lean.ico">
-        <title>mathlib docs: core.init.meta.rec_util</title>
+        <title>mathlib docs: tactics</title>
         <meta charset="UTF-8">
     </head>
     <body>
         <div class="row"><div class="column left"><div class="internal_nav">
-<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">core.init.meta.rec_util</a></h2><div class="gh_nav_link"><a href="https://github.com/leanprover-community/lean/blob/5fe582789fb6fbc6bb006def79e087fefee6384e/library/init/meta/rec_util.lean">View source</a></div><a href="#tactic.constructor_num_fields">tactic.constructor_num_fields</a><br>
-<a href="#tactic.is_type_app_of">tactic.is_type_app_of</a><br>
-<a href="#tactic.mk_brec_on_rec_value">tactic.mk_brec_on_rec_value</a><br>
-<a href="#tactic.mk_constructor_arg_names">tactic.mk_constructor_arg_names</a><br>
-<a href="#tactic.mk_constructor_fresh_names">tactic.mk_constructor_fresh_names</a><br>
-<a href="#tactic.mk_constructors_arg_names">tactic.mk_constructors_arg_names</a><br>
-<a href="#tactic.mk_constructors_fresh_names">tactic.mk_constructors_fresh_names</a><br>
+<h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">tactics</a></h2><a href="#abel">abel</a><br>
+<a href="#ac_mono">ac_mono</a><br>
+<a href="#apply_fun">apply_fun</a><br>
+<a href="#apply_rules">apply_rules</a><br>
+<a href="#assoc_rewrite">assoc_rewrite</a><br>
+<a href="#choose">choose</a><br>
+<a href="#clear_aux_decl">clear_aux_decl</a><br>
+<a href="#congr'">congr'</a><br>
+<a href="#congruence closure (cc)">congruence closure (cc)</a><br>
+<a href="#contrapose">contrapose</a><br>
+<a href="#conv">conv</a><br>
+<a href="#convert">convert</a><br>
+<a href="#convert_to">convert_to</a><br>
+<a href="#def_replacer">def_replacer</a><br>
+<a href="#default_dec_tac'">default_dec_tac'</a><br>
+<a href="#elide/unelide">elide/unelide</a><br>
+<a href="#ext1 / ext">ext1 / ext</a><br>
+<a href="#field_simp">field_simp</a><br>
+<a href="#fin_cases">fin_cases</a><br>
+<a href="#finish/clarify/safe">finish/clarify/safe</a><br>
+<a href="#h_generalize">h_generalize</a><br>
+<a href="#import_private">import_private</a><br>
+<a href="#Instance cache tactics">Instance cache tactics</a><br>
+<a href="#library_search">library_search</a><br>
+<a href="#lift">lift</a><br>
+<a href="#linarith">linarith</a><br>
+<a href="#mono">mono</a><br>
+<a href="#norm_cast">norm_cast</a><br>
+<a href="#norm_num">norm_num</a><br>
+<a href="#obtain">obtain</a><br>
+<a href="#omega">omega</a><br>
+<a href="#pi_instance">pi_instance</a><br>
+<a href="#push_neg">push_neg</a><br>
+<a href="#rcases">rcases</a><br>
+<a href="#refine_struct">refine_struct</a><br>
+<a href="#replace">replace</a><br>
+<a href="#restate_axiom">restate_axiom</a><br>
+<a href="#ring">ring</a><br>
+<a href="#ring_exp">ring_exp</a><br>
+<a href="#rintro">rintro</a><br>
+<a href="#rotate">rotate</a><br>
+<a href="#set">set</a><br>
+<a href="#simpa">simpa</a><br>
+<a href="#solve_by_elim">solve_by_elim</a><br>
+<a href="#squeeze_simp / squeeze_simpa">squeeze_simp / squeeze_simpa</a><br>
+<a href="#suggest">suggest</a><br>
+<a href="#swap">swap</a><br>
+<a href="#tfae">tfae</a><br>
+<a href="#The `ext` attribute">The `ext` attribute</a><br>
+<a href="#The `reassoc` attribute">The `reassoc` attribute</a><br>
+<a href="#The reassoc_of function">The reassoc_of function</a><br>
+<a href="#tidy">tidy</a><br>
+<a href="#unfold_coes">unfold_coes</a><br>
+<a href="#use">use</a><br>
 </div></div>
-<div class="column middle"><div class="content">
-<a id="top"></a><div class="decl def" id="tactic.is_type_app_of"><div class="gh_link"><a href="https://github.com/leanprover-community/lean/blob/5fe582789fb6fbc6bb006def79e087fefee6384e/library/init/meta/rec_util.lean#L15">view source</a></div>      <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/rec_util.html#tactic.is_type_app_of">tactic.is_type_app_of</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#bool">bool</a></div></div>
-   <p>Return tt iff e's type is of the form <code>(I_name ...)</code></p>
-  </ul></div><div class="decl def" id="tactic.mk_brec_on_rec_value"><div class="gh_link"><a href="https://github.com/leanprover-community/lean/blob/5fe582789fb6fbc6bb006def79e087fefee6384e/library/init/meta/rec_util.lean#L31">view source</a></div>      <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/rec_util.html#tactic.mk_brec_on_rec_value">tactic.mk_brec_on_rec_value</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/expr.html#expr">expr</a></div></div>
-   <p>Construct brec_on "recursive value". F_name is the name of the brec_on "dictionary".
-  Type of the F_name hypothesis should be of the form (below (C ...)) where C is a constructor.
-  The result is the "recursive value" for the (i+1)-th recursive value of the constructor C.</p>
-  </ul></div><div class="decl def" id="tactic.constructor_num_fields"><div class="gh_link"><a href="https://github.com/leanprover-community/lean/blob/5fe582789fb6fbc6bb006def79e087fefee6384e/library/init/meta/rec_util.lean#L35">view source</a></div>      <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/rec_util.html#tactic.constructor_num_fields">tactic.constructor_num_fields</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a></div></div>
-   <p></p>
-  </ul></div><div class="decl def" id="tactic.mk_constructor_arg_names"><div class="gh_link"><a href="https://github.com/leanprover-community/lean/blob/5fe582789fb6fbc6bb006def79e087fefee6384e/library/init/meta/rec_util.lean#L53">view source</a></div>      <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/rec_util.html#tactic.mk_constructor_arg_names">tactic.mk_constructor_arg_names</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> →
-<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> →
-<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a>)</div></div>
-   <p>Return a list of names of the form [p.i, ..., p.{i+n}] where n is
-  the number of fields of the constructor c</p>
-  </ul></div><div class="decl def" id="tactic.mk_constructors_arg_names"><div class="gh_link"><a href="https://github.com/leanprover-community/lean/blob/5fe582789fb6fbc6bb006def79e087fefee6384e/library/init/meta/rec_util.lean#L65">view source</a></div>      <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/rec_util.html#tactic.mk_constructors_arg_names">tactic.mk_constructors_arg_names</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> →
-<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a>))</div></div>
-   <p>Given an inductive datatype I with k constructors and where constructor i has n_i fields,
-  return the list [[p.1, ..., p.n_1], [p.{n_1 + 1}, ..., p.{n_1 + n_2}], ..., [..., p.{n_1 + ... + n_k}]]</p>
-  </ul></div><div class="decl def" id="tactic.mk_constructor_fresh_names"><div class="gh_link"><a href="https://github.com/leanprover-community/lean/blob/5fe582789fb6fbc6bb006def79e087fefee6384e/library/init/meta/rec_util.lean#L104">view source</a></div>      <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/rec_util.html#tactic.mk_constructor_fresh_names">tactic.mk_constructor_fresh_names</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#nat" title="nat">ℕ</a> →
-<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> →
-<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/rb_map.html#name_set">name_set</a> →
-<a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#prod" title="prod">×</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/rb_map.html#name_set">name_set</a>)</div></div>
-   <p></p>
-  </ul></div><div class="decl def" id="tactic.mk_constructors_fresh_names"><div class="gh_link"><a href="https://github.com/leanprover-community/lean/blob/5fe582789fb6fbc6bb006def79e087fefee6384e/library/init/meta/rec_util.lean#L115">view source</a></div>      <div class="decl_header impl_collapsed">       <span class="decl_meta">meta</span> <span class="decl_kind">def</span>       <span class="decl_name"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/rec_util.html#tactic.mk_constructors_fresh_names">tactic.mk_constructors_fresh_names</a></span>  <span class="decl_args">:</span>     <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a> → <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/tactic.html#tactic">tactic</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#list">list</a> <a href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/name.html#name">name</a>))</div></div>
-   <p></p>
-  </ul></div>
+<div class="column middle"><div class="content docfile">
+<h1>Mathlib tactics</h1>
+
+<p>In addition to <a href="https://leanprover.github.io/reference/tactics.html">core tactics</a>,
+mathlib provides a number of specific interactive tactics.
+Here we document the mostly commonly used ones.</p>
+<div class="tactic">
+<h2 id="abel"><a href="#abel">abel</a></h2>
+<p>Evaluate expressions in the language of <em>additive</em>, commutative monoids and groups.
+It attempts to prove the goal outright if there is no <code>at</code>
+specifier and the target is an equality, but if this
+fails, it falls back to rewriting all monoid expressions into a normal form.
+If there is an <code>at</code> specifier, it rewrites the given target into a normal form.</p>
+
+<pre><code>example {α : Type*} {a b : α} [add_comm_monoid α] : a + (b + a) = a + a + b := by abel
+example {α : Type*} {a b : α} [add_comm_group α] : (a + b) - ((b + a) + a) = -a := by abel
+example {α : Type*} {a b : α} [add_comm_group α] (hyp : a + a - a = b - b) : a = 0 :=
+by { abel at hyp, exact hyp }
+</code></pre>
+</div>
+<div class="tactic">
+<h2 id="ac_mono"><a href="#ac_mono">ac_mono</a></h2>
+<p><code>ac_mono</code> reduces the <code>f x ⊑ f y</code>, for some relation <code>⊑</code> and a
+monotonic function <code>f</code> to <code>x ≺ y</code>.</p>
+
+<p><code>ac_mono*</code> unwraps monotonic functions until it can't.</p>
+
+<p><code>ac_mono^k</code>, for some literal number <code>k</code> applies monotonicity <code>k</code>
+times.</p>
+
+<p><code>ac_mono h</code>, with <code>h</code> a hypothesis, unwraps monotonic functions and
+uses <code>h</code> to solve the remaining goal. Can be combined with <code>*</code> or <code>^k</code>:
+<code>ac_mono* h</code></p>
+
+<p><code>ac_mono : p</code> asserts <code>p</code> and uses it to discharge the goal result
+unwrapping a series of monotonic functions. Can be combined with * or
+^k: <code>ac_mono* : p</code></p>
+
+<p>In the case where <code>f</code> is an associative or commutative operator,
+<code>ac_mono</code> will consider any possible permutation of its arguments and
+use the one the minimizes the difference between the left-hand side
+and the right-hand side.</p>
+
+<p>To use it, first import <code>tactic.monotonicity</code>.</p>
+
+<p><code>ac_mono</code> can be used as follows:</p>
+
+<pre><code>example (x y z k m n : ℕ)
+  (h₀ : z ≥ 0)
+  (h₁ : x ≤ y) :
+  (m + x + n) * z + k ≤ z * (y + n + m) + k :=
+begin
+  ac_mono,
+  -- ⊢ (m + x + n) * z ≤ z * (y + n + m)
+  ac_mono,
+  -- ⊢ m + x + n ≤ y + n + m
+  ac_mono,
+end
+</code></pre>
+
+<p>As with <code>mono*</code>, <code>ac_mono*</code> solves the goal in one go and so does
+<code>ac_mono* h₁</code>. The latter syntax becomes especially interesting in the
+following example:</p>
+
+<pre><code>example (x y z k m n : ℕ)
+  (h₀ : z ≥ 0)
+  (h₁ : m + x + n ≤ y + n + m) :
+  (m + x + n) * z + k ≤ z * (y + n + m) + k :=
+by ac_mono* h₁.
+</code></pre>
+
+<p>By giving <code>ac_mono</code> the assumption <code>h₁</code>, we are asking <code>ac_refl</code> to
+stop earlier than it would normally would.</p>
+</div>
+<div class="tactic">
+<h2 id="apply_fun"><a href="#apply_fun">apply_fun</a></h2>
+<p>Apply a function to some local assumptions which are either equalities
+or inequalities. For instance, if the context contains <code>h : a = b</code> and
+some function <code>f</code> then <code>apply_fun f at h</code> turns <code>h</code> into
+<code>h : f a = f b</code>. When the assumption is an inequality <code>h : a ≤ b</code>, a side
+goal <code>monotone f</code> is created, unless this condition is provided using
+<code>apply_fun f at h using P</code> where <code>P : monotone f</code>, or the <code>mono</code> tactic
+can prove it.</p>
+
+<p>Typical usage is:</p>
+
+<pre><code>open function
+
+example (X Y Z : Type) (f : X → Y) (g : Y → Z) (H : injective $ g ∘ f) :
+  injective f :=
+begin
+  intros x x' h,
+  apply_fun g at h,
+  exact H h
+end
+</code></pre>
+</div>
+<div class="tactic">
+<h2 id="apply_rules"><a href="#apply_rules">apply_rules</a></h2>
+<p><code>apply_rules hs n</code> applies the list of lemmas <code>hs</code> and <code>assumption</code> on the
+first goal and the resulting subgoals, iteratively, at most <code>n</code> times.
+<code>n</code> is optional, equal to 50 by default.
+<code>hs</code> can contain user attributes: in this case all theorems with this
+attribute are added to the list of rules.</p>
+
+<p>For instance:</p>
+
+<pre><code>@[user_attribute]
+meta def mono_rules : user_attribute :=
+{ name := `mono_rules,
+  descr := "lemmas usable to prove monotonicity" }
+
+attribute [mono_rules] add_le_add mul_le_mul_of_nonneg_right
+
+lemma my_test {a b c d e : real} (h1 : a ≤ b) (h2 : c ≤ d) (h3 : 0 ≤ e) :
+a + c * e + a + c + 0 ≤ b + d * e + b + d + e :=
+-- any of the following lines solve the goal:
+add_le_add (add_le_add (add_le_add (add_le_add h1 (mul_le_mul_of_nonneg_right h2 h3)) h1 ) h2) h3
+by apply_rules [add_le_add, mul_le_mul_of_nonneg_right]
+by apply_rules [mono_rules]
+by apply_rules mono_rules
+</code></pre>
+</div>
+<div class="tactic">
+<h2 id="assoc_rewrite"><a href="#assoc_rewrite">assoc_rewrite</a></h2>
+<p><code>assoc_rewrite [h₀, ← h₁] at ⊢ h₂</code> behaves like
+<code>rewrite [h₀, ← h₁] at ⊢ h₂</code> with the exception that associativity is
+used implicitly to make rewriting possible.</p>
+</div>
+<div class="tactic">
+<h2 id="choose"><a href="#choose">choose</a></h2>
+<p><code>choose a b h using hyp</code> takes an hypothesis <code>hyp</code> of the form
+<code>∀ (x : X) (y : Y), ∃ (a : A) (b : B), P x y a b</code> for some <code>P : X → Y → A → B → Prop</code> and outputs
+into context a function <code>a : X → Y → A</code>, <code>b : X → Y → B</code> and a proposition <code>h</code> stating
+<code>∀ (x : X) (y : Y), P x y (a x y) (b x y)</code>. It presumably also works with dependent versions.</p>
+
+<p>Example:</p>
+
+<pre><code>example (h : ∀n m : ℕ, ∃i j, m = n + i ∨ m + j = n) : true :=
+begin
+  choose i j h using h,
+  guard_hyp i := ℕ → ℕ → ℕ,
+  guard_hyp j := ℕ → ℕ → ℕ,
+  guard_hyp h := ∀ (n m : ℕ), m = n + i n m ∨ m + j n m = n,
+  trivial
+end
+</code></pre>
+</div>
+<div class="tactic">
+<h2 id="clear_aux_decl"><a href="#clear_aux_decl">clear_aux_decl</a></h2>
+<p><code>clear_aux_decl</code> clears every <code>aux_decl</code> in the local context for the current goal.
+This includes the induction hypothesis when using the equation compiler and
+<code>_let_match</code> and <code>_fun_match</code>.</p>
+
+<p>It is useful when using a tactic such as <code>finish</code>, <code>simp *</code> or <code>subst</code> that may use these
+auxiliary declarations, and produce an error saying the recursion is not well founded.</p>
+
+<pre><code>example (n m : ℕ) (h₁ : n = m) (h₂ : ∃ a : ℕ, a = n ∧ a = m) : 2 * m = 2 * n :=
+let ⟨a, ha⟩ := h₂ in
+begin
+  clear_aux_decl, -- subst will fail without this line
+  subst h₁
+end
+
+example (x y : ℕ) (h₁ : ∃ n : ℕ, n * 1 = 2) (h₂ : 1 + 1 = 2 → x * 1 = y) : x = y :=
+let ⟨n, hn⟩ := h₁ in
+begin
+  clear_aux_decl, -- finish produces an error without this line
+  finish
+end
+</code></pre>
+</div>
+<div class="tactic">
+<h2 id="congr'"><a href="#congr'">congr'</a></h2>
+<p>Same as the <code>congr</code> tactic, but takes an optional argument which gives
+the depth of recursive applications. This is useful when <code>congr</code>
+is too aggressive in breaking down the goal. For example, given
+<code>⊢ f (g (x + y)) = f (g (y + x))</code>, <code>congr'</code> produces the goals <code>⊢ x = y</code>
+and <code>⊢ y = x</code>, while <code>congr' 2</code> produces the intended <code>⊢ x + y = y + x</code>.
+If, at any point, a subgoal matches a hypothesis then the subgoal will be closed.</p>
+</div>
+<div class="tactic">
+<h2 id="congruence closure (cc)"><a href="#congruence closure (cc)">congruence closure (cc)</a></h2>
+<p>The congruence closure tactic  tries to solve the goal by chaining
+equalities from context and applying congruence (ie if <code>a = b</code> then <code>f a = f b</code>).
+It is a finishing tactic, ie is meant to close
+the current goal, not to make some inconclusive progress.
+A mostly trivial example would be:</p>
+
+<pre><code>example (a b c : ℕ) (f : ℕ → ℕ) (h: a = b) (h' : b = c) : f a = f c := by cc
+</code></pre>
+
+<p>As an example requiring some thinking to do by hand, consider:</p>
+
+<pre><code>example (f : ℕ → ℕ) (x : ℕ)
+  (H1 : f (f (f x)) = x) (H2 : f (f (f (f (f x)))) = x) :
+  f x = x :=
+by cc
+</code></pre>
+
+<p>The tactic works by building an equality matching graph. It's a graph where
+the vertices are terms and they are linked by edges if they are known to
+be equal. Once you've added all the equalities in your context, you take
+the transitive closure of the graph and, for each connected component
+(i.e. equivalence class) you can elect a term that will represent the
+whole class and store proofs that the other elements are equal to it.
+You then take the transitive closure of these equalities under the
+congruence lemmas.</p>
+
+<p>The <code>cc</code> implementation in Lean does a few more tricks: for example it
+derives <code>a=b</code> from <code>nat.succ a = nat.succ b</code>, and <code>nat.succ a !=
+nat.zero</code> for any <code>a</code>.</p>
+
+<ul>
+<li><p>The starting reference point is Nelson, Oppen, <a href="http://www.cs.colorado.edu/~bec/courses/csci5535-s09/reading/nelson-oppen-congruence.pdf">Fast decision procedures based on congruence closure</a>, Journal of the ACM (1980)</p></li>
+<li><p>The congruence lemmas for dependent type theory as used in Lean are described in <a href="https://leanprover.github.io/papers/congr.pdf">Congruence closure in intensional type theory</a> (de Moura, Selsam IJCAR 2016).</p></li>
+</ul>
+</div>
+<div class="tactic">
+<h2 id="contrapose"><a href="#contrapose">contrapose</a></h2>
+<p>Transforms the goal into its contrapositive.</p>
+
+<p><code>contrapose</code>     turns a goal <code>P → Q</code> into <code>¬ Q → ¬ P</code></p>
+
+<p><code>contrapose!</code>    turns a goal <code>P → Q</code> into <code>¬ Q → ¬ P</code> and pushes negations inside <code>P</code> and <code>Q</code>
+                 using <code>push_neg</code></p>
+
+<p><code>contrapose h</code>   first reverts the local assumption <code>h</code>, and then uses <code>contrapose</code> and <code>intro h</code></p>
+
+<p><code>contrapose! h</code>  first reverts the local assumption <code>h</code>, and then uses <code>contrapose!</code> and <code>intro h</code></p>
+
+<p><code>contrapose h with new_h</code> uses the name <code>new_h</code> for the introduced hypothesis</p>
+</div>
+<div class="tactic">
+<h2 id="conv"><a href="#conv">conv</a></h2>
+<p>The <code>conv</code> tactic is built-in to lean. Inside <code>conv</code> blocks mathlib currently
+additionally provides</p>
+
+<ul>
+<li><code>erw</code>,</li>
+<li><code>ring</code> and <code>ring2</code>,</li>
+<li><code>norm_num</code>, and</li>
+<li><code>conv</code> (within another <code>conv</code>).
+Using <code>conv</code> inside a <code>conv</code> block allows the user to return to the previous
+state of the outer <code>conv</code> block after it is finished. Thus you can continue
+editing an expression without having to start a new <code>conv</code> block and re-scoping
+everything. For example:</li>
+</ul>
+
+<pre><code>example (a b c d : ℕ) (h₁ : b = c) (h₂ : a + c = a + d) : a + b = a + d :=
+by conv {
+  to_lhs,
+  conv {
+    congr, skip,
+    rw h₁,
+  },
+  rw h₂,
+}
+</code></pre>
+
+<p>Without <code>conv</code> the above example would need to be proved using two successive
+<code>conv</code> blocks each beginning with <code>to_lhs</code>.</p>
+
+<p>Also, as a shorthand <code>conv_lhs</code> and <code>conv_rhs</code> are provided, so that</p>
+
+<pre><code>example : 0 + 0 = 0 :=
+begin
+  conv_lhs { simp }
+end
+</code></pre>
+
+<p>just means</p>
+
+<pre><code>example : 0 + 0 = 0 :=
+begin
+  conv { to_lhs, simp }
+end
+</code></pre>
+
+<p>and likewise for <code>to_rhs</code>.</p>
+</div>
+<div class="tactic">
+<h2 id="convert"><a href="#convert">convert</a></h2>
+<p>The <code>exact e</code> and <code>refine e</code> tactics require a term <code>e</code> whose type is
+definitionally equal to the goal. <code>convert e</code> is similar to <code>refine
+e</code>, but the type of <code>e</code> is not required to exactly match the
+goal. Instead, new goals are created for differences between the type
+of <code>e</code> and the goal. For example, in the proof state</p>
+
+<pre><code>n : ℕ,
+e : prime (2 * n + 1)
+⊢ prime (n + n + 1)
+</code></pre>
+
+<p>the tactic <code>convert e</code> will change the goal to</p>
+
+<pre><code>⊢ n + n = 2 * n
+</code></pre>
+
+<p>In this example, the new goal can be solved using <code>ring</code>.</p>
+
+<p>The syntax <code>convert ← e</code> will reverse the direction of the new goals
+(producing <code>⊢ 2 * n = n + n</code> in this example).</p>
+
+<p>Internally, <code>convert e</code> works by creating a new goal asserting that
+the goal equals the type of <code>e</code>, then simplifying it using
+<code>congr'</code>. The syntax <code>convert e using n</code> can be used to control the
+depth of matching (like <code>congr' n</code>). In the example, <code>convert e using
+1</code> would produce a new goal <code>⊢ n + n + 1 = 2 * n + 1</code>.</p>
+</div>
+<div class="tactic">
+<h2 id="convert_to"><a href="#convert_to">convert_to</a></h2>
+<p><code>convert_to g using n</code> attempts to change the current goal to <code>g</code>, but unlike <code>change</code>,
+it will generate equality proof obligations using <code>congr' n</code> to resolve discrepancies.
+<code>convert_to g</code> defaults to using <code>congr' 1</code>.</p>
+
+<p><code>ac_change</code> is <code>convert_to</code> followed by <code>ac_refl</code>. It is useful for rearranging/reassociating
+e.g. sums:</p>
+
+<pre><code>example (a b c d e f g N : ℕ) : (a + b) + (c + d) + (e + f) + g ≤ N :=
+begin
+  ac_change a + d + e + f + c + g + b ≤ _,
+-- ⊢ a + d + e + f + c + g + b ≤ N
+end
+</code></pre>
+</div>
+<div class="tactic">
+<h2 id="def_replacer"><a href="#def_replacer">def_replacer</a></h2>
+<p><code>def_replacer foo</code> sets up a stub definition <code>foo : tactic unit</code>, which can
+effectively be defined and re-defined later, by tagging definitions with <code>@[foo]</code>.</p>
+
+<ul>
+<li><code>@[foo] meta def foo_1 : tactic unit := ...</code> replaces the current definition of <code>foo</code>.</li>
+<li><code>@[foo] meta def foo_2 (old : tactic unit) : tactic unit := ...</code> replaces the current
+definition of <code>foo</code>, and provides access to the previous definition via <code>old</code>.
+(The argument can also be an <code>option (tactic unit)</code>, which is provided as <code>none</code> if
+this is the first definition tagged with <code>@[foo]</code> since <code>def_replacer</code> was invoked.)</li>
+</ul>
+
+<p><code>def_replacer foo : α → β → tactic γ</code> allows the specification of a replacer with
+custom input and output types. In this case all subsequent redefinitions must have the
+same type, or the type <code>α → β → tactic γ → tactic γ</code> or
+<code>α → β → option (tactic γ) → tactic γ</code> analogously to the previous cases.</p>
+</div>
+<div class="tactic">
+<h2 id="default_dec_tac'"><a href="#default_dec_tac'">default_dec_tac'</a></h2>
+<p><code>default_dec_tac'</code> is a replacement for the core tactic <code>default_dec_tac</code>, fixing a bug. This
+bug is often indicated by a message <code>nested exception message: tactic failed, there are no goals to be solved</code>,and solved by appending <code>using_well_founded wf_tacs</code> to the recursive definition.
+See also additional documentation of <code>using_well_founded</code> in
+<a href="extras/well_founded_recursion.md">docs/extras/well_founded_recursion.md</a>.</p>
+</div>
+<div class="tactic">
+<h2 id="elide/unelide"><a href="#elide/unelide">elide/unelide</a></h2>
+<p>The <code>elide n (at ...)</code> tactic hides all subterms of the target goal or hypotheses
+beyond depth <code>n</code> by replacing them with <code>hidden</code>, which is a variant
+on the identity function. (Tactics should still mostly be able to see
+through the abbreviation, but if you want to unhide the term you can use
+<code>unelide</code>.)</p>
+
+<p>The <code>unelide (at ...)</code> tactic removes all <code>hidden</code> subterms in the target
+types (usually added by <code>elide</code>).</p>
+</div>
+<div class="tactic">
+<h2 id="ext1 / ext"><a href="#ext1 / ext">ext1 / ext</a></h2>
+<ul>
+<li><p><code>ext1 id</code> selects and apply one extensionality lemma (with
+attribute <code>ext</code>), using <code>id</code>, if provided, to name a
+local constant introduced by the lemma. If <code>id</code> is omitted, the
+local constant is named automatically, as per <code>intro</code>.</p></li>
+<li><p><code>ext</code> applies as many extensionality lemmas as possible;</p></li>
+<li><code>ext ids</code>, with <code>ids</code> a list of identifiers, finds extentionality
+and applies them until it runs out of identifiers in <code>ids</code> to name
+the local constants.</li>
+</ul>
+
+<p>When trying to prove:</p>
+
+<p><code>lean
+  α β : Type,
+  f g : α → set β
+  ⊢ f = g
+</code></p>
+
+<p>applying <code>ext x y</code> yields:</p>
+
+<p><code>lean
+  α β : Type,
+  f g : α → set β,
+  x : α,
+  y : β
+  ⊢ y ∈ f x ↔ y ∈ g x
+</code></p>
+
+<p>by applying functional extensionality and set extensionality.</p>
+
+<p>A maximum depth can be provided with <code>ext x y z : 3</code>.</p>
+</div>
+<div class="tactic">
+<h2 id="field_simp"><a href="#field_simp">field_simp</a></h2>
+<p>The goal of <code>field_simp</code> is to reduce an expression in a field to an expression of the form <code>n / d</code>
+where neither <code>n</code> nor <code>d</code> contains any division symbol, just using the simplifier (with a carefully
+crafted simpset named <code>field_simps</code>) to reduce the number of division symbols whenever possible by
+iterating the following steps:</p>
+
+<ul>
+<li>write an inverse as a division</li>
+<li>in any product, move the division to the right</li>
+<li>if there are several divisions in a product, group them together at the end and write them as a
+single division</li>
+<li>reduce a sum to a common denominator</li>
+</ul>
+
+<p>If the goal is an equality, this simpset will also clear the denominators, so that the proof
+can normally be concluded by an application of <code>ring</code> or <code>ring_exp</code>.</p>
+
+<p><code>field_simp [hx, hy]</code> is a short form for <code>simp [-one_div_eq_inv, hx, hy] with field_simps</code></p>
+
+<p>Note that this naive algorithm will not try to detect common factors in denominators to reduce the
+complexity of the resulting expression. Instead, it relies on the ability of <code>ring</code> to handle
+complicated expressions in the next step.</p>
+
+<p>As always with the simplifier, reduction steps will only be applied if the preconditions of the
+lemmas can be checked. This means that proofs that denominators are nonzero should be included. The
+fact that a product is nonzero when all factors are, and that a power of a nonzero number is
+nonzero, are included in the simpset, but more complicated assertions (especially dealing with sums)
+should be given explicitly. If your expression is not completely reduced by the simplifier
+invocation, check the denominators of the resulting expression and provide proofs that they are
+nonzero to enable further progress.</p>
+
+<p>The invocation of <code>field_simp</code> removes the lemma <code>one_div_eq_inv</code> (which is marked as a simp lemma
+in core) from the simpset, as this lemma works against the algorithm explained above.</p>
+
+<p>For example,</p>
+
+<pre><code>example (a b c d x y : ℂ) (hx : x ≠ 0) (hy : y ≠ 0) :
+  a + b / x + c / x^2 + d / x^3 = a + x⁻¹ * (y * b / y + (d / x + c) / x) :=
+begin
+  field_simp [hx, hy],
+  ring
+end
+</code></pre>
+</div>
+<div class="tactic">
+<h2 id="fin_cases"><a href="#fin_cases">fin_cases</a></h2>
+<p><code>fin_cases h</code> performs case analysis on a hypothesis of the form
+1) <code>h : A</code>, where <code>[fintype A]</code> is available, or
+2) <code>h ∈ A</code>, where <code>A : finset X</code>, <code>A : multiset X</code> or <code>A : list X</code>.</p>
+
+<p><code>fin_cases *</code> performs case analysis on all suitable hypotheses.</p>
+
+<p>As an example, in</p>
+
+<pre><code>example (f : ℕ → Prop) (p : fin 3) (h0 : f 0) (h1 : f 1) (h2 : f 2) : f p.val :=
+begin
+  fin_cases p; simp,
+  all_goals { assumption }
+end
+</code></pre>
+
+<p>after <code>fin_cases p; simp</code>, there are three goals, <code>f 0</code>, <code>f 1</code>, and <code>f 2</code>.</p>
+</div>
+<div class="tactic">
+<h2 id="finish/clarify/safe"><a href="#finish/clarify/safe">finish/clarify/safe</a></h2>
+<p>These tactics do straightforward things: they call the simplifier, split conjunctive assumptions,
+eliminate existential quantifiers on the left, and look for contradictions. They rely on ematching
+and congruence closure to try to finish off a goal at the end.</p>
+
+<p>The procedures <em>do</em> split on disjunctions and recreate the smt state for each terminal call, so
+they are only meant to be used on small, straightforward problems.</p>
+
+<ul>
+<li>finish:  solves the goal or fails</li>
+<li>clarify: makes as much progress as possible while not leaving more than one goal</li>
+<li>safe:    splits freely, finishes off whatever subgoals it can, and leaves the rest</li>
+</ul>
+
+<p>All accept an optional list of simplifier rules, typically definitions that should be expanded.
+(The equations and identities should not refer to the local context.) All also accept an optional list of <code>ematch</code> lemmas, which must be preceded by <code>using</code>.</p>
+</div>
+<div class="tactic">
+<h2 id="h_generalize"><a href="#h_generalize">h_generalize</a></h2>
+<p><code>h_generalize Hx : e == x</code> matches on <code>cast _ e</code> in the goal and replaces it with
+<code>x</code>. It also adds <code>Hx : e == x</code> as an assumption. If <code>cast _ e</code> appears multiple
+times (not necessarily with the same proof), they are all replaced by <code>x</code>. <code>cast</code>
+<code>eq.mp</code>, <code>eq.mpr</code>, <code>eq.subst</code>, <code>eq.substr</code>, <code>eq.rec</code> and <code>eq.rec_on</code> are all treated
+as casts.</p>
+
+<ul>
+<li><code>h_generalize Hx : e == x with h</code> adds hypothesis <code>α = β</code> with <code>e : α, x : β</code>;</li>
+<li><code>h_generalize Hx : e == x with _</code> chooses automatically chooses the name of
+assumption <code>α = β</code>;
+<ul>
+<li><code>h_generalize! Hx : e == x</code> reverts <code>Hx</code>;</li>
+<li>when <code>Hx</code> is omitted, assumption <code>Hx : e == x</code> is not added.</li>
+</ul></li>
+</ul>
+</div>
+<div class="tactic">
+<h2 id="import_private"><a href="#import_private">import_private</a></h2>
+<p><code>import_private foo from bar</code> finds a private declaration <code>foo</code> in the same file as <code>bar</code> and creates a
+local notation to refer to it.</p>
+
+<p><code>import_private foo</code>, looks for <code>foo</code> in all (imported) files.</p>
+
+<p>When possible, make <code>foo</code> non-private rather than using this feature.</p>
+</div>
+<div class="tactic">
+<h2 id="Instance cache tactics"><a href="#Instance cache tactics">Instance cache tactics</a></h2>
+<p>For performance reasons, Lean does not automatically update its database
+of class instances during a proof. The group of tactics described below
+helps forcing such updates. For a simple (but very artificial) example,
+consider the function <code>default</code> from the core library. It has type
+<code>Π (α : Sort u) [inhabited α], α</code>, so one can use <code>default α</code> only if Lean
+can find a registered instance of <code>inhabited α</code>. Because the database of
+such instance is not automatically updated during a proof, the following
+attempt won't work (Lean will not pick up the instance from the local
+context):</p>
+
+<pre><code>def my_id (α : Type) : α → α :=
+begin
+  intro x,
+  have : inhabited α := ⟨x⟩,
+  exact default α, -- Won't work!
+end
+</code></pre>
+
+<p>However, it will work, producing the identity function, if one replaces have by its variant <code>haveI</code> described below.</p>
+
+<ul>
+<li><p><code>resetI</code>: Reset the instance cache. This allows any instances
+currently in the context to be used in typeclass inference.</p></li>
+<li><p><code>unfreezeI</code>: Unfreeze local instances, which allows us to revert
+instances in the context</p></li>
+<li><p><code>introI</code>/<code>introsI</code>: <code>intro</code>/<code>intros</code> followed by <code>resetI</code>. Like
+<code>intro</code>/<code>intros</code>, but uses the introduced variable in typeclass inference.</p></li>
+<li><p><code>haveI</code>/<code>letI</code>: <code>have</code>/<code>let</code> followed by <code>resetI</code>. Used to add typeclasses
+to the context so that they can be used in typeclass inference. The syntax
+<code>haveI := &lt;proof&gt;</code> and <code>haveI : t := &lt;proof&gt;</code> is supported, but
+<code>haveI : t, from _</code> and <code>haveI : t, { &lt;proof&gt; }</code> are not; in these cases
+use <code>have : t, { &lt;proof&gt; }, resetI</code> directly).</p></li>
+<li><p><code>exactI</code>: <code>resetI</code> followed by <code>exact</code>. Like <code>exact</code>, but uses all
+variables in the context for typeclass inference.</p></li>
+</ul>
+</div>
+<div class="tactic">
+<h2 id="library_search"><a href="#library_search">library_search</a></h2>
+<p><code>library_search</code> is a tactic to identify existing lemmas in the library. It tries to close the
+current goal by applying a lemma from the library, then discharging any new goals using
+<code>solve_by_elim</code>.</p>
+
+<p>Typical usage is:</p>
+
+<pre><code>example (n m k : ℕ) : n * (m - k) = n * m - n * k :=
+by library_search -- exact nat.mul_sub_left_distrib n m k
+</code></pre>
+
+<p><code>library_search</code> prints a trace message showing the proof it found, shown above as a comment.
+Typically you will then copy and paste this proof, replacing the call to <code>library_search</code>.</p>
+</div>
+<div class="tactic">
+<h2 id="lift"><a href="#lift">lift</a></h2>
+<p>Lift an expression to another type.</p>
+
+<ul>
+<li>Usage: <code>'lift' expr 'to' expr ('using' expr)? ('with' id (id id?)?)?</code>.</li>
+<li>If <code>n : ℤ</code> and <code>hn : n ≥ 0</code> then the tactic <code>lift n to ℕ using hn</code> creates a new
+constant of type <code>ℕ</code>, also named <code>n</code> and replaces all occurrences of the old variable <code>(n : ℤ)</code>
+with <code>↑n</code> (where <code>n</code> in the new variable). It will remove <code>n</code> and <code>hn</code> from the context.
+<ul>
+<li>So for example the tactic <code>lift n to ℕ using hn</code> transforms the goal
+<code>n : ℤ, hn : n ≥ 0, h : P n ⊢ n = 3</code> to <code>n : ℕ, h : P ↑n ⊢ ↑n = 3</code>
+(here <code>P</code> is some term of type <code>ℤ → Prop</code>).</li>
+</ul></li>
+<li>The argument <code>using hn</code> is optional, the tactic <code>lift n to ℕ</code> does the same, but also creates a
+new subgoal that <code>n ≥ 0</code> (where <code>n</code> is the old variable).
+<ul>
+<li>So for example the tactic <code>lift n to ℕ</code> transforms the goal
+<code>n : ℤ, h : P n ⊢ n = 3</code> to two goals
+<code>n : ℕ, h : P ↑n ⊢ ↑n = 3</code> and <code>n : ℤ, h : P n ⊢ n ≥ 0</code>.</li>
+</ul></li>
+<li>You can also use <code>lift n to ℕ using e</code> where <code>e</code> is any expression of type <code>n ≥ 0</code>.</li>
+<li>Use <code>lift n to ℕ with k</code> to specify the name of the new variable.</li>
+<li>Use <code>lift n to ℕ with k hk</code> to also specify the name of the equality <code>↑k = n</code>. In this case, <code>n</code>
+will remain in the context. You can use <code>rfl</code> for the name of <code>hk</code> to substitute <code>n</code> away
+(i.e. the default behavior).</li>
+<li>You can also use <code>lift e to ℕ with k hk</code> where <code>e</code> is any expression of type <code>ℤ</code>.
+In this case, the <code>hk</code> will always stay in the context, but it will be used to rewrite <code>e</code> in
+all hypotheses and the target.
+<ul>
+<li>So for example the tactic <code>lift n + 3 to ℕ using hn with k hk</code> transforms the goal
+<code>n : ℤ, hn : n + 3 ≥ 0, h : P (n + 3) ⊢ n + 3 = 2 * n</code> to the goal
+<code>n : ℤ, k : ℕ, hk : ↑k = n + 3, h : P ↑k ⊢ ↑k = 2 * n</code>.</li>
+</ul></li>
+<li>The tactic <code>lift n to ℕ using h</code> will remove <code>h</code> from the context. If you want to keep it,
+specify it again as the third argument to <code>with</code>, like this: <code>lift n to ℕ using h with n rfl h</code>.</li>
+<li>More generally, this can lift an expression from <code>α</code> to <code>β</code> assuming that there is an instance
+of <code>can_lift α β</code>. In this case the proof obligation is specified by <code>can_lift.cond</code>.</li>
+<li>Given an instance <code>can_lift β γ</code>, it can also lift <code>α → β</code> to <code>α → γ</code>; more generally, given
+<code>β : Π a : α, Type*</code>, <code>γ : Π a : α, Type*</code>, and <code>[Π a : α, can_lift (β a) (γ a)]</code>, it automatically
+generates an instance <code>can_lift (Π a, β a) (Π a, γ a)</code>.</li>
+</ul>
+</div>
+<div class="tactic">
+<h2 id="linarith"><a href="#linarith">linarith</a></h2>
+<p><code>linarith</code> attempts to find a contradiction between hypotheses that are linear (in)equalities.
+Equivalently, it can prove a linear inequality by assuming its negation and proving <code>false</code>.</p>
+
+<p>In theory, <code>linarith</code> should prove any goal that is true in the theory of linear arithmetic over the rationals. While there is some special handling for non-dense orders like <code>nat</code> and <code>int</code>, this tactic is not complete for these theories and will not prove every true goal.</p>
+
+<p>An example:</p>
+
+<pre><code>example (x y z : ℚ) (h1 : 2*x  &lt; 3*y) (h2 : -4*x + 2*z &lt; 0)
+        (h3 : 12*y - 4* z &lt; 0)  : false :=
+by linarith
+</code></pre>
+
+<p><code>linarith</code> will use all appropriate hypotheses and the negation of the goal, if applicable.</p>
+
+<p><code>linarith [t1, t2, t3]</code> will additionally use proof terms <code>t1, t2, t3</code>.</p>
+
+<p><code>linarith only [h1, h2, h3, t1, t2, t3]</code> will use only the goal (if relevant), local hypotheses
+h1, h2, h3, and proofs t1, t2, t3. It will ignore the rest of the local context.</p>
+
+<p><code>linarith!</code> will use a stronger reducibility setting to try to identify atoms. For example,</p>
+
+<pre><code>example (x : ℚ) : id x ≥ x :=
+by linarith
+</code></pre>
+
+<p>will fail, because <code>linarith</code> will not identify <code>x</code> and <code>id x</code>. <code>linarith!</code> will.
+This can sometimes be expensive.</p>
+
+<p><code>linarith {discharger := tac, restrict_type := tp, exfalso := ff}</code> takes a config object with three optional
+arguments.</p>
+
+<ul>
+<li><code>discharger</code> specifies a tactic to be used for reducing an algebraic equation in the
+proof stage. The default is <code>ring</code>. Other options currently include <code>ring SOP</code> or <code>simp</code> for basic
+problems.</li>
+<li><code>restrict_type</code> will only use hypotheses that are inequalities over <code>tp</code>. This is useful
+if you have e.g. both integer and rational valued inequalities in the local context, which can
+sometimes confuse the tactic.</li>
+<li>If <code>exfalso</code> is false, <code>linarith</code> will fail when the goal is neither an inequality nor <code>false</code>. (True by default.)</li>
+</ul>
+</div>
+<div class="tactic">
+<h2 id="mono"><a href="#mono">mono</a></h2>
+<ul>
+<li><code>mono</code> applies a monotonicity rule.</li>
+<li><code>mono*</code> applies monotonicity rules repetitively.</li>
+<li><code>mono with x ≤ y</code> or <code>mono with [0 ≤ x,0 ≤ y]</code> creates an assertion for the listed
+propositions. Those help to select the right monotonicity rule.</li>
+<li><code>mono left</code> or <code>mono right</code> is useful when proving strict orderings:
+for <code>x + y &lt; w + z</code> could be broken down into either
+<ul>
+<li>left:  <code>x ≤ w</code> and <code>y &lt; z</code> or</li>
+<li>right: <code>x &lt; w</code> and <code>y ≤ z</code></li>
+</ul></li>
+</ul>
+
+<p>To use it, first import <code>tactic.monotonicity</code>.</p>
+
+<p>Here is an example of mono:</p>
+
+<pre><code>example (x y z k : ℤ)
+  (h : 3 ≤ (4 : ℤ))
+  (h' : z ≤ y) :
+  (k + 3 + x) - y ≤ (k + 4 + x) - z :=
+begin
+  mono, -- unfold `(-)`, apply add_le_add
+  { -- ⊢ k + 3 + x ≤ k + 4 + x
+    mono, -- apply add_le_add, refl
+    -- ⊢ k + 3 ≤ k + 4
+    mono },
+  { -- ⊢ -y ≤ -z
+    mono /- apply neg_le_neg -/ }
+end
+</code></pre>
+
+<p>More succinctly, we can prove the same goal as:</p>
+
+<pre><code>example (x y z k : ℤ)
+  (h : 3 ≤ (4 : ℤ))
+  (h' : z ≤ y) :
+  (k + 3 + x) - y ≤ (k + 4 + x) - z :=
+by mono*
+</code></pre>
+</div>
+<div class="tactic">
+<h2 id="norm_cast"><a href="#norm_cast">norm_cast</a></h2>
+<p>This tactic normalizes casts inside expressions.
+It is basically a simp tactic with a specific set of lemmas to move casts
+upwards in the expression.
+Therefore it can be used more safely as a non-terminating tactic.
+It also has special handling of numerals.</p>
+
+<p>For instance, given an assumption</p>
+
+<pre><code>a b : ℤ
+h : ↑a + ↑b &lt; (10 : ℚ)
+</code></pre>
+
+<p>writing <code>norm_cast at h</code> will turn <code>h</code> into</p>
+
+<pre><code>h : a + b &lt; 10
+</code></pre>
+
+<p>You can also use <code>exact_mod_cast</code>, <code>apply_mod_cast</code>, <code>rw_mod_cast</code>
+or <code>assumption_mod_cast</code>.
+Writing <code>exact_mod_cast h</code> and <code>apply_mod_cast h</code> will normalize the goal and h before using <code>exact h</code> or <code>apply h</code>.
+Writing <code>assumption_mod_cast</code> will normalize the goal and for every
+expression <code>h</code> in the context it will try to normalize <code>h</code> and use
+<code>exact h</code>.
+<code>rw_mod_cast</code> acts like the <code>rw</code> tactic but it applies <code>norm_cast</code> between steps.</p>
+
+<p>These tactics work with three attributes,
+<code>elim_cast</code>, <code>move_cast</code> and <code>squash_cast</code>.</p>
+
+<p><code>elim_cast</code> is for elimination lemmas of the shape
+<code>Π ..., P ↑a1 ... ↑an = P a1 ... an</code>, for instance:</p>
+
+<pre><code>int.coe_nat_inj' : ∀ {m n : ℕ}, ↑m = ↑n ↔ m = n
+
+rat.coe_int_denom : ∀ (n : ℤ), ↑n.denom = 1
+</code></pre>
+
+<p><code>move_cast</code> is for compositional lemmas of the shape
+<code>Π ..., ↑(P a1 ... an) = P ↑a1 ... ↑an</code>, for instance:</p>
+
+<pre><code>int.coe_nat_add : ∀ (m n : ℕ), ↑(m + n) = ↑m + ↑n`
+
+nat.cast_sub : ∀ {α : Type*} [add_group α] [has_one α] {m n : ℕ}, m ≤ n → ↑(n - m) = ↑n - ↑m
+</code></pre>
+
+<p><code>squash_cast</code> is for lemmas of the shape
+<code>Π ..., ↑↑a = ↑a</code>, for instance:</p>
+
+<pre><code>int.cast_coe_nat : ∀ (n : ℕ), ↑↑n = ↑n
+
+int.cats_id : int.cast_id : ∀ (n : ℤ), ↑n = n
+</code></pre>
+
+<p><code>push_cast</code> rewrites the expression to move casts toward the leaf nodes.
+This uses <code>move_cast</code> lemmas in the "forward" direction.
+For example, <code>↑(a + b)</code> will be written to <code>↑a + ↑b</code>.
+It is equivalent to <code>simp only with push_cast</code>, and can also be used at hypotheses
+with <code>push_cast at h</code>.</p>
+</div>
+<div class="tactic">
+<h2 id="norm_num"><a href="#norm_num">norm_num</a></h2>
+<p>Normalises numerical expressions. It supports the operations <code>+</code> <code>-</code> <code>*</code> <code>/</code> <code>^</code> and <code>%</code> over numerical types such as <code>ℕ</code>, <code>ℤ</code>, <code>ℚ</code>, <code>ℝ</code>, <code>ℂ</code>, and can prove goals of the form <code>A = B</code>, <code>A ≠ B</code>, <code>A &lt; B</code> and <code>A ≤ B</code>, where <code>A</code> and <code>B</code> are
+numerical expressions. It also has a relatively simple primality prover.</p>
+
+<pre><code>import data.real.basic
+
+example : (2 : ℝ) + 2 = 4 := by norm_num
+example : (12345.2 : ℝ) ≠ 12345.3 := by norm_num
+example : (73 : ℝ) &lt; 789/2 := by norm_num
+example : 123456789 + 987654321 = 1111111110 := by norm_num
+example (R : Type*) [ring R] : (2 : R) + 2 = 4 := by norm_num
+example (F : Type*) [linear_ordered_field F] : (2 : F) + 2 &lt; 5 := by norm_num
+example : nat.prime (2^13 - 1) := by norm_num
+example : ¬ nat.prime (2^11 - 1) := by norm_num
+example (x : ℝ) (h : x = 123 + 456) : x = 579 := by norm_num at h; assumption
+</code></pre>
+</div>
+<div class="tactic">
+<h2 id="obtain"><a href="#obtain">obtain</a></h2>
+<p>The <code>obtain</code> tactic is a combination of <code>have</code> and <code>rcases</code>.</p>
+
+<pre><code>obtain ⟨patt⟩ : type,
+{ ... }
+</code></pre>
+
+<p>is equivalent to</p>
+
+<pre><code>have h : type,
+{ ... },
+rcases h with ⟨patt⟩
+</code></pre>
+
+<p>The syntax <code>obtain ⟨patt⟩ : type := proof</code> is also supported.</p>
+
+<p>If <code>⟨patt⟩</code> is omitted, <code>rcases</code> will try to infer the pattern.</p>
+
+<p>If <code>type</code> is omitted, <code>:= proof</code> is required.</p>
+</div>
+<div class="tactic">
+<h2 id="omega"><a href="#omega">omega</a></h2>
+<p><code>omega</code> attempts to discharge goals in the quantifier-free fragment of linear integer and natural number arithmetic using the Omega test. In other words, the core procedure of <code>omega</code> works with goals of the form</p>
+
+<pre><code>∀ x₁, ... ∀ xₖ, P
+</code></pre>
+
+<p>where <code>x₁, ... xₖ</code> are integer (resp. natural number) variables, and <code>P</code> is a quantifier-free formula of linear integer (resp. natural number) arithmetic. For instance:</p>
+
+<pre><code>example : ∀ (x y : int), (x ≤ 5 ∧ y ≤ 3) → x + y ≤ 8 := by omega
+</code></pre>
+
+<p>By default, <code>omega</code> tries to guess the correct domain by looking at the goal and hypotheses, and then reverts all relevant hypotheses and variables (e.g., all variables of type <code>nat</code> and <code>Prop</code>s in linear natural number arithmetic, if the domain was determined to be <code>nat</code>) to universally close the goal before calling the main procedure. Therefore, <code>omega</code> will often work even if the goal is not in the above form:</p>
+
+<pre><code>example (x y : nat) (h : 2 * x + 1 = 2 * y) : false := by omega
+</code></pre>
+
+<p>But this behaviour is not always optimal, since it may revert irrelevant hypotheses or incorrectly guess the domain. Use <code>omega manual</code> to disable automatic reverts, and <code>omega int</code> or <code>omega nat</code> to specify the domain.</p>
+
+<pre><code>example (x y z w : int) (h1 : 3 * y ≥ x) (h2 : z &gt; 19 * w) : 3 * x ≤ 9 * y :=
+by {revert h1 x y, omega manual}
+
+example (i : int) (n : nat) (h1 : i = 0) (h2 : n &lt; n) : false := by omega nat
+
+example (n : nat) (h1 : n &lt; 34) (i : int) (h2 : i * 9 = -72) : i = -8 :=
+by {revert h2 i, omega manual int}
+</code></pre>
+
+<p><code>omega</code> handles <code>nat</code> subtraction by repeatedly rewriting goals of the form <code>P[t-s]</code> into <code>P[x] ∧ (t = s + x ∨ (t ≤ s ∧ x = 0))</code>, where <code>x</code> is fresh. This means that each (distinct) occurrence of subtraction will cause the goal size to double during DNF transformation.</p>
+
+<p><code>omega</code> implements the real shadow step of the Omega test, but not the dark and gray shadows. Therefore, it should (in principle) succeed whenever the negation of the goal has no real solution, but it may fail if a real solution exists, even if there is no integer/natural number solution.</p>
+</div>
+<div class="tactic">
+<h2 id="pi_instance"><a href="#pi_instance">pi_instance</a></h2>
+<p><code>pi_instance</code> constructs an instance of <code>my_class (Π i : I, f i)</code>
+where we know <code>Π i, my_class (f i)</code>. If an order relation is required,
+it defaults to <code>pi.partial_order</code>. Any field of the instance that
+<code>pi_instance</code> cannot construct is left untouched and generated as a
+new goal.</p>
+</div>
+<div class="tactic">
+<h2 id="push_neg"><a href="#push_neg">push_neg</a></h2>
+<p>This tactic pushes negations inside expressions. For instance, given an assumption</p>
+
+<pre><code>h : ¬ ∀ ε &gt; 0, ∃ δ &gt; 0, ∀ x, |x - x₀| ≤ δ → |f x - y₀| ≤ ε)
+</code></pre>
+
+<p>writing <code>push_neg at h</code> will turn <code>h</code> into</p>
+
+<pre><code>h : ∃ ε, ε &gt; 0 ∧ ∀ δ, δ &gt; 0 → (∃ x, |x - x₀| ≤ δ ∧ ε &lt; |f x - y₀|),
+</code></pre>
+
+<p>(the pretty printer does <em>not</em> use the abreviations <code>∀ δ &gt; 0</code> and <code>∃ ε &gt; 0</code> but this issue
+has nothing to do with <code>push_neg</code>).
+Note that names are conserved by this tactic, contrary to what would happen with <code>simp</code>
+using the relevant lemmas. One can also use this tactic at the goal using <code>push_neg</code>,
+at every assumption and the goal using <code>push_neg at *</code> or at selected assumptions and the goal
+using say <code>push_neg at h h' ⊢</code> as usual.</p>
+</div>
+<div class="tactic">
+<h2 id="rcases"><a href="#rcases">rcases</a></h2>
+<p>The <code>rcases</code> tactic is the same as <code>cases</code>, but with more flexibility in the
+<code>with</code> pattern syntax to allow for recursive case splitting. The pattern syntax
+uses the following recursive grammar:</p>
+
+<pre><code>patt ::= (patt_list "|")* patt_list
+patt_list ::= id | "_" | "⟨" (patt ",")* patt "⟩"
+</code></pre>
+
+<p>A pattern like <code>⟨a, b, c⟩ | ⟨d, e⟩</code> will do a split over the inductive
+datatype, naming the first three parameters of the first constructor as
+<code>a,b,c</code> and the first two of the second constructor <code>d,e</code>. If the list
+is not as long as the number of arguments to the constructor or the
+number of constructors, the remaining variables will be automatically
+named. If there are nested brackets such as <code>⟨⟨a⟩, b | c⟩ | d</code> then
+these will cause more case splits as necessary. If there are too many
+arguments, such as <code>⟨a, b, c⟩</code> for splitting on <code>∃ x, ∃ y, p x</code>, then it
+will be treated as <code>⟨a, ⟨b, c⟩⟩</code>, splitting the last parameter as
+necessary.</p>
+
+<p><code>rcases</code> also has special support for quotient types: quotient induction into Prop works like
+matching on the constructor <code>quot.mk</code>.</p>
+
+<p><code>rcases h : e with PAT</code> will do the same as <code>rcases e with PAT</code> with the exception that an assumption
+<code>h : e = PAT</code> will be added to the context.</p>
+
+<p><code>rcases? e</code> will perform case splits on <code>e</code> in the same way as <code>rcases e</code>,
+but rather than accepting a pattern, it does a maximal cases and prints the
+pattern that would produce this case splitting. The default maximum depth is 5,
+but this can be modified with <code>rcases? e : n</code>.</p>
+</div>
+<div class="tactic">
+<h2 id="refine_struct"><a href="#refine_struct">refine_struct</a></h2>
+<p><code>refine_struct { .. }</code> acts like <code>refine</code> but works only with structure instance
+literals. It creates a goal for each missing field and tags it with the name of the
+field so that <code>have_field</code> can be used to generically refer to the field currently
+being refined.</p>
+
+<p>As an example, we can use <code>refine_struct</code> to automate the construction semigroup
+instances:</p>
+
+<pre><code>refine_struct ( { .. } : semigroup α ),
+-- case semigroup, mul
+-- α : Type u,
+-- ⊢ α → α → α
+
+-- case semigroup, mul_assoc
+-- α : Type u,
+-- ⊢ ∀ (a b c : α), a * b * c = a * (b * c)
+</code></pre>
+
+<p><code>have_field</code>, used after <code>refine_struct _</code> poses <code>field</code> as a local constant
+with the type of the field of the current goal:</p>
+
+<pre><code>refine_struct ({ .. } : semigroup α),
+{ have_field, ... },
+{ have_field, ... },
+</code></pre>
+
+<p>behaves like</p>
+
+<pre><code>refine_struct ({ .. } : semigroup α),
+{ have field := @semigroup.mul, ... },
+{ have field := @semigroup.mul_assoc, ... },
+</code></pre>
+</div>
+<div class="tactic">
+<h2 id="replace"><a href="#replace">replace</a></h2>
+<p>Acts like <code>have</code>, but removes a hypothesis with the same name as
+this one. For example if the state is <code>h : p ⊢ goal</code> and <code>f : p → q</code>,
+then after <code>replace h := f h</code> the goal will be <code>h : q ⊢ goal</code>,
+where <code>have h := f h</code> would result in the state <code>h : p, h : q ⊢ goal</code>.
+This can be used to simulate the <code>specialize</code> and <code>apply at</code> tactics
+of Coq.</p>
+</div>
+<div class="tactic">
+<h2 id="restate_axiom"><a href="#restate_axiom">restate_axiom</a></h2>
+<p><code>restate_axiom</code> makes a new copy of a structure field, first definitionally simplifying the type.
+This is useful to remove <code>auto_param</code> or <code>opt_param</code> from the statement.</p>
+
+<p>As an example, we have:</p>
+
+<pre><code>structure A :=
+(x : ℕ)
+(a' : x = 1 . skip)
+
+example (z : A) : z.x = 1 := by rw A.a' -- rewrite tactic failed, lemma is not an equality nor a iff
+
+restate_axiom A.a'
+example (z : A) : z.x = 1 := by rw A.a
+</code></pre>
+
+<p>By default, <code>restate_axiom</code> names the new lemma by removing a trailing <code>'</code>, or otherwise appending
+<code>_lemma</code> if there is no trailing <code>'</code>. You can also give <code>restate_axiom</code> a second argument to
+specify the new name, as in</p>
+
+<pre><code>restate_axiom A.a f
+example (z : A) : z.x = 1 := by rw A.f
+</code></pre>
+</div>
+<div class="tactic">
+<h2 id="ring"><a href="#ring">ring</a></h2>
+<p>Evaluate expressions in the language of <em>commutative</em> (semi)rings.
+Based on <a href="http://www.cs.ru.nl/~freek/courses/tt-2014/read/10.1.1.61.3041.pdf">Proving Equalities in a Commutative Ring Done Right in Coq</a> by Benjamin Grégoire and Assia Mahboubi.</p>
+
+<p>The variant <code>ring!</code> uses a more aggessive reducibility setting to determine equality of atoms.</p>
+</div>
+<div class="tactic">
+<h2 id="ring_exp"><a href="#ring_exp">ring_exp</a></h2>
+<p>Evaluate expressions in <em>commutative</em> (semi)rings, allowing for variables in the exponent.</p>
+
+<p>This tactic extends <code>ring</code>: it should solve every goal that <code>ring</code> can solve.
+Additionally, it knows how to evaluate expressions with complicated exponents
+(where <code>ring</code> only understands constant exponents).
+The variants <code>ring_exp!</code> and <code>ring_exp_eq!</code> use a more aggessive reducibility setting to determine equality of atoms.</p>
+
+<p>For example:</p>
+
+<pre><code>example (n : ℕ) (m : ℤ) : 2^(n+1) * m = 2 * 2^n * m := by ring_exp
+example (a b : ℤ) (n : ℕ) : (a + b)^(n + 2) = (a^2 + b^2 + a * b + b * a) * (a + b)^n := by ring_exp
+example (x y : ℕ) : x + id y = y + id x := by ring_exp!
+</code></pre>
+</div>
+<div class="tactic">
+<h2 id="rintro"><a href="#rintro">rintro</a></h2>
+<p>The <code>rintro</code> tactic is a combination of the <code>intros</code> tactic with <code>rcases</code> to
+allow for destructuring patterns while introducing variables. See <code>rcases</code> for
+a description of supported patterns. For example, <code>rintros (a | ⟨b, c⟩) ⟨d, e⟩</code>
+will introduce two variables, and then do case splits on both of them producing
+two subgoals, one with variables <code>a d e</code> and the other with <code>b c d e</code>.</p>
+
+<p><code>rintro?</code> will introduce and case split on variables in the same way as
+<code>rintro</code>, but will also print the <code>rintro</code> invocation that would have the same
+result. Like <code>rcases?</code>, <code>rintro? : n</code> allows for modifying the
+depth of splitting; the default is 5.</p>
+</div>
+<div class="tactic">
+<h2 id="rotate"><a href="#rotate">rotate</a></h2>
+<p><code>rotate</code> moves the first goal to the back. <code>rotate n</code> will do this <code>n</code> times.</p>
+</div>
+<div class="tactic">
+<h2 id="set"><a href="#set">set</a></h2>
+<p><code>set a := t with h</code> is a variant of <code>let a := t</code>. It adds the hypothesis <code>h : a = t</code> to the local context and replaces <code>t</code> with <code>a</code> everywhere it can.</p>
+
+<p><code>set a := t with ←h</code> will add <code>h : t = a</code> instead.</p>
+
+<p><code>set! a := t with h</code> does not do any replacing.</p>
+
+<pre><code>example (x : ℕ) (h : x = 3)  : x + x + x = 9 :=
+begin
+  set y := x with ←h_xy,
+/-
+x : ℕ,
+y : ℕ := x,
+h_xy : x = y,
+h : y = 3
+⊢ y + y + y = 9
+-/
+end
+</code></pre>
+</div>
+<div class="tactic">
+<h2 id="simpa"><a href="#simpa">simpa</a></h2>
+<p>This is a "finishing" tactic modification of <code>simp</code>. It has two forms.</p>
+
+<ul>
+<li><p><code>simpa [rules, ...] using e</code> will simplify the goal and the type of
+<code>e</code> using <code>rules</code>, then try to close the goal using <code>e</code>.</p>
+
+<p>Simplifying the type of <code>e</code> makes it more likely to match the goal
+(which has also been simplified). This construction also tends to be
+more robust under changes to the simp lemma set.</p></li>
+<li><p><code>simpa [rules, ...]</code> will simplify the goal and the type of a
+hypothesis <code>this</code> if present in the context, then try to close the goal using
+the <code>assumption</code> tactic.</p></li>
+</ul>
+</div>
+<div class="tactic">
+<h2 id="solve_by_elim"><a href="#solve_by_elim">solve_by_elim</a></h2>
+<p>The tactic <code>solve_by_elim</code> repeatedly applies assumptions to the current goal, and succeeds if this eventually discharges the main goal.</p>
+
+<pre><code>solve_by_elim { discharger := `[cc] }
+</code></pre>
+
+<p>also attempts to discharge the goal using congruence closure before each round of applying assumptions.</p>
+
+<p><code>solve_by_elim*</code> tries to solve all goals together, using backtracking if a solution for one goal
+makes other goals impossible.</p>
+
+<p>By default <code>solve_by_elim</code> also applies <code>congr_fun</code> and <code>congr_arg</code> against the goal.</p>
+
+<p>The assumptions can be modified with similar syntax as for <code>simp</code>:</p>
+
+<ul>
+<li><code>solve_by_elim [h₁, h₂, ..., hᵣ]</code> also applies the named lemmas (or all lemmas tagged with the named
+attributes).</li>
+<li><code>solve_by_elim only [h₁, h₂, ..., hᵣ]</code> does not include the local context, <code>congr_fun</code>, or <code>congr_arg</code>
+unless they are explicitly included.</li>
+<li><code>solve_by_elim [-id_1, ... -id_n]</code> uses the default assumptions, removing the specified ones.</li>
+</ul>
+</div>
+<div class="tactic">
+<h2 id="squeeze_simp / squeeze_simpa"><a href="#squeeze_simp / squeeze_simpa">squeeze_simp / squeeze_simpa</a></h2>
+<p><code>squeeze_simp</code> and <code>squeeze_simpa</code> perform the same task with
+the difference that <code>squeeze_simp</code> relates to <code>simp</code> while
+<code>squeeze_simpa</code> relates to <code>simpa</code>. The following applies to both
+<code>squeeze_simp</code> and <code>squeeze_simpa</code>.</p>
+
+<p><code>squeeze_simp</code> behaves like <code>simp</code> (including all its arguments)
+and prints a <code>simp only</code> invokation to skip the search through the
+<code>simp</code> lemma list.</p>
+
+<p>For instance, the following is easily solved with <code>simp</code>:</p>
+
+<pre><code>example : 0 + 1 = 1 + 0 := by simp
+</code></pre>
+
+<p>To guide the proof search and speed it up, we may replace <code>simp</code>
+with <code>squeeze_simp</code>:</p>
+
+<pre><code>example : 0 + 1 = 1 + 0 := by squeeze_simp
+-- prints: simp only [add_zero, eq_self_iff_true, zero_add]
+</code></pre>
+
+<p><code>squeeze_simp</code> suggests a replacement which we can use instead of
+<code>squeeze_simp</code>.</p>
+
+<pre><code>example : 0 + 1 = 1 + 0 := by simp only [add_zero, eq_self_iff_true, zero_add]
+</code></pre>
+
+<p><code>squeeze_simp only</code> prints nothing as it already skips the <code>simp</code> list.</p>
+
+<p>This tactic is useful for speeding up the compilation of a complete file.
+Steps:</p>
+
+<ol>
+<li>search and replace <code>simp</code> with <code>squeeze_simp</code> (the space helps avoid the
+  replacement of <code>simp</code> in <code>@[simp]</code>) throughout the file.</li>
+<li>Starting at the beginning of the file, go to each printout in turn, copy
+  the suggestion in place of <code>squeeze_simp</code>.</li>
+<li>after all the suggestions were applied, search and replace <code>squeeze_simp</code> with
+  <code>simp</code> to remove the occurrences of <code>squeeze_simp</code> that did not produce a suggestion.</li>
+</ol>
+
+<p>Known limitation(s):</p>
+
+<ul>
+<li>in cases where <code>squeeze_simp</code> is used after a <code>;</code> (e.g. <code>cases x; squeeze_simp</code>),
+<code>squeeze_simp</code> will produce as many suggestions as the number of goals it is applied to.
+It is likely that none of the suggestion is a good replacement but they can all be
+combined by concatenating their list of lemmas.</li>
+</ul>
+</div>
+<div class="tactic">
+<h2 id="suggest"><a href="#suggest">suggest</a></h2>
+<p><code>suggest</code> lists possible usages of the <code>refine</code> tactic and leaves the tactic state unchanged.
+It is intended as a complement of the search function in your editor, the <code>#find</code> tactic, and <code>library_search</code>.</p>
+
+<p><code>suggest</code> takes an optional natural number <code>num</code> as input and returns the first <code>num</code> (or less, if all possibilities are exhausted) possibilities ordered by length of lemma names. The default for <code>num</code> is <code>50</code>.</p>
+
+<p>For performance reasons <code>suggest</code> uses monadic lazy lists (<code>mllist</code>). This means that <code>suggest</code> might miss some results if <code>num</code> is not large enough. However, because <code>suggest</code> uses monadic lazy lists, smaller values of <code>num</code> run faster than larger values.</p>
+
+<p>An example of <code>suggest</code> in action,</p>
+
+<pre><code>example (n : nat) : n &lt; n + 1 :=
+begin suggest, sorry end
+</code></pre>
+
+<p>prints the list,</p>
+
+<pre><code>exact nat.lt.base n
+exact nat.lt_succ_self n
+refine not_le.mp _
+refine gt_iff_lt.mp _
+refine nat.lt.step _
+refine lt_of_not_ge _
+...
+</code></pre>
+</div>
+<div class="tactic">
+<h2 id="swap"><a href="#swap">swap</a></h2>
+<p><code>swap n</code> will move the <code>n</code>th goal to the front. <code>swap</code> defaults to <code>swap 2</code>, and so interchanges the first and second goals.</p>
+</div>
+<div class="tactic">
+<h2 id="tfae"><a href="#tfae">tfae</a></h2>
+<p>The <code>tfae</code> tactic suite is a set of tactics that help with proving that certain
+propositions are equivalent.
+In <code>data/list/basic.lean</code> there is a section devoted to propositions of the
+form</p>
+
+<pre><code>tfae [p1, p2, ..., pn]
+</code></pre>
+
+<p>where <code>p1</code>, <code>p2</code>, through, <code>pn</code> are terms of type <code>Prop</code>.
+This proposition asserts that all the <code>pi</code> are pairwise equivalent.
+There are results that allow to extract the equivalence
+of two propositions <code>pi</code> and <code>pj</code>.</p>
+
+<p>To prove a goal of the form <code>tfae [p1, p2, ..., pn]</code>, there are two
+tactics.  The first tactic is <code>tfae_have</code>.  As an argument it takes an
+expression of the form <code>i arrow j</code>, where <code>i</code> and <code>j</code> are two positive
+natural numbers, and <code>arrow</code> is an arrow such as <code>→</code>, <code>-&gt;</code>, <code>←</code>, <code>&lt;-</code>,
+<code>↔</code>, or <code>&lt;-&gt;</code>.  The tactic <code>tfae_have : i arrow j</code> sets up a subgoal in
+which the user has to prove the equivalence (or implication) of <code>pi</code> and <code>pj</code>.</p>
+
+<p>The remaining tactic, <code>tfae_finish</code>, is a finishing tactic. It
+collects all implications and equivalences from the local context and
+computes their transitive closure to close the
+main goal.</p>
+
+<p><code>tfae_have</code> and <code>tfae_finish</code> can be used together in a proof as
+follows:</p>
+
+<pre><code>example (a b c d : Prop) : tfae [a,b,c,d] :=
+begin
+  tfae_have : 3 → 1,
+  { /- prove c → a -/ },
+  tfae_have : 2 → 3,
+  { /- prove b → c -/ },
+  tfae_have : 2 ← 1,
+  { /- prove a → b -/ },
+  tfae_have : 4 ↔ 2,
+  { /- prove d ↔ b -/ },
+    -- a b c d : Prop,
+    -- tfae_3_to_1 : c → a,
+    -- tfae_2_to_3 : b → c,
+    -- tfae_1_to_2 : a → b,
+    -- tfae_4_iff_2 : d ↔ b
+    -- ⊢ tfae [a, b, c, d]
+  tfae_finish,
+end
+</code></pre>
+</div>
+<div class="tactic">
+<h2 id="The `ext` attribute"><a href="#The `ext` attribute">The `ext` attribute</a></h2>
+<p>Tag lemmas of the form:</p>
+
+<p><code>lean
+ @[ext]
+ lemma my_collection.ext (a b : my_collection)
+   (h : ∀ x, a.lookup x = b.lookup y) :
+   a = b := ...
+</code></p>
+
+<p>The attribute indexes extensionality lemma using the type of the
+ objects (i.e. <code>my_collection</code>) which it gets from the statement of
+ the lemma.  In some cases, the same lemma can be used to state the
+ extensionality of multiple types that are definitionally equivalent.</p>
+
+<p><code>lean
+ attribute [ext [(→),thunk,stream]] funext
+</code></p>
+
+<p>Those parameters are cumulative. The following are equivalent:</p>
+
+<p><code>lean
+ attribute [ext [(→),thunk]] funext
+ attribute [ext [stream]] funext
+</code></p>
+
+<p>and</p>
+
+<p><code>lean
+ attribute [ext [(→),thunk,stream]] funext
+</code></p>
+
+<p>One removes type names from the list for one lemma with:</p>
+
+<p><code>lean
+ attribute [ext [-stream,-thunk]] funext
+</code></p>
+
+<p>Also, the following:</p>
+
+<p><code>lean
+ @[ext]
+ lemma my_collection.ext (a b : my_collection)
+   (h : ∀ x, a.lookup x = b.lookup y) :
+   a = b := ...
+</code></p>
+
+<p>is equivalent to</p>
+
+<p><code>lean
+ @[ext *]
+ lemma my_collection.ext (a b : my_collection)
+   (h : ∀ x, a.lookup x = b.lookup y) :
+   a = b := ...
+</code></p>
+
+<p>The <code>*</code> parameter indicates to simply infer the
+ type from the lemma's statement.</p>
+
+<p>This allows us specify type synonyms along with the type
+ that referred to in the lemma statement.</p>
+
+<p><code>lean
+ @[ext [*,my_type_synonym]]
+ lemma my_collection.ext (a b : my_collection)
+   (h : ∀ x, a.lookup x = b.lookup y) :
+   a = b := ...
+</code></p>
+
+<p>Attribute <code>ext</code> can be applied to a structure to generate its extensionality lemma:</p>
+
+<p><code>
+ @[ext]
+ structure foo (α : Type*) :=
+ (x y : ℕ)
+ (z : {z // z &lt; x})
+ (k : α)
+ (h : x &lt; y)
+</code></p>
+
+<p>will generate:</p>
+
+<p><code>
+ @[ext] lemma foo.ext : ∀ {α : Type u_1} (x y : foo α), x.x = y.x → x.y = y.y → x.z == y.z → x.k = y.k → x = y
+ lemma foo.ext_iff : ∀ {α : Type u_1} (x y : foo α), x = y ↔ x.x = y.x ∧ x.y = y.y ∧ x.z == y.z ∧ x.k = y.k
+</code></p>
+</div>
+<div class="tactic">
+<h2 id="The `reassoc` attribute"><a href="#The `reassoc` attribute">The `reassoc` attribute</a></h2>
+<p>The <code>reassoc</code> attribute can be applied to a lemma</p>
+
+<pre><code>@[reassoc]
+lemma some_lemma : foo ≫ bar = baz := ...
+</code></pre>
+
+<p>and produce</p>
+
+<pre><code>lemma some_lemma_assoc {Y : C} (f : X ⟶ Y) : foo ≫ bar ≫ f = baz ≫ f := ...
+</code></pre>
+
+<p>The name of the produced lemma can be specified with <code>@[reassoc other_lemma_name]</code>. If
+<code>simp</code> is added first, the generated lemma will also have the <code>simp</code> attribute.</p>
+</div>
+<div class="tactic">
+<h2 id="The reassoc_of function"><a href="#The reassoc_of function">The reassoc_of function</a></h2>
+<p><code>reassoc_of h</code> takes local assumption <code>h</code> and add a <code>≫ f</code> term on the right of both sides of the equality.
+Instead of creating a new assumption from the result, <code>reassoc_of h</code> stands for the proof of that reassociated
+statement. This prevents poluting the local context with complicated assumptions used only once or twice.</p>
+
+<p>In the following, assumption <code>h</code> is needed in a reassociated form. Instead of proving it as a new goal and adding it as
+an assumption, we use <code>reassoc_of h</code> as a rewrite rule which works just as well.</p>
+
+<pre><code>example (X Y Z W : C) (x : X ⟶ Y) (y : Y ⟶ Z) (z z' : Z ⟶ W) (w : X ⟶ Z)
+  (h : x ≫ y = w)
+  (h' : y ≫ z = y ≫ z') :
+  x ≫ y ≫ z = w ≫ z' :=
+begin
+  -- reassoc_of h : ∀ {X' : C} (f : W ⟶ X'), x ≫ y ≫ f = w ≫ f
+  rw [h',reassoc_of h],
+end
+</code></pre>
+
+<p>Although <code>reassoc_of</code> is not a tactic or a meta program, its type is generated
+through meta-programming to make it usable inside normal expressions.</p>
+</div>
+<div class="tactic">
+<h2 id="tidy"><a href="#tidy">tidy</a></h2>
+<p><code>tidy</code> attempts to use a variety of conservative tactics to solve the goals.
+In particular, <code>tidy</code> uses the <code>chain</code> tactic to repeatedly apply a list of tactics to
+the goal and recursively on new goals, until no tactic makes further progress.</p>
+
+<p><code>tidy</code> can report the tactic script it found using <code>tidy?</code>. As an example</p>
+
+<pre><code>example : ∀ x : unit, x = unit.star :=
+begin
+  tidy? -- Prints the trace message: "intros x, exact dec_trivial"
+end
+</code></pre>
+
+<p>The default list of tactics can be found by looking up the definition of
+<a href="https://github.com/leanprover/mathlib/blob/master/tactic/tidy.lean"><code>default_tidy_tactics</code></a>.</p>
+
+<p>This list can be overriden using <code>tidy { tactics :=  ... }</code>. (The list must be a list of
+<code>tactic string</code>, so that <code>tidy?</code> can report a usable tactic script.)</p>
+</div>
+<div class="tactic">
+<h2 id="unfold_coes"><a href="#unfold_coes">unfold_coes</a></h2>
+<p>Unfold coercion-related definitions</p>
+</div>
+<div class="tactic">
+<h2 id="use"><a href="#use">use</a></h2>
+<p>Similar to <code>existsi</code>. <code>use x</code> will instantiate the first term of an <code>∃</code> or <code>Σ</code> goal with <code>x</code>.
+Unlike <code>existsi</code>, <code>x</code> is elaborated with respect to the expected type.
+Equivalent to <code>refine ⟨x, _⟩</code>.</p>
+
+<p><code>use</code> will alternatively take a list of terms <code>[x0, ..., xn]</code>.</p>
+
+<p>Examples:</p>
+
+<pre><code>example (α : Type) : ∃ S : set α, S = S :=
+by use ∅
+
+example : ∃ x : ℤ, x = x :=
+by use 42
+
+example : ∃ a b c : ℤ, a + b + c = 6 :=
+by use [1, 2, 3]
+
+example : ∃ p : ℤ × ℤ, p.1 = 1 :=
+by use ⟨1, 42⟩
+</code></pre>
+</div>
+
 </div></div>
 <div class="column right"><div class="nav">
 <div class="search">
@@ -329,7 +1704,7 @@
 
 
 </div><div class="nav_sect">core</div>
-<div class="nav_sect_inner" id="core">
+<div class="nav_sect_inner hidden" id="core">
 <div class="nav_sect">data</div>
 <div class="nav_sect_inner hidden" id="core/data">
 <div class="nav_sect">buffer</div>
@@ -346,7 +1721,7 @@
 
 
 </div><div class="nav_sect">init</div>
-<div class="nav_sect_inner" id="core/init">
+<div class="nav_sect_inner hidden" id="core/init">
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="core/init/algebra">
 <a class="nav_file" id="core/init/algebra/classes.html" href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/classes.html">classes</a><br>
@@ -493,7 +1868,7 @@
 
 
 </div><div class="nav_sect">meta</div>
-<div class="nav_sect_inner" id="core/init/meta">
+<div class="nav_sect_inner hidden" id="core/init/meta">
 <div class="nav_sect">converter</div>
 <div class="nav_sect_inner hidden" id="core/init/meta/converter">
 <a class="nav_file" id="core/init/meta/converter/conv.html" href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/converter/conv.html">conv</a><br>
@@ -550,7 +1925,7 @@
 <a class="nav_file" id="core/init/meta/options.html" href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/options.html">options</a><br>
 <a class="nav_file" id="core/init/meta/pexpr.html" href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/pexpr.html">pexpr</a><br>
 <a class="nav_file" id="core/init/meta/rb_map.html" href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/rb_map.html">rb_map</a><br>
-<a class="nav_file visible" id="core/init/meta/rec_util.html" href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/rec_util.html">rec_util</a><br>
+<a class="nav_file" id="core/init/meta/rec_util.html" href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/rec_util.html">rec_util</a><br>
 <a class="nav_file" id="core/init/meta/ref.html" href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/ref.html">ref</a><br>
 <a class="nav_file" id="core/init/meta/relation_tactics.html" href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/relation_tactics.html">relation_tactics</a><br>
 <a class="nav_file" id="core/init/meta/rewrite_tactic.html" href="https://leanprover-community.github.io/mathlib_docs/core/init/meta/rewrite_tactic.html">rewrite_tactic</a><br>
