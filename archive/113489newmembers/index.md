@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Maths Challenges](65204MathsChallenges.html) (49 messages, latest: Dec 20 2019 at 07:56)
+
 * [subtype issues](93961subtypeissues.html) (45 messages, latest: Dec 20 2019 at 00:43)
 
 * [simple set proof](23357simplesetproof.html) (30 messages, latest: Dec 20 2019 at 00:26)
 
 * [mod 2 problem](25956mod2problem.html) (4 messages, latest: Dec 19 2019 at 08:42)
-
-* [Maths Challenges](65204MathsChallenges.html) (47 messages, latest: Dec 18 2019 at 22:18)
 
 * [error when using theorem/lemma instead of def](58110errorwhenusingtheoremlemmainsteadofdef.html) (12 messages, latest: Dec 18 2019 at 18:11)
 
