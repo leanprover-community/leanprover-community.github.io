@@ -118,6 +118,154 @@ I have two questions: </p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183897491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183897491">Kevin Buzzard (Dec 19 2019 at 23:59)</a>:</h4>
 <p>erm, does Theorem Proving In Lean talk about it?</p>
 
+<a name="183897608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183897608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183897608">Kevin Buzzard (Dec 20 2019 at 00:00)</a>:</h4>
+<p>Sticking with what you did, <code>have h6 : ∀ x, x ∈ s₁ ↔ x ∈ s₂, by intros; rw h5,</code></p>
+
+<a name="183897729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183897729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183897729">Kevin Buzzard (Dec 20 2019 at 00:02)</a>:</h4>
+<p>I don't know how many theorems there are about sets with two elements in the library! Here's a place to look: <a href="https://leanprover-community.github.io/mathlib_docs/data/set/basic.html" target="_blank" title="https://leanprover-community.github.io/mathlib_docs/data/set/basic.html">https://leanprover-community.github.io/mathlib_docs/data/set/basic.html</a></p>
+
+<a name="183897804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183897804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183897804">Kevin Buzzard (Dec 20 2019 at 00:03)</a>:</h4>
+<p><code>by</code> puts you into tactic mode (like <code>begin ... end</code>) and <code>rw</code> is a tactic which is hard to emulate in term mode (the mode you're writing in).</p>
+
+<a name="183897937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183897937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183897937">Kevin Buzzard (Dec 20 2019 at 00:05)</a>:</h4>
+<p>I can't find <code>example (a b x : U) : x ∈ ({a, b} : set U) ↔ x = a ∨ x = b </code> in mathlib :-/</p>
+
+<a name="183898124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183898124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183898124">Kevin Doran (Dec 20 2019 at 00:08)</a>:</h4>
+<p>Regarding the syntax:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">s₁</span><span class="o">:</span> <span class="n">set</span> <span class="n">U</span> <span class="o">:=</span> <span class="o">{</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">}</span>
+</pre></div>
+
+
+<p>I did a search for 'set' on the "Theorem Proving in Lean" guide, but I didn't recognize anything related to that syntax. But quite likely I might need some more background knowledge before I can make that call. </p>
+<p>I checked out the mathlib docs on set/basic. It looked like I could use <code>set.ext_iff</code>, but the IDE reports unknown identifier for <code>set.ext_iff</code>.</p>
+
+<a name="183898157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183898157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183898157">Kevin Buzzard (Dec 20 2019 at 00:09)</a>:</h4>
+<p>Did you import <code>data.set.basic</code> or <code>data.set</code>?</p>
+
+<a name="183898338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183898338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183898338">Kevin Doran (Dec 20 2019 at 00:12)</a>:</h4>
+<p>Just <code>data.set</code>, and tried referencing<code>ext_iff</code>with <code>set.basic.ext_iff</code> and <code>set.ext_iff</code>.<br>
+Should it be <code>import data.set.basic</code>?</p>
+
+<a name="183898347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183898347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183898347">Kevin Buzzard (Dec 20 2019 at 00:12)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_doubleton_iff</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">x</span> <span class="o">:</span> <span class="n">U</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="o">({</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">}</span> <span class="o">:</span> <span class="n">set</span> <span class="n">U</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">∨</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="k">by</span> <span class="n">rintro</span> <span class="o">(</span><span class="n">h</span> <span class="bp">|</span> <span class="n">h</span> <span class="bp">|</span> <span class="n">h</span><span class="o">)</span><span class="bp">;</span> <span class="n">cases</span> <span class="n">h</span><span class="bp">;</span> <span class="n">simp</span><span class="o">,</span>
+  <span class="k">begin</span> <span class="n">rintro</span> <span class="o">(</span><span class="n">h</span> <span class="bp">|</span> <span class="n">h</span><span class="o">),</span> <span class="o">{</span><span class="n">right</span><span class="o">,</span> <span class="n">left</span><span class="o">,</span> <span class="n">assumption</span><span class="o">},</span> <span class="o">{</span><span class="n">left</span><span class="o">,</span> <span class="n">assumption</span><span class="o">}</span> <span class="kn">end</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>I'm sure there will be a much better proof of that.</p>
+
+<a name="183898394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183898394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183898394">Kevin Buzzard (Dec 20 2019 at 00:13)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">set</span><span class="bp">.</span><span class="n">ext_iff</span> <span class="c1">-- set.ext_iff : ∀ (s t : set ?M_1), s = t ↔ ∀ (x : ?M_1), x ∈ s ↔ x ∈ t</span>
+</pre></div>
+
+
+<p>Is your mathlib over a year old? That might also explain it</p>
+
+<a name="183898418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183898418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183898418">Joe (Dec 20 2019 at 00:13)</a>:</h4>
+<p>I remember the definition of <code>{a, b}</code> is this</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="err">∈</span> <span class="o">({</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">}</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">))</span> <span class="bp">↔</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">∨</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">∨</span> <span class="n">false</span> <span class="o">:=</span> <span class="n">iff</span><span class="bp">.</span><span class="n">rfl</span>
+</pre></div>
+
+
+<p>and so</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="err">∈</span> <span class="o">({</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">}</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">))</span> <span class="bp">↔</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">∨</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">∨</span> <span class="n">false</span> <span class="o">:=</span> <span class="n">iff</span><span class="bp">.</span><span class="n">rfl</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="o">({</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">}</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">∨</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">foo</span><span class="o">,</span> <span class="n">or_false</span><span class="o">]</span>
+</pre></div>
+
+<a name="183898447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183898447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183898447">Kenny Lau (Dec 20 2019 at 00:14)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">theorem</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_doubleton_iff</span> <span class="o">{</span><span class="n">U</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">x</span> <span class="o">:</span> <span class="n">U</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="o">({</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">}</span> <span class="o">:</span> <span class="n">set</span> <span class="n">U</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">∨</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">or</span><span class="bp">.</span><span class="n">comm</span><span class="o">]</span>
+</pre></div>
+
+<a name="183898458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183898458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183898458">Kevin Doran (Dec 20 2019 at 00:14)</a>:</h4>
+<p>Just using the live env <code>https://leanprover.github.io/live/3.4.1</code></p>
+
+<a name="183898479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183898479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183898479">Kevin Buzzard (Dec 20 2019 at 00:14)</a>:</h4>
+<p>eew your mathlib is very old, use the more modern live env</p>
+
+<a name="183898519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183898519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183898519">Kevin Buzzard (Dec 20 2019 at 00:15)</a>:</h4>
+<p>Try a challenge here: <a href="https://github.com/kbuzzard/xena/blob/master/Maths_Challenges/challenges.md" target="_blank" title="https://github.com/kbuzzard/xena/blob/master/Maths_Challenges/challenges.md">https://github.com/kbuzzard/xena/blob/master/Maths_Challenges/challenges.md</a> . That'll take you to a modern mathlib</p>
+
+<a name="183898527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183898527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183898527">Kevin Buzzard (Dec 20 2019 at 00:15)</a>:</h4>
+<p>Then delete the challenge and bookmark ;-)</p>
+
+<a name="183898530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183898530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183898530">Kevin Doran (Dec 20 2019 at 00:15)</a>:</h4>
+<p>Okay! That explains a lot. I thought there was some special syntax to use <code>ext_iff</code> from <code>ext</code>, but it's just an old version!</p>
+
+<a name="183898636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183898636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183898636">Kevin Doran (Dec 20 2019 at 00:17)</a>:</h4>
+<p>One final question: if I see some other unknown syntax, like the set notation <code>{a , b}</code>, is there a method of searching Lean code or mathlib for the definition?</p>
+
+<a name="183898740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183898740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183898740">Kevin Buzzard (Dec 20 2019 at 00:19)</a>:</h4>
+<p>If you see some unknown notation, then you can search for it with <code>#print notation</code>. This does not work with the following very small amount of Lean inbuilt syntax: </p>
+<div class="codehilite"><pre><span></span>[a, b]
+{a, b, c}
+∀
+∃
+</pre></div>
+
+
+<p>and the ones I've forgotten</p>
+
+<a name="183898824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183898824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183898824">Kevin Doran (Dec 20 2019 at 00:20)</a>:</h4>
+<p>okay, noted. Thanks a million!</p>
+
+<a name="183898834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183898834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183898834">Kevin Buzzard (Dec 20 2019 at 00:20)</a>:</h4>
+<p>Most of the time Lean is very good at being able to tell you absolutely everything about an object which you can't understand. But there are just a few edge cases which you have to know.</p>
+
+<a name="183898842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183898842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183898842">Kevin Buzzard (Dec 20 2019 at 00:20)</a>:</h4>
+<p>This might change in Lean 4.</p>
+
+<a name="183898979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183898979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183898979">Joe (Dec 20 2019 at 00:22)</a>:</h4>
+<p>Or you can shut down notations entirely and see what they really are</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="kn">notation</span> <span class="n">false</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="err">∈</span> <span class="o">({</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">}</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">))</span> <span class="bp">↔</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">∨</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">∨</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- iff (has_mem.mem x (has_insert.insert b (singleton a))) (or (eq x b) (or (eq x a) false))</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="183899046"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183899046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183899046">Joe (Dec 20 2019 at 00:23)</a>:</h4>
+<p>So <code>{a, b}</code> is <code>has_insert.insert b (singleton a)</code> (<code>set.insert b (singleton a)</code>).</p>
+
+<a name="183899123"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183899123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183899123">Kevin Buzzard (Dec 20 2019 at 00:24)</a>:</h4>
+<p>oh wow I thought that this would just give you junk.</p>
+
+<a name="183899216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20set%20proof/near/183899216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23357simplesetproof.html#183899216">Kevin Buzzard (Dec 20 2019 at 00:26)</a>:</h4>
+<p>That trick works for <code>∃</code> too, but not for <code>∀</code></p>
+
 
 {% endraw %}
 

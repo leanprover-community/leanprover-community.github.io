@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [simple set proof](23357simplesetproof.html) (5 messages, latest: Dec 19 2019 at 23:59)
+* [subtype issues](93961subtypeissues.html) (45 messages, latest: Dec 20 2019 at 00:43)
 
-* [subtype issues](93961subtypeissues.html) (43 messages, latest: Dec 19 2019 at 22:55)
+* [simple set proof](23357simplesetproof.html) (30 messages, latest: Dec 20 2019 at 00:26)
 
 * [mod 2 problem](25956mod2problem.html) (4 messages, latest: Dec 19 2019 at 08:42)
 
