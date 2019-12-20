@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Reusing `finset.prod` facts for lists](93009Reusingfinsetprodfactsforlists.html) (10 messages, latest: Dec 20 2019 at 17:39)
+* [Reusing `finset.prod` facts for lists](93009Reusingfinsetprodfactsforlists.html) (11 messages, latest: Dec 20 2019 at 19:06)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (247 messages, latest: Dec 20 2019 at 16:44)
 
