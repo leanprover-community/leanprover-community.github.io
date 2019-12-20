@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [type checker plug and play](43449typecheckerplugandplay.html) (18 messages, latest: Dec 20 2019 at 11:50)
+* [type checker plug and play](43449typecheckerplugandplay.html) (27 messages, latest: Dec 20 2019 at 12:24)
 
 * [see Note \[default priority\]](84243seeNotedefaultpriority.html) (6 messages, latest: Dec 19 2019 at 20:11)
 

@@ -88,6 +88,42 @@ permalink: archive/113488general/43449typecheckerplugandplay.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20checker%20plug%20and%20play/near/183929068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43449typecheckerplugandplay.html#183929068">Tim Daly (Dec 20 2019 at 11:50)</a>:</h4>
 <p>Even more interesting is his distinction between proof relevant and proof irrelevant rules, such as equality. A conjecture would be that Oracle systems (i.e. computer algebra) are ideal for answering proof irrelevant questions</p>
 
+<a name="183929930"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20checker%20plug%20and%20play/near/183929930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43449typecheckerplugandplay.html#183929930">Mario Carneiro (Dec 20 2019 at 12:04)</a>:</h4>
+<p>The kernel is the only thing that produces elements of the abstract data type "judgment". This is what ensures soundness and a "small trusted kernel" mentioned earlier in the talk</p>
+
+<a name="183929988"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20checker%20plug%20and%20play/near/183929988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43449typecheckerplugandplay.html#183929988">Mario Carneiro (Dec 20 2019 at 12:05)</a>:</h4>
+<p>So user code that wants to return a proof of |- A = B has to call kernel functions in order to construct the data, that's the whole point</p>
+
+<a name="183930042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20checker%20plug%20and%20play/near/183930042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43449typecheckerplugandplay.html#183930042">Mario Carneiro (Dec 20 2019 at 12:06)</a>:</h4>
+<p>you can't just respond "yes" to the query equal(A,B)</p>
+
+<a name="183930172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20checker%20plug%20and%20play/near/183930172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43449typecheckerplugandplay.html#183930172">Tim Daly (Dec 20 2019 at 12:09)</a>:</h4>
+<p>The question equal(A,B) question becomes "Is there a (proven) coercion between A and B?". Given a proof of the coercion code in Axiom (already provided by a prior Lean proof) the answer to the question equal(A,B) where A is POLY(FRAC(INT)) and B is FRAC(POLY(INT)) is decideable and proof irrelevant.</p>
+
+<a name="183930603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20checker%20plug%20and%20play/near/183930603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43449typecheckerplugandplay.html#183930603">Mario Carneiro (Dec 20 2019 at 12:15)</a>:</h4>
+<p>In Andrej's system, equal(A,B) means "please provide a proof of the convertibility of A and B, i.e. |- A = B". This proof can go by any means, including equality reflection on some theorem that you have lying around if the theory supports it, but it needs an actual proof; trusted code doesn't work for this purpose</p>
+
+<a name="183930938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20checker%20plug%20and%20play/near/183930938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43449typecheckerplugandplay.html#183930938">Tim Daly (Dec 20 2019 at 12:20)</a>:</h4>
+<p>The Axiom Sane effort is using Lean to prove the coercion code. So the coercion becomes an axiom in Lean. There is an "actual proof" in Lean which is a proof of the Axiom code, the proof can be provided as it is carried with the code.</p>
+
+<a name="183930965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20checker%20plug%20and%20play/near/183930965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43449typecheckerplugandplay.html#183930965">Tim Daly (Dec 20 2019 at 12:21)</a>:</h4>
+<p>The coercion code is essentially a Lean tactic.</p>
+
+<a name="183931071"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20checker%20plug%20and%20play/near/183931071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43449typecheckerplugandplay.html#183931071">Tim Daly (Dec 20 2019 at 12:23)</a>:</h4>
+<p>Ultimately  the Axiom algorithms can all be used as Lean tactics or Lean axioms once they are proven.</p>
+
+<a name="183931151"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20checker%20plug%20and%20play/near/183931151" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43449typecheckerplugandplay.html#183931151">Tim Daly (Dec 20 2019 at 12:24)</a>:</h4>
+<p>One could compute a GCD by calling the Axiom code rather than using Peano</p>
+
 
 {% endraw %}
 
