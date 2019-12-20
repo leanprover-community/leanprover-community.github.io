@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [DTT](81261DTT.html) (1 message, latest: Dec 20 2019 at 20:34)
+* [DTT](81261DTT.html) (2 messages, latest: Dec 20 2019 at 21:09)
 
 * [Reusing `finset.prod` facts for lists](93009Reusingfinsetprodfactsforlists.html) (11 messages, latest: Dec 20 2019 at 19:06)
 
