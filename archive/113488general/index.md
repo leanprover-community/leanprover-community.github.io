@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [type checker plug and play](43449typecheckerplugandplay.html) (4 messages, latest: Dec 20 2019 at 08:48)
+
 * [see Note \[default priority\]](84243seeNotedefaultpriority.html) (6 messages, latest: Dec 19 2019 at 20:11)
 
 * [local ring diamond?](97591localringdiamond.html) (9 messages, latest: Dec 19 2019 at 19:49)
