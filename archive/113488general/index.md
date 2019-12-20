@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Reusing `finset.prod` facts for lists](93009Reusingfinsetprodfactsforlists.html) (5 messages, latest: Dec 20 2019 at 15:26)
+* [markdown module docstrings](07338markdownmoduledocstrings.html) (247 messages, latest: Dec 20 2019 at 16:44)
+
+* [Reusing `finset.prod` facts for lists](93009Reusingfinsetprodfactsforlists.html) (8 messages, latest: Dec 20 2019 at 16:42)
 
 * [type checker plug and play](43449typecheckerplugandplay.html) (27 messages, latest: Dec 20 2019 at 12:24)
 
@@ -20,8 +22,6 @@ permalink: archive/113488general/index.html
 * [Theoretical Mathematics](62661TheoreticalMathematics.html) (16 messages, latest: Dec 18 2019 at 22:38)
 
 * [mathlib-scripts](42935mathlibscripts.html) (2 messages, latest: Dec 17 2019 at 21:02)
-
-* [markdown module docstrings](07338markdownmoduledocstrings.html) (242 messages, latest: Dec 17 2019 at 12:57)
 
 * [ATP in the news](89243ATPinthenews.html) (1 message, latest: Dec 17 2019 at 12:55)
 
