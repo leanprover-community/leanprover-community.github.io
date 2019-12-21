@@ -364,6 +364,43 @@ instance group : (presented_group rels)</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184011026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184011026">Jalex Stark (Dec 21 2019 at 13:34)</a>:</h4>
 <p>i guess the term <code>lean ∀ x : presented_group my_rels2, x * x = 1</code> can be turned into the term<code>lean ∀ x:pauli_two, x * x = 1</code> by one application of definitional equality, but you can't make that substitution before the compiler has made up its mind about whether the second term makes sense</p>
 
+<a name="184012753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184012753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184012753">Jalex Stark (Dec 21 2019 at 14:32)</a>:</h4>
+<p>I don't know how to access a statment like "if w \in rels, then w = 1 in presented_group rels". I also don't know how to access the quotient map from my free group to my presented group. There is a lemma in the presented_groups file that looks awfully relevant but I can't figure out how to make any interesting terms with it. </p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">to_group_eq_one_of_mem_closure</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">group</span><span class="bp">.</span><span class="n">normal_closure</span> <span class="n">rels</span><span class="o">,</span> <span class="n">F</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">x</span> <span class="n">w</span><span class="o">,</span> <span class="o">(</span><span class="n">is_group_hom</span><span class="bp">.</span><span class="n">mem_ker</span> <span class="n">F</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span>  <span class="o">((</span><span class="n">closure_rels_subset_ker</span> <span class="n">h</span><span class="o">)</span> <span class="n">w</span><span class="o">)</span>
+</pre></div>
+
+
+<p>(I would love if the answer to my question was "read X tutorial or Y book chapter more closely to understand Z fundamental concept that you clearly lack understanding of")</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- goal: define the two qubit pauli group</span>
+<span class="kn">import</span> <span class="n">tactic</span>
+<span class="kn">import</span> <span class="n">group_theory</span><span class="bp">.</span><span class="n">presented_group</span>
+
+<span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group</span>
+
+<span class="kn">open</span> <span class="n">presented_group</span>
+
+<span class="n">def</span> <span class="n">gen_J</span> <span class="o">:</span> <span class="n">free_group</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">3</span><span class="o">)</span> <span class="o">:=</span> <span class="n">free_group</span><span class="bp">.</span><span class="n">of</span> <span class="mi">0</span>
+<span class="n">def</span> <span class="n">gen_x</span> <span class="o">:</span> <span class="n">free_group</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">3</span><span class="o">)</span> <span class="o">:=</span> <span class="n">free_group</span><span class="bp">.</span><span class="n">of</span> <span class="mi">1</span>
+<span class="n">def</span> <span class="n">gen_z</span> <span class="o">:</span> <span class="n">free_group</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">3</span><span class="o">)</span> <span class="o">:=</span> <span class="n">free_group</span><span class="bp">.</span><span class="n">of</span> <span class="mi">2</span>
+
+<span class="n">def</span> <span class="n">my_rels</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">free_group</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">3</span><span class="o">))</span> <span class="o">:=</span>
+<span class="o">{</span><span class="n">gen_J</span><span class="err">^</span><span class="mi">2</span><span class="o">,</span> <span class="n">gen_x</span><span class="err">^</span><span class="mi">2</span><span class="o">,</span> <span class="n">gen_z</span><span class="err">^</span><span class="mi">2</span><span class="o">,</span> <span class="n">gen_J</span><span class="bp">*</span><span class="n">gen_x</span><span class="bp">*</span><span class="n">gen_z</span><span class="bp">*</span><span class="n">gen_x</span><span class="bp">⁻¹*</span><span class="n">gen_z</span><span class="bp">⁻¹</span><span class="o">}</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">group</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">pauli_two</span> <span class="o">:=</span> <span class="n">presented_group</span> <span class="n">my_rels</span>
+
+<span class="n">def</span> <span class="n">J</span> <span class="o">:=</span> <span class="o">((</span><span class="n">presented_group</span><span class="bp">.</span><span class="n">of</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">pauli_two</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">x</span> <span class="o">:=</span> <span class="o">((</span><span class="n">presented_group</span><span class="bp">.</span><span class="n">of</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">pauli_two</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">z</span> <span class="o">:=</span> <span class="o">((</span><span class="n">presented_group</span><span class="bp">.</span><span class="n">of</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:</span> <span class="n">pauli_two</span><span class="o">)</span>
+
+<span class="kn">theorem</span> <span class="n">rel1</span> <span class="o">:</span> <span class="n">J</span><span class="err">^</span><span class="mi">2</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
 

@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [a concrete group](48802aconcretegroup.html) (61 messages, latest: Dec 21 2019 at 13:34)
+* [a concrete group](48802aconcretegroup.html) (62 messages, latest: Dec 21 2019 at 14:32)
 
 * [print redundant parentheses](52885printredundantparentheses.html) (4 messages, latest: Dec 21 2019 at 13:02)
 
