@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [DTT](81261DTT.html) (2 messages, latest: Dec 20 2019 at 21:09)
+* [Reusing `finset.prod` facts for lists](93009Reusingfinsetprodfactsforlists.html) (14 messages, latest: Dec 21 2019 at 00:59)
 
-* [Reusing `finset.prod` facts for lists](93009Reusingfinsetprodfactsforlists.html) (11 messages, latest: Dec 20 2019 at 19:06)
+* [DTT](81261DTT.html) (2 messages, latest: Dec 20 2019 at 21:09)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (247 messages, latest: Dec 20 2019 at 16:44)
 
