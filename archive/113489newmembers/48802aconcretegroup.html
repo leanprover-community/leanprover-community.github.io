@@ -202,6 +202,168 @@ Do you mean awkward like, I will have to understand details about how lean repre
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/183729887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#183729887">Mario Carneiro (Dec 18 2019 at 08:40)</a>:</h4>
 <p>I don't see why, provided you set up the operation right</p>
 
+<a name="184010176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010176">Jalex Stark (Dec 21 2019 at 13:06)</a>:</h4>
+<p>Using the definitions that Alex J Best gave, it seems like the type system has less of an understanding of the claim "pauli_two is a group" than the claim "free_group (fin 2)" is a group. </p>
+<p>Lean knows how to deal with <br>
+theorem order_not_two : ∀ x : (free_group (fin 3)), x≠ 1 → x * x ≠ 1</p>
+<p>but not<br>
+theorem order_two : ∀ x : pauli_two, x * x = 1<br>
+in which case it says it can't find has_mul or has_one for pauli_two</p>
+
+<a name="184010370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010370">Jalex Stark (Dec 21 2019 at 13:12)</a>:</h4>
+<p>the presented_group file has this line<br>
+instance (rels : set (free_group α)) : group (presented_group (rels)) :=<br>
+quotient_group.group _</p>
+<p>and I guess I expected it to have something like<br>
+instance group : (presented_group rels)</p>
+
+<a name="184010375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010375">Kevin Buzzard (Dec 21 2019 at 13:12)</a>:</h4>
+<p>Can you post the current working version of your code? The errors just mean that there is no term of tyoe <code>group G</code> for your group <code>G</code></p>
+
+<a name="184010383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010383">Jalex Stark (Dec 21 2019 at 13:13)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+<span class="kn">import</span> <span class="n">group_theory</span><span class="bp">.</span><span class="n">presented_group</span>
+
+<span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group</span>
+
+<span class="c1">-- open presented_group</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">free_group</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">3</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">J</span> <span class="o">:</span> <span class="n">free_group</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">3</span><span class="o">)</span> <span class="o">:=</span> <span class="n">free_group</span><span class="bp">.</span><span class="n">of</span> <span class="mi">0</span>
+<span class="n">def</span> <span class="n">x</span> <span class="o">:</span> <span class="n">free_group</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">3</span><span class="o">)</span> <span class="o">:=</span> <span class="n">free_group</span><span class="bp">.</span><span class="n">of</span> <span class="mi">1</span>
+<span class="n">def</span> <span class="n">z</span> <span class="o">:</span> <span class="n">free_group</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">3</span><span class="o">)</span> <span class="o">:=</span> <span class="n">free_group</span><span class="bp">.</span><span class="n">of</span> <span class="mi">2</span>
+
+<span class="c1">--check everything makes sense so far</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">to_bool</span> <span class="o">(</span><span class="n">z</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span><span class="bp">⁻¹</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="c1">-- if you use pauli_two_gens like Johan you need to tell lean that this is decidable</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">to_bool</span> <span class="o">(</span><span class="n">J</span> <span class="bp">*</span> <span class="o">(</span><span class="n">J</span><span class="bp">⁻¹</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">my_rels2</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">free_group</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">3</span><span class="o">))</span> <span class="o">:=</span>
+<span class="o">{</span><span class="n">J</span><span class="err">^</span><span class="mi">2</span><span class="o">,</span> <span class="n">x</span><span class="err">^</span><span class="mi">2</span><span class="o">,</span> <span class="n">z</span><span class="err">^</span><span class="mi">2</span><span class="o">,</span> <span class="n">J</span><span class="bp">*</span><span class="n">x</span><span class="bp">*</span><span class="n">z</span><span class="bp">*</span><span class="n">x</span><span class="bp">⁻¹*</span><span class="n">z</span><span class="bp">⁻¹</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">pauli_two</span> <span class="o">:=</span> <span class="n">presented_group</span> <span class="n">my_rels2</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">my_rels2</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">pauli_two</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">group</span> <span class="n">pauli_two</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">has_pow</span> <span class="o">(</span><span class="n">free_group</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">3</span><span class="o">))</span> <span class="bp">ℕ</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">has_pow</span> <span class="o">(</span><span class="n">pauli_two</span><span class="o">)</span> <span class="bp">ℕ</span>
+
+<span class="kn">open</span> <span class="n">free_group</span>
+
+<span class="kn">theorem</span> <span class="n">order_not_two</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="o">(</span><span class="n">free_group</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">3</span><span class="o">)),</span> <span class="n">x</span><span class="bp">≠</span> <span class="mi">1</span> <span class="bp">→</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">≠</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">rintros</span>  <span class="bp">⟨</span> <span class="n">L</span><span class="bp">⟩</span> <span class="o">,</span>
+<span class="n">induction</span> <span class="n">L</span> <span class="k">with</span> <span class="n">hd</span> <span class="n">tl</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">simp</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">theorem</span> <span class="n">order_two</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">pauli_two</span><span class="o">,</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="184010432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010432">Kevin Buzzard (Dec 21 2019 at 13:14)</a>:</h4>
+<p>Can you put it all in quotes so it displays properly?</p>
+
+<a name="184010441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010441">Kevin Buzzard (Dec 21 2019 at 13:15)</a>:</h4>
+<p><code> ```lean </code> at the top</p>
+
+<a name="184010444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010444">Kevin Buzzard (Dec 21 2019 at 13:15)</a>:</h4>
+<p>And <code> ``` </code> at the end</p>
+
+<a name="184010604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010604">Jalex Stark (Dec 21 2019 at 13:20)</a>:</h4>
+<blockquote>
+<p>there is no term of type group G for your group G</p>
+</blockquote>
+<p>If I construct such a term manually, how do I get the compiler to notice it when I'm writing statements about G?</p>
+
+<a name="184010615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010615">Kevin Buzzard (Dec 21 2019 at 13:21)</a>:</h4>
+<p>which version of lean/mathlib are you using? Your proof of <code>order_not_two</code> doesn't compile for me</p>
+
+<a name="184010660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010660">Jalex Stark (Dec 21 2019 at 13:22)</a>:</h4>
+<p>oh, sorry, it doesn't compile for me either</p>
+
+<a name="184010663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010663">Jalex Stark (Dec 21 2019 at 13:22)</a>:</h4>
+<p>it had been a sorry and I  had been trying to prove it and forgot to revert it before posting</p>
+
+<a name="184010666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010666">Kevin Buzzard (Dec 21 2019 at 13:22)</a>:</h4>
+<p><code>instance : group pauli_two := by unfold pauli_two; apply_instance</code></p>
+
+<a name="184010667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010667">Kevin Buzzard (Dec 21 2019 at 13:22)</a>:</h4>
+<p>is what you're missing.</p>
+
+<a name="184010674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010674">Kevin Buzzard (Dec 21 2019 at 13:23)</a>:</h4>
+<p>or alternatively</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">group</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">pauli_two</span> <span class="o">:=</span> <span class="n">presented_group</span> <span class="n">my_rels2</span>
+</pre></div>
+
+<a name="184010721"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010721">Kevin Buzzard (Dec 21 2019 at 13:25)</a>:</h4>
+<p>The type class inference system handles the job of coming up with e.g. what notation means for a given type. Your definition of <code>pauli_two</code> is just a definition of a new type -- if you hover over <code>presented_group</code> then you'll see that it just returns something of type <code>Type</code>.</p>
+
+<a name="184010731"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010731">Jalex Stark (Dec 21 2019 at 13:25)</a>:</h4>
+<p>that @derive clause makes a lot of sense to me coming from programming in ocaml</p>
+
+<a name="184010735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010735">Kevin Buzzard (Dec 21 2019 at 13:25)</a>:</h4>
+<p>OK great, it's brand spanking new in Lean.</p>
+
+<a name="184010778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010778">Jalex Stark (Dec 21 2019 at 13:26)</a>:</h4>
+<p>would it make sense for presented_group to return a type decorated with a group instance?</p>
+
+<a name="184010785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010785">Kevin Buzzard (Dec 21 2019 at 13:26)</a>:</h4>
+<p>I am not a computer scientist, all I can say is that because groups are "partially bundled" this is what we have to do.</p>
+
+<a name="184010797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010797">Kevin Buzzard (Dec 21 2019 at 13:27)</a>:</h4>
+<p>Another alternative is that <code>presented_group</code> returns a term of type <code>Group</code> where <code>Group</code> is the category of groups.</p>
+
+<a name="184010800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010800">Jalex Stark (Dec 21 2019 at 13:27)</a>:</h4>
+<p>ok, I think I can accept this as a fact of life.</p>
+
+<a name="184010802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010802">Kevin Buzzard (Dec 21 2019 at 13:27)</a>:</h4>
+<p>If you do it that way then all your maps between groups will be morphisms in the category and you'll lose some of the cool advantages of functional programming because they won't be functions any more. Or something.</p>
+
+<a name="184010842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010842">Kevin Buzzard (Dec 21 2019 at 13:28)</a>:</h4>
+<p>In short, this is a design decision</p>
+
+<a name="184010847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010847">Kevin Buzzard (Dec 21 2019 at 13:28)</a>:</h4>
+<p>and the less I say about it the better ;-) because I know nothing about the pros and cons. There is a section about this in the mathlib paper.</p>
+
+<a name="184010861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010861">Kevin Buzzard (Dec 21 2019 at 13:29)</a>:</h4>
+<p>Note that <code>theorem order_two : ∀ x : presented_group my_rels2, x * x = 1 := by sorry</code> works fine, because the typeclass system knows that <code>presented_group R</code> is a group.</p>
+
+<a name="184010922"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184010922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184010922">Kevin Buzzard (Dec 21 2019 at 13:31)</a>:</h4>
+<p>section 4.1.1 of <a href="https://leanprover-community.github.io/papers/mathlib-paper.pdf" target="_blank" title="https://leanprover-community.github.io/papers/mathlib-paper.pdf">the mathlib paper</a> talks about the design decisions.</p>
+
+<a name="184011026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/a%20concrete%20group/near/184011026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48802aconcretegroup.html#184011026">Jalex Stark (Dec 21 2019 at 13:34)</a>:</h4>
+<p>i guess the term <code>lean ∀ x : presented_group my_rels2, x * x = 1</code> can be turned into the term<code>lean ∀ x:pauli_two, x * x = 1</code> by one application of definitional equality, but you can't make that substitution before the compiler has made up its mind about whether the second term makes sense</p>
+
 
 {% endraw %}
 

@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [print redundant parentheses](52885printredundantparentheses.html) (3 messages, latest: Dec 21 2019 at 12:57)
+* [a concrete group](48802aconcretegroup.html) (61 messages, latest: Dec 21 2019 at 13:34)
+
+* [print redundant parentheses](52885printredundantparentheses.html) (4 messages, latest: Dec 21 2019 at 13:02)
 
 * [difference between two forms](54455differencebetweentwoforms.html) (3 messages, latest: Dec 21 2019 at 09:09)
 
@@ -22,8 +24,6 @@ permalink: archive/113489newmembers/index.html
 * [mod 2 problem](25956mod2problem.html) (4 messages, latest: Dec 19 2019 at 08:42)
 
 * [error when using theorem/lemma instead of def](58110errorwhenusingtheoremlemmainsteadofdef.html) (12 messages, latest: Dec 18 2019 at 18:11)
-
-* [a concrete group](48802aconcretegroup.html) (34 messages, latest: Dec 18 2019 at 08:40)
 
 * [case splitting the wrong way](20762casesplittingthewrongway.html) (3 messages, latest: Dec 18 2019 at 06:54)
 
