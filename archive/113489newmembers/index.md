@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [cache-olean user confusion?](49795cacheoleanuserconfusion.html) (22 messages, latest: Dec 21 2019 at 15:48)
+* [a concrete group](48802aconcretegroup.html) (66 messages, latest: Dec 21 2019 at 17:21)
 
-* [a concrete group](48802aconcretegroup.html) (65 messages, latest: Dec 21 2019 at 15:44)
+* [cache-olean user confusion?](49795cacheoleanuserconfusion.html) (22 messages, latest: Dec 21 2019 at 15:48)
 
 * [print redundant parentheses](52885printredundantparentheses.html) (4 messages, latest: Dec 21 2019 at 13:02)
 
