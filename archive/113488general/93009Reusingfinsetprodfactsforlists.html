@@ -85,6 +85,57 @@ permalink: archive/113488general/93009Reusingfinsetprodfactsforlists.html
   <span class="o">(</span><span class="n">hw</span> <span class="o">:</span> <span class="n">s</span><span class="bp">.</span><span class="n">sum</span> <span class="n">w</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">s</span><span class="bp">.</span><span class="n">prod</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">z</span> <span class="n">i</span><span class="o">)</span> <span class="err">^</span> <span class="o">(</span><span class="n">w</span> <span class="n">i</span><span class="o">))</span> <span class="bp">≤</span> <span class="n">s</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">w</span> <span class="n">i</span> <span class="bp">*</span> <span class="n">z</span> <span class="n">i</span><span class="o">)</span> <span class="o">:=</span>
 </pre></div>
 
+<a name="183988196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reusing%20%60finset.prod%60%20facts%20for%20lists/near/183988196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93009Reusingfinsetprodfactsforlists.html#183988196">Kevin Buzzard (Dec 21 2019 at 01:01)</a>:</h4>
+<p><code>∀ l : list α, (fin_range (length l)).prod (λ i, l.nth_le i.1 i.2) = l.prod</code> doesn't compile -- Lean can't find <code>⊢ has_one (fin (length l))</code>. These things should surely be easy to prove by induction on <code>l</code> right?</p>
+
+<a name="183988511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reusing%20%60finset.prod%60%20facts%20for%20lists/near/183988511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93009Reusingfinsetprodfactsforlists.html#183988511">Kevin Buzzard (Dec 21 2019 at 01:08)</a>:</h4>
+<div class="codehilite"><pre><span></span>failed to synthesize type class instance for
+x r : ℝ≥0
+⊢ has_pow ℝ ℝ
+</pre></div>
+
+
+<p>I can't get anything to work</p>
+
+<a name="183988625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reusing%20%60finset.prod%60%20facts%20for%20lists/near/183988625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93009Reusingfinsetprodfactsforlists.html#183988625">Kevin Buzzard (Dec 21 2019 at 01:10)</a>:</h4>
+<p>But I see your point. A finset is not enough here because of duplicates. You need to use this <code>finset.sum univ</code> trick of Chris I guess.</p>
+
+<a name="183988868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reusing%20%60finset.prod%60%20facts%20for%20lists/near/183988868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93009Reusingfinsetprodfactsforlists.html#183988868">Mario Carneiro (Dec 21 2019 at 01:17)</a>:</h4>
+<p>I think we need an ergonomic way to form "fin n -&gt; A" vectors from concrete lists of values, i.e. vector.cons</p>
+
+<a name="183988871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reusing%20%60finset.prod%60%20facts%20for%20lists/near/183988871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93009Reusingfinsetprodfactsforlists.html#183988871">Mario Carneiro (Dec 21 2019 at 01:17)</a>:</h4>
+<p>that would solve this problem</p>
+
+<a name="183989159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reusing%20%60finset.prod%60%20facts%20for%20lists/near/183989159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93009Reusingfinsetprodfactsforlists.html#183989159">Mario Carneiro (Dec 21 2019 at 01:25)</a>:</h4>
+<p>I also can't find an instance of <code>has_pow nnreal nnreal</code>. Was this added at some point?</p>
+
+<a name="183989173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reusing%20%60finset.prod%60%20facts%20for%20lists/near/183989173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93009Reusingfinsetprodfactsforlists.html#183989173">Yury G. Kudryashov (Dec 21 2019 at 01:25)</a>:</h4>
+<p>No, that's why I define it in my code.</p>
+
+<a name="183989175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reusing%20%60finset.prod%60%20facts%20for%20lists/near/183989175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93009Reusingfinsetprodfactsforlists.html#183989175">Mario Carneiro (Dec 21 2019 at 01:25)</a>:</h4>
+<p>that's not very MWE</p>
+
+<a name="183989384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reusing%20%60finset.prod%60%20facts%20for%20lists/near/183989384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93009Reusingfinsetprodfactsforlists.html#183989384">Yury G. Kudryashov (Dec 21 2019 at 01:30)</a>:</h4>
+<p>For an MWE, let's one can try to deduce</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">list</span><span class="bp">.</span><span class="n">prod_mul</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_monoid</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">α</span> <span class="bp">×</span> <span class="n">α</span><span class="o">))</span> <span class="o">:</span> <span class="o">(</span><span class="n">l</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">i</span><span class="bp">.</span><span class="n">fst</span> <span class="bp">*</span> <span class="n">i</span><span class="bp">.</span><span class="n">snd</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">×</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">))</span><span class="bp">.</span><span class="n">prod</span> <span class="bp">=</span> <span class="o">(</span><span class="n">l</span><span class="bp">.</span><span class="n">map</span> <span class="n">prod</span><span class="bp">.</span><span class="n">fst</span><span class="o">)</span><span class="bp">.</span><span class="n">prod</span> <span class="bp">*</span> <span class="o">(</span><span class="n">l</span><span class="bp">.</span><span class="n">map</span> <span class="n">prod</span><span class="bp">.</span><span class="n">snd</span><span class="o">)</span><span class="bp">.</span><span class="n">prod</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>from the corresponding fact about <code>finset</code>s</p>
+
+<a name="183989422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reusing%20%60finset.prod%60%20facts%20for%20lists/near/183989422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93009Reusingfinsetprodfactsforlists.html#183989422">Yury G. Kudryashov (Dec 21 2019 at 01:31)</a>:</h4>
+<p>Or, say, deduce <code>∀ a b c x y z, (a * b * c) * (x * y * z) = ((a * x) * (b * y) * (c * z))</code> from <code>finset.prod_mul_distrib</code>.</p>
+
 
 {% endraw %}
 
