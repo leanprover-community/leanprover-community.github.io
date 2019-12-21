@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [a concrete group](48802aconcretegroup.html) (62 messages, latest: Dec 21 2019 at 14:32)
+* [cache-olean user confusion?](49795cacheoleanuserconfusion.html) (22 messages, latest: Dec 21 2019 at 15:48)
+
+* [a concrete group](48802aconcretegroup.html) (65 messages, latest: Dec 21 2019 at 15:44)
 
 * [print redundant parentheses](52885printredundantparentheses.html) (4 messages, latest: Dec 21 2019 at 13:02)
 
@@ -32,8 +34,6 @@ permalink: archive/113489newmembers/index.html
 * [Help with lean install (windows)](65113Helpwithleaninstallwindows.html) (17 messages, latest: Dec 17 2019 at 23:56)
 
 * [Uniqueness of binary expansions](45971Uniquenessofbinaryexpansions.html) (30 messages, latest: Dec 17 2019 at 21:51)
-
-* [cache-olean user confusion?](49795cacheoleanuserconfusion.html) (21 messages, latest: Dec 17 2019 at 21:05)
 
 * [TPIL 7.10.2.a](49743TPIL7102a.html) (17 messages, latest: Dec 17 2019 at 04:51)
 
