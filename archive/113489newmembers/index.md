@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [print redundant parentheses](52885printredundantparentheses.html) (3 messages, latest: Dec 21 2019 at 12:57)
+
 * [difference between two forms](54455differencebetweentwoforms.html) (3 messages, latest: Dec 21 2019 at 09:09)
 
 * [Maths Challenges](65204MathsChallenges.html) (49 messages, latest: Dec 20 2019 at 07:56)
