@@ -1027,6 +1027,57 @@ permalink: archive/113488general/99005typeclassproblems.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184070632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184070632">Alex J. Best (Dec 22 2019 at 21:42)</a>:</h4>
 <p>I just made the PR <a href="https://github.com/leanprover-community/mathlib/issues/1822" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1822">#1822</a> where I did something bad and broke multiplication, but I'm not sure how to fix it. I'm not sure how to minify it but you can look at line 154 in <a href="https://github.com/leanprover-community/mathlib/blob/6764734114a5e07eddc0409e485eb0bab6aea161/src/ring_theory/dedekind_finite.lean#L154" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/6764734114a5e07eddc0409e485eb0bab6aea161/src/ring_theory/dedekind_finite.lean#L154">https://github.com/leanprover-community/mathlib/blob/6764734114a5e07eddc0409e485eb0bab6aea161/src/ring_theory/dedekind_finite.lean#L154</a> compared to 115 where somehow the intervening instance <code>instance dedekind_finite_of_noetherian [is_noetherian_ring R] : dedekind_finite R :=</code> breaks <code>monoid.has_mul</code>.</p>
 
+<a name="184072698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184072698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184072698">Kevin Buzzard (Dec 22 2019 at 22:50)</a>:</h4>
+<p>You should ask permission to make new branches on leanprover-community; that way I could use <code>cache-olean</code> to make checking out your issue less of a hassle.</p>
+
+<a name="184072822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184072822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184072822">Alex J. Best (Dec 22 2019 at 22:55)</a>:</h4>
+<p>I hereby ask for permission!  Sorry, I also just added a new better version, but the question /relevant part is still the same.</p>
+
+<a name="184072947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184072947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184072947">Kevin Buzzard (Dec 22 2019 at 22:58)</a>:</h4>
+<p><a href="https://gist.github.com/kbuzzard/aa3de5382b956ab9306dc8ec65f47cba" target="_blank" title="https://gist.github.com/kbuzzard/aa3de5382b956ab9306dc8ec65f47cba">Here's the instance trace</a>. I think you might have created a loop. For example I see</p>
+<div class="codehilite"><pre><span></span>[class_instances] (17) ?x_59 : field G := real.field
+failed is_def_eq
+[class_instances] (17) ?x_59 : field G := rat.field
+failed is_def_eq
+...
+[class_instances] (17) ?x_59 : field G := real.field
+failed is_def_eq
+[class_instances] (17) ?x_59 : field G := rat.field
+failed is_def_eq
+...
+[class_instances] (20) ?x_124 : field G := real.field
+failed is_def_eq
+[class_instances] (20) ?x_124 : field G := rat.field
+failed is_def_eq
+...
+[class_instances] (18) ?x_65 : field G := real.field
+failed is_def_eq
+[class_instances] (18) ?x_65 : field G := rat.field
+failed is_def_eq
+...
+[class_instances] (19) ?x_67 : field G := real.field
+failed is_def_eq
+[class_instances] (19) ?x_67 : field G := rat.field
+failed is_def_eq
+...
+[class_instances] (19) ?x_67 : field G := real.field
+failed is_def_eq
+[class_instances] (19) ?x_67 : field G := rat.field
+failed is_def_eq
+...
+[class_instances] (19) ?x_67 : field G := real.field
+failed is_def_eq
+[class_instances] (19) ?x_67 : field G := rat.field
+failed is_def_eq
+...
+</pre></div>
+
+
+<p>but actually that just looks weird (to me), usually the numbers just creep up by one.</p>
+
 
 {% endraw %}
 
