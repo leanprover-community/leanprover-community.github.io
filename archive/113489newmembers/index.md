@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [difference between two forms](54455differencebetweentwoforms.html) (9 messages, latest: Dec 22 2019 at 05:41)
+
 * [cache-olean user confusion?](49795cacheoleanuserconfusion.html) (23 messages, latest: Dec 21 2019 at 19:43)
 
 * [a concrete group](48802aconcretegroup.html) (66 messages, latest: Dec 21 2019 at 17:21)
 
 * [print redundant parentheses](52885printredundantparentheses.html) (4 messages, latest: Dec 21 2019 at 13:02)
-
-* [difference between two forms](54455differencebetweentwoforms.html) (3 messages, latest: Dec 21 2019 at 09:09)
 
 * [Maths Challenges](65204MathsChallenges.html) (49 messages, latest: Dec 20 2019 at 07:56)
 
