@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [proving 1 + 1 = 2. Why does my rewrite fail here?](28218proving112Whydoesmyrewritefailhere.html) (15 messages, latest: Dec 22 2019 at 17:17)
+* [proving 1 + 1 = 2. Why does my rewrite fail here?](28218proving112Whydoesmyrewritefailhere.html) (16 messages, latest: Dec 22 2019 at 18:39)
 
 * [difference between two forms](54455differencebetweentwoforms.html) (9 messages, latest: Dec 22 2019 at 05:41)
 
