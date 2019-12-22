@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [typeclass problems](99005typeclassproblems.html) (188 messages, latest: Dec 22 2019 at 21:42)
+
 * [𝟙 and 𝟭 in VS Code](99821andinVSCode.html) (1 message, latest: Dec 22 2019 at 11:46)
 
 * [Reusing `finset.prod` facts for lists](93009Reusingfinsetprodfactsforlists.html) (27 messages, latest: Dec 21 2019 at 02:18)
@@ -3452,8 +3454,6 @@ permalink: archive/113488general/index.html
 * [syntax surprises](75896syntaxsurprises.html) (31 messages, latest: Jun 19 2018 at 15:43)
 
 * [Hales60](30964Hales60.html) (3 messages, latest: Jun 19 2018 at 15:00)
-
-* [typeclass problems](99005typeclassproblems.html) (187 messages, latest: Jun 18 2018 at 07:52)
 
 * [anonymous recursive functions](57659anonymousrecursivefunctions.html) (8 messages, latest: Jun 17 2018 at 17:53)
 
