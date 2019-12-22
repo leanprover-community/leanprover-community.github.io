@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [proving 1 + 1 = 2. Why does my rewrite fail here?](28218proving112Whydoesmyrewritefailhere.html) (5 messages, latest: Dec 22 2019 at 15:59)
+
 * [difference between two forms](54455differencebetweentwoforms.html) (9 messages, latest: Dec 22 2019 at 05:41)
 
 * [cache-olean user confusion?](49795cacheoleanuserconfusion.html) (23 messages, latest: Dec 21 2019 at 19:43)

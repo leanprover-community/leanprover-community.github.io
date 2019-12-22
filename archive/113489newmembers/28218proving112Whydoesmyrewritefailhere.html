@@ -1,0 +1,64 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/28218proving112Whydoesmyrewritefailhere.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/28218proving112Whydoesmyrewritefailhere.html">proving 1 + 1 = 2. Why does my rewrite fail here?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="184059093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%201%20%2B%201%20%3D%202.%20Why%20does%20my%20rewrite%20fail%20here%3F/near/184059093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28218proving112Whydoesmyrewritefailhere.html#184059093">agro1986 (Dec 22 2019 at 15:44)</a>:</h4>
+<p>Hi all. I wanted to build my own natural number-like number system and prove that 1 + 1 = 2. Why does my rw fail here?</p>
+<div class="codehilite"><pre><span></span>constant mynumber: Type
+constant zero: mynumber
+constant one: mynumber
+constant two: mynumber
+constant after: mynumber → mynumber
+constant plus: mynumber → mynumber → mynumber
+def one_is_after_zero := one = after(zero)
+def two_is_after_one := two = after(one)
+def plus_zero (n: mynumber) := plus n zero = n
+def plus_after (n m: mynumber) :=
+  plus n (after m) = after (plus n m)
+
+theorem one_plus_one_is_two: plus one one = two :=
+begin
+  rw one_is_after_zero,  -- FAILED HERE
+end
+</pre></div>
+
+
+<p>The popup in vs code just say "failed" without any explanation. Thanks.</p>
+
+<a name="184059415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%201%20%2B%201%20%3D%202.%20Why%20does%20my%20rewrite%20fail%20here%3F/near/184059415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28218proving112Whydoesmyrewritefailhere.html#184059415">Kevin Buzzard (Dec 22 2019 at 15:55)</a>:</h4>
+<p>You never need to use constants in Lean. But the reason for the failure is that <code>one_is_after_zero</code> is the <em>statement</em> that <code>one = after(zero)</code> -- it has type <code>Prop</code>. The <code>rw</code> tactic eats <em>proofs</em> -- you need to <code>rw h</code> where <code>h</code> has type <code>one_is_after_zero</code>.</p>
+
+<a name="184059469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%201%20%2B%201%20%3D%202.%20Why%20does%20my%20rewrite%20fail%20here%3F/near/184059469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28218proving112Whydoesmyrewritefailhere.html#184059469">Kevin Buzzard (Dec 22 2019 at 15:56)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">constant</span> <span class="n">h</span> <span class="o">:</span> <span class="n">one</span> <span class="bp">=</span> <span class="n">after</span><span class="o">(</span><span class="n">zero</span><span class="o">)</span>
+<span class="kn">theorem</span> <span class="n">one_plus_one_is_two</span><span class="o">:</span> <span class="n">plus</span> <span class="n">one</span> <span class="n">one</span> <span class="bp">=</span> <span class="n">two</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="184059532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%201%20%2B%201%20%3D%202.%20Why%20does%20my%20rewrite%20fail%20here%3F/near/184059532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28218proving112Whydoesmyrewritefailhere.html#184059532">Alex J. Best (Dec 22 2019 at 15:59)</a>:</h4>
+<p>You could change all your <code>def blah := ...</code> to <code>axiom blah : ...</code> to get the effect you want</p>
+
+<a name="184059535"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%201%20%2B%201%20%3D%202.%20Why%20does%20my%20rewrite%20fail%20here%3F/near/184059535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28218proving112Whydoesmyrewritefailhere.html#184059535">Kevin Buzzard (Dec 22 2019 at 15:59)</a>:</h4>
+<p>Note the change from <code>:=</code> to <code>:</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
