@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [functor ext lemma?](19198functorextlemma.html) (11 messages, latest: Dec 22 2019 at 12:59)
+
 * [bundling submonoids](35255bundlingsubmonoids.html) (28 messages, latest: Dec 20 2019 at 18:39)
 
 * [field_simp fails](28940fieldsimpfails.html) (6 messages, latest: Dec 19 2019 at 22:25)

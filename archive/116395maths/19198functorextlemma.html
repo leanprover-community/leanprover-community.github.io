@@ -1,0 +1,110 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/19198functorextlemma.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/19198functorextlemma.html">functor ext lemma?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="184052269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/functor%20ext%20lemma%3F/near/184052269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19198functorextlemma.html#184052269">Kevin Buzzard (Dec 22 2019 at 12:16)</a>:</h4>
+<p>Is this just what I'm stuck with in dependent type theory? I want to prove two functors are equal.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">functor</span>
+<span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">opens</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">structure functor (C : Type u₁) [category.{v₁} C] (D : Type u₂) [category.{v₂} D] :</span>
+<span class="cm">  Type (max v₁ v₂ u₁ u₂) :=</span>
+<span class="cm">(obj       : C → D)</span>
+<span class="cm">(map       : Π {X Y : C}, (X ⟶ Y) → ((obj X) ⟶ (obj Y)))</span>
+<span class="cm">(map_id&#39;   : ∀ (X : C), map (𝟙 X) = 𝟙 (obj X) . obviously)</span>
+<span class="cm">(map_comp&#39; : ∀ {X Y Z : C} (f : X ⟶ Y) (g : Y ⟶ Z), map (f ≫ g) = (map f) ≫ (map g) . obviously)</span>
+
+<span class="cm">infixr ` ⥤ `:26 := functor       -- type as \func --</span>
+<span class="cm">-/</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">X</span><span class="o">]</span>
+
+<span class="kn">open</span> <span class="n">topological_space</span>
+
+<span class="n">def</span> <span class="n">res_functor</span> <span class="o">{</span><span class="n">Y₁</span> <span class="n">Y₂</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">}</span> <span class="o">(</span><span class="n">hY</span> <span class="o">:</span> <span class="n">Y₂</span> <span class="err">⊆</span> <span class="n">Y₁</span><span class="o">)</span> <span class="o">:</span>
+    <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">X</span> <span class="bp">//</span> <span class="n">Y₁</span> <span class="err">⊆</span> <span class="n">V</span><span class="o">}</span> <span class="err">⥤</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">X</span> <span class="bp">//</span> <span class="n">Y₂</span> <span class="err">⊆</span> <span class="n">V</span><span class="o">}</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">obj</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">V</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">V</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">subset</span><span class="bp">.</span><span class="n">trans</span> <span class="n">hY</span> <span class="n">V</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">map</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">id</span><span class="o">}</span>
+
+<span class="c1">-- is this supposed to be a such a kerfuffle</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="n">res_functor</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">subset</span><span class="bp">.</span><span class="n">refl</span> <span class="n">Y</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">𝟭</span> <span class="bp">_</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">unfold</span> <span class="n">res_functor</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">functor</span><span class="bp">.</span><span class="n">id</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">functor</span><span class="bp">.</span><span class="n">mk</span><span class="bp">.</span><span class="n">inj_eq</span><span class="o">,</span> <span class="c1">-- is there an ext lemma missing?</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">ext</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">eq</span><span class="o">,</span>
+    <span class="n">refl</span><span class="o">},</span>
+  <span class="o">{</span> <span class="c1">-- aargh I have heqs</span>
+    <span class="n">apply</span> <span class="n">heq_of_eq</span><span class="o">,</span>
+    <span class="n">ext</span><span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="184052467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/functor%20ext%20lemma%3F/near/184052467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19198functorextlemma.html#184052467">Kevin Buzzard (Dec 22 2019 at 12:22)</a>:</h4>
+<p>The reason I get <code>heq</code>s is I guess because <code>(obj X) ⟶ (obj Y)</code> changes when I change <code>obj</code> to something equal to <code>obj</code>. I would be happy with some kind of procedure where I am first asked to prove that the two <code>obj</code> maps are equal and then after that I'm asked to prove that the <code>map</code> maps are equal (rather than hequal). Does that even make sense in Lean's type theory?</p>
+
+<a name="184052626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/functor%20ext%20lemma%3F/near/184052626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19198functorextlemma.html#184052626">Kevin Buzzard (Dec 22 2019 at 12:27)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> <span class="user-mention" data-user-id="110087">@Scott Morrison</span> <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> to do the kind of algebraic geometry I want to do, I really want to make this category theory stuff work. But I still don't really understand the limitations of dependent type theory in this context. It's clear as an end user what I want to do here -- the objs are the same, the maps are the same, so the functors are the same. The above example is distilled from some proof that pushforwards and pullbacks for sheaves of objects in a category are adjoint functors, and it's what is stopping automation from taking over in some diagram chase. <a href="https://github.com/ramonfmir/lean-scheme/blob/sheaves_of_categories/src/sheaves_of_categories/pushforward.lean" target="_blank" title="https://github.com/ramonfmir/lean-scheme/blob/sheaves_of_categories/src/sheaves_of_categories/pushforward.lean">Here's what I'm doing</a> in case anyone is interested.</p>
+
+<a name="184052814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/functor%20ext%20lemma%3F/near/184052814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19198functorextlemma.html#184052814">Alex J. Best (Dec 22 2019 at 12:32)</a>:</h4>
+<p>I don't know what the "correct" way is but </p>
+<div class="codehilite"><pre><span></span>  <span class="n">unfold</span> <span class="n">res_functor</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">functor</span><span class="bp">.</span><span class="n">id</span><span class="o">,</span>
+  <span class="n">tidy</span>
+</pre></div>
+
+
+<p>is a lot easier on the eye (and brain)!</p>
+
+<a name="184052832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/functor%20ext%20lemma%3F/near/184052832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19198functorextlemma.html#184052832">Kevin Buzzard (Dec 22 2019 at 12:33)</a>:</h4>
+<p>I tidied too early! I just try tidy and obviously (not really knowing what they do yet) and then go back to first principles. I think I need some crash course in when to use <code>tidy</code>. Thanks!</p>
+
+<a name="184052836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/functor%20ext%20lemma%3F/near/184052836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19198functorextlemma.html#184052836">Alex J. Best (Dec 22 2019 at 12:33)</a>:</h4>
+<p>Oh but "tidy says" just</p>
+<div class="codehilite"><pre><span></span>  <span class="n">simp</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+  <span class="n">refl</span><span class="o">,</span>
+</pre></div>
+
+<a name="184052887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/functor%20ext%20lemma%3F/near/184052887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19198functorextlemma.html#184052887">Alex J. Best (Dec 22 2019 at 12:35)</a>:</h4>
+<p>Yeah I'm also slightly surprised that tidy doesn't work if unfolding needs doing in this case</p>
+
+<a name="184052908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/functor%20ext%20lemma%3F/near/184052908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19198functorextlemma.html#184052908">Kevin Buzzard (Dec 22 2019 at 12:35)</a>:</h4>
+<p>There's maybe either a missing simp lemma or a missing ext lemma, but I'm too much of a beginner in this area to know how to fix this properly.</p>
+
+<a name="184053330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/functor%20ext%20lemma%3F/near/184053330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19198functorextlemma.html#184053330">Kevin Buzzard (Dec 22 2019 at 12:46)</a>:</h4>
+<p>I can't rewrite this lemma in my application anyway :-( (motive is not type correct, and neither <code>erw</code> nor <code>simp only</code> fixes it). Am I not supposed to be proving that functors are equal? Functors are terms not types, I thought equality would be a good idea...</p>
+
+<a name="184053746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/functor%20ext%20lemma%3F/near/184053746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19198functorextlemma.html#184053746">Alex J. Best (Dec 22 2019 at 12:58)</a>:</h4>
+<p>Can you get away with just constructing a natural isomorphism of your functors?</p>
+
+<a name="184053763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/functor%20ext%20lemma%3F/near/184053763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19198functorextlemma.html#184053763">Patrick Massot (Dec 22 2019 at 12:59)</a>:</h4>
+<p>Yes, that's the standard answer in category theory: do you really mean <em>equal</em> here?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
