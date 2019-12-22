@@ -58,6 +58,109 @@ end
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%201%20%2B%201%20%3D%202.%20Why%20does%20my%20rewrite%20fail%20here%3F/near/184059535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28218proving112Whydoesmyrewritefailhere.html#184059535">Kevin Buzzard (Dec 22 2019 at 15:59)</a>:</h4>
 <p>Note the change from <code>:=</code> to <code>:</code></p>
 
+<a name="184059582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%201%20%2B%201%20%3D%202.%20Why%20does%20my%20rewrite%20fail%20here%3F/near/184059582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28218proving112Whydoesmyrewritefailhere.html#184059582">agro1986 (Dec 22 2019 at 16:00)</a>:</h4>
+<p>that makes sense. proposition != the proof that the proposition is true</p>
+
+<a name="184059590"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%201%20%2B%201%20%3D%202.%20Why%20does%20my%20rewrite%20fail%20here%3F/near/184059590" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28218proving112Whydoesmyrewritefailhere.html#184059590">agro1986 (Dec 22 2019 at 16:00)</a>:</h4>
+<div class="codehilite"><pre><span></span>constant one_is_after_zero: one = after(zero)
+constant two_is_after_one: two = after(one)
+constant plus_zero (n: mynumber): plus n zero = n
+constant plus_after (n m: mynumber) :
+  plus n (after m) = after (plus n m)
+
+theorem one_plus_one_is_two: plus one one = two :=
+begin
+  rw one_is_after_zero,
+  rw plus_after,
+  rw plus_zero,
+  rw two_is_after_one,
+  rw one_is_after_zero,
+end
+</pre></div>
+
+<a name="184059647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%201%20%2B%201%20%3D%202.%20Why%20does%20my%20rewrite%20fail%20here%3F/near/184059647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28218proving112Whydoesmyrewritefailhere.html#184059647">Kevin Buzzard (Dec 22 2019 at 16:02)</a>:</h4>
+<p>The constant-free version looks like this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">mynumber</span><span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">zero</span><span class="o">:</span> <span class="n">mynumber</span>
+<span class="bp">|</span> <span class="n">one</span><span class="o">:</span> <span class="n">mynumber</span>
+<span class="bp">|</span> <span class="n">two</span><span class="o">:</span> <span class="n">mynumber</span>
+<span class="bp">|</span> <span class="n">after</span><span class="o">:</span> <span class="n">mynumber</span> <span class="bp">→</span> <span class="n">mynumber</span>
+<span class="bp">|</span> <span class="n">plus</span><span class="o">:</span> <span class="n">mynumber</span> <span class="bp">→</span> <span class="n">mynumber</span> <span class="bp">→</span> <span class="n">mynumber</span>
+
+<span class="kn">namespace</span> <span class="n">mynumber</span>
+
+<span class="kn">variables</span>
+  <span class="o">(</span><span class="n">one_is_after_zero</span> <span class="o">:</span> <span class="n">one</span> <span class="bp">=</span> <span class="n">after</span><span class="o">(</span><span class="n">zero</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">two_is_after_one</span> <span class="o">:</span> <span class="n">two</span> <span class="bp">=</span> <span class="n">after</span><span class="o">(</span><span class="n">one</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">plus_zero</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">plus</span> <span class="n">n</span> <span class="n">zero</span> <span class="bp">=</span> <span class="n">n</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">plus_after</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="n">m</span><span class="o">,</span> <span class="n">plus</span> <span class="n">n</span> <span class="o">(</span><span class="n">after</span> <span class="n">m</span><span class="o">)</span> <span class="bp">=</span> <span class="n">after</span> <span class="o">(</span><span class="n">plus</span> <span class="n">n</span> <span class="n">m</span><span class="o">))</span>
+
+<span class="n">include</span> <span class="n">one_is_after_zero</span> <span class="n">two_is_after_one</span> <span class="n">plus_zero</span> <span class="n">plus_after</span>
+
+<span class="kn">theorem</span> <span class="n">one_plus_one_is_two</span><span class="o">:</span> <span class="n">plus</span> <span class="n">one</span> <span class="n">one</span> <span class="bp">=</span> <span class="n">two</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">one_is_after_zero</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">plus_after</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">plus_zero</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">two_is_after_one</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">one_is_after_zero</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">end</span> <span class="n">mynumber</span>
+</pre></div>
+
+<a name="184059713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%201%20%2B%201%20%3D%202.%20Why%20does%20my%20rewrite%20fail%20here%3F/near/184059713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28218proving112Whydoesmyrewritefailhere.html#184059713">Kevin Buzzard (Dec 22 2019 at 16:04)</a>:</h4>
+<p><code>include</code> should be purple. I can't remember the reason this can't be fixed.</p>
+
+<a name="184059799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%201%20%2B%201%20%3D%202.%20Why%20does%20my%20rewrite%20fail%20here%3F/near/184059799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28218proving112Whydoesmyrewritefailhere.html#184059799">agro1986 (Dec 22 2019 at 16:07)</a>:</h4>
+<p>Wow thanks! Other than 'inductive' I've encountered them from TPiL. I hope I can write my code more closer to everyone else's style</p>
+
+<a name="184060218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%201%20%2B%201%20%3D%202.%20Why%20does%20my%20rewrite%20fail%20here%3F/near/184060218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28218proving112Whydoesmyrewritefailhere.html#184060218">Kevin Buzzard (Dec 22 2019 at 16:19)</a>:</h4>
+<p>The only advantage I can think of for the <code>inductive</code> method over the <code>constant</code> method is that with the <code>inductive</code> method the principle of induction gets generated automatically by Lean. Other than that the two methods are very similar. If you write <code>#print prefix mynumber</code> you can see all the stuff that Lean generates for you, the key one being <code>mynumber.rec</code>. With your method you'd have to make the principle of induction yourself as another constant.</p>
+
+<a name="184061237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%201%20%2B%201%20%3D%202.%20Why%20does%20my%20rewrite%20fail%20here%3F/near/184061237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28218proving112Whydoesmyrewritefailhere.html#184061237">Mario Carneiro (Dec 22 2019 at 16:50)</a>:</h4>
+<p>Umm...</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">one_plus_one_is_not_two</span><span class="o">:</span> <span class="n">plus</span> <span class="n">one</span> <span class="n">one</span> <span class="bp">≠</span> <span class="n">two</span><span class="bp">.</span>
+</pre></div>
+
+<a name="184061247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%201%20%2B%201%20%3D%202.%20Why%20does%20my%20rewrite%20fail%20here%3F/near/184061247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28218proving112Whydoesmyrewritefailhere.html#184061247">Mario Carneiro (Dec 22 2019 at 16:51)</a>:</h4>
+<p>the inductive structure is assuming things that you don't necessarily want to assert</p>
+
+<a name="184061294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%201%20%2B%201%20%3D%202.%20Why%20does%20my%20rewrite%20fail%20here%3F/near/184061294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28218proving112Whydoesmyrewritefailhere.html#184061294">Mario Carneiro (Dec 22 2019 at 16:52)</a>:</h4>
+<p>You could just do this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span>
+  <span class="o">(</span><span class="n">mynumber</span><span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">zero</span><span class="o">:</span> <span class="n">mynumber</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">one</span><span class="o">:</span> <span class="n">mynumber</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">two</span><span class="o">:</span> <span class="n">mynumber</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">after</span><span class="o">:</span> <span class="n">mynumber</span> <span class="bp">→</span> <span class="n">mynumber</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">plus</span><span class="o">:</span> <span class="n">mynumber</span> <span class="bp">→</span> <span class="n">mynumber</span> <span class="bp">→</span> <span class="n">mynumber</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">one_is_after_zero</span> <span class="o">:</span> <span class="n">one</span> <span class="bp">=</span> <span class="n">after</span><span class="o">(</span><span class="n">zero</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">two_is_after_one</span> <span class="o">:</span> <span class="n">two</span> <span class="bp">=</span> <span class="n">after</span><span class="o">(</span><span class="n">one</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">plus_zero</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">plus</span> <span class="n">n</span> <span class="n">zero</span> <span class="bp">=</span> <span class="n">n</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">plus_after</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="n">m</span><span class="o">,</span> <span class="n">plus</span> <span class="n">n</span> <span class="o">(</span><span class="n">after</span> <span class="n">m</span><span class="o">)</span> <span class="bp">=</span> <span class="n">after</span> <span class="o">(</span><span class="n">plus</span> <span class="n">n</span> <span class="n">m</span><span class="o">))</span>
+
+<span class="n">include</span> <span class="n">one_is_after_zero</span> <span class="n">two_is_after_one</span> <span class="n">plus_zero</span> <span class="n">plus_after</span>
+
+<span class="kn">theorem</span> <span class="n">one_plus_one_is_two</span><span class="o">:</span> <span class="n">plus</span> <span class="n">one</span> <span class="n">one</span> <span class="bp">=</span> <span class="n">two</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">one_is_after_zero</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">plus_after</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">plus_zero</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">two_is_after_one</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">one_is_after_zero</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
 
