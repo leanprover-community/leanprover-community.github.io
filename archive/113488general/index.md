@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [typeclass problems](99005typeclassproblems.html) (199 messages, latest: Dec 23 2019 at 16:40)
+
 * [Is there code for X](10831IstherecodeforX.html) (2 messages, latest: Dec 23 2019 at 15:27)
 
 * [profile information](28472profileinformation.html) (1 message, latest: Dec 23 2019 at 14:32)
 
 * [How to prove decidability?](00132Howtoprovedecidability.html) (7 messages, latest: Dec 23 2019 at 11:15)
-
-* [typeclass problems](99005typeclassproblems.html) (198 messages, latest: Dec 23 2019 at 00:55)
 
 * [𝟙 and 𝟭 in VS Code](99821andinVSCode.html) (1 message, latest: Dec 22 2019 at 11:46)
 
