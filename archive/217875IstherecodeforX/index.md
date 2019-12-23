@@ -9,9 +9,9 @@ permalink: archive/217875IstherecodeforX/index.html
 
 ### Topics:
 
-* [Super vector space](25167Supervectorspace.html) (1 message, latest: Dec 22 2019 at 14:10)
+* [Completion of a ring](44833Completionofaring.html) (2 messages, latest: Dec 23 2019 at 15:38)
 
-* [Completion of a ring](44833Completionofaring.html) (1 message, latest: Dec 22 2019 at 14:10)
+* [Super vector space](25167Supervectorspace.html) (1 message, latest: Dec 22 2019 at 14:10)
 
 * [stream events](95106streamevents.html) (1 message, latest: Dec 22 2019 at 14:08)
 
