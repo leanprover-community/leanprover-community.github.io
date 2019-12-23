@@ -1,0 +1,43 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/00132Howtoprovedecidability.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html">How to prove decidability?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="184087098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184087098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184087098">Li Yao'an (Dec 23 2019 at 07:03)</a>:</h4>
+<p>I was reproving things about the natural numbers, when I thought it would be good to show that le (&lt;=) is decidable.<br>
+decidable is an inductive class constructed either by p or (not p), so supposing I construct a function f taking in two natural numbers a and b, and gives a proof of either <code>a &lt;= b</code> or <code>\not(a &lt;= b)</code>,  and additionally showed that f was decidable, then I could possibly show that &lt;= was decidable with some ite statement over another function g that tells us which statement we are trying to prove. But firstly, we would have to show g was decidable, and I can't seem to show that.</p>
+<p>How should I proceed to show the decidability of (a class of) statements?</p>
+<p>Edit: Now that I think of it, I'm not sure what the syntax of the statement I'm trying to prove is.</p>
+
+<a name="184088713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184088713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184088713">Mario Carneiro (Dec 23 2019 at 07:50)</a>:</h4>
+<p>Certainly you can't prove decidability by case analysis. This is essentially assuming what you want to prove</p>
+
+<a name="184088721"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184088721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184088721">Mario Carneiro (Dec 23 2019 at 07:50)</a>:</h4>
+<p>The actual statement you want to prove is:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">decidable_le</span> <span class="o">:</span> <span class="n">decidable_rel</span> <span class="o">((</span><span class="bp">&lt;=</span><span class="o">)</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">-&gt;</span> <span class="n">nat</span> <span class="bp">-&gt;</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="184088735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184088735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184088735">Mario Carneiro (Dec 23 2019 at 07:51)</a>:</h4>
+<p>In the case of le on natural numbers, the proof goes by induction on one argument and cases on the other</p>
+
+<a name="184088786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184088786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184088786">Mario Carneiro (Dec 23 2019 at 07:52)</a>:</h4>
+<p>You have to show that <code>0 &lt;= b</code> is true, <code>succ a &lt;= 0</code> is false, and <code>succ a &lt;= succ b</code> iff <code>a &lt;= b</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

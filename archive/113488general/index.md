@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [How to prove decidability?](00132Howtoprovedecidability.html) (5 messages, latest: Dec 23 2019 at 07:52)
+
 * [typeclass problems](99005typeclassproblems.html) (198 messages, latest: Dec 23 2019 at 00:55)
 
 * [𝟙 and 𝟭 in VS Code](99821andinVSCode.html) (1 message, latest: Dec 22 2019 at 11:46)
