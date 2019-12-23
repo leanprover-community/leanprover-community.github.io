@@ -16,6 +16,21 @@ permalink: archive/113488general/28472profileinformation.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profile%20information/near/184108118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28472profileinformation.html#184108118">Yury G. Kudryashov (Dec 23 2019 at 14:32)</a>:</h4>
 <p>Hi, <code>lean --profile</code> reports several "took ..." for each declaration: "type checking", "compilation", "decl post-processing", "elaboration". What does each step mean?</p>
 
+<a name="184121110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profile%20information/near/184121110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28472profileinformation.html#184121110">Simon Hudon (Dec 23 2019 at 17:57)</a>:</h4>
+<ul>
+<li>
+<p>Elaboration is the step that runs your tactic but it also "guesses" all the type error that you don't provide. In other functional languages, we could call that type inference. </p>
+</li>
+<li>
+<p>Type checking is when all the type information is all provided, how long does it take to check all the types. This includes checking that the proof tree that you provide forms a valid proof. This step can sometimes be slow because of all the (sometimes recursive) definitions that it has to unfold to check definitional equality. </p>
+</li>
+<li>
+<p>Compilation is the step takes a Lean definition and translates it into something that can be executed efficiently. It is especially relevant for tactics as they are not executed in the kernel (i.e. unfolded during type checking). Any definition that those use (e.g. <code>list.map</code>) also have to be compiled.</p>
+</li>
+</ul>
+<p>I'm not sure about "decl post-processing". It might have to do with equation compilation</p>
+
 
 {% endraw %}
 
