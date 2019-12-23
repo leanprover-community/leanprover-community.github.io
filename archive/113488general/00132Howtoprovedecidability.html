@@ -54,6 +54,19 @@ end
 
 <p>but I'm getting "rec_fn_macro only allowed in meta definitions". What is this error?</p>
 
+<a name="184097927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184097927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184097927">Mario Carneiro (Dec 23 2019 at 11:15)</a>:</h4>
+<p>Are you sure? The following gives me no errors:</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">nat</span>
+<span class="kn">instance</span> <span class="n">decidable_le</span> <span class="o">:</span> <span class="n">decidable_rel</span> <span class="o">((</span><span class="bp">≤</span><span class="o">)</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">-&gt;</span> <span class="n">nat</span> <span class="bp">-&gt;</span> <span class="kt">Prop</span><span class="o">)</span>
+<span class="bp">|</span><span class="mi">0</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="bp">|</span><span class="o">(</span><span class="n">succ</span> <span class="n">a</span><span class="o">)</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="bp">|</span><span class="o">(</span><span class="n">succ</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">succ</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">specialize</span> <span class="n">decidable_le</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">cases</span> <span class="n">decidable_le</span> <span class="k">with</span> <span class="n">h</span> <span class="n">h</span><span class="o">,</span> <span class="n">admit</span><span class="o">,</span> <span class="n">admit</span>
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
 

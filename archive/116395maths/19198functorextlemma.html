@@ -284,6 +284,47 @@ but is expected to have type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/functor%20ext%20lemma%3F/near/184091269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19198functorextlemma.html#184091269">Johan Commelin (Dec 23 2019 at 08:54)</a>:</h4>
 <p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Note that natural iso's contain data, and hence should be <code>def</code>. Also, the data-parts should probably not be filled in by <code>tidy</code> (even though you can use <code>tidy?</code> to see what to do, but should be filled in with term mode. Hopefully, you would then get two (canonically <span aria-label="see no evil" class="emoji emoji-1f648" role="img" title="see no evil">:see_no_evil:</span>) isomorphic functors, that are defeq on objects. It would then make sense to talk about an identity morphism between them (after evaluation on some object).</p>
 
+<a name="184097577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/functor%20ext%20lemma%3F/near/184097577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19198functorextlemma.html#184097577">Johan Commelin (Dec 23 2019 at 11:07)</a>:</h4>
+<p>This proves your <code>Hid</code> challenge:</p>
+<div class="codehilite"><pre><span></span>      <span class="n">ext</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="n">limits</span><span class="bp">.</span><span class="n">colimit</span><span class="bp">.</span><span class="n">ι_pre</span><span class="o">,</span>
+      <span class="n">erw</span> <span class="n">category</span><span class="bp">.</span><span class="n">comp_id</span><span class="o">,</span>
+      <span class="n">tidy</span><span class="o">,</span>
+</pre></div>
+
+<a name="184097804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/functor%20ext%20lemma%3F/near/184097804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19198functorextlemma.html#184097804">Kevin Buzzard (Dec 23 2019 at 11:12)</a>:</h4>
+<p>as does this:</p>
+<div class="codehilite"><pre><span></span>        unfold limits.colimit.pre,
+        dsimp,
+        ext V,
+        dsimp,
+        rw limits.colimit.ι_desc,
+        dsimp,
+        erw category_theory.category.comp_id,
+        tidy,
+</pre></div>
+
+
+<p>but yours is better ;-) Thanks!</p>
+
+<a name="184097818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/functor%20ext%20lemma%3F/near/184097818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19198functorextlemma.html#184097818">Kevin Buzzard (Dec 23 2019 at 11:13)</a>:</h4>
+<p>I see that both of us need an <code>erw</code> in a situation where it's completely clear that a <code>rw</code> will work ;-)</p>
+
+<a name="184097981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/functor%20ext%20lemma%3F/near/184097981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19198functorextlemma.html#184097981">Kevin Buzzard (Dec 23 2019 at 11:16)</a>:</h4>
+<p>In fact my proof simplifies to yours. I unfold something and do some other rewrite, and after simplification I end up where you were.</p>
+
+<a name="184098377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/functor%20ext%20lemma%3F/near/184098377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19198functorextlemma.html#184098377">Kevin Buzzard (Dec 23 2019 at 11:25)</a>:</h4>
+<p><code>ext</code>, in this context, seems to be taking a goal of the form <code>m1=m2</code> where the m_i are morphisms in a category, and replacing it with a goal of the form <code>F(j)&gt;&gt;m1 = F(j)&gt;&gt;m2</code>. It seems to be explicitly using the fact that the source or target of the m_i is a colimit and it's somehow using a universal property of colimits?</p>
+
+<a name="184099636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/functor%20ext%20lemma%3F/near/184099636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19198functorextlemma.html#184099636">Johan Commelin (Dec 23 2019 at 11:56)</a>:</h4>
+<p>Pretty smart, right?</p>
+
 
 {% endraw %}
 
