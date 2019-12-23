@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [functor ext lemma?](19198functorextlemma.html) (45 messages, latest: Dec 23 2019 at 11:56)
+* [functor ext lemma?](19198functorextlemma.html) (47 messages, latest: Dec 23 2019 at 12:19)
 
 * [category theory](81338categorytheory.html) (6 messages, latest: Dec 23 2019 at 10:15)
 
