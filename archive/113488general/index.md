@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [profile information](28472profileinformation.html) (5 messages, latest: Dec 23 2019 at 18:20)
+* [profile information](28472profileinformation.html) (8 messages, latest: Dec 23 2019 at 19:38)
 
 * [typeclass problems](99005typeclassproblems.html) (199 messages, latest: Dec 23 2019 at 16:40)
 
