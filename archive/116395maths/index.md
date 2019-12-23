@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [category theory](81338categorytheory.html) (3 messages, latest: Dec 23 2019 at 06:13)
+* [functor ext lemma?](19198functorextlemma.html) (39 messages, latest: Dec 23 2019 at 08:54)
 
-* [functor ext lemma?](19198functorextlemma.html) (37 messages, latest: Dec 23 2019 at 03:03)
+* [category theory](81338categorytheory.html) (3 messages, latest: Dec 23 2019 at 06:13)
 
 * [bundling submonoids](35255bundlingsubmonoids.html) (28 messages, latest: Dec 20 2019 at 18:39)
 

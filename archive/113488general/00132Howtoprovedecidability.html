@@ -37,6 +37,23 @@ decidable is an inductive class constructed either by p or (not p), so supposing
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184088786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184088786">Mario Carneiro (Dec 23 2019 at 07:52)</a>:</h4>
 <p>You have to show that <code>0 &lt;= b</code> is true, <code>succ a &lt;= 0</code> is false, and <code>succ a &lt;= succ b</code> iff <code>a &lt;= b</code></p>
 
+<a name="184090659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184090659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184090659">Li Yao'an (Dec 23 2019 at 08:39)</a>:</h4>
+<p>Thanks for the reply; I am now less confused.</p>
+<p>On a theoretical note, suppose I had written the function f (inductively). Additionally, I prove that f either outputs a proof of <code> a  &lt;= b </code> or <code>\not a &lt;= b</code>. Is there any way to formalize the line of reasoning "f is computable and hence proves that <code> a &lt;= b </code> is decidable?</p>
+<p>On a more practical note, I tried to fill in the sorry for the statement you gave (I sorried out the details):</p>
+<div class="codehilite"><pre><span></span>instance decidable_le : decidable_rel ((≤) : nat -&gt; nat -&gt; Prop)
+|0 b := sorry
+|(succ a) 0 := sorry
+|(succ a) (succ b) :=
+begin
+   specialize decidable_le a b, cases decidable_le with h h, admit, admit
+end
+</pre></div>
+
+
+<p>but I'm getting "rec_fn_macro only allowed in meta definitions". What is this error?</p>
+
 
 {% endraw %}
 
