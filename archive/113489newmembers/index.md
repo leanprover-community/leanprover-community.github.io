@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [hello! + how to get started on math?](95375hellohowtogetstartedonmath.html) (2 messages, latest: Dec 23 2019 at 04:55)
+* [hello! + how to get started on math?](95375hellohowtogetstartedonmath.html) (3 messages, latest: Dec 23 2019 at 09:47)
 
 * [proving 1 + 1 = 2. Why does my rewrite fail here?](28218proving112Whydoesmyrewritefailhere.html) (16 messages, latest: Dec 22 2019 at 18:39)
 
