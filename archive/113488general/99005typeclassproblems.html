@@ -1078,6 +1078,60 @@ failed is_def_eq
 
 <p>but actually that just looks weird (to me), usually the numbers just creep up by one.</p>
 
+<a name="184073570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184073570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184073570">Kevin Buzzard (Dec 22 2019 at 23:17)</a>:</h4>
+<div class="codehilite"><pre><span></span>[class_instances] (3) ?x_11 : ring G := @dedekind_finite.to_ring ?x_12 ?x_13
+[class_instances] (4) ?x_13 : dedekind_finite G := @ @_root_.dedekind_finite_of_noetherian ?x_17 ?x_18 ?x_19
+[class_instances] (5) ?x_18 : ring G := @dedekind_finite.to_ring ?x_20 ?x_21
+[class_instances] (6) ?x_21 : dedekind_finite G := @ @_root_.dedekind_finite_of_noetherian ?x_25 ?x_26 ?x_27
+...
+</pre></div>
+
+
+<p>I think that's your problem.</p>
+
+<a name="184073578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184073578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184073578">Kevin Buzzard (Dec 22 2019 at 23:17)</a>:</h4>
+<p>To prove G is a ring it suffices to prove it's Dedekind finite, to prove it's Dedekind finite it suffices to prove it's a Noetherian ring and...oh.. also a ring! And to check that it's a ring, it suffices to prove it's Dedekind finite, and off we go again.</p>
+
+<a name="184073803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184073803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184073803">Kevin Buzzard (Dec 22 2019 at 23:24)</a>:</h4>
+<p>You wrote</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+
+<span class="n">class</span> <span class="n">dedekind_finite</span> <span class="kn">extends</span> <span class="n">ring</span> <span class="n">R</span> <span class="o">:=</span>
+<span class="o">(</span> <span class="n">inv_comm</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">R</span><span class="o">,</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">)</span>
+</pre></div>
+
+
+<p>and I am wondering whether this should be</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">dedekind_finite</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span> <span class="n">inv_comm</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">R</span><span class="o">,</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">)</span>
+</pre></div>
+
+
+<p>but unfortunately I am guessing here. I don't really understand how these things work -- I don't really understand the difference between the two in practice.</p>
+
+<a name="184073874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184073874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184073874">Kevin Buzzard (Dec 22 2019 at 23:27)</a>:</h4>
+<p>The thing I know for sure is that I am quoting the last (3), the last (4), the last (5)...in the instance trace, which means for sure that things are spiralling out of control.</p>
+
+<a name="184074008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184074008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184074008">Kevin Buzzard (Dec 22 2019 at 23:31)</a>:</h4>
+<p>OK so I can't guarantee that my fix is what you should be doing, but it does seem to fix the problem. You have to add the extra ring instances</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">i</span><span class="o">,</span> <span class="n">f</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">I</span><span class="o">)</span> <span class="o">[</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">ring</span> <span class="o">(</span><span class="n">f</span> <span class="n">i</span><span class="o">)]</span>
+</pre></div>
+
+
+<p>on line 27 but then the monoid error goes away. (I also have an error in <code>dedekind_finite_of_noetherian</code> but that was before I started fiddling and it might be because I just cut and pasted the file instead of forking your clone)</p>
+
+<a name="184074195"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184074195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184074195">Kevin Buzzard (Dec 22 2019 at 23:36)</a>:</h4>
+<blockquote>
+<p>I hereby ask for permission!  Sorry, I also just added a new better version, but the question /relevant part is still the same.</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> -- who can add people to the "can push to mathlib non-master branch" list? Is it you? Alex is <code>alexjbest</code> on github</p>
+
 
 {% endraw %}
 
