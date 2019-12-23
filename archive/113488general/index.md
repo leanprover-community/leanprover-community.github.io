@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [profile information](28472profileinformation.html) (1 message, latest: Dec 23 2019 at 14:32)
+
 * [How to prove decidability?](00132Howtoprovedecidability.html) (7 messages, latest: Dec 23 2019 at 11:15)
 
 * [typeclass problems](99005typeclassproblems.html) (198 messages, latest: Dec 23 2019 at 00:55)
