@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [typeclass problems](99005typeclassproblems.html) (197 messages, latest: Dec 22 2019 at 23:36)
+* [typeclass problems](99005typeclassproblems.html) (198 messages, latest: Dec 23 2019 at 00:55)
 
 * [𝟙 and 𝟭 in VS Code](99821andinVSCode.html) (1 message, latest: Dec 22 2019 at 11:46)
 
