@@ -71,6 +71,37 @@ end
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184145351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184145351">Li Yao'an (Dec 24 2019 at 01:55)</a>:</h4>
 <p>My bad, the error only seems to appear once I fill in the admits. Give me some time to generate a somewhat MWE. (I used lots of lemmas.)</p>
 
+<a name="184145892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184145892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184145892">Li Yao'an (Dec 24 2019 at 02:10)</a>:</h4>
+<p>Here's a code:</p>
+<div class="codehilite"><pre><span></span>namespace hidden
+
+inductive nat : Type
+|zero : nat
+|succ : nat → nat
+
+namespace nat
+
+constant le : nat → nat → Prop
+infix ` ≤ ` := le
+
+axiom p1 : ∀ b : nat, zero ≤ b
+axiom p2 : ∀ a : nat, ¬succ a ≤ zero
+axiom p3 : ∀ a b : nat, succ a ≤ succ b ↔ a ≤ b
+
+instance decidable_le : decidable_rel ((≤) : nat -&gt; nat -&gt; Prop) -- rec_fn_macro only allowed in meta definitions
+|zero b := begin apply is_true, exact p1 b end
+|(succ a) zero := begin apply is_false, exact p2 a end
+|(succ a) (succ b) :=
+begin
+  specialize decidable_le a b, cases decidable_le with h h,
+  apply is_false, rwa p3, apply is_true, rwa p3
+end
+
+end nat
+end hidden
+</pre></div>
+
 
 {% endraw %}
 
