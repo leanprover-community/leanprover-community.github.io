@@ -18,6 +18,36 @@ permalink: archive/113489newmembers/98716universesinlean.html
 <a href="https://github.com/enharsha/Graphs-in-Lean/blob/master/graph.lean" target="_blank" title="https://github.com/enharsha/Graphs-in-Lean/blob/master/graph.lean">https://github.com/enharsha/Graphs-in-Lean/blob/master/graph.lean</a><br>
 However, while compiling definition of path, it shows the following error - "universe level of type_of(arg <a href="https://github.com/leanprover-community/mathlib/issues/3" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/3">#3</a>) of 'path.addedge' is too big for the corresponding inductive datatype". Could anyone help me out? I have referred to inductive types section in Theorem Proving in Lean, where vectors have been defined in a similar fashion.</p>
 
+<a name="184152900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/universes%20in%20lean/near/184152900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98716universesinlean.html#184152900">Johan Commelin (Dec 24 2019 at 06:00)</a>:</h4>
+<p>Well, your edges live in some universe <code>v</code>, and paths must live (by your definition) in universe <code>u</code>. That doesn't fit...</p>
+
+<a name="184152908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/universes%20in%20lean/near/184152908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98716universesinlean.html#184152908">Johan Commelin (Dec 24 2019 at 06:01)</a>:</h4>
+<p>So, either you just use one universe, or paths should live in <code>Type (max u v)</code></p>
+
+<a name="184152914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/universes%20in%20lean/near/184152914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98716universesinlean.html#184152914">Johan Commelin (Dec 24 2019 at 06:01)</a>:</h4>
+<p>Also, when you write <code>g : graph</code>, I feat that Lean can't figure out the universes by itself. So maybe you need to write <code>g : graph.{u v}</code></p>
+
+<a name="184153703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/universes%20in%20lean/near/184153703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98716universesinlean.html#184153703">Yury G. Kudryashov (Dec 24 2019 at 06:28)</a>:</h4>
+<p>Another approach is to define</p>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">v</span> <span class="n">u</span>
+<span class="kn">structure</span> <span class="n">graph</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">edges</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span>
+</pre></div>
+
+
+<p>This is similar to the approach taken by <code>category_theory.category</code>. Not sure which approach is better.</p>
+
+<a name="184154105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/universes%20in%20lean/near/184154105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98716universesinlean.html#184154105">Jesse Michael Han (Dec 24 2019 at 06:41)</a>:</h4>
+<p>this compiles for me:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">path</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">graph</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span> <span class="n">v</span><span class="o">})</span> <span class="o">(</span><span class="n">start</span> <span class="o">:</span> <span class="n">g</span><span class="bp">.</span><span class="n">vertex</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">g</span><span class="bp">.</span><span class="n">vertex</span><span class="o">)</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="n">v</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">fix</span> <span class="o">:</span> <span class="n">path</span> <span class="n">start</span>
+<span class="bp">|</span> <span class="n">addedge</span> <span class="o">(</span><span class="n">add</span> <span class="o">:</span> <span class="n">g</span><span class="bp">.</span><span class="n">edge</span><span class="o">)</span> <span class="o">(</span><span class="n">last</span> <span class="o">:</span> <span class="n">g</span><span class="bp">.</span><span class="n">vertex</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">path</span> <span class="n">last</span><span class="o">)</span> <span class="o">(</span><span class="n">pr</span> <span class="o">:</span> <span class="n">last</span> <span class="bp">=</span> <span class="n">g</span><span class="bp">.</span><span class="n">φ1</span> <span class="n">add</span><span class="o">)</span> <span class="o">:</span> <span class="n">path</span> <span class="o">(</span><span class="n">g</span><span class="bp">.</span><span class="n">φ2</span> <span class="n">add</span><span class="o">)</span>
+</pre></div>
+
 
 {% endraw %}
 
