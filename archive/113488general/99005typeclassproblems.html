@@ -1140,6 +1140,86 @@ failed is_def_eq
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184116152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184116152">Alex J. Best (Dec 23 2019 at 16:40)</a>:</h4>
 <p>Thanks <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  and <span class="user-mention" data-user-id="112680">@Johan Commelin</span> for the very helpful comments! It looks like it works well with classes taking ring as a parameter instead of extending (I should have copied the way <code>is_noetherian_ring</code> is set up, rather than <code>integral_domain</code>!) I'll do some more tidy up and push it (unfortunately I can't see a way to change the PR branch but for the next one I should be able to push to mathlib instead (ty <span class="user-mention" data-user-id="110026">@Simon Hudon</span> ))</p>
 
+<a name="184185635"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184185635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184185635">Oliver Nash (Dec 24 2019 at 19:33)</a>:</h4>
+<p>I've been suffering with some typeclass problems which I've managed to reduce to the following:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">algebra</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+
+<span class="kn">section</span> <span class="n">prio</span>
+<span class="kn">set_option</span> <span class="n">default_priority</span> <span class="mi">200</span> <span class="c1">-- No problem if priority 199 or lower, evidently because algebra.to_module has priority 200</span>
+<span class="n">class</span> <span class="n">foo</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">M</span> <span class="n">M&#39;</span>  <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M&#39;</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">M</span><span class="o">]</span> <span class="kn">extends</span> <span class="n">module</span> <span class="n">R</span> <span class="n">M&#39;</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→</span><span class="err">ₗ</span><span class="o">[</span><span class="n">R</span><span class="o">]</span> <span class="n">M&#39;</span><span class="o">)</span>
+<span class="kn">end</span> <span class="n">prio</span>
+
+<span class="kn">set_option</span> <span class="n">class</span><span class="bp">.</span><span class="n">instance_max_depth</span> <span class="mi">100</span>
+<span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">class_instances</span> <span class="n">true</span>
+
+<span class="kn">instance</span> <span class="n">bar</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">ring</span> <span class="n">A</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">R</span> <span class="n">A</span><span class="o">]</span> <span class="o">:</span> <span class="n">module</span> <span class="n">R</span> <span class="n">A</span> <span class="o">:=</span> <span class="n">infer_instance</span>
+</pre></div>
+
+<a name="184185709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184185709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184185709">Oliver Nash (Dec 24 2019 at 19:35)</a>:</h4>
+<p>The above will report that <code>maximum class-instance resolution depth has been reached</code> when elaborating <code>bar</code> but it will work if we lower the priority of the instances created by the declaration of <code>foo</code>, as indicated in my comment.</p>
+
+<a name="184185826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184185826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184185826">Oliver Nash (Dec 24 2019 at 19:38)</a>:</h4>
+<p>I do not understand the "Prolog-like search" that is performed as part of typeclass inference well at all but I am surprised because my fuzzy understanding had lead me to believe that changing priorities like this should merely affect performance, rather than the actual results. Evidently I am in error. Can anyone shed any light?</p>
+
+<a name="184185873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184185873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184185873">Kevin Buzzard (Dec 24 2019 at 19:39)</a>:</h4>
+<p>Typeclass loops can cause the max class-instance error and changing priorities can avoid the loops because a solution might be found before the loop is found</p>
+
+<a name="184185877"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184185877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184185877">Oliver Nash (Dec 24 2019 at 19:39)</a>:</h4>
+<p>Furthermore, in debugging this, I attempted to read my first "class-instance resolution trace", and I note that my definition <code>foo</code> appears to introduce a looping behaviour, based on the following output from <code>lean foobar.lean 2&gt;&amp;1 | grep foo.to_module</code>:</p>
+
+<a name="184185928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184185928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184185928">Oliver Nash (Dec 24 2019 at 19:40)</a>:</h4>
+<div class="codehilite"><pre><span></span>[class_instances] (0) ?x_0 : @module R A (@comm_ring.to_ring R _inst_1) (@ring.to_add_comm_group A _inst_2) := @foo.to_module ?x_98 ?x_99 ?x_100 ?x_101 ?x_102 ?x_103 ?x_104 ?x_105
+[class_instances] (1) ?x_104 : @module R (free_abelian_group ?x_122) (@comm_ring.to_ring R _inst_1) (free_abelian_group.add_comm_group ?x_122) := @foo.to_module ?x_222 ?x_223 ?x_224 ?x_225 ?x_226 ?x_227
+[class_instances] (2) ?x_228 : @module R (free_abelian_group ?x_246) (@comm_ring.to_ring R _inst_1) (free_abelian_group.add_comm_group ?x_246) := @foo.to_module ?x_360 ?x_361 ?x_362 ?x_363 ?x_364 ?x_365
+[class_instances] (3) ?x_366 : @module R (free_abelian_group ?x_384) (@comm_ring.to_ring R _inst_1) (free_abelian_group.add_comm_group ?x_384) := @foo.to_module ?x_498 ?x_499 ?x_500 ?x_501 ?x_502 ?x_503
+[class_instances] (4) ?x_504 : @module R (free_abelian_group ?x_522) (@comm_ring.to_ring R _inst_1) (free_abelian_group.add_comm_group ?x_522) := @foo.to_module ?x_636 ?x_637 ?x_638 ?x_639 ?x_640 ?x_641
+[class_instances] (5) ?x_642 : @module R (free_abelian_group ?x_660) (@comm_ring.to_ring R _inst_1) (free_abelian_group.add_comm_group ?x_660) := @foo.to_module ?x_774 ?x_775 ?x_776 ?x_777 ?x_778 ?x_779
+[class_instances] (6) ?x_780 : @module R (free_abelian_group ?x_798) (@comm_ring.to_ring R _inst_1) (free_abelian_group.add_comm_group ?x_798) := @foo.to_module ?x_912 ?x_913 ?x_914 ?x_915 ?x_916 ?x_917
+[class_instances] (7) ?x_918 : @module R (free_abelian_group ?x_936) (@comm_ring.to_ring R _inst_1) (free_abelian_group.add_comm_group ?x_936) := @foo.to_module ?x_1050 ?x_1051 ?x_1052 ?x_1053 ?x_1054 ?
+[class_instances] (8) ?x_1056 : @module R (free_abelian_group ?x_1074) (@comm_ring.to_ring R _inst_1) (free_abelian_group.add_comm_group ?x_1074) := @foo.to_module ?x_1188 ?x_1189 ?x_1190 ?x_1191 ?x_119
+[class_instances] (9) ?x_1194 : @module R (free_abelian_group ?x_1212) (@comm_ring.to_ring R _inst_1) (free_abelian_group.add_comm_group ?x_1212) := @foo.to_module ?x_1326 ?x_1327 ?x_1328 ?x_1329 ?x_133
+[class_instances] (10) ?x_1332 : @module R (free_abelian_group ?x_1350) (@comm_ring.to_ring R _inst_1) (free_abelian_group.add_comm_group ?x_1350) := @foo.to_module ?x_1464 ?x_1465 ?x_1466 ?x_1467 ?x_14
+[class_instances] (11) ?x_1470 : @module R (free_abelian_group ?x_1488) (@comm_ring.to_ring R _inst_1) (free_abelian_group.add_comm_group ?x_1488) := @foo.to_module ?x_1602 ?x_1603 ?x_1604 ?x_1605 ?x_16
+[class_instances] (12) ?x_1608 : @module R (free_abelian_group ?x_1626) (@comm_ring.to_ring R _inst_1) (free_abelian_group.add_comm_group ?x_1626) := @foo.to_module ?x_1740 ?x_1741 ?x_1742 ?x_1743 ?x_17
+[class_instances] (13) ?x_1746 : @module R (free_abelian_group ?x_1764) (@comm_ring.to_ring R _inst_1) (free_abelian_group.add_comm_group ?x_1764) := @foo.to_module ?x_1878 ?x_1879 ?x_1880 ?x_1881 ?x_18
+[class_instances] (14) ?x_1884 : @module R (free_abelian_group ?x_1902) (@comm_ring.to_ring R _inst_1) (free_abelian_group.add_comm_group ?x_1902) := @foo.to_module ?x_2016 ?x_2017 ?x_2018 ?x_2019 ?x_20
+[class_instances] (15) ?x_2022 : @module R (free_abelian_group ?x_2040) (@comm_ring.to_ring R _inst_1) (free_abelian_group.add_comm_group ?x_2040) := @foo.to_module ?x_2154 ?x_2155 ?x_2156 ?x_2157 ?x_21
+[class_instances] (16) ?x_2160 : @module R (free_abelian_group ?x_2178) (@comm_ring.to_ring R _inst_1) (free_abelian_group.add_comm_group ?x_2178) := @foo.to_module ?x_2292 ?x_2293 ?x_2294 ?x_2295 ?x_22
+[class_instances] (17) ?x_2298 : @module R (free_abelian_group ?x_2316) (@comm_ring.to_ring R _inst_1) (free_abelian_group.add_comm_group ?x_2316) := @foo.to_module ?x_2430 ?x_2431 ?x_2432 ?x_2433 ?x_24
+[class_instances] (18) ?x_2436 : @module R (free_abelian_group
+</pre></div>
+
+<a name="184185936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184185936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184185936">Oliver Nash (Dec 24 2019 at 19:41)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Thank you, that is consistent with my fuzzy understanding.</p>
+
+<a name="184185984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184185984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184185984">Oliver Nash (Dec 24 2019 at 19:42)</a>:</h4>
+<p>So what is the take-home message here? Is it:</p>
+<p>1. I need to be more careful about instance priorities?, or<br>
+  2. Priorities aside, the definition of <code>foo</code> is faulty / unidiomatic in some way?, or<br>
+  3. I should give up on <code>extends</code> and just make <code>module R M'</code> a parameter in the definition of <code>foo</code>?, or<br>
+  4. Something else?</p>
+
+<a name="184186138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184186138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184186138">Oliver Nash (Dec 24 2019 at 19:47)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="184186280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184186280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184186280">Oliver Nash (Dec 24 2019 at 19:51)</a>:</h4>
+<p>My guess is that there is no unconditional answer to the above, and the best one can say is "sometimes option 1, sometimes option 3", depending on the situation.</p>
+
 
 {% endraw %}
 
