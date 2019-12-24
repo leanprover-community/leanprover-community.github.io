@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [hello! + how to get started on math?](95375hellohowtogetstartedonmath.html) (8 messages, latest: Dec 24 2019 at 10:10)
+* [hello! + how to get started on math?](95375hellohowtogetstartedonmath.html) (9 messages, latest: Dec 24 2019 at 14:30)
 
 * [universes in lean](98716universesinlean.html) (7 messages, latest: Dec 24 2019 at 09:57)
 
