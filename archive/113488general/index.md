@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [How to prove decidability?](00132Howtoprovedecidability.html) (12 messages, latest: Dec 24 2019 at 10:45)
+* [How to prove decidability?](00132Howtoprovedecidability.html) (14 messages, latest: Dec 24 2019 at 13:08)
 
 * [slow proofs](67935slowproofs.html) (17 messages, latest: Dec 24 2019 at 04:08)
 

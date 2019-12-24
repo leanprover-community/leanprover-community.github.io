@@ -114,6 +114,41 @@ end hidden
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184162744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184162744">Kevin Buzzard (Dec 24 2019 at 10:45)</a>:</h4>
 <p>It might be something to do with the fact that you're using constants. They get very little love here, nobody ever uses them (perhaps for reasons like this?)</p>
 
+<a name="184168679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184168679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184168679">Mario Carneiro (Dec 24 2019 at 13:08)</a>:</h4>
+<p>It has to do with the <code>noncomputable</code> markings associated with use of constants and axioms</p>
+
+<a name="184168693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20decidability%3F/near/184168693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00132Howtoprovedecidability.html#184168693">Mario Carneiro (Dec 24 2019 at 13:08)</a>:</h4>
+<p>compare:</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">hidden</span>
+
+<span class="kn">inductive</span> <span class="n">nat</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span><span class="n">zero</span> <span class="o">:</span> <span class="n">nat</span>
+<span class="bp">|</span><span class="n">succ</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">nat</span>
+
+<span class="kn">namespace</span> <span class="n">nat</span>
+
+<span class="n">def</span> <span class="n">le</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">nat</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">infix</span> <span class="bp">`</span> <span class="bp">≤</span> <span class="bp">`</span> <span class="o">:=</span> <span class="n">le</span>
+
+<span class="kn">theorem</span> <span class="n">p1</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">b</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">zero</span> <span class="bp">≤</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">theorem</span> <span class="n">p2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="bp">¬</span><span class="n">succ</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">zero</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">theorem</span> <span class="n">p3</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">succ</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">succ</span> <span class="n">b</span> <span class="bp">↔</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">instance</span> <span class="n">decidable_le</span> <span class="o">:</span> <span class="n">decidable_rel</span> <span class="o">((</span><span class="bp">≤</span><span class="o">)</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">-&gt;</span> <span class="n">nat</span> <span class="bp">-&gt;</span> <span class="kt">Prop</span><span class="o">)</span>
+<span class="bp">|</span><span class="n">zero</span> <span class="n">b</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">apply</span> <span class="n">is_true</span><span class="o">,</span> <span class="n">exact</span> <span class="n">p1</span> <span class="n">b</span> <span class="kn">end</span>
+<span class="bp">|</span><span class="o">(</span><span class="n">succ</span> <span class="n">a</span><span class="o">)</span> <span class="n">zero</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">apply</span> <span class="n">is_false</span><span class="o">,</span> <span class="n">exact</span> <span class="n">p2</span> <span class="n">a</span> <span class="kn">end</span>
+<span class="bp">|</span><span class="o">(</span><span class="n">succ</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">succ</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">specialize</span> <span class="n">decidable_le</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">cases</span> <span class="n">decidable_le</span> <span class="k">with</span> <span class="n">h</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">is_false</span><span class="o">,</span> <span class="n">rwa</span> <span class="n">p3</span><span class="o">,</span> <span class="n">apply</span> <span class="n">is_true</span><span class="o">,</span> <span class="n">rwa</span> <span class="n">p3</span>
+<span class="kn">end</span>
+
+<span class="kn">end</span> <span class="n">nat</span>
+<span class="kn">end</span> <span class="n">hidden</span>
+</pre></div>
+
 
 {% endraw %}
 
