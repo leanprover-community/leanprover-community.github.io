@@ -9,13 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [How to prove decidability?](00132Howtoprovedecidability.html) (8 messages, latest: Dec 24 2019 at 01:55)
+
+* [slow proofs](67935slowproofs.html) (12 messages, latest: Dec 24 2019 at 01:19)
+
 * [profile information](28472profileinformation.html) (8 messages, latest: Dec 23 2019 at 19:38)
 
 * [typeclass problems](99005typeclassproblems.html) (199 messages, latest: Dec 23 2019 at 16:40)
 
 * [Is there code for X](10831IstherecodeforX.html) (2 messages, latest: Dec 23 2019 at 15:27)
-
-* [How to prove decidability?](00132Howtoprovedecidability.html) (7 messages, latest: Dec 23 2019 at 11:15)
 
 * [𝟙 and 𝟭 in VS Code](99821andinVSCode.html) (1 message, latest: Dec 22 2019 at 11:46)
 

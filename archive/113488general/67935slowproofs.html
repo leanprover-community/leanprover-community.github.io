@@ -1,0 +1,96 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/67935slowproofs.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/67935slowproofs.html">slow proofs</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="184143324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slow%20proofs/near/184143324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67935slowproofs.html#184143324">Yury G. Kudryashov (Dec 24 2019 at 01:03)</a>:</h4>
+<p>Hi, the following files have largest compile times as counted by running something like <code>for f in $(find . -name *.lean); do time lean -j1 --profile $f; done</code> after <code>leanpkg build</code>:</p>
+<div class="codehilite"><pre><span></span>./src/data/complex/exponential.time!1:01.78
+./src/data/polynomial.time!1:57.13
+./src/data/real/ennreal.time!1:01.25
+./src/group_theory/congruence.time!1:03.07
+./src/linear_algebra/basic.time!1:58.68
+./src/ring_theory/power_series.time!1:18.62
+./src/topology/algebra/infinite_sum.time!1:37.40
+./src/category_theory/limits/shapes/binary_products.time!2:04.08
+./src/data/multiset.time!2:01.77
+./src/analysis/complex/exponential.time!3:50.83
+</pre></div>
+
+<a name="184143346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slow%20proofs/near/184143346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67935slowproofs.html#184143346">Yury G. Kudryashov (Dec 24 2019 at 01:03)</a>:</h4>
+<p>And the longest-running proof is</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">dist_le_tsum_dist_of_tendsto</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">α</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">summable</span> <span class="o">(</span><span class="bp">λ</span><span class="n">n</span><span class="o">,</span> <span class="n">dist</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">)))</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="n">tendsto</span> <span class="n">f</span> <span class="n">at_top</span> <span class="o">(</span><span class="err">𝓝</span> <span class="n">a</span><span class="o">))</span> <span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">dist</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="o">)</span> <span class="n">a</span> <span class="bp">≤</span> <span class="err">∑</span> <span class="n">m</span><span class="o">,</span> <span class="n">dist</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="n">m</span><span class="o">))</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="n">m</span><span class="o">)</span><span class="bp">.</span><span class="n">succ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">dist_le_tsum_of_dist_le_of_tendsto</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">,</span> <span class="n">dist</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">))</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">,</span> <span class="n">le_refl</span> <span class="o">(</span><span class="n">dist</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">)))</span> <span class="n">h</span> <span class="n">ha</span> <span class="n">n</span>
+</pre></div>
+
+
+<p>in <code>infinite_sum.lean</code>.</p>
+
+<a name="184143400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slow%20proofs/near/184143400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67935slowproofs.html#184143400">Yury G. Kudryashov (Dec 24 2019 at 01:04)</a>:</h4>
+<p>Any idea what makes it so hard to elaborate this proof?</p>
+
+<a name="184143541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slow%20proofs/near/184143541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67935slowproofs.html#184143541">Simon Hudon (Dec 24 2019 at 01:07)</a>:</h4>
+<p>The two things I can think of are 1. how long is the path to the type class instances that it needs (and the number of candidates being considered) 2. and the amount of definition unfolding required to check that functions are applied to arguments of the right type.</p>
+
+<a name="184143635"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slow%20proofs/near/184143635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67935slowproofs.html#184143635">Yury G. Kudryashov (Dec 24 2019 at 01:09)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">dist_le_tsum_of_dist_le_of_tendsto</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">dist</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">d</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">hd</span> <span class="o">:</span> <span class="n">summable</span> <span class="n">d</span><span class="o">)</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="n">tendsto</span> <span class="n">f</span> <span class="n">at_top</span> <span class="o">(</span><span class="err">𝓝</span> <span class="n">a</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">dist</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="o">)</span> <span class="n">a</span> <span class="bp">≤</span> <span class="err">∑</span> <span class="n">m</span><span class="o">,</span> <span class="n">d</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">m</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">_</span>
+</pre></div>
+
+<a name="184143715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slow%20proofs/near/184143715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67935slowproofs.html#184143715">Yury G. Kudryashov (Dec 24 2019 at 01:11)</a>:</h4>
+<p>Is it possible to trace unfolding of definitions?</p>
+
+<a name="184143723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slow%20proofs/near/184143723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67935slowproofs.html#184143723">Yury G. Kudryashov (Dec 24 2019 at 01:11)</a>:</h4>
+<p>I don't see any definitions to unfold here.</p>
+
+<a name="184143832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slow%20proofs/near/184143832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67935slowproofs.html#184143832">Joe (Dec 24 2019 at 01:14)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">dist_le_tsum_dist_of_tendsto</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">α</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">summable</span> <span class="o">(</span><span class="bp">λ</span><span class="n">n</span><span class="o">,</span> <span class="n">dist</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">)))</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="n">tendsto</span> <span class="n">f</span> <span class="n">at_top</span> <span class="o">(</span><span class="err">𝓝</span> <span class="n">a</span><span class="o">))</span> <span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">dist</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="o">)</span> <span class="n">a</span> <span class="bp">≤</span> <span class="err">∑</span> <span class="n">m</span><span class="o">,</span> <span class="n">dist</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="n">m</span><span class="o">))</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="n">m</span><span class="o">)</span><span class="bp">.</span><span class="n">succ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">show</span> <span class="n">dist</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="o">)</span> <span class="n">a</span> <span class="bp">≤</span> <span class="err">∑</span> <span class="n">m</span><span class="o">,</span> <span class="o">(</span><span class="bp">λ</span><span class="n">x</span><span class="o">,</span> <span class="n">dist</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="bp">.</span><span class="n">succ</span><span class="o">))</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">m</span><span class="o">),</span> <span class="k">from</span>
+<span class="n">dist_le_tsum_of_dist_le_of_tendsto</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">dist</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">))</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">le_refl</span> <span class="bp">_</span><span class="o">)</span> <span class="n">h</span> <span class="n">ha</span> <span class="n">n</span>
+</pre></div>
+
+<a name="184143858"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slow%20proofs/near/184143858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67935slowproofs.html#184143858">Joe (Dec 24 2019 at 01:14)</a>:</h4>
+<p>I think this should fix it.</p>
+
+<a name="184143869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slow%20proofs/near/184143869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67935slowproofs.html#184143869">Joe (Dec 24 2019 at 01:15)</a>:</h4>
+<p>Lean cannot find the function <code>d</code> in <code>dist_le_tsum_of_dist_le_of_tendsto</code></p>
+
+<a name="184144022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slow%20proofs/near/184144022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67935slowproofs.html#184144022">Yury G. Kudryashov (Dec 24 2019 at 01:18)</a>:</h4>
+<p>Thanks @Joe!</p>
+
+<a name="184144036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slow%20proofs/near/184144036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67935slowproofs.html#184144036">Joe (Dec 24 2019 at 01:19)</a>:</h4>
+<p>No problem.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
