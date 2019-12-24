@@ -1228,6 +1228,22 @@ failed is_def_eq
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184188668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184188668">Kevin Buzzard (Dec 24 2019 at 21:01)</a>:</h4>
 <p>I think <code>foo.to_module</code> exists because you're extending. I'd love to point you to some docs explaining the basic do's and don'ts in this area but there aren't any and I can't write them</p>
 
+<a name="184191449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184191449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184191449">Oliver Nash (Dec 24 2019 at 22:23)</a>:</h4>
+<p>Thanks. Yes, I believe one of the things that extending does is to create <code>foo.to_module</code>; I too would love to read such docs, but I’ll happily plough ahead for now and wait till they are written (perhaps after Lean 4 arrives).</p>
+
+<a name="184191622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184191622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184191622">Oliver Nash (Dec 24 2019 at 22:28)</a>:</h4>
+<p>I think I more or less understand the no loops prohibition (a tree-like search can't search a general graph) but I need to sharpen my understanding a little. I still have various questions but I'm unblocked so I think I'll just put them aside for now and see how I go when I pick this up, in a few days. Thanks again.</p>
+
+<a name="184192445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184192445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184192445">Mario Carneiro (Dec 24 2019 at 22:55)</a>:</h4>
+<p>The general rule being violated here is that <code>foo</code> has three explicit (type) args, but it has a parent that has only two</p>
+
+<a name="184192449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184192449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184192449">Mario Carneiro (Dec 24 2019 at 22:55)</a>:</h4>
+<p>which means that during instance search <code>M</code> gets invented, leading to the instance loop</p>
+
 
 {% endraw %}
 
