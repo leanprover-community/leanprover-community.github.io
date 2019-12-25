@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [typeclass problems](99005typeclassproblems.html) (215 messages, latest: Dec 24 2019 at 22:55)
+* [typeclass problems](99005typeclassproblems.html) (217 messages, latest: Dec 25 2019 at 00:23)
 
 * [How to prove decidability?](00132Howtoprovedecidability.html) (14 messages, latest: Dec 24 2019 at 13:08)
 
