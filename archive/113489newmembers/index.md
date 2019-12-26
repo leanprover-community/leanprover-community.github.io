@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Basics](34198Basics.html) (6 messages, latest: Dec 26 2019 at 06:32)
+* [Basics](34198Basics.html) (7 messages, latest: Dec 26 2019 at 07:57)
 
 * [hello! + how to get started on math?](95375hellohowtogetstartedonmath.html) (9 messages, latest: Dec 24 2019 at 14:30)
 
