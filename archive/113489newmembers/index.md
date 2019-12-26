@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Symmetry of equality applied to a hypothesis](35681Symmetryofequalityappliedtoahypothesis.html) (1 message, latest: Dec 26 2019 at 16:57)
+
 * [universes in lean](98716universesinlean.html) (8 messages, latest: Dec 26 2019 at 11:12)
 
 * [Basics](34198Basics.html) (7 messages, latest: Dec 26 2019 at 07:57)
