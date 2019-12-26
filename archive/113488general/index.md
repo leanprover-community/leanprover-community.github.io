@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [typeclass problems](99005typeclassproblems.html) (219 messages, latest: Dec 25 2019 at 06:38)
+* [How to prove decidability?](00132Howtoprovedecidability.html) (15 messages, latest: Dec 26 2019 at 01:50)
 
-* [How to prove decidability?](00132Howtoprovedecidability.html) (14 messages, latest: Dec 24 2019 at 13:08)
+* [typeclass problems](99005typeclassproblems.html) (219 messages, latest: Dec 25 2019 at 06:38)
 
 * [slow proofs](67935slowproofs.html) (17 messages, latest: Dec 24 2019 at 04:08)
 
