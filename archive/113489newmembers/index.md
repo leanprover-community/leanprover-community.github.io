@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Symmetry of equality applied to a hypothesis](35681Symmetryofequalityappliedtoahypothesis.html) (1 message, latest: Dec 26 2019 at 16:57)
+* [Symmetry of equality applied to a hypothesis](35681Symmetryofequalityappliedtoahypothesis.html) (5 messages, latest: Dec 26 2019 at 17:56)
 
 * [universes in lean](98716universesinlean.html) (8 messages, latest: Dec 26 2019 at 11:12)
 
