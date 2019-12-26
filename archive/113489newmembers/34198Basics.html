@@ -91,6 +91,56 @@ permalink: archive/113489newmembers/34198Basics.html
 <span class="o">)</span>
 </pre></div>
 
+<a name="184280088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basics/near/184280088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34198Basics.html#184280088">Patrick Massot (Dec 26 2019 at 20:01)</a>:</h4>
+<p>How do you declare your variables p, q and r?</p>
+
+<a name="184280103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basics/near/184280103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34198Basics.html#184280103">Patrick Massot (Dec 26 2019 at 20:01)</a>:</h4>
+<p>You seem to use them implicitly, hence they should appear between curly brackets.</p>
+
+<a name="184280185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basics/near/184280185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34198Basics.html#184280185">Iocta (Dec 26 2019 at 20:03)</a>:</h4>
+<p>I have <code>variables p q r : Prop</code> at the top of the page.</p>
+
+<a name="184280234"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basics/near/184280234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34198Basics.html#184280234">Patrick Massot (Dec 26 2019 at 20:04)</a>:</h4>
+<p>This defaults to regular parentheses, hence explicit arguments.</p>
+
+<a name="184280239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basics/near/184280239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34198Basics.html#184280239">Patrick Massot (Dec 26 2019 at 20:04)</a>:</h4>
+<p>Switch to <code>variables {p q r : Prop}</code>.</p>
+
+<a name="184280513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basics/near/184280513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34198Basics.html#184280513">Iocta (Dec 26 2019 at 20:11)</a>:</h4>
+<p>That works. How should my code be if I wanted to keep the <code>variables p q r : Prop</code>?</p>
+
+<a name="184280688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basics/near/184280688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34198Basics.html#184280688">Bryan Gin-ge Chen (Dec 26 2019 at 20:15)</a>:</h4>
+<p>You have to provide all explicit parameters to the function <code>show_p</code>, so your last example should look like this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="bp">∧</span> <span class="n">q</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="n">p</span> <span class="bp">∧</span> <span class="n">r</span><span class="o">)</span> <span class="bp">→</span> <span class="n">p</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">q</span> <span class="bp">∨</span> <span class="n">r</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="k">assume</span> <span class="n">h</span><span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="bp">∧</span> <span class="n">q</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="n">p</span> <span class="bp">∧</span> <span class="n">r</span><span class="o">)</span> <span class="o">,</span>
+<span class="k">show</span> <span class="n">p</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">q</span> <span class="bp">∨</span> <span class="n">r</span><span class="o">),</span>
+<span class="k">from</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="n">show_p</span> <span class="n">p</span> <span class="n">q</span> <span class="n">r</span> <span class="n">h</span> <span class="o">)</span>  <span class="o">(</span><span class="n">show_q_or_r</span> <span class="n">p</span> <span class="n">q</span> <span class="n">r</span> <span class="n">h</span><span class="o">)</span>
+<span class="o">)</span>
+</pre></div>
+
+<a name="184280753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basics/near/184280753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34198Basics.html#184280753">Iocta (Dec 26 2019 at 20:16)</a>:</h4>
+<p>Oh I see. Thank you all.</p>
+
+<a name="184280769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basics/near/184280769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34198Basics.html#184280769">Patrick Massot (Dec 26 2019 at 20:16)</a>:</h4>
+<p>That kind of verbosity is <em>precisely</em> what implicit arguments are meant to deal with.</p>
+
+<a name="184280798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basics/near/184280798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34198Basics.html#184280798">Patrick Massot (Dec 26 2019 at 20:17)</a>:</h4>
+<p>(of course you're free to use them or not, I only want to make sure you understand the point).</p>
+
+<a name="184280849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basics/near/184280849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34198Basics.html#184280849">Iocta (Dec 26 2019 at 20:18)</a>:</h4>
+<p>Yep, got it.</p>
+
 
 {% endraw %}
 

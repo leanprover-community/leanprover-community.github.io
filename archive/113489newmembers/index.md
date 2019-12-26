@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Basics](34198Basics.html) (8 messages, latest: Dec 26 2019 at 19:59)
+* [Basics](34198Basics.html) (19 messages, latest: Dec 26 2019 at 20:18)
 
 * [Symmetry of equality applied to a hypothesis](35681Symmetryofequalityappliedtoahypothesis.html) (5 messages, latest: Dec 26 2019 at 17:56)
 
