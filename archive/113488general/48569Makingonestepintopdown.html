@@ -17,6 +17,34 @@ permalink: archive/113488general/48569Makingonestepintopdown.html
 <p>Natural deduction formalism allows to apply inference rules in any direction - both in top-down and bottom-up direction. That is in opposite to the sequent calculus whose inference rules are mean for bottom-up application only. That is why forward and backward inference is possible in natural deduction, i.e. it is possible to gate statements, to choose inference rule, to choose the direction for the inference rule and make one step of inference. Such logic (as opposite to the restricted versions of first order logic like datalog or prolog) have no clear notion of consequence set, but such single step is some kind of computing of consequence set, part of it.</p>
 <p>I am now playing with the Microsoft Lean theorem prover which has documentation for the natural deduction. My question is - can I do the mentioned actions in this prover - i.e. specify statement, inference rule and application direction and get the result? Lean is theorem prover and that is why it may compute only large chunks of those single steps, but maybe it is possible to use Lean to compute such single steps as well? And maybe it is possible to use Lean in API manner as API calculator - to submit statements and flag for the inference rule and get back the statements of such single step in other software? Is it possible and how?Making one step (in top-down,</p>
 
+<a name="184275265"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Making%20one%20step%20%28in%20top-down%2C/near/184275265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48569Makingonestepintopdown.html#184275265">Etienne Laurin (Dec 26 2019 at 18:19)</a>:</h4>
+<p>If you use tactics to prove a theorem <code>s</code>, you can then use <code>#print s</code> to see the individual steps of the proof, for example:</p>
+<div class="codehilite"><pre><span></span>lemma eg (A B C : Prop) : (A → (B → C)) → (A ∧ B → C) := by cc
+#print eg
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>theorem eg : ∀ (A B C : Prop), (A → B → C) → A ∧ B → C :=
+λ (A B C : Prop) (a : A → B → C) (a_1 : A ∧ B),
+  of_eq_true
+    (eq.trans
+       (eq.trans (eq.symm (imp_eq_of_eq_true_left (eq_true_of_and_eq_true_right (eq_true_intro a_1))))
+          (eq.symm
+             (imp_eq_of_eq_true_left
+                (eq.trans (eq.symm (and_eq_of_eq_true_right (eq_true_of_and_eq_true_right (eq_true_intro a_1))))
+                   (eq_true_intro a_1)))))
+       (eq_true_intro a))
+</pre></div>
+
+<a name="184275318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Making%20one%20step%20%28in%20top-down%2C/near/184275318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48569Makingonestepintopdown.html#184275318">Etienne Laurin (Dec 26 2019 at 18:20)</a>:</h4>
+<p>To do this from other software you could use the <code>--export</code> or <code>--server</code> modes</p>
+
+<a name="184276585"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Making%20one%20step%20%28in%20top-down%2C/near/184276585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48569Makingonestepintopdown.html#184276585">Alex Skara (Dec 26 2019 at 18:42)</a>:</h4>
+<p>Thanks for suggestion but I am have a bit different use case. Reasoning and not the theorem proving is my use case. And it is important for reasoning to make one step in a manner that it is the external decision what premises to choose and which inference rule to apply (and not the built-in search process). There are some works that point to this direction e.g. <a href="https://ieeexplore.ieee.org/document/6359662" target="_blank" title="https://ieeexplore.ieee.org/document/6359662">https://ieeexplore.ieee.org/document/6359662</a> and <a href="http://www.isle.org/~langley/papers/icarus.rrl.ilp05.pdf" target="_blank" title="http://www.isle.org/~langley/papers/icarus.rrl.ilp05.pdf">http://www.isle.org/~langley/papers/icarus.rrl.ilp05.pdf</a> and whole emerging culture of relational reinforcement learning and automatic theory proving that uses guidance from the (deep) reinforcement learning (there is strong Czech group working on that). Just wanted to know is it worth to dig deeper in to Lean documentation or the code with the aim to enable such one-step inference rule applications. Currently I am developing my own software for that using teaching software for sequent calculus and for natural deduction, but it would be more nice to have some solid tools. I also asked the same question in Coq and Isabelle groups and they too have no mechanisms for explicit control over one step inferences.</p>
+
 
 {% endraw %}
 
