@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Basics](34198Basics.html) (8 messages, latest: Dec 26 2019 at 19:59)
+
 * [Symmetry of equality applied to a hypothesis](35681Symmetryofequalityappliedtoahypothesis.html) (5 messages, latest: Dec 26 2019 at 17:56)
 
 * [universes in lean](98716universesinlean.html) (8 messages, latest: Dec 26 2019 at 11:12)
-
-* [Basics](34198Basics.html) (7 messages, latest: Dec 26 2019 at 07:57)
 
 * [hello! + how to get started on math?](95375hellohowtogetstartedonmath.html) (9 messages, latest: Dec 24 2019 at 14:30)
 

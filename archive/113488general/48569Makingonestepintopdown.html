@@ -45,6 +45,28 @@ permalink: archive/113488general/48569Makingonestepintopdown.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Making%20one%20step%20%28in%20top-down%2C/near/184276585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48569Makingonestepintopdown.html#184276585">Alex Skara (Dec 26 2019 at 18:42)</a>:</h4>
 <p>Thanks for suggestion but I am have a bit different use case. Reasoning and not the theorem proving is my use case. And it is important for reasoning to make one step in a manner that it is the external decision what premises to choose and which inference rule to apply (and not the built-in search process). There are some works that point to this direction e.g. <a href="https://ieeexplore.ieee.org/document/6359662" target="_blank" title="https://ieeexplore.ieee.org/document/6359662">https://ieeexplore.ieee.org/document/6359662</a> and <a href="http://www.isle.org/~langley/papers/icarus.rrl.ilp05.pdf" target="_blank" title="http://www.isle.org/~langley/papers/icarus.rrl.ilp05.pdf">http://www.isle.org/~langley/papers/icarus.rrl.ilp05.pdf</a> and whole emerging culture of relational reinforcement learning and automatic theory proving that uses guidance from the (deep) reinforcement learning (there is strong Czech group working on that). Just wanted to know is it worth to dig deeper in to Lean documentation or the code with the aim to enable such one-step inference rule applications. Currently I am developing my own software for that using teaching software for sequent calculus and for natural deduction, but it would be more nice to have some solid tools. I also asked the same question in Coq and Isabelle groups and they too have no mechanisms for explicit control over one step inferences.</p>
 
+<a name="184279642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Making%20one%20step%20%28in%20top-down%2C/near/184279642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48569Makingonestepintopdown.html#184279642">Etienne Laurin (Dec 26 2019 at 19:51)</a>:</h4>
+<p>Lean's tactic mode allows you to specify a proof as a list of steps. The <code>have</code> tactic can perform a single forward step, and the <code>refine</code> tactic a single backwards step. For example:</p>
+<div class="codehilite"><pre><span></span>example {p q r : Prop} : p → q → r → p ∧ q ∧ r :=
+begin
+  intros,
+  have : q ∧ r := and.intro ‹q› ‹r›,
+  have : p ∧ q ∧ r :=  and.intro ‹p› ‹q ∧ r›,
+  exact ‹p ∧ q ∧ r›
+end
+
+example {p q r : Prop} : p → q → r → p ∧ q ∧ r :=
+begin
+  intros,
+  refine and.intro _ _,
+  exact ‹p›,
+  refine and.intro _ _,
+  exact ‹q›,
+  exact ‹r›
+end
+</pre></div>
+
 
 {% endraw %}
 
