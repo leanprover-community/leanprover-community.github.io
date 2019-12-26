@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [linter](19343linter.html) (12 messages, latest: Dec 26 2019 at 13:29)
+
 * [highlightjs](69590highlightjs.html) (1 message, latest: Dec 26 2019 at 09:31)
 
 * [How to prove decidability?](00132Howtoprovedecidability.html) (15 messages, latest: Dec 26 2019 at 01:50)
@@ -76,8 +78,6 @@ permalink: archive/113488general/index.html
 * [Lots of errors in mathlib, is this normal?](07125Lotsoferrorsinmathlibisthisnormal.html) (17 messages, latest: Dec 09 2019 at 19:07)
 
 * [event in Paris](94041eventinParis.html) (2 messages, latest: Dec 07 2019 at 17:51)
-
-* [linter](19343linter.html) (10 messages, latest: Dec 06 2019 at 21:36)
 
 * [cache-olean](72177cacheolean.html) (52 messages, latest: Dec 06 2019 at 20:14)
 
