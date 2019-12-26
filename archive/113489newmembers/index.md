@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Basics](34198Basics.html) (1 message, latest: Dec 26 2019 at 05:19)
+
 * [hello! + how to get started on math?](95375hellohowtogetstartedonmath.html) (9 messages, latest: Dec 24 2019 at 14:30)
 
 * [universes in lean](98716universesinlean.html) (7 messages, latest: Dec 24 2019 at 09:57)
