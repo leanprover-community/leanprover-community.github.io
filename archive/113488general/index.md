@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [What do we know about Lean 4?](05425WhatdoweknowaboutLean4.html) (5 messages, latest: Dec 27 2019 at 13:43)
+* [What do we know about Lean 4?](05425WhatdoweknowaboutLean4.html) (9 messages, latest: Dec 27 2019 at 14:16)
 
 * [Beer reward](97796Beerreward.html) (1 message, latest: Dec 27 2019 at 11:46)
 
