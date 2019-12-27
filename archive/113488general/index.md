@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [apply fails to synthesize type class instance](74812applyfailstosynthesizetypeclassinstance.html) (2 messages, latest: Dec 27 2019 at 08:51)
+* [apply fails to synthesize type class instance](74812applyfailstosynthesizetypeclassinstance.html) (3 messages, latest: Dec 27 2019 at 09:12)
 
 * [VSCode extension](96418VSCodeextension.html) (3 messages, latest: Dec 27 2019 at 02:38)
 
