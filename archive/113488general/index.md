@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Beer reward](97796Beerreward.html) (2 messages, latest: Dec 27 2019 at 18:38)
+
 * [tfae formatting](05308tfaeformatting.html) (16 messages, latest: Dec 27 2019 at 16:40)
 
 * [What do we know about Lean 4?](05425WhatdoweknowaboutLean4.html) (9 messages, latest: Dec 27 2019 at 14:16)
-
-* [Beer reward](97796Beerreward.html) (1 message, latest: Dec 27 2019 at 11:46)
 
 * [apply fails to synthesize type class instance](74812applyfailstosynthesizetypeclassinstance.html) (10 messages, latest: Dec 27 2019 at 10:46)
 
