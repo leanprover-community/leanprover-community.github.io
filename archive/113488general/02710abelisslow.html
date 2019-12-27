@@ -1,0 +1,34 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/02710abelisslow.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/02710abelisslow.html">`abel` is slow</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="184338159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60abel%60%20is%20slow/near/184338159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02710abelisslow.html#184338159">Yury G. Kudryashov (Dec 27 2019 at 19:11)</a>:</h4>
+<p>Hi, it seems that <code>abel</code> spends 3s on the following goal:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">V</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">V</span><span class="o">]</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">V</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">l</span> <span class="err">•</span> <span class="n">y</span> <span class="bp">+</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">l</span> <span class="err">•</span> <span class="n">x</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">+</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">l</span> <span class="err">•</span> <span class="n">x</span> <span class="bp">-</span> <span class="o">(</span><span class="n">y</span> <span class="bp">-</span> <span class="n">l</span> <span class="err">•</span> <span class="n">y</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">abel</span>
+</pre></div>
+
+
+<p><code>lean --profile</code> says that it spends most of the time in <code>tactic.mk_instance</code>. I wonder what instances does it try to make.</p>
+
+<a name="184338257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60abel%60%20is%20slow/near/184338257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02710abelisslow.html#184338257">Yury G. Kudryashov (Dec 27 2019 at 19:13)</a>:</h4>
+<p>It works <em>much</em> faster if I reformulate the goal as an equality.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

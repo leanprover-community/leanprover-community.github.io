@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Beer reward](97796Beerreward.html) (2 messages, latest: Dec 27 2019 at 18:38)
+* [Beer reward](97796Beerreward.html) (8 messages, latest: Dec 27 2019 at 19:53)
 
-* [tfae formatting](05308tfaeformatting.html) (16 messages, latest: Dec 27 2019 at 16:40)
+* [tfae formatting](05308tfaeformatting.html) (19 messages, latest: Dec 27 2019 at 19:47)
+
+* [`abel` is slow](02710abelisslow.html) (2 messages, latest: Dec 27 2019 at 19:13)
 
 * [What do we know about Lean 4?](05425WhatdoweknowaboutLean4.html) (9 messages, latest: Dec 27 2019 at 14:16)
 
