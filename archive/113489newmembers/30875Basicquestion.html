@@ -1,0 +1,62 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/30875Basicquestion.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/30875Basicquestion.html">Basic question</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="184332654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20question/near/184332654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30875Basicquestion.html#184332654">De Paz (Dec 27 2019 at 17:14)</a>:</h4>
+<p>Hello!<br>
+Undergraduate student from Germany here who is interested in Lean!</p>
+<p>I read the tutorial about Propositions and I'm currently reading the Logic and Proof manual and want to try the following:<br>
+I want to proof that the identity element in a goup is unique by defining a  group and using that definition. Here is my code:</p>
+<p>universe u<br>
+variables α : Type u</p>
+<p>class Group (α : Type u) :=<br>
+    (operation : α × α → α)<br>
+    (one : α )<br>
+    ( associativity : ∀ a b c: α, operation(a, operation(b,c) ) = operation( operation(a,b), c) )<br>
+    ( left_neutral: ∀ a : α, operation(a, one) = a )<br>
+    ( right_neutral : ∀ a : α, operation(one, a ) = a )<br>
+    ( left_inverse: ∀ a : α, ∃ l_inverse : α , operation(l_inverse, a) = one )<br>
+    ( right_inverse: ∀ a : α, ∃ r_inverse : α , operation(a, r_inverse) = one )</p>
+<p>My problem is that I don't know how to use this defintion.  <br>
+Can someone  tell me where I can find an example related to my problem ?</p>
+<p>I'm looking forward to learn more about Lean!<br>
+Thank you</p>
+
+<a name="184333581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20question/near/184333581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30875Basicquestion.html#184333581">Jesse Michael Han (Dec 27 2019 at 17:35)</a>:</h4>
+<p>i think you want a statement like this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">G</span> <span class="o">:</span> <span class="n">Group</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">e</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">H_left</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">Group</span><span class="bp">.</span><span class="n">operation</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">e</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span>
+ <span class="n">e</span> <span class="bp">=</span> <span class="o">(</span><span class="n">Group</span><span class="bp">.</span><span class="n">one</span> <span class="n">α</span><span class="o">)</span>
+</pre></div>
+
+<a name="184333698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20question/near/184333698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30875Basicquestion.html#184333698">Jesse Michael Han (Dec 27 2019 at 17:38)</a>:</h4>
+<p>(note: the proof of this can be one-lined with <code>by finish using Group.right_neutral e</code>)</p>
+
+<a name="184333885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20question/near/184333885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30875Basicquestion.html#184333885">Kevin Buzzard (Dec 27 2019 at 17:41)</a>:</h4>
+<p>man that's too many axioms for a group ;-)</p>
+
+<a name="184333903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20question/near/184333903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30875Basicquestion.html#184333903">Kevin Buzzard (Dec 27 2019 at 17:41)</a>:</h4>
+<p><a href="https://xenaproject.wordpress.com/2018/04/30/group-theory-revision/" target="_blank" title="https://xenaproject.wordpress.com/2018/04/30/group-theory-revision/">https://xenaproject.wordpress.com/2018/04/30/group-theory-revision/</a></p>
+
+<a name="184333983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20question/near/184333983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30875Basicquestion.html#184333983">Kevin Buzzard (Dec 27 2019 at 17:42)</a>:</h4>
+<p>Example of using groups in Lean: <a href="https://github.com/kbuzzard/xena/blob/master/blog/group_axioms_class.lean" target="_blank" title="https://github.com/kbuzzard/xena/blob/master/blog/group_axioms_class.lean">https://github.com/kbuzzard/xena/blob/master/blog/group_axioms_class.lean</a></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
