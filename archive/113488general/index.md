@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Beer reward](97796Beerreward.html) (1 message, latest: Dec 27 2019 at 11:46)
+
 * [apply fails to synthesize type class instance](74812applyfailstosynthesizetypeclassinstance.html) (10 messages, latest: Dec 27 2019 at 10:46)
 
 * [VSCode extension](96418VSCodeextension.html) (3 messages, latest: Dec 27 2019 at 02:38)
