@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [natural number game questions](52294naturalnumbergamequestions.html) (4 messages, latest: Dec 27 2019 at 04:49)
+
 * [Symmetry of equality applied to a hypothesis](35681Symmetryofequalityappliedtoahypothesis.html) (6 messages, latest: Dec 26 2019 at 21:57)
 
 * [Basics](34198Basics.html) (19 messages, latest: Dec 26 2019 at 20:18)
