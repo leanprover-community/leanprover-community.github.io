@@ -38,6 +38,34 @@ permalink: archive/113488general/74812applyfailstosynthesizetypeclassinstance.ht
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20fails%20to%20synthesize%20type%20class%20instance/near/184309983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74812applyfailstosynthesizetypeclassinstance.html#184309983">Yury G. Kudryashov (Dec 27 2019 at 09:12)</a>:</h4>
 <p>Does it happen because <code>orderable_topology</code> takes <code>topological_space</code> and <code>partial_order</code> as arguments?</p>
 
+<a name="184313603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20fails%20to%20synthesize%20type%20class%20instance/near/184313603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74812applyfailstosynthesizetypeclassinstance.html#184313603">Patrick Massot (Dec 27 2019 at 10:29)</a>:</h4>
+<p>This is a known issue: <code>apply</code> is very bad at finding type class instances. Usually you can use <code>refine</code> instead (after figuring out how many underscores you need).</p>
+
+<a name="184313828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20fails%20to%20synthesize%20type%20class%20instance/near/184313828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74812applyfailstosynthesizetypeclassinstance.html#184313828">Patrick Massot (Dec 27 2019 at 10:34)</a>:</h4>
+<p>I'll have a look at your specific issue.</p>
+
+<a name="184313834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20fails%20to%20synthesize%20type%20class%20instance/near/184313834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74812applyfailstosynthesizetypeclassinstance.html#184313834">Yury G. Kudryashov (Dec 27 2019 at 10:34)</a>:</h4>
+<p>Then I'll probably drop <a href="https://github.com/leanprover-community/mathlib/issues/1828" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1828">#1828</a>. Restricting <code>squeeze_zero</code> to reals make it possible to use <code>apply squeeze_zero</code>.</p>
+
+<a name="184314184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20fails%20to%20synthesize%20type%20class%20instance/near/184314184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74812applyfailstosynthesizetypeclassinstance.html#184314184">Patrick Massot (Dec 27 2019 at 10:42)</a>:</h4>
+<p>Do you have any use case besides reals?</p>
+
+<a name="184314272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20fails%20to%20synthesize%20type%20class%20instance/near/184314272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74812applyfailstosynthesizetypeclassinstance.html#184314272">Yury G. Kudryashov (Dec 27 2019 at 10:45)</a>:</h4>
+<p>No, I just felt that <code>algebra/ordered</code> is a better place for this lemma. Since it breaks <code>apply</code>, I think it's better to just drop the PR.</p>
+
+<a name="184314274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20fails%20to%20synthesize%20type%20class%20instance/near/184314274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74812applyfailstosynthesizetypeclassinstance.html#184314274">Patrick Massot (Dec 27 2019 at 10:45)</a>:</h4>
+<p>Ok</p>
+
+<a name="184314329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20fails%20to%20synthesize%20type%20class%20instance/near/184314329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74812applyfailstosynthesizetypeclassinstance.html#184314329">Patrick Massot (Dec 27 2019 at 10:46)</a>:</h4>
+<p>About the derivative extension PR, you are right that there are many small holes in the API. All those lemmas about closure could have more variation and also <code>continuous_on</code> versions.</p>
+
 
 {% endraw %}
 
