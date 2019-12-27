@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [universes in lean](98716universesinlean.html) (9 messages, latest: Dec 27 2019 at 07:15)
+
 * [natural number game questions](52294naturalnumbergamequestions.html) (5 messages, latest: Dec 27 2019 at 05:10)
 
 * [Symmetry of equality applied to a hypothesis](35681Symmetryofequalityappliedtoahypothesis.html) (6 messages, latest: Dec 26 2019 at 21:57)
 
 * [Basics](34198Basics.html) (19 messages, latest: Dec 26 2019 at 20:18)
-
-* [universes in lean](98716universesinlean.html) (8 messages, latest: Dec 26 2019 at 11:12)
 
 * [hello! + how to get started on math?](95375hellohowtogetstartedonmath.html) (9 messages, latest: Dec 24 2019 at 14:30)
 

@@ -56,6 +56,24 @@ However, while compiling definition of path, it shows the following error - "uni
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/universes%20in%20lean/near/184256613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98716universesinlean.html#184256613">Harsha Nyapathi (Dec 26 2019 at 11:12)</a>:</h4>
 <p>Yes, mismatch of the universes seems to be the issue. It compiles now. Thanks a lot!</p>
 
+<a name="184304841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/universes%20in%20lean/near/184304841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98716universesinlean.html#184304841">Yury G. Kudryashov (Dec 27 2019 at 07:15)</a>:</h4>
+<p><span class="user-mention" data-user-id="249638">@Harsha Nyapathi</span> It seems to me that</p>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">v</span> <span class="n">u</span>
+<span class="kn">structure</span> <span class="n">graph</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">edge</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span>
+</pre></div>
+
+
+<p>requires fewer equality assumptions in various lemmas. E.g., paths can be defined as</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">path</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">graph</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">start</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">v</span> <span class="n">u</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">fix</span> <span class="o">:</span> <span class="n">path</span> <span class="n">start</span>
+<span class="bp">|</span> <span class="n">addedge</span> <span class="o">{</span><span class="n">last</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">path</span> <span class="n">last</span><span class="o">)</span> <span class="o">{</span><span class="n">last&#39;</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">g</span><span class="bp">.</span><span class="n">edge</span> <span class="n">last</span> <span class="n">last&#39;</span><span class="o">)</span> <span class="o">:</span> <span class="n">path</span> <span class="n">last&#39;</span>
+</pre></div>
+
+
+<p>Of course, a downside of this approach is that you need to write <code>{v₁ v₂ : α} (e : g.edge v₁ v₂)</code> instead of <code>e : g.edge</code>.<br>
+Another bonus of this definition is that it makes easier to define, e.g., the graph corresponding to a category (no need to bundle homs with domain/codomain).</p>
+
 
 {% endraw %}
 

@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [apply fails to synthesize type class instance](74812applyfailstosynthesizetypeclassinstance.html) (1 message, latest: Dec 27 2019 at 07:01)
+
 * [VSCode extension](96418VSCodeextension.html) (3 messages, latest: Dec 27 2019 at 02:38)
 
 * [monotonocity attribute](35815monotonocityattribute.html) (13 messages, latest: Dec 26 2019 at 21:49)
