@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [pip install mathlibtools](15827pipinstallmathlibtools.html) (64 messages, latest: Dec 28 2019 at 20:15)
+* [Beer reward](97796Beerreward.html) (21 messages, latest: Dec 28 2019 at 21:55)
+
+* [pip install mathlibtools](15827pipinstallmathlibtools.html) (68 messages, latest: Dec 28 2019 at 21:53)
 
 * [suffices to prove](57736sufficestoprove.html) (13 messages, latest: Dec 28 2019 at 19:24)
 
@@ -24,8 +26,6 @@ permalink: archive/113488general/index.html
 * [tfae formatting](05308tfaeformatting.html) (26 messages, latest: Dec 28 2019 at 09:26)
 
 * [timeout when working with ideal of polynomial ring](30847timeoutwhenworkingwithidealofpolynomialring.html) (79 messages, latest: Dec 28 2019 at 07:07)
-
-* [Beer reward](97796Beerreward.html) (20 messages, latest: Dec 28 2019 at 00:50)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (250 messages, latest: Dec 28 2019 at 00:47)
 
