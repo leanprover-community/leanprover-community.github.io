@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [tfae formatting](05308tfaeformatting.html) (25 messages, latest: Dec 28 2019 at 08:07)
+* [What do we know about Lean 4?](05425WhatdoweknowaboutLean4.html) (11 messages, latest: Dec 28 2019 at 09:40)
+
+* [tfae formatting](05308tfaeformatting.html) (26 messages, latest: Dec 28 2019 at 09:26)
 
 * [timeout when working with ideal of polynomial ring](30847timeoutwhenworkingwithidealofpolynomialring.html) (79 messages, latest: Dec 28 2019 at 07:07)
-
-* [What do we know about Lean 4?](05425WhatdoweknowaboutLean4.html) (10 messages, latest: Dec 28 2019 at 04:17)
 
 * [`abel` is slow](02710abelisslow.html) (5 messages, latest: Dec 28 2019 at 01:56)
 
