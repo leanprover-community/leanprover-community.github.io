@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean 3.5.0c Released](69981Lean350cReleased.html) (18 messages, latest: Dec 28 2019 at 12:15)
+* [Lean 3.5.0c Released](69981Lean350cReleased.html) (19 messages, latest: Dec 28 2019 at 14:45)
 
 * [What do we know about Lean 4?](05425WhatdoweknowaboutLean4.html) (14 messages, latest: Dec 28 2019 at 11:45)
 
