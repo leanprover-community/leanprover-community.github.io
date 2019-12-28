@@ -160,6 +160,31 @@ num. allocated closures: 300
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60abel%60%20is%20slow/near/184370305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02710abelisslow.html#184370305">Yury G. Kudryashov (Dec 28 2019 at 10:56)</a>:</h4>
 <p>I tried to look at <code>set_option trace.class_instances true</code> output, and it takes wrong routes to very high-order classes before figuring out <code>has_add</code> from <code>add_comm_group</code>.</p>
 
+<a name="184379742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60abel%60%20is%20slow/near/184379742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02710abelisslow.html#184379742">Kevin Buzzard (Dec 28 2019 at 15:40)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">abel</span> <span class="c1">-- necessary</span>
+
+<span class="c1">-- if the 5 imports below are commented out, then the `abel` below compiles for me in around 0.25 seconds</span>
+<span class="c1">-- With set_option trace.class_instances true, debugging output is 21298 lines</span>
+
+<span class="c1">-- now try uncommenting these imports, from top to bottom (some later ones import earlier ones)</span>
+
+<span class="c1">--import algebra.pi_instances -- adds approx 0.9 seconds more (47105 lines of debugging output)</span>
+<span class="c1">--import ring_theory.ideals -- adds approx 0.3 seconds more (53378 lines)</span>
+<span class="c1">--import algebra.euclidean_domain -- adds approx 0.2 seconds more (59692 lines)</span>
+<span class="c1">--import data.complex.basic -- adds approx 0.2 seconds more (89214 lines)</span>
+<span class="c1">--import analysis.normed_space.basic -- adds approx 0.7 seconds more (120699 lines)</span>
+
+<span class="n">universes</span> <span class="n">v</span> <span class="n">u</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">V</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">V</span><span class="o">]</span>
+
+<span class="c1">--set_option trace.class_instances true</span>
+<span class="c1">--set_option profiler true</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">V</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">l</span> <span class="err">•</span> <span class="n">y</span> <span class="bp">+</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">l</span> <span class="err">•</span> <span class="n">x</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">+</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">l</span> <span class="err">•</span> <span class="n">x</span> <span class="bp">-</span> <span class="o">(</span><span class="n">y</span> <span class="bp">-</span> <span class="n">l</span> <span class="err">•</span> <span class="n">y</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">abel</span>
+</pre></div>
+
 
 {% endraw %}
 
