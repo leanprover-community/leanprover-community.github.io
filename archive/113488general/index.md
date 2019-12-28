@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Beer reward](97796Beerreward.html) (21 messages, latest: Dec 28 2019 at 21:55)
+* [Beer reward](97796Beerreward.html) (24 messages, latest: Dec 28 2019 at 22:24)
 
-* [pip install mathlibtools](15827pipinstallmathlibtools.html) (68 messages, latest: Dec 28 2019 at 21:53)
+* [pip install mathlibtools](15827pipinstallmathlibtools.html) (70 messages, latest: Dec 28 2019 at 22:07)
 
 * [suffices to prove](57736sufficestoprove.html) (13 messages, latest: Dec 28 2019 at 19:24)
 
