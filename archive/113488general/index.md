@@ -9,7 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [suffices to prove](57736sufficestoprove.html) (5 messages, latest: Dec 28 2019 at 17:55)
+* [abbreviation](53591abbreviation.html) (6 messages, latest: Dec 28 2019 at 18:57)
+
+* [pip install mathlibtools](15827pipinstallmathlibtools.html) (59 messages, latest: Dec 28 2019 at 18:57)
+
+* [suffices to prove](57736sufficestoprove.html) (10 messages, latest: Dec 28 2019 at 18:56)
 
 * [What do we know about Lean 4?](05425WhatdoweknowaboutLean4.html) (15 messages, latest: Dec 28 2019 at 16:43)
 
@@ -2126,8 +2130,6 @@ permalink: archive/113488general/index.html
 * [Cannot find instance](90874Cannotfindinstance.html) (1 message, latest: Dec 04 2018 at 06:16)
 
 * [norm_num](71468normnum.html) (34 messages, latest: Dec 03 2018 at 23:22)
-
-* [abbreviation](53591abbreviation.html) (5 messages, latest: Dec 03 2018 at 02:50)
 
 * [mem_eq_self](30622memeqself.html) (10 messages, latest: Dec 02 2018 at 18:06)
 

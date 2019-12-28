@@ -37,6 +37,30 @@ permalink: archive/113488general/53591abbreviation.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abbreviation/near/150747018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53591abbreviation.html#150747018">Reid Barton (Dec 03 2018 at 02:50)</a>:</h4>
 <p>You can also do more interesting things like <code>abbreviation my_add' (α : Type) := has_add (list α)</code></p>
 
+<a name="184386743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abbreviation/near/184386743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53591abbreviation.html#184386743">Sebastien Gouezel (Dec 28 2019 at 18:57)</a>:</h4>
+<p>I have tried to convert <code>module</code> to an abbreviation for <code>semimodule</code>, but something is not working out of the box. Here is a minimal example showing the problem.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">pi_instances</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span> <span class="n">w</span>
+
+<span class="n">class</span> <span class="n">SemiModule</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">add_comm_monoid</span> <span class="n">β</span><span class="o">]</span>
+
+<span class="kn">abbreviation</span> <span class="n">Module</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">β</span><span class="o">]</span> <span class="o">:=</span>
+<span class="n">SemiModule</span> <span class="n">α</span> <span class="n">β</span>
+
+<span class="kn">instance</span> <span class="n">piSemiModule</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span>  <span class="o">[</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">add_comm_monoid</span> <span class="err">$</span> <span class="n">f</span> <span class="n">i</span><span class="o">]</span> <span class="o">[</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">SemiModule</span> <span class="n">α</span> <span class="err">$</span> <span class="n">f</span> <span class="n">i</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">SemiModule</span> <span class="n">α</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">i</span> <span class="o">:</span> <span class="n">I</span><span class="o">,</span> <span class="n">f</span> <span class="n">i</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">constructor</span>
+
+<span class="kn">instance</span> <span class="n">piModule</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">add_comm_group</span> <span class="err">$</span> <span class="n">f</span> <span class="n">i</span><span class="o">]</span> <span class="o">[</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">Module</span> <span class="n">α</span> <span class="err">$</span> <span class="n">f</span> <span class="n">i</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">Module</span> <span class="n">α</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">i</span> <span class="o">:</span> <span class="n">I</span><span class="o">,</span> <span class="n">f</span> <span class="n">i</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+
+<p>The last <code>by apply_instance</code> does not find the instance <code>piSemiModule</code> which is right here. I don't understand why.</p>
+
 
 {% endraw %}
 
