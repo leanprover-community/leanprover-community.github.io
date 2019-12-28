@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [`abel` is slow](02710abelisslow.html) (5 messages, latest: Dec 28 2019 at 01:56)
+
 * [Beer reward](97796Beerreward.html) (20 messages, latest: Dec 28 2019 at 00:50)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (250 messages, latest: Dec 28 2019 at 00:47)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [Lean 3.5.0c Released](69981Lean350cReleased.html) (8 messages, latest: Dec 28 2019 at 00:42)
 
 * [tfae formatting](05308tfaeformatting.html) (21 messages, latest: Dec 27 2019 at 23:47)
-
-* [`abel` is slow](02710abelisslow.html) (4 messages, latest: Dec 27 2019 at 23:03)
 
 * [What do we know about Lean 4?](05425WhatdoweknowaboutLean4.html) (9 messages, latest: Dec 27 2019 at 14:16)
 
