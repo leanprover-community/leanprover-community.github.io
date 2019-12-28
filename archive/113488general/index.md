@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [suffices to prove](57736sufficestoprove.html) (5 messages, latest: Dec 28 2019 at 17:55)
+
 * [What do we know about Lean 4?](05425WhatdoweknowaboutLean4.html) (15 messages, latest: Dec 28 2019 at 16:43)
 
 * [Lean 3.5.0c Released](69981Lean350cReleased.html) (23 messages, latest: Dec 28 2019 at 16:40)

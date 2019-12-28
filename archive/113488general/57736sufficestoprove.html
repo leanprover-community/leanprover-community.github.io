@@ -1,0 +1,65 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/57736sufficestoprove.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/57736sufficestoprove.html">suffices to prove</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="184383472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/suffices%20to%20prove/near/184383472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57736sufficestoprove.html#184383472">Kevin Buzzard (Dec 28 2019 at 17:28)</a>:</h4>
+<p>Idly proving that equivalence relations are the same as partitions (thinking about a future Lean maths challenge). Here's a goal:</p>
+<div class="codehilite"><pre><span></span>1 goal
+X : Type,
+R : {R // equivalence R},
+c d : set X,
+hc : c ∈ {S : set X | ∃ (x : X), S = equivalence_class ↑R x},
+hd : d ∈ {S : set X | ∃ (x : X), S = equivalence_class ↑R x},
+x : X,
+hx : x ∈ c ∩ d
+⊢ c = d
+</pre></div>
+
+
+<p>I want to prove this by saying "it suffices to prove c \sub d and d \sub c, but by symmetry we only need to prove c \sub d". I know I can factor out a lemma saying "if all the things in the local context are true then c \sub d" and then I can just apply this lemma twice -- but I don't see any obstruction in theory to having a tactic where I say "by <code>set.subset.antisymm</code> and the underlying symmetry, change the goal to <code>c \sub d</code> please" and maybe Lean replies "just convince me that <code>x ∈ d ∩ c</code> and you're good to go".</p>
+<p>Can this already be done with some <code>wlog</code> trickery? I couldn't see how.</p>
+
+<a name="184383494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/suffices%20to%20prove/near/184383494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57736sufficestoprove.html#184383494">Kevin Buzzard (Dec 28 2019 at 17:29)</a>:</h4>
+<p>PS <code>def equivalence_class {X : Type} (R : X → X → Prop) (x : X) := {y : X | R x y}</code>, not that it matters here (all that matters is that the local context is symmetric in c and d)</p>
+
+<a name="184384154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/suffices%20to%20prove/near/184384154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57736sufficestoprove.html#184384154">Patrick Massot (Dec 28 2019 at 17:49)</a>:</h4>
+<p>I came across the same question last week, and I don't think <code>wlog</code> helps here.</p>
+
+<a name="184384262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/suffices%20to%20prove/near/184384262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57736sufficestoprove.html#184384262">Patrick Massot (Dec 28 2019 at 17:52)</a>:</h4>
+<p>If you post a realistic MWE I can try to cook up something.</p>
+
+<a name="184384377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/suffices%20to%20prove/near/184384377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57736sufficestoprove.html#184384377">Kevin Buzzard (Dec 28 2019 at 17:55)</a>:</h4>
+<p>Is this realistic:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">equivalence_class</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span><span class="n">y</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">|</span> <span class="n">R</span> <span class="n">x</span> <span class="n">y</span><span class="o">}</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">HR</span> <span class="o">:</span> <span class="n">equivalence</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">),</span>
+  <span class="n">c</span> <span class="err">∈</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">),</span> <span class="n">S</span> <span class="bp">=</span> <span class="n">equivalence_class</span> <span class="n">R</span> <span class="n">x</span><span class="o">}</span> <span class="bp">→</span>
+  <span class="n">d</span> <span class="err">∈</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">),</span> <span class="n">S</span> <span class="bp">=</span> <span class="n">equivalence_class</span> <span class="n">R</span> <span class="n">x</span><span class="o">}</span> <span class="bp">→</span> <span class="n">c</span> <span class="err">∩</span> <span class="n">d</span> <span class="bp">≠</span> <span class="err">∅</span> <span class="bp">→</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">d</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">c</span> <span class="n">d</span> <span class="n">hc</span> <span class="n">hd</span> <span class="n">hcd</span><span class="o">,</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
