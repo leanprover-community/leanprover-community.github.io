@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean 3.5.0c Released](69981Lean350cReleased.html) (11 messages, latest: Dec 28 2019 at 10:58)
+* [What do we know about Lean 4?](05425WhatdoweknowaboutLean4.html) (14 messages, latest: Dec 28 2019 at 11:45)
+
+* [Lean 3.5.0c Released](69981Lean350cReleased.html) (12 messages, latest: Dec 28 2019 at 11:01)
 
 * [`abel` is slow](02710abelisslow.html) (8 messages, latest: Dec 28 2019 at 10:56)
-
-* [What do we know about Lean 4?](05425WhatdoweknowaboutLean4.html) (13 messages, latest: Dec 28 2019 at 10:46)
 
 * [tfae formatting](05308tfaeformatting.html) (26 messages, latest: Dec 28 2019 at 09:26)
 
