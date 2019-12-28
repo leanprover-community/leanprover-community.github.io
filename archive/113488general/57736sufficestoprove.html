@@ -90,6 +90,82 @@ hcd : c ∩ d ≠ ∅
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/suffices%20to%20prove/near/184386718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57736sufficestoprove.html#184386718">Kevin Buzzard (Dec 28 2019 at 18:56)</a>:</h4>
 <p>I get the same error "To generate cases at least two permutations..." as above.</p>
 
+<a name="184387163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/suffices%20to%20prove/near/184387163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57736sufficestoprove.html#184387163">Kevin Buzzard (Dec 28 2019 at 19:10)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="n">def</span> <span class="n">equivalence_class</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span><span class="n">y</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">|</span> <span class="n">R</span> <span class="n">x</span> <span class="n">y</span><span class="o">}</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">HR</span> <span class="o">:</span> <span class="n">equivalence</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">),</span>
+  <span class="n">c</span> <span class="err">∈</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">),</span> <span class="n">S</span> <span class="bp">=</span> <span class="n">equivalence_class</span> <span class="n">R</span> <span class="n">x</span><span class="o">}</span> <span class="bp">→</span>
+  <span class="n">d</span> <span class="err">∈</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">),</span> <span class="n">S</span> <span class="bp">=</span> <span class="n">equivalence_class</span> <span class="n">R</span> <span class="n">x</span><span class="o">}</span> <span class="bp">→</span> <span class="n">c</span> <span class="err">∩</span> <span class="n">d</span> <span class="bp">≠</span> <span class="err">∅</span> <span class="bp">→</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">d</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">c</span> <span class="n">d</span> <span class="n">hc</span> <span class="n">hd</span> <span class="n">hcd</span><span class="o">,</span>
+  <span class="c">/-</span><span class="cm"></span>
+<span class="cm">  1 goal</span>
+<span class="cm">X : Type,</span>
+<span class="cm">R : X → X → Prop,</span>
+<span class="cm">HR : equivalence R,</span>
+<span class="cm">c d : set X,</span>
+<span class="cm">hc : c ∈ {S : set X | ∃ (x : X), S = equivalence_class R x},</span>
+<span class="cm">hd : d ∈ {S : set X | ∃ (x : X), S = equivalence_class R x},</span>
+<span class="cm">hcd : c ∩ d ≠ ∅</span>
+<span class="cm">⊢ c = d</span>
+<span class="cm">-/</span>
+  <span class="n">suffices</span> <span class="n">htemp</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">HR</span> <span class="o">:</span> <span class="n">equivalence</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">hc</span> <span class="o">:</span> <span class="n">c</span> <span class="err">∈</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">),</span> <span class="n">S</span> <span class="bp">=</span> <span class="n">equivalence_class</span> <span class="n">R</span> <span class="n">x</span><span class="o">})</span>
+    <span class="o">(</span><span class="n">hd</span> <span class="o">:</span> <span class="n">d</span> <span class="err">∈</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">),</span> <span class="n">S</span> <span class="bp">=</span> <span class="n">equivalence_class</span> <span class="n">R</span> <span class="n">x</span><span class="o">})</span>
+    <span class="o">(</span><span class="n">hcd</span> <span class="o">:</span> <span class="n">c</span> <span class="err">∩</span> <span class="n">d</span> <span class="bp">≠</span> <span class="err">∅</span><span class="o">),</span> <span class="n">c</span> <span class="err">⊆</span> <span class="n">d</span><span class="o">,</span> <span class="c1">-- I want this to be my final goal</span>
+    <span class="n">apply</span> <span class="n">set</span><span class="bp">.</span><span class="n">subset</span><span class="bp">.</span><span class="n">antisymm</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="n">htemp</span> <span class="n">X</span> <span class="n">R</span> <span class="n">HR</span> <span class="n">c</span> <span class="n">d</span> <span class="o">(</span><span class="k">by</span> <span class="n">assumption</span><span class="o">)</span> <span class="o">(</span><span class="k">by</span> <span class="n">assumption</span><span class="o">)</span> <span class="o">(</span><span class="k">by</span> <span class="n">assumption</span><span class="o">),</span>
+    <span class="n">suffices</span> <span class="n">htemp2</span> <span class="o">:</span> <span class="n">d</span> <span class="err">∩</span> <span class="n">c</span> <span class="bp">≠</span> <span class="err">∅</span><span class="o">,</span> <span class="c1">-- I want this to be the last but one goal</span>
+      <span class="n">exact</span> <span class="n">htemp</span> <span class="n">X</span> <span class="n">R</span> <span class="n">HR</span> <span class="n">d</span> <span class="n">c</span> <span class="o">(</span><span class="k">by</span> <span class="n">assumption</span><span class="o">)</span> <span class="o">(</span><span class="k">by</span> <span class="n">assumption</span><span class="o">)</span> <span class="o">(</span><span class="n">htemp2</span><span class="o">),</span> <span class="c1">-- `by assumption` fails for htemp2</span>
+    <span class="c">/-</span><span class="cm"> currently two goals.</span>
+<span class="cm">     first is</span>
+<span class="cm">     ⊢ d ∩ c ≠ ∅</span>
+<span class="cm">     and we have a hypothesis</span>
+<span class="cm">     hcd : c ∩ d ≠ ∅,</span>
+<span class="cm">    -/</span>
+    <span class="n">sorry</span><span class="o">,</span>
+    <span class="c">/-</span><span class="cm"> other goal is overkill currently:</span>
+
+<span class="cm">      X : Type,</span>
+<span class="cm">      R : X → X → Prop,</span>
+<span class="cm">      HR : equivalence R,</span>
+<span class="cm">      c d : set X,</span>
+<span class="cm">      hc : c ∈ {S : set X | ∃ (x : X), S = equivalence_class R x},</span>
+<span class="cm">      hd : d ∈ {S : set X | ∃ (x : X), S = equivalence_class R x},</span>
+<span class="cm">      hcd : c ∩ d ≠ ∅</span>
+<span class="cm">      ⊢ ∀ (X : Type) (R : X → X → Prop),</span>
+<span class="cm">        equivalence R →</span>
+<span class="cm">        ∀ (c d : set X),</span>
+<span class="cm">        c ∈ {S : set X | ∃ (x : X), S = equivalence_class R x} →</span>
+<span class="cm">        d ∈ {S : set X | ∃ (x : X), S = equivalence_class R x} → c ∩ d ≠ ∅ → c ⊆ d</span>
+<span class="cm">    -/</span>
+    <span class="n">clear</span> <span class="n">hcd</span> <span class="n">hd</span> <span class="n">hc</span> <span class="n">c</span> <span class="n">d</span> <span class="n">HR</span> <span class="n">R</span> <span class="n">X</span><span class="o">,</span>
+    <span class="n">intros</span> <span class="n">X</span> <span class="n">R</span> <span class="n">HR</span> <span class="n">c</span> <span class="n">d</span> <span class="n">hc</span> <span class="n">hd</span> <span class="n">hcd</span><span class="o">,</span>
+    <span class="c">/-</span><span class="cm"></span>
+<span class="cm">    X : Type,</span>
+<span class="cm">    R : X → X → Prop,</span>
+<span class="cm">    HR : equivalence R,</span>
+<span class="cm">    c d : set X,</span>
+<span class="cm">    hc : c ∈ {S : set X | ∃ (x : X), S = equivalence_class R x},</span>
+<span class="cm">    hd : d ∈ {S : set X | ∃ (x : X), S = equivalence_class R x},</span>
+<span class="cm">    hcd : c ∩ d ≠ ∅</span>
+<span class="cm">    ⊢ c ⊆ d</span>
+<span class="cm">    -/</span>
+    <span class="n">sorry</span>
+  <span class="kn">end</span>
+</pre></div>
+
+<a name="184387666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/suffices%20to%20prove/near/184387666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57736sufficestoprove.html#184387666">Kevin Buzzard (Dec 28 2019 at 19:24)</a>:</h4>
+<p>It's the "suffices : htemp" line which I can't be bothered to write. On the blackboard I'd just say "we want c=d, but it suffices to prove c sub d as the other inclusion then follows by symmetry"</p>
+
+<a name="184387684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/suffices%20to%20prove/near/184387684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57736sufficestoprove.html#184387684">Kevin Buzzard (Dec 28 2019 at 19:24)</a>:</h4>
+<p>I don't have to quantify over X and R, I could have left them as constants</p>
+
 
 {% endraw %}
 

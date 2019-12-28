@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [pip install mathlibtools](15827pipinstallmathlibtools.html) (63 messages, latest: Dec 28 2019 at 19:49)
+
+* [suffices to prove](57736sufficestoprove.html) (13 messages, latest: Dec 28 2019 at 19:24)
+
 * [abbreviation](53591abbreviation.html) (6 messages, latest: Dec 28 2019 at 18:57)
-
-* [pip install mathlibtools](15827pipinstallmathlibtools.html) (59 messages, latest: Dec 28 2019 at 18:57)
-
-* [suffices to prove](57736sufficestoprove.html) (10 messages, latest: Dec 28 2019 at 18:56)
 
 * [What do we know about Lean 4?](05425WhatdoweknowaboutLean4.html) (15 messages, latest: Dec 28 2019 at 16:43)
 
