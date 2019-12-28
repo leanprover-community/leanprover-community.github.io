@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [tfae formatting](05308tfaeformatting.html) (22 messages, latest: Dec 28 2019 at 07:40)
+
+* [timeout when working with ideal of polynomial ring](30847timeoutwhenworkingwithidealofpolynomialring.html) (79 messages, latest: Dec 28 2019 at 07:07)
+
 * [What do we know about Lean 4?](05425WhatdoweknowaboutLean4.html) (10 messages, latest: Dec 28 2019 at 04:17)
 
 * [`abel` is slow](02710abelisslow.html) (5 messages, latest: Dec 28 2019 at 01:56)
@@ -18,8 +22,6 @@ permalink: archive/113488general/index.html
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (250 messages, latest: Dec 28 2019 at 00:47)
 
 * [Lean 3.5.0c Released](69981Lean350cReleased.html) (8 messages, latest: Dec 28 2019 at 00:42)
-
-* [tfae formatting](05308tfaeformatting.html) (21 messages, latest: Dec 27 2019 at 23:47)
 
 * [apply fails to synthesize type class instance](74812applyfailstosynthesizetypeclassinstance.html) (10 messages, latest: Dec 27 2019 at 10:46)
 
@@ -502,8 +504,6 @@ permalink: archive/113488general/index.html
 * [doc_blame!](32536docblame.html) (6 messages, latest: Sep 03 2019 at 20:43)
 
 * [Strong Induction](70987StrongInduction.html) (20 messages, latest: Sep 03 2019 at 13:37)
-
-* [timeout when working with ideal of polynomial ring](30847timeoutwhenworkingwithidealofpolynomialring.html) (77 messages, latest: Sep 03 2019 at 12:55)
 
 * [subset of a subtype](71577subsetofasubtype.html) (5 messages, latest: Sep 03 2019 at 10:50)
 
