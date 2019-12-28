@@ -102,6 +102,25 @@ permalink: archive/113488general/69981Lean350cReleased.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.5.0c%20Released/near/184377809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69981Lean350cReleased.html#184377809">Kevin Buzzard (Dec 28 2019 at 14:45)</a>:</h4>
 <p>Yury, you would probably be better off talking to <span class="user-mention" data-user-id="230999">@Daniel Selsam</span> directly about this. He understands type class inference well. In some sense type class inference has turned out to be one of the biggest problems which mathematicians have had with Lean 3, and things were written about it in the mathlib paper. My impression is that it was originally written with modest goals in mind perhaps inspired by the way it is used in computer science, and then mathematicians wanted to push it a whole lot further ("if <code>group</code> is a typeclass then I guess <code>module</code> should be too, because modules are defined by a few axioms just like groups -- oh dear things just got complicated" was something that happened, and "if <code>group</code> is a typeclass then I guess <code>ring</code> and <code>comm_ring</code> and <code>field</code> and <code>complete_topological_field</code> and 100 other things are too -- oh crap, type class inference is now trying 20 times to prove that the integers are a field".</p>
 
+<a name="184381623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.5.0c%20Released/near/184381623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69981Lean350cReleased.html#184381623">Simon Hudon (Dec 28 2019 at 16:35)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="110026">Simon Hudon</span>  Is there any reason why <code>intro</code> wasn't changed to <code>rintro</code> in Lean 3.5.0c?</p>
+</blockquote>
+<p>The goal of the first community release was to be conservative, to make a Lean version that could be used interchangeably (almost) with 3.4.2. If we move <code>rintro</code> into Lean core, we have to remove it from mathlib. That can be a suitable next step but I think there needs to be a discussion about the willingness of the mathlib community to break compatibility with Leo's Lean 3</p>
+
+<a name="184381671"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.5.0c%20Released/near/184381671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69981Lean350cReleased.html#184381671">Patrick Massot (Dec 28 2019 at 16:36)</a>:</h4>
+<p>But isn't <code>rintro</code> fully compatible with <code>intro</code>?</p>
+
+<a name="184381732"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.5.0c%20Released/near/184381732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69981Lean350cReleased.html#184381732">Simon Hudon (Dec 28 2019 at 16:38)</a>:</h4>
+<p>You mean move <code>rintro</code> and call it <code>intro</code>? You're right, that might not break anything. This is in the category of changes we could call moving mathlib tactics to core (which especially concerns the primed tactics). The best is to make one decision for the block with little variations from tactic to tactic.</p>
+
+<a name="184381826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.5.0c%20Released/near/184381826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69981Lean350cReleased.html#184381826">Patrick Massot (Dec 28 2019 at 16:40)</a>:</h4>
+<p>Yes.</p>
+
 
 {% endraw %}
 
