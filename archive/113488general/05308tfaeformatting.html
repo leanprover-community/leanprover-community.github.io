@@ -119,6 +119,25 @@ Pinging <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tfae%20formatting/near/184339910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05308tfaeformatting.html#184339910">Rob Lewis (Dec 27 2019 at 19:47)</a>:</h4>
 <p>So maybe we should use 1-based indexing. Or unordered lists with indices added manually.</p>
 
+<a name="184350235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tfae%20formatting/near/184350235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05308tfaeformatting.html#184350235">Mario Carneiro (Dec 27 2019 at 23:45)</a>:</h4>
+<p>Actually, I think we could use an annotation so that we can write:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">tfae_mem_nhds_within_Ioi</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="k">by</span> <span class="n">tfae</span> <span class="o">[</span>
+    <span class="n">Ioi</span><span class="o">:</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">nhds_within</span> <span class="n">a</span> <span class="o">(</span><span class="n">Ioi</span> <span class="n">a</span><span class="o">),</span>
+    <span class="n">Ioc</span><span class="o">:</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">nhds_within</span> <span class="n">a</span> <span class="o">(</span><span class="n">Ioc</span> <span class="n">a</span> <span class="n">b</span><span class="o">),</span>
+    <span class="n">Ioo</span><span class="o">:</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">nhds_within</span> <span class="n">a</span> <span class="o">(</span><span class="n">Ioo</span> <span class="n">a</span> <span class="n">b</span><span class="o">),</span>
+    <span class="n">ex_Ioc</span><span class="o">:</span> <span class="bp">∃</span> <span class="n">u</span> <span class="err">∈</span> <span class="n">Ioc</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">Ioo</span> <span class="n">a</span> <span class="n">u</span> <span class="err">⊆</span> <span class="n">s</span><span class="o">,</span>
+    <span class="n">ex_Ioi</span><span class="o">:</span> <span class="bp">∃</span> <span class="n">u</span> <span class="err">∈</span> <span class="n">Ioi</span> <span class="n">a</span><span class="o">,</span> <span class="n">Ioo</span> <span class="n">a</span> <span class="n">u</span> <span class="err">⊆</span> <span class="n">s</span><span class="o">]</span> <span class="o">:=</span>
+</pre></div>
+
+
+<p>and then reference the names using <code>tfae_have Ioi &lt;-&gt; Ioo := tfae_mem_nhds_within_Ioi</code> or similar</p>
+
+<a name="184350298"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tfae%20formatting/near/184350298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05308tfaeformatting.html#184350298">Mario Carneiro (Dec 27 2019 at 23:47)</a>:</h4>
+<p>It could be syntax for <code>tfae [(\lam Ioi, Ioi) s ∈ nhds_within a (Ioi a), ...</code></p>
+
 
 {% endraw %}
 
