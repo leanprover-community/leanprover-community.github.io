@@ -9,19 +9,19 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [What do we know about Lean 4?](05425WhatdoweknowaboutLean4.html) (11 messages, latest: Dec 28 2019 at 09:40)
+* [Lean 3.5.0c Released](69981Lean350cReleased.html) (11 messages, latest: Dec 28 2019 at 10:58)
+
+* [`abel` is slow](02710abelisslow.html) (8 messages, latest: Dec 28 2019 at 10:56)
+
+* [What do we know about Lean 4?](05425WhatdoweknowaboutLean4.html) (13 messages, latest: Dec 28 2019 at 10:46)
 
 * [tfae formatting](05308tfaeformatting.html) (26 messages, latest: Dec 28 2019 at 09:26)
 
 * [timeout when working with ideal of polynomial ring](30847timeoutwhenworkingwithidealofpolynomialring.html) (79 messages, latest: Dec 28 2019 at 07:07)
 
-* [`abel` is slow](02710abelisslow.html) (5 messages, latest: Dec 28 2019 at 01:56)
-
 * [Beer reward](97796Beerreward.html) (20 messages, latest: Dec 28 2019 at 00:50)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (250 messages, latest: Dec 28 2019 at 00:47)
-
-* [Lean 3.5.0c Released](69981Lean350cReleased.html) (8 messages, latest: Dec 28 2019 at 00:42)
 
 * [apply fails to synthesize type class instance](74812applyfailstosynthesizetypeclassinstance.html) (10 messages, latest: Dec 27 2019 at 10:46)
 

@@ -105,6 +105,61 @@ num. allocated closures: 266
 <span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">algebra</span>
 </pre></div>
 
+<a name="184370239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60abel%60%20is%20slow/near/184370239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02710abelisslow.html#184370239">Kevin Buzzard (Dec 28 2019 at 10:54)</a>:</h4>
+<p>ooh---<code>abel</code> is slow!</p>
+
+<a name="184370243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60abel%60%20is%20slow/near/184370243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02710abelisslow.html#184370243">Kevin Buzzard (Dec 28 2019 at 10:54)</a>:</h4>
+<div class="codehilite"><pre><span></span>elaboration: tactic execution took 3.65s
+num. allocated objects:  923
+num. allocated closures: 300
+ 3648ms   100.0%   tactic.interactive.abel._lambda_3
+ 3648ms   100.0%   tactic.istep
+ 3648ms   100.0%   scope_trace
+ 3648ms   100.0%   interaction_monad_orelse
+ 3648ms   100.0%   tactic.istep._lambda_1
+ 3648ms   100.0%   tactic.step
+ 3648ms   100.0%   _interaction._lambda_2
+ 3647ms   100.0%   tactic.alternative._lambda_3
+ 3647ms   100.0%   tactic.replace_at
+ 3647ms   100.0%   tactic.replace_at._lambda_4
+ 3646ms    99.9%   tactic.ext_simplify_core
+ 3646ms    99.9%   tactic.abel.normalize
+ 3646ms    99.9%   tactic.abel.normalize._lambda_6
+ 3642ms    99.8%   tactic.abel.normalize._lambda_4
+ 3236ms    88.7%   tactic.abel.mk_cache
+ 3143ms    86.2%   tactic.mk_instance
+  406ms    11.1%   tactic.trans_conv._lambda_3
+  374ms    10.3%   tactic.abel.eval&#39;
+  374ms    10.3%   tactic.abel.eval
+  233ms     6.4%   tactic.mk_app
+  181ms     5.0%   tactic.mk_mapp
+   78ms     2.1%   tactic.abel.cache.mk_app
+   46ms     1.3%   tactic.norm_num
+   38ms     1.0%   tactic.abel.eval_add
+   36ms     1.0%   tactic.abel.eval_neg
+   32ms     0.9%   tactic.trans_conv._lambda_1
+   32ms     0.9%   tactic.simplify
+   17ms     0.5%   expr.of_int
+   17ms     0.5%   tactic.abel.eval_atom
+   17ms     0.5%   expr.of_nat._lambda_1
+    5ms     0.1%   tactic.infer_type
+    1ms     0.0%   tactic.try_core
+    1ms     0.0%   string.push
+    1ms     0.0%   relation_tactic
+    1ms     0.0%   tactic.replace_target
+    1ms     0.0%   tactic.mk_eq_mpr
+    1ms     0.0%   tactic.unify
+    1ms     0.0%   tactic.try
+    1ms     0.0%   _private.1416197847.relation_tactic._lambda_1
+    1ms     0.0%   tactic.apply_core
+</pre></div>
+
+<a name="184370305"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60abel%60%20is%20slow/near/184370305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02710abelisslow.html#184370305">Yury G. Kudryashov (Dec 28 2019 at 10:56)</a>:</h4>
+<p>I tried to look at <code>set_option trace.class_instances true</code> output, and it takes wrong routes to very high-order classes before figuring out <code>has_add</code> from <code>add_comm_group</code>.</p>
+
 
 {% endraw %}
 
