@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [What do we know about Lean 4?](05425WhatdoweknowaboutLean4.html) (14 messages, latest: Dec 28 2019 at 11:45)
+* [Lean 3.5.0c Released](69981Lean350cReleased.html) (18 messages, latest: Dec 28 2019 at 12:15)
 
-* [Lean 3.5.0c Released](69981Lean350cReleased.html) (12 messages, latest: Dec 28 2019 at 11:01)
+* [What do we know about Lean 4?](05425WhatdoweknowaboutLean4.html) (14 messages, latest: Dec 28 2019 at 11:45)
 
 * [`abel` is slow](02710abelisslow.html) (8 messages, latest: Dec 28 2019 at 10:56)
 

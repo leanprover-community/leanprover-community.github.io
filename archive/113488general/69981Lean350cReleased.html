@@ -74,6 +74,30 @@ permalink: archive/113488general/69981Lean350cReleased.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.5.0c%20Released/near/184370441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69981Lean350cReleased.html#184370441">Yury G. Kudryashov (Dec 28 2019 at 11:01)</a>:</h4>
 <p>BTW, which part of the Lean C++ code is responsible for class instances resolution? I think about adding an algorithm that works better with algebraic classes, namely go <strong>down</strong> the chain from existing constants, not up from the goal.</p>
 
+<a name="184372554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.5.0c%20Released/near/184372554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69981Lean350cReleased.html#184372554">Patrick Massot (Dec 28 2019 at 12:06)</a>:</h4>
+<p>Indeed <code>rcases</code> is not backward compatible, I was wrong.</p>
+
+<a name="184372635"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.5.0c%20Released/near/184372635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69981Lean350cReleased.html#184372635">Patrick Massot (Dec 28 2019 at 12:08)</a>:</h4>
+<p>Yury, what you are asking for is a huge change.</p>
+
+<a name="184372703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.5.0c%20Released/near/184372703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69981Lean350cReleased.html#184372703">Patrick Massot (Dec 28 2019 at 12:10)</a>:</h4>
+<p>It seems that what I'm asking should actually be rather easy. The <code>intro</code> tactic is defined in Lean (in core lib of course) so it should be possible to change it without recompiling Lean, and I could try to find a completely new name for <code>rcases</code>. Too bad <code>split</code> and <code>destruct</code> are already taken.</p>
+
+<a name="184372785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.5.0c%20Released/near/184372785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69981Lean350cReleased.html#184372785">Patrick Massot (Dec 28 2019 at 12:13)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span>  Is there any reason why <code>intro</code> wasn't changed to <code>rintro</code> in Lean 3.5.0c?</p>
+
+<a name="184372789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.5.0c%20Released/near/184372789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69981Lean350cReleased.html#184372789">Yury G. Kudryashov (Dec 28 2019 at 12:13)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> I don't know whether I'll have time/skills to work on this, and I don't expect it to be done soon. However I feel that this is a way to go, at least for algebraic structures.</p>
+
+<a name="184372850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.5.0c%20Released/near/184372850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69981Lean350cReleased.html#184372850">Patrick Massot (Dec 28 2019 at 12:15)</a>:</h4>
+<p>I don't deny that, I'm only trying to keep a distinction between easy modifications that could be made before or during Fomm2020 and long-term goals.</p>
+
 
 {% endraw %}
 
