@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [distributing `or`](74778distributingor.html) (1 message, latest: Dec 29 2019 at 01:36)
+
 * [Basic question](30875Basicquestion.html) (9 messages, latest: Dec 27 2019 at 22:52)
 
 * [universes in lean](98716universesinlean.html) (9 messages, latest: Dec 27 2019 at 07:15)
