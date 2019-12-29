@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [distributing `or`](74778distributingor.html) (4 messages, latest: Dec 29 2019 at 02:02)
+* [distributing `or`](74778distributingor.html) (7 messages, latest: Dec 29 2019 at 05:43)
 
 * [Basic question](30875Basicquestion.html) (9 messages, latest: Dec 27 2019 at 22:52)
 

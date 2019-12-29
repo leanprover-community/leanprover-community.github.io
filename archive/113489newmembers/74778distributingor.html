@@ -53,6 +53,20 @@ permalink: archive/113489newmembers/74778distributingor.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distributing%20%60or%60/near/184400100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74778distributingor.html#184400100">Kenny Lau (Dec 29 2019 at 02:02)</a>:</h4>
 <p>or maybe <code>classical.em</code>, I don't remember</p>
 
+<a name="184406114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distributing%20%60or%60/near/184406114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74778distributingor.html#184406114">Iocta (Dec 29 2019 at 05:24)</a>:</h4>
+<p>This is in the <a href="https://leanprover.github.io/theorem_proving_in_lean/propositions_and_proofs.html#exercises" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/propositions_and_proofs.html#exercises">section of the exercises</a> that I think isn't supposed to require <code>classical</code>. Is there a way to do it without?</p>
+
+<a name="184406605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distributing%20%60or%60/near/184406605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74778distributingor.html#184406605">Joe (Dec 29 2019 at 05:42)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">factor_or</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="n">r</span><span class="o">)</span> <span class="bp">→</span> <span class="n">p</span> <span class="bp">∨</span> <span class="o">(</span><span class="n">q</span> <span class="bp">∧</span> <span class="n">r</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="bp">λ</span><span class="n">h</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">elim</span> <span class="n">h</span><span class="bp">.</span><span class="n">left</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="err">$</span> <span class="bp">λ</span><span class="n">hq</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">elim</span> <span class="n">h</span><span class="bp">.</span><span class="n">right</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="err">$</span> <span class="bp">λ</span><span class="n">hr</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">inr</span> <span class="err">$</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="n">hq</span> <span class="n">hr</span>
+</pre></div>
+
+<a name="184406619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distributing%20%60or%60/near/184406619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74778distributingor.html#184406619">Yury G. Kudryashov (Dec 29 2019 at 05:43)</a>:</h4>
+<p>Try to do <code>or.elim</code> on both <code>and.left h</code> and <code>and.right h</code>.</p>
+
 
 {% endraw %}
 
