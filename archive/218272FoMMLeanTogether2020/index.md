@@ -9,7 +9,7 @@ permalink: archive/218272FoMMLeanTogether2020/index.html
 
 ### Topics:
 
-* [travel and hotel](81662travelandhotel.html) (9 messages, latest: Dec 28 2019 at 21:30)
+* [travel and hotel](81662travelandhotel.html) (10 messages, latest: Dec 29 2019 at 09:42)
 
 * [dinner and catering](71041dinnerandcatering.html) (2 messages, latest: Dec 28 2019 at 21:27)
 
