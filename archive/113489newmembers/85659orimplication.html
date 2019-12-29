@@ -27,6 +27,77 @@ permalink: archive/113489newmembers/85659orimplication.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60or%60%20implication/near/184436800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85659orimplication.html#184436800">Iocta (Dec 29 2019 at 21:23)</a>:</h4>
 <p>Thanks.</p>
 
+<a name="184439048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60or%60%20implication/near/184439048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85659orimplication.html#184439048">Bryan Gin-ge Chen (Dec 29 2019 at 22:33)</a>:</h4>
+<p>Proofs like these can be done "automatically" by chasing through Lean's error messages. (Well, not as automatic as using a tactic like <code>cc</code> or <code>finish</code>, of course). In case it helps, here's an edited transcript of my thoughts as I work through this one:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="n">p</span> <span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="kt">Prop</span>
+
+<span class="c1">-- Step 0:</span>
+<span class="kn">lemma</span> <span class="n">p_or_q_implies_r_implies_p_implies_r</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">r</span><span class="o">)</span><span class="bp">→</span> <span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">r</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span> <span class="bp">_</span><span class="o">))</span>
+<span class="c1">-- don&#39;t know how to synthesize placeholder</span>
+<span class="c1">-- context:</span>
+<span class="c1">-- p q r : Prop,</span>
+<span class="c1">-- h : p ∨ q → r,</span>
+<span class="c1">-- hp : p</span>
+<span class="c1">-- ⊢ r</span>
+</pre></div>
+
+
+<p>Hmm, Lean wants something of type <code>r</code>. I don't see anything of that type in the context, but I do see that <code>h : p ∨ q → r</code>. So I bet we can make progress if we replace the <code>_</code> with <code>h _</code>.</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- Step 1:</span>
+<span class="kn">lemma</span> <span class="n">p_or_q_implies_r_implies_p_implies_r&#39;</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">r</span><span class="o">)</span><span class="bp">→</span> <span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">r</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span> <span class="n">h</span> <span class="bp">_</span><span class="o">))</span>
+<span class="c1">-- don&#39;t know how to synthesize placeholder</span>
+<span class="c1">-- context:</span>
+<span class="c1">-- p q r : Prop,</span>
+<span class="c1">-- h : p ∨ q → r,</span>
+<span class="c1">-- hp : p</span>
+<span class="c1">-- ⊢ p ∨ q</span>
+</pre></div>
+
+
+<p>Now Lean wants something of type <code>p ∨ q</code>. I recall that <code>or</code> has two constructors, <code>or.inl</code> and <code>or.inr</code>. (In ordinary language, I know I can prove an "or" statement by proving either the thing on the left or the thing on the right).</p>
+<p>Let's try each one in turn. First, let's replace the <code>_</code> with <code>(or.inl _)</code> (parentheses are needed because otherwise <code>or.inl</code> and <code>_</code> will be read as two distinct arguments to <code>h</code>):</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- Step 2L:</span>
+<span class="kn">lemma</span> <span class="n">p_or_q_implies_r_implies_p_implies_r&#39;&#39;</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">r</span><span class="o">)</span><span class="bp">→</span> <span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">r</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span> <span class="n">h</span> <span class="o">(</span><span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="bp">_</span><span class="o">)))</span>
+<span class="c1">-- don&#39;t know how to synthesize placeholder</span>
+<span class="c1">-- context:</span>
+<span class="c1">-- p q r : Prop,</span>
+<span class="c1">-- h : p ∨ q → r,</span>
+<span class="c1">-- hp : p</span>
+<span class="c1">-- ⊢ p</span>
+</pre></div>
+
+
+<p>Hey, <code>hp : p</code> so <code>hp</code> should fit perfectly in the hole!</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- Step 3L:</span>
+<span class="kn">lemma</span> <span class="n">p_or_q_implies_r_implies_p_implies_r&#39;&#39;&#39;</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">r</span><span class="o">)</span><span class="bp">→</span> <span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">r</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span> <span class="n">h</span> <span class="o">(</span><span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">hp</span><span class="o">)))</span>
+<span class="c1">-- * Tada!</span>
+</pre></div>
+
+
+<p>Just for fun, let's see what happens if we tried using <code>(or.inr _)</code> back at Step 2 instead:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- Step 2R:</span>
+<span class="kn">lemma</span> <span class="n">p_or_q_implies_r_implies_p_implies_r&#39;&#39;</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">r</span><span class="o">)</span><span class="bp">→</span> <span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">r</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span> <span class="n">h</span> <span class="o">(</span><span class="n">or</span><span class="bp">.</span><span class="n">inr</span> <span class="bp">_</span><span class="o">)))</span>
+<span class="c1">-- don&#39;t know how to synthesize placeholder</span>
+<span class="c1">-- context:</span>
+<span class="c1">-- p q r : Prop,</span>
+<span class="c1">-- h : p ∨ q → r,</span>
+<span class="c1">-- hp : p</span>
+<span class="c1">-- ⊢ q</span>
+</pre></div>
+
+
+<p>Well darn, I don't see anything in the context with type <code>q</code>, nor anything that can give me something of type <code>q</code>. So this was a dead end after all.</p>
+
+<a name="184439647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60or%60%20implication/near/184439647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85659orimplication.html#184439647">Iocta (Dec 29 2019 at 22:52)</a>:</h4>
+<p>That does help, thanks!</p>
+
 
 {% endraw %}
 
