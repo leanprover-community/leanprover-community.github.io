@@ -94,6 +94,50 @@ permalink: archive/113488general/53591abbreviation.html
 
 <p>Bewildering!</p>
 
+<a name="184428817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abbreviation/near/184428817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53591abbreviation.html#184428817">Chris Hughes (Dec 29 2019 at 17:14)</a>:</h4>
+<p>Changing <code>abbreviation Module (β : Type v) [add_comm_group β]</code> to <code>abbreviation Module (β : Type v) [add_comm_monoid β]</code> makes it work. I think the problem is unifying the different <code>add_comm_monoid</code> instance generated because of this.</p>
+
+<a name="184428882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abbreviation/near/184428882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53591abbreviation.html#184428882">Chris Hughes (Dec 29 2019 at 17:16)</a>:</h4>
+<p>I haven't worked it out exactly, but I think it's basically trying to do this unification, but with more metavariables, and it doesn't work with the metavariables</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">add_comm_group</span> <span class="err">$</span> <span class="n">f</span> <span class="n">i</span><span class="o">]</span> <span class="o">:</span>
+  <span class="bp">@</span><span class="n">pi</span><span class="bp">.</span><span class="n">add_comm_monoid</span> <span class="n">I</span> <span class="n">f</span> <span class="bp">_</span> <span class="bp">=</span> <span class="bp">@</span><span class="n">add_comm_group</span><span class="bp">.</span><span class="n">to_add_comm_monoid</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+<a name="184428885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abbreviation/near/184428885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53591abbreviation.html#184428885">Chris Hughes (Dec 29 2019 at 17:16)</a>:</h4>
+<p>I might be completely wrong.</p>
+
+<a name="184428957"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abbreviation/near/184428957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53591abbreviation.html#184428957">Chris Hughes (Dec 29 2019 at 17:18)</a>:</h4>
+<p>It must be trying to unify</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="n">SemiModule</span> <span class="o">(</span><span class="bp">Π</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="err">?</span><span class="n">M_1</span><span class="o">),</span> <span class="err">?</span><span class="n">M_2</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">pi</span><span class="bp">.</span><span class="n">add_comm_monoid</span> <span class="err">?</span><span class="n">M_1</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="err">?</span><span class="n">M_1</span><span class="o">),</span> <span class="err">?</span><span class="n">M_2</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="err">?</span><span class="n">M_1</span><span class="o">),</span> <span class="err">?</span><span class="n">M_3</span> <span class="n">i</span><span class="o">))</span>
+</pre></div>
+
+
+<p>with </p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="n">SemiModule</span> <span class="o">(</span><span class="bp">Π</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">I</span><span class="o">),</span> <span class="n">f</span> <span class="n">i</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">@</span><span class="n">add_comm_group</span><span class="bp">.</span><span class="n">to_add_comm_monoid</span> <span class="o">(</span><span class="bp">Π</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">I</span><span class="o">),</span> <span class="n">f</span> <span class="n">i</span><span class="o">)</span>
+       <span class="o">(</span><span class="bp">@</span><span class="n">pi</span><span class="bp">.</span><span class="n">add_comm_group</span> <span class="n">I</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">I</span><span class="o">),</span> <span class="n">f</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">I</span><span class="o">),</span> <span class="bp">_</span><span class="n">inst_1</span> <span class="n">i</span><span class="o">)))</span>
+</pre></div>
+
+<a name="184428962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abbreviation/near/184428962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53591abbreviation.html#184428962">Chris Hughes (Dec 29 2019 at 17:18)</a>:</h4>
+<p>Which is difficult with the metavariables there.</p>
+
+<a name="184429051"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abbreviation/near/184429051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53591abbreviation.html#184429051">Chris Hughes (Dec 29 2019 at 17:21)</a>:</h4>
+<p><code>?M_1</code> and <code>?M_2</code> look easy to infer, but <code>?M_3</code> must be the difficult one.</p>
+
+<a name="184429099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abbreviation/near/184429099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53591abbreviation.html#184429099">Chris Hughes (Dec 29 2019 at 17:22)</a>:</h4>
+<p>And you have to unfold <code>?M_3</code> to see that they are defeq.</p>
+
+<a name="184429802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abbreviation/near/184429802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53591abbreviation.html#184429802">Chris Hughes (Dec 29 2019 at 17:42)</a>:</h4>
+<p>I guess this maybe answers the question you asked me the other day about extending type classes, versus having the other class as an argument. This seems to be a downside of the argument approach.</p>
+
 
 {% endraw %}
 
