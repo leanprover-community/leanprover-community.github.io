@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [abbreviation](53591abbreviation.html) (7 messages, latest: Dec 29 2019 at 15:03)
+
 * [Beer reward](97796Beerreward.html) (29 messages, latest: Dec 29 2019 at 10:01)
 
 * [suffices to prove](57736sufficestoprove.html) (15 messages, latest: Dec 29 2019 at 01:34)
 
 * [pip install mathlibtools](15827pipinstallmathlibtools.html) (70 messages, latest: Dec 28 2019 at 22:07)
-
-* [abbreviation](53591abbreviation.html) (6 messages, latest: Dec 28 2019 at 18:57)
 
 * [What do we know about Lean 4?](05425WhatdoweknowaboutLean4.html) (15 messages, latest: Dec 28 2019 at 16:43)
 
