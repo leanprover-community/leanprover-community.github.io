@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [`or` implication](85659orimplication.html) (3 messages, latest: Dec 29 2019 at 21:23)
+
 * [distributing `or`](74778distributingor.html) (10 messages, latest: Dec 29 2019 at 06:37)
 
 * [Basic question](30875Basicquestion.html) (9 messages, latest: Dec 27 2019 at 22:52)
