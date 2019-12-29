@@ -117,6 +117,17 @@ permalink: archive/113488general/97796Beerreward.html
 <p>Maybe we could hack something in vscode-lean (or a fork?). <a href="https://stackoverflow.com/questions/38955116/how-does-an-extension-for-vs-code-get-the-install-path-of-vs-code" target="_blank" title="https://stackoverflow.com/questions/38955116/how-does-an-extension-for-vs-code-get-the-install-path-of-vs-code">Apparently</a>, we can get the absolute path to the vscode-lean extension with <code>vscode.extensions.getExtension ("jroesch.lean").extensionPath</code>. Since the folder structure for the portable VS Code that you provide should be predictable, we should be able to use this method to give an absolute path to Lean?</p>
 <p>I'll experiment with this a little bit more tonight, but no promises.</p>
 
+<a name="184402035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Beer%20reward/near/184402035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97796Beerreward.html#184402035">Bryan Gin-ge Chen (Dec 29 2019 at 03:07)</a>:</h4>
+<p>OK, <a href="https://github.com/bryangingechen/vscode-lean/tree/pmassot" target="_blank" title="https://github.com/bryangingechen/vscode-lean/tree/pmassot">here's</a> a fork of vscode-lean which allows you to use <code>%extensionPath%</code> in the <code>lean.executablePath</code> and <code>lean.leanpkgPath</code> settings as a placeholder for the absolute path to the extension. You then can specify a relative path on top of that and hopefully that's enough for your needs. To test it out:</p>
+<ul>
+<li>Clone the repo and then <a href="https://code.visualstudio.com/api/working-with-extensions/publishing-extension#packaging-extensions" target="_blank" title="https://code.visualstudio.com/api/working-with-extensions/publishing-extension#packaging-extensions">bundle it with <code>vsce package</code> to get a <code>.vsix</code> file</a>. Or if you trust me, you can download the attached file: <a href="/user_uploads/3121/0UiIdOqEwS-u0amZcBSOph_N/lean-0.14.8.vsix" target="_blank" title="lean-0.14.8.vsix">lean-0.14.8.vsix</a>. </li>
+<li>Open the extensions tab in your portable version of VS Code and then click the three dots at the top right to "Install from VSIX".</li>
+<li>Now open the settings and edit <code>lean.executablePath</code> and <code>lean.leanpkgPath</code> (the 2nd most likely doesn't matter since your students are not likely to use the leanpkg integration). The string should begin with <code>%extensionPath%</code> and then include a relative path from the extension folder inside <a href="https://code.visualstudio.com/docs/editor/portable" target="_blank" title="https://code.visualstudio.com/docs/editor/portable">the "portable data" folder</a> to the Lean executable you want to use. E.g. I think <code>%extensionPath%/../../../lean</code> will point to <code>lean</code> in the same directory as the Visual Studio Code executable.</li>
+</ul>
+<p>I only did some minimal testing, so I'm not sure if you need to use forward slashes or back slashes on Windows.</p>
+<p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> If you think this would be valuable for the main extension I can add some more documentation and PR this.</p>
+
 
 {% endraw %}
 
