@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1603 messages, latest: Dec 30 2019 at 18:49)
+
 * [Making inductive type instance of has_repr type class](68443Makinginductivetypeinstanceofhasreprtypeclass.html) (9 messages, latest: Dec 30 2019 at 03:34)
 
 * [distribute not](61777distributenot.html) (36 messages, latest: Dec 30 2019 at 02:37)
@@ -224,8 +226,6 @@ permalink: archive/113489newmembers/index.html
 * [Frustrating nat proofs](54230Frustratingnatproofs.html) (15 messages, latest: Nov 19 2019 at 00:31)
 
 * [Using data.rat](47222Usingdatarat.html) (142 messages, latest: Nov 18 2019 at 08:51)
-
-* [noob question(s)](52075noobquestions.html) (1601 messages, latest: Nov 16 2019 at 17:47)
 
 * [noob VS Code autocomplete question](49917noobVSCodeautocompletequestion.html) (14 messages, latest: Nov 16 2019 at 14:22)
 
