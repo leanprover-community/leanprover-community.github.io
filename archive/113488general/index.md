@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [beer reward](66500beerreward.html) (1 message, latest: Dec 30 2019 at 15:00)
+* [beer reward](66500beerreward.html) (2 messages, latest: Dec 30 2019 at 16:15)
 
 * [Beer reward](97796Beerreward.html) (35 messages, latest: Dec 30 2019 at 09:02)
 
