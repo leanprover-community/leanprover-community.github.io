@@ -79,6 +79,57 @@ instance : has_repr day :=
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Making%20inductive%20type%20instance%20of%20has_repr%20type%20class/near/184446325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68443Makinginductivetypeinstanceofhasreprtypeclass.html#184446325">Joe (Dec 30 2019 at 02:27)</a>:</h4>
 <p>You are welcome.</p>
 
+<a name="184448338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Making%20inductive%20type%20instance%20of%20has_repr%20type%20class/near/184448338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68443Makinginductivetypeinstanceofhasreprtypeclass.html#184448338">Kenny Lau (Dec 30 2019 at 03:33)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">day</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">monday</span> <span class="o">:</span> <span class="n">day</span>
+<span class="bp">|</span> <span class="n">tuesday</span> <span class="o">:</span> <span class="n">day</span>
+<span class="bp">|</span> <span class="n">wednesday</span> <span class="o">:</span> <span class="n">day</span>
+<span class="bp">|</span> <span class="n">thursday</span> <span class="o">:</span> <span class="n">day</span>
+<span class="bp">|</span> <span class="n">friday</span> <span class="o">:</span> <span class="n">day</span>
+<span class="bp">|</span> <span class="n">saturday</span> <span class="o">:</span> <span class="n">day</span>
+<span class="bp">|</span> <span class="n">sunday</span> <span class="o">:</span> <span class="n">day</span>
+
+<span class="kn">protected</span> <span class="n">def</span> <span class="n">day</span><span class="bp">.</span><span class="n">repr</span> <span class="o">:</span> <span class="n">day</span> <span class="bp">→</span> <span class="n">string</span>
+<span class="bp">|</span> <span class="n">day</span><span class="bp">.</span><span class="n">monday</span>  <span class="o">:=</span> <span class="s2">&quot;monday&quot;</span>
+<span class="bp">|</span> <span class="n">day</span><span class="bp">.</span><span class="n">tuesday</span> <span class="o">:=</span> <span class="s2">&quot;tuesday&quot;</span>
+<span class="bp">|</span> <span class="n">day</span><span class="bp">.</span><span class="n">wednesday</span> <span class="o">:=</span> <span class="s2">&quot;wednesday&quot;</span>
+<span class="bp">|</span> <span class="n">day</span><span class="bp">.</span><span class="n">thursday</span> <span class="o">:=</span> <span class="s2">&quot;thursday&quot;</span>
+<span class="bp">|</span> <span class="n">day</span><span class="bp">.</span><span class="n">friday</span> <span class="o">:=</span> <span class="s2">&quot;friday&quot;</span>
+<span class="bp">|</span> <span class="n">day</span><span class="bp">.</span><span class="n">saturday</span> <span class="o">:=</span> <span class="s2">&quot;saturday&quot;</span>
+<span class="bp">|</span> <span class="n">day</span><span class="bp">.</span><span class="n">sunday</span> <span class="o">:=</span> <span class="s2">&quot;sunday&quot;</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_repr</span> <span class="n">day</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">day</span><span class="bp">.</span><span class="n">repr</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="184448377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Making%20inductive%20type%20instance%20of%20has_repr%20type%20class/near/184448377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68443Makinginductivetypeinstanceofhasreprtypeclass.html#184448377">Kenny Lau (Dec 30 2019 at 03:34)</a>:</h4>
+<p>if you use <code>monday</code> instead of <code>day.monday</code>, Lean treats that as a variable</p>
+
+<a name="184448378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Making%20inductive%20type%20instance%20of%20has_repr%20type%20class/near/184448378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68443Makinginductivetypeinstanceofhasreprtypeclass.html#184448378">Kenny Lau (Dec 30 2019 at 03:34)</a>:</h4>
+<p>so it's as if you wrote:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">day</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">monday</span> <span class="o">:</span> <span class="n">day</span>
+<span class="bp">|</span> <span class="n">tuesday</span> <span class="o">:</span> <span class="n">day</span>
+<span class="bp">|</span> <span class="n">wednesday</span> <span class="o">:</span> <span class="n">day</span>
+<span class="bp">|</span> <span class="n">thursday</span> <span class="o">:</span> <span class="n">day</span>
+<span class="bp">|</span> <span class="n">friday</span> <span class="o">:</span> <span class="n">day</span>
+<span class="bp">|</span> <span class="n">saturday</span> <span class="o">:</span> <span class="n">day</span>
+<span class="bp">|</span> <span class="n">sunday</span> <span class="o">:</span> <span class="n">day</span>
+
+<span class="kn">protected</span> <span class="n">def</span> <span class="n">day</span><span class="bp">.</span><span class="n">repr</span> <span class="o">:</span> <span class="n">day</span> <span class="bp">→</span> <span class="n">string</span>
+<span class="bp">|</span> <span class="n">x</span>  <span class="o">:=</span> <span class="s2">&quot;monday&quot;</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_repr</span> <span class="n">day</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">day</span><span class="bp">.</span><span class="n">repr</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="184448381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Making%20inductive%20type%20instance%20of%20has_repr%20type%20class/near/184448381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68443Makinginductivetypeinstanceofhasreprtypeclass.html#184448381">Kenny Lau (Dec 30 2019 at 03:34)</a>:</h4>
+<p>and that's why the second equation would never be used</p>
+
 
 {% endraw %}
 

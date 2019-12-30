@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [distribute not](61777distributenot.html) (36 messages, latest: Dec 30 2019 at 02:37)
+* [Making inductive type instance of has_repr type class](68443Makinginductivetypeinstanceofhasreprtypeclass.html) (9 messages, latest: Dec 30 2019 at 03:34)
 
-* [Making inductive type instance of has_repr type class](68443Makinginductivetypeinstanceofhasreprtypeclass.html) (5 messages, latest: Dec 30 2019 at 02:27)
+* [distribute not](61777distributenot.html) (36 messages, latest: Dec 30 2019 at 02:37)
 
 * [`or` implication](85659orimplication.html) (5 messages, latest: Dec 29 2019 at 22:52)
 
