@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [supr and val](90497suprandval.html) (4 messages, latest: Dec 30 2019 at 09:54)
+
 * [subalgebra.add_mem](73390subalgebraaddmem.html) (6 messages, latest: Dec 23 2019 at 14:03)
 
 * [functor ext lemma?](19198functorextlemma.html) (47 messages, latest: Dec 23 2019 at 12:19)

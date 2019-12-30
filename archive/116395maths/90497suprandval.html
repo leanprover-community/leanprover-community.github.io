@@ -1,0 +1,97 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/90497suprandval.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/90497suprandval.html">supr and val</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="184460350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20val/near/184460350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/90497suprandval.html#184460350">Kevin Buzzard (Dec 30 2019 at 09:10)</a>:</h4>
+<p>I was hoping this would be <code>rfl</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">opens</span>
+
+<span class="kn">open</span> <span class="n">topological_space</span>
+
+<span class="kn">lemma</span> <span class="n">what_is_this_called</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">X</span><span class="o">]</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">Y</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">f</span><span class="o">)</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">ι</span> <span class="o">:</span> <span class="n">γ</span> <span class="bp">→</span> <span class="n">opens</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:</span>
+<span class="o">(</span><span class="err">⨆</span> <span class="o">(</span><span class="n">j</span> <span class="o">:</span> <span class="n">γ</span><span class="o">),</span> <span class="n">hf</span><span class="bp">.</span><span class="n">comap</span> <span class="o">(</span><span class="n">ι</span> <span class="n">j</span><span class="o">))</span><span class="bp">.</span><span class="n">val</span> <span class="bp">=</span> <span class="err">⋃</span> <span class="o">(</span><span class="n">j</span> <span class="o">:</span> <span class="n">γ</span><span class="o">),</span> <span class="n">f</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="o">(</span><span class="n">ι</span> <span class="n">j</span><span class="o">)</span><span class="bp">.</span><span class="n">val</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>This is surely much easier than I am making it...</p>
+
+<a name="184462068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20val/near/184462068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/90497suprandval.html#184462068">Kevin Buzzard (Dec 30 2019 at 09:47)</a>:</h4>
+<p><code>opens.Sup_s</code> is helpful!</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">what_is_this_called</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">X</span><span class="o">]</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">Y</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">f</span><span class="o">)</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">ι</span> <span class="o">:</span> <span class="n">γ</span> <span class="bp">→</span> <span class="n">opens</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:</span>
+<span class="o">(</span><span class="err">⨆</span> <span class="o">(</span><span class="n">j</span> <span class="o">:</span> <span class="n">γ</span><span class="o">),</span> <span class="n">hf</span><span class="bp">.</span><span class="n">comap</span> <span class="o">(</span><span class="n">ι</span> <span class="n">j</span><span class="o">))</span><span class="bp">.</span><span class="n">val</span> <span class="bp">=</span> <span class="err">⋃</span> <span class="o">(</span><span class="n">j</span> <span class="o">:</span> <span class="n">γ</span><span class="o">),</span> <span class="n">f</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="o">(</span><span class="n">ι</span> <span class="n">j</span><span class="o">)</span><span class="bp">.</span><span class="n">val</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">unfold</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">supr</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">opens</span><span class="bp">.</span><span class="n">Sup_s</span><span class="o">,</span>
+  <span class="n">ext</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span>
+    <span class="n">rintro</span> <span class="bp">⟨</span><span class="n">V</span><span class="o">,</span> <span class="n">HV</span><span class="o">,</span> <span class="n">H</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">use</span> <span class="n">V</span><span class="o">,</span>
+    <span class="n">existsi</span> <span class="bp">_</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="n">H</span><span class="o">,</span>
+    <span class="n">convert</span> <span class="n">HV</span><span class="o">,</span>
+    <span class="n">ext</span> <span class="n">Z</span><span class="o">,</span>
+    <span class="n">split</span><span class="o">,</span>
+      <span class="n">rintro</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+      <span class="n">split</span><span class="o">,</span>
+        <span class="n">split</span><span class="o">,</span>
+          <span class="n">use</span> <span class="n">i</span><span class="o">,</span>
+      <span class="n">refl</span><span class="o">,</span>
+    <span class="n">rintro</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">use</span> <span class="n">i</span><span class="o">,</span>
+    <span class="n">refl</span><span class="o">,</span>
+  <span class="n">rintro</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">j</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">h3</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_sUnion</span><span class="o">,</span>
+  <span class="n">use</span> <span class="n">f</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="o">(</span><span class="n">ι</span> <span class="n">j</span><span class="o">)</span><span class="bp">.</span><span class="n">val</span><span class="o">,</span>
+  <span class="n">existsi</span> <span class="bp">_</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">h3</span><span class="o">,</span>
+  <span class="n">existsi</span> <span class="n">hf</span><span class="bp">.</span><span class="n">comap</span> <span class="o">(</span><span class="n">ι</span> <span class="n">j</span><span class="o">),</span>
+  <span class="n">split</span><span class="o">,</span>
+    <span class="n">use</span> <span class="n">j</span><span class="o">,</span>
+  <span class="n">refl</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="184462357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20val/near/184462357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/90497suprandval.html#184462357">Chris Hughes (Dec 30 2019 at 09:54)</a>:</h4>
+<p>The lemma <code>opens.supr_val</code> seems to be missing</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">opens</span><span class="bp">.</span><span class="n">supr_val</span> <span class="o">{</span><span class="n">X</span> <span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">X</span><span class="o">]</span> <span class="o">(</span><span class="n">ι</span> <span class="o">:</span> <span class="n">γ</span> <span class="bp">→</span> <span class="n">opens</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="err">⨆</span> <span class="n">i</span><span class="o">,</span> <span class="n">ι</span> <span class="n">i</span><span class="o">)</span><span class="bp">.</span><span class="n">val</span> <span class="bp">=</span> <span class="err">⨆</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">ι</span> <span class="n">i</span><span class="o">)</span><span class="bp">.</span><span class="n">val</span> <span class="o">:=</span>
+<span class="bp">@</span><span class="n">galois_connection</span><span class="bp">.</span><span class="n">l_supr</span> <span class="o">(</span><span class="n">opens</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">subtype</span><span class="bp">.</span><span class="n">val</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span>
+    <span class="n">opens</span><span class="bp">.</span><span class="n">interior</span> <span class="n">opens</span><span class="bp">.</span><span class="n">gc</span> <span class="bp">_</span>
+
+<span class="kn">lemma</span> <span class="n">what_is_this_called</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">X</span><span class="o">]</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">Y</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">f</span><span class="o">)</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">ι</span> <span class="o">:</span> <span class="n">γ</span> <span class="bp">→</span> <span class="n">opens</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:</span>
+<span class="o">(</span><span class="err">⨆</span> <span class="o">(</span><span class="n">j</span> <span class="o">:</span> <span class="n">γ</span><span class="o">),</span> <span class="n">hf</span><span class="bp">.</span><span class="n">comap</span> <span class="o">(</span><span class="n">ι</span> <span class="n">j</span><span class="o">))</span><span class="bp">.</span><span class="n">val</span> <span class="bp">=</span> <span class="err">⋃</span> <span class="o">(</span><span class="n">j</span> <span class="o">:</span> <span class="n">γ</span><span class="o">),</span> <span class="n">f</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="o">(</span><span class="n">ι</span> <span class="n">j</span><span class="o">)</span><span class="bp">.</span><span class="n">val</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">set</span><span class="bp">.</span><span class="n">ext_iff</span><span class="o">,</span> <span class="n">opens</span><span class="bp">.</span><span class="n">supr_val</span><span class="o">,</span> <span class="n">continuous</span><span class="bp">.</span><span class="n">comap</span><span class="o">],</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="184462368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20val/near/184462368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/90497suprandval.html#184462368">Chris Hughes (Dec 30 2019 at 09:54)</a>:</h4>
+<p>Also, things like <code>continuous.mem_comap</code> would be good simp lemmas.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
