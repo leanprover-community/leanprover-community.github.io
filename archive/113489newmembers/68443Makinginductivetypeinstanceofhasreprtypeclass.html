@@ -1,0 +1,85 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/68443Makinginductivetypeinstanceofhasreprtypeclass.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/68443Makinginductivetypeinstanceofhasreprtypeclass.html">Making inductive type instance of has_repr type class</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="184445846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Making%20inductive%20type%20instance%20of%20has_repr%20type%20class/near/184445846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68443Makinginductivetypeinstanceofhasreprtypeclass.html#184445846">Mukesh Tiwari (Dec 30 2019 at 02:11)</a>:</h4>
+<p>Could some one please tell me what is wrong with my code.  I have defined a inductive type and trying to make it instance of has_repr, but getting this error  "equation compiler error, equation <a href="https://github.com/leanprover-community/mathlib/issues/2" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/2">#2</a> has not been used in the compilation, note that the left-hand-side of  equation <a href="https://github.com/leanprover-community/mathlib/issues/1" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1">#1</a> is a variable"</p>
+<div class="codehilite"><pre><span></span>inductive day : Type
+| monday : day
+| tuesday : day
+| wednesday : day
+| thursday : day
+| friday : day
+| saturday : day
+| sunday : day
+
+protected def day.repr : day → string
+| monday  := &quot;monday&quot;
+| tuesday := &quot;tuesday&quot;
+| wednesday := &quot;wednesday&quot;
+| thursday := &quot;thursday&quot;
+| friday := &quot;friday&quot;
+| saturday := &quot;saturday&quot;
+| sunday := &quot;sunday&quot;
+
+
+instance : has_repr day :=
+(day.repr)
+</pre></div>
+
+<a name="184446086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Making%20inductive%20type%20instance%20of%20has_repr%20type%20class/near/184446086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68443Makinginductivetypeinstanceofhasreprtypeclass.html#184446086">Joe (Dec 30 2019 at 02:19)</a>:</h4>
+<p>Put everything into the namespace <code>day</code></p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">day</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">monday</span> <span class="o">:</span> <span class="n">day</span>
+<span class="bp">|</span> <span class="n">tuesday</span> <span class="o">:</span> <span class="n">day</span>
+<span class="bp">|</span> <span class="n">wednesday</span> <span class="o">:</span> <span class="n">day</span>
+<span class="bp">|</span> <span class="n">thursday</span> <span class="o">:</span> <span class="n">day</span>
+<span class="bp">|</span> <span class="n">friday</span> <span class="o">:</span> <span class="n">day</span>
+<span class="bp">|</span> <span class="n">saturday</span> <span class="o">:</span> <span class="n">day</span>
+<span class="bp">|</span> <span class="n">sunday</span> <span class="o">:</span> <span class="n">day</span>
+
+<span class="kn">namespace</span> <span class="n">day</span>
+
+<span class="kn">protected</span> <span class="n">def</span> <span class="n">repr</span> <span class="o">:</span> <span class="n">day</span> <span class="bp">→</span> <span class="n">string</span>
+<span class="bp">|</span> <span class="n">monday</span>  <span class="o">:=</span> <span class="s2">&quot;monday&quot;</span>
+<span class="bp">|</span> <span class="n">tuesday</span> <span class="o">:=</span> <span class="s2">&quot;tuesday&quot;</span>
+<span class="bp">|</span> <span class="n">wednesday</span> <span class="o">:=</span> <span class="s2">&quot;wednesday&quot;</span>
+<span class="bp">|</span> <span class="n">thursday</span> <span class="o">:=</span> <span class="s2">&quot;thursday&quot;</span>
+<span class="bp">|</span> <span class="n">friday</span> <span class="o">:=</span> <span class="s2">&quot;friday&quot;</span>
+<span class="bp">|</span> <span class="n">saturday</span> <span class="o">:=</span> <span class="s2">&quot;saturday&quot;</span>
+<span class="bp">|</span> <span class="n">sunday</span> <span class="o">:=</span> <span class="s2">&quot;sunday&quot;</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_repr</span> <span class="n">day</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">day</span><span class="bp">.</span><span class="n">repr</span><span class="bp">⟩</span>
+
+<span class="kn">end</span> <span class="n">day</span>
+</pre></div>
+
+<a name="184446134"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Making%20inductive%20type%20instance%20of%20has_repr%20type%20class/near/184446134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68443Makinginductivetypeinstanceofhasreprtypeclass.html#184446134">Joe (Dec 30 2019 at 02:20)</a>:</h4>
+<p>or <code>open day</code> before your definition of <code>day.repr</code></p>
+
+<a name="184446319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Making%20inductive%20type%20instance%20of%20has_repr%20type%20class/near/184446319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68443Makinginductivetypeinstanceofhasreprtypeclass.html#184446319">Mukesh Tiwari (Dec 30 2019 at 02:26)</a>:</h4>
+<p><span class="user-mention" data-user-id="127148">@Joe</span>  Thank you very much. I also noticed that my brackets were ( instead of ⟨.</p>
+
+<a name="184446325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Making%20inductive%20type%20instance%20of%20has_repr%20type%20class/near/184446325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68443Makinginductivetypeinstanceofhasreprtypeclass.html#184446325">Joe (Dec 30 2019 at 02:27)</a>:</h4>
+<p>You are welcome.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
