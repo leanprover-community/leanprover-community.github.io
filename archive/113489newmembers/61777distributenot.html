@@ -1,0 +1,161 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/61777distributenot.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html">distribute not</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="184440686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distribute%20not/near/184440686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html#184440686">Iocta (Dec 29 2019 at 23:22)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">distribute_not</span><span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">¬</span><span class="n">p</span> <span class="bp">∧</span> <span class="bp">¬</span><span class="n">q</span> <span class="o">:=</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hq</span><span class="o">,</span> <span class="bp">_</span><span class="o">)</span> <span class="o">)</span>
+</pre></div>
+
+
+<p>gives this prompt which I didn't expect</p>
+<div class="codehilite"><pre><span></span> <span class="mi">02</span><span class="bp">.</span><span class="n">lean</span>   <span class="mi">136</span>  <span class="mi">24</span> <span class="n">error</span>           <span class="n">don&#39;t</span> <span class="n">know</span> <span class="n">how</span> <span class="n">to</span> <span class="n">synthesize</span> <span class="n">placeholder</span>
+ <span class="kn">context</span><span class="o">:</span>
+ <span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">,</span>
+ <span class="n">h</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span><span class="o">),</span>
+ <span class="n">hp</span> <span class="o">:</span> <span class="n">p</span>
+ <span class="err">⊢</span> <span class="n">false</span> <span class="o">(</span><span class="n">lean</span><span class="bp">-</span><span class="n">checker</span><span class="o">)</span>
+ <span class="mi">02</span><span class="bp">.</span><span class="n">lean</span>   <span class="mi">136</span>  <span class="mi">34</span> <span class="n">error</span>           <span class="n">don&#39;t</span> <span class="n">know</span> <span class="n">how</span> <span class="n">to</span> <span class="n">synthesize</span> <span class="n">placeholder</span>
+ <span class="kn">context</span><span class="o">:</span>
+ <span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">,</span>
+ <span class="n">h</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span><span class="o">),</span>
+ <span class="n">hq</span> <span class="o">:</span> <span class="n">q</span>
+ <span class="err">⊢</span> <span class="n">false</span> <span class="o">(</span><span class="n">lean</span><span class="bp">-</span><span class="n">checker</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Why does it give that? How can I deal with it?</p>
+
+<a name="184440733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distribute%20not/near/184440733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html#184440733">Joe (Dec 29 2019 at 23:24)</a>:</h4>
+<p><code>¬p</code> is <code>p → false</code>.</p>
+
+<a name="184440793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distribute%20not/near/184440793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html#184440793">Joe (Dec 29 2019 at 23:24)</a>:</h4>
+<p>Try this</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">distribute_not</span><span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">¬</span><span class="n">p</span> <span class="bp">∧</span> <span class="bp">¬</span><span class="n">q</span> <span class="o">:=</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span> <span class="n">h</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hq</span><span class="o">,</span> <span class="n">h</span> <span class="bp">_</span><span class="o">)</span> <span class="o">)</span>
+</pre></div>
+
+<a name="184441128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distribute%20not/near/184441128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html#184441128">Iocta (Dec 29 2019 at 23:32)</a>:</h4>
+<p>Yep.</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">distribute_not</span><span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">¬</span><span class="n">p</span> <span class="bp">∧</span> <span class="bp">¬</span><span class="n">q</span> <span class="o">:=</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span> <span class="n">h</span> <span class="o">(</span><span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">hp</span><span class="o">))</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">hq</span><span class="o">,</span> <span class="n">h</span> <span class="o">(</span><span class="n">or</span><span class="bp">.</span><span class="n">inr</span> <span class="n">hq</span><span class="o">)))</span>
+</pre></div>
+
+<a name="184441133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distribute%20not/near/184441133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html#184441133">Kevin Buzzard (Dec 29 2019 at 23:33)</a>:</h4>
+<p>You know about how to build these terms using <code>_</code>?</p>
+
+<a name="184441137"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distribute%20not/near/184441137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html#184441137">Iocta (Dec 29 2019 at 23:33)</a>:</h4>
+<p>How do you mean?</p>
+
+<a name="184441139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distribute%20not/near/184441139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html#184441139">Kevin Buzzard (Dec 29 2019 at 23:33)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">distribute_not</span><span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">¬</span><span class="n">p</span> <span class="bp">∧</span> <span class="bp">¬</span><span class="n">q</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="bp">_</span>
+</pre></div>
+
+<a name="184441141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distribute%20not/near/184441141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html#184441141">Kevin Buzzard (Dec 29 2019 at 23:34)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">distribute_not</span><span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">¬</span><span class="n">p</span> <span class="bp">∧</span> <span class="bp">¬</span><span class="n">q</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="bp">_⟩</span>
+</pre></div>
+
+<a name="184441183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distribute%20not/near/184441183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html#184441183">Kevin Buzzard (Dec 29 2019 at 23:34)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">distribute_not</span><span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">¬</span><span class="n">p</span> <span class="bp">∧</span> <span class="bp">¬</span><span class="n">q</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="bp">⟨λ</span> <span class="n">hp</span><span class="o">,</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">_⟩</span>
+</pre></div>
+
+<a name="184441186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distribute%20not/near/184441186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html#184441186">Kevin Buzzard (Dec 29 2019 at 23:34)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">distribute_not</span><span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">¬</span><span class="n">p</span> <span class="bp">∧</span> <span class="bp">¬</span><span class="n">q</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="bp">⟨λ</span> <span class="n">hp</span><span class="o">,</span> <span class="n">h</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">_⟩</span>
+</pre></div>
+
+<a name="184441187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distribute%20not/near/184441187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html#184441187">Kevin Buzzard (Dec 29 2019 at 23:35)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">distribute_not</span><span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">¬</span><span class="n">p</span> <span class="bp">∧</span> <span class="bp">¬</span><span class="n">q</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="bp">⟨λ</span> <span class="n">hp</span><span class="o">,</span> <span class="n">h</span> <span class="err">$</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">hp</span><span class="o">,</span> <span class="bp">_⟩</span>
+</pre></div>
+
+<a name="184441197"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distribute%20not/near/184441197" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html#184441197">Kevin Buzzard (Dec 29 2019 at 23:35)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">distribute_not</span><span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">¬</span><span class="n">p</span> <span class="bp">∧</span> <span class="bp">¬</span><span class="n">q</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="bp">⟨λ</span> <span class="n">hp</span><span class="o">,</span> <span class="n">h</span> <span class="err">$</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">hp</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">hq</span><span class="o">,</span> <span class="n">h</span> <span class="err">$</span> <span class="n">or</span><span class="bp">.</span><span class="n">inr</span> <span class="n">hq</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="184441272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distribute%20not/near/184441272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html#184441272">Kevin Buzzard (Dec 29 2019 at 23:36)</a>:</h4>
+<p>Oh -- I see Bryan just talked you through this in the other thread :-)</p>
+
+<a name="184441277"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distribute%20not/near/184441277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html#184441277">Iocta (Dec 29 2019 at 23:36)</a>:</h4>
+<p>Ah that is similar reasoning to the .. yeah that :-)</p>
+
+<a name="184441300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distribute%20not/near/184441300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html#184441300">Kevin Buzzard (Dec 29 2019 at 23:37)</a>:</h4>
+<p>The <code>_</code> method is by far the most fun method of writing those proofs, especially when they can be done constructively.</p>
+
+<a name="184441370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distribute%20not/near/184441370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html#184441370">Iocta (Dec 29 2019 at 23:39)</a>:</h4>
+<p>I didn't get why it decided hp and hq should be p and q?</p>
+
+<a name="184441416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distribute%20not/near/184441416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html#184441416">Iocta (Dec 29 2019 at 23:40)</a>:</h4>
+<p>in </p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">distribute_not&#39;</span><span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">¬</span><span class="n">p</span> <span class="bp">∧</span> <span class="bp">¬</span><span class="n">q</span> <span class="o">:=</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hq</span><span class="o">,</span> <span class="bp">_</span><span class="o">))</span>
+</pre></div>
+
+<a name="184441497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distribute%20not/near/184441497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html#184441497">Joe (Dec 29 2019 at 23:43)</a>:</h4>
+<p>Because <code>¬p</code> is really just an abbreviation for <code>p → false</code>.</p>
+
+<a name="184441543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distribute%20not/near/184441543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html#184441543">Joe (Dec 29 2019 at 23:44)</a>:</h4>
+<p>Here's the definition in lean</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">not</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:=</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">false</span>
+<span class="kn">prefix</span> <span class="bp">`¬`</span> <span class="o">:=</span> <span class="n">not</span>
+</pre></div>
+
+<a name="184441547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distribute%20not/near/184441547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html#184441547">Joe (Dec 29 2019 at 23:45)</a>:</h4>
+<p>You can <code>#check not</code> and then find the definition of <code>not</code> in the library if you are using vscode</p>
+
+<a name="184441562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distribute%20not/near/184441562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html#184441562">Iocta (Dec 29 2019 at 23:46)</a>:</h4>
+<p>I am using emacs, it just says <code> 02.lean   156   1 info            not : Prop → Prop (lean-checker)</code></p>
+
+<a name="184441688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distribute%20not/near/184441688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html#184441688">Joe (Dec 29 2019 at 23:49)</a>:</h4>
+<p>I'm not sure how to do that in emacs. But in vscode, you can <code>command</code> + click (or <code>ctrl</code> + click) to go to the definition of a name.</p>
+
+<a name="184441731"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distribute%20not/near/184441731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html#184441731">Iocta (Dec 29 2019 at 23:50)</a>:</h4>
+<p>Oh I see what you mean. just a regular go-to-definition.</p>
+
+<a name="184441732"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distribute%20not/near/184441732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html#184441732">Joe (Dec 29 2019 at 23:50)</a>:</h4>
+<p>Yes, right.</p>
+
+<a name="184441734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/distribute%20not/near/184441734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61777distributenot.html#184441734">Iocta (Dec 29 2019 at 23:50)</a>:</h4>
+<p>(<code>alt-.</code>)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
