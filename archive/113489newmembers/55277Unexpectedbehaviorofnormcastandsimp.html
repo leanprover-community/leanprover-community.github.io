@@ -1,0 +1,183 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/55277Unexpectedbehaviorofnormcastandsimp.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/55277Unexpectedbehaviorofnormcastandsimp.html">Unexpected behavior of norm_cast and simp</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="184548735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unexpected%20behavior%20of%20norm_cast%20and%20simp/near/184548735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55277Unexpectedbehaviorofnormcastandsimp.html#184548735">Joe (Dec 31 2019 at 15:15)</a>:</h4>
+<p>When the goal is <code>⊢ ⇑(f + 0) = ⇑f</code>, <code>norm_cast</code> failed to simplify even though a lemma with the type <code>⇑(f + g) = ⇑f + ⇑g</code> is marked with <code>move_cast</code>. Same thing if the goal is <code>⊢ ↑(f + 0) = ↑f</code>.</p>
+<p>When the goal is <code>⊢ ⇑f + 0 = ⇑f</code>, <code>simp</code> failed to simplify using <code>add_zero</code>, and <code>rw</code> also failed to rewrite using <code>add_zero</code>.</p>
+<p>Is this a known issue?</p>
+
+<a name="184548749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unexpected%20behavior%20of%20norm_cast%20and%20simp/near/184548749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55277Unexpectedbehaviorofnormcastandsimp.html#184548749">Joe (Dec 31 2019 at 15:15)</a>:</h4>
+<p>Here is an example. </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">pi_instances</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">foo_func</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">//</span> <span class="n">true</span> <span class="o">}</span>
+
+<span class="kn">infixr</span> <span class="bp">`</span> <span class="bp">→</span><span class="err">ₘ</span> <span class="bp">`</span><span class="o">:</span><span class="mi">25</span> <span class="o">:=</span> <span class="n">foo_func</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span>
+
+<span class="kn">namespace</span> <span class="n">foo_func</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span><span class="err">ₘ</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">val</span><span class="bp">⟩</span>
+
+<span class="kn">lemma</span> <span class="n">eq</span> <span class="o">{</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span><span class="err">ₘ</span> <span class="n">β</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="bp">→</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">:=</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">eq</span>
+<span class="kn">lemma</span> <span class="n">eq_iff</span> <span class="o">{</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span><span class="err">ₘ</span> <span class="n">β</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">:=</span>
+<span class="n">iff</span><span class="bp">.</span><span class="n">intro</span> <span class="n">foo_func</span><span class="bp">.</span><span class="n">eq</span> <span class="o">(</span><span class="n">congr_arg</span> <span class="n">coe_fn</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">[</span><span class="n">has_zero</span> <span class="n">β</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span><span class="err">ₘ</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨⟨λ</span><span class="n">a</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">trivial</span><span class="bp">⟩⟩</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">,</span> <span class="n">elim_cast</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">coe_zero</span> <span class="o">[</span><span class="n">has_zero</span> <span class="n">β</span><span class="o">]</span> <span class="o">:</span> <span class="o">((</span><span class="mi">0</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span><span class="err">ₘ</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kn">instance</span> <span class="o">[</span><span class="n">has_add</span> <span class="n">β</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_add</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span><span class="err">ₘ</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨λ</span><span class="n">f</span> <span class="n">g</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">f</span> <span class="bp">+</span> <span class="n">g</span><span class="o">,</span> <span class="n">trivial</span><span class="bp">⟩⟩</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">,</span> <span class="n">move_cast</span><span class="o">]</span>
+<span class="kn">lemma</span> <span class="n">coe_add</span> <span class="o">[</span><span class="n">has_add</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span><span class="err">ₘ</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="o">((</span><span class="n">f</span> <span class="bp">+</span> <span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span><span class="err">ₘ</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="bp">+</span> <span class="n">g</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kn">lemma</span> <span class="n">add_zero_norm_cast</span> <span class="o">[</span><span class="n">add_monoid</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span><span class="err">ₘ</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="err">←</span> <span class="n">foo_func</span><span class="bp">.</span><span class="n">eq_iff</span><span class="o">,</span>
+  <span class="n">norm_cast</span><span class="o">,</span>
+  <span class="c1">-- norm_cast failed to simplify</span>
+
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">add_zero_simp</span> <span class="o">[</span><span class="n">add_monoid</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span><span class="err">ₘ</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="err">←</span> <span class="n">foo_func</span><span class="bp">.</span><span class="n">eq_iff</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">add_zero</span><span class="o">],</span>
+  <span class="c1">-- simp failed to apply add_zero</span>
+  <span class="n">exact</span> <span class="n">add_zero</span> <span class="bp">_</span>
+<span class="kn">end</span>
+
+<span class="kn">end</span> <span class="n">foo_func</span>
+</pre></div>
+
+<a name="184548968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unexpected%20behavior%20of%20norm_cast%20and%20simp/near/184548968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55277Unexpectedbehaviorofnormcastandsimp.html#184548968">Kevin Buzzard (Dec 31 2019 at 15:20)</a>:</h4>
+<p>I don't know if these cast tactics work with <code>⇑</code>. In the docs they only mention <code>↑</code></p>
+
+<a name="184549036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unexpected%20behavior%20of%20norm_cast%20and%20simp/near/184549036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55277Unexpectedbehaviorofnormcastandsimp.html#184549036">Kevin Buzzard (Dec 31 2019 at 15:21)</a>:</h4>
+<p>With the <code>simp</code> thing, <code>add_zero</code> doesn't seem to apply at all (not even to <code>f + 0 = f</code>) -- maybe there is a missing <code>add_monoid</code> instance?</p>
+
+<a name="184549086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unexpected%20behavior%20of%20norm_cast%20and%20simp/near/184549086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55277Unexpectedbehaviorofnormcastandsimp.html#184549086">Kevin Buzzard (Dec 31 2019 at 15:22)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">add_zero_simp</span> <span class="o">[</span><span class="n">add_monoid</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span><span class="err">ₘ</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">convert</span> <span class="n">add_zero</span> <span class="n">f</span><span class="o">,</span>
+  <span class="c">/-</span><span class="cm"></span>
+<span class="cm">  failed to synthesize type class instance for</span>
+<span class="cm">α : Type u,</span>
+<span class="cm">β : Type v,</span>
+<span class="cm">_inst_1 : add_monoid β,</span>
+<span class="cm">f : α →ₘ β</span>
+<span class="cm">⊢ add_monoid (α →ₘ β)</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="184549103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unexpected%20behavior%20of%20norm_cast%20and%20simp/near/184549103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55277Unexpectedbehaviorofnormcastandsimp.html#184549103">Joe (Dec 31 2019 at 15:22)</a>:</h4>
+<p>Actually this is what I want to prove, because <code>f</code> is a subtype.</p>
+
+<a name="184549110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unexpected%20behavior%20of%20norm_cast%20and%20simp/near/184549110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55277Unexpectedbehaviorofnormcastandsimp.html#184549110">Joe (Dec 31 2019 at 15:22)</a>:</h4>
+<p>a subtype of <code>α → β</code></p>
+
+<a name="184549123"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unexpected%20behavior%20of%20norm_cast%20and%20simp/near/184549123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55277Unexpectedbehaviorofnormcastandsimp.html#184549123">Joe (Dec 31 2019 at 15:23)</a>:</h4>
+<p>I want to show that a subtype of <code>α → β</code> is an <code>add_monoid</code> if <code>β</code> is an <code>add_monoid</code>.</p>
+
+<a name="184549187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unexpected%20behavior%20of%20norm_cast%20and%20simp/near/184549187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55277Unexpectedbehaviorofnormcastandsimp.html#184549187">Kevin Buzzard (Dec 31 2019 at 15:24)</a>:</h4>
+<p>I think all this <code>norm_cast</code> stuff works with <code>coe</code>, and <code>coe_to_fun</code> is different.</p>
+
+<a name="184549205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unexpected%20behavior%20of%20norm_cast%20and%20simp/near/184549205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55277Unexpectedbehaviorofnormcastandsimp.html#184549205">Joe (Dec 31 2019 at 15:25)</a>:</h4>
+<p>Here is an example with <code>coe</code>. And it seems nothing works....</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">pi_instances</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">foo_func</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">//</span> <span class="n">true</span> <span class="o">}</span>
+
+<span class="kn">infixr</span> <span class="bp">`</span> <span class="bp">→</span><span class="err">ₘ</span> <span class="bp">`</span><span class="o">:</span><span class="mi">25</span> <span class="o">:=</span> <span class="n">foo_func</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span>
+
+<span class="kn">namespace</span> <span class="n">foo_func&#39;</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span><span class="err">ₘ</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">subtype</span><span class="bp">.</span><span class="n">val</span><span class="bp">⟩</span>
+
+<span class="kn">lemma</span> <span class="n">eq</span> <span class="o">{</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span><span class="err">ₘ</span> <span class="n">β</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="bp">→</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">:=</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">eq</span>
+<span class="kn">lemma</span> <span class="n">eq_iff</span> <span class="o">{</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span><span class="err">ₘ</span> <span class="n">β</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">:=</span>
+<span class="n">iff</span><span class="bp">.</span><span class="n">intro</span> <span class="n">foo_func&#39;</span><span class="bp">.</span><span class="n">eq</span> <span class="o">(</span><span class="n">congr_arg</span> <span class="n">coe</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">[</span><span class="n">has_zero</span> <span class="n">β</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span><span class="err">ₘ</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨⟨λ</span><span class="n">a</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">trivial</span><span class="bp">⟩⟩</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">,</span> <span class="n">elim_cast</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">coe_zero</span> <span class="o">[</span><span class="n">has_zero</span> <span class="n">β</span><span class="o">]</span> <span class="o">:</span> <span class="o">((</span><span class="mi">0</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span><span class="err">ₘ</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kn">instance</span> <span class="o">[</span><span class="n">has_add</span> <span class="n">β</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_add</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span><span class="err">ₘ</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨λ</span><span class="n">f</span> <span class="n">g</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">f</span> <span class="bp">+</span> <span class="n">g</span><span class="o">,</span> <span class="n">trivial</span><span class="bp">⟩⟩</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">,</span> <span class="n">move_cast</span><span class="o">]</span>
+<span class="kn">lemma</span> <span class="n">coe_add</span> <span class="o">[</span><span class="n">has_add</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span><span class="err">ₘ</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="o">((</span><span class="n">f</span> <span class="bp">+</span> <span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span><span class="err">ₘ</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="bp">+</span> <span class="n">g</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kn">lemma</span> <span class="n">add_zero_norm_cast</span> <span class="o">[</span><span class="n">add_monoid</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span><span class="err">ₘ</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="err">←</span> <span class="n">foo_func&#39;</span><span class="bp">.</span><span class="n">eq_iff</span><span class="o">,</span>
+  <span class="n">norm_cast</span><span class="o">,</span>
+  <span class="c1">-- norm_cast failed to simplify</span>
+
+<span class="kn">end</span>
+
+<span class="kn">end</span> <span class="n">foo_func&#39;</span>
+</pre></div>
+
+<a name="184549211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unexpected%20behavior%20of%20norm_cast%20and%20simp/near/184549211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55277Unexpectedbehaviorofnormcastandsimp.html#184549211">Kevin Buzzard (Dec 31 2019 at 15:25)</a>:</h4>
+<p>I think I'm wrong about coe to fun.</p>
+
+<a name="184549269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unexpected%20behavior%20of%20norm_cast%20and%20simp/near/184549269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55277Unexpectedbehaviorofnormcastandsimp.html#184549269">Kevin Buzzard (Dec 31 2019 at 15:26)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">add_zero_simp</span> <span class="o">[</span><span class="n">add_monoid</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span><span class="err">ₘ</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="err">←</span> <span class="n">foo_func</span><span class="bp">.</span><span class="n">eq_iff</span><span class="o">,</span>
+  <span class="n">push_cast</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">add_zero</span> <span class="bp">_</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="184549270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unexpected%20behavior%20of%20norm_cast%20and%20simp/near/184549270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55277Unexpectedbehaviorofnormcastandsimp.html#184549270">Kevin Buzzard (Dec 31 2019 at 15:26)</a>:</h4>
+<p>It's working fine there</p>
+
+<a name="184549288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unexpected%20behavior%20of%20norm_cast%20and%20simp/near/184549288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55277Unexpectedbehaviorofnormcastandsimp.html#184549288">Kevin Buzzard (Dec 31 2019 at 15:27)</a>:</h4>
+<p>You just want to go the other way to the way <code>norm_cast</code> is taking you.</p>
+
+<a name="184549348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unexpected%20behavior%20of%20norm_cast%20and%20simp/near/184549348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55277Unexpectedbehaviorofnormcastandsimp.html#184549348">Kevin Buzzard (Dec 31 2019 at 15:28)</a>:</h4>
+<p><code>push_cast</code> is a tactic which is mentioned in the <code>norm_cast</code> docs but somehow it's in with all the tags which are used to make <code>norm_cast</code> work so it's hard to spot.</p>
+
+<a name="184549430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unexpected%20behavior%20of%20norm_cast%20and%20simp/near/184549430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55277Unexpectedbehaviorofnormcastandsimp.html#184549430">Joe (Dec 31 2019 at 15:30)</a>:</h4>
+<p>Oh, I see. <code>norm_cast</code> and <code>push_cast</code> move in opposite direction.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

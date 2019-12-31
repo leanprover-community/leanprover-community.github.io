@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [What do we know about Lean 4?](05425WhatdoweknowaboutLean4.html) (18 messages, latest: Dec 31 2019 at 15:27)
+
 * [VScode extension](56578VScodeextension.html) (457 messages, latest: Dec 31 2019 at 11:08)
 
 * [beer reward](66500beerreward.html) (2 messages, latest: Dec 30 2019 at 16:15)
@@ -20,8 +22,6 @@ permalink: archive/113488general/index.html
 * [suffices to prove](57736sufficestoprove.html) (15 messages, latest: Dec 29 2019 at 01:34)
 
 * [pip install mathlibtools](15827pipinstallmathlibtools.html) (70 messages, latest: Dec 28 2019 at 22:07)
-
-* [What do we know about Lean 4?](05425WhatdoweknowaboutLean4.html) (15 messages, latest: Dec 28 2019 at 16:43)
 
 * [Lean 3.5.0c Released](69981Lean350cReleased.html) (23 messages, latest: Dec 28 2019 at 16:40)
 
