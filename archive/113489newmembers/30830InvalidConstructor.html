@@ -1,0 +1,363 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/30830InvalidConstructor.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html">Invalid Constructor</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="184546082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184546082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184546082">James Weaver (Dec 31 2019 at 14:16)</a>:</h4>
+<p>I'm having a bit of trouble with inductive type constructors. My code is as follows:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">ring</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">algebra</span>
+<span class="kn">import</span> <span class="n">field_theory</span><span class="bp">.</span><span class="n">subfield</span>
+
+<span class="kn">set_option</span> <span class="n">class</span><span class="bp">.</span><span class="n">instance_max_depth</span> <span class="mi">40</span>
+
+<span class="c1">-- define fixes K k f for any f ∈ ring_aut K</span>
+<span class="n">def</span> <span class="n">fixes</span> <span class="o">{</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">K</span><span class="o">]</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">set</span> <span class="n">K</span><span class="o">)</span> <span class="o">[</span><span class="n">is_subfield</span> <span class="n">k</span><span class="o">]</span> <span class="o">:</span> <span class="o">(</span><span class="n">ring_aut</span> <span class="n">K</span><span class="o">)</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="o">:=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">f</span> <span class="o">:</span> <span class="n">ring_aut</span> <span class="n">K</span><span class="o">,</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">k</span><span class="o">,</span> <span class="n">f</span><span class="bp">.</span><span class="n">to_fun</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span><span class="o">))</span>
+
+<span class="c1">-- define gal K k</span>
+<span class="n">def</span> <span class="n">gal</span> <span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">K</span><span class="o">]</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">set</span> <span class="n">K</span><span class="o">)</span> <span class="o">[</span><span class="n">is_subfield</span> <span class="n">k</span><span class="o">]</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">α</span> <span class="o">:</span> <span class="o">(</span><span class="n">K</span> <span class="err">≃</span><span class="bp">+*</span> <span class="n">K</span><span class="o">)</span> <span class="bp">//</span> <span class="o">(</span><span class="n">fixes</span> <span class="n">k</span> <span class="n">α</span><span class="o">)</span> <span class="o">}</span>
+<span class="kn">instance</span> <span class="o">{</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">K</span><span class="o">]</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="n">set</span> <span class="n">K</span><span class="o">}</span> <span class="o">[</span><span class="n">is_subfield</span> <span class="n">k</span><span class="o">]</span> <span class="o">:</span><span class="n">has_coe</span> <span class="o">(</span><span class="n">gal</span> <span class="n">K</span> <span class="n">k</span><span class="o">)</span> <span class="o">(</span><span class="n">ring_aut</span> <span class="n">K</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">s</span><span class="o">,</span> <span class="n">s</span><span class="bp">.</span><span class="n">val</span><span class="bp">⟩</span>
+
+<span class="kn">section</span> <span class="n">gal</span>
+
+<span class="c1">-- Let K/k be an extension of fields</span>
+<span class="kn">variable</span> <span class="o">{</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+<span class="kn">variable</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">K</span><span class="o">]</span>
+<span class="kn">variable</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="n">set</span> <span class="n">K</span><span class="o">}</span>
+<span class="kn">variable</span> <span class="o">[</span><span class="n">is_subfield</span> <span class="n">k</span><span class="o">]</span>
+
+<span class="c1">-- Show that id is in gal</span>
+<span class="n">def</span> <span class="n">aut_one</span> <span class="o">:</span> <span class="n">ring_aut</span> <span class="n">K</span> <span class="o">:=</span>  <span class="n">group</span><span class="bp">.</span><span class="n">one</span> <span class="o">(</span><span class="n">ring_aut</span> <span class="n">K</span><span class="o">)</span>
+<span class="kn">theorem</span> <span class="n">aut_one_fixes_k</span> <span class="o">:</span> <span class="n">fixes</span> <span class="n">k</span> <span class="n">aut_one</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">rw</span> <span class="o">[</span><span class="n">fixes</span><span class="o">],</span> <span class="n">intro</span><span class="o">,</span> <span class="n">refl</span> <span class="kn">end</span>
+<span class="n">def</span> <span class="n">gal_one</span> <span class="o">:</span> <span class="n">gal</span> <span class="n">K</span> <span class="n">k</span> <span class="o">:=</span> <span class="bp">⟨</span> <span class="n">aut_one</span><span class="o">,</span> <span class="n">aut_one_fixes_k</span> <span class="bp">⟩</span>
+
+<span class="c1">-- define multiplication in the galois group</span>
+<span class="n">def</span> <span class="n">aut_mul</span> <span class="o">:</span> <span class="n">ring_aut</span> <span class="n">K</span> <span class="bp">→</span> <span class="n">ring_aut</span> <span class="n">K</span> <span class="bp">→</span> <span class="n">ring_aut</span> <span class="n">K</span> <span class="o">:=</span> <span class="n">group</span><span class="bp">.</span><span class="n">mul</span>
+<span class="kn">theorem</span> <span class="n">gal_closed_under_aut_mul</span> <span class="o">(</span><span class="n">g</span> <span class="n">h</span> <span class="o">:</span> <span class="n">gal</span> <span class="n">K</span> <span class="n">k</span><span class="o">)</span> <span class="o">:</span> <span class="n">fixes</span> <span class="n">k</span> <span class="o">(</span><span class="n">aut_mul</span> <span class="n">g</span> <span class="n">h</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">intro</span> <span class="n">x</span><span class="o">,</span>
+    <span class="n">change</span> <span class="n">g</span><span class="bp">.</span><span class="n">val</span><span class="bp">.</span><span class="n">to_fun</span> <span class="o">(</span><span class="n">h</span><span class="bp">.</span><span class="n">val</span><span class="bp">.</span><span class="n">to_fun</span> <span class="err">↑</span><span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="err">↑</span><span class="n">x</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">h</span><span class="bp">.</span><span class="n">property</span><span class="o">,</span> <span class="n">g</span><span class="bp">.</span><span class="n">property</span><span class="o">]</span>
+<span class="kn">end</span>
+<span class="n">def</span> <span class="n">gal_mul</span> <span class="o">:</span> <span class="n">gal</span> <span class="n">K</span> <span class="n">k</span> <span class="bp">→</span> <span class="n">gal</span> <span class="n">K</span> <span class="n">k</span> <span class="bp">→</span> <span class="n">gal</span> <span class="n">K</span> <span class="n">k</span> <span class="o">:=</span>
+    <span class="bp">λ</span> <span class="n">g</span> <span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">gal</span> <span class="n">K</span> <span class="n">k</span><span class="o">),</span> <span class="bp">⟨</span> <span class="n">aut_mul</span> <span class="n">g</span> <span class="n">h</span><span class="o">,</span> <span class="n">gal_closed_under_aut_mul</span> <span class="n">g</span> <span class="n">h</span><span class="bp">⟩</span>
+
+<span class="c1">-- show that the galois group is closed under inversion</span>
+<span class="n">def</span> <span class="n">aut_inv</span> <span class="o">:</span> <span class="n">ring_aut</span> <span class="n">K</span> <span class="bp">→</span> <span class="n">ring_aut</span> <span class="n">K</span> <span class="o">:=</span> <span class="n">group</span><span class="bp">.</span><span class="n">inv</span>
+<span class="kn">theorem</span> <span class="n">gal_closed_under_inversion</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">gal</span> <span class="n">K</span> <span class="n">k</span><span class="o">)</span> <span class="o">:</span> <span class="n">fixes</span> <span class="n">k</span> <span class="o">(</span><span class="n">aut_inv</span> <span class="n">g</span><span class="bp">.</span><span class="n">val</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">intro</span> <span class="n">x</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">g</span><span class="bp">.</span><span class="n">val</span><span class="bp">.</span><span class="n">to_equiv</span><span class="bp">.</span><span class="n">injective</span><span class="o">,</span>
+    <span class="n">change</span> <span class="n">g</span><span class="bp">.</span><span class="n">val</span><span class="bp">.</span><span class="n">to_fun</span> <span class="o">(</span><span class="n">g</span><span class="bp">.</span><span class="n">val</span><span class="bp">.</span><span class="n">inv_fun</span> <span class="err">↑</span><span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">g</span><span class="bp">.</span><span class="n">val</span><span class="bp">.</span><span class="n">to_fun</span> <span class="err">↑</span><span class="n">x</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">g</span><span class="bp">.</span><span class="n">val</span><span class="bp">.</span><span class="n">right_inv</span><span class="o">,</span> <span class="n">g</span><span class="bp">.</span><span class="n">property</span><span class="o">],</span>
+<span class="kn">end</span>
+<span class="n">def</span> <span class="n">gal_inv</span> <span class="o">:</span> <span class="n">gal</span> <span class="n">K</span> <span class="n">k</span> <span class="bp">→</span> <span class="n">gal</span> <span class="n">K</span> <span class="n">k</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">g</span> <span class="o">:</span> <span class="n">gal</span> <span class="n">K</span> <span class="n">k</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">aut_inv</span> <span class="n">g</span><span class="bp">.</span><span class="n">val</span><span class="o">,</span> <span class="n">gal_closed_under_inversion</span> <span class="n">g</span><span class="bp">⟩</span>
+
+<span class="c1">-- show is assoc</span>
+<span class="kn">theorem</span> <span class="n">gal_mul_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">gal</span> <span class="n">K</span> <span class="n">k</span><span class="o">),</span> <span class="n">gal_mul</span> <span class="o">(</span><span class="n">gal_mul</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">gal_mul</span> <span class="n">a</span> <span class="o">(</span><span class="n">gal_mul</span> <span class="n">b</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">intros</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="o">,</span>
+    <span class="n">split</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="c1">-- show gal_one is the left and right identity</span>
+<span class="kn">theorem</span> <span class="n">gal_one_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">gal</span> <span class="n">K</span> <span class="n">k</span><span class="o">),</span> <span class="n">gal_mul</span> <span class="n">gal_one</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">intro</span> <span class="n">a</span><span class="o">,</span>
+    <span class="n">change</span> <span class="bp">⟨</span> <span class="n">aut_mul</span> <span class="n">aut_one</span> <span class="n">a</span><span class="bp">.</span><span class="n">val</span><span class="o">,</span> <span class="n">gal_closed_under_aut_mul</span> <span class="n">gal_one</span> <span class="n">a</span> <span class="bp">⟩</span> <span class="bp">=</span> <span class="n">a</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>The last line produces an error, specifically it tells me:</p>
+<div class="codehilite"><pre><span></span>invalid constructor ⟨...⟩, expected type is not an inductive type
+  ?m_1
+</pre></div>
+
+
+<p>which isn't making much sense to me. As far as I can see the type <code>gal K k</code> really ought to be deducible, so it should be using the constructor for that type, which as a subtype is of the form <code>⟨a : ring_aut K, p : fixes k a⟩</code>.</p>
+
+<a name="184546091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184546091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184546091">Kenny Lau (Dec 31 2019 at 14:16)</a>:</h4>
+<p>use ```lean to enable syntax highlighting</p>
+
+<a name="184546100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184546100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184546100">Kenny Lau (Dec 31 2019 at 14:17)</a>:</h4>
+<div class="codehilite"><pre><span></span>```lean
+lorem ipsum
+```
+</pre></div>
+
+<a name="184546159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184546159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184546159">Kenny Lau (Dec 31 2019 at 14:18)</a>:</h4>
+<p>change that line to:</p>
+<div class="codehilite"><pre><span></span><span class="n">change</span> <span class="o">(</span><span class="bp">⟨</span> <span class="n">aut_mul</span> <span class="n">aut_one</span> <span class="n">a</span><span class="bp">.</span><span class="n">val</span><span class="o">,</span> <span class="n">gal_closed_under_aut_mul</span> <span class="n">gal_one</span> <span class="n">a</span> <span class="bp">⟩</span> <span class="o">:</span> <span class="n">gal</span> <span class="n">K</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span><span class="o">,</span>
+</pre></div>
+
+<a name="184546161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184546161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184546161">Kenny Lau (Dec 31 2019 at 14:19)</a>:</h4>
+<p>Lean elaborates from left to right</p>
+
+<a name="184546166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184546166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184546166">Kenny Lau (Dec 31 2019 at 14:19)</a>:</h4>
+<p>so Lean sees the anonymous constructor before it sees <code>a</code></p>
+
+<a name="184546171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184546171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184546171">Kenny Lau (Dec 31 2019 at 14:19)</a>:</h4>
+<p>and it tries to match the type of <code>a</code> <strong>to</strong> the type of the anonymous constructor (i.e. coerce RHS to LHS)</p>
+
+<a name="184546175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184546175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184546175">Kenny Lau (Dec 31 2019 at 14:19)</a>:</h4>
+<p>but Lean cannot figure out the type of the anonymous constructor</p>
+
+<a name="184546355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184546355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184546355">James Weaver (Dec 31 2019 at 14:23)</a>:</h4>
+<p>Thanks, that really helps!</p>
+
+<a name="184546753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184546753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184546753">Kevin Buzzard (Dec 31 2019 at 14:33)</a>:</h4>
+<p>One issue with doing Galois theory like this (with subfields) is that in practice you might end up with two fields E and F and an injective field map from E to F, and you'll have to dance around between E and the image of the map. This is not really an issue when doing mathematics, but when formalising it in type theory you might find that it becomes a pain and you'd be better off setting things up with E a field and F an E-algebra.</p>
+
+<a name="184546816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184546816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184546816">Kenny Lau (Dec 31 2019 at 14:34)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">ring</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">algebra</span>
+<span class="kn">import</span> <span class="n">field_theory</span><span class="bp">.</span><span class="n">subfield</span>
+
+<span class="n">universes</span> <span class="n">u</span>
+
+<span class="c1">-- Define fixes k f for any f : ring_aut K.</span>
+<span class="n">def</span> <span class="n">fixes</span> <span class="o">{</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">K</span><span class="o">]</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">set</span> <span class="n">K</span><span class="o">)</span> <span class="o">[</span><span class="n">is_subfield</span> <span class="n">k</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">ring_aut</span> <span class="n">K</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="bp">∀</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">k</span><span class="o">,</span> <span class="bp">@</span><span class="n">coe_fn</span> <span class="bp">_</span> <span class="n">ring_equiv</span><span class="bp">.</span><span class="n">has_coe_to_fun</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span>
+
+<span class="c1">-- Define gal K k.</span>
+<span class="n">def</span> <span class="n">gal</span> <span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">K</span><span class="o">]</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">set</span> <span class="n">K</span><span class="o">)</span> <span class="o">[</span><span class="n">is_subfield</span> <span class="n">k</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">α</span> <span class="o">:</span> <span class="n">K</span> <span class="err">≃</span><span class="bp">+*</span> <span class="n">K</span> <span class="bp">//</span> <span class="n">fixes</span> <span class="n">k</span> <span class="n">α</span> <span class="o">}</span>
+
+<span class="kn">instance</span> <span class="o">{</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">K</span><span class="o">]</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="n">set</span> <span class="n">K</span><span class="o">}</span> <span class="o">[</span><span class="n">is_subfield</span> <span class="n">k</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">has_coe</span> <span class="o">(</span><span class="n">gal</span> <span class="n">K</span> <span class="n">k</span><span class="o">)</span> <span class="o">(</span><span class="n">ring_aut</span> <span class="n">K</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">s</span><span class="o">,</span> <span class="n">s</span><span class="bp">.</span><span class="n">val</span><span class="bp">⟩</span>
+
+<span class="kn">instance</span> <span class="o">{</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">K</span><span class="o">]</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="n">set</span> <span class="n">K</span><span class="o">}</span> <span class="o">[</span><span class="n">is_subfield</span> <span class="n">k</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">group</span> <span class="o">(</span><span class="n">gal</span> <span class="n">K</span> <span class="n">k</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">@</span><span class="n">subtype</span><span class="bp">.</span><span class="n">group</span> <span class="o">(</span><span class="n">ring_aut</span> <span class="n">K</span><span class="o">)</span> <span class="bp">_</span> <span class="o">{</span> <span class="n">f</span> <span class="bp">|</span> <span class="n">fixes</span> <span class="n">k</span> <span class="n">f</span> <span class="o">}</span>
+<span class="o">{</span> <span class="n">mul_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">g</span> <span class="n">hf</span> <span class="n">hg</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span> <span class="k">show</span> <span class="n">f</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">g</span><span class="bp">.</span><span class="mi">1</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="k">show</span> <span class="n">g</span><span class="bp">.</span><span class="mi">1</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span><span class="o">,</span> <span class="k">from</span> <span class="n">hg</span> <span class="n">x</span> <span class="n">hx</span><span class="o">]</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">hf</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span>
+  <span class="n">one_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">inv_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">hf</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">symm_apply_eq</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span> <span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="err">$</span> <span class="n">hf</span> <span class="n">x</span> <span class="n">hx</span> <span class="o">}</span>
+</pre></div>
+
+<a name="184546818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184546818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184546818">Kevin Buzzard (Dec 31 2019 at 14:34)</a>:</h4>
+<p><code>theorem aut_one_fixes_k : fixes k aut_one := begin intro, refl end</code> You don't need the rewrite, because it's true by definition ;-)</p>
+
+<a name="184546832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184546832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184546832">Kenny Lau (Dec 31 2019 at 14:35)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> try as I might, I cannot fix the line with <code>@coe_fn _ ring_equiv.has_coe_to_fun f x = x</code> (L9)</p>
+
+<a name="184546834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184546834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184546834">Kenny Lau (Dec 31 2019 at 14:35)</a>:</h4>
+<p>you might be familiar with priority tricks</p>
+
+<a name="184546841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184546841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184546841">Kevin Buzzard (Dec 31 2019 at 14:35)</a>:</h4>
+<p><code>theorem aut_one_fixes_k : fixes k aut_one := λ _, rfl</code> is the term mode version</p>
+
+<a name="184546965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184546965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184546965">Kevin Buzzard (Dec 31 2019 at 14:38)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> try as I might, I cannot fix the line with <code>@coe_fn _ ring_equiv.has_coe_to_fun f x = x</code> (L9)</p>
+</blockquote>
+<div class="codehilite"><pre><span></span><span class="bp">∀</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">k</span><span class="o">,</span> <span class="n">f</span><span class="bp">.</span><span class="n">to_equiv</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span>
+</pre></div>
+
+
+<p>? I remember talking about this with Mario. I think there's no coercion from all these higher equivs to regular equiv, and perhaps this is for a reason.</p>
+
+<a name="184546973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184546973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184546973">Kenny Lau (Dec 31 2019 at 14:38)</a>:</h4>
+<p>but why isn't the <code>ring_equiv.has_coe_to_fun</code> instance triggering</p>
+
+<a name="184546978"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184546978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184546978">James Weaver (Dec 31 2019 at 14:38)</a>:</h4>
+<p>You do seem to have to manually cast them using to_equiv</p>
+
+<a name="184546980"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184546980" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184546980">Kenny Lau (Dec 31 2019 at 14:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="253752">@James Weaver</span> btw this is how I would construct the group structure</p>
+
+<a name="184546996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184546996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184546996">Kenny Lau (Dec 31 2019 at 14:39)</a>:</h4>
+<p>then what is <code>ring_equiv.has_coe_to_fun</code> for</p>
+
+<a name="184547062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184547062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184547062">James Weaver (Dec 31 2019 at 14:41)</a>:</h4>
+<p><code>@subtype.group</code> is a new one to me</p>
+
+<a name="184547115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184547115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184547115">Kevin Buzzard (Dec 31 2019 at 14:42)</a>:</h4>
+<p>In type theory a set is a term, not a type.</p>
+
+<a name="184547120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184547120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184547120">Kevin Buzzard (Dec 31 2019 at 14:42)</a>:</h4>
+<p>So <code>group X</code> doesn't make sense if X is a subset of Y.</p>
+
+<a name="184547130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184547130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184547130">Kevin Buzzard (Dec 31 2019 at 14:42)</a>:</h4>
+<p>It doesn't typecheck.</p>
+
+<a name="184547157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184547157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184547157">Kevin Buzzard (Dec 31 2019 at 14:43)</a>:</h4>
+<p>If X is a subgroup of G, then <code>subtype.group</code> is the function you need to create the <code>group  ↥X</code> term</p>
+
+<a name="184547201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184547201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184547201">James Weaver (Dec 31 2019 at 14:44)</a>:</h4>
+<p>right, I see</p>
+
+<a name="184547202"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184547202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184547202">Kevin Buzzard (Dec 31 2019 at 14:44)</a>:</h4>
+<p>where that weird little up-arrow means "change the subset X into a subtype"</p>
+
+<a name="184547244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184547244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184547244">Kevin Buzzard (Dec 31 2019 at 14:45)</a>:</h4>
+<p>You can figure out what Kenny is doing by just writing <code>#check @subtype.group</code>. The <code>@</code> sign means "let me fill in all of the inputs to the function myself, even the ones you usually guess for me in the <code>{}</code> and <code>[]</code> brackets"</p>
+
+<a name="184547326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184547326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184547326">Kevin Buzzard (Dec 31 2019 at 14:47)</a>:</h4>
+<blockquote>
+<p>but why isn't the <code>ring_equiv.has_coe_to_fun</code> instance triggering</p>
+</blockquote>
+<p>Is it because <code>ring_aut</code> isn't syntactically equivalent to <code>ring_equiv</code>?</p>
+
+<a name="184547351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184547351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184547351">James Weaver (Dec 31 2019 at 14:47)</a>:</h4>
+<p>/me nods</p>
+
+<a name="184547397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184547397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184547397">James Weaver (Dec 31 2019 at 14:48)</a>:</h4>
+<p>Right, and the $ is function application with a different binding weight so as to avoid excessive parentheses?</p>
+
+<a name="184547402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184547402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184547402">Kenny Lau (Dec 31 2019 at 14:48)</a>:</h4>
+<p>I tried <code>∀ x ∈ k, (f : K ≃+* K) x = x</code> <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span></p>
+
+<a name="184547403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184547403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184547403">James Weaver (Dec 31 2019 at 14:48)</a>:</h4>
+<p>(Like in Haskel)</p>
+
+<a name="184547443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184547443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184547443">Kevin Buzzard (Dec 31 2019 at 14:49)</a>:</h4>
+<blockquote>
+<p>I tried <code>∀ x ∈ k, (f : K ≃+* K) x = x</code> <span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span></p>
+</blockquote>
+<p>Maybe that's one of those "check that <code>f</code> can be considered as having type <code>ring_equiv</code> but don't actually change what Lean thinks the type of <code>f</code> is?" issues?</p>
+
+<a name="184547455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184547455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184547455">Kevin Buzzard (Dec 31 2019 at 14:50)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">ring_aut</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">ring_equiv</span><span class="bp">.</span><span class="n">to_fun</span><span class="bp">⟩</span>
+
+<span class="n">def</span> <span class="n">fixes</span> <span class="o">{</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">K</span><span class="o">]</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">set</span> <span class="n">K</span><span class="o">)</span> <span class="o">[</span><span class="n">is_subfield</span> <span class="n">k</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">ring_aut</span> <span class="n">K</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="bp">∀</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">k</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span>
+</pre></div>
+
+<a name="184547501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184547501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184547501">Kenny Lau (Dec 31 2019 at 14:50)</a>:</h4>
+<p>ok <code>∀ x ∈ k, (show K ≃+* K, from f) x = x</code> worked but that is only zeta equivalent</p>
+
+<a name="184547506"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184547506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184547506">Kenny Lau (Dec 31 2019 at 14:50)</a>:</h4>
+<blockquote>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">ring_aut</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">ring_equiv</span><span class="bp">.</span><span class="n">to_fun</span><span class="bp">⟩</span>
+
+<span class="n">def</span> <span class="n">fixes</span> <span class="o">{</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">K</span><span class="o">]</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">set</span> <span class="n">K</span><span class="o">)</span> <span class="o">[</span><span class="n">is_subfield</span> <span class="n">k</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">ring_aut</span> <span class="n">K</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="bp">∀</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">k</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span>
+</pre></div>
+
+
+</blockquote>
+<p>nice</p>
+
+<a name="184547512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184547512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184547512">Kevin Buzzard (Dec 31 2019 at 14:50)</a>:</h4>
+<p>So arguably there's a missing instance here.</p>
+
+<a name="184547522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184547522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184547522">Kevin Buzzard (Dec 31 2019 at 14:51)</a>:</h4>
+<p>(and I don't care if I made a loop in the instance graph because eveything is defeq)</p>
+
+<a name="184547529"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184547529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184547529">Kenny Lau (Dec 31 2019 at 14:51)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">ring</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">algebra</span>
+<span class="kn">import</span> <span class="n">field_theory</span><span class="bp">.</span><span class="n">subfield</span>
+
+<span class="n">universes</span> <span class="n">u</span>
+
+<span class="c1">-- credit Kevin Buzzard</span>
+<span class="kn">instance</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">ring_aut</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">ring_equiv</span><span class="bp">.</span><span class="n">to_fun</span><span class="bp">⟩</span>
+
+<span class="c1">-- Define fixes k f for any f : ring_aut K.</span>
+<span class="n">def</span> <span class="n">fixes</span> <span class="o">{</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">K</span><span class="o">]</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">set</span> <span class="n">K</span><span class="o">)</span> <span class="o">[</span><span class="n">is_subfield</span> <span class="n">k</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">ring_aut</span> <span class="n">K</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="bp">∀</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">k</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span>
+
+<span class="c1">-- Define gal K k.</span>
+<span class="n">def</span> <span class="n">gal</span> <span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">K</span><span class="o">]</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">set</span> <span class="n">K</span><span class="o">)</span> <span class="o">[</span><span class="n">is_subfield</span> <span class="n">k</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">α</span> <span class="o">:</span> <span class="n">K</span> <span class="err">≃</span><span class="bp">+*</span> <span class="n">K</span> <span class="bp">//</span> <span class="n">fixes</span> <span class="n">k</span> <span class="n">α</span> <span class="o">}</span>
+
+<span class="kn">instance</span> <span class="o">{</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">K</span><span class="o">]</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="n">set</span> <span class="n">K</span><span class="o">}</span> <span class="o">[</span><span class="n">is_subfield</span> <span class="n">k</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">has_coe</span> <span class="o">(</span><span class="n">gal</span> <span class="n">K</span> <span class="n">k</span><span class="o">)</span> <span class="o">(</span><span class="n">ring_aut</span> <span class="n">K</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">s</span><span class="o">,</span> <span class="n">s</span><span class="bp">.</span><span class="n">val</span><span class="bp">⟩</span>
+
+<span class="kn">instance</span> <span class="o">{</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">K</span><span class="o">]</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="n">set</span> <span class="n">K</span><span class="o">}</span> <span class="o">[</span><span class="n">is_subfield</span> <span class="n">k</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">group</span> <span class="o">(</span><span class="n">gal</span> <span class="n">K</span> <span class="n">k</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">@</span><span class="n">subtype</span><span class="bp">.</span><span class="n">group</span> <span class="o">(</span><span class="n">ring_aut</span> <span class="n">K</span><span class="o">)</span> <span class="bp">_</span> <span class="o">{</span> <span class="n">f</span> <span class="bp">|</span> <span class="n">fixes</span> <span class="n">k</span> <span class="n">f</span> <span class="o">}</span>
+<span class="o">{</span> <span class="n">mul_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">g</span> <span class="n">hf</span> <span class="n">hg</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span> <span class="k">show</span> <span class="n">f</span> <span class="o">(</span><span class="n">g</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">hg</span> <span class="n">x</span> <span class="n">hx</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">hf</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span>
+  <span class="n">one_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">inv_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">hf</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">symm_apply_eq</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span> <span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="err">$</span> <span class="n">hf</span> <span class="n">x</span> <span class="n">hx</span> <span class="o">}</span>
+</pre></div>
+
+<a name="184547538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184547538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184547538">Kenny Lau (Dec 31 2019 at 14:51)</a>:</h4>
+<p>now the code is cleaner</p>
+
+<a name="184547799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184547799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184547799">Kevin Buzzard (Dec 31 2019 at 14:56)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">gal_one_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">gal</span> <span class="n">K</span> <span class="n">k</span><span class="o">),</span> <span class="n">gal_mul</span> <span class="n">gal_one</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">gal_mul</span> <span class="n">gal_one</span><span class="o">,</span>
+  <span class="n">unfold_coes</span><span class="o">,</span>
+  <span class="n">dsimp</span><span class="o">,</span>
+<span class="bp">...</span>
+</pre></div>
+
+
+<p>is another way of getting around the <code>change</code> issue. But actually the correct thing to do is to play around like I'm doing above, and then see what you want to change the goal to, and then use <code>change</code> the way Kenny said.</p>
+
+<a name="184547874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184547874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184547874">James Weaver (Dec 31 2019 at 14:58)</a>:</h4>
+<p>I did find the operation of the function <code>set</code> a little surprising<br>
+I would have expected <code>set K</code> to be an assertion that <code>K</code> is a set or a way of accessing the underlying set of <code>K</code>, but it seems that <code>set K</code> is the type of subsets of the underlying set of <code>K</code>.</p>
+
+<a name="184547887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184547887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184547887">Kevin Buzzard (Dec 31 2019 at 14:58)</a>:</h4>
+<p>There's no "underlying set" -- it's type theory.</p>
+
+<a name="184547902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184547902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184547902">Kevin Buzzard (Dec 31 2019 at 14:59)</a>:</h4>
+<p>I spent a long time mentally changing <code>set K</code> to <code>subset_of K</code> before I got the hang of it.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

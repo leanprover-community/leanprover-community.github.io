@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Invalid Constructor](30830InvalidConstructor.html) (45 messages, latest: Dec 31 2019 at 14:59)
+
 * [noob question(s)](52075noobquestions.html) (1603 messages, latest: Dec 30 2019 at 18:49)
 
 * [Making inductive type instance of has_repr type class](68443Makinginductivetypeinstanceofhasreprtypeclass.html) (9 messages, latest: Dec 30 2019 at 03:34)
