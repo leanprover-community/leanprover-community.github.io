@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Unexpected behavior of norm_cast and simp](55277Unexpectedbehaviorofnormcastandsimp.html) (16 messages, latest: Dec 31 2019 at 15:30)
+* [Invalid Constructor](30830InvalidConstructor.html) (64 messages, latest: Jan 01 2020 at 12:53)
 
-* [Invalid Constructor](30830InvalidConstructor.html) (60 messages, latest: Dec 31 2019 at 15:14)
+* [Unexpected behavior of norm_cast and simp](55277Unexpectedbehaviorofnormcastandsimp.html) (16 messages, latest: Dec 31 2019 at 15:30)
 
 * [noob question(s)](52075noobquestions.html) (1603 messages, latest: Dec 30 2019 at 18:49)
 
