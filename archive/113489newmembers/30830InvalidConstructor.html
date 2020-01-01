@@ -544,6 +544,48 @@ I would have expected <code>set K</code> to be an assertion that <code>K</code> 
   <span class="n">inv_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">hf</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">symm_apply_eq</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span> <span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="err">$</span> <span class="n">hf</span> <span class="n">x</span> <span class="o">}</span>
 </pre></div>
 
+<a name="184597213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184597213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184597213">James Weaver (Jan 01 2020 at 13:01)</a>:</h4>
+<p>Still running into a problem with</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- introduce an example</span>
+<span class="kn">variable</span> <span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span>
+<span class="kn">variable</span> <span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span>
+<span class="kn">variable</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">k</span><span class="o">]</span>
+<span class="kn">variable</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">K</span><span class="o">]</span>
+<span class="kn">variable</span> <span class="n">i</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">→+*</span> <span class="n">K</span>
+
+<span class="kn">instance</span> <span class="n">n</span><span class="o">:</span><span class="n">has_coe</span> <span class="n">k</span> <span class="n">K</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">i</span><span class="bp">⟩</span>
+
+<span class="kn">variable</span> <span class="n">f</span> <span class="o">:</span> <span class="n">K</span> <span class="bp">→</span> <span class="n">K</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">f</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">k</span><span class="o">)</span>
+</pre></div>
+
+
+<p>though.  The has_coe instance demands an explicit name and isn't found by the #check command.</p>
+
+<a name="184597515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184597515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184597515">Alex J. Best (Jan 01 2020 at 13:10)</a>:</h4>
+<p>I think your problem is that i is a variable, the following works</p>
+<div class="codehilite"><pre><span></span><span class="kn">universe</span> <span class="n">u</span>
+
+
+<span class="kn">variable</span> <span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span>
+<span class="kn">variable</span> <span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span>
+<span class="kn">variable</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">k</span><span class="o">]</span>
+<span class="kn">variable</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">K</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">i</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">→+*</span> <span class="n">K</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">instance</span> <span class="n">n</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="n">k</span> <span class="n">K</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">i</span> <span class="n">K</span> <span class="n">k</span><span class="bp">⟩</span>
+<span class="kn">variable</span> <span class="n">f</span> <span class="o">:</span> <span class="n">K</span> <span class="bp">→</span> <span class="n">K</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">f</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">k</span><span class="o">)</span>
+</pre></div>
+
+<a name="184597640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Invalid%20Constructor/near/184597640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30830InvalidConstructor.html#184597640">Alex J. Best (Jan 01 2020 at 13:14)</a>:</h4>
+<p>I don't know exactly what your use case is so maybe this isnt that useful? But before you had <code>n</code> depending on <code>i</code> so the coercion couldn't just pick one <code>i</code>to make the coercion from?</p>
+
 
 {% endraw %}
 

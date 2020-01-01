@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [monotone -> strict_mono](62572monotonestrictmono.html) (7 messages, latest: Jan 01 2020 at 13:52)
+
+* [Lean 3.5.0c Released](69981Lean350cReleased.html) (24 messages, latest: Jan 01 2020 at 13:03)
+
 * [What do we know about Lean 4?](05425WhatdoweknowaboutLean4.html) (18 messages, latest: Dec 31 2019 at 15:27)
 
 * [VScode extension](56578VScodeextension.html) (457 messages, latest: Dec 31 2019 at 11:08)
@@ -22,8 +26,6 @@ permalink: archive/113488general/index.html
 * [suffices to prove](57736sufficestoprove.html) (15 messages, latest: Dec 29 2019 at 01:34)
 
 * [pip install mathlibtools](15827pipinstallmathlibtools.html) (70 messages, latest: Dec 28 2019 at 22:07)
-
-* [Lean 3.5.0c Released](69981Lean350cReleased.html) (23 messages, latest: Dec 28 2019 at 16:40)
 
 * [`abel` is slow](02710abelisslow.html) (9 messages, latest: Dec 28 2019 at 15:40)
 

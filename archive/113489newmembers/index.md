@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Invalid Constructor](30830InvalidConstructor.html) (64 messages, latest: Jan 01 2020 at 12:53)
+* [Invalid Constructor](30830InvalidConstructor.html) (67 messages, latest: Jan 01 2020 at 13:14)
 
 * [Unexpected behavior of norm_cast and simp](55277Unexpectedbehaviorofnormcastandsimp.html) (16 messages, latest: Dec 31 2019 at 15:30)
 
