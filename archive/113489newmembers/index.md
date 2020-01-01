@@ -9,6 +9,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [failed to prove recursive application is decreasing](86610failedtoproverecursiveapplicationisdecreasing.html) (2 messages, latest: Jan 01 2020 at 22:33)
+
+* [Learning from mathlib (e.g., TPiL 4.6, Q5)](87598LearningfrommathlibegTPiL46Q5.html) (1 message, latest: Jan 01 2020 at 22:27)
+
 * [Invalid Constructor](30830InvalidConstructor.html) (67 messages, latest: Jan 01 2020 at 13:14)
 
 * [Unexpected behavior of norm_cast and simp](55277Unexpectedbehaviorofnormcastandsimp.html) (16 messages, latest: Dec 31 2019 at 15:30)

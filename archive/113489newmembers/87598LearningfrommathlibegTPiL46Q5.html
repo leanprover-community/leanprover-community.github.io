@@ -1,0 +1,49 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html">Learning from mathlib (e.g., TPiL 4.6, Q5)</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="184616152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184616152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184616152">Luis O'Shea (Jan 01 2020 at 22:27)</a>:</h4>
+<p>In trying to learn from mathlib I've run into a couple of things I don't understand. For example, say you want to prove <code>(¬∀ x, p x) → ∃ x, ¬p x</code>, where <code>p</code> is a predicate. This is, (modulo decidability) proven in mathlib, so I tried to just copy that approach:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">logic</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span>
+
+<span class="kn">open</span> <span class="n">classical</span>
+
+<span class="c1">-- Mirrors proof of not_forall in logic/basic.lean:446</span>
+<span class="kn">example</span><span class="o">:</span> <span class="o">(</span><span class="bp">¬∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span><span class="n">p</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="n">not</span><span class="bp">.</span><span class="n">imp_symm</span> <span class="err">$</span> <span class="k">assume</span> <span class="n">nx</span> <span class="n">x</span><span class="o">,</span> <span class="n">nx</span><span class="bp">.</span><span class="n">imp_symm</span> <span class="err">$</span> <span class="k">assume</span> <span class="n">hnpx</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span><span class="n">hnpx</span><span class="bp">⟩</span> <span class="c1">-- Error: need decidable (p x)</span>
+</pre></div>
+
+
+<p>On the one hand the failure is not surprising (since <code>not.imp_symm</code> needs  decidability). On the other hand I had hoped <code>open classical</code> would make everything decidable. However, what does work is to make my own version of <code>not.imp_symm</code>:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- Mirrors proof of not.imp_symm in logic/basic.lean:167</span>
+<span class="kn">lemma</span> <span class="n">not</span><span class="bp">.</span><span class="n">my_imp_symm</span> <span class="o">{</span><span class="n">P</span> <span class="n">Q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">hnpq</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">P</span> <span class="bp">→</span> <span class="n">Q</span><span class="o">)</span> <span class="o">(</span><span class="n">hnq</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">Q</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="o">:=</span>
+<span class="n">by_contradiction</span> <span class="err">$</span> <span class="k">assume</span> <span class="n">hnp</span><span class="o">,</span> <span class="n">hnq</span> <span class="err">$</span> <span class="n">hnpq</span> <span class="n">hnp</span>
+
+<span class="kn">example</span><span class="o">:</span> <span class="o">(</span><span class="bp">¬∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span><span class="n">p</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="n">not</span><span class="bp">.</span><span class="n">my_imp_symm</span> <span class="err">$</span> <span class="k">assume</span> <span class="n">nx</span> <span class="n">x</span><span class="o">,</span> <span class="n">nx</span><span class="bp">.</span><span class="n">my_imp_symm</span> <span class="err">$</span> <span class="k">assume</span> <span class="n">hnpx</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span><span class="n">hnpx</span><span class="bp">⟩</span> <span class="c1">-- Success!</span>
+</pre></div>
+
+
+<p>So my questions are:</p>
+<ol>
+<li>If I'm working classically what do I do if I need a theorem that requires decidability (such as <code>not.imp_symm</code>)? (Obviously reproving it as I did is ugly.)</li>
+<li>Along the way I noticed that the above lemma is called using "dot notation" (namely <code>nx.my_imp_symm</code>). I assume this is similar to things like <code>and.left</code>, but I don't understand how the syntax  works. Is it described somewhere?</li>
+</ol>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

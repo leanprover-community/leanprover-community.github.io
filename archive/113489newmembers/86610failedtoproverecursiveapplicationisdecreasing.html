@@ -1,0 +1,48 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/86610failedtoproverecursiveapplicationisdecreasing.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/86610failedtoproverecursiveapplicationisdecreasing.html">failed to prove recursive application is decreasing</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="184616285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/failed%20to%20prove%20recursive%20application%20is%20decreasing/near/184616285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86610failedtoproverecursiveapplicationisdecreasing.html#184616285">Vincent Beffara (Jan 01 2020 at 22:31)</a>:</h4>
+<p>Hi, trying to define some custom well-founded order for use in recursive definitions, failing, and simplifying until I get a reasonably simple case where things still fail and I don't get why:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span>
+
+<span class="kn">structure</span> <span class="n">toto</span> <span class="o">:=</span> <span class="o">(</span><span class="n">val</span> <span class="o">:</span> <span class="n">list</span> <span class="n">V</span><span class="o">)</span>
+
+<span class="kn">inductive</span> <span class="n">shorter</span> <span class="o">:</span> <span class="n">toto</span> <span class="n">V</span> <span class="bp">-&gt;</span> <span class="n">toto</span> <span class="n">V</span> <span class="bp">-&gt;</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">step</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="n">V</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">V</span><span class="o">),</span> <span class="n">shorter</span> <span class="bp">⟨</span><span class="n">l</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">z</span><span class="bp">::</span><span class="n">l</span><span class="bp">⟩</span>
+
+<span class="kn">lemma</span> <span class="n">shorter_wf</span> <span class="o">:</span> <span class="n">well_founded</span> <span class="o">(</span><span class="n">shorter</span> <span class="n">V</span><span class="o">)</span>
+    <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">apply</span> <span class="n">well_founded</span><span class="bp">.</span><span class="n">intro</span><span class="o">,</span> <span class="n">intro</span> <span class="n">l</span><span class="o">,</span> <span class="n">cases</span> <span class="n">l</span> <span class="k">with</span> <span class="n">xs</span><span class="o">,</span>
+        <span class="n">induction</span> <span class="n">xs</span> <span class="k">with</span> <span class="n">y</span> <span class="n">ys</span><span class="bp">;</span> <span class="n">apply</span> <span class="n">acc</span><span class="bp">.</span><span class="n">intro</span><span class="bp">;</span> <span class="n">intros</span><span class="bp">;</span> <span class="n">cases</span> <span class="n">a</span><span class="o">,</span>
+        <span class="n">apply</span> <span class="n">xs_ih</span> <span class="o">}</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_well_founded</span> <span class="o">(</span><span class="n">toto</span> <span class="n">V</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">shorter</span> <span class="n">V</span><span class="o">,</span> <span class="n">shorter_wf</span> <span class="n">V</span><span class="bp">⟩</span>
+
+<span class="n">def</span> <span class="n">fold</span> <span class="o">:</span> <span class="n">toto</span> <span class="n">V</span> <span class="bp">-&gt;</span> <span class="kt">Prop</span>
+    <span class="bp">|</span> <span class="bp">⟨</span><span class="o">[]</span><span class="bp">⟩</span>    <span class="o">:=</span> <span class="n">true</span>
+    <span class="bp">|</span> <span class="bp">⟨</span><span class="n">x</span><span class="bp">::</span><span class="n">xs</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="k">have</span> <span class="n">h</span> <span class="o">:</span> <span class="n">shorter</span> <span class="n">V</span> <span class="bp">⟨</span><span class="n">xs</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">x</span><span class="bp">::</span><span class="n">xs</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">shorter</span><span class="bp">.</span><span class="n">step</span> <span class="n">x</span> <span class="n">xs</span><span class="o">,</span>
+        <span class="n">fold</span> <span class="bp">⟨</span><span class="n">xs</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>Lean tells me that it cannot show <code>shorter V {val := xs} {val := x :: xs}</code> even though I have <code>h</code> in the state which states exactly that, and lean telling me that it will try to use <code>assumption</code>. What am I missing?</p>
+
+<a name="184616338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/failed%20to%20prove%20recursive%20application%20is%20decreasing/near/184616338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86610failedtoproverecursiveapplicationisdecreasing.html#184616338">Vincent Beffara (Jan 01 2020 at 22:33)</a>:</h4>
+<p>Usually the answer would be "if <code>assumption</code> fails, try <code>convert</code> instead and it will tell you why" but here I don't know how to try that ...</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
