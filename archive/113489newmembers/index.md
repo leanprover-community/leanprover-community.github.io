@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [failed to prove recursive application is decreasing](86610failedtoproverecursiveapplicationisdecreasing.html) (4 messages, latest: Jan 02 2020 at 00:18)
+* [Learning from mathlib (e.g., TPiL 4.6, Q5)](87598LearningfrommathlibegTPiL46Q5.html) (36 messages, latest: Jan 02 2020 at 02:20)
 
-* [Learning from mathlib (e.g., TPiL 4.6, Q5)](87598LearningfrommathlibegTPiL46Q5.html) (17 messages, latest: Jan 02 2020 at 00:07)
+* [failed to prove recursive application is decreasing](86610failedtoproverecursiveapplicationisdecreasing.html) (4 messages, latest: Jan 02 2020 at 00:18)
 
 * [Invalid Constructor](30830InvalidConstructor.html) (67 messages, latest: Jan 01 2020 at 13:14)
 

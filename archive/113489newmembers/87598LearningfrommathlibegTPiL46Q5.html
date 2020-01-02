@@ -154,6 +154,115 @@ You can define the notation for <code>pi</code> like this</p>
 </blockquote>
 <p>There's also a little bit more about it <a href="https://leanprover.github.io/theorem_proving_in_lean/structures_and_records.html#declaring-structures" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/structures_and_records.html#declaring-structures">in 9.1</a>.</p>
 
+<a name="184622642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184622642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184622642">Luis O'Shea (Jan 02 2020 at 02:00)</a>:</h4>
+<p>I'm going to read through §3.3.1 and §9.1. In the meantime (while I figure out what degree of denseness I'm suffering from) here is a more concrete explanation of what I fund puzzling about the dot syntax. While I understand <code>l.length</code>, what I don't understand is that this works (it's just a minimal version of the above):</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">not</span><span class="bp">.</span><span class="n">my_imp_symm</span> <span class="o">{</span><span class="n">P</span> <span class="n">Q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">hnpq</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">P</span> <span class="bp">→</span> <span class="n">Q</span><span class="o">)</span> <span class="o">(</span><span class="n">hnq</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">Q</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="o">:=</span>  <span class="n">sorry</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">nx</span> <span class="o">:</span> <span class="bp">¬∃</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span><span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">nx</span><span class="bp">.</span><span class="n">my_imp_symm</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span><span class="n">h</span><span class="bp">⟩</span><span class="o">)</span> <span class="c1">-- this is fine!</span>
+</pre></div>
+
+
+<p>and yet if I do the obvious replacement of <code>nx.my_imp_symm</code> to <code>not.my_imp_symm nx</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">nx</span> <span class="o">:</span> <span class="bp">¬∃</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span><span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="n">x</span> <span class="o">:=</span> <span class="o">(</span><span class="n">not</span><span class="bp">.</span><span class="n">my_imp_symm</span> <span class="n">nx</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span><span class="n">h</span><span class="bp">⟩</span><span class="o">)</span> <span class="c1">-- this does not work!</span>
+</pre></div>
+
+
+<p>then it (clearly) does not work.</p>
+
+<a name="184622647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184622647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184622647">Luis O'Shea (Jan 02 2020 at 02:00)</a>:</h4>
+<p>I'm going to read through §3.3.1 and §9.1. In the meantime (while I figure out what degree of denseness I'm suffering from) here is a more concrete explanation of what I fund puzzling about the dot syntax. While I understand <code>l.length</code>, what I don't understand is that this works (it's just a minimal version of the above):</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">not</span><span class="bp">.</span><span class="n">my_imp_symm</span> <span class="o">{</span><span class="n">P</span> <span class="n">Q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">hnpq</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">P</span> <span class="bp">→</span> <span class="n">Q</span><span class="o">)</span> <span class="o">(</span><span class="n">hnq</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">Q</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="o">:=</span>  <span class="n">sorry</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">nx</span> <span class="o">:</span> <span class="bp">¬∃</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span><span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">nx</span><span class="bp">.</span><span class="n">my_imp_symm</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span><span class="n">h</span><span class="bp">⟩</span><span class="o">)</span> <span class="c1">-- this is fine!</span>
+</pre></div>
+
+
+<p>and yet if I do the obvious replacement of <code>nx.my_imp_symm</code> to <code>not.my_imp_symm nx</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">nx</span> <span class="o">:</span> <span class="bp">¬∃</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span><span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="n">x</span> <span class="o">:=</span> <span class="o">(</span><span class="n">not</span><span class="bp">.</span><span class="n">my_imp_symm</span> <span class="n">nx</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span><span class="n">h</span><span class="bp">⟩</span><span class="o">)</span> <span class="c1">-- this does not work!</span>
+</pre></div>
+
+
+<p>then it (clearly) does not work.</p>
+
+<a name="184622701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184622701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184622701">Kevin Buzzard (Jan 02 2020 at 02:02)</a>:</h4>
+<p>It doesn't work, but that's not because of a dot notation issue.</p>
+
+<a name="184622846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184622846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184622846">Kevin Buzzard (Jan 02 2020 at 02:07)</a>:</h4>
+<p>It doesn't work because the inputs are the wrong way around.</p>
+
+<a name="184622847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184622847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184622847">Kevin Buzzard (Jan 02 2020 at 02:07)</a>:</h4>
+<p><code>example (nx : ¬∃ x, ¬p x) (x : α) : p x := not.my_imp_symm (λ h, ⟨x,h⟩ : ¬ p x → ∃ x, ¬p x) nx</code></p>
+
+<a name="184622890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184622890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184622890">Kevin Buzzard (Jan 02 2020 at 02:08)</a>:</h4>
+<p>The idea is that if L has type <code>list</code> then <code>L.blah</code> will look at <code>list.blah</code> and then go through the inputs and find the first one of type <code>list</code> and replace it with <code>L</code>. This might not be the first explicit input to the function.</p>
+
+<a name="184622909"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184622909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184622909">Kevin Buzzard (Jan 02 2020 at 02:09)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">list</span><span class="bp">.</span><span class="n">silly</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="mi">37</span>
+
+<span class="n">def</span> <span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">]</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">L</span><span class="bp">.</span><span class="n">silly</span> <span class="mi">5</span> <span class="c1">-- 37</span>
+</pre></div>
+
+<a name="184622962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184622962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184622962">Luis O'Shea (Jan 02 2020 at 02:10)</a>:</h4>
+<p>Ah!</p>
+
+<a name="184622964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184622964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184622964">Kevin Buzzard (Jan 02 2020 at 02:10)</a>:</h4>
+<p>In your example, <code>hnpq</code> is a pi type, and it's <code>hnq</code> which has type <code>not &lt;something&gt;</code>.</p>
+
+<a name="184622979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184622979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184622979">Kevin Buzzard (Jan 02 2020 at 02:11)</a>:</h4>
+<p>If you can be bothered to search back a few months you'll find some thread where someone else explains pretty much the same thing to me ;-)</p>
+
+<a name="184622980"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184622980" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184622980">Luis O'Shea (Jan 02 2020 at 02:11)</a>:</h4>
+<p>Right -- I need <code>lemma not_my_imp_symm {P Q : Prop} (hnq : ¬Q) (hnpq : ¬P → Q)  : P :=  sorry</code> (flipped order of arguments)</p>
+
+<a name="184622983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184622983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184622983">Kevin Buzzard (Jan 02 2020 at 02:11)</a>:</h4>
+<p>One wonders whether this sort of thing should be documented somehow.</p>
+
+<a name="184622988"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184622988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184622988">Kevin Buzzard (Jan 02 2020 at 02:12)</a>:</h4>
+<p>PS </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="kn">lemma</span> <span class="n">not</span><span class="bp">.</span><span class="n">my_imp_symm</span> <span class="o">{</span><span class="n">P</span> <span class="n">Q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">hnpq</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">P</span> <span class="bp">→</span> <span class="n">Q</span><span class="o">)</span> <span class="o">(</span><span class="n">hnq</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">Q</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">finish</span>
+</pre></div>
+
+<a name="184623028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184623028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184623028">Luis O'Shea (Jan 02 2020 at 02:12)</a>:</h4>
+<p>Sadly, once you see what's going on it does seem very trivial.</p>
+
+<a name="184623040"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184623040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184623040">Luis O'Shea (Jan 02 2020 at 02:12)</a>:</h4>
+<p>(Mind you I'm very grateful to have this explained to me!)</p>
+
+<a name="184623041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184623041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184623041">Kevin Buzzard (Jan 02 2020 at 02:12)</a>:</h4>
+<p>dot notation is trivial, but only once you've spent a fair amount of time figuring out what's going on ;-) I think a lot of the computer scientists figured this out a long time ago, but it took me a while.</p>
+
+<a name="184623166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184623166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184623166">Kevin Buzzard (Jan 02 2020 at 02:17)</a>:</h4>
+<p>For what it's worth, here is me wrestling with this stuff just under a year ago: <a href="#narrow/stream/113488-general/topic/dot.20notation.20confusion/near/157341136" title="#narrow/stream/113488-general/topic/dot.20notation.20confusion/near/157341136">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot.20notation.20confusion/near/157341136</a></p>
+
+<a name="184623227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184623227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184623227">Bryan Gin-ge Chen (Jan 02 2020 at 02:19)</a>:</h4>
+<p>I think I finally "got" dot notation from reading your thread as well.</p>
+
+<a name="184623271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184623271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184623271">Luis O'Shea (Jan 02 2020 at 02:20)</a>:</h4>
+<p>I was chuffed when I recently used <a href="https://github.com/leanprover/lean/blob/ceacfa7445953cbc8860ddabc55407430a9ca5c3/library/init/logic.lean#L16" target="_blank" title="https://github.com/leanprover/lean/blob/ceacfa7445953cbc8860ddabc55407430a9ca5c3/library/init/logic.lean#L16">flip</a> in a proof. This trick (dot syntax) is another sneaky way of reordering arguments (without resorting to lambdas or small lemmas).</p>
+
 
 {% endraw %}
 
