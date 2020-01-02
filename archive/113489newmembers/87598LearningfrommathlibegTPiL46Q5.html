@@ -43,6 +43,93 @@ permalink: archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html
 <li>Along the way I noticed that the above lemma is called using "dot notation" (namely <code>nx.my_imp_symm</code>). I assume this is similar to things like <code>and.left</code>, but I don't understand how the syntax  works. Is it described somewhere?</li>
 </ol>
 
+<a name="184617481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184617481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184617481">Joe (Jan 01 2020 at 23:09)</a>:</h4>
+<p>You need <code>local attribute [instance] classical.prop_decidable</code></p>
+
+<a name="184618294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184618294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184618294">Luis O'Shea (Jan 01 2020 at 23:35)</a>:</h4>
+<p>Thanks. I'm curious, do "normal" classical Lean scripts start with that line (<code>local attribute [instance] classical.prop_decidable</code>)? (Perhaps a more pointed version of my question is: if I'm a classical mathematician , should I start all my scripts with <code>local attribute [instance] classical.prop_decidable</code>?)</p>
+
+<a name="184618405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184618405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184618405">Luis O'Shea (Jan 01 2020 at 23:38)</a>:</h4>
+<p>Thanks to the above tip (and searching through mathlib) it seems I can also do <code>open_locale classical</code> (with a <code>import tactic</code> at the top). Is that the way to write classical math? (Note that I don't understand the implications of <code>open_locale</code>).</p>
+
+<a name="184618618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184618618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184618618">Joe (Jan 01 2020 at 23:45)</a>:</h4>
+<p>Yes. <code>open_locale</code> is for both notations and attributes.</p>
+
+<a name="184618620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184618620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184618620">Joe (Jan 01 2020 at 23:45)</a>:</h4>
+<p>Here is its documentation</p>
+
+<a name="184618621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184618621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184618621">Joe (Jan 01 2020 at 23:45)</a>:</h4>
+<p>This consists of two user-commands which allow you to declare notation and commands localized to a namespace.</p>
+<ul>
+<li>Declare notation which is localized to a namespace using:</li>
+</ul>
+<div class="codehilite"><pre><span></span>localized &quot;infix ` ⊹ `:60 := my_add&quot; in my.add
+</pre></div>
+
+
+<ul>
+<li>After this command it will be available in the same section/namespace/file, just as if you wrote <code>local infix </code> ⊹ <code>:60 := my_add</code></li>
+<li>You can open it in other places. The following command will declare the notation again as local notation in that section/namespace/files:</li>
+</ul>
+<div class="codehilite"><pre><span></span>open_locale my.add
+</pre></div>
+
+
+<ul>
+<li>More generally, the following will declare all localized notation in the specified namespaces.</li>
+</ul>
+<div class="codehilite"><pre><span></span>open_locale namespace1 namespace2 ...
+</pre></div>
+
+
+<ul>
+<li>You can also declare other localized commands, like local attributes</li>
+</ul>
+<div class="codehilite"><pre><span></span>localized &quot;attribute [simp] le_refl&quot; in le
+</pre></div>
+
+
+<ul>
+<li>Warning 1: as a limitation on user commands, you cannot put <code>open_locale</code> directly after your imports. You have to write another command first (e.g. <code>open</code>, <code>namespace</code>, <code>universe variables</code>, <code>noncomputable theory</code>, <code>run_cmd tactic.skip</code>, ...).</li>
+<li>Warning 2: You have to fully specify the names used in localized notation, so that the localized notation also works when the appropriate namespaces are not opened.</li>
+</ul>
+
+<a name="184618798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184618798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184618798">Joe (Jan 01 2020 at 23:50)</a>:</h4>
+<p>So there is a line in the file <code>tactic/localized.lean</code> that makes <code>open_locale</code> work:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- you can run `open_locale classical` to get the decidability of all propositions.</span>
+<span class="n">localized</span> <span class="s2">&quot;attribute [instance, priority 9] classical.prop_decidable&quot;</span> <span class="k">in</span> <span class="n">classical</span>
+</pre></div>
+
+<a name="184618857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184618857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184618857">Luis O'Shea (Jan 01 2020 at 23:52)</a>:</h4>
+<p>That's how I found it -- I searched mathlib for <code>classical.prop_decidable</code> and one of the first hits is the comment above (namely "you can run <code>open_locale classical</code> to get the decidability of all propositions.").</p>
+
+<a name="184618925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184618925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184618925">Luis O'Shea (Jan 01 2020 at 23:55)</a>:</h4>
+<p>Beyond that I find the documentation for <code>open_locale</code> a bit obscure (being a beginner at Lean). Is it fair to summarize this thread as: If you want to do classical math just put <code>open_locale classical</code> at the top of your files? (Or perhaps more conservatively, wait until you  need it, then stick it at the top.)</p>
+
+<a name="184618990"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184618990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184618990">Joe (Jan 01 2020 at 23:57)</a>:</h4>
+<p>Yes, you can do that. <br>
+The other use for <code>open_locale</code> is for notation. <br>
+You can define the notation for <code>pi</code> like this</p>
+<div class="codehilite"><pre><span></span><span class="n">localized</span> <span class="s2">&quot;notation `π` := real.pi&quot;</span> <span class="k">in</span> <span class="n">real</span>
+</pre></div>
+
+
+<p>And when you want to use the notation, say <code>open_locale real</code>.</p>
+
+<a name="184619031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20from%20mathlib%20%28e.g.%2C%20TPiL%204.6%2C%20Q5%29/near/184619031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87598LearningfrommathlibegTPiL46Q5.html#184619031">Kevin Buzzard (Jan 01 2020 at 23:58)</a>:</h4>
+<p>That (<code>open_locale classical</code>) is pretty much what I do. I also add <code>noncomputable theory</code> at the top sometimes</p>
+
 
 {% endraw %}
 
