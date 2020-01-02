@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [failed to prove recursive application is decreasing](86610failedtoproverecursiveapplicationisdecreasing.html) (7 messages, latest: Jan 02 2020 at 11:51)
+* [failed to prove recursive application is decreasing](86610failedtoproverecursiveapplicationisdecreasing.html) (8 messages, latest: Jan 02 2020 at 12:23)
 
 * [Learning from mathlib (e.g., TPiL 4.6, Q5)](87598LearningfrommathlibegTPiL46Q5.html) (36 messages, latest: Jan 02 2020 at 02:20)
 
