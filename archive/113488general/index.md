@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* ["Lean is like Coq but better"](42650LeanislikeCoqbutbetter.html) (2 messages, latest: Jan 02 2020 at 23:54)
+* ["Lean is like Coq but better"](42650LeanislikeCoqbutbetter.html) (5 messages, latest: Jan 03 2020 at 01:30)
 
 * [monotone -> strict_mono](62572monotonestrictmono.html) (7 messages, latest: Jan 01 2020 at 13:52)
 
