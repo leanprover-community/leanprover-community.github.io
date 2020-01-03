@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Trust "down to the metal"](74934Trustdowntothemetal.html) (5 messages, latest: Jan 03 2020 at 09:42)
+* ["Analysis / calculus" project](70283Analysiscalculusproject.html) (1 message, latest: Jan 03 2020 at 10:17)
+
+* [Trust "down to the metal"](74934Trustdowntothemetal.html) (6 messages, latest: Jan 03 2020 at 10:16)
 
 * ["Lean is like Coq but better"](42650LeanislikeCoqbutbetter.html) (5 messages, latest: Jan 03 2020 at 01:30)
 
