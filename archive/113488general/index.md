@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Trust "down to the metal"](74934Trustdowntothemetal.html) (8 messages, latest: Jan 03 2020 at 13:22)
+* [Trust "down to the metal"](74934Trustdowntothemetal.html) (10 messages, latest: Jan 03 2020 at 15:18)
 
 * ["Analysis / calculus" project](70283Analysiscalculusproject.html) (1 message, latest: Jan 03 2020 at 10:17)
 

@@ -51,6 +51,17 @@ You can do all the dancing you want at any level and then "run it through the ha
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Trust%20%22down%20to%20the%20metal%22/near/184732550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74934Trustdowntothemetal.html#184732550">Mario Carneiro (Jan 03 2020 at 13:22)</a>:</h4>
 <p>writing the logic gates is not fun though. You really need to abstract away from that to get a real theorem prover running</p>
 
+<a name="184740243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Trust%20%22down%20to%20the%20metal%22/near/184740243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74934Trustdowntothemetal.html#184740243">Tim Daly (Jan 03 2020 at 15:06)</a>:</h4>
+<p>Intel bought Altera (the second largest FPGA company) a couple years ago. Intel now ships CPUs with a built-in FPGA. You can buy one now (but you have to be one of the FAANGs, they only sell them to the big server companies). One of these days you'll be able to "side load" your FPGA processor and side-load your proof from your proof-carrying code. Leo probably has access to one at Microsoft.</p>
+<p>As for "a large read-only memory", the Altera has a lot of ROM that allows you to install whole CPUs. They also have dual MIPS CPUs available on the die itself if you want to run MPS code. The rules for a logic like CIC would be a trivial in comparison. And since the hardware is naturally fully parallel you can compute all branches of your proof tree at once.</p>
+<p>It would be much easier to write proven hardware semantics for Bauer's Andromeda on an FPGA than it would to prove anything about an x86 instruction stream. Using a layered code architecture like Milawa would allow the user to decide which, and how many, layers to side load into the FPGA, each layer proven by lower layers. With not many layers you end up with a fully proven lisp engine.</p>
+<p>It will all be available, likely within 2020, once Intel decides to ship non-FAANG hardware to the world.</p>
+
+<a name="184741175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Trust%20%22down%20to%20the%20metal%22/near/184741175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74934Trustdowntothemetal.html#184741175">Tim Daly (Jan 03 2020 at 15:18)</a>:</h4>
+<p>So layering Lean's logic on an FPGA that implements the trusted kernel would run really fast and, if the kernel is in ROM, would be rather trustworthy.</p>
+
 
 {% endraw %}
 
