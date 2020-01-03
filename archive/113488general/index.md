@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* ["Lean is like Coq but better"](42650LeanislikeCoqbutbetter.html) (2 messages, latest: Jan 02 2020 at 23:54)
+
 * [monotone -> strict_mono](62572monotonestrictmono.html) (7 messages, latest: Jan 01 2020 at 13:52)
 
 * [Lean 3.5.0c Released](69981Lean350cReleased.html) (24 messages, latest: Jan 01 2020 at 13:03)
