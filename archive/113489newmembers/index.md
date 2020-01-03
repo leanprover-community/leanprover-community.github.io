@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Coercions](08998Coercions.html) (1 message, latest: Jan 03 2020 at 18:56)
+* [Coercions](08998Coercions.html) (5 messages, latest: Jan 03 2020 at 19:34)
+
+* [(no topic)](79918notopic.html) (217 messages, latest: Jan 03 2020 at 19:21)
 
 * [Type*](83565Type.html) (6 messages, latest: Jan 03 2020 at 08:40)
 
@@ -310,8 +312,6 @@ permalink: archive/113489newmembers/index.html
 * [I proved divisibility is transitive!](29909Iproveddivisibilityistransitive.html) (30 messages, latest: Nov 04 2019 at 16:15)
 
 * [Bug with letter H?](80050BugwithletterH.html) (5 messages, latest: Nov 04 2019 at 09:51)
-
-* [(no topic)](79918notopic.html) (216 messages, latest: Nov 03 2019 at 19:48)
 
 * [Look for lemma](97673Lookforlemma.html) (4 messages, latest: Nov 02 2019 at 21:56)
 

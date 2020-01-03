@@ -19,6 +19,30 @@ permalink: archive/113489newmembers/08998Coercions.html
 <p>2) I have a type X,  E is of type <code>set X</code>, and <code>x : \N \to E</code>,  is there a way to see x as a sequence in X rather than in E? <code>\u x</code>does not seem to work.<br>
 The context is that I have a defintion of limit in X and I would like to apply it to sequences in E. Of course I can declare <code>x: \N \to X</code> and add the property that every value of x is in E, but I guess coercions are designed to do the job.</p>
 
+<a name="184758404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercions/near/184758404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08998Coercions.html#184758404">Patrick Massot (Jan 03 2020 at 19:01)</a>:</h4>
+<p>Your first question is a bit vague, but maybe it is answered by the following snippet:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- exact h   won&#39;t work</span>
+  <span class="n">exact_mod_cast</span> <span class="n">h</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="184758528"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercions/near/184758528" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08998Coercions.html#184758528">Patrick Massot (Jan 03 2020 at 19:02)</a>:</h4>
+<p>I guess this example was oversimplified but, just in case, the "right" way of proving <code>(0 : ℝ) &lt; 2</code> is to use the <code>norm_num</code> tactic.</p>
+
+<a name="184760046"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercions/near/184760046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08998Coercions.html#184760046">Kevin Buzzard (Jan 03 2020 at 19:21)</a>:</h4>
+<p>As for the second question, you might well find that <code>x 3</code> is a pair, consisting of (1) a term of type <code>X</code> and (2) a proof that this term is in <code>E</code>. So perhaps <code>(x 3).1</code> will be the element of <code>X</code> that you're looking for.</p>
+
+<a name="184761034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercions/near/184761034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08998Coercions.html#184761034">Kevin Buzzard (Jan 03 2020 at 19:34)</a>:</h4>
+<p>To make matters even more confusing (at least for a beginner), if <code>E : set X</code> then <code>E</code> is a term, not a type, and so <code>e : E</code> doesn't really make sense (and neither does <code>\N \to E</code>). However it's OK, because there is something called a subtype of X, and what happens is that when Lean sees you want to think about <code>E</code> as a type it coerces it magically to be the subtype. This is the difference between <code>{x : \N | x &gt; 6}</code> and <code>{x : \N // x &gt; 6}</code> (the first is the subset, the second is the subtype). The coercion is indicated by the little up-arrow <code>\u</code>.</p>
+
 
 {% endraw %}
 
