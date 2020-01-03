@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Coercions](08998Coercions.html) (1 message, latest: Jan 03 2020 at 18:56)
+
 * [Type*](83565Type.html) (6 messages, latest: Jan 03 2020 at 08:40)
 
 * [failed to prove recursive application is decreasing](86610failedtoproverecursiveapplicationisdecreasing.html) (8 messages, latest: Jan 02 2020 at 12:23)
