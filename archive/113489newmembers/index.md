@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Type*](83565Type.html) (4 messages, latest: Jan 02 2020 at 22:24)
+* [Type*](83565Type.html) (5 messages, latest: Jan 03 2020 at 07:37)
 
 * [failed to prove recursive application is decreasing](86610failedtoproverecursiveapplicationisdecreasing.html) (8 messages, latest: Jan 02 2020 at 12:23)
 
