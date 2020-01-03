@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Trust "down to the metal"](74934Trustdowntothemetal.html) (1 message, latest: Jan 03 2020 at 07:54)
+* [Trust "down to the metal"](74934Trustdowntothemetal.html) (3 messages, latest: Jan 03 2020 at 08:27)
 
 * ["Lean is like Coq but better"](42650LeanislikeCoqbutbetter.html) (5 messages, latest: Jan 03 2020 at 01:30)
 
