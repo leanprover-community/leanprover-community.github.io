@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (408 messages, latest: Jan 03 2020 at 20:59)
+
 * [Trust "down to the metal"](74934Trustdowntothemetal.html) (14 messages, latest: Jan 03 2020 at 16:45)
 
 * ["Analysis / calculus" project](70283Analysiscalculusproject.html) (1 message, latest: Jan 03 2020 at 10:17)
@@ -248,8 +250,6 @@ permalink: archive/113488general/index.html
 * [vscode snippets](92603vscodesnippets.html) (30 messages, latest: Nov 12 2019 at 19:27)
 
 * [simp lemmas priority](36603simplemmaspriority.html) (2 messages, latest: Nov 12 2019 at 17:58)
-
-* [Lean in the wild](43625Leaninthewild.html) (405 messages, latest: Nov 12 2019 at 17:34)
 
 * [type_of and friends](59957typeofandfriends.html) (4 messages, latest: Nov 12 2019 at 07:07)
 
