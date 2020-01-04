@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [distributing `or`](74778distributingor.html) (11 messages, latest: Jan 04 2020 at 15:28)
+
 * [Coercions](08998Coercions.html) (5 messages, latest: Jan 03 2020 at 19:34)
 
 * [(no topic)](79918notopic.html) (217 messages, latest: Jan 03 2020 at 19:21)
@@ -30,8 +32,6 @@ permalink: archive/113489newmembers/index.html
 * [distribute not](61777distributenot.html) (36 messages, latest: Dec 30 2019 at 02:37)
 
 * [`or` implication](85659orimplication.html) (5 messages, latest: Dec 29 2019 at 22:52)
-
-* [distributing `or`](74778distributingor.html) (10 messages, latest: Dec 29 2019 at 06:37)
 
 * [Basic question](30875Basicquestion.html) (9 messages, latest: Dec 27 2019 at 22:52)
 
