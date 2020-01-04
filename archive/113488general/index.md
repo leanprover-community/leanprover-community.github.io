@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [AI and theorem proving continued](66080AIandtheoremprovingcontinued.html) (11 messages, latest: Jan 04 2020 at 21:29)
+
 * [Lean vs Coq](64589LeanvsCoq.html) (260 messages, latest: Jan 04 2020 at 19:13)
 
 * [Tactics for program support](53544Tacticsforprogramsupport.html) (1 message, latest: Jan 04 2020 at 00:36)
