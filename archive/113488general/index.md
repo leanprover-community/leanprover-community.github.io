@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean vs Coq](64589LeanvsCoq.html) (245 messages, latest: Jan 04 2020 at 16:51)
+* [Lean vs Coq](64589LeanvsCoq.html) (249 messages, latest: Jan 04 2020 at 17:59)
 
 * [Tactics for program support](53544Tacticsforprogramsupport.html) (1 message, latest: Jan 04 2020 at 00:36)
 

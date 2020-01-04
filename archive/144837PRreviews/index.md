@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1835 more lie basics](507431835moreliebasics.html) (4 messages, latest: Jan 04 2020 at 17:33)
+
 * [#1823](477621823.html) (3 messages, latest: Dec 23 2019 at 12:35)
 
 * [#1596 case_bash on nat](526901596casebashonnat.html) (1 message, latest: Dec 19 2019 at 09:28)
