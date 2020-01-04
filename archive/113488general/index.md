@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Tactics for program support](53544Tacticsforprogramsupport.html) (1 message, latest: Jan 04 2020 at 00:36)
+
 * [zero vector space](12000zerovectorspace.html) (1 message, latest: Jan 03 2020 at 23:14)
 
 * [Lean in the wild](43625Leaninthewild.html) (409 messages, latest: Jan 03 2020 at 23:00)
