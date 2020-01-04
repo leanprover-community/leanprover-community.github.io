@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Beautiful examples of "AndCommuted $ helps math coders"](54709BeautifulexamplesofAndCommutedhelpsmathcoders.html) (2 messages, latest: Jan 03 2020 at 22:22)
+* [zero vector space](12000zerovectorspace.html) (1 message, latest: Jan 03 2020 at 23:14)
 
-* [Lean in the wild](43625Leaninthewild.html) (408 messages, latest: Jan 03 2020 at 20:59)
+* [Lean in the wild](43625Leaninthewild.html) (409 messages, latest: Jan 03 2020 at 23:00)
+
+* [Beautiful examples of "AndCommuted $ helps math coders"](54709BeautifulexamplesofAndCommutedhelpsmathcoders.html) (2 messages, latest: Jan 03 2020 at 22:22)
 
 * [Trust "down to the metal"](74934Trustdowntothemetal.html) (14 messages, latest: Jan 03 2020 at 16:45)
 
