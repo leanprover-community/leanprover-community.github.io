@@ -1,0 +1,150 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/64589LeanvsCoq.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html">Lean vs Coq</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="184801623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184801623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184801623">Ramkumar Ramachandra (Jan 04 2020 at 12:16)</a>:</h4>
+<p>Is Lean slow because a VM is used for computations?</p>
+
+<a name="184801982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184801982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184801982">Mario Carneiro (Jan 04 2020 at 12:27)</a>:</h4>
+<p>This is a vague statement without a reference for comparison, but the short answer is yes. When you evaluate a lean tactic or lean function using <code>#eval</code>, it executes a bytecode in a similar way to Python, leading to the same order of speed (it's certainly not as well optimized as python though).</p>
+
+<a name="184802050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802050">Mario Carneiro (Jan 04 2020 at 12:29)</a>:</h4>
+<p>One of the biggest changes with Lean 4 is an overhaul of this system. Lean code will now be transpiled to C and then compiled and run, so you are likely to see performance similar to Haskell (although again, optimization is an infinitely deep rabbit-hole)</p>
+
+<a name="184802160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802160">Ramkumar Ramachandra (Jan 04 2020 at 12:32)</a>:</h4>
+<p>I see, that's good to hear. I was comparing the compile speeds of mathlib and math-comp, which are comparable in size.</p>
+
+<a name="184802166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802166">Mario Carneiro (Jan 04 2020 at 12:32)</a>:</h4>
+<p><span class="user-mention" data-user-id="256543">@Ramkumar Ramachandra</span> You made a similar claim on coq-club regarding speed of Coq over lean for everyday elaboration. My personal experience is the opposite, so if you could clarify what kind of benchmark you are thinking of that would be helpful</p>
+
+<a name="184802173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802173">Mario Carneiro (Jan 04 2020 at 12:33)</a>:</h4>
+<p>How fast does math-comp compile? Is the material comparable? Does this include the coq standard library?</p>
+
+<a name="184802176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802176">Ramkumar Ramachandra (Jan 04 2020 at 12:33)</a>:</h4>
+<p>Just plain wall-clock time. Run <code>make</code> on mathlib or math-comp. math-comp takes about 10 mins to build, and the loc-count is similar.</p>
+
+<a name="184802219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802219">Ramkumar Ramachandra (Jan 04 2020 at 12:34)</a>:</h4>
+<p>It doesn't include the standard library, and I think the material is comparable, but I'm a beginner.</p>
+
+<a name="184802220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802220">Mario Carneiro (Jan 04 2020 at 12:35)</a>:</h4>
+<p>I think the Coq standard library is much bigger than the lean core lib</p>
+
+<a name="184802289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802289">Mario Carneiro (Jan 04 2020 at 12:36)</a>:</h4>
+<p>Also, I suspect that math-comp is much more low level in its tactic usage, leading to faster run times. I could be wrong but Gonthier has some opinions in this area that are not shared elsewhere in the coq ecosystem</p>
+
+<a name="184802303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802303">Ramkumar Ramachandra (Jan 04 2020 at 12:37)</a>:</h4>
+<p>lean's stdlib is 18k loc, while coq's is 122k. Coq's stdlib is indeed much larger.</p>
+
+<a name="184802308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802308">Mario Carneiro (Jan 04 2020 at 12:37)</a>:</h4>
+<p>I think mathlib is closer to coq stdlib + math-comp</p>
+
+<a name="184802351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802351">Mario Carneiro (Jan 04 2020 at 12:38)</a>:</h4>
+<p>but this is still a very vague equivalence because the details are all different</p>
+
+<a name="184802352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802352">Ramkumar Ramachandra (Jan 04 2020 at 12:38)</a>:</h4>
+<p>That would be incorrect. math-comp uses ssreflect heavily.</p>
+
+<a name="184802356"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802356">Mario Carneiro (Jan 04 2020 at 12:38)</a>:</h4>
+<p>Right, that's what I mean</p>
+
+<a name="184802364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802364">Mario Carneiro (Jan 04 2020 at 12:38)</a>:</h4>
+<p>ssreflect is a very direct imperative tactic style</p>
+
+<a name="184802373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802373">Mario Carneiro (Jan 04 2020 at 12:39)</a>:</h4>
+<p>it's fast to work with that</p>
+
+<a name="184802374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802374">Ramkumar Ramachandra (Jan 04 2020 at 12:39)</a>:</h4>
+<p>Ah; I wouldn't know.</p>
+
+<a name="184802378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802378">Patrick Massot (Jan 04 2020 at 12:39)</a>:</h4>
+<p>Yes, Gonthier and his team are extremely proud of using almost no automation.</p>
+
+<a name="184802379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802379">Mario Carneiro (Jan 04 2020 at 12:39)</a>:</h4>
+<p>A representative of the opposite camp would be isabelle, which uses lots of automated proof searching and "blast", "auto", "sledgehammer" type tactics</p>
+
+<a name="184802425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802425">Ramkumar Ramachandra (Jan 04 2020 at 12:40)</a>:</h4>
+<p>Yes. I believe they're also starting to play with ML-based proof search.</p>
+
+<a name="184802435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802435">Mario Carneiro (Jan 04 2020 at 12:40)</a>:</h4>
+<p>I'm pretty sure this split is the number 1 aspect that contributes to overall proof checking time of entire libraries</p>
+
+<a name="184802451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802451">Ramkumar Ramachandra (Jan 04 2020 at 12:41)</a>:</h4>
+<p>... okay, but lean is similar enough to coq to compare on an loc-basis, no?</p>
+
+<a name="184802493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802493">Mario Carneiro (Jan 04 2020 at 12:42)</a>:</h4>
+<p>Roughly, yes. I think lean is a bit more terse in general from my impressions</p>
+
+<a name="184802496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802496">Ramkumar Ramachandra (Jan 04 2020 at 12:42)</a>:</h4>
+<p>Do you have an answer to my question about formalizing ∞-categories, by the way?</p>
+
+<a name="184802512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802512">Mario Carneiro (Jan 04 2020 at 12:43)</a>:</h4>
+<p>I've been wanting to see how infinity cats are formalized for a long time, because I don't understand the math and will continue not to until someone actually writes a formal definition down instead of vague words</p>
+
+<a name="184802553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802553">Mario Carneiro (Jan 04 2020 at 12:44)</a>:</h4>
+<p>There is nothing in principle stopping anyone from writing it down assuming they actually know what they want</p>
+
+<a name="184802621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802621">Mario Carneiro (Jan 04 2020 at 12:45)</a>:</h4>
+<p>I will say that I think it is ludicrous to consider changing your foundations (kernel) in order to accomodate X mathematics. If you need to do so you've already lost</p>
+
+<a name="184802666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802666">Ramkumar Ramachandra (Jan 04 2020 at 12:46)</a>:</h4>
+<p>I've just started working on formalizing ∞-categories in Coq. The textbook-definition is the most straightforward way to think about it, and you kind of have to bend over backwards in the Coq formalization -- it's quite ugly.</p>
+
+<a name="184802672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802672">Mario Carneiro (Jan 04 2020 at 12:46)</a>:</h4>
+<p>Do you have a link?</p>
+
+<a name="184802687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802687">Mario Carneiro (Jan 04 2020 at 12:47)</a>:</h4>
+<p>I think the lean way wouldn't be so different from that, so I'm interested to know what bending you have to do</p>
+
+<a name="184802745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802745">Ramkumar Ramachandra (Jan 04 2020 at 12:49)</a>:</h4>
+<p>See <a href="https://gist.github.com/artagnon/18c5b8ef22704ef5e92a2111da627692" target="_blank" title="https://gist.github.com/artagnon/18c5b8ef22704ef5e92a2111da627692">https://gist.github.com/artagnon/18c5b8ef22704ef5e92a2111da627692</a> -- I haven't made much progress though.</p>
+
+<a name="184802831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20Coq/near/184802831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64589LeanvsCoq.html#184802831">Ramkumar Ramachandra (Jan 04 2020 at 12:51)</a>:</h4>
+<p>I couldn't write a currified version: it became too complicated.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
