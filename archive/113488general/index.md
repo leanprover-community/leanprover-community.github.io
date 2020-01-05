@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [zero vector space](12000zerovectorspace.html) (2 messages, latest: Jan 05 2020 at 15:20)
+
 * [Lean vs Coq](64589LeanvsCoq.html) (261 messages, latest: Jan 05 2020 at 03:59)
 
 * [AI and theorem proving continued](66080AIandtheoremprovingcontinued.html) (11 messages, latest: Jan 04 2020 at 21:29)
 
 * [Tactics for program support](53544Tacticsforprogramsupport.html) (1 message, latest: Jan 04 2020 at 00:36)
-
-* [zero vector space](12000zerovectorspace.html) (1 message, latest: Jan 03 2020 at 23:14)
 
 * [Lean in the wild](43625Leaninthewild.html) (409 messages, latest: Jan 03 2020 at 23:00)
 

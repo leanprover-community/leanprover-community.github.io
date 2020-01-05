@@ -16,6 +16,34 @@ permalink: archive/113488general/12000zerovectorspace.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/zero%20vector%20space/near/184775664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12000zerovectorspace.html#184775664">Yury G. Kudryashov (Jan 03 2020 at 23:14)</a>:</h4>
 <p>Hi, is there any canonical way to say "a vector space is either {0}, or has a non-zero element"? I mean, are there any lemmas in <code>linear_algebra</code> that take some specific way of saying "E is not {0}" as an argument?</p>
 
+<a name="184852673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/zero%20vector%20space/near/184852673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12000zerovectorspace.html#184852673">Alexander Bentkamp (Jan 05 2020 at 15:20)</a>:</h4>
+<p>I don't know what the canonical way to say it is, but maybe you could use these to lemmas that I proved recently, but haven't merged into mathlib yet:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">exists_mem_ne_zero_of_dim_pos&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">}</span>
+  <span class="o">[</span><span class="n">discrete_field</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">vector_space</span> <span class="n">α</span> <span class="n">β</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">h_dim</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">dim</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">β</span><span class="o">,</span> <span class="n">x</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">obtain</span> <span class="bp">⟨</span><span class="n">b</span><span class="o">,</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">_⟩</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">,</span> <span class="n">b</span> <span class="err">∈</span> <span class="o">(</span><span class="err">⊤</span> <span class="o">:</span> <span class="n">submodule</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">),</span>
+  <span class="o">{</span> <span class="n">apply</span> <span class="n">exists_mem_ne_zero_of_dim_pos</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">dim_top</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">h_dim</span> <span class="o">},</span>
+  <span class="n">use</span> <span class="n">b</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">dim_pos_of_mem_ne_zero</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">}</span>
+  <span class="o">[</span><span class="n">discrete_field</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">vector_space</span> <span class="n">α</span> <span class="n">β</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">dim</span> <span class="n">α</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">classical</span><span class="o">,</span>
+  <span class="n">by_contra</span> <span class="n">hc</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">not_lt</span><span class="o">,</span> <span class="n">cardinal</span><span class="bp">.</span><span class="n">le_zero</span><span class="o">,</span> <span class="err">←</span><span class="n">dim_top</span><span class="o">]</span> <span class="n">at</span> <span class="n">hc</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">x_mem_bot</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="err">⊥</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">submodule</span><span class="bp">.</span><span class="n">bot_of_dim_zero</span> <span class="err">⊤</span> <span class="n">hc</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">mem_top</span> <span class="o">},</span>
+  <span class="n">exact</span> <span class="n">h</span> <span class="o">((</span><span class="n">mem_bot</span> <span class="n">α</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="n">x_mem_bot</span><span class="o">)</span>
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
 
