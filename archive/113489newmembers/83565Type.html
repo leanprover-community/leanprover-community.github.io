@@ -55,6 +55,23 @@ class Associative {G : Type u} (f : G → G → G) : Type u :=
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%2A/near/184828333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83565Type.html#184828333">Chris Hughes (Jan 05 2020 at 01:42)</a>:</h4>
 <p>I guess I was wrong about <code>Type*</code> being the same as <code>Type _</code>. <code>Type _</code> will probably try to infer from the context what the universe should be - it will fill it in with whatever it is forced to be, and will fail if there's nothing forcing it to be a particular universe. and <code>Type*</code> will fill it in with something sensible basically. I don't know the precise algorithms.</p>
 
+<a name="184829264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%2A/near/184829264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83565Type.html#184829264">Mario Carneiro (Jan 05 2020 at 02:17)</a>:</h4>
+<p>These are not the same; one uses <code>Type u</code> and the other uses <code>Type _</code>. I'm pretty sure that <code>Type*</code> and <code>Type _</code> are identical</p>
+
+<a name="184829336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%2A/near/184829336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83565Type.html#184829336">Mario Carneiro (Jan 05 2020 at 02:19)</a>:</h4>
+<p>The error message makes it clear what the problem is:</p>
+<div class="codehilite"><pre><span></span>failed to add declaration &#39;Associative&#39; to environment, type has metavariables
+</pre></div>
+
+
+<p>It successfully unified, but it wasn't completely able to pin down the target type because this is also valid:</p>
+<div class="codehilite"><pre><span></span><span class="kn">universe</span> <span class="n">u</span>
+<span class="n">class</span> <span class="n">Associative</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">→</span> <span class="n">G</span> <span class="bp">→</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">u</span><span class="bp">+</span><span class="mi">37</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">Hassoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">G</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="o">(</span><span class="n">f</span> <span class="n">y</span> <span class="n">z</span><span class="o">))</span>
+</pre></div>
+
 
 {% endraw %}
 

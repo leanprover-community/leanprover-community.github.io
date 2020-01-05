@@ -38,6 +38,35 @@ permalink: archive/113489newmembers/62674recursionfailswithirreducibletype.html
 <span class="err">⊢</span> <span class="n">a</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">&lt;</span> <span class="n">a</span>
 </pre></div>
 
+<a name="184829444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/recursion%20fails%20with%20irreducible%20type/near/184829444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62674recursionfailswithirreducibletype.html#184829444">Mario Carneiro (Jan 05 2020 at 02:23)</a>:</h4>
+<p>The problem has nothing to do with the irreducible marking, it's simply that the default dec tac doesn't check the context first as it should. You can fix this by specifying the dec tac to be <code>assumption</code>:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">nat&#39;</span> <span class="o">:=</span> <span class="n">nat</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_lt</span> <span class="n">nat&#39;</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">has_lt</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">decidable_eq</span> <span class="n">nat&#39;</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">decidable_eq</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_sub</span> <span class="n">nat&#39;</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">has_sub</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_one</span> <span class="n">nat&#39;</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">has_one</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="n">nat&#39;</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">has_zero</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_well_founded</span> <span class="n">nat&#39;</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="o">(</span><span class="bp">&lt;</span><span class="o">),</span> <span class="n">sorry</span><span class="bp">⟩</span>
+
+<span class="n">attribute</span> <span class="o">[</span><span class="kn">irreducible</span><span class="o">]</span> <span class="n">nat&#39;</span>
+
+<span class="n">def</span> <span class="n">pred</span> <span class="o">:</span> <span class="n">nat&#39;</span> <span class="bp">→</span> <span class="n">nat&#39;</span> <span class="bp">|</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">0</span>
+<span class="k">then</span> <span class="mi">0</span>
+<span class="k">else</span> <span class="k">have</span> <span class="o">(</span><span class="n">a</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">pred</span> <span class="o">(</span><span class="n">a</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span>
+<span class="n">using_well_founded</span> <span class="o">{</span><span class="n">dec_tac</span> <span class="o">:=</span> <span class="bp">`</span><span class="o">[</span><span class="n">assumption</span><span class="o">]}</span>
+</pre></div>
+
+<a name="184829499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/recursion%20fails%20with%20irreducible%20type/near/184829499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62674recursionfailswithirreducibletype.html#184829499">Bryan Gin-ge Chen (Jan 05 2020 at 02:24)</a>:</h4>
+<p>Presumably this is already on the list of things to fix in whatever comes after 3.5.0c.</p>
+
+<a name="184829512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/recursion%20fails%20with%20irreducible%20type/near/184829512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62674recursionfailswithirreducibletype.html#184829512">Etienne Laurin (Jan 05 2020 at 02:25)</a>:</h4>
+<p>Thanks! I hadn't tried that because Lean says that "The default decreasing tactic uses the 'assumption' tactic"</p>
+
 
 {% endraw %}
 
