@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [`normed_ring` axioms](67174normedringaxioms.html) (9 messages, latest: Jan 05 2020 at 17:56)
+* [`normed_ring` axioms](67174normedringaxioms.html) (10 messages, latest: Jan 05 2020 at 18:09)
 
 * [supr and val](90497suprandval.html) (4 messages, latest: Dec 30 2019 at 09:54)
 
