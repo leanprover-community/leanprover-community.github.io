@@ -9,9 +9,9 @@ permalink: archive/218272FoMMLeanTogether2020/index.html
 
 ### Topics:
 
-* [Leaning together over good food](00462Leaningtogetherovergoodfood.html) (13 messages, latest: Jan 05 2020 at 21:46)
+* [travel and hotel](81662travelandhotel.html) (14 messages, latest: Jan 05 2020 at 22:58)
 
-* [travel and hotel](81662travelandhotel.html) (13 messages, latest: Jan 04 2020 at 16:13)
+* [Leaning together over good food](00462Leaningtogetherovergoodfood.html) (13 messages, latest: Jan 05 2020 at 21:46)
 
 * [Zoom](71430Zoom.html) (1 message, latest: Jan 02 2020 at 02:45)
 
