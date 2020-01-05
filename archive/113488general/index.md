@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [beer reward](66500beerreward.html) (3 messages, latest: Jan 05 2020 at 17:26)
+
 * [zero vector space](12000zerovectorspace.html) (2 messages, latest: Jan 05 2020 at 15:20)
 
 * [Lean vs Coq](64589LeanvsCoq.html) (261 messages, latest: Jan 05 2020 at 03:59)
@@ -34,8 +36,6 @@ permalink: archive/113488general/index.html
 * [What do we know about Lean 4?](05425WhatdoweknowaboutLean4.html) (18 messages, latest: Dec 31 2019 at 15:27)
 
 * [VScode extension](56578VScodeextension.html) (457 messages, latest: Dec 31 2019 at 11:08)
-
-* [beer reward](66500beerreward.html) (2 messages, latest: Dec 30 2019 at 16:15)
 
 * [Beer reward](97796Beerreward.html) (35 messages, latest: Dec 30 2019 at 09:02)
 
