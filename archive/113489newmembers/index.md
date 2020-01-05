@@ -9,13 +9,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [recursion fails with irreducible type](62674recursionfailswithirreducibletype.html) (1 message, latest: Jan 05 2020 at 01:57)
+
+* [Type*](83565Type.html) (8 messages, latest: Jan 05 2020 at 01:42)
+
 * [distributing `or`](74778distributingor.html) (11 messages, latest: Jan 04 2020 at 15:28)
 
 * [Coercions](08998Coercions.html) (5 messages, latest: Jan 03 2020 at 19:34)
 
 * [(no topic)](79918notopic.html) (217 messages, latest: Jan 03 2020 at 19:21)
-
-* [Type*](83565Type.html) (6 messages, latest: Jan 03 2020 at 08:40)
 
 * [failed to prove recursive application is decreasing](86610failedtoproverecursiveapplicationisdecreasing.html) (8 messages, latest: Jan 02 2020 at 12:23)
 

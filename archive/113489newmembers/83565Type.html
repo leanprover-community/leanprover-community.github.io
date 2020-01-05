@@ -36,6 +36,25 @@ permalink: archive/113489newmembers/83565Type.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%2A/near/184718394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83565Type.html#184718394">Chris Hughes (Jan 03 2020 at 08:40)</a>:</h4>
 <p>Yes. <code>Type*</code> is what is used most of the time to avoid having to think about universes.</p>
 
+<a name="184828115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%2A/near/184828115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83565Type.html#184828115">Mukesh Tiwari (Jan 05 2020 at 01:35)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span>  Sorry for disturbing you, but could you please tell me that why the second one is not accepted by Lean? <br>
+This is accepted by Lean:</p>
+<div class="codehilite"><pre><span></span>universe u
+class Associative {G : Type u} (f : G → G → G) : Type u :=
+(Hassoc : ∀ x y z : G, f (f x y) z = f x (f y z))
+</pre></div>
+
+
+<p>But this one not:</p>
+<div class="codehilite"><pre><span></span>class Associative {G : Type _} (f : G → G → G) : Type _ :=
+(Hassoc : ∀ x y z : G, f (f x y) z = f x (f y z))
+</pre></div>
+
+<a name="184828333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%2A/near/184828333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83565Type.html#184828333">Chris Hughes (Jan 05 2020 at 01:42)</a>:</h4>
+<p>I guess I was wrong about <code>Type*</code> being the same as <code>Type _</code>. <code>Type _</code> will probably try to infer from the context what the universe should be - it will fill it in with whatever it is forced to be, and will fail if there's nothing forcing it to be a particular universe. and <code>Type*</code> will fill it in with something sensible basically. I don't know the precise algorithms.</p>
+
 
 {% endraw %}
 
