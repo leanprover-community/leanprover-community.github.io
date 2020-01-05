@@ -1,0 +1,86 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/42753TPIL7103.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/42753TPIL7103.html">TPIL 7.10.3</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="184841084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%207.10.3/near/184841084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42753TPIL7103.html#184841084">Eduardo Cavazos (Jan 05 2020 at 09:18)</a>:</h4>
+<p>From TPIL exercise 7.10.3:</p>
+<blockquote>
+<p>Define an inductive data type consisting of terms built up from the following constructors:</p>
+<ul>
+<li><code>const n</code>, a constant denoting the natural number <code>n</code></li>
+<li><code>var n</code>, a variable, numbered <code>n</code></li>
+<li><code>plus s t</code>, denoting the sum of <code>s</code> and <code>t</code></li>
+<li><code>times s t</code>, denoting the product of <code>s</code> and <code>t</code></li>
+</ul>
+<p>Recursively define a function that evaluates any such term with respect to an assignment of values to the variables.</p>
+</blockquote>
+<p>Handling everything except for the <code>var</code>, here's what I have so far for the inductive data type:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">Expr</span>
+<span class="bp">|</span> <span class="n">const</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">Expr</span>
+<span class="bp">|</span> <span class="n">plus</span>  <span class="o">:</span> <span class="n">Expr</span> <span class="bp">→</span> <span class="n">Expr</span> <span class="bp">→</span> <span class="n">Expr</span>
+<span class="bp">|</span> <span class="n">times</span> <span class="o">:</span> <span class="n">Expr</span> <span class="bp">→</span> <span class="n">Expr</span> <span class="bp">→</span> <span class="n">Expr</span>
+</pre></div>
+
+
+<p>And the function that evaluates these terms:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="kn">eval</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">Expr</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+
+    <span class="n">Expr</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">e</span>
+
+        <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">n</span><span class="o">)</span>
+
+        <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span><span class="o">,</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">d</span><span class="o">)</span>
+
+        <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span><span class="o">,</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">d</span><span class="o">)</span>
+</pre></div>
+
+
+<p>This seems to work OK:</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="n">reduce</span> <span class="kn">eval</span> <span class="o">(</span><span class="n">plus</span> <span class="o">(</span><span class="n">const</span> <span class="mi">2</span><span class="o">)</span> <span class="o">(</span><span class="n">const</span> <span class="mi">3</span><span class="o">))</span> <span class="c1">-- 5</span>
+
+<span class="bp">#</span><span class="n">reduce</span> <span class="kn">eval</span> <span class="o">(</span><span class="n">plus</span> <span class="o">(</span><span class="n">plus</span> <span class="o">(</span><span class="n">const</span> <span class="mi">2</span><span class="o">)</span> <span class="o">(</span><span class="n">const</span> <span class="mi">3</span><span class="o">))</span>   <span class="o">(</span><span class="n">const</span> <span class="mi">4</span><span class="o">))</span>  <span class="c1">-- 9</span>
+
+<span class="bp">#</span><span class="n">reduce</span> <span class="kn">eval</span> <span class="o">(</span><span class="n">times</span> <span class="o">(</span><span class="n">const</span> <span class="mi">2</span><span class="o">)</span> <span class="o">(</span><span class="n">const</span> <span class="mi">3</span><span class="o">))</span>    <span class="c1">-- 6</span>
+
+<span class="bp">#</span><span class="n">reduce</span> <span class="kn">eval</span> <span class="o">(</span><span class="n">times</span>   <span class="o">(</span><span class="n">plus</span> <span class="o">(</span><span class="n">const</span> <span class="mi">2</span><span class="o">)</span> <span class="o">(</span><span class="n">const</span> <span class="mi">3</span><span class="o">))</span>   <span class="o">(</span><span class="n">plus</span> <span class="o">(</span><span class="n">const</span> <span class="mi">4</span><span class="o">)</span> <span class="o">(</span><span class="n">const</span> <span class="mi">5</span><span class="o">)))</span>  <span class="c1">-- 45</span>
+
+<span class="bp">#</span><span class="n">reduce</span> <span class="kn">eval</span> <span class="o">(</span><span class="n">plus</span>   <span class="o">(</span><span class="n">times</span> <span class="o">(</span><span class="n">const</span> <span class="mi">2</span><span class="o">)</span> <span class="o">(</span><span class="n">const</span> <span class="mi">3</span><span class="o">))</span>   <span class="o">(</span><span class="n">times</span> <span class="o">(</span><span class="n">const</span> <span class="mi">4</span><span class="o">)</span> <span class="o">(</span><span class="n">const</span> <span class="mi">5</span><span class="o">)))</span> <span class="c1">-- 26</span>
+</pre></div>
+
+
+<p>It isn't clear what the exercise intends as far is support for <code>var</code> goes, however.</p>
+<p>Can someone give an example of how <code>var</code> would be used as they're intending?</p>
+<p>Thanks!</p>
+
+<a name="184841318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%207.10.3/near/184841318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42753TPIL7103.html#184841318">Kenny Lau (Jan 05 2020 at 09:26)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">Expr</span>
+<span class="bp">|</span> <span class="n">const</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">Expr</span>
+<span class="bp">|</span> <span class="n">var</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">Expr</span>
+<span class="bp">|</span> <span class="n">plus</span>  <span class="o">:</span> <span class="n">Expr</span> <span class="bp">→</span> <span class="n">Expr</span> <span class="bp">→</span> <span class="n">Expr</span>
+<span class="bp">|</span> <span class="n">times</span> <span class="o">:</span> <span class="n">Expr</span> <span class="bp">→</span> <span class="n">Expr</span> <span class="bp">→</span> <span class="n">Expr</span>
+
+<span class="n">def</span> <span class="kn">eval</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">Expr</span><span class="o">)</span> <span class="o">(</span><span class="n">assignment</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="bp">#</span><span class="n">reduce</span> <span class="kn">eval</span> <span class="o">(</span><span class="n">Expr</span><span class="bp">.</span><span class="n">var</span> <span class="mi">2</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span> <span class="c1">-- 3</span>
+</pre></div>
+
+<a name="184841320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%207.10.3/near/184841320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42753TPIL7103.html#184841320">Kenny Lau (Jan 05 2020 at 09:26)</a>:</h4>
+<p>I think</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
