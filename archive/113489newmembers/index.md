@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [recursion fails with irreducible type](62674recursionfailswithirreducibletype.html) (5 messages, latest: Jan 05 2020 at 03:50)
+* [Type*](83565Type.html) (11 messages, latest: Jan 05 2020 at 05:20)
 
-* [Type*](83565Type.html) (10 messages, latest: Jan 05 2020 at 02:19)
+* [recursion fails with irreducible type](62674recursionfailswithirreducibletype.html) (5 messages, latest: Jan 05 2020 at 03:50)
 
 * [distributing `or`](74778distributingor.html) (11 messages, latest: Jan 04 2020 at 15:28)
 
