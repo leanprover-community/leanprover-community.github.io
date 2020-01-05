@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [recursion fails with irreducible type](62674recursionfailswithirreducibletype.html) (4 messages, latest: Jan 05 2020 at 02:25)
+* [recursion fails with irreducible type](62674recursionfailswithirreducibletype.html) (5 messages, latest: Jan 05 2020 at 03:50)
 
 * [Type*](83565Type.html) (10 messages, latest: Jan 05 2020 at 02:19)
 
