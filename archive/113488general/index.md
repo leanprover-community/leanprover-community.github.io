@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Cell Phone Mathematics](39723CellPhoneMathematics.html) (7 messages, latest: Jan 06 2020 at 16:26)
+
 * [typeclass problems](99005typeclassproblems.html) (223 messages, latest: Jan 06 2020 at 15:20)
 
 * [Formal Methods in Mathematics / Lean Together 2020](50962FormalMethodsinMathematicsLeanTogether2020.html) (9 messages, latest: Jan 06 2020 at 14:52)
@@ -18,8 +20,6 @@ permalink: archive/113488general/index.html
 * [bulleting / browers questions](04997bulletingbrowersquestions.html) (5 messages, latest: Jan 06 2020 at 05:21)
 
 * [𝟙 and 𝟭 in VS Code](99821andinVSCode.html) (2 messages, latest: Jan 06 2020 at 05:01)
-
-* [Cell Phone Mathematics](39723CellPhoneMathematics.html) (6 messages, latest: Jan 06 2020 at 02:05)
 
 * [beer reward](66500beerreward.html) (3 messages, latest: Jan 05 2020 at 17:26)
 
