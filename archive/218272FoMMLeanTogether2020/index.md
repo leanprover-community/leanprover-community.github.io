@@ -9,7 +9,7 @@ permalink: archive/218272FoMMLeanTogether2020/index.html
 
 ### Topics:
 
-* [Zoom](71430Zoom.html) (35 messages, latest: Jan 06 2020 at 16:53)
+* [Zoom](71430Zoom.html) (36 messages, latest: Jan 06 2020 at 18:38)
 
 * [New laptop](24955Newlaptop.html) (1 message, latest: Jan 06 2020 at 11:14)
 
