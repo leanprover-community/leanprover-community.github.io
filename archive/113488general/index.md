@@ -9,15 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [linter](19343linter.html) (14 messages, latest: Jan 06 2020 at 22:18)
+
+* [Cell Phone Mathematics](39723CellPhoneMathematics.html) (10 messages, latest: Jan 06 2020 at 22:16)
+
+* [typeclass problems](99005typeclassproblems.html) (238 messages, latest: Jan 06 2020 at 22:12)
+
 * [Cubical Type Theory](02033CubicalTypeTheory.html) (1 message, latest: Jan 06 2020 at 21:53)
 
-* [typeclass problems](99005typeclassproblems.html) (235 messages, latest: Jan 06 2020 at 21:51)
-
-* [Cell Phone Mathematics](39723CellPhoneMathematics.html) (9 messages, latest: Jan 06 2020 at 21:27)
-
 * [Formal Methods in Mathematics / Lean Together 2020](50962FormalMethodsinMathematicsLeanTogether2020.html) (9 messages, latest: Jan 06 2020 at 14:52)
-
-* [linter](19343linter.html) (13 messages, latest: Jan 06 2020 at 14:18)
 
 * [bulleting / browers questions](04997bulletingbrowersquestions.html) (5 messages, latest: Jan 06 2020 at 05:21)
 
