@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [bulleting / browers questions](04997bulletingbrowersquestions.html) (1 message, latest: Jan 06 2020 at 01:56)
+* [bulleting / browers questions](04997bulletingbrowersquestions.html) (4 messages, latest: Jan 06 2020 at 02:48)
 
-* [Cell Phone Mathematics](39723CellPhoneMathematics.html) (5 messages, latest: Jan 06 2020 at 01:49)
+* [Cell Phone Mathematics](39723CellPhoneMathematics.html) (6 messages, latest: Jan 06 2020 at 02:05)
 
 * [beer reward](66500beerreward.html) (3 messages, latest: Jan 05 2020 at 17:26)
 
