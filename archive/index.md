@@ -24,7 +24,7 @@ permalink: archive/index.html
 
 * [IMO-grand-challenge](208328IMOgrandchallenge/index.html) (12 topics)
 
-* [FoMM / Lean Together 2020](218272FoMMLeanTogether2020/index.html) (7 topics)
+* [FoMM / Lean Together 2020](218272FoMMLeanTogether2020/index.html) (8 topics)
 
 * [concrete semantics](187724concretesemantics/index.html) (4 topics)
 
