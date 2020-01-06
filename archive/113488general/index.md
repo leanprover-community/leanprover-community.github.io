@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [typeclass problems](99005typeclassproblems.html) (223 messages, latest: Jan 06 2020 at 15:20)
+
 * [Formal Methods in Mathematics / Lean Together 2020](50962FormalMethodsinMathematicsLeanTogether2020.html) (9 messages, latest: Jan 06 2020 at 14:52)
 
 * [linter](19343linter.html) (13 messages, latest: Jan 06 2020 at 14:18)
-
-* [typeclass problems](99005typeclassproblems.html) (222 messages, latest: Jan 06 2020 at 14:14)
 
 * [bulleting / browers questions](04997bulletingbrowersquestions.html) (5 messages, latest: Jan 06 2020 at 05:21)
 
