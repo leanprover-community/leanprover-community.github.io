@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Cell Phone Mathematics](39723CellPhoneMathematics.html) (8 messages, latest: Jan 06 2020 at 19:51)
+* [typeclass problems](99005typeclassproblems.html) (228 messages, latest: Jan 06 2020 at 20:59)
 
-* [typeclass problems](99005typeclassproblems.html) (224 messages, latest: Jan 06 2020 at 19:39)
+* [Cell Phone Mathematics](39723CellPhoneMathematics.html) (8 messages, latest: Jan 06 2020 at 19:51)
 
 * [Formal Methods in Mathematics / Lean Together 2020](50962FormalMethodsinMathematicsLeanTogether2020.html) (9 messages, latest: Jan 06 2020 at 14:52)
 

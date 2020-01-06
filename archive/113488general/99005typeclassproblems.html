@@ -1303,6 +1303,37 @@ failed is_def_eq
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184938522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184938522">Kevin Buzzard (Jan 06 2020 at 19:39)</a>:</h4>
 <p><code>foo</code> has a real mathematical meaning. An example of <code>foo</code> is the statement that a complex vector space can be considered as a real vector space (of twice the dimension, in this setting).</p>
 
+<a name="184952258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184952258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184952258">Daniel Selsam (Jan 06 2020 at 20:19)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Thanks. What would be a good name for this instance then? Also, I suppose this instance is problematic no matter which direction we solve the subgoals in. If we go right-to-left, we <em>immediately</em> cycle. However, it does seems to work when <code>algebra k A</code> is tried before <code>module A M</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">algebra</span>
+
+<span class="kn">universe</span> <span class="kn">variables</span> <span class="n">u</span> <span class="n">v</span> <span class="n">w</span>
+
+<span class="kn">instance</span> <span class="n">foo</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">}</span>
+  <span class="o">(</span><span class="bp">_</span> <span class="o">:</span> <span class="n">comm_ring</span> <span class="n">k</span><span class="o">)</span> <span class="o">(</span><span class="bp">_</span> <span class="o">:</span> <span class="n">ring</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="bp">_</span> <span class="o">:</span> <span class="n">add_comm_group</span> <span class="n">M</span><span class="o">)</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">k</span> <span class="n">A</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">A</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">module</span> <span class="n">k</span> <span class="n">M</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">sorry</span>
+
+<span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">2000</span><span class="o">]</span> <span class="n">ring</span><span class="bp">.</span><span class="n">to_add_comm_group</span>
+<span class="kn">example</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">}</span>
+  <span class="o">[</span><span class="n">comm_ring</span> <span class="n">k</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">A</span><span class="o">]</span> <span class="o">[</span><span class="n">ring</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">k</span> <span class="n">A</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">A</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">module</span> <span class="n">k</span> <span class="n">M</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- works</span>
+</pre></div>
+
+<a name="184952870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184952870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184952870">Yury G. Kudryashov (Jan 06 2020 at 20:26)</a>:</h4>
+<p>In this particular case a possible solution is to have a tag "don't try this instance if <code>k = A</code>".</p>
+
+<a name="184953437"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184953437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184953437">Johan Commelin (Jan 06 2020 at 20:33)</a>:</h4>
+<p><span class="user-mention" data-user-id="230999">@Daniel Selsam</span> It could be called <code>restrict_scalars</code></p>
+
+<a name="184955772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/184955772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#184955772">Daniel Selsam (Jan 06 2020 at 20:59)</a>:</h4>
+<p>Is there a reasonable "sister" instance that would make it loop even if <code>algebra k A</code> were tried first, before <code>module A M</code>?</p>
+
 
 {% endraw %}
 
