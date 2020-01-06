@@ -70,6 +70,19 @@ permalink: archive/113488general/19343linter.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linter/near/184261744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19343linter.html#184261744">Oliver Nash (Dec 26 2019 at 13:29)</a>:</h4>
 <p>I'm not quite sure exactly what the rule would be, but I wonder if this is the sort of thing we could have the linter warn about?</p>
 
+<a name="184909272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linter/near/184909272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19343linter.html#184909272">Floris van Doorn (Jan 06 2020 at 14:18)</a>:</h4>
+<p>Yes, this is definitely something we can have the linter warn about. I think the rule is<br>
+"There cannot be a local constant in one of the (type-class) hypotheses that does not occur in the conclusion (and cannot be inferred from the type of the local constants in the conclusion)."<br>
+I'm not sure if the parenthetical is necessary.</p>
+<p>There are instances which violate this rule, <code>coe_trans</code> comes to mind:</p>
+<div class="codehilite"><pre><span></span><span class="n">coe_trans</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u₁</span><span class="o">}</span> <span class="o">{</span><span class="n">b</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u₂</span><span class="o">}</span> <span class="o">{</span><span class="n">c</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u₃</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="n">a</span> <span class="n">b</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">has_coe_t</span> <span class="n">b</span> <span class="n">c</span><span class="o">],</span> <span class="n">has_coe_t</span> <span class="n">a</span> <span class="n">c</span>
+</pre></div>
+
+
+<p>However, instances like those do raise issues:<br>
+<a href="#narrow/stream/113488-general/topic/remove.20all.20instances.20with.20variable.20domain" title="#narrow/stream/113488-general/topic/remove.20all.20instances.20with.20variable.20domain">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/remove.20all.20instances.20with.20variable.20domain</a></p>
+
 
 {% endraw %}
 

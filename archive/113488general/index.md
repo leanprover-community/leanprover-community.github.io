@@ -9,7 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [typeclass problems](99005typeclassproblems.html) (221 messages, latest: Jan 06 2020 at 13:38)
+* [Formal Methods in Mathematics / Lean Together 2020](50962FormalMethodsinMathematicsLeanTogether2020.html) (9 messages, latest: Jan 06 2020 at 14:52)
+
+* [linter](19343linter.html) (13 messages, latest: Jan 06 2020 at 14:18)
+
+* [typeclass problems](99005typeclassproblems.html) (222 messages, latest: Jan 06 2020 at 14:14)
 
 * [bulleting / browers questions](04997bulletingbrowersquestions.html) (5 messages, latest: Jan 06 2020 at 05:21)
 
@@ -68,8 +72,6 @@ permalink: archive/113488general/index.html
 * [monotonocity attribute](35815monotonocityattribute.html) (13 messages, latest: Dec 26 2019 at 21:49)
 
 * [Making one step (in top-down,](48569Makingonestepintopdown.html) (13 messages, latest: Dec 26 2019 at 21:32)
-
-* [linter](19343linter.html) (12 messages, latest: Dec 26 2019 at 13:29)
 
 * [highlightjs](69590highlightjs.html) (1 message, latest: Dec 26 2019 at 09:31)
 
@@ -362,8 +364,6 @@ permalink: archive/113488general/index.html
 * [Strong binding power](90950Strongbindingpower.html) (2 messages, latest: Oct 21 2019 at 13:41)
 
 * [nolint doc](59595nolintdoc.html) (2 messages, latest: Oct 20 2019 at 20:42)
-
-* [Formal Methods in Mathematics / Lean Together 2020](50962FormalMethodsinMathematicsLeanTogether2020.html) (3 messages, latest: Oct 20 2019 at 16:43)
 
 * [algebraic closure](74840algebraicclosure.html) (216 messages, latest: Oct 16 2019 at 22:09)
 
