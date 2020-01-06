@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [typeclass problems](99005typeclassproblems.html) (221 messages, latest: Jan 06 2020 at 13:38)
+
 * [bulleting / browers questions](04997bulletingbrowersquestions.html) (5 messages, latest: Jan 06 2020 at 05:21)
 
 * [𝟙 and 𝟭 in VS Code](99821andinVSCode.html) (2 messages, latest: Jan 06 2020 at 05:01)
@@ -72,8 +74,6 @@ permalink: archive/113488general/index.html
 * [highlightjs](69590highlightjs.html) (1 message, latest: Dec 26 2019 at 09:31)
 
 * [How to prove decidability?](00132Howtoprovedecidability.html) (15 messages, latest: Dec 26 2019 at 01:50)
-
-* [typeclass problems](99005typeclassproblems.html) (219 messages, latest: Dec 25 2019 at 06:38)
 
 * [slow proofs](67935slowproofs.html) (17 messages, latest: Dec 24 2019 at 04:08)
 
