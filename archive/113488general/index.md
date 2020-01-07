@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [typeclass problems](99005typeclassproblems.html) (242 messages, latest: Jan 07 2020 at 09:24)
+* [typeclass problems](99005typeclassproblems.html) (243 messages, latest: Jan 07 2020 at 11:51)
 
 * [guides](94498guides.html) (6 messages, latest: Jan 07 2020 at 06:31)
 
