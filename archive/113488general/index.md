@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Cubical Type Theory](02033CubicalTypeTheory.html) (5 messages, latest: Jan 07 2020 at 19:30)
+
 * [Cell Phone Mathematics](39723CellPhoneMathematics.html) (37 messages, latest: Jan 07 2020 at 16:06)
 
 * [Lean vs Coq](64589LeanvsCoq.html) (264 messages, latest: Jan 07 2020 at 14:31)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [guides](94498guides.html) (7 messages, latest: Jan 07 2020 at 14:14)
 
 * [typeclass problems](99005typeclassproblems.html) (256 messages, latest: Jan 07 2020 at 12:42)
-
-* [Cubical Type Theory](02033CubicalTypeTheory.html) (4 messages, latest: Jan 07 2020 at 03:27)
 
 * [linter](19343linter.html) (14 messages, latest: Jan 06 2020 at 22:18)
 
