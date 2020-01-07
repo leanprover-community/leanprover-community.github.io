@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Cell Phone Mathematics](39723CellPhoneMathematics.html) (36 messages, latest: Jan 07 2020 at 15:55)
+* [Cell Phone Mathematics](39723CellPhoneMathematics.html) (37 messages, latest: Jan 07 2020 at 16:06)
 
 * [Lean vs Coq](64589LeanvsCoq.html) (264 messages, latest: Jan 07 2020 at 14:31)
 
