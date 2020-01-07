@@ -9,11 +9,11 @@ permalink: archive/218272FoMMLeanTogether2020/index.html
 
 ### Topics:
 
+* [Zoom](71430Zoom.html) (49 messages, latest: Jan 07 2020 at 14:49)
+
 * [Leaning together over good food](00462Leaningtogetherovergoodfood.html) (14 messages, latest: Jan 06 2020 at 22:58)
 
 * [New laptop](24955Newlaptop.html) (2 messages, latest: Jan 06 2020 at 22:30)
-
-* [Zoom](71430Zoom.html) (41 messages, latest: Jan 06 2020 at 21:46)
 
 * [travel and hotel](81662travelandhotel.html) (16 messages, latest: Jan 06 2020 at 04:23)
 

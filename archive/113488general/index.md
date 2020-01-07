@@ -9,11 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Cell Phone Mathematics](39723CellPhoneMathematics.html) (19 messages, latest: Jan 07 2020 at 13:53)
+* [Cell Phone Mathematics](39723CellPhoneMathematics.html) (32 messages, latest: Jan 07 2020 at 14:52)
+
+* [Lean vs Coq](64589LeanvsCoq.html) (264 messages, latest: Jan 07 2020 at 14:31)
+
+* [guides](94498guides.html) (7 messages, latest: Jan 07 2020 at 14:14)
 
 * [typeclass problems](99005typeclassproblems.html) (256 messages, latest: Jan 07 2020 at 12:42)
-
-* [guides](94498guides.html) (6 messages, latest: Jan 07 2020 at 06:31)
 
 * [Cubical Type Theory](02033CubicalTypeTheory.html) (4 messages, latest: Jan 07 2020 at 03:27)
 
@@ -28,8 +30,6 @@ permalink: archive/113488general/index.html
 * [beer reward](66500beerreward.html) (3 messages, latest: Jan 05 2020 at 17:26)
 
 * [zero vector space](12000zerovectorspace.html) (2 messages, latest: Jan 05 2020 at 15:20)
-
-* [Lean vs Coq](64589LeanvsCoq.html) (261 messages, latest: Jan 05 2020 at 03:59)
 
 * [AI and theorem proving continued](66080AIandtheoremprovingcontinued.html) (11 messages, latest: Jan 04 2020 at 21:29)
 
