@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [guides](94498guides.html) (3 messages, latest: Jan 07 2020 at 04:41)
+
 * [Cell Phone Mathematics](39723CellPhoneMathematics.html) (12 messages, latest: Jan 07 2020 at 03:46)
 
 * [Cubical Type Theory](02033CubicalTypeTheory.html) (4 messages, latest: Jan 07 2020 at 03:27)
