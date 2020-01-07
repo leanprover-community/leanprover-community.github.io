@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Cubical Type Theory](02033CubicalTypeTheory.html) (3 messages, latest: Jan 07 2020 at 02:57)
+
+* [Cell Phone Mathematics](39723CellPhoneMathematics.html) (11 messages, latest: Jan 07 2020 at 02:02)
+
 * [linter](19343linter.html) (14 messages, latest: Jan 06 2020 at 22:18)
 
-* [Cell Phone Mathematics](39723CellPhoneMathematics.html) (10 messages, latest: Jan 06 2020 at 22:16)
-
 * [typeclass problems](99005typeclassproblems.html) (238 messages, latest: Jan 06 2020 at 22:12)
-
-* [Cubical Type Theory](02033CubicalTypeTheory.html) (1 message, latest: Jan 06 2020 at 21:53)
 
 * [Formal Methods in Mathematics / Lean Together 2020](50962FormalMethodsinMathematicsLeanTogether2020.html) (9 messages, latest: Jan 06 2020 at 14:52)
 
