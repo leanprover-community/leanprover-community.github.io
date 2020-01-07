@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [guides](94498guides.html) (5 messages, latest: Jan 07 2020 at 05:52)
+* [guides](94498guides.html) (6 messages, latest: Jan 07 2020 at 06:31)
 
 * [Cell Phone Mathematics](39723CellPhoneMathematics.html) (12 messages, latest: Jan 07 2020 at 03:46)
 
