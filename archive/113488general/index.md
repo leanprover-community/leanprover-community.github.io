@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Cell Phone Mathematics](39723CellPhoneMathematics.html) (14 messages, latest: Jan 07 2020 at 12:58)
+* [Cell Phone Mathematics](39723CellPhoneMathematics.html) (19 messages, latest: Jan 07 2020 at 13:53)
 
 * [typeclass problems](99005typeclassproblems.html) (256 messages, latest: Jan 07 2020 at 12:42)
 
