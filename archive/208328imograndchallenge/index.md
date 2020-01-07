@@ -9,6 +9,8 @@ permalink: archive/208328IMOgrandchallenge/index.html
 
 ### Topics:
 
+* [Extracting an existential witness](57312Extractinganexistentialwitness.html) (1 message, latest: Jan 07 2020 at 20:42)
+
 * [Reading list/sample AI](10546ReadinglistsampleAI.html) (35 messages, latest: Dec 18 2019 at 07:14)
 
 * [general discussion](95555generaldiscussion.html) (72 messages, latest: Oct 25 2019 at 00:33)

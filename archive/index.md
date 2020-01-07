@@ -10,7 +10,7 @@ permalink: archive/index.html
 
 * [general](113488general/index.html) (2284 topics)
 
-* [new members](113489newmembers/index.html) (734 topics)
+* [new members](113489newmembers/index.html) (735 topics)
 
 * [maths](116395maths/index.html) (697 topics)
 
@@ -22,7 +22,7 @@ permalink: archive/index.html
 
 * [kbb](141825kbb/index.html) (13 topics)
 
-* [IMO-grand-challenge](208328IMOgrandchallenge/index.html) (12 topics)
+* [IMO-grand-challenge](208328IMOgrandchallenge/index.html) (13 topics)
 
 * [FoMM / Lean Together 2020](218272FoMMLeanTogether2020/index.html) (8 topics)
 

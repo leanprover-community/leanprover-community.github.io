@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Induction over sigma in filters](94667Inductionoversigmainfilters.html) (1 message, latest: Jan 07 2020 at 20:10)
+
 * [recursion fails with irreducible type](62674recursionfailswithirreducibletype.html) (6 messages, latest: Jan 06 2020 at 16:16)
 
 * [Type*](83565Type.html) (12 messages, latest: Jan 05 2020 at 12:45)

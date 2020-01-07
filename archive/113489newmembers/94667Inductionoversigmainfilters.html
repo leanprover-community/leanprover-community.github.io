@@ -1,0 +1,77 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/94667Inductionoversigmainfilters.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/94667Inductionoversigmainfilters.html">Induction over sigma in filters</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="185049677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction%20over%20sigma%20in%20filters/near/185049677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94667Inductionoversigmainfilters.html#185049677">Aria Miuk (Jan 07 2020 at 20:10)</a>:</h4>
+<p>Hello, could anyone please point me in a good direction wrt. a proof using dependent types - I am not quite used to working with them. It seems to me my approach from non--dependent scenario is completely inapplicable within the realm of dependent types.</p>
+<p>The basic version of the theorem is as follows. (I shall just use Lean for brevity.)</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span>
+<span class="kn">open</span> <span class="n">list</span>
+
+<span class="kn">variables</span>
+    <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span>
+    <span class="o">{</span><span class="n">P</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_pred</span> <span class="n">P</span><span class="o">]</span>
+    <span class="o">{</span><span class="n">Q</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_pred</span> <span class="n">Q</span><span class="o">]</span>
+    <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_pred</span> <span class="n">R</span><span class="o">]</span>
+
+<span class="kn">lemma</span> <span class="n">filter_partition</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">x</span><span class="o">,</span> <span class="bp">¬</span><span class="n">Q</span> <span class="n">x</span> <span class="bp">↔</span> <span class="n">R</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span>
+    <span class="n">length</span> <span class="o">(</span><span class="n">filter</span> <span class="n">P</span> <span class="n">l</span><span class="o">)</span> <span class="bp">=</span> <span class="n">length</span> <span class="o">(</span><span class="n">filter</span> <span class="n">P</span> <span class="o">(</span><span class="n">filter</span> <span class="n">Q</span> <span class="n">l</span><span class="o">))</span> <span class="bp">+</span> <span class="n">length</span> <span class="o">(</span><span class="n">filter</span> <span class="n">P</span> <span class="o">(</span><span class="n">filter</span> <span class="n">R</span> <span class="n">l</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">l</span> <span class="k">with</span> <span class="n">hd</span><span class="o">,</span>
+    <span class="o">{</span><span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">add_zero</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">filter_nil</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">length</span><span class="o">]},</span>
+    <span class="o">{</span>
+      <span class="n">by_cases</span> <span class="n">h₁</span> <span class="o">:</span> <span class="n">R</span> <span class="n">hd</span><span class="o">,</span>
+        <span class="o">{</span>
+          <span class="k">have</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">Q</span> <span class="n">hd</span><span class="o">,</span> <span class="k">from</span> <span class="o">(</span><span class="n">h</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="n">h₁</span><span class="o">,</span>
+          <span class="n">by_cases</span> <span class="n">h₂</span> <span class="o">:</span> <span class="n">P</span> <span class="n">hd</span><span class="bp">;</span> <span class="n">simp</span><span class="bp">*</span><span class="o">,</span>
+        <span class="o">},</span>
+        <span class="o">{</span>
+          <span class="k">have</span> <span class="o">:</span> <span class="n">Q</span> <span class="n">hd</span><span class="o">,</span> <span class="k">from</span> <span class="o">(</span><span class="n">not_iff_comm</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">h</span> <span class="bp">_</span><span class="o">))</span><span class="bp">.</span><span class="mi">1</span> <span class="n">h₁</span><span class="o">,</span>
+          <span class="n">by_cases</span> <span class="n">h₂</span> <span class="o">:</span> <span class="n">P</span> <span class="n">hd</span><span class="bp">;</span> <span class="n">simp</span><span class="bp">*</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I included the proof to show what idea doesn't seem to translate (as far as I can tell) into the following version.</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">filter_partition_dependent</span>
+  <span class="o">{</span><span class="n">P</span> <span class="o">:</span> <span class="o">{</span><span class="n">x</span> <span class="bp">//</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">l</span><span class="o">}</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_pred</span> <span class="n">P</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">x</span><span class="o">,</span> <span class="bp">¬</span><span class="n">Q</span> <span class="n">x</span> <span class="bp">↔</span> <span class="n">R</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">length</span> <span class="o">(</span><span class="n">filter</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="o">{</span><span class="n">x</span> <span class="bp">//</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">l</span><span class="o">}),</span> <span class="n">P</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">attach</span> <span class="n">l</span><span class="o">))</span> <span class="bp">=</span>
+  <span class="n">length</span> <span class="o">(</span><span class="n">filter</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="o">{</span><span class="n">x</span> <span class="bp">//</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">filter</span> <span class="n">Q</span> <span class="n">l</span><span class="o">}),</span> <span class="n">P</span> <span class="bp">⟨</span><span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">mem_of_mem_filter</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span><span class="o">)</span> <span class="o">(</span><span class="n">attach</span> <span class="o">(</span><span class="n">filter</span> <span class="n">Q</span> <span class="n">l</span><span class="o">)))</span> <span class="bp">+</span>
+  <span class="n">length</span> <span class="o">(</span><span class="n">filter</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="o">{</span><span class="n">x</span> <span class="bp">//</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">filter</span> <span class="n">R</span> <span class="n">l</span><span class="o">}),</span> <span class="n">P</span> <span class="bp">⟨</span><span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">mem_of_mem_filter</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span><span class="o">)</span> <span class="o">(</span><span class="n">attach</span> <span class="o">(</span><span class="n">filter</span> <span class="n">R</span> <span class="n">l</span><span class="o">)))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">resetI</span><span class="o">,</span> <span class="n">induction</span> <span class="n">l</span> <span class="k">with</span> <span class="n">hd</span> <span class="n">tl</span> <span class="n">ih</span><span class="o">,</span>
+    <span class="o">{</span><span class="n">simp</span> <span class="o">[</span><span class="n">attach</span><span class="o">]},</span>
+    <span class="o">{</span>
+      <span class="c1">-- ih : ∀ {P : {x // x ∈ tl} → Prop}</span>
+    <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>This version is not much different. I promoted the original <code>P : α → Prop</code> to <code>P : {x // x ∈ l} → Prop</code>,<br>
+which means I had to use <code>attach</code>ed versions of lists. The filtered lists also need a proof that <code>a ∈ filter p l → a ∈ l</code>.</p>
+<p>The problem is that the original proof by induction on <code>l</code> (with <code>hd :: tl</code> in the inductive case) appears to no longer work, because the inductive hypothesis wants <code>P : {x // x ∈ tl} → Prop</code> and I  only have <code>P : {x // x ∈ hd :: tl} → Prop</code>. <br>
+I tried synthesizing one from <code>P</code> but the conclusion still has the original <code>P</code> that also considers the head.<br>
+I can't think of a way to actually successfully use induction here - do I need some filter congruence lemmas?<br>
+These seem to only work in "homogeneous" settings with filtering predicates of equivalent types.</p>
+<p>Could someone please suggest an alternative way to prove this? Or am I missing something here, have I managed to make the theorem false?<br>
+Here's also a link to the web editor which conveniently contains a minimal compilable example - I am not sure how Zulip handles long URLs so I made a pastebin of the link. <a href="https://pastebin.com/raw/grX324K2" target="_blank" title="https://pastebin.com/raw/grX324K2">https://pastebin.com/raw/grX324K2</a></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

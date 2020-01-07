@@ -1,0 +1,24 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/208328IMOgrandchallenge/57312Extractinganexistentialwitness.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/index.html">IMO-grand-challenge</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/57312Extractinganexistentialwitness.html">Extracting an existential witness</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="185052676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/Extracting%20an%20existential%20witness/near/185052676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/57312Extractinganexistentialwitness.html#185052676">Vlad Firoiu (Jan 07 2020 at 20:42)</a>:</h4>
+<p>One of the issues with problems such as "Find the smallest integer N such that p(N)" is that the translation to an existential is too weak; a proof of the existential, even in a constructive logic, might require far too much time to normalize. We want the theorem prover to actually write down the bits that specify the integer, but there is no way to distinguish it from a brute-force program that is proven to terminate and give the right output.</p>
+<p>Here is a slightly unorthodox solution to the problem; unorthodox because it requires interacting with the theorem prover multiple times. First, let's assume that the solution is known to be encodable in K bits. That is, we want to witness a K-bit integer N that satisfies p(N). We begin by querying (perhaps in parallel) the prover with two different propositions: that there exists a K-bit N s.t. p(N) with first bit 0, and the same but with first bit 1. If one of the queries is successful (say the 0-case), we query (twice) again about the second bit, fixing the first bit to be 0. This continues until we've produced all of the bits for the existential.</p>
+<p>Lifting the restriction on K is a bit trickier. In principle there is a reasonable maximum M beyond which even writing M arbitrary bits would go beyond the time limit. We could use a similar querying strategy to binary search for the minimal K in the range [0, M].</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
