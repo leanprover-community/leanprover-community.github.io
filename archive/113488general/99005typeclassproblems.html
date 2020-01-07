@@ -1405,6 +1405,58 @@ failed is_def_eq
 <p>According to the comment in <code>algebra.lean</code>, <code>algebra.comap</code> is a workaround for not being able to use <code>algebra.trans</code>. When you say it is a nightmare, are you saying it is a nightmare for the same reason that <code>algebra.trans</code> would be a nightmare? Can you please give an example of an "ugly" statement that avoids both?  </p>
 <p>Thanks very much.</p>
 
+<a name="185003938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/185003938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#185003938">Johan Commelin (Jan 07 2020 at 12:01)</a>:</h4>
+<p>As far as I understand, the problem that Chris mentions affects both <code>algebra.comap</code> and <code>algebra.trans</code>. Suppose that <code>A → B → C</code> are ring homs. Then <code>C</code> is an algebra over <code>B</code>, and <code>B</code> over <code>A</code>. By transitivity, <code>C</code> is also an algebra over <code>A</code>. But this fixes a particular (i.e., the transitive one) algebra structure for <code>C</code> over <code>A</code>. In practice, if one wants to apply a lemma, (e.g. to <code>ℚ → ℝ → ℂ</code>) then there is another algebra structure floating around which is not defeq to the transitive one.</p>
+
+<a name="185004895"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/185004895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#185004895">Daniel Selsam (Jan 07 2020 at 12:17)</a>:</h4>
+<p>Thanks.</p>
+
+<a name="185005203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/185005203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#185005203">Daniel Selsam (Jan 07 2020 at 12:22)</a>:</h4>
+<p>I have not been able to get the <code>restrict_scalars</code> example to loop when it could have succeeded, once I controlled the subgoal ordering more carefully. So, I am still looking for a more compelling example of no-cycle-support being annoying in Lean3, or for a new cycle that you will want to introduce in Lean4.</p>
+
+<a name="185005809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/185005809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#185005809">Johan Commelin (Jan 07 2020 at 12:31)</a>:</h4>
+<p><a href="https://cloud.commelin.net/s/C8PrCLoxe7995Nk" target="_blank" title="https://cloud.commelin.net/s/C8PrCLoxe7995Nk">https://cloud.commelin.net/s/C8PrCLoxe7995Nk</a> is a picture of a type class graph that algebraic geometers have in their head, and use all the time.</p>
+
+<a name="185005837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/185005837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#185005837">Johan Commelin (Jan 07 2020 at 12:31)</a>:</h4>
+<p><span class="user-mention" data-user-id="230999">@Daniel Selsam</span> We currently cannot state this graph yet, because we haven't built enough algebraic geometry yet.</p>
+
+<a name="185005901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/185005901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#185005901">Johan Commelin (Jan 07 2020 at 12:32)</a>:</h4>
+<p>But all the info in this graph is used <em>implicitly</em> on almost every page of algebraic geometry (after introductory lecture notes)</p>
+
+<a name="185006036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/185006036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#185006036">Johan Commelin (Jan 07 2020 at 12:34)</a>:</h4>
+<p>So, this is not really a Lean 3 example. But being able to support dependencies like those in this graph would be really cool. As far as I understand, Lean 3 wouldn't be able to do that.</p>
+
+<a name="185006304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/185006304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#185006304">Daniel Selsam (Jan 07 2020 at 12:38)</a>:</h4>
+<p>Interesting, thank you. What is the difference between the dotted edges, the regular edges, and the dark edges?</p>
+
+<a name="185006332"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/185006332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#185006332">Johan Commelin (Jan 07 2020 at 12:39)</a>:</h4>
+<p>The bold edges seem to "merge" two dependencies</p>
+
+<a name="185006365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/185006365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#185006365">Johan Commelin (Jan 07 2020 at 12:39)</a>:</h4>
+<p>The dotted edges are considered "trivial" (either because the definition <code>extends</code> the other) or because, well... it's trivial (i.e., doesn't require proof in Hartshorne – one of the main introductory texts in AG).</p>
+
+<a name="185006441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/185006441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#185006441">Johan Commelin (Jan 07 2020 at 12:40)</a>:</h4>
+<p>I found this graph on the wall of my office, when I arrived here in Freiburg. I think it's from an appendix in a book on AG by Goertz and Wedhorn.</p>
+
+<a name="185006450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/185006450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#185006450">Johan Commelin (Jan 07 2020 at 12:40)</a>:</h4>
+<p>I left it on the wall <span aria-label="grinning face with smiling eyes" class="emoji emoji-1f601" role="img" title="grinning face with smiling eyes">:grinning_face_with_smiling_eyes:</span></p>
+
+<a name="185006545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/185006545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#185006545">Daniel Selsam (Jan 07 2020 at 12:42)</a>:</h4>
+<p>Thanks.</p>
+
 
 {% endraw %}
 

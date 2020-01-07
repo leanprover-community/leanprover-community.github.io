@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [typeclass problems](99005typeclassproblems.html) (243 messages, latest: Jan 07 2020 at 11:51)
+* [Cell Phone Mathematics](39723CellPhoneMathematics.html) (14 messages, latest: Jan 07 2020 at 12:58)
+
+* [typeclass problems](99005typeclassproblems.html) (256 messages, latest: Jan 07 2020 at 12:42)
 
 * [guides](94498guides.html) (6 messages, latest: Jan 07 2020 at 06:31)
-
-* [Cell Phone Mathematics](39723CellPhoneMathematics.html) (12 messages, latest: Jan 07 2020 at 03:46)
 
 * [Cubical Type Theory](02033CubicalTypeTheory.html) (4 messages, latest: Jan 07 2020 at 03:27)
 
