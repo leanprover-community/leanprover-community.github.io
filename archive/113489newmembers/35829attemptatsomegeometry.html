@@ -86,6 +86,30 @@ end
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185128876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185128876">Johan Commelin (Jan 08 2020 at 16:18)</a>:</h4>
 <p>Another remark: usually it's better to not use <code>\and</code> in assumptions, but to just state the clauses as separate assumptions. That makes it easier to use the lemma/axiom</p>
 
+<a name="185135377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185135377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185135377">Matt Earnshaw (Jan 08 2020 at 17:22)</a>:</h4>
+<p>thanks both, this is very helpful already. now I am trying to make headway on the symmetry part of the equivalence relation proof.  It seem necessary to introduce the converse <code>constant parallel_implies_eq_or_no_common_pt (l₁ l₂ : Ln) : parallel l₁ l₂ → (l₁ = l₂ ∨ ¬∃ p : Pt, belongs p l₁ ∧ belongs p l₂)</code> (which finally <em>defines</em> parallel). then</p>
+<div class="codehilite"><pre><span></span>lemma symmetric_parallel : symmetric parallel :=
+begin
+  intros l₁ l₂ h,
+  have x := (parallel_implies_eq_or_no_common_pt l₁ l₂) h,
+  cases x,
+  rw x,
+  apply line_parallel_to_itself,
+end
+</pre></div>
+
+
+<p>with context</p>
+<div class="codehilite"><pre><span></span>l₁ l₂ : Ln,
+h : parallel l₁ l₂,
+x : ¬∃ (p : Pt), belongs p l₁ ∧ belongs p l₂
+⊢ parallel l₂ l₁
+</pre></div>
+
+
+<p>now what I <em>want</em> to do is use <code>and.symm</code> to swap the terms in <code>x</code>, but am stuck there.</p>
+
 
 {% endraw %}
 
