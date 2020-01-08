@@ -1,0 +1,92 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/35829attemptatsomegeometry.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html">attempt at some geometry</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="185127850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185127850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185127850">Matt Earnshaw (Jan 08 2020 at 16:08)</a>:</h4>
+<p>as an exercise I wanted to try proving some theorems from Artin's <em>Geometric Algebra</em>, but I quickly hit a wall -- maybe due to being weak on the basics, maybe due to infelicitous transcription of the axioms. here is what I have so far, but as you can see I did not make much progress on the first lemma, just unsure how to proceed! apologies for the very vague 'question' but any tips or pointers would be appreciated.</p>
+<div class="codehilite"><pre><span></span>-- constants of types subsume the usual statement of a theory&#39;s signature and axioms
+constants Pt Ln : Sort
+constant belongs : Pt → Ln → Prop
+constant parallel : Ln → Ln → Prop
+
+-- Artin def 2.1: can and ought we to formulate this as a term of type parallel l₁ l₂? this should be a definition not an axiom - is &#39;constant&#39; appropriate?
+constant eq_or_no_common_pt_implies_parallel (l₁ l₂ : Ln) : (l₁ = l₂ ∨ ¬∃ p : Pt, belongs p l₁ ∧ belongs p l₂) → parallel l₁ l₂
+
+-- Artin axiom 1: distinct points determine unique line
+constant unique_ln_bw_two_pts (p₁ p₂ : Pt) : (p₁ ≠ p₂) → ∃ p₁p₂ : Ln, belongs p₁ p₁p₂ ∧ belongs p₂ p₁p₂ ∧ (∀ l : Ln, belongs p₁ l ∧ belongs p₂ l → p₁p₂ = l)
+-- Artin axiom 2: exists unique parallel
+constant exists_parallel (p : Pt) (l : Ln) : (∃ l₁ : Ln, parallel l l₁ ∧ belongs p l₁)
+constant unique_parallel (p : Pt) (l l₁ l₂ : Ln) : (parallel l l₁ ∧ parallel l l₂ ∧ belongs p l₁ ∧ belongs p l₁) → l₁ = l₂
+
+lemma line_parallel_to_itself (l : Ln) : reflexive parallel :=
+begin
+  have h₁ := eq_or_no_common_pt_implies_parallel l l,
+  have h₂ := eq.refl l,
+  sorry
+end
+
+theorem parallel_is_equivalence : equivalence parallel :=
+begin
+  -- split,
+  -- exact line_parallel_to_itself,
+end
+</pre></div>
+
+<a name="185128089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185128089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185128089">Kevin Buzzard (Jan 08 2020 at 16:10)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">line_parallel_to_itself</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">Ln</span><span class="o">)</span> <span class="o">:</span> <span class="n">reflexive</span> <span class="n">parallel</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">l</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">eq_or_no_common_pt_implies_parallel</span><span class="o">,</span>
+  <span class="n">left</span><span class="o">,</span>
+  <span class="n">refl</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="185128158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185128158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185128158">Johan Commelin (Jan 08 2020 at 16:11)</a>:</h4>
+<p><span class="user-mention" data-user-id="247064">@Matt Earnshaw</span> In general people tend to avoid <code>constant</code> completely, except for little demo purposes.</p>
+
+<a name="185128171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185128171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185128171">Kevin Buzzard (Jan 08 2020 at 16:11)</a>:</h4>
+<p>[note that I have proved it like a computer scientist -- I wrote the proof backwards]</p>
+
+<a name="185128333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185128333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185128333">Johan Commelin (Jan 08 2020 at 16:12)</a>:</h4>
+<p>But for testing things out, it's fine. And in that cases your "axioms" should also be encoded as <code>constant</code>s</p>
+
+<a name="185128416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185128416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185128416">Johan Commelin (Jan 08 2020 at 16:14)</a>:</h4>
+<p>A different option would be to turn all your <code>constant</code>s into <code>variable</code>s, and maybe make some of them <em>implicit</em> (using <code>{}</code>)</p>
+
+<a name="185128520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185128520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185128520">Johan Commelin (Jan 08 2020 at 16:14)</a>:</h4>
+<p>In the end, if you move away from <code>constant</code>, your best bet would be to bundle all your data and axioms into a <code>structure</code></p>
+
+<a name="185128684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185128684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185128684">Johan Commelin (Jan 08 2020 at 16:16)</a>:</h4>
+<p><span class="user-mention" data-user-id="247064">@Matt Earnshaw</span> You have a typo in the <code>unique_parallel</code> axiom. You ask that <code>l1</code> is parallel to <code>l</code> twice.</p>
+
+<a name="185128712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185128712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185128712">Johan Commelin (Jan 08 2020 at 16:16)</a>:</h4>
+<p>Also, can't you just ask that <code>l1</code> is parallel to <code>l2</code>, and leave <code>l</code> completely out of the picture?</p>
+
+<a name="185128876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185128876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185128876">Johan Commelin (Jan 08 2020 at 16:18)</a>:</h4>
+<p>Another remark: usually it's better to not use <code>\and</code> in assumptions, but to just state the clauses as separate assumptions. That makes it easier to use the lemma/axiom</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

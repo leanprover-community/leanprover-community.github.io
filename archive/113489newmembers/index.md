@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [attempt at some geometry](35829attemptatsomegeometry.html) (10 messages, latest: Jan 08 2020 at 16:18)
+
 * [basics](17142basics.html) (34 messages, latest: Jan 08 2020 at 08:24)
 
 * [Induction over sigma in filters](94667Inductionoversigmainfilters.html) (12 messages, latest: Jan 08 2020 at 00:40)
