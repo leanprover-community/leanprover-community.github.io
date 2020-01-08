@@ -76,6 +76,100 @@ permalink: archive/113489newmembers/17142basics.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/185067013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#185067013">Aria Miuk (Jan 07 2020 at 23:42)</a>:</h4>
 <p>Can you prove either of these? What happens if you attempt?</p>
 
+<a name="185069953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/185069953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#185069953">Iocta (Jan 08 2020 at 00:31)</a>:</h4>
+<p>I want to do something like <code>or.elim hp</code>, but I can't figure out how to make <code>hp</code>. </p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">↔</span> <span class="bp">¬</span><span class="n">p</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">c</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">hp</span><span class="o">:</span> <span class="n">p</span><span class="o">,</span> <span class="k">from</span> <span class="bp">_</span><span class="o">,</span>
+<span class="k">show</span> <span class="n">false</span><span class="o">,</span> <span class="k">from</span> <span class="bp">_</span>
+</pre></div>
+
+<a name="185070165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/185070165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#185070165">Iocta (Jan 08 2020 at 00:35)</a>:</h4>
+<p>If hp then hnp, and absurd hp hnp. And vice versa. But how do I state either of those hypotheses?</p>
+
+<a name="185070268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/185070268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#185070268">Aria Miuk (Jan 08 2020 at 00:37)</a>:</h4>
+<p>So you need to prove <code>p</code>. Surely your only hypothesis is <code>c</code>. Let's use it. <code>c.2</code> gives us <code>not p -&gt; p</code>, we apply it to get the conclusion <code>not p</code>. So far so good?</p>
+
+<a name="185070320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/185070320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#185070320">Bryan Gin-ge Chen (Jan 08 2020 at 00:38)</a>:</h4>
+<p>Here's another transcript of my thoughts as I work through the start of this one "automatically" (in the style of <a href="#narrow/stream/113489-new-members/topic/.60or.60.20implication/near/184439048" title="#narrow/stream/113489-new-members/topic/.60or.60.20implication/near/184439048">this previous post</a>). </p>
+<p>We start out with a single underscore and let Lean tell us what's missing:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- (1)</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">↔</span> <span class="bp">¬</span><span class="n">p</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">_</span>
+<span class="c">/-</span><span class="cm"> p : Prop</span>
+<span class="cm">⊢ ¬(p ↔ ¬p) -/</span>
+</pre></div>
+
+
+<p>Here and below, I'll just quote the part of the error message(s) that shows the hypotheses in the context and the goal. Since <code>¬(p ↔ ¬p)</code> is the same as <code>(p ↔ ¬p) → false</code>, which is a function type, we should be able to make progress by introducing a lambda:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- (2a)</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">↔</span> <span class="bp">¬</span><span class="n">p</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="bp">_</span>
+<span class="c">/-</span><span class="cm"> p : Prop,</span>
+<span class="cm">h : p ↔ ¬p</span>
+<span class="cm">⊢ false -/</span>
+</pre></div>
+
+
+<p>Note that <code>p ↔ ¬p</code> is the same as <code>(p → ¬p) ∧ (¬p → p)</code> so we could proceed by using <code>h.1</code> and <code>h.2</code>. However, I'll redo this step by making use of Lean's pattern-matching syntax to split <code>h</code> into two hypotheses:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- (2b)</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">↔</span> <span class="bp">¬</span><span class="n">p</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="bp">⟨</span><span class="n">h1</span><span class="o">,</span> <span class="n">h2</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">_</span>
+<span class="c">/-</span><span class="cm"> p : Prop,</span>
+<span class="cm">_x : p ↔ ¬p,</span>
+<span class="cm">_fun_match : (p ↔ ¬p) → false,</span>
+<span class="cm">h1 : p → ¬p,</span>
+<span class="cm">h2 : ¬p → p</span>
+<span class="cm">⊢ false -/</span>
+</pre></div>
+
+
+<p>Aside from <code>h1</code> and <code>h2</code> there's some other junk in the context related to the pattern-matching; I won't show it again below. Now, how do we make progress towards the goal of <code>false</code>? Now we realize that <code>h1 : p → ¬p</code> is short for <code>h1 : p → p → false</code>. Since passing two parameters to <code>h1</code> will yield <code>false</code>, we should try replacing the underscore with <code>h1 _ _</code>:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- (3)</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">↔</span> <span class="bp">¬</span><span class="n">p</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="bp">⟨</span><span class="n">h1</span><span class="o">,</span> <span class="n">h2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">h1</span> <span class="bp">_</span> <span class="bp">_</span>
+<span class="c">/-</span><span class="cm"> h1 : p → ¬p,</span>
+<span class="cm">h2 : ¬p → p</span>
+<span class="cm">⊢ p -/</span>
+<span class="c">/-</span><span class="cm"> h1 : p → ¬p,</span>
+<span class="cm">h2 : ¬p → p</span>
+<span class="cm">⊢ p -/</span>
+</pre></div>
+
+
+<p>There are now two error messages because there are two underscores. Since I'm only intending to show a few more steps, from here on out I'm only going to show the error message corresponding to the first underscore. How do we make progress towards <code>p</code> there? Well, note that <code>h2 : ¬p → p</code> is a function which takes one parameter and returns <code>p</code>, so let's replace the underscore with <code>h2 _</code>:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- (4)</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">↔</span> <span class="bp">¬</span><span class="n">p</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="bp">⟨</span><span class="n">h1</span><span class="o">,</span> <span class="n">h2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">h1</span> <span class="o">(</span><span class="n">h2</span> <span class="bp">_</span><span class="o">)</span> <span class="bp">_</span>
+<span class="c">/-</span><span class="cm"> h1 : p → ¬p,</span>
+<span class="cm">h2 : ¬p → p</span>
+<span class="cm">⊢ ¬p -/</span>
+</pre></div>
+
+
+<p>Hey, here's the goal of <code>¬p</code> we hinted at! Now what? Well, naïvely, we might apply <code>h1</code> again, since it ends in <code>¬p</code>. However, if you try this, you'll see that continuing this way won't work (try it, what happens?). What should we do instead? Well, if we instead observe that <code>¬p</code> is the same as <code>p → false</code>, we can alternatively introduce another lambda here:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- (5)</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">↔</span> <span class="bp">¬</span><span class="n">p</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="bp">⟨</span><span class="n">h1</span><span class="o">,</span> <span class="n">h2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">h1</span> <span class="o">(</span><span class="n">h2</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h3</span><span class="o">,</span> <span class="bp">_</span><span class="o">))</span> <span class="bp">_</span>
+<span class="c">/-</span><span class="cm"> h1 : p → ¬p,</span>
+<span class="cm">h2 : ¬p → p,</span>
+<span class="cm">h3 : p</span>
+<span class="cm">⊢ false -/</span>
+</pre></div>
+
+
+<p>Now we have <code>p</code> in the context, as desired! I'll leave the rest to you, but one final hint. Our goal is <code>false</code> again. Last time we saw this (step (3)), we replaced the underscore with <code>h1 _ _</code>. You should try doing this again. You'll end up in a state with 3 underscores / errors, but there's now something in the context which will let you close two of them right away...</p>
+<p>You can fill in the last underscore very similarly.</p>
+<p>When you get to the end, you'll notice that in blindly "chasing underscores" we end up with quite a bit of duplication. We could have avoided this by naming some terms with <code>have</code> statements, and it's worth refactoring the proof along those lines. Then you might start again from scratch and try to write a version of the proof with the <code>have</code> statements from the beginning.</p>
+
+<a name="185071145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/185071145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#185071145">Iocta (Jan 08 2020 at 00:52)</a>:</h4>
+<p>I'll meditate on this. Thanks.</p>
+
 
 {% endraw %}
 
