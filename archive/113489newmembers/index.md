@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [attempt at some geometry](35829attemptatsomegeometry.html) (11 messages, latest: Jan 08 2020 at 17:22)
+* [attempt at some geometry](35829attemptatsomegeometry.html) (12 messages, latest: Jan 08 2020 at 18:41)
 
 * [basics](17142basics.html) (34 messages, latest: Jan 08 2020 at 08:24)
 
