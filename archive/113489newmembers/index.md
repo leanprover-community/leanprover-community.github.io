@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [basics](17142basics.html) (26 messages, latest: Jan 08 2020 at 03:27)
+* [basics](17142basics.html) (27 messages, latest: Jan 08 2020 at 04:17)
 
 * [Induction over sigma in filters](94667Inductionoversigmainfilters.html) (12 messages, latest: Jan 08 2020 at 00:40)
 
