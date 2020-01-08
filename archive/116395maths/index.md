@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [`is_bounded_linear_map`](07028isboundedlinearmap.html) (9 messages, latest: Jan 08 2020 at 02:55)
+
 * [Normed algebras](23015Normedalgebras.html) (1 message, latest: Jan 08 2020 at 01:45)
 
 * [Linear algebra question](95554Linearalgebraquestion.html) (4 messages, latest: Jan 07 2020 at 02:10)
