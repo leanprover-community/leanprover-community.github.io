@@ -253,6 +253,88 @@ end
 
 <p>doesn't work. So I really don't get why your version does work. Maybe something with the existential, but it's still weird</p>
 
+<a name="185150966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185150966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185150966">Johan Commelin (Jan 08 2020 at 20:01)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">parallel_trans</span> <span class="o">:</span> <span class="n">transitive</span> <span class="n">parallel</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rintros</span> <span class="n">l₁</span> <span class="n">l₂</span> <span class="n">l₃</span> <span class="o">(</span><span class="n">rfl</span><span class="bp">|</span><span class="n">h₁₂</span><span class="o">)</span> <span class="o">(</span><span class="n">rfl</span><span class="bp">|</span><span class="n">h₂₃</span><span class="o">),</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">parallel_refl</span> <span class="bp">_</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">right</span><span class="o">,</span> <span class="n">assumption</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">right</span><span class="o">,</span> <span class="n">assumption</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">by_cases</span> <span class="n">h₁₃</span> <span class="o">:</span> <span class="n">l₁</span> <span class="bp">=</span> <span class="n">l₃</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">subst</span> <span class="n">h₁₃</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="n">parallel_refl</span> <span class="bp">_</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">right</span><span class="o">,</span>
+      <span class="n">contrapose</span><span class="bp">!</span> <span class="n">h₁₃</span><span class="o">,</span>
+      <span class="n">rcases</span> <span class="n">h₁₃</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">p</span><span class="o">,</span> <span class="n">hp₁</span><span class="o">,</span> <span class="n">hp₂</span><span class="bp">⟩</span><span class="o">,</span>
+      <span class="n">apply</span> <span class="n">unique_parallel</span> <span class="n">p</span> <span class="n">l₂</span><span class="o">,</span>
+      <span class="n">all_goals</span>
+      <span class="o">{</span> <span class="n">try</span> <span class="o">{</span><span class="n">right</span><span class="o">},</span> <span class="n">assumption</span> <span class="o">}</span> <span class="o">}</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>The last line of the proof abuses the weird behaviour that I don't understand</p>
+
+<a name="185152739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185152739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185152739">Johan Commelin (Jan 08 2020 at 20:21)</a>:</h4>
+<blockquote>
+<p>that gives me <code>contrapose only applies to nondependent arrows between decidable props</code>, though I am satisfied with the following (but still good to see alternatives)</p>
+</blockquote>
+<p>lemma parallel_symmetric : symmetric parallel :=<br>
+begin<br>
+  intros l₁ l₂ h,<br>
+  cases h,<br>
+  { rw h,<br>
+    left,<br>
+    refl },<br>
+  { right,<br>
+    exact h },<br>
+end</p>
+<div class="codehilite"><pre><span></span>
+</pre></div>
+
+
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Do you understand what's going on?</p>
+
+<a name="185153554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185153554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185153554">Mario Carneiro (Jan 08 2020 at 20:31)</a>:</h4>
+<p>oh wow, that was a real wtf</p>
+
+<a name="185153582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185153582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185153582">Mario Carneiro (Jan 08 2020 at 20:31)</a>:</h4>
+<p>the problem is</p>
+<div class="codehilite"><pre><span></span><span class="kn">constants</span> <span class="n">Pt</span> <span class="n">Ln</span> <span class="o">:</span> <span class="n">Sort</span>
+</pre></div>
+
+<a name="185153595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185153595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185153595">Mario Carneiro (Jan 08 2020 at 20:31)</a>:</h4>
+<p><code>Sort = Prop</code></p>
+
+<a name="185153674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185153674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185153674">Mario Carneiro (Jan 08 2020 at 20:32)</a>:</h4>
+<p>therefore <code>l₁</code> and <code>l₂</code> are two proofs of the proposition <code>Ln</code> and are hence equal by proof irrelevance</p>
+
+<a name="185153876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185153876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185153876">Bryan Gin-ge Chen (Jan 08 2020 at 20:34)</a>:</h4>
+<p>Wow, indeed <code>#check Pt</code> gives <code>Pt : Prop</code>.</p>
+
+<a name="185154571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185154571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185154571">Johan Commelin (Jan 08 2020 at 20:42)</a>:</h4>
+<p>Aha, that's sneaky</p>
+
+<a name="185154767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185154767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185154767">Johan Commelin (Jan 08 2020 at 20:45)</a>:</h4>
+<p><span class="user-mention" data-user-id="247064">@Matt Earnshaw</span> The solution is to change <code>Sort</code> into <code>Type</code></p>
+
+<a name="185155905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185155905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185155905">Kevin Buzzard (Jan 08 2020 at 20:57)</a>:</h4>
+<p>Or presumably a change to <code>Sort u</code> would also solve this.</p>
+
+<a name="185156128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185156128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185156128">Mario Carneiro (Jan 08 2020 at 20:59)</a>:</h4>
+<p>I would suggest <code>Type u</code> instead</p>
+
 
 {% endraw %}
 
