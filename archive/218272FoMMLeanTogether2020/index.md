@@ -9,9 +9,9 @@ permalink: archive/218272FoMMLeanTogether2020/index.html
 
 ### Topics:
 
-* [Dinner](11009Dinner.html) (1 message, latest: Jan 08 2020 at 14:56)
+* [Zoom](71430Zoom.html) (59 messages, latest: Jan 08 2020 at 15:54)
 
-* [Zoom](71430Zoom.html) (57 messages, latest: Jan 08 2020 at 14:48)
+* [Dinner](11009Dinner.html) (6 messages, latest: Jan 08 2020 at 15:29)
 
 * [Leaning together over good food](00462Leaningtogetherovergoodfood.html) (14 messages, latest: Jan 06 2020 at 22:58)
 
