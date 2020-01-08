@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Normed algebras](23015Normedalgebras.html) (1 message, latest: Jan 08 2020 at 01:45)
+
 * [Linear algebra question](95554Linearalgebraquestion.html) (4 messages, latest: Jan 07 2020 at 02:10)
 
 * [integer multiplication well-defined](55853integermultiplicationwelldefined.html) (5 messages, latest: Jan 06 2020 at 04:58)
