@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Cell Phone Mathematics](39723CellPhoneMathematics.html) (41 messages, latest: Jan 09 2020 at 08:58)
+* [Cell Phone Mathematics](39723CellPhoneMathematics.html) (42 messages, latest: Jan 09 2020 at 09:02)
 
 * [Cubical Type Theory](02033CubicalTypeTheory.html) (6 messages, latest: Jan 07 2020 at 21:36)
 
