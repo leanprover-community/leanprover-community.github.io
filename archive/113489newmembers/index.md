@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1609 messages, latest: Jan 08 2020 at 23:59)
+
 * [attempt at some geometry](35829attemptatsomegeometry.html) (41 messages, latest: Jan 08 2020 at 21:48)
 
 * [basics](17142basics.html) (34 messages, latest: Jan 08 2020 at 08:24)
@@ -34,8 +36,6 @@ permalink: archive/113489newmembers/index.html
 * [Invalid Constructor](30830InvalidConstructor.html) (67 messages, latest: Jan 01 2020 at 13:14)
 
 * [Unexpected behavior of norm_cast and simp](55277Unexpectedbehaviorofnormcastandsimp.html) (16 messages, latest: Dec 31 2019 at 15:30)
-
-* [noob question(s)](52075noobquestions.html) (1603 messages, latest: Dec 30 2019 at 18:49)
 
 * [Making inductive type instance of has_repr type class](68443Makinginductivetypeinstanceofhasreprtypeclass.html) (9 messages, latest: Dec 30 2019 at 03:34)
 

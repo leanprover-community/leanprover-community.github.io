@@ -9046,6 +9046,42 @@ Command exited with non-zero status 1
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/184491982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#184491982">Johan Commelin (Dec 30 2019 at 18:49)</a>:</h4>
 <p>I you have some expression of the form <code>x = a</code>, then the <code>rfl</code> pattern works as if you just wrote <code>h</code>, and followed the <code>rcases</code>/<code>rintro</code> with a <code>subst h</code>.</p>
 
+<a name="185168184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/185168184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#185168184">Greg Langmead (Jan 08 2020 at 23:15)</a>:</h4>
+<p>Any tips on defining the unit sphere in Euclidean space? I'm using <span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> 's definition <code>def euclidean_space (n : ℕ) : Type := (fin n → ℝ)</code> and can't figure out how to form the summation of the squares <code>def unit_sphere (n : ℕ) := { x : euclidean_space n // ...}</code></p>
+
+<a name="185168392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/185168392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#185168392">Kevin Buzzard (Jan 08 2020 at 23:18)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="n">def</span> <span class="n">euclidean_space</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">unit_sphere</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">x</span> <span class="o">:</span> <span class="n">euclidean_space</span> <span class="n">n</span> <span class="bp">//</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum</span> <span class="n">finset</span><span class="bp">.</span><span class="n">univ</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span> <span class="n">i</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">}</span>
+</pre></div>
+
+<a name="185168426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/185168426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#185168426">Kevin Buzzard (Jan 08 2020 at 23:19)</a>:</h4>
+<p>Maybe <code>def unit_sphere (n : ℕ) := { x : euclidean_space n // finset.univ.sum (λ i, (x i) ^ 2) = 1}</code> is a bit nicer.</p>
+
+<a name="185168551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/185168551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#185168551">Kevin Buzzard (Jan 08 2020 at 23:22)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">finset</span><span class="bp">.</span><span class="n">sum</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">finset.sum : Π {α : Type u_1} {β : Type u_2} [_inst_1 : add_comm_monoid β], finset α → (α → β) → β</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p><code>finset.sum</code> eats a finite subset of alpha, and a function from alpha to a commutative monoid beta, and spits out the sum of this function over the given finite subset of alpha.</p>
+
+<a name="185168826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/185168826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#185168826">Kevin Buzzard (Jan 08 2020 at 23:26)</a>:</h4>
+<p><code>finset.univ</code> is all of the set alpha (which Lean figures out must be <code>fin n</code> by "unification"), and Lean also figures out that alpha is a finite type (by "type class inference")</p>
+
+<a name="185170969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/185170969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#185170969">Nicholas Talin (Jan 08 2020 at 23:59)</a>:</h4>
+<p>What would be the best introductory book on analysis if I wanted to use Lean to formalize its statements and solve exercises along the way?</p>
+
 
 {% endraw %}
 
