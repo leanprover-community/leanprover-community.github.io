@@ -852,6 +852,30 @@ end</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185218793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185218793">Johan Commelin (Jan 09 2020 at 14:55)</a>:</h4>
 <p>Because I <code>open parallel</code>, I can just write <code>refl</code> instead of <code>parallel.refl</code> in the proof.</p>
 
+<a name="185226097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185226097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185226097">Matt Earnshaw (Jan 09 2020 at 16:05)</a>:</h4>
+<p>thanks. that starts to look a bit inelegant but i won't worry about it at this stage. trying to push on with Theorem 2.2 concerning pencils of parallel lines. as a test I tried the following:</p>
+<div class="codehilite"><pre><span></span>def pencil (l : Ω.Ln) := {m : Ω.Ln | l ∥ m}
+
+lemma pencil_of_line_contains_line (l : Ω.Ln) : l ∈ pencil l := parallel.refl
+</pre></div>
+
+
+<p>which works, but I don't really understand how lean figures out that <code>parallel.refl</code> is a term of <code>l ∈ pencil l</code> ?</p>
+
+<a name="185226841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185226841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185226841">Bryan Gin-ge Chen (Jan 09 2020 at 16:12)</a>:</h4>
+<p><code>set Ln</code> is the type of predicates on <code>Ln</code>, i.e. functions from <code>Ln</code> to <code>Prop</code>. In particular <code>x ∈ { y | P }</code> means the same thing as <code>P x</code>. Thus <code>l ∈ pencil l</code> translates to <code>l ∥ l</code>.</p>
+<p>(edit: I thought there was some discussion of this in TPiL or Logic &amp; Proof but I didn't see any. However, the start of <a href="https://github.com/leanprover-community/lean/blob/master/library/init/data/set.lean" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/library/init/data/set.lean">init.logic</a> is fairly readable.)</p>
+
+<a name="185227288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185227288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185227288">Johan Commelin (Jan 09 2020 at 16:16)</a>:</h4>
+<p><span class="user-mention" data-user-id="247064">@Matt Earnshaw</span> I should note that <code>equivalence</code> isn't used that much in mathlib. On the other hand, the three lemmas tagged with <code>@[refl]</code>, <code>@[symm]</code> and <code>@[trans]</code> are very useful.</p>
+
+<a name="185227363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attempt%20at%20some%20geometry/near/185227363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35829attemptatsomegeometry.html#185227363">Johan Commelin (Jan 09 2020 at 16:17)</a>:</h4>
+<p>For quotients by equivalence relations, we use <code>setoid</code>, but you don't want that here</p>
+
 
 {% endraw %}
 
