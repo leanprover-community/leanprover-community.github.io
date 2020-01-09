@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1609 messages, latest: Jan 08 2020 at 23:59)
+* [noob question(s)](52075noobquestions.html) (1613 messages, latest: Jan 09 2020 at 01:38)
 
 * [attempt at some geometry](35829attemptatsomegeometry.html) (41 messages, latest: Jan 08 2020 at 21:48)
 
