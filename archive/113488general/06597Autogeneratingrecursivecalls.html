@@ -122,6 +122,35 @@ permalink: archive/113488general/06597Autogeneratingrecursivecalls.html
 
 <p>Then you should be able to write <code>rename</code> so that, together with <code>rewrite</code> it will form <code>rename_all</code>. What do you think?</p>
 
+<a name="185307758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Autogenerating%20recursive%20calls/near/185307758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06597Autogeneratingrecursivecalls.html#185307758">Chris B (Jan 10 2020 at 13:01)</a>:</h4>
+<p>I think this is also one of the big selling points of recursion schemes (ala Haskell) if you're interested, but I haven't actually studied them enough to know if you could implement them in Lean. <span class="user-mention" data-user-id="110026">@Simon Hudon</span> Do you know if anything like Haskell's <code>Fix</code> can be done with Lean?</p>
+
+<a name="185308549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Autogenerating%20recursive%20calls/near/185308549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06597Autogeneratingrecursivecalls.html#185308549">Simon Hudon (Jan 10 2020 at 13:14)</a>:</h4>
+<p>I also love recursion schemes. <code>Fix</code> is hard to encode directly but there are ways to get close. The simplest approach would be to define it as:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">fix</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">-&gt;</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="n">intro</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="n">F</span> <span class="n">a</span> <span class="bp">-&gt;</span> <span class="o">(</span><span class="n">a</span> <span class="bp">-&gt;</span> <span class="n">fix</span><span class="o">)</span> <span class="bp">-&gt;</span> <span class="n">fix</span>
+</pre></div>
+
+
+<p>It's not quite perfect though. For one thing, <code>fix</code> lies in a different universe than <code>F</code> so <code>F fix</code> is not type correct. More type trickery can still help here.</p>
+<p>In another direction, <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>, <span class="user-mention" data-user-id="110865">@Jeremy Avigad</span> and I wrote a paper last year defining quotients of polynomial functors and using them to construct broader classes of inductive and coinductive data types in Lean. <code>Fix</code> is a direct result of that theory <a href="https://www.andrew.cmu.edu/user/avigad/Papers/qpf.pdf" target="_blank" title="https://www.andrew.cmu.edu/user/avigad/Papers/qpf.pdf">QPF</a>.</p>
+
+<a name="185309823"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Autogenerating%20recursive%20calls/near/185309823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06597Autogeneratingrecursivecalls.html#185309823">Wojciech Nawrocki (Jan 10 2020 at 13:33)</a>:</h4>
+<blockquote>
+<p>Then you should be able to write <code>rename</code> so that, together with <code>rewrite</code> it will form <code>rename_all</code>. What do you think?</p>
+</blockquote>
+<p>Indeed that should work, but it will not if I modify the function a bit:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">weird_rename</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span> <span class="n">string</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span><span class="o">:</span> <span class="n">string</span><span class="o">):</span> <span class="n">formula</span> <span class="bp">→</span> <span class="n">formula</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">var</span> <span class="n">nm</span><span class="o">)</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">nm</span> <span class="bp">=</span> <span class="n">x</span> <span class="k">then</span> <span class="o">(</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="k">else</span> <span class="o">(</span><span class="n">var</span> <span class="n">nm</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">plus</span> <span class="n">f₁</span> <span class="n">f₂</span><span class="o">)</span> <span class="o">:=</span> <span class="n">mult</span> <span class="n">f₁</span> <span class="o">(</span><span class="n">weird_rename</span> <span class="n">f₂</span><span class="o">)</span>
+</pre></div>
+
+
+<p>To express this, <code>rewrite</code> would have to pass both rewritten and not-rewritten results, which can be done but I think it would have to make the resulting <code>rewrite'</code> very specific. On first glance recursion schemes do seem to be solving a similar problem, thanks for the link!</p>
+
 
 {% endraw %}
 
