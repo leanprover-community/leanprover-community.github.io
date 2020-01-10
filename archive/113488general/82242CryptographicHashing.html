@@ -40,6 +40,23 @@ permalink: archive/113488general/82242CryptographicHashing.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cryptographic%20Hashing/near/185288365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82242CryptographicHashing.html#185288365">Tim Daly (Jan 10 2020 at 07:33)</a>:</h4>
 <p>So instead of shipping whole proof scripts back and forth, all that would be needed is a hash code. The proof script still exists but the hash code can be a table lookup. If the lookup fails for any reason, then request the associated proof script to re-validate the proof. This is especially useful if Lean is a network server. It just keeps a table of hashes of proofs it has validated.</p>
 
+<a name="185290098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cryptographic%20Hashing/near/185290098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82242CryptographicHashing.html#185290098">Tim Daly (Jan 10 2020 at 08:13)</a>:</h4>
+<p>Indeed, one can get ever more clever. One could hash all of the hashes for all of the proven algorithms into one hash. Then all that needs to be exchanged for, say, a Groebner basis computation would be a single meta-hash.</p>
+
+<a name="185290175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cryptographic%20Hashing/near/185290175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82242CryptographicHashing.html#185290175">Tim Daly (Jan 10 2020 at 08:15)</a>:</h4>
+<p>So there would be a single meta-hash for each algorithm, one for GCD, one for Groebner, etc. It is all very efficient and can scale. The server doesn't need to store proof scripts since if the hash lookup fails, it just asks the client for the proof.</p>
+
+<a name="185291969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cryptographic%20Hashing/near/185291969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82242CryptographicHashing.html#185291969">Johan Commelin (Jan 10 2020 at 08:52)</a>:</h4>
+<p>I've been thinking a bit about Unison (<a href="http://unisonweb.org" target="_blank" title="http://unisonweb.org">unisonweb.org</a>) recently. It's a type-theoretic functional programming language based on content addressable storage. So everything is hashed and then stored. Renaming a function is a 1-line change in the metadata, and doesn't break any code. You no longer store your code in files, but in this content addressable store managed by Unison. If you want to read the definition of a function, the system renders a textual representation for you, based on the content of some hashes + the names in the metadata. So you don't actually see the hashes.<br>
+It should make things like distributed code, reproducibility, refactoring code, etc... easier.</p>
+
+<a name="185291988"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cryptographic%20Hashing/near/185291988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82242CryptographicHashing.html#185291988">Johan Commelin (Jan 10 2020 at 08:53)</a>:</h4>
+<p>I wonder if a similar system might be usable for an ITP as well. It seems closely related to what <span class="user-mention" data-user-id="223495">@Tim Daly</span> is suggesting</p>
+
 
 {% endraw %}
 
