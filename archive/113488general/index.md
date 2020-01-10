@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Autogenerating recursive calls](06597Autogeneratingrecursivecalls.html) (10 messages, latest: Jan 10 2020 at 13:33)
+* [typeclass paper](35889typeclasspaper.html) (3 messages, latest: Jan 10 2020 at 14:35)
+
+* [Autogenerating recursive calls](06597Autogeneratingrecursivecalls.html) (15 messages, latest: Jan 10 2020 at 14:20)
 
 * [Cryptographic Hashing](82242CryptographicHashing.html) (14 messages, latest: Jan 10 2020 at 13:03)
 
