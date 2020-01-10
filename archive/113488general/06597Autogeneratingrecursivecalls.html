@@ -1,0 +1,76 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/06597Autogeneratingrecursivecalls.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/06597Autogeneratingrecursivecalls.html">Autogenerating recursive calls</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="185274492"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Autogenerating%20recursive%20calls/near/185274492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06597Autogeneratingrecursivecalls.html#185274492">Wojciech Nawrocki (Jan 10 2020 at 01:24)</a>:</h4>
+<p>Hello! Something I would really like for working with types that have many constructors is some kind of code generator for structural recursion in which I only want to touch some subsets of the constructors. For example, consider a simple type of formulas:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">formula</span>
+<span class="bp">|</span> <span class="n">var</span><span class="o">:</span> <span class="n">string</span> <span class="bp">→</span> <span class="n">formula</span>
+<span class="bp">|</span> <span class="n">plus</span><span class="o">:</span> <span class="n">formula</span> <span class="bp">→</span> <span class="n">formula</span> <span class="bp">→</span> <span class="n">formula</span>
+<span class="bp">|</span> <span class="n">mult</span><span class="o">:</span> <span class="n">formula</span> <span class="bp">→</span> <span class="n">formula</span> <span class="bp">→</span> <span class="n">formula</span>
+</pre></div>
+
+
+<p>for which I need to write a rename-variables function that changes all 'x's to 'y's:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">rename</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span> <span class="n">string</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span><span class="o">:</span> <span class="n">string</span><span class="o">):</span> <span class="n">formula</span> <span class="bp">→</span> <span class="n">formula</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">var</span> <span class="n">nm</span><span class="o">)</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">nm</span> <span class="bp">=</span> <span class="n">x</span> <span class="k">then</span> <span class="o">(</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="k">else</span> <span class="o">(</span><span class="n">var</span> <span class="n">nm</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">plus</span> <span class="n">f₁</span> <span class="n">f₂</span><span class="o">)</span> <span class="o">:=</span> <span class="n">plus</span> <span class="o">(</span><span class="n">rename</span> <span class="n">f₁</span><span class="o">)</span> <span class="o">(</span><span class="n">rename</span> <span class="n">f₂</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">mult</span> <span class="n">f₁</span> <span class="n">f₂</span><span class="o">)</span> <span class="o">:=</span> <span class="n">mult</span> <span class="o">(</span><span class="n">rename</span> <span class="n">f₁</span><span class="o">)</span> <span class="o">(</span><span class="n">rename</span> <span class="n">f₂</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Most of this function is trivial and simply calls itself recursively on occurrences of the same type within constructors. Writing such functions is boring and most of the code is boilerplate. Instead, I would like a way to simply say:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">recurse</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">rename</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span> <span class="n">string</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span><span class="o">:</span> <span class="n">string</span><span class="o">):</span> <span class="n">formula</span> <span class="bp">→</span> <span class="n">formula</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">var</span> <span class="n">nm</span><span class="o">)</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">nm</span> <span class="bp">=</span> <span class="n">x</span> <span class="k">then</span> <span class="o">(</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="k">else</span> <span class="o">(</span><span class="n">var</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+
+
+<p>or something similarly short and have Lean autogenerate the rest. Does anyone know if something like or close to it is possible? Has it been done in another language?<br>
+(This seems like the kind of thing some variation on lenses could work for but I'm not quite sure.)</p>
+
+<a name="185275016"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Autogenerating%20recursive%20calls/near/185275016" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06597Autogeneratingrecursivecalls.html#185275016">Simon Hudon (Jan 10 2020 at 01:34)</a>:</h4>
+<p>I think I would break down the problem into generating a <code>replace</code> function which looks like:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">replace</span> <span class="o">(</span><span class="n">f</span><span class="o">:</span> <span class="n">formula</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">formula</span><span class="o">):</span> <span class="n">formula</span> <span class="bp">→</span> <span class="n">formula</span>
+<span class="bp">|</span> <span class="n">x</span> <span class="o">:=</span>
+  <span class="k">match</span> <span class="n">f</span> <span class="n">x</span> <span class="k">with</span>
+  <span class="bp">|</span> <span class="n">some</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">y</span>
+  <span class="bp">|</span> <span class="n">none</span> <span class="o">:=</span>
+    <span class="k">match</span> <span class="n">x</span> <span class="k">with</span>
+    <span class="bp">|</span> <span class="n">var</span> <span class="n">v</span> <span class="o">:=</span> <span class="n">var</span> <span class="n">v</span>
+    <span class="bp">|</span> <span class="n">plus</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">plus</span> <span class="o">(</span><span class="n">replace</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">replace</span> <span class="n">y</span><span class="o">)</span>
+    <span class="bp">|</span> <span class="n">mult</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">mult</span> <span class="o">(</span><span class="n">replace</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">replace</span> <span class="n">y</span><span class="o">)</span>
+    <span class="kn">end</span>
+  <span class="kn">end</span>
+</pre></div>
+
+
+<p>(not sure if that compiles) and then define your recursive function (by hand or automatically) as:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">rename</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span> <span class="n">string</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span><span class="o">:</span> <span class="n">string</span><span class="o">)</span> <span class="o">:</span> <span class="n">formula</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">formula</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">var</span> <span class="n">nm</span><span class="o">)</span> <span class="o">:=</span> <span class="n">some</span> <span class="err">$</span> <span class="k">if</span> <span class="n">nm</span> <span class="bp">=</span> <span class="n">x</span> <span class="k">then</span> <span class="o">(</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="k">else</span> <span class="o">(</span><span class="n">var</span> <span class="n">x</span><span class="o">)</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">none</span>
+
+<span class="n">def</span> <span class="n">rename&#39;</span>  <span class="o">(</span><span class="n">x</span><span class="o">:</span> <span class="n">string</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span><span class="o">:</span> <span class="n">string</span><span class="o">)</span> <span class="o">:</span> <span class="n">formula</span> <span class="bp">→</span> <span class="n">formula</span> <span class="o">:=</span>
+<span class="n">replace</span> <span class="o">(</span><span class="n">rename</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span>
+</pre></div>
+
+<a name="185275033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Autogenerating%20recursive%20calls/near/185275033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06597Autogeneratingrecursivecalls.html#185275033">Simon Hudon (Jan 10 2020 at 01:35)</a>:</h4>
+<p>The code for <code>replace</code> can be generated using the <code>induction</code> tactic.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
