@@ -69,6 +69,33 @@ It should make things like distributed code, reproducibility, refactoring code, 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cryptographic%20Hashing/near/185307863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82242CryptographicHashing.html#185307863">Jason Rute (Jan 10 2020 at 13:03)</a>:</h4>
 <p><span class="user-mention" data-user-id="223495">@Tim Daly</span> I now see you responded to my questions in another topic.  I’ll look at that...</p>
 
+<a name="185318108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cryptographic%20Hashing/near/185318108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82242CryptographicHashing.html#185318108">Tim Daly (Jan 10 2020 at 15:11)</a>:</h4>
+<p>The hash gives a collision-resistant name to the theorem/proof. Git, for example, uses SHA1. The first 8 hex characters are usually unique and act as a 'nickname' for the full hash. In addition, storing the hashes by using the first 2 hex characters gives a quick file system lookup.</p>
+<p>You could use the hash to name the file containing the actual theorem/proof text. Then each theorem could provide the URL for the proof text by just providing a link to the hash-named file.</p>
+<p>The Lean user (e.g. Axiom) can also store the proof text or it could rely on Lean to provide the URL. That is a design decision for someone who wants to use Lean as a network proof engine.  Axiom Sane wants to generate proofs of its algorithms, store the proofs, and provide them to its users so the results can be trusted.</p>
+<p>It seems that Axiom's 10,000 algorithms would be painful to use in a trusted manner if every use required a full re-proof of the algorithm on every use. It is an issue of working-at-scale for automating trust between the computer algebra branch and the logic/proof branch of computational mathematics.</p>
+
+<a name="185318285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cryptographic%20Hashing/near/185318285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82242CryptographicHashing.html#185318285">Johan Commelin (Jan 10 2020 at 15:12)</a>:</h4>
+<p>Tim, I suggest you take a look at unison for more ideas in this direction</p>
+
+<a name="185318313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cryptographic%20Hashing/near/185318313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82242CryptographicHashing.html#185318313">Johan Commelin (Jan 10 2020 at 15:13)</a>:</h4>
+<p>Also, I repeat that SHA1 isn't your best choice</p>
+
+<a name="185318348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cryptographic%20Hashing/near/185318348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82242CryptographicHashing.html#185318348">Johan Commelin (Jan 10 2020 at 15:13)</a>:</h4>
+<p>Linus claims that SHA1 is fine for git, and it probably is. But I wonder if he would choose it again, if he would have to choose something now.</p>
+
+<a name="185320642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cryptographic%20Hashing/near/185320642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82242CryptographicHashing.html#185320642">Tim Daly (Jan 10 2020 at 15:38)</a>:</h4>
+<p>re: SHA1. Like git, there is no real concern about its crypto properties (e.g. SHA1 has a prefix-hash collision attack). SHA1 returns a 160 character "name". SHA256 returns a 256 character name. (SHA1 and SHA256 share a design. There is a SHA3 with a different design  but like Linux, I don't see the concern) What you want is a hash that depends on EVERY bit of the file contents. </p>
+<p>I am looking at the Unison website now. Perhaps Lean could construct itself on Unison and let someone else do the heavy lifting of crafting a hash-based solution. Either way, if you're going from 3 mathematicians to 3000 mathematicians, a couple dozen computer algebra systems, a large corpus of proven algorithms, and a non-trivial pile of mathematics, all hiding somewhere "in the cloud", it helps to have a scalable design.</p>
+<p>With trusted algorithms, Axiom could use some other system's algorithms for, say, algebraic geometry without re-implementing them. I'm not inventing these ideas. There are whole conferences and funded research efforts on the subject. (See James Davenport for some connections). Systems need trusted communication designed in.</p>
+<p>There is also work on organizing the theorems. Axiom uses a hierarchy so they can be inherited based on properties (e.g. a chain of axioms that assume commutativity (giving arithmetic) verses a different chain that does not assume that (e.g. matrices). See the work of Farmer and Carette on "tiny theories". This scales much better than a flat organization.</p>
+<p>Oh, and don't get me started on the (literate) documentation :-)</p>
+
 
 {% endraw %}
 

@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [typeclass paper](35889typeclasspaper.html) (3 messages, latest: Jan 10 2020 at 14:35)
+* [typeclass paper](35889typeclasspaper.html) (20 messages, latest: Jan 10 2020 at 15:59)
 
-* [Autogenerating recursive calls](06597Autogeneratingrecursivecalls.html) (15 messages, latest: Jan 10 2020 at 14:20)
+* [Cryptographic Hashing](82242CryptographicHashing.html) (19 messages, latest: Jan 10 2020 at 15:38)
 
-* [Cryptographic Hashing](82242CryptographicHashing.html) (14 messages, latest: Jan 10 2020 at 13:03)
+* [Autogenerating recursive calls](06597Autogeneratingrecursivecalls.html) (16 messages, latest: Jan 10 2020 at 15:05)
 
 * [Cell Phone Mathematics](39723CellPhoneMathematics.html) (42 messages, latest: Jan 09 2020 at 09:02)
 
