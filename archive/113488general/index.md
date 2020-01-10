@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [typeclass paper](35889typeclasspaper.html) (20 messages, latest: Jan 10 2020 at 15:59)
+* [typeclass paper](35889typeclasspaper.html) (37 messages, latest: Jan 10 2020 at 16:56)
 
 * [Cryptographic Hashing](82242CryptographicHashing.html) (19 messages, latest: Jan 10 2020 at 15:38)
 

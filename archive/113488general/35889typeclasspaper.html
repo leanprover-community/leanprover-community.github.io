@@ -103,6 +103,98 @@ permalink: archive/113488general/35889typeclasspaper.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185322677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185322677">Johan Commelin (Jan 10 2020 at 15:59)</a>:</h4>
 <p><span class="user-mention" data-user-id="230999">@Daniel Selsam</span> Section 5.3 ends with a parenthetical remark (that is not properly</p>
 
+<a name="185322808"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185322808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185322808">Daniel Selsam (Jan 10 2020 at 16:00)</a>:</h4>
+<p>I have been pushing frequent fixes, including the 5.3 issue. Please reload the page.</p>
+
+<a name="185322908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185322908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185322908">Daniel Selsam (Jan 10 2020 at 16:01)</a>:</h4>
+<p>If 5.3 still trails off for you after reloading, you may need to click some kind of "jump to most recent version of paper" button.</p>
+
+<a name="185323900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185323900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185323900">Daniel Selsam (Jan 10 2020 at 16:11)</a>:</h4>
+<blockquote>
+<p>But I realize now that this is not a problem that you hit during tc resolution, but during type checking</p>
+</blockquote>
+<p>This example is outside the scope of tc resolution, since presumably the two calls to tc are independent. There is a related issue we have discussed about TC though: whether to consider a second solution to the same (sub)goal to be a repeat (and so discard it) if it has the same type as the first solution, even if it is not definitionally equal to the first solution.</p>
+
+<a name="185324025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185324025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185324025">Daniel Selsam (Jan 10 2020 at 16:12)</a>:</h4>
+<p>Our current plan is to say that typeclasses are "morally canonical", and consider a solution (to a subgoal) to be a repeat if it has the same type as a previous solution.</p>
+
+<a name="185324260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185324260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185324260">Daniel Selsam (Jan 10 2020 at 16:14)</a>:</h4>
+<p>The "morally canonical" assumption would be violated by <code>Algebra</code>, and some downstream goals may succeed or fail depending on which specific instance to <code>Algebra</code> is found first.</p>
+
+<a name="185324441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185324441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185324441">Johan Commelin (Jan 10 2020 at 16:16)</a>:</h4>
+<p>Aah, it might be that it still pops up here...</p>
+
+<a name="185324471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185324471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185324471">Johan Commelin (Jan 10 2020 at 16:16)</a>:</h4>
+<p>Note that in general <code>Algebra R A</code> is not a subsingleton... but if <code>R</code> is <code>\Z</code> or <code>\Q</code>, then it is...</p>
+
+<a name="185324520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185324520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185324520">Daniel Selsam (Jan 10 2020 at 16:17)</a>:</h4>
+<p>Edited my comment -- the assumption is violated whether or not Algebra is a subsingleton.</p>
+
+<a name="185324863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185324863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185324863">Johan Commelin (Jan 10 2020 at 16:20)</a>:</h4>
+<p>By transitivity <code>algebra R A</code> and <code>f</code> will give me another instance of <code>algebra R B</code>, and by some property field of <code>alg_hom</code> we know that <code>f</code> ensures it is prop-eq to the existing instance of <code>algebra R B</code>.<br>
+Mathematicians treat these instances as def-eq all the time.</p>
+
+<a name="185324875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185324875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185324875">Johan Commelin (Jan 10 2020 at 16:20)</a>:</h4>
+<p>Or if <code>R</code> is any field</p>
+
+<a name="185324877"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185324877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185324877">Johan Commelin (Jan 10 2020 at 16:21)</a>:</h4>
+<p>Suppose we have <code>algebra R A</code>, <code>algebra R B</code> and <code>f : alg_hom[R] A B</code> in the context.</p>
+
+<a name="185324902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185324902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185324902">Johan Commelin (Jan 10 2020 at 16:21)</a>:</h4>
+<p>Oops... messages are mangled up by German telecom</p>
+
+<a name="185325802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185325802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185325802">Daniel Selsam (Jan 10 2020 at 16:29)</a>:</h4>
+<p>Can you come up with an example where typeclass resolution will succeed or fail depending on which of two different instances with the same type are discovered first for some subgoal?</p>
+
+<a name="185326046"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185326046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185326046">Daniel Selsam (Jan 10 2020 at 16:31)</a>:</h4>
+<p>How about I try to come up with a toy example first to make the issue clear, and then you can try to come up with a real example that would exhibit the same problem.</p>
+
+<a name="185328210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185328210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185328210">Chris Hughes (Jan 10 2020 at 16:51)</a>:</h4>
+<p>I don't think typeclass inference fails in these situations, the problem tends to be that it infers two different instances in different situations, so terms that look the same, and are in fact equal aren't definitionally equal, so <code>exact</code> doesn't work when it looks like it should.</p>
+
+<a name="185328504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185328504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185328504">Daniel Selsam (Jan 10 2020 at 16:54)</a>:</h4>
+<p>Very artificial example but just to give intuition:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">Foo</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">Bool</span><span class="o">)</span>
+<span class="n">class</span> <span class="n">Bar</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">Bool</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="o">(</span><span class="n">u</span> <span class="o">:</span> <span class="n">Unit</span> <span class="o">:=</span> <span class="o">())</span>
+<span class="n">class</span> <span class="n">Rig</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="o">(</span><span class="n">u</span> <span class="o">:</span> <span class="n">Unit</span> <span class="o">:=</span> <span class="o">())</span>
+
+<span class="kn">instance</span> <span class="n">FooToBar</span> <span class="o">[</span><span class="n">f</span><span class="o">:</span><span class="n">Foo</span><span class="o">]</span> <span class="o">:</span> <span class="n">Bar</span> <span class="n">f</span><span class="bp">.</span><span class="n">b</span> <span class="o">:=</span> <span class="o">{}</span>
+<span class="kn">instance</span> <span class="n">BarToRig</span> <span class="o">[</span><span class="n">Bar</span> <span class="n">true</span><span class="o">]</span> <span class="o">:</span> <span class="n">Rig</span> <span class="o">:=</span> <span class="o">{}</span>
+
+<span class="kn">instance</span> <span class="n">FooTrue</span>  <span class="o">:</span> <span class="n">Foo</span> <span class="o">:=</span> <span class="o">{</span><span class="n">b</span> <span class="o">:=</span> <span class="n">true</span><span class="o">}</span>
+<span class="kn">instance</span> <span class="n">FooFalse</span> <span class="o">:</span> <span class="n">Foo</span> <span class="o">:=</span> <span class="o">{</span><span class="n">b</span> <span class="o">:=</span> <span class="n">false</span><span class="o">}</span>
+
+<span class="c1">-- There are two instances to Foo with different values.</span>
+<span class="c1">-- Since they have the same type, the second one found is discarded.</span>
+<span class="c1">-- The overall query succeeds only if the first one found happens to be `FooTrue`.</span>
+
+<span class="n">def</span> <span class="n">synthRig</span> <span class="o">[</span><span class="n">Rig</span><span class="o">]</span> <span class="o">:</span> <span class="n">Unit</span> <span class="o">:=</span> <span class="o">()</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">Unit</span> <span class="o">:=</span> <span class="n">synthRig</span>
+</pre></div>
+
+<a name="185328736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185328736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185328736">Daniel Selsam (Jan 10 2020 at 16:56)</a>:</h4>
+<blockquote>
+<p>I don't think typeclass inference fails in these situations, the problem tends to be that it infers two different instances in different situations, so terms that look the same, and are in fact equal aren't definitionally equal, so <code>exact</code> doesn't work when it looks like it should.</p>
+</blockquote>
+<p>I agree with <span class="user-mention" data-user-id="112680">@Johan Commelin</span> that the issue you are describing is probably better addressed after the fact, outside of typeclass resolution. Note that Lean3 had a subsingleton-canonicalizer which would address this problem.</p>
+
 
 {% endraw %}
 
