@@ -195,6 +195,32 @@ Mathematicians treat these instances as def-eq all the time.</p>
 </blockquote>
 <p>I agree with <span class="user-mention" data-user-id="112680">@Johan Commelin</span> that the issue you are describing is probably better addressed after the fact, outside of typeclass resolution. Note that Lean3 had a subsingleton-canonicalizer which would address this problem.</p>
 
+<a name="185329385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185329385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185329385">Chris Hughes (Jan 10 2020 at 17:04)</a>:</h4>
+<p>Here's an example that comes up in practice</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">constant</span> <span class="n">fintype</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span>
+
+<span class="n">attribute</span> <span class="o">[</span><span class="n">class</span><span class="o">]</span> <span class="n">fintype</span>
+
+<span class="n">def</span> <span class="n">card</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">constant</span> <span class="n">fintype_range</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">fintype</span> <span class="err">↥</span><span class="n">p</span>
+
+<span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">fintype_range</span>
+
+<span class="kn">instance</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">fintype</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">range</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">lemma</span> <span class="n">subset_lemma</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">card</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">card</span> <span class="n">p</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">card</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">range</span> <span class="n">f</span><span class="o">)</span> <span class="bp">=</span> <span class="n">card</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">range</span> <span class="n">f</span><span class="o">):=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">subset_lemma</span><span class="o">],</span> <span class="c1">--fails</span>
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
 
