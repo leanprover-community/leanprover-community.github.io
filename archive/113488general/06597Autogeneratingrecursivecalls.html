@@ -70,6 +70,13 @@ permalink: archive/113488general/06597Autogeneratingrecursivecalls.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Autogenerating%20recursive%20calls/near/185275033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06597Autogeneratingrecursivecalls.html#185275033">Simon Hudon (Jan 10 2020 at 01:35)</a>:</h4>
 <p>The code for <code>replace</code> can be generated using the <code>induction</code> tactic.</p>
 
+<a name="185282186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Autogenerating%20recursive%20calls/near/185282186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06597Autogeneratingrecursivecalls.html#185282186">Tim Daly (Jan 10 2020 at 04:50)</a>:</h4>
+<p>Actually, no. All the hash function is doing is checking that the proof object is unchanged. Lean could concatenate a version number to the proof it gives to Axiom (for the GCD, for example). When Axiom returns the GCD computation, Lean has to decide to trust the result. So Axiom provides the proof that Lean initially provided for GCD (which Axiom stored a long time ago) and the hash code. Lean can then concatenate the version number of the proof checker to the proof source code, compute the hash and compare it to the prior hash. If either the version number is wrong or the proof text has changed then the hash won't match.</p>
+<p>A hash mismatch due to a version number change on Lean's proof checker means that Lean needs to fully check the provided proof. If the version number hasn't changed then the proof text must have changed and Lean needs to fully check the provided proof. But if the hash matches then nothing has changed and there is evidence that the GCD proof previously passed Lean's proof checker so it doesn't need to be re-checked, saving a lot of work.</p>
+<p>The hash has nothing to do with the actual method of proof.</p>
+<p>The problem to solve is to scale proof checking and trusted computation to larger computations. A Groebner basis can have many steps using other algorithms and each proof of each sub-algorithm needs to be provided to Lean to be checked. A hash checker would make this a very low cost but very trustable operation.</p>
+
 
 {% endraw %}
 
