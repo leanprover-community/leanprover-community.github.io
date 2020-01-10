@@ -9,9 +9,9 @@ permalink: archive/218272FoMMLeanTogether2020/index.html
 
 ### Topics:
 
-* [Zoom](71430Zoom.html) (79 messages, latest: Jan 10 2020 at 19:49)
+* [Term rewriting and PL theory](21022TermrewritingandPLtheory.html) (7 messages, latest: Jan 10 2020 at 21:11)
 
-* [Term rewriting and PL theory](21022TermrewritingandPLtheory.html) (5 messages, latest: Jan 10 2020 at 19:24)
+* [Zoom](71430Zoom.html) (79 messages, latest: Jan 10 2020 at 19:49)
 
 * [Dinner](11009Dinner.html) (6 messages, latest: Jan 08 2020 at 15:29)
 
