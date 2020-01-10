@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Autogenerating recursive calls](06597Autogeneratingrecursivecalls.html) (3 messages, latest: Jan 10 2020 at 01:35)
+* [Cryptographic Hashing](82242CryptographicHashing.html) (3 messages, latest: Jan 10 2020 at 03:48)
 
-* [Cryptographic Hashing](82242CryptographicHashing.html) (2 messages, latest: Jan 10 2020 at 00:49)
+* [Autogenerating recursive calls](06597Autogeneratingrecursivecalls.html) (3 messages, latest: Jan 10 2020 at 01:35)
 
 * [Cell Phone Mathematics](39723CellPhoneMathematics.html) (42 messages, latest: Jan 09 2020 at 09:02)
 
