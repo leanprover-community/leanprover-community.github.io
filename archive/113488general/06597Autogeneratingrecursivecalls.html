@@ -110,6 +110,18 @@ permalink: archive/113488general/06597Autogeneratingrecursivecalls.html
 
 <p>which I'm not sure generalize into a single higher-order function since then one cannot call <code>replace</code> from <code>rename</code>. This is the reason why I asked about code generation. I guess that's what tactics do and <code>induction</code> is a good shout for going some way towards shorter definitions.</p>
 
+<a name="185307320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Autogenerating%20recursive%20calls/near/185307320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06597Autogeneratingrecursivecalls.html#185307320">Simon Hudon (Jan 10 2020 at 12:55)</a>:</h4>
+<p>Let's try this again, then.</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">rewrite</span> <span class="o">(</span><span class="n">f</span><span class="o">:</span> <span class="n">formula</span> <span class="bp">→</span> <span class="n">formula</span><span class="o">):</span> <span class="n">formula</span> <span class="bp">→</span> <span class="n">formula</span>
+<span class="bp">|</span> <span class="n">e</span><span class="bp">@</span><span class="o">(</span><span class="n">var</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="n">f</span> <span class="n">e</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">plus</span> <span class="n">e</span> <span class="n">e&#39;</span><span class="o">)</span> <span class="o">:=</span> <span class="n">f</span> <span class="o">(</span><span class="n">plus</span> <span class="o">(</span><span class="n">rewrite</span> <span class="n">e</span><span class="o">)</span> <span class="o">(</span><span class="n">rewrite</span> <span class="n">e&#39;</span><span class="o">))</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">mult</span> <span class="n">e</span> <span class="n">e&#39;</span><span class="o">)</span> <span class="o">:=</span> <span class="n">f</span> <span class="o">(</span><span class="n">mult</span> <span class="o">(</span><span class="n">rewrite</span> <span class="n">e</span><span class="o">)</span> <span class="o">(</span><span class="n">rewrite</span> <span class="n">e&#39;</span><span class="o">))</span>
+</pre></div>
+
+
+<p>Then you should be able to write <code>rename</code> so that, together with <code>rewrite</code> it will form <code>rename_all</code>. What do you think?</p>
+
 
 {% endraw %}
 
