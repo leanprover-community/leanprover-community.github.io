@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Equivalent Lean command for Coq's Search?](69175EquivalentLeancommandforCoqsSearch.html) (1 message, latest: Jan 10 2020 at 17:05)
+* [Equivalent Lean command for Coq's Search?](69175EquivalentLeancommandforCoqsSearch.html) (4 messages, latest: Jan 10 2020 at 18:52)
 
 * [attempt at some geometry](35829attemptatsomegeometry.html) (105 messages, latest: Jan 10 2020 at 05:32)
 
