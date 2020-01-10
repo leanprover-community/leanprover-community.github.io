@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1616 messages, latest: Jan 09 2020 at 23:22)
+
 * [attempt at some geometry](35829attemptatsomegeometry.html) (103 messages, latest: Jan 09 2020 at 22:39)
 
 * [basics](17142basics.html) (37 messages, latest: Jan 09 2020 at 09:10)
-
-* [noob question(s)](52075noobquestions.html) (1615 messages, latest: Jan 09 2020 at 06:26)
 
 * [Induction over sigma in filters](94667Inductionoversigmainfilters.html) (12 messages, latest: Jan 08 2020 at 00:40)
 
