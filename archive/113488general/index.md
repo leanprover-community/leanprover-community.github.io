@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [typeclass paper](35889typeclasspaper.html) (39 messages, latest: Jan 10 2020 at 19:57)
+* [Term rewriting and PL theory](21022TermrewritingandPLtheory.html) (7 messages, latest: Jan 10 2020 at 20:21)
 
-* [Term rewriting and PL theory](21022TermrewritingandPLtheory.html) (6 messages, latest: Jan 10 2020 at 19:39)
+* [typeclass paper](35889typeclasspaper.html) (39 messages, latest: Jan 10 2020 at 19:57)
 
 * [Autogenerating recursive calls](06597Autogeneratingrecursivecalls.html) (17 messages, latest: Jan 10 2020 at 19:06)
 
