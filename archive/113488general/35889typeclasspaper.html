@@ -303,6 +303,26 @@ Mathematicians treat these instances as def-eq all the time.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185390808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185390808">Tim Daly (Jan 11 2020 at 13:57)</a>:</h4>
 <p>If your problem is only that you might encounter the same object on different paths, it might help to memoize the path information so you never traverse it more than once. I will reread the paper with your new definition. I assumed more about the problem than you wrote I guess. My apology for the mistake.</p>
 
+<a name="185391293"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185391293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185391293">Jason Rute (Jan 11 2020 at 14:11)</a>:</h4>
+<p>Also Rust is another language using type classes or something similar.  Is any of this a concern there?</p>
+
+<a name="185391928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185391928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185391928">Jason Rute (Jan 11 2020 at 14:27)</a>:</h4>
+<p>In Scala, <em>implicits</em> are similar to Lean's type classes. They are used  to support ad-hoc polymorphism, coercion, and true-type classes.  They also have a similar syntax to Lean.  I know they are one fo the things which makes compiling Scala so slow, particularly because of <em>implicit macros</em>, which are the Scala analogue of instances depending on other instances.  Do you know off-hand if your method can be used to speed up implicit resolution in Scala?  (Or if Scala uses a method similar to yours already?)  I know the implicit resolution in Scala has some additional concerns such as trying to resolve implicits in closer levels of scope first.  Also, I haven't checked for sure that diamonds or loops are allowed in implicit macros.  Last, I don't know for sure that the slow down in implicit search in practice is due to an exponential search tree or if it is due to the execution time of the code in the implicit macros.  Just curious if you have any thoughts on this.</p>
+
+<a name="185391976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185391976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185391976">Jason Rute (Jan 11 2020 at 14:28)</a>:</h4>
+<p>(Due to the Zulip mobile app issues, my messages got reversed.)</p>
+
+<a name="185392639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185392639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185392639">Jason Rute (Jan 11 2020 at 14:49)</a>:</h4>
+<p>Actually, I just checked with some Scala code.  Diamonds are allowed in Scala in the sense that you can write the code.  However, implicit search will fall if it finds two ways to resolve the same implicit at the same level of scope, so if the top of the diamond is inhabited, it will complain that there are two ways to match the expected type (even if they evaluate the same).  This must mean it is checking all the paths (at least until it finds two satisfied paths).  In that case, I hope it is doing something similar to your method or it could be checking an exponential number of paths.</p>
+
+<a name="185392767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185392767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185392767">Daniel Selsam (Jan 11 2020 at 14:53)</a>:</h4>
+<p><span class="user-mention" data-user-id="115715">@Jason Rute</span> Thanks. I have never used Scala and know very little about it. Could you please share your diamond example?</p>
+
 
 {% endraw %}
 
