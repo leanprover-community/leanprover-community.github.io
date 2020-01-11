@@ -9,11 +9,11 @@ permalink: archive/218272FoMMLeanTogether2020/index.html
 
 ### Topics:
 
+* [Term rewriting and PL theory](21022TermrewritingandPLtheory.html) (9 messages, latest: Jan 11 2020 at 15:52)
+
 * [Notes of maintainers meeting?](03554Notesofmaintainersmeeting.html) (1 message, latest: Jan 11 2020 at 01:55)
 
 * [Share ride to airport early 1-11](25689Shareridetoairportearly111.html) (1 message, latest: Jan 10 2020 at 23:06)
-
-* [Term rewriting and PL theory](21022TermrewritingandPLtheory.html) (7 messages, latest: Jan 10 2020 at 21:11)
 
 * [Zoom](71430Zoom.html) (79 messages, latest: Jan 10 2020 at 19:49)
 

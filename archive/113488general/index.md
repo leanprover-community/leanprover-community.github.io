@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Using hammer](05313Usinghammer.html) (4 messages, latest: Jan 11 2020 at 14:59)
+* [typeclass paper](35889typeclasspaper.html) (64 messages, latest: Jan 11 2020 at 15:59)
 
-* [typeclass paper](35889typeclasspaper.html) (62 messages, latest: Jan 11 2020 at 14:53)
+* [Using hammer](05313Usinghammer.html) (5 messages, latest: Jan 11 2020 at 15:01)
 
 * [Autogenerating recursive calls](06597Autogeneratingrecursivecalls.html) (19 messages, latest: Jan 10 2020 at 23:49)
 

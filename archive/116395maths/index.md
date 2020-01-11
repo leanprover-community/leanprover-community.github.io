@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [linear independence](18622linearindependence.html) (24 messages, latest: Jan 11 2020 at 15:44)
+
 * [\| notation](97065notation.html) (2 messages, latest: Jan 11 2020 at 07:06)
 
 * [`is_bounded_linear_map`](07028isboundedlinearmap.html) (9 messages, latest: Jan 08 2020 at 02:55)
@@ -336,8 +338,6 @@ permalink: archive/116395maths/index.html
 * [Increasing convergent subsequence](65378Increasingconvergentsubsequence.html) (21 messages, latest: Jul 19 2019 at 18:56)
 
 * [The Hodge Conjecture](31867TheHodgeConjecture.html) (4 messages, latest: Jul 19 2019 at 06:35)
-
-* [linear independence](18622linearindependence.html) (23 messages, latest: Jul 18 2019 at 22:47)
 
 * [conditionally complete linear order for nnreal](95057conditionallycompletelinearorderfornnreal.html) (3 messages, latest: Jul 18 2019 at 17:43)
 
