@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [typeclass paper](35889typeclasspaper.html) (40 messages, latest: Jan 10 2020 at 23:51)
+
+* [Autogenerating recursive calls](06597Autogeneratingrecursivecalls.html) (19 messages, latest: Jan 10 2020 at 23:49)
+
 * [Term rewriting and PL theory](21022TermrewritingandPLtheory.html) (7 messages, latest: Jan 10 2020 at 20:21)
-
-* [typeclass paper](35889typeclasspaper.html) (39 messages, latest: Jan 10 2020 at 19:57)
-
-* [Autogenerating recursive calls](06597Autogeneratingrecursivecalls.html) (17 messages, latest: Jan 10 2020 at 19:06)
 
 * [Cryptographic Hashing](82242CryptographicHashing.html) (19 messages, latest: Jan 10 2020 at 15:38)
 
