@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [typeclass paper](35889typeclasspaper.html) (45 messages, latest: Jan 11 2020 at 07:22)
+* [typeclass paper](35889typeclasspaper.html) (50 messages, latest: Jan 11 2020 at 08:51)
 
 * [Autogenerating recursive calls](06597Autogeneratingrecursivecalls.html) (19 messages, latest: Jan 10 2020 at 23:49)
 
