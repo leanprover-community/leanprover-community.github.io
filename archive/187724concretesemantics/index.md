@@ -9,7 +9,7 @@ permalink: archive/187724concretesemantics/index.html
 
 ### Topics:
 
-* [Status report](74337Statusreport.html) (1 message, latest: Mar 06 2019 at 22:03)
+* [Status report](74337Statusreport.html) (2 messages, latest: Jan 11 2020 at 02:35)
 
 * [What's Isabelle's "auto"?](44646WhatsIsabellesauto.html) (7 messages, latest: Mar 01 2019 at 20:09)
 
