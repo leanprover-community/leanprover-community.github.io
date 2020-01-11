@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [new maintainers](23366newmaintainers.html) (3 messages, latest: Jan 11 2020 at 20:58)
+* [new maintainers](23366newmaintainers.html) (4 messages, latest: Jan 11 2020 at 22:37)
 
 * [typeclass paper](35889typeclasspaper.html) (66 messages, latest: Jan 11 2020 at 16:03)
 

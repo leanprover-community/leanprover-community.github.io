@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [compulsory pure undergraduate maths that is not in Lean](75447compulsorypureundergraduatemathsthatisnotinLean.html) (6 messages, latest: Jan 11 2020 at 17:45)
+* [compulsory pure undergraduate maths that is not in Lean](75447compulsorypureundergraduatemathsthatisnotinLean.html) (7 messages, latest: Jan 11 2020 at 22:38)
 
 * [linear independence](18622linearindependence.html) (24 messages, latest: Jan 11 2020 at 15:44)
 
