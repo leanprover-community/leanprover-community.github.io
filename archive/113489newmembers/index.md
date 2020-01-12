@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [basics](17142basics.html) (42 messages, latest: Jan 12 2020 at 19:59)
+
 * [A finite set has finitely many endofunctions?](54624Afinitesethasfinitelymanyendofunctions.html) (10 messages, latest: Jan 12 2020 at 18:34)
 
 * [How to access the multiplication inside the monoid inside ..](03822Howtoaccessthemultiplicationinsidethemonoidinside.html) (9 messages, latest: Jan 12 2020 at 18:25)
@@ -20,8 +22,6 @@ permalink: archive/113489newmembers/index.html
 * [attempt at some geometry](35829attemptatsomegeometry.html) (105 messages, latest: Jan 10 2020 at 05:32)
 
 * [noob question(s)](52075noobquestions.html) (1616 messages, latest: Jan 09 2020 at 23:22)
-
-* [basics](17142basics.html) (37 messages, latest: Jan 09 2020 at 09:10)
 
 * [Induction over sigma in filters](94667Inductionoversigmainfilters.html) (12 messages, latest: Jan 08 2020 at 00:40)
 
