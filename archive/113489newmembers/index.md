@@ -9,7 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [How to access the multiplication inside the monoid inside ..](03822Howtoaccessthemultiplicationinsidethemonoidinside.html) (6 messages, latest: Jan 12 2020 at 15:47)
+* [How to access the multiplication inside the monoid inside ..](03822Howtoaccessthemultiplicationinsidethemonoidinside.html) (7 messages, latest: Jan 12 2020 at 16:32)
+
+* [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (35 messages, latest: Jan 12 2020 at 16:32)
+
+* [A finite set has finitely many endofunctions?](54624Afinitesethasfinitelymanyendofunctions.html) (5 messages, latest: Jan 12 2020 at 16:28)
 
 * [Equivalent Lean command for Coq's Search?](69175EquivalentLeancommandforCoqsSearch.html) (8 messages, latest: Jan 12 2020 at 05:59)
 
@@ -214,8 +218,6 @@ permalink: archive/113489newmembers/index.html
 * [multiple assumptions of definitionally equal type](09309multipleassumptionsofdefinitionallyequaltype.html) (43 messages, latest: Nov 26 2019 at 20:07)
 
 * [Type ?M_1](72415TypeM1.html) (5 messages, latest: Nov 26 2019 at 17:59)
-
-* [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (34 messages, latest: Nov 25 2019 at 07:43)
 
 * [rewrite only first occurrence?](40181rewriteonlyfirstoccurrence.html) (20 messages, latest: Nov 24 2019 at 19:09)
 

@@ -69,6 +69,13 @@ in @dfa.mk _ _ M.m M.is_finite M.has_decidable_eq (λ q a, M.is_monoid.mul q (M.
 <p>I get the error message <code>invalid field notation, function 'monoid.mul' does not have explicit argument with type (monoid ...)</code>.</p>
 <p>I wonder why?</p>
 
+<a name="185440457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20access%20the%20multiplication%20inside%20the%20monoid%20inside%20../near/185440457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03822Howtoaccessthemultiplicationinsidethemonoidinside.html#185440457">Chris B (Jan 12 2020 at 16:32)</a>:</h4>
+<p>That's a great question...  And one that I'm sure Mario or someone can answer for you lol. FWIW this works too.</p>
+<div class="codehilite"><pre><span></span>def recognizer_to_dfa {alphabet : Type} [fintype alphabet] (M : monoid_recognizer alphabet) : dfa alphabet :=
+@dfa.mk _ _ M.m M.is_finite M.has_decidable_eq (λ q a, @monoid.mul M.m M.is_monoid q (M.h [a])) (M.h []) M.fin
+</pre></div>
+
 
 {% endraw %}
 

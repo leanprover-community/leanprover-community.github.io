@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Starting a Machine Learning for Theorem Proving stream](70719StartingaMachineLearningforTheoremProvingstream.html) (2 messages, latest: Jan 12 2020 at 16:27)
+
 * [Hammer talk](28743Hammertalk.html) (3 messages, latest: Jan 12 2020 at 15:56)
 
 * [contrapositive](81947contrapositive.html) (50 messages, latest: Jan 12 2020 at 14:32)
