@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Hammer talk](28743Hammertalk.html) (1 message, latest: Jan 12 2020 at 14:54)
+
+* [contrapositive](81947contrapositive.html) (50 messages, latest: Jan 12 2020 at 14:32)
+
 * [Term rewriting and PL theory](21022TermrewritingandPLtheory.html) (9 messages, latest: Jan 12 2020 at 07:42)
 
 * [new maintainers](23366newmaintainers.html) (5 messages, latest: Jan 12 2020 at 04:32)
@@ -444,8 +448,6 @@ permalink: archive/113488general/index.html
 * [doc_blame](42231docblame.html) (9 messages, latest: Oct 04 2019 at 18:10)
 
 * [Projection is a def, should be lemma](21432Projectionisadefshouldbelemma.html) (4 messages, latest: Oct 04 2019 at 18:07)
-
-* [contrapositive](81947contrapositive.html) (48 messages, latest: Oct 04 2019 at 02:21)
 
 * [Sphinx try it! with leanprover-community web editor](90281Sphinxtryitwithleanprovercommunitywebeditor.html) (7 messages, latest: Oct 03 2019 at 22:52)
 

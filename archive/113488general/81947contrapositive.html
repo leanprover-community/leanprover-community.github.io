@@ -261,6 +261,29 @@ _inst_2 : decidable Q
 </blockquote>
 <p>Currently <code>example : B ↔ A := by library_search</code> doesn't work, and I would like to fix this.</p>
 
+<a name="185436510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/185436510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#185436510">Chris B (Jan 12 2020 at 14:28)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> <br>
+Not sure if this is related, but in mathlib rev c5d91, the following fails when I would have expected it to find <code>not_not</code> :</p>
+<div class="codehilite"><pre><span></span>example (p : Prop) [decidable p] : (¬¬p) → p := by library_search
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>failed
+state:
+p : Prop,
+_inst_1 : decidable p
+|- ¬¬p → p
+</pre></div>
+
+<a name="185436629"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/185436629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#185436629">Chris B (Jan 12 2020 at 14:32)</a>:</h4>
+<p>Actually this also fails, but some how succeeds in finding MyAx if I change both to <code>(¬¬p ↔ p)</code>.</p>
+<div class="codehilite"><pre><span></span>axiom MyAx (p : Prop) [decidable p] : (¬¬p) → p
+
+example (p : Prop) [decidable p] : (¬¬p) → p := by library_search
+</pre></div>
+
 
 {% endraw %}
 
