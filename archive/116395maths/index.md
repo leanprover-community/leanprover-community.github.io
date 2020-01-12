@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [set builder notation](67232setbuildernotation.html) (3 messages, latest: Jan 12 2020 at 19:36)
+* [formalising def of alg closed fields](80165formalisingdefofalgclosedfields.html) (5 messages, latest: Jan 12 2020 at 20:19)
+
+* [set builder notation](67232setbuildernotation.html) (6 messages, latest: Jan 12 2020 at 20:14)
 
 * [compulsory pure undergraduate maths that is not in Lean](75447compulsorypureundergraduatemathsthatisnotinLean.html) (8 messages, latest: Jan 12 2020 at 00:13)
 

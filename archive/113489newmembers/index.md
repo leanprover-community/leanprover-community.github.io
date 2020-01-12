@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [basics](17142basics.html) (42 messages, latest: Jan 12 2020 at 19:59)
+* [How to access the multiplication inside the monoid inside ..](03822Howtoaccessthemultiplicationinsidethemonoidinside.html) (10 messages, latest: Jan 12 2020 at 20:53)
 
-* [A finite set has finitely many endofunctions?](54624Afinitesethasfinitelymanyendofunctions.html) (10 messages, latest: Jan 12 2020 at 18:34)
+* [A finite set has finitely many endofunctions?](54624Afinitesethasfinitelymanyendofunctions.html) (13 messages, latest: Jan 12 2020 at 20:52)
 
-* [How to access the multiplication inside the monoid inside ..](03822Howtoaccessthemultiplicationinsidethemonoidinside.html) (9 messages, latest: Jan 12 2020 at 18:25)
+* [basics](17142basics.html) (46 messages, latest: Jan 12 2020 at 20:06)
 
 * [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (35 messages, latest: Jan 12 2020 at 16:32)
 

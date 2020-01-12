@@ -1,0 +1,72 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/80165formalisingdefofalgclosedfields.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/80165formalisingdefofalgclosedfields.html">formalising def of alg closed fields</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="185448389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/formalising%20def%20of%20alg%20closed%20fields/near/185448389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/80165formalisingdefofalgclosedfields.html#185448389">Kevin Buzzard (Jan 12 2020 at 20:13)</a>:</h4>
+<p>It is a source of some frustration to me that I still often don't know the best way to proceed when defining new concepts in Lean. Proofs I feel like I have learnt a lot of the techniques (tactic/term mode etc). But I found myself on the way back from Pittsburgh wanting alg closed fields, and ended up writing this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">polynomial</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">polynomial</span> <span class="c1">-- just a sanity check, probably shouldn&#39;t be imported</span>
+
+<span class="kn">open</span> <span class="n">polynomial</span>
+
+<span class="n">class</span> <span class="n">algebraically_closed_field</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">discrete_field</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">exists_root&#39;</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">k</span><span class="o">)</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">degree</span> <span class="n">f</span><span class="o">),</span>
+   <span class="bp">∃</span> <span class="n">z</span> <span class="o">:</span> <span class="n">k</span><span class="o">,</span> <span class="n">is_root</span> <span class="n">f</span> <span class="n">z</span><span class="o">)</span>
+
+<span class="kn">namespace</span> <span class="n">algebraically_closed_field</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">algebraically_closed_field</span> <span class="n">k</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">exists_root</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">k</span><span class="o">}</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">degree</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">∃</span> <span class="n">z</span> <span class="o">:</span> <span class="n">k</span><span class="o">,</span> <span class="n">is_root</span> <span class="n">f</span> <span class="n">z</span>
+
+<span class="c1">-- sanity check</span>
+<span class="n">noncomputable</span> <span class="kn">example</span> <span class="o">:</span> <span class="n">algebraically_closed_field</span> <span class="n">ℂ</span> <span class="o">:=</span>
+<span class="o">{</span><span class="n">exists_root&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">hf</span><span class="o">,</span> <span class="n">complex</span><span class="bp">.</span><span class="n">exists_root</span> <span class="n">hf</span><span class="o">,</span>
+<span class="bp">..</span><span class="n">complex</span><span class="bp">.</span><span class="n">discrete_field</span><span class="o">}</span>
+
+<span class="kn">end</span> <span class="n">algebraically_closed_field</span>
+
+<span class="n">def</span> <span class="n">is_algebraically_closed</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">k</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+  <span class="bp">∀</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">k</span><span class="o">}</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">degree</span> <span class="n">f</span><span class="o">),</span> <span class="bp">∃</span> <span class="n">z</span> <span class="o">:</span> <span class="n">k</span><span class="o">,</span> <span class="n">is_root</span> <span class="n">f</span> <span class="n">z</span>
+
+<span class="c1">-- sanity check</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">is_algebraically_closed</span> <span class="n">ℂ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">hf</span><span class="o">,</span> <span class="n">complex</span><span class="bp">.</span><span class="n">exists_root</span>
+</pre></div>
+
+
+<p>Should it be a new class, or just a definition? What should I be doing in order to be able to confidently make this decision myself?</p>
+
+<a name="185448508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/formalising%20def%20of%20alg%20closed%20fields/near/185448508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/80165formalisingdefofalgclosedfields.html#185448508">Patrick Massot (Jan 12 2020 at 20:17)</a>:</h4>
+<p>You can make it a class either way. The question is only whether it should extend <code>discrete_field</code> or take it as a parameter.</p>
+
+<a name="185448557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/formalising%20def%20of%20alg%20closed%20fields/near/185448557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/80165formalisingdefofalgclosedfields.html#185448557">Patrick Massot (Jan 12 2020 at 20:18)</a>:</h4>
+<p>Since it doesn't use more types than <code>discrete_field</code>, Mario's rule is to extend.</p>
+
+<a name="185448560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/formalising%20def%20of%20alg%20closed%20fields/near/185448560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/80165formalisingdefofalgclosedfields.html#185448560">Patrick Massot (Jan 12 2020 at 20:18)</a>:</h4>
+<p>But I guess either way would be fine.</p>
+
+<a name="185448586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/formalising%20def%20of%20alg%20closed%20fields/near/185448586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/80165formalisingdefofalgclosedfields.html#185448586">Kevin Buzzard (Jan 12 2020 at 20:19)</a>:</h4>
+<blockquote>
+<p>But I guess either way would be fine.</p>
+</blockquote>
+<p>This is exactly the problem! There is so often more than one way to do it and I never know which one to choose.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
