@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Algebraic closure Roadmap](47612AlgebraicclosureRoadmap.html) (1 message, latest: Jan 12 2020 at 21:53)
+* [Algebraic closure Roadmap](47612AlgebraicclosureRoadmap.html) (2 messages, latest: Jan 12 2020 at 22:27)
+
+* [Future projects as Wiki?](55533FutureprojectsasWiki.html) (1 message, latest: Jan 12 2020 at 22:27)
 
 * [formalising def of alg closed fields](80165formalisingdefofalgclosedfields.html) (5 messages, latest: Jan 12 2020 at 20:19)
 
