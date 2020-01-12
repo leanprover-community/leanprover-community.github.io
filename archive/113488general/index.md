@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Term rewriting and PL theory](21022TermrewritingandPLtheory.html) (8 messages, latest: Jan 12 2020 at 05:11)
+* [Term rewriting and PL theory](21022TermrewritingandPLtheory.html) (9 messages, latest: Jan 12 2020 at 07:42)
 
 * [new maintainers](23366newmaintainers.html) (5 messages, latest: Jan 12 2020 at 04:32)
 
