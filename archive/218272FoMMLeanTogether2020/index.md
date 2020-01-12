@@ -9,6 +9,8 @@ permalink: archive/218272FoMMLeanTogether2020/index.html
 
 ### Topics:
 
+* [photos](02942photos.html) (1 message, latest: Jan 12 2020 at 00:21)
+
 * [Term rewriting and PL theory](21022TermrewritingandPLtheory.html) (9 messages, latest: Jan 11 2020 at 15:52)
 
 * [Notes of maintainers meeting?](03554Notesofmaintainersmeeting.html) (1 message, latest: Jan 11 2020 at 01:55)
