@@ -32,6 +32,17 @@ permalink: archive/113489newmembers/03822Howtoaccessthemultiplicationinsidethemo
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20access%20the%20multiplication%20inside%20the%20monoid%20inside%20../near/185419619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03822Howtoaccessthemultiplicationinsidethemonoidinside.html#185419619">Agnishom Chattopadhyay (Jan 12 2020 at 05:18)</a>:</h4>
 <p>What other way is there to do this? My understanding is that something like <code>M.is_monoid.mul</code> or similar thing should work</p>
 
+<a name="185434711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20access%20the%20multiplication%20inside%20the%20monoid%20inside%20../near/185434711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03822Howtoaccessthemultiplicationinsidethemonoidinside.html#185434711">Chris B (Jan 12 2020 at 13:35)</a>:</h4>
+<p>This works for me :</p>
+<div class="codehilite"><pre><span></span>def recognizer_to_dfa {alphabet : Type} [fintype alphabet] (M : monoid_recognizer alphabet) : dfa alphabet :=
+let MONOID_MUL : M.m → M.m → M.m := M.is_monoid.mul
+in @dfa.mk _ _ M.m M.is_finite M.has_decidable_eq (λ q a, MONOID_MUL q (M.h [a])) (M.h []) M.fin
+</pre></div>
+
+
+<p>What error message are you getting?</p>
+
 
 {% endraw %}
 
