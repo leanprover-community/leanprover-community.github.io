@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [How to access the multiplication inside the monoid inside ..](03822Howtoaccessthemultiplicationinsidethemonoidinside.html) (5 messages, latest: Jan 12 2020 at 13:35)
+* [How to access the multiplication inside the monoid inside ..](03822Howtoaccessthemultiplicationinsidethemonoidinside.html) (6 messages, latest: Jan 12 2020 at 15:47)
 
 * [Equivalent Lean command for Coq's Search?](69175EquivalentLeancommandforCoqsSearch.html) (8 messages, latest: Jan 12 2020 at 05:59)
 
