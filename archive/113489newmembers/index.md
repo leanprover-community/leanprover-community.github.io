@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [How to access the multiplication inside the monoid inside ..](03822Howtoaccessthemultiplicationinsidethemonoidinside.html) (7 messages, latest: Jan 12 2020 at 16:32)
+* [How to access the multiplication inside the monoid inside ..](03822Howtoaccessthemultiplicationinsidethemonoidinside.html) (8 messages, latest: Jan 12 2020 at 17:47)
+
+* [A finite set has finitely many endofunctions?](54624Afinitesethasfinitelymanyendofunctions.html) (7 messages, latest: Jan 12 2020 at 17:09)
 
 * [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (35 messages, latest: Jan 12 2020 at 16:32)
-
-* [A finite set has finitely many endofunctions?](54624Afinitesethasfinitelymanyendofunctions.html) (5 messages, latest: Jan 12 2020 at 16:28)
 
 * [Equivalent Lean command for Coq's Search?](69175EquivalentLeancommandforCoqsSearch.html) (8 messages, latest: Jan 12 2020 at 05:59)
 

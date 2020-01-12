@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Starting a Machine Learning for Theorem Proving stream](70719StartingaMachineLearningforTheoremProvingstream.html) (2 messages, latest: Jan 12 2020 at 16:27)
+* [Starting a Machine Learning for Theorem Proving stream](70719StartingaMachineLearningforTheoremProvingstream.html) (4 messages, latest: Jan 12 2020 at 17:46)
+
+* [HoTT in Lean](14455HoTTinLean.html) (1 message, latest: Jan 12 2020 at 17:14)
 
 * [Hammer talk](28743Hammertalk.html) (3 messages, latest: Jan 12 2020 at 15:56)
 
