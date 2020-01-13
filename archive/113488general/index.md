@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Hammer talk](28743Hammertalk.html) (7 messages, latest: Jan 13 2020 at 02:56)
+* [Hammer talk](28743Hammertalk.html) (9 messages, latest: Jan 13 2020 at 03:24)
 
 * [Does proof checking use theorems?](06433Doesproofcheckingusetheorems.html) (15 messages, latest: Jan 13 2020 at 02:35)
 
