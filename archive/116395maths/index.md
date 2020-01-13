@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [uniform convergence](45296uniformconvergence.html) (1 message, latest: Jan 13 2020 at 21:57)
+
 * [Algebraic geometry course](53656Algebraicgeometrycourse.html) (5 messages, latest: Jan 13 2020 at 20:20)
 
 * [Algebraic closure Roadmap](47612AlgebraicclosureRoadmap.html) (3 messages, latest: Jan 13 2020 at 00:09)
