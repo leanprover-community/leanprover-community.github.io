@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Does proof checking use theorems?](06433Doesproofcheckingusetheorems.html) (1 message, latest: Jan 12 2020 at 23:48)
+* [Does proof checking use theorems?](06433Doesproofcheckingusetheorems.html) (14 messages, latest: Jan 13 2020 at 00:56)
 
 * [Book recomendation](33332Bookrecomendation.html) (1 message, latest: Jan 12 2020 at 22:36)
 

@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Algebraic closure Roadmap](47612AlgebraicclosureRoadmap.html) (2 messages, latest: Jan 12 2020 at 22:27)
+* [Algebraic closure Roadmap](47612AlgebraicclosureRoadmap.html) (3 messages, latest: Jan 13 2020 at 00:09)
 
 * [Future projects as Wiki?](55533FutureprojectsasWiki.html) (1 message, latest: Jan 12 2020 at 22:27)
 

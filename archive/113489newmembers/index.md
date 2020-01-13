@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [accessing current and previous patterns](96853accessingcurrentandpreviouspatterns.html) (2 messages, latest: Jan 13 2020 at 00:57)
+
 * [How to access the multiplication inside the monoid inside ..](03822Howtoaccessthemultiplicationinsidethemonoidinside.html) (10 messages, latest: Jan 12 2020 at 20:53)
 
 * [A finite set has finitely many endofunctions?](54624Afinitesethasfinitelymanyendofunctions.html) (13 messages, latest: Jan 12 2020 at 20:52)
