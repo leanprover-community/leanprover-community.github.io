@@ -340,6 +340,62 @@ permalink: archive/113489newmembers/17142basics.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/185448185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#185448185">Iocta (Jan 12 2020 at 20:06)</a>:</h4>
 <p>ah I see</p>
 
+<a name="185458232"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/185458232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#185458232">Iocta (Jan 13 2020 at 01:06)</a>:</h4>
+<p>This <code>example</code> works but it's quite long. Did I miss some opportunity to simplify?</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span>
+
+<span class="kn">theorem</span> <span class="n">contrap</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">¬</span><span class="n">q</span> <span class="bp">→</span> <span class="bp">¬</span><span class="n">p</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">h</span> <span class="n">hnq</span> <span class="n">hp</span><span class="o">,</span> <span class="n">hnq</span> <span class="o">(</span><span class="n">h</span> <span class="n">hp</span><span class="o">)</span>
+
+
+<span class="kn">open</span> <span class="n">classical</span>
+
+<span class="kn">lemma</span> <span class="n">unnotnot</span> <span class="o">:</span> <span class="bp">¬¬</span><span class="n">p</span> <span class="bp">→</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">hnnp</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">em</span> <span class="n">p</span><span class="o">)</span> <span class="n">id</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hnp</span><span class="o">,</span> <span class="n">false</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">absurd</span> <span class="n">hnp</span> <span class="n">hnnp</span><span class="o">))</span>
+
+<span class="kn">lemma</span> <span class="n">notnot</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">→</span> <span class="bp">¬¬</span><span class="n">p</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">hp</span> <span class="n">hnp</span><span class="o">,</span> <span class="n">hnp</span> <span class="n">hp</span>
+
+<span class="kn">theorem</span> <span class="n">ncontrap</span> <span class="o">:</span> <span class="o">(</span> <span class="bp">¬</span><span class="n">p</span> <span class="bp">→</span> <span class="bp">¬</span><span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">q</span> <span class="bp">→</span> <span class="n">p</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">np2nq</span> <span class="n">hq</span><span class="o">,</span>
+<span class="n">or</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">em</span> <span class="n">p</span><span class="o">)</span>
+<span class="n">id</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">hnp</span><span class="o">,</span>  <span class="o">(</span><span class="n">absurd</span> <span class="o">(</span><span class="n">np2nq</span> <span class="n">hnp</span><span class="o">)</span>   <span class="o">(</span><span class="n">notnot</span> <span class="bp">_</span> <span class="n">hq</span><span class="o">)))</span>
+
+
+<span class="kn">lemma</span> <span class="n">contrapositive_not</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">¬</span><span class="o">(</span><span class="bp">¬</span><span class="n">q</span> <span class="bp">→</span> <span class="bp">¬</span><span class="n">p</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span><span class="n">h</span> <span class="n">h&#39;</span><span class="o">,</span>
+<span class="n">or</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">em</span> <span class="n">q</span><span class="o">)</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">hq</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">nnp2nnq</span> <span class="o">:</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="o">(</span><span class="n">contrap</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">h&#39;</span><span class="o">),</span>
+  <span class="k">have</span> <span class="n">p2q</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">q</span><span class="o">,</span> <span class="k">from</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">hq</span><span class="o">:</span> <span class="bp">_</span><span class="o">,</span>
+    <span class="k">from</span> <span class="n">unnotnot</span> <span class="bp">_</span> <span class="o">(</span><span class="n">nnp2nnq</span> <span class="o">(</span><span class="n">notnot</span> <span class="bp">_</span> <span class="n">hp</span><span class="o">)),</span> <span class="n">hq</span><span class="o">),</span>
+  <span class="n">absurd</span> <span class="n">p2q</span> <span class="n">h</span><span class="o">)</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">hnq</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">hnp</span><span class="o">:</span> <span class="bp">¬</span><span class="n">p</span><span class="o">,</span> <span class="k">from</span> <span class="n">h&#39;</span> <span class="n">hnq</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">p2q</span><span class="o">:</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">q</span><span class="o">,</span> <span class="k">from</span> <span class="n">ncontrap</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">h&#39;</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">false&#39;</span> <span class="o">:</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="n">h</span> <span class="n">p2q</span><span class="o">,</span>
+  <span class="n">false&#39;</span><span class="o">)</span>
+
+
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="n">p</span> <span class="bp">∧</span> <span class="bp">¬</span><span class="n">q</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">h</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">hnq</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">q</span><span class="o">,</span> <span class="k">from</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hq&#39;</span><span class="o">,</span> <span class="o">(</span><span class="n">h</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span> <span class="n">hq&#39;</span><span class="o">))),</span>
+<span class="n">and</span><span class="bp">.</span><span class="n">intro</span>
+<span class="o">(</span><span class="n">or</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">em</span> <span class="n">p</span><span class="o">)</span> <span class="n">id</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hnp</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">h&#39;</span> <span class="o">:</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="n">contrapositive_not</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">h</span><span class="o">,</span>
+<span class="o">(</span><span class="n">false</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hnq&#39;</span><span class="o">,</span> <span class="n">hnp</span><span class="o">)))))</span>
+<span class="n">hnq</span>
+</pre></div>
+
+<a name="185458907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/185458907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#185458907">Reid Barton (Jan 13 2020 at 01:27)</a>:</h4>
+<p>This looks a lot more complicated than necessary. In particular, you shouldn't need to use <code>em</code> again to fill in the underscore.<br>
+In the context of the underscore, you know <code>not p</code> and also <code>not (p -&gt; q)</code>. But <code>not p</code> is <code>p -&gt; false</code>, and from <code>false</code> you can prove <code>q</code>, so you get <code>p -&gt; q</code>, which contradicts <code>not (p -&gt; q)</code>.</p>
+
 
 {% endraw %}
 
