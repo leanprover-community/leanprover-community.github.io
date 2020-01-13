@@ -41,6 +41,83 @@ permalink: archive/113489newmembers/96853accessingcurrentandpreviouspatterns.htm
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/accessing%20current%20and%20previous%20patterns/near/185473567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96853accessingcurrentandpreviouspatterns.html#185473567">Etienne Laurin (Jan 13 2020 at 08:32)</a>:</h4>
 <p>I'm porting some code from Haskell, I was trying to use pattern matching instead of <code>dite</code>.</p>
 
+<a name="185525421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/accessing%20current%20and%20previous%20patterns/near/185525421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96853accessingcurrentandpreviouspatterns.html#185525421">Etienne Laurin (Jan 13 2020 at 19:04)</a>:</h4>
+<p>I'm trying to write a tactic that keeps a pattern match witness, but I'm getting stuck implementing <code>has_reflect</code>. What am I missing here?</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="kn">structure</span> <span class="n">equation</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">witness</span> <span class="o">:</span> <span class="n">option</span> <span class="n">name</span><span class="o">)</span> <span class="o">(</span><span class="n">pattern</span> <span class="o">:</span> <span class="n">pexpr</span><span class="o">)</span> <span class="o">(</span><span class="n">body</span> <span class="o">:</span> <span class="n">pexpr</span><span class="o">)</span>
+
+<span class="n">meta</span> <span class="kn">instance</span> <span class="n">equation</span><span class="bp">.</span><span class="n">reflect</span> <span class="o">:</span> <span class="n">has_reflect</span> <span class="n">equation</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="n">witness</span><span class="o">,</span> <span class="n">pattern</span><span class="o">,</span> <span class="n">body</span><span class="bp">⟩</span>
+<span class="o">:=</span> <span class="bp">`</span><span class="o">(</span><span class="n">equation</span><span class="bp">.</span><span class="n">mk</span> <span class="err">%%</span><span class="o">(</span><span class="n">reflect</span> <span class="n">witness</span><span class="o">)</span> <span class="err">%%</span><span class="o">(</span><span class="n">reflect</span> <span class="n">pattern</span><span class="o">)</span> <span class="err">%%</span><span class="o">(</span><span class="n">reflect</span> <span class="n">body</span><span class="o">))</span>
+<span class="c1">-- equation type mismatch, term has type</span>
+<span class="c1">--   expr</span>
+<span class="c1">-- but is expected to have type</span>
+<span class="c1">--   reflected {witness := witness, pattern := pattern, body := body}</span>
+
+<span class="bp">#</span><span class="n">reduce</span> <span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">equation</span><span class="o">,</span> <span class="n">reflected</span> <span class="n">x</span>
+<span class="c1">-- λ (x : equation), expr</span>
+</pre></div>
+
+<a name="185528421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/accessing%20current%20and%20previous%20patterns/near/185528421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96853accessingcurrentandpreviouspatterns.html#185528421">Mario Carneiro (Jan 13 2020 at 19:33)</a>:</h4>
+<p>I think you can just do this:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">has_reflect</span><span class="o">]</span>
+<span class="n">meta</span> <span class="kn">structure</span> <span class="n">equation</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">witness</span> <span class="o">:</span> <span class="n">option</span> <span class="n">name</span><span class="o">)</span> <span class="o">(</span><span class="n">pattern</span> <span class="o">:</span> <span class="n">pexpr</span><span class="o">)</span> <span class="o">(</span><span class="n">body</span> <span class="o">:</span> <span class="n">pexpr</span><span class="o">)</span>
+</pre></div>
+
+<a name="185528815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/accessing%20current%20and%20previous%20patterns/near/185528815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96853accessingcurrentandpreviouspatterns.html#185528815">Mario Carneiro (Jan 13 2020 at 19:36)</a>:</h4>
+<p>You have to use some messy methods to get around the typing otherwise:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">dont_tell_me_what_I_cant_do</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">reflected</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">delta</span> <span class="n">reflected</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">id</span>
+
+<span class="n">meta</span> <span class="kn">instance</span> <span class="n">equation</span><span class="bp">.</span><span class="n">reflect</span> <span class="o">:</span> <span class="n">has_reflect</span> <span class="n">equation</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="n">witness</span><span class="o">,</span> <span class="n">pattern</span><span class="o">,</span> <span class="n">body</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">dont_tell_me_what_I_cant_do</span>
+  <span class="bp">`</span><span class="o">(</span><span class="n">equation</span><span class="bp">.</span><span class="n">mk</span> <span class="err">%%</span><span class="o">(</span><span class="n">reflect</span> <span class="n">witness</span><span class="o">)</span> <span class="err">%%</span><span class="o">(</span><span class="n">reflect</span> <span class="n">pattern</span><span class="o">)</span> <span class="err">%%</span><span class="o">(</span><span class="n">reflect</span> <span class="n">body</span><span class="o">))</span>
+</pre></div>
+
+<a name="185529053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/accessing%20current%20and%20previous%20patterns/near/185529053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96853accessingcurrentandpreviouspatterns.html#185529053">Mario Carneiro (Jan 13 2020 at 19:38)</a>:</h4>
+<p>If you don't construct the term yourself but let lean do it, it is more agreeable:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="kn">instance</span> <span class="n">equation</span><span class="bp">.</span><span class="n">reflect</span> <span class="o">:</span> <span class="n">has_reflect</span> <span class="n">equation</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="n">witness</span><span class="o">,</span> <span class="n">pattern</span><span class="o">,</span> <span class="n">body</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="bp">`</span><span class="o">(</span><span class="bp">_</span><span class="o">)</span>
+</pre></div>
+
+<a name="185529083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/accessing%20current%20and%20previous%20patterns/near/185529083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96853accessingcurrentandpreviouspatterns.html#185529083">Etienne Laurin (Jan 13 2020 at 19:38)</a>:</h4>
+<p>Splendid, the attribute does work.</p>
+
+<a name="185529255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/accessing%20current%20and%20previous%20patterns/near/185529255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96853accessingcurrentandpreviouspatterns.html#185529255">Etienne Laurin (Jan 13 2020 at 19:40)</a>:</h4>
+<p><code>_</code> seems dodgy.. I have two <del>terms</del> variables of the same type I don't know which one it would pick.</p>
+
+<a name="185529284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/accessing%20current%20and%20previous%20patterns/near/185529284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96853accessingcurrentandpreviouspatterns.html#185529284">Mario Carneiro (Jan 13 2020 at 19:40)</a>:</h4>
+<p>The type is <code>reflect a</code> so lean knows exactly what to put there</p>
+
+<a name="185529324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/accessing%20current%20and%20previous%20patterns/near/185529324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96853accessingcurrentandpreviouspatterns.html#185529324">Mario Carneiro (Jan 13 2020 at 19:41)</a>:</h4>
+<p>The value is reflected in the type of the goal</p>
+
+<a name="185529352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/accessing%20current%20and%20previous%20patterns/near/185529352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96853accessingcurrentandpreviouspatterns.html#185529352">Mario Carneiro (Jan 13 2020 at 19:41)</a>:</h4>
+<p>You only need the brute force methods if you want to lie to lean about what the reflected value is</p>
+
+<a name="185529475"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/accessing%20current%20and%20previous%20patterns/near/185529475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96853accessingcurrentandpreviouspatterns.html#185529475">Mario Carneiro (Jan 13 2020 at 19:42)</a>:</h4>
+<p>for example</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="kn">instance</span> <span class="n">equation</span><span class="bp">.</span><span class="n">reflect</span> <span class="o">:</span> <span class="n">has_reflect</span> <span class="n">equation</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="n">witness</span><span class="o">,</span> <span class="n">pattern</span><span class="o">,</span> <span class="n">body</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">dont_tell_me_what_I_cant_do</span> <span class="bp">`</span><span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+</pre></div>
+
+<a name="185530105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/accessing%20current%20and%20previous%20patterns/near/185530105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96853accessingcurrentandpreviouspatterns.html#185530105">Etienne Laurin (Jan 13 2020 at 19:48)</a>:</h4>
+<p>What magic makes <code>_</code> work? If I change the pattern match into a <code>let</code>, it fails "to synthesize type class instance"</p>
+<div class="codehilite"><pre><span></span><span class="bp">|</span> <span class="n">eqn</span> <span class="o">:=</span> <span class="k">let</span> <span class="n">witness</span> <span class="o">:=</span> <span class="n">eqn</span><span class="bp">.</span><span class="n">witness</span><span class="o">,</span> <span class="n">body</span> <span class="o">:=</span> <span class="n">eqn</span><span class="bp">.</span><span class="n">body</span><span class="o">,</span> <span class="n">pattern</span> <span class="o">:=</span> <span class="n">eqn</span><span class="bp">.</span><span class="n">pattern</span> <span class="k">in</span> <span class="bp">`</span><span class="o">(</span><span class="bp">_</span><span class="o">)</span>
+</pre></div>
+
 
 {% endraw %}
 

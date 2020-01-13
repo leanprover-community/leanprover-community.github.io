@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [accessing current and previous patterns](96853accessingcurrentandpreviouspatterns.html) (4 messages, latest: Jan 13 2020 at 08:32)
+* [accessing current and previous patterns](96853accessingcurrentandpreviouspatterns.html) (15 messages, latest: Jan 13 2020 at 19:48)
 
 * [A finite set has finitely many endofunctions?](54624Afinitesethasfinitelymanyendofunctions.html) (16 messages, latest: Jan 13 2020 at 07:52)
 
