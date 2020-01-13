@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [HoTT in Lean](14455HoTTinLean.html) (4 messages, latest: Jan 13 2020 at 17:48)
+
 * [Does proof checking use theorems?](06433Doesproofcheckingusetheorems.html) (44 messages, latest: Jan 13 2020 at 16:57)
 
 * [Automation for list.perm](85351Automationforlistperm.html) (3 messages, latest: Jan 13 2020 at 14:36)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [Hammer talk](28743Hammertalk.html) (9 messages, latest: Jan 13 2020 at 03:24)
 
 * [Book recomendation](33332Bookrecomendation.html) (1 message, latest: Jan 12 2020 at 22:36)
-
-* [HoTT in Lean](14455HoTTinLean.html) (2 messages, latest: Jan 12 2020 at 21:33)
 
 * [Starting a Machine Learning for Theorem Proving stream](70719StartingaMachineLearningforTheoremProvingstream.html) (4 messages, latest: Jan 12 2020 at 17:46)
 
