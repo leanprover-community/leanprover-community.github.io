@@ -9,15 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Does proof checking use theorems?](06433Doesproofcheckingusetheorems.html) (14 messages, latest: Jan 13 2020 at 00:56)
+* [Hammer talk](28743Hammertalk.html) (7 messages, latest: Jan 13 2020 at 02:56)
+
+* [Does proof checking use theorems?](06433Doesproofcheckingusetheorems.html) (15 messages, latest: Jan 13 2020 at 02:35)
 
 * [Book recomendation](33332Bookrecomendation.html) (1 message, latest: Jan 12 2020 at 22:36)
 
 * [HoTT in Lean](14455HoTTinLean.html) (2 messages, latest: Jan 12 2020 at 21:33)
 
 * [Starting a Machine Learning for Theorem Proving stream](70719StartingaMachineLearningforTheoremProvingstream.html) (4 messages, latest: Jan 12 2020 at 17:46)
-
-* [Hammer talk](28743Hammertalk.html) (3 messages, latest: Jan 12 2020 at 15:56)
 
 * [contrapositive](81947contrapositive.html) (50 messages, latest: Jan 12 2020 at 14:32)
 

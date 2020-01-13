@@ -30,6 +30,37 @@ permalink: archive/113488general/28743Hammertalk.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Hammer%20talk/near/185439357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28743Hammertalk.html#185439357">Jesse Michael Han (Jan 12 2020 at 15:56)</a>:</h4>
 <p>for the last question, (iirc) the hammer currently translates theorems in <code>mathlib</code> to TPTP, and it would be easy to use his setup to extract a dataset (of just theorem statements) in that format</p>
 
+<a name="185461045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Hammer%20talk/near/185461045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28743Hammertalk.html#185461045">Gabriel Ebner (Jan 13 2020 at 02:40)</a>:</h4>
+<blockquote>
+<p>How useful would it be to improve the premise selection algorithm</p>
+</blockquote>
+<p>There is lots of room for improvement here.  Slide 28 shows the results we get if we select the lemmas contained in the proof term of the existing proof.  Choosing the lemmas from the proof term doubles the success rate on average.</p>
+
+<a name="185461260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Hammer%20talk/near/185461260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28743Hammertalk.html#185461260">Gabriel Ebner (Jan 13 2020 at 02:48)</a>:</h4>
+<blockquote>
+<p>Is this hacked into the Lean source code?</p>
+</blockquote>
+<p>Yes.  It's in this file in my branch: <a href="https://github.com/gebner/lean/blob/05a7e979a1d8f87a2c4c6266dec0efd9bb03afa9/src/library/feature_search.cpp" target="_blank" title="https://github.com/gebner/lean/blob/05a7e979a1d8f87a2c4c6266dec0efd9bb03afa9/src/library/feature_search.cpp">https://github.com/gebner/lean/blob/05a7e979a1d8f87a2c4c6266dec0efd9bb03afa9/src/library/feature_search.cpp</a></p>
+<blockquote>
+<p>How easy would it be to swap out your tactic with another custom tactic using a mix of Lean and C++ code (or all C++ code)?</p>
+</blockquote>
+<p>If you have C++ code, you'd need to modify the Lean source code to call it (but that's not too hard, see <a href="https://github.com/gebner/lean/blob/05a7e979a1d8f87a2c4c6266dec0efd9bb03afa9/src/library/feature_search.cpp#L242-L258" target="_blank" title="https://github.com/gebner/lean/blob/05a7e979a1d8f87a2c4c6266dec0efd9bb03afa9/src/library/feature_search.cpp#L242-L258">https://github.com/gebner/lean/blob/05a7e979a1d8f87a2c4c6266dec0efd9bb03afa9/src/library/feature_search.cpp#L242-L258</a> for the part that does this).  Another option is to call an external program (and parse stdout).  In either case you'd need to modify the lean part to call the new selection code (not too hard either, but I haven't made an API to add other lemma selection algorithms).</p>
+
+<a name="185461395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Hammer%20talk/near/185461395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28743Hammertalk.html#185461395">Simon Cruanes (Jan 13 2020 at 02:53)</a>:</h4>
+<p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> have you considered, longer term, cooperating with prover authors so that they output more detailed proofs?<br>
+For example, as far as I can tell, E-HO could possibly be modified to output not just the DAG of clauses produced by superposition, but also the substitutions used at each step. That makes proof reconstruction much easier since steps are either instantiations or essentially ground inferences.<br>
+I imagine that it'd incur a slowdown but that's a tradeoff.</p>
+
+<a name="185461496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Hammer%20talk/near/185461496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28743Hammertalk.html#185461496">Gabriel Ebner (Jan 13 2020 at 02:56)</a>:</h4>
+<blockquote>
+<p>Finally, how easy would it be to extract the information used by the hammer?</p>
+</blockquote>
+<p>For the evaluation in the slides I've used this wonderfully hacky piece of code: <a href="https://github.com/gebner/mathlib/blob/f4120984839677564fabf5b80f7203374dc832ca/src/tactic/hammer/do_eval.lean#L80" target="_blank" title="https://github.com/gebner/mathlib/blob/f4120984839677564fabf5b80f7203374dc832ca/src/tactic/hammer/do_eval.lean#L80">https://github.com/gebner/mathlib/blob/f4120984839677564fabf5b80f7203374dc832ca/src/tactic/hammer/do_eval.lean#L80</a>  It prints lots of stuff to stderr using a very ad-hoc format.  All of the ones you have in mind are somewhere in that file, e.g. <code>axs</code> on the line I linked to is the list of lemmas selected using the lemma selection and <code>lems.map prod.fst</code> is the list of lemmas used by the external prover.</p>
+
 
 {% endraw %}
 
