@@ -76,6 +76,19 @@ Do you have in mind lemmas? Of course Lean does not re-check the proof of a lemm
 </blockquote>
 <p>AFAIU <code>meta</code> is gone in lean4.  However many interesting parts are implemented using an FFI to C++ code, and for those functions that are imported from C++ you can only prove that they produce <em>some</em> result value, but not which one.</p>
 
+<a name="185472231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Does%20proof%20checking%20use%20theorems%3F/near/185472231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06433Doesproofcheckingusetheorems.html#185472231">Tim Daly (Jan 13 2020 at 08:06)</a>:</h4>
+<p>Martin-Lof's paper (Constructive Mathematics and Computer Programming) (<a href="https://www.cs.tufts.edu/~nr/cs257/archive/per-martin-lof/constructive-math.pdf" target="_blank" title="https://www.cs.tufts.edu/~nr/cs257/archive/per-martin-lof/constructive-math.pdf">https://www.cs.tufts.edu/~nr/cs257/archive/per-martin-lof/constructive-math.pdf</a>) claims "it no longer seems possible to distinguish the discipline of programming from constructive mathematics". Bob Harper uses it as the basis of his 2018 Oregon Lecture (<a href="https://www.youtube.com/playlist?list=PL0DsGHMPLUWXXA8RHzVZ2B5E5hP8CD15Z" target="_blank" title="https://www.youtube.com/playlist?list=PL0DsGHMPLUWXXA8RHzVZ2B5E5hP8CD15Z">https://www.youtube.com/playlist?list=PL0DsGHMPLUWXXA8RHzVZ2B5E5hP8CD15Z</a>) (aside: Harper's courses are exceptionally good)</p>
+<p>It seems, as far as I can tell, the "transition paper" from the prior discussion to a formal basis for program verification in Lean. (I read it before but not with this question "before the court").</p>
+
+<a name="185474381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Does%20proof%20checking%20use%20theorems%3F/near/185474381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06433Doesproofcheckingusetheorems.html#185474381">Chris B (Jan 13 2020 at 08:46)</a>:</h4>
+<blockquote>
+<p>They argue that verifications will involve dozens of pages. A verification of the GCD algorithm, if everything is expanded in all its glory (i.e. reproven) might take several pages but mathematical proofs rest on prior proofs, making them shorter, so I don't see that their objection is reasonable.</p>
+</blockquote>
+<p>Even the kernel makes use abstraction IE  "<code>theorem_x : T := h1 h2 h3</code> type-checks, so don't bother re-checking it at subsequent use sites". It's definitely the case that internally, Lean produces more data than a human would want to deal with in the process of convincing itself something is admissible, but isn't that why we're using computers in the first place?</p>
+<p>As for an example of a program accepted by Lean, some minimal examples would be like the read/write registers that are used as a state_t tutorial in "Programming in Lean". Even just array access in lean using <code>fin</code> is a very cool example of a tiny program with a built-in spec that ensures all accesses are in-bounds . Off the top of my head I can't think of any good examples that aren't <code>meta</code>, but a lot of those could probably be un-meta'd just by giving them a gas parameter to ensure termination.</p>
+
 
 {% endraw %}
 

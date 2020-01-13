@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Hammer talk](28743Hammertalk.html) (9 messages, latest: Jan 13 2020 at 03:24)
+* [Does proof checking use theorems?](06433Doesproofcheckingusetheorems.html) (17 messages, latest: Jan 13 2020 at 08:46)
 
-* [Does proof checking use theorems?](06433Doesproofcheckingusetheorems.html) (15 messages, latest: Jan 13 2020 at 02:35)
+* [Hammer talk](28743Hammertalk.html) (9 messages, latest: Jan 13 2020 at 03:24)
 
 * [Book recomendation](33332Bookrecomendation.html) (1 message, latest: Jan 12 2020 at 22:36)
 
