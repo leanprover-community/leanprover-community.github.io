@@ -9,6 +9,10 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [set.not_mem_Inter_iff](22431setnotmemInteriff.html) (8 messages, latest: Jan 13 2020 at 22:49)
+
+* [(no topic)](79918notopic.html) (1 message, latest: Jan 13 2020 at 22:23)
+
 * [uniform convergence](45296uniformconvergence.html) (1 message, latest: Jan 13 2020 at 21:57)
 
 * [Algebraic geometry course](53656Algebraicgeometrycourse.html) (5 messages, latest: Jan 13 2020 at 20:20)
