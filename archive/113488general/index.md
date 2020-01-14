@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [bulleting / browers questions](04997bulletingbrowersquestions.html) (11 messages, latest: Jan 14 2020 at 17:43)
+
 * [web editor](11270webeditor.html) (21 messages, latest: Jan 14 2020 at 16:14)
 
 * [HoTT in Lean](14455HoTTinLean.html) (6 messages, latest: Jan 14 2020 at 12:36)
 
 * [Does proof checking use theorems?](06433Doesproofcheckingusetheorems.html) (45 messages, latest: Jan 14 2020 at 11:11)
-
-* [bulleting / browers questions](04997bulletingbrowersquestions.html) (10 messages, latest: Jan 14 2020 at 11:09)
 
 * [words](77296words.html) (11 messages, latest: Jan 14 2020 at 09:43)
 
