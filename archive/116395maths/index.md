@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [coe_sort for finset](79663coesortforfinset.html) (14 messages, latest: Jan 14 2020 at 08:58)
+* [coe_sort for finset](79663coesortforfinset.html) (15 messages, latest: Jan 14 2020 at 09:11)
 
 * [uniform convergence](45296uniformconvergence.html) (2 messages, latest: Jan 14 2020 at 08:19)
 

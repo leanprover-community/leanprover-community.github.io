@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [words](77296words.html) (11 messages, latest: Jan 14 2020 at 09:43)
+
+* [bulleting / browers questions](04997bulletingbrowersquestions.html) (9 messages, latest: Jan 14 2020 at 09:37)
+
 * [type system](41896typesystem.html) (4 messages, latest: Jan 14 2020 at 08:59)
-
-* [words](77296words.html) (6 messages, latest: Jan 14 2020 at 08:12)
-
-* [bulleting / browers questions](04997bulletingbrowersquestions.html) (8 messages, latest: Jan 14 2020 at 02:07)
 
 * [Starting a Machine Learning for Theorem Proving stream](70719StartingaMachineLearningforTheoremProvingstream.html) (5 messages, latest: Jan 14 2020 at 01:06)
 
