@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [A finite set has finitely many endofunctions?](54624Afinitesethasfinitelymanyendofunctions.html) (17 messages, latest: Jan 14 2020 at 13:41)
+
 * [basics](17142basics.html) (51 messages, latest: Jan 14 2020 at 06:11)
 
 * [accessing current and previous patterns](96853accessingcurrentandpreviouspatterns.html) (17 messages, latest: Jan 13 2020 at 23:03)
-
-* [A finite set has finitely many endofunctions?](54624Afinitesethasfinitelymanyendofunctions.html) (16 messages, latest: Jan 13 2020 at 07:52)
 
 * [How to access the multiplication inside the monoid inside ..](03822Howtoaccessthemultiplicationinsidethemonoidinside.html) (10 messages, latest: Jan 12 2020 at 20:53)
 

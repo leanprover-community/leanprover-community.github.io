@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [`a ≤ b → f b ≤ f a`](38187abfbfa.html) (9 messages, latest: Jan 14 2020 at 12:58)
+* [`a ≤ b → f b ≤ f a`](38187abfbfa.html) (12 messages, latest: Jan 14 2020 at 13:25)
 
 * [Algebraic geometry course](53656Algebraicgeometrycourse.html) (10 messages, latest: Jan 14 2020 at 11:57)
 
