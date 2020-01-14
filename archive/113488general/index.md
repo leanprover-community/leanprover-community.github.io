@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Starting a Machine Learning for Theorem Proving stream](70719StartingaMachineLearningforTheoremProvingstream.html) (5 messages, latest: Jan 14 2020 at 01:06)
+
 * [Variables in Lean](23793VariablesinLean.html) (4 messages, latest: Jan 14 2020 at 00:44)
 
 * [bulleting / browers questions](04997bulletingbrowersquestions.html) (7 messages, latest: Jan 14 2020 at 00:16)
@@ -22,8 +24,6 @@ permalink: archive/113488general/index.html
 * [Hammer talk](28743Hammertalk.html) (9 messages, latest: Jan 13 2020 at 03:24)
 
 * [Book recomendation](33332Bookrecomendation.html) (1 message, latest: Jan 12 2020 at 22:36)
-
-* [Starting a Machine Learning for Theorem Proving stream](70719StartingaMachineLearningforTheoremProvingstream.html) (4 messages, latest: Jan 12 2020 at 17:46)
 
 * [contrapositive](81947contrapositive.html) (50 messages, latest: Jan 12 2020 at 14:32)
 

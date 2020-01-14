@@ -26,11 +26,11 @@ permalink: archive/index.html
 
 * [FoMM / Lean Together 2020](218272FoMMLeanTogether2020/index.html) (13 topics)
 
+* [Machine Learning for Theorem Proving](219941MachineLearningforTheoremProving/index.html) (6 topics)
+
 * [concrete semantics](187724concretesemantics/index.html) (4 topics)
 
 * [Is there code for X?](217875IstherecodeforX/index.html) (4 topics)
-
-* [Machine Learning for Theorem Proving](219941MachineLearningforTheoremProving/index.html) (4 topics)
 
 * [Big Proof 2019](198800BigProof2019/index.html) (3 topics)
 

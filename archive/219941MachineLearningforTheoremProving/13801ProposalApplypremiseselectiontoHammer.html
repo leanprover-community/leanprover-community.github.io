@@ -1,0 +1,42 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/219941MachineLearningforTheoremProving/13801ProposalApplypremiseselectiontoHammer.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/index.html">Machine Learning for Theorem Proving</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/13801ProposalApplypremiseselectiontoHammer.html">Proposal: Apply premise selection to Hammer</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="185556572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/Proposal%3A%20Apply%20premise%20selection%20to%20Hammer/near/185556572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/13801ProposalApplypremiseselectiontoHammer.html#185556572">Jason Rute (Jan 14 2020 at 01:22)</a>:</h4>
+<p>Here is a project which I think is very doable for an enterprising person.  Recently, <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span>  <a href="http://www.andrew.cmu.edu/user/avigad/meetings/fomm2020/slides/fomm_ebner.pdf" target="_blank" title="http://www.andrew.cmu.edu/user/avigad/meetings/fomm2020/slides/fomm_ebner.pdf">incorporated an SMT-based "hammer" into a branch of Lean3</a>.  Right now, it uses TF-IDF (with cosine similarity) to select premises/lemmas.  However, Gabriel showed (on slide 28) that if one used better premise selection one could up-to double the success rate.  I think this is a ripe opportunity to apply the recent advancements in machine learning premise selection for theorem proving.</p>
+
+<a name="185556680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/Proposal%3A%20Apply%20premise%20selection%20to%20Hammer/near/185556680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/13801ProposalApplypremiseselectiontoHammer.html#185556680">Jason Rute (Jan 14 2020 at 01:25)</a>:</h4>
+<p>For supervised learning, Gabriel has already found a way to extract both the lemmas used in the original lean proofs as well as those used by the hammer.  This would make a great training set.  Then one could also apply reinforcement learning by using a trained premise selection model, extracting which lemmas have and have not been used, and then using this to train a new model.  Repeat until convergence.  Since the TF-IDF premise selector is already in C++, I imagine one could incorporate a trained TensorFlow model in there.  (And still do the training in Python by using his code to extract the lemmas used.)</p>
+
+<a name="185556780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/Proposal%3A%20Apply%20premise%20selection%20to%20Hammer/near/185556780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/13801ProposalApplypremiseselectiontoHammer.html#185556780">Jason Rute (Jan 14 2020 at 01:27)</a>:</h4>
+<p>See here for a discussion on some of this.  <a href="#narrow/stream/113488-general/topic/Hammer.20talk" title="#narrow/stream/113488-general/topic/Hammer.20talk">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Hammer.20talk</a></p>
+
+<a name="185556961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/Proposal%3A%20Apply%20premise%20selection%20to%20Hammer/near/185556961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/13801ProposalApplypremiseselectiontoHammer.html#185556961">Jason Rute (Jan 14 2020 at 01:31)</a>:</h4>
+<p>Of course a learned model of premise selection would have trouble with never-seen definitions (unlike TF-IDF).  Google's HOList however showed that sometimes this is ok.  They trained a model on the core HOL Light library, but it did respectably on the Flyspeck library even though there were a number of new definitions.  Moreover, there is <a href="https://arxiv.org/pdf/1911.02065.pdf" target="_blank" title="https://arxiv.org/pdf/1911.02065.pdf">recent research by IBM</a> about this exact problem.</p>
+
+<a name="185557161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/Proposal%3A%20Apply%20premise%20selection%20to%20Hammer/near/185557161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/13801ProposalApplypremiseselectiontoHammer.html#185557161">Jason Rute (Jan 14 2020 at 01:35)</a>:</h4>
+<p>Here is <a href="https://arxiv.org/pdf/1911.06904.pdf" target="_blank" title="https://arxiv.org/pdf/1911.06904.pdf">one of the best results in the area of premise selection</a> (also by IBM) at least according to the two standard machine learning benchmarks (HOLStep and the Mizar dataset).  While this might be complicated for a first pass, I could imagine starting with something simpler.  There are a lot of references in that paper (including the original HOLStep paper).  Also, I think Isabelle's Sledgehammer uses naive Bayes for another example.</p>
+
+<a name="185557477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/Proposal%3A%20Apply%20premise%20selection%20to%20Hammer/near/185557477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/13801ProposalApplypremiseselectiontoHammer.html#185557477">Jason Rute (Jan 14 2020 at 01:42)</a>:</h4>
+<p>Of course, this might be premature as a project since Gabriel is still improving the hammer (or maybe this was already something he had in mind to add to it).  Either way, I could imagine using the dependency graph of Lean premises as another standard premise selection dataset (this one coming from dependent type theory).</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
