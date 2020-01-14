@@ -118,6 +118,14 @@ permalink: archive/113489newmembers/96853accessingcurrentandpreviouspatterns.htm
 <div class="codehilite"><pre><span></span><span class="bp">|</span> <span class="n">eqn</span> <span class="o">:=</span> <span class="k">let</span> <span class="n">witness</span> <span class="o">:=</span> <span class="n">eqn</span><span class="bp">.</span><span class="n">witness</span><span class="o">,</span> <span class="n">body</span> <span class="o">:=</span> <span class="n">eqn</span><span class="bp">.</span><span class="n">body</span><span class="o">,</span> <span class="n">pattern</span> <span class="o">:=</span> <span class="n">eqn</span><span class="bp">.</span><span class="n">pattern</span> <span class="k">in</span> <span class="bp">`</span><span class="o">(</span><span class="bp">_</span><span class="o">)</span>
 </pre></div>
 
+<a name="185547657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/accessing%20current%20and%20previous%20patterns/near/185547657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96853accessingcurrentandpreviouspatterns.html#185547657">Mario Carneiro (Jan 13 2020 at 23:03)</a>:</h4>
+<p>If you don't pattern match on <code>eqn</code>, the goal is <code>reflect eqn</code>, and then lean's automatic mechanism for deriving reflect instances will use the <code>has_reflect equations</code> instance to synthesize this goal. This fails because we're in the middle of building the instance</p>
+
+<a name="185547696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/accessing%20current%20and%20previous%20patterns/near/185547696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96853accessingcurrentandpreviouspatterns.html#185547696">Mario Carneiro (Jan 13 2020 at 23:03)</a>:</h4>
+<p>The magic that makes <code> `(_)</code> produce a reflect instance is... magic, it is built into lean's elaborator</p>
+
 
 {% endraw %}
 

@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [set.not_mem_Inter_iff](22431setnotmemInteriff.html) (8 messages, latest: Jan 13 2020 at 22:49)
+* [set.not_mem_Inter_iff](22431setnotmemInteriff.html) (9 messages, latest: Jan 13 2020 at 23:06)
 
 * [(no topic)](79918notopic.html) (1 message, latest: Jan 13 2020 at 22:23)
 
