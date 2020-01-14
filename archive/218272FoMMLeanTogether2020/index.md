@@ -9,7 +9,9 @@ permalink: archive/218272FoMMLeanTogether2020/index.html
 
 ### Topics:
 
-* [Zoom](71430Zoom.html) (80 messages, latest: Jan 13 2020 at 11:44)
+* [Lean Together](47203LeanTogether.html) (9 messages, latest: Jan 14 2020 at 19:31)
+
+* [Zoom](71430Zoom.html) (81 messages, latest: Jan 14 2020 at 19:01)
 
 * [photos](02942photos.html) (1 message, latest: Jan 12 2020 at 00:21)
 
@@ -28,8 +30,6 @@ permalink: archive/218272FoMMLeanTogether2020/index.html
 * [travel and hotel](81662travelandhotel.html) (16 messages, latest: Jan 06 2020 at 04:23)
 
 * [dinner and catering](71041dinnerandcatering.html) (2 messages, latest: Dec 28 2019 at 21:27)
-
-* [Lean Together](47203LeanTogether.html) (1 message, latest: Dec 28 2019 at 20:53)
 
 * [streaming video](82274streamingvideo.html) (3 messages, latest: Dec 28 2019 at 20:52)
 
