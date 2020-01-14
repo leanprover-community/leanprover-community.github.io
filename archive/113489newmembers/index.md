@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1618 messages, latest: Jan 14 2020 at 21:21)
+
 * [A finite set has finitely many endofunctions?](54624Afinitesethasfinitelymanyendofunctions.html) (17 messages, latest: Jan 14 2020 at 13:41)
 
 * [basics](17142basics.html) (51 messages, latest: Jan 14 2020 at 06:11)
@@ -22,8 +24,6 @@ permalink: archive/113489newmembers/index.html
 * [Equivalent Lean command for Coq's Search?](69175EquivalentLeancommandforCoqsSearch.html) (8 messages, latest: Jan 12 2020 at 05:59)
 
 * [attempt at some geometry](35829attemptatsomegeometry.html) (105 messages, latest: Jan 10 2020 at 05:32)
-
-* [noob question(s)](52075noobquestions.html) (1616 messages, latest: Jan 09 2020 at 23:22)
 
 * [Induction over sigma in filters](94667Inductionoversigmainfilters.html) (12 messages, latest: Jan 08 2020 at 00:40)
 

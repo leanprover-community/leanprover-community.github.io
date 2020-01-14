@@ -9110,6 +9110,38 @@ Command exited with non-zero status 1
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/185267588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#185267588">Yury G. Kudryashov (Jan 09 2020 at 23:22)</a>:</h4>
 <p><span class="user-mention" data-user-id="111038">@Greg Langmead</span> I have a branch with  inverse function theorem (mostly done). I'm going to make a PR in a few days.</p>
 
+<a name="185641416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/185641416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#185641416">Spencer Peters (Jan 14 2020 at 21:18)</a>:</h4>
+<p>Hi everyone! I just got introduced to Lean through the natural number game, and I started playing around with writing up the first homework from a discrete math class I TA'd recently. In that homework, students were supposed to define a sudoku puzzle as a function f: {1, 2, ..., 9} x {1, 2, ..., 9} -&gt; {1, 2, ..., 9}. So I defined the subtype</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">nine</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="o">{</span><span class="n">v</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">//</span> <span class="n">v</span> <span class="bp">&lt;</span> <span class="mi">9</span><span class="o">}</span>
+</pre></div>
+
+
+<p>Now I have two questions. First, although I can coerce a subtype of nat to nat, I can't seem to coerce a "nine" to a nat. What I mean is that this works:</p>
+<div class="codehilite"><pre><span></span><span class="kn">constant</span> <span class="n">x</span> <span class="o">:</span> <span class="o">{</span><span class="n">v</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">//</span> <span class="n">v</span> <span class="bp">&lt;</span> <span class="mi">9</span><span class="o">}</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="err">↑</span><span class="n">x</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span>
+</pre></div>
+
+
+<p>But this produces an error:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">nine</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">//</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="mi">9</span><span class="o">}</span>
+<span class="kn">constant</span> <span class="n">y</span> <span class="o">:</span> <span class="n">nine</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="err">↑</span><span class="n">y</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Is there a line I can add which will cause all the typeclass instances of {x : ℕ // x &lt; 9} to carry over to the new type nine?<br>
+My second question has to do with sets in Lean. In our discrete math class obviously we work with sets, not inductive types. So I would like the students to be able to work with something like (edited, set nine changed to set nat)</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">nine_set</span> <span class="o">:</span> <span class="n">set</span> <span class="n">nat</span> <span class="o">:=</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">7</span><span class="o">,</span> <span class="mi">8</span><span class="o">,</span> <span class="mi">9</span><span class="o">}</span>
+</pre></div>
+
+
+<p>But if I then try to define a function from nine_set to nine_set, I run into the issue that nine_set is not a Type! I'm guessing that there isn't any way around this, but I thought I'd ask.</p>
+
+<a name="185641729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/185641729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#185641729">Bryan Gin-ge Chen (Jan 14 2020 at 21:21)</a>:</h4>
+<p>Welcome! You might find <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/theories/sets.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/theories/sets.md">this doc on "set-like objects" in mathlib</a> useful. I'll take a look at the more detailed questions later if no one else has gotten to them.</p>
+
 
 {% endraw %}
 
