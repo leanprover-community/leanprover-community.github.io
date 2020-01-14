@@ -1,0 +1,33 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/84418filterbase.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/84418filterbase.html">filter base</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="185623997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20base/near/185623997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84418filterbase.html#185623997">Yury G. Kudryashov (Jan 14 2020 at 18:25)</a>:</h4>
+<p>Hi, many simplification lemmas about filters can be formulated in terms of</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">filter</span><span class="bp">.</span><span class="n">has_base</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">ι</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">filter</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="bp">∀</span> <span class="o">{{</span><span class="n">t</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}},</span> <span class="n">t</span> <span class="err">∈</span> <span class="n">f</span> <span class="bp">&lt;-&gt;</span> <span class="bp">∃</span> <span class="n">i</span><span class="o">,</span> <span class="n">s</span> <span class="n">i</span> <span class="err">⊆</span> <span class="n">t</span>
+</pre></div>
+
+
+<p>I use <code>s : ι → set α</code> instead of <code>set (set α)</code> because usually this base is a range of a function. This property is stronger than <code>f = infi (principal ∘ s)</code>, and immediately implies statements like <code>tendsto m f f' → f.has_base s → ∀ t ∈ f', ∃ i, s i ⊆ m ⁻¹' t</code>, and similarly for <code>f'</code>.<br>
+What do you think about adding it to <code>mathlib</code>?</p>
+
+<a name="185625003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20base/near/185625003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84418filterbase.html#185625003">Yury G. Kudryashov (Jan 14 2020 at 18:35)</a>:</h4>
+<p>A possible application: we can prove that various families (open balls, closed balls, same with rational <code>r</code>, same with <code>r=n⁻¹</code>) form bases of <code>nhds x</code> in an <code>emetric/metric</code> space, then use these lemmas in rewrites without proving <code>N²</code> helper lemmas.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
