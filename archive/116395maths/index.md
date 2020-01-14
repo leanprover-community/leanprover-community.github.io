@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [`a ≤ b → f b ≤ f a`](38187abfbfa.html) (9 messages, latest: Jan 14 2020 at 12:58)
+
 * [Algebraic geometry course](53656Algebraicgeometrycourse.html) (10 messages, latest: Jan 14 2020 at 11:57)
 
 * [coe_sort for finset](79663coesortforfinset.html) (15 messages, latest: Jan 14 2020 at 09:11)

@@ -34,6 +34,30 @@ One thing I could not work out is whether we ever add any constants which reinfo
 <p>How would this approach compare to working in the "standard" model where a <code>Type</code> is a set, and defining the internal version of <code>Type</code> to be a simplicial set in the classical sense, and simply proving (okay, it is not so easy, but I also think it's not out of reach) theorems about fibrancy of sums and universes and so on?<br>
 Basically my question is: if we had all the model category-theoretic prerequisites for the "model theory" of HoTT in place, how easy would it be to build an "internal HoTT system" that is usable in practice? Would it differ substantially from the approach you are suggesting?</p>
 
+<a name="185590874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/HoTT%20in%20Lean/near/185590874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14455HoTTinLean.html#185590874">Ulrik Buchholtz (Jan 14 2020 at 12:30)</a>:</h4>
+<blockquote>
+<p>So is this similar to the setup used in <a href="https://github.com/annenkov/two-level" target="_blank" title="https://github.com/annenkov/two-level">https://github.com/annenkov/two-level</a>?</p>
+</blockquote>
+<p>Yes, Danil Annenkov is a co-author of the two-level type theory paper. </p>
+<blockquote>
+<p>So we cannot use classical reasoning in the outer level, right?</p>
+</blockquote>
+<p>Not directly, no, but the way I was thinking about it, the outer (meta) level is an “implementation detail” and shouldn't be used for reasoning. So you add axioms about the (univalent, inner) types, but not about the meta-types. That said, with a 1-cohesive modality, you could capture the outermost 1-topos Set that simplicial sets sits 1-cohesively over, and add axioms for that, but that seems unnecessary.</p>
+<blockquote>
+<p>One thing I could not work out is whether we ever add any constants which reinforce the interpretation of Type as specifically simplicial sets, as opposed to any model topos (say) with the expected conditions of fibrancy of sums, fibrant universes, univalent universes etc.</p>
+</blockquote>
+<p>Well, we'd add axioms that the inner higher topos has choice, Reedy-limits, Whitehead's principle and sets cover. That should narrow down the Grothendieck <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">∞</mi><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex"> (\infty,1) </annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">∞</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span>-topos models considerably. We could then further add that geometric realization of simplicial sets is surjective.</p>
+
+<a name="185591352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/HoTT%20in%20Lean/near/185591352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14455HoTTinLean.html#185591352">Ulrik Buchholtz (Jan 14 2020 at 12:36)</a>:</h4>
+<blockquote>
+<p>How would this approach compare to working in the "standard" model where a <code>Type</code> is a set, and defining the internal version of <code>Type</code> to be a simplicial set in the classical sense, and simply proving (okay, it is not so easy, but I also think it's not out of reach) theorems about fibrancy of sums and universes and so on?<br>
+Basically my question is: if we had all the model category-theoretic prerequisites for the "model theory" of HoTT in place, how easy would it be to build an "internal HoTT system" that is usable in practice? Would it differ substantially from the approach you are suggesting?</p>
+</blockquote>
+<p>My guess is that with current technology, it would be much more cumbersome. My hope was that with a little macroprogramming in Lean4, you could reuse most of mathlib as is, but in the univalent layer. A slight price to pay is that there are two (mathematical) prop universes, one strict, and one homotopical, but they would be equivalent (and both equivalent to bool). I fear that the (shallow/deep?) embedding approach would not be nearly as transparent in practice.<br>
+But (as I mentioned last week), I would actually love to be wrong, because I'd like to see many applications of internal languages (for different kinds of categories or first-order models or …) be transparent and easy to use.</p>
+
 
 {% endraw %}
 
