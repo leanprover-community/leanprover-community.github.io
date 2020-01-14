@@ -23,6 +23,19 @@ permalink: archive/116395maths/79663coesortforfinset.html
 
 <p>However, it doesn't seem that <code>coe_sort</code> exists for <code>finset</code>. I'm wondering: 1) what is a working way to state this now, 2) Is there a need for <code>coe_sort</code> in <code>finset</code>?</p>
 
+<a name="185566330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coe_sort%20for%20finset/near/185566330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79663coesortforfinset.html#185566330">Bryan Gin-ge Chen (Jan 14 2020 at 05:21)</a>:</h4>
+<p>I think this is may be what you want:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+
+<span class="kn">theorem</span> <span class="n">finset_endomorphism_cardinality</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+    <span class="n">finset</span><span class="bp">.</span><span class="n">card</span> <span class="o">(</span><span class="n">s</span><span class="bp">.</span><span class="n">pi</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">s</span><span class="o">)</span> <span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">card</span> <span class="n">s</span><span class="o">)</span> <span class="err">^</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">card</span> <span class="n">s</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">finset</span><span class="bp">.</span><span class="n">card</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">pi</span><span class="o">,</span> <span class="n">multiset</span><span class="bp">.</span><span class="n">card_pi</span><span class="o">,</span>
+    <span class="n">multiset</span><span class="bp">.</span><span class="n">prod_repeat</span><span class="o">,</span> <span class="n">multiset</span><span class="bp">.</span><span class="n">map_const</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">pow_eq_pow</span><span class="o">]</span>
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
 
