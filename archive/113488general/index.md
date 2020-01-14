@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [web editor](11270webeditor.html) (14 messages, latest: Jan 14 2020 at 14:59)
+
 * [HoTT in Lean](14455HoTTinLean.html) (6 messages, latest: Jan 14 2020 at 12:36)
 
 * [Does proof checking use theorems?](06433Doesproofcheckingusetheorems.html) (45 messages, latest: Jan 14 2020 at 11:11)
@@ -1008,8 +1010,6 @@ permalink: archive/113488general/index.html
 * [Proving Axiom Sane](39467ProvingAxiomSane.html) (10 messages, latest: Jun 08 2019 at 08:59)
 
 * [VSCode Live Share](77256VSCodeLiveShare.html) (7 messages, latest: Jun 07 2019 at 22:00)
-
-* [web editor](11270webeditor.html) (12 messages, latest: Jun 07 2019 at 21:20)
 
 * [`split_ifs`, and nested `dite`](62902splitifsandnesteddite.html) (4 messages, latest: Jun 07 2019 at 16:56)
 
