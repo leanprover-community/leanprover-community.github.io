@@ -1,0 +1,47 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/77296words.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/77296words.html">words</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="185561933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/words/near/185561933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77296words.html#185561933">Jeremy Avigad (Jan 14 2020 at 03:25)</a>:</h4>
+<p>In his talk in the Formal Abstracts session of the meeting at Carnegie Mellon last week, Tom Hales pointed out that for some purposes, it may be better to use the word "or" instead of the symbol <code>∨</code>. The former is not harder to type than the latter, it is familiar, it is easy to read, and everyone knows what it means.</p>
+<p>For fun, I took Chris Hughes' proof of quadratic reciprocity in the library and replaced all the logical connectives with the words "not" "and" "or" "implies" "iff" "exists" and "forall". The result is attached.:</p>
+<p><a href="/user_uploads/3121/WLhtWzuCMMmf2358-cAnE2M2/quadratic_reciprocity_with_words.lean" target="_blank" title="quadratic_reciprocity_with_words.lean">quadratic_reciprocity_with_words.lean</a></p>
+<p>The theorem</p>
+<div class="codehilite"><pre><span></span>lemma euler_criterion_units {x : units (zmodp p hp)} :
+  (∃ y : units (zmodp p hp), y ^ 2 = x) ↔ x ^ (p / 2) = 1
+</pre></div>
+
+
+<p>becomes</p>
+<div class="codehilite"><pre><span></span>lemma euler_criterion {a : zmodp p hp} (ha : a ≠ 0) :
+  (exists y : zmodp p hp, y ^ 2 = a) iff a ^ (p / 2) = 1
+</pre></div>
+
+
+<p>and the line</p>
+<div class="codehilite"><pre><span></span>have he : ∀ {x}, x ∈ Ico 1 (p / 2).succ → x ≠ 0 ∧ x ≤ p / 2
+</pre></div>
+
+
+<p>becomes</p>
+<div class="codehilite"><pre><span></span>have he : forall {x}, x ∈ Ico 1 (p / 2).succ implies x ≠ 0 and x ≤ p / 2
+</pre></div>
+
+
+<p>Call me crazy, but I kind of like the text versions.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
