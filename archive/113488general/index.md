@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Variables in Lean](23793VariablesinLean.html) (4 messages, latest: Jan 14 2020 at 00:44)
+
+* [bulleting / browers questions](04997bulletingbrowersquestions.html) (7 messages, latest: Jan 14 2020 at 00:16)
+
 * [HoTT in Lean](14455HoTTinLean.html) (4 messages, latest: Jan 13 2020 at 17:48)
 
 * [Does proof checking use theorems?](06433Doesproofcheckingusetheorems.html) (44 messages, latest: Jan 13 2020 at 16:57)
@@ -48,8 +52,6 @@ permalink: archive/113488general/index.html
 * [linter](19343linter.html) (14 messages, latest: Jan 06 2020 at 22:18)
 
 * [Formal Methods in Mathematics / Lean Together 2020](50962FormalMethodsinMathematicsLeanTogether2020.html) (9 messages, latest: Jan 06 2020 at 14:52)
-
-* [bulleting / browers questions](04997bulletingbrowersquestions.html) (5 messages, latest: Jan 06 2020 at 05:21)
 
 * [𝟙 and 𝟭 in VS Code](99821andinVSCode.html) (2 messages, latest: Jan 06 2020 at 05:01)
 

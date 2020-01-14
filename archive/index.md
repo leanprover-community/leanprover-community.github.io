@@ -8,7 +8,7 @@ permalink: archive/index.html
 
 ## Streams:
 
-* [general](113488general/index.html) (2296 topics)
+* [general](113488general/index.html) (2297 topics)
 
 * [new members](113489newmembers/index.html) (741 topics)
 
@@ -29,6 +29,8 @@ permalink: archive/index.html
 * [concrete semantics](187724concretesemantics/index.html) (4 topics)
 
 * [Is there code for X?](217875IstherecodeforX/index.html) (4 topics)
+
+* [Machine Learning for Theorem Proving](219941MachineLearningforTheoremProving/index.html) (4 topics)
 
 * [Big Proof 2019](198800BigProof2019/index.html) (3 topics)
 
