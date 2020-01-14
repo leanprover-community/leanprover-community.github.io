@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (8 messages, latest: Jan 14 2020 at 10:05)
+* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (10 messages, latest: Jan 14 2020 at 11:57)
 
 * [coe_sort for finset](79663coesortforfinset.html) (15 messages, latest: Jan 14 2020 at 09:11)
 

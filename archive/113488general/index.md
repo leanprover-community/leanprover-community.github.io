@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [words](77296words.html) (11 messages, latest: Jan 14 2020 at 09:43)
+* [Does proof checking use theorems?](06433Doesproofcheckingusetheorems.html) (45 messages, latest: Jan 14 2020 at 11:11)
 
-* [bulleting / browers questions](04997bulletingbrowersquestions.html) (9 messages, latest: Jan 14 2020 at 09:37)
+* [bulleting / browers questions](04997bulletingbrowersquestions.html) (10 messages, latest: Jan 14 2020 at 11:09)
+
+* [words](77296words.html) (11 messages, latest: Jan 14 2020 at 09:43)
 
 * [type system](41896typesystem.html) (4 messages, latest: Jan 14 2020 at 08:59)
 
@@ -20,8 +22,6 @@ permalink: archive/113488general/index.html
 * [Variables in Lean](23793VariablesinLean.html) (4 messages, latest: Jan 14 2020 at 00:44)
 
 * [HoTT in Lean](14455HoTTinLean.html) (4 messages, latest: Jan 13 2020 at 17:48)
-
-* [Does proof checking use theorems?](06433Doesproofcheckingusetheorems.html) (44 messages, latest: Jan 13 2020 at 16:57)
 
 * [Automation for list.perm](85351Automationforlistperm.html) (3 messages, latest: Jan 13 2020 at 14:36)
 
