@@ -26,6 +26,13 @@ permalink: archive/219941MachineLearningforTheoremProving/34292HOList.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/185555480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#185555480">Jason Rute (Jan 14 2020 at 01:02)</a>:</h4>
 <p>I know there are still a lot of questions about HOList (like why it uses s-expressions).  Feel free to discuss here.</p>
 
+<a name="185575109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/185575109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#185575109">Stanislas Polu (Jan 14 2020 at 08:49)</a>:</h4>
+<p>On the question of S-expression, I think that we went to the bottom of it through various private discussions. Pretty-printed HOL-light expressions which are appealing because they are close to what a human formalizing a proof would use are unfortunately ambiguous. The parser supports type annotation for human to disambiguate term types when coding in HOL Light, but unfortunately the pretty-printer is destructive such that <code>pretty_print o parse</code> is not the identity.</p>
+<p>S-expressions are unambiguous as they are a natural way to marshal the in-memory representation of HOL Light terms (with every variable/constant being explicitly typed).</p>
+<p>Ideally for some ML application, having compact representations is useful. Theoretically we could record the top-level semi-typed parsable theorem and term expressions and have them appear in proof logs as tactics arguments but that's probably not practical because hol-light starts by turning these expressions into in-memory representations, destroying the disambiguated human-provided terms.</p>
+<p>Hope this context is useful!</p>
+
 
 {% endraw %}
 

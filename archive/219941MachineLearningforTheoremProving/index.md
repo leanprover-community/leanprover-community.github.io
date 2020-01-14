@@ -9,11 +9,11 @@ permalink: archive/219941MachineLearningforTheoremProving/index.html
 
 ### Topics:
 
+* [HOList](34292HOList.html) (3 messages, latest: Jan 14 2020 at 08:49)
+
 * [Proposal: Apply premise selection to Hammer](13801ProposalApplypremiseselectiontoHammer.html) (9 messages, latest: Jan 14 2020 at 03:41)
 
 * [Welcome!](08910Welcome.html) (10 messages, latest: Jan 14 2020 at 01:21)
-
-* [HOList](34292HOList.html) (2 messages, latest: Jan 14 2020 at 01:02)
 
 * [curmudgeoning](51896curmudgeoning.html) (22 messages, latest: Jan 14 2020 at 00:59)
 

@@ -9,13 +9,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [coe_sort for finset](79663coesortforfinset.html) (2 messages, latest: Jan 14 2020 at 05:21)
+* [coe_sort for finset](79663coesortforfinset.html) (14 messages, latest: Jan 14 2020 at 08:58)
+
+* [uniform convergence](45296uniformconvergence.html) (2 messages, latest: Jan 14 2020 at 08:19)
 
 * [set.not_mem_Inter_iff](22431setnotmemInteriff.html) (9 messages, latest: Jan 13 2020 at 23:06)
 
 * [(no topic)](79918notopic.html) (1 message, latest: Jan 13 2020 at 22:23)
-
-* [uniform convergence](45296uniformconvergence.html) (1 message, latest: Jan 13 2020 at 21:57)
 
 * [Algebraic geometry course](53656Algebraicgeometrycourse.html) (5 messages, latest: Jan 13 2020 at 20:20)
 
