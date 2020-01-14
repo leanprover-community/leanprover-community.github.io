@@ -31,6 +31,30 @@ What do you think about adding it to <code>mathlib</code>?</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20base/near/185639304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84418filterbase.html#185639304">Patrick Massot (Jan 14 2020 at 20:56)</a>:</h4>
 <p>We already had this need in the perfectoid project, but it's among the many things that should be PRed but are not. We also tried several implementations and I'm super happy with the one we currently have. See <a href="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/for_mathlib/filter.lean#L82" target="_blank" title="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/for_mathlib/filter.lean#L82">https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/for_mathlib/filter.lean#L82</a> and the rest of that file, as well as <a href="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/for_mathlib/topological_groups.lean" target="_blank" title="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/for_mathlib/topological_groups.lean">https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/for_mathlib/topological_groups.lean</a>, <a href="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/for_mathlib/topological_rings.lean" target="_blank" title="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/for_mathlib/topological_rings.lean">https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/for_mathlib/topological_rings.lean</a> etc. One difficulty is to make something that we can easily use in more specialized situation without rewriting all lemmas to make them really usable.</p>
 
+<a name="185645617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20base/near/185645617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84418filterbase.html#185645617">Yury G. Kudryashov (Jan 14 2020 at 22:04)</a>:</h4>
+<p>Why did you choose to have a separate type instead of a predicate? I think that usually we already have a filter and want to rewrite some <code>tendsto</code> in a more reasonable way.</p>
+
+<a name="185646072"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20base/near/185646072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84418filterbase.html#185646072">Patrick Massot (Jan 14 2020 at 22:08)</a>:</h4>
+<p>That's not the case in the perfectoid project. The filter base comes first, then the filter and then the topology.</p>
+
+<a name="185646120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20base/near/185646120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84418filterbase.html#185646120">Patrick Massot (Jan 14 2020 at 22:09)</a>:</h4>
+<p>See <a href="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/valuation/topology.lean" target="_blank" title="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/valuation/topology.lean">https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/valuation/topology.lean</a></p>
+
+<a name="185646140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20base/near/185646140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84418filterbase.html#185646140">Patrick Massot (Jan 14 2020 at 22:09)</a>:</h4>
+<p>But I didn't find a nice way to cover all use cases.</p>
+
+<a name="185650787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20base/near/185650787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84418filterbase.html#185650787">Mario Carneiro (Jan 14 2020 at 22:59)</a>:</h4>
+<p>Isn't there already a <code>filter.generate</code> function for generating a filter from a filter (sub)base?</p>
+
+<a name="185650824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20base/near/185650824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84418filterbase.html#185650824">Mario Carneiro (Jan 14 2020 at 22:59)</a>:</h4>
+<p>I can certainly see the use in a <code>has_base</code> predicate for saying that a filter is generated by a base other than the one used in its definition though</p>
+
 
 {% endraw %}
 

@@ -9142,6 +9142,22 @@ My second question has to do with sets in Lean. In our discrete math class obvio
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/185641729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#185641729">Bryan Gin-ge Chen (Jan 14 2020 at 21:21)</a>:</h4>
 <p>Welcome! You might find <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/theories/sets.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/theories/sets.md">this doc on "set-like objects" in mathlib</a> useful. I'll take a look at the more detailed questions later if no one else has gotten to them.</p>
 
+<a name="185646746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/185646746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#185646746">Kevin Buzzard (Jan 14 2020 at 22:15)</a>:</h4>
+<p>We already have a type <code>fin 9</code>. You might be better off sticking with that.</p>
+<p>You can add the coercion manually:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">nine</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="o">{</span><span class="n">v</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">//</span> <span class="n">v</span> <span class="bp">&lt;</span> <span class="mi">9</span><span class="o">}</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="n">nine</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">n</span><span class="bp">.</span><span class="mi">1</span><span class="bp">⟩</span>
+
+<span class="kn">constant</span> <span class="n">y</span> <span class="o">:</span> <span class="n">nine</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="c1">-- works</span>
+</pre></div>
+
+
+<p>The switch from finite sets to inductive types will be painful. I constantly tell the student that a term of type <code>fin 9</code> is a pair consisting of a number and a proof, and eventually this will dawn on them.</p>
+
 
 {% endraw %}
 

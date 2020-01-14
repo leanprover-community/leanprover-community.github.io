@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [filter base](84418filterbase.html) (3 messages, latest: Jan 14 2020 at 20:56)
+* [filter base](84418filterbase.html) (9 messages, latest: Jan 14 2020 at 22:59)
 
 * [uniform convergence](45296uniformconvergence.html) (3 messages, latest: Jan 14 2020 at 16:16)
 
