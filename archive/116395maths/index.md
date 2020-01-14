@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (8 messages, latest: Jan 14 2020 at 10:05)
+
 * [coe_sort for finset](79663coesortforfinset.html) (15 messages, latest: Jan 14 2020 at 09:11)
 
 * [uniform convergence](45296uniformconvergence.html) (2 messages, latest: Jan 14 2020 at 08:19)
@@ -16,8 +18,6 @@ permalink: archive/116395maths/index.html
 * [set.not_mem_Inter_iff](22431setnotmemInteriff.html) (9 messages, latest: Jan 13 2020 at 23:06)
 
 * [(no topic)](79918notopic.html) (1 message, latest: Jan 13 2020 at 22:23)
-
-* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (5 messages, latest: Jan 13 2020 at 20:20)
 
 * [Algebraic closure Roadmap](47612AlgebraicclosureRoadmap.html) (3 messages, latest: Jan 13 2020 at 00:09)
 
