@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [bulleting / browers questions](04997bulletingbrowersquestions.html) (8 messages, latest: Jan 14 2020 at 02:07)
+
 * [Starting a Machine Learning for Theorem Proving stream](70719StartingaMachineLearningforTheoremProvingstream.html) (5 messages, latest: Jan 14 2020 at 01:06)
 
 * [Variables in Lean](23793VariablesinLean.html) (4 messages, latest: Jan 14 2020 at 00:44)
-
-* [bulleting / browers questions](04997bulletingbrowersquestions.html) (7 messages, latest: Jan 14 2020 at 00:16)
 
 * [HoTT in Lean](14455HoTTinLean.html) (4 messages, latest: Jan 13 2020 at 17:48)
 

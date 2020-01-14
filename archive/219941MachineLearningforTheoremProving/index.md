@@ -9,7 +9,7 @@ permalink: archive/219941MachineLearningforTheoremProving/index.html
 
 ### Topics:
 
-* [Proposal: Apply premise selection to Hammer](13801ProposalApplypremiseselectiontoHammer.html) (6 messages, latest: Jan 14 2020 at 01:42)
+* [Proposal: Apply premise selection to Hammer](13801ProposalApplypremiseselectiontoHammer.html) (8 messages, latest: Jan 14 2020 at 02:56)
 
 * [Welcome!](08910Welcome.html) (10 messages, latest: Jan 14 2020 at 01:21)
 
