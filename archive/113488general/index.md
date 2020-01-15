@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [deep learning for symbolic mathematics](03624deeplearningforsymbolicmathematics.html) (3 messages, latest: Jan 15 2020 at 00:59)
+
+* [words](77296words.html) (12 messages, latest: Jan 15 2020 at 00:57)
+
 * [bulleting / browers questions](04997bulletingbrowersquestions.html) (11 messages, latest: Jan 14 2020 at 17:43)
 
 * [web editor](11270webeditor.html) (21 messages, latest: Jan 14 2020 at 16:14)
@@ -16,8 +20,6 @@ permalink: archive/113488general/index.html
 * [HoTT in Lean](14455HoTTinLean.html) (6 messages, latest: Jan 14 2020 at 12:36)
 
 * [Does proof checking use theorems?](06433Doesproofcheckingusetheorems.html) (45 messages, latest: Jan 14 2020 at 11:11)
-
-* [words](77296words.html) (11 messages, latest: Jan 14 2020 at 09:43)
 
 * [type system](41896typesystem.html) (4 messages, latest: Jan 14 2020 at 08:59)
 
