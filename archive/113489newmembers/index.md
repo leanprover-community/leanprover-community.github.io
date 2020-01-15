@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1619 messages, latest: Jan 14 2020 at 22:15)
+* [noob question(s)](52075noobquestions.html) (1621 messages, latest: Jan 14 2020 at 23:20)
 
 * [A finite set has finitely many endofunctions?](54624Afinitesethasfinitelymanyendofunctions.html) (17 messages, latest: Jan 14 2020 at 13:41)
 
