@@ -587,6 +587,172 @@ recall that AB is defined to be the union of {A}, {B} and the points in between 
 <span class="kn">end</span>
 </pre></div>
 
+<a name="185695141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185695141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185695141">Marc Masdeu (Jan 15 2020 at 13:04)</a>:</h4>
+<p>Thanks guys, I'm studying your solutions now...</p>
+
+<a name="185695410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185695410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185695410">Marc Masdeu (Jan 15 2020 at 13:08)</a>:</h4>
+<p>About <span class="user-mention" data-user-id="112680">@Johan Commelin</span> complaint about long lines: I definitely agree with it, but how would you go about writing the simple statement "Given three distinct points on a line, exactly one of them is between the other two" in a concise way?</p>
+
+<a name="185695504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185695504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185695504">Alex J. Best (Jan 15 2020 at 13:09)</a>:</h4>
+<p>I guess Johan just means put some line breaks in at natural looking points (lean won't care)</p>
+
+<a name="185696350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185696350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185696350">Marc Masdeu (Jan 15 2020 at 13:20)</a>:</h4>
+<blockquote>
+<p>I guess Johan just means put some line breaks in at natural looking points (lean won't care)</p>
+</blockquote>
+<p>Oh <span aria-label="sweat smile" class="emoji emoji-1f605" role="img" title="sweat smile">:sweat_smile:</span></p>
+
+<a name="185697184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185697184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185697184">Marc Masdeu (Jan 15 2020 at 13:32)</a>:</h4>
+<blockquote>
+<p>Also, you overwrote the standard meaning of <code>∈</code>, so my suggestions no longer typecheck</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> to solve this, I have decided to go back to set theory. That means that Points should be a set, and that Lines should be a set of sets of points. If I initialize</p>
+<div class="codehilite"><pre><span></span>Points : set Type u
+Lines : set set Points
+</pre></div>
+
+
+<p>then my axioms start to misbehave, because <em>I assume</em> that it doesn't make sense to write A : Points and instead I should write someting like A \in Points. Am I right?</p>
+
+<a name="185697524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185697524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185697524">Kevin Buzzard (Jan 15 2020 at 13:37)</a>:</h4>
+<p>I would be tempted to let points be in a type, and lines be subsets of points, if you want to go down the subset route.</p>
+
+<a name="185697562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185697562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185697562">Kenny Lau (Jan 15 2020 at 13:37)</a>:</h4>
+<p>one would first have to prove <code>lines.ext</code> then</p>
+
+<a name="185697825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185697825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185697825">Kevin Buzzard (Jan 15 2020 at 13:40)</a>:</h4>
+<p>I can prove that</p>
+
+<a name="185697846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185697846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185697846">Kevin Buzzard (Jan 15 2020 at 13:41)</a>:</h4>
+<p>it follows from <code>propext</code></p>
+
+<a name="185697892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185697892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185697892">Marc Masdeu (Jan 15 2020 at 13:41)</a>:</h4>
+<blockquote>
+<p>I would be tempted to let points be in a type, and lines be subsets of points, if you want to go down the subset route.</p>
+</blockquote>
+<p>I have two reasons to do that: I am trying to copy Hartshorne's UTM book and he defines points to be a set. The second reason is so that in this way I don't need to define what A \in ell means.</p>
+<p>Your intermediate approach seems to solve my second concern, I will try that.</p>
+
+<a name="185697946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185697946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185697946">Marc Masdeu (Jan 15 2020 at 13:42)</a>:</h4>
+<blockquote>
+<p>one would first have to prove <code>lines.ext</code> then</p>
+</blockquote>
+<p>What is that?</p>
+
+<a name="185697986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185697986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185697986">Kevin Buzzard (Jan 15 2020 at 13:43)</a>:</h4>
+<blockquote>
+<p>he defines points to be a set</p>
+</blockquote>
+<p>That's because he's thinking about framing things in terms of set theory. There are two kinds of sets. There are subsets of a given set, like the even numbers, and there are generic sets about which we know nothing -- and in type theory those are types.</p>
+
+<a name="185698012"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185698012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185698012">Kevin Buzzard (Jan 15 2020 at 13:43)</a>:</h4>
+<p><code>lines.ext</code> is the statement that two lines are equal if and only for all points P, P is in line 1 iff it's in line 2. One can prove this in Lean no problem.</p>
+
+<a name="185698183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185698183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185698183">Kevin Buzzard (Jan 15 2020 at 13:45)</a>:</h4>
+<p>In contrast to the "generic" set of points, a line is a subset. Subsets are different to sets.</p>
+
+<a name="185698258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185698258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185698258">Marc Masdeu (Jan 15 2020 at 13:46)</a>:</h4>
+<p>And two subsets are not automatically equal iff they contain the same elements? I am getting lost.</p>
+
+<a name="185698260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185698260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185698260">Kevin Buzzard (Jan 15 2020 at 13:46)</a>:</h4>
+<p>I don't know anything about the various ways of doing this stuff. I know that Ali Sever followed Tarski, and IIRC a line was an abstract type. What does Hartshorne do?</p>
+
+<a name="185698285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185698285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185698285">Kevin Buzzard (Jan 15 2020 at 13:46)</a>:</h4>
+<blockquote>
+<p>And two subsets are not automatically equal iff they contain the same elements? I am getting lost.</p>
+</blockquote>
+<p>It is a trivial theorem, but it is not true by definition.</p>
+
+<a name="185698337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185698337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185698337">Kevin Buzzard (Jan 15 2020 at 13:47)</a>:</h4>
+<p>In fact it is equivalent to propositional extensionality, which is talked about at great length <a href="https://leanprover.github.io/theorem_proving_in_lean/axioms_and_computation.html#propositional-extensionality" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/axioms_and_computation.html#propositional-extensionality">here</a>. As a mathematician you should just ignore all this. Kenny is a constructivist, he is just trolling really.</p>
+
+<a name="185698391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185698391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185698391">Kevin Buzzard (Jan 15 2020 at 13:48)</a>:</h4>
+<p>Remember that in set theory there is an axiom which says that two sets with the same elements are equal.</p>
+
+<a name="185698450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185698450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185698450">Kevin Buzzard (Jan 15 2020 at 13:49)</a>:</h4>
+<p>Equal sets have the same elements -- this is obvious. Sets with the same elements are equal -- this is a theorem, whose one-line proof is "it's an axiom"</p>
+
+<a name="185698470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185698470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185698470">Kevin Buzzard (Jan 15 2020 at 13:49)</a>:</h4>
+<p>so you will have to supply a one-line proof ;-)</p>
+
+<a name="185698482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185698482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185698482">Marc Masdeu (Jan 15 2020 at 13:49)</a>:</h4>
+<p>From Hartshorne: "We simply postulate a set, whose elements are called <em>points</em>, together with certain subsets, which we call <em>lines</em>. We do not say what the points are, nor which subsets form lines, but we do require that these undefined notions obey certain axioms..."</p>
+
+<a name="185698608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185698608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185698608">Kevin Buzzard (Jan 15 2020 at 13:50)</a>:</h4>
+<p>OK so you should make a type of points, and let lines be subsets. Then everything will work just the way Hartshorne wants.</p>
+
+<a name="185698714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185698714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185698714">Marc Masdeu (Jan 15 2020 at 13:52)</a>:</h4>
+<blockquote>
+<p>Equal sets have the same elements -- this is obvious. Sets with the same elements are equal -- this is a theorem, whose one-line proof is "it's an axiom"</p>
+</blockquote>
+<p>Oh. And Lean standard doesn't come with these theorems proven for you? I would imagine that if Lean knows what a set is, then it knows all the basic theorems on set theory.</p>
+
+<a name="185698727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185698727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185698727">Kevin Buzzard (Jan 15 2020 at 13:52)</a>:</h4>
+<p>The difference between type theory and set theory is that in type theory, the only sets you can have are subsets of a fixed set. It took me a long time to realise that mathematicians use the concept of set in two different ways.</p>
+
+<a name="185698775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185698775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185698775">Kevin Buzzard (Jan 15 2020 at 13:53)</a>:</h4>
+<p>It could easily be a theorem in core Lean. Kenny is just trolling. He seems to have caused you a great deal of confusion. There is nothing special about <code>lines.ext</code>. You will have to prove lots of theorems.</p>
+
+<a name="185698841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185698841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185698841">Kevin Buzzard (Jan 15 2020 at 13:53)</a>:</h4>
+<p>The point is that if you make a new <em>definition</em> (e.g. <code>lines</code>) then you will have to prove lots of theorems about that definition.</p>
+
+<a name="185698957"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185698957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185698957">Marc Masdeu (Jan 15 2020 at 13:55)</a>:</h4>
+<p>Oh I see. And yes, I'm becoming more confused the more I learn. This is fine, though!</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">0</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+
+<span class="n">noncomputable</span> <span class="n">theory</span>
+<span class="n">open_locale</span> <span class="n">classical</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+<span class="kn">constant</span> <span class="n">Points</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span>
+<span class="kn">constant</span> <span class="n">Lines</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">Points</span><span class="o">)</span>
+<span class="kn">constant</span> <span class="n">I1</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Points</span><span class="o">,</span>  <span class="n">A</span> <span class="bp">≠</span> <span class="n">B</span> <span class="bp">→</span> <span class="bp">∃!</span> <span class="n">ℓ</span> <span class="o">:</span> <span class="n">Lines</span><span class="o">,</span> <span class="o">(</span> <span class="n">A</span> <span class="err">∈</span> <span class="n">ℓ</span> <span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span> <span class="n">B</span> <span class="err">∈</span> <span class="n">ℓ</span> <span class="o">)</span>
+</pre></div>
+
+
+<p>Why does Lean complain in the last line?</p>
+<p>---- &gt; I figured it out! Now Lines is a set :-)</p>
+
+<a name="185698966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185698966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185698966">Kevin Buzzard (Jan 15 2020 at 13:55)</a>:</h4>
+<p>Take a look at <a href="https://github.com/leanprover-community/mathlib/blob/master/src/data/complex/basic.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/data/complex/basic.lean">the way Lean does complex numbers</a>. A new definition, and then immediately you have to prove a bunch of trivial theorems about <code>complex</code>. Lean might have lots of theorems about sets, but if you define <code>lines</code> then you have to prove theorems about <code>lines</code> including trivial theorems.</p>
+
+<a name="185699146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185699146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185699146">Marc Masdeu (Jan 15 2020 at 13:57)</a>:</h4>
+<blockquote>
+<p>Take a look at <a href="https://github.com/leanprover-community/mathlib/blob/master/src/data/complex/basic.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/data/complex/basic.lean">the way Lean does complex numbers</a>. A new definition, and then immediately you have to prove a bunch of trivial theorems about <code>complex</code>. Lean might have lots of theorems about sets, but if you define <code>lines</code> then you have to prove theorems about <code>lines</code> including trivial theorems.</p>
+</blockquote>
+<p>I see. That will keep me busy.</p>
+
 
 {% endraw %}
 
