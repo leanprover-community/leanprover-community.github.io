@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [coercions from polynomials](03953coercionsfrompolynomials.html) (33 messages, latest: Jan 15 2020 at 19:59)
+* [use and exists_prop](21313useandexistsprop.html) (16 messages, latest: Jan 15 2020 at 20:13)
+
+* [coercions from polynomials](03953coercionsfrompolynomials.html) (37 messages, latest: Jan 15 2020 at 20:03)
 
 * [deep learning for symbolic mathematics](03624deeplearningforsymbolicmathematics.html) (8 messages, latest: Jan 15 2020 at 17:50)
 
@@ -1762,8 +1764,6 @@ permalink: archive/113488general/index.html
 * [global have](75446globalhave.html) (23 messages, latest: Feb 13 2019 at 17:40)
 
 * [derive](25024derive.html) (10 messages, latest: Feb 13 2019 at 17:02)
-
-* [use and exists_prop](21313useandexistsprop.html) (13 messages, latest: Feb 13 2019 at 14:35)
 
 * [Logic & Proof Ch. 8 Homework Question](82512LogicProofCh8HomeworkQuestion.html) (7 messages, latest: Feb 13 2019 at 07:08)
 
