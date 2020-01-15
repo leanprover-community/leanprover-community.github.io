@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [deep learning for symbolic mathematics](03624deeplearningforsymbolicmathematics.html) (3 messages, latest: Jan 15 2020 at 00:59)
+* [deep learning for symbolic mathematics](03624deeplearningforsymbolicmathematics.html) (7 messages, latest: Jan 15 2020 at 01:23)
 
 * [words](77296words.html) (12 messages, latest: Jan 15 2020 at 00:57)
 
