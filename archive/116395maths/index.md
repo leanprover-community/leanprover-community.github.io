@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [coe_sort for finset](79663coesortforfinset.html) (17 messages, latest: Jan 15 2020 at 04:38)
+* [coe_sort for finset](79663coesortforfinset.html) (18 messages, latest: Jan 15 2020 at 05:33)
 
 * [filter base](84418filterbase.html) (9 messages, latest: Jan 14 2020 at 22:59)
 
