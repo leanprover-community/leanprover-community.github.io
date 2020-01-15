@@ -9,7 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1621 messages, latest: Jan 14 2020 at 23:20)
+* [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (43 messages, latest: Jan 15 2020 at 09:00)
+
+* [noob question(s)](52075noobquestions.html) (1622 messages, latest: Jan 15 2020 at 08:46)
+
+* [attempt at some geometry](35829attemptatsomegeometry.html) (108 messages, latest: Jan 15 2020 at 08:40)
 
 * [A finite set has finitely many endofunctions?](54624Afinitesethasfinitelymanyendofunctions.html) (17 messages, latest: Jan 14 2020 at 13:41)
 
@@ -22,8 +26,6 @@ permalink: archive/113489newmembers/index.html
 * [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (35 messages, latest: Jan 12 2020 at 16:32)
 
 * [Equivalent Lean command for Coq's Search?](69175EquivalentLeancommandforCoqsSearch.html) (8 messages, latest: Jan 12 2020 at 05:59)
-
-* [attempt at some geometry](35829attemptatsomegeometry.html) (105 messages, latest: Jan 10 2020 at 05:32)
 
 * [Induction over sigma in filters](94667Inductionoversigmainfilters.html) (12 messages, latest: Jan 08 2020 at 00:40)
 

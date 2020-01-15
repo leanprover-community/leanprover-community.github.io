@@ -1,0 +1,332 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html">formalizing Hilbert's axioms for plane geometry</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="185678084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678084">Marc Masdeu (Jan 15 2020 at 08:35)</a>:</h4>
+<p>Hi there, I'm a mathematician getting started with Lean. After having done the natural number game and a few of the challenges, I wanted to start formalizing something easy, and I tried with Hilber'ts axioms.</p>
+<p>So far, I have this little:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+<span class="c1">-- We want to be able to define functions using the law of excluded middle</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">0</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+
+
+<span class="n">noncomputable</span> <span class="n">theory</span>
+
+<span class="n">open_locale</span> <span class="n">classical</span>
+
+<span class="kn">constants</span> <span class="n">Points</span> <span class="n">Lines</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span>
+<span class="kn">constant</span> <span class="n">lies_on</span> <span class="o">:</span> <span class="n">Points</span> <span class="bp">→</span> <span class="n">Lines</span> <span class="bp">→</span> <span class="kt">Prop</span>
+
+<span class="n">local</span> <span class="kn">infixl</span> <span class="bp">`</span><span class="err">∈</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">lies_on</span>
+
+<span class="kn">constant</span> <span class="n">I1</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Points</span><span class="o">,</span>  <span class="n">A</span> <span class="bp">≠</span> <span class="n">B</span> <span class="bp">→</span> <span class="bp">∃!</span> <span class="n">ℓ</span><span class="o">,</span> <span class="o">(</span> <span class="n">A</span> <span class="err">∈</span> <span class="n">ℓ</span> <span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span> <span class="n">B</span> <span class="err">∈</span> <span class="n">ℓ</span> <span class="o">)</span>
+<span class="c1">--constant I11 : ∀ A B : Points,  A ≠ B → ∃ ℓ, ( A ∈ ℓ ) ∧ ( B ∈ ℓ )</span>
+<span class="c1">--constant I12 : ∀ A B : Points, ∀ r s : Lines, (A ≠ B) →  (A ∈ r) →  (B ∈ r) →  (A ∈ s) → (B ∈ s) →  r = s</span>
+<span class="kn">constant</span> <span class="n">I2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">ℓ</span> <span class="o">:</span> <span class="n">Lines</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Points</span><span class="o">,</span> <span class="n">A</span> <span class="bp">≠</span> <span class="n">B</span> <span class="bp">∧</span> <span class="n">A</span> <span class="err">∈</span> <span class="n">ℓ</span> <span class="bp">∧</span> <span class="n">B</span> <span class="err">∈</span> <span class="n">ℓ</span>
+<span class="kn">constant</span> <span class="n">I3</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">A</span> <span class="n">B</span> <span class="n">C</span> <span class="o">:</span> <span class="n">Points</span><span class="o">,</span> <span class="o">(</span><span class="n">A</span> <span class="bp">≠</span> <span class="n">B</span> <span class="bp">∧</span> <span class="n">A</span> <span class="bp">≠</span> <span class="n">C</span> <span class="bp">∧</span> <span class="n">B</span> <span class="bp">≠</span> <span class="n">C</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">ℓ</span><span class="o">,</span> <span class="o">(</span><span class="n">A</span> <span class="err">∈</span> <span class="n">ℓ</span> <span class="bp">∧</span> <span class="n">B</span> <span class="err">∈</span> <span class="n">ℓ</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">¬</span> <span class="o">(</span><span class="n">C</span> <span class="err">∈</span> <span class="n">ℓ</span><span class="o">)</span> <span class="o">)))</span>
+
+<span class="kn">lemma</span> <span class="n">I11</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Points</span><span class="o">,</span>  <span class="n">A</span> <span class="bp">≠</span> <span class="n">B</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">ℓ</span><span class="o">,</span> <span class="o">(</span> <span class="n">A</span> <span class="err">∈</span> <span class="n">ℓ</span> <span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span> <span class="n">B</span> <span class="err">∈</span> <span class="n">ℓ</span> <span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intros</span> <span class="n">A</span> <span class="n">B</span><span class="o">,</span>
+<span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">I1</span> <span class="n">A</span> <span class="n">B</span> <span class="n">h</span> <span class="k">with</span> <span class="n">ℓ</span> <span class="n">h1</span><span class="o">,</span>
+<span class="n">existsi</span> <span class="n">ℓ</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">h1</span> <span class="k">with</span> <span class="n">H</span><span class="o">,</span>
+<span class="n">exact</span> <span class="n">H</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">I12</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Points</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="n">Lines</span><span class="o">,</span> <span class="o">(</span><span class="n">A</span> <span class="bp">≠</span> <span class="n">B</span><span class="o">)</span> <span class="bp">→</span>  <span class="o">(</span><span class="n">A</span> <span class="err">∈</span> <span class="n">r</span><span class="o">)</span> <span class="bp">→</span>  <span class="o">(</span><span class="n">B</span> <span class="err">∈</span> <span class="n">r</span><span class="o">)</span> <span class="bp">→</span>  <span class="o">(</span><span class="n">A</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">B</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="bp">→</span>  <span class="n">r</span> <span class="bp">=</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intros</span> <span class="n">A</span> <span class="n">B</span><span class="o">,</span>
+<span class="n">intros</span> <span class="n">r</span> <span class="n">s</span><span class="o">,</span>
+<span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">intro</span> <span class="n">hAr</span><span class="o">,</span>
+<span class="n">intro</span> <span class="n">hBr</span><span class="o">,</span>
+<span class="n">intro</span> <span class="n">hAs</span><span class="o">,</span>
+<span class="n">intro</span> <span class="n">hBs</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">I1</span> <span class="n">A</span> <span class="n">B</span> <span class="n">h</span> <span class="k">with</span> <span class="n">ℓ</span> <span class="n">h1</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">r_is_ell</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">=</span> <span class="n">ℓ</span><span class="o">,</span>
+<span class="bp">...</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>The axiom I1 is an if and only if statement, and I wanted to separate the two statements as I11 and I12. I succeeded with I11 (existence) but for I12 (uniqueness) I am having trouble. I end up with the following tactic state:</p>
+<div class="codehilite"><pre><span></span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Points</span><span class="o">,</span>
+<span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="n">Lines</span><span class="o">,</span>
+<span class="n">h</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">≠</span> <span class="n">B</span><span class="o">,</span>
+<span class="n">hAr</span> <span class="o">:</span> <span class="n">A</span><span class="err">∈</span><span class="n">r</span><span class="o">,</span>
+<span class="n">hBr</span> <span class="o">:</span> <span class="n">B</span><span class="err">∈</span><span class="n">r</span><span class="o">,</span>
+<span class="n">hAs</span> <span class="o">:</span> <span class="n">A</span><span class="err">∈</span><span class="n">s</span><span class="o">,</span>
+<span class="n">hBs</span> <span class="o">:</span> <span class="n">B</span><span class="err">∈</span><span class="n">s</span><span class="o">,</span>
+<span class="n">ℓ</span> <span class="o">:</span> <span class="n">Lines</span><span class="o">,</span>
+<span class="n">h1</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">ℓ</span> <span class="o">:</span> <span class="n">Lines</span><span class="o">),</span> <span class="n">A</span><span class="err">∈</span><span class="n">ℓ</span> <span class="bp">∧</span> <span class="n">B</span><span class="err">∈</span><span class="n">ℓ</span><span class="o">)</span> <span class="n">ℓ</span> <span class="bp">∧</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">Lines</span><span class="o">),</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">ℓ</span> <span class="o">:</span> <span class="n">Lines</span><span class="o">),</span> <span class="n">A</span><span class="err">∈</span><span class="n">ℓ</span> <span class="bp">∧</span> <span class="n">B</span><span class="err">∈</span><span class="n">ℓ</span><span class="o">)</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">ℓ</span>
+<span class="err">⊢</span> <span class="n">r</span> <span class="bp">=</span> <span class="n">s</span>
+</pre></div>
+
+
+<p>and then I want to conclude by showing that r = ell = s, so I do <code>have r_eq_ell : r = \ell</code>. This gives me the first goal of showing r = ell, and there I get stuck:</p>
+<div class="codehilite"><pre><span></span><span class="mi">2</span> <span class="n">goals</span>
+<span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Points</span><span class="o">,</span>
+<span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="n">Lines</span><span class="o">,</span>
+<span class="n">h</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">≠</span> <span class="n">B</span><span class="o">,</span>
+<span class="n">hAr</span> <span class="o">:</span> <span class="n">A</span><span class="err">∈</span><span class="n">r</span><span class="o">,</span>
+<span class="n">hBr</span> <span class="o">:</span> <span class="n">B</span><span class="err">∈</span><span class="n">r</span><span class="o">,</span>
+<span class="n">hAs</span> <span class="o">:</span> <span class="n">A</span><span class="err">∈</span><span class="n">s</span><span class="o">,</span>
+<span class="n">hBs</span> <span class="o">:</span> <span class="n">B</span><span class="err">∈</span><span class="n">s</span><span class="o">,</span>
+<span class="n">ℓ</span> <span class="o">:</span> <span class="n">Lines</span><span class="o">,</span>
+<span class="n">h1</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">ℓ</span> <span class="o">:</span> <span class="n">Lines</span><span class="o">),</span> <span class="n">A</span><span class="err">∈</span><span class="n">ℓ</span> <span class="bp">∧</span> <span class="n">B</span><span class="err">∈</span><span class="n">ℓ</span><span class="o">)</span> <span class="n">ℓ</span> <span class="bp">∧</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">Lines</span><span class="o">),</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">ℓ</span> <span class="o">:</span> <span class="n">Lines</span><span class="o">),</span> <span class="n">A</span><span class="err">∈</span><span class="n">ℓ</span> <span class="bp">∧</span> <span class="n">B</span><span class="err">∈</span><span class="n">ℓ</span><span class="o">)</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">ℓ</span>
+<span class="err">⊢</span> <span class="n">r</span> <span class="bp">=</span> <span class="n">ℓ</span>
+
+<span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Points</span><span class="o">,</span>
+<span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="n">Lines</span><span class="o">,</span>
+<span class="n">h</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">≠</span> <span class="n">B</span><span class="o">,</span>
+<span class="n">hAr</span> <span class="o">:</span> <span class="n">A</span><span class="err">∈</span><span class="n">r</span><span class="o">,</span>
+<span class="n">hBr</span> <span class="o">:</span> <span class="n">B</span><span class="err">∈</span><span class="n">r</span><span class="o">,</span>
+<span class="n">hAs</span> <span class="o">:</span> <span class="n">A</span><span class="err">∈</span><span class="n">s</span><span class="o">,</span>
+<span class="n">hBs</span> <span class="o">:</span> <span class="n">B</span><span class="err">∈</span><span class="n">s</span><span class="o">,</span>
+<span class="n">ℓ</span> <span class="o">:</span> <span class="n">Lines</span><span class="o">,</span>
+<span class="n">h1</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">ℓ</span> <span class="o">:</span> <span class="n">Lines</span><span class="o">),</span> <span class="n">A</span><span class="err">∈</span><span class="n">ℓ</span> <span class="bp">∧</span> <span class="n">B</span><span class="err">∈</span><span class="n">ℓ</span><span class="o">)</span> <span class="n">ℓ</span> <span class="bp">∧</span>
+    <span class="bp">∀</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">Lines</span><span class="o">),</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">ℓ</span> <span class="o">:</span> <span class="n">Lines</span><span class="o">),</span> <span class="n">A</span><span class="err">∈</span><span class="n">ℓ</span> <span class="bp">∧</span> <span class="n">B</span><span class="err">∈</span><span class="n">ℓ</span><span class="o">)</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">ℓ</span><span class="o">,</span>
+<span class="n">r_eq_ell</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">=</span> <span class="n">ℓ</span>
+<span class="err">⊢</span> <span class="n">r</span> <span class="bp">=</span> <span class="n">s</span>
+</pre></div>
+
+
+<p>Thank you for any help!</p>
+<p>PS: I know that I should be using classes or structures, but I am trying to keep it as simple as possible (and using as few non-math concepts as possible). Once I get something compiling I will try to understand how to make it up to standards.</p>
+
+<a name="185678302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678302">Johan Commelin (Jan 15 2020 at 08:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="254058">@Marc Masdeu</span> I think there are functions <code>unique_of_exists_unique</code> that take an <code>∃! foobar</code> statement, and spit out the corresponding uniqueness statement.</p>
+
+<a name="185678307"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678307">Johan Commelin (Jan 15 2020 at 08:39)</a>:</h4>
+<p>But maybe you would rather prove it by yourself, as an exercise.</p>
+
+<a name="185678386"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678386">Marc Masdeu (Jan 15 2020 at 08:41)</a>:</h4>
+<p>Good to know (I had seen it elsewhere) but I would like to prove the exact statement of I12 (yes, as an exercice), and more so now that I got stuck :-).</p>
+
+<a name="185678416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678416">Johan Commelin (Jan 15 2020 at 08:41)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="k">have</span> <span class="n">r_is_ell</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">=</span> <span class="n">ℓ</span><span class="o">,</span>
+<span class="o">{</span> <span class="n">apply</span> <span class="n">h1</span><span class="bp">.</span><span class="n">right</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="n">assumption&#39;</span> <span class="o">},</span>
+</pre></div>
+
+<a name="185678472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678472">Johan Commelin (Jan 15 2020 at 08:42)</a>:</h4>
+<p>Alternative:</p>
+<div class="codehilite"><pre><span></span><span class="n">rcases</span> <span class="n">I1</span> <span class="n">A</span> <span class="n">B</span> <span class="n">h</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">ℓ</span><span class="o">,</span> <span class="n">h1_left</span><span class="o">,</span> <span class="n">h1_right</span><span class="bp">⟩</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">r_is_ell</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">=</span> <span class="n">ℓ</span><span class="o">,</span>
+<span class="o">{</span> <span class="n">apply</span> <span class="n">h1_right</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="n">assumption&#39;</span> <span class="o">},</span>
+</pre></div>
+
+<a name="185678478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678478">Johan Commelin (Jan 15 2020 at 08:42)</a>:</h4>
+<p>I changed <code>cases</code> to <code>rcases</code>. That allows you to do "recursive" cases. (And I didn't attempt to give meaningful names to the hypotheses)</p>
+
+<a name="185678511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678511">Marc Masdeu (Jan 15 2020 at 08:43)</a>:</h4>
+<p>aha! Is there a way to resolve the have with tactics? I am not so comfortable yet with switching from one way to the other..</p>
+
+<a name="185678577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678577">Johan Commelin (Jan 15 2020 at 08:44)</a>:</h4>
+<p>What do you mean?</p>
+
+<a name="185678590"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678590" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678590">Johan Commelin (Jan 15 2020 at 08:45)</a>:</h4>
+<p>I proved the <code>have</code> using tactics. I used <code>{ ... }</code> to "zoom in" on one goal</p>
+
+<a name="185678596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678596">Johan Commelin (Jan 15 2020 at 08:45)</a>:</h4>
+<p>But you don't need to write those curly braces, if you don't want to</p>
+
+<a name="185678606"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678606">Johan Commelin (Jan 15 2020 at 08:45)</a>:</h4>
+<p>Or do you want to avoid the <code>have</code> altogether?</p>
+
+<a name="185678614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678614">Marc Masdeu (Jan 15 2020 at 08:45)</a>:</h4>
+<p>Oh I see. I am trying myself now. I thought that the {} was used to construct directly a term. I am in the right thread...</p>
+
+<a name="185678706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678706">Johan Commelin (Jan 15 2020 at 08:47)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">rcases</span> <span class="n">I1</span> <span class="n">A</span> <span class="n">B</span> <span class="n">h</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">ℓ</span><span class="o">,</span> <span class="n">h1_left</span><span class="o">,</span> <span class="n">h1_right</span><span class="bp">⟩</span><span class="o">,</span>
+<span class="n">transitivity</span><span class="o">,</span>
+<span class="o">{</span> <span class="n">apply</span> <span class="n">h1_right</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="n">assumption&#39;</span> <span class="o">},</span>
+<span class="o">{</span> <span class="n">symmetry</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">h1_right</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="n">assumption&#39;</span> <span class="o">}</span>
+</pre></div>
+
+<a name="185678714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678714">Johan Commelin (Jan 15 2020 at 08:47)</a>:</h4>
+<p>Proof without <code>have</code></p>
+
+<a name="185678742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678742">Johan Commelin (Jan 15 2020 at 08:47)</a>:</h4>
+<p>Shorter version:</p>
+<div class="codehilite"><pre><span></span><span class="n">rcases</span> <span class="n">I1</span> <span class="n">A</span> <span class="n">B</span> <span class="n">h</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">ℓ</span><span class="o">,</span> <span class="n">h1_left</span><span class="o">,</span> <span class="n">h1_right</span><span class="bp">⟩</span><span class="o">,</span>
+<span class="n">transitivity</span><span class="o">,</span>
+<span class="n">swap</span><span class="o">,</span> <span class="n">symmetry</span><span class="o">,</span>
+<span class="n">all_goals</span>
+<span class="o">{</span> <span class="n">apply</span> <span class="n">h1_right</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="n">assumption&#39;</span> <span class="o">},</span>
+</pre></div>
+
+<a name="185678744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678744">Marc Masdeu (Jan 15 2020 at 08:47)</a>:</h4>
+<p>OK, I got it. I thought that h1 was a function so that I could apply it by doing something like <code>h1 r</code> but this never worked. I hadn't thought of doing the <code>.right</code> and I still don't see the reasoning behind it.</p>
+
+<a name="185678802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678802">Johan Commelin (Jan 15 2020 at 08:48)</a>:</h4>
+<p>Sure, it also took me some time to parse it. But it is of the form <code>... ∧ ...</code></p>
+
+<a name="185678806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678806">Johan Commelin (Jan 15 2020 at 08:48)</a>:</h4>
+<p>And the right hand side is a function</p>
+
+<a name="185678846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678846">Marc Masdeu (Jan 15 2020 at 08:49)</a>:</h4>
+<p>Oh! How can I check this kind of things inside a proof? If h1 was defined outside, I would start trying <code>#check h1</code>, <code>#check h1 r</code> and so on, but I couldn't do anything like that inside the proof...</p>
+
+<a name="185678911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678911">Johan Commelin (Jan 15 2020 at 08:50)</a>:</h4>
+<p>Are you using VScode?</p>
+
+<a name="185678934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678934">Johan Commelin (Jan 15 2020 at 08:50)</a>:</h4>
+<p>Because it lists your entire context in the tactic state</p>
+
+<a name="185678954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678954">Johan Commelin (Jan 15 2020 at 08:51)</a>:</h4>
+<p>In the same place where you would see the output of <code>#check foobar</code></p>
+
+<a name="185678957"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678957">Marc Masdeu (Jan 15 2020 at 08:51)</a>:</h4>
+<p>No, I'm using cocalc (I want some summer camp students to be able to play around with this, and wanted to set something up easy to use for them)</p>
+
+<a name="185678967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678967">Johan Commelin (Jan 15 2020 at 08:51)</a>:</h4>
+<p>But where do you see the output of <code>#check h1</code> in CoCalc?</p>
+
+<a name="185678968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185678968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185678968">Johan Commelin (Jan 15 2020 at 08:51)</a>:</h4>
+<p>Probably in some message window somewhere</p>
+
+<a name="185679031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185679031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185679031">Johan Commelin (Jan 15 2020 at 08:52)</a>:</h4>
+<p>You are also seeing the goal that you want to prove somewhere. Right above it should be a list of all your hypotheses.</p>
+
+<a name="185679036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185679036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185679036">Marc Masdeu (Jan 15 2020 at 08:52)</a>:</h4>
+<p>Yes, there is a message window. But if I want to know the type of something, for example, I can't ask for it there.</p>
+
+<a name="185679059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185679059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185679059">Johan Commelin (Jan 15 2020 at 08:52)</a>:</h4>
+<p>I'm copy-pasting this from your first message:</p>
+<div class="codehilite"><pre><span></span><span class="mi">2</span> <span class="n">goals</span>
+<span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Points</span><span class="o">,</span>
+<span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="n">Lines</span><span class="o">,</span>
+<span class="n">h</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">≠</span> <span class="n">B</span><span class="o">,</span>
+<span class="n">hAr</span> <span class="o">:</span> <span class="n">A</span><span class="err">∈</span><span class="n">r</span><span class="o">,</span>
+<span class="n">hBr</span> <span class="o">:</span> <span class="n">B</span><span class="err">∈</span><span class="n">r</span><span class="o">,</span>
+<span class="n">hAs</span> <span class="o">:</span> <span class="n">A</span><span class="err">∈</span><span class="n">s</span><span class="o">,</span>
+<span class="n">hBs</span> <span class="o">:</span> <span class="n">B</span><span class="err">∈</span><span class="n">s</span><span class="o">,</span>
+<span class="n">ℓ</span> <span class="o">:</span> <span class="n">Lines</span><span class="o">,</span>
+<span class="n">h1</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">ℓ</span> <span class="o">:</span> <span class="n">Lines</span><span class="o">),</span> <span class="n">A</span><span class="err">∈</span><span class="n">ℓ</span> <span class="bp">∧</span> <span class="n">B</span><span class="err">∈</span><span class="n">ℓ</span><span class="o">)</span> <span class="n">ℓ</span> <span class="bp">∧</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">Lines</span><span class="o">),</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">ℓ</span> <span class="o">:</span> <span class="n">Lines</span><span class="o">),</span> <span class="n">A</span><span class="err">∈</span><span class="n">ℓ</span> <span class="bp">∧</span> <span class="n">B</span><span class="err">∈</span><span class="n">ℓ</span><span class="o">)</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">ℓ</span>
+<span class="err">⊢</span> <span class="n">r</span> <span class="bp">=</span> <span class="n">ℓ</span>
+</pre></div>
+
+<a name="185679079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185679079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185679079">Marc Masdeu (Jan 15 2020 at 08:53)</a>:</h4>
+<p>Yes, I see the hypotheses and everything, and they get updated as I advance. A lot like the web interface of the natural number game. What I don't have is autocompletion.</p>
+
+<a name="185679081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185679081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185679081">Johan Commelin (Jan 15 2020 at 08:53)</a>:</h4>
+<p>That's where you can see <code>h1 : (λ (ℓ : Lines), A∈ℓ ∧ B∈ℓ) ℓ ∧ ∀ (y : Lines), (λ (ℓ : Lines), A∈ℓ ∧ B∈ℓ) y → y = ℓ</code></p>
+
+<a name="185679094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185679094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185679094">Johan Commelin (Jan 15 2020 at 08:53)</a>:</h4>
+<p>That's the type of <code>h1</code></p>
+
+<a name="185679110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185679110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185679110">Johan Commelin (Jan 15 2020 at 08:53)</a>:</h4>
+<p>Hmm... what exactly do you mean? I thought CoCalc had some form of autocomplete</p>
+
+<a name="185679275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185679275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185679275">Marc Masdeu (Jan 15 2020 at 08:56)</a>:</h4>
+<p>I don't think it has any autocompletion (unless I have it disabled somehow!). What I meant --and maybe it's still me being stupid-- is that if I want to run some command (like <code>h1 r</code>) inside the proof to see what it would give me, I will probably get a useless error.</p>
+
+<a name="185679287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185679287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185679287">Alex J. Best (Jan 15 2020 at 08:56)</a>:</h4>
+<p>If you are in a tactic block and you want to know the type of something you can <code>have what_am_i := thing_I_dont_know,</code> then in the info at cursor block you should see <code>what_am_i : ℕ</code>  or whatever it is</p>
+
+<a name="185679314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185679314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185679314">Marc Masdeu (Jan 15 2020 at 08:57)</a>:</h4>
+<p>Oh <span class="user-mention" data-user-id="127136">@Alex J. Best</span>  this is clever! Thanks.</p>
+
+<a name="185679317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185679317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185679317">Alex J. Best (Jan 15 2020 at 08:57)</a>:</h4>
+<p><a href="/user_uploads/3121/xEkVmxTm9brRbz4qtJYljgir/Screen-Shot-2020-01-15-at-14.27.06.png" target="_blank" title="Screen-Shot-2020-01-15-at-14.27.06.png">Screen-Shot-2020-01-15-at-14.27.06.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/xEkVmxTm9brRbz4qtJYljgir/Screen-Shot-2020-01-15-at-14.27.06.png" target="_blank" title="Screen-Shot-2020-01-15-at-14.27.06.png"><img src="/user_uploads/3121/xEkVmxTm9brRbz4qtJYljgir/Screen-Shot-2020-01-15-at-14.27.06.png"></a></div>
+
+<a name="185679323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185679323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185679323">Johan Commelin (Jan 15 2020 at 08:57)</a>:</h4>
+<p><span class="user-mention" data-user-id="254058">@Marc Masdeu</span> Aha, I see. This might be one way to "hack" it:</p>
+<div class="codehilite"><pre><span></span><span class="n">rcases</span> <span class="n">I1</span> <span class="n">A</span> <span class="n">B</span> <span class="n">h</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">ℓ</span><span class="o">,</span> <span class="n">h1</span><span class="bp">⟩</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">test</span> <span class="o">:=</span> <span class="n">h1</span> <span class="n">r</span><span class="o">,</span>
+</pre></div>
+
+
+<p>This will give you an error</p>
+
+<a name="185679331"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185679331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185679331">Johan Commelin (Jan 15 2020 at 08:57)</a>:</h4>
+<p>Aah, ok, Alex beat me (-;</p>
+
+<a name="185679385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185679385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185679385">Marc Masdeu (Jan 15 2020 at 08:58)</a>:</h4>
+<p>You guys are incredibly helpful! Thanks!!</p>
+
+<a name="185679397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185679397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185679397">Alex J. Best (Jan 15 2020 at 08:58)</a>:</h4>
+<p>This is normally how I build terms, start with a function /lemma I want to apply with no arguments as have, then add arguments one by one till it gets to what I want.</p>
+
+<a name="185679459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185679459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185679459">Marc Masdeu (Jan 15 2020 at 08:59)</a>:</h4>
+<p>Aha. Yes, I want to learn how to translate the way we do math usually, into Lean.<br>
+I'll go back and try to prove a few more stupid lemmas. Probably will come back very soon...</p>
+
+<a name="185679514"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185679514" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185679514">Johan Commelin (Jan 15 2020 at 09:00)</a>:</h4>
+<p>Good luck! (-;</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
