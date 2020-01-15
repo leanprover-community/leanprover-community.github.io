@@ -873,6 +873,77 @@ Lines : set set Points
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185710703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185710703">Marc Masdeu (Jan 15 2020 at 15:52)</a>:</h4>
 <p><span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span>  I don't understand what did the <code>finish</code> do...</p>
 
+<a name="185712264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185712264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185712264">Bryan Gin-ge Chen (Jan 15 2020 at 16:06)</a>:</h4>
+<p>At a mathematical level they're equivalent. There are slight differences when it comes to how Lean interprets them due to the fact that I made <code>A</code>, <code>B</code>, <code>r</code> and <code>s</code> <a href="https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html#implicit-arguments" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html#implicit-arguments">"implicit arguments"</a> using curly braces.</p>
+<p>In Lean what I wrote is generally preferred since it saves a lot of typing. (Using <code>variables</code> would be even better). Could you say more about the symmetry you expect between forall and exists? </p>
+<p><code>finish</code> is a tactic which is able to clear "obvious" goals if they just boil down to logical manipulation. In this case, it turns out that you can just as well use <code>intros, refl</code> instead of <code>finish</code>.</p>
+
+<a name="185712858"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185712858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185712858">Marc Masdeu (Jan 15 2020 at 16:11)</a>:</h4>
+<blockquote>
+<p>Could you say more about the symmetry you expect between forall and exists? </p>
+</blockquote>
+<p>Well, how would you write in Lean these two statements (which I see as "symmetrical"):<br>
+<code>for all x,  P(x)</code> and <code>there exists x, P(x)</code>.</p>
+
+<a name="185713087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185713087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185713087">Bryan Gin-ge Chen (Jan 15 2020 at 16:13)</a>:</h4>
+<p>I'd write them like this: <code>∀ x, P x</code>, <code>∃ x, P x</code>. They behave rather differently though.</p>
+
+<a name="185713305"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185713305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185713305">Kevin Buzzard (Jan 15 2020 at 16:15)</a>:</h4>
+<p>They are yin and yang</p>
+
+<a name="185713626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185713626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185713626">Bryan Gin-ge Chen (Jan 15 2020 at 16:18)</a>:</h4>
+<p>"forall x" indicates to me that the thing that follows is a function of x. (It just happens to take values in the world of logical propositions). Lean lets us write such statements using more function-oriented syntax (we can give x as an argument to the function).</p>
+
+<a name="185713637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185713637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185713637">Marc Masdeu (Jan 15 2020 at 16:18)</a>:</h4>
+<p>Yes, that's the symmetry that I meant! But you see, if you want to write a lemma one could write:<br>
+<code>lemma hasP : \forall x : Type, P x</code> or <code>lemma existsP : \exists x : Type, P x</code>. The first one can be rewritten as<br>
+<code>lemma hasP {x : Type} : P x</code>. What about the second?</p>
+
+<a name="185713691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185713691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185713691">Kevin Buzzard (Jan 15 2020 at 16:18)</a>:</h4>
+<p>You can't move the exists to the left of the colon. They are different in that respect.</p>
+
+<a name="185713773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185713773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185713773">Kevin Buzzard (Jan 15 2020 at 16:19)</a>:</h4>
+<p>The general concept of "negation" switches them around</p>
+
+<a name="185713951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185713951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185713951">Marc Masdeu (Jan 15 2020 at 16:20)</a>:</h4>
+<blockquote>
+<p>You can't move the exists to the left of the colon. They are different in that respect.</p>
+</blockquote>
+<p>I think that this is what I was observing. I guess one gets used to it.</p>
+
+<a name="185713975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185713975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185713975">Johan Commelin (Jan 15 2020 at 16:20)</a>:</h4>
+<p>I guess this constructive logic leaking through....</p>
+
+<a name="185713990"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185713990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185713990">Johan Commelin (Jan 15 2020 at 16:20)</a>:</h4>
+<p>Because there they aren't symmetric at all.</p>
+
+<a name="185714865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185714865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185714865">Kevin Buzzard (Jan 15 2020 at 16:29)</a>:</h4>
+<p>They are like night and day. "I can see in the day, how come I can't see in the night?"</p>
+
+<a name="185714980"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185714980" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185714980">Bryan Gin-ge Chen (Jan 15 2020 at 16:30)</a>:</h4>
+<p>Since forall gives rise to functions maybe exists should arise from co-functions (in the sense of <a href="https://en.wikipedia.org/wiki/Coinduction" target="_blank" title="https://en.wikipedia.org/wiki/Coinduction">"co-data"</a>?)...</p>
+
+<a name="185715114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185715114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185715114">Chris Hughes (Jan 15 2020 at 16:31)</a>:</h4>
+<p>It is a coproduct.</p>
+
+<a name="185715151"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185715151" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185715151">Chris Hughes (Jan 15 2020 at 16:31)</a>:</h4>
+<p>And functions are products.</p>
+
 
 {% endraw %}
 
