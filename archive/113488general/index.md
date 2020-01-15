@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [typeclass problems](99005typeclassproblems.html) (262 messages, latest: Jan 15 2020 at 03:31)
+* [typeclass problems](99005typeclassproblems.html) (264 messages, latest: Jan 15 2020 at 04:54)
 
 * [deep learning for symbolic mathematics](03624deeplearningforsymbolicmathematics.html) (7 messages, latest: Jan 15 2020 at 01:23)
 

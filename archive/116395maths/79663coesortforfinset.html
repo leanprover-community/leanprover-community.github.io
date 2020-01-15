@@ -89,6 +89,28 @@ A finset is a finite subset of an arbitrary type.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coe_sort%20for%20finset/near/185576522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79663coesortforfinset.html#185576522">Patrick Massot (Jan 14 2020 at 09:11)</a>:</h4>
 <p>I don't think I wrote any of that page, I think it's all from Chris.</p>
 
+<a name="185667646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coe_sort%20for%20finset/near/185667646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79663coesortforfinset.html#185667646">Enrico Borba (Jan 15 2020 at 04:35)</a>:</h4>
+<blockquote>
+<p>I think this is may be what you want:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+
+<span class="kn">theorem</span> <span class="n">finset_endomorphism_cardinality</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+    <span class="n">finset</span><span class="bp">.</span><span class="n">card</span> <span class="o">(</span><span class="n">s</span><span class="bp">.</span><span class="n">pi</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">s</span><span class="o">)</span> <span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">card</span> <span class="n">s</span><span class="o">)</span> <span class="err">^</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">card</span> <span class="n">s</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">finset</span><span class="bp">.</span><span class="n">card</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">pi</span><span class="o">,</span> <span class="n">multiset</span><span class="bp">.</span><span class="n">card_pi</span><span class="o">,</span>
+    <span class="n">multiset</span><span class="bp">.</span><span class="n">prod_repeat</span><span class="o">,</span> <span class="n">multiset</span><span class="bp">.</span><span class="n">map_const</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">pow_eq_pow</span><span class="o">]</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+</blockquote>
+<p><span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> How did you know which definitions to pass to simp? <code>by simp *</code> works, but I'd like a way to know which simplifications it applied so I can rewrite it as a <code>simp only</code>.</p>
+
+<a name="185667768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coe_sort%20for%20finset/near/185667768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79663coesortforfinset.html#185667768">Bryan Gin-ge Chen (Jan 15 2020 at 04:38)</a>:</h4>
+<p>You can use <a href="https://leanprover-community.github.io/mathlib_docs/tactics.html#squeeze_simp%20/%20squeeze_simpa" target="_blank" title="https://leanprover-community.github.io/mathlib_docs/tactics.html#squeeze_simp%20/%20squeeze_simpa"><code>squeeze_simp</code></a> to give you a minimal set. It usually works, but it's not perfect. Sometimes there are extra / missing lemmas.</p>
+
 
 {% endraw %}
 
