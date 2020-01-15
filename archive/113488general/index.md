@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [typeclass problems](99005typeclassproblems.html) (262 messages, latest: Jan 15 2020 at 03:31)
+
 * [deep learning for symbolic mathematics](03624deeplearningforsymbolicmathematics.html) (7 messages, latest: Jan 15 2020 at 01:23)
 
 * [words](77296words.html) (12 messages, latest: Jan 15 2020 at 00:57)
@@ -54,8 +56,6 @@ permalink: archive/113488general/index.html
 * [Lean vs Coq](64589LeanvsCoq.html) (264 messages, latest: Jan 07 2020 at 14:31)
 
 * [guides](94498guides.html) (7 messages, latest: Jan 07 2020 at 14:14)
-
-* [typeclass problems](99005typeclassproblems.html) (256 messages, latest: Jan 07 2020 at 12:42)
 
 * [linter](19343linter.html) (14 messages, latest: Jan 06 2020 at 22:18)
 

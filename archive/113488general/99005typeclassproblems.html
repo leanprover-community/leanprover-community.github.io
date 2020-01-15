@@ -1457,6 +1457,53 @@ failed is_def_eq
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/185006545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#185006545">Daniel Selsam (Jan 07 2020 at 12:42)</a>:</h4>
 <p>Thanks.</p>
 
+<a name="185663943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/185663943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#185663943">Yury G. Kudryashov (Jan 15 2020 at 03:03)</a>:</h4>
+<p><span class="user-mention" data-user-id="230999">@Daniel Selsam</span> One more typeclass related problem, see <a href="https://github.com/leanprover-community/mathlib/issues/1875" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1875">#1875</a> <a href="https://github.com/leanprover-community/mathlib/pull/1875#discussion_r366674829" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1875#discussion_r366674829">https://github.com/leanprover-community/mathlib/pull/1875#discussion_r366674829</a> for a context, or below for a minimal example.</p>
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="n">theory</span>
+<span class="n">open_locale</span> <span class="n">classical</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+<span class="n">def</span> <span class="n">indicator</span> <span class="o">[</span><span class="n">has_zero</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">if</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="k">then</span> <span class="n">f</span> <span class="n">x</span> <span class="k">else</span> <span class="mi">0</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="kn">axiom</span> <span class="n">is_add_monoid_hom</span><span class="bp">.</span><span class="n">indicator</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">add_monoid</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">is_add_monoid_hom</span> <span class="o">(</span><span class="bp">λ</span><span class="n">f</span><span class="o">:</span><span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">,</span> <span class="n">indicator</span> <span class="n">s</span> <span class="n">f</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">indicator_sum</span> <span class="o">[</span><span class="n">add_comm_monoid</span> <span class="n">β</span><span class="o">]</span> <span class="o">{</span><span class="n">ι</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">ι</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">indicator</span> <span class="n">s</span> <span class="o">(</span><span class="n">I</span><span class="bp">.</span><span class="n">sum</span> <span class="n">f</span><span class="o">)</span> <span class="bp">=</span> <span class="n">I</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">indicator</span> <span class="n">s</span> <span class="o">(</span><span class="n">f</span> <span class="n">i</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">convert</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">sum_hom</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span>
+  <span class="n">convert</span> <span class="n">is_add_monoid_hom</span><span class="bp">.</span><span class="n">indicator</span> <span class="n">β</span> <span class="n">s</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">indicator_sum&#39;</span> <span class="o">[</span><span class="n">add_comm_monoid</span> <span class="n">β</span><span class="o">]</span> <span class="o">{</span><span class="n">ι</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">ι</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">indicator</span> <span class="n">s</span> <span class="o">(</span><span class="n">I</span><span class="bp">.</span><span class="n">sum</span> <span class="n">f</span><span class="o">)</span> <span class="bp">=</span> <span class="n">I</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">indicator</span> <span class="n">s</span> <span class="o">(</span><span class="n">f</span> <span class="n">i</span><span class="o">))</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">sum_hom</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
+</pre></div>
+
+
+<p>The <code>begin ... end</code> proof works while the last line fails to unify <code>add_monoid (α → β)</code> from <code>add_comm_monoid.to_add_monoid (pi.add_comm_monoid ...)</code> with <code>pi.add_monoid ...</code>. I have no idea how hard is to improve the situation here.</p>
+
+<a name="185664356"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/185664356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#185664356">Mario Carneiro (Jan 15 2020 at 03:13)</a>:</h4>
+<p>I think this is missing MWE stuff</p>
+
+<a name="185664951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/185664951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#185664951">Yury G. Kudryashov (Jan 15 2020 at 03:28)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> What do you mean?</p>
+
+<a name="185664958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/185664958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#185664958">Mario Carneiro (Jan 15 2020 at 03:28)</a>:</h4>
+<p>what are the imports? I'm pretty sure <code>is_add_monoid_hom</code> is not in core</p>
+
+<a name="185664984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/185664984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#185664984">Mario Carneiro (Jan 15 2020 at 03:29)</a>:</h4>
+<p>ideally this should not have any imports, so it can be a standalone example that ports to lean 4</p>
+
+<a name="185665069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/185665069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html#185665069">Yury G. Kudryashov (Jan 15 2020 at 03:31)</a>:</h4>
+<p>I'll try to post a version with no imports.</p>
+
 
 {% endraw %}
 
