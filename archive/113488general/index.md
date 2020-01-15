@@ -9,15 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [coercions from polynomials](03953coercionsfrompolynomials.html) (4 messages, latest: Jan 15 2020 at 16:30)
+* [coercions from polynomials](03953coercionsfrompolynomials.html) (8 messages, latest: Jan 15 2020 at 17:53)
 
-* [words](77296words.html) (19 messages, latest: Jan 15 2020 at 16:25)
+* [deep learning for symbolic mathematics](03624deeplearningforsymbolicmathematics.html) (8 messages, latest: Jan 15 2020 at 17:50)
+
+* [words](77296words.html) (21 messages, latest: Jan 15 2020 at 17:50)
 
 * [bulleting / browers questions](04997bulletingbrowersquestions.html) (12 messages, latest: Jan 15 2020 at 16:05)
 
 * [typeclass problems](99005typeclassproblems.html) (264 messages, latest: Jan 15 2020 at 04:54)
-
-* [deep learning for symbolic mathematics](03624deeplearningforsymbolicmathematics.html) (7 messages, latest: Jan 15 2020 at 01:23)
 
 * [web editor](11270webeditor.html) (21 messages, latest: Jan 14 2020 at 16:14)
 
