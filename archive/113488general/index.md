@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [coercions from polynomials](03953coercionsfrompolynomials.html) (9 messages, latest: Jan 15 2020 at 18:33)
+* [coercions from polynomials](03953coercionsfrompolynomials.html) (33 messages, latest: Jan 15 2020 at 19:59)
 
 * [deep learning for symbolic mathematics](03624deeplearningforsymbolicmathematics.html) (8 messages, latest: Jan 15 2020 at 17:50)
 

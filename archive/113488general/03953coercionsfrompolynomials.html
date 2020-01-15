@@ -85,6 +85,110 @@ permalink: archive/113488general/03953coercionsfrompolynomials.html
 <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">k</span> <span class="bp">|</span> <span class="bp">∀</span> <span class="n">f</span><span class="o">,</span> <span class="n">f</span> <span class="err">∈</span> <span class="n">S</span> <span class="bp">→</span> <span class="kn">eval</span> <span class="n">x</span> <span class="n">f</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">}</span> <span class="c1">-- works BUT VARIABLES IN STUPID ORDER!</span>
 </pre></div>
 
+<a name="185732724"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercions%20from%20polynomials/near/185732724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03953coercionsfrompolynomials.html#185732724">Reid Barton (Jan 15 2020 at 19:11)</a>:</h4>
+<p>oh yeah, inference with has_mem is super annoying</p>
+
+<a name="185735148"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercions%20from%20polynomials/near/185735148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03953coercionsfrompolynomials.html#185735148">Mario Carneiro (Jan 15 2020 at 19:35)</a>:</h4>
+<p>When using "forall in" so that I can't write the type, I usually do something like this:</p>
+<div class="codehilite"><pre><span></span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">k</span> <span class="bp">|</span> <span class="bp">∀</span> <span class="n">f</span> <span class="err">∈</span> <span class="n">S</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">n</span> <span class="n">k</span><span class="o">)</span><span class="bp">.</span><span class="kn">eval</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">}</span>
+</pre></div>
+
+<a name="185735280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercions%20from%20polynomials/near/185735280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03953coercionsfrompolynomials.html#185735280">Johan Commelin (Jan 15 2020 at 19:36)</a>:</h4>
+<p><span aria-label="thumbs up" class="emoji emoji-1f44d" role="img" title="thumbs up">:thumbs_up:</span> But it is still 3.1415 miles away from what mathematicians would write...</p>
+
+<a name="185735901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercions%20from%20polynomials/near/185735901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03953coercionsfrompolynomials.html#185735901">Johan Commelin (Jan 15 2020 at 19:42)</a>:</h4>
+<p>Are there examples of <code>has_mem X Y</code> in mathlib where <code>X</code> is not uniquely determined by <code>Y</code>? More precisely, can someone point me to two instances with types <code>has_mem X_1 Y</code> and <code>has_mem X_2 Y</code> such that <code>X_1</code> differs from <code>X_2</code>?</p>
+
+<a name="185736009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercions%20from%20polynomials/near/185736009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03953coercionsfrompolynomials.html#185736009">Johan Commelin (Jan 15 2020 at 19:44)</a>:</h4>
+<p>(The dual case is clear: <code>has_mem X (set X)</code> and <code>has_mem X (finset X)</code>, etc... all exist and are desirable.)</p>
+
+<a name="185736104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercions%20from%20polynomials/near/185736104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03953coercionsfrompolynomials.html#185736104">Reid Barton (Jan 15 2020 at 19:44)</a>:</h4>
+<p><code>X</code> is an <code>out_param</code> so I think the case you suggest is not supposed to happen, but I never really understood whether <code>out_param</code> behaves like I would expect from Haskell</p>
+
+<a name="185736156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercions%20from%20polynomials/near/185736156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03953coercionsfrompolynomials.html#185736156">Reid Barton (Jan 15 2020 at 19:45)</a>:</h4>
+<p>Like here we definitely know that <code>S : set (mv_polynomial n k)</code>, so there should be no problem inferring <code>f : mv_polynomial n k</code> and yet here we are</p>
+
+<a name="185736308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercions%20from%20polynomials/near/185736308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03953coercionsfrompolynomials.html#185736308">Johan Commelin (Jan 15 2020 at 19:46)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">has_mem&#39;</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">T</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+<span class="o">(</span><span class="n">mem</span> <span class="o">:</span> <span class="n">T</span> <span class="bp">→</span> <span class="n">Y</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span>
+</pre></div>
+
+<a name="185736334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercions%20from%20polynomials/near/185736334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03953coercionsfrompolynomials.html#185736334">Reid Barton (Jan 15 2020 at 19:46)</a>:</h4>
+<p>Also I think it would be better if ∈ was not overloaded at all, but only had type <code>a -&gt; set a -&gt; Prop</code>. The other cases you refer to could be handled using coercions.</p>
+
+<a name="185736387"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercions%20from%20polynomials/near/185736387" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03953coercionsfrompolynomials.html#185736387">Reid Barton (Jan 15 2020 at 19:47)</a>:</h4>
+<p>after all, a set S is exactly determined by its membership predicate so there is no loss of information this way</p>
+
+<a name="185736577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercions%20from%20polynomials/near/185736577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03953coercionsfrompolynomials.html#185736577">Johan Commelin (Jan 15 2020 at 19:49)</a>:</h4>
+<blockquote>
+<p>Also I think it would be better if ∈ was not overloaded at all, but only had type <code>a -&gt; set a -&gt; Prop</code>. The other cases you refer to could be handled using coercions.</p>
+</blockquote>
+<p>But you run the risk that you have to explicitly tell Lean that you want to coerce...</p>
+
+<a name="185736718"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercions%20from%20polynomials/near/185736718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03953coercionsfrompolynomials.html#185736718">Johan Commelin (Jan 15 2020 at 19:51)</a>:</h4>
+<p>Suppose I write <code>∀ f ∈ S</code>, and <code>S : finset X</code>. Then Lean doesn't know the type of <code>f</code> yet. It will want to coerce <code>S</code> to <code>set m_1?</code>, but probably isn't smart enough to figure out that <code>finset X</code> only coerces to <code>set X</code>.</p>
+
+<a name="185736765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercions%20from%20polynomials/near/185736765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03953coercionsfrompolynomials.html#185736765">Reid Barton (Jan 15 2020 at 19:51)</a>:</h4>
+<p>oh this might be an issue, yes, but isn't that already broken?</p>
+
+<a name="185736775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercions%20from%20polynomials/near/185736775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03953coercionsfrompolynomials.html#185736775">Johan Commelin (Jan 15 2020 at 19:51)</a>:</h4>
+<p>So you end up writing <code>∀ f ∈ (S : set (mv_polynomial k n))</code>, which is what we want to avoid.</p>
+
+<a name="185736848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercions%20from%20polynomials/near/185736848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03953coercionsfrompolynomials.html#185736848">Reid Barton (Jan 15 2020 at 19:52)</a>:</h4>
+<p>Anyways that's the same as the coercion to function issue which will hopefully be fixed in <span aria-label="four leaf clover" class="emoji emoji-1f340" role="img" title="four leaf clover">:four_leaf_clover:</span></p>
+
+<a name="185736851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercions%20from%20polynomials/near/185736851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03953coercionsfrompolynomials.html#185736851">Johan Commelin (Jan 15 2020 at 19:52)</a>:</h4>
+<p>Well, not if you allow multiple <code>has_mem</code>s, I think</p>
+
+<a name="185736873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercions%20from%20polynomials/near/185736873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03953coercionsfrompolynomials.html#185736873">Johan Commelin (Jan 15 2020 at 19:52)</a>:</h4>
+<p>What do you think of my <code>has_mem'</code>?</p>
+
+<a name="185736899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercions%20from%20polynomials/near/185736899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03953coercionsfrompolynomials.html#185736899">Johan Commelin (Jan 15 2020 at 19:52)</a>:</h4>
+<p>It's probably broken as well... I dunno</p>
+
+<a name="185737154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercions%20from%20polynomials/near/185737154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03953coercionsfrompolynomials.html#185737154">Reid Barton (Jan 15 2020 at 19:53)</a>:</h4>
+<p>I think this encoding might get annoying in practice because Lean will naturally synthesize a type like <code>(@set.has_mem a).T</code> and then it will need to be reduced to <code>a</code> and it might not happen automatically in the right places</p>
+
+<a name="185737161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercions%20from%20polynomials/near/185737161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03953coercionsfrompolynomials.html#185737161">Reid Barton (Jan 15 2020 at 19:53)</a>:</h4>
+<p>Other than that, I think it would work</p>
+
+<a name="185737219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercions%20from%20polynomials/near/185737219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03953coercionsfrompolynomials.html#185737219">Johan Commelin (Jan 15 2020 at 19:54)</a>:</h4>
+<p>I think the problem with <code>out_param</code> was that it kicks in too late. My version would hopefully kick in at the right time</p>
+
+<a name="185737464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercions%20from%20polynomials/near/185737464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03953coercionsfrompolynomials.html#185737464">Patrick Massot (Jan 15 2020 at 19:56)</a>:</h4>
+<p>Do whatever you want as long as we don't loose sets being members of a filter.</p>
+
+<a name="185737590"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercions%20from%20polynomials/near/185737590" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03953coercionsfrompolynomials.html#185737590">Johan Commelin (Jan 15 2020 at 19:58)</a>:</h4>
+<p>Patrick, as long as nothing else can be member of a filter, that should be fine.</p>
+
+<a name="185737711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercions%20from%20polynomials/near/185737711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03953coercionsfrompolynomials.html#185737711">Johan Commelin (Jan 15 2020 at 19:59)</a>:</h4>
+<p>I wish we could register lookup tables in the parser and/or elaborator. Where you say: Oh, you've got <code>∀ f ∈ S</code>? Figure out the type of <code>S</code>, and I'll look in the table what the type of <code>f</code> must be.</p>
+
 
 {% endraw %}
 
