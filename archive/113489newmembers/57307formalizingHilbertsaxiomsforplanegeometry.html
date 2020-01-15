@@ -778,6 +778,101 @@ Lines : set set Points
 <p>and I am trying to complete it using the fact that I1 is a lot stronger...</p>
 <p>Moreover, I don't like that there are so many hypothesis. It seems that this is a side effect of working with sets.</p>
 
+<a name="185706065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185706065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185706065">Bryan Gin-ge Chen (Jan 15 2020 at 15:07)</a>:</h4>
+<p>If you use <code>variables</code>  you can state some hypotheses just once at the beginning of a <code>section</code> or <code>namespace</code>. See <a href="https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html#variables-and-sections" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html#variables-and-sections">2.6 of Theorem Proving in Lean</a> if you haven't already.</p>
+
+<a name="185706476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185706476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185706476">Bryan Gin-ge Chen (Jan 15 2020 at 15:11)</a>:</h4>
+<p>Oh, I guess you may also want to state your lemma like this to avoid the giant <code>intros</code> at the start of the proof:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">I12</span> <span class="o">{</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Points</span><span class="o">}</span> <span class="o">{</span><span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">Points</span><span class="o">}</span> <span class="o">(</span><span class="n">rL</span> <span class="o">:</span> <span class="n">r</span> <span class="err">∈</span> <span class="n">Lines</span><span class="o">)</span> <span class="o">(</span><span class="n">sL</span> <span class="o">:</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">Lines</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">≠</span> <span class="n">B</span><span class="o">)</span> <span class="o">(</span><span class="n">hAr</span> <span class="o">:</span> <span class="n">A</span> <span class="err">∈</span> <span class="n">r</span><span class="o">)</span> <span class="o">(</span><span class="n">hBr</span> <span class="o">:</span> <span class="n">B</span> <span class="err">∈</span> <span class="n">r</span><span class="o">)</span> <span class="o">(</span><span class="n">hAs</span> <span class="o">:</span> <span class="n">A</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">hBs</span> <span class="o">:</span> <span class="n">B</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">=</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+
+<a name="185706835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185706835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185706835">Johan Commelin (Jan 15 2020 at 15:15)</a>:</h4>
+<p><span class="user-mention" data-user-id="254058">@Marc Masdeu</span> At this point, if you really want to pursue the geometry formalisation (instead of just fooling around to learn more Lean), I think it would be useful to look at the previous attempts.</p>
+
+<a name="185707250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185707250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185707250">Marc Masdeu (Jan 15 2020 at 15:19)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="254058">Marc Masdeu</span> At this point, if you really want to pursue the geometry formalisation (instead of just fooling around to learn more Lean), I think it would be useful to look at the previous attempts.</p>
+</blockquote>
+<p>Oh I do want to fool around. Formalizing geometry was just what I picked as a testing grounds, since it doesn't itself have much pre-requisites. Eventually I will want to teach students how to use this, so I better learn a bit first.</p>
+
+<a name="185707545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185707545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185707545">Bryan Gin-ge Chen (Jan 15 2020 at 15:22)</a>:</h4>
+<p>Could you post what you have in its entirety? Otherwise I can only guess how you corrected <code>I1</code>.</p>
+
+<a name="185707665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185707665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185707665">Marc Masdeu (Jan 15 2020 at 15:23)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+<span class="c1">-- We want to be able to define functions using the law of excluded middle</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">0</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+
+
+<span class="n">noncomputable</span> <span class="n">theory</span>
+<span class="n">open_locale</span> <span class="n">classical</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+<span class="kn">constant</span> <span class="n">Points</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span>
+<span class="kn">constant</span> <span class="n">Lines</span> <span class="o">:</span> <span class="n">set</span><span class="o">(</span><span class="n">set</span><span class="o">(</span><span class="n">Points</span><span class="o">))</span>
+
+<span class="kn">constant</span> <span class="n">I1</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Points</span><span class="o">,</span>  <span class="n">A</span> <span class="bp">≠</span> <span class="n">B</span> <span class="bp">→</span> <span class="bp">∃!</span> <span class="o">(</span><span class="n">ℓ</span> <span class="err">∈</span> <span class="n">Lines</span><span class="o">),</span> <span class="o">(</span> <span class="n">A</span> <span class="err">∈</span> <span class="n">ℓ</span> <span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span> <span class="n">B</span> <span class="err">∈</span> <span class="n">ℓ</span> <span class="o">)</span>
+<span class="kn">constant</span> <span class="n">I2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">ℓ</span> <span class="err">∈</span> <span class="n">Lines</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Points</span><span class="o">,</span> <span class="n">A</span> <span class="bp">≠</span> <span class="n">B</span> <span class="bp">∧</span> <span class="n">A</span> <span class="err">∈</span> <span class="n">ℓ</span> <span class="bp">∧</span> <span class="n">B</span> <span class="err">∈</span> <span class="n">ℓ</span>
+<span class="kn">constant</span> <span class="n">I3</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">A</span> <span class="n">B</span> <span class="n">C</span> <span class="o">:</span> <span class="n">Points</span><span class="o">,</span> <span class="o">(</span><span class="n">A</span> <span class="bp">≠</span> <span class="n">B</span> <span class="bp">∧</span> <span class="n">A</span> <span class="bp">≠</span> <span class="n">C</span> <span class="bp">∧</span> <span class="n">B</span> <span class="bp">≠</span> <span class="n">C</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">ℓ</span> <span class="err">∈</span> <span class="n">Lines</span><span class="o">,</span> <span class="o">(</span><span class="n">A</span> <span class="err">∈</span> <span class="n">ℓ</span> <span class="bp">∧</span> <span class="n">B</span> <span class="err">∈</span> <span class="n">ℓ</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">¬</span> <span class="o">(</span><span class="n">C</span> <span class="err">∈</span> <span class="n">ℓ</span><span class="o">)</span> <span class="o">)))</span>
+
+<span class="kn">notation</span> <span class="n">p</span> <span class="bp">`</span><span class="n">xor</span><span class="bp">`</span> <span class="n">q</span> <span class="o">:=</span> <span class="o">(</span><span class="n">p</span> <span class="bp">∧</span> <span class="bp">¬</span> <span class="n">q</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="n">q</span> <span class="bp">∧</span> <span class="bp">¬</span> <span class="n">p</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">I12</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Points</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">r</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">Lines</span><span class="o">,</span> <span class="o">(</span><span class="n">A</span> <span class="bp">≠</span> <span class="n">B</span><span class="o">)</span> <span class="bp">→</span>  <span class="o">(</span><span class="n">A</span> <span class="err">∈</span> <span class="n">r</span><span class="o">)</span> <span class="bp">→</span>  <span class="o">(</span><span class="n">B</span> <span class="err">∈</span> <span class="n">r</span><span class="o">)</span> <span class="bp">→</span>  <span class="o">(</span><span class="n">A</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">B</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="bp">→</span>  <span class="n">r</span> <span class="bp">=</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intros</span> <span class="n">A</span> <span class="n">B</span> <span class="n">r</span> <span class="n">s</span> <span class="n">rL</span> <span class="n">sL</span> <span class="n">h</span> <span class="n">hAr</span> <span class="n">hBr</span> <span class="n">hAs</span> <span class="n">hBs</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">unique_of_exists_unique</span> <span class="o">(</span><span class="n">I1</span> <span class="n">A</span> <span class="n">B</span> <span class="n">h</span><span class="o">),</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+<a name="185708513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185708513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185708513">Kevin Buzzard (Jan 15 2020 at 15:31)</a>:</h4>
+<p>Does <code>open_locale classical</code> not automatically do the local attribute business? What happens if you delete line 3?</p>
+
+<a name="185708728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185708728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185708728">Marc Masdeu (Jan 15 2020 at 15:33)</a>:</h4>
+<p>I don't see any change. I copied line 3 from somewhere, and kept the comment since I do want to use the LEM.</p>
+
+<a name="185709505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185709505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185709505">Bryan Gin-ge Chen (Jan 15 2020 at 15:40)</a>:</h4>
+<p>The <code>unfold</code>s are unnecessary, but may help you see what's going on.</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">I12</span> <span class="o">{</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Points</span><span class="o">}</span> <span class="o">{</span><span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">Points</span><span class="o">}</span> <span class="o">(</span><span class="n">rL</span> <span class="o">:</span> <span class="n">r</span> <span class="err">∈</span> <span class="n">Lines</span><span class="o">)</span> <span class="o">(</span><span class="n">sL</span> <span class="o">:</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">Lines</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">≠</span> <span class="n">B</span><span class="o">)</span> <span class="o">(</span><span class="n">hAr</span> <span class="o">:</span> <span class="n">A</span> <span class="err">∈</span> <span class="n">r</span><span class="o">)</span> <span class="o">(</span><span class="n">hBr</span> <span class="o">:</span> <span class="n">B</span> <span class="err">∈</span> <span class="n">r</span><span class="o">)</span> <span class="o">(</span><span class="n">hAs</span> <span class="o">:</span> <span class="n">A</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">hBs</span> <span class="o">:</span> <span class="n">B</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">=</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">unique_of_exists_unique</span> <span class="o">(</span><span class="n">I1</span> <span class="n">A</span> <span class="n">B</span> <span class="n">h</span><span class="o">),</span>
+  <span class="o">{</span> <span class="n">unfold</span> <span class="n">exists_unique</span><span class="o">,</span>
+    <span class="n">use</span> <span class="n">rL</span><span class="o">,</span>
+    <span class="n">split</span><span class="o">,</span>
+    <span class="n">split</span><span class="o">,</span>
+    <span class="n">assumption</span><span class="o">,</span>
+    <span class="n">assumption</span><span class="o">,</span>
+    <span class="n">finish</span><span class="o">,</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">unfold</span> <span class="n">exists_unique</span><span class="o">,</span>
+    <span class="n">use</span> <span class="n">sL</span><span class="o">,</span>
+    <span class="n">split</span><span class="o">,</span>
+    <span class="n">split</span><span class="o">,</span>
+    <span class="n">assumption</span><span class="o">,</span>
+    <span class="n">assumption</span><span class="o">,</span>
+    <span class="n">finish</span><span class="o">,</span> <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="185710009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185710009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185710009">Marc Masdeu (Jan 15 2020 at 15:45)</a>:</h4>
+<p>Thanks! Now that we are at this. You changed a lot the definition of the lemma, by removing all the foralls, for example. What is the difference between the two, and which form should I prefer? The form that I had was a bit similar to what I would do in math, and this notation breaks the symmetry between forall and exists, right?</p>
+
+<a name="185710703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/185710703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#185710703">Marc Masdeu (Jan 15 2020 at 15:52)</a>:</h4>
+<p><span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span>  I don't understand what did the <code>finish</code> do...</p>
+
 
 {% endraw %}
 
