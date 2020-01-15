@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (46 messages, latest: Jan 15 2020 at 09:07)
+* [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (60 messages, latest: Jan 15 2020 at 12:53)
 
-* [noob question(s)](52075noobquestions.html) (1622 messages, latest: Jan 15 2020 at 08:46)
+* [attempt at some geometry](35829attemptatsomegeometry.html) (109 messages, latest: Jan 15 2020 at 12:44)
 
-* [attempt at some geometry](35829attemptatsomegeometry.html) (108 messages, latest: Jan 15 2020 at 08:40)
+* [noob question(s)](52075noobquestions.html) (1623 messages, latest: Jan 15 2020 at 12:38)
 
 * [A finite set has finitely many endofunctions?](54624Afinitesethasfinitelymanyendofunctions.html) (17 messages, latest: Jan 14 2020 at 13:41)
 
