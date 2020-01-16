@@ -53,6 +53,111 @@ That said:</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185818655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185818655">Johan Commelin (Jan 16 2020 at 14:24)</a>:</h4>
 <p><span class="user-mention" data-user-id="230999">@Daniel Selsam</span> Do you have the name and line numbers for this instance in mathlib?</p>
 
+<a name="185863167"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185863167" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185863167">Mario Carneiro (Jan 16 2020 at 21:31)</a>:</h4>
+<blockquote>
+<p>In particular, there is no current plan for Lean4 to address performance problems arising from huge term trees.</p>
+</blockquote>
+<p>This is a bad idea. Large trees before deduplication is an inevitable consequence of dependent type theory due to redundancy inside types and dependent arguments. This will be <em>the</em> thing that we will all notice and hope to be improved in the next version if you don't fix it now.</p>
+
+<a name="185863279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185863279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185863279">Mario Carneiro (Jan 16 2020 at 21:32)</a>:</h4>
+<p>There is a coq paper about typeclass slowness using exactly your C1-C5 example</p>
+
+<a name="185864985"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185864985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185864985">Daniel Selsam (Jan 16 2020 at 21:49)</a>:</h4>
+<blockquote>
+<p>There is a coq paper about typeclass slowness using exactly your C1-C5 example</p>
+</blockquote>
+<p>Using unbundled typeclasses.</p>
+
+<a name="185865318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185865318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185865318">Mario Carneiro (Jan 16 2020 at 21:49)</a>:</h4>
+<p>I think that's what you are doing in the example as well</p>
+
+<a name="185865442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185865442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185865442">Mario Carneiro (Jan 16 2020 at 21:50)</a>:</h4>
+<p>the parameters are stacking up, and each one refers to all the previous, so instances on C5 are already O(n^5)</p>
+
+<a name="185865456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185865456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185865456">Daniel Selsam (Jan 16 2020 at 21:50)</a>:</h4>
+<blockquote>
+<p>I think that's what you are doing in the example as well</p>
+</blockquote>
+<p>Yes, but that is not the way typeclasses are generally used in mathlib.</p>
+
+<a name="185865489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185865489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185865489">Mario Carneiro (Jan 16 2020 at 21:50)</a>:</h4>
+<p>It is, when more types get involved</p>
+
+<a name="185865534"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185865534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185865534">Mario Carneiro (Jan 16 2020 at 21:51)</a>:</h4>
+<p>For example <code>module A B</code> needs <code>ring A</code> and <code>add_group B</code> as parameters</p>
+
+<a name="185865562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185865562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185865562">Johan Commelin (Jan 16 2020 at 21:51)</a>:</h4>
+<p>And <code>topological_vector_space</code> needs ...</p>
+
+<a name="185865568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185865568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185865568">Mario Carneiro (Jan 16 2020 at 21:51)</a>:</h4>
+<p>I'm not exactly sure where your example is coming from but category theory has a similar problem with mandatory dependencies</p>
+
+<a name="185865710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185865710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185865710">Daniel Selsam (Jan 16 2020 at 21:53)</a>:</h4>
+<p>Yes but <code>ring A</code> and <code>add_group B</code> internally bundle many layers. Do you know which class in mathlib takes the most instance parameters? It seems harder to accidentally take a ton of instance parameters in Lean since it doesn't support the implicit generalization that Coq does.</p>
+
+<a name="185865766"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185865766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185865766">Mario Carneiro (Jan 16 2020 at 21:53)</a>:</h4>
+<p>topological vector space is probably a contender</p>
+
+<a name="185865820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185865820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185865820">Johan Commelin (Jan 16 2020 at 21:54)</a>:</h4>
+<p>complete topological vector space?</p>
+
+<a name="185865827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185865827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185865827">Daniel Selsam (Jan 16 2020 at 21:54)</a>:</h4>
+<p>In Coq, the same example looks harmless :</p>
+<div class="codehilite"><pre><span></span><span class="kn">Class</span> <span class="n">C1</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kn">Set</span><span class="o">)</span> <span class="o">:</span> <span class="kn">Set</span> <span class="o">:=</span> <span class="o">{}.</span>
+<span class="kn">Instance</span> <span class="n">I1</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kn">Set</span><span class="o">)</span> <span class="o">:</span> <span class="n">C1</span> <span class="n">X</span> <span class="o">:=</span> <span class="o">{}.</span>
+<span class="kn">Class</span> <span class="n">C2</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kn">Set</span><span class="o">)</span> <span class="o">`{</span><span class="n">C1</span> <span class="n">X</span><span class="o">}</span> <span class="o">:</span> <span class="kn">Set</span> <span class="o">:=</span> <span class="o">{}.</span>
+<span class="kn">Instance</span> <span class="n">I2</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kn">Set</span><span class="o">)</span> <span class="o">`{</span><span class="n">C1</span> <span class="n">X</span><span class="o">}</span> <span class="o">:</span> <span class="n">C2</span> <span class="n">X</span> <span class="o">:=</span> <span class="o">{}.</span>
+<span class="kn">Class</span> <span class="n">C3</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kn">Set</span><span class="o">)</span> <span class="o">`{</span><span class="n">C2</span> <span class="n">X</span><span class="o">}</span> <span class="o">:</span> <span class="kn">Set</span> <span class="o">:=</span> <span class="o">{}.</span>
+<span class="kn">Instance</span> <span class="n">I3</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kn">Set</span><span class="o">)</span> <span class="o">`{</span><span class="n">C2</span> <span class="n">X</span><span class="o">}</span> <span class="o">:</span> <span class="n">C3</span> <span class="n">X</span> <span class="o">:=</span> <span class="o">{}.</span>
+<span class="kn">Class</span> <span class="n">C4</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kn">Set</span><span class="o">)</span> <span class="o">`{</span><span class="n">C3</span> <span class="n">X</span><span class="o">}</span> <span class="o">:</span> <span class="kn">Set</span> <span class="o">:=</span> <span class="o">{}.</span>
+<span class="kn">Instance</span> <span class="n">I4</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kn">Set</span><span class="o">)</span> <span class="o">`{</span><span class="n">C3</span> <span class="n">X</span><span class="o">}</span> <span class="o">:</span> <span class="n">C4</span> <span class="n">X</span> <span class="o">:=</span> <span class="o">{}.</span>
+<span class="kn">Class</span> <span class="n">C5</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kn">Set</span><span class="o">)</span> <span class="o">`{</span><span class="n">C4</span> <span class="n">X</span><span class="o">}</span> <span class="o">:</span> <span class="kn">Set</span> <span class="o">:=</span> <span class="o">{}.</span>
+<span class="kn">Instance</span> <span class="n">I5</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kn">Set</span><span class="o">)</span> <span class="o">`{</span><span class="n">C4</span> <span class="n">X</span><span class="o">}</span> <span class="o">:</span> <span class="n">C5</span> <span class="n">X</span> <span class="o">:=</span> <span class="o">{}.</span>
+<span class="kn">Example</span> <span class="n">failing_tower</span> <span class="o">:</span> <span class="n">C5</span> <span class="n">unit</span> <span class="o">:=</span> <span class="o">_.</span>
+</pre></div>
+
+<a name="185865855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185865855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185865855">Mario Carneiro (Jan 16 2020 at 21:54)</a>:</h4>
+<p>I recall that being a feature request on lean 3</p>
+
+<a name="185866009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185866009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185866009">Patrick Massot (Jan 16 2020 at 21:56)</a>:</h4>
+<p>Looking harmless was a feature request?</p>
+
+<a name="185866070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185866070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185866070">Mario Carneiro (Jan 16 2020 at 21:56)</a>:</h4>
+<p>Being able to write <code>[module A B]</code> and getting <code>{A} {B} [ring A] [add_group B] [module A B]</code> automatically</p>
+
+<a name="185866134"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185866134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185866134">Mario Carneiro (Jan 16 2020 at 21:57)</a>:</h4>
+<p>This is very nice when you are doing e.g. linear algebra between two or three vector spaces</p>
+
+<a name="185866161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185866161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185866161">Patrick Massot (Jan 16 2020 at 21:57)</a>:</h4>
+<p>Oooh...</p>
+
+<a name="185866243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185866243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185866243">Patrick Massot (Jan 16 2020 at 21:58)</a>:</h4>
+<p>I didn't even know you could ask Santa Claus to get that.</p>
+
+<a name="185866296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185866296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185866296">Kevin Buzzard (Jan 16 2020 at 21:59)</a>:</h4>
+<p>It would be delicate to get right -- if B was already an add_group for some other reason then you don't want to add it again.</p>
+
 
 {% endraw %}
 

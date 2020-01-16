@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [How to write about there are infinite primes p % 4 = 3](17447Howtowriteaboutthereareinfiniteprimesp43.html) (18 messages, latest: Jan 16 2020 at 20:58)
+* [How to write about there are infinite primes p % 4 = 3](17447Howtowriteaboutthereareinfiniteprimesp43.html) (19 messages, latest: Jan 16 2020 at 21:17)
 
 * [noob question(s)](52075noobquestions.html) (1633 messages, latest: Jan 16 2020 at 17:18)
 

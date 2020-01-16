@@ -9,15 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [typeclass paper](35889typeclasspaper.html) (76 messages, latest: Jan 16 2020 at 20:54)
+* [huge term trees](96965hugetermtrees.html) (26 messages, latest: Jan 16 2020 at 21:59)
+
+* [typeclass paper](35889typeclasspaper.html) (77 messages, latest: Jan 16 2020 at 21:13)
 
 * [int.sizeof](68714intsizeof.html) (5 messages, latest: Jan 16 2020 at 18:42)
 
 * [Formal Methods in Mathematics / Lean Together 2020](50962FormalMethodsinMathematicsLeanTogether2020.html) (20 messages, latest: Jan 16 2020 at 16:44)
 
 * [encodable fintypes](14256encodablefintypes.html) (16 messages, latest: Jan 16 2020 at 15:17)
-
-* [huge term trees](96965hugetermtrees.html) (5 messages, latest: Jan 16 2020 at 14:24)
 
 * [automorphisms of the universe](20227automorphismsoftheuniverse.html) (3 messages, latest: Jan 16 2020 at 14:14)
 
