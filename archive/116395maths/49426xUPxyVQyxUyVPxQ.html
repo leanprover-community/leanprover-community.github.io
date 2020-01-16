@@ -1,0 +1,100 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/49426xUPxyVQyxUyVPxQ.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/49426xUPxyVQyxUyVPxQ.html">(∀ x : U, P x) ∨ (∀ y : V, Q y) ↔ ∀ (x : U) (y : V), P x ∨ Q</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="185793542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%28%E2%88%80%20x%20%3A%20U%2C%20P%20x%29%20%E2%88%A8%20%28%E2%88%80%20y%20%3A%20V%2C%20Q%20y%29%20%E2%86%94%20%E2%88%80%20%28x%20%3A%20U%29%20%28y%20%3A%20V%29%2C%20P%20x%20%E2%88%A8%20Q/near/185793542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49426xUPxyVQyxUyVPxQ.html#185793542">Kevin Buzzard (Jan 16 2020 at 08:12)</a>:</h4>
+<p>This fact comes up in <a href="https://twitter.com/andrejbauer/status/1217567959088082946?s=20" target="_blank" title="https://twitter.com/andrejbauer/status/1217567959088082946?s=20">Andrej Bauer's proof</a> of a result in my alg geom course. Here's a classical proof:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">U</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">Q</span> <span class="o">:</span> <span class="n">V</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span>
+<span class="o">(</span><span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">U</span><span class="o">,</span> <span class="n">P</span> <span class="n">x</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">y</span> <span class="o">:</span> <span class="n">V</span><span class="o">,</span> <span class="n">Q</span> <span class="n">y</span><span class="o">)</span> <span class="bp">↔</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">U</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">V</span><span class="o">),</span> <span class="n">P</span> <span class="n">x</span> <span class="bp">∨</span> <span class="n">Q</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span><span class="o">,</span>
+    <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">intros</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="n">h</span> <span class="k">with</span> <span class="n">h1</span> <span class="n">h2</span><span class="o">,</span>
+      <span class="n">left</span><span class="o">,</span> <span class="n">exact</span> <span class="n">h1</span> <span class="n">x</span><span class="o">,</span>
+    <span class="n">right</span><span class="o">,</span> <span class="n">exact</span> <span class="n">h2</span> <span class="n">y</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">classical</span><span class="o">,</span>
+  <span class="n">by_cases</span> <span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">U</span><span class="o">),</span> <span class="n">P</span> <span class="n">x</span><span class="o">),</span>
+    <span class="n">left</span><span class="o">,</span> <span class="n">exact</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">right</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">y</span><span class="o">,</span>
+  <span class="n">push_neg</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">h</span> <span class="k">with</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span>
+  <span class="n">replace</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">h</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">contradiction</span><span class="o">,</span>
+  <span class="n">assumption</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I'm assuming (a) there is no constructive proof and (b) this fact will be in the library somewhere. How do I use automation to find it? I couldn't get <code>library_search</code> to work. If I could find it in the library I could verify that it was in the classical part. Do I need to pepper the claim with decidable_somethings?</p>
+<div class="inline-preview-twitter"><div class="twitter-tweet"><a href="https://twitter.com/andrejbauer/status/1217567959088082946?s=20" target="_blank"><img class="twitter-avatar" src="https://pbs.twimg.com/profile_images/1127298346786410498/MxRwtRD-_normal.png"></a><p><a href="https://twitter.com/XenaProject" target="_blank" title="https://twitter.com/XenaProject">@XenaProject</a> I think I have a better paper proof of "union of algebraic sets is algebraic", and I formalized it, unfortunately in Coq because I do not speak Lean (can only read it), here: <a href="https://t.co/2QPhUXsSvr" target="_blank" title="https://t.co/2QPhUXsSvr">https://gist.github.com/andrejbauer/4dd8fa975fc98c9cc48dfdc776abde23</a></p><span>- Andrej Bauer (@andrejbauer)</span></div></div>
+
+<a name="185793815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%28%E2%88%80%20x%20%3A%20U%2C%20P%20x%29%20%E2%88%A8%20%28%E2%88%80%20y%20%3A%20V%2C%20Q%20y%29%20%E2%86%94%20%E2%88%80%20%28x%20%3A%20U%29%20%28y%20%3A%20V%29%2C%20P%20x%20%E2%88%A8%20Q/near/185793815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49426xUPxyVQyxUyVPxQ.html#185793815">Johan Commelin (Jan 16 2020 at 08:17)</a>:</h4>
+<p>If Andrej formalised it, doesn't that imply that a constructive proof exists?</p>
+
+<a name="185793922"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%28%E2%88%80%20x%20%3A%20U%2C%20P%20x%29%20%E2%88%A8%20%28%E2%88%80%20y%20%3A%20V%2C%20Q%20y%29%20%E2%86%94%20%E2%88%80%20%28x%20%3A%20U%29%20%28y%20%3A%20V%29%2C%20P%20x%20%E2%88%A8%20Q/near/185793922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49426xUPxyVQyxUyVPxQ.html#185793922">Kenny Lau (Jan 16 2020 at 08:19)</a>:</h4>
+<p>wow it's Andrej Bauer himself!</p>
+
+<a name="185794007"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%28%E2%88%80%20x%20%3A%20U%2C%20P%20x%29%20%E2%88%A8%20%28%E2%88%80%20y%20%3A%20V%2C%20Q%20y%29%20%E2%86%94%20%E2%88%80%20%28x%20%3A%20U%29%20%28y%20%3A%20V%29%2C%20P%20x%20%E2%88%A8%20Q/near/185794007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49426xUPxyVQyxUyVPxQ.html#185794007">Kenny Lau (Jan 16 2020 at 08:21)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c">(* We assume excluded middle *)</span>
+<span class="kn">Axiom</span> <span class="n">lem</span> <span class="o">:</span> <span class="k">forall</span> <span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">,</span> <span class="n">p</span> <span class="o">\/</span> <span class="o">~</span> <span class="n">p</span><span class="o">.</span>
+</pre></div>
+
+<a name="185794105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%28%E2%88%80%20x%20%3A%20U%2C%20P%20x%29%20%E2%88%A8%20%28%E2%88%80%20y%20%3A%20V%2C%20Q%20y%29%20%E2%86%94%20%E2%88%80%20%28x%20%3A%20U%29%20%28y%20%3A%20V%29%2C%20P%20x%20%E2%88%A8%20Q/near/185794105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49426xUPxyVQyxUyVPxQ.html#185794105">Johan Commelin (Jan 16 2020 at 08:23)</a>:</h4>
+<p>Wut! Isn't that illegal?</p>
+
+<a name="185796033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%28%E2%88%80%20x%20%3A%20U%2C%20P%20x%29%20%E2%88%A8%20%28%E2%88%80%20y%20%3A%20V%2C%20Q%20y%29%20%E2%86%94%20%E2%88%80%20%28x%20%3A%20U%29%20%28y%20%3A%20V%29%2C%20P%20x%20%E2%88%A8%20Q/near/185796033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49426xUPxyVQyxUyVPxQ.html#185796033">Sebastien Gouezel (Jan 16 2020 at 08:59)</a>:</h4>
+<p>Slightly golfed:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">U</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">Q</span> <span class="o">:</span> <span class="n">V</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span>
+<span class="o">(</span><span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">U</span><span class="o">,</span> <span class="n">P</span> <span class="n">x</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">y</span> <span class="o">:</span> <span class="n">V</span><span class="o">,</span> <span class="n">Q</span> <span class="n">y</span><span class="o">)</span> <span class="bp">↔</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">U</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">V</span><span class="o">),</span> <span class="n">P</span> <span class="n">x</span> <span class="bp">∨</span> <span class="n">Q</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refine</span> <span class="bp">⟨</span><span class="k">by</span> <span class="n">tauto</span><span class="o">,</span> <span class="bp">λ</span><span class="n">H</span><span class="o">,</span> <span class="bp">_⟩</span><span class="o">,</span>
+  <span class="n">by_contradiction</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">push_neg</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">rcases</span> <span class="n">h</span> <span class="k">with</span> <span class="bp">⟨⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">hy</span><span class="bp">⟩⟩</span><span class="o">,</span>
+  <span class="n">simpa</span> <span class="o">[</span><span class="n">hx</span><span class="o">,</span> <span class="n">hy</span><span class="o">]</span> <span class="kn">using</span> <span class="n">H</span> <span class="n">x</span> <span class="n">y</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="185796048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%28%E2%88%80%20x%20%3A%20U%2C%20P%20x%29%20%E2%88%A8%20%28%E2%88%80%20y%20%3A%20V%2C%20Q%20y%29%20%E2%86%94%20%E2%88%80%20%28x%20%3A%20U%29%20%28y%20%3A%20V%29%2C%20P%20x%20%E2%88%A8%20Q/near/185796048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/49426xUPxyVQyxUyVPxQ.html#185796048">Mario Carneiro (Jan 16 2020 at 08:59)</a>:</h4>
+<p>Eh, please don't ignore good old fashioned looking at files. What I did: The theorem is obviously in <code>logic.basic</code>, it uses forall and or so look for <code>forall_or</code>. Found one distribution lemma, the other is missing, result:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span> <span class="n">logic</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">protected</span> <span class="kn">theorem</span> <span class="n">classical</span><span class="bp">.</span><span class="n">forall_or_distrib_right</span>
+  <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span><span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span> <span class="bp">∨</span> <span class="n">q</span><span class="o">)</span> <span class="bp">↔</span> <span class="o">(</span><span class="bp">∀</span><span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">∨</span> <span class="n">q</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">or_comm</span><span class="o">,</span> <span class="n">classical</span><span class="bp">.</span><span class="n">forall_or_distrib_left</span><span class="o">]</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">U</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">Q</span> <span class="o">:</span> <span class="n">V</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span>
+<span class="o">(</span><span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">U</span><span class="o">,</span> <span class="n">P</span> <span class="n">x</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">y</span> <span class="o">:</span> <span class="n">V</span><span class="o">,</span> <span class="n">Q</span> <span class="n">y</span><span class="o">)</span> <span class="bp">↔</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">U</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">V</span><span class="o">),</span> <span class="n">P</span> <span class="n">x</span> <span class="bp">∨</span> <span class="n">Q</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="err">←</span> <span class="n">classical</span><span class="bp">.</span><span class="n">forall_or_distrib_right</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">forall_congr</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span>  <span class="n">rw</span> <span class="err">←</span> <span class="n">classical</span><span class="bp">.</span><span class="n">forall_or_distrib_left</span><span class="o">),</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [(∀ x : U, P x) ∨ (∀ y : V, Q y) ↔ ∀ (x : U) (y : V), P x ∨ Q](49426xUPxyVQyxUyVPxQ.html) (7 messages, latest: Jan 16 2020 at 08:59)
+
 * [proving theorems in the theory of categories](16155provingtheoremsinthetheoryofcategories.html) (8 messages, latest: Jan 16 2020 at 05:58)
 
 * [coe_sort for finset](79663coesortforfinset.html) (18 messages, latest: Jan 15 2020 at 05:33)
