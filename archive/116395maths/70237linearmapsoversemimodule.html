@@ -24,6 +24,37 @@ permalink: archive/116395maths/70237linearmapsoversemimodule.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185818425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185818425">Kevin Buzzard (Jan 16 2020 at 14:21)</a>:</h4>
 <p>I'm afraid that when I was making a push to get people to do commutative algebra in Lean, I had no idea what a semiring was ;-)</p>
 
+<a name="185824677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185824677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185824677">Sebastien Gouezel (Jan 16 2020 at 15:27)</a>:</h4>
+<p>I had a go at it, and I thought it would also be a good idea to let <code>module</code> be an abbreviation for <code>semimodule</code>. Everything compiles well, but some things become extremely slow, and I have not been able to adjust the instances (Yes, I want Lean 4 !! :)<br>
+MWE (with current mathlib):</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">convex</span>
+
+<span class="c1">-- attribute [instance, priority 200] add_comm_monoid.to_add_monoid</span>
+<span class="c1">-- set_option trace.class_instances true</span>
+
+<span class="n">class</span> <span class="n">inner_product_space</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">add_comm_monoid</span> <span class="n">α</span><span class="o">,</span> <span class="n">semimodule</span> <span class="n">ℝ</span> <span class="n">α</span>
+</pre></div>
+
+
+<p>takes 30s on my laptop. With instances tracing on, it does not complete.</p>
+
+<a name="185826662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185826662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185826662">Johan Commelin (Jan 16 2020 at 15:45)</a>:</h4>
+<p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> Thanks for the attempt!</p>
+
+<a name="185826677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185826677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185826677">Johan Commelin (Jan 16 2020 at 15:45)</a>:</h4>
+<p>Too bad that it blows up</p>
+
+<a name="185827891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185827891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185827891">Reid Barton (Jan 16 2020 at 15:57)</a>:</h4>
+<p>This reminds me a bit of <a href="https://github.com/leanprover-community/mathlib/commit/89ece147049fb463f9ff320b73433fcdd32370ce" target="_blank" title="https://github.com/leanprover-community/mathlib/commit/89ece147049fb463f9ff320b73433fcdd32370ce">https://github.com/leanprover-community/mathlib/commit/89ece147049fb463f9ff320b73433fcdd32370ce</a></p>
+
+<a name="185828108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear%20maps%20over%20semimodule/near/185828108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70237linearmapsoversemimodule.html#185828108">Johan Commelin (Jan 16 2020 at 15:58)</a>:</h4>
+<p>Except that this time the compile time is multiplied by 30 instead of divided by 3</p>
+
 
 {% endraw %}
 

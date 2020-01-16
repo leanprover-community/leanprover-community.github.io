@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [(∀ x : U, P x) ∨ (∀ y : V, Q y) ↔ ∀ (x : U) (y : V), P x ∨ Q](49426xUPxyVQyxUyVPxQ.html) (15 messages, latest: Jan 16 2020 at 14:33)
+* [linear maps over semimodule](70237linearmapsoversemimodule.html) (8 messages, latest: Jan 16 2020 at 15:58)
 
-* [linear maps over semimodule](70237linearmapsoversemimodule.html) (3 messages, latest: Jan 16 2020 at 14:21)
+* [(∀ x : U, P x) ∨ (∀ y : V, Q y) ↔ ∀ (x : U) (y : V), P x ∨ Q](49426xUPxyVQyxUyVPxQ.html) (16 messages, latest: Jan 16 2020 at 15:03)
 
 * [Radical of an ideal](98932Radicalofanideal.html) (6 messages, latest: Jan 16 2020 at 12:29)
 
