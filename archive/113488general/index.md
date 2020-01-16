@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [use and exists_prop](21313useandexistsprop.html) (21 messages, latest: Jan 15 2020 at 23:26)
+* [use and exists_prop](21313useandexistsprop.html) (23 messages, latest: Jan 16 2020 at 00:05)
 
 * [coercions from polynomials](03953coercionsfrompolynomials.html) (37 messages, latest: Jan 15 2020 at 20:03)
 
