@@ -25,6 +25,18 @@ permalink: archive/113488general/68714intsizeof.html
 
 <p>I need to prove a few things to have well founded recursion, one of them is <code>int.sizeof ↑n &lt; n + 3</code>. Using <code>#print</code> I can see the definition of <code>int.sizeof</code> and see that the statement I need to show is true. I couldn't find any docs on <code>int.sizeof</code> though, and I also don't see it in <code>int.basic</code>, what is it and why is it showing up here?</p>
 
+<a name="185790863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int.sizeof/near/185790863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68714intsizeof.html#185790863">Mario Carneiro (Jan 16 2020 at 07:04)</a>:</h4>
+<p>I recommend breaking this into two definitions</p>
+
+<a name="185790883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int.sizeof/near/185790883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68714intsizeof.html#185790883">Mario Carneiro (Jan 16 2020 at 07:05)</a>:</h4>
+<p>The equation compiler will accept the definition over <code>nat</code>, and the definition over <code>int</code> can refer to it in each branch</p>
+
+<a name="185790951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int.sizeof/near/185790951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68714intsizeof.html#185790951">Mario Carneiro (Jan 16 2020 at 07:07)</a>:</h4>
+<p>If you see the equation compiler giving you subgoals about <code>X.sizeof</code>, that just means it failed to prove it automatically and you need to supply your own well founded measure. <code>X.sizeof</code> is almost never the measure you want to use</p>
+
 
 {% endraw %}
 
