@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [(∀ x : U, P x) ∨ (∀ y : V, Q y) ↔ ∀ (x : U) (y : V), P x ∨ Q](49426xUPxyVQyxUyVPxQ.html) (7 messages, latest: Jan 16 2020 at 08:59)
+* [Radical of an ideal](98932Radicalofanideal.html) (5 messages, latest: Jan 16 2020 at 09:45)
+
+* [(∀ x : U, P x) ∨ (∀ y : V, Q y) ↔ ∀ (x : U) (y : V), P x ∨ Q](49426xUPxyVQyxUyVPxQ.html) (13 messages, latest: Jan 16 2020 at 09:38)
 
 * [proving theorems in the theory of categories](16155provingtheoremsinthetheoryofcategories.html) (8 messages, latest: Jan 16 2020 at 05:58)
 
