@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [How to write about there are infinite primes p % 4 = 3](17447Howtowriteaboutthereareinfiniteprimesp43.html) (18 messages, latest: Jan 16 2020 at 20:58)
+
 * [noob question(s)](52075noobquestions.html) (1633 messages, latest: Jan 16 2020 at 17:18)
 
 * [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (119 messages, latest: Jan 15 2020 at 18:05)
