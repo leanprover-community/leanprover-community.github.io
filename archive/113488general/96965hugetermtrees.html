@@ -1,0 +1,59 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/96965hugetermtrees.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html">huge term trees</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="185818122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185818122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185818122">Daniel Selsam (Jan 16 2020 at 14:17)</a>:</h4>
+<p>I have been doing more performance analysis on mathlib, and I found something rather intriguing. At some point during compilation, there is a typeclass <strong>goal</strong> with a ~1GB string representation. The consequences of such huge term trees are subtle. Although I did not compute the size of the term DAG (as opposed to the term tree), my suspicion is that it is relatively small. Most modules in Lean3 (and Lean4) are careful to traverse expressions as DAGs instead of as trees, and for these modules, explosion in term tree sizes may not have much ill-effect. Indeed, typeclass synthesis only takes 5ms for this example despite the enormous term tree size. However, not all modules are designed to avoid this blowup, and so huge term trees do carry the risk of massive slowdowns in some parts of the system. In some cases, Lean has even been consciously removing support for efficiently handling huge term trees, since many of the things it seems to require actually hurt performance in the majority of cases. In particular, there is no current plan for Lean4 to address performance problems arising from huge term trees.</p>
+<p>What is causing these huge term trees? Can you design the libraries in a way that avoids this blowup?</p>
+
+<a name="185818133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185818133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185818133">Daniel Selsam (Jan 16 2020 at 14:17)</a>:</h4>
+<p>In case it helps, here are the first 1,000 characters of the typeclass goal mentioned above:</p>
+<p>"""<br>
+decidable (Pi {X : category_theory.functor.{v₁ (max u₂ v₃) u₁ (max v₂ v₃ u₂ u₃)} C 𝒞 (category_theory.functor.{v₂ v₃ u₂ u₃} D 𝒟 E ℰ) (category_theory.functor.category.{v₂ v₃ u₂ u₃} D 𝒟 E ℰ)} {Y : category_theory.functor.{v₁ (max u₂ v₃) u₁ (max v₂ v₃ u₂ u₃)} C 𝒞 (category_theory.functor.{v₂ v₃ u₂ u₃} D 𝒟 E ℰ) (category_theory.functor.category.{v₂ v₃ u₂ u₃} D 𝒟 E ℰ)} {Z : category_theory.functor.{v₁ (max u₂ v₃) u₁ (max v₂ v₃ u₂ u₃)} C 𝒞 (category_theory.functor.{v₂ v₃ u₂ u₃} D 𝒟 E ℰ) (category_theory.functor.category.{v₂ v₃ u₂ u₃} D 𝒟 E ℰ)} (f : category_theory.has_hom.hom.{(max u₁ u₂ v₃) (max v₁ (max u₂ v₃) u₁ v₂ v₃ u₂ u₃)} (category_theory.functor.{v₁ (max u₂ v₃) u₁ (max v₂ v₃ u₂ u₃)} C 𝒞 (category_theory.functor.{v₂ v₃ u₂ u₃} D 𝒟 E ℰ) (category_theory.functor.category.{v₂ v₃ u₂ u₃} D 𝒟 E ℰ)) (category_theory.category_struct.to_has_hom.{(max u₁ u₂ v₃) (max v₁ (max u₂ v₃) u₁ v₂ v₃ u₂ u₃)} (category_theory.functor.{v₁ (max u₂ v₃) u₁ (max v₂ v₃ u₂ u₃)} C 𝒞 (category_theory.functor.{v₂ v₃ '<br>
+"""</p>
+
+<a name="185818383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185818383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185818383">Daniel Selsam (Jan 16 2020 at 14:20)</a>:</h4>
+<p>And here is a toy pattern that could explain:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">C1</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>  <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="o">(</span><span class="n">u</span><span class="o">:</span><span class="n">Unit</span><span class="o">:=())</span>
+<span class="kn">instance</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>  <span class="o">:</span> <span class="n">C1</span> <span class="n">α</span> <span class="o">:=</span> <span class="o">{}</span>
+<span class="n">class</span> <span class="n">C2</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">C1</span> <span class="n">α</span><span class="o">]</span>  <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="o">(</span><span class="n">u</span><span class="o">:</span><span class="n">Unit</span><span class="o">:=())</span>
+<span class="kn">instance</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">C1</span> <span class="n">α</span><span class="o">]</span>  <span class="o">:</span> <span class="n">C2</span> <span class="n">α</span> <span class="o">:=</span> <span class="o">{}</span>
+<span class="n">class</span> <span class="n">C3</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">C1</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">C2</span> <span class="n">α</span><span class="o">]</span>  <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="o">(</span><span class="n">u</span><span class="o">:</span><span class="n">Unit</span><span class="o">:=())</span>
+<span class="kn">instance</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">C1</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">C2</span> <span class="n">α</span><span class="o">]</span>  <span class="o">:</span> <span class="n">C3</span> <span class="n">α</span> <span class="o">:=</span> <span class="o">{}</span>
+<span class="n">class</span> <span class="n">C4</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">C1</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">C2</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">C3</span> <span class="n">α</span><span class="o">]</span>  <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="o">(</span><span class="n">u</span><span class="o">:</span><span class="n">Unit</span><span class="o">:=())</span>
+<span class="kn">instance</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">C1</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">C2</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">C3</span> <span class="n">α</span><span class="o">]</span>  <span class="o">:</span> <span class="n">C4</span> <span class="n">α</span> <span class="o">:=</span> <span class="o">{}</span>
+<span class="n">class</span> <span class="n">C5</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">C1</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">C2</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">C3</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">C4</span> <span class="n">α</span><span class="o">]</span>  <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="o">(</span><span class="n">u</span><span class="o">:</span><span class="n">Unit</span><span class="o">:=())</span>
+<span class="kn">instance</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">C1</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">C2</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">C3</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">C4</span> <span class="n">α</span><span class="o">]</span>  <span class="o">:</span> <span class="n">C5</span> <span class="n">α</span> <span class="o">:=</span> <span class="o">{}</span>
+<span class="c1">-- and so on</span>
+</pre></div>
+
+<a name="185818568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185818568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185818568">Johan Commelin (Jan 16 2020 at 14:23)</a>:</h4>
+<p>First of all: Thanks for all your efforts. The Lean 4 team is doing a really great job!<br>
+That said:</p>
+<blockquote>
+<p>Can you design the libraries in a way that avoids this blowup?</p>
+</blockquote>
+<p>I understand this question. But my first reaction is: mathematicians shouldn't have to care...</p>
+
+<a name="185818655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185818655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185818655">Johan Commelin (Jan 16 2020 at 14:24)</a>:</h4>
+<p><span class="user-mention" data-user-id="230999">@Daniel Selsam</span> Do you have the name and line numbers for this instance in mathlib?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

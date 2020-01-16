@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [huge term trees](96965hugetermtrees.html) (5 messages, latest: Jan 16 2020 at 14:24)
+
+* [automorphisms of the universe](20227automorphismsoftheuniverse.html) (3 messages, latest: Jan 16 2020 at 14:14)
+
 * [encodable fintypes](14256encodablefintypes.html) (15 messages, latest: Jan 16 2020 at 13:11)
 
 * [Counterexample generators for mathematicians](72886Counterexamplegeneratorsformathematicians.html) (1 message, latest: Jan 16 2020 at 12:04)

@@ -1,0 +1,49 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/20227automorphismsoftheuniverse.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/20227automorphismsoftheuniverse.html">automorphisms of the universe</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="185817491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automorphisms%20of%20the%20universe/near/185817491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20227automorphismsoftheuniverse.html#185817491">Johan Commelin (Jan 16 2020 at 14:09)</a>:</h4>
+<p>Golfing challenge. See also <a href="https://mathoverflow.net/questions/350553/is-prod-x-mathcalu-x-to-x-cong-1-admissible-in-type-theory" target="_blank" title="https://mathoverflow.net/questions/350553/is-prod-x-mathcalu-x-to-x-cong-1-admissible-in-type-theory">https://mathoverflow.net/questions/350553/is-prod-x-mathcalu-x-to-x-cong-1-admissible-in-type-theory</a></p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="n">noncomputable</span> <span class="n">theory</span>
+<span class="n">open_locale</span> <span class="n">classical</span>
+
+<span class="n">def</span> <span class="n">foo</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">),</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">X</span><span class="o">,</span> <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">=</span> <span class="bp">ℕ</span> <span class="k">then</span> <span class="k">by</span> <span class="o">{</span><span class="n">subst</span> <span class="n">h</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">}</span> <span class="k">else</span> <span class="n">id</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">claim</span> <span class="o">:</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">,</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span><span class="o">)</span> <span class="err">≃</span> <span class="n">unit</span><span class="o">)</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">let</span> <span class="n">bar</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">,</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">X</span><span class="o">,</span> <span class="n">id</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">oops</span> <span class="o">:</span> <span class="n">foo</span> <span class="bp">=</span> <span class="n">bar</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">apply</span> <span class="n">claim</span><span class="bp">.</span><span class="n">injective</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">subsingleton</span><span class="bp">.</span><span class="n">elim</span> <span class="o">},</span>
+  <span class="k">have</span> <span class="n">oops_nat_zero</span> <span class="o">:</span> <span class="n">foo</span> <span class="bp">ℕ</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">bar</span> <span class="bp">ℕ</span> <span class="mi">0</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">oops</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">foo</span><span class="o">,</span> <span class="n">bar</span><span class="o">]</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+  <span class="n">contradiction</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="185817776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automorphisms%20of%20the%20universe/near/185817776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20227automorphismsoftheuniverse.html#185817776">Chris Hughes (Jan 16 2020 at 14:13)</a>:</h4>
+<p>It can't be done constructively though.</p>
+
+<a name="185817891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automorphisms%20of%20the%20universe/near/185817891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20227automorphismsoftheuniverse.html#185817891">Johan Commelin (Jan 16 2020 at 14:14)</a>:</h4>
+<p>Yup, that's what I'm trying to celebrate (-;</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
