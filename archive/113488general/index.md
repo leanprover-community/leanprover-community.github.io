@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [typeclass paper](35889typeclasspaper.html) (69 messages, latest: Jan 16 2020 at 18:56)
+
+* [int.sizeof](68714intsizeof.html) (5 messages, latest: Jan 16 2020 at 18:42)
+
 * [Formal Methods in Mathematics / Lean Together 2020](50962FormalMethodsinMathematicsLeanTogether2020.html) (20 messages, latest: Jan 16 2020 at 16:44)
 
 * [encodable fintypes](14256encodablefintypes.html) (16 messages, latest: Jan 16 2020 at 15:17)
@@ -18,8 +22,6 @@ permalink: archive/113488general/index.html
 * [automorphisms of the universe](20227automorphismsoftheuniverse.html) (3 messages, latest: Jan 16 2020 at 14:14)
 
 * [Counterexample generators for mathematicians](72886Counterexamplegeneratorsformathematicians.html) (1 message, latest: Jan 16 2020 at 12:04)
-
-* [int.sizeof](68714intsizeof.html) (4 messages, latest: Jan 16 2020 at 07:07)
 
 * [use and exists_prop](21313useandexistsprop.html) (23 messages, latest: Jan 16 2020 at 00:05)
 
@@ -56,8 +58,6 @@ permalink: archive/113488general/index.html
 * [Term rewriting and PL theory](21022TermrewritingandPLtheory.html) (9 messages, latest: Jan 12 2020 at 07:42)
 
 * [new maintainers](23366newmaintainers.html) (5 messages, latest: Jan 12 2020 at 04:32)
-
-* [typeclass paper](35889typeclasspaper.html) (66 messages, latest: Jan 11 2020 at 16:03)
 
 * [Using hammer](05313Usinghammer.html) (5 messages, latest: Jan 11 2020 at 15:01)
 
