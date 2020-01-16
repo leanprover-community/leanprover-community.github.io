@@ -404,6 +404,38 @@ Mathematicians treat these instances as def-eq all the time.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185846970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185846970">Daniel Selsam (Jan 16 2020 at 18:56)</a>:</h4>
 <p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> To the best of my knowledge, nobody has yet brought to our attention any issue that cuts might help address, so we haven't considered it.</p>
 
+<a name="185847550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185847550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185847550">Daniel Selsam (Jan 16 2020 at 19:02)</a>:</h4>
+<blockquote>
+<p>Mathlib is dropped in toward the beginning without introduction. One of the reasons we wrote the mathlib paper was just for this reason, so we can cite it without describing it!</p>
+</blockquote>
+<p>Funny, I thought we cited the Mathlib paper in both the abstract and the introduction, but we don't seem to cite it all... <span aria-label="thinking" class="emoji emoji-1f914" role="img" title="thinking">:thinking:</span> ... must have gotten lost during refactoring. Great catch!</p>
+
+<a name="185848459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185848459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185848459">Daniel Selsam (Jan 16 2020 at 19:11)</a>:</h4>
+<blockquote>
+<p>One of the frustrating parts of Lean 3 type class resolution is error reporting. To some extent I think this is inherent in the algorithm, it can be hard to localize what goes wrong. I wonder if this gets better or worse with tabled resolution. Is this something you've thought about at all and is there anything worth saying in the paper? I'd be very interested to read a paragraph on this in section 5.5 if there is.</p>
+</blockquote>
+<p>This is an interesting question. Tracing and error reporting for typeclass resolution will be <em>way</em> better in Lean4, not because of the tabled typeclass resolution procedure but because of a much better system-wide tracing framework. I think tabling will help as well, but not for any deep reason -- mainly just because the traces will be that much shorter (in some cases, exponentially shorter). I don't think this is a paper-worthy insight though.</p>
+
+<a name="185848799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185848799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185848799">Daniel Selsam (Jan 16 2020 at 19:14)</a>:</h4>
+<p>The discrimination trees (S5.3, indexing the instances) will shrink the traces a lot too. Lean3 tries to resolve every goal with every instance whose result type has the same head symbol, and the vast majority of these attempts fail. Lean4 will only try a much smaller superset of the instances that will successfully resolve.</p>
+
+<a name="185850707"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185850707" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185850707">Daniel Selsam (Jan 16 2020 at 19:32)</a>:</h4>
+<blockquote>
+<p>the frustrating int coe issue we had in mathlib</p>
+</blockquote>
+<p>AFAICT this issue is just the "succeeding diamond following by failing downstream goal" variant of the diamond problem, which will be solved by tabling (and is also solved by Coq's short-circuit trick). However, even without the exponential blowup, typeclass resolution still does need to do search, so the "most-constrained variable first" advice you gave in Zulip awhile back is still sound.</p>
+
+<a name="185851275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/185851275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#185851275">Daniel Selsam (Jan 16 2020 at 19:38)</a>:</h4>
+<blockquote>
+<p>Both appear in the literature, but "type class" seems to be more common than "typeclass" (except maybe surrounding Coq). Any reason to prefer the latter?</p>
+</blockquote>
+<p>I prefer "typeclass", since typeclass is a distinct concept from the compositional meaning of "type class". I also always write "datastructure" as opposed to "data structure" for the same reason.</p>
+
 
 {% endraw %}
 
