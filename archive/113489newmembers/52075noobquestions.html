@@ -9206,6 +9206,36 @@ They are all here if anyone is interested :) <br>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/185833027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#185833027">Anton Felix Lorenzen (Jan 16 2020 at 16:40)</a>:</h4>
 <p>Do you know how I can tell Lean that for c, d, e in Prop and c decidable, "c -&gt; d" and "c -&gt; ite c d e" are the same type? Or lift a value of the first type to a value of the second? (This is my first post here, so I hope this is the right place to ask that)</p>
 
+<a name="185835672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/185835672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#185835672">Joe (Jan 16 2020 at 17:04)</a>:</h4>
+<p>Both of them have the type <code>Prop</code>. I guess you want to prove the following?</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">c</span> <span class="n">d</span> <span class="n">e</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable</span> <span class="n">c</span><span class="o">]</span> <span class="o">:</span> <span class="o">(</span><span class="n">c</span> <span class="bp">→</span> <span class="n">d</span><span class="o">)</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">c</span> <span class="bp">→</span> <span class="k">if</span> <span class="n">c</span> <span class="k">then</span> <span class="n">d</span> <span class="k">else</span> <span class="n">e</span><span class="o">)</span> <span class="o">:=</span>
+</pre></div>
+
+<a name="185836033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/185836033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#185836033">Anton Felix Lorenzen (Jan 16 2020 at 17:08)</a>:</h4>
+<p><span class="user-mention" data-user-id="127148">@Joe</span> Yes</p>
+
+<a name="185836376"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/185836376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#185836376">Kevin Buzzard (Jan 16 2020 at 17:11)</a>:</h4>
+<p>It's called something like <code>ifpos</code> [edit: <code>if_pos</code>]</p>
+
+<a name="185836955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/185836955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#185836955">Joe (Jan 16 2020 at 17:17)</a>:</h4>
+<p>Can you use tactics?</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">c</span> <span class="n">d</span> <span class="n">e</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable</span> <span class="n">c</span><span class="o">]</span> <span class="o">:</span> <span class="o">(</span><span class="n">c</span> <span class="bp">→</span> <span class="n">d</span><span class="o">)</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">c</span> <span class="bp">→</span> <span class="k">if</span> <span class="n">c</span> <span class="k">then</span> <span class="n">d</span> <span class="k">else</span> <span class="n">e</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">iff</span><span class="bp">.</span><span class="n">intro</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span> <span class="n">hc</span><span class="o">,</span> <span class="k">by</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">if_pos</span> <span class="n">hc</span><span class="o">,</span> <span class="n">exact</span> <span class="n">h</span> <span class="n">hc</span> <span class="o">})</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span> <span class="n">hc</span><span class="o">,</span> <span class="k">by</span> <span class="o">{</span> <span class="k">have</span> <span class="o">:=</span> <span class="n">h</span> <span class="n">hc</span><span class="o">,</span> <span class="n">rw</span> <span class="n">if_pos</span> <span class="n">hc</span> <span class="n">at</span> <span class="n">this</span><span class="o">,</span> <span class="n">assumption</span> <span class="o">})</span>
+</pre></div>
+
+<a name="185837091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/185837091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#185837091">Anton Felix Lorenzen (Jan 16 2020 at 17:18)</a>:</h4>
+<p>Got this with <code>if_pos</code>. Looks good!</p>
+<div class="codehilite"><pre><span></span>lemma foo (c d e : Prop) [decidable c] : (c → d) ↔ (c → if c then d else e) :=
+  iff.intro (λ f c, eq.mp (eq.symm (if_pos c)) (f c)) (λ f c, eq.mp (if_pos c) (f c))
+</pre></div>
+
 
 {% endraw %}
 
