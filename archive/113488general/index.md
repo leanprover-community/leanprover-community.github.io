@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Formal Methods in Mathematics / Lean Together 2020](50962FormalMethodsinMathematicsLeanTogether2020.html) (15 messages, latest: Jan 16 2020 at 15:55)
+* [Formal Methods in Mathematics / Lean Together 2020](50962FormalMethodsinMathematicsLeanTogether2020.html) (20 messages, latest: Jan 16 2020 at 16:44)
 
 * [encodable fintypes](14256encodablefintypes.html) (16 messages, latest: Jan 16 2020 at 15:17)
 

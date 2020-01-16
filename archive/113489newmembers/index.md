@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1627 messages, latest: Jan 15 2020 at 23:44)
+* [noob question(s)](52075noobquestions.html) (1628 messages, latest: Jan 16 2020 at 16:40)
 
 * [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (119 messages, latest: Jan 15 2020 at 18:05)
 
