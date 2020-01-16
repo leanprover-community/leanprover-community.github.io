@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [proving theorems in the theory of categories](16155provingtheoremsinthetheoryofcategories.html) (5 messages, latest: Jan 16 2020 at 02:56)
+
 * [coe_sort for finset](79663coesortforfinset.html) (18 messages, latest: Jan 15 2020 at 05:33)
 
 * [filter base](84418filterbase.html) (9 messages, latest: Jan 14 2020 at 22:59)

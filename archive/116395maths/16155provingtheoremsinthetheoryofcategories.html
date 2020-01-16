@@ -1,0 +1,82 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/16155provingtheoremsinthetheoryofcategories.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/16155provingtheoremsinthetheoryofcategories.html">proving theorems in the theory of categories</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="185779047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20theorems%20in%20the%20theory%20of%20categories/near/185779047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/16155provingtheoremsinthetheoryofcategories.html#185779047">Enrico Borba (Jan 16 2020 at 02:13)</a>:</h4>
+<p>I'm trying to prove a statement about all categories but can't state it properly. I'm trying to state that given a morphism <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span></span></span></span> , the existence of a right inverse <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span></span></span></span> implies that <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span></span></span></span> is an epimorphism. Here's my attempt at stating it</p>
+<div class="codehilite"><pre><span></span>  universes v u
+
+  example {C : Type u} [category.{v} C] (A B : C.obj) (f : A ⟶ B) :
+      ∃ g: B ⟶ A, f ≫ g = C.id B → category_theory.epi f := sorry
+</pre></div>
+
+
+<p>I'm not exactly sure how to state that<br>
+  1. <code>C</code> is a category<br>
+  2. <code>A B</code> are objects of <code>C</code><br>
+  3. <code>f</code> is a morphism from <code>A</code> to <code>B</code></p>
+
+<a name="185779386"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20theorems%20in%20the%20theory%20of%20categories/near/185779386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/16155provingtheoremsinthetheoryofcategories.html#185779386">Simon Hudon (Jan 16 2020 at 02:21)</a>:</h4>
+<p>Instead of <code>(A B : C.obj)</code>, use <code>(A B : C)</code>. Everything else should work</p>
+
+<a name="185780655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20theorems%20in%20the%20theory%20of%20categories/near/185780655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/16155provingtheoremsinthetheoryofcategories.html#185780655">Enrico Borba (Jan 16 2020 at 02:52)</a>:</h4>
+<p>Hmm that doesn't solve it either. I get this output. Sorry for the large log</p>
+<div class="codehilite"><pre><span></span>/home/enricozb/projects/learning/lean/algebra_chapter_0/src/ch1.lean:236:24: error: function expected at
+  category
+term has type
+  Type (max (v+1) (u+1))
+/home/enricozb/projects/learning/lean/algebra_chapter_0/src/ch1.lean:236:59: error: failed to synthesize type class instance for
+C : Type u,
+_inst_1 : ⁇,
+A B : C
+⊢ category_theory.has_hom C
+/home/enricozb/projects/learning/lean/algebra_chapter_0/src/ch1.lean:237:13: error: failed to synthesize type class instance for
+C : Type u,
+_inst_1 : ⁇,
+A B : C,
+f : A ⟶ B
+⊢ category_theory.has_hom C
+/home/enricozb/projects/learning/lean/algebra_chapter_0/src/ch1.lean:237:27: error: invalid field notation, type is not of the form (C ...) where C is a constant
+  C
+has type
+  Type u
+/home/enricozb/projects/learning/lean/algebra_chapter_0/src/ch1.lean:237:20: error: don&#39;t know how to synthesize placeholder
+context:
+C : Type u,
+_inst_1 : ⁇,
+A B : C,
+f : A ⟶ B,
+g : B ⟶ A
+⊢ Type ?
+</pre></div>
+
+<a name="185780806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20theorems%20in%20the%20theory%20of%20categories/near/185780806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/16155provingtheoremsinthetheoryofcategories.html#185780806">Enrico Borba (Jan 16 2020 at 02:55)</a>:</h4>
+<p>Oh shoot I have a definition of <code>category</code> that's conflicting. Here's what I get with your suggested change</p>
+<div class="codehilite"><pre><span></span>/home/enricozb/projects/learning/lean/algebra_chapter_0/src/ch1.lean:237:27: error: invalid field notation, type is not of the form (C ...) where C is a constant
+  C
+has type
+  Type u
+</pre></div>
+
+<a name="185780869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20theorems%20in%20the%20theory%20of%20categories/near/185780869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/16155provingtheoremsinthetheoryofcategories.html#185780869">Simon Hudon (Jan 16 2020 at 02:56)</a>:</h4>
+<p>That fixes one thing. The other one should be fixed by replacing <code>C.id B</code> with <code>\b1 B</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
