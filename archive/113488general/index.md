@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [encodable fintypes](14256encodablefintypes.html) (14 messages, latest: Jan 16 2020 at 12:43)
+* [encodable fintypes](14256encodablefintypes.html) (15 messages, latest: Jan 16 2020 at 13:11)
 
 * [Counterexample generators for mathematicians](72886Counterexamplegeneratorsformathematicians.html) (1 message, latest: Jan 16 2020 at 12:04)
 
