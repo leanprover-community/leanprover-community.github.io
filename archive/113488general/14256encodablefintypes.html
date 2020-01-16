@@ -20,6 +20,56 @@ permalink: archive/113488general/14256encodablefintypes.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/encodable%20fintypes/near/185782952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14256encodablefintypes.html#185782952">Yury G. Kudryashov (Jan 16 2020 at 03:42)</a>:</h4>
 <p>You probably want <code>to_fun x = ⟨card {y : α | encode y &lt; encode x}, _⟩</code>. This function is injective, hence bijective. Then it should be possible to use <code>nat.find</code> to build an inverse.</p>
 
+<a name="185783639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/encodable%20fintypes/near/185783639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14256encodablefintypes.html#185783639">Yury G. Kudryashov (Jan 16 2020 at 04:00)</a>:</h4>
+<p>Probably we can use <code>fintype.bij_inv</code> and <code>fintype.injective_iff_surjective_of_equiv</code>.</p>
+
+<a name="185784904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/encodable%20fintypes/near/185784904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14256encodablefintypes.html#185784904">Yury G. Kudryashov (Jan 16 2020 at 04:31)</a>:</h4>
+<p>This works:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">encodable</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">wlog</span>
+
+<span class="kn">open</span> <span class="n">fintype</span> <span class="n">encodable</span> <span class="n">function</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">encodable</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="kn">theorem</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card_subtype_strict_mono</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_pred</span> <span class="n">p</span><span class="o">]</span>
+  <span class="o">[</span><span class="n">decidable_pred</span> <span class="n">q</span><span class="o">]</span> <span class="o">(</span><span class="n">hpq</span> <span class="o">:</span> <span class="o">{</span><span class="n">x</span> <span class="bp">|</span> <span class="n">p</span> <span class="n">x</span><span class="o">}</span> <span class="err">⊂</span> <span class="o">{</span><span class="n">x</span> <span class="bp">|</span> <span class="n">q</span> <span class="n">x</span><span class="o">})</span> <span class="o">:</span>
+  <span class="n">card</span> <span class="o">{</span><span class="n">x</span> <span class="bp">//</span> <span class="n">p</span> <span class="n">x</span><span class="o">}</span> <span class="bp">&lt;</span> <span class="n">card</span> <span class="o">{</span><span class="n">x</span> <span class="bp">//</span> <span class="n">q</span> <span class="n">x</span><span class="o">}</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">subtype_card</span><span class="o">,</span> <span class="n">subtype_card</span><span class="o">],</span>
+  <span class="n">apply</span> <span class="n">finset</span><span class="bp">.</span><span class="n">card_lt_card</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">finset</span><span class="bp">.</span><span class="n">coe_ssubset</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">ssubset_def</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">subset_def</span><span class="o">,</span>
+    <span class="n">finset</span><span class="bp">.</span><span class="n">mem_coe</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_filter</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_univ</span><span class="o">,</span> <span class="n">true_and</span><span class="o">],</span>
+  <span class="n">exact</span> <span class="n">hpq</span>
+<span class="kn">end</span>
+
+<span class="n">def</span> <span class="n">equiv_fin_card_of_encodable</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">fin</span> <span class="o">(</span><span class="n">card</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">set</span> <span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">fin</span> <span class="o">(</span><span class="n">card</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+    <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">card</span> <span class="o">{</span><span class="n">y</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">|</span> <span class="n">encode</span> <span class="n">y</span> <span class="bp">&lt;</span> <span class="n">encode</span> <span class="n">x</span><span class="o">},</span> <span class="n">card_subtype_lt</span> <span class="err">$</span> <span class="n">lt_irrefl</span> <span class="err">$</span> <span class="n">encode</span> <span class="n">x</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">suffices</span> <span class="o">:</span> <span class="n">bijective</span> <span class="n">f</span><span class="o">,</span>
+    <span class="k">from</span> <span class="bp">⟨</span><span class="n">f</span><span class="o">,</span> <span class="n">bij_inv</span> <span class="n">this</span><span class="o">,</span> <span class="n">left_inverse_bij_inv</span> <span class="n">this</span><span class="o">,</span> <span class="n">right_inverse_bij_inv</span> <span class="n">this</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">suffices</span> <span class="o">:</span> <span class="n">injective</span> <span class="n">f</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rcases</span> <span class="n">equiv_fin</span> <span class="n">α</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">e</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="bp">⟨</span><span class="n">this</span><span class="o">,</span> <span class="o">(</span><span class="n">injective_iff_surjective_of_equiv</span> <span class="n">e</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="n">this</span><span class="bp">⟩</span> <span class="o">},</span>
+  <span class="k">assume</span> <span class="n">x</span> <span class="n">y</span> <span class="n">hxy</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">encode_injective</span><span class="o">,</span>
+  <span class="n">by_contradiction</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">wlog</span> <span class="n">H</span> <span class="o">:</span> <span class="n">encode</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">encode</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">lt_or_gt_of_ne</span> <span class="n">h</span> <span class="kn">using</span> <span class="o">[</span><span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">y</span> <span class="n">x</span><span class="o">],</span>
+  <span class="n">suffices</span> <span class="o">:</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">f</span> <span class="n">y</span><span class="o">,</span>
+    <span class="k">from</span> <span class="n">ne_of_lt</span> <span class="n">this</span> <span class="n">hxy</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card_subtype_strict_mono</span> <span class="bp">_</span> <span class="bp">⟨λ</span> <span class="n">z</span> <span class="n">hz</span><span class="o">,</span> <span class="bp">_</span><span class="o">,</span>
+    <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">absurd</span> <span class="o">(</span><span class="n">h</span> <span class="n">H</span><span class="o">)</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">set</span><span class="bp">.</span><span class="n">mem_set_of_eq</span><span class="o">,</span> <span class="n">lt_irrefl</span><span class="o">,</span> <span class="n">not_false_iff</span><span class="o">]</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">set</span><span class="bp">.</span><span class="n">mem_set_of_eq</span><span class="o">]</span> <span class="n">at</span> <span class="n">hz</span> <span class="err">⊢</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">lt_trans</span> <span class="n">hz</span> <span class="n">H</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="185785095"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/encodable%20fintypes/near/185785095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14256encodablefintypes.html#185785095">Yury G. Kudryashov (Jan 16 2020 at 04:34)</a>:</h4>
+<p>(deleted)</p>
+
 
 {% endraw %}
 

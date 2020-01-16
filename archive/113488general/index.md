@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [encodable fintypes](14256encodablefintypes.html) (2 messages, latest: Jan 16 2020 at 03:42)
+* [encodable fintypes](14256encodablefintypes.html) (5 messages, latest: Jan 16 2020 at 04:34)
 
 * [use and exists_prop](21313useandexistsprop.html) (23 messages, latest: Jan 16 2020 at 00:05)
 
