@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [int.sizeof](68714intsizeof.html) (4 messages, latest: Jan 16 2020 at 07:07)
+* [encodable fintypes](14256encodablefintypes.html) (14 messages, latest: Jan 16 2020 at 12:43)
 
-* [encodable fintypes](14256encodablefintypes.html) (7 messages, latest: Jan 16 2020 at 07:02)
+* [Counterexample generators for mathematicians](72886Counterexamplegeneratorsformathematicians.html) (1 message, latest: Jan 16 2020 at 12:04)
+
+* [int.sizeof](68714intsizeof.html) (4 messages, latest: Jan 16 2020 at 07:07)
 
 * [use and exists_prop](21313useandexistsprop.html) (23 messages, latest: Jan 16 2020 at 00:05)
 

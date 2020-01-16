@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Radical of an ideal](98932Radicalofanideal.html) (5 messages, latest: Jan 16 2020 at 09:45)
+* [Radical of an ideal](98932Radicalofanideal.html) (6 messages, latest: Jan 16 2020 at 12:29)
+
+* [linear maps over semimodule](70237linearmapsoversemimodule.html) (1 message, latest: Jan 16 2020 at 12:15)
 
 * [(∀ x : U, P x) ∨ (∀ y : V, Q y) ↔ ∀ (x : U) (y : V), P x ∨ Q](49426xUPxyVQyxUyVPxQ.html) (13 messages, latest: Jan 16 2020 at 09:38)
 
