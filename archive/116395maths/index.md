@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [linear maps over semimodule](70237linearmapsoversemimodule.html) (22 messages, latest: Jan 16 2020 at 22:41)
+* [linear maps over semimodule](70237linearmapsoversemimodule.html) (23 messages, latest: Jan 17 2020 at 09:41)
 
 * [(∀ x : U, P x) ∨ (∀ y : V, Q y) ↔ ∀ (x : U) (y : V), P x ∨ Q](49426xUPxyVQyxUyVPxQ.html) (16 messages, latest: Jan 16 2020 at 15:03)
 

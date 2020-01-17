@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [typeclass paper](35889typeclasspaper.html) (79 messages, latest: Jan 17 2020 at 09:28)
+
 * [CNL and the Stack Project](27935CNLandtheStackProject.html) (3 messages, latest: Jan 17 2020 at 07:12)
 
 * [huge term trees](96965hugetermtrees.html) (33 messages, latest: Jan 17 2020 at 05:49)
-
-* [typeclass paper](35889typeclasspaper.html) (78 messages, latest: Jan 16 2020 at 22:11)
 
 * [int.sizeof](68714intsizeof.html) (5 messages, latest: Jan 16 2020 at 18:42)
 
