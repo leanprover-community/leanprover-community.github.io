@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [\[recursor 5\]](68259recursor5.html) (1 message, latest: Jan 17 2020 at 22:49)
+
 * [CNL and the Stack Project](27935CNLandtheStackProject.html) (25 messages, latest: Jan 17 2020 at 20:47)
 
 * [typeclass paper](35889typeclasspaper.html) (80 messages, latest: Jan 17 2020 at 19:54)
