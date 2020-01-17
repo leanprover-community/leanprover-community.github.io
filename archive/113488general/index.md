@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [typeclass paper](35889typeclasspaper.html) (78 messages, latest: Jan 16 2020 at 22:11)
+* [huge term trees](96965hugetermtrees.html) (30 messages, latest: Jan 17 2020 at 00:31)
 
-* [huge term trees](96965hugetermtrees.html) (27 messages, latest: Jan 16 2020 at 22:00)
+* [typeclass paper](35889typeclasspaper.html) (78 messages, latest: Jan 16 2020 at 22:11)
 
 * [int.sizeof](68714intsizeof.html) (5 messages, latest: Jan 16 2020 at 18:42)
 

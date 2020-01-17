@@ -162,6 +162,71 @@ That said:</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185866403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185866403">Mario Carneiro (Jan 16 2020 at 22:00)</a>:</h4>
 <p>I would have pointed to the issue page but they are all gone :(</p>
 
+<a name="185876715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185876715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185876715">Daniel Selsam (Jan 17 2020 at 00:26)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>In particular, there is no current plan for Lean4 to address performance problems arising from huge term trees.</p>
+</blockquote>
+<p>This is a bad idea. Large trees before deduplication is an inevitable consequence of dependent type theory due to redundancy inside types and dependent arguments. It's not a thing you can easily work around as a user. This will be <em>the</em> thing that we will all notice and hope to be improved in the next version if you don't fix it at this early stage.</p>
+</blockquote>
+<p>I agree that it <em>might</em> be this critical, but I have don't have enough information yet to have an informed opinion. In particular, there might be acceptable ways of keeping the heights of these towers acceptably bounded, and the possible backend solutions might all have substantial downsides. For now, let us all work together to investigate the problem and to assess our options.</p>
+
+<a name="185876962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185876962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185876962">Daniel Selsam (Jan 17 2020 at 00:30)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="230999">Daniel Selsam</span> Do you have the name and line numbers for this instance in mathlib?</p>
+</blockquote>
+<p>Unfortunately, no. This would take quite a bit more bookkeeping, and I won't have time or CPU cycles for this for several days. Is somebody else able to investigate in the meantime with the new (and much improved) leancrawler? It is very well-documented. Here is what I suggest to start: create a lean file that imports all of mathlib, export it to a <code>.yaml</code> as described in the README, and run a simple script like the following:</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">crawler</span> <span class="kn">import</span> <span class="n">LeanLib</span>
+<span class="kn">import</span> <span class="nn">networkx</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loading export.yaml&quot;</span><span class="p">)</span>
+<span class="n">lib</span> <span class="o">=</span> <span class="n">LeanLib</span><span class="o">.</span><span class="n">from_yaml</span><span class="p">(</span><span class="s1">&#39;FindBig&#39;</span><span class="p">,</span> <span class="s1">&#39;export.yaml&#39;</span><span class="p">)</span>
+
+<span class="n">decls</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">lib</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Top-10 biggest decls by type:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">decls</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="p">(</span><span class="k">lambda</span> <span class="n">decl</span><span class="p">:</span> <span class="o">-</span> <span class="n">decl</span><span class="o">.</span><span class="n">type_size</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">decl</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">decls</span><span class="p">[:</span><span class="mi">10</span><span class="p">]):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">decl</span><span class="p">,</span> <span class="n">decl</span><span class="o">.</span><span class="n">type_size</span><span class="p">,</span> <span class="n">decl</span><span class="o">.</span><span class="n">type_dedup_size</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Top-10 biggest decls by value:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">decls</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="p">(</span><span class="k">lambda</span> <span class="n">decl</span><span class="p">:</span> <span class="o">-</span> <span class="n">decl</span><span class="o">.</span><span class="n">value_size</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">decl</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">decls</span><span class="p">[:</span><span class="mi">10</span><span class="p">]):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">decl</span><span class="p">,</span> <span class="n">decl</span><span class="o">.</span><span class="n">value_size</span><span class="p">,</span> <span class="n">decl</span><span class="o">.</span><span class="n">value_dedup_size</span><span class="p">)</span>
+</pre></div>
+
+<a name="185877007"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/185877007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#185877007">Daniel Selsam (Jan 17 2020 at 00:31)</a>:</h4>
+<p>I just ran this, but only importing a few mathlib theories. This was the output:</p>
+<div class="codehilite"><pre><span></span>Top-10 biggest decls by type:
+
+category_theory.limits.is_colimit.hom_desc 35592 1159
+category_theory.limits.is_limit.hom_lift 7508 1350
+gcd_domain.mk.inj 6650 3306
+gcd_domain.mk.inj_arrow 6643 3319
+algebraic_geometry.PresheafedSpace.ext 6407 549
+decidable_linear_ordered_semiring.mk.inj 6387 3709
+decidable_linear_ordered_semiring.mk.inj_arrow 6378 3758
+lattice.complete_boolean_algebra.mk.inj 6252 4008
+lattice.complete_boolean_algebra.mk.inj_arrow 6241 4025
+linear_ordered_semiring.mk.inj 5958 3444
+
+Top-10 biggest decls by value:
+
+filter.is_lawful_monad 100044499 36343
+algebraic_geometry.PresheafedSpace.stalk_map.comp 63928223 16816
+emetric.countable_closure_of_compact 6553913 35855
+real.exists_sup 6422084 11798
+Top.presheaf.stalk_pushforward.comp 4524414 13016
+category_theory.equivalence.unit_inverse_comp 3779575 9474
+is_measurable.diff_null 1158921 7082
+set.is_lawful_monad 987060 26209
+free_group.is_lawful_monad 961500 23022
+Top.presheaf.stalk_pushforward.id 899051 5074
+</pre></div>
+
 
 {% endraw %}
 
