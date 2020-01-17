@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [deep learning for symbolic mathematics](03624deeplearningforsymbolicmathematics.html) (10 messages, latest: Jan 17 2020 at 13:33)
+
 * [words](77296words.html) (25 messages, latest: Jan 17 2020 at 11:25)
 
 * [typeclass paper](35889typeclasspaper.html) (79 messages, latest: Jan 17 2020 at 09:28)
@@ -30,8 +32,6 @@ permalink: archive/113488general/index.html
 * [use and exists_prop](21313useandexistsprop.html) (23 messages, latest: Jan 16 2020 at 00:05)
 
 * [coercions from polynomials](03953coercionsfrompolynomials.html) (37 messages, latest: Jan 15 2020 at 20:03)
-
-* [deep learning for symbolic mathematics](03624deeplearningforsymbolicmathematics.html) (8 messages, latest: Jan 15 2020 at 17:50)
 
 * [bulleting / browers questions](04997bulletingbrowersquestions.html) (12 messages, latest: Jan 15 2020 at 16:05)
 

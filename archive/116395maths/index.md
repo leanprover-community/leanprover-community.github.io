@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (32 messages, latest: Jan 17 2020 at 11:55)
+* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (34 messages, latest: Jan 17 2020 at 13:11)
 
-* [linear maps over semimodule](70237linearmapsoversemimodule.html) (23 messages, latest: Jan 17 2020 at 09:41)
+* [linear maps over semimodule](70237linearmapsoversemimodule.html) (24 messages, latest: Jan 17 2020 at 13:08)
 
 * [(∀ x : U, P x) ∨ (∀ y : V, Q y) ↔ ∀ (x : U) (y : V), P x ∨ Q](49426xUPxyVQyxUyVPxQ.html) (16 messages, latest: Jan 16 2020 at 15:03)
 
