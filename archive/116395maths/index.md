@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (16 messages, latest: Jan 17 2020 at 10:39)
+
 * [linear maps over semimodule](70237linearmapsoversemimodule.html) (23 messages, latest: Jan 17 2020 at 09:41)
 
 * [(∀ x : U, P x) ∨ (∀ y : V, Q y) ↔ ∀ (x : U) (y : V), P x ∨ Q](49426xUPxyVQyxUyVPxQ.html) (16 messages, latest: Jan 16 2020 at 15:03)
@@ -22,8 +24,6 @@ permalink: archive/116395maths/index.html
 * [filter base](84418filterbase.html) (9 messages, latest: Jan 14 2020 at 22:59)
 
 * [uniform convergence](45296uniformconvergence.html) (3 messages, latest: Jan 14 2020 at 16:16)
-
-* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (15 messages, latest: Jan 14 2020 at 15:17)
 
 * [`a ≤ b → f b ≤ f a`](38187abfbfa.html) (12 messages, latest: Jan 14 2020 at 13:25)
 
