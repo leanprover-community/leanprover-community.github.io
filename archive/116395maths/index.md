@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [integral domain timeout](05974integraldomaintimeout.html) (10 messages, latest: Jan 17 2020 at 17:47)
+* [linear maps over semimodule](70237linearmapsoversemimodule.html) (25 messages, latest: Jan 17 2020 at 18:56)
 
-* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (37 messages, latest: Jan 17 2020 at 17:22)
+* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (40 messages, latest: Jan 17 2020 at 18:46)
 
-* [linear maps over semimodule](70237linearmapsoversemimodule.html) (24 messages, latest: Jan 17 2020 at 13:08)
+* [integral domain timeout](05974integraldomaintimeout.html) (11 messages, latest: Jan 17 2020 at 18:05)
 
 * [(∀ x : U, P x) ∨ (∀ y : V, Q y) ↔ ∀ (x : U) (y : V), P x ∨ Q](49426xUPxyVQyxUyVPxQ.html) (16 messages, latest: Jan 16 2020 at 15:03)
 

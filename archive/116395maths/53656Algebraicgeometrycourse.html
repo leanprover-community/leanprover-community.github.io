@@ -182,6 +182,29 @@ permalink: archive/116395maths/53656Algebraicgeometrycourse.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/185937787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#185937787">Alex J. Best (Jan 17 2020 at 17:22)</a>:</h4>
 <p>Or nilpotents etc. I added some bits at <a href="https://github.com/leanprover-community/mathlib/blob/ece70146a142c8b04563c21edb34c87d192b172b/src/ring_theory/dedekind_finite.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/ece70146a142c8b04563c21edb34c87d192b172b/src/ring_theory/dedekind_finite.lean">https://github.com/leanprover-community/mathlib/blob/ece70146a142c8b04563c21edb34c87d192b172b/src/ring_theory/dedekind_finite.lean</a> but its almost nothing</p>
 
+<a name="185941507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/185941507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#185941507">Kevin Buzzard (Jan 17 2020 at 18:07)</a>:</h4>
+<p>Today my main achievement was that I managed to reproduce the proof which I knew as a kid of something which I knew couldn't possibly be the Nullstellensatz:</p>
+<p><a href="https://github.com/ImperialCollegeLondon/M4P33/blob/ac0a28f19936a7f861ff3c6c0dc57d9b6093e8e6/src/abstract_V_and_I.lean#L151" target="_blank" title="https://github.com/ImperialCollegeLondon/M4P33/blob/ac0a28f19936a7f861ff3c6c0dc57d9b6093e8e6/src/abstract_V_and_I.lean#L151">https://github.com/ImperialCollegeLondon/M4P33/blob/ac0a28f19936a7f861ff3c6c0dc57d9b6093e8e6/src/abstract_V_and_I.lean#L151</a></p>
+<p>I managed to abstract out all of the algebraic geometry completely :D I only import data.set.basic (although there's a joke at the top of the file)</p>
+
+<a name="185944812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/185944812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#185944812">Kevin Buzzard (Jan 17 2020 at 18:44)</a>:</h4>
+<blockquote>
+<p>If you use parameters, this trick doesn't work</p>
+</blockquote>
+<p>Right, because P needs to be reversed.</p>
+
+<a name="185944869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/185944869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#185944869">Kevin Buzzard (Jan 17 2020 at 18:46)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="err">𝕍</span><span class="bp">_</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="n">W</span> <span class="o">:=</span>
+<span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">W</span> <span class="bp">|</span> <span class="bp">∀</span> <span class="n">f</span> <span class="err">∈</span> <span class="n">S</span><span class="o">,</span> <span class="n">P</span> <span class="n">f</span> <span class="n">x</span><span class="o">}</span>
+<span class="kn">notation</span> <span class="bp">`</span><span class="err">𝕍</span><span class="bp">`</span><span class="o">:</span><span class="n">max</span> <span class="o">:=</span> <span class="err">𝕍</span><span class="bp">_</span> <span class="o">(</span><span class="k">by</span> <span class="n">exact</span> <span class="n">P</span><span class="o">)</span>
+</pre></div>
+
+
+<p>This hack enables me to state theorems the way mathematicians would expect to see them, but when I'm working on proofs I still see the <code>P</code> in the tactic state. Is there any way to get rid of this?</p>
+
 
 {% endraw %}
 
