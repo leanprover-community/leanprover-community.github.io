@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (44 messages, latest: Jan 17 2020 at 21:48)
+
 * [integral domain timeout](05974integraldomaintimeout.html) (15 messages, latest: Jan 17 2020 at 20:08)
 
 * [linear maps over semimodule](70237linearmapsoversemimodule.html) (27 messages, latest: Jan 17 2020 at 20:03)
-
-* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (40 messages, latest: Jan 17 2020 at 18:46)
 
 * [(∀ x : U, P x) ∨ (∀ y : V, Q y) ↔ ∀ (x : U) (y : V), P x ∨ Q](49426xUPxyVQyxUyVPxQ.html) (16 messages, latest: Jan 16 2020 at 15:03)
 

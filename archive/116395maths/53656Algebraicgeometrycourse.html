@@ -205,6 +205,60 @@ permalink: archive/116395maths/53656Algebraicgeometrycourse.html
 
 <p>This hack enables me to state theorems the way mathematicians would expect to see them, but when I'm working on proofs I still see the <code>P</code> in the tactic state. Is there any way to get rid of this?</p>
 
+<a name="185956929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/185956929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#185956929">Kevin Buzzard (Jan 17 2020 at 21:05)</a>:</h4>
+<p>Is there a one-line tactic which solves this sort of thing:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">lattice</span>
+
+<span class="kn">open</span> <span class="n">set</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">A</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">ι</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="o">:</span>
+<span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">R</span><span class="o">),</span> <span class="o">(</span><span class="n">f</span> <span class="err">∈</span> <span class="err">⋃</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">ι</span><span class="o">),</span> <span class="n">S</span> <span class="n">i</span><span class="o">)</span> <span class="bp">→</span> <span class="n">P</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="bp">↔</span>
+  <span class="bp">∀</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">ι</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">R</span><span class="o">),</span> <span class="n">f</span> <span class="err">∈</span> <span class="n">S</span> <span class="n">i</span> <span class="bp">→</span> <span class="n">P</span> <span class="n">f</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span><span class="o">,</span>
+    <span class="n">intros</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">a</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">mem_Union</span><span class="o">,</span>
+    <span class="n">use</span> <span class="n">i</span><span class="o">,</span>
+    <span class="n">assumption</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">h</span> <span class="n">f</span> <span class="n">hf</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">mem_Union</span> <span class="n">at</span> <span class="n">hf</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">hf</span> <span class="k">with</span> <span class="n">i</span> <span class="n">hi</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">h</span> <span class="n">i</span><span class="o">,</span>
+  <span class="n">assumption</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I really feel like I'm following my nose at all points and so am hoping this is just the sort of thing that CS people have tacticised</p>
+
+<a name="185957312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/185957312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#185957312">Chris Hughes (Jan 17 2020 at 21:08)</a>:</h4>
+<p><code>simp, tauto</code></p>
+
+<a name="185961199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/185961199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#185961199">Kevin Buzzard (Jan 17 2020 at 21:47)</a>:</h4>
+<p>Do we have this:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- Over an infinite integral domain a polynomial f is zero iff it</span>
+<span class="cm">    evaluates to zero everywhere -/</span>
+<span class="kn">lemma</span> <span class="n">mv_polynomial</span><span class="bp">.</span><span class="n">eval_eq_zero</span>  <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">integral_domain</span> <span class="n">k</span><span class="o">]</span> <span class="o">[</span><span class="n">infinite</span> <span class="n">k</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">n</span> <span class="n">k</span><span class="o">}</span> <span class="o">:</span>
+<span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="kn">eval</span> <span class="n">x</span> <span class="n">f</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">f</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>? I think you can prove it in the case when n is finite, by induction on the size of n, and then for general n you write the polynomial ring as a filtered colimit of finite n's. </p>
+<p>I would like to prove this myself, if it's not there, but I suspect there might be some quite high-powered ways to do this. For example I don't know whether I'm supposed to be reducing to the case of <code>n = fin m</code> or <code>n : fintype</code> or what. The reduction needs the concept of the variables which appear in f, which might be some sort of monad bind thing?</p>
+
+<a name="185961290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/185961290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#185961290">Kevin Buzzard (Jan 17 2020 at 21:48)</a>:</h4>
+<p><span class="user-mention" data-user-id="258511">@Alexander Uhlmann</span> isolated this property at Xena yesterday.</p>
+
 
 {% endraw %}
 
