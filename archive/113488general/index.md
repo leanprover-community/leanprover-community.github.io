@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [words](77296words.html) (24 messages, latest: Jan 17 2020 at 10:31)
+* [words](77296words.html) (25 messages, latest: Jan 17 2020 at 11:25)
 
 * [typeclass paper](35889typeclasspaper.html) (79 messages, latest: Jan 17 2020 at 09:28)
 

@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (16 messages, latest: Jan 17 2020 at 10:39)
+* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (32 messages, latest: Jan 17 2020 at 11:55)
 
 * [linear maps over semimodule](70237linearmapsoversemimodule.html) (23 messages, latest: Jan 17 2020 at 09:41)
 

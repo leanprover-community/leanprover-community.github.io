@@ -151,6 +151,20 @@ Tom is right that the output text does have a run-on computer-generated feel, bu
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/words/near/185903696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77296words.html#185903696">Mario Carneiro (Jan 17 2020 at 10:31)</a>:</h4>
 <p>(does lean have "hygienic notation"?)</p>
 
+<a name="185906975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/words/near/185906975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77296words.html#185906975">Sebastian Ullrich (Jan 17 2020 at 11:25)</a>:</h4>
+<p><code>notation</code> is always hygienic in Lean 3 &amp; Lean 4:</p>
+<div class="codehilite"><pre><span></span>postfix `ⁿ`:100 := λ x, x ^ n
+</pre></div>
+
+
+<p>does not work because <code>n</code> is unbound. However, every good hygienic macro system also allows hygiene-bending operations, which in Lean 4 you can use like</p>
+<div class="codehilite"><pre><span></span>macro (x : term) &quot;ⁿ&quot;:100 =&gt; `(x ^ $(mkTermId `n))
+</pre></div>
+
+
+<p>Now <code>n</code> will be resolved in the caller's scope, not the macro declaration's scope.</p>
+
 
 {% endraw %}
 
