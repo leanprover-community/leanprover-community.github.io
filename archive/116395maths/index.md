@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [integral domain timeout](05974integraldomaintimeout.html) (12 messages, latest: Jan 17 2020 at 19:50)
+* [integral domain timeout](05974integraldomaintimeout.html) (15 messages, latest: Jan 17 2020 at 20:08)
 
-* [linear maps over semimodule](70237linearmapsoversemimodule.html) (26 messages, latest: Jan 17 2020 at 19:01)
+* [linear maps over semimodule](70237linearmapsoversemimodule.html) (27 messages, latest: Jan 17 2020 at 20:03)
 
 * [Algebraic geometry course](53656Algebraicgeometrycourse.html) (40 messages, latest: Jan 17 2020 at 18:46)
 

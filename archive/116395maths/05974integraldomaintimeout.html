@@ -110,6 +110,28 @@ permalink: archive/116395maths/05974integraldomaintimeout.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/integral%20domain%20timeout/near/185950175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05974integraldomaintimeout.html#185950175">Andrew Ashworth (Jan 17 2020 at 19:50)</a>:</h4>
 <p>Do you need to have the displayed content equal to the keystrokes you type in? If not, then the VSCode plugin - if it was extended appropriately - could probably render formulas to latex</p>
 
+<a name="185951101"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/integral%20domain%20timeout/near/185951101" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05974integraldomaintimeout.html#185951101">Kevin Buzzard (Jan 17 2020 at 20:01)</a>:</h4>
+<p>No I definitely don't need this. <span class="user-mention" data-user-id="110031">@Patrick Massot</span> can hacking VSCode give me <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>k</mi><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">k^n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span></span></span></span> instead of <code>fin n -&gt; k</code>?</p>
+
+<a name="185951618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/integral%20domain%20timeout/near/185951618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05974integraldomaintimeout.html#185951618">Daniel Selsam (Jan 17 2020 at 20:07)</a>:</h4>
+<blockquote>
+<p>Can others reproduce this:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- (deterministic) timeout</span>
+<span class="kn">theorem</span> <span class="err">𝕍</span><span class="bp">_</span><span class="n">radical&#39;</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">integral_domain</span> <span class="n">k</span><span class="o">]</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">ideal</span> <span class="o">(</span><span class="n">mv_polynomial</span> <span class="n">n</span> <span class="n">k</span><span class="o">))</span> <span class="o">:</span>
+  <span class="err">𝕍</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">mv_polynomial</span> <span class="n">n</span> <span class="n">k</span><span class="o">))</span> <span class="bp">=</span> <span class="err">𝕍</span> <span class="o">(</span><span class="n">I</span><span class="bp">.</span><span class="n">radical</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+</blockquote>
+<p>Diamonds. Two searches for <code>has_coe_to_fun</code> traverse <code>discrete_linear_ordered_field</code> 14,000x times each.</p>
+
+<a name="185951773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/integral%20domain%20timeout/near/185951773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05974integraldomaintimeout.html#185951773">Kevin Buzzard (Jan 17 2020 at 20:08)</a>:</h4>
+<p>Daniel thank you so much for these advanced debugging comments. I am just writing MSc level mathematics in a mathematically normal way and coming up with these issues in Lean 3, I am quite excited about Lean 4 now.</p>
+
 
 {% endraw %}
 
