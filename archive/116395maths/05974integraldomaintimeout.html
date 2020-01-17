@@ -1,0 +1,108 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/05974integraldomaintimeout.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/05974integraldomaintimeout.html">integral domain timeout</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="185938119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/integral%20domain%20timeout/near/185938119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05974integraldomaintimeout.html#185938119">Kevin Buzzard (Jan 17 2020 at 17:26)</a>:</h4>
+<p>Can others reproduce this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">mv_polynomial</span>
+<span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">ideal_operations</span>
+
+<span class="kn">open</span> <span class="n">mv_polynomial</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">k</span><span class="o">]</span>
+
+<span class="kn">variable</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="err">𝕍</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">mv_polynomial</span> <span class="n">n</span> <span class="n">k</span><span class="o">))</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">n</span> <span class="bp">→</span> <span class="n">k</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">k</span> <span class="bp">|</span> <span class="bp">∀</span> <span class="n">f</span> <span class="err">∈</span> <span class="n">S</span><span class="o">,</span> <span class="kn">eval</span> <span class="n">x</span> <span class="n">f</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">}</span> <span class="c1">-- works BUT VARIABLES IN STUPID ORDER!</span>
+
+<span class="kn">set_option</span> <span class="n">profiler</span> <span class="n">true</span>
+
+<span class="c1">-- typechecks in under a second</span>
+<span class="kn">theorem</span> <span class="err">𝕍</span><span class="bp">_</span><span class="n">radical</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">k</span><span class="o">]</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">ideal</span> <span class="o">(</span><span class="n">mv_polynomial</span> <span class="n">n</span> <span class="n">k</span><span class="o">))</span> <span class="o">:</span>
+  <span class="err">𝕍</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">mv_polynomial</span> <span class="n">n</span> <span class="n">k</span><span class="o">))</span> <span class="bp">=</span> <span class="err">𝕍</span> <span class="o">(</span><span class="n">I</span><span class="bp">.</span><span class="n">radical</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="c1">-- (deterministic) timeout</span>
+<span class="kn">theorem</span> <span class="err">𝕍</span><span class="bp">_</span><span class="n">radical&#39;</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">integral_domain</span> <span class="n">k</span><span class="o">]</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">ideal</span> <span class="o">(</span><span class="n">mv_polynomial</span> <span class="n">n</span> <span class="n">k</span><span class="o">))</span> <span class="o">:</span>
+  <span class="err">𝕍</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">mv_polynomial</span> <span class="n">n</span> <span class="n">k</span><span class="o">))</span> <span class="bp">=</span> <span class="err">𝕍</span> <span class="o">(</span><span class="n">I</span><span class="bp">.</span><span class="n">radical</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="185938595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/integral%20domain%20timeout/near/185938595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05974integraldomaintimeout.html#185938595">Kevin Buzzard (Jan 17 2020 at 17:32)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c1">-- works fine</span>
+<span class="n">noncomputable</span> <span class="kn">instance</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">integral_domain</span> <span class="n">k</span><span class="o">]</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">has_coe</span> <span class="o">(</span><span class="n">ideal</span> <span class="o">(</span><span class="n">mv_polynomial</span> <span class="n">n</span> <span class="n">k</span><span class="o">))</span> <span class="o">(</span><span class="n">set</span> <span class="o">(</span><span class="n">mv_polynomial</span> <span class="n">n</span> <span class="n">k</span><span class="o">))</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+
+<span class="c1">-- times out</span>
+<span class="n">noncomputable</span> <span class="kn">theorem</span> <span class="err">𝕍</span><span class="bp">_</span><span class="n">radical&#39;</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">integral_domain</span> <span class="n">k</span><span class="o">]</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">ideal</span> <span class="o">(</span><span class="n">mv_polynomial</span> <span class="n">n</span> <span class="n">k</span><span class="o">))</span> <span class="o">:</span>
+  <span class="err">𝕍</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">mv_polynomial</span> <span class="n">n</span> <span class="n">k</span><span class="o">))</span> <span class="bp">=</span> <span class="err">𝕍</span> <span class="o">(</span><span class="n">I</span><span class="bp">.</span><span class="n">radical</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="185938862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/integral%20domain%20timeout/near/185938862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05974integraldomaintimeout.html#185938862">Kevin Buzzard (Jan 17 2020 at 17:35)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c1">-- times out</span>
+<span class="n">noncomputable</span> <span class="kn">theorem</span> <span class="err">𝕍</span><span class="bp">_</span><span class="n">radical&#39;</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">integral_domain</span> <span class="n">k</span><span class="o">]</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">ideal</span> <span class="o">(</span><span class="n">mv_polynomial</span> <span class="n">n</span> <span class="n">k</span><span class="o">))</span> <span class="o">:</span>
+  <span class="err">𝕍</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">mv_polynomial</span> <span class="n">n</span> <span class="n">k</span><span class="o">))</span> <span class="bp">=</span> <span class="err">𝕍</span> <span class="o">((</span><span class="n">ideal</span><span class="bp">.</span><span class="n">radical</span> <span class="n">I</span> <span class="o">:</span> <span class="n">ideal</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="185939013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/integral%20domain%20timeout/near/185939013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05974integraldomaintimeout.html#185939013">Kevin Buzzard (Jan 17 2020 at 17:36)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c1">-- works</span>
+<span class="kn">theorem</span> <span class="err">𝕍</span><span class="bp">_</span><span class="n">radical&#39;</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">integral_domain</span> <span class="n">k</span><span class="o">]</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">ideal</span> <span class="o">(</span><span class="n">mv_polynomial</span> <span class="n">n</span> <span class="n">k</span><span class="o">))</span> <span class="o">:</span>
+  <span class="err">𝕍</span> <span class="o">(</span><span class="err">↑</span><span class="n">I</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">mv_polynomial</span> <span class="n">n</span> <span class="n">k</span><span class="o">))</span> <span class="bp">=</span> <span class="err">𝕍</span> <span class="o">(</span><span class="err">↑</span><span class="o">(</span><span class="n">ideal</span><span class="bp">.</span><span class="n">radical</span> <span class="n">I</span> <span class="o">:</span> <span class="n">ideal</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>So when do I need the up-arrows?</p>
+
+<a name="185939040"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/integral%20domain%20timeout/near/185939040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05974integraldomaintimeout.html#185939040">Kevin Buzzard (Jan 17 2020 at 17:37)</a>:</h4>
+<p>And why did I not need them for comm_rings?</p>
+
+<a name="185939383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/integral%20domain%20timeout/near/185939383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05974integraldomaintimeout.html#185939383">Kevin Buzzard (Jan 17 2020 at 17:40)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="err">𝕍</span><span class="bp">_</span><span class="n">radical&#39;</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">integral_domain</span> <span class="n">k</span><span class="o">]</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">ideal</span> <span class="o">(</span><span class="n">mv_polynomial</span> <span class="n">n</span> <span class="n">k</span><span class="o">))</span> <span class="o">:</span>
+  <span class="err">𝕍</span> <span class="o">(</span><span class="err">↑</span><span class="n">I</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">_</span><span class="o">)</span> <span class="bp">=</span> <span class="err">𝕍</span> <span class="o">(</span><span class="err">↑</span><span class="o">(</span><span class="n">ideal</span><span class="bp">.</span><span class="n">radical</span> <span class="n">I</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="c1">-- don&#39;t know how to synthesize placeholder</span>
+</pre></div>
+
+
+<p>gaargh</p>
+
+<a name="185939401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/integral%20domain%20timeout/near/185939401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05974integraldomaintimeout.html#185939401">Kevin Buzzard (Jan 17 2020 at 17:41)</a>:</h4>
+<p>why does it look so ugly?</p>
+
+<a name="185939414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/integral%20domain%20timeout/near/185939414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05974integraldomaintimeout.html#185939414">Kevin Buzzard (Jan 17 2020 at 17:41)</a>:</h4>
+<p>I am trying to sell this software to mathematicians</p>
+
+<a name="185939868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/integral%20domain%20timeout/near/185939868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05974integraldomaintimeout.html#185939868">Johan Commelin (Jan 17 2020 at 17:47)</a>:</h4>
+<p>I guess that you can play tricks, if you want. Where you make <code>k \^n</code> notation for <code>fin n → k</code>, similar to the way that Mario made the <code>\bbV</code> notation. Idem dito for <code>k[X_1, ..., X_n]</code>.</p>
+
+<a name="185939882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/integral%20domain%20timeout/near/185939882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05974integraldomaintimeout.html#185939882">Johan Commelin (Jan 17 2020 at 17:47)</a>:</h4>
+<p>But such hacks will likely break down fast</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
