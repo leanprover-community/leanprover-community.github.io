@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (120 messages, latest: Jan 16 2020 at 22:56)
+* [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (122 messages, latest: Jan 16 2020 at 23:06)
 
 * [How to write about there are infinite primes p % 4 = 3](17447Howtowriteaboutthereareinfiniteprimesp43.html) (19 messages, latest: Jan 16 2020 at 21:17)
 
