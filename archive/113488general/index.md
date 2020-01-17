@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [words](77296words.html) (26 messages, latest: Jan 17 2020 at 16:54)
+
 * [CNL and the Stack Project](27935CNLandtheStackProject.html) (19 messages, latest: Jan 17 2020 at 15:55)
 
 * [deep learning for symbolic mathematics](03624deeplearningforsymbolicmathematics.html) (10 messages, latest: Jan 17 2020 at 13:33)
-
-* [words](77296words.html) (25 messages, latest: Jan 17 2020 at 11:25)
 
 * [typeclass paper](35889typeclasspaper.html) (79 messages, latest: Jan 17 2020 at 09:28)
 
