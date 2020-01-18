@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [lifting "down"](58858liftingdown.html) (19 messages, latest: Jan 18 2020 at 17:19)
+
 * [basics](17142basics.html) (76 messages, latest: Jan 18 2020 at 10:12)
 
 * [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (152 messages, latest: Jan 17 2020 at 12:56)
