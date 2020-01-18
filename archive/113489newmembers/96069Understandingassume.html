@@ -1,0 +1,30 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/96069Understandingassume.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html">Understanding assume</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186014967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186014967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186014967">Daniel Keys (Jan 18 2020 at 22:47)</a>:</h4>
+<p>New to functional languages. Want to understand how <code>assume</code> works in Lean. Why is it OK to have <code>theorem ex1 : ¬(p ∧ ¬q) → (p → q) := begin assume h : ¬(p ∧ ¬q), assume hp : p</code> but not for example <code>theorem ex2 : (p → r ∨ s) → ((p → r) ∨ (p → s)) := begin assume rs : r ∨ s</code>?</p>
+
+<a name="186015136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186015136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186015136">Moses Schönfinkel (Jan 18 2020 at 22:52)</a>:</h4>
+<p>Because -&gt; is right associative. The first argument of <code>theorem ex2</code> is a function from <code>p</code> to <code>r or s</code>.</p>
+
+<a name="186015147"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186015147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186015147">Moses Schönfinkel (Jan 18 2020 at 22:53)</a>:</h4>
+<p>Also note that in <code>theorem ex1</code>, your <code>h</code> is of type <code>(p and not q) -&gt; false</code>, that is, a function type. You're then left with <code>p -&gt; s</code>, where associativity plays no part. You can therefore further assume <code>p</code>. Note that the parentheses around <code>(p -&gt; q)</code> are redundant.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

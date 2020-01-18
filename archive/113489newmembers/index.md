@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Understanding assume](96069Understandingassume.html) (3 messages, latest: Jan 18 2020 at 22:53)
+
 * [lifting "down"](58858liftingdown.html) (19 messages, latest: Jan 18 2020 at 17:19)
 
 * [basics](17142basics.html) (76 messages, latest: Jan 18 2020 at 10:12)

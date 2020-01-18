@@ -48,6 +48,10 @@ permalink: archive/113488general/40495memorycorruption.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/memory%20corruption/near/186012095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40495memorycorruption.html#186012095">Patrick Massot (Jan 18 2020 at 21:16)</a>:</h4>
 <p>I relaunched leanpkg and it built successfully.</p>
 
+<a name="186013793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/memory%20corruption/near/186013793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40495memorycorruption.html#186013793">Gabriel Ebner (Jan 18 2020 at 22:08)</a>:</h4>
+<p>I had a similar problem when building mathlib using a debug build of Lean.  Building mathlib failed due to assertions, which are disabled in the release build (used by elan).  If these assertions are violated, you can very easily get memory corruption.  (That is, these assertions check whether an array access is in bounds.  And both reads and writes are out-of-bounds...  I'm actually surprised this hasn't caused any bigger troubles yet.)  This is the commit that replaces the out-of-bound array accesses by memory safe versions: <a href="https://github.com/leanprover-community/lean/pull/89/commits/7a94b7022b76e48bf2d9af0182932d30d99f1af8" target="_blank" title="https://github.com/leanprover-community/lean/pull/89/commits/7a94b7022b76e48bf2d9af0182932d30d99f1af8">https://github.com/leanprover-community/lean/pull/89/commits/7a94b7022b76e48bf2d9af0182932d30d99f1af8</a>  It's part of <a href="https://github.com/leanprover-community/lean/pull/89" target="_blank" title="https://github.com/leanprover-community/lean/pull/89">https://github.com/leanprover-community/lean/pull/89</a> which is not merged yet.</p>
+
 
 {% endraw %}
 
