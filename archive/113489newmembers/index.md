@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [basics](17142basics.html) (53 messages, latest: Jan 18 2020 at 05:57)
+
 * [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (152 messages, latest: Jan 17 2020 at 12:56)
 
 * [How to write about there are infinite primes p % 4 = 3](17447Howtowriteaboutthereareinfiniteprimesp43.html) (19 messages, latest: Jan 16 2020 at 21:17)
@@ -18,8 +20,6 @@ permalink: archive/113489newmembers/index.html
 * [attempt at some geometry](35829attemptatsomegeometry.html) (111 messages, latest: Jan 15 2020 at 14:54)
 
 * [A finite set has finitely many endofunctions?](54624Afinitesethasfinitelymanyendofunctions.html) (17 messages, latest: Jan 14 2020 at 13:41)
-
-* [basics](17142basics.html) (51 messages, latest: Jan 14 2020 at 06:11)
 
 * [accessing current and previous patterns](96853accessingcurrentandpreviouspatterns.html) (17 messages, latest: Jan 13 2020 at 23:03)
 
