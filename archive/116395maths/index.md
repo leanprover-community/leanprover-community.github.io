@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (45 messages, latest: Jan 18 2020 at 06:33)
+* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (46 messages, latest: Jan 18 2020 at 11:52)
 
 * [integral domain timeout](05974integraldomaintimeout.html) (15 messages, latest: Jan 17 2020 at 20:08)
 
