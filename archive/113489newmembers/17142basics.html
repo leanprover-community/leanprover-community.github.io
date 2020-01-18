@@ -492,6 +492,39 @@ In the context of the underscore, you know <code>not p</code> and also <code>not
 <span class="k">forall</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="o">(</span><span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>  <span class="o">(</span><span class="n">and</span> <span class="o">(</span><span class="n">eq</span> <span class="o">(</span><span class="n">k</span> <span class="bp">+</span> <span class="n">m</span><span class="o">)</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">and</span> <span class="o">(</span><span class="n">prime</span> <span class="n">k</span><span class="o">)</span> <span class="o">(</span><span class="n">prime</span> <span class="n">m</span><span class="o">)))</span>
 </pre></div>
 
+<a name="185985317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/185985317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#185985317">Iocta (Jan 18 2020 at 08:01)</a>:</h4>
+<p>Aha</p>
+
+<a name="185985624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/185985624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#185985624">Iocta (Jan 18 2020 at 08:11)</a>:</h4>
+<p>Given </p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">divides</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="bp">∃</span> <span class="n">k</span><span class="o">,</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">n</span>
+</pre></div>
+
+
+<p>How do I check whether <code>divides 3 6</code>?</p>
+
+<a name="185985666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/185985666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#185985666">Iocta (Jan 18 2020 at 08:12)</a>:</h4>
+<p>#check/#eval/#print don't seem to do it</p>
+
+<a name="185985680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/185985680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#185985680">Mario Carneiro (Jan 18 2020 at 08:14)</a>:</h4>
+<p>You need to prove the predicate is decidable first, which amounts to giving a decision procedure. In most programming languages, for example, you decide <code>m | n</code> by testing if <code>m % n = 0</code></p>
+
+<a name="185985722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/185985722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#185985722">Mario Carneiro (Jan 18 2020 at 08:14)</a>:</h4>
+<p>Luckily, we've already gone to the trouble to do this, but you have to use the built-in divides relation to get this</p>
+
+<a name="185985781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/185985781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#185985781">Alex J. Best (Jan 18 2020 at 08:16)</a>:</h4>
+<p>Once you have a decidable proposition <code>#eval to_bool (divides 3 6)</code> will display either <code>tt</code> or <code>ff</code></p>
+
+<a name="185985784"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/185985784" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#185985784">Mario Carneiro (Jan 18 2020 at 08:16)</a>:</h4>
+<p>Note that by the syntactic form of the expression (an exists over natural numbers of a basic proposition) it is not obviously decidable. For example Goldbach's conjecture can also be written in this form but it's an open question if this is a decidable proposition</p>
+
 
 {% endraw %}
 
