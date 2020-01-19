@@ -1,0 +1,69 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/80429coercionfromto.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/80429coercionfromto.html">coercion from ℚ to ℝ</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186033091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coercion%20from%20%E2%84%9A%20to%20%E2%84%9D/near/186033091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/80429coercionfromto.html#186033091">Kevin Buzzard (Jan 19 2020 at 09:22)</a>:</h4>
+<p>What's the canonical name for the coercion from <code>rat</code> to <code>real</code>? I had imagined <code>coe</code>, but</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">is_semiring_hom</span> <span class="o">(</span><span class="n">coe</span> <span class="o">:</span> <span class="n">ℚ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+
+<p>times out.</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">is_semiring_hom</span> <span class="o">(</span><span class="n">rat</span><span class="bp">.</span><span class="n">cast</span> <span class="o">:</span> <span class="n">ℚ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+
+<p>works fine, but I need that it's injective and <code>rat.cast_injective</code> works with <code>coe</code>. Which one am I supposed to be using?</p>
+
+<a name="186033213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coercion%20from%20%E2%84%9A%20to%20%E2%84%9D/near/186033213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/80429coercionfromto.html#186033213">Kevin Buzzard (Jan 19 2020 at 09:27)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">basic</span> <span class="n">set_theory</span><span class="bp">.</span><span class="n">schroeder_bernstein</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">countable</span>
+<span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">algebraic</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">polynomial</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">rat</span><span class="bp">.</span><span class="n">default</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">cardinality</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">linarith</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">fin_cases</span>
+
+<span class="n">noncomputable</span> <span class="n">theory</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+</pre></div>
+
+
+<p>might be relevant here (this is work of a student)</p>
+
+<a name="186033316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coercion%20from%20%E2%84%9A%20to%20%E2%84%9D/near/186033316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/80429coercionfromto.html#186033316">Patrick Massot (Jan 19 2020 at 09:30)</a>:</h4>
+<p>In such an algebraic context I would say <code>rat.cast</code> is what you want. Here you are really using that <code>ℝ</code> is a division ring, not the fact that it contains <code>ℚ</code>.</p>
+
+<a name="186033394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coercion%20from%20%E2%84%9A%20to%20%E2%84%9D/near/186033394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/80429coercionfromto.html#186033394">Mario Carneiro (Jan 19 2020 at 09:34)</a>:</h4>
+<p><code>coe</code> is defeq to <code>rat.cast</code></p>
+
+<a name="186033441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coercion%20from%20%E2%84%9A%20to%20%E2%84%9D/near/186033441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/80429coercionfromto.html#186033441">Mario Carneiro (Jan 19 2020 at 09:34)</a>:</h4>
+<p>It is written using <code>coe</code>, but the lemmas have <code>rat.cast</code> based names</p>
+
+<a name="186033551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coercion%20from%20%E2%84%9A%20to%20%E2%84%9D/near/186033551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/80429coercionfromto.html#186033551">Kevin Buzzard (Jan 19 2020 at 09:38)</a>:</h4>
+<p>I know they're defeq but I got that timeout. Is it a missing instance then?</p>
+
+<a name="186033605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coercion%20from%20%E2%84%9A%20to%20%E2%84%9D/near/186033605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/80429coercionfromto.html#186033605">Kevin Buzzard (Jan 19 2020 at 09:40)</a>:</h4>
+<p>A student wants to pass from Q[X] to R[X] a lot</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

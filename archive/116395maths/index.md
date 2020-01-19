@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [coercion from ℚ to ℝ](80429coercionfromto.html) (7 messages, latest: Jan 19 2020 at 09:40)
+
 * [Algebraic geometry course](53656Algebraicgeometrycourse.html) (50 messages, latest: Jan 18 2020 at 22:59)
 
 * [integral domain timeout](05974integraldomaintimeout.html) (15 messages, latest: Jan 17 2020 at 20:08)
