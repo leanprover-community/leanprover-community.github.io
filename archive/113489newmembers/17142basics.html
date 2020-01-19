@@ -705,6 +705,28 @@ open nat
 </blockquote>
 <p>I was aware, but thank you! I'm looking to get a better handle on Lean by going through proofs manually</p>
 
+<a name="186030897"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186030897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186030897">Patrick Massot (Jan 19 2020 at 08:06)</a>:</h4>
+<p><span class="user-mention" data-user-id="259240">@Cerek Hillen (he) (W2'20)</span> your proof works but it breaks many abstraction barriers. You know too much about how sets are implemented, and know too many lemmas about them. Maybe try:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">A</span> <span class="err">∩</span> <span class="err">∅</span> <span class="bp">=</span> <span class="err">∅</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">ext</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rintro</span> <span class="bp">⟨</span><span class="n">ha</span><span class="o">,</span> <span class="n">ha&#39;</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">assumption</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">exfalso</span><span class="o">,</span>
+    <span class="n">assumption</span> <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="186030957"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186030957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186030957">Patrick Massot (Jan 19 2020 at 08:08)</a>:</h4>
+<p>Another useful exercise from the opposite of the style spectrum is to understand the following proof term:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">A</span> <span class="err">∩</span> <span class="err">∅</span> <span class="bp">=</span> <span class="err">∅</span> <span class="o">:=</span>
+<span class="n">set</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="bp">⟨λ</span> <span class="bp">⟨</span><span class="n">h</span><span class="o">,</span> <span class="n">h&#39;</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">h&#39;</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">false</span><span class="bp">.</span><span class="n">elim</span> <span class="n">h</span><span class="bp">⟩</span>
+</pre></div>
+
 
 {% endraw %}
 

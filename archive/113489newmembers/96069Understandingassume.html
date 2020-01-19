@@ -270,6 +270,68 @@ You want to prove <code>((p → r) ∨ (p → s))</code> in <code>ex2</code>, so
   <span class="o">(</span><span class="bp">λ</span> <span class="n">hp</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">p</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">hp&#39;</span><span class="o">,</span> <span class="n">absurd</span> <span class="n">hp&#39;</span> <span class="n">hp</span><span class="o">)</span>
 </pre></div>
 
+<a name="186031050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186031050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186031050">Daniel Keys (Jan 19 2020 at 08:11)</a>:</h4>
+<p><span class="user-mention" data-user-id="127148">@Joe</span> <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  So that brings me exactly to what I fail to understand in these proofs. All of a sudden you have <code>hr</code> and <code>hs</code>, or the even more cryptic <code>$ λ hp'</code> coming up in your <code>lambda</code> terms. How can you produce these and work with them if the only hypothesis is <code>(p → r ∨ s)</code>? Where from does LEAN know what <code>hp'</code> is? Maybe it is my unwillingness to work with <code>lambda</code>. While I'll be looking into it, can one get what you wrote in a framework like this:</p>
+<div class="codehilite"><pre><span></span>theorem T1 : (p → r ∨ s) → ((p → r) ∨ (p → s)) :=
+begin
+    intros prs,
+    cases (em p) with hp hnp,
+    { ... },
+    { ... }
+end
+</pre></div>
+
+
+<p>which is easier to read, to help my understanding?</p>
+
+<a name="186031409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186031409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186031409">Mario Carneiro (Jan 19 2020 at 08:24)</a>:</h4>
+<p>lambda is a binder, meaning that it introduces a new name. So when you see <code>λ hp'</code>, you should expect that the name <code>hp'</code> has not been previously used</p>
+
+<a name="186031411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186031411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186031411">Mario Carneiro (Jan 19 2020 at 08:24)</a>:</h4>
+<p>The tactic version of lambda is <code>intros</code></p>
+
+<a name="186031418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186031418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186031418">Mario Carneiro (Jan 19 2020 at 08:25)</a>:</h4>
+<p>The dollar sign is just a trick for reducing parentheses. <code>f $ g x y</code> is the same as <code>f (g x y)</code></p>
+
+<a name="186031472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186031472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186031472">Daniel Keys (Jan 19 2020 at 08:27)</a>:</h4>
+<p>So how do you write it with <code>begin...end</code>? I probably just need to see that once.</p>
+
+<a name="186031505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186031505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186031505">Mario Carneiro (Jan 19 2020 at 08:28)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="n">p</span> <span class="n">q</span> <span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="kt">Prop</span>
+<span class="kn">open</span> <span class="n">classical</span>
+<span class="kn">theorem</span> <span class="n">T1</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">r</span> <span class="bp">∨</span> <span class="n">s</span><span class="o">)</span> <span class="bp">→</span> <span class="o">((</span><span class="n">p</span> <span class="bp">→</span> <span class="n">r</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">s</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">prs</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="o">(</span><span class="n">em</span> <span class="n">p</span><span class="o">)</span> <span class="k">with</span> <span class="n">hp</span> <span class="n">hnp</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">cases</span> <span class="n">prs</span> <span class="n">hp</span> <span class="k">with</span> <span class="n">hr</span> <span class="n">hs</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">left</span><span class="o">,</span> <span class="n">intro</span><span class="o">,</span> <span class="n">exact</span> <span class="n">hr</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">right</span><span class="o">,</span> <span class="n">intro</span><span class="o">,</span> <span class="n">exact</span> <span class="n">hs</span> <span class="o">}</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">left</span><span class="o">,</span> <span class="n">intro</span><span class="o">,</span> <span class="n">contradiction</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="186031531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186031531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186031531">Daniel Keys (Jan 19 2020 at 08:28)</a>:</h4>
+<p>Thanks a lot! This will get me going.</p>
+
+<a name="186031534"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186031534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186031534">Mario Carneiro (Jan 19 2020 at 08:28)</a>:</h4>
+<p>protip: use <code> ```lean ... ``` </code> to fence lean code</p>
+
+<a name="186031922"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186031922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186031922">Daniel Keys (Jan 19 2020 at 08:43)</a>:</h4>
+<p>I can see what the <code>left</code> and <code>right</code> terms do in the above, but I don't remember having seen that in the manual. Is it there somewhere?</p>
+
+<a name="186031983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186031983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186031983">Kevin Buzzard (Jan 19 2020 at 08:44)</a>:</h4>
+<p>They're explained in the <a href="http://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/" target="_blank" title="http://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/">natural number game</a></p>
+
 
 {% endraw %}
 
