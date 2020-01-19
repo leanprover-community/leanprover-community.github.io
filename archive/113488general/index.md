@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [words](77296words.html) (32 messages, latest: Jan 19 2020 at 21:46)
+
 * [memory corruption](40495memorycorruption.html) (5 messages, latest: Jan 18 2020 at 22:08)
 
 * [\[recursor 5\]](68259recursor5.html) (3 messages, latest: Jan 18 2020 at 01:15)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [CNL and the Stack Project](27935CNLandtheStackProject.html) (25 messages, latest: Jan 17 2020 at 20:47)
 
 * [typeclass paper](35889typeclasspaper.html) (80 messages, latest: Jan 17 2020 at 19:54)
-
-* [words](77296words.html) (26 messages, latest: Jan 17 2020 at 16:54)
 
 * [deep learning for symbolic mathematics](03624deeplearningforsymbolicmathematics.html) (10 messages, latest: Jan 17 2020 at 13:33)
 
