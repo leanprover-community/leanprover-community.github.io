@@ -670,6 +670,41 @@ open nat
 
 <p>How to write this?</p>
 
+<a name="186020919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186020919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186020919">Bryan Gin-ge Chen (Jan 19 2020 at 02:07)</a>:</h4>
+<p><span class="user-mention" data-user-id="253355">@Iocta</span> The answer depends on the type of <code>α</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">logic</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∃</span><span class="n">x</span> <span class="o">:</span><span class="n">α</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">exists</span><span class="bp">.</span><span class="n">elim</span> <span class="n">h</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="n">h&#39;</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+
+<span class="n">noncomputable</span> <span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∃</span><span class="n">x</span> <span class="o">:</span><span class="n">β</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">exists</span><span class="bp">.</span><span class="n">classical_rec_on</span> <span class="n">h</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="n">h&#39;</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+
+<a name="186021038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186021038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186021038">Bryan Gin-ge Chen (Jan 19 2020 at 02:10)</a>:</h4>
+<p><span class="user-mention" data-user-id="259240">@Cerek Hillen (he) (W2'20)</span> Maybe you already know this, but just to be sure, your <code>intersection_empty</code> is also known as <a href="https://github.com/leanprover-community/mathlib/blob/baa3aa7370e506ef89c40557eed8bd1cc811ab30/src/data/set/basic.lean#L374" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/baa3aa7370e506ef89c40557eed8bd1cc811ab30/src/data/set/basic.lean#L374"><code>set.inter_empty</code> in mathlib</a>. You can find this out if you <code>import tactic</code> and then use <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md#library_search" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md#library_search"><code>library_search</code></a>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">intersection_empty</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+        <span class="n">A</span> <span class="err">∩</span> <span class="err">∅</span> <span class="bp">=</span> <span class="err">∅</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">library_search</span>
+</pre></div>
+
+<a name="186021748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186021748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186021748">Cerek Hillen (he) (W2'20) (Jan 19 2020 at 02:37)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="259240">Cerek Hillen (he) (W2'20)</span> Maybe you already know this, but just to be sure, your <code>intersection_empty</code> is also known as <a href="https://github.com/leanprover-community/mathlib/blob/baa3aa7370e506ef89c40557eed8bd1cc811ab30/src/data/set/basic.lean#L374" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/baa3aa7370e506ef89c40557eed8bd1cc811ab30/src/data/set/basic.lean#L374"><code>set.inter_empty</code> in mathlib</a>. You can find this out if you <code>import tactic</code> and then use <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md#library_search" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md#library_search"><code>library_search</code></a>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">intersection_empty</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+        <span class="n">A</span> <span class="err">∩</span> <span class="err">∅</span> <span class="bp">=</span> <span class="err">∅</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">library_search</span>
+</pre></div>
+
+
+</blockquote>
+<p>I was aware, but thank you! I'm looking to get a better handle on Lean by going through proofs manually</p>
+
 
 {% endraw %}
 
