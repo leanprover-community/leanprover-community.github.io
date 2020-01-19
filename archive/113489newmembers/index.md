@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Understanding assume](96069Understandingassume.html) (48 messages, latest: Jan 19 2020 at 03:03)
+
 * [more basics](41001morebasics.html) (8 messages, latest: Jan 19 2020 at 02:38)
 
 * [basics](17142basics.html) (101 messages, latest: Jan 19 2020 at 02:37)
-
-* [Understanding assume](96069Understandingassume.html) (47 messages, latest: Jan 19 2020 at 01:04)
 
 * [lifting "down"](58858liftingdown.html) (19 messages, latest: Jan 18 2020 at 17:19)
 
