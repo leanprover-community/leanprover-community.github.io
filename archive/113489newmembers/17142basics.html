@@ -550,6 +550,84 @@ In the context of the underscore, you know <code>not p</code> and also <code>not
 
 <p>But Mario's suggestion of currying it and writing <code>m &gt; 1 → m &lt; n → ¬ (divides m n)</code> is better for functional languages because it's easier to work with; typically m&gt;1 comes from one proof and m&lt;n comes from another, and if you curry it then you don't need to apply the <code>and.intro</code></p>
 
+<a name="186018685"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186018685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186018685">Cerek Hillen (he) (W2'20) (Jan 19 2020 at 00:49)</a>:</h4>
+<p>sorry if this is out of place (new to lean and to the community <span aria-label="happy" class="emoji emoji-1f600" role="img" title="happy">:happy:</span>) but i've been searching all over the docs and can't find an answer. i'm trying to rewrite with <code>rw mem_empty_eq</code>, and receiving the following error:</p>
+<div class="codehilite"><pre><span></span>rewrite tactic failed, did not find instance of the pattern in the target expression
+  ?m_2 ∈ ∅
+state:
+α : Type,
+A : set α
+⊢ {a : α | a ∈ A ∧ a ∈ ∅} = ∅
+</pre></div>
+
+<a name="186018730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186018730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186018730">Kevin Buzzard (Jan 19 2020 at 00:50)</a>:</h4>
+<p>ouch</p>
+
+<a name="186018732"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186018732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186018732">Cerek Hillen (he) (W2'20) (Jan 19 2020 at 00:50)</a>:</h4>
+<p>i would think that <code>a ∈ ∅</code> is sufficient  to rewrite?</p>
+
+<a name="186018733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186018733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186018733">Kevin Buzzard (Jan 19 2020 at 00:50)</a>:</h4>
+<p>It's hidden too deep in the term.</p>
+
+<a name="186018738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186018738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186018738">Kevin Buzzard (Jan 19 2020 at 00:50)</a>:</h4>
+<p>try <code>ext</code> first</p>
+
+<a name="186018745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186018745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186018745">Kevin Buzzard (Jan 19 2020 at 00:50)</a>:</h4>
+<p>You can't rewrite under a lambda.</p>
+
+<a name="186018752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186018752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186018752">Cerek Hillen (he) (W2'20) (Jan 19 2020 at 00:51)</a>:</h4>
+<p>ah! that makes sense. is that just to protect against accidentally rewriting already-bound terms?</p>
+
+<a name="186018753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186018753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186018753">Kevin Buzzard (Jan 19 2020 at 00:51)</a>:</h4>
+<p>Alternatively you could try <code>simp only [mem_empty_eq]</code></p>
+
+<a name="186018755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186018755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186018755">Kevin Buzzard (Jan 19 2020 at 00:51)</a>:</h4>
+<p>I have no idea why it makes sense, I am a mathematician. I just know the workarounds.</p>
+
+<a name="186018797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186018797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186018797">Cerek Hillen (he) (W2'20) (Jan 19 2020 at 00:52)</a>:</h4>
+<blockquote>
+<p>I am a mathematician</p>
+</blockquote>
+<p>Hahaha, well thank you all the same <span aria-label="happy" class="emoji emoji-1f600" role="img" title="happy">:happy:</span></p>
+
+<a name="186018801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186018801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186018801">Kevin Buzzard (Jan 19 2020 at 00:52)</a>:</h4>
+<p><code>mem_empty_eq</code> is definitionally true, so you could just write <code>show  {a : α | a ∈ A ∧ false} = ∅</code></p>
+
+<a name="186018854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186018854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186018854">Kevin Buzzard (Jan 19 2020 at 00:54)</a>:</h4>
+<p>but then you probably won't be able to rewrite <code>and_false</code> on the next line, you'll perhaps have to do <code>ext</code> in the end if you want to prove this by hand. Did you try <code>simp</code>?</p>
+
+<a name="186018857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186018857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186018857">Cerek Hillen (he) (W2'20) (Jan 19 2020 at 00:54)</a>:</h4>
+<p>yeah, <code>simp</code> goes through the entire proof for me. i'm trying to get a better handle on lean by doing some introductory exercises on an undergrad abstract algebra textbook i found</p>
+
+<a name="186018865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186018865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186018865">Cerek Hillen (he) (W2'20) (Jan 19 2020 at 00:55)</a>:</h4>
+<p>i got it to work with <code>simp only [...]</code> for both the <code>mem_empty_eq</code> and <code>and_false</code> steps. i'm going to try with <code>ext</code> to get more experience with that too</p>
+
+<a name="186018915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186018915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186018915">Kevin Buzzard (Jan 19 2020 at 00:56)</a>:</h4>
+<p>After <code>ext</code> the rewrites do work.</p>
+
+<a name="186018928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186018928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186018928">Cerek Hillen (he) (W2'20) (Jan 19 2020 at 00:58)</a>:</h4>
+<p>yep, although only on the rhs of the <code>iff</code>, i can show that <code>forall a. a \not \in ...</code> with a <code>iff_false</code>, and then i can map that to the set being <code>\emptyset</code> maybe?</p>
+
+<a name="186018967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186018967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186018967">Cerek Hillen (he) (W2'20) (Jan 19 2020 at 00:58)</a>:</h4>
+<p>thank you for your help :)</p>
+
 
 {% endraw %}
 

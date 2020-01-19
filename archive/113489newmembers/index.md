@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Understanding assume](96069Understandingassume.html) (28 messages, latest: Jan 18 2020 at 23:59)
+* [Understanding assume](96069Understandingassume.html) (39 messages, latest: Jan 19 2020 at 00:59)
+
+* [basics](17142basics.html) (93 messages, latest: Jan 19 2020 at 00:58)
 
 * [lifting "down"](58858liftingdown.html) (19 messages, latest: Jan 18 2020 at 17:19)
-
-* [basics](17142basics.html) (76 messages, latest: Jan 18 2020 at 10:12)
 
 * [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (152 messages, latest: Jan 17 2020 at 12:56)
 
