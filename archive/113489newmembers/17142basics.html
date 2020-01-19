@@ -727,6 +727,60 @@ open nat
 <span class="n">set</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="bp">⟨λ</span> <span class="bp">⟨</span><span class="n">h</span><span class="o">,</span> <span class="n">h&#39;</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">h&#39;</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">false</span><span class="bp">.</span><span class="n">elim</span> <span class="n">h</span><span class="bp">⟩</span>
 </pre></div>
 
+<a name="186051217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186051217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186051217">Cerek Hillen (he) (W2'20) (Jan 19 2020 at 19:02)</a>:</h4>
+<p>I'm just recently learning about the axiomatic description of set theory, so bear with me. When you say I know too much about how sets are implemented / too many lemmas about them, do just mean that it's generally better to provide proofs that don't rely on operators' definitions &amp; facts about them?</p>
+
+<a name="186051233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186051233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186051233">Cerek Hillen (he) (W2'20) (Jan 19 2020 at 19:03)</a>:</h4>
+<p>Or just that in this situation, since it's a base-level proof about the union identity, that it's better to prove it without knowledge of constructions and proofs that one would prove with the result itself?</p>
+
+<a name="186051357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186051357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186051357">Cerek Hillen (he) (W2'20) (Jan 19 2020 at 19:06)</a>:</h4>
+<p>Also another introductory question, say I have the following 2 hypotheses:</p>
+<div class="codehilite"><pre><span></span>h : ∀ (x : α), x ∈ A → x ∈ B,
+a : α
+</pre></div>
+
+
+<p>Intuitively I should be able to construct a hypothesis that states <code>a ∈ A → a ∈ B</code>, but how would I actually do that?</p>
+
+<a name="186051410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186051410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186051410">Bryan Gin-ge Chen (Jan 19 2020 at 19:08)</a>:</h4>
+<p><code>h a</code> has type <code>a ∈ A → a ∈ B</code>.</p>
+
+<a name="186051428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186051428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186051428">Cerek Hillen (he) (W2'20) (Jan 19 2020 at 19:09)</a>:</h4>
+<p>oh! i didn't realize that \forall operators actually presented themselves as functions, or function-adjacent thing</p>
+
+<a name="186051431"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186051431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186051431">Cerek Hillen (he) (W2'20) (Jan 19 2020 at 19:09)</a>:</h4>
+<p>i get the sense that i'm using the word wrong so far as lean is concerned</p>
+
+<a name="186051738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186051738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186051738">Bryan Gin-ge Chen (Jan 19 2020 at 19:18)</a>:</h4>
+<p>Well, the way I would phrase it (which might be a little off still...) is that the <code>forall</code>  "creates" a <a href="https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html#dependent-types" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html#dependent-types">dependent function type</a>, thus something whose type is a <code>forall</code> (like <code>h</code>) is a function. (The section of TPiL I linked talks about "Pi" types, see <a href="https://leanprover.github.io/theorem_proving_in_lean/quantifiers_and_equality.html#the-universal-quantifier" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/quantifiers_and_equality.html#the-universal-quantifier">this section</a> for why <code>forall</code> and <code>Pi</code> are the same).</p>
+
+<a name="186052300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186052300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186052300">Cerek Hillen (he) (W2'20) (Jan 19 2020 at 19:37)</a>:</h4>
+<p>Ah ok, that makes sense--it's like in a type theoretic mathematical system where you'd say a thing is true iff there exists a function of the type <code>A -&gt; true</code> (or <code>A -&gt; 1</code> i guess technically)</p>
+
+<a name="186052338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186052338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186052338">Cerek Hillen (he) (W2'20) (Jan 19 2020 at 19:38)</a>:</h4>
+<p>but since <code>forall</code> describes a property of some thing, it's just equivalent to some <code>A -&gt; Prop</code>, except you have to provide some <code>a : A</code></p>
+
+<a name="186052345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186052345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186052345">Cerek Hillen (he) (W2'20) (Jan 19 2020 at 19:38)</a>:</h4>
+<p>my only knowledge of type theory is the introductory section of Homotopy Type Theory so some of my intuitions might be off</p>
+
+<a name="186052706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186052706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186052706">Kevin Buzzard (Jan 19 2020 at 19:50)</a>:</h4>
+<p>You should probably read the first few sections of theorem proving in Lean, I think you'll find it very enlightening</p>
+
+<a name="186052879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/basics/near/186052879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17142basics.html#186052879">Cerek Hillen (he) (W2'20) (Jan 19 2020 at 19:56)</a>:</h4>
+<p>On it <span aria-label="slight smile" class="emoji emoji-1f642" role="img" title="slight smile">:slight_smile:</span></p>
+
 
 {% endraw %}
 

@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [basics](17142basics.html) (115 messages, latest: Jan 19 2020 at 19:56)
+
 * [Create a polynomial in Z\[X\] by clearing denomiators](48288CreateapolynomialinZXbyclearingdenomiators.html) (1 message, latest: Jan 19 2020 at 18:26)
 
 * [Understanding assume](96069Understandingassume.html) (60 messages, latest: Jan 19 2020 at 09:02)
-
-* [basics](17142basics.html) (103 messages, latest: Jan 19 2020 at 08:08)
 
 * [more basics](41001morebasics.html) (8 messages, latest: Jan 19 2020 at 02:38)
 
