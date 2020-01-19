@@ -24,6 +24,131 @@ permalink: archive/113489newmembers/96069Understandingassume.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186015147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186015147">Moses Schönfinkel (Jan 18 2020 at 22:53)</a>:</h4>
 <p>Also note that in <code>theorem ex1</code>, your <code>h</code> is of type <code>(p and not q) -&gt; false</code>, that is, a function type. You're then left with <code>p -&gt; s</code>, where associativity plays no part. You can therefore further assume <code>p</code>. Note that the parentheses around <code>(p -&gt; q)</code> are redundant.</p>
 
+<a name="186015496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186015496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186015496">Kevin Buzzard (Jan 18 2020 at 23:03)</a>:</h4>
+<p>Surely the analogue of what works in ex1 is <code>assume prs : (p → r ∨ s)</code>? That's the left hand side of the implication. Both goals are of the form <code>P -&gt; Q</code> and you want to start with <code>assume hP : P</code>.</p>
+
+<a name="186015568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186015568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186015568">Daniel Keys (Jan 18 2020 at 23:04)</a>:</h4>
+<p>So is there any assumption that can be made to help in <code>theorem ex2</code>? I wanted to get started like <code>assume hp : p</code>, like @Kevin Buzzard suggests, but it just doesn't work. I get an error message.</p>
+
+<a name="186015706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186015706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186015706">Mario Carneiro (Jan 18 2020 at 23:08)</a>:</h4>
+<p>You can't prove that theorem in constructive logic, meaning that the straightforward "follow your nose" approach doesn't work</p>
+
+<a name="186015716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186015716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186015716">Mario Carneiro (Jan 18 2020 at 23:08)</a>:</h4>
+<p>You can prove it by cases on whether <code>p</code> is true or false</p>
+
+<a name="186015737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186015737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186015737">Daniel Keys (Jan 18 2020 at 23:09)</a>:</h4>
+<p>How to get started in that case?</p>
+
+<a name="186015741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186015741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186015741">Mario Carneiro (Jan 18 2020 at 23:09)</a>:</h4>
+<p><code>begin by_cases p,</code></p>
+
+<a name="186015794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186015794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186015794">Mario Carneiro (Jan 18 2020 at 23:10)</a>:</h4>
+<p>if it complains about decidable something then write this at the top of your file:</p>
+<div class="codehilite"><pre><span></span><span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+</pre></div>
+
+<a name="186015816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186015816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186015816">Daniel Keys (Jan 18 2020 at 23:11)</a>:</h4>
+<p>Right, it does say <code>by_cases tactic failed, type of given expression is not decidable</code>.</p>
+
+<a name="186015925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186015925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186015925">Kevin Buzzard (Jan 18 2020 at 23:15)</a>:</h4>
+<p>I said <code>P</code> not <code>p</code>. You have some super-complex goals with lots and lots of p's and q's and and's and r's, but ultimately it is of the form P -&gt; Q with P and Q slightly less complicated expressions. Your job is to figure out what P and Q are, and then assume hP of type P.</p>
+
+<a name="186015988"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186015988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186015988">Daniel Keys (Jan 18 2020 at 23:17)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Sorry, I noticed that too late. That is actually something I can already get from <code>intro</code>, right?</p>
+
+<a name="186015990"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186015990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186015990">Kevin Buzzard (Jan 18 2020 at 23:17)</a>:</h4>
+<p>oh sure</p>
+
+<a name="186016225"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186016225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186016225">Kevin Buzzard (Jan 18 2020 at 23:25)</a>:</h4>
+<blockquote>
+<p>if it complains about decidable something then write this at the top of your file:</p>
+<div class="codehilite"><pre><span></span><span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+</pre></div>
+
+
+</blockquote>
+<p>Isn't something like</p>
+<div class="codehilite"><pre><span></span><span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">10</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+</pre></div>
+
+
+<p>better? But isn't <code>open_locale classical</code> even better?</p>
+
+<a name="186016375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186016375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186016375">Mario Carneiro (Jan 18 2020 at 23:30)</a>:</h4>
+<p>Yes, but I don't know if daniel is using mathlib</p>
+
+<a name="186016690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186016690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186016690">Daniel Keys (Jan 18 2020 at 23:41)</a>:</h4>
+<p><span class="user-mention" data-user-id="110027">@Moses Schönfinkel</span> Your response is too high-level for a newbie like me. Is there any way to elaborate a bit? For another example, I can do <code>theorem T3L : ¬p ∧ ¬q → ¬(p ∨ q) := assume right: p ∨ q</code> but can't do <code>assume right : ((p → r) ∨ (p → s)) </code> in that <code>ex2</code>.</p>
+
+<a name="186016739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186016739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186016739">Kevin Buzzard (Jan 18 2020 at 23:42)</a>:</h4>
+<p>Are you really sure you can do <code>assume right: p ∨ q</code>?</p>
+
+<a name="186016750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186016750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186016750">Kevin Buzzard (Jan 18 2020 at 23:43)</a>:</h4>
+<p><code>¬p ∧ ¬q → ¬(p ∨ q)</code> is of the form <code>X -&gt; Y</code> with <code>X=¬p ∧ ¬q</code> and <code>Y=¬(p ∨ q)</code>. Do you understand that?</p>
+
+<a name="186016753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186016753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186016753">Kevin Buzzard (Jan 18 2020 at 23:43)</a>:</h4>
+<p>So the only possible thing you can assume is a proof of <code>X</code></p>
+
+<a name="186016801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186016801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186016801">Kevin Buzzard (Jan 18 2020 at 23:44)</a>:</h4>
+<p>ex2 is also of the form X -&gt; Y and you have to figure out what X and Y are, and then assume you have a proof of X, and your goal will be to prove Y. But first you need to figure out what X and Y are.</p>
+
+<a name="186016815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186016815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186016815">Daniel Keys (Jan 18 2020 at 23:45)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I sure can. I have that working. </p>
+<div class="codehilite"><pre><span></span>theorem T3L : ¬p ∧ ¬q → ¬(p ∨ q) :=
+begin
+    intros notP_and_notQ,
+    assume rhs : p ∨ q,
+    { cases rhs with hp hq,
+            { exact notP_and_notQ.left hp },
+            { exact notP_and_notQ.right hq } }
+end
+#check T3L p q
+</pre></div>
+
+<a name="186017170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186017170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186017170">Kevin Buzzard (Jan 18 2020 at 23:55)</a>:</h4>
+<p>sure it works after the intros!</p>
+
+<a name="186017213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186017213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186017213">Kevin Buzzard (Jan 18 2020 at 23:56)</a>:</h4>
+<p>After the intros, the goal is <code>(p ∨ q) -&gt; false</code></p>
+
+<a name="186017215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186017215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186017215">Kevin Buzzard (Jan 18 2020 at 23:56)</a>:</h4>
+<p>so you can assume a proof of <code>(p ∨ q)</code></p>
+
+<a name="186017276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186017276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186017276">Kevin Buzzard (Jan 18 2020 at 23:58)</a>:</h4>
+<p>If your goal is X -&gt; Y then you can assume a proof of X. That's the rule.</p>
+
+<a name="186017285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186017285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186017285">Joe (Jan 18 2020 at 23:59)</a>:</h4>
+<p><span class="user-mention" data-user-id="259186">@Daniel Keys</span> <br>
+You want to prove <code>((p → r) ∨ (p → s))</code> in <code>ex2</code>, so it just doesn't make any sense to assume it. Else there would be nothing left to prove.</p>
+
+<a name="186017289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20assume/near/186017289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96069Understandingassume.html#186017289">Joe (Jan 18 2020 at 23:59)</a>:</h4>
+<p>I'm not sure why you find this confusing...</p>
+
 
 {% endraw %}
 
