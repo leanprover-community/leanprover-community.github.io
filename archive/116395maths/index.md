@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [transcendence basis](52048transcendencebasis.html) (8 messages, latest: Jan 20 2020 at 09:34)
+* [transcendence basis](52048transcendencebasis.html) (9 messages, latest: Jan 20 2020 at 11:31)
 
 * [Algebraic geometry course](53656Algebraicgeometrycourse.html) (55 messages, latest: Jan 19 2020 at 18:59)
 
