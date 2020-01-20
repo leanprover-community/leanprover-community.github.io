@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [-1 raised to an integer](771111raisedtoaninteger.html) (3 messages, latest: Jan 20 2020 at 17:34)
+* [transcendence basis](52048transcendencebasis.html) (10 messages, latest: Jan 20 2020 at 18:46)
 
-* [transcendence basis](52048transcendencebasis.html) (9 messages, latest: Jan 20 2020 at 11:31)
+* [-1 raised to an integer](771111raisedtoaninteger.html) (3 messages, latest: Jan 20 2020 at 17:34)
 
 * [Algebraic geometry course](53656Algebraicgeometrycourse.html) (55 messages, latest: Jan 19 2020 at 18:59)
 
