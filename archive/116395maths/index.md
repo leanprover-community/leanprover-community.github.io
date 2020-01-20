@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [transcendence basis](52048transcendencebasis.html) (10 messages, latest: Jan 20 2020 at 18:46)
+* [Matroids in lean](31547Matroidsinlean.html) (6 messages, latest: Jan 20 2020 at 19:53)
+
+* [transcendence basis](52048transcendencebasis.html) (14 messages, latest: Jan 20 2020 at 19:44)
 
 * [-1 raised to an integer](771111raisedtoaninteger.html) (3 messages, latest: Jan 20 2020 at 17:34)
 
@@ -1038,8 +1040,6 @@ permalink: archive/116395maths/index.html
 * [Uniformly Continuous on Metric Spaces](20349UniformlyContinuousonMetricSpaces.html) (8 messages, latest: Sep 26 2018 at 13:17)
 
 * [compact spaces](28743compactspaces.html) (4 messages, latest: Sep 22 2018 at 22:32)
-
-* [Matroids in lean](31547Matroidsinlean.html) (4 messages, latest: Sep 21 2018 at 21:50)
 
 * [homeos](77548homeos.html) (5 messages, latest: Sep 20 2018 at 20:12)
 

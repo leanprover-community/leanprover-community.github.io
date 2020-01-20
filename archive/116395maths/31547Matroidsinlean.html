@@ -29,6 +29,17 @@ permalink: archive/116395maths/31547Matroidsinlean.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Matroids%20in%20lean/near/134407123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31547Matroidsinlean.html#134407123">Kevin Buzzard (Sep 21 2018 at 21:50)</a>:</h4>
 <p>The kbb stuff was just a surprise appearance. I would recommend that you formalise a precise statement and ask if it can be proved, or formulate a precise object and ask if it can be defined. Or several statements and objects if you'd rather.</p>
 
+<a name="186128652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Matroids%20in%20lean/near/186128652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31547Matroidsinlean.html#186128652">Bryan Gin-ge Chen (Jan 20 2020 at 19:47)</a>:</h4>
+<p>The code has evolved a fair bit since I posted this thread. The latest version is currently in the <a href="https://github.com/bryangingechen/lean-matroids/tree/fintype2" target="_blank" title="https://github.com/bryangingechen/lean-matroids/tree/fintype2">"fintype2" branch</a></p>
+<p>In the first version, I started out using finsets for everything (including the ground set) (now living in <code>matroids-old.lean</code>) and managed to formalize the independent set, circuits, bases and rank function definitions of matroids as well as various equivalences between them. </p>
+<p>After thinking about Mario's comments <a href="#narrow/stream/113489-new-members/topic/getting.20a.20nicer.20induction.20hypothesis.20from.20finset.2Einduction/near/134558327" title="#narrow/stream/113489-new-members/topic/getting.20a.20nicer.20induction.20hypothesis.20from.20finset.2Einduction/near/134558327">here</a> and <a href="#narrow/stream/113489-new-members/topic/finset.20of.20subtype.20from.20filter" title="#narrow/stream/113489-new-members/topic/finset.20of.20subtype.20from.20filter">here</a>, I then switched to using a fintype for the ground set (<code>matroids.lean</code>), which was a fairly painless refactoring up until I had to define restrictions of matroids (right before defining rank functions). That's where I'm stuck now. </p>
+<p>I think I probably need to define "submatroids" as a new structure to continue (like how mathlib defines both groups and subgroups separately), since I've hit a wall juggling subtypes and finsets of the ground set. At the same time, I've also been thinking it may make more sense to rework everything in terms of sets instead of finsets.</p>
+
+<a name="186129043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Matroids%20in%20lean/near/186129043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31547Matroidsinlean.html#186129043">Adam Topaz (Jan 20 2020 at 19:53)</a>:</h4>
+<p>Just wondering -- Is there a particular reason to use finite types? Algebraic (in)dependence in field extensions, for example, forms a finitary matroid which is not finite, right?</p>
+
 
 {% endraw %}
 
