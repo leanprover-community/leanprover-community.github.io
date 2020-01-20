@@ -28,6 +28,24 @@ permalink: archive/116395maths/771111raisedtoaninteger.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/-1%20raised%20to%20an%20integer/near/186120809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/771111raisedtoaninteger.html#186120809">Enrico Borba (Jan 20 2020 at 17:34)</a>:</h4>
 <p>Oh very interesting. I'll try this. Thank you</p>
 
+<a name="186131134"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/-1%20raised%20to%20an%20integer/near/186131134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/771111raisedtoaninteger.html#186131134">Enrico Borba (Jan 20 2020 at 20:31)</a>:</h4>
+<p>Hmm, is it obvious why <code>ring_exp</code> can't handle this?</p>
+<div class="codehilite"><pre><span></span>example (n : ℕ) : ((-1 : units ℤ) ^ (n + 1)) = (-1 : units ℤ) * ((-1 : units ℤ) ^ n) := by ring_exp
+</pre></div>
+
+<a name="186131595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/-1%20raised%20to%20an%20integer/near/186131595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/771111raisedtoaninteger.html#186131595">Mario Carneiro (Jan 20 2020 at 20:39)</a>:</h4>
+<p><code>units ℤ</code> isn't a ring</p>
+
+<a name="186131680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/-1%20raised%20to%20an%20integer/near/186131680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/771111raisedtoaninteger.html#186131680">Mario Carneiro (Jan 20 2020 at 20:41)</a>:</h4>
+<p>it's also overkill for this example. There is a lemma that says exactly this; use <code>library_search</code> to find it</p>
+
+<a name="186132377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/-1%20raised%20to%20an%20integer/near/186132377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/771111raisedtoaninteger.html#186132377">Enrico Borba (Jan 20 2020 at 20:54)</a>:</h4>
+<p><code>library_search</code> suggests I just use <code>rfl</code>, which I guess makes sense depending on how <code>pow</code> is implemented on <code>succ n</code>. Thanks!</p>
+
 
 {% endraw %}
 

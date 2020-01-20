@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [\[recursor 5\]](68259recursor5.html) (4 messages, latest: Jan 20 2020 at 17:33)
+* [typeclass paper](35889typeclasspaper.html) (82 messages, latest: Jan 20 2020 at 20:18)
 
-* [typeclass paper](35889typeclasspaper.html) (81 messages, latest: Jan 20 2020 at 17:08)
+* [\[recursor 5\]](68259recursor5.html) (5 messages, latest: Jan 20 2020 at 20:05)
 
 * [words](77296words.html) (32 messages, latest: Jan 19 2020 at 21:46)
 

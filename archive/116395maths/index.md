@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Matroids in lean](31547Matroidsinlean.html) (6 messages, latest: Jan 20 2020 at 19:53)
+* [-1 raised to an integer](771111raisedtoaninteger.html) (7 messages, latest: Jan 20 2020 at 20:54)
+
+* [Matroids in lean](31547Matroidsinlean.html) (7 messages, latest: Jan 20 2020 at 20:01)
 
 * [transcendence basis](52048transcendencebasis.html) (14 messages, latest: Jan 20 2020 at 19:44)
-
-* [-1 raised to an integer](771111raisedtoaninteger.html) (3 messages, latest: Jan 20 2020 at 17:34)
 
 * [Algebraic geometry course](53656Algebraicgeometrycourse.html) (55 messages, latest: Jan 19 2020 at 18:59)
 
