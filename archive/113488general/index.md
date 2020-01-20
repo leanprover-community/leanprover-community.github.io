@@ -9,15 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [\[recursor 5\]](68259recursor5.html) (4 messages, latest: Jan 20 2020 at 17:33)
+
+* [typeclass paper](35889typeclasspaper.html) (81 messages, latest: Jan 20 2020 at 17:08)
+
 * [words](77296words.html) (32 messages, latest: Jan 19 2020 at 21:46)
 
 * [memory corruption](40495memorycorruption.html) (5 messages, latest: Jan 18 2020 at 22:08)
 
-* [\[recursor 5\]](68259recursor5.html) (3 messages, latest: Jan 18 2020 at 01:15)
-
 * [CNL and the Stack Project](27935CNLandtheStackProject.html) (25 messages, latest: Jan 17 2020 at 20:47)
-
-* [typeclass paper](35889typeclasspaper.html) (80 messages, latest: Jan 17 2020 at 19:54)
 
 * [deep learning for symbolic mathematics](03624deeplearningforsymbolicmathematics.html) (10 messages, latest: Jan 17 2020 at 13:33)
 
