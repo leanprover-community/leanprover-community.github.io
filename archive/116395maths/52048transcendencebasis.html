@@ -1,0 +1,46 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/52048transcendencebasis.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/52048transcendencebasis.html">transcendence basis</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186081702"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transcendence%20basis/near/186081702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52048transcendencebasis.html#186081702">Kevin Buzzard (Jan 20 2020 at 08:22)</a>:</h4>
+<p>Do we have transcendence bases in Lean? I need the transcendence basis analogue of the linear algebra assertion that every spanning set contains a basis.</p>
+
+<a name="186082708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transcendence%20basis/near/186082708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52048transcendencebasis.html#186082708">Mario Carneiro (Jan 20 2020 at 08:42)</a>:</h4>
+<p>I don't think so. I guess the nicest way to assert this is that the evaluation map from R[X1, ..., Xn] using the basis is injective</p>
+
+<a name="186082850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transcendence%20basis/near/186082850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52048transcendencebasis.html#186082850">Mario Carneiro (Jan 20 2020 at 08:45)</a>:</h4>
+<p>That is, <code>injective (eval₂ coe b)</code> says that <code>b : I -&gt; R</code> is an algebraically independent family (where <code>coe : Q -&gt; R</code> is the inclusion)</p>
+
+<a name="186082852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transcendence%20basis/near/186082852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52048transcendencebasis.html#186082852">Kevin Buzzard (Jan 20 2020 at 08:45)</a>:</h4>
+<p>I was trying to work through how to set this up. If I have a small field k and a big field K, then it seems to me to be crucial that I use subsets of K, so I can use <code>mv_polynomial s k</code> with s the subset, coerced to a subtype. I'm only interested in the finite situation right now, but here I don't think I can use a finset -- or do finsets also coerce to types?</p>
+
+<a name="186082922"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transcendence%20basis/near/186082922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52048transcendencebasis.html#186082922">Mario Carneiro (Jan 20 2020 at 08:46)</a>:</h4>
+<p>You don't actually need anything here to be finite, that was just illustration</p>
+
+<a name="186082947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transcendence%20basis/near/186082947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52048transcendencebasis.html#186082947">Mario Carneiro (Jan 20 2020 at 08:48)</a>:</h4>
+<p>I'm not sure that it is crucial to use subsets, but I would have to know more about your application</p>
+
+<a name="186083015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transcendence%20basis/near/186083015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52048transcendencebasis.html#186083015">Mario Carneiro (Jan 20 2020 at 08:48)</a>:</h4>
+<p>Indeed, my experience with <code>basis</code> itself suggests otherwise, that you should use families instead (indexed in some arbitrary type) or you will regret it later and have to refactor</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
