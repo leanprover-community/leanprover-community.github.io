@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (157 messages, latest: Jan 20 2020 at 12:46)
+
 * [basics](17142basics.html) (115 messages, latest: Jan 19 2020 at 19:56)
 
 * [Create a polynomial in Z\[X\] by clearing denomiators](48288CreateapolynomialinZXbyclearingdenomiators.html) (1 message, latest: Jan 19 2020 at 18:26)
@@ -18,8 +20,6 @@ permalink: archive/113489newmembers/index.html
 * [more basics](41001morebasics.html) (8 messages, latest: Jan 19 2020 at 02:38)
 
 * [lifting "down"](58858liftingdown.html) (19 messages, latest: Jan 18 2020 at 17:19)
-
-* [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (152 messages, latest: Jan 17 2020 at 12:56)
 
 * [How to write about there are infinite primes p % 4 = 3](17447Howtowriteaboutthereareinfiniteprimesp43.html) (19 messages, latest: Jan 16 2020 at 21:17)
 
