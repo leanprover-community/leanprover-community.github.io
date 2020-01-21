@@ -1,0 +1,28 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/42461Isthisprovableconstructively.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/42461Isthisprovableconstructively.html">Is this provable constructively?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186181588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Is%20this%20provable%20constructively%3F/near/186181588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42461Isthisprovableconstructively.html#186181588">Vlad Firoiu (Jan 21 2020 at 13:22)</a>:</h4>
+<p>I've been struggling to decide whether the following is provable constructively:<br>
+lemma not_forall_exists_nat (p : ℕ -&gt; bool) : ¬ (∀ (a : ℕ), p a) -&gt; ∃ (a : ℕ), ¬ p a</p>
+<p>I don't see any way to prove it, so I've mostly given up hope that it is provable, but my intuition says that there is in fact a constructive procedure for producing the witness, which is to just check each natural in order. I imagine the way to show it is unprovable would be to exhibit some strange Godelian p.</p>
+
+<a name="186183582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Is%20this%20provable%20constructively%3F/near/186183582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42461Isthisprovableconstructively.html#186183582">Anne Baanen (Jan 21 2020 at 13:46)</a>:</h4>
+<p>I think it is unprovable constructively, with the counterexample Kripke model looking like ℕ union {*}, with <code>* ≤ n</code> for each n. At <code>*</code>, <code>p</code> never holds; at <code>n</code>, only <code>p n</code> holds. Then <code>* |- ¬ (∀a, p a)</code> (since at each point, at most one a satisfies <code>p a</code>), <code>* ||- ∀ a, p a ∨ ¬ p a</code> (since at each point <code>n</code>, just check whether <code>n = a</code>), but not <code>* ||- ∃ a, ¬ p a</code> (let <code>n</code> be the corresponding instantiation of <code>a</code>, then <code>n ≥ *</code> and <code>p n</code> is true but <code>_|_</code> is false).</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

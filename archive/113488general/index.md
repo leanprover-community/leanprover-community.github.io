@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Is this provable constructively?](42461Isthisprovableconstructively.html) (2 messages, latest: Jan 21 2020 at 13:46)
+
 * [typeclass paper](35889typeclasspaper.html) (89 messages, latest: Jan 21 2020 at 11:05)
 
 * [\[recursor 5\]](68259recursor5.html) (5 messages, latest: Jan 20 2020 at 20:05)
