@@ -513,6 +513,39 @@ permalink: archive/116395maths/53656Algebraicgeometrycourse.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186141059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186141059">Kevin Buzzard (Jan 20 2020 at 23:35)</a>:</h4>
 <p>I am trying to use multivariate polynomials to do things in MSc level commutative algebra and it's very interesting but I am also extremely slow.</p>
 
+<a name="186162741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186162741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186162741">Johan Commelin (Jan 21 2020 at 08:32)</a>:</h4>
+<p>All the different ways of composing evaluation of polynomials is quite brittle in my experience. Lean of gets stuck on elaborating concise statements, and there are many holes in the library. This is one reason why I'm in favour of <span class="user-mention" data-user-id="214703">@Yury G. Kudryashov</span> proposal to ditch <code>eval2</code> (even though I may have been the one asking to introduce it), and only have <code>map</code> and <code>eval</code>. Because it significantly reduces the amount of library interface that one has to develop and maintain. Nevertheless it is frustrating that many statements about plugging polynomials into polynomials that look trivial in informal math (after years of usage, I agree) become pretty unreadable in Lean. To the point that I no longer understand the code that I wrote 25 seconds ago...<br>
+(End of rant <span aria-label="oops" class="emoji emoji-1f643" role="img" title="oops">:oops:</span>)</p>
+
+<a name="186163466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186163466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186163466">Mario Carneiro (Jan 21 2020 at 08:47)</a>:</h4>
+<p>I don't think eval2 needs to be ditched, because it can be used to define the other two, but I'm fine with having only the basic theorems about it with everything else in <code>map</code> and <code>eval</code></p>
+
+<a name="186163726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186163726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186163726">Johan Commelin (Jan 21 2020 at 08:52)</a>:</h4>
+<p>Does that mean that users should avoid it?</p>
+
+<a name="186163769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186163769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186163769">Johan Commelin (Jan 21 2020 at 08:53)</a>:</h4>
+<p>Also, for <code>eval2</code> you need ring structure and a ring hom, etc. <code>map</code> could be defined coefficient-wise which avoids some tc search that has failed me several times.</p>
+
+<a name="186163874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186163874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186163874">Patrick Massot (Jan 21 2020 at 08:54)</a>:</h4>
+<p>Johan and Mario, isn't 3am where you are?</p>
+
+<a name="186164007"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186164007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186164007">Johan Commelin (Jan 21 2020 at 08:56)</a>:</h4>
+<p>In a very small neighbourhood around me, it is 09:55. But I can't globalise that property (-;</p>
+
+<a name="186164015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186164015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186164015">Johan Commelin (Jan 21 2020 at 08:56)</a>:</h4>
+<p>I will need to kill 3 more hours before I'm allowed to break my fast</p>
+
+<a name="186164156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186164156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186164156">Patrick Massot (Jan 21 2020 at 08:59)</a>:</h4>
+<p>I see.</p>
+
 
 {% endraw %}
 

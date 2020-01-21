@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [typeclass paper](35889typeclasspaper.html) (86 messages, latest: Jan 21 2020 at 03:56)
+* [typeclass paper](35889typeclasspaper.html) (87 messages, latest: Jan 21 2020 at 08:46)
 
 * [\[recursor 5\]](68259recursor5.html) (5 messages, latest: Jan 20 2020 at 20:05)
 
