@@ -90,6 +90,56 @@ permalink: archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoi
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186143525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186143525">Jason Rute (Jan 21 2020 at 00:38)</a>:</h4>
 <p>Am I understanding this correctly, <span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span>?</p>
 
+<a name="186144329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186144329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186144329">Jason Rute (Jan 21 2020 at 01:02)</a>:</h4>
+<p>With pretty printing, the goal mentioned above is:</p>
+<div class="codehilite"><pre><span></span>tactic failed, there are unsolved goals
+state:
+2 goals
+case nat.zero
+m : ℕ
+⊢ m + 0 = 0 + m
+case nat.succ
+m n_n : ℕ,
+n_ih : m + n_n = n_n + m
+⊢ m + nat.succ n_n = nat.succ n_n + m
+</pre></div>
+
+
+<p>After setting <code>set_option pp.all true</code>, it becomes</p>
+<div class="codehilite"><pre><span></span>tactic failed, there are unsolved goals
+state:
+2 goals
+case nat.zero
+m : nat
+⊢ @eq.{1} nat (@has_add.add.{0} nat nat.has_add m nat.zero) (@has_add.add.{0} nat nat.has_add nat.zero m)
+
+case nat.succ
+m n_n : nat,
+n_ih : @eq.{1} nat (@has_add.add.{0} nat nat.has_add m n_n) (@has_add.add.{0} nat nat.has_add n_n m)
+⊢ @eq.{1} nat (@has_add.add.{0} nat nat.has_add m (nat.succ n_n)) (@has_add.add.{0} nat nat.has_add (nat.succ n_n) m)
+</pre></div>
+
+
+<p>which is fairly machine parsable (on a level similar to the s-expressions used by HOList/DeepHOL).  Given that tools like HOList don't need the fastest server, it would be interesting to see if something like the HOList server interface could be built from the Lean server.</p>
+
+<a name="186144616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186144616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186144616">Bryan Gin-ge Chen (Jan 21 2020 at 01:10)</a>:</h4>
+<p>Most of what you wrote about the commands looks correct to me. There are actually a few more commands like "search" and "hole", that are used for text editor integration. If you can read typescript, you can also get an idea of the interface for the server commands by browsing <a href="https://github.com/leanprover/lean-client-js/blob/master/lean-client-js-core/src/server.ts" target="_blank" title="https://github.com/leanprover/lean-client-js/blob/master/lean-client-js-core/src/server.ts">this</a> and <a href="https://github.com/leanprover/lean-client-js/blob/master/lean-client-js-core/src/commands.ts" target="_blank" title="https://github.com/leanprover/lean-client-js/blob/master/lean-client-js-core/src/commands.ts">this</a> from <code>lean-client-js-core</code>.</p>
+<blockquote>
+<p>However, it seems that the agent would have to interact with the actual Lean code and parse the pretty printed human readable responses</p>
+</blockquote>
+<p>I'm not a Lean metaprogramming expert, but I think it should be possible to write meta code which will return whatever info you want in machine-readable form as well. For instance, the info in the error messages you quoted is available from <code>tactic.local_context</code>. See <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md">mathlib's "tactic writing" tutorial</a> for some more info.</p>
+<p>The hole commands might also be interesting to you, since they let you trigger Lean meta code at positions in the code ("holes") that are surrounded by <code>{!</code> and <code>!}</code>. Among other things, you can write meta code which returns a string in the "replacements" field of the response message; you might be able to use this to query Lean for something you're interested in and return it in JSON or some other format. <a href="https://github.com/leanprover-community/mathlib/blob/ff2a41e4579d2238b8864e2bd072831a2006a808/docs/holes.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/ff2a41e4579d2238b8864e2bd072831a2006a808/docs/holes.md">Here's</a> some docs on the hole commands provided by mathlib.</p>
+
+<a name="186144989"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186144989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186144989">Jason Rute (Jan 21 2020 at 01:19)</a>:</h4>
+<p>Ok interesting.  Thanks!</p>
+
+<a name="186146224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186146224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186146224">Reid Barton (Jan 21 2020 at 01:51)</a>:</h4>
+<p>From what I recall, if you've used Lean from inside VS Code/emacs, you've pretty much directly experienced all the functionality the server mode has to offer</p>
+
 
 {% endraw %}
 
