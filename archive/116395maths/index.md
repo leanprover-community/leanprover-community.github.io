@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (67 messages, latest: Jan 21 2020 at 18:51)
+* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (74 messages, latest: Jan 21 2020 at 20:39)
 
-* [lie theory](63798lietheory.html) (1 message, latest: Jan 21 2020 at 08:55)
+* [lie theory](63798lietheory.html) (12 messages, latest: Jan 21 2020 at 20:21)
 
 * [-1 raised to an integer](771111raisedtoaninteger.html) (7 messages, latest: Jan 20 2020 at 20:54)
 

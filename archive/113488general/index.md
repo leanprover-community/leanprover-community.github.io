@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [typeclass paper](35889typeclasspaper.html) (92 messages, latest: Jan 21 2020 at 19:50)
+* [Is this provable constructively?](42461Isthisprovableconstructively.html) (12 messages, latest: Jan 21 2020 at 20:18)
 
-* [Is this provable constructively?](42461Isthisprovableconstructively.html) (11 messages, latest: Jan 21 2020 at 16:54)
+* [typeclass paper](35889typeclasspaper.html) (92 messages, latest: Jan 21 2020 at 19:50)
 
 * [Congruence closure](82087Congruenceclosure.html) (8 messages, latest: Jan 21 2020 at 16:49)
 
