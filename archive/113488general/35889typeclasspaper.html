@@ -488,6 +488,22 @@ I understand lean does not use canonical structures. Can anyone clarify, as they
 </blockquote>
 <p><span class="user-mention" data-user-id="259452">@Bas Spitters</span> Welcome! Typeclasses are remarkably simple and versatile, and (at least with tabling) seem to work extremely well for zillions of diverse uses. Do you see any major advantages offered by canonical structures?</p>
 
+<a name="186149253"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186149253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186149253">Daniel Selsam (Jan 21 2020 at 03:08)</a>:</h4>
+<blockquote>
+<p>This should probably go somewhere else, but I'd like to understand more about congruence, and more generally automation in lean.<br>
+Is the congruence paper still the best reference?</p>
+</blockquote>
+<p>We haven't started building automation for Lean4 yet. Note that the congruence closure procedure from IJCAR2016 doesn't seem to be that popular in mathlib --- the main workhorse has been the simplifier. We are not currently planning many changes to the simplifier, though our preliminary experiments suggest that we may be able to improve its performance by 10-100x. Mathlib also includes many diverse, interesting tactics written by users. You may want to ask a mathlib power-user to give you a tour.</p>
+
+<a name="186149566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186149566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186149566">Mario Carneiro (Jan 21 2020 at 03:17)</a>:</h4>
+<p><span class="user-mention" data-user-id="230999">@Daniel Selsam</span> Can you give any clues as to where the 10x performance improvement in <code>simp</code> is likely to come from?</p>
+
+<a name="186151247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186151247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186151247">Simon Hudon (Jan 21 2020 at 03:56)</a>:</h4>
+<p>Already indexing <code>simp</code> lemmas with discrimation trees should make a big difference. Right now, if you have a lemma of the same <code>@coe (list a) (multiset a) xs = ...</code>, it is simply indexed by the function name <code>coe</code>. With a discrimination tree, you can have the index distinguish between <code>@coe (list a) (multiset a) xs</code> and <code>@coe nat int n</code>. Where as the Lean 3 solution gives us hundreds of collisions for <code>coe</code>, the Lean 4 solution should narrow down the search more aggressively before trying to apply rewrite rules.</p>
+
 
 {% endraw %}
 
