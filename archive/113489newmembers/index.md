@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Nested datatypes and vector](12793Nesteddatatypesandvector.html) (1 message, latest: Jan 21 2020 at 17:55)
+
 * [A clear tactic that doesn't care about dependency order](95767Acleartacticthatdoesntcareaboutdependencyorder.html) (1 message, latest: Jan 21 2020 at 16:02)
 
 * [attempt at some geometry](35829attemptatsomegeometry.html) (119 messages, latest: Jan 21 2020 at 15:13)
