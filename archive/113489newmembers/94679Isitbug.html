@@ -1,0 +1,110 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/94679Isitbug.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/94679Isitbug.html">Is it bug?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186142304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20bug%3F/near/186142304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94679Isitbug.html#186142304">Anton Kalsin (Jan 21 2020 at 00:04)</a>:</h4>
+<p>Sorry for my english.</p>
+<p>I've placed questions in code. What is going on? Can anybody explain me?</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">hidden</span>
+<span class="kn">universe</span> <span class="n">u</span>
+
+<span class="kn">inductive</span> <span class="n">eq</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">refl</span> <span class="o">:</span> <span class="n">eq</span> <span class="n">a</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span>
+<span class="kn">theorem</span> <span class="n">subst</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">P</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">eq</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">P</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="n">eq</span><span class="bp">.</span><span class="n">rec</span> <span class="n">h₂</span> <span class="n">h₁</span>
+
+<span class="n">def</span> <span class="n">subst₂</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">eq</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">P</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="bp">@</span><span class="n">subst</span> <span class="n">α</span> <span class="n">a</span> <span class="n">b</span> <span class="n">P</span> <span class="n">h₁</span> <span class="n">h₂</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">eq</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">eq</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="k">have</span> <span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">,</span> <span class="k">from</span> <span class="k">assume</span> <span class="n">x</span><span class="o">,</span> <span class="n">eq</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">),</span>
+
+  <span class="c1">-- why₁?</span>
+  <span class="k">have</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">eq</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">))</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">eq</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">),</span> <span class="k">from</span> <span class="n">rfl</span><span class="o">,</span> <span class="c1">-- it&#39;s ok</span>
+  <span class="c1">--have p a = eq (f a) (f a), from rfl, -- it&#39;s not ok</span>
+
+  <span class="n">sorry</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">eq</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">eq</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="k">let</span> <span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">eq</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="k">in</span>
+
+  <span class="k">have</span> <span class="n">e</span> <span class="o">:</span> <span class="n">p</span> <span class="n">a</span><span class="o">,</span> <span class="k">from</span> <span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">),</span>
+
+  <span class="c1">-- why₂?</span>
+  <span class="k">have</span> <span class="bp">@</span><span class="n">subst</span> <span class="n">α</span> <span class="n">a</span> <span class="n">b</span> <span class="n">p</span> <span class="n">h</span> <span class="n">e</span> <span class="bp">=</span> <span class="n">subst₂</span> <span class="n">p</span> <span class="n">h</span> <span class="n">e</span><span class="o">,</span> <span class="k">from</span> <span class="n">rfl</span><span class="o">,</span> <span class="c1">-- have this, but:</span>
+  <span class="k">show</span> <span class="n">eq</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">b</span><span class="o">),</span> <span class="k">from</span> <span class="bp">@</span><span class="n">subst</span> <span class="n">α</span> <span class="n">a</span> <span class="n">b</span> <span class="n">p</span> <span class="n">h</span> <span class="n">e</span> <span class="c1">-- it&#39;s ok</span>
+  <span class="c1">--show eq (f a) (f b), from subst₂ p h e -- it&#39;s not ok</span>
+
+<span class="kn">end</span> <span class="n">hidden</span>
+</pre></div>
+
+
+<p><a href="https://t.ly/NMwjx" target="_blank" title="https://t.ly/NMwjx">This code on web editor</a></p>
+
+<a name="186142330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20bug%3F/near/186142330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94679Isitbug.html#186142330">Kevin Buzzard (Jan 21 2020 at 00:06)</a>:</h4>
+<p>Try the more modern web editor at <a href="https://leanprover-community.github.io/lean-web-editor/" target="_blank" title="https://leanprover-community.github.io/lean-web-editor/">https://leanprover-community.github.io/lean-web-editor/</a> and see if anything changes?</p>
+
+<a name="186142369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20bug%3F/near/186142369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94679Isitbug.html#186142369">Kevin Buzzard (Jan 21 2020 at 00:06)</a>:</h4>
+<p>That's running 3.5.0c</p>
+
+<a name="186142460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20bug%3F/near/186142460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94679Isitbug.html#186142460">Anton Kalsin (Jan 21 2020 at 00:08)</a>:</h4>
+<p>No changes</p>
+
+<a name="186142468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20bug%3F/near/186142468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94679Isitbug.html#186142468">Mario Carneiro (Jan 21 2020 at 00:09)</a>:</h4>
+<p>For <code>why₁</code>, you need to use <code>let p : α → Prop := assume x, eq (f a) (f x),</code> instead of <code>have</code></p>
+
+<a name="186142471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20bug%3F/near/186142471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94679Isitbug.html#186142471">Mario Carneiro (Jan 21 2020 at 00:09)</a>:</h4>
+<p>The difference is that with <code>let</code> lean will remember the definition and be able to unfold it later</p>
+
+<a name="186142602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20bug%3F/near/186142602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94679Isitbug.html#186142602">Anton Kalsin (Jan 21 2020 at 00:12)</a>:</h4>
+<p>Thanks. It's work</p>
+
+<a name="186142621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20bug%3F/near/186142621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94679Isitbug.html#186142621">Mario Carneiro (Jan 21 2020 at 00:13)</a>:</h4>
+<p>For <code>why₂</code>, the difference is that <code>subst₂</code> is not marked as <code>elab_as_eliminator</code>, so when it tries to figure out why <code>P b</code> in the type of <code>subst₂</code> should match with <code>eq (f a) (f b)</code> it guesses <code>P := eq (f a)</code> and <code>b := f b</code> and gets to nonsense</p>
+
+<a name="186142630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20bug%3F/near/186142630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94679Isitbug.html#186142630">Mario Carneiro (Jan 21 2020 at 00:13)</a>:</h4>
+<p>If you use <code>@subst₂ ...</code> it should work</p>
+
+<a name="186142696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20bug%3F/near/186142696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94679Isitbug.html#186142696">Mario Carneiro (Jan 21 2020 at 00:15)</a>:</h4>
+<p>Actually, for <code>elab_as_eliminator</code> to work <code>b</code> has to be explicit and provided</p>
+
+<a name="186142700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20bug%3F/near/186142700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94679Isitbug.html#186142700">Mario Carneiro (Jan 21 2020 at 00:15)</a>:</h4>
+<p>so that it knows what to abstract</p>
+
+<a name="186143023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20bug%3F/near/186143023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94679Isitbug.html#186143023">Anton Kalsin (Jan 21 2020 at 00:24)</a>:</h4>
+<p>Thanks. It's not clear for me now, but I'll read tutorial in more detail</p>
+
+<a name="186143237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Is%20it%20bug%3F/near/186143237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94679Isitbug.html#186143237">Mario Carneiro (Jan 21 2020 at 00:31)</a>:</h4>
+<p>It's not really a theory thing, it has to do with how elaboration works. As long as you sprinkle enough <code>@</code> signs you can make it work</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

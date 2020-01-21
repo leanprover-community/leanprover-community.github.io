@@ -47,6 +47,49 @@ permalink: archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoi
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186071312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186071312">Bryan Gin-ge Chen (Jan 20 2020 at 03:34)</a>:</h4>
 <p>You can also see it action in the <a href="https://leanprover-community.github.io/lean-web-editor/" target="_blank" title="https://leanprover-community.github.io/lean-web-editor/">community web editor</a> if you click the question mark and scroll down to the "Debug settings" and then open your browser's console.</p>
 
+<a name="186143472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186143472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186143472">Jason Rute (Jan 21 2020 at 00:37)</a>:</h4>
+<p>Taking <span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span>'s advice, I looked at Lean's server mode through the <a href="https://leanprover-community.github.io/lean-web-editor/" target="_blank" title="https://leanprover-community.github.io/lean-web-editor/">community web editor</a>.  First, I could only get it to work on Firefox (it didn't work on Safari or Chrome on my Mac).  Second, when <span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> says my "browser's console", that means go to Tools &gt; Web Developer &gt; Web Console.</p>
+
+<a name="186143475"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186143475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186143475">Jason Rute (Jan 21 2020 at 00:37)</a>:</h4>
+<p>From my limited experimentation, there appears to be three requests one can make of the server, "info", "sync", and "complete".  I'm still trying to figure out what these three do.  I should probably next try to interact directly with the Lean3 server via python.  Until I do that, it appears that "sync" does most of the heavy lifting.  It appears to send the whole file contents.</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;command&quot;</span><span class="p">:</span> <span class="s2">&quot;sync&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;file_name&quot;</span><span class="p">:</span> <span class="s2">&quot;/test.lean&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;example (m n : ℕ) : m + n = n + m :=\nby refl&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;seq_num&quot;</span><span class="p">:</span> <span class="mi">40</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>And then one gets back responses about the state of the file, including messages about tactics which don't work.</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;msgs&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;caption&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;file_name&quot;</span><span class="p">:</span> <span class="s2">&quot;/test.lean&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;pos_col&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="nt">&quot;pos_line&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="nt">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;invalid apply tactic, failed to unify\n  m + n = n + m\nwith\n  ?m_2 = ?m_2\nstate:\nm n : ℕ\n⊢ m + n = n + m&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;response&quot;</span><span class="p">:</span> <span class="s2">&quot;all_messages&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>The "info" command seems for getting more information about variable types, squiggly lines, and other information displayed in the side bar.  I think the "complete" command is for autocompletion.  (Again, using a Python (or other) client to manually communicate with <code>lean --server</code> would make all this more clear.)</p>
+
+<a name="186143481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186143481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186143481">Jason Rute (Jan 21 2020 at 00:38)</a>:</h4>
+<p>If the "sync" command is the natural way to use try out tactics on a goal via Lean3 server, that would be a pretty blunt tool, but could be workable.  One could enter the goal with a hole (e.g. <code>example (m n : ℕ) : m + n = n + m := begin end</code>).  Then one can try filling in the hole with various tactics and see what the responses are, including the new goal state (e.g. enter <code>example (m n : ℕ) : m + n = n + m := begin induction n end</code>).  However, it seems that the agent would have to interact with the actual Lean code and parse the pretty printed human readable responses (e.g. the agent would have to parse: <code>"tactic failed, there are unsolved goals\nstate:\n2 goals\ncase nat.zero\nm : ℕ\n⊢ m + 0 = 0 + m\n\ncase nat.succ\nm n_n : ℕ,\nn_ih : m + n_n = n_n + m\n⊢ m + nat.succ n_n = nat.succ n_n + m"</code>).  This isn't impossible.  There are only a few message templates the agent would have to deal with and possibly one could turn off some pretty printers to make the formulas more machine readable.  Nonetheless, I think something like the Python bindings look more promising.</p>
+
+<a name="186143525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186143525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186143525">Jason Rute (Jan 21 2020 at 00:38)</a>:</h4>
+<p>Am I understanding this correctly, <span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span>?</p>
+
 
 {% endraw %}
 

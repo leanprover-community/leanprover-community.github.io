@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Is it bug?](94679Isitbug.html) (13 messages, latest: Jan 21 2020 at 00:31)
+
 * [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (158 messages, latest: Jan 20 2020 at 13:07)
 
 * [basics](17142basics.html) (115 messages, latest: Jan 19 2020 at 19:56)
