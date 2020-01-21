@@ -508,6 +508,20 @@ Is the congruence paper still the best reference?</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186163436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186163436">Patrick Massot (Jan 21 2020 at 08:46)</a>:</h4>
 <p><span class="user-mention" data-user-id="230999">@Daniel Selsam</span> do you know what happened to <a href="https://github.com/leanprover/lean/wiki/Simplifier-Features" target="_blank" title="https://github.com/leanprover/lean/wiki/Simplifier-Features">https://github.com/leanprover/lean/wiki/Simplifier-Features</a>? It seemed to have many ideas to improve the simplifier. Note that most of it is covered by the golden rule of automation: compare with Isabelle.</p>
 
+<a name="186172293"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186172293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186172293">Daniel Selsam (Jan 21 2020 at 11:01)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="230999">Daniel Selsam</span> Can you give any clues as to where the 10x performance improvement in <code>simp</code> is likely to come from?</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> By far the single biggest speedup will come from better caching of the simp sets. Last I checked, building mathlib involves ~70 minutes of building simp sets but only ~25 minutes inside the actual simplifier. A second big speedup will come from using discrimination trees instead of head maps as <span class="user-mention" data-user-id="110026">@Simon Hudon</span> said. A third will come from being more careful not to accidentally traverse huge terms (e.g. by eagerly reducing projections and abstracting all proof terms).</p>
+
+<a name="186172597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186172597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186172597">Daniel Selsam (Jan 21 2020 at 11:05)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="230999">Daniel Selsam</span> do you know what happened to <a href="https://github.com/leanprover/lean/wiki/Simplifier-Features" target="_blank" title="https://github.com/leanprover/lean/wiki/Simplifier-Features">https://github.com/leanprover/lean/wiki/Simplifier-Features</a>? It seemed to have many ideas to improve the simplifier. Note that most of it is covered by the golden rule of automation: compare with Isabelle.</p>
+</blockquote>
+<p>I was not aware of this document. Thank you for sharing.</p>
+
 
 {% endraw %}
 
