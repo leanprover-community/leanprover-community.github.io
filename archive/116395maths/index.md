@@ -9,13 +9,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (57 messages, latest: Jan 20 2020 at 23:35)
+
 * [-1 raised to an integer](771111raisedtoaninteger.html) (7 messages, latest: Jan 20 2020 at 20:54)
 
 * [Matroids in lean](31547Matroidsinlean.html) (7 messages, latest: Jan 20 2020 at 20:01)
 
 * [transcendence basis](52048transcendencebasis.html) (14 messages, latest: Jan 20 2020 at 19:44)
-
-* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (55 messages, latest: Jan 19 2020 at 18:59)
 
 * [coercion from ℚ to ℝ](80429coercionfromto.html) (8 messages, latest: Jan 19 2020 at 10:13)
 
