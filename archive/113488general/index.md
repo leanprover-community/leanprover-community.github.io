@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Coercing linear maps to functions](11795Coercinglinearmapstofunctions.html) (2 messages, latest: Jan 21 2020 at 14:34)
+* [Is this provable constructively?](42461Isthisprovableconstructively.html) (3 messages, latest: Jan 21 2020 at 15:59)
 
-* [Is this provable constructively?](42461Isthisprovableconstructively.html) (2 messages, latest: Jan 21 2020 at 13:46)
+* [Coercing linear maps to functions](11795Coercinglinearmapstofunctions.html) (4 messages, latest: Jan 21 2020 at 15:08)
 
 * [typeclass paper](35889typeclasspaper.html) (89 messages, latest: Jan 21 2020 at 11:05)
 

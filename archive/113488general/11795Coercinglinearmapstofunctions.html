@@ -41,6 +41,14 @@ term has type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coercing%20linear%20maps%20to%20functions/near/186188195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11795Coercinglinearmapstofunctions.html#186188195">Anne Baanen (Jan 21 2020 at 14:34)</a>:</h4>
 <p>The <code>linear_algebra</code> lemmas all use coercion to go from linear maps to functions, so I'd prefer that over writing <code>(foo x).to_fun</code>.</p>
 
+<a name="186191554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coercing%20linear%20maps%20to%20functions/near/186191554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11795Coercinglinearmapstofunctions.html#186191554">Reid Barton (Jan 21 2020 at 15:07)</a>:</h4>
+<p>This is the same as the equiv coercion issue. If you have <code>e : equiv a b</code> and you want to form the application <code>e x</code> where <code>x : a</code>, it only works if <code>a</code> and <code>b</code> don't contain metavariables. But often <code>e</code> is some term (like your <code>foo</code>) in which you want to determine a metavariable from the type of <code>x</code>, but that's impossible because then the coercion cannot fire yet.</p>
+
+<a name="186191683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coercing%20linear%20maps%20to%20functions/near/186191683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11795Coercinglinearmapstofunctions.html#186191683">Reid Barton (Jan 21 2020 at 15:08)</a>:</h4>
+<p>I think the core problem was that type instance search won't fire when the goal type still contains metavariables.</p>
+
 
 {% endraw %}
 
