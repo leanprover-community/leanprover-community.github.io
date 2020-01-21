@@ -536,6 +536,13 @@ It has been argued that we'd need general unification hints to get the best of b
 <p>There are problems with canonical structures as well. One thing I dislike about canonical structures is the amount of boilerplate code you have to write to add a new structure to the hierarchy (for example, the number of unification hints you have to explicitly declare is quadratic in the number of structures, and forgetting one can cause hard-to-debug errors).<br>
 Combining both type classes and canonical structures in a library sounds very dangerous: it sounds a lot more manageable to stick with a single approach, than continually translating between two different approaches.</p>
 
+<a name="186219826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186219826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186219826">Daniel Selsam (Jan 21 2020 at 19:50)</a>:</h4>
+<blockquote>
+<p>Here's a problem with the fully unbundled approach. The term size can blow up</p>
+</blockquote>
+<p>AFAICT only the term <em>tree</em> size blows up, and I don't see any fundamental reason why all operations in the system couldn't in principle be made to scale in the dag sizes instead of the tree sizes. Note that Lean currently does scale exponentially on <a href="#narrow/stream/113488-general/topic/huge.20term.20trees/near/185818383" title="#narrow/stream/113488-general/topic/huge.20term.20trees/near/185818383">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge.20term.20trees/near/185818383</a> , though this is a conscious decision: we don't hash-cons and we use faster, imprecise caches in many places. Some recent discussion at <a href="#narrow/stream/113488-general/topic/huge.20term.20trees" title="#narrow/stream/113488-general/topic/huge.20term.20trees">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge.20term.20trees</a></p>
+
 
 {% endraw %}
 

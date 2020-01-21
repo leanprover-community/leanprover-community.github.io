@@ -190,6 +190,37 @@ error: &quot;Failure(\&quot;No theorem exists with index 220805353555668225\&quo
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186211833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186211833">Stanislas Polu (Jan 21 2020 at 18:27)</a>:</h4>
 <p>Maybe <span class="user-mention" data-user-id="217806">@Markus Rabe</span> or <span class="user-mention" data-user-id="239426">@Christian Szegedy</span> can shed some light on this? <span aria-label="grimacing" class="emoji emoji-1f62c" role="img" title="grimacing">:grimacing:</span></p>
 
+<a name="186218006"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186218006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186218006">Christian Szegedy (Jan 21 2020 at 19:31)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>The response to any apply tactic request should already include the pretty printed version of the terms </p>
+</blockquote>
+<p>I didn’t see this behavior in <a href="https://github.com/jasonrute/holist-communication-example/blob/master/walkthrough_of_holist_api.ipynb" target="_blank" title="https://github.com/jasonrute/holist-communication-example/blob/master/walkthrough_of_holist_api.ipynb">my notebook</a>.  All the apply tactic calls only return the full s-expressions.  For example see cell 10.</p>
+</blockquote>
+<p>It looks like (unfortunately) that this is only in our Google-internal version. We could do another round of exporting, especially that we have some code for an ICLR paper that should be open-sourced as well.</p>
+
+<a name="186218426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186218426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186218426">Christian Szegedy (Jan 21 2020 at 19:35)</a>:</h4>
+<blockquote>
+<p>I was under the impression, possibly wrong, that one needs to replay (VerifyProof) and register (RegisterTheorem) all the theorems.  Of course this is assuming you are working in the “low level” gRPC API.  If you are working in the “high level” Python API then I assume the Python code does that stuff for you, but I haven’t explored that as much yet.</p>
+</blockquote>
+<p>The current verifier verifies theorems in their original context. So currently. you need to replay the whole theorem library in order to verify any number of theorems:<br>
+- You can verify only theorems that came from the HOL-Light library (complex),<br>
+- You can verify any number of theorems (you don't need to verify all of them)<br>
+- All the theorems in the library will be run through the kernel for verification.<br>
+- Those theorems that had an external proof (to be verified) will use their external proof at exactly that position where the theorem was proved originally.</p>
+
+<a name="186220118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186220118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186220118">Christian Szegedy (Jan 21 2020 at 19:52)</a>:</h4>
+<blockquote>
+<p>Ah I now realize that some theorems in <code>theorem_database_v1.1.textpb</code> are registered and usable.  I think only definitions are registered, but other theorems are not. </p>
+<p>The question therefore remains?</p>
+</blockquote>
+<p>The human prooflogs contain proof-steps that rely on theorems created "on the fly" by forward reasoning steps (so called conversions). These theorems don't show up in the theorem database. Also proofs relying on them can't be replayed as conversions can't be replayed either.</p>
+<p>On the other hand the exported tensorflow examples contain the actual s-expression of those parameters, so if somebody uses those examples, the corresponding theorem can be used for training the parameter-selection models, even if those tactic-parameters don't show up in the proof-logs.</p>
+<p>Around 60% of the human proofs can be replayed, as a large number of them uses theorems deduced by forward reasoning steps, other theorems use ad-hoc substitution of terms that we did not log either.</p>
+
 
 {% endraw %}
 
