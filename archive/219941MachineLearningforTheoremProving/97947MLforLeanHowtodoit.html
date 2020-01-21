@@ -144,6 +144,72 @@ n_ih : @eq.{1} nat (@has_add.add.{0} nat nat.has_add m n_n) (@has_add.add.{0} na
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186146645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186146645">Jason Rute (Jan 21 2020 at 02:03)</a>:</h4>
 <p>The more I think about it, this VS Code/emacs functionality is probably all that is needed to reproduce something like the HOList interface.  I think the only added thing would be to use a small amount of custom meta programming to get the outputs (such as the current goal state after applying a tactic) in the most useful form.  (And even this is optional since the current text outputs are fairly useful and parsable.)  The only worries I have is that (1) it is not fast enough, and (2) the idea I have of how to implement it is too hacky.  Maybe I'll sketch out my idea soon since it is pretty straightforward.</p>
 
+<a name="186178485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186178485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186178485">Jason Rute (Jan 21 2020 at 12:41)</a>:</h4>
+<p>Here is how one could implement something very similar to HOList’s API but for Lean, using the Lean server.  (As with the HOList API, I am assuming tactics are only applied to single goals and not to lists of goals.)</p>
+
+<a name="186178492"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186178492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186178492">Jason Rute (Jan 21 2020 at 12:41)</a>:</h4>
+<p>The HOList API has an <code>ApplyTactic</code> request which sends a goal and a tactic command (with parameters).  The response is either a success or failure.  A success returns the new goal state. In the Lean Server (ignoring right now the details of how to represent formulas), all I would have to do is take my goal:</p>
+<div class="codehilite"><pre><span></span><span class="n">m</span> <span class="n">n_n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">n_ih</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n_n</span> <span class="bp">=</span> <span class="n">n_n</span> <span class="bp">+</span> <span class="n">m</span>
+<span class="err">⊢</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n_n</span> <span class="bp">=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n_n</span> <span class="bp">+</span> <span class="n">m</span>
+</pre></div>
+
+
+<p>and my tactic (plus parameters) <code>induction m</code>.<br>
+Next, I convert this all to an <code>example</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">m</span> <span class="n">n_n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+        <span class="o">(</span><span class="n">n_ih</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n_n</span> <span class="bp">=</span> <span class="n">n_n</span> <span class="bp">+</span> <span class="n">m</span><span class="o">)</span>
+        <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n_n</span> <span class="bp">=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n_n</span> <span class="bp">+</span> <span class="n">m</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">induction</span> <span class="n">m</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I put this in a file and run sync on it.</p>
+
+<a name="186178541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186178541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186178541">Jason Rute (Jan 21 2020 at 12:42)</a>:</h4>
+<p>Implementing HOList’s <code>VerifyProof</code> request is even more straight forward.  It is given a theorem (e.g. <code>⊢ ∀  m n : nat, m + n = n + m</code>) and a proof which is a list of tactics (with parameters) (e.g. [<code>intro</code>, <code>intro</code>, <code>simp</code>]) and returns whether that proof succeeds.  Just put it into a file and check it with the server:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span>  <span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intro</span><span class="bp">;</span>
+<span class="n">intro</span><span class="bp">;</span>
+<span class="n">simp</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="186178558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186178558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186178558">Jason Rute (Jan 21 2020 at 12:42)</a>:</h4>
+<p>Finally there is HOList’s <code>RegisterTheorem</code>.  If one is using it to register a theorem (e.g. <code>(m n_n : ℕ) ⊢ m + n = n + m</code>) one just needs to enter the theorem into Lean with a unique identifier.  If one is ok with sorries, then</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">thm_1862938746298</span> <span class="o">(</span><span class="n">m</span> <span class="n">n_n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>If like HOList, one wants to use the proof from VerifyProof (see my documentation of the HOList API), then use the proof (just [<code>simp</code>] in this case):</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">thm_1862938746298</span> <span class="o">(</span><span class="n">m</span> <span class="n">n_n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">simp</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>These registered theorems should probably go in another file so they don’t have to be checked every time.</p>
+
+<a name="186178568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186178568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186178568">Jason Rute (Jan 21 2020 at 12:42)</a>:</h4>
+<p>Also, there is adding definitions via <code>RegisterTheorem</code>.  Again, this seems straight forward.</p>
+
+<a name="186178574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186178574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186178574">Jason Rute (Jan 21 2020 at 12:42)</a>:</h4>
+<p>It think the next thing would be to try this out (calling the Lean server as above) in a simple Python client to make sure it works.</p>
+
+<a name="186178580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186178580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186178580">Jason Rute (Jan 21 2020 at 12:42)</a>:</h4>
+<p>I’m not saying this will 100% fulfill the HOList API since that was intended for HOL Light, but it will get 90% of the way there.  Then we can have a discussion about the other 10%.  (Ok, maybe that remaining 10% will take 90% of the time.  One still needs to catalog the Lean tactics and their parameters for example.)</p>
+
 
 {% endraw %}
 
