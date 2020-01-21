@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [typeclass paper](35889typeclasspaper.html) (90 messages, latest: Jan 21 2020 at 17:11)
+* [typeclass paper](35889typeclasspaper.html) (91 messages, latest: Jan 21 2020 at 18:22)
 
 * [Is this provable constructively?](42461Isthisprovableconstructively.html) (11 messages, latest: Jan 21 2020 at 16:54)
 
