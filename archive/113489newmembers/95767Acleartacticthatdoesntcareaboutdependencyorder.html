@@ -1,0 +1,34 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/95767Acleartacticthatdoesntcareaboutdependencyorder.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/95767Acleartacticthatdoesntcareaboutdependencyorder.html">A clear tactic that doesn't care about dependency order</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186197043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/A%20clear%20tactic%20that%20doesn%27t%20care%20about%20dependency%20order/near/186197043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95767Acleartacticthatdoesntcareaboutdependencyorder.html#186197043">Jannis Limperg (Jan 21 2020 at 16:02)</a>:</h4>
+<p>I wrote a small wrapper around <code>clear</code> that can clear multiple hypotheses which depend on each other and don't need to be specified in dependency order. So the following succeeds where <code>clear</code> fails:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">γ</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span><span class="o">,</span> <span class="n">β</span> <span class="n">a</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">test</span> <span class="o">(</span><span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">β</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">γ</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">unit</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+    <span class="n">smart_clear</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="o">(),</span>
+  <span class="kn">end</span>
+</pre></div>
+
+
+<p>Does this already exist somewhere? (I did it mostly to learn about Lean metaprogramming, so didn't look for it much.)</p>
+<p>(Also hi, first time posting here.)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

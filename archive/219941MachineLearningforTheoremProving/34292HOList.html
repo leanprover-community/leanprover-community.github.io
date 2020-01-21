@@ -130,6 +130,53 @@ permalink: archive/219941MachineLearningforTheoremProving/34292HOList.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/185749163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#185749163">Simon Cruanes (Jan 15 2020 at 22:03)</a>:</h4>
 <p>especially when you want to embed big chunks of code into it… no escaping needed</p>
 
+<a name="186201897"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186201897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186201897">Stanislas Polu (Jan 21 2020 at 16:46)</a>:</h4>
+<p><span class="user-mention" data-user-id="115715">@Jason Rute</span> and others friends knowledgeable about Holist. I've been able to spin up a holist instance using the <code>gcr.io/deepmath/hol-light</code> image. One thing that I expected from reading the code and introspecting the proof logs was that all theorems fingerprints appearing in the proof logs would be directly usable with that image but it looks like that's not the case. How does one is supposed to interact with the prover for a goal part of the test set? Do they have to replay and register all theorems first?</p>
+
+<a name="186202542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186202542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186202542">Stanislas Polu (Jan 21 2020 at 16:53)</a>:</h4>
+<p>Example code failing:</p>
+<div class="codehilite"><pre><span></span>for_all_x_exists_y_x_equals_y = Theorem(
+    name=&quot;FORALL_X_EXISTS_Y_SUCH_THAT_X_EQUALS_Y&quot;,
+    conclusion=&quot;(a (c (fun (fun A (bool)) (bool)) !) (l (v A x) (a (c (fun (fun A (bool)) (bool)) ?) (l (v A y) (a (a (c (fun A (fun A (bool))) =) (v A x)) (v A y))))))&quot;,
+    training_split=Theorem.Split.TESTING,
+    tag=Theorem.Tag.THEOREM,
+)
+
+if __name__ == &#39;__main__&#39;:
+    with grpc.insecure_channel(&#39;10.72.7.138:2000&#39;) as channel:
+        stub = ProofAssistantServiceStub(channel)
+
+        request3 = ApplyTacticRequest(goal=for_all_x_exists_y_x_equals_y, tactic=&quot;SIMP_TAC [ THM 220805353555668225 ]&quot;)
+        print(&quot;Request:&quot;)
+        print(request3)
+
+        response3 = stub.ApplyTactic(request3)
+        print(&quot;Response:&quot;)
+        print(response3)
+</pre></div>
+
+
+<p>Where <code>220805353555668225</code> is the fingerprint of a theorem argument taken from the training set (appears in <code>human/train/prooflogs-00037-of-00600.pbtxt</code>)</p>
+<p>This gives:</p>
+<div class="codehilite"><pre><span></span>Request:
+goal {
+  conclusion: &quot;(a (c (fun (fun A (bool)) (bool)) !) (l (v A x) (a (c (fun (fun A (bool)) (bool)) ?) (l (v A y) (a (a (c (fun A (fun A (bool))) =) (v A x)) (v A y))))))&quot;
+  tag: THEOREM
+  name: &quot;FORALL_X_EXISTS_Y_SUCH_THAT_X_EQUALS_Y&quot;
+  training_split: TESTING
+}
+tactic: &quot;SIMP_TAC [ THM 220805353555668225 ]&quot;
+
+Response:
+error: &quot;Failure(\&quot;No theorem exists with index 220805353555668225\&quot;)&quot;
+</pre></div>
+
+<a name="186202862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186202862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186202862">Stanislas Polu (Jan 21 2020 at 16:56)</a>:</h4>
+<p>Or in other words how can I easily replay a proof log ?</p>
+
 
 {% endraw %}
 

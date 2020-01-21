@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [A clear tactic that doesn't care about dependency order](95767Acleartacticthatdoesntcareaboutdependencyorder.html) (1 message, latest: Jan 21 2020 at 16:02)
+
 * [attempt at some geometry](35829attemptatsomegeometry.html) (119 messages, latest: Jan 21 2020 at 15:13)
 
 * [elan install](21080elaninstall.html) (9 messages, latest: Jan 21 2020 at 03:19)

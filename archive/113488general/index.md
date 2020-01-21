@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Is this provable constructively?](42461Isthisprovableconstructively.html) (3 messages, latest: Jan 21 2020 at 15:59)
+* [Is this provable constructively?](42461Isthisprovableconstructively.html) (11 messages, latest: Jan 21 2020 at 16:54)
+
+* [Congruence closure](82087Congruenceclosure.html) (8 messages, latest: Jan 21 2020 at 16:49)
 
 * [Coercing linear maps to functions](11795Coercinglinearmapstofunctions.html) (4 messages, latest: Jan 21 2020 at 15:08)
 
