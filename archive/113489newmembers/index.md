@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [attempt at some geometry](35829attemptatsomegeometry.html) (117 messages, latest: Jan 21 2020 at 14:57)
+
 * [elan install](21080elaninstall.html) (9 messages, latest: Jan 21 2020 at 03:19)
 
 * [Is it bug?](94679Isitbug.html) (13 messages, latest: Jan 21 2020 at 00:31)
@@ -28,8 +30,6 @@ permalink: archive/113489newmembers/index.html
 * [How to write about there are infinite primes p % 4 = 3](17447Howtowriteaboutthereareinfiniteprimesp43.html) (19 messages, latest: Jan 16 2020 at 21:17)
 
 * [noob question(s)](52075noobquestions.html) (1633 messages, latest: Jan 16 2020 at 17:18)
-
-* [attempt at some geometry](35829attemptatsomegeometry.html) (111 messages, latest: Jan 15 2020 at 14:54)
 
 * [A finite set has finitely many endofunctions?](54624Afinitesethasfinitelymanyendofunctions.html) (17 messages, latest: Jan 14 2020 at 13:41)
 

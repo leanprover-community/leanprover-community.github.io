@@ -1,0 +1,47 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/11795Coercinglinearmapstofunctions.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/11795Coercinglinearmapstofunctions.html">Coercing linear maps to functions</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186188074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coercing%20linear%20maps%20to%20functions/near/186188074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11795Coercinglinearmapstofunctions.html#186188074">Anne Baanen (Jan 21 2020 at 14:33)</a>:</h4>
+<p>I'm experiencing problems coercing linear maps to functions. For example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span>
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">all</span> <span class="n">true</span>
+<span class="n">def</span> <span class="n">foo</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span><span class="err">ₗ</span><span class="o">[</span><span class="n">α</span><span class="o">]</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">foo</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">to_fun</span> <span class="n">y</span> <span class="bp">=</span> <span class="o">(</span><span class="n">foo</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">to_fun</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">sorry</span> <span class="c1">-- works</span>
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="bp">@</span><span class="n">foo</span> <span class="n">α</span> <span class="bp">_</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=</span> <span class="bp">@</span><span class="n">foo</span> <span class="n">α</span> <span class="bp">_</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">sorry</span> <span class="c1">-- works</span>
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">foo</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">foo</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">sorry</span> <span class="c1">-- error at `foo`: function expected</span>
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">coe_fn</span> <span class="n">foo</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">coe_fn</span> <span class="n">foo</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">sorry</span> <span class="c1">-- error at `coe_fn` is the same</span>
+</pre></div>
+
+
+<p>The error for <code>foo x y</code> is, with <code>pp.all</code> enabled:</p>
+<div class="codehilite"><pre><span></span>function expected at
+  @foo α ?m_1 x
+term has type
+  @linear_map.{0 0 0} α α α ?m_1 (@ring.to_add_comm_group.{0} α ?m_1) (@ring.to_add_comm_group.{0} α ?m_1)
+    (@ring.to_module.{0} α ?m_1)
+    (@ring.to_module.{0} α ?m_1)
+</pre></div>
+
+
+<p>Passing <code>α</code> (or the <code>comm_ring</code> instance) explicitly does fix the issue as the second working example shows, but shouldn't <code>α</code> be determined automatically from the type of <code>x</code>? And if not, why is it shown with <code>pp.all</code> enabled? I don't really understand what I'm doing wrong here.</p>
+
+<a name="186188195"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coercing%20linear%20maps%20to%20functions/near/186188195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11795Coercinglinearmapstofunctions.html#186188195">Anne Baanen (Jan 21 2020 at 14:34)</a>:</h4>
+<p>The <code>linear_algebra</code> lemmas all use coercion to go from linear maps to functions, so I'd prefer that over writing <code>(foo x).to_fun</code>.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
