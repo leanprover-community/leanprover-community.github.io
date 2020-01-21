@@ -45,6 +45,24 @@ nested occurrence &#39;subtype.{1} (_nest_1_1.list.Form Var ℒ) (fun (l : _nest
 a datatype where ill-formed formulas can be build).<br>
 Thanks to everyone!</p>
 
+<a name="186232742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Nested%20datatypes%20and%20vector/near/186232742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/12793Nesteddatatypesandvector.html#186232742">Mario Carneiro (Jan 21 2020 at 22:00)</a>:</h4>
+<p>My recommendation is to avoid nested inductive types in lean 3 (and maybe lean 4, we'll see). You should just code it as a regular inductive type. One way to do this, similar to what is done in the flypitch project:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">prop_lang</span> <span class="o">:=</span>
+<span class="n">mk</span> <span class="bp">::</span> <span class="o">(</span><span class="n">Symb</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">Arity</span> <span class="o">:</span> <span class="n">Symb</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span>
+
+<span class="kn">inductive</span> <span class="n">PreForm</span> <span class="o">(</span><span class="n">Var</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">ℒ</span> <span class="o">:</span> <span class="n">prop_lang</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">V</span> <span class="o">{}</span> <span class="o">:</span> <span class="n">Var</span> <span class="bp">→</span> <span class="n">PreForm</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="n">Symb</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">ℒ</span><span class="bp">.</span><span class="n">Symb</span><span class="o">)</span> <span class="o">:</span> <span class="n">PreForm</span> <span class="o">(</span><span class="n">ℒ</span><span class="bp">.</span><span class="n">Arity</span> <span class="n">c</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">App</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">:</span> <span class="n">PreForm</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">PreForm</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">PreForm</span> <span class="n">n</span>
+
+<span class="n">def</span> <span class="n">Form</span> <span class="o">(</span><span class="n">Var</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">ℒ</span> <span class="o">:</span> <span class="n">prop_lang</span><span class="o">)</span> <span class="o">:=</span> <span class="n">PreForm</span> <span class="n">Var</span> <span class="n">ℒ</span> <span class="mi">0</span>
+</pre></div>
+
+<a name="186232968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Nested%20datatypes%20and%20vector/near/186232968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/12793Nesteddatatypesandvector.html#186232968">Mario Carneiro (Jan 21 2020 at 22:03)</a>:</h4>
+<p>That is, you say "everything goes okay with <code>myvector</code>" but actually you will have issues when you want to e.g. define functions out of the nested inductive</p>
+
 
 {% endraw %}
 
