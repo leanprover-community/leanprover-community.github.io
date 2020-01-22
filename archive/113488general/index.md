@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [typeclass paper](35889typeclasspaper.html) (97 messages, latest: Jan 22 2020 at 21:56)
+
 * [Congruence closure](82087Congruenceclosure.html) (9 messages, latest: Jan 21 2020 at 21:40)
 
 * [Is this provable constructively?](42461Isthisprovableconstructively.html) (13 messages, latest: Jan 21 2020 at 21:27)
-
-* [typeclass paper](35889typeclasspaper.html) (92 messages, latest: Jan 21 2020 at 19:50)
 
 * [Coercing linear maps to functions](11795Coercinglinearmapstofunctions.html) (4 messages, latest: Jan 21 2020 at 15:08)
 
