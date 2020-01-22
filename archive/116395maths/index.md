@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (79 messages, latest: Jan 22 2020 at 02:09)
+* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (102 messages, latest: Jan 22 2020 at 22:55)
+
+* [hello](47413hello.html) (31 messages, latest: Jan 22 2020 at 22:09)
 
 * [lie theory](63798lietheory.html) (13 messages, latest: Jan 21 2020 at 21:59)
 
@@ -1448,8 +1450,6 @@ permalink: archive/116395maths/index.html
 * [free group](47376freegroup.html) (92 messages, latest: Apr 02 2018 at 05:00)
 
 * [Easy topological space question](03444Easytopologicalspacequestion.html) (18 messages, latest: Apr 02 2018 at 01:23)
-
-* [hello](47413hello.html) (30 messages, latest: Apr 01 2018 at 14:37)
 
 
 {% include archive_update.html %}

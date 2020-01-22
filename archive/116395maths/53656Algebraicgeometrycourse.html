@@ -606,6 +606,144 @@ p.eval2 f X</code> I think. It's the canonical map with that type.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186249247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186249247">Yury G. Kudryashov (Jan 22 2020 at 02:09)</a>:</h4>
 <p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> The whole proposal is here: <a href="https://github.com/leanprover-community/mathlib/issues/1864" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1864">#1864</a>. Comments are welcome. Volunteers to actually implement this are more than welcome.</p>
 
+<a name="186338055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186338055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186338055">Kevin Buzzard (Jan 22 2020 at 22:27)</a>:</h4>
+<p>I am finding the following "trivialities"</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">mv_polynomial</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">mv_polynomial</span><span class="bp">.</span><span class="n">option_equiv_right</span>
+<span class="c1">-- mv_polynomial (option β) α ≃+* mv_polynomial β (polynomial α)</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">mv_polynomial</span><span class="bp">.</span><span class="n">option_equiv_right</span>
+<span class="c">/-</span><span class="cm"> it&#39;s built from</span>
+
+<span class="cm">. mv_polynomial.ring_equiv_of_equiv</span>
+<span class="cm">. mv_polynomial.sum_ring_equiv</span>
+<span class="cm">. mv_polynomial.ring_equiv_congr</span>
+
+<span class="cm">glued together with</span>
+
+<span class="cm">. ring_equiv.trans</span>
+<span class="cm">-/</span>
+
+<span class="kn">open</span> <span class="n">mv_polynomial</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">k</span><span class="o">]</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">polynomial</span> <span class="n">k</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">k</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">polynomial</span><span class="bp">.</span><span class="kn">eval</span> <span class="n">a</span> <span class="o">(</span><span class="kn">eval</span> <span class="n">g</span> <span class="o">((</span><span class="n">option_equiv_right</span> <span class="n">k</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">X</span> <span class="n">none</span><span class="o">)))</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">k</span><span class="o">]</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">polynomial</span> <span class="n">k</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+<span class="kn">eval</span> <span class="n">g</span> <span class="o">((</span><span class="n">option_equiv_right</span> <span class="n">k</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">X</span> <span class="o">(</span><span class="n">some</span> <span class="n">i</span><span class="o">)))</span> <span class="bp">=</span> <span class="n">g</span> <span class="n">i</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+
+
+<p>very painful. What should I be doing here?</p>
+
+<a name="186339248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186339248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186339248">Kevin Buzzard (Jan 22 2020 at 22:40)</a>:</h4>
+<p>I think maybe this should be the first line?</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">k</span><span class="o">]</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">polynomial</span> <span class="n">k</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">k</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">polynomial</span><span class="bp">.</span><span class="kn">eval</span> <span class="n">a</span> <span class="o">(</span><span class="kn">eval</span> <span class="n">g</span> <span class="o">((</span><span class="n">option_equiv_right</span> <span class="n">k</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">X</span> <span class="n">none</span><span class="o">)))</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">show</span> <span class="n">polynomial</span><span class="bp">.</span><span class="kn">eval</span> <span class="n">a</span> <span class="o">(</span><span class="kn">eval</span> <span class="n">g</span> <span class="o">(((</span>
+    <span class="o">(</span><span class="bp">@</span><span class="n">mv_polynomial</span><span class="bp">.</span><span class="n">ring_equiv_congr</span>
+      <span class="o">(</span><span class="n">mv_polynomial</span> <span class="n">unit</span> <span class="n">k</span><span class="o">)</span> <span class="n">n</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">mv_polynomial</span><span class="bp">.</span><span class="n">punit_ring_equiv</span> <span class="n">k</span><span class="o">))</span>
+    <span class="err">∘</span>
+    <span class="o">(</span><span class="n">mv_polynomial</span><span class="bp">.</span><span class="n">sum_ring_equiv</span> <span class="n">k</span> <span class="n">n</span> <span class="n">unit</span><span class="o">))</span>
+    <span class="err">∘</span>
+    <span class="o">(</span><span class="n">mv_polynomial</span><span class="bp">.</span><span class="n">ring_equiv_of_equiv</span> <span class="n">k</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">option_equiv_sum_punit</span> <span class="n">n</span><span class="o">)))</span>
+    <span class="o">(</span><span class="n">X</span> <span class="n">none</span><span class="o">)))</span> <span class="bp">=</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="186339441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186339441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186339441">Mario Carneiro (Jan 22 2020 at 22:43)</a>:</h4>
+<p><code>option_equiv_right</code> lacks definition lemmas</p>
+
+<a name="186339577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186339577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186339577">Kevin Buzzard (Jan 22 2020 at 22:44)</a>:</h4>
+<p>I see. So this first <code>show</code> should be done with a <code>rw</code>? And then after that there should be lemmas <code>eval_sum_ring_equiv_X</code> and <code>eval_ring_equiv_congr_X</code> and <code>eval_ring_equiv_of_equiv_X</code>?</p>
+
+<a name="186339744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186339744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186339744">Kevin Buzzard (Jan 22 2020 at 22:46)</a>:</h4>
+<p>Should it be beta not alpha which is explicit in <code>mv_polynomial.ring_equiv_congr : Π (α : Type u_1) {β : Type u_2} {γ : Type u_1} [_inst_1 : comm_semiring α] [_inst_2 : comm_semiring γ], α ≃+* γ → mv_polynomial β α ≃+* mv_polynomial β γ</code>?</p>
+
+<a name="186339795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186339795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186339795">Mario Carneiro (Jan 22 2020 at 22:47)</a>:</h4>
+<p>I think so</p>
+
+<a name="186339856"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186339856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186339856">Mario Carneiro (Jan 22 2020 at 22:48)</a>:</h4>
+<p>I think the definitional lemmas should be stated using just application if possible, <code>eval</code> is some derived thing (but it should probably also be available)</p>
+
+<a name="186339905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186339905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186339905">Mario Carneiro (Jan 22 2020 at 22:49)</a>:</h4>
+<p>Well, maybe not... I guess since it's a known ring hom you already have info on everything except what happens to constants and variables</p>
+
+<a name="186339986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186339986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186339986">Kevin Buzzard (Jan 22 2020 at 22:50)</a>:</h4>
+<p>there are lots of <code>blah_X</code> and <code>blah_C</code> lemmas</p>
+
+<a name="186340000"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186340000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186340000">Kevin Buzzard (Jan 22 2020 at 22:50)</a>:</h4>
+<p>I am suggesting we add a few more ;-)</p>
+
+<a name="186340003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186340003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186340003">Mario Carneiro (Jan 22 2020 at 22:50)</a>:</h4>
+<p>I think you are right</p>
+
+<a name="186340035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186340035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186340035">Kevin Buzzard (Jan 22 2020 at 22:50)</a>:</h4>
+<p>I'm slowly getting the hang of this Lean malarkey</p>
+
+<a name="186340055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186340055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186340055">Mario Carneiro (Jan 22 2020 at 22:51)</a>:</h4>
+<p>I really hope it's a <code>rfl</code> proof because there are a whole bunch of definitions in the way</p>
+
+<a name="186340147"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186340147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186340147">Kevin Buzzard (Jan 22 2020 at 22:52)</a>:</h4>
+<p>I can iterate the <code>show, rw</code> process ;-)</p>
+
+<a name="186340149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186340149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186340149">Mario Carneiro (Jan 22 2020 at 22:52)</a>:</h4>
+<p>I'm still not even sure what <code>option_equiv_right α β (X none) = _</code> should complete to</p>
+
+<a name="186340198"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186340198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186340198">Kevin Buzzard (Jan 22 2020 at 22:53)</a>:</h4>
+<p>you mean <code>option_equiv_right R n (X none) = _</code>?</p>
+
+<a name="186340209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186340209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186340209">Mario Carneiro (Jan 22 2020 at 22:53)</a>:</h4>
+<p>I'm in the same context as the definition, they were called alpha and beta there</p>
+
+<a name="186340214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186340214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186340214">Kevin Buzzard (Jan 22 2020 at 22:53)</a>:</h4>
+<p>It's <code>C unit</code> or <code>C punit</code> or whatever</p>
+
+<a name="186340263"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186340263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186340263">Kevin Buzzard (Jan 22 2020 at 22:54)</a>:</h4>
+<p>wait</p>
+
+<a name="186340265"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186340265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186340265">Mario Carneiro (Jan 22 2020 at 22:54)</a>:</h4>
+<p>I think it's <code>C polynomial.X</code></p>
+
+<a name="186340268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186340268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186340268">Kevin Buzzard (Jan 22 2020 at 22:54)</a>:</h4>
+<p>yeah, that :-)</p>
+
+<a name="186340269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186340269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186340269">Mario Carneiro (Jan 22 2020 at 22:54)</a>:</h4>
+<p>but lean times out when I write that</p>
+
+<a name="186340347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186340347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186340347">Mario Carneiro (Jan 22 2020 at 22:55)</a>:</h4>
+<p>oh, nvm</p>
+
 
 {% endraw %}
 
