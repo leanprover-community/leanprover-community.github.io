@@ -274,6 +274,21 @@ The example above failed because the theorem with the fingerprint (or "index") 2
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186305605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186305605">Stanislas Polu (Jan 22 2020 at 16:48)</a>:</h4>
 <p><span class="user-mention" data-user-id="239426">@Christian Szegedy</span> can you expand on the limitation related to conversions? Replaying the prooflogs would just fail there? From skimming through the <a href="http://parse_tactic.ml" target="_blank" title="http://parse_tactic.ml">parse_tactic.ml</a> code it looks like there is some support for conversions? What are the current limitations?</p>
 
+<a name="186329092"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186329092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186329092">Christian Szegedy (Jan 22 2020 at 20:45)</a>:</h4>
+<blockquote>
+<p>If only 60% of the human proofs can be replayed, then 60% is somewhat of an upper bound on the performance of any supervised prover, right? (not sure it's mentioned in the papers?)</p>
+</blockquote>
+<p>This is not necessarily true. Since we use the network to guide a search, if the search explores enough branches it can discover proofs that are alternative to the human proofs.</p>
+
+<a name="186329489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186329489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186329489">Christian Szegedy (Jan 22 2020 at 20:50)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="239426">Christian Szegedy</span> can you expand on the limitation related to conversions? Replaying the prooflogs would just fail there? From skimming through the <a href="http://parse_tactic.ml" target="_blank" title="http://parse_tactic.ml">parse_tactic.ml</a> code it looks like there is some support for conversions? What are the current limitations?</p>
+</blockquote>
+<p>We log some of the conversions, but the ApplyTactic function call can't make use of them.</p>
+<p>We have a new internal extension to the API that allows the application of "rules" (forward reasoning steps), we have run some preliminary expriments using them, but we don't have a proper integration, especially proof replay and verification are not implemented for them. We plan to open source our extensions to the interface as soon as there is enough interest in the community to use it.</p>
+
 
 {% endraw %}
 
