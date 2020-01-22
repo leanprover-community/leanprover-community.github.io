@@ -221,6 +221,13 @@ error: &quot;Failure(\&quot;No theorem exists with index 220805353555668225\&quo
 <p>On the other hand the exported tensorflow examples contain the actual s-expression of those parameters, so if somebody uses those examples, the corresponding theorem can be used for training the parameter-selection models, even if those tactic-parameters don't show up in the proof-logs.</p>
 <p>Around 60% of the human proofs can be replayed, as a large number of them uses theorems deduced by forward reasoning steps, other theorems use ad-hoc substitution of terms that we did not log either.</p>
 
+<a name="186252165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186252165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186252165">Markus Rabe (Jan 22 2020 at 03:20)</a>:</h4>
+<p><span class="user-mention" data-user-id="249373">@Stanislas Polu</span> <span class="user-mention" data-user-id="115715">@Jason Rute</span><br>
+The example above failed because the theorem with the fingerprint (or "index") 220805353555668225 is unknown to HOL Light when it is started up. Only the "core" Theorems are loaded at that point (which includes some basic definitions and theorems). Before you use any other theorem you need to register that theorem with the RegisterTheoremRequest.</p>
+<p>As Christian said, don't expect all human-written proofs to go through, as some tactics are not supported and not all theorems that humans used in the proofs are in our theorem database.</p>
+<p>As a final note: VerifyProof was only used for a deprecated version of our proof checker. Currently it is not used for anything and should be ignored.</p>
+
 
 {% endraw %}
 
