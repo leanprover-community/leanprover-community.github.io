@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (159 messages, latest: Jan 22 2020 at 08:48)
+
 * [A clear tactic that doesn't care about dependency order](95767Acleartacticthatdoesntcareaboutdependencyorder.html) (8 messages, latest: Jan 22 2020 at 04:17)
 
 * [Nested datatypes and vector](12793Nesteddatatypesandvector.html) (3 messages, latest: Jan 21 2020 at 22:03)
@@ -18,8 +20,6 @@ permalink: archive/113489newmembers/index.html
 * [elan install](21080elaninstall.html) (9 messages, latest: Jan 21 2020 at 03:19)
 
 * [Is it bug?](94679Isitbug.html) (13 messages, latest: Jan 21 2020 at 00:31)
-
-* [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (158 messages, latest: Jan 20 2020 at 13:07)
 
 * [basics](17142basics.html) (115 messages, latest: Jan 19 2020 at 19:56)
 

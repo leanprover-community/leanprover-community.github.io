@@ -1330,6 +1330,57 @@ Thanks!</p>
 </blockquote>
 <p>Rename the file <code>hpdefs.lean</code> into <code>axioms.lean</code>. Then in <code>firstlemmas.lean</code> have the first line <code>import .axioms</code> and Lean complains. But your explanation is reasonable. I will avoid this file name in the future.</p>
 
+<a name="186265955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/186265955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#186265955">Marc Masdeu (Jan 22 2020 at 08:48)</a>:</h4>
+<p>OK, I got stuck again. I don't see why the following code does not work:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="n">noncomputable</span> <span class="n">theory</span>
+
+<span class="c1">-- We want to be able to define functions using the law of excluded middle</span>
+<span class="n">open_locale</span> <span class="n">classical</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+
+<span class="n">class</span> <span class="n">HilbertPlane</span><span class="o">:=</span>
+    <span class="o">(</span><span class="n">Point</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">Lines</span> <span class="o">:</span> <span class="n">set</span><span class="o">(</span><span class="n">set</span><span class="o">(</span><span class="n">Point</span><span class="o">)))</span>
+    <span class="o">(</span><span class="n">line_segment</span> <span class="o">:</span> <span class="n">Point</span> <span class="bp">→</span> <span class="n">Point</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">Point</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">line_segment_def</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Point</span><span class="o">)</span> <span class="o">:</span> <span class="n">line_segment</span> <span class="n">A</span> <span class="n">B</span> <span class="bp">=</span> <span class="o">{</span><span class="n">A</span><span class="o">}</span> <span class="err">∪</span> <span class="o">{</span><span class="n">B</span><span class="o">})</span>
+
+<span class="kn">constant</span> <span class="err">Ω</span> <span class="o">:</span> <span class="n">HilbertPlane</span>
+
+<span class="kn">lemma</span> <span class="n">endpoints_are_in_segment</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="err">Ω</span><span class="bp">.</span><span class="n">Point</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">A</span> <span class="err">∈</span> <span class="o">(</span><span class="err">Ω</span><span class="bp">.</span><span class="n">line_segment</span> <span class="n">A</span> <span class="n">B</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">sorry</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>It is frustrating, since this works perfectly:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="n">noncomputable</span> <span class="n">theory</span>
+
+<span class="c1">-- We want to be able to define functions using the law of excluded middle</span>
+<span class="n">open_locale</span> <span class="n">classical</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+
+<span class="kn">constant</span> <span class="n">Point</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span>
+<span class="kn">constant</span> <span class="n">Lines</span> <span class="o">:</span> <span class="n">set</span><span class="o">(</span><span class="n">set</span><span class="o">(</span><span class="n">Point</span><span class="o">))</span>
+<span class="kn">definition</span> <span class="n">line_segment</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Point</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="n">Point</span> <span class="o">:=</span> <span class="o">{</span><span class="n">A</span><span class="o">}</span> <span class="err">∪</span> <span class="o">{</span><span class="n">B</span><span class="o">}</span>
+
+<span class="kn">lemma</span> <span class="n">endpoints_are_in_segment</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Point</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">A</span> <span class="err">∈</span> <span class="n">line_segment</span> <span class="n">A</span> <span class="n">B</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">unfold</span> <span class="n">line_segment</span><span class="o">,</span>
+<span class="n">finish</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Apart from the solution, I would appreciate being able to tell in the future how to fix these issues (by reading at errors, or using "debugging" commands in Lean). I hope I didn't have to constantly ask Zulip...</p>
+
 
 {% endraw %}
 
