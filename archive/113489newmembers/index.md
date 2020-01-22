@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [A clear tactic that doesn't care about dependency order](95767Acleartacticthatdoesntcareaboutdependencyorder.html) (7 messages, latest: Jan 22 2020 at 00:28)
+* [A clear tactic that doesn't care about dependency order](95767Acleartacticthatdoesntcareaboutdependencyorder.html) (8 messages, latest: Jan 22 2020 at 04:17)
 
 * [Nested datatypes and vector](12793Nesteddatatypesandvector.html) (3 messages, latest: Jan 21 2020 at 22:03)
 
