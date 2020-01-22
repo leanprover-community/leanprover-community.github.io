@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [A clear tactic that doesn't care about dependency order](95767Acleartacticthatdoesntcareaboutdependencyorder.html) (9 messages, latest: Jan 22 2020 at 14:57)
+* [A clear tactic that doesn't care about dependency order](95767Acleartacticthatdoesntcareaboutdependencyorder.html) (10 messages, latest: Jan 22 2020 at 15:36)
 
-* [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (167 messages, latest: Jan 22 2020 at 13:01)
+* [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (172 messages, latest: Jan 22 2020 at 15:26)
 
 * [Nested datatypes and vector](12793Nesteddatatypesandvector.html) (3 messages, latest: Jan 21 2020 at 22:03)
 
