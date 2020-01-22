@@ -1381,6 +1381,110 @@ Thanks!</p>
 
 <p>Apart from the solution, I would appreciate being able to tell in the future how to fix these issues (by reading at errors, or using "debugging" commands in Lean). I hope I didn't have to constantly ask Zulip...</p>
 
+<a name="186267136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/186267136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#186267136">Mario Carneiro (Jan 22 2020 at 09:04)</a>:</h4>
+<p>Let's start with the error message.</p>
+<div class="codehilite"><pre><span></span>invalid field notation, function &#39;HilbertPlane.line_segment&#39; does not have explicit argument with type (HilbertPlane ...)
+</pre></div>
+
+
+<p>Okay, that's weird. What type does it actually have?</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">print</span> <span class="n">HilbertPlane</span><span class="bp">.</span><span class="n">line_segment</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">HilbertPlane</span><span class="bp">.</span><span class="n">line_segment</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">[</span><span class="n">c</span> <span class="o">:</span> <span class="n">HilbertPlane</span><span class="o">],</span> <span class="n">HilbertPlane</span><span class="bp">.</span><span class="n">Point</span> <span class="bp">→</span> <span class="n">HilbertPlane</span><span class="bp">.</span><span class="n">Point</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">HilbertPlane</span><span class="bp">.</span><span class="n">Point</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="o">[</span><span class="n">c</span> <span class="o">:</span> <span class="n">HilbertPlane</span><span class="o">],</span> <span class="o">[</span><span class="n">HilbertPlane</span><span class="bp">.</span><span class="n">line_segment</span> <span class="n">c</span><span class="o">]</span>
+</pre></div>
+
+
+<p>Notice that <code>c</code> here, the <code>HilbertPlane</code> argument in question, is in square brackets. That means it is intended to be inferred by type class inference. Why? Because you called <code>HilbertPlane</code> a <code>class</code> rather than a <code>structure</code>.</p>
+
+<a name="186267723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/186267723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#186267723">Mario Carneiro (Jan 22 2020 at 09:13)</a>:</h4>
+<p>The idea with typeclass arguments is that you don't specify them, you let lean figure them out. Let's try that:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">endpoints_are_in_segment</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="err">Ω</span><span class="bp">.</span><span class="n">Point</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">A</span> <span class="err">∈</span> <span class="o">(</span><span class="n">line_segment</span> <span class="n">A</span> <span class="n">B</span><span class="o">))</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>unknown identifier &#39;line_segment&#39;
+</pre></div>
+
+
+<p>Thanks lean. Guess we need to open the namespace</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">HilbertPlane</span>
+<span class="kn">lemma</span> <span class="n">endpoints_are_in_segment</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="err">Ω</span><span class="bp">.</span><span class="n">Point</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">A</span> <span class="err">∈</span> <span class="o">(</span><span class="n">line_segment</span> <span class="n">A</span> <span class="n">B</span><span class="o">))</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>failed to synthesize type class instance for
+A : Point,
+B : Point
+⊢ HilbertPlane
+</pre></div>
+
+
+<p>Okay, getting closer. It says it can't find an instance of <code>HilbertPlane</code>. (Notice also that it omits the <code>Ω</code> in <code>Point</code>. Clearly that's how it expects you to write it.) I will note at this point that <code>HilbertPlane</code> has no arguments, which is rather unusual for a typeclass. It's really only a useful construct if there is only ever one <code>HilbertPlane</code> around, but maybe that's the case for you.</p>
+
+<a name="186267740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/186267740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#186267740">Mario Carneiro (Jan 22 2020 at 09:13)</a>:</h4>
+<p>In any case, we can add it as an instance variable, and then lean should find it:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="o">[</span><span class="n">HilbertPlane</span><span class="o">]</span>
+
+<span class="kn">open</span> <span class="n">HilbertPlane</span>
+<span class="kn">lemma</span> <span class="n">endpoints_are_in_segment</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Point</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">A</span> <span class="err">∈</span> <span class="o">(</span><span class="n">line_segment</span> <span class="n">A</span> <span class="n">B</span><span class="o">))</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>kernel failed to type check declaration &#39;endpoints_are_in_segment&#39; this is usually due to a buggy tactic or a bug in the builtin elaborator
+elaborated type:
+  ∀ [_inst_1 : HilbertPlane] (A B : Point), A ∈ line_segment A B
+elaborated value:
+  λ [_inst_1 : HilbertPlane] (A B : Point), sorry
+nested exception message:
+invalid reference to undefined universe level parameter &#39;u_1&#39;
+</pre></div>
+
+
+<p>Ooh, these are extra special errors that you get if you managed to fool the tactic framework into producing an invalid proof. I think this will go away if you actually finish the proof, though.</p>
+
+<a name="186268141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/186268141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#186268141">Mario Carneiro (Jan 22 2020 at 09:18)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="o">[</span><span class="n">HilbertPlane</span><span class="o">]</span>
+
+<span class="kn">open</span> <span class="n">HilbertPlane</span>
+<span class="kn">lemma</span> <span class="n">endpoints_are_in_segment</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Point</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">A</span> <span class="err">∈</span> <span class="o">(</span><span class="n">line_segment</span> <span class="n">A</span> <span class="n">B</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">line_segment_def</span><span class="o">]</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>kernel failed to type check declaration &#39;endpoints_are_in_segment&#39; this is usually due to a buggy tactic or a bug in the builtin elaborator
+elaborated type:
+  ∀ [_inst_1 : HilbertPlane] (A B : Point), A ∈ line_segment A B
+elaborated value:
+  λ [_inst_1 : HilbertPlane] (A B : Point),
+    eq.mpr
+      ...
+      trivial
+nested exception message:
+invalid reference to undefined universe level parameter &#39;u_1&#39;
+</pre></div>
+
+
+<p>Apparently my hope was unfounded. This is an actual bug in lean, so I'm not sure what the best workaround is, but explicitly including the instance seems to work:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="o">[</span><span class="err">Ω</span> <span class="o">:</span> <span class="n">HilbertPlane</span><span class="o">]</span>
+<span class="n">include</span> <span class="err">Ω</span>
+
+<span class="kn">open</span> <span class="n">HilbertPlane</span>
+<span class="kn">lemma</span> <span class="n">endpoints_are_in_segment</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Point</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">A</span> <span class="err">∈</span> <span class="o">(</span><span class="n">line_segment</span> <span class="n">A</span> <span class="n">B</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">line_segment_def</span><span class="o">]</span> <span class="c1">-- works</span>
+</pre></div>
+
+<a name="186269915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/186269915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#186269915">Marc Masdeu (Jan 22 2020 at 09:42)</a>:</h4>
+<p>Oh wow! This is a great explanation!! I will see if I can fit this into the rest of the code. Still, I doubt I'd be able to debug something like this in the future. Lean is hard.</p>
+
 
 {% endraw %}
 
