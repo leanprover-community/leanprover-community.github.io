@@ -255,6 +255,17 @@ The example above failed because the theorem with the fingerprint (or "index") 2
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186272506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186272506">Jason Rute (Jan 22 2020 at 10:15)</a>:</h4>
 <p>Also, I assume the way that RegisterTheorem now works is to add the theorem as an axiom using the CHEAT tactic?</p>
 
+<a name="186278286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186278286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186278286">Stanislas Polu (Jan 22 2020 at 11:39)</a>:</h4>
+<p>Form the code in [0], it looks like anything received from RegisterTheorem is indeed assumed:</p>
+<div class="codehilite"><pre><span></span>Theorem_fingerprint.index_thm index (Drule.mk_thm (to_term_list gs));
+</pre></div>
+
+
+<p>As Drule.mk_thm is a wrapper around the ASSUME tactic I believe.</p>
+<p>But unclear if [0] is what is deployed in the <code>gcr.io/deepmath/hol-light</code> image?</p>
+<p>[0] <a href="https://github.com/brain-research/hol-light/blob/master/sandboxee.ml#L141-L144" target="_blank" title="https://github.com/brain-research/hol-light/blob/master/sandboxee.ml#L141-L144">https://github.com/brain-research/hol-light/blob/master/sandboxee.ml#L141-L144</a></p>
+
 
 {% endraw %}
 
