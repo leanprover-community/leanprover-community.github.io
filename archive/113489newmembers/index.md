@@ -9,13 +9,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (202 messages, latest: Jan 23 2020 at 15:52)
+* [Analysis tools](56566Analysistools.html) (2 messages, latest: Jan 23 2020 at 16:44)
+
+* [A clear tactic that doesn't care about dependency order](95767Acleartacticthatdoesntcareaboutdependencyorder.html) (13 messages, latest: Jan 23 2020 at 16:35)
+
+* [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (205 messages, latest: Jan 23 2020 at 16:27)
 
 * [basics](17142basics.html) (117 messages, latest: Jan 23 2020 at 14:30)
 
 * [Using `rw`](59824Usingrw.html) (13 messages, latest: Jan 23 2020 at 07:51)
-
-* [A clear tactic that doesn't care about dependency order](95767Acleartacticthatdoesntcareaboutdependencyorder.html) (10 messages, latest: Jan 22 2020 at 15:36)
 
 * [Nested datatypes and vector](12793Nesteddatatypesandvector.html) (3 messages, latest: Jan 21 2020 at 22:03)
 
