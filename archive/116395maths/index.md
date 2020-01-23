@@ -9,6 +9,10 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Integrals w.r.t. non-canonical measures](54614Integralswrtnoncanonicalmeasures.html) (1 message, latest: Jan 23 2020 at 04:41)
+
+* [linear maps over semimodule](70237linearmapsoversemimodule.html) (28 messages, latest: Jan 23 2020 at 04:27)
+
 * [Algebraic geometry course](53656Algebraicgeometrycourse.html) (115 messages, latest: Jan 22 2020 at 23:14)
 
 * [hello](47413hello.html) (31 messages, latest: Jan 22 2020 at 22:09)
@@ -24,8 +28,6 @@ permalink: archive/116395maths/index.html
 * [coercion from ℚ to ℝ](80429coercionfromto.html) (8 messages, latest: Jan 19 2020 at 10:13)
 
 * [integral domain timeout](05974integraldomaintimeout.html) (15 messages, latest: Jan 17 2020 at 20:08)
-
-* [linear maps over semimodule](70237linearmapsoversemimodule.html) (27 messages, latest: Jan 17 2020 at 20:03)
 
 * [(∀ x : U, P x) ∨ (∀ y : V, Q y) ↔ ∀ (x : U) (y : V), P x ∨ Q](49426xUPxyVQyxUyVPxQ.html) (16 messages, latest: Jan 16 2020 at 15:03)
 
