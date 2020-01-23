@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [basics](17142basics.html) (117 messages, latest: Jan 23 2020 at 14:30)
+
 * [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (199 messages, latest: Jan 23 2020 at 13:52)
 
 * [Using `rw`](59824Usingrw.html) (13 messages, latest: Jan 23 2020 at 07:51)
@@ -22,8 +24,6 @@ permalink: archive/113489newmembers/index.html
 * [elan install](21080elaninstall.html) (9 messages, latest: Jan 21 2020 at 03:19)
 
 * [Is it bug?](94679Isitbug.html) (13 messages, latest: Jan 21 2020 at 00:31)
-
-* [basics](17142basics.html) (115 messages, latest: Jan 19 2020 at 19:56)
 
 * [Create a polynomial in Z\[X\] by clearing denomiators](48288CreateapolynomialinZXbyclearingdenomiators.html) (1 message, latest: Jan 19 2020 at 18:26)
 

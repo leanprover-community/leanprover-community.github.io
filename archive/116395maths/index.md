@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (133 messages, latest: Jan 23 2020 at 14:52)
+
 * [Integrals w.r.t. non-canonical measures](54614Integralswrtnoncanonicalmeasures.html) (18 messages, latest: Jan 23 2020 at 13:56)
 
 * [continuity of division](61329continuityofdivision.html) (14 messages, latest: Jan 23 2020 at 12:06)
-
-* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (116 messages, latest: Jan 23 2020 at 08:31)
 
 * [linear maps over semimodule](70237linearmapsoversemimodule.html) (28 messages, latest: Jan 23 2020 at 04:27)
 

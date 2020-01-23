@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [simp vs rw](10028simpvsrw.html) (15 messages, latest: Jan 23 2020 at 14:57)
+
+* [old vs new structure cmd: docs](95675oldvsnewstructurecmddocs.html) (6 messages, latest: Jan 23 2020 at 14:32)
+
 * [typeclass paper](35889typeclasspaper.html) (153 messages, latest: Jan 23 2020 at 12:31)
-
-* [old vs new structure cmd: docs](95675oldvsnewstructurecmddocs.html) (3 messages, latest: Jan 23 2020 at 12:21)
-
-* [simp vs rw](10028simpvsrw.html) (13 messages, latest: Jan 23 2020 at 09:35)
 
 * [deep learning for symbolic mathematics](03624deeplearningforsymbolicmathematics.html) (15 messages, latest: Jan 23 2020 at 08:24)
 

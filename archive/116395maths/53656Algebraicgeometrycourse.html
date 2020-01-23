@@ -836,6 +836,109 @@ p.eval2 f X</code> I think. It's the canonical map with that type.</p>
 </blockquote>
 <p><span class="user-mention" data-user-id="214703">@Yury G. Kudryashov</span> I didn't mean to imply that you and Mario should do all the work. (Sorry if it came across like that.) What I meant was that you seemed to have a pretty clear view of what you wanted as an end result. So I was inviting you and Mario to lead the discussion. Once it's clear what we want, I'm willing to write a bunch of code.</p>
 
+<a name="186394059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186394059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186394059">Kevin Buzzard (Jan 23 2020 at 14:35)</a>:</h4>
+<p>Do we not have this?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">mv_polynomial</span>
+
+<span class="kn">open</span> <span class="n">mv_polynomial</span>
+
+<span class="c1">-- two evaluations of one mv_polynomial coincide, if the evaluation functions</span>
+<span class="c1">-- agree on the variables occurring in the polynomial</span>
+<span class="kn">example</span>  <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">S</span><span class="o">]</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+ <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">S</span><span class="o">)</span> <span class="o">(</span><span class="n">φ</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">S</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">n</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">vars</span> <span class="n">p</span><span class="o">,</span> <span class="n">f</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">g</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span>
+ <span class="n">eval₂</span> <span class="n">φ</span> <span class="n">f</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">eval₂</span> <span class="n">φ</span> <span class="n">g</span> <span class="n">p</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>Johan -- I'm on a train, but thanks to Mario's heroic <code>simp</code> efforts yesterday and your efforts from a few days ago, I now have a proof in the finite variable case.</p>
+
+<a name="186394192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186394192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186394192">Kevin Buzzard (Jan 23 2020 at 14:36)</a>:</h4>
+<p>The annoying thing about the example above is that so far I have never needed to penetrate the interface for <code>mv_polynomial</code>, but now I am maybe going to have to think about how the type is implemented?</p>
+
+<a name="186394443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186394443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186394443">Johan Commelin (Jan 23 2020 at 14:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I guess we don't have this. Try</p>
+<div class="codehilite"><pre><span></span><span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">p</span><span class="bp">.</span><span class="n">induction_on</span><span class="o">,</span>
+  <span class="n">all_goals</span> <span class="o">{</span><span class="n">sorry</span><span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="186394560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186394560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186394560">Kevin Buzzard (Jan 23 2020 at 14:40)</a>:</h4>
+<p>Nice idea!</p>
+
+<a name="186394581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186394581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186394581">Kevin Buzzard (Jan 23 2020 at 14:40)</a>:</h4>
+<p>I had just started with <code>unfold eval_2</code> :-) That looked much worse :-)</p>
+
+<a name="186394655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186394655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186394655">Kevin Buzzard (Jan 23 2020 at 14:41)</a>:</h4>
+<p>So apparently I am crazy trying to prove this without assuming that <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϕ</mi></mrow><annotation encoding="application/x-tex">\phi</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">ϕ</span></span></span></span> is a ring hom? I'm not sure we need it...</p>
+
+<a name="186394921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186394921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186394921">Kevin Buzzard (Jan 23 2020 at 14:44)</a>:</h4>
+<p>aargh one of the goals is not true :-/</p>
+
+<a name="186395099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186395099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186395099">Johan Commelin (Jan 23 2020 at 14:46)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I'm quite sure that you need <code>φ</code> to be a ring hom</p>
+
+<a name="186395129"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186395129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186395129">Johan Commelin (Jan 23 2020 at 14:47)</a>:</h4>
+<p>Ooh, no, you're right. You shouldn't (in theory).</p>
+
+<a name="186395142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186395142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186395142">Johan Commelin (Jan 23 2020 at 14:47)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Which goal is false?</p>
+
+<a name="186395162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186395162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186395162">Kevin Buzzard (Jan 23 2020 at 14:47)</a>:</h4>
+<p>Why? Not that it matters.</p>
+<p>Induction fails because one of the goals is</p>
+<div class="codehilite"><pre><span></span><span class="n">p0</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">n</span> <span class="n">R</span><span class="o">,</span>
+<span class="n">i</span> <span class="o">:</span> <span class="n">n</span><span class="o">,</span>
+<span class="n">hp</span> <span class="o">:</span> <span class="n">eval₂</span> <span class="n">φ</span> <span class="n">f</span> <span class="n">p0</span> <span class="bp">=</span> <span class="n">eval₂</span> <span class="n">φ</span> <span class="n">g</span> <span class="n">p0</span>
+<span class="err">⊢</span> <span class="n">eval₂</span> <span class="n">φ</span> <span class="n">f</span> <span class="o">(</span><span class="n">p0</span> <span class="bp">*</span> <span class="n">X</span> <span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="n">eval₂</span> <span class="n">φ</span> <span class="n">g</span> <span class="o">(</span><span class="n">p0</span> <span class="bp">*</span> <span class="n">X</span> <span class="n">i</span><span class="o">)</span>
+</pre></div>
+
+
+<p>and my hypothesis is that f and g agree on the variables mentioned in p, but here p0 is arbitrary.</p>
+
+<a name="186395252"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186395252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186395252">Kevin Buzzard (Jan 23 2020 at 14:48)</a>:</h4>
+<p>[sorry, on a train with sporadic connection]</p>
+
+<a name="186395489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186395489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186395489">Kevin Buzzard (Jan 23 2020 at 14:50)</a>:</h4>
+<p>In the library there is </p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">hom_eq_hom</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">γ</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">σ</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">)</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">is_semiring_hom</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">hg</span> <span class="o">:</span> <span class="n">is_semiring_hom</span> <span class="n">g</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hC</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">a</span><span class="o">:</span><span class="n">α</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">C</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">(</span><span class="n">C</span> <span class="n">a</span><span class="o">))</span> <span class="o">(</span><span class="n">hX</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">n</span><span class="o">:</span><span class="n">σ</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">X</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">(</span><span class="n">X</span> <span class="n">n</span><span class="o">))</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">σ</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">f</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">g</span> <span class="n">p</span> <span class="o">:=</span> <span class="bp">...</span>
+</pre></div>
+
+
+<p>but if the <code>p</code> were before the <code>hX</code> one could weaken <code>hX</code> and only ask that the equality held for variables in the support (in the obvious sense) of p</p>
+
+<a name="186395534"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186395534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186395534">Kevin Buzzard (Jan 23 2020 at 14:50)</a>:</h4>
+<p>I think I might have to modify the proof of <code>induction_on</code></p>
+
+<a name="186395684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186395684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186395684">Johan Commelin (Jan 23 2020 at 14:52)</a>:</h4>
+<p>Aaah, I see.</p>
+
+<a name="186395692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186395692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186395692">Johan Commelin (Jan 23 2020 at 14:52)</a>:</h4>
+<p>Annoying</p>
+
+<a name="186395708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186395708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186395708">Kevin Buzzard (Jan 23 2020 at 14:52)</a>:</h4>
+<p>I'm going in...</p>
+
 
 {% endraw %}
 

@@ -64,6 +64,24 @@ permalink: archive/113488general/10028simpvsrw.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20vs%20rw/near/186371685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10028simpvsrw.html#186371685">Anne Baanen (Jan 23 2020 at 09:35)</a>:</h4>
 <p>I've also been wanting a rewrite-under-binders tactic (I've been doing a lot of rewrites of the form <code>finset.prod s (λi, ...)</code>), so I'd be happy to program it :-)</p>
 
+<a name="186396095"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20vs%20rw/near/186396095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10028simpvsrw.html#186396095">Anne Baanen (Jan 23 2020 at 14:56)</a>:</h4>
+<p>Success:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">t</span> <span class="o">:</span> <span class="n">set</span> <span class="n">β</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">s</span><span class="o">,</span> <span class="n">f</span> <span class="err">&#39;&#39;</span> <span class="n">s</span> <span class="err">⊆</span> <span class="n">t</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">∀</span> <span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">f</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="n">t</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp_rw</span> <span class="o">[</span><span class="n">set</span><span class="bp">.</span><span class="n">image_subset_iff</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">subset_def</span><span class="o">]</span>
+</pre></div>
+
+<a name="186396192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20vs%20rw/near/186396192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10028simpvsrw.html#186396192">Anne Baanen (Jan 23 2020 at 14:57)</a>:</h4>
+<p>At this point, the tactic is just:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- `simp_rw` is a version of `simp` where rules are applied in the given order like `rw` does .-/</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">simp_rw</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">rw_rules</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">location</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+  <span class="n">q</span><span class="bp">.</span><span class="n">rules</span><span class="bp">.</span><span class="n">mmap&#39;</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">rule</span> <span class="o">:</span> <span class="n">rw_rule</span><span class="o">),</span>
+    <span class="k">if</span> <span class="n">rule</span><span class="bp">.</span><span class="n">symm</span>
+    <span class="k">then</span> <span class="n">fail</span> <span class="s2">&quot;simp_rw can only rewrite in forward direction&quot;</span>
+    <span class="k">else</span> <span class="n">simp</span> <span class="n">none</span> <span class="n">tt</span> <span class="o">[</span><span class="n">simp_arg_type</span><span class="bp">.</span><span class="n">expr</span> <span class="n">rule</span><span class="bp">.</span><span class="n">rule</span><span class="o">]</span> <span class="o">[]</span> <span class="n">l</span><span class="o">)</span> <span class="c1">-- equivalent to `simp only [rule] at l`</span>
+</pre></div>
+
 
 {% endraw %}
 
