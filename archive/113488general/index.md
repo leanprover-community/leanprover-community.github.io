@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [typeclass paper](35889typeclasspaper.html) (149 messages, latest: Jan 23 2020 at 11:50)
+* [typeclass paper](35889typeclasspaper.html) (153 messages, latest: Jan 23 2020 at 12:31)
 
-* [old vs new structure cmd: docs](95675oldvsnewstructurecmddocs.html) (2 messages, latest: Jan 23 2020 at 11:46)
+* [old vs new structure cmd: docs](95675oldvsnewstructurecmddocs.html) (3 messages, latest: Jan 23 2020 at 12:21)
 
 * [simp vs rw](10028simpvsrw.html) (13 messages, latest: Jan 23 2020 at 09:35)
 
