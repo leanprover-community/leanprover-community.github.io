@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Using `rw`](59824Usingrw.html) (4 messages, latest: Jan 22 2020 at 23:55)
+* [Using `rw`](59824Usingrw.html) (12 messages, latest: Jan 23 2020 at 00:58)
 
 * [A clear tactic that doesn't care about dependency order](95767Acleartacticthatdoesntcareaboutdependencyorder.html) (10 messages, latest: Jan 22 2020 at 15:36)
 

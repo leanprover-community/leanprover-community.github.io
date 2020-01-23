@@ -37,6 +37,76 @@ permalink: archive/113489newmembers/59824Usingrw.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20%60rw%60/near/186344454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/59824Usingrw.html#186344454">Yury G. Kudryashov (Jan 22 2020 at 23:55)</a>:</h4>
 <p><code>nat</code> is defined as an inductive type, and all constructors are injective by definition.</p>
 
+<a name="186345949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20%60rw%60/near/186345949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/59824Usingrw.html#186345949">Mario Carneiro (Jan 23 2020 at 00:16)</a>:</h4>
+<p>The proof of injectivity of constructors is somewhat involved. The core theorem is called <code>nat.no_confusion</code>, and it's defined from the recursor</p>
+
+<a name="186346168"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20%60rw%60/near/186346168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/59824Usingrw.html#186346168">Yury G. Kudryashov (Jan 23 2020 at 00:20)</a>:</h4>
+<p>This theorem has an unreadable type that basically says "all constructors are injective".</p>
+
+<a name="186346450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20%60rw%60/near/186346450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/59824Usingrw.html#186346450">Mario Carneiro (Jan 23 2020 at 00:26)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c1">-- first, consider the following definition:</span>
+<span class="c1">-- def nat.injected : nat → nat → Prop</span>
+<span class="c1">-- | 0 0 := true</span>
+<span class="c1">-- | (m + 1) (n + 1) := m = n</span>
+<span class="c1">-- | _ _ := false</span>
+
+<span class="c1">-- which we write using the recursor because we aren&#39;t assuming</span>
+<span class="c1">-- the equation compiler</span>
+<span class="n">def</span> <span class="n">nat</span><span class="bp">.</span><span class="n">injected</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">rec</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">rec</span> <span class="n">true</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">false</span><span class="o">)</span> <span class="n">n</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">m</span> <span class="n">IH</span> <span class="n">n</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">rec</span> <span class="n">false</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span> <span class="bp">_</span><span class="o">,</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">n</span><span class="o">)</span> <span class="n">n</span><span class="o">)</span>
+  <span class="n">m</span> <span class="n">n</span>
+
+<span class="c1">-- Now we prove by cases that this follows from equality, by a one argument recursion</span>
+<span class="kn">theorem</span> <span class="n">nat</span><span class="bp">.</span><span class="n">injected_of_eq</span> <span class="o">{</span><span class="n">m</span> <span class="n">n</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">injected</span> <span class="n">m</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="n">suffices</span> <span class="n">nat</span><span class="bp">.</span><span class="n">injected</span> <span class="n">m</span> <span class="n">m</span><span class="o">,</span> <span class="k">from</span> <span class="n">h</span> <span class="bp">▸</span> <span class="n">this</span><span class="o">,</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">rec</span> <span class="n">trivial</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span> <span class="bp">_</span><span class="o">,</span> <span class="n">rfl</span><span class="o">)</span> <span class="n">m</span>
+
+<span class="c1">-- And now we observe that injectivity follows:</span>
+<span class="kn">theorem</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_inj&#39;</span> <span class="o">{</span><span class="n">m</span> <span class="n">n</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">injected_of_eq</span> <span class="n">h</span>
+</pre></div>
+
+<a name="186346599"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20%60rw%60/near/186346599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/59824Usingrw.html#186346599">Mario Carneiro (Jan 23 2020 at 00:29)</a>:</h4>
+<p>The version you see in <code>nat.no_confusion</code> and <code>nat.no_confusion_type</code> is the same argument, but written in a way that generalizes to arbitrary inductive types</p>
+
+<a name="186346726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20%60rw%60/near/186346726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/59824Usingrw.html#186346726">Mario Carneiro (Jan 23 2020 at 00:31)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c1">-- This is also how you can show that zero is not a successor</span>
+<span class="kn">theorem</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_ne_zero&#39;</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">injected_of_eq</span> <span class="n">h</span>
+</pre></div>
+
+<a name="186347563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20%60rw%60/near/186347563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/59824Usingrw.html#186347563">Daniel Keys (Jan 23 2020 at 00:46)</a>:</h4>
+<p>This helps! Where, i.e. in what file, is <code>succ_inj</code> defined in the LEAN source code?</p>
+
+<a name="186348077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20%60rw%60/near/186348077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/59824Usingrw.html#186348077">Mario Carneiro (Jan 23 2020 at 00:56)</a>:</h4>
+<p>You can ctrl-click on things in vscode to find them, but it probably won't help much in this case. <code>nat.succ_inj</code> is defined in <code>init.data.nat.lemmas</code>, but it is just an alias:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">succ_inj</span> <span class="o">{</span><span class="n">n</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">succ</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">m</span> <span class="o">:=</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">succ</span><span class="bp">.</span><span class="n">inj_arrow</span> <span class="n">H</span> <span class="n">id</span>
+</pre></div>
+
+
+<p>where <code>nat.succ.inj_arrow</code> is an automatically generated lemma that is created when <code>nat</code> itself is written down</p>
+
+<a name="186348177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20%60rw%60/near/186348177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/59824Usingrw.html#186348177">Mario Carneiro (Jan 23 2020 at 00:58)</a>:</h4>
+<p>Here is the stack of definitions involved. All of these except the first are autogenerated</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">print</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_inj</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span><span class="bp">.</span><span class="n">inj_arrow</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span><span class="bp">.</span><span class="n">inj</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">nat</span><span class="bp">.</span><span class="n">no_confusion</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">nat</span><span class="bp">.</span><span class="n">no_confusion_type</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cases_on</span>
+</pre></div>
+
 
 {% endraw %}
 
