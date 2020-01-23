@@ -690,6 +690,68 @@ On the other hand, they have also been an obscure feature for a long time in Coq
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186346825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186346825">Mario Carneiro (Jan 23 2020 at 00:32)</a>:</h4>
 <p>Some of that is legacy from the core/mathlib split</p>
 
+<a name="186371396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186371396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186371396">Patrick Massot (Jan 23 2020 at 09:30)</a>:</h4>
+<p>We still have one example when canonical structures do something we have never been able to do with type classes: math-comp's bigop. They have a big operators library which is completely generic in the operator. This requires having lemmas whose input are predicates like <code>is_associative</code> and <code>is_commutative</code>. Such things were tried with type classes, there are remnants in the core library, but it never took off. My understanding is we always need some constant head symbol, like <code>has_add.add</code> instead of a mysterious operator <code>op</code> and a type class <code>[is_associative op]</code>.</p>
+
+<a name="186371459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186371459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186371459">Patrick Massot (Jan 23 2020 at 09:31)</a>:</h4>
+<p>In this bigop library they can prove one lemma covering big sums, big products, big intersection, big direct sum of modules etc where we have separate lemmas for each case (with giant holes in the API until someone needs each specific case).</p>
+
+<a name="186371562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186371562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186371562">Patrick Massot (Jan 23 2020 at 09:33)</a>:</h4>
+<p>But there is a huge barrier to trying canonical structures, we would need to rewrite the whole library. At the end of summer there was almost enough incentive with all the type class resolution failure or crazy timing. But then Daniel came and promised all this will be solved in Lean 4 so we wait.</p>
+
+<a name="186372534"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186372534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186372534">Gabriel Ebner (Jan 23 2020 at 09:48)</a>:</h4>
+<blockquote>
+<p>My understanding is we always need some constant head symbol, like has_add.add instead of a mysterious operator op</p>
+</blockquote>
+<p>This is only true for the simplifier, which looks up the simp lemmas by the name of the head symbol. I don't think that's a problem to develop generic bigops.  BTW, we have a type class <code>is_associative</code> and also instances like <code>is_associative (*)</code> for semigroups, etc.</p>
+
+<a name="186372701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186372701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186372701">Johan Commelin (Jan 23 2020 at 09:51)</a>:</h4>
+<p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> Could you please clarify. Should <code>simp</code>-lemmas have these constant head symbols, or only the terms that we are matching?</p>
+
+<a name="186372765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186372765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186372765">Johan Commelin (Jan 23 2020 at 09:52)</a>:</h4>
+<p>Because I think <span class="user-mention" data-user-id="110031">@Patrick Massot</span> would like a world where you state a lemma for a generic <code>op</code> and then use it in the simplifier when applying it to some <code>has_add.add</code> occurence.</p>
+
+<a name="186372842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186372842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186372842">Gabriel Ebner (Jan 23 2020 at 09:53)</a>:</h4>
+<p>Errm, both:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="bp">...</span> <span class="o">:</span> <span class="n">r</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">↔</span> <span class="n">r</span> <span class="n">y</span> <span class="n">x</span> <span class="o">:=</span> <span class="bp">...</span> <span class="c1">-- bad since relation `r` is not a constant</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">[</span><span class="n">is_associative</span> <span class="n">f</span><span class="o">]</span> <span class="bp">...</span> <span class="o">:</span>
+  <span class="n">f</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="o">(</span><span class="n">f</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span>  <span class="o">:=</span> <span class="bp">...</span> <span class="c1">-- bad since head symbol `f` of lhs is not a constant</span>
+</pre></div>
+
+<a name="186372973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186372973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186372973">Johan Commelin (Jan 23 2020 at 09:55)</a>:</h4>
+<p>Ok. so that's bad. Because it means we have to state each lemma 5 times, instead of once.</p>
+
+<a name="186372984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186372984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186372984">Johan Commelin (Jan 23 2020 at 09:55)</a>:</h4>
+<p>Which is exactly the situation that Patrick is describing.</p>
+
+<a name="186373047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186373047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186373047">Anne Baanen (Jan 23 2020 at 09:56)</a>:</h4>
+<p>If we replaced <code>finset.prod</code> with <code>finset.bigop (*)</code>, then <code>finset.bigop</code> would be the head symbol, no?</p>
+
+<a name="186373049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186373049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186373049">Johan Commelin (Jan 23 2020 at 09:56)</a>:</h4>
+<p>Of course we could try to generalise the proofs, but it's clear that in this regard our setup with typeclasses is suboptimal.</p>
+
+<a name="186373152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186373152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186373152">Johan Commelin (Jan 23 2020 at 09:58)</a>:</h4>
+<blockquote>
+<p>If we replaced <code>finset.prod</code> with <code>finset.bigop (*)</code>, then <code>finset.bigop</code> would be the head symbol, no?</p>
+</blockquote>
+<p>Aha, I guess that might work, but it would mean a step down in readability.</p>
+
+<a name="186373218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186373218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186373218">Johan Commelin (Jan 23 2020 at 09:59)</a>:</h4>
+<p>If <code>finset.prod</code> is than made an <code>abbreviation</code> of <code>finset.bigop (*)</code> and simp-lemmas can see through such an abbreviation, then it might work. But I'm not sure if that actually works.</p>
+
 
 {% endraw %}
 

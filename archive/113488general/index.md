@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [typeclass paper](35889typeclasspaper.html) (137 messages, latest: Jan 23 2020 at 09:59)
+
+* [simp vs rw](10028simpvsrw.html) (13 messages, latest: Jan 23 2020 at 09:35)
+
 * [deep learning for symbolic mathematics](03624deeplearningforsymbolicmathematics.html) (15 messages, latest: Jan 23 2020 at 08:24)
 
 * [Verifying X86 Instructions](52655VerifyingX86Instructions.html) (1 message, latest: Jan 23 2020 at 02:20)
-
-* [typeclass paper](35889typeclasspaper.html) (124 messages, latest: Jan 23 2020 at 00:32)
-
-* [simp vs rw](10028simpvsrw.html) (12 messages, latest: Jan 22 2020 at 23:17)
 
 * [Congruence closure](82087Congruenceclosure.html) (9 messages, latest: Jan 21 2020 at 21:40)
 

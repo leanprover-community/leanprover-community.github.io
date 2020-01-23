@@ -1529,6 +1529,37 @@ invalid reference to undefined universe level parameter &#39;u_1&#39;
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/186296511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#186296511">Marc Masdeu (Jan 22 2020 at 15:26)</a>:</h4>
 <p>It turns out that cocalc had issues with some sort of caching. I restarted everything and the complaint went away... Thanks <span class="user-mention" data-user-id="110031">@Patrick Massot</span> !</p>
 
+<a name="186371280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/186371280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#186371280">Marc Masdeu (Jan 23 2020 at 09:29)</a>:</h4>
+<p>This question should be quick: I have the state:</p>
+<div class="codehilite"><pre><span></span><span class="err">Ω</span> <span class="o">:</span> <span class="n">HilbertPlane</span><span class="o">,</span>
+<span class="n">A</span> <span class="o">:</span> <span class="n">HilbertPlane</span><span class="bp">.</span><span class="n">Point</span>
+<span class="err">⊢</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="n">HilbertPlane</span><span class="bp">.</span><span class="n">Point</span> <span class="bp">|</span> <span class="n">A</span> <span class="bp">*</span> <span class="n">C</span><span class="bp">*</span><span class="n">A</span><span class="o">}</span> <span class="bp">=</span> <span class="err">∅</span>
+</pre></div>
+
+
+<p>This is a trivial statement, directly following from the axiom:</p>
+<div class="codehilite"><pre><span></span>    <span class="o">(</span><span class="n">B12</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="n">C</span> <span class="o">:</span> <span class="n">Point</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">A</span> <span class="bp">*</span> <span class="n">B</span> <span class="bp">*</span> <span class="n">C</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">A</span> <span class="bp">≠</span> <span class="n">B</span> <span class="bp">∧</span> <span class="n">A</span> <span class="bp">≠</span> <span class="n">C</span> <span class="bp">∧</span> <span class="n">B</span> <span class="bp">≠</span> <span class="n">C</span> <span class="bp">∧</span> <span class="n">collinear</span> <span class="n">A</span> <span class="n">B</span> <span class="n">C</span><span class="o">))</span>
+</pre></div>
+
+
+<p>but I don't see how to do it in Lean. I would like to say to Lean:<br>
+1) Let C be a point in the left set.<br>
+2) By B12 A B A we have A \neq A, contradiction.</p>
+
+<a name="186371793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/186371793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#186371793">Patrick Massot (Jan 23 2020 at 09:36)</a>:</h4>
+<p>A generic start would be <code>ext C, suffices : ¬ A*C*A, by simpa,</code>.</p>
+
+<a name="186371934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/186371934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#186371934">Marc Masdeu (Jan 23 2020 at 09:39)</a>:</h4>
+<p>The ext C is what I didn't know...</p>
+
+<a name="186372997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/186372997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#186372997">Marc Masdeu (Jan 23 2020 at 09:56)</a>:</h4>
+<p>I then intro'd h : A * C * A<br>
+I want to apply B12's second inequality (one of the 4 and statements). I try <code>have g : HilbertPlane.B12 A C A,</code> but it doesn't work.</p>
+
 
 {% endraw %}
 
