@@ -1574,6 +1574,48 @@ I want to apply B12's second inequality (one of the 4 and statements). I try <co
 
 <p>I even found something called <code>set.inter_singleton_eq_empty</code>,  which looks like would finish this instantly. But I don't now how to apply it.</p>
 
+<a name="186378292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/186378292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#186378292">Johan Commelin (Jan 23 2020 at 11:11)</a>:</h4>
+<p><span class="user-mention" data-user-id="254058">@Marc Masdeu</span> That name reads like the singleton is on the right hand side of <code>∩</code></p>
+
+<a name="186378304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/186378304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#186378304">Johan Commelin (Jan 23 2020 at 11:11)</a>:</h4>
+<p>Is there also <code>set.singleton_inter_eq_empty</code>?</p>
+
+<a name="186378312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/186378312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#186378312">Johan Commelin (Jan 23 2020 at 11:11)</a>:</h4>
+<p>Otherwise, maybe <code>rw set.inter_comm</code>?</p>
+
+<a name="186378321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/186378321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#186378321">Johan Commelin (Jan 23 2020 at 11:11)</a>:</h4>
+<p>(I just made up that name, but it should exist.)</p>
+
+<a name="186378380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/186378380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#186378380">Johan Commelin (Jan 23 2020 at 11:12)</a>:</h4>
+<p>Also <code>squeeze_simp [h]</code> might be able to help</p>
+
+<a name="186378532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/186378532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#186378532">Marc Masdeu (Jan 23 2020 at 11:15)</a>:</h4>
+<blockquote>
+<p>Otherwise, maybe <code>rw set.inter_comm</code>?</p>
+</blockquote>
+<p>This worked! So I finished it with:</p>
+<div class="codehilite"><pre><span></span><span class="n">rw</span> <span class="n">set</span><span class="bp">.</span><span class="n">inter_comm</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">set</span><span class="bp">.</span><span class="n">inter_singleton_eq_empty</span><span class="o">,</span>
+<span class="n">exact</span> <span class="n">h1</span><span class="o">,</span>
+</pre></div>
+
+
+<p>Great!</p>
+
+<a name="186379838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/186379838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#186379838">Johan Commelin (Jan 23 2020 at 11:36)</a>:</h4>
+<p><span class="user-mention" data-user-id="254058">@Marc Masdeu</span> Does this mean that <code>set.singleton_inter_eq_empty</code> is missing? If so, that's a (tiny) hole in the library</p>
+
+<a name="186380832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/formalizing%20Hilbert%27s%20axioms%20for%20plane%20geometry/near/186380832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/57307formalizingHilbertsaxiomsforplanegeometry.html#186380832">Marc Masdeu (Jan 23 2020 at 11:54)</a>:</h4>
+<p>It does exist, and it clears the goal in one less line :-).</p>
+
 
 {% endraw %}
 

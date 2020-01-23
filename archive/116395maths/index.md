@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [continuity of division](61329continuityofdivision.html) (10 messages, latest: Jan 23 2020 at 11:50)
+
 * [Integrals w.r.t. non-canonical measures](54614Integralswrtnoncanonicalmeasures.html) (4 messages, latest: Jan 23 2020 at 08:33)
 
 * [Algebraic geometry course](53656Algebraicgeometrycourse.html) (116 messages, latest: Jan 23 2020 at 08:31)

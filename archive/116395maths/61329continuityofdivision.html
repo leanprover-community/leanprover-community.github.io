@@ -1,0 +1,79 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/61329continuityofdivision.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/61329continuityofdivision.html">continuity of division</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186378827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuity%20of%20division/near/186378827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61329continuityofdivision.html#186378827">Chris Hughes (Jan 23 2020 at 11:20)</a>:</h4>
+<p>What's the canonical way of stating and proving this? I got stuck on the division.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="o">{</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">×</span> <span class="n">ℝ</span> <span class="bp">//</span> <span class="n">x</span> <span class="bp">≠</span> <span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span> <span class="o">},</span>
+  <span class="o">(</span><span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span> <span class="bp">/</span> <span class="o">(</span><span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="mi">1</span><span class="err">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="mi">2</span><span class="err">^</span><span class="mi">2</span><span class="o">))</span> <span class="o">:=</span>
+<span class="n">continuous</span><span class="bp">.</span><span class="n">mul</span>
+  <span class="o">(</span><span class="n">continuous</span><span class="bp">.</span><span class="n">mul</span>
+    <span class="o">(</span><span class="n">continuous_fst</span><span class="bp">.</span><span class="n">comp</span> <span class="n">continuous_subtype_val</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">continuous_snd</span><span class="bp">.</span><span class="n">comp</span> <span class="n">continuous_subtype_val</span><span class="o">))</span>
+  <span class="k">begin</span>
+
+
+  <span class="kn">end</span>
+</pre></div>
+
+<a name="186379339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuity%20of%20division/near/186379339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61329continuityofdivision.html#186379339">Sebastien Gouezel (Jan 23 2020 at 11:29)</a>:</h4>
+<p>Do you really want to use a subtype, instead of <code>continuous_on</code>?</p>
+
+<a name="186379602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuity%20of%20division/near/186379602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61329continuityofdivision.html#186379602">Chris Hughes (Jan 23 2020 at 11:33)</a>:</h4>
+<p>Not particularly, I have no preference.</p>
+
+<a name="186379872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuity%20of%20division/near/186379872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61329continuityofdivision.html#186379872">Reid Barton (Jan 23 2020 at 11:37)</a>:</h4>
+<p>maybe something like</p>
+<div class="codehilite"><pre><span></span>  <span class="k">begin</span>
+    <span class="k">let</span> <span class="n">f</span> <span class="o">:</span> <span class="o">{</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">×</span> <span class="n">ℝ</span> <span class="bp">//</span> <span class="n">x</span> <span class="bp">≠</span> <span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span> <span class="o">}</span> <span class="bp">→</span> <span class="o">{</span> <span class="n">y</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">//</span> <span class="n">y</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="o">}</span> <span class="o">:=</span>
+      <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="mi">1</span><span class="err">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="mi">2</span><span class="err">^</span><span class="mi">2</span><span class="o">,</span> <span class="n">sorry</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="k">have</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">f</span> <span class="o">:=</span> <span class="n">continuous_subtype_mk</span> <span class="bp">_</span> <span class="n">sorry</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="o">(</span><span class="k">show</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="n">continuous</span><span class="bp">.</span><span class="n">comp</span> <span class="n">real</span><span class="bp">.</span><span class="n">continuous_inv</span> <span class="n">this</span><span class="o">),</span>
+  <span class="kn">end</span>
+</pre></div>
+
+<a name="186379963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuity%20of%20division/near/186379963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61329continuityofdivision.html#186379963">Chris Hughes (Jan 23 2020 at 11:39)</a>:</h4>
+<p><code>real.continuous.inv</code> seems to do the trick.</p>
+
+<a name="186379979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuity%20of%20division/near/186379979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61329continuityofdivision.html#186379979">Chris Hughes (Jan 23 2020 at 11:39)</a>:</h4>
+<p>But there should probably be a <code>real.continuous_on_inv</code> as well.</p>
+
+<a name="186380183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuity%20of%20division/near/186380183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61329continuityofdivision.html#186380183">Chris Hughes (Jan 23 2020 at 11:43)</a>:</h4>
+<p>One day a tactic will do this for me<br>
+<code>x₁ x₂ : ℝ,
+hx : (x₁, x₂) ≠ (0, 0)
+⊢ ¬x₁ ^ 2 + x₂ ^ 2 = 0</code></p>
+
+<a name="186380459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuity%20of%20division/near/186380459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61329continuityofdivision.html#186380459">Johan Commelin (Jan 23 2020 at 11:48)</a>:</h4>
+<p>That would be nice. A <code>real_field</code> tactic?</p>
+
+<a name="186380479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuity%20of%20division/near/186380479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61329continuityofdivision.html#186380479">Johan Commelin (Jan 23 2020 at 11:48)</a>:</h4>
+<p>Or maybe <code>linear_ordered_field</code> or something like that.</p>
+
+<a name="186380579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuity%20of%20division/near/186380579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61329continuityofdivision.html#186380579">Johan Commelin (Jan 23 2020 at 11:50)</a>:</h4>
+<p>What is the natural structure in which squares are positive?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
