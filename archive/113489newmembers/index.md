@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (176 messages, latest: Jan 23 2020 at 09:56)
+* [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (177 messages, latest: Jan 23 2020 at 10:41)
 
 * [Using `rw`](59824Usingrw.html) (13 messages, latest: Jan 23 2020 at 07:51)
 

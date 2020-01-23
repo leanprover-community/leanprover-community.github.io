@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [typeclass paper](35889typeclasspaper.html) (137 messages, latest: Jan 23 2020 at 09:59)
+* [typeclass paper](35889typeclasspaper.html) (147 messages, latest: Jan 23 2020 at 10:12)
 
 * [simp vs rw](10028simpvsrw.html) (13 messages, latest: Jan 23 2020 at 09:35)
 

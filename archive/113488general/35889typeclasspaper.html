@@ -752,6 +752,46 @@ On the other hand, they have also been an obscure feature for a long time in Coq
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186373218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186373218">Johan Commelin (Jan 23 2020 at 09:59)</a>:</h4>
 <p>If <code>finset.prod</code> is than made an <code>abbreviation</code> of <code>finset.bigop (*)</code> and simp-lemmas can see through such an abbreviation, then it might work. But I'm not sure if that actually works.</p>
 
+<a name="186373401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186373401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186373401">Johan Commelin (Jan 23 2020 at 10:01)</a>:</h4>
+<p>I tried something like this in a commit on folding min and max: <a href="https://github.com/leanprover-community/mathlib/commit/b031290b228838d5e779908b129420331bb131c5" target="_blank" title="https://github.com/leanprover-community/mathlib/commit/b031290b228838d5e779908b129420331bb131c5">https://github.com/leanprover-community/mathlib/commit/b031290b228838d5e779908b129420331bb131c5</a></p>
+
+<a name="186373503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186373503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186373503">Patrick Massot (Jan 23 2020 at 10:02)</a>:</h4>
+<p>Sure, we can have <code>finset.bigop (*)</code> and a notation for that. But then the library would still need lemmas about the generic <code>op</code> and the simplifier wouldn't trigger</p>
+
+<a name="186373507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186373507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186373507">Johan Commelin (Jan 23 2020 at 10:02)</a>:</h4>
+<p>More than half of that commit is stating specialised versions of the two general lemmas, and even the two general lemmas ought to be unified.</p>
+
+<a name="186373527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186373527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186373527">Patrick Massot (Jan 23 2020 at 10:03)</a>:</h4>
+<p>See also <a href="https://github.com/PatrickMassot/bigop/blob/master/src/bigop.lean" target="_blank" title="https://github.com/PatrickMassot/bigop/blob/master/src/bigop.lean">https://github.com/PatrickMassot/bigop/blob/master/src/bigop.lean</a> for my old attempt to port the bigop library</p>
+
+<a name="186373569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186373569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186373569">Johan Commelin (Jan 23 2020 at 10:04)</a>:</h4>
+<p>Could we have attributes that state the specialised simp-lemmas after the generic <code>op</code> version?</p>
+
+<a name="186373643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186373643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186373643">Patrick Massot (Jan 23 2020 at 10:04)</a>:</h4>
+<p>It sorts of work (although it faces elaboration issues). But then you need to actually use it in the middle of other proofs where you expect the simplifier to work.</p>
+
+<a name="186373670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186373670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186373670">Sebastian Ullrich (Jan 23 2020 at 10:05)</a>:</h4>
+<p>Yes, that was one idea for making the simplifier work with more unbundled typeclasses. Throw a metaprogram at it.</p>
+
+<a name="186373692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186373692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186373692">Sebastian Ullrich (Jan 23 2020 at 10:05)</a>:</h4>
+<p>The specialized lemmas would be generated eagerly</p>
+
+<a name="186374274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186374274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186374274">Sebastien Gouezel (Jan 23 2020 at 10:12)</a>:</h4>
+<p>Or craft an attribute on the generic lemmas that would generate the versions for sums, products, unions, and so on, which would be generic enough that one can add new instances to the attributes (for instance max), and then all the lemmas would become available right away for max.</p>
+
+<a name="186374298"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20paper/near/186374298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35889typeclasspaper.html#186374298">Sebastien Gouezel (Jan 23 2020 at 10:12)</a>:</h4>
+<p>Oups, Johan just said this two messages ago!</p>
+
 
 {% endraw %}
 
