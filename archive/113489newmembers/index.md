@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Using `rw`](59824Usingrw.html) (4 messages, latest: Jan 22 2020 at 23:55)
+
 * [A clear tactic that doesn't care about dependency order](95767Acleartacticthatdoesntcareaboutdependencyorder.html) (10 messages, latest: Jan 22 2020 at 15:36)
 
 * [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (172 messages, latest: Jan 22 2020 at 15:26)

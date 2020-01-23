@@ -1,0 +1,66 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/10028simpvsrw.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/10028simpvsrw.html">simp vs rw</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186341187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20vs%20rw/near/186341187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10028simpvsrw.html#186341187">Yury G. Kudryashov (Jan 22 2020 at 23:07)</a>:</h4>
+<p>Hi, is there a command that can do rewrites inside <code>forall</code> / <code>exists</code> (like <code>simp</code>) but does them in a predictable order (like <code>rw</code>)?</p>
+
+<a name="186341282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20vs%20rw/near/186341282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10028simpvsrw.html#186341282">Kevin Buzzard (Jan 22 2020 at 23:08)</a>:</h4>
+<p>You mean without using <code>conv</code>?</p>
+
+<a name="186341300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20vs%20rw/near/186341300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10028simpvsrw.html#186341300">Yury G. Kudryashov (Jan 22 2020 at 23:09)</a>:</h4>
+<p>Yes.</p>
+
+<a name="186341446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20vs%20rw/near/186341446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10028simpvsrw.html#186341446">Yury G. Kudryashov (Jan 22 2020 at 23:10)</a>:</h4>
+<p>I just want to simplify <code>f '' s ⊆ t</code> to <code>∀ x ∈ s, f x ∈ t</code> inside <code>∀</code>. <code>rw</code> can't do it, and <code>simp only [image_subset_iff, subset_def]</code> applies the latter lemma first.</p>
+
+<a name="186341485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20vs%20rw/near/186341485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10028simpvsrw.html#186341485">Yury G. Kudryashov (Jan 22 2020 at 23:11)</a>:</h4>
+<p>Currently I write <code>simp only [image_subset_iff], simp only [subset_def, mem_preimage] </code></p>
+
+<a name="186341508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20vs%20rw/near/186341508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10028simpvsrw.html#186341508">Mario Carneiro (Jan 22 2020 at 23:11)</a>:</h4>
+<p>oof, kevin beat me with the <code>conv</code></p>
+
+<a name="186341569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20vs%20rw/near/186341569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10028simpvsrw.html#186341569">Mario Carneiro (Jan 22 2020 at 23:12)</a>:</h4>
+<p>use <code>conv rw</code></p>
+
+<a name="186341622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20vs%20rw/near/186341622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10028simpvsrw.html#186341622">Yury G. Kudryashov (Jan 22 2020 at 23:13)</a>:</h4>
+<p>Do you mean <code>conv { (navigate), rw }</code>?</p>
+
+<a name="186341749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20vs%20rw/near/186341749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10028simpvsrw.html#186341749">Yury G. Kudryashov (Jan 22 2020 at 23:15)</a>:</h4>
+<p>I wanted to avoid explicit navigation.</p>
+
+<a name="186341795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20vs%20rw/near/186341795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10028simpvsrw.html#186341795">Yury G. Kudryashov (Jan 22 2020 at 23:15)</a>:</h4>
+<p>It's inside 4 levels of <code>forall</code>, so I'll just stick to <code>simp only [], simp only []</code>.</p>
+
+<a name="186341908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20vs%20rw/near/186341908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10028simpvsrw.html#186341908">Kevin Buzzard (Jan 22 2020 at 23:17)</a>:</h4>
+<p>It's <code>set.ball_image_iff</code> if that helps...</p>
+
+<a name="186341921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20vs%20rw/near/186341921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10028simpvsrw.html#186341921">Mario Carneiro (Jan 22 2020 at 23:17)</a>:</h4>
+<p>I guess it would not be hard to write a wrapper that looks like <code>rw [a, b]</code> and does <code>simp only [a], simp only [b]</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

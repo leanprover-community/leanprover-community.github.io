@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (102 messages, latest: Jan 22 2020 at 22:55)
+* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (115 messages, latest: Jan 22 2020 at 23:14)
 
 * [hello](47413hello.html) (31 messages, latest: Jan 22 2020 at 22:09)
 

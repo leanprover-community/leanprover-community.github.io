@@ -744,6 +744,91 @@ p.eval2 f X</code> I think. It's the canonical map with that type.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186340347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186340347">Mario Carneiro (Jan 22 2020 at 22:55)</a>:</h4>
 <p>oh, nvm</p>
 
+<a name="186340931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186340931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186340931">Mario Carneiro (Jan 22 2020 at 23:03)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">option_equiv_right_CX</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">option_equiv_right</span> <span class="n">α</span> <span class="n">β</span> <span class="o">(</span><span class="n">X</span> <span class="n">none</span><span class="o">)</span> <span class="bp">=</span> <span class="n">C</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span> <span class="o">:=</span>
+<span class="k">show</span> <span class="n">map</span> <span class="o">(</span><span class="n">eval₂</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">C</span> <span class="o">(</span><span class="bp">λ</span><span class="n">u</span><span class="o">:</span><span class="n">punit</span><span class="o">,</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">sum_to_iter</span> <span class="n">α</span> <span class="n">β</span> <span class="n">unit</span>
+    <span class="o">(</span><span class="n">rename</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">option_equiv_sum_punit</span><span class="bp">._</span><span class="n">match_1</span> <span class="n">β</span><span class="o">)</span>
+      <span class="o">(</span><span class="n">X</span> <span class="n">none</span><span class="o">)))</span> <span class="bp">=</span> <span class="n">C</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span><span class="o">,</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">sum_to_iter_Xr</span><span class="o">]</span>
+</pre></div>
+
+
+<p><code>sum_to_iter_Xr</code> should be a simp lemma</p>
+
+<a name="186340988"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186340988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186340988">Kevin Buzzard (Jan 22 2020 at 23:04)</a>:</h4>
+<p>oh nice!</p>
+
+<a name="186341012"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186341012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186341012">Mario Carneiro (Jan 22 2020 at 23:04)</a>:</h4>
+<p>also <code>punit_ring_equiv</code> and like all the other involved functions should have definitional lemmas so I don't have to manually unfold them like this</p>
+
+<a name="186341158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186341158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186341158">Kevin Buzzard (Jan 22 2020 at 23:06)</a>:</h4>
+<p>To people not reading the details: what is happening here is that Lean has four(!) different ways of storing <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo stretchy="false">[</mo><mi>X</mi><mo stretchy="false">]</mo><mo stretchy="false">[</mo><mi>n</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">R[X][n]</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault">n</span><span class="mclose">]</span></span></span></span> where <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span></span></span> is one variable and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> is a set of variables; it's polynomials with coefficients in <code>option n</code>, or in <code>n + punit</code>, or polynomials in variables <code>n</code> over base ring <code>R[X]</code>, or polynomials in variables <code>n</code> over polynomials in variables <code>punit</code></p>
+
+<a name="186341171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186341171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186341171">Kevin Buzzard (Jan 22 2020 at 23:06)</a>:</h4>
+<p>Of course, all of these are the same, and humans find it extremely easy to switch between representations at the drop of a hat</p>
+
+<a name="186341314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186341314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186341314">Mario Carneiro (Jan 22 2020 at 23:09)</a>:</h4>
+<p>the other case is similar, luckily:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">option_equiv_right_X_none</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">option_equiv_right</span> <span class="n">α</span> <span class="n">β</span> <span class="o">(</span><span class="n">X</span> <span class="n">none</span><span class="o">)</span> <span class="bp">=</span> <span class="n">C</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span> <span class="o">:=</span>
+<span class="k">show</span> <span class="n">map</span> <span class="o">(</span><span class="n">eval₂</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">C</span> <span class="o">(</span><span class="bp">λ</span><span class="n">u</span><span class="o">:</span><span class="n">punit</span><span class="o">,</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">sum_to_iter</span> <span class="n">α</span> <span class="n">β</span> <span class="n">unit</span>
+    <span class="o">(</span><span class="n">rename</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">option_equiv_sum_punit</span><span class="bp">._</span><span class="n">match_1</span> <span class="n">β</span><span class="o">)</span>
+      <span class="o">(</span><span class="n">X</span> <span class="n">none</span><span class="o">)))</span> <span class="bp">=</span> <span class="n">C</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span><span class="o">,</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">sum_to_iter_Xr</span><span class="o">]</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">option_equiv_right_X_some</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">option_equiv_right</span> <span class="n">α</span> <span class="n">β</span> <span class="o">(</span><span class="n">X</span> <span class="o">(</span><span class="n">some</span> <span class="n">b</span><span class="o">))</span> <span class="bp">=</span> <span class="n">X</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">show</span> <span class="n">map</span> <span class="o">(</span><span class="n">eval₂</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">C</span> <span class="o">(</span><span class="bp">λ</span><span class="n">u</span><span class="o">:</span><span class="n">punit</span><span class="o">,</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">sum_to_iter</span> <span class="n">α</span> <span class="n">β</span> <span class="n">unit</span>
+    <span class="o">(</span><span class="n">rename</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">option_equiv_sum_punit</span><span class="bp">._</span><span class="n">match_1</span> <span class="n">β</span><span class="o">)</span>
+      <span class="o">(</span><span class="n">X</span> <span class="o">(</span><span class="n">some</span> <span class="n">b</span><span class="o">))))</span> <span class="bp">=</span> <span class="n">X</span> <span class="n">b</span><span class="o">,</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">sum_to_iter_Xl</span><span class="o">]</span>
+</pre></div>
+
+<a name="186341455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186341455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186341455">Mario Carneiro (Jan 22 2020 at 23:10)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">option_equiv_right_C</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">option_equiv_right</span> <span class="n">α</span> <span class="n">β</span> <span class="o">(</span><span class="n">C</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="n">C</span> <span class="o">(</span><span class="n">polynomial</span><span class="bp">.</span><span class="n">C</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">show</span> <span class="n">map</span> <span class="o">(</span><span class="n">eval₂</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">C</span> <span class="o">(</span><span class="bp">λ</span><span class="n">u</span><span class="o">:</span><span class="n">punit</span><span class="o">,</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">sum_to_iter</span> <span class="n">α</span> <span class="n">β</span> <span class="n">unit</span>
+    <span class="o">(</span><span class="n">rename</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">option_equiv_sum_punit</span><span class="bp">._</span><span class="n">match_1</span> <span class="n">β</span><span class="o">)</span>
+      <span class="o">(</span><span class="n">C</span> <span class="n">a</span><span class="o">)))</span> <span class="bp">=</span> <span class="n">C</span> <span class="o">(</span><span class="n">polynomial</span><span class="bp">.</span><span class="n">C</span> <span class="n">a</span><span class="o">),</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">sum_to_iter_C</span><span class="o">]</span>
+</pre></div>
+
+<a name="186341572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186341572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186341572">Kevin Buzzard (Jan 22 2020 at 23:12)</a>:</h4>
+<p>So all three of the <code>sum_to_iter_?</code> things should be simp lemmas?</p>
+
+<a name="186341581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186341581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186341581">Mario Carneiro (Jan 22 2020 at 23:12)</a>:</h4>
+<p>yes</p>
+
+<a name="186341645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186341645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186341645">Kevin Buzzard (Jan 22 2020 at 23:13)</a>:</h4>
+<p>Many thanks! And we can perhaps get rid of the <code>show</code> lines by coming up with some other simp lemmas?</p>
+
+<a name="186341650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186341650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186341650">Kevin Buzzard (Jan 22 2020 at 23:13)</a>:</h4>
+<p>Or is this overoptimistic?</p>
+
+<a name="186341662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186341662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186341662">Mario Carneiro (Jan 22 2020 at 23:13)</a>:</h4>
+<p>I also brute forced my way through several other definitions here, that should have definitional lemmas: <code>ring_equiv_of_equiv</code>, <code>option_equiv_sum_punit</code> (the definition should not be simp), <code>sum_comm</code> (ditto), <code>sum_ring_equiv</code>, <code>punit_ring_equiv</code></p>
+
+<a name="186341712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186341712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186341712">Mario Carneiro (Jan 22 2020 at 23:14)</a>:</h4>
+<p>Ideally this proof should be <code>dunfold option_equiv_right; simp</code></p>
+
 
 {% endraw %}
 

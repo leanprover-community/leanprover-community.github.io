@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [typeclass paper](35889typeclasspaper.html) (97 messages, latest: Jan 22 2020 at 21:56)
+* [typeclass paper](35889typeclasspaper.html) (120 messages, latest: Jan 22 2020 at 23:39)
+
+* [simp vs rw](10028simpvsrw.html) (12 messages, latest: Jan 22 2020 at 23:17)
 
 * [Congruence closure](82087Congruenceclosure.html) (9 messages, latest: Jan 21 2020 at 21:40)
 
