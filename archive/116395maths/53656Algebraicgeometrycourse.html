@@ -960,6 +960,41 @@ p.eval2 f X</code> I think. It's the canonical map with that type.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186403065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186403065">Kevin Buzzard (Jan 23 2020 at 16:01)</a>:</h4>
 <p>/me hopes <span class="user-mention" data-user-id="110044">@Chris Hughes</span> is coming to Xena...</p>
 
+<a name="186420269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186420269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186420269">Kevin Buzzard (Jan 23 2020 at 18:39)</a>:</h4>
+<p>He was!</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">eval₂_eq_of_eq_on_vars</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">R</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">S</span><span class="o">]</span> <span class="o">{</span><span class="n">σ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">σ</span> <span class="bp">→</span> <span class="n">S</span><span class="o">)</span> <span class="o">(</span><span class="n">φ</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">S</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">σ</span> <span class="n">R</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">is_semiring_hom</span> <span class="n">φ</span><span class="o">]</span> <span class="c1">-- do we need this??</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="err">∈</span> <span class="o">(</span><span class="n">p</span><span class="bp">.</span><span class="n">support</span><span class="bp">.</span><span class="n">bind</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">support</span><span class="o">),</span> <span class="n">f</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">g</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">eval₂</span> <span class="n">φ</span> <span class="n">f</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">eval₂</span> <span class="n">φ</span> <span class="n">g</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">unfold</span> <span class="n">eval₂</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">sum</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">prod</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum_congr</span> <span class="n">rfl</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span>
+  <span class="n">congr&#39;</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">finset</span><span class="bp">.</span><span class="n">prod_congr</span> <span class="n">rfl</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">i</span> <span class="n">hi</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">finset</span><span class="bp">.</span><span class="n">mem_bind</span><span class="o">,</span> <span class="n">exists_imp_distrib</span><span class="o">]</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">h</span> <span class="n">i</span> <span class="n">x</span> <span class="n">hx</span> <span class="n">hi</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">this</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="186420408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186420408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186420408">Johan Commelin (Jan 23 2020 at 18:40)</a>:</h4>
+<p>Doesn't that mean you can remove those first two lines with <code>unfold</code>s?</p>
+
+<a name="186420461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186420461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186420461">Kevin Buzzard (Jan 23 2020 at 18:41)</a>:</h4>
+<p>However he also says that the definition of <code>vars</code> in <code>mv_polynomial</code> should be what he wants it to be :P</p>
+
+<a name="186420472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186420472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186420472">Kevin Buzzard (Jan 23 2020 at 18:41)</a>:</h4>
+<p>oh we only just did it :-)</p>
+
 
 {% endraw %}
 
