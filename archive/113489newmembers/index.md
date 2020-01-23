@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Analysis tools](56566Analysistools.html) (2 messages, latest: Jan 23 2020 at 16:44)
+* [Analysis tools](56566Analysistools.html) (3 messages, latest: Jan 23 2020 at 17:51)
 
 * [A clear tactic that doesn't care about dependency order](95767Acleartacticthatdoesntcareaboutdependencyorder.html) (13 messages, latest: Jan 23 2020 at 16:35)
 

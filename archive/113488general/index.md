@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [typeclass paper](35889typeclasspaper.html) (154 messages, latest: Jan 23 2020 at 16:49)
+* [typeclass paper](35889typeclasspaper.html) (155 messages, latest: Jan 23 2020 at 17:10)
 
-* [simp vs rw](10028simpvsrw.html) (21 messages, latest: Jan 23 2020 at 16:03)
+* [simp vs rw](10028simpvsrw.html) (22 messages, latest: Jan 23 2020 at 17:09)
 
 * [Verifying X86 Instructions](52655VerifyingX86Instructions.html) (2 messages, latest: Jan 23 2020 at 15:16)
 
