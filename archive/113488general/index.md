@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Verifying X86 Instructions](52655VerifyingX86Instructions.html) (1 message, latest: Jan 23 2020 at 02:20)
+* [deep learning for symbolic mathematics](03624deeplearningforsymbolicmathematics.html) (14 messages, latest: Jan 23 2020 at 03:55)
 
-* [deep learning for symbolic mathematics](03624deeplearningforsymbolicmathematics.html) (12 messages, latest: Jan 23 2020 at 02:08)
+* [Verifying X86 Instructions](52655VerifyingX86Instructions.html) (1 message, latest: Jan 23 2020 at 02:20)
 
 * [typeclass paper](35889typeclasspaper.html) (124 messages, latest: Jan 23 2020 at 00:32)
 
