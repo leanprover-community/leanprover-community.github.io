@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [deep learning for symbolic mathematics](03624deeplearningforsymbolicmathematics.html) (14 messages, latest: Jan 23 2020 at 03:55)
+* [deep learning for symbolic mathematics](03624deeplearningforsymbolicmathematics.html) (15 messages, latest: Jan 23 2020 at 08:24)
 
 * [Verifying X86 Instructions](52655VerifyingX86Instructions.html) (1 message, latest: Jan 23 2020 at 02:20)
 
