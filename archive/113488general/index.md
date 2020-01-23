@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Verifying X86 Instructions](52655VerifyingX86Instructions.html) (1 message, latest: Jan 23 2020 at 02:20)
+
+* [deep learning for symbolic mathematics](03624deeplearningforsymbolicmathematics.html) (12 messages, latest: Jan 23 2020 at 02:08)
+
 * [typeclass paper](35889typeclasspaper.html) (124 messages, latest: Jan 23 2020 at 00:32)
 
 * [simp vs rw](10028simpvsrw.html) (12 messages, latest: Jan 22 2020 at 23:17)
@@ -26,8 +30,6 @@ permalink: archive/113488general/index.html
 * [memory corruption](40495memorycorruption.html) (5 messages, latest: Jan 18 2020 at 22:08)
 
 * [CNL and the Stack Project](27935CNLandtheStackProject.html) (25 messages, latest: Jan 17 2020 at 20:47)
-
-* [deep learning for symbolic mathematics](03624deeplearningforsymbolicmathematics.html) (10 messages, latest: Jan 17 2020 at 13:33)
 
 * [huge term trees](96965hugetermtrees.html) (33 messages, latest: Jan 17 2020 at 05:49)
 
