@@ -9,15 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [simp vs rw](10028simpvsrw.html) (15 messages, latest: Jan 23 2020 at 14:57)
+* [simp vs rw](10028simpvsrw.html) (18 messages, latest: Jan 23 2020 at 15:59)
+
+* [Verifying X86 Instructions](52655VerifyingX86Instructions.html) (2 messages, latest: Jan 23 2020 at 15:16)
 
 * [old vs new structure cmd: docs](95675oldvsnewstructurecmddocs.html) (6 messages, latest: Jan 23 2020 at 14:32)
 
 * [typeclass paper](35889typeclasspaper.html) (153 messages, latest: Jan 23 2020 at 12:31)
 
 * [deep learning for symbolic mathematics](03624deeplearningforsymbolicmathematics.html) (15 messages, latest: Jan 23 2020 at 08:24)
-
-* [Verifying X86 Instructions](52655VerifyingX86Instructions.html) (1 message, latest: Jan 23 2020 at 02:20)
 
 * [Congruence closure](82087Congruenceclosure.html) (9 messages, latest: Jan 21 2020 at 21:40)
 

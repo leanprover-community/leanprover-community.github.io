@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [basics](17142basics.html) (117 messages, latest: Jan 23 2020 at 14:30)
+* [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (202 messages, latest: Jan 23 2020 at 15:52)
 
-* [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (199 messages, latest: Jan 23 2020 at 13:52)
+* [basics](17142basics.html) (117 messages, latest: Jan 23 2020 at 14:30)
 
 * [Using `rw`](59824Usingrw.html) (13 messages, latest: Jan 23 2020 at 07:51)
 
