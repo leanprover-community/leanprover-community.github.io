@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Polymorphic recursion in inductive type](23509Polymorphicrecursionininductivetype.html) (1 message, latest: Jan 24 2020 at 15:47)
+* [Polymorphic recursion in inductive type](23509Polymorphicrecursionininductivetype.html) (23 messages, latest: Jan 24 2020 at 16:56)
 
 * [_match_2](17342match2.html) (7 messages, latest: Jan 23 2020 at 20:10)
 

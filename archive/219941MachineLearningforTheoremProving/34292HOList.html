@@ -442,6 +442,24 @@ cc <span class="user-mention" data-user-id="217806">@Markus Rabe</span> <span cl
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186498505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186498505">Stanislas Polu (Jan 24 2020 at 14:54)</a>:</h4>
 <p>Problem solved on my end by fixing discrepancies in the S-Expr I was sending (escaped characters were not handled properly). Replaying logs seems to work properly now \o/ Hope this is all useful to others.</p>
 
+<a name="186506019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186506019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186506019">Stanislas Polu (Jan 24 2020 at 16:13)</a>:</h4>
+<p><span class="user-mention" data-user-id="115715">@Jason Rute</span> in your walkthrough[0], the TRANS_TAC marshalling is a bit wrong. It takes a theorem then a term.<br>
+[0] <a href="https://github.com/jasonrute/holist-communication-example/blob/master/walkthrough_of_holist_api.ipynb" target="_blank" title="https://github.com/jasonrute/holist-communication-example/blob/master/walkthrough_of_holist_api.ipynb">https://github.com/jasonrute/holist-communication-example/blob/master/walkthrough_of_holist_api.ipynb</a></p>
+
+<a name="186507286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186507286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186507286">Markus Rabe (Jan 24 2020 at 16:27)</a>:</h4>
+<p>All good questions. Note that the theorem database also includes the flyspeck corpus, but I believe we have not published the proof logs for flyspeck. I believe the flyspeck theorems are all labeled as TESTING. Hence your divisor is off for testing. If you want to be even more precise you should also discount the definitions, as they do not have proofs.</p>
+<p>But still interesting that the size of the training for TESTING is significantly larger than for VALIDATION. I wasn't aware of that.</p>
+
+<a name="186507358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186507358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186507358">Markus Rabe (Jan 24 2020 at 16:28)</a>:</h4>
+<p>LABEL_TAC and other unsupported tactics are in the proof logs as we log the proofs as the humans wrote them.</p>
+
+<a name="186507925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186507925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186507925">Markus Rabe (Jan 24 2020 at 16:34)</a>:</h4>
+<p>As for the failures of RegisterTheorem: Yes, the fingerprint is unfortunately not the one computed in HOL Light, but just the one that you indicated in the register theorem request. We're fixing this internally as well, so any future releases should not have the problem. Thanks for noticing and for all the work you've put in!</p>
+
 
 {% endraw %}
 
