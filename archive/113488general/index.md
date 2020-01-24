@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [huge term trees](96965hugetermtrees.html) (34 messages, latest: Jan 24 2020 at 01:50)
+
 * [Prelude](22962Prelude.html) (2 messages, latest: Jan 23 2020 at 22:21)
 
 * [typeclass paper](35889typeclasspaper.html) (157 messages, latest: Jan 23 2020 at 20:28)
@@ -34,8 +36,6 @@ permalink: archive/113488general/index.html
 * [memory corruption](40495memorycorruption.html) (5 messages, latest: Jan 18 2020 at 22:08)
 
 * [CNL and the Stack Project](27935CNLandtheStackProject.html) (25 messages, latest: Jan 17 2020 at 20:47)
-
-* [huge term trees](96965hugetermtrees.html) (33 messages, latest: Jan 17 2020 at 05:49)
 
 * [int.sizeof](68714intsizeof.html) (5 messages, latest: Jan 16 2020 at 18:42)
 
