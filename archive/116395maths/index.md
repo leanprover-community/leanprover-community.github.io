@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [riemannian geometry](99151riemanniangeometry.html) (6 messages, latest: Jan 24 2020 at 21:59)
+* [finset puzzle](85492finsetpuzzle.html) (18 messages, latest: Jan 24 2020 at 22:01)
 
-* [finset puzzle](85492finsetpuzzle.html) (17 messages, latest: Jan 24 2020 at 21:37)
+* [riemannian geometry](99151riemanniangeometry.html) (6 messages, latest: Jan 24 2020 at 21:59)
 
 * [integrals and pi](46934integralsandpi.html) (3 messages, latest: Jan 24 2020 at 20:40)
 
