@@ -186,6 +186,59 @@ inductive {v} Exp (t : Type v -&gt; Type (v + 1)) : Type (v + 1) -&gt; Type (v +
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Polymorphic%20recursion%20in%20inductive%20type/near/186511774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23509Polymorphicrecursionininductivetype.html#186511774">Reid Barton (Jan 24 2020 at 17:10)</a>:</h4>
 <p>Having <code>Term</code> live in <code>Type (u + 1)</code> will likely be a pain if you want to do any kind of monadic programming.</p>
 
+<a name="186517076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Polymorphic%20recursion%20in%20inductive%20type/near/186517076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23509Polymorphicrecursionininductivetype.html#186517076">Mario Carneiro (Jan 24 2020 at 18:00)</a>:</h4>
+<p><span class="user-mention" data-user-id="258922">@Anton Lorenzen</span>  Your rendering of <code>Exp</code> doesn't make much sense to me either. The recursive option type for encoding indices is not a problem, but I would expect the <code>lam</code> argument to have a different type, like so:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">Exp</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span> <span class="bp">-&gt;</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">v</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">var</span> <span class="o">{</span><span class="n">a</span><span class="o">}</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">-&gt;</span> <span class="n">Exp</span> <span class="n">a</span>
+<span class="bp">|</span> <span class="n">app</span> <span class="o">{</span><span class="n">a</span><span class="o">}</span> <span class="o">:</span> <span class="n">Exp</span> <span class="n">a</span> <span class="bp">-&gt;</span> <span class="n">Exp</span> <span class="n">a</span> <span class="bp">-&gt;</span> <span class="n">Exp</span> <span class="n">a</span>
+<span class="bp">|</span> <span class="n">lam</span> <span class="o">{</span><span class="n">a</span><span class="o">}</span> <span class="o">:</span> <span class="n">Exp</span> <span class="o">(</span><span class="n">Incr</span> <span class="n">a</span><span class="o">)</span> <span class="bp">-&gt;</span> <span class="n">Exp</span> <span class="n">a</span>
+</pre></div>
+
+<a name="186517443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Polymorphic%20recursion%20in%20inductive%20type/near/186517443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23509Polymorphicrecursionininductivetype.html#186517443">Mario Carneiro (Jan 24 2020 at 18:05)</a>:</h4>
+<p>You can eliminate the universe bumping in this definition by taking advantage of the fact that there are only a "small" (nat indexed) number of options you can tack on a type</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">Incr&#39;</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">punit</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">v</span> <span class="bp">×</span> <span class="n">Incr&#39;</span> <span class="n">n</span>
+
+<span class="kn">inductive</span> <span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">Exp&#39;</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">-&gt;</span> <span class="kt">Type</span> <span class="n">u</span>
+<span class="bp">|</span> <span class="n">var</span> <span class="o">{</span><span class="n">a</span><span class="o">}</span> <span class="o">:</span> <span class="n">Incr&#39;</span> <span class="n">v</span> <span class="n">a</span> <span class="bp">-&gt;</span> <span class="n">Exp&#39;</span> <span class="n">a</span>
+<span class="bp">|</span> <span class="n">app</span> <span class="o">{</span><span class="n">a</span><span class="o">}</span> <span class="o">:</span> <span class="n">Exp&#39;</span> <span class="n">a</span> <span class="bp">-&gt;</span> <span class="n">Exp&#39;</span> <span class="n">a</span> <span class="bp">-&gt;</span> <span class="n">Exp&#39;</span> <span class="n">a</span>
+<span class="bp">|</span> <span class="n">lam</span> <span class="o">{</span><span class="n">a</span><span class="o">}</span> <span class="o">:</span> <span class="n">Exp&#39;</span> <span class="o">(</span><span class="n">a</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">-&gt;</span> <span class="n">Exp&#39;</span> <span class="n">a</span>
+
+<span class="n">def</span> <span class="n">Exp</span> <span class="o">(</span><span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="n">Exp&#39;</span> <span class="n">v</span> <span class="mi">0</span>
+</pre></div>
+
+<a name="186518147"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Polymorphic%20recursion%20in%20inductive%20type/near/186518147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23509Polymorphicrecursionininductivetype.html#186518147">Jannis Limperg (Jan 24 2020 at 18:12)</a>:</h4>
+<p>This technique looks like a more complicated version of the usual encoding of scope-safe terms:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">Term</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">var</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">Term</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="n">app</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">:</span> <span class="n">Term</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">Term</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">Term</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="n">lam</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">:</span> <span class="n">Term</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Term</span> <span class="n">n</span>
+</pre></div>
+
+
+<p><code>Term n</code> is a term in any context of length at least <code>n</code> (and variables are indexes into such a context).</p>
+
+<a name="186518406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Polymorphic%20recursion%20in%20inductive%20type/near/186518406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23509Polymorphicrecursionininductivetype.html#186518406">Anton Lorenzen (Jan 24 2020 at 18:15)</a>:</h4>
+<p>Hey Jannis, nice to see you here :)</p>
+
+<a name="186518452"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Polymorphic%20recursion%20in%20inductive%20type/near/186518452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23509Polymorphicrecursionininductivetype.html#186518452">Mario Carneiro (Jan 24 2020 at 18:15)</a>:</h4>
+<p><span class="user-mention" data-user-id="256311">@Jannis Limperg</span> It is; I just wrote it that way because Anton seemed to want variables indexed on arbitrary types</p>
+
+<a name="186518658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Polymorphic%20recursion%20in%20inductive%20type/near/186518658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23509Polymorphicrecursionininductivetype.html#186518658">Mario Carneiro (Jan 24 2020 at 18:17)</a>:</h4>
+<p>There isn't any real advantage to the version I posted first over the version you just wrote, and some significant disadvantages. Using types for indexing like this makes sense in haskell but in a dependent type theory there isn't much downside to just using <code>nat</code></p>
+
+<a name="186518922"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Polymorphic%20recursion%20in%20inductive%20type/near/186518922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23509Polymorphicrecursionininductivetype.html#186518922">Jannis Limperg (Jan 24 2020 at 18:20)</a>:</h4>
+<p>Nice to see you too, Anton. Type theory remains a small field. ;)</p>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I thought so too, but wasn't sure that I hadn't missed some subtlety.</p>
+
 
 {% endraw %}
 

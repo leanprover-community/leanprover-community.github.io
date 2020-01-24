@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [A clear tactic that doesn't care about dependency order](95767Acleartacticthatdoesntcareaboutdependencyorder.html) (14 messages, latest: Jan 24 2020 at 17:55)
+* [A clear tactic that doesn't care about dependency order](95767Acleartacticthatdoesntcareaboutdependencyorder.html) (18 messages, latest: Jan 24 2020 at 18:26)
 
-* [Polymorphic recursion in inductive type](23509Polymorphicrecursionininductivetype.html) (28 messages, latest: Jan 24 2020 at 17:10)
+* [Polymorphic recursion in inductive type](23509Polymorphicrecursionininductivetype.html) (35 messages, latest: Jan 24 2020 at 18:20)
 
 * [_match_2](17342match2.html) (7 messages, latest: Jan 23 2020 at 20:10)
 

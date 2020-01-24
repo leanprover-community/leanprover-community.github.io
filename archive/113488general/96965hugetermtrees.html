@@ -259,6 +259,53 @@ category_theory.limits.is_limit.hom_lift 7508 1350
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/186482164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#186482164">Tim Daly (Jan 24 2020 at 11:18)</a>:</h4>
 <p>There is a phenomena in computer algebra called "intermediate expression swell". A computation can start with a small input and end with a small output but the intermediate steps generate many megabytes. I wonder if there is a similar phenomena that occurs in certain proofs. It may not be a "bug" per se, just an emergent property of the particular proof technique.</p>
 
+<a name="186520177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/186520177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#186520177">Daniel Selsam (Jan 24 2020 at 18:33)</a>:</h4>
+<p>Ran the script posted above on all of mathlib:<br>
+"""<br>
+Top-10 biggest decls by value:<br>
+Top-10 biggest decls by value:</p>
+<p>tangent_bundle_model_space_chart_at 2499367138 21824<br>
+Gromov_Hausdorff.totally_bounded 2448909819 42588<br>
+"""<br>
+With commas: 21,824 -&gt; 2,499,367,138 which is &gt;100,000x tree-to-dag ratio.</p>
+
+<a name="186520527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/186520527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#186520527">Daniel Selsam (Jan 24 2020 at 18:37)</a>:</h4>
+<p>The proof seems to be mostly <code>simp</code>. Could someone who understands the proof comment on why there might be so much sharing?</p>
+
+<a name="186520702"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/186520702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#186520702">Johan Commelin (Jan 24 2020 at 18:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> Is the expert on that proof. <span class="user-mention" data-user-id="230999">@Daniel Selsam</span> I'm trying to understand what you mean. What are those numbers representing?</p>
+
+<a name="186520717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/186520717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#186520717">Johan Commelin (Jan 24 2020 at 18:39)</a>:</h4>
+<p>The number of nodes in a dag (resp. tree) representation of the proof?</p>
+
+<a name="186520736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/186520736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#186520736">Daniel Selsam (Jan 24 2020 at 18:40)</a>:</h4>
+<blockquote>
+<p>The number of nodes in a dag (resp. tree) representation of the proof?</p>
+</blockquote>
+<p>Yes.</p>
+
+<a name="186521378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/186521378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#186521378">Daniel Selsam (Jan 24 2020 at 18:46)</a>:</h4>
+<p>To clarify: this kind of repeated subterm might not be a problem at all. Based on Lean3's <code>--profile</code> report, it seems to only take a few seconds to elaborate and type-check it, and the moderate slowness might not even have anything to do with the tree size.</p>
+
+<a name="186521833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/186521833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#186521833">Johan Commelin (Jan 24 2020 at 18:51)</a>:</h4>
+<p><span class="user-mention" data-user-id="230999">@Daniel Selsam</span> <a href="https://github.com/leanprover-community/mathlib/blob/9ac26cb6220deec0960f8a719572a82ead25f90e/src/geometry/manifold/basic_smooth_bundle.lean#L540L571" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/9ac26cb6220deec0960f8a719572a82ead25f90e/src/geometry/manifold/basic_smooth_bundle.lean#L540L571">https://github.com/leanprover-community/mathlib/blob/9ac26cb6220deec0960f8a719572a82ead25f90e/src/geometry/manifold/basic_smooth_bundle.lean#L540L571</a><br>
+I can't really parse this proof. But it's clear that it's doing some massive simps (-;</p>
+
+<a name="186521908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/186521908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#186521908">Johan Commelin (Jan 24 2020 at 18:52)</a>:</h4>
+<p>I don't think I can really help here</p>
+
+<a name="186521971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/186521971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#186521971">Rob Lewis (Jan 24 2020 at 18:53)</a>:</h4>
+<p>There's something kind of funny going on there with the <code>simp</code>s followed by <code>erw</code> too.</p>
+
 
 {% endraw %}
 

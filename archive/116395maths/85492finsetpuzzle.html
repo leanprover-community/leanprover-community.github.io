@@ -1,0 +1,83 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/85492finsetpuzzle.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/85492finsetpuzzle.html">finset puzzle</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186520877"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20puzzle/near/186520877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85492finsetpuzzle.html#186520877">Kevin Buzzard (Jan 24 2020 at 18:41)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">β</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">finset</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">finset</span><span class="bp">.</span><span class="n">bind</span> <span class="n">s</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sup</span> <span class="n">s</span> <span class="n">f</span>  <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="c1">-- or to put it another way</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">β</span><span class="o">]</span> <span class="o">:</span>
+<span class="bp">@</span><span class="n">finset</span><span class="bp">.</span><span class="n">bind</span> <span class="n">α</span> <span class="n">β</span> <span class="bp">_</span> <span class="bp">=</span> <span class="bp">@</span><span class="n">finset</span><span class="bp">.</span><span class="n">sup</span> <span class="o">(</span><span class="n">finset</span> <span class="n">β</span><span class="o">)</span> <span class="n">α</span> <span class="bp">_</span>  <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>There are two different ways to take a finite union of finite sets. Trying to prove directly that they are equal seems hard to me -- but am I missing something? Perhaps one should prove instead that they have the same elements?</p>
+
+<a name="186520948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20puzzle/near/186520948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85492finsetpuzzle.html#186520948">Johan Commelin (Jan 24 2020 at 18:42)</a>:</h4>
+<p>Yes, use <code>ext</code></p>
+
+<a name="186521225"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20puzzle/near/186521225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85492finsetpuzzle.html#186521225">Kevin Buzzard (Jan 24 2020 at 18:45)</a>:</h4>
+<p>This came up when I was trying to prove this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">mv_polynomial</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">σ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">σ</span> <span class="n">R</span><span class="o">}</span>
+  <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">σ</span><span class="o">]</span> <span class="o">:</span>
+<span class="n">mv_polynomial</span><span class="bp">.</span><span class="n">vars</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">p</span><span class="bp">.</span><span class="n">support</span><span class="bp">.</span><span class="n">bind</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">support</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p><code>vars</code> is something in the <code>mv_polynomial</code> API which I had not come across until the other day, but its interface seems very basic. Chris' instinct was to use <code>bind</code> to do unions like this -- but apparently it wasn't Johannes'. Of course as long as the API is there it doesn't matter, but when Chris proved for me that evaluating a polynomial at two different assignments of the variables which agree on the variables of the polynomial will give the same answer, he used bind and it came out really nicely.</p>
+
+<a name="186521343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20puzzle/near/186521343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85492finsetpuzzle.html#186521343">Kevin Buzzard (Jan 24 2020 at 18:46)</a>:</h4>
+<p>gaargh, <code>finset.mem_sup</code> is not there because it's working in some arbitrary lattice</p>
+
+<a name="186521540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20puzzle/near/186521540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85492finsetpuzzle.html#186521540">Kevin Buzzard (Jan 24 2020 at 18:48)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="err">⊢</span> <span class="o">(</span><span class="bp">∃</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">s</span><span class="o">),</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">f</span> <span class="n">i</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sup</span> <span class="n">s</span> <span class="n">f</span>
+</pre></div>
+
+
+<p>is what I'm left with</p>
+
+<a name="186521615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20puzzle/near/186521615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85492finsetpuzzle.html#186521615">Kevin Buzzard (Jan 24 2020 at 18:49)</a>:</h4>
+<p>the sup is defined as a fold over union.</p>
+
+<a name="186521663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20puzzle/near/186521663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85492finsetpuzzle.html#186521663">Johan Commelin (Jan 24 2020 at 18:49)</a>:</h4>
+<p>Is there a <code>mem_fold</code>?</p>
+
+<a name="186521722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20puzzle/near/186521722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85492finsetpuzzle.html#186521722">Kevin Buzzard (Jan 24 2020 at 18:50)</a>:</h4>
+<p>I just don't know whether I'm supposed to be digging this low. All I want to prove is that evaluating a polynomial at two different assignments which agree on all the variables of the polynomial gives the same answer :-)</p>
+
+<a name="186521751"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20puzzle/near/186521751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85492finsetpuzzle.html#186521751">Johan Commelin (Jan 24 2020 at 18:50)</a>:</h4>
+<p>So, sorry the statement and feed it to an UG at xena (-;</p>
+
+<a name="186521961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20puzzle/near/186521961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85492finsetpuzzle.html#186521961">Kevin Buzzard (Jan 24 2020 at 18:53)</a>:</h4>
+<p>There's no <code>mem_fold</code> anywhere. I could prove it by induction I guess :-/ But when I launched into a proof the other day involving evaluations of mv_polynomials, Mario just came along and proved it with a very well-judged <code>simp</code>, and at Xena on Thursday when we were proving that the evaluations were equal if the assignments agreed on the support (as defined by <code>bind</code>) Chris stopped at some point and said "automation should do it from here". I am not sure I understand the full power of <code>simp</code> with these things.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
