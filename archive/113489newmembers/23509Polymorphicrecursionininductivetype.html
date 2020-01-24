@@ -156,6 +156,36 @@ inductive {v} Exp (t : Type v -&gt; Type (v + 1)) : Type (v + 1) -&gt; Type (v +
 | lam {a} : Exp (Incr (t a)) -&gt; Exp (Lift a)
 </pre></div>
 
+<a name="186510983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Polymorphic%20recursion%20in%20inductive%20type/near/186510983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23509Polymorphicrecursionininductivetype.html#186510983">Anton Lorenzen (Jan 24 2020 at 17:03)</a>:</h4>
+<p>No, I don't think I mean that. I guess I am going to use the <code>Term</code> part from above</p>
+
+<a name="186511018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Polymorphic%20recursion%20in%20inductive%20type/near/186511018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23509Polymorphicrecursionininductivetype.html#186511018">Anton Lorenzen (Jan 24 2020 at 17:03)</a>:</h4>
+<p>Thanks!</p>
+
+<a name="186511212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Polymorphic%20recursion%20in%20inductive%20type/near/186511212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23509Polymorphicrecursionininductivetype.html#186511212">Reid Barton (Jan 24 2020 at 17:05)</a>:</h4>
+<blockquote>
+<p>The question is therefore if I can do "recursion on universes" and have Exp be in the universe of the number of lamdas it contains. And also, if that is actually a good idea (I guess not).</p>
+</blockquote>
+<p>You definitely can't do any kind of quantification over universes other than prenex (i.e., at the outermost position). For example you can't prove a lemma by induction where you invoke the inductive hypothesis at a different universe, because that would compile to passing a term quantified over universes to the recursor.</p>
+
+<a name="186511703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Polymorphic%20recursion%20in%20inductive%20type/near/186511703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23509Polymorphicrecursionininductivetype.html#186511703">Reid Barton (Jan 24 2020 at 17:09)</a>:</h4>
+<p>The universe level checks can be overly conservative, which might make techniques like this less useful. For example</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">Incr&#39;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">u</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">zero</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">),</span> <span class="n">Incr&#39;</span> <span class="n">v</span>
+<span class="bp">|</span> <span class="n">succ</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">),</span> <span class="n">v</span> <span class="bp">→</span> <span class="n">Incr&#39;</span> <span class="n">v</span>
+</pre></div>
+
+
+<p>is isomorphic to <code>Incr</code>, but it has to have result <code>Type (u + 1)</code> not <code>Type u</code>.</p>
+
+<a name="186511774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Polymorphic%20recursion%20in%20inductive%20type/near/186511774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23509Polymorphicrecursionininductivetype.html#186511774">Reid Barton (Jan 24 2020 at 17:10)</a>:</h4>
+<p>Having <code>Term</code> live in <code>Type (u + 1)</code> will likely be a pain if you want to do any kind of monadic programming.</p>
+
 
 {% endraw %}
 

@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Polymorphic recursion in inductive type](23509Polymorphicrecursionininductivetype.html) (23 messages, latest: Jan 24 2020 at 16:56)
+* [A clear tactic that doesn't care about dependency order](95767Acleartacticthatdoesntcareaboutdependencyorder.html) (14 messages, latest: Jan 24 2020 at 17:55)
+
+* [Polymorphic recursion in inductive type](23509Polymorphicrecursionininductivetype.html) (28 messages, latest: Jan 24 2020 at 17:10)
 
 * [_match_2](17342match2.html) (7 messages, latest: Jan 23 2020 at 20:10)
 
 * [Analysis tools](56566Analysistools.html) (3 messages, latest: Jan 23 2020 at 17:51)
-
-* [A clear tactic that doesn't care about dependency order](95767Acleartacticthatdoesntcareaboutdependencyorder.html) (13 messages, latest: Jan 23 2020 at 16:35)
 
 * [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (205 messages, latest: Jan 23 2020 at 16:27)
 
