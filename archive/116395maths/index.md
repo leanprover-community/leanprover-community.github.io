@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [finset puzzle](85492finsetpuzzle.html) (10 messages, latest: Jan 24 2020 at 18:53)
+* [finset puzzle](85492finsetpuzzle.html) (13 messages, latest: Jan 24 2020 at 19:57)
+
+* [riemannian geometry](99151riemanniangeometry.html) (2 messages, latest: Jan 24 2020 at 19:46)
 
 * [integrals and pi](46934integralsandpi.html) (1 message, latest: Jan 24 2020 at 18:38)
-
-* [riemannian geometry](99151riemanniangeometry.html) (1 message, latest: Jan 24 2020 at 18:35)
 
 * [Integrals w.r.t. non-canonical measures](54614Integralswrtnoncanonicalmeasures.html) (25 messages, latest: Jan 23 2020 at 20:04)
 

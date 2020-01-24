@@ -77,6 +77,34 @@ permalink: archive/116395maths/85492finsetpuzzle.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20puzzle/near/186521961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85492finsetpuzzle.html#186521961">Kevin Buzzard (Jan 24 2020 at 18:53)</a>:</h4>
 <p>There's no <code>mem_fold</code> anywhere. I could prove it by induction I guess :-/ But when I launched into a proof the other day involving evaluations of mv_polynomials, Mario just came along and proved it with a very well-judged <code>simp</code>, and at Xena on Thursday when we were proving that the evaluations were equal if the assignments agreed on the support (as defined by <code>bind</code>) Chris stopped at some point and said "automation should do it from here". I am not sure I understand the full power of <code>simp</code> with these things.</p>
 
+<a name="186522613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20puzzle/near/186522613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85492finsetpuzzle.html#186522613">Kevin Buzzard (Jan 24 2020 at 19:00)</a>:</h4>
+<p>oh I see what to do -- there is sup_le and le_sup and those should give it me.</p>
+
+<a name="186525422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20puzzle/near/186525422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85492finsetpuzzle.html#186525422">Kevin Buzzard (Jan 24 2020 at 19:30)</a>:</h4>
+<p>gaargh <code>le_sup</code> isn't enough. I'm left with</p>
+<div class="codehilite"><pre><span></span>1 goal
+α : Type u_1,
+s : finset α,
+β : Type u_2,
+_inst_2 : decidable_eq β,
+f : α → finset β,
+x : β,
+hx : x ∈ finset.sup s f
+⊢ ∃ (a : α) (H : a ∈ s), x ∈ f a
+</pre></div>
+
+<a name="186528174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20puzzle/near/186528174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85492finsetpuzzle.html#186528174">Floris van Doorn (Jan 24 2020 at 19:57)</a>:</h4>
+<p>Here is a proof assuming decidable equality on <code>\a</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">β</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">finset</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">finset</span><span class="bp">.</span><span class="n">bind</span> <span class="n">s</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sup</span> <span class="n">s</span> <span class="n">f</span>  <span class="o">:=</span>
+<span class="n">finset</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">s</span> <span class="n">rfl</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="n">s</span> <span class="n">hx</span> <span class="n">IH</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">IH</span><span class="o">])</span>
+</pre></div>
+
 
 {% endraw %}
 
