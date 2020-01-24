@@ -1,352 +1,315 @@
-/* Begin main layout */
+* {
+    box-sizing: border-box;
+  }
+
 body {
+    font-family: 'Lucida Grande', Arial, sans-serif;
+}
+
+/* Create three unequal columns that floats next to each other */
+.column {
+    float: left;
     height: 100vh;
-    margin: 0px;
-    display: flex;
-    flex-direction: column;
   }
 
-  header {
-    padding: .2rem;
-    display: flex;
-    justify-content: space-between;
-    display: none;
+  .content {
+    padding: 15px;
   }
 
-  header h1 {
-    font-size : 2rem;
-    margin: .2rem;
+  .content h1 {
+      margin-block-start: 0em;
   }
 
-  #nav-trigger { /* hidden checkbox controling the menu on small screens*/
+/* note: .left and .right are flipped */
+  .right {
       position: fixed;
-      clip: rect(0,0,0,0);
+      top: 0;
+      right: 0;
   }
 
-  label[for="nav-trigger"] { /* The MENU button*/
-      display: none;
-      margin: 10px 15px 10px 0;
-      font-family: sans-serif;
-      border: 1px solid #eee;
-      padding: 10px;
-      background: #fff;
-      color: black;
-      font-size: 12px;
-      cursor: pointer;
-      font-weight: 700;
-      border-radius: 2px;
+  .left {
+      position: fixed;
+      top: 0;
+      left: 0;
   }
 
-  .container {
-    display: flex;
-    flex-direction: row;
-    overflow: hidden; /* overflow will be managed by individual columns */
+  .left, .right {
+    width: 20vw;
+    overflow-y: scroll;
+    overflow-x: auto;
+    z-index: 0;
+  }
+
+  .middle {
+      position: fixed;
+      top: 0;
+      left: 20vw;
+      width: 60%;
+      overflow-y: auto;
+      overflow-x: auto;
+  }
+
+
+.mod_doc h1 {
+    margin-top: 0;
+}
+
+
+ /* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+
+  .nav .nav_sect_inner {
+    padding-left: 15px;
+    /* display: none; */
+}
+
+.nav .nav_sect_inner.hidden {
+    display: none;
+}
+
+.nav .nav_sect {
+    width: fit-content;
+    color: darkblue;
+    cursor: pointer;
+}
+
+.nav .nav_file {
+    color: blue;
+/*     cursor: pointer; */
+    display: inline-block;
+}
+
+.nav .nav_file.visible {
+    color: darkred;
+/*     cursor: auto; */
+}
+
+.nav, .internal_nav {
+    font-size: 15px;
+    padding: 15px;
+}
+
+
+.decl, .mod_doc, .index_body, .tactic {
+    overflow-x: auto;
+    padding-left: 8px;
+}
+
+.decl, .inductive, .note, .tactic {
+    padding-right: 8px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.def {
+    border-left: 10px solid #92dce5;
+    border-top: 2px solid #92dce5;
+}
+
+.theorem {
+    border-left: 10px solid #8fe388;
+    border-top: 2px solid #8fe388;
+}
+
+.axiom, .constant {
+    border-left: 10px solid #f44708;
+    border-top: 2px solid #f44708;
+}
+
+.structure, .inductive {
+    border-left: 10px solid #f0a202;
+    border-top: 2px solid #f0a202;
+}
+
+.note, .tactic {
+    border-left: 10px solid #0479c7;
+    border-top: 2px solid #0479c7;
+    padding-left: 8px;
+}
+
+.decl_name, .decl_args {
+    padding: 0px 4px 0px 0px;
+    white-space: nowrap;
+}
+
+.decl_args, .decl_args a:link, .decl_args a:visited, .decl_args a:active {
+    color: darkslategray;
+}
+
+.decl_args a:hover {
+    color: black;
+}
+
+.implicits {
+    padding-top: 8px;
+}
+
+.impl_arg {
+    font-family: monospace;
+    font-size: 15px;
+}
+
+ul {
+    padding-inline-start: 25px;
+}
+
+.implicits, .impl_arg, .impl_arg a:link, .impl_arg a:visited, .impl_arg a:active {
+    color: black;
+    white-space: nowrap;
+}
+
+.impl_arg a:hover {
+    color: darkslategray;
+}
+
+.decl_header, .attributes {
+    font-weight: bold;
+    line-height: 1.5;
+}
+
+.decl_header {
+    font-size: 15px;
+}
+
+.decl_header {
+    /* indent everything but first line twice as much as decl_type */
+    text-indent: -8ex; padding-left: 8ex;
+}
+
+.decl_type {
+    margin-top: 2px;
+    margin-left: 4ex; /* extra indentation */
+}
+
+code, .decl_header, .attributes, .structure_field, .constructor, .instances li, .equation {
+    font-family: monospace;
+}
+
+code {
+    font-size: 15px;
+}
+
+.structure_fields, .constructors {
+    display: block;
+    padding-inline-start: 0;
+    margin-top: 1ex;
+    font-size: 15px;
+}
+
+.structure_field {
+    display: block;
+}
+.structure_field:before {
+    content: '(';
+    color: gray;
+}
+.structure_field:after {
+    content: ')';
+    color: gray;
+}
+
+.constructor {
+    display: block;
+}
+.constructor:before {
+    content: '| ';
+    color: gray;
+}
+
+code a:link, code a:visited, code a:active,
+.decl a:link, .decl a:visited, .decl a:active {
+    color: black;
+}
+
+code a:hover, .decl a:hover {
+    color: darkslategray;
+}
+
+.indent {
+    padding: 5px;
+}
+
+a.index:link, a.index:visited, a.index:active {
+    color:darkblue;
+}
+
+a.file:link, a.file:visited, a.file:active {
+    color:darkseagreen;
+}
+
+.anchor {
+    height: 1px;
+    width: 1px;
+}
+
+.internal_nav h1 {
+    font-size: 22px;
+    margin-top: 0px;
+}
+
+.internal_nav h2 {
+    font-size: 19px;
     margin: 0px;
-  }
-
-  .column {
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    padding: 1rem;
-  }
-
-  #left {
-    flex-shrink: 0;
-  }
-  #right {
-    flex-shrink: 0;
-  }
-
-  @media screen and (max-width:1000px) {
-    header {
-        display: flex;
-    }
-
-    #left > h1 {
-        display: none;
-    }
-
-    label[for="nav-trigger"] {
-      display: block;
-    }
-
-    #left, #right {
-      display: none
-    }
-
-    #nav-trigger:checked ~ * #right {
-      display: flex;
-      flex-shrink:0;
-    }
-  }
-  /* End main layout */
-
-  * {
-      box-sizing: border-box;
-    }
-
-  body {
-      font-family: 'Lucida Grande', Arial, sans-serif;
-  }
-
-
-
-  .mod_doc h1 {
-      margin-top: 0;
-  }
-
-
-  .nav_sect_inner {
-      display: flex;
-      flex-direction: column;
-      padding-left: 15px;
-      /* display: none; */
-  }
-
-  .nav_sect_inner.hidden {
-      display: none;
-  }
-
-  .nav_sect {
-      display: flex;
-      flex-direction: column;
-      width: fit-content;
-      color: darkblue;
-      cursor: pointer;
-  }
-
-  .nav_file {
-      color: blue;
-  /*     cursor: pointer; */
-      display: inline-block;
-  }
-
-  .nav_file.visible {
-      color: darkred;
-  /*     cursor: auto; */
-  }
-
-  .nav, .internal_nav {
-      font-size: 15px;
-      padding: 15px;
-  }
-
-
-  .decl, .mod_doc, .index_body, .tactic {
-      padding-left: 8px;
-  }
-
-  .decl, .inductive, .note, .tactic {
-      padding-right: 8px;
-      margin-top: 20px;
-      margin-bottom: 20px;
-  }
-
-  .def {
-      border-left: 10px solid #92dce5;
-      border-top: 2px solid #92dce5;
-  }
-
-  .theorem {
-      border-left: 10px solid #8fe388;
-      border-top: 2px solid #8fe388;
-  }
-
-  .axiom, .constant {
-      border-left: 10px solid #f44708;
-      border-top: 2px solid #f44708;
-  }
-
-  .structure, .inductive {
-      border-left: 10px solid #f0a202;
-      border-top: 2px solid #f0a202;
-  }
-
-  .note, .tactic {
-      border-left: 10px solid #0479c7;
-      border-top: 2px solid #0479c7;
-      padding-left: 8px;
-  }
-
-  .decl_name, .decl_args {
-      padding: 0px 4px 0px 0px;
-      white-space: nowrap;
-  }
-
-  .decl_args, .decl_args a:link, .decl_args a:visited, .decl_args a:active {
-      color: darkslategray;
-  }
-
-  .decl_args a:hover {
-      color: black;
-  }
-
-  .implicits {
-      padding-top: 8px;
-  }
-
-  .impl_arg {
-      font-family: monospace;
-      font-size: 15px;
-  }
-
-  ul {
-      padding-inline-start: 25px;
-  }
-
-  .implicits, .impl_arg, .impl_arg a:link, .impl_arg a:visited, .impl_arg a:active {
-      color: black;
-      white-space: nowrap;
-  }
-
-  .impl_arg a:hover {
-      color: darkslategray;
-  }
-
-  .decl_header, .attributes {
-      font-weight: bold;
-      line-height: 1.5;
-  }
-
-  .decl_header {
-      font-size: 15px;
-  }
-
-  .decl_header {
-      /* indent everything but first line twice as much as decl_type */
-      text-indent: -8ex; padding-left: 8ex;
-  }
-
-  .decl_type {
-      margin-top: 2px;
-      margin-left: 4ex; /* extra indentation */
-  }
-
-  code, .decl_header, .attributes, .structure_field, .constructor, .instances li, .equation {
-      font-family: monospace;
-  }
-
-  code {
-      font-size: 15px;
-  }
-
-  .structure_fields, .constructors {
-      display: block;
-      padding-inline-start: 0;
-      margin-top: 1ex;
-      font-size: 15px;
-  }
-
-  .structure_field {
-      display: block;
-  }
-  .structure_field:before {
-      content: '(';
-      color: gray;
-  }
-  .structure_field:after {
-      content: ')';
-      color: gray;
-  }
-
-  .constructor {
-      display: block;
-  }
-  .constructor:before {
-      content: '| ';
-      color: gray;
-  }
-
-  code a:link, code a:visited, code a:active,
-  .decl a:link, .decl a:visited, .decl a:active {
-      color: black;
-  }
-
-  code a:hover, .decl a:hover {
-      color: darkslategray;
-  }
-
-  .indent {
-      padding: 5px;
-  }
-
-  a.index:link, a.index:visited, a.index:active {
-      color:darkblue;
-  }
-
-  a.file:link, a.file:visited, a.file:active {
-      color:darkseagreen;
-  }
-
-  .anchor {
-      height: 1px;
-      width: 1px;
-  }
-
-  .internal_nav h1 {
-      font-size: 22px;
-      margin-top: 0px;
-  }
-
-  .internal_nav h2 {
-      font-size: 19px;
-      margin: 0px;
-      padding: 0px;
-  }
-
-  .internal_nav .gh_nav_link {
-      padding-bottom: 1.5em;
-  }
-
-  .decl_header.impl_collapsed .impl_arg > span {
-      display: none;
-  }
-
-  .decl_header.impl_collapsed .impl_arg ~ .impl_arg {
-      display: none;
-  }
-
-  .decl_header.impl_collapsed .impl_arg:after {
-      cursor: pointer;
-      content: '{â€¦}';
-  }
-
-  .impl_arg {
-      font-style: italic;
-      font-weight: normal;
-  }
-
-  .gh_link {
-      float: right;
-      margin-left: 20px;
-  }
-
-  .gh_link:before, .gh_nav_link:before {
-      content: "";
-      display: inline-block;
-      background: url(https://leanprover-community.github.io/assets/img/gh_logo.png) no-repeat;
-      width: 16px;
-      height: 13px;
-  }
-
-  .content.docfile h2, .note h2 {
-      margin-block-start: 3px;
-      margin-block-end: 0px;
-  }
-
-  .content.docfile h2 a {
-      color: black;
-  }
-
-  .content.docfile h2 a:link, .content.docfile h2 a:visited, .content.docfile h2 a:active {
-      color: black;
-  }
-
-  .content.docfile h2 a:hover {
-      color: darkslategray;
-  }
-
-  .nav h3 {
-      margin-block-end: 4px;
-  }
+    padding: 0px;
+}
+
+.internal_nav .gh_nav_link {
+    padding-bottom: 1.5em;
+}
+
+.decl_header.impl_collapsed .impl_arg > span {
+    display: none;
+}
+
+.decl_header.impl_collapsed .impl_arg ~ .impl_arg {
+    display: none;
+}
+
+.decl_header.impl_collapsed .impl_arg:after {
+    cursor: pointer;
+    content: '{…}';
+}
+
+.impl_arg {
+    font-style: italic;
+    font-weight: normal;
+}
+
+.gh_link {
+    float: right;
+    margin-left: 20px;
+}
+
+.gh_link:before, .internal_nav .gh_nav_link:before {
+    content: "";
+    display: inline-block;
+    background: url(https://leanprover-community.github.io/assets/img/gh_logo.png) no-repeat;
+    width: 16px;
+    height: 13px;
+}
+
+.content.docfile h2, .note h2 {
+    margin-block-start: 3px;
+    margin-block-end: 0px;
+}
+
+.content.docfile h2 a {
+    color: black;
+}
+
+.content.docfile h2 a:link, .content.docfile h2 a:visited, .content.docfile h2 a:active {
+    color: black;
+}
+
+.content.docfile h2 a:hover {
+    color: darkslategray;
+}
+
+.nav h3 {
+    margin-block-end: 4px;
+}
