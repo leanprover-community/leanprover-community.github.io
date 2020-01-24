@@ -1,0 +1,44 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/23509Polymorphicrecursionininductivetype.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/23509Polymorphicrecursionininductivetype.html">Polymorphic recursion in inductive type</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186503479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Polymorphic%20recursion%20in%20inductive%20type/near/186503479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23509Polymorphicrecursionininductivetype.html#186503479">Anton Lorenzen (Jan 24 2020 at 15:47)</a>:</h4>
+<p>I want to represent de brujin indices as in slides 24-25 of <a href="https://www.slideshare.net/ekmett/bound-making-de-bruijn-succ-less" target="_blank" title="https://www.slideshare.net/ekmett/bound-making-de-bruijn-succ-less">https://www.slideshare.net/ekmett/bound-making-de-bruijn-succ-less</a><br>
+and <a href="https://www.researchgate.net/profile/Ross_Paterson4/publication/2612840_De_Bruijn_notation_as_a_nested_datatype/links/5703a08008aeade57a25a487/De-Bruijn-notation-as-a-nested-datatype.pdf" target="_blank" title="https://www.researchgate.net/profile/Ross_Paterson4/publication/2612840_De_Bruijn_notation_as_a_nested_datatype/links/5703a08008aeade57a25a487/De-Bruijn-notation-as-a-nested-datatype.pdf">https://www.researchgate.net/profile/Ross_Paterson4/publication/2612840_De_Bruijn_notation_as_a_nested_datatype/links/5703a08008aeade57a25a487/De-Bruijn-notation-as-a-nested-datatype.pdf</a><br>
+That is, I want to go from</p>
+<div class="codehilite"><pre><span></span>inductive {u} Incr (v : Type u) : Type u
+| zero : Incr
+| succ : v -&gt; Incr
+
+inductive {u} Term : Type u -&gt; Type (u + 1)
+| var {v} : v -&gt; Term v
+| app {v} : Term v -&gt; Term v -&gt; Term v
+| lam {v} : Term (Incr v) -&gt; Term v
+</pre></div>
+
+
+<p>to</p>
+<div class="codehilite"><pre><span></span>inductive {v} Exp : Type v -&gt; Type (v + 1)
+| var {a} : a -&gt; Exp a
+| app {a} : Exp a -&gt; Exp a -&gt; Exp a
+| lam {a} : Exp (Incr (Exp a)) -&gt; Exp a
+</pre></div>
+
+
+<p>The second one doesn't compile. Is there a way to reduce the universe in the recursive <code>Exp</code>?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
