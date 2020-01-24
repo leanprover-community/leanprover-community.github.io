@@ -105,6 +105,24 @@ hx : x ∈ finset.sup s f
 <span class="n">finset</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">s</span> <span class="n">rfl</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="n">s</span> <span class="n">hx</span> <span class="n">IH</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">IH</span><span class="o">])</span>
 </pre></div>
 
+<a name="186529196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20puzzle/near/186529196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85492finsetpuzzle.html#186529196">Floris van Doorn (Jan 24 2020 at 20:07)</a>:</h4>
+<p>And here is a proof without that assumption:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">β</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">finset</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">finset</span><span class="bp">.</span><span class="n">bind</span> <span class="n">s</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sup</span> <span class="n">s</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">le_antisymm</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">y</span><span class="o">,</span> <span class="n">rw</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_bind</span><span class="o">,</span> <span class="n">rintro</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="o">,</span> <span class="n">hy</span><span class="bp">⟩</span><span class="o">,</span> <span class="k">have</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">finset</span><span class="bp">.</span><span class="n">le_sup</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">f</span> <span class="bp">_</span> <span class="n">hx</span><span class="o">,</span> <span class="n">exact</span> <span class="n">this</span> <span class="n">hy</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">refine</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sup_le</span> <span class="bp">_</span><span class="o">,</span> <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span> <span class="n">y</span> <span class="n">hy</span><span class="o">,</span> <span class="n">rw</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_bind</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="o">,</span> <span class="n">hy</span><span class="bp">⟩</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="186529280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20puzzle/near/186529280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85492finsetpuzzle.html#186529280">Floris van Doorn (Jan 24 2020 at 20:08)</a>:</h4>
+<p>You indeed also need <code>sup_le</code>.</p>
+
 
 {% endraw %}
 
