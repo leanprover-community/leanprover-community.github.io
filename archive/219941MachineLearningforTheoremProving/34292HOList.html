@@ -370,6 +370,66 @@ TRAIN: ~789k
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186487969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186487969">Stanislas Polu (Jan 24 2020 at 12:46)</a>:</h4>
 <p><span class="user-mention" data-user-id="217806">@Markus Rabe</span> sorry another quick question. It looks like <code>LABEL_TAC</code> is not accepted by the proof assistant. Any reason why they appear in the proof logs?</p>
 
+<a name="186491122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186491122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186491122">Stanislas Polu (Jan 24 2020 at 13:25)</a>:</h4>
+<p>FInally, while attempting to replay the proof logs with the following procedure: for all tactics taking a theorem argument, call RegisterTheorem on each argument and then for all tactics, call ApplyTactic.</p>
+<p>I often, despite a successful call to RegisterTheorem (the fingerprint I use (the one from the proof logs) is returned to me with no error), I get an eventual error when applying the tactic with message "No theorem exists with index XXX". From reading the ML code, I have a hard time seeing how the fingerprint can be returned successfully at RegisterTheorem and then not being hitting that message meaning that the index does not has that fingerprint.</p>
+<p>Example logs:</p>
+<div class="codehilite"><pre><span></span>Replaying /Users/spolu/deephol-data/deepmath/deephol/proofs/human/test/prooflogs-00218-of-00537.jsonl
+&gt; ApplyTactic X_GEN_TAC `(v (fun (cart (real) N) (bool)) s)`
+&lt; ApplyTactic 1 goals
+&gt; ApplyTactic X_GEN_TAC `(v (fun (cart (real) N) (bool)) t)`
+&lt; ApplyTactic 1 goals
+&gt; ApplyTactic DISCH_TAC
+&lt; ApplyTactic 1 goals
+&gt; ApplyTactic RAW_POP_TAC 0
+&lt; ApplyTactic 1 goals
+&gt; RegisterTheorem 3261843337692443473
+&lt; RegisterTheorem 3261843337692443473
+&gt; ApplyTactic REWRITE_TAC [ THM 3261843337692443473 ]
+&lt; ApplyTactic 1 goals
+&gt; RegisterTheorem 3276577123099513888
+&lt; RegisterTheorem 3276577123099513888
+&gt; ApplyTactic MP_TAC THM 3276577123099513888
+!!! Failure(&quot;No theorem exists with index 3276577123099513888&quot;)
+&gt; RegisterTheorem 3550116108290505704
+&lt; RegisterTheorem 3550116108290505704
+&gt; RegisterTheorem 1457252911920550478
+&lt; RegisterTheorem 1457252911920550478
+&gt; RegisterTheorem 4032148915606337071
+&lt; RegisterTheorem 4032148915606337071
+&gt; RegisterTheorem 1358160238249633387
+&lt; RegisterTheorem 1358160238249633387
+&gt; RegisterTheorem 34540287283234494
+&lt; RegisterTheorem 34540287283234494
+&gt; RegisterTheorem 3806712188414811372
+&lt; RegisterTheorem 3806712188414811372
+&gt; ApplyTactic SIMP_TAC [ THM 3550116108290505704 ; THM 1457252911920550478 ; THM 4032148915606337071 ; THM 1358160238249633387 ; THM 34540287283234494 ; THM 3806712188414811372 ]
+!!! Failure(&quot;No theorem exists with index 34540287283234494&quot;)
+&gt; ApplyTactic DISCH_TAC
+&lt; ApplyTactic 1 goals
+&gt; ApplyTactic RAW_POP_TAC 0
+&lt; ApplyTactic 1 goals
+&gt; RegisterTheorem 4441231563045595206
+&lt; RegisterTheorem 4441231563045595206
+&gt; ApplyTactic MP_TAC THM 4441231563045595206
+!!! Failure(&quot;No theorem exists with index 4441231563045595206&quot;)
+&gt; ApplyTactic ANTS_TAC
+&lt; ApplyTactic 2 goals
+&gt; RegisterTheorem 647530560333096154
+&lt; RegisterTheorem 647530560333096154
+&gt; ApplyTactic REWRITE_TAC [ THM 647530560333096154 ]
+&lt; ApplyTactic 1 goals
+</pre></div>
+
+
+<p>As you can see this happens quite often.<br>
+cc <span class="user-mention" data-user-id="217806">@Markus Rabe</span> <span class="user-mention" data-user-id="239426">@Christian Szegedy</span></p>
+
+<a name="186491176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186491176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186491176">Stanislas Polu (Jan 24 2020 at 13:26)</a>:</h4>
+<p>(sorry for all the questions, hope it'll be useful to the community)</p>
+
 
 {% endraw %}
 
