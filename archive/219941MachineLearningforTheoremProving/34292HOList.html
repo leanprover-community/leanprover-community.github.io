@@ -335,6 +335,37 @@ What I meant is that we have a new proof checker that bypasses the API and inste
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186421586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186421586">Stanislas Polu (Jan 23 2020 at 18:52)</a>:</h4>
 <p><span class="user-mention" data-user-id="239426">@Christian Szegedy</span> thanks!</p>
 
+<a name="186476176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186476176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186476176">Stanislas Polu (Jan 24 2020 at 09:43)</a>:</h4>
+<p><span class="user-mention" data-user-id="217806">@Markus Rabe</span> I'm a bit surprised by the following:</p>
+<div class="codehilite"><pre><span></span>root@dev-1-0:~# du -h ~/deephol-data/deepmath/deephol/proofs/human/test
+3.3G    /root/deephol-data/deepmath/deephol/proofs/human/test
+root@dev-1-0:~# du -h ~/deephol-data/deepmath/deephol/proofs/human/valid
+2.4G    /root/deephol-data/deepmath/deephol/proofs/human/valid
+root@dev-1-0:~# du -h ~/deephol-data/deepmath/deephol/proofs/human/train
+9.2G    /root/deephol-data/deepmath/deephol/proofs/human/train
+</pre></div>
+
+
+<p>vs</p>
+<div class="codehilite"><pre><span></span>root@dev-1-0:~# grep &quot;TEST&quot; ~/deephol-data/deepmath/deephol/theorem_database_v1.1.textpb | wc -l
+14141
+root@dev-1-0:~# grep &quot;VALIDATION&quot; ~/deephol-data/deepmath/deephol/theorem_database_v1.1.textpb | wc -l
+3668
+root@dev-1-0:~# grep &quot;TRAINING&quot; ~/deephol-data/deepmath/deephol/theorem_database_v1.1.textpb | wc -l
+11655
+</pre></div>
+
+
+<p>Which gives a bytes/theorem (approximation) of:</p>
+<div class="codehilite"><pre><span></span>TEST: ~233k
+VALIDATION: ~654k
+TRAIN: ~789k
+</pre></div>
+
+
+<p>Which indicates that the size of the proofs in the test set are noticeably smaller vs train/validation? Is that intentional? (or maybe a discrepancy in tf records for the test set?)</p>
+
 
 {% endraw %}
 
