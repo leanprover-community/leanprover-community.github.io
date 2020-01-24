@@ -50,11 +50,14 @@
 <a href="#rintro">rintro</a><br>
 <a href="#rotate">rotate</a><br>
 <a href="#set">set</a><br>
+<a href="#simp_rw">simp_rw</a><br>
 <a href="#simpa">simpa</a><br>
+<a href="#simps">simps</a><br>
 <a href="#solve_by_elim">solve_by_elim</a><br>
 <a href="#squeeze_simp / squeeze_simpa">squeeze_simp / squeeze_simpa</a><br>
 <a href="#suggest">suggest</a><br>
 <a href="#swap">swap</a><br>
+<a href="#tautology">tautology</a><br>
 <a href="#tfae">tfae</a><br>
 <a href="#The `ext` attribute">The `ext` attribute</a><br>
 <a href="#The `reassoc` attribute">The `reassoc` attribute</a><br>
@@ -1072,6 +1075,30 @@ end
 </code></pre>
 </div>
 <div class="tactic">
+<h2 id="simp_rw"><a href="#simp_rw">simp_rw</a></h2>
+<p><code>simp_rw</code> functions as a mix of <code>simp</code> and <code>rw</code>. Like <code>rw</code>, it applies each
+rewrite rule in the given order, but like <code>simp</code> it repeatedly applies these
+rules and also under binders like <code>∀ x, ...</code>, <code>∃ x, ...</code> and <code>λ x, ...</code>.</p>
+
+<p>Usage:</p>
+
+<ul>
+<li><code>simp_rw [lemma_1, ..., lemma_n]</code> will rewrite the goal by applying the
+lemmas in that order.</li>
+<li><code>simp_rw [lemma_1, ..., lemma_n] at h₁ ... hₙ</code> will rewrite the given hypotheses.</li>
+<li><code>simp_rw [...] at ⊢ h₁ ... hₙ</code> rewrites the goal as well as the given hypotheses.</li>
+<li><code>simp_rw [...] at *</code> rewrites in the whole context: all hypotheses and the goal.</li>
+</ul>
+
+<p>For example, neither <code>simp</code> nor <code>rw</code> can solve the following, but <code>simp_rw</code> can:</p>
+
+<pre><code>example {α β : Type} {f : α → β} {t : set β} : (∀ s, f '' s ⊆ t) = ∀ s : set α, ∀ x ∈ s, x ∈ f ⁻¹' t :=
+by simp_rw [set.image_subset_iff, set.subset_def]
+</code></pre>
+
+<p>Lemmas passed to <code>simp_rw</code> must be expressions that are valid arguments to <code>simp</code>.</p>
+</div>
+<div class="tactic">
 <h2 id="simpa"><a href="#simpa">simpa</a></h2>
 <p>This is a "finishing" tactic modification of <code>simp</code>. It has two forms.</p>
 
@@ -1085,6 +1112,41 @@ more robust under changes to the simp lemma set.</p></li>
 <li><p><code>simpa [rules, ...]</code> will simplify the goal and the type of a
 hypothesis <code>this</code> if present in the context, then try to close the goal using
 the <code>assumption</code> tactic.</p></li>
+</ul>
+</div>
+<div class="tactic">
+<h2 id="simps"><a href="#simps">simps</a></h2>
+<ul>
+<li>The <code>@[simps]</code> attribute automatically derives lemmas specifying the projections of the declaration.</li>
+<li>Example: (note that the forward and reverse functions are specified differently!)
+<code>lean
+@[simps] def refl (α) : α ≃ α := ⟨id, λ x, x, λ x, rfl, λ x, rfl⟩
+</code>
+derives two simp-lemmas:
+<code>lean
+@[simp] lemma refl_to_fun (α) (x : α) : (refl α).to_fun x = id x
+@[simp] lemma refl_inv_fun (α) (x : α) : (refl α).inv_fun x = x
+</code></li>
+<li>It does not derive simp-lemmas for the prop-valued projections.</li>
+<li>It will automatically reduce newly created beta-redexes, but not unfold any definitions.</li>
+<li>If one of the fields itself is a structure, this command will recursively create
+simp-lemmas for all fields in that structure.</li>
+<li>You can use <code>@[simps proj1 proj2 ...]</code> to only generate the projection lemmas for the specified
+projections. For example:
+<code>lean
+attribute [simps to_fun] refl
+</code></li>
+<li>If one of the values is an eta-expanded structure, we will eta-reduce this structure.</li>
+<li>You can use <code>@[simps lemmas_only]</code> to derive the lemmas, but not mark them
+as simp-lemmas.</li>
+<li>You can use <code>@[simps short_name]</code> to only use the name of the last projection for the name of the
+generated lemmas.</li>
+<li>The precise syntax is <code>('simps' 'lemmas_only'? 'short_name'? ident*)</code>.</li>
+<li>If one of the projections is marked as a coercion, the generated lemmas do <em>not</em> use this
+coercion.</li>
+<li><code>@[simps]</code> reduces let-expressions where necessary.</li>
+<li>If one of the fields is a partially applied constructor, we will eta-expand it
+(this likely never happens).</li>
 </ul>
 </div>
 <div class="tactic">
@@ -1192,6 +1254,23 @@ refine lt_of_not_ge _
 <div class="tactic">
 <h2 id="swap"><a href="#swap">swap</a></h2>
 <p><code>swap n</code> will move the <code>n</code>th goal to the front. <code>swap</code> defaults to <code>swap 2</code>, and so interchanges the first and second goals.</p>
+</div>
+<div class="tactic">
+<h2 id="tautology"><a href="#tautology">tautology</a></h2>
+<p>This tactic (with shorthand <code>tauto</code>) breaks down assumptions of the form <code>_ ∧ _</code>, <code>_ ∨ _</code>, <code>_ ↔ _</code> and <code>∃ _, _</code>
+and splits a goal of the form <code>_ ∧ _</code>, <code>_ ↔ _</code> or <code>∃ _, _</code> until it can be discharged
+using <code>reflexivity</code> or <code>solve_by_elim</code>. This is a finishing tactic: it
+either closes the goal of raises an error.</p>
+
+<p>The variants <code>tautology!</code> or <code>tauto!</code> use the law of excluded middle.</p>
+
+<p>For instance, one can write:</p>
+
+<pre><code>example (p q r : Prop) [decidable p] [decidable r] : p ∨ (q ∧ r) ↔ (p ∨ q) ∧ (r ∨ p ∨ r) := by tauto
+</code></pre>
+
+<p>and the decidability assumptions can be dropped if <code>tauto!</code> is used
+instead of <code>tauto</code>.</p>
 </div>
 <div class="tactic">
 <h2 id="tfae"><a href="#tfae">tfae</a></h2>
@@ -1520,10 +1599,17 @@ by use ⟨1, 42⟩
 
 </div><div class="nav_sect">analysis</div>
 <div class="nav_sect_inner hidden" id="analysis">
-<div class="nav_sect">calculus</div>
+<div class="nav_sect">ODE</div>
+<div class="nav_sect_inner hidden" id="analysis/ODE">
+<a class="nav_file" id="analysis/ODE/gronwall.html" href="https://leanprover-community.github.io/mathlib_docs/analysis/ODE/gronwall.html">gronwall</a><br>
+
+
+</div><div class="nav_sect">calculus</div>
 <div class="nav_sect_inner hidden" id="analysis/calculus">
 <a class="nav_file" id="analysis/calculus/deriv.html" href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/deriv.html">deriv</a><br>
+<a class="nav_file" id="analysis/calculus/extend_deriv.html" href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/extend_deriv.html">extend_deriv</a><br>
 <a class="nav_file" id="analysis/calculus/fderiv.html" href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/fderiv.html">fderiv</a><br>
+<a class="nav_file" id="analysis/calculus/local_extr.html" href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/local_extr.html">local_extr</a><br>
 <a class="nav_file" id="analysis/calculus/mean_value.html" href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/mean_value.html">mean_value</a><br>
 <a class="nav_file" id="analysis/calculus/tangent_cone.html" href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/tangent_cone.html">tangent_cone</a><br>
 <a class="nav_file" id="analysis/calculus/times_cont_diff.html" href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/times_cont_diff.html">times_cont_diff</a><br>
@@ -2174,6 +2260,7 @@ by use ⟨1, 42⟩
 <a class="nav_file" id="data/fintype.html" href="https://leanprover-community.github.io/mathlib_docs/data/fintype.html">fintype</a><br>
 <a class="nav_file" id="data/hash_map.html" href="https://leanprover-community.github.io/mathlib_docs/data/hash_map.html">hash_map</a><br>
 <a class="nav_file" id="data/holor.html" href="https://leanprover-community.github.io/mathlib_docs/data/holor.html">holor</a><br>
+<a class="nav_file" id="data/indicator_function.html" href="https://leanprover-community.github.io/mathlib_docs/data/indicator_function.html">indicator_function</a><br>
 <a class="nav_file" id="data/lazy_list2.html" href="https://leanprover-community.github.io/mathlib_docs/data/lazy_list2.html">lazy_list2</a><br>
 <a class="nav_file" id="data/mllist.html" href="https://leanprover-community.github.io/mathlib_docs/data/mllist.html">mllist</a><br>
 <a class="nav_file" id="data/multiset.html" href="https://leanprover-community.github.io/mathlib_docs/data/multiset.html">multiset</a><br>
@@ -2209,7 +2296,9 @@ by use ⟨1, 42⟩
 <div class="nav_sect_inner hidden" id="geometry">
 <div class="nav_sect">manifold</div>
 <div class="nav_sect_inner hidden" id="geometry/manifold">
+<a class="nav_file" id="geometry/manifold/basic_smooth_bundle.html" href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/basic_smooth_bundle.html">basic_smooth_bundle</a><br>
 <a class="nav_file" id="geometry/manifold/manifold.html" href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html">manifold</a><br>
+<a class="nav_file" id="geometry/manifold/mfderiv.html" href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/mfderiv.html">mfderiv</a><br>
 <a class="nav_file" id="geometry/manifold/real_instances.html" href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/real_instances.html">real_instances</a><br>
 <a class="nav_file" id="geometry/manifold/smooth_manifold_with_corners.html" href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/smooth_manifold_with_corners.html">smooth_manifold_with_corners</a><br>
 
@@ -2231,6 +2320,7 @@ by use ⟨1, 42⟩
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -2251,7 +2341,9 @@ by use ⟨1, 42⟩
 <a class="nav_file" id="linear_algebra/finite_dimensional.html" href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/finite_dimensional.html">finite_dimensional</a><br>
 <a class="nav_file" id="linear_algebra/finsupp.html" href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/finsupp.html">finsupp</a><br>
 <a class="nav_file" id="linear_algebra/finsupp_vector_space.html" href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/finsupp_vector_space.html">finsupp_vector_space</a><br>
+<a class="nav_file" id="linear_algebra/linear_action.html" href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/linear_action.html">linear_action</a><br>
 <a class="nav_file" id="linear_algebra/matrix.html" href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/matrix.html">matrix</a><br>
+<a class="nav_file" id="linear_algebra/multilinear.html" href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/multilinear.html">multilinear</a><br>
 <a class="nav_file" id="linear_algebra/sesquilinear_form.html" href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/sesquilinear_form.html">sesquilinear_form</a><br>
 <a class="nav_file" id="linear_algebra/tensor_product.html" href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/tensor_product.html">tensor_product</a><br>
 
@@ -2278,6 +2370,7 @@ by use ⟨1, 42⟩
 <a class="nav_file" id="measure_theory/borel_space.html" href="https://leanprover-community.github.io/mathlib_docs/measure_theory/borel_space.html">borel_space</a><br>
 <a class="nav_file" id="measure_theory/decomposition.html" href="https://leanprover-community.github.io/mathlib_docs/measure_theory/decomposition.html">decomposition</a><br>
 <a class="nav_file" id="measure_theory/giry_monad.html" href="https://leanprover-community.github.io/mathlib_docs/measure_theory/giry_monad.html">giry_monad</a><br>
+<a class="nav_file" id="measure_theory/indicator_function.html" href="https://leanprover-community.github.io/mathlib_docs/measure_theory/indicator_function.html">indicator_function</a><br>
 <a class="nav_file" id="measure_theory/integration.html" href="https://leanprover-community.github.io/mathlib_docs/measure_theory/integration.html">integration</a><br>
 <a class="nav_file" id="measure_theory/l1_space.html" href="https://leanprover-community.github.io/mathlib_docs/measure_theory/l1_space.html">l1_space</a><br>
 <a class="nav_file" id="measure_theory/lebesgue_measure.html" href="https://leanprover-community.github.io/mathlib_docs/measure_theory/lebesgue_measure.html">lebesgue_measure</a><br>
@@ -2285,6 +2378,7 @@ by use ⟨1, 42⟩
 <a class="nav_file" id="measure_theory/measure_space.html" href="https://leanprover-community.github.io/mathlib_docs/measure_theory/measure_space.html">measure_space</a><br>
 <a class="nav_file" id="measure_theory/outer_measure.html" href="https://leanprover-community.github.io/mathlib_docs/measure_theory/outer_measure.html">outer_measure</a><br>
 <a class="nav_file" id="measure_theory/probability_mass_function.html" href="https://leanprover-community.github.io/mathlib_docs/measure_theory/probability_mass_function.html">probability_mass_function</a><br>
+<a class="nav_file" id="measure_theory/set_integral.html" href="https://leanprover-community.github.io/mathlib_docs/measure_theory/set_integral.html">set_integral</a><br>
 <a class="nav_file" id="measure_theory/simple_func_dense.html" href="https://leanprover-community.github.io/mathlib_docs/measure_theory/simple_func_dense.html">simple_func_dense</a><br>
 
 
@@ -2307,7 +2401,9 @@ by use ⟨1, 42⟩
 <div class="nav_sect_inner hidden" id="order">
 <div class="nav_sect">filter</div>
 <div class="nav_sect_inner hidden" id="order/filter">
+<a class="nav_file" id="order/filter/bases.html" href="https://leanprover-community.github.io/mathlib_docs/order/filter/bases.html">bases</a><br>
 <a class="nav_file" id="order/filter/basic.html" href="https://leanprover-community.github.io/mathlib_docs/order/filter/basic.html">basic</a><br>
+<a class="nav_file" id="order/filter/extr.html" href="https://leanprover-community.github.io/mathlib_docs/order/filter/extr.html">extr</a><br>
 <a class="nav_file" id="order/filter/filter_product.html" href="https://leanprover-community.github.io/mathlib_docs/order/filter/filter_product.html">filter_product</a><br>
 <a class="nav_file" id="order/filter/lift.html" href="https://leanprover-community.github.io/mathlib_docs/order/filter/lift.html">lift</a><br>
 <a class="nav_file" id="order/filter/partial.html" href="https://leanprover-community.github.io/mathlib_docs/order/filter/partial.html">partial</a><br>
@@ -2461,6 +2557,7 @@ by use ⟨1, 42⟩
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
 <a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
+<a class="nav_file" id="tactic/simp_rw.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simp_rw.html">simp_rw</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
 <a class="nav_file" id="tactic/slice.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/slice.html">slice</a><br>
@@ -2569,6 +2666,7 @@ by use ⟨1, 42⟩
 <a class="nav_file" id="topology/dense_embedding.html" href="https://leanprover-community.github.io/mathlib_docs/topology/dense_embedding.html">dense_embedding</a><br>
 <a class="nav_file" id="topology/homeomorph.html" href="https://leanprover-community.github.io/mathlib_docs/topology/homeomorph.html">homeomorph</a><br>
 <a class="nav_file" id="topology/list.html" href="https://leanprover-community.github.io/mathlib_docs/topology/list.html">list</a><br>
+<a class="nav_file" id="topology/local_extr.html" href="https://leanprover-community.github.io/mathlib_docs/topology/local_extr.html">local_extr</a><br>
 <a class="nav_file" id="topology/local_homeomorph.html" href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html">local_homeomorph</a><br>
 <a class="nav_file" id="topology/maps.html" href="https://leanprover-community.github.io/mathlib_docs/topology/maps.html">maps</a><br>
 <a class="nav_file" id="topology/opens.html" href="https://leanprover-community.github.io/mathlib_docs/topology/opens.html">opens</a><br>

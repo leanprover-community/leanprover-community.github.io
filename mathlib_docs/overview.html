@@ -11,84 +11,70 @@
 <h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><h2><a href="#top">mathlib overview</a></h2><ul>
   <li><a href="#an-overview-of-mathlib">An overview of mathlib</a>
   <ul>
-    <li><a href="#what-is-currently-in-mathlib">What is currently in mathlib?</a>
-    <ul>
-      <li><a href="#algebra">Algebra</a></li>
-      <li><a href="#analysis">Analysis</a></li>
-      <li><a href="#topology">Topology</a></li>
-      <li><a href="#category-theory">Category theory</a></li>
-      <li><a href="#number-theory">Number theory</a></li>
-      <li><a href="#other-mathematical-theories-and-objects">Other mathematical theories and objects.</a></li>
-      <li><a href="#programming">Programming</a></li>
-      <li><a href="#tactics">Tactics</a></li>
-    </ul></li>
+    <li><a href="#algebra">Algebra</a></li>
+    <li><a href="#number-theory">Number theory</a></li>
+    <li><a href="#analysis">Analysis</a></li>
+    <li><a href="#topology">Topology</a></li>
+    <li><a href="#measure-theory">Measure theory.</a></li>
+    <li><a href="#category-theory">Category theory</a></li>
+    <li><a href="#other-mathematical-theories-and-objects">Other mathematical theories and objects.</a></li>
   </ul></li>
 </ul>
 </div></div>
 <div class="column middle"><div class="content">
 <h1 id="an-overview-of-mathlib">An overview of mathlib</h1>
 
-<p>This is an overview of mathlib as it was on 12th August 2018.</p>
-
-<p>A mathematician might be surprised about what is currently in mathlib, because it does not really correspond to how mathematics is built up in a standard undergraduate mathematics degree. For example, there is currently no basic theory of matrices, in particular no link between matrices and linear maps, no proof that det(AB)=det(A)det(B), and so on; such things are often taught very early in a mathematics degree. On the other hand there is the theory of localisation of rings at multiplicative sets, and the theory of measure spaces, which are typically taught in a third or higher year course. Why is this? The reason is that we do not want to have to prove the same thing more than once, and this changes the way that mathematics is built. What are the reasons that the link between matrices and linear maps is stressed early on in a mathematics degree? Perhaps it is for pedagogical reasons -- abstract vector spaces are a useful concept in statistics and applied mathematics, and introducing them via concrete examples such as real 3-space is probably good for pedagogical reasons. But neither pedagogy nor applications outside pure mathematics are particularly high on mathlib's agenda.</p>
-
-<p>The approach taken by mathlib is far more akin to that of Bourbaki, a group of French mathematicians who wrote many volumes of mathematics with the ultimate goal of building it from scratch. Mathlib is doing exactly the same thing. Bourbaki stressed working in the maximal generality -- for example, you will not find a proof of the open mapping theorem for Banach spaces over the reals in Bourbaki, you will find it proved for Banach spaces over an arbitrary complete field; this means that number theorists can apply the theorem to Banach spaces over the p-adic numbers, for example (and nowadays in p-adic analysis they do just that). To give another example, the theory of Cauchy sequences is set up for sequences taking values in a general ring equipped with an absolute value function to a linearly ordered field. All of this theory is set up before the real numbers are even defined -- indeed the point of setting up the theory in this generality is precisely so that the real numbers can be defined as equivalence classes of Cauchy sequences of rationals, once one has proved that the rationals are a ring and a linearly ordered field, and defined an absolute value function from the rationals to the rationals. This approach would be a pedagogical nightmare.</p>
-
-<p>This design decision has consequences, which were also consequences for Bourbaki. In an attempt to unify various proofs and work in the maximal generality, Bourbaki introduced notions such as filters. Very little is said about the notion of a filter in a typical undergraduate mathematics degree, but using filters unifies various notions of a limit, and there is a 70 kilobyte file (long for mathlib standards) <code>order/filter.lean</code> proving lots of basic results about filters and setting up a very general notion of limit via the <code>tendsto</code> function. This has consequences which might seem strange for mathematicians. For example the definition of a compact topological space is expressed in terms of filters. Does this mean that to work with compact topological spaces in Lean, a mathematician has to learn all about filters? No it does not! Because after introducing a definition in mathlib, the authors often then prove all the absolutely fundamental basic results about the definition as part of what is called the "interface" or the "API" to the definition. For example, in the mathlib file <code>analysis/topology/topological_space.lean</code>, in the section called <code>compact</code>, the lemma <code>compact_iff_finite_subcover</code> is proved, which shows that a subset of a topological space is compact if and only if every open cover has a finite subcover. Indeed, part of the art of writing mathlib is to make sure that every definition has a robust API to go with it, so that mathematicians can use the definition the way they want to.</p>
-
-<p>[Editor's note: my impression is that one place where mathematicians really play fast and loose is when it comes to manipulating finite sets; mathematicians have a robust intuitive feeling for how one can manipulate them and often do things such as re-arranging finite sums in a way which mathlib currently struggles to emulate; however the interface is being actively worked upon, and will get better over time. Another place where beginners seem to struggle is that mathematicians often move between natural, integer, rational, real and complex numbers without any comment; all of these types are different in Lean and one has to explicitly move from one type to another, and there is currently a "knack" to making this happen seamlessly in Lean.]</p>
-
-<h2 id="what-is-currently-in-mathlib">What is currently in mathlib?</h2>
-
-<p>Because of the nature of the way mathematics is being built here, as already mentioned above, mathematicians might find what is in mathlib surprising. However, as it grows, it will begin to reflect more accurately what mathematicians actually care about. Many of the key definitions in mathlib come with robust API's, but mathematicians need to be clear what this means. A basic robust API for the theory of groups does not mean Sylow's theorems or even the first isomorphism theorem. It means simply that users have easy access to the definition and basic properties of groups such as <code>(a b)^(-1) = b^(-1) a^(-1)</code>, or that <code>a c = b c -&gt; a = b</code>. The harder stuff comes later.</p>
-
-<p>Note that mathlib is currently being actively developed, and new things tend to appear on almost a weekly basis. In particular, the list below might get out of date very quickly.</p>
+<p>Note that mathlib is currently being actively developed, and new things tend to appear on almost a weekly basis. In particular, the list below might get out of date very quickly. This page was last updated on 27th December 2019.</p>
 
 <h3 id="algebra">Algebra</h3>
 
-<p>There is a robust API for groups, rings, commutative rings, and fields, as well as modules over rings. There are also robust APIs for weaker objects such as monoids and semirings. There is also a robust API for several different classes of orderings, such as ordered groups, ordered fields and so on. Most of this theory is developed either in core Lean or in <code>mathlib/algebra/</code>.</p>
-
-<p>Within the <code>group_theory</code> directory there is some more advanced group theory. For example the theory of cosets, subgroups, and quotients, the theory of group actions, free groups, and the definition of the signature of a permutation for an element of a symmetric group.</p>
-
-<p>Within the <code>linear_algebra</code> directory there are basic constructions for modules, for example maps between modules, submodules and quotient modules, as well as a theory of multivariate polynomials over rings. The theory of polynomials in one variable is developed much further, in <code>data/polynomial.lean</code>.</p>
-
-<p>Within the <code>ring_theory</code> directory there is the theory of ideals, including prime and maximal ideals, plus an API for quotient rings. There is also an API for localisation, including definitions and universal properties.</p>
-
-<p>In the future it would be good to have some of the theory of finite-dimensional vector spaces and matrices, and this would open the door to some more advanced algebra such as algebraic number theory and representation theory of finite groups.</p>
-
-<h3 id="analysis">Analysis</h3>
-
-<p>As well as definitions of the real and complex numbers (and also non-negative reals, plus a type for "extended" non-negative reals obtained by adding +infinity), there is a general theory of limits (sometimes written in the language of filters, but with an API which enables mathematicians to use them the way they would normally). Much of this is in the directories <code>data/real/</code> and <code>analysis/</code>, with a little more in <code>data/analysis/</code>. Within <code>analysis/measure_theory/</code> there is an API for Borel spaces and measure spaces, including Lebesgue measure.</p>
-
-<p>It would be nice in the future to have some basic facts about power series, for example that they are continuous within their radius of convergence. There is also nothing at all about differentiability.</p>
-
-<h3 id="topology">Topology</h3>
-
-<p>Surprisingly located in <code>analysis/topology/</code>, the basic topology files contain an API for topological spaces and continuous maps, as well as the theory of uniform spaces and (in <code>analysis/</code>) metric spaces. There is also an API for topological groups and rings (as well as topological monoids and various other things it was appropriate to include), as well as a very general theory of limits (via filters) and a basic API for infinite sums.</p>
-
-<h3 id="category-theory">Category theory</h3>
-
-<p>Because the categories that mathematicians want to work with are often not sets, there are technical foundational issues here. The category theory library for mathematicians is in <code>category_theory/</code> and currently only has a few basic definitions (functors, natural transformations), which have been hard won. Do not confuse this with the <code>category/</code> directory in mathlib, which is mostly for functional programming tools, using category theory in the computer scientist's sense of endofunctors of the category of types.</p>
+<p>Groups. Subgroups, quotients, cosets, centralizers, free groups, abelianisation, Sylow 1.
+Rings. primes and irreducibles, characteristic of a ring, ideals, fields, Euclidean domains, principal ideal domains, unique factorization domains, Noetherian rings. Ordered rings and fields. Polynomials and power series. Localisation.
+Modules over a ring, direct sums and limits, tensor products.
+Lie algebras (definition and basic properties).
+Fields: minimal polynomials, finite extensions, algebraic extensions, splitting fields, perfect closure, finite fields.
+Vector spaces, bases, finite-dimensional spaces, matrices, linear maps, dual spaces, bilinear and sesquilinear forms.</p>
 
 <h3 id="number-theory">Number theory</h3>
 
-<p>There is very little here beyond APIs for naturals, integers and rationals, because a general theory of number fields needs basic results about finite-dimensional vector spaces and Noetherian rings and modules, neither of which are present, and basic analytic number theory will need some basic differential and integral calculus, which is also not present. The delicate result that the power function is Diophantine is proved -- this is a key step in Matiyesevich's resolution of Hilbert's 10th problem. Along the way a basic theory of Pell's equation is developed, involving developing some arithmetic of the ring <code>Z[sqrt(d)]</code> for d a non-square.</p>
+<p>The <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/theories/naturals.md">naturals</a>, the integers, the rationals.
+Primes, uniqueness of factorization. GCDs. Congruences and modular arithmetic. Z is an ED/PID/UFD. Sums of two and four squares, Pell’s equation in cases needed for Matiyasevich’s theorem (d=a^2-1). Euler’s Totient function. Quadratic reciprocity.
+<a href="https://github.com/leanprover-community/mathlib/blob/master/docs/theories/padics.md">p-adic numbers</a>. Hensel’s Lemma.</p>
+
+<h3 id="analysis">Analysis</h3>
+
+<p>The reals and complex numbers.
+Basic theory of differentiation of functions of one and several variables. The Intermediate Value Theorem, Rolle's theorem, the Mean Value Theorem. The chain rule, product rule, mean value theorem, C^n and C^infty functions.
+Sups and Infs. Sequences and sums. Sum of a geometric progression, exp and log, trig and inverse trig functions, basic properties (double angle formulae etc). Pi, and proof that it’s between 3.141 and 3.142
+The complex numbers are algebraically closed.
+Definition of real manifold, manifolds with corners. Vector bundles, tangent bundle.</p>
+
+<h3 id="topology">Topology</h3>
+
+<p>Metric spaces. Cauchy sequences, Hausdorff distance and Gromov-Hausdorff distance. Completions. Lipschitz continuous functions.
+Uniform spaces, uniform continuity, completions.
+Topological spaces, open and closed sets, compact sets, connected sets. Separation axioms T0 to T4. Topological groups, rings, fields. Continuous maps, homeomorphisms, the compact-open topology. Sequences, sequential spaces, sequentially continuous functions. The Stone-Cech compactification. Topological fibre bundles. Baire theorem. Normed vector spaces, operator norm.
+Presheaves on a topological space, stalks.</p>
+
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/docs/theories/topology.md">See here for more details information about topology in mathlib</a>.</p>
+
+<h3 id="measure-theory">Measure theory.</h3>
+
+<p>Sigma algebras, measure spaces, Borel measurable functions, probability spaces, the Lebesgue integral, L^1 spaces, the Bochner integral, the Giry monad (i.e. measures on a measurable space form a measurable space).</p>
+
+<h3 id="category-theory">Category theory</h3>
+
+<p>Categories, small and large categories.
+Functors, full and faithful functors, natural transformations, the Yoneda lemma. Equivalence of categories, sums, products, limits, adjoints. Monoidal categories.
+The category of commutative rings, the category of modules over a ring, the category of measurable spaces.</p>
+
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/docs/theories/category_theory.md">See here for more detailed information about category theory in mathlib</a>.</p>
 
 <h3 id="other-mathematical-theories-and-objects">Other mathematical theories and objects.</h3>
 
-<p>Basic propositional logic is in <code>logic/</code>.</p>
-
-<p>The <code>order/</code> directory contains the theories of lattices and complete lattices, boolean algebras, filters and Galois connections, which are not often run into in a mathematics degree, although they are the sorts of things which need to be developed if one is to develop mathematics a la Bourbaki. Ordinals and cardinals, as well as a model of ZFC inside Lean, are in <code>set_theory/</code>.</p>
-
-<p><code>computability/</code> is stuff like the halting problem.</p>
-
-<h3 id="programming">Programming</h3>
-
-<p>The directory <code>data/equiv/</code> contains an API for the concept of two objects being in bijection with one another. The directories <code>data/list/</code>, <code>data/set</code> and <code>data/sigma</code> contain more advanced APIs for lists, sets and sigma types than are given in core Lean. Also in <code>data/</code> is more advanced APIs for booleans, characters, finite sets, multisets (that is, finite sets where elements can appear with multiplicity greater than one) and subtype, amongst many other things which form part of the general programming framework. These are not necessary immediately upon getting started, but become useful when building more complicated proofs, definitions, or tactics. There is also <code>category/</code>, with a few extras on monads and category theory as used in functional programming.</p>
-
-<h3 id="tactics">Tactics</h3>
-
-<p><code>meta/</code> and <code>tactic/</code> contain new tactics defined in mathlib, and are beyond the scope of this overview. See the <a href="https://github.com/leanprover/mathlib/blob/master/docs/tactics.md">documentation</a> and <a href="https://github.com/leanprover/mathlib/tree/master/test">test cases</a>.</p>
+<p>Ordinals and cardinals. A model of ZFC.
+Continued fractions. Turing machines, the Halting problem.
+Conway games. The Fibonacci sequence. The hyperreals. Cubing a cube.</p>
 
 </div></div>
 <div class="column right"><div class="nav">
@@ -193,10 +179,17 @@
 
 </div><div class="nav_sect">analysis</div>
 <div class="nav_sect_inner hidden" id="analysis">
-<div class="nav_sect">calculus</div>
+<div class="nav_sect">ODE</div>
+<div class="nav_sect_inner hidden" id="analysis/ODE">
+<a class="nav_file" id="analysis/ODE/gronwall.html" href="https://leanprover-community.github.io/mathlib_docs/analysis/ODE/gronwall.html">gronwall</a><br>
+
+
+</div><div class="nav_sect">calculus</div>
 <div class="nav_sect_inner hidden" id="analysis/calculus">
 <a class="nav_file" id="analysis/calculus/deriv.html" href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/deriv.html">deriv</a><br>
+<a class="nav_file" id="analysis/calculus/extend_deriv.html" href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/extend_deriv.html">extend_deriv</a><br>
 <a class="nav_file" id="analysis/calculus/fderiv.html" href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/fderiv.html">fderiv</a><br>
+<a class="nav_file" id="analysis/calculus/local_extr.html" href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/local_extr.html">local_extr</a><br>
 <a class="nav_file" id="analysis/calculus/mean_value.html" href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/mean_value.html">mean_value</a><br>
 <a class="nav_file" id="analysis/calculus/tangent_cone.html" href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/tangent_cone.html">tangent_cone</a><br>
 <a class="nav_file" id="analysis/calculus/times_cont_diff.html" href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/times_cont_diff.html">times_cont_diff</a><br>
@@ -847,6 +840,7 @@
 <a class="nav_file" id="data/fintype.html" href="https://leanprover-community.github.io/mathlib_docs/data/fintype.html">fintype</a><br>
 <a class="nav_file" id="data/hash_map.html" href="https://leanprover-community.github.io/mathlib_docs/data/hash_map.html">hash_map</a><br>
 <a class="nav_file" id="data/holor.html" href="https://leanprover-community.github.io/mathlib_docs/data/holor.html">holor</a><br>
+<a class="nav_file" id="data/indicator_function.html" href="https://leanprover-community.github.io/mathlib_docs/data/indicator_function.html">indicator_function</a><br>
 <a class="nav_file" id="data/lazy_list2.html" href="https://leanprover-community.github.io/mathlib_docs/data/lazy_list2.html">lazy_list2</a><br>
 <a class="nav_file" id="data/mllist.html" href="https://leanprover-community.github.io/mathlib_docs/data/mllist.html">mllist</a><br>
 <a class="nav_file" id="data/multiset.html" href="https://leanprover-community.github.io/mathlib_docs/data/multiset.html">multiset</a><br>
@@ -882,7 +876,9 @@
 <div class="nav_sect_inner hidden" id="geometry">
 <div class="nav_sect">manifold</div>
 <div class="nav_sect_inner hidden" id="geometry/manifold">
+<a class="nav_file" id="geometry/manifold/basic_smooth_bundle.html" href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/basic_smooth_bundle.html">basic_smooth_bundle</a><br>
 <a class="nav_file" id="geometry/manifold/manifold.html" href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/manifold.html">manifold</a><br>
+<a class="nav_file" id="geometry/manifold/mfderiv.html" href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/mfderiv.html">mfderiv</a><br>
 <a class="nav_file" id="geometry/manifold/real_instances.html" href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/real_instances.html">real_instances</a><br>
 <a class="nav_file" id="geometry/manifold/smooth_manifold_with_corners.html" href="https://leanprover-community.github.io/mathlib_docs/geometry/manifold/smooth_manifold_with_corners.html">smooth_manifold_with_corners</a><br>
 
@@ -904,6 +900,7 @@
 <a class="nav_file" id="group_theory/free_abelian_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_abelian_group.html">free_abelian_group</a><br>
 <a class="nav_file" id="group_theory/free_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/free_group.html">free_group</a><br>
 <a class="nav_file" id="group_theory/group_action.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/group_action.html">group_action</a><br>
+<a class="nav_file" id="group_theory/monoid_localization.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/monoid_localization.html">monoid_localization</a><br>
 <a class="nav_file" id="group_theory/order_of_element.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/order_of_element.html">order_of_element</a><br>
 <a class="nav_file" id="group_theory/presented_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/presented_group.html">presented_group</a><br>
 <a class="nav_file" id="group_theory/quotient_group.html" href="https://leanprover-community.github.io/mathlib_docs/group_theory/quotient_group.html">quotient_group</a><br>
@@ -924,7 +921,9 @@
 <a class="nav_file" id="linear_algebra/finite_dimensional.html" href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/finite_dimensional.html">finite_dimensional</a><br>
 <a class="nav_file" id="linear_algebra/finsupp.html" href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/finsupp.html">finsupp</a><br>
 <a class="nav_file" id="linear_algebra/finsupp_vector_space.html" href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/finsupp_vector_space.html">finsupp_vector_space</a><br>
+<a class="nav_file" id="linear_algebra/linear_action.html" href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/linear_action.html">linear_action</a><br>
 <a class="nav_file" id="linear_algebra/matrix.html" href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/matrix.html">matrix</a><br>
+<a class="nav_file" id="linear_algebra/multilinear.html" href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/multilinear.html">multilinear</a><br>
 <a class="nav_file" id="linear_algebra/sesquilinear_form.html" href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/sesquilinear_form.html">sesquilinear_form</a><br>
 <a class="nav_file" id="linear_algebra/tensor_product.html" href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/tensor_product.html">tensor_product</a><br>
 
@@ -951,6 +950,7 @@
 <a class="nav_file" id="measure_theory/borel_space.html" href="https://leanprover-community.github.io/mathlib_docs/measure_theory/borel_space.html">borel_space</a><br>
 <a class="nav_file" id="measure_theory/decomposition.html" href="https://leanprover-community.github.io/mathlib_docs/measure_theory/decomposition.html">decomposition</a><br>
 <a class="nav_file" id="measure_theory/giry_monad.html" href="https://leanprover-community.github.io/mathlib_docs/measure_theory/giry_monad.html">giry_monad</a><br>
+<a class="nav_file" id="measure_theory/indicator_function.html" href="https://leanprover-community.github.io/mathlib_docs/measure_theory/indicator_function.html">indicator_function</a><br>
 <a class="nav_file" id="measure_theory/integration.html" href="https://leanprover-community.github.io/mathlib_docs/measure_theory/integration.html">integration</a><br>
 <a class="nav_file" id="measure_theory/l1_space.html" href="https://leanprover-community.github.io/mathlib_docs/measure_theory/l1_space.html">l1_space</a><br>
 <a class="nav_file" id="measure_theory/lebesgue_measure.html" href="https://leanprover-community.github.io/mathlib_docs/measure_theory/lebesgue_measure.html">lebesgue_measure</a><br>
@@ -958,6 +958,7 @@
 <a class="nav_file" id="measure_theory/measure_space.html" href="https://leanprover-community.github.io/mathlib_docs/measure_theory/measure_space.html">measure_space</a><br>
 <a class="nav_file" id="measure_theory/outer_measure.html" href="https://leanprover-community.github.io/mathlib_docs/measure_theory/outer_measure.html">outer_measure</a><br>
 <a class="nav_file" id="measure_theory/probability_mass_function.html" href="https://leanprover-community.github.io/mathlib_docs/measure_theory/probability_mass_function.html">probability_mass_function</a><br>
+<a class="nav_file" id="measure_theory/set_integral.html" href="https://leanprover-community.github.io/mathlib_docs/measure_theory/set_integral.html">set_integral</a><br>
 <a class="nav_file" id="measure_theory/simple_func_dense.html" href="https://leanprover-community.github.io/mathlib_docs/measure_theory/simple_func_dense.html">simple_func_dense</a><br>
 
 
@@ -980,7 +981,9 @@
 <div class="nav_sect_inner hidden" id="order">
 <div class="nav_sect">filter</div>
 <div class="nav_sect_inner hidden" id="order/filter">
+<a class="nav_file" id="order/filter/bases.html" href="https://leanprover-community.github.io/mathlib_docs/order/filter/bases.html">bases</a><br>
 <a class="nav_file" id="order/filter/basic.html" href="https://leanprover-community.github.io/mathlib_docs/order/filter/basic.html">basic</a><br>
+<a class="nav_file" id="order/filter/extr.html" href="https://leanprover-community.github.io/mathlib_docs/order/filter/extr.html">extr</a><br>
 <a class="nav_file" id="order/filter/filter_product.html" href="https://leanprover-community.github.io/mathlib_docs/order/filter/filter_product.html">filter_product</a><br>
 <a class="nav_file" id="order/filter/lift.html" href="https://leanprover-community.github.io/mathlib_docs/order/filter/lift.html">lift</a><br>
 <a class="nav_file" id="order/filter/partial.html" href="https://leanprover-community.github.io/mathlib_docs/order/filter/partial.html">partial</a><br>
@@ -1134,6 +1137,7 @@
 <a class="nav_file" id="tactic/ring2.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring2.html">ring2</a><br>
 <a class="nav_file" id="tactic/ring_exp.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/ring_exp.html">ring_exp</a><br>
 <a class="nav_file" id="tactic/scc.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/scc.html">scc</a><br>
+<a class="nav_file" id="tactic/simp_rw.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simp_rw.html">simp_rw</a><br>
 <a class="nav_file" id="tactic/simpa.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simpa.html">simpa</a><br>
 <a class="nav_file" id="tactic/simps.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/simps.html">simps</a><br>
 <a class="nav_file" id="tactic/slice.html" href="https://leanprover-community.github.io/mathlib_docs/tactic/slice.html">slice</a><br>
@@ -1242,6 +1246,7 @@
 <a class="nav_file" id="topology/dense_embedding.html" href="https://leanprover-community.github.io/mathlib_docs/topology/dense_embedding.html">dense_embedding</a><br>
 <a class="nav_file" id="topology/homeomorph.html" href="https://leanprover-community.github.io/mathlib_docs/topology/homeomorph.html">homeomorph</a><br>
 <a class="nav_file" id="topology/list.html" href="https://leanprover-community.github.io/mathlib_docs/topology/list.html">list</a><br>
+<a class="nav_file" id="topology/local_extr.html" href="https://leanprover-community.github.io/mathlib_docs/topology/local_extr.html">local_extr</a><br>
 <a class="nav_file" id="topology/local_homeomorph.html" href="https://leanprover-community.github.io/mathlib_docs/topology/local_homeomorph.html">local_homeomorph</a><br>
 <a class="nav_file" id="topology/maps.html" href="https://leanprover-community.github.io/mathlib_docs/topology/maps.html">maps</a><br>
 <a class="nav_file" id="topology/opens.html" href="https://leanprover-community.github.io/mathlib_docs/topology/opens.html">opens</a><br>
