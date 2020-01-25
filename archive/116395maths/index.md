@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (141 messages, latest: Jan 25 2020 at 14:56)
+
 * [mv_polynomial puzzles](39684mvpolynomialpuzzles.html) (2 messages, latest: Jan 25 2020 at 13:29)
 
 * [finset puzzle](85492finsetpuzzle.html) (21 messages, latest: Jan 25 2020 at 01:30)
@@ -18,8 +20,6 @@ permalink: archive/116395maths/index.html
 * [riemannian geometry](99151riemanniangeometry.html) (6 messages, latest: Jan 24 2020 at 21:59)
 
 * [Integrals w.r.t. non-canonical measures](54614Integralswrtnoncanonicalmeasures.html) (25 messages, latest: Jan 23 2020 at 20:04)
-
-* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (140 messages, latest: Jan 23 2020 at 18:41)
 
 * [continuity of division](61329continuityofdivision.html) (14 messages, latest: Jan 23 2020 at 12:06)
 
