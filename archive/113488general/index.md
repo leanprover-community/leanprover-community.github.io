@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [cpp 2020](79240cpp2020.html) (6 messages, latest: Jan 25 2020 at 13:32)
+
 * [huge term trees](96965hugetermtrees.html) (53 messages, latest: Jan 25 2020 at 10:49)
 
 * [contrapose](82079contrapose.html) (19 messages, latest: Jan 25 2020 at 09:15)
@@ -224,8 +226,6 @@ permalink: archive/113488general/index.html
 * [norm_cast](53959normcast.html) (13 messages, latest: Dec 05 2019 at 11:25)
 
 * [Which function causes dependency on an axiom?](98598Whichfunctioncausesdependencyonanaxiom.html) (2 messages, latest: Dec 05 2019 at 10:36)
-
-* [cpp 2020](79240cpp2020.html) (4 messages, latest: Dec 05 2019 at 10:12)
 
 * [What is 'init' and how do I create it?](86560WhatisinitandhowdoIcreateit.html) (21 messages, latest: Dec 05 2019 at 03:31)
 

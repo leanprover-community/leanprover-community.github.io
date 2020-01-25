@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [mv_polynomial puzzles](39684mvpolynomialpuzzles.html) (2 messages, latest: Jan 25 2020 at 13:29)
+
 * [finset puzzle](85492finsetpuzzle.html) (21 messages, latest: Jan 25 2020 at 01:30)
 
 * [integrals and pi](46934integralsandpi.html) (17 messages, latest: Jan 25 2020 at 01:18)
