@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (153 messages, latest: Jan 25 2020 at 21:13)
+* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (164 messages, latest: Jan 25 2020 at 22:55)
 
 * [mv_polynomial puzzles](39684mvpolynomialpuzzles.html) (2 messages, latest: Jan 25 2020 at 13:29)
 

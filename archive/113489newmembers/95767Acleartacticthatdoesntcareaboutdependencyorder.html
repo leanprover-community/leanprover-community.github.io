@@ -132,6 +132,14 @@ And yes, please contribute this to mathlib.</p>
 <p>Wrt the name: I think I'll just keep <code>clear_dependent</code>. <code>clear'!</code> is too ugly, and nondescript to boot.</p>
 <p>Wrt improving the builtin <code>clear</code> instead: This would certainly be preferable. However, I'm not sure that my current implementation is robust enough to go into the stdlib. It's a bit of a hack (using <code>revert</code> under the hood) and I don't have the necessary experience with Lean tactics to judge what might go wrong. (For example, many tactics seem to have logic related to goal tags which I don't understand.) Ideally, the C++ for <code>clear</code> would be changed to use the <code>revert</code> logic, but I don't dare to go near that.</p>
 
+<a name="186590855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/A%20clear%20tactic%20that%20doesn%27t%20care%20about%20dependency%20order/near/186590855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95767Acleartacticthatdoesntcareaboutdependencyorder.html#186590855">Mario Carneiro (Jan 25 2020 at 22:14)</a>:</h4>
+<p>I think <code>clear'!</code> is better, because the tick represents a todo to fix the builtin tactic for the next version of lean</p>
+
+<a name="186590931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/A%20clear%20tactic%20that%20doesn%27t%20care%20about%20dependency%20order/near/186590931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95767Acleartacticthatdoesntcareaboutdependencyorder.html#186590931">Mario Carneiro (Jan 25 2020 at 22:16)</a>:</h4>
+<p>I don't see a problem with using <code>revert</code>. The goal tags thing is so that you can use the <code>case</code> tactic. It isn't very important that tactics preserve this unless you want to do processing between <code>induction</code> and <code>case</code></p>
+
 
 {% endraw %}
 

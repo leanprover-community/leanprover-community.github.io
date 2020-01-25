@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1643 messages, latest: Jan 25 2020 at 21:10)
+* [noob question(s)](52075noobquestions.html) (1645 messages, latest: Jan 25 2020 at 22:59)
 
-* [A clear tactic that doesn't care about dependency order](95767Acleartacticthatdoesntcareaboutdependencyorder.html) (24 messages, latest: Jan 25 2020 at 20:49)
+* [A clear tactic that doesn't care about dependency order](95767Acleartacticthatdoesntcareaboutdependencyorder.html) (26 messages, latest: Jan 25 2020 at 22:16)
 
 * [Polymorphic recursion in inductive type](23509Polymorphicrecursionininductivetype.html) (35 messages, latest: Jan 24 2020 at 18:20)
 

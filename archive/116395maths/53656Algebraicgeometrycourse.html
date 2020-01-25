@@ -1066,6 +1066,54 @@ p.eval2 f X</code> I think. It's the canonical map with that type.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186588923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186588923">Chris Hughes (Jan 25 2020 at 21:13)</a>:</h4>
 <p>I also think <code>dfinsupp</code> should just be called <code>direct_sum</code>, since there are no applications I can think of where we don't want it to be this.</p>
 
+<a name="186591677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186591677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186591677">Yury G. Kudryashov (Jan 25 2020 at 22:41)</a>:</h4>
+<p>For me <code>monoid_algebra</code> and <code>free_comm_monoid</code> represent algebraic interface of what we need while <code>finsupp</code> / <code>dfinsupp</code> are specific types that can be used to fulfill this interface.</p>
+
+<a name="186591927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186591927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186591927">Yury G. Kudryashov (Jan 25 2020 at 22:49)</a>:</h4>
+<p>Currently <code>mv_polynomial</code> uses <code>σ →₀ ℕ</code> as an implementation of <code>free_comm_monoid σ</code> and <code>M →₀ α</code> as an implementation of <code>monoid_algebra α M</code>, <code>M = σ →₀ ℕ</code>. The definitions and theorems heavily rely on using these specific types. I think that we should define <code>monoid_algebra</code> separately from polynomials, prove universal property etc, then have <code>mv_polynomial α R := monoid_algebra R (multiplicative $ free_comm_monoid α)</code>, where <code>free_comm_monoid α</code> can be either <code>α →₀ ℕ</code> or <code>multiset α</code>.</p>
+
+<a name="186591992"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186591992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186591992">Kevin Buzzard (Jan 25 2020 at 22:50)</a>:</h4>
+<p>Only the definitions and theorems in <code>mv_polynomial.lean</code> rely on these, right? Everything else should just use the 1000-line interface made there. So why does it matter? I'm not saying it doesn't, I'm just trying to understand this way of thinking.</p>
+
+<a name="186591999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186591999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186591999">Yury G. Kudryashov (Jan 25 2020 at 22:51)</a>:</h4>
+<p>We can implement <code>monoid_algebra</code> either on top of <code>finsupp</code>, or on top of <code>dfinsupp</code> — I don't care too much. We may also want to reimplement <code>finsupp</code> on top of <code>dfinsupp</code> to reduce code duplication.</p>
+
+<a name="186592005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186592005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186592005">Kevin Buzzard (Jan 25 2020 at 22:51)</a>:</h4>
+<p>so here is a case where you think the implementation details don't matter.</p>
+
+<a name="186592053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186592053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186592053">Yury G. Kudryashov (Jan 25 2020 at 22:52)</a>:</h4>
+<p>Few reasons:</p>
+<ol>
+<li>Reduce code duplication between <code>polynomial</code> and <code>mv_polynomial</code>.</li>
+<li>Make it easier to add other kinds of polynomial-like objects.</li>
+</ol>
+
+<a name="186592061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186592061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186592061">Kevin Buzzard (Jan 25 2020 at 22:53)</a>:</h4>
+<p>I see.</p>
+
+<a name="186592065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186592065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186592065">Kevin Buzzard (Jan 25 2020 at 22:53)</a>:</h4>
+<p>Yes, you can imagine that people will want variants at some point</p>
+
+<a name="186592070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186592070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186592070">Yury G. Kudryashov (Jan 25 2020 at 22:53)</a>:</h4>
+<p><strong>I</strong> will want quasipolynomials.</p>
+
+<a name="186592124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186592124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186592124">Yury G. Kudryashov (Jan 25 2020 at 22:55)</a>:</h4>
+<p>E.g., to write solutions of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>x</mi><mo>˙</mo></mover><mo>=</mo><mi>A</mi><mi>x</mi><mo>+</mo><msup><mi>e</mi><mrow><mi>a</mi><mi>t</mi></mrow></msup><mi>v</mi></mrow><annotation encoding="application/x-tex">\dot x=Ax+e^{at}v</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.66786em;vertical-align:0em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.66786em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathdefault">x</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.11111000000000001em;"><span class="mord">˙</span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.7935559999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7935559999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">t</span></span></span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span></span></span></span> where <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span> is an eigenvalue of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span></span></span></span>.</p>
+
+<a name="186592127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186592127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186592127">Yury G. Kudryashov (Jan 25 2020 at 22:55)</a>:</h4>
+<p>Or to deal with some local normal forms of differential equations.</p>
+
 
 {% endraw %}
 
