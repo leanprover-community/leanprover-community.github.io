@@ -236,6 +236,24 @@ He suggested us to wait until Lean 4 is ready (suggested that it would take seve
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186237459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186237459">Minchao Wu (Jan 21 2020 at 22:59)</a>:</h4>
 <p>Interacting with the Lean server is basically how Rob and I implemented the interface between Lean 3 and Mathematica. Jesse and I had also discussed the possibility of doing this for ML at last year’s ITP. Talking to Lean server should be fine, the challenging part is parsing and managing proof states from what returned from Lean. For that we probably want some meta-programs to do it for us, and that’s why Jesse and I have also decided (for now) to wait until Lean 4 to see if there are new meta-level tools to use.</p>
 
+<a name="186555403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186555403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186555403">Jason Rute (Jan 25 2020 at 03:40)</a>:</h4>
+<p><span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> I've been playing around with the lean server.  The good news is that I can get it to behave in a back-and-forth manner where I feed it a goal and a tactic and it tells me if that tactic succeeds and what the goal state is.  The bad news is that it is really slow.  The only way I can reliably get it to work is to:</p>
+<ul>
+<li>feed in my partial proof to a "sync" request</li>
+<li>wait for it to send back an "all_messages" response</li>
+<li>parse that response<br>
+This takes consistently about .1 seconds which is REALLY slow for this sort of simple round trip. I thought I can use the "info" request instead (which is much faster), but that is unreliable.  The response to an info request is often referencing a previous version of the file before the sync request.  Do you know of a faster way, or is this a fundamental limitation of the lean server that it takes .1 seconds to fully process a sync request.</li>
+</ul>
+
+<a name="186555577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186555577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186555577">Jason Rute (Jan 25 2020 at 03:46)</a>:</h4>
+<p>Also, a way to make the info request reliable is to use a new file for each call, but again if I do that it is still 0.1 seconds per call, so there is no speed up to use the "info" request.</p>
+
+<a name="186555858"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186555858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186555858">Jason Rute (Jan 25 2020 at 03:56)</a>:</h4>
+<p>For Google research, I think 0.1 seconds would be fine (and I understand that some tactics would inherently take a while to execute), but it would make it hard for us mere mortals to do cool stuff.</p>
+
 
 {% endraw %}
 
