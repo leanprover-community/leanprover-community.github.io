@@ -332,6 +332,41 @@ With commas: 21,824 -&gt; 2,499,367,138 which is &gt;100,000x tree-to-dag ratio.
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/186566557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#186566557">Mario Carneiro (Jan 25 2020 at 09:57)</a>:</h4>
 <p>The kernel will only see this if it is unfolded. Making it irreducible should prevent the elaborator from creating terms which require such unfolding</p>
 
+<a name="186566789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/186566789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#186566789">Mario Carneiro (Jan 25 2020 at 10:04)</a>:</h4>
+<p>I think what is actually happening is that those <code>have</code> statements are not actual <code>have</code>s, they are repeated subterms. For example, I can clearly see the full proof of</p>
+<div class="codehilite"><pre><span></span>  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">p</span><span class="o">:</span><span class="n">GH_space</span><span class="o">,</span> <span class="bp">∃</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">p</span><span class="bp">.</span><span class="n">rep</span><span class="o">),</span> <span class="bp">∃</span><span class="n">N</span> <span class="bp">≤</span> <span class="n">K</span> <span class="n">n</span><span class="o">,</span> <span class="bp">∃</span><span class="n">E</span> <span class="o">:</span> <span class="n">equiv</span> <span class="n">s</span> <span class="o">(</span><span class="n">fin</span> <span class="n">N</span><span class="o">),</span>
+    <span class="n">p</span> <span class="err">∈</span> <span class="n">t</span> <span class="bp">→</span> <span class="n">univ</span> <span class="err">⊆</span> <span class="err">⋃</span><span class="n">x</span><span class="err">∈</span><span class="n">s</span><span class="o">,</span> <span class="n">ball</span> <span class="n">x</span> <span class="o">(</span><span class="n">u</span> <span class="n">n</span><span class="o">),</span>
+</pre></div>
+
+
+<p>copied many times in the <code>#print</code> output</p>
+
+<a name="186567831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/186567831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#186567831">Mario Carneiro (Jan 25 2020 at 10:35)</a>:</h4>
+<p>Hm, I tried writing a variant of <code>have</code> that actually inserts beta redexes in the term, but they might be optimized away by <code>intro</code> or another tactic</p>
+
+<a name="186568020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/186568020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#186568020">Mario Carneiro (Jan 25 2020 at 10:40)</a>:</h4>
+<p>Looks like <code>intro_core</code> will check to see if the current result has the form <code>?m a</code> and replaces it with <code>?m'[a]</code>, causing the substitution to occur when the metavariable is filled</p>
+
+<a name="186568229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/186568229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#186568229">Mario Carneiro (Jan 25 2020 at 10:46)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">tactic</span><span class="bp">.</span><span class="n">assertv_core</span> <span class="bp">`</span><span class="n">H</span> <span class="bp">`</span><span class="o">(</span><span class="n">true</span><span class="o">)</span> <span class="bp">`</span><span class="o">(</span><span class="n">trivial</span> <span class="o">:</span> <span class="n">true</span><span class="o">),</span>
+  <span class="n">tactic</span><span class="bp">.</span><span class="n">result</span> <span class="bp">&gt;&gt;=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span><span class="o">,</span> <span class="c1">-- ?m_1 trivial</span>
+  <span class="n">intro</span> <span class="n">z</span><span class="o">,</span>
+  <span class="n">tactic</span><span class="bp">.</span><span class="n">result</span> <span class="bp">&gt;&gt;=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span><span class="o">,</span> <span class="c1">-- ?m_1[trivial]</span>
+  <span class="n">exact</span> <span class="n">trivial</span><span class="o">,</span>
+  <span class="n">tactic</span><span class="bp">.</span><span class="n">result</span> <span class="bp">&gt;&gt;=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span><span class="o">,</span> <span class="c1">-- trivial</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="186568303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/186568303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#186568303">Mario Carneiro (Jan 25 2020 at 10:49)</a>:</h4>
+<p>It's a nice optimization that probably avoids a lot of superfluous redexes, but it's not obvious how to work around it from the lean side. I think you just have to detect these on the C++ side and introduce <code>have</code>s then. (Lean can't see subterm sharing, which limits the ability to do anything about this. It also means that you can't write any efficient dag traversal tactics in lean. I guess lean 4 must have fixed this, if you wrote the elaborator in lean.)</p>
+
 
 {% endraw %}
 
