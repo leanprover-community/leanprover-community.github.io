@@ -1036,6 +1036,36 @@ p.eval2 f X</code> I think. It's the canonical map with that type.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186588476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186588476">Chris Hughes (Jan 25 2020 at 20:59)</a>:</h4>
 <p>monoid algebra should be defined to be dfinsupp I think.</p>
 
+<a name="186588656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186588656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186588656">Kevin Buzzard (Jan 25 2020 at 21:04)</a>:</h4>
+<p>So currently it starts like this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">ring</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finsupp</span> <span class="n">data</span><span class="bp">.</span><span class="n">polynomial</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">algebra</span>
+
+<span class="n">noncomputable</span> <span class="n">theory</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">100</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+
+<span class="kn">open</span> <span class="n">set</span> <span class="n">function</span> <span class="n">finsupp</span> <span class="n">lattice</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span> <span class="n">w</span> <span class="n">x</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">}</span> <span class="o">{</span><span class="n">δ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">x</span><span class="o">}</span>
+
+<span class="c">/-</span><span class="cm">- Multivariate polynomial, where `σ` is the index set of the variables and</span>
+<span class="cm">  `α` is the coefficient ring -/</span>
+<span class="n">def</span> <span class="n">mv_polynomial</span> <span class="o">(</span><span class="n">σ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:=</span> <span class="o">(</span><span class="n">σ</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">α</span>
+</pre></div>
+
+
+<p>How do you think it should start? Same imports?</p>
+
+<a name="186588723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186588723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186588723">Chris Hughes (Jan 25 2020 at 21:06)</a>:</h4>
+<p>I think change <code>→₀</code> to <code>Π₀</code> and <code>ℕ</code> to an arbitrary monoid.</p>
+
+<a name="186588923"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Algebraic%20geometry%20course/near/186588923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53656Algebraicgeometrycourse.html#186588923">Chris Hughes (Jan 25 2020 at 21:13)</a>:</h4>
+<p>I also think <code>dfinsupp</code> should just be called <code>direct_sum</code>, since there are no applications I can think of where we don't want it to be this.</p>
+
 
 {% endraw %}
 
