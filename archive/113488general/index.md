@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [huge term trees](96965hugetermtrees.html) (46 messages, latest: Jan 24 2020 at 19:39)
+* [huge term trees](96965hugetermtrees.html) (48 messages, latest: Jan 25 2020 at 09:57)
+
+* [contrapose](82079contrapose.html) (19 messages, latest: Jan 25 2020 at 09:15)
 
 * [Prelude](22962Prelude.html) (2 messages, latest: Jan 23 2020 at 22:21)
 
@@ -734,8 +736,6 @@ permalink: archive/113488general/index.html
 * [norm_num on fields](29952normnumonfields.html) (1 message, latest: Aug 06 2019 at 09:22)
 
 * [converting a `finset` to a `Type`](40496convertingafinsettoaType.html) (13 messages, latest: Aug 06 2019 at 08:04)
-
-* [contrapose](82079contrapose.html) (16 messages, latest: Aug 05 2019 at 19:44)
 
 * [missing transitivity tags](04612missingtransitivitytags.html) (2 messages, latest: Aug 05 2019 at 15:45)
 

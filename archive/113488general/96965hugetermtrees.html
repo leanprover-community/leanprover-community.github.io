@@ -324,6 +324,14 @@ With commas: 21,824 -&gt; 2,499,367,138 which is &gt;100,000x tree-to-dag ratio.
 </blockquote>
 <p>It's funny, I am responsible for both of them in two unrelated areas. What I can tell is that both involve complicated objects, but otherwise they are of a somewhat different nature. The first one has big simps, but otherwise it is mostly unfolding definitions. The main unusual point in the second one involves constructing new types depending on some objects in the proof.</p>
 
+<a name="186566491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/186566491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#186566491">Sebastien Gouezel (Jan 25 2020 at 09:55)</a>:</h4>
+<p>For the very big tree-to-dag ratio in <code>Gromov_Hausdorff.totally_bounded</code>, this proof uses a lot the Hausdorff distance. I remember that at the beginning these proofs were super-slow, and this was solved by making Hausdorff distance irreducible. If I understand correctly, making something irreducible does not change anything for the kernel, which still has to deal with the full definition. So maybe the definition of Hausdorff distance is already big, and since it appears a lot of times in the proof this might explain what is going on. Hausdorff distance is defined in terms of supremums of infimums of real numbers, which are themselves defined with Cauchy sequences, so depending on the inner workings this might definitely be huge.</p>
+
+<a name="186566557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/huge%20term%20trees/near/186566557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96965hugetermtrees.html#186566557">Mario Carneiro (Jan 25 2020 at 09:57)</a>:</h4>
+<p>The kernel will only see this if it is unfolded. Making it irreducible should prevent the elaborator from creating terms which require such unfolding</p>
+
 
 {% endraw %}
 
