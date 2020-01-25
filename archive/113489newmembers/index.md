@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1637 messages, latest: Jan 25 2020 at 19:58)
+
 * [A clear tactic that doesn't care about dependency order](95767Acleartacticthatdoesntcareaboutdependencyorder.html) (23 messages, latest: Jan 24 2020 at 19:33)
 
 * [Polymorphic recursion in inductive type](23509Polymorphicrecursionininductivetype.html) (35 messages, latest: Jan 24 2020 at 18:20)
@@ -40,8 +42,6 @@ permalink: archive/113489newmembers/index.html
 * [lifting "down"](58858liftingdown.html) (19 messages, latest: Jan 18 2020 at 17:19)
 
 * [How to write about there are infinite primes p % 4 = 3](17447Howtowriteaboutthereareinfiniteprimesp43.html) (19 messages, latest: Jan 16 2020 at 21:17)
-
-* [noob question(s)](52075noobquestions.html) (1633 messages, latest: Jan 16 2020 at 17:18)
 
 * [A finite set has finitely many endofunctions?](54624Afinitesethasfinitelymanyendofunctions.html) (17 messages, latest: Jan 14 2020 at 13:41)
 

@@ -9236,6 +9236,53 @@ They are all here if anyone is interested :) <br>
   iff.intro (λ f c, eq.mp (eq.symm (if_pos c)) (f c)) (λ f c, eq.mp (if_pos c) (f c))
 </pre></div>
 
+<a name="186586097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186586097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186586097">Greg Langmead (Jan 25 2020 at 19:48)</a>:</h4>
+<p>I'm having trouble working with continuous functions on subsets of euclidean space. I think I lack some idiom. The first proof below is working for all of ℝ but the second gives an error because it needs some sort of coercion maybe?</p>
+<div class="codehilite"><pre><span></span>import geometry.manifold.real_instances
+
+lemma certain_func_is_continuous : continuous (λ x:ℝ, 4 * (x:ℝ)) :=
+begin
+  apply continuous.mul _ _,
+  apply_instance,
+  exact continuous_const,
+  exact continuous_id,
+end
+
+def real_gt_one := {x: ℝ | x &gt; 1}
+
+lemma certain_func_is_continuous_gtone : continuous (λ x:real_gt_one, 4 * (x:ℝ)) :=
+begin
+  apply continuous.mul _ _,
+  apply_instance,
+  exact continuous_const,
+  exact continuous_id,
+end
+</pre></div>
+
+
+<p>the error is</p>
+<div class="codehilite"><pre><span></span>invalid type ascription, term has type
+  continuous id
+but is expected to have type
+  continuous (λ (x : ↥real_gt_one), ↑x)
+</pre></div>
+
+
+<p>My short term goal is to define functions that are only continuous on the subset like 1/(1-x).</p>
+
+<a name="186586405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186586405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186586405">Alex J. Best (Jan 25 2020 at 19:58)</a>:</h4>
+<p>Your function is from <code>real_gt_one</code> to <code>ℝ</code>, is that what you want? In this case your function at the end is not <code>id</code> the identity function but rather <code>coe</code> the coercion from <code>real_gt_one</code> to <code>ℝ</code>.</p>
+
+<a name="186586410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186586410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186586410">Yury G. Kudryashov (Jan 25 2020 at 19:58)</a>:</h4>
+<p>I guess you need <code>continuous_subtype_val</code></p>
+
+<a name="186586414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186586414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186586414">Alex J. Best (Jan 25 2020 at 19:58)</a>:</h4>
+<p>If you run <code>dsimp</code> before your last line lean simplifies your expression to show that the goal is <code>continuous coe</code> really.</p>
+
 
 {% endraw %}
 
