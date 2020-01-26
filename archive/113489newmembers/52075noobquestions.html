@@ -9417,6 +9417,29 @@ but is expected to have type
    <span class="n">retry_apply_aux</span> <span class="n">e</span> <span class="n">cfg</span> <span class="o">((</span><span class="n">b</span><span class="o">,</span> <span class="n">n</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="bp">::</span> <span class="n">gs</span><span class="o">)</span>
 </pre></div>
 
+<a name="186633171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186633171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186633171">Greg Langmead (Jan 26 2020 at 18:55)</a>:</h4>
+<p><span class="user-mention" data-user-id="214703">@Yury G. Kudryashov</span> I was suggesting that instead of sprinkling @[continuity] hints around mathlib, there could be one file with packages of continuity lemmas being exported under various names. That seems more general than deciding in a one-size-fits-all fashion at the point where the lemma is defined.</p>
+
+<a name="186633268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186633268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186633268">Greg Langmead (Jan 26 2020 at 18:58)</a>:</h4>
+<p>Now I'm trying to define continuity of a function of two variables and I can't get <code>continuous_snd</code> to work with my subset of ℝ×ℝ:</p>
+<div class="codehilite"><pre><span></span>lemma certain_twovar_func_continuous : continuous (λx:real_gt_one × real_gt_one, (x.1:ℝ) * (1 - (x.2:ℝ)⁻¹)) :=
+begin
+  apply continuous.mul _ _,
+  apply_instance,
+  sorry, -- writing &quot;apply continuous_snd&quot; here gives: invalid apply tactic, failed to unify continuous (λ (x : ↥real_gt_one × ↥real_gt_one), ↑(x.fst)) with continuous prod.snd
+  apply continuous.sub,
+  apply continuous_const,
+  apply real.continuous.inv _ sorry,
+  sorry,
+end
+</pre></div>
+
+<a name="186633285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186633285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186633285">Greg Langmead (Jan 26 2020 at 18:59)</a>:</h4>
+<p>I have an instance that indicates real_gt_one is a topological_space but somehow continous_snd is not type matching. Is it because I am using a lambda?</p>
+
 
 {% endraw %}
 
