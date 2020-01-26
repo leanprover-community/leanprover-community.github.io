@@ -200,6 +200,60 @@ ubuntu : <a href="https://github.com/leanprover-community/mathlib/blob/master/do
 <p>Obviously, my mindset is the problem. To use Lean effectively I have to adopt a whole new tool chain. That is going to make it very painful to package and ship it as part of Axiom. I need things like test automation during build so proofs are checked at build time. I need the proof-checker available as a separate tool. I need to integrate the lean system with the Axiom command line so you can #check, for example.I realize, coming from the "other side" of computational mathematics, that I'm not the usual lean customer. Nevertheless, I feel it is important to merge Lean and Axiom seamlessly.</p>
 <p>Rather than complaining, is there a way I can help?</p>
 
+<a name="186623229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186623229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186623229">Tim Daly (Jan 26 2020 at 14:05)</a>:</h4>
+<p>The first "tooling" of interest would be a way to take an input file and "compile it" to a fully elaborated proof that only needs the proof checker (no libraries, no tactics).The proof checker should accept that "compiled form" and accept or reject it.</p>
+
+<a name="186623272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186623272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186623272">Tim Daly (Jan 26 2020 at 14:06)</a>:</h4>
+<p>My understanding is that the proof checker only needs the trusted kernel as support.</p>
+
+<a name="186623273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186623273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186623273">Jason Rute (Jan 26 2020 at 14:06)</a>:</h4>
+<p>I do agree that using and installing Lean is very different from other apps.  Part of this I think is that while lean is a compiler (and can compiler programs from the command line), its interactivity is what is more important.  If you just want to check/compile a lean file from the command line, you can use <code>lean my_lean_file.lean</code>.  However, Lean has no REPL.  It does however have a server <code>lean --server</code> which can be used to communicate with it interactively by a machine.  (It is unusable by a human directly.)  I think this is how emacs and vs code communicate with Lean.  The server is really designed for interactive and incremental checking of a lean file while it is being worked on and hence is frustrating to use for direct communication.  However, some have been able to make Lean communicate with external processes that aren't editors by using the Lean server.  For example, <span class="user-mention" data-user-id="110596">@Rob Lewis</span> and <span class="user-mention" data-user-id="110187">@Minchao Wu</span>  have built a <a href="https://robertylewis.com/leanmm/" target="_blank" title="https://robertylewis.com/leanmm/">bi-directional connection between Lean and Mathematica</a>.</p>
+<p>I'm also building a small python prototype which I'm using to communicate with Lean directly for the purpose of machine learning.  I'll put that on GitHub in a few days.</p>
+
+<a name="186623342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186623342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186623342">Jason Rute (Jan 26 2020 at 14:09)</a>:</h4>
+<p>To be clear, I think none of us think that installing Lean is as easy as it could be.  And using Lean from an external application is a huge pain.  I think the official word from Microsoft research is to wait for Lean 4.  (And they won't let you make any changes to Lean directly except in your own fork.)  However, I think as a community we can find work arounds and better documentation for Lean 3.</p>
+
+<a name="186623529"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186623529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186623529">Jason Rute (Jan 26 2020 at 14:15)</a>:</h4>
+<p>The way I am using the Lean server (and I imagine how Rob and Minchao are also doing it) is to send a JSON sync request to the server and then wait not only for the response to that request, but also an "all_messages" response which contains any compiler errors.  The round trip takes about 0.1 seconds which is pretty slow IMO.  See more discussion on <a href="#narrow/stream/219941-Machine-Learning.20for.20Theorem.20Proving/topic/ML.20for.20Lean.3A.20How.20to.20do.20it.3F" title="#narrow/stream/219941-Machine-Learning.20for.20Theorem.20Proving/topic/ML.20for.20Lean.3A.20How.20to.20do.20it.3F">this topic</a>.  (Actually, you might want to check out that whole stream.)</p>
+
+<a name="186623536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186623536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186623536">Tim Daly (Jan 26 2020 at 14:15)</a>:</h4>
+<p>I built programs for Microsoft in the past. I used a commercial program that built ".msi" files (if memory serves) that could automatically install all of the programs in the right place. My customer set (Intel and Police) just wanted "point and click" installs. I'm surprised that a Microsoft-related Lean program doesn't have this tooling. In addition, the documentation had a LOT of pictures (about 2 per page) along with a lot of "click on the blue box now".</p>
+
+<a name="186623695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186623695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186623695">Tim Daly (Jan 26 2020 at 14:19)</a>:</h4>
+<p>re: the MMA-Lean link... why would you need to translate "x^2-2*x+1" into fully elaborated code? You have systems on either end that can parse expressions. I'm rewriting the Axiom system to accept / produce Lean proofs at the user-level source code.</p>
+
+<a name="186623818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186623818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186623818">Tim Daly (Jan 26 2020 at 14:22)</a>:</h4>
+<p>Axiom should store fully elaborated code that a proof checker can check. But that is never user visible. It is only used when the Axiom "Oracle" wants to supply an answer to Lean (e.g. a GCD result) so Lean can trust the answer.</p>
+
+<a name="186623881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186623881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186623881">Jason Rute (Jan 26 2020 at 14:24)</a>:</h4>
+<p>From my little experience, the usual Lean output is not easy to parse by a machine.  However one can write a custom parser for expressions, which is what they do.  They could have made it more generic (like s-expressions or JSON), but I guess they wanted to directly put the AST into Mathematica code.</p>
+
+<a name="186624239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186624239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186624239">Jason Rute (Jan 26 2020 at 14:34)</a>:</h4>
+<p>In your system <span class="user-mention" data-user-id="223495">@Tim Daly</span> what would you be sending to Lean and what would you be getting back?  Are you sending a proof of a specific result, like <code>theorem xx123 : nat.gcd 6 9 == 3 := &lt;some proof&gt;</code>?  Are you just getting back just something indicating whether that proof is correct or not?  Or is it more complicated?</p>
+
+<a name="186624295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186624295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186624295">Tim Daly (Jan 26 2020 at 14:36)</a>:</h4>
+<p>Thanks for the Lewis/Wu paper link. I know what I'm doing for the rest of the day.</p>
+
+<a name="186624545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186624545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186624545">Tim Daly (Jan 26 2020 at 14:44)</a>:</h4>
+<p>re: Lean/Axiom communication. These are "peer" systems so each needs/provides services. Axiom has 10k algorithms that need to be proven correct so it needs Lean (and an associated "computer algebra" mathlib-like library on the Lean side). Lean needs to be able to use heavy algorithms (like Groebner basis) with the associated proof so it can get "Oracle" answers. I am not at the stage of defining the communication link. </p>
+<p>But (I think) Lean is the combination of a trusted core, and as of Lean 4, the rest of it will be Lean code. If that is the case it should be possible to re-implement the trusted core in Lisp and embed all of Lean inside Axiom. That way there is no "communication link" as each system has shared data representations.</p>
+
+<a name="186624607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186624607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186624607">Tim Daly (Jan 26 2020 at 14:44)</a>:</h4>
+<p>Instead of being "a proof system" and "a computer algebra system", it becomes a "computational mathematics" system.</p>
+
 
 {% endraw %}
 
