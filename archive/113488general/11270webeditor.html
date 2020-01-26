@@ -254,6 +254,19 @@ ubuntu : <a href="https://github.com/leanprover-community/mathlib/blob/master/do
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186624607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186624607">Tim Daly (Jan 26 2020 at 14:44)</a>:</h4>
 <p>Instead of being "a proof system" and "a computer algebra system", it becomes a "computational mathematics" system.</p>
 
+<a name="186625200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186625200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186625200">Jason Rute (Jan 26 2020 at 15:02)</a>:</h4>
+<p>By the way, in Lean 4, I think instead of this custom JSON server, they will switch to the Language Server Protocol.  I don't know that it will change much, but Lean 4 might also make it quicker and easier to communicate with Lean.</p>
+
+<a name="186625530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186625530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186625530">Jason Rute (Jan 26 2020 at 15:12)</a>:</h4>
+<p>As for the proving and running algorithms, will they be running in Axiom or Lean?  For example, the user wants a calculation of <code>gcd 6 9</code>.  Would that calculation be done in Axiom with an algorithm verified by Lean offline to be correct?  Would that calculation be done entirely in Lean?  Or would Axiom compute some sort of proof witness that would be checked in Lean?  (I'm not sure what that would be for gcd, but for an integral it could be a proof that the integrand is the derivative of the Axiom computed solution.)</p>
+
+<a name="186626036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186626036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186626036">Tim Daly (Jan 26 2020 at 15:29)</a>:</h4>
+<p>One of the key problems with the idea of a peer-to-peer communication interface is context. Axiom allows full runtime, first class dependent type construction. So the types are "part of the session". Since dependent types are undecidable Axiom uses built-in heuristics to resolve types at runtime. That mean, of course, that if you try to communicate the expression "x^2-2*x+1", you also have to communicate the type of "x" and the type of the coefficient ring (is it modular?) as well as the type of the whole expression.</p>
+<p>Merging Lean and Axiom in a common system means that the runtime dependent types are shared and Lean can know that this is a polynomial with coefficients mod p. Similarly, the question above about doing integration means that Lean has access to Axiom's implementation of the Risch algorithm.</p>
+
 
 {% endraw %}
 

@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [web editor](11270webeditor.html) (57 messages, latest: Jan 26 2020 at 14:44)
+* [Lean in the wild](43625Leaninthewild.html) (411 messages, latest: Jan 26 2020 at 15:31)
+
+* [web editor](11270webeditor.html) (60 messages, latest: Jan 26 2020 at 15:29)
 
 * [cpp 2020](79240cpp2020.html) (6 messages, latest: Jan 25 2020 at 13:32)
 
@@ -108,8 +110,6 @@ permalink: archive/113488general/index.html
 * [AI and theorem proving continued](66080AIandtheoremprovingcontinued.html) (11 messages, latest: Jan 04 2020 at 21:29)
 
 * [Tactics for program support](53544Tacticsforprogramsupport.html) (1 message, latest: Jan 04 2020 at 00:36)
-
-* [Lean in the wild](43625Leaninthewild.html) (409 messages, latest: Jan 03 2020 at 23:00)
 
 * [Beautiful examples of "AndCommuted $ helps math coders"](54709BeautifulexamplesofAndCommutedhelpsmathcoders.html) (2 messages, latest: Jan 03 2020 at 22:22)
 
