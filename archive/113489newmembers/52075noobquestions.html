@@ -9440,6 +9440,58 @@ end
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186633285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186633285">Greg Langmead (Jan 26 2020 at 18:59)</a>:</h4>
 <p>I have an instance that indicates real_gt_one is a topological_space but somehow continous_snd is not type matching. Is it because I am using a lambda?</p>
 
+<a name="186633427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186633427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186633427">Joe (Jan 26 2020 at 19:03)</a>:</h4>
+<p>Looking at the error message. it seems that you should apply <code>continuous_fst</code>?</p>
+
+<a name="186633576"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186633576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186633576">Joe (Jan 26 2020 at 19:07)</a>:</h4>
+<p>Also there is a coercion sign, so perhaps you can try <code>refine continuous.comp _ _</code> and see what comes out.</p>
+
+<a name="186633962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186633962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186633962">Greg Langmead (Jan 26 2020 at 19:18)</a>:</h4>
+<p>Sorry yes continuous_fst is what I should be using, and gives me the error, and I prepared my post with _snd by mistake.</p>
+<div class="codehilite"><pre><span></span>invalid apply tactic, failed to unify continuous (λ (x : ↥real_gt_one × ↥real_gt_one), ↑(x.fst)) with continuous prod.snd
+</pre></div>
+
+
+<p>I didn't succeed yet with continuous.comp, will keep trying.</p>
+
+<a name="186634222"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186634222" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186634222">Alex J. Best (Jan 26 2020 at 19:24)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">certain_twovar_func_continuous</span> <span class="o">:</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">λ</span><span class="n">x</span><span class="o">:</span><span class="n">real_gt_one</span> <span class="bp">×</span> <span class="n">real_gt_one</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">-</span> <span class="o">(</span><span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span><span class="bp">⁻¹</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">continuous</span><span class="bp">.</span><span class="n">mul</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">apply_instance</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">continuous</span><span class="bp">.</span><span class="n">comp</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">continuous_subtype_val</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">continuous_fst</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">continuous</span><span class="bp">.</span><span class="n">sub</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">continuous_const</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">real</span><span class="bp">.</span><span class="n">continuous</span><span class="bp">.</span><span class="n">inv</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">intros</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">a</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+  <span class="n">intro</span><span class="o">,</span>
+  <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">continuous</span><span class="bp">.</span><span class="n">comp</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">continuous_subtype_val</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">continuous_snd</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>now I got stuck proving that <code>a.snd.val \ne 0</code></p>
+
+<a name="186634383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186634383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186634383">Joe (Jan 26 2020 at 19:28)</a>:</h4>
+<p><span class="user-mention" data-user-id="111038">@Greg Langmead</span> I guess you can take a look at how <code>nnreal</code> is defined?</p>
+
+<a name="186634394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186634394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186634394">Joe (Jan 26 2020 at 19:29)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="n">nnreal</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">nnreal</span><span class="bp">.</span><span class="n">continuous_coe</span>
+</pre></div>
+
 
 {% endraw %}
 
