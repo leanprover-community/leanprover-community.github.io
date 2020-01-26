@@ -9316,6 +9316,61 @@ but is expected to have type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186592248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186592248">Yury G. Kudryashov (Jan 25 2020 at 22:59)</a>:</h4>
 <p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Could you please tell me some details?</p>
 
+<a name="186592391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186592391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186592391">Kevin Buzzard (Jan 25 2020 at 23:03)</a>:</h4>
+<p>I don't understand things well enough to be able to say anything coherent.</p>
+
+<a name="186592624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186592624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186592624">Yury G. Kudryashov (Jan 25 2020 at 23:10)</a>:</h4>
+<p>Then you can tag one of those who discussed this.</p>
+
+<a name="186592626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186592626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186592626">Kevin Buzzard (Jan 25 2020 at 23:10)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> made some comments at some point...</p>
+
+<a name="186592684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186592684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186592684">Joe (Jan 25 2020 at 23:12)</a>:</h4>
+<p>I think that would work, except that tactics such as <code>apply</code> <code>refine</code> <code>exact</code> won't stop on the simplest cases. <span class="user-mention" data-user-id="214703">@Yury G. Kudryashov</span></p>
+
+<a name="186592689"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186592689" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186592689">Joe (Jan 25 2020 at 23:12)</a>:</h4>
+<p>Here is an example I discovered a long time ago, where using <code>apply' continuous_tan'</code> on <code>continuous (λx, sin x)</code> results in a timeout. The root of this problem is <code>exact</code>, so I guess there is nothing you can do. Though I think there must be a way to make things irreducible or something, so that unifying mismatched expressions can end quickly.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">exponential</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">tidy</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">apply</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">apply_fun</span>
+
+<span class="kn">namespace</span> <span class="n">real</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">}</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">f</span><span class="o">)</span>
+<span class="n">include</span> <span class="n">hf</span>
+
+<span class="kn">lemma</span> <span class="n">continuous_tan&#39;</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">a</span><span class="o">,</span> <span class="n">cos</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">λ</span><span class="n">a</span><span class="o">,</span> <span class="n">tan</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">show</span> <span class="n">continuous</span> <span class="o">((</span><span class="n">tan</span> <span class="err">∘</span> <span class="bp">@</span><span class="n">subtype</span><span class="bp">.</span><span class="n">val</span> <span class="n">ℝ</span> <span class="o">(</span><span class="bp">λ</span><span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">cos</span> <span class="n">x</span><span class="o">)</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">))</span> <span class="err">∘</span> <span class="bp">λ</span><span class="n">a</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">f</span> <span class="n">a</span><span class="o">,</span> <span class="n">h</span> <span class="n">a</span><span class="bp">⟩</span><span class="o">),</span>
+  <span class="k">from</span> <span class="n">continuous</span><span class="bp">.</span><span class="n">comp</span> <span class="n">continuous_tan</span> <span class="o">(</span><span class="n">continuous_subtype_mk</span> <span class="bp">_</span> <span class="n">hf</span><span class="o">)</span>
+
+<span class="kn">end</span> <span class="n">real</span>
+
+<span class="kn">open</span> <span class="n">real</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span> <span class="o">:</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">λ</span><span class="n">x</span><span class="o">,</span> <span class="n">sin</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">continuous_tan&#39;</span> <span class="n">ℝ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">this</span><span class="o">,</span>
+  <span class="c1">-- apply&#39; this,</span>
+  <span class="c1">-- refine this,</span>
+  <span class="c1">-- apply this,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="186593645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186593645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186593645">Reid Barton (Jan 25 2020 at 23:45)</a>:</h4>
+<p>Yes, probably a case of excessive (and fruitless) definitional unfolding.</p>
+
+<a name="186593915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186593915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186593915">Chris Hughes (Jan 25 2020 at 23:51)</a>:</h4>
+<p>You can just set <code>tactic.apply</code> to only unfold reducibles right?</p>
+
 
 {% endraw %}
 

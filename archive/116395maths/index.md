@@ -9,6 +9,10 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Request for integral lemmas](78086Requestforintegrallemmas.html) (2 messages, latest: Jan 25 2020 at 23:47)
+
+* [Notation for `filter.eventually`](56497Notationforfiltereventually.html) (2 messages, latest: Jan 25 2020 at 23:46)
+
 * [Algebraic geometry course](53656Algebraicgeometrycourse.html) (164 messages, latest: Jan 25 2020 at 22:55)
 
 * [mv_polynomial puzzles](39684mvpolynomialpuzzles.html) (2 messages, latest: Jan 25 2020 at 13:29)
