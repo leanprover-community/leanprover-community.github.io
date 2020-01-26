@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean in the wild](43625Leaninthewild.html) (411 messages, latest: Jan 26 2020 at 15:31)
+* [web editor](11270webeditor.html) (64 messages, latest: Jan 26 2020 at 16:58)
 
-* [web editor](11270webeditor.html) (60 messages, latest: Jan 26 2020 at 15:29)
+* [Lean in the wild](43625Leaninthewild.html) (414 messages, latest: Jan 26 2020 at 16:51)
 
 * [cpp 2020](79240cpp2020.html) (6 messages, latest: Jan 25 2020 at 13:32)
 
