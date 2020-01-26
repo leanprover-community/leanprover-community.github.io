@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Request for integral lemmas](78086Requestforintegrallemmas.html) (6 messages, latest: Jan 26 2020 at 01:14)
+* [Request for integral lemmas](78086Requestforintegrallemmas.html) (8 messages, latest: Jan 26 2020 at 02:10)
 
 * [Notation for `filter.eventually`](56497Notationforfiltereventually.html) (2 messages, latest: Jan 25 2020 at 23:46)
 
