@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [sets in lean](66871setsinlean.html) (3 messages, latest: Jan 26 2020 at 20:56)
+
 * [noob question(s)](52075noobquestions.html) (1664 messages, latest: Jan 26 2020 at 19:29)
 
 * [Permission to push create branch on main mathlib repo](47016Permissiontopushcreatebranchonmainmathlibrepo.html) (6 messages, latest: Jan 26 2020 at 18:25)
