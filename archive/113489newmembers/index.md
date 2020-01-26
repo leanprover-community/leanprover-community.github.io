@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1652 messages, latest: Jan 25 2020 at 23:51)
+* [noob question(s)](52075noobquestions.html) (1655 messages, latest: Jan 26 2020 at 00:09)
 
 * [A clear tactic that doesn't care about dependency order](95767Acleartacticthatdoesntcareaboutdependencyorder.html) (26 messages, latest: Jan 25 2020 at 22:16)
 

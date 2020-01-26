@@ -9371,6 +9371,52 @@ but is expected to have type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186593915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186593915">Chris Hughes (Jan 25 2020 at 23:51)</a>:</h4>
 <p>You can just set <code>tactic.apply</code> to only unfold reducibles right?</p>
 
+<a name="186594496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186594496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186594496">Joe (Jan 26 2020 at 00:07)</a>:</h4>
+<p>I don't know if that would work because <code>apply</code> is bugged. Even applying <code>continuous_sin'</code> to <code>continuous (λx, sin x)</code> fails.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">exponential</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">apply</span>
+
+<span class="kn">namespace</span> <span class="n">real</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">}</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">f</span><span class="o">)</span>
+<span class="n">include</span> <span class="n">hf</span>
+
+<span class="kn">lemma</span> <span class="n">continuous_sin&#39;</span> <span class="o">:</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">λ</span><span class="n">a</span><span class="o">,</span> <span class="n">sin</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">))</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">end</span> <span class="n">real</span>
+
+<span class="kn">open</span> <span class="n">real</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span> <span class="o">:</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">λ</span><span class="n">x</span><span class="o">,</span> <span class="n">sin</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">continuous_sin&#39;</span><span class="o">,</span>  <span class="c1">-- fails</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="186594570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186594570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186594570">Chris Hughes (Jan 26 2020 at 00:09)</a>:</h4>
+<p>There's <code>apply'</code> which fixes the bug.</p>
+
+<a name="186594571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186594571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186594571">Joe (Jan 26 2020 at 00:09)</a>:</h4>
+<p>On the other hand, if you look at the source code of <code>apply'</code>, it tries <code>exact</code> first:</p>
+<div class="codehilite"><pre><span></span><span class="kn">private</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">retry_apply_aux</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">(</span><span class="n">cfg</span> <span class="o">:</span> <span class="n">apply_cfg</span><span class="o">),</span> <span class="n">list</span> <span class="o">(</span><span class="n">bool</span> <span class="bp">×</span> <span class="n">name</span> <span class="bp">×</span>  <span class="n">expr</span><span class="o">)</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="o">(</span><span class="n">list</span> <span class="o">(</span><span class="n">name</span> <span class="bp">×</span> <span class="n">expr</span><span class="o">))</span>
+<span class="bp">|</span> <span class="n">e</span> <span class="n">cfg</span> <span class="n">gs</span> <span class="o">:=</span>
+<span class="n">focus1</span> <span class="o">(</span><span class="n">do</span> <span class="o">{</span>
+     <span class="n">tgt</span> <span class="o">:</span> <span class="n">expr</span> <span class="err">←</span> <span class="n">target</span><span class="o">,</span> <span class="n">t</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">e</span><span class="o">,</span>
+     <span class="n">unify</span> <span class="n">t</span> <span class="n">tgt</span><span class="o">,</span>                             <span class="c1">-- apply&#39; is already stuck here</span>
+     <span class="n">exact</span> <span class="n">e</span><span class="o">,</span>
+     <span class="n">gs&#39;</span> <span class="err">←</span> <span class="n">get_goals</span><span class="o">,</span>
+     <span class="k">let</span> <span class="n">r</span> <span class="o">:=</span> <span class="n">reorder_goals</span> <span class="n">gs</span> <span class="n">cfg</span><span class="bp">.</span><span class="n">new_goals</span><span class="o">,</span>
+     <span class="n">set_goals</span> <span class="o">(</span><span class="n">gs&#39;</span> <span class="bp">++</span> <span class="n">r</span><span class="bp">.</span><span class="n">map</span> <span class="n">prod</span><span class="bp">.</span><span class="n">snd</span><span class="o">),</span>
+     <span class="n">return</span> <span class="n">r</span> <span class="o">})</span> <span class="bp">&lt;|&gt;</span>
+<span class="n">do</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">pi</span> <span class="n">n</span> <span class="n">bi</span> <span class="n">d</span> <span class="n">b</span><span class="o">)</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">e</span> <span class="bp">&gt;&gt;=</span> <span class="n">whnf</span> <span class="bp">|</span> <span class="n">apply_core</span> <span class="n">e</span> <span class="n">cfg</span><span class="o">,</span>  <span class="c1">-- so it will never get here</span>
+   <span class="n">v</span> <span class="err">←</span> <span class="n">mk_meta_var</span> <span class="n">d</span><span class="o">,</span>
+   <span class="k">let</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">b</span><span class="bp">.</span><span class="n">has_var</span><span class="o">,</span>
+   <span class="n">e</span> <span class="err">←</span> <span class="n">head_beta</span> <span class="err">$</span> <span class="n">e</span> <span class="n">v</span><span class="o">,</span>
+   <span class="n">retry_apply_aux</span> <span class="n">e</span> <span class="n">cfg</span> <span class="o">((</span><span class="n">b</span><span class="o">,</span> <span class="n">n</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="bp">::</span> <span class="n">gs</span><span class="o">)</span>
+</pre></div>
+
 
 {% endraw %}
 

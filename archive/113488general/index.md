@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [web editor](11270webeditor.html) (35 messages, latest: Jan 26 2020 at 00:35)
+
 * [cpp 2020](79240cpp2020.html) (6 messages, latest: Jan 25 2020 at 13:32)
 
 * [huge term trees](96965hugetermtrees.html) (53 messages, latest: Jan 25 2020 at 10:49)
@@ -58,8 +60,6 @@ permalink: archive/113488general/index.html
 * [bulleting / browers questions](04997bulletingbrowersquestions.html) (12 messages, latest: Jan 15 2020 at 16:05)
 
 * [typeclass problems](99005typeclassproblems.html) (264 messages, latest: Jan 15 2020 at 04:54)
-
-* [web editor](11270webeditor.html) (21 messages, latest: Jan 14 2020 at 16:14)
 
 * [HoTT in Lean](14455HoTTinLean.html) (6 messages, latest: Jan 14 2020 at 12:36)
 
