@@ -1,0 +1,116 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/03826Reductionrulewhendeclaringstructure.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html">Reduction rule when declaring structure</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186662638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186662638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186662638">Sebastien Gouezel (Jan 27 2020 at 08:50)</a>:</h4>
+<p>I am creating an instance of a structure with lets inside lets inside lets. I vaguely remember that I should declare an option to make sure that my definition will be reasonably flattened, but I don't remember its name.</p>
+
+<a name="186662718"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186662718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186662718">Mario Carneiro (Jan 27 2020 at 08:52)</a>:</h4>
+<p><code>set_option eqn_compiler.zeta true</code>?</p>
+
+<a name="186662848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186662848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186662848">Sebastien Gouezel (Jan 27 2020 at 08:55)</a>:</h4>
+<p>Maybe this is it. Except that I am not using the equation compiler, so maybe this is not needed. Here is my definition:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- The space of continuous multilinear maps on `Π(i : fin (n+1)), E i` is canonically isomorphic to</span>
+<span class="cm">the space of continuous linear maps from `E 0` to the space of continuous multilinear maps on</span>
+<span class="cm">`Π(i : fin n), E i.succ `, by separating the first variable. We register this isomorphism in</span>
+<span class="cm">`linear_to_multilinear_equiv_multilinear_cont 𝕜 E E₂`. We build on the algebraic version (without</span>
+<span class="cm">topology) given in `linear_to_multilinear_equiv_multilinear 𝕜 E E₂`. -/</span>
+<span class="n">def</span> <span class="n">linear_to_multilinear_equiv_multilinear_cont</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">E</span> <span class="mi">0</span> <span class="bp">→</span><span class="n">L</span><span class="o">[</span><span class="err">𝕜</span><span class="o">]</span> <span class="o">(</span><span class="n">continuous_multilinear_map</span> <span class="err">𝕜</span> <span class="o">(</span><span class="bp">λ</span><span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">),</span> <span class="n">E</span> <span class="n">i</span><span class="bp">.</span><span class="n">succ</span><span class="o">)</span> <span class="n">E₂</span><span class="o">))</span> <span class="err">≃</span><span class="n">L</span><span class="o">[</span><span class="err">𝕜</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">continuous_multilinear_map</span> <span class="err">𝕜</span> <span class="n">E</span> <span class="n">E₂</span><span class="o">)</span> <span class="o">:=</span>
+<span class="c1">-- first, register a linear equiv `aux`. Then, to check the continuity, it makes it possible to use</span>
+<span class="c1">-- linear_map.continuous_of_bound</span>
+<span class="k">let</span> <span class="n">aux</span> <span class="o">:</span> <span class="o">(</span><span class="n">E</span> <span class="mi">0</span> <span class="bp">→</span><span class="n">L</span><span class="o">[</span><span class="err">𝕜</span><span class="o">]</span> <span class="o">(</span><span class="n">continuous_multilinear_map</span> <span class="err">𝕜</span> <span class="o">(</span><span class="bp">λ</span><span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">),</span> <span class="n">E</span> <span class="n">i</span><span class="bp">.</span><span class="n">succ</span><span class="o">)</span> <span class="n">E₂</span><span class="o">))</span> <span class="err">≃ₗ</span><span class="o">[</span><span class="err">𝕜</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">continuous_multilinear_map</span> <span class="err">𝕜</span> <span class="n">E</span> <span class="n">E₂</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span>  <span class="o">:=</span> <span class="bp">λ</span><span class="n">f</span><span class="o">,</span> <span class="o">(</span><span class="n">linear_to_multilinear_equiv_multilinear</span> <span class="err">𝕜</span> <span class="n">E</span> <span class="n">E₂</span>
+    <span class="o">(</span><span class="n">continuous_multilinear_map</span><span class="bp">.</span><span class="n">to_multilinear_map_linear</span><span class="bp">.</span><span class="n">comp</span> <span class="n">f</span><span class="bp">.</span><span class="n">to_linear_map</span><span class="o">))</span><span class="bp">.</span><span class="n">mk_continuous_of_bound</span>
+      <span class="o">(</span><span class="err">∥</span><span class="n">f</span><span class="err">∥</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span><span class="n">m</span><span class="o">,</span> <span class="n">continuous_multilinear_map</span><span class="bp">.</span><span class="n">norm_image_tail_le</span> <span class="n">f</span> <span class="n">m</span><span class="o">),</span>
+  <span class="n">add</span>     <span class="o">:=</span> <span class="bp">λ</span><span class="n">f₁</span> <span class="n">f₂</span><span class="o">,</span> <span class="k">by</span> <span class="o">{</span> <span class="n">ext</span> <span class="n">m</span><span class="o">,</span> <span class="n">refl</span> <span class="o">},</span>
+  <span class="n">smul</span>    <span class="o">:=</span> <span class="bp">λ</span><span class="n">c</span> <span class="n">f</span><span class="o">,</span> <span class="k">by</span> <span class="o">{</span> <span class="n">ext</span> <span class="n">m</span><span class="o">,</span> <span class="n">refl</span> <span class="o">},</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">λ</span><span class="n">f</span><span class="o">,</span>
+    <span class="k">let</span> <span class="n">finv</span> <span class="o">:</span> <span class="o">(</span><span class="n">E</span> <span class="mi">0</span> <span class="bp">→</span><span class="err">ₗ</span><span class="o">[</span><span class="err">𝕜</span><span class="o">]</span> <span class="o">(</span><span class="n">continuous_multilinear_map</span> <span class="err">𝕜</span> <span class="o">(</span><span class="bp">λ</span><span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">),</span> <span class="n">E</span> <span class="n">i</span><span class="bp">.</span><span class="n">succ</span><span class="o">)</span> <span class="n">E₂</span><span class="o">))</span> <span class="o">:=</span>
+    <span class="o">{</span> <span class="c1">-- define a linear map into `n` continuous multilinear maps from an `n+1` continuous multilinear map</span>
+      <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span><span class="n">x</span><span class="o">,</span>
+        <span class="o">((</span><span class="n">linear_to_multilinear_equiv_multilinear</span> <span class="err">𝕜</span> <span class="n">E</span> <span class="n">E₂</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
+          <span class="n">f</span><span class="bp">.</span><span class="n">to_multilinear_map</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">mk_continuous_of_bound</span> <span class="o">(</span><span class="err">∥</span><span class="n">f</span><span class="err">∥</span> <span class="bp">*</span> <span class="err">∥</span><span class="n">x</span><span class="err">∥</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">norm_image_cons_le</span> <span class="n">x</span><span class="o">),</span>
+      <span class="n">add</span>    <span class="o">:=</span> <span class="bp">λ</span><span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="k">by</span> <span class="o">{</span> <span class="n">ext</span> <span class="n">m</span><span class="o">,</span> <span class="n">exact</span> <span class="n">f</span><span class="bp">.</span><span class="n">cons_add</span> <span class="n">m</span> <span class="n">x</span> <span class="n">y</span> <span class="o">},</span>
+      <span class="n">smul</span>   <span class="o">:=</span> <span class="bp">λ</span><span class="n">c</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="o">{</span> <span class="n">ext</span> <span class="n">m</span><span class="o">,</span> <span class="n">exact</span> <span class="n">f</span><span class="bp">.</span><span class="n">cons_smul</span> <span class="n">m</span> <span class="n">c</span> <span class="n">x</span> <span class="o">}</span> <span class="o">}</span>
+    <span class="k">in</span>
+    <span class="c1">-- the linear map `finv` is also continuous</span>
+    <span class="o">{</span> <span class="n">cont</span> <span class="o">:=</span> <span class="k">begin</span>
+        <span class="n">refine</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">continuous_of_bound</span> <span class="bp">_</span> <span class="o">(</span><span class="err">∥</span><span class="n">f</span><span class="err">∥</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span><span class="n">x</span><span class="o">,</span> <span class="bp">_</span><span class="o">),</span>
+        <span class="n">apply</span> <span class="n">multilinear_map</span><span class="bp">.</span><span class="n">mk_continuous_norm_le</span> <span class="bp">_</span> <span class="o">(</span><span class="n">mul_nonneg&#39;</span> <span class="o">(</span><span class="n">norm_nonneg</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="n">norm_nonneg</span> <span class="bp">_</span><span class="o">)),</span>
+      <span class="kn">end</span><span class="o">,</span>
+      <span class="bp">..</span> <span class="n">finv</span> <span class="o">},</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">λ</span><span class="n">f</span><span class="o">,</span> <span class="k">begin</span>
+    <span class="n">ext</span> <span class="n">x</span> <span class="n">m</span><span class="o">,</span>
+    <span class="n">change</span> <span class="n">f</span> <span class="o">(</span><span class="n">cons</span> <span class="n">x</span> <span class="n">m</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">tail</span> <span class="o">(</span><span class="n">cons</span> <span class="n">x</span> <span class="n">m</span><span class="o">))</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="n">m</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">cons_zero</span><span class="o">,</span> <span class="n">tail_cons</span><span class="o">]</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">λ</span><span class="n">f</span><span class="o">,</span> <span class="k">begin</span>
+    <span class="n">ext</span> <span class="n">m</span><span class="o">,</span>
+    <span class="n">change</span> <span class="n">f</span> <span class="o">(</span><span class="n">cons</span> <span class="o">(</span><span class="n">m</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">tail</span> <span class="n">m</span><span class="o">))</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">m</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">cons_self_tail</span>
+  <span class="kn">end</span> <span class="o">}</span> <span class="k">in</span>
+<span class="c1">-- now, create our continuous linear equiv, by using the fields of `aux` and adding continuity.</span>
+<span class="o">{</span> <span class="n">continuous_to_fun</span> <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">refine</span> <span class="n">aux</span><span class="bp">.</span><span class="n">to_linear_map</span><span class="bp">.</span><span class="n">continuous_of_bound</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span><span class="n">f</span><span class="o">,</span> <span class="bp">_</span><span class="o">),</span>
+    <span class="n">rw</span> <span class="n">one_mul</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">continuous_multilinear_map</span><span class="bp">.</span><span class="n">op_norm_le_bound</span> <span class="bp">_</span> <span class="o">(</span><span class="n">norm_nonneg</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span><span class="n">m</span><span class="o">,</span> <span class="bp">_</span><span class="o">),</span>
+    <span class="n">apply</span> <span class="n">continuous_multilinear_map</span><span class="bp">.</span><span class="n">norm_image_tail_le</span> <span class="n">f</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">continuous_inv_fun</span> <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">refine</span> <span class="n">aux</span><span class="bp">.</span><span class="n">symm</span><span class="bp">.</span><span class="n">to_linear_map</span><span class="bp">.</span><span class="n">continuous_of_bound</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span><span class="n">f</span><span class="o">,</span> <span class="bp">_</span><span class="o">),</span>
+    <span class="n">rw</span> <span class="n">one_mul</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">continuous_linear_map</span><span class="bp">.</span><span class="n">op_norm_le_bound</span> <span class="bp">_</span> <span class="o">(</span><span class="n">norm_nonneg</span> <span class="bp">_</span> <span class="o">)</span> <span class="o">(</span><span class="bp">λ</span><span class="n">x</span><span class="o">,</span> <span class="bp">_</span><span class="o">),</span>
+    <span class="n">apply</span> <span class="n">continuous_multilinear_map</span><span class="bp">.</span><span class="n">op_norm_le_bound</span> <span class="bp">_</span> <span class="o">((</span><span class="n">mul_nonneg&#39;</span> <span class="o">(</span><span class="n">norm_nonneg</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="n">norm_nonneg</span> <span class="bp">_</span><span class="o">)))</span> <span class="o">(</span><span class="bp">λ</span><span class="n">m</span><span class="o">,</span> <span class="bp">_</span><span class="o">),</span>
+    <span class="n">exact</span> <span class="n">f</span><span class="bp">.</span><span class="n">norm_image_cons_le</span> <span class="n">x</span> <span class="n">m</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="bp">..</span> <span class="n">aux</span> <span class="o">}</span>
+</pre></div>
+
+<a name="186662929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186662929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186662929">Mario Carneiro (Jan 27 2020 at 08:56)</a>:</h4>
+<p>Have you considered <em>not</em> writing huge definitions with lets upon lets?</p>
+
+<a name="186662965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186662965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186662965">Mario Carneiro (Jan 27 2020 at 08:56)</a>:</h4>
+<p>there is no tax on auxiliary defs</p>
+
+<a name="186663016"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186663016" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186663016">Sebastien Gouezel (Jan 27 2020 at 08:57)</a>:</h4>
+<p>You mean, separating the <code>aux</code> in an auxiliary definition, whose only purpose would be to define <code>linear_to_multilinear_equiv_multilinear_cont</code>? Since it would never be used later on, what would be the interest?</p>
+
+<a name="186663072"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186663072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186663072">Mario Carneiro (Jan 27 2020 at 08:58)</a>:</h4>
+<p>Well, I think you are about to create a new contender for the world's largest term tree again</p>
+
+<a name="186663078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186663078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186663078">Sebastien Gouezel (Jan 27 2020 at 08:58)</a>:</h4>
+<p>(Of course, when I did my definition, I did it in two steps as you advertise, to keep Lean reasonably reactive).</p>
+
+<a name="186663116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186663116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186663116">Mario Carneiro (Jan 27 2020 at 08:59)</a>:</h4>
+<p>I don't think inlining like this is actually good for lean</p>
+
+<a name="186663136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186663136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186663136">Sebastien Gouezel (Jan 27 2020 at 08:59)</a>:</h4>
+<p>OK, I will split it then.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
