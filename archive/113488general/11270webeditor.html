@@ -325,6 +325,123 @@ ubuntu : <a href="https://github.com/leanprover-community/mathlib/blob/master/do
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186653286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186653286">Chris B (Jan 27 2020 at 04:56)</a>:</h4>
 <p>Well the first version I don't hate. I'll polish it up some more by the end of this weekend.</p>
 
+<a name="186653580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186653580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186653580">Mario Carneiro (Jan 27 2020 at 05:05)</a>:</h4>
+<p>Are the lean 3 -&gt; 4 changes backward incompatible?</p>
+
+<a name="186653582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186653582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186653582">Chris B (Jan 27 2020 at 05:05)</a>:</h4>
+<p><span class="user-mention" data-user-id="223495">@Tim Daly</span> If you're talking about the export file's size, it's because the export file includes the prelude + your stuff. The prelude's export file only takes a few seconds to parse and check. You can read about what the stuff in the export file means (and maybe get some insight into how the kernel sees Lean terms) here <a href="https://github.com/leanprover/lean/blob/master/doc/export_format.md" target="_blank" title="https://github.com/leanprover/lean/blob/master/doc/export_format.md">https://github.com/leanprover/lean/blob/master/doc/export_format.md</a><br>
+Fun fact, Mathlib's export file is ~230 mb and &gt; 8 million lines.</p>
+
+<a name="186653626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186653626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186653626">Mario Carneiro (Jan 27 2020 at 05:06)</a>:</h4>
+<p>Oh, that helps a lot to guess how it compares with <a href="http://set.mm" target="_blank" title="http://set.mm">set.mm</a></p>
+
+<a name="186653633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186653633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186653633">Mario Carneiro (Jan 27 2020 at 05:06)</a>:</h4>
+<p>which is 30 MB compressed</p>
+
+<a name="186653643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186653643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186653643">Mario Carneiro (Jan 27 2020 at 05:07)</a>:</h4>
+<p>I'm glad to hear there is only one order of magnitude difference, I was worried the tactic proofs might be a lot worse than that</p>
+
+<a name="186653685"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186653685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186653685">Mario Carneiro (Jan 27 2020 at 05:08)</a>:</h4>
+<p>when you throw in defeq proofs it will probably double in size</p>
+
+<a name="186653710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186653710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186653710">Chris B (Jan 27 2020 at 05:10)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> They're incompatible in that the code that I wrote is hella different, but the new version of nanoda can check lean3 export files.</p>
+
+<a name="186653755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186653755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186653755">Mario Carneiro (Jan 27 2020 at 05:10)</a>:</h4>
+<p>what's new in the kernel?</p>
+
+<a name="186653771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186653771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186653771">Mario Carneiro (Jan 27 2020 at 05:11)</a>:</h4>
+<p>the lean.mm1 axiomatization doesn't cover mutual recursion (because the thesis version doesn't either)</p>
+
+<a name="186653777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186653777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186653777">Mario Carneiro (Jan 27 2020 at 05:11)</a>:</h4>
+<p>wait, is there such a thing as lean 4 export files?</p>
+
+<a name="186653819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186653819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186653819">Mario Carneiro (Jan 27 2020 at 05:12)</a>:</h4>
+<p>my understanding is that lean 4 has no export format right now and may ship without one</p>
+
+<a name="186653823"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186653823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186653823">Chris B (Jan 27 2020 at 05:12)</a>:</h4>
+<p>They removed the whole concept of reduction rules in favor of what Sebastian referred to as hard-coded recursors for both inductive and quotient, there's some new gadgetry for mutual definitions, and some of the typechecker stuff is different, esp the procedure for unfolding/delta reduction. I think the C++ version of lean3's checker was closer.</p>
+
+<a name="186653843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186653843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186653843">Chris B (Jan 27 2020 at 05:13)</a>:</h4>
+<p>Well the kernel has these new declaration types called Opaque, Theorem, and Mutual that are in the kernel but don't have any lean3 representation. So I've made code for them, but they don't appear in lean3 export files.</p>
+
+<a name="186653884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186653884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186653884">Chris B (Jan 27 2020 at 05:14)</a>:</h4>
+<p>Opaque and Theorem are similar to Definition.</p>
+
+<a name="186653900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186653900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186653900">Chris B (Jan 27 2020 at 05:15)</a>:</h4>
+<p>I forgot to ask Sebastian about them, but I was pretty sure they were meant to be lean 4 export items, like #OPAQUE ..., #THEOREM ... since they're in like the same 'class' of kernel item.</p>
+
+<a name="186653944"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186653944" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186653944">Chris B (Jan 27 2020 at 05:16)</a>:</h4>
+<p>Actually I think I did ask, but the kernel wasn't his wheelhouse so he wasn't sure. Or something.</p>
+
+<a name="186653963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186653963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186653963">Mario Carneiro (Jan 27 2020 at 05:17)</a>:</h4>
+<p>I guess these are like definition except the kernel won't unfold them? Or something?</p>
+
+<a name="186654012"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186654012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186654012">Mario Carneiro (Jan 27 2020 at 05:18)</a>:</h4>
+<p>I assume that while heuristics etc for delta reduction may have changed the basic principle is still the same, so my thesis doesn't need to change there</p>
+
+<a name="186654058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186654058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186654058">Chris B (Jan 27 2020 at 05:19)</a>:</h4>
+<p>Oh abbreviation is the other one. Opaque and Abbreviation were like enum variants of ReducibilityHint in lean3, which dictates how definitions are unfolded yeah.</p>
+
+<a name="186654068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186654068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186654068">Mario Carneiro (Jan 27 2020 at 05:19)</a>:</h4>
+<p>Even Opaque definitions don't really change anything in the axiomatization since you can just say that they could be unfolded but aren't</p>
+
+<a name="186654121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186654121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186654121">Mario Carneiro (Jan 27 2020 at 05:21)</a>:</h4>
+<p>hardcoded inductives and quotients aren't really a problem, I mean they were basically hardcoded anyway with an "extensible" system with exactly two extensions and no external access</p>
+
+<a name="186654171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186654171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186654171">Chris B (Jan 27 2020 at 05:22)</a>:</h4>
+<p>There's also a new thing for handling all of the unique names, <code>local_ctx</code>, but I can only sort of pseudo-code read c++ and the implementation is over my head.</p>
+
+<a name="186654174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186654174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186654174">Mario Carneiro (Jan 27 2020 at 05:22)</a>:</h4>
+<p>Mutual sounds like something new though... an equation compiled definition understood natively by the kernel? Like Agda?</p>
+
+<a name="186654357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186654357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186654357">Chris B (Jan 27 2020 at 05:27)</a>:</h4>
+<p>The kernel only defines it as a type of declaration, it doesn't actually get used by the stuff you get in an export file, but the constructor gets called in the files that implement the equation compiler yeah.</p>
+
+<a name="186654620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186654620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186654620">Mario Carneiro (Jan 27 2020 at 05:34)</a>:</h4>
+<p>So the content associated with a Mutual declaration is the same as that of a regular declaration? (e.g. the lean 3 analogue being <code>@[mutual] def foo := bar</code>)</p>
+
+<a name="186654645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186654645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186654645">Mario Carneiro (Jan 27 2020 at 05:35)</a>:</h4>
+<p>and delta reduction works as normal?</p>
+
+<a name="186654701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186654701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186654701">Mario Carneiro (Jan 27 2020 at 05:37)</a>:</h4>
+<p>Did you implement any of this for nanoda, or are you just recognizing the (hypothetical) syntax?</p>
+
+<a name="186654964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186654964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186654964">Chris B (Jan 27 2020 at 05:45)</a>:</h4>
+<p>Most of it is implemented. The part of lean4's inductive that deal with nested inductive I haven't done yet since I wanted to get a C++ person's opinion on how <code>local_ctx</code> works, and the new declaration types exist but don't do anything because they're never called. w.r.t the mutual thing, from the kernel's perspective it's like a <code>Vec&lt;Definition&gt;</code> where <code>Definition</code> is the <code>def my_thing : A := ...</code> variety, and they're marked meta. The process for checking whether they're admissible is like iterating over them with the same procedure as for definitions.</p>
+
+<a name="186655435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186655435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186655435">Mario Carneiro (Jan 27 2020 at 05:59)</a>:</h4>
+<p>Oh, Mutual definitions are always meta? well in that case I will ignore them :P</p>
+
 
 {% endraw %}
 
