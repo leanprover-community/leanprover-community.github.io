@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Reduction rule when declaring structure](03826Reductionrulewhendeclaringstructure.html) (26 messages, latest: Jan 27 2020 at 09:13)
+* [github actions](76245githubactions.html) (3 messages, latest: Jan 27 2020 at 11:56)
+
+* [Reduction rule when declaring structure](03826Reductionrulewhendeclaringstructure.html) (28 messages, latest: Jan 27 2020 at 11:00)
 
 * [web editor](11270webeditor.html) (103 messages, latest: Jan 27 2020 at 06:21)
 
