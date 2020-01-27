@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [recreating `trace_state`](84788recreatingtracestate.html) (4 messages, latest: Jan 27 2020 at 13:37)
+* [github actions](76245githubactions.html) (15 messages, latest: Jan 27 2020 at 14:33)
 
-* [github actions](76245githubactions.html) (14 messages, latest: Jan 27 2020 at 13:28)
+* [recreating `trace_state`](84788recreatingtracestate.html) (4 messages, latest: Jan 27 2020 at 13:37)
 
 * [Reduction rule when declaring structure](03826Reductionrulewhendeclaringstructure.html) (28 messages, latest: Jan 27 2020 at 11:00)
 
