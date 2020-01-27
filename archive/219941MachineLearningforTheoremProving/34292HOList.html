@@ -478,6 +478,29 @@ cc <span class="user-mention" data-user-id="217806">@Markus Rabe</span> <span cl
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186719383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186719383">Stanislas Polu (Jan 27 2020 at 19:59)</a>:</h4>
 <p><span class="user-mention" data-user-id="217806">@Markus Rabe</span> Thanks. Arguably you could have created a new GoalStack for each request and have full support of the Tactics? Is there a reason why you didn't go for that?</p>
 
+<a name="186719764"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186719764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186719764">Stanislas Polu (Jan 27 2020 at 20:03)</a>:</h4>
+<p>Finally, the last set of errors I'm getting when "replaying" the validation set are related to CONV tactics (which I believe are expected since I can see in the ML code that the CONV passed to CONV_TAC are not supported), example:</p>
+<div class="codehilite"><pre><span></span>&gt; ApplyTactic CONV_TAC REAL_FIELD
+!!! Failure(&quot;Parse failure at :9: expected conv but found REAL_FIELD&quot;)
+--
+&gt; ApplyTactic CONV_TAC COND_ELIM_CONV
+!!! Failure(&quot;Parse failure at :9: expected conv but found COND_ELIM_CONV&quot;)
+</pre></div>
+
+
+<p>I also have a few errors that seem to be due to an erroneous tracing, example:</p>
+<div class="codehilite"><pre><span></span>&gt; ApplyTactic X_CHOOSE_TAC `(v (cart (real) N) y)` THM 1452504403316335102
+!!! Failure(&quot;X_CHOOSE_TAC: expected type :real^M but got :real^N&quot;)
+</pre></div>
+
+
+<p>Are you guys aware of those ^</p>
+<p>Finally, the identify is sometime passed to the GEN_WRITE_TAC as <code>I</code> but it does not seem supported, is that expected?</p>
+<div class="codehilite"><pre><span></span>&gt; ApplyTactic GEN_REWRITE_TAC I [ THM 2993471090521929300 ]
+!!! Failure(&quot;Parse failure at :16: expected convfn but found I&quot;)
+</pre></div>
+
 
 {% endraw %}
 

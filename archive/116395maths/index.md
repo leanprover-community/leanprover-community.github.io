@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Combinatorics](60782Combinatorics.html) (1 message, latest: Jan 27 2020 at 18:58)
+* [Refactoring polynomials](69676Refactoringpolynomials.html) (11 messages, latest: Jan 27 2020 at 20:25)
 
-* [Refactoring polynomials](69676Refactoringpolynomials.html) (7 messages, latest: Jan 27 2020 at 12:31)
+* [Combinatorics](60782Combinatorics.html) (2 messages, latest: Jan 27 2020 at 20:08)
 
 * [Algebraic geometry course](53656Algebraicgeometrycourse.html) (177 messages, latest: Jan 27 2020 at 12:21)
 

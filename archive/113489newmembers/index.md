@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1681 messages, latest: Jan 27 2020 at 19:59)
+* [more basics](41001morebasics.html) (26 messages, latest: Jan 27 2020 at 20:50)
 
-* [more basics](41001morebasics.html) (24 messages, latest: Jan 27 2020 at 08:51)
+* [noob question(s)](52075noobquestions.html) (1681 messages, latest: Jan 27 2020 at 19:59)
 
 * [sets in lean](66871setsinlean.html) (3 messages, latest: Jan 26 2020 at 20:56)
 
