@@ -1,0 +1,31 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/84788recreatingtracestate.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/84788recreatingtracestate.html">recreating `trace_state`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186646401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recreating%20%60trace_state%60/near/186646401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84788recreatingtracestate.html#186646401">Jason Rute (Jan 27 2020 at 01:20)</a>:</h4>
+<p>A meta programming question:  How would one recreate <code>trace_state</code> without using the built in formatter for the <code>tactic_state</code> type?  I'm mostly interested in getting information found in <code>trace_state</code>, i.e. the context and targets for the other goals besides the current one, and not in the actual recreation of the trace_state.  This code for example gets all the information for the current goal, but not for the other goals:</p>
+<div class="codehilite"><pre><span></span>meta def trace_current_goal : tactic unit :=
+do
+ goal ← tactic.target,
+ local_cxt ← tactic.local_context,
+ local_cxt_types ← list.mmap tactic.infer_type local_cxt,
+ let s := &quot;Goal: &quot; ++ (to_string goal) ++ &quot;\nLocal Context: &quot;++ (to_string local_cxt) ++ &quot;\nLocal Context Types: &quot; ++(to_string local_cxt_types),
+ tractic.trace s,
+return ()
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
