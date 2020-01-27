@@ -110,6 +110,98 @@ permalink: archive/113488general/03826Reductionrulewhendeclaringstructure.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186663136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186663136">Sebastien Gouezel (Jan 27 2020 at 08:59)</a>:</h4>
 <p>OK, I will split it then.</p>
 
+<a name="186663213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186663213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186663213">Mario Carneiro (Jan 27 2020 at 09:00)</a>:</h4>
+<p>One reason you might want to keep an auxiliary def is if you ever want to inspect this definition later (prove some theorem about it, which is usually the case for defs) all of this stuff will explode on you</p>
+
+<a name="186663222"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186663222" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186663222">Sebastien Gouezel (Jan 27 2020 at 09:00)</a>:</h4>
+<p>Still, is there some option to tell Lean to flatten the definition of <code>linear_to_multilinear_equiv_multilinear_cont</code> (or is it a better idea to keep it unflattened?)</p>
+
+<a name="186663227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186663227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186663227">Mario Carneiro (Jan 27 2020 at 09:00)</a>:</h4>
+<p>with an auxiliary you can unfold stuff one at a time</p>
+
+<a name="186663271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186663271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186663271">Mario Carneiro (Jan 27 2020 at 09:01)</a>:</h4>
+<p>I don't think there are many options for changing the definition between the elaborator and the kernel</p>
+
+<a name="186663330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186663330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186663330">Sebastien Gouezel (Jan 27 2020 at 09:02)</a>:</h4>
+<p>Everything in there is Prop, except for the actual definition (when one applies things to objects) which is completely trivial and for which I register a simp lemma right after the definition, of course.</p>
+
+<a name="186663335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186663335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186663335">Mario Carneiro (Jan 27 2020 at 09:02)</a>:</h4>
+<p>most of it is out of your control, meaning you have to use tactics if you want what you write to not reflect the actual output</p>
+
+<a name="186663357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186663357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186663357">Mario Carneiro (Jan 27 2020 at 09:02)</a>:</h4>
+<p>lean automatically creates auxiliary defs for props inside defs</p>
+
+<a name="186663387"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186663387" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186663387">Mario Carneiro (Jan 27 2020 at 09:03)</a>:</h4>
+<p><code>eqn_compiler.zeta</code> affects how those auxiliaries are stated</p>
+
+<a name="186663402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186663402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186663402">Mario Carneiro (Jan 27 2020 at 09:03)</a>:</h4>
+<p>The easiest way to find out if a planned optimization happened is to look at the <code>#print</code> on the result</p>
+
+<a name="186663578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186663578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186663578">Sebastien Gouezel (Jan 27 2020 at 09:06)</a>:</h4>
+<p>The output of <code>#print</code> ends with nice dots like</p>
+<div class="codehilite"><pre><span></span><span class="err">…</span>
+       <span class="err">…</span>
+       <span class="err">…</span>
+       <span class="err">…</span>
+       <span class="err">…</span>
+       <span class="err">…</span>
+       <span class="err">…</span>
+       <span class="err">…</span>
+       <span class="err">…</span>
+       <span class="err">…</span>
+       <span class="err">…</span>
+       <span class="err">…</span><span class="o">)</span>
+    <span class="err">…</span>
+    <span class="err">…</span>
+</pre></div>
+
+<a name="186663656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186663656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186663656">Johan Commelin (Jan 27 2020 at 09:08)</a>:</h4>
+<blockquote>
+<p>Have you considered <em>not</em> writing huge definitions with lets upon lets?</p>
+</blockquote>
+<p>Aaaaah, you're spoiling all our fun <span aria-label="oops" class="emoji emoji-1f643" role="img" title="oops">:oops:</span></p>
+
+<a name="186663842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186663842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186663842">Mario Carneiro (Jan 27 2020 at 09:11)</a>:</h4>
+<p>if you want, you can see more letters and less dots (well, probably even more dots) by increasing <code>pp.max_steps</code></p>
+
+<a name="186663865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186663865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186663865">Mario Carneiro (Jan 27 2020 at 09:11)</a>:</h4>
+<p>but that's probably a bad sign</p>
+
+<a name="186663942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186663942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186663942">Sebastien Gouezel (Jan 27 2020 at 09:12)</a>:</h4>
+<p>The next lemma is</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">class</span><span class="bp">.</span><span class="n">instance_max_depth</span> <span class="mi">352</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">linear_to_multilinear_equiv_multilinear_cont_apply</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">E</span> <span class="mi">0</span> <span class="bp">→</span><span class="n">L</span><span class="o">[</span><span class="err">𝕜</span><span class="o">]</span> <span class="o">(</span><span class="n">continuous_multilinear_map</span> <span class="err">𝕜</span> <span class="o">(</span><span class="bp">λ</span><span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">),</span> <span class="n">E</span> <span class="n">i</span><span class="bp">.</span><span class="n">succ</span><span class="o">)</span> <span class="n">E₂</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">Π</span><span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span><span class="o">),</span> <span class="n">E</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">linear_to_multilinear_equiv_multilinear_cont</span> <span class="err">𝕜</span> <span class="n">E</span> <span class="n">E₂</span> <span class="n">f</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">(</span><span class="n">m</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">tail</span> <span class="n">m</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+
+<p>and yes, 351 is not enough :-)</p>
+
+<a name="186663973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186663973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186663973">Johan Commelin (Jan 27 2020 at 09:12)</a>:</h4>
+<p>I guess my computer would have punched me in my stomach around 253...</p>
+
+<a name="186664047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reduction%20rule%20when%20declaring%20structure/near/186664047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03826Reductionrulewhendeclaringstructure.html#186664047">Sebastien Gouezel (Jan 27 2020 at 09:13)</a>:</h4>
+<p>It's extremely quick though. But there are a lot of coercions in there...</p>
+
 
 {% endraw %}
 

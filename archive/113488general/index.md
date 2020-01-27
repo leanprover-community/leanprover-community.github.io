@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Reduction rule when declaring structure](03826Reductionrulewhendeclaringstructure.html) (10 messages, latest: Jan 27 2020 at 08:59)
+* [Reduction rule when declaring structure](03826Reductionrulewhendeclaringstructure.html) (26 messages, latest: Jan 27 2020 at 09:13)
 
 * [web editor](11270webeditor.html) (103 messages, latest: Jan 27 2020 at 06:21)
 

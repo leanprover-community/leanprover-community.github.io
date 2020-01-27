@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (165 messages, latest: Jan 26 2020 at 16:31)
+* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (172 messages, latest: Jan 27 2020 at 09:15)
 
 * [Request for integral lemmas](78086Requestforintegrallemmas.html) (8 messages, latest: Jan 26 2020 at 02:10)
 
