@@ -29,6 +29,23 @@ return ()
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recreating%20%60trace_state%60/near/186652170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84788recreatingtracestate.html#186652170">Mario Carneiro (Jan 27 2020 at 04:20)</a>:</h4>
 <p><span class="user-mention" data-user-id="115715">@Jason Rute</span> <code>tactic.target</code> is a shorthand for <code>(list.head &lt;$&gt; get_goals) &gt;&gt;= infer_type</code>. If you want the other goals, call <code>get_goals</code> directly</p>
 
+<a name="186680301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recreating%20%60trace_state%60/near/186680301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84788recreatingtracestate.html#186680301">Jason Rute (Jan 27 2020 at 13:20)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> how do I get the local_context for the other goals?  What is <code>tactic.local_context</code> shorthand for?  Is this documented anywhere?</p>
+
+<a name="186681617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recreating%20%60trace_state%60/near/186681617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84788recreatingtracestate.html#186681617">Rob Lewis (Jan 27 2020 at 13:37)</a>:</h4>
+<p><code>local_context</code> is implemented in c++, it's hard coded to give the context of the first goal. I'm not 100% sure this is robust, but you can typically do something like this (build whatever data structure you want instead of tracing).</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">true</span> <span class="bp">∧</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">do</span>
+  <span class="bp">`</span><span class="o">[</span><span class="n">refine</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="bp">_⟩</span><span class="o">],</span> <span class="c1">-- give ourselves two goals with different local contexts</span>
+  <span class="n">trace_state</span><span class="o">,</span>
+  <span class="n">gs</span> <span class="err">←</span> <span class="n">get_goals</span><span class="o">,</span>
+  <span class="n">gs</span><span class="bp">.</span><span class="n">mmap&#39;</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">g</span><span class="o">,</span> <span class="n">set_goals</span> <span class="o">[</span><span class="n">g</span><span class="o">]</span> <span class="bp">&gt;&gt;</span> <span class="n">local_context</span> <span class="bp">&gt;&gt;=</span> <span class="n">trace</span><span class="o">,</span>
+  <span class="n">set_goals</span> <span class="n">gs</span><span class="o">,</span>
+  <span class="n">trace_state</span>
+</pre></div>
+
 
 {% endraw %}
 
