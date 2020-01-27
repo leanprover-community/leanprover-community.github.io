@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (176 messages, latest: Jan 27 2020 at 11:31)
+* [Refactoring polynomials](69676Refactoringpolynomials.html) (7 messages, latest: Jan 27 2020 at 12:31)
+
+* [Algebraic geometry course](53656Algebraicgeometrycourse.html) (177 messages, latest: Jan 27 2020 at 12:21)
 
 * [Request for integral lemmas](78086Requestforintegrallemmas.html) (8 messages, latest: Jan 26 2020 at 02:10)
 

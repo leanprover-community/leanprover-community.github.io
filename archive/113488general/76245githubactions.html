@@ -26,6 +26,53 @@ permalink: archive/113488general/76245githubactions.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/github%20actions/near/186674958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76245githubactions.html#186674958">Gabriel Ebner (Jan 27 2020 at 11:56)</a>:</h4>
 <p>I can't comment on the "waste of resources" part.  The mathlib build only takes a fraction of the time limit set by github, they clearly seem to expect this usage.  Are there any downsides to building mathlib with multiple lean versions?  Do you get inundated with emails?</p>
 
+<a name="186677013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/github%20actions/near/186677013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76245githubactions.html#186677013">Kevin Buzzard (Jan 27 2020 at 12:30)</a>:</h4>
+<blockquote>
+<p>Are there any downsides to building mathlib with multiple lean versions?</p>
+</blockquote>
+<p>Doesn't it harm the environment or something?</p>
+
+<a name="186677026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/github%20actions/near/186677026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76245githubactions.html#186677026">Johan Commelin (Jan 27 2020 at 12:30)</a>:</h4>
+<p>It probably does. I don't think GitHub Actions is CO₂-neutral</p>
+
+<a name="186677607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/github%20actions/near/186677607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76245githubactions.html#186677607">Sebastien Gouezel (Jan 27 2020 at 12:39)</a>:</h4>
+<p>Yes, that's my point. Thanks <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> , I have desactivated actions on my fork.</p>
+
+<a name="186677837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/github%20actions/near/186677837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76245githubactions.html#186677837">Sebastien Gouezel (Jan 27 2020 at 12:43)</a>:</h4>
+<p>Also, mathlib master is currently broken (error in <code>\archive\cubing_a_cube.lean</code>). I guess the new building tools do not test <code>archive</code> properly...</p>
+
+<a name="186677893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/github%20actions/near/186677893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76245githubactions.html#186677893">Johan Commelin (Jan 27 2020 at 12:44)</a>:</h4>
+<p>Ouch... that happened quickly (-;</p>
+
+<a name="186677920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/github%20actions/near/186677920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76245githubactions.html#186677920">Johan Commelin (Jan 27 2020 at 12:44)</a>:</h4>
+<p>Anyway, better discover it now instead of 3 months from now</p>
+
+<a name="186678100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/github%20actions/near/186678100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76245githubactions.html#186678100">Sebastien Gouezel (Jan 27 2020 at 12:47)</a>:</h4>
+<p>If you go to <a href="https://github.com/leanprover-community/mathlib/runs/409812707" target="_blank" title="https://github.com/leanprover-community/mathlib/runs/409812707">https://github.com/leanprover-community/mathlib/runs/409812707</a> for instance, the <code>test</code> step seems to succeed, but if you open it you will see an error.</p>
+
+<a name="186678204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/github%20actions/near/186678204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76245githubactions.html#186678204">Johan Commelin (Jan 27 2020 at 12:49)</a>:</h4>
+<p>Also:</p>
+<div class="codehilite"><pre><span></span>leanpkg build                          1h 16m 7s
+&gt; lean --make src
+Run leanpkg build | python scripts/detect_errors.py
+
+WARNING: Lean version mismatch: installed version is nightly-2020-01-12, but package requires 3.4.2
+
+configuring mathlib 0.1
+
+WARNING: Lean version mismatch: installed version is nightly-2020-01-12, but package requires 3.4.2
+
+&gt; lean --make src
+</pre></div>
+
 
 {% endraw %}
 

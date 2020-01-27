@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [github actions](76245githubactions.html) (3 messages, latest: Jan 27 2020 at 11:56)
+* [github actions](76245githubactions.html) (11 messages, latest: Jan 27 2020 at 12:49)
 
 * [Reduction rule when declaring structure](03826Reductionrulewhendeclaringstructure.html) (28 messages, latest: Jan 27 2020 at 11:00)
 
