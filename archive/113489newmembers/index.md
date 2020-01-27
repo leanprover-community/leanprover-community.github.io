@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [more basics](41001morebasics.html) (9 messages, latest: Jan 27 2020 at 04:47)
+
 * [sets in lean](66871setsinlean.html) (3 messages, latest: Jan 26 2020 at 20:56)
 
 * [noob question(s)](52075noobquestions.html) (1664 messages, latest: Jan 26 2020 at 19:29)
@@ -40,8 +42,6 @@ permalink: archive/113489newmembers/index.html
 * [Create a polynomial in Z\[X\] by clearing denomiators](48288CreateapolynomialinZXbyclearingdenomiators.html) (1 message, latest: Jan 19 2020 at 18:26)
 
 * [Understanding assume](96069Understandingassume.html) (60 messages, latest: Jan 19 2020 at 09:02)
-
-* [more basics](41001morebasics.html) (8 messages, latest: Jan 19 2020 at 02:38)
 
 * [lifting "down"](58858liftingdown.html) (19 messages, latest: Jan 18 2020 at 17:19)
 
