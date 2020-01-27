@@ -1,0 +1,46 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/99877settactic.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html">set tactic</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186732214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/186732214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#186732214">Kevin Buzzard (Jan 27 2020 at 22:18)</a>:</h4>
+<p>Is there a tactic which does goals like this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">U₁</span> <span class="n">U₂</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">U₁</span> <span class="bp">≠</span> <span class="err">∅</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">U₂</span> <span class="bp">≠</span> <span class="err">∅</span><span class="o">)</span>
+<span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">-</span><span class="n">U₁</span> <span class="err">∪</span> <span class="bp">-</span><span class="n">U₂</span> <span class="bp">=</span> <span class="n">univ</span> <span class="bp">→</span> <span class="bp">-</span><span class="n">U₁</span> <span class="bp">=</span> <span class="n">univ</span> <span class="bp">∨</span> <span class="bp">-</span><span class="n">U₂</span> <span class="bp">=</span> <span class="n">univ</span><span class="o">)</span> <span class="o">:</span> <span class="n">U₁</span> <span class="err">∩</span> <span class="n">U₂</span> <span class="bp">≠</span> <span class="err">∅</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">h1</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h2</span> <span class="o">:</span> <span class="bp">-</span><span class="n">U₁</span> <span class="err">∪</span> <span class="bp">-</span><span class="n">U₂</span> <span class="bp">=</span> <span class="n">univ</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">eq_univ_iff_forall</span><span class="o">,</span>
+    <span class="n">intro</span> <span class="n">x</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">eq_empty_iff_forall_not_mem</span> <span class="n">at</span> <span class="n">h1</span><span class="o">,</span>
+    <span class="n">replace</span> <span class="n">h1</span> <span class="o">:=</span> <span class="n">h1</span> <span class="n">x</span><span class="o">,</span>
+    <span class="n">revert</span> <span class="n">h1</span><span class="o">,</span>
+    <span class="n">simp</span><span class="o">,</span> <span class="n">tauto</span><span class="bp">!</span><span class="o">,</span>
+  <span class="n">replace</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">h</span> <span class="n">h2</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">h</span> <span class="k">with</span> <span class="n">h3</span> <span class="n">h4</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">h₁</span><span class="o">,</span> <span class="n">exact</span> <span class="n">compl_univ_iff</span><span class="bp">.</span><span class="mi">1</span> <span class="n">h3</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">h₂</span><span class="o">,</span> <span class="n">exact</span> <span class="n">compl_univ_iff</span><span class="bp">.</span><span class="mi">1</span> <span class="n">h4</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>? It's just easy stuff from logic.basic but disguised as sets.</p>
+
+<a name="186732870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/186732870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#186732870">Chris Hughes (Jan 27 2020 at 22:26)</a>:</h4>
+<p><code>by finish [set.ext_iff]</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

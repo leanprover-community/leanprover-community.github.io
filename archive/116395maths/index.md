@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [set tactic](99877settactic.html) (2 messages, latest: Jan 27 2020 at 22:26)
+
 * [Refactoring polynomials](69676Refactoringpolynomials.html) (11 messages, latest: Jan 27 2020 at 20:25)
 
 * [Combinatorics](60782Combinatorics.html) (2 messages, latest: Jan 27 2020 at 20:08)
