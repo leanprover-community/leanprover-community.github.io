@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [more basics](41001morebasics.html) (26 messages, latest: Jan 27 2020 at 20:50)
+* [more basics](41001morebasics.html) (27 messages, latest: Jan 27 2020 at 21:40)
 
 * [noob question(s)](52075noobquestions.html) (1681 messages, latest: Jan 27 2020 at 19:59)
 
