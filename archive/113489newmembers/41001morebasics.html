@@ -98,6 +98,59 @@ permalink: archive/113489newmembers/41001morebasics.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/186654070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#186654070">Kenny Lau (Jan 27 2020 at 05:20)</a>:</h4>
 <p>also you should be able to see the type of <code>z</code> in the underscore after it?</p>
 
+<a name="186656010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/186656010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#186656010">Iocta (Jan 27 2020 at 06:16)</a>:</h4>
+<blockquote>
+<p>also you should be able to see the type of z in the underscore after it?</p>
+</blockquote>
+<p>That's what I expected, but it doesn't appear</p>
+
+<a name="186656164"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/186656164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#186656164">Mario Carneiro (Jan 27 2020 at 06:21)</a>:</h4>
+<p>When I put that in lean, there is an error over "exists" saying it can't synthesize <code>|- Prop</code>, but I can still hover over <code>z</code> to see <code>z : α</code></p>
+
+<a name="186656224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/186656224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#186656224">Mario Carneiro (Jan 27 2020 at 06:22)</a>:</h4>
+<p>You can't use <code>exists.elim</code> unless lean knows what you are trying to prove (the <code>_</code> in <code>foo: _</code>)</p>
+
+<a name="186656241"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/186656241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#186656241">Mario Carneiro (Jan 27 2020 at 06:23)</a>:</h4>
+<p>If I remove the <code>have</code> and just use</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span> <span class="bp">∨</span> <span class="n">q</span> <span class="n">x</span><span class="o">)</span> <span class="bp">↔</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">q</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">iff</span><span class="bp">.</span><span class="n">intro</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span>
+<span class="o">(</span><span class="n">exists</span><span class="bp">.</span><span class="n">elim</span> <span class="n">h</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">z</span><span class="o">,</span> <span class="bp">_</span><span class="o">))</span>
+<span class="o">)</span>
+<span class="bp">_</span>
+</pre></div>
+
+
+<p>then the underscores are highlighted as you would expect</p>
+
+<a name="186656476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/186656476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#186656476">Iocta (Jan 27 2020 at 06:31)</a>:</h4>
+<p>ah putting the cursor over <code>z</code> does display its type</p>
+
+<a name="186656569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/186656569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#186656569">Iocta (Jan 27 2020 at 06:33)</a>:</h4>
+<p>I didn't see it originally because there's a fair amount of latency before it appears</p>
+
+<a name="186656634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/186656634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#186656634">Iocta (Jan 27 2020 at 06:35)</a>:</h4>
+<p>dunno if that's an intentional delay in  <code>lean-mode</code> to make it less distracting or it's just slow</p>
+
+<a name="186656745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/186656745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#186656745">Mario Carneiro (Jan 27 2020 at 06:38)</a>:</h4>
+<p>I would guess it's a mix of intentional latency by vscode and lean latency. Hovers that are too aggressive can really get in your way</p>
+
+<a name="186656754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/186656754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#186656754">Mario Carneiro (Jan 27 2020 at 06:38)</a>:</h4>
+<p>there is a setting for hover delay in preferences</p>
+
+<a name="186656820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/186656820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#186656820">Iocta (Jan 27 2020 at 06:40)</a>:</h4>
+<p>i'm using emacs,  it just appears in the bottom bar rather than hovering</p>
+
 
 {% endraw %}
 

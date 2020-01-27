@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [more basics](41001morebasics.html) (11 messages, latest: Jan 27 2020 at 05:20)
+* [more basics](41001morebasics.html) (21 messages, latest: Jan 27 2020 at 06:40)
 
 * [sets in lean](66871setsinlean.html) (3 messages, latest: Jan 26 2020 at 20:56)
 
