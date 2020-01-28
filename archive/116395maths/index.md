@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Lean for the curious mathematician](84968Leanforthecuriousmathematician.html) (1 message, latest: Jan 28 2020 at 11:36)
+* [Lean for the curious mathematician](84968Leanforthecuriousmathematician.html) (6 messages, latest: Jan 28 2020 at 12:29)
 
-* [formal roadmaps](84825formalroadmaps.html) (6 messages, latest: Jan 28 2020 at 10:29)
+* [formal roadmaps](84825formalroadmaps.html) (7 messages, latest: Jan 28 2020 at 12:14)
 
 * [Inductive construction](61623Inductiveconstruction.html) (21 messages, latest: Jan 28 2020 at 10:29)
 
