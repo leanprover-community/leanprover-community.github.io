@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [web editor](11270webeditor.html) (104 messages, latest: Jan 28 2020 at 01:00)
+
 * [github actions](76245githubactions.html) (19 messages, latest: Jan 27 2020 at 16:31)
 
 * [recreating `trace_state`](84788recreatingtracestate.html) (4 messages, latest: Jan 27 2020 at 13:37)
 
 * [Reduction rule when declaring structure](03826Reductionrulewhendeclaringstructure.html) (28 messages, latest: Jan 27 2020 at 11:00)
-
-* [web editor](11270webeditor.html) (103 messages, latest: Jan 27 2020 at 06:21)
 
 * [Lean in the wild](43625Leaninthewild.html) (418 messages, latest: Jan 26 2020 at 18:58)
 
