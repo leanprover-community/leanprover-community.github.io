@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Inductive construction](61623Inductiveconstruction.html) (16 messages, latest: Jan 28 2020 at 01:01)
+* [Inductive construction](61623Inductiveconstruction.html) (20 messages, latest: Jan 28 2020 at 09:35)
 
 * [formal roadmaps](84825formalroadmaps.html) (2 messages, latest: Jan 27 2020 at 23:06)
 
