@@ -9,6 +9,10 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Inductive construction](61623Inductiveconstruction.html) (13 messages, latest: Jan 27 2020 at 23:25)
+
+* [formal roadmaps](84825formalroadmaps.html) (2 messages, latest: Jan 27 2020 at 23:06)
+
 * [set tactic](99877settactic.html) (2 messages, latest: Jan 27 2020 at 22:26)
 
 * [Refactoring polynomials](69676Refactoringpolynomials.html) (11 messages, latest: Jan 27 2020 at 20:25)

@@ -1,0 +1,119 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/61623Inductiveconstruction.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/61623Inductiveconstruction.html">Inductive construction</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186735706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inductive%20construction/near/186735706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61623Inductiveconstruction.html#186735706">Bhavik Mehta (Jan 27 2020 at 23:03)</a>:</h4>
+<p>I'm trying to formalise this argument: an infinite set contains countably many points. Proof: given infinite s, pick an element x0. Then s1 := s - {x0} is infinite, so we can pick an element x1. Then x2 := s1 - {x1} is infinite, continue inductively. <br>
+Here's where I'm at so far</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">finite</span>
+
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">10</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+<span class="kn">open</span> <span class="n">set</span>
+
+<span class="kn">lemma</span> <span class="n">exists_mem_of_infinite</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">set</span><span class="bp">.</span><span class="n">infinite</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="n">exists_mem_of_ne_empty</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">t</span><span class="o">,</span> <span class="n">hs</span> <span class="o">(</span><span class="n">t</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="n">finite_empty</span><span class="o">))</span>
+
+<span class="kn">lemma</span> <span class="n">infinite_erase</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">set</span><span class="bp">.</span><span class="n">infinite</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">set</span><span class="bp">.</span><span class="n">infinite</span> <span class="o">{</span><span class="n">t</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">|</span> <span class="n">t</span> <span class="bp">≠</span> <span class="n">x</span><span class="o">}</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">a</span><span class="o">,</span> <span class="n">apply</span> <span class="n">hs</span><span class="o">,</span> <span class="n">by_cases</span> <span class="o">(</span><span class="n">x</span> <span class="err">∈</span> <span class="n">s</span><span class="o">),</span>
+    <span class="n">convert</span> <span class="n">set</span><span class="bp">.</span><span class="n">finite_insert</span> <span class="n">x</span> <span class="n">a</span><span class="o">,</span> <span class="n">ext</span> <span class="n">t</span><span class="o">,</span> <span class="n">simp</span><span class="o">,</span> <span class="n">split</span><span class="o">,</span> <span class="n">intro</span> <span class="n">q</span><span class="o">,</span>
+    <span class="n">by_cases</span> <span class="o">(</span><span class="n">t</span> <span class="bp">=</span> <span class="n">x</span><span class="o">),</span> <span class="n">rw</span> <span class="n">h</span><span class="o">,</span> <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">],</span> <span class="n">right</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">⟨</span><span class="err">‹</span><span class="bp">_</span><span class="err">›</span><span class="o">,</span> <span class="err">‹</span><span class="bp">_</span><span class="err">›</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">rintro</span> <span class="o">(</span><span class="n">rfl</span> <span class="bp">|</span> <span class="bp">_</span><span class="o">),</span> <span class="n">exact</span> <span class="n">h</span><span class="o">,</span> <span class="n">exact</span> <span class="n">a_1</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+  <span class="n">convert</span> <span class="n">a</span><span class="o">,</span> <span class="n">ext</span><span class="o">,</span> <span class="n">simp</span><span class="o">,</span> <span class="n">split</span><span class="bp">;</span> <span class="n">intro</span> <span class="n">p</span><span class="o">,</span> <span class="n">refine</span> <span class="bp">⟨</span><span class="n">p</span><span class="o">,</span> <span class="bp">_⟩</span><span class="o">,</span> <span class="n">rintro</span> <span class="n">rfl</span><span class="o">,</span> <span class="n">apply</span> <span class="n">h</span> <span class="n">p</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">p</span><span class="bp">.</span><span class="mi">1</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">has_sequence_of_infinite</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">set</span><span class="bp">.</span><span class="n">infinite</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">a</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">i</span> <span class="n">j</span><span class="o">,</span> <span class="n">a</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">a</span> <span class="n">j</span> <span class="bp">→</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">j</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I'll add that my question is about how to get this form of inductive construction as proof, rather than a different formalisation of the statement</p>
+
+<a name="186736301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inductive%20construction/near/186736301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61623Inductiveconstruction.html#186736301">Mario Carneiro (Jan 27 2020 at 23:11)</a>:</h4>
+<p>You need to use <code>choice</code> recursively to construct the sequence</p>
+
+<a name="186736321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inductive%20construction/near/186736321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61623Inductiveconstruction.html#186736321">Mario Carneiro (Jan 27 2020 at 23:11)</a>:</h4>
+<p>(this is a principle known as dependent choice in the literature)</p>
+
+<a name="186736538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inductive%20construction/near/186736538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61623Inductiveconstruction.html#186736538">Reid Barton (Jan 27 2020 at 23:14)</a>:</h4>
+<p>This is the kind of thing that <a href="https://github.com/rwbarton/lean-model-categories/blob/top-dev/src/logic/crec.lean" target="_blank" title="https://github.com/rwbarton/lean-model-categories/blob/top-dev/src/logic/crec.lean">https://github.com/rwbarton/lean-model-categories/blob/top-dev/src/logic/crec.lean</a> is supposed to be good for, though it might be a bit awkward in this specific setup</p>
+
+<a name="186736622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inductive%20construction/near/186736622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61623Inductiveconstruction.html#186736622">Bhavik Mehta (Jan 27 2020 at 23:15)</a>:</h4>
+<blockquote>
+<p>(this is a principle known as dependent choice in the literature)</p>
+</blockquote>
+<p>Yeah I'm aware of this, but I can't get the recursion to work in lean</p>
+
+<a name="186736715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inductive%20construction/near/186736715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61623Inductiveconstruction.html#186736715">Bhavik Mehta (Jan 27 2020 at 23:16)</a>:</h4>
+<p>More generally I'm not sure how I'd do a construction like <a href="https://en.wikipedia.org/wiki/Recursive_definition#Principle_of_recursive_definition" target="_blank" title="https://en.wikipedia.org/wiki/Recursive_definition#Principle_of_recursive_definition">this one</a></p>
+
+<a name="186736746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inductive%20construction/near/186736746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61623Inductiveconstruction.html#186736746">Mario Carneiro (Jan 27 2020 at 23:17)</a>:</h4>
+<p>that's just definition by well founded recursion, the equation compiler does it for you</p>
+
+<a name="186736848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inductive%20construction/near/186736848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61623Inductiveconstruction.html#186736848">Bhavik Mehta (Jan 27 2020 at 23:18)</a>:</h4>
+<p>But how can I do it myself? For instance if I had to do that inside a bigger theorem - I can't figure out how to get it then</p>
+
+<a name="186736987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inductive%20construction/near/186736987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61623Inductiveconstruction.html#186736987">Reid Barton (Jan 27 2020 at 23:20)</a>:</h4>
+<p>for example you can do something like this--your lemmas won't help here though</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">has_sequence_of_infinite</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">set</span><span class="bp">.</span><span class="n">infinite</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">a</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">i</span> <span class="n">j</span><span class="o">,</span> <span class="n">a</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">a</span> <span class="n">j</span> <span class="bp">→</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">j</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">obtain</span> <span class="bp">⟨</span><span class="n">a</span><span class="o">,</span> <span class="n">ha</span><span class="bp">⟩</span> <span class="o">:</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">s</span> <span class="bp">//</span> <span class="bp">∀</span> <span class="n">i</span> <span class="n">j</span><span class="o">,</span> <span class="n">i</span> <span class="bp">&lt;</span> <span class="n">j</span> <span class="bp">→</span> <span class="o">(</span><span class="n">a</span> <span class="n">i</span><span class="o">)</span><span class="bp">.</span><span class="n">val</span> <span class="bp">≠</span> <span class="o">(</span><span class="n">a</span> <span class="n">j</span><span class="o">)</span><span class="bp">.</span><span class="n">val</span><span class="o">}</span> <span class="o">:=</span>
+    <span class="n">crec&#39;</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_wf</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">s</span><span class="o">),</span> <span class="n">x</span><span class="bp">.</span><span class="n">val</span> <span class="bp">≠</span> <span class="n">y</span><span class="bp">.</span><span class="n">val</span><span class="o">)</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">swap</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rintros</span> <span class="n">a</span> <span class="bp">⟨</span><span class="n">If</span><span class="o">,</span> <span class="n">IH</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">change</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">//</span> <span class="bp">∀</span> <span class="n">i</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">&lt;</span> <span class="n">a</span><span class="o">),</span> <span class="o">(</span><span class="n">If</span> <span class="n">i</span> <span class="n">h</span><span class="o">)</span><span class="bp">.</span><span class="n">val</span> <span class="bp">≠</span> <span class="n">x</span><span class="bp">.</span><span class="n">val</span><span class="o">},</span>
+    <span class="n">sorry</span> <span class="o">},</span>
+  <span class="n">refine</span> <span class="bp">⟨λ</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span><span class="n">a</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">val</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span><span class="n">a</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">property</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">i</span> <span class="n">j</span> <span class="n">h</span><span class="o">,</span> <span class="bp">_⟩</span><span class="o">,</span>
+  <span class="n">rcases</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_trichotomy</span> <span class="n">i</span> <span class="n">j</span> <span class="k">with</span> <span class="n">h&#39;</span><span class="bp">|</span><span class="n">h&#39;</span><span class="bp">|</span><span class="n">h&#39;</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="o">(</span><span class="n">ha</span> <span class="n">i</span> <span class="n">j</span> <span class="n">h&#39;</span> <span class="n">h</span><span class="o">)</span><span class="bp">.</span><span class="n">elim</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">h&#39;</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="o">(</span><span class="n">ha</span> <span class="n">j</span> <span class="n">i</span> <span class="n">h&#39;</span> <span class="n">h</span><span class="bp">.</span><span class="n">symm</span><span class="o">)</span><span class="bp">.</span><span class="n">elim</span> <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="186737081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inductive%20construction/near/186737081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61623Inductiveconstruction.html#186737081">Reid Barton (Jan 27 2020 at 23:22)</a>:</h4>
+<p>You have something more like a <a href="https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-List.html#v:unfoldr" target="_blank" title="https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-List.html#v:unfoldr">https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-List.html#v:unfoldr</a> (without the Maybe)</p>
+
+<a name="186737150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inductive%20construction/near/186737150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61623Inductiveconstruction.html#186737150">Bhavik Mehta (Jan 27 2020 at 23:23)</a>:</h4>
+<p>Yeah I was surprised that something so natural in haskell is awkward here</p>
+
+<a name="186737275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inductive%20construction/near/186737275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61623Inductiveconstruction.html#186737275">Mario Carneiro (Jan 27 2020 at 23:25)</a>:</h4>
+<p>haskell doesn't care about proofs, though, which are what make this proof tricky</p>
+
+<a name="186737290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inductive%20construction/near/186737290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61623Inductiveconstruction.html#186737290">Bhavik Mehta (Jan 27 2020 at 23:25)</a>:</h4>
+<p>Fair point!</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
