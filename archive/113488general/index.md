@@ -9,13 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Coq as a lean type checker](81552Coqasaleantypechecker.html) (7 messages, latest: Jan 28 2020 at 17:56)
+* [github actions](76245githubactions.html) (23 messages, latest: Jan 28 2020 at 18:55)
+
+* [Coq as a lean type checker](81552Coqasaleantypechecker.html) (24 messages, latest: Jan 28 2020 at 18:31)
+
+* [crash lean with `revert`](53254crashleanwithrevert.html) (8 messages, latest: Jan 28 2020 at 18:11)
 
 * [Open_locale](36418Openlocale.html) (4 messages, latest: Jan 28 2020 at 17:42)
 
 * [web editor](11270webeditor.html) (119 messages, latest: Jan 28 2020 at 16:10)
-
-* [github actions](76245githubactions.html) (19 messages, latest: Jan 27 2020 at 16:31)
 
 * [recreating `trace_state`](84788recreatingtracestate.html) (4 messages, latest: Jan 27 2020 at 13:37)
 

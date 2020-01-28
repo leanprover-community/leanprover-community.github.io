@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [induction generalizing](17261inductiongeneralizing.html) (1 message, latest: Jan 28 2020 at 17:35)
+* [induction generalizing](17261inductiongeneralizing.html) (16 messages, latest: Jan 28 2020 at 18:46)
 
 * [set.finite.fintype](98503setfinitefintype.html) (2 messages, latest: Jan 28 2020 at 17:15)
 

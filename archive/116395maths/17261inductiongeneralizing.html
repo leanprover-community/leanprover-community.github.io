@@ -17,6 +17,140 @@ permalink: archive/116395maths/17261inductiongeneralizing.html
 <p><code>induction</code> isn't documented in the tactics doc as far as I can see, and I think I need to use it in a slightly fancy way (is it <code>generalizing</code> I want here?). I have some slightly messy goal involving quantifying over all finite subsets of a type <code>K</code>. I want to prove the goal by induction on the size of the subset. In particular the inductive hypotheses in <code>data.set.finite</code> are not right for me -- they involve hypotheses of the form "if it's true for S then it's true for S union {x}" but what I can prove is that it's true for the empty subset, and if n&gt;=1 is the size of non-empty S, and if it's true for all subsets of S of size n-1, then it's true for S. </p>
 <p>I can probably do this by explicitly copying my messy goal (which will mention typeclasses) and putting a "forall n" in front of it and an assumption which says n is the size of S, proving that this suffices, and then doing induction on n  -- but is there some cheap way to do this just using the <code>induction</code> tactic?</p>
 
+<a name="186811567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induction%20generalizing/near/186811567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17261inductiongeneralizing.html#186811567">Kevin Buzzard (Jan 28 2020 at 18:27)</a>:</h4>
+<p>dammit</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">Zariskis_lemma</span>
+  <span class="c1">-- let k be a field</span>
+  <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">k</span><span class="o">]</span>
+  <span class="c1">-- and let k ⊆ K be another field</span>
+  <span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">K</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">k</span> <span class="n">K</span><span class="o">]</span>
+  <span class="c1">-- Assume that there&#39;s a finite subset S of K</span>
+  <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">K</span><span class="o">)</span> <span class="o">(</span><span class="n">hfs</span> <span class="o">:</span> <span class="n">S</span><span class="bp">.</span><span class="n">finite</span><span class="o">)</span>
+  <span class="c1">-- which generates K as a k-algebra</span>
+  <span class="c1">-- (note: `⊤` is &quot;the largest k-subalgebra of K&quot;, i.e., K)</span>
+  <span class="o">(</span><span class="n">hsgen</span> <span class="o">:</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">adjoin</span> <span class="n">k</span> <span class="n">S</span> <span class="bp">=</span> <span class="err">⊤</span><span class="o">)</span>
+  <span class="c1">-- Then</span>
+  <span class="o">:</span>
+  <span class="c1">-- K is finitely-generated as a k-vector space</span>
+<span class="o">(</span><span class="err">⊤</span> <span class="o">:</span> <span class="n">submodule</span> <span class="n">k</span> <span class="n">K</span><span class="o">)</span><span class="bp">.</span><span class="n">fg</span>
+<span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">unfreezeI</span><span class="o">,</span> <span class="c1">-- to get next line to work; I need to quantify over k</span>
+  <span class="n">revert</span> <span class="n">k</span><span class="o">,</span>
+  <span class="n">set</span> <span class="n">n</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">S</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">finite</span><span class="bp">.</span><span class="n">fintype</span> <span class="n">hfs</span><span class="o">)</span> <span class="k">with</span> <span class="n">hn</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+  <span class="c">/-</span><span class="cm"></span>
+<span class="cm">  induction tactic failed, failed to create new goal</span>
+<span class="cm">  -/</span>
+</pre></div>
+
+
+<p>this is more annoying than I realised. This works:</p>
+<div class="codehilite"><pre><span></span><span class="k">begin</span>
+  <span class="n">unfreezeI</span><span class="o">,</span> <span class="c1">-- to get next line to work; I need to quantify over k</span>
+  <span class="n">revert</span> <span class="n">k</span><span class="o">,</span>
+  <span class="n">suffices</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">k</span><span class="o">]</span>
+    <span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">K</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">k</span> <span class="n">K</span><span class="o">]</span>
+    <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">K</span><span class="o">)</span> <span class="o">(</span><span class="n">hfs</span> <span class="o">:</span> <span class="n">S</span><span class="bp">.</span><span class="n">finite</span><span class="o">)</span> <span class="o">(</span><span class="n">hn</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="bp">@</span><span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">S</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">finite</span><span class="bp">.</span><span class="n">fintype</span> <span class="n">hfs</span><span class="o">))</span>
+    <span class="o">(</span><span class="n">hsgen</span> <span class="o">:</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">adjoin</span> <span class="n">k</span> <span class="n">S</span> <span class="bp">=</span> <span class="err">⊤</span><span class="o">),</span>  <span class="o">(</span><span class="err">⊤</span> <span class="o">:</span> <span class="n">submodule</span> <span class="n">k</span> <span class="n">K</span><span class="o">)</span><span class="bp">.</span><span class="n">fg</span><span class="o">,</span>
+    <span class="n">intros</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">this</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">S</span> <span class="n">hfs</span> <span class="n">rfl</span> <span class="n">hsgen</span><span class="o">,</span>
+  <span class="n">sorry</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>but I feel like I'm missing a trick (the <code>rfl</code> is <code>hn</code>).</p>
+<div class="codehilite"><pre><span></span>
+</pre></div>
+
+<a name="186812959"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induction%20generalizing/near/186812959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17261inductiongeneralizing.html#186812959">Floris van Doorn (Jan 28 2020 at 18:39)</a>:</h4>
+<p>The problem is that <code>n</code> is a let-expression.</p>
+
+<a name="186812995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induction%20generalizing/near/186812995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17261inductiongeneralizing.html#186812995">Floris van Doorn (Jan 28 2020 at 18:40)</a>:</h4>
+<p>This works, but is still ugly:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">all</span>
+
+<span class="kn">universe</span> <span class="kn">variables</span> <span class="n">u</span> <span class="n">v</span>
+
+<span class="kn">theorem</span> <span class="n">Zariskis_lemma</span>
+  <span class="c1">-- let k be a field</span>
+  <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">k</span><span class="o">]</span>
+  <span class="c1">-- and let k ⊆ K be another field</span>
+  <span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">K</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">k</span> <span class="n">K</span><span class="o">]</span>
+  <span class="c1">-- Assume that there&#39;s a finite subset S of K</span>
+  <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">K</span><span class="o">)</span> <span class="o">(</span><span class="n">hfs</span> <span class="o">:</span> <span class="n">S</span><span class="bp">.</span><span class="n">finite</span><span class="o">)</span>
+  <span class="c1">-- which generates K as a k-algebra</span>
+  <span class="c1">-- (note: `⊤` is &quot;the largest k-subalgebra of K&quot;, i.e., K)</span>
+  <span class="o">(</span><span class="n">hsgen</span> <span class="o">:</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">adjoin</span> <span class="n">k</span> <span class="n">S</span> <span class="bp">=</span> <span class="err">⊤</span><span class="o">)</span>
+  <span class="c1">-- Then</span>
+  <span class="o">:</span>
+  <span class="c1">-- K is finitely-generated as a k-vector space</span>
+<span class="o">(</span><span class="err">⊤</span> <span class="o">:</span> <span class="n">submodule</span> <span class="n">k</span> <span class="n">K</span><span class="o">)</span><span class="bp">.</span><span class="n">fg</span>
+<span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">unfreezeI</span><span class="o">,</span> <span class="c1">-- to get next line to work; I need to quantify over k</span>
+  <span class="n">revert</span> <span class="n">k</span><span class="o">,</span>
+  <span class="k">obtain</span> <span class="bp">⟨</span><span class="n">n</span><span class="o">,</span> <span class="n">hn</span><span class="bp">⟩</span> <span class="o">:</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">//</span> <span class="bp">@</span><span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">S</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">finite</span><span class="bp">.</span><span class="n">fintype</span> <span class="n">hfs</span><span class="o">)</span> <span class="bp">=</span> <span class="n">n</span><span class="o">}</span> <span class="o">:=</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="186813156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induction%20generalizing/near/186813156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17261inductiongeneralizing.html#186813156">Floris van Doorn (Jan 28 2020 at 18:41)</a>:</h4>
+<ul>
+<li>Is there a tactic that forgets the body of a local hypothesis (in Coq this is <code>clearbody n</code>)?</li>
+<li>Is there a tactic that does the same as <code>set x := t with hx</code>, but makes <code>x</code> a normal variable, instead of a let-expression?</li>
+</ul>
+<p>We should add both these tactics if they don't already exist.</p>
+
+<a name="186813259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induction%20generalizing/near/186813259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17261inductiongeneralizing.html#186813259">Kevin Buzzard (Jan 28 2020 at 18:42)</a>:</h4>
+<p>Yes, I used <code>set</code> instead of <code>let</code> to try and somehow get around this but clearly it didn't work (because <code>set</code> uses <code>let</code>). Your method is better than mine because you didn't have to rewrite the goal. Thanks!</p>
+
+<a name="186813351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induction%20generalizing/near/186813351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17261inductiongeneralizing.html#186813351">Kevin Buzzard (Jan 28 2020 at 18:42)</a>:</h4>
+<p>nice use of <code>obtain</code> there ;-)</p>
+
+<a name="186813363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induction%20generalizing/near/186813363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17261inductiongeneralizing.html#186813363">Floris van Doorn (Jan 28 2020 at 18:42)</a>:</h4>
+<p>I updated it to use <code>obtain</code> instead of <code>have</code>.</p>
+
+<a name="186813378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induction%20generalizing/near/186813378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17261inductiongeneralizing.html#186813378">Floris van Doorn (Jan 28 2020 at 18:43)</a>:</h4>
+<p>Oh, you saw it :)</p>
+
+<a name="186813417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induction%20generalizing/near/186813417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17261inductiongeneralizing.html#186813417">Kevin Buzzard (Jan 28 2020 at 18:43)</a>:</h4>
+<p>I was trying to understand it when it changed in front of me :-)</p>
+
+<a name="186813516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induction%20generalizing/near/186813516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17261inductiongeneralizing.html#186813516">Floris van Doorn (Jan 28 2020 at 18:44)</a>:</h4>
+<p>Another shortening, now there is just <code>O(1)</code> extra stuff you have to type compared to a dedicated tactic for this purpose.</p>
+
+<a name="186813535"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induction%20generalizing/near/186813535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17261inductiongeneralizing.html#186813535">Kevin Buzzard (Jan 28 2020 at 18:44)</a>:</h4>
+<p>So am I wrong in thinking that there is some option to <code>induction</code> which does this for me automatically?</p>
+
+<a name="186813605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induction%20generalizing/near/186813605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17261inductiongeneralizing.html#186813605">Floris van Doorn (Jan 28 2020 at 18:45)</a>:</h4>
+<p>I don't think such option currently exist. But we could let <code>induction</code> call <code>clearbody</code> on its argument if the <code>clearbody</code> tactic exists.</p>
+
+<a name="186813670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induction%20generalizing/near/186813670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17261inductiongeneralizing.html#186813670">Floris van Doorn (Jan 28 2020 at 18:45)</a>:</h4>
+<p>which turns a let-expression into a normal variable.</p>
+
+<a name="186813707"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induction%20generalizing/near/186813707" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17261inductiongeneralizing.html#186813707">Kevin Buzzard (Jan 28 2020 at 18:45)</a>:</h4>
+<p>This is actually a tricky commutative algebra lemma, but I had no idea that this part was the tricky part :-/</p>
+
+<a name="186813718"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induction%20generalizing/near/186813718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17261inductiongeneralizing.html#186813718">Floris van Doorn (Jan 28 2020 at 18:46)</a>:</h4>
+<p>:)</p>
+
 
 {% endraw %}
 
