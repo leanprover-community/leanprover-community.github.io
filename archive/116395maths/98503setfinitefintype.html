@@ -1,0 +1,61 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/98503setfinitefintype.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/98503setfinitefintype.html">set.finite.fintype</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186803197"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set.finite.fintype/near/186803197" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98503setfinitefintype.html#186803197">Kevin Buzzard (Jan 28 2020 at 17:05)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">finite</span>
+
+<span class="kn">open</span> <span class="n">set</span>
+
+<span class="c">/-</span><span class="cm"> From data.set.finite:</span>
+
+<span class="cm">noncomputable instance finite.fintype {s : set α} (h : finite s) : fintype s :=</span>
+<span class="cm">classical.choice h</span>
+
+<span class="cm">-/</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">finite</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">apply_instance</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">tactic.mk_instance failed to generate instance for</span>
+<span class="cm">  fintype ↥s</span>
+<span class="cm">state:</span>
+<span class="cm">α : Type ?,</span>
+<span class="cm">s : set α,</span>
+<span class="cm">hs : finite s</span>
+<span class="cm">⊢ fintype ↥s</span>
+<span class="cm">-/</span>
+
+<span class="n">noncomputable</span> <span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">finite</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- same error</span>
+
+<span class="n">noncomputable</span> <span class="n">theory</span>
+<span class="n">open_locale</span> <span class="n">classical</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">10000</span><span class="o">]</span> <span class="n">set</span><span class="bp">.</span><span class="n">finite</span><span class="bp">.</span><span class="n">fintype</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">finite</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- same error</span>
+</pre></div>
+
+
+<p>The instance <code>finite s -&gt; fintype s</code> -- I can't ever get it to fire. I just changed <code>instance</code> to <code>def</code> in mathlib and recompiled, and it seems to compile fine (I haven't finished yet but it's been running for a while). Should it be a <code>def</code>?</p>
+
+<a name="186804089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set.finite.fintype/near/186804089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98503setfinitefintype.html#186804089">Yury G. Kudryashov (Jan 28 2020 at 17:15)</a>:</h4>
+<p>I think it should</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

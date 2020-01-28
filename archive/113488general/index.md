@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [web editor](11270webeditor.html) (119 messages, latest: Jan 28 2020 at 16:10)
+* [Coq as a lean type checker](81552Coqasaleantypechecker.html) (7 messages, latest: Jan 28 2020 at 17:56)
 
-* [Open_locale](36418Openlocale.html) (3 messages, latest: Jan 28 2020 at 15:56)
+* [Open_locale](36418Openlocale.html) (4 messages, latest: Jan 28 2020 at 17:42)
+
+* [web editor](11270webeditor.html) (119 messages, latest: Jan 28 2020 at 16:10)
 
 * [github actions](76245githubactions.html) (19 messages, latest: Jan 27 2020 at 16:31)
 

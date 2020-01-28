@@ -1,0 +1,77 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/81552Coqasaleantypechecker.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html">Coq as a lean type checker</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186803454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186803454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186803454">Bas Spitters (Jan 28 2020 at 17:08)</a>:</h4>
+<p>Gaetan Gilbert made a Coq type checker for lean in order the help understand the differences. I think it's very useful in that way.<br>
+<a href="https://coq.discourse.group/t/alpha-announcement-coq-is-a-lean-typechecker/581" target="_blank" title="https://coq.discourse.group/t/alpha-announcement-coq-is-a-lean-typechecker/581">https://coq.discourse.group/t/alpha-announcement-coq-is-a-lean-typechecker/581</a></p>
+
+<a name="186804882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186804882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186804882">Johan Commelin (Jan 28 2020 at 17:24)</a>:</h4>
+<p>That seems like a really thorough comparison. Chapeau!</p>
+
+<a name="186806965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186806965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186806965">Rob Lewis (Jan 28 2020 at 17:48)</a>:</h4>
+<p>This is cool! I'm not really clear what's meant by this line:</p>
+<blockquote>
+<p>The whole stdlib cannot be checked as some conversion problems are<br>
+pathological. two_pos seems a typical example (0 &lt; 2 in an ordered<br>
+field). </p>
+</blockquote>
+<p>I'm probably missing something, does anyone know what the issue is with 0 &lt; 2?</p>
+
+<a name="186807137"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186807137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186807137">Johan Commelin (Jan 28 2020 at 17:50)</a>:</h4>
+<p>I just saw that <span class="user-mention" data-user-id="243878">@Gaëtan Gilbert</span> also has an account here. So we can ask him directly <span aria-label="wink" class="emoji emoji-1f609" role="img" title="wink">:wink:</span></p>
+
+<a name="186807665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186807665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186807665">Floris van Doorn (Jan 28 2020 at 17:54)</a>:</h4>
+<p>Yes, this looks really cool indeed. Also interesting to see some small kernel differences between Coq and Lean I have never seen before.</p>
+
+<a name="186807681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186807681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186807681">Gaëtan Gilbert (Jan 28 2020 at 17:54)</a>:</h4>
+<p>It means that some conversion problem involved in checked the proof of 0&lt;2 is difficult for Coq. I haven't investigated yet, I guess it starts unfolding the wrong thing then gets lost.</p>
+
+<a name="186807862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186807862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186807862">Floris van Doorn (Jan 28 2020 at 17:56)</a>:</h4>
+<p>I also don't know what the problem is with <code>two_pos</code>. <br>
+For the lazy:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">two_pos</span> <span class="o">:</span> <span class="o">(</span><span class="mi">2</span><span class="o">:</span><span class="n">α</span><span class="o">)</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span> <span class="n">unfold</span> <span class="n">bit0</span><span class="o">,</span> <span class="n">exact</span> <span class="n">add_pos</span> <span class="n">zero_lt_one</span> <span class="n">zero_lt_one</span> <span class="kn">end</span>
+</pre></div>
+
+
+<p>and <code>#print two_pos</code> gives</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">two_pos</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">linear_ordered_field</span> <span class="n">α</span><span class="o">],</span> <span class="mi">2</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">linear_ordered_field</span> <span class="n">α</span><span class="o">],</span>
+  <span class="n">eq</span><span class="bp">.</span><span class="n">mpr</span>
+    <span class="o">(</span><span class="n">id</span>
+       <span class="o">((</span><span class="bp">λ</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">has_lt</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">a_1</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">e_2</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a_1</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="n">b_1</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">e_3</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">b_1</span><span class="o">),</span>
+           <span class="n">congr</span> <span class="o">(</span><span class="n">congr_arg</span> <span class="n">gt</span> <span class="n">e_2</span><span class="o">)</span> <span class="n">e_3</span><span class="o">)</span>
+          <span class="mi">2</span>
+          <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span>
+          <span class="o">(</span><span class="n">bit0</span><span class="bp">.</span><span class="n">equations</span><span class="bp">._</span><span class="n">eqn_1</span> <span class="mi">1</span><span class="o">)</span>
+          <span class="mi">0</span>
+          <span class="mi">0</span>
+          <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="mi">0</span><span class="o">)))</span>
+    <span class="o">(</span><span class="n">add_pos</span> <span class="n">zero_lt_one</span> <span class="n">zero_lt_one</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Maybe it's the weird identity function generated by <code>unfold</code> that causes problems.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
