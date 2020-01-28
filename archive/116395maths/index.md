@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Lean for the curious mathematician](84968Leanforthecuriousmathematician.html) (6 messages, latest: Jan 28 2020 at 12:29)
+* [Lean for the curious mathematician](84968Leanforthecuriousmathematician.html) (8 messages, latest: Jan 28 2020 at 16:07)
 
 * [formal roadmaps](84825formalroadmaps.html) (7 messages, latest: Jan 28 2020 at 12:14)
 
