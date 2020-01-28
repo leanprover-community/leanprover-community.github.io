@@ -501,6 +501,21 @@ cc <span class="user-mention" data-user-id="217806">@Markus Rabe</span> <span cl
 !!! Failure(&quot;Parse failure at :16: expected convfn but found I&quot;)
 </pre></div>
 
+<a name="186741900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186741900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186741900">Christian Szegedy (Jan 28 2020 at 00:37)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="239426">Christian Szegedy</span> the original Holist paper[0] states that final results should be shared using the test set (4.2) but it looks like the main result is produced on the validation set (Table 2) and there is no such result for the test set? I believe it is the same for the SoTa paper [1]. Am I missing something?</p>
+</blockquote>
+<p>Yes, I think it is sloppiness on our side. We have verified our results internally with the test set and the results were very close. Also, we got pretty decent results on the Flyspeck corpus which is a completely independent branch from the training set. This is also reported in the HOList paper.</p>
+<p>We will rerun our model from the GNN paper with the test set and update the paper. I am quite confident that the results don't change significantly to the validation set as we did not do a lot of tuning on it.</p>
+
+<a name="186742113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186742113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186742113">Christian Szegedy (Jan 28 2020 at 00:40)</a>:</h4>
+<blockquote>
+<p>Finally, the last set of errors I'm getting when "replaying" the validation set are related to CONV tactics (which I believe are expected since I can see in the ML code that the CONV passed to CONV_TAC are not supported), example:</p>
+</blockquote>
+<p>All those errors are expected. Currently the API supports only theorem parameters and only the selected set of 42 tactics we have enabled.</p>
+
 
 {% endraw %}
 
