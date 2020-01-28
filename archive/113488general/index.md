@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [github actions](76245githubactions.html) (30 messages, latest: Jan 28 2020 at 19:05)
+* [Coq as a lean type checker](81552Coqasaleantypechecker.html) (27 messages, latest: Jan 28 2020 at 20:43)
 
-* [Coq as a lean type checker](81552Coqasaleantypechecker.html) (24 messages, latest: Jan 28 2020 at 18:31)
+* [github actions](76245githubactions.html) (37 messages, latest: Jan 28 2020 at 20:40)
 
 * [crash lean with `revert`](53254crashleanwithrevert.html) (8 messages, latest: Jan 28 2020 at 18:11)
 
