@@ -462,6 +462,49 @@ Fun fact, Mathlib's export file is ~230 mb and &gt; 8 million lines.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186773946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186773946">Jason Rute (Jan 28 2020 at 11:33)</a>:</h4>
 <p>I didn’t realize you could run a GUI from a Docker container.  This will be interesting.</p>
 
+<a name="186792099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186792099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186792099">Tim Daly (Jan 28 2020 at 15:17)</a>:</h4>
+<p>Emacs runs fine. Apparently Docker has moved/merged with Kubernetes so I'm behind the curve on yet another technology. It takes forever to understand how to build one of these things so it might take a while. Kubernetes is more network capable . Axiom uses X11 for its graphics and browser front-ends and has used a remote X11 server successfully. I suspect there is a way to get vscode to "network" so I'm going to dig into that. I may be able to get lean --server to pipe to a network using ns. There are many "variables in play" here and I still have a lot to learn.<br>
+There won't be much more to say until I get happy with the results. </p>
+<p>That said, I think that a Docker/(Kubernetes?) solution provides a trivial-to-install, stable platform for releases that run everywhere. I think that a Kubernetes version of Lean "in the cloud" is also possible, perhaps connected to <span class="user-mention" data-user-id="116034">@William Stein</span> 's Sage system or the Jupiter notebooks. </p>
+<p>I think that a "point and click" version of Lean would be easier for mathematicians and students to use.</p>
+
+<a name="186792889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186792889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186792889">Johan Commelin (Jan 28 2020 at 15:25)</a>:</h4>
+<p>That's one thing I have wanted to look into, but never actually got to it: Since VScode runs on electron, it should be easy to run the editor front-end on a simple laptop, and run the back-end (including Lean) on some heavy-duty server. Does anyone have a clue how hard it is to pull this off?</p>
+
+<a name="186793236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186793236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186793236">Johan Commelin (Jan 28 2020 at 15:28)</a>:</h4>
+<p><span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> I think you also linked us to some "VScode in the browser" thing. Did that ever take off? I already lost that link, so I don't even know how to find the project atm.</p>
+
+<a name="186793635"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186793635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186793635">Bryan Gin-ge Chen (Jan 28 2020 at 15:32)</a>:</h4>
+<p>The closest thing I can think of is the <a href="https://github.com/Microsoft/monaco-editor" target="_blank" title="https://github.com/Microsoft/monaco-editor">monaco editor</a> which is what the lean-web-editor uses.</p>
+
+<a name="186793999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186793999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186793999">Johan Commelin (Jan 28 2020 at 15:36)</a>:</h4>
+<p><span class="user-mention" data-user-id="223495">@Tim Daly</span> re docker. I just unearthed this post by William Stein <a href="#narrow/stream/113489-new-members/topic/Installation.20and.20usage.20instructions/near/147247975" title="#narrow/stream/113489-new-members/topic/Installation.20and.20usage.20instructions/near/147247975">https://leanprover.zulipchat.com/#narrow/stream/113489-new-members/topic/Installation.20and.20usage.20instructions/near/147247975</a></p>
+
+<a name="186794039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186794039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186794039">Johan Commelin (Jan 28 2020 at 15:36)</a>:</h4>
+<p><span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> I think I found it: <a href="https://stackblitz.com/" target="_blank" title="https://stackblitz.com/">https://stackblitz.com/</a></p>
+
+<a name="186794419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186794419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186794419">Bryan Gin-ge Chen (Jan 28 2020 at 15:40)</a>:</h4>
+<p>OK, I don't think I've seen stackblitz before but it looks cool!</p>
+
+<a name="186794608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186794608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186794608">Johan Commelin (Jan 28 2020 at 15:42)</a>:</h4>
+<p>Ooh, maybe it was Patrick who showed it to me</p>
+
+<a name="186795851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186795851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186795851">Tim Daly (Jan 28 2020 at 15:57)</a>:</h4>
+<p><span class="user-mention" data-user-id="116034">@William Stein</span> is way ahead of me. Cocalc is certainly a better path than I'm taking, especially since it helps William and has real company backing. Anyone who has used Cocalc for Lean, please post instructions.</p>
+
+<a name="186796027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/web%20editor/near/186796027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11270webeditor.html#186796027">Kevin Buzzard (Jan 28 2020 at 15:59)</a>:</h4>
+<p>It works out of the box!</p>
+
 
 {% endraw %}
 

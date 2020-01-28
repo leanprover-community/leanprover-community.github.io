@@ -9607,6 +9607,50 @@ begin<br>
 <p>use 2*p_w^2+2*p_w,</p>
 <p>Then how do I apply p_h?</p>
 
+<a name="186790384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186790384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186790384">Johan Commelin (Jan 28 2020 at 15:00)</a>:</h4>
+<p>I would suggest <code>cases p with k p</code></p>
+
+<a name="186790391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186790391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186790391">Johan Commelin (Jan 28 2020 at 15:00)</a>:</h4>
+<p>To get nicer names</p>
+
+<a name="186790429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186790429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186790429">Johan Commelin (Jan 28 2020 at 15:01)</a>:</h4>
+<p>After that, you are looking for <code>rw p_h</code> (or <code>rw p</code>, if you change the <code>cases</code>)</p>
+
+<a name="186790564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186790564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186790564">Johan Commelin (Jan 28 2020 at 15:02)</a>:</h4>
+<p>Alternative: <code>subst n</code>. This will look for <code>n = ...</code> in you context, and replace all occurences of <code>n</code> with <code>...</code></p>
+
+<a name="186790567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186790567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186790567">Alex Kontorovich (Jan 28 2020 at 15:02)</a>:</h4>
+<p>Ah yes, rw! Thanks. Now shouldn't simp do the algebra for me and finish? </p>
+<p>Let's see if this works:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">square_of_odd_is_odd</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">n</span><span class="bp">=</span><span class="mi">2</span><span class="bp">*</span><span class="n">k</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">-&gt;</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">l</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">n</span><span class="bp">*</span><span class="n">n</span> <span class="bp">=</span> <span class="mi">2</span><span class="bp">*</span><span class="n">l</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+<span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">intro</span> <span class="n">n</span><span class="o">,</span>
+    <span class="n">intro</span> <span class="n">p</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="n">p</span> <span class="k">with</span> <span class="n">k</span> <span class="n">p</span><span class="o">,</span>
+    <span class="n">use</span> <span class="mi">2</span><span class="bp">*</span><span class="n">k</span><span class="err">^</span><span class="mi">2</span><span class="bp">+</span><span class="mi">2</span><span class="bp">*</span><span class="n">k</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">p</span><span class="o">,</span>
+    <span class="n">simp</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="186790644"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186790644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186790644">Johan Commelin (Jan 28 2020 at 15:03)</a>:</h4>
+<p>I don't think <code>simp</code> will do that for you. But <code>ring</code> should.</p>
+
+<a name="186790671"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186790671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186790671">Alex Kontorovich (Jan 28 2020 at 15:03)</a>:</h4>
+<p>Yes! Works! Thanks that's great!</p>
+
+<a name="186790688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/186790688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#186790688">Johan Commelin (Jan 28 2020 at 15:03)</a>:</h4>
+<p>You might need <code>import tactic</code> at the top of your file.</p>
+
 
 {% endraw %}
 
