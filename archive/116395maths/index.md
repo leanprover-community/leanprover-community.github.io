@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [induction generalizing](17261inductiongeneralizing.html) (19 messages, latest: Jan 28 2020 at 21:37)
+* [Lean for the curious mathematician](84968Leanforthecuriousmathematician.html) (10 messages, latest: Jan 28 2020 at 22:15)
 
-* [Lean for the curious mathematician](84968Leanforthecuriousmathematician.html) (9 messages, latest: Jan 28 2020 at 21:11)
+* [induction generalizing](17261inductiongeneralizing.html) (20 messages, latest: Jan 28 2020 at 22:00)
 
 * [set.finite.fintype](98503setfinitefintype.html) (2 messages, latest: Jan 28 2020 at 17:15)
 
