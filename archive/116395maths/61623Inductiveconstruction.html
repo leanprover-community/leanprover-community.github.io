@@ -183,6 +183,35 @@ Here's where I'm at so far</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inductive%20construction/near/186766040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61623Inductiveconstruction.html#186766040">Alistair Tucker (Jan 28 2020 at 09:35)</a>:</h4>
 <p>Anyway it would be great to see this in mathlib</p>
 
+<a name="186769596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inductive%20construction/near/186769596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61623Inductiveconstruction.html#186769596">Bhavik Mehta (Jan 28 2020 at 10:29)</a>:</h4>
+<blockquote>
+<p>Alternative method. We need to unify <code>set.infinite</code> and <code>infinite</code> for types</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">denumerable</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">finite</span>
+
+<span class="n">def</span> <span class="n">seq</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_pred</span> <span class="n">s</span><span class="o">]</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">set</span><span class="bp">.</span><span class="n">infinite</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">denumerable</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="bp">@</span><span class="n">denumerable</span><span class="bp">.</span><span class="n">of_encodable_of_infinite</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">⟨λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">hs</span> <span class="bp">⟨</span><span class="n">h</span><span class="bp">⟩⟩</span>
+</pre></div>
+
+
+</blockquote>
+<p>Sure, I realise we can get other formalisations of the statement, but I'm asking about how to formalise the proof idea. For instance, the same mathematical proof immediately adapts to show</p>
+<div class="codehilite"><pre><span></span><span class="bp">∃</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">a</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">i</span> <span class="n">j</span><span class="o">,</span> <span class="n">i</span> <span class="bp">&lt;</span> <span class="n">j</span> <span class="bp">→</span> <span class="n">a</span> <span class="n">i</span> <span class="bp">&lt;</span> <span class="n">a</span> <span class="n">j</span><span class="o">)</span>
+</pre></div>
+
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="bp">∃</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">a</span> <span class="n">i</span> <span class="bp">-</span> <span class="mi">10</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">i</span> <span class="n">j</span><span class="o">,</span> <span class="n">i</span> <span class="bp">&lt;</span> <span class="n">j</span> <span class="bp">→</span> <span class="n">a</span> <span class="n">i</span> <span class="bp">&lt;</span> <span class="n">a</span> <span class="n">j</span> <span class="bp">+</span> <span class="mi">25</span><span class="o">)</span>
+</pre></div>
+
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="bp">∃</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">a</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">i</span> <span class="n">j</span><span class="o">,</span> <span class="n">i</span> <span class="bp">&lt;</span> <span class="n">j</span> <span class="bp">→</span> <span class="o">(</span><span class="n">a</span> <span class="n">i</span><span class="o">)</span><span class="err">^</span><span class="mi">2</span> <span class="bp">&lt;</span> <span class="n">a</span> <span class="n">j</span><span class="o">)</span>
+</pre></div>
+
+
+<p>but I don't see how to use <code>denumerable</code> to get these - whereas it appears <code>crec'</code> does adapt nicely to these cases</p>
+
 
 {% endraw %}
 
