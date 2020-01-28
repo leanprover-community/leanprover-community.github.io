@@ -162,6 +162,32 @@ The final result is that from outside the private module, everything you can see
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186826613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186826613">Mario Carneiro (Jan 28 2020 at 20:43)</a>:</h4>
 <p>Is there an analogue of the Lean output format for Coq?</p>
 
+<a name="186831409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186831409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186831409">Gaëtan Gilbert (Jan 28 2020 at 21:33)</a>:</h4>
+<p>Coq -&gt; Lean is way harder due to universe cumulativity (I wouldn't be surprised if it's impossible)<br>
+Other universe issues:</p>
+<ul>
+<li>non recursively uniform parameters (AFAICT translating them to regular indices only changes the universe of the inductive)</li>
+<li>template universe polymorphism (a predecessor of universe polymorphism, kinda underspecified, it has caused repeated inconsistencies but hasn't been removed because it's still in use everywhere through sigma types and list and so on)</li>
+</ul>
+<p>If you get past universe issues you also have</p>
+<ul>
+<li>your pattern matching to eliminator elaboration must be as strong as the termination condition implemented in Coq (not sure how hard this is, I'm not an expert on the termination checker)</li>
+<li>mutual and nested inductives (I think Lean already has some system to deal with those?) </li>
+<li>modules. You could just reduce functor applications and treat the resulting flat modules as namespaces (AFAIK the checker does something like that). If module aliases or Include are used you will not have a fun time.</li>
+</ul>
+<p>Less used:</p>
+<ul>
+<li>records with definitional eta (not used in Coq's stdlib)</li>
+<li>coinductives (not used much afaik)</li>
+<li>primitive integers and floats (also not used much afaik)</li>
+</ul>
+<p>No output format, parsing vo files while ignoring non-kernel stuff may be feasible if you tie yourself to a specific Coq version.</p>
+
+<a name="186831569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186831569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186831569">Gaëtan Gilbert (Jan 28 2020 at 21:35)</a>:</h4>
+<p>PS maybe using serapi or a custom plugin one could get a reasonable output format</p>
+
 
 {% endraw %}
 
