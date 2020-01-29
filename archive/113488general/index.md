@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [@\[congr\]](50322congr.html) (4 messages, latest: Jan 29 2020 at 09:10)
+
 * [Consistency strength of different theorem provers](39955Consistencystrengthofdifferenttheoremprovers.html) (3 messages, latest: Jan 29 2020 at 08:57)
 
 * [Coq as a lean type checker](81552Coqasaleantypechecker.html) (35 messages, latest: Jan 29 2020 at 07:29)
 
 * [Parsing a string into an expression](93510Parsingastringintoanexpression.html) (16 messages, latest: Jan 29 2020 at 06:41)
-
-* [@\[congr\]](50322congr.html) (3 messages, latest: Jan 29 2020 at 05:26)
 
 * [Sort* vs Type*](77480SortvsType.html) (8 messages, latest: Jan 29 2020 at 03:51)
 
