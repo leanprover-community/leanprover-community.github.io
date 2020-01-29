@@ -73,6 +73,7 @@ Don't forget to also follow the instructions on [Lean Projects](https://github.c
 * [Official list of publications](https://leanprover.github.io/publications/)
 
 ### Papers about Lean
+* Daniel Selsam, Sebastian Ullrich, and Leonardo de Moura. [*Tabled Typeclass Resolution.*](https://arxiv.org/pdf/2001.04301.pdf) arXiv 2020.
 * Mario Carneiro. [*The Type Theory of Lean.*](https://github.com/digama0/lean-type-theory/releases) Master thesis, 2019.
   * Meta-theoretic properties of Lean 3, including soundness.
 * Sebastian Ullrich, Leonardo de Moura. [*Counting Immutable Beans: Reference Counting Optimized for Purely Functional Programming.*](https://arxiv.org/abs/1908.05647) preprint 2019.
