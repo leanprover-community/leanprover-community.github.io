@@ -215,6 +215,31 @@ Other universe issues:</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186862131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186862131">Johan Commelin (Jan 29 2020 at 07:29)</a>:</h4>
 <p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> You're getting some indirect credit. See the first comment.</p>
 
+<a name="186883196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186883196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186883196">Gaëtan Gilbert (Jan 29 2020 at 13:05)</a>:</h4>
+<p>Updated stdlib stats after fixing the issue examplified by <code>two_pos</code> (we need to check for proof irrelevance before comparing structurally):</p>
+<p>Lean Import with 10s timeout, set upfront instances and set conv check:<br>
+320s, 1GB RAM<br>
+vo size 111MB<br>
+11 skips (3 timeout, 8 not instantiated)</p>
+<p>The timeouts are <code>bla.equations._eqn_1</code>, where <code>bla</code> in</p>
+<ul>
+<li><code>tactic.delta_config.max_steps._default</code></li>
+<li><code>char.of_nat</code></li>
+<li><code>simp.default_max_steps</code><br>
+These all involve moderately sized integers (<code>of_nat</code> through <code>char.is_valid</code>)</li>
+</ul>
+<p>I actually already did a hack for <code>std.prec.max.equations._eqn_1</code>, setting <code>prec.max</code> to the <code>Expand</code> reduction strategy (when comparing 2 applied constants we need to decide which one we try to reduce first, <code>Expand</code> is the most eager strategy). That may be correct for the <code>max_steps</code> but doesn't seem right for <code>of_nat</code>.<br>
+What does Lean do here?</p>
+
+<a name="186883738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186883738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186883738">Mario Carneiro (Jan 29 2020 at 13:12)</a>:</h4>
+<p>Lean unfolds the definition with the largest definitional height, which I believe is the max of the definitional heights of all referenced definitions, plus one</p>
+
+<a name="186883916"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%20as%20a%20lean%20type%20checker/near/186883916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81552Coqasaleantypechecker.html#186883916">Mario Carneiro (Jan 29 2020 at 13:14)</a>:</h4>
+<p>Looking at <code>char.of_nat</code>, I see no expensive unfolding at all</p>
+
 
 {% endraw %}
 

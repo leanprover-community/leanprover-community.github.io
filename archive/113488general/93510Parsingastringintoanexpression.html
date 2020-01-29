@@ -105,6 +105,34 @@ do
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186860041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186860041">Mario Carneiro (Jan 29 2020 at 06:41)</a>:</h4>
 <p>I don't think it is possible to use <code>with_input</code> when using <code>lean --run</code></p>
 
+<a name="186885285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186885285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186885285">Jason Rute (Jan 29 2020 at 13:31)</a>:</h4>
+<p>So this:</p>
+<div class="codehilite"><pre><span></span>meta def experiment (s : string) : lean.parser unit :=
+do
+   pe &lt;- lean.parser.with_input interactive.types.texpr s,
+   e &lt;- lean.parser.of_tactic (tactic.to_expr pe.1),
+   v &lt;- lean.parser.of_tactic (tactic.mk_meta_var e),
+   gs &lt;- lean.parser.of_tactic (tactic.get_goals),
+   lean.parser.of_tactic (tactic.set_goals $ v :: gs),
+   t &lt;- lean.parser.of_tactic tactic.target,
+   lean.parser.of_tactic (tactic.trace t),
+   return ()
+
+run_cmd experiment &quot;true&quot;
+</pre></div>
+
+
+<p>is giving me an error at <code>run_cmd</code>: "vm check failed: dynamic_cast&lt;vm_State*&gt;(to_external(o)) (possibly due to incorrect axioms, or sorry)".  Maybe this is related to what Mario was talking about about not being able to use <code>lean.parser.with_input</code> with <code>lean --run</code>.</p>
+
+<a name="186885835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186885835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186885835">Sebastian Ullrich (Jan 29 2020 at 13:38)</a>:</h4>
+<p>That's a bug, <code>run_cmd</code> should only accept <code>tactic</code>s. <code>lean.parser</code> cannot be used outside of user-defined parser extensions (notations/commands/tactic params).</p>
+
+<a name="186886175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186886175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186886175">Jason Rute (Jan 29 2020 at 13:42)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> Can you point me to examples of what you mean by "the <code>parse</code> syntax" or using <code>user_command</code>?  (Or does Mario's comment mean what I want to do is ultimately doomed to fail?)</p>
+
 
 {% endraw %}
 

@@ -9,15 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Consistency strength of different theorem provers](39955Consistencystrengthofdifferenttheoremprovers.html) (20 messages, latest: Jan 29 2020 at 11:37)
+* [Parsing a string into an expression](93510Parsingastringintoanexpression.html) (19 messages, latest: Jan 29 2020 at 13:42)
+
+* [Consistency strength of different theorem provers](39955Consistencystrengthofdifferenttheoremprovers.html) (23 messages, latest: Jan 29 2020 at 13:28)
+
+* [Coq as a lean type checker](81552Coqasaleantypechecker.html) (38 messages, latest: Jan 29 2020 at 13:14)
 
 * [cpp 2020](79240cpp2020.html) (10 messages, latest: Jan 29 2020 at 11:28)
 
 * [@\[congr\]](50322congr.html) (4 messages, latest: Jan 29 2020 at 09:10)
-
-* [Coq as a lean type checker](81552Coqasaleantypechecker.html) (35 messages, latest: Jan 29 2020 at 07:29)
-
-* [Parsing a string into an expression](93510Parsingastringintoanexpression.html) (16 messages, latest: Jan 29 2020 at 06:41)
 
 * [Sort* vs Type*](77480SortvsType.html) (8 messages, latest: Jan 29 2020 at 03:51)
 
