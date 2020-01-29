@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [@\[congr\]](50322congr.html) (4 messages, latest: Jan 29 2020 at 09:10)
+* [Consistency strength of different theorem provers](39955Consistencystrengthofdifferenttheoremprovers.html) (20 messages, latest: Jan 29 2020 at 11:37)
 
-* [Consistency strength of different theorem provers](39955Consistencystrengthofdifferenttheoremprovers.html) (3 messages, latest: Jan 29 2020 at 08:57)
+* [cpp 2020](79240cpp2020.html) (10 messages, latest: Jan 29 2020 at 11:28)
+
+* [@\[congr\]](50322congr.html) (4 messages, latest: Jan 29 2020 at 09:10)
 
 * [Coq as a lean type checker](81552Coqasaleantypechecker.html) (35 messages, latest: Jan 29 2020 at 07:29)
 
@@ -34,8 +36,6 @@ permalink: archive/113488general/index.html
 * [Reduction rule when declaring structure](03826Reductionrulewhendeclaringstructure.html) (28 messages, latest: Jan 27 2020 at 11:00)
 
 * [Lean in the wild](43625Leaninthewild.html) (418 messages, latest: Jan 26 2020 at 18:58)
-
-* [cpp 2020](79240cpp2020.html) (6 messages, latest: Jan 25 2020 at 13:32)
 
 * [huge term trees](96965hugetermtrees.html) (53 messages, latest: Jan 25 2020 at 10:49)
 
