@@ -74,6 +74,29 @@ permalink: archive/113488general/93510Parsingastringintoanexpression.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186855612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186855612">Jason Rute (Jan 29 2020 at 04:32)</a>:</h4>
 <p>Sure, but I will warn you <span class="user-mention" data-user-id="223495">@Tim Daly</span> that I am a hobbist, so I might not get around to it too quickly (or I might wake up tomorrow and want to give it a try :) ).</p>
 
+<a name="186858153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186858153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186858153">Jason Rute (Jan 29 2020 at 05:48)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> I got this far, but I think I am mixing the <code>parser</code> and <code>tactic</code> monads.  Do you know what I need to do here?</p>
+<div class="codehilite"><pre><span></span>def experiment (s : string) : lean.parser unit :=
+do
+   pe &lt;- lean.parser.with_input interactive.types.texpr s,  -- parser monad
+   e &lt;- to_expr pe.1,  -- tactic monad
+   v &lt;- mk_meta_var e,
+   gs &lt;- get_goals,
+   set_goals $ v :: gs,
+   t &lt;- target,
+   trace t,  -- should output the goal given by the string s
+   return ()
+</pre></div>
+
+<a name="186858223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186858223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186858223">Jason Rute (Jan 29 2020 at 05:51)</a>:</h4>
+<p><span class="user-mention" data-user-id="223495">@Tim Daly</span> You might be interested also in <a href="#narrow/stream/219941-Machine-Learning.20for.20Theorem.20Proving/topic/ML.20for.20Lean.3A.20How.20to.20do.20it.3F" title="#narrow/stream/219941-Machine-Learning.20for.20Theorem.20Proving/topic/ML.20for.20Lean.3A.20How.20to.20do.20it.3F">this thread</a>.  For example, I made <a href="https://github.com/jasonrute/communicating-with-lean/blob/master/communicate_with_lean.ipynb" target="_blank" title="https://github.com/jasonrute/communicating-with-lean/blob/master/communicate_with_lean.ipynb">a python prototype</a> of communicating with Lean using the Lean server.</p>
+
+<a name="186858352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186858352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186858352">Simon Hudon (Jan 29 2020 at 05:55)</a>:</h4>
+<p>Yes, that's a very annoying separation when you need to invoke the parser. You can invoke tactic from parser but not the other way around. Figuring out how to get the user to call your automation can be tricky. If you only want to call tactic from parser, you can use <code>lean.parser.of_tactic</code></p>
+
 
 {% endraw %}
 

@@ -341,6 +341,16 @@ This takes consistently about .1 seconds which is REALLY slow for this sort of s
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186843896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186843896">Minchao Wu (Jan 29 2020 at 00:01)</a>:</h4>
 <p>We also called the virtual file "dummy.lean" :-)</p>
 
+<a name="186857523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186857523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186857523">Jason Rute (Jan 29 2020 at 05:30)</a>:</h4>
+<p>Thank you <span class="user-mention" data-user-id="110187">@Minchao Wu</span> !  Your code has been very helpful, but it also points out a number of subtle flaws in my current implementation.  I was too quick to claim victory. :(</p>
+<ul>
+<li>I don't handle universes, so if I try to put in the goal <code>Π {α : Sort u} {a : α} {p : α → Sort v} {b : α}, a == b → p a → p b</code>, Lean will complain about <code>u</code> and <code>v</code>.  I could store the universes with the goal, and use a section to enter them, so that isn't a huge deal-breaker.</li>
+<li>Lean's pretty printed goal output is not necessarily valid lean code.  Example, this is the Lean pretty printed theorem, but <code>∀ (s : list char), string.mk_iterator {data := s} = {fst := list.nil char, snd := s}</code> is not valid Lean.  The problem is that in <code>list.nil char</code>, the <code>char</code> is implicit (the type of <code>list.nil</code> is <code>Π {T : Type}, list T</code>).  I would have to know to enter it as <code>@list.nil char</code> or know that the <code>char</code> can be inferred.  Similarly, <code>and.symm = and.swap</code> isn't valid Lean.  It needs to be <code>∀ a b : Prop, @and.symm a b = @and.swap a b</code></li>
+<li>Without knowing the theorems exact place, Lean can't fill in type classes.  For example, if I try to enter <code>∀ (c : Prop) [_inst_1 : decidable c] (a b : ordering), ite c a b = ordering.gt = ite c (a = ordering.gt) (b = ordering.gt)</code> I get complaints about "failed to synthesize type class instance [...]".</li>
+<li>This isn't a problem with my app, but it should be noted that auto-generated equation theorems for definitions and type class instances get outputted in the dump.  For example,<code> ∀ {α : Type u₁} {β : Type u₂} (a : α) (b : β), combinator.K a b = a</code> and <code>∀ {α : Type u}, list.has_append = {append := list.append α}</code>.  They aren't really something that is "provable" except using themselves.  At least <code>refl</code> solves them.</li>
+</ul>
+
 
 {% endraw %}
 
