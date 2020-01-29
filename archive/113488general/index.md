@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Sort* vs Type*](77480SortvsType.html) (4 messages, latest: Jan 28 2020 at 23:40)
+* [Coq as a lean type checker](81552Coqasaleantypechecker.html) (33 messages, latest: Jan 29 2020 at 01:16)
+
+* [Sort* vs Type*](77480SortvsType.html) (6 messages, latest: Jan 29 2020 at 01:13)
 
 * [Normalization fails in lean](41870Normalizationfailsinlean.html) (29 messages, latest: Jan 28 2020 at 23:21)
-
-* [Coq as a lean type checker](81552Coqasaleantypechecker.html) (32 messages, latest: Jan 28 2020 at 22:57)
 
 * [github actions](76245githubactions.html) (39 messages, latest: Jan 28 2020 at 21:46)
 
