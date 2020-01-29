@@ -297,6 +297,46 @@ This takes consistently about .1 seconds which is REALLY slow for this sort of s
 </blockquote>
 <p>On that note, are these the default config on the docker image?</p>
 
+<a name="186839725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186839725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186839725">Jason Rute (Jan 28 2020 at 23:05)</a>:</h4>
+<p>Ok, for those interested, here is a <a href="https://github.com/jasonrute/communicating-with-lean/blob/master/communicate_with_lean.ipynb" target="_blank" title="https://github.com/jasonrute/communicating-with-lean/blob/master/communicate_with_lean.ipynb">prototype of communicating with Lean via the Lean Server from an external program</a>.    It looks like it is possible to implement a Lean version of HOList's <code>ApplyTactic</code> request.  I think the next step would be to see if we can get a list of all Lean theorems and if we can plug them into this interface (specifically see if we can run the do-nothing <code>skip</code> tactic on the theorem goal).  I'm not entirely happy with how this turned out.  The Lean server is really not intended for this purpose and had to be fought with a lot, but I think it works now (if a bit slowly).</p>
+
+<a name="186840485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186840485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186840485">Jason Rute (Jan 28 2020 at 23:15)</a>:</h4>
+<p>Also, if anyone is interested in using the Lean server for another purpose (other than a text editor/IDE) I hope this would give them inspiration.</p>
+
+<a name="186840703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186840703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186840703">Jason Rute (Jan 28 2020 at 23:19)</a>:</h4>
+<p><span class="user-mention" data-user-id="116045">@Jesse Michael Han</span> I think you told me you can get a List of all theorems from the environment.  How does one do this?</p>
+
+<a name="186840788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186840788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186840788">Scott Morrison (Jan 28 2020 at 23:20)</a>:</h4>
+<p>Don't have time to go into detail now, but look at the implementation of <code>library_search</code>, which does exactly this.</p>
+
+<a name="186841186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186841186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186841186">Minchao Wu (Jan 28 2020 at 23:27)</a>:</h4>
+<p>You can also find similar implementation in our Mathematica-Lean link repo</p>
+
+<a name="186841188"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186841188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186841188">Minchao Wu (Jan 28 2020 at 23:27)</a>:</h4>
+<p><a href="https://github.com/minchaowu/mm-lean/blob/master/src/dump.lean" target="_blank" title="https://github.com/minchaowu/mm-lean/blob/master/src/dump.lean">https://github.com/minchaowu/mm-lean/blob/master/src/dump.lean</a></p>
+
+<a name="186841353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186841353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186841353">Minchao Wu (Jan 28 2020 at 23:30)</a>:</h4>
+<p>By the way, we’ve done similar things (i.e., an interface with experimental RL results) to HOL4, which is to appear in this year’s AITP.</p>
+
+<a name="186843148"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186843148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186843148">Jason Rute (Jan 28 2020 at 23:54)</a>:</h4>
+<p>Oh cool.  I look forward to reading all the slides and abstracts from AITP this year.</p>
+
+<a name="186843368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186843368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186843368">Jason Rute (Jan 28 2020 at 23:56)</a>:</h4>
+<p>Also, <span class="user-mention" data-user-id="110187">@Minchao Wu</span>, did you interface with Mathematica in a similar way to how I did it above?  You used the lean server, right?</p>
+
+<a name="186843645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186843645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186843645">Minchao Wu (Jan 28 2020 at 23:59)</a>:</h4>
+<p>Yes, it works the same way as I can see from you repo, except that there is no python scripts involved. The Lean server subprocess is handled directly by Mathematica.</p>
+
 
 {% endraw %}
 

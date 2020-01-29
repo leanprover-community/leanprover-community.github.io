@@ -256,6 +256,20 @@ ie</p>
 <p>Just came across this: <a href="https://www.youtube.com/watch?v=rhNea8VlWcA" target="_blank" title="https://www.youtube.com/watch?v=rhNea8VlWcA">Cedille Cast #9: Impredicativity, proof-irrelevance, and normalization</a></p>
 <div class="youtube-video message_inline_image"><a data-id="rhNea8VlWcA" href="https://www.youtube.com/watch?v=rhNea8VlWcA" target="_blank" title="https://www.youtube.com/watch?v=rhNea8VlWcA"><img src="https://i.ytimg.com/vi/rhNea8VlWcA/default.jpg"></a></div>
 
+<a name="186840845"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Normalization%20fails%20in%20lean/near/186840845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41870Normalizationfailsinlean.html#186840845">Chris Hughes (Jan 28 2020 at 23:21)</a>:</h4>
+<p>No idea if this is related or interesting, but I stumbled upon this failing to reduce as well. It reduces if I replace <code>false</code> with <code>empty</code>.</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">not&#39;</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">false</span>
+
+<span class="kn">prefix</span> <span class="bp">`</span> <span class="bp">¬</span><span class="err">&#39;</span> <span class="bp">`</span><span class="o">:</span><span class="mi">40</span> <span class="o">:=</span> <span class="n">not&#39;</span>
+
+<span class="n">def</span> <span class="n">X</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">:</span> <span class="bp">¬</span><span class="err">&#39;</span> <span class="bp">¬</span><span class="err">&#39;</span> <span class="o">(</span><span class="bp">¬</span><span class="err">&#39;</span> <span class="bp">¬</span><span class="err">&#39;</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">p</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">h</span> <span class="o">:</span> <span class="bp">¬</span><span class="err">&#39;</span> <span class="o">(</span><span class="bp">¬</span><span class="err">&#39;</span> <span class="bp">¬</span><span class="err">&#39;</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">p</span><span class="o">),</span>
+<span class="n">h</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hnnp</span><span class="o">,</span> <span class="o">(</span><span class="n">hnnp</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hp</span> <span class="o">:</span> <span class="n">p</span><span class="o">,</span> <span class="n">h</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hnnp</span><span class="o">,</span> <span class="n">hp</span><span class="o">)))</span><span class="bp">.</span><span class="n">elim</span><span class="o">)</span>
+
+<span class="bp">#</span><span class="n">reduce</span> <span class="n">X</span>
+</pre></div>
+
 
 {% endraw %}
 

@@ -1,0 +1,34 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/77480SortvsType.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/77480SortvsType.html">Sort* vs Type*</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186841940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Sort%2A%20vs%20Type%2A/near/186841940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77480SortvsType.html#186841940">Yury G. Kudryashov (Jan 28 2020 at 23:38)</a>:</h4>
+<p>Why do we have, e.g., <code>psigma</code> and <code>sigma</code>? Is there any situation where <code>psigma</code> can't be used instead of <code>sigma</code>? Same question for other similar pairs.</p>
+
+<a name="186841967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Sort%2A%20vs%20Type%2A/near/186841967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77480SortvsType.html#186841967">Yury G. Kudryashov (Jan 28 2020 at 23:39)</a>:</h4>
+<p>I understand that the standard library is written with <code>sigma</code> here and there. I don't understand whether something will fail if we replace <code>sigma</code> with <code>psigma</code> everywhere.</p>
+
+<a name="186842049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Sort%2A%20vs%20Type%2A/near/186842049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77480SortvsType.html#186842049">Floris van Doorn (Jan 28 2020 at 23:40)</a>:</h4>
+<p>Lean cannot always figure out what universe levels you want when using <code>psigma</code>. For example,you might get constraints like <code>max 1 ?u =?= 1</code>, where Lean cannot possibly know whether you want <code>?u</code> to be 0 or 1.</p>
+
+<a name="186842070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Sort%2A%20vs%20Type%2A/near/186842070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77480SortvsType.html#186842070">Floris van Doorn (Jan 28 2020 at 23:40)</a>:</h4>
+<p>So even thought <code>psigma</code> is more general than <code>sigma</code>, <code>sigma</code> requires less universe annotations.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

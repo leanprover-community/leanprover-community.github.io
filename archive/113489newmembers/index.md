@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Local/city threads](73023Localcitythreads.html) (6 messages, latest: Jan 28 2020 at 21:17)
+* [Local/city threads](73023Localcitythreads.html) (7 messages, latest: Jan 28 2020 at 23:47)
 
 * [noob question(s)](52075noobquestions.html) (1701 messages, latest: Jan 28 2020 at 16:38)
 

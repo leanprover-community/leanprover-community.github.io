@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Sort* vs Type*](77480SortvsType.html) (4 messages, latest: Jan 28 2020 at 23:40)
+
+* [Normalization fails in lean](41870Normalizationfailsinlean.html) (29 messages, latest: Jan 28 2020 at 23:21)
+
 * [Coq as a lean type checker](81552Coqasaleantypechecker.html) (32 messages, latest: Jan 28 2020 at 22:57)
 
 * [github actions](76245githubactions.html) (39 messages, latest: Jan 28 2020 at 21:46)
@@ -250,8 +254,6 @@ permalink: archive/113488general/index.html
 * [visualizations](70566visualizations.html) (68 messages, latest: Dec 04 2019 at 16:25)
 
 * [How do you use Lean at command line?](78951HowdoyouuseLeanatcommandline.html) (11 messages, latest: Dec 03 2019 at 23:26)
-
-* [Normalization fails in lean](41870Normalizationfailsinlean.html) (28 messages, latest: Dec 03 2019 at 21:35)
 
 * [Creating many representations for the same thing.](13087Creatingmanyrepresentationsforthesamething.html) (5 messages, latest: Dec 03 2019 at 06:40)
 
