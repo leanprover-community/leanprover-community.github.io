@@ -55,6 +55,26 @@ permalink: archive/116395maths/98503setfinitefintype.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set.finite.fintype/near/186804089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98503setfinitefintype.html#186804089">Yury G. Kudryashov (Jan 28 2020 at 17:15)</a>:</h4>
 <p>I think it should</p>
 
+<a name="186844188"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set.finite.fintype/near/186844188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98503setfinitefintype.html#186844188">Reid Barton (Jan 29 2020 at 00:06)</a>:</h4>
+<p>We could detect this with a linter, right? <code>hs</code> is not a type class argument (and <code>finite</code> is not even a class--does this matter?) and nothing depends on <code>hs</code> so there is no way it could ever be inferred, either.</p>
+
+<a name="186844358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set.finite.fintype/near/186844358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98503setfinitefintype.html#186844358">Mario Carneiro (Jan 29 2020 at 00:09)</a>:</h4>
+<p>I like the idea of checking this with a linter. It can definitely be done</p>
+
+<a name="186844437"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set.finite.fintype/near/186844437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98503setfinitefintype.html#186844437">Mario Carneiro (Jan 29 2020 at 00:10)</a>:</h4>
+<p>it does matter that <code>finite</code> is not a class</p>
+
+<a name="186844575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set.finite.fintype/near/186844575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98503setfinitefintype.html#186844575">Mario Carneiro (Jan 29 2020 at 00:13)</a>:</h4>
+<p>The simplest way to make the linter work is to create a replica of the instance type and try to prove it by <code>apply_instance</code></p>
+
+<a name="186844691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set.finite.fintype/near/186844691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98503setfinitefintype.html#186844691">Mario Carneiro (Jan 29 2020 at 00:15)</a>:</h4>
+<p>this might have false negatives for "transitivity" instances like <code>foo A B -&gt; foo B C -&gt; foo A C</code> (which should be discouraged)</p>
+
 
 {% endraw %}
 
