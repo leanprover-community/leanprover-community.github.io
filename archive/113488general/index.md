@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Coq as a lean type checker](81552Coqasaleantypechecker.html) (35 messages, latest: Jan 29 2020 at 07:29)
+
 * [Parsing a string into an expression](93510Parsingastringintoanexpression.html) (16 messages, latest: Jan 29 2020 at 06:41)
 
 * [@\[congr\]](50322congr.html) (3 messages, latest: Jan 29 2020 at 05:26)
 
 * [Sort* vs Type*](77480SortvsType.html) (8 messages, latest: Jan 29 2020 at 03:51)
-
-* [Coq as a lean type checker](81552Coqasaleantypechecker.html) (33 messages, latest: Jan 29 2020 at 01:16)
 
 * [Normalization fails in lean](41870Normalizationfailsinlean.html) (29 messages, latest: Jan 28 2020 at 23:21)
 

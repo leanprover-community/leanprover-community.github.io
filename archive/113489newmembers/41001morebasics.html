@@ -191,6 +191,80 @@ permalink: archive/113489newmembers/41001morebasics.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/186729050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#186729050">Kevin Buzzard (Jan 27 2020 at 21:40)</a>:</h4>
 <p>I am pretty sure that such a thing is undecidable!</p>
 
+<a name="186861142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/186861142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#186861142">Iocta (Jan 29 2020 at 07:08)</a>:</h4>
+<p>Am I on the right track?</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">classical</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">↔</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">iff</span><span class="bp">.</span><span class="n">intro</span>
+<span class="o">(</span><span class="k">assume</span> <span class="n">p_all_x</span> <span class="n">exists_npx</span><span class="o">,</span>
+  <span class="n">exists</span><span class="bp">.</span><span class="n">elim</span>
+    <span class="n">exists_npx</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">hnpa</span><span class="o">,</span>
+      <span class="k">have</span> <span class="n">hpa</span><span class="o">:</span> <span class="n">p</span> <span class="n">a</span><span class="o">,</span> <span class="k">from</span>  <span class="n">p_all_x</span> <span class="n">a</span><span class="o">,</span>
+      <span class="n">absurd</span> <span class="n">hpa</span> <span class="n">hnpa</span> <span class="o">))</span>
+<span class="o">(</span><span class="k">assume</span> <span class="n">exists_npx</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">or</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">em</span>  <span class="o">(</span><span class="n">p</span> <span class="n">a</span><span class="o">))</span>
+  <span class="n">id</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">hnpa</span><span class="o">,</span> <span class="bp">_</span><span class="o">))</span>
+</pre></div>
+
+<a name="186861463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/186861463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#186861463">Kevin Buzzard (Jan 29 2020 at 07:14)</a>:</h4>
+<p>Well you're not using tactic mode so you're already at a big disadvantage</p>
+
+<a name="186861496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/186861496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#186861496">Kevin Buzzard (Jan 29 2020 at 07:15)</a>:</h4>
+<p>I'm not at lean right now but if you post the local context at the underscore (the assumptions and goal) it should be easy to see whether or not the hole is fillable</p>
+
+<a name="186861593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/186861593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#186861593">Iocta (Jan 29 2020 at 07:18)</a>:</h4>
+<div class="codehilite"><pre><span></span> <span class="mi">04</span><span class="n">e</span><span class="bp">.</span><span class="n">lean</span>    <span class="mi">60</span>  <span class="mi">12</span> <span class="n">error</span>           <span class="n">don&#39;t</span> <span class="n">know</span> <span class="n">how</span> <span class="n">to</span> <span class="n">synthesize</span> <span class="n">placeholder</span>
+ <span class="kn">context</span><span class="o">:</span>
+ <span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">,</span>
+ <span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">,</span>
+ <span class="n">exists_npx</span> <span class="o">:</span> <span class="bp">¬∃</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="bp">¬</span><span class="n">p</span> <span class="n">x</span><span class="o">,</span>
+ <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span>
+ <span class="n">hnpa</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">p</span> <span class="n">a</span>
+ <span class="err">⊢</span> <span class="n">p</span> <span class="n">a</span> <span class="o">(</span><span class="n">lean</span><span class="bp">-</span><span class="n">checker</span><span class="o">)</span>
+</pre></div>
+
+<a name="186861647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/186861647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#186861647">Johan Commelin (Jan 29 2020 at 07:19)</a>:</h4>
+<p>How would you prove it in maths?</p>
+
+<a name="186862052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/186862052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#186862052">Kevin Buzzard (Jan 29 2020 at 07:27)</a>:</h4>
+<p>Yeah -- the hole is fillable but as Johan says you need to know where you're going.</p>
+
+<a name="186862129"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/186862129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#186862129">Kevin Buzzard (Jan 29 2020 at 07:29)</a>:</h4>
+<p>and it would be a little easier to fill it in tactic mode. Are you using Lean in a funny way? I'd be tempted to just type "begin end" in place of that underscore. Are you not using Lean "live"?</p>
+
+<a name="186862307"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/186862307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#186862307">Iocta (Jan 29 2020 at 07:33)</a>:</h4>
+<p>I have emacs running lean-mode with flycheck, not sure if that's normal</p>
+
+<a name="186862400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/186862400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#186862400">Iocta (Jan 29 2020 at 07:35)</a>:</h4>
+<p>I haven't seen begin or end yet. been going through the tutorial. currently at <a href="https://leanprover.github.io/theorem_proving_in_lean/quantifiers_and_equality.html" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/quantifiers_and_equality.html">https://leanprover.github.io/theorem_proving_in_lean/quantifiers_and_equality.html</a></p>
+
+<a name="186862567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/186862567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#186862567">Johan Commelin (Jan 29 2020 at 07:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="253355">@Iocta</span> Honest question: are you a computer scientist or a mathematician? This seems to matter a lot for which style is best when learning Lean.</p>
+
+<a name="186862579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/186862579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#186862579">Johan Commelin (Jan 29 2020 at 07:39)</a>:</h4>
+<p>You are currently learning in CS mode. But there are also tutorials that approach Lean in math mode.</p>
+
+<a name="186862648"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/186862648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#186862648">Johan Commelin (Jan 29 2020 at 07:40)</a>:</h4>
+<p>E.g. <a href="http://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/" target="_blank" title="http://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/">http://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/</a></p>
+
+<a name="186862901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/186862901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#186862901">Iocta (Jan 29 2020 at 07:46)</a>:</h4>
+<p>Oh interesting, I hadn't seen that, will take a look.</p>
+
 
 {% endraw %}
 

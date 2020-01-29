@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [more basics](41001morebasics.html) (40 messages, latest: Jan 29 2020 at 07:46)
+
 * [noob question(s)](52075noobquestions.html) (1704 messages, latest: Jan 29 2020 at 06:33)
 
 * [Local/city threads](73023Localcitythreads.html) (9 messages, latest: Jan 29 2020 at 04:39)
-
-* [more basics](41001morebasics.html) (27 messages, latest: Jan 27 2020 at 21:40)
 
 * [sets in lean](66871setsinlean.html) (3 messages, latest: Jan 26 2020 at 20:56)
 
