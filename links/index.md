@@ -113,7 +113,8 @@ Don't forget to also follow the instructions on [Lean Projects](https://github.c
   * [Formalization](https://github.com/robertylewis/mathematica) / [Website](https://robertylewis.com/leanmm/)
 
 ### Unpublished works using Lean
-* Paul-Nicolas Madelaine. [*Arithmetic and Casting in Lean.*](https://lean-forward.github.io/internships/arithmetic_and_casting_in_lean.pdf). Internship report, 2019.
+* Paul-Nicolas Madelaine. [*Arithmetic and Casting in Lean.*](https://lean-forward.github.io/norm_cast/norm_cast.pdf). 
+  * [Internship report](https://lean-forward.github.io/internships/arithmetic_and_casting_in_lean.pdf), 2019.
   * A description of the [`norm_cast` tactic](https://github.com/leanprover-community/mathlib/blob/master/src/tactic/norm_cast.lean) in mathlib.
 * Neil Strickland, Nicola Bellumat [*Iterated chromatic localisation.*](https://arxiv.org/abs/1907.07801) arXiv 2019.
   * [Formalization](https://github.com/NeilStrickland/itloc)
