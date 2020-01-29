@@ -351,6 +351,31 @@ This takes consistently about .1 seconds which is REALLY slow for this sort of s
 <li>This isn't a problem with my app, but it should be noted that auto-generated equation theorems for definitions and type class instances get outputted in the dump.  For example,<code> ∀ {α : Type u₁} {β : Type u₂} (a : α) (b : β), combinator.K a b = a</code> and <code>∀ {α : Type u}, list.has_append = {append := list.append α}</code>.  They aren't really something that is "provable" except using themselves.  At least <code>refl</code> solves them.</li>
 </ul>
 
+<a name="186859952"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186859952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186859952">Jesse Michael Han (Jan 29 2020 at 06:39)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="116045">Jesse Michael Han</span> I think you told me you can get a List of all theorems from the environment.  How does one do this?</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="115715">@Jason Rute</span>  you can do something like this in Lean (the code in <code>library_search</code> is a bit more specialized, but essentially does the same thing):</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">process_thm</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">declaration</span><span class="o">)</span> <span class="o">:</span> <span class="n">option</span> <span class="n">declaration</span> <span class="o">:=</span>
+<span class="k">let</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">d</span><span class="bp">.</span><span class="n">to_name</span> <span class="k">in</span>
+  <span class="k">if</span> <span class="bp">¬</span> <span class="n">d</span><span class="bp">.</span><span class="n">is_trusted</span> <span class="bp">∨</span> <span class="n">n</span><span class="bp">.</span><span class="n">is_internal</span> <span class="k">then</span> <span class="n">none</span>
+  <span class="k">else</span> <span class="k">match</span> <span class="n">d</span> <span class="k">with</span>
+       <span class="bp">|</span> <span class="n">declaration</span><span class="bp">.</span><span class="n">defn</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">none</span>
+       <span class="bp">|</span> <span class="n">t</span><span class="bp">@</span><span class="o">(</span><span class="n">declaration</span><span class="bp">.</span><span class="n">thm</span> <span class="n">n</span> <span class="n">ns</span> <span class="n">e</span> <span class="n">te</span><span class="o">)</span> <span class="o">:=</span> <span class="n">some</span> <span class="n">t</span>
+       <span class="bp">|</span> <span class="n">declaration</span><span class="bp">.</span><span class="n">cnst</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">none</span>
+       <span class="bp">|</span> <span class="n">declaration</span><span class="bp">.</span><span class="n">ax</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">none</span>
+       <span class="kn">end</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">library_thms</span> <span class="o">:</span> <span class="n">tactic</span> <span class="err">$</span> <span class="n">list</span> <span class="n">declaration</span> <span class="o">:=</span>
+  <span class="n">environment</span><span class="bp">.</span><span class="n">decl_filter_map</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">get_env</span> <span class="bp">&lt;*&gt;</span> <span class="n">return</span> <span class="n">process_thm</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">list_all_theorems</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+  <span class="n">do</span> <span class="n">library_thms</span> <span class="bp">&gt;&gt;=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="o">(</span><span class="n">declaration</span><span class="bp">.</span><span class="n">to_name</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">x</span><span class="o">)</span>
+
+<span class="n">run_cmd</span> <span class="n">list_all_theorems</span>
+</pre></div>
+
 
 {% endraw %}
 
