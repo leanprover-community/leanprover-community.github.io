@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [action of subgroup inference issues](01686actionofsubgroupinferenceissues.html) (7 messages, latest: Jan 29 2020 at 16:59)
+* [continuity](75863continuity.html) (4 messages, latest: Jan 29 2020 at 17:44)
 
-* [continuity](75863continuity.html) (2 messages, latest: Jan 29 2020 at 16:51)
+* [action of subgroup inference issues](01686actionofsubgroupinferenceissues.html) (7 messages, latest: Jan 29 2020 at 16:59)
 
 * [more basics](41001morebasics.html) (41 messages, latest: Jan 29 2020 at 08:19)
 

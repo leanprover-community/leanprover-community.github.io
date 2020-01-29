@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Parsing a string into an expression](93510Parsingastringintoanexpression.html) (20 messages, latest: Jan 29 2020 at 16:59)
+* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (17 messages, latest: Jan 29 2020 at 17:33)
 
-* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (2 messages, latest: Jan 29 2020 at 16:50)
+* [Parsing a string into an expression](93510Parsingastringintoanexpression.html) (24 messages, latest: Jan 29 2020 at 17:16)
 
 * [Coq as a lean type checker](81552Coqasaleantypechecker.html) (39 messages, latest: Jan 29 2020 at 14:17)
 

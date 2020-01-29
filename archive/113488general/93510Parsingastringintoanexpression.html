@@ -137,6 +137,42 @@ run_cmd experiment &quot;true&quot;
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186905676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186905676">Simon Hudon (Jan 29 2020 at 16:59)</a>:</h4>
 <p>While it is fresh, can you file this <code>run_cmd</code> issue? I'd like to make the error message better.</p>
 
+<a name="186905863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186905863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186905863">Simon Hudon (Jan 29 2020 at 17:01)</a>:</h4>
+<p>I wouldn't say your project is doomed. I would only say that you'll have to run your experiment while parsing / elaborating Lean files, not as a Lean program (with a main, etc)</p>
+
+<a name="186906842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186906842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186906842">Simon Hudon (Jan 29 2020 at 17:11)</a>:</h4>
+<p>Now about the <code>user_command</code> idea (which I think is what you need):</p>
+<div class="codehilite"><pre><span></span><span class="n">setup_tactic_parser</span> <span class="c1">-- this is actually a user command too</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">user_command</span><span class="o">]</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">my_command</span> <span class="o">(</span><span class="n">meta_info</span> <span class="o">:</span> <span class="n">decl_meta_info</span><span class="o">)</span> <span class="o">(</span><span class="bp">_</span> <span class="o">:</span> <span class="n">parse</span> <span class="o">(</span><span class="n">tk</span> <span class="s2">&quot;my_command&quot;</span><span class="o">))</span> <span class="o">:</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">parser</span><span class="bp">.</span><span class="n">of_tactic</span> <span class="err">$</span> <span class="n">trace</span> <span class="s2">&quot;hello world&quot;</span>
+<span class="bp">.</span>
+
+<span class="n">my_command</span> <span class="bp">.</span> <span class="c1">-- prints &quot;hello world&quot;</span>
+</pre></div>
+
+<a name="186906944"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186906944" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186906944">Simon Hudon (Jan 29 2020 at 17:12)</a>:</h4>
+<p>Then if you want to user to write in an expression, you can do:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">user_command</span><span class="o">]</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">my_command</span> <span class="o">(</span><span class="n">meta_info</span> <span class="o">:</span> <span class="n">decl_meta_info</span><span class="o">)</span> <span class="o">(</span><span class="bp">_</span> <span class="o">:</span> <span class="n">parse</span> <span class="o">(</span><span class="n">tk</span> <span class="s2">&quot;my_command&quot;</span><span class="o">))</span> <span class="o">:</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">e</span> <span class="bp">&lt;-</span> <span class="n">texpr</span><span class="o">,</span>
+   <span class="n">parser</span><span class="bp">.</span><span class="n">of_tactic</span> <span class="err">$</span> <span class="n">trace</span> <span class="n">e</span>
+<span class="bp">.</span>
+
+<span class="n">my_command</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">.</span> <span class="c1">-- prints &quot;1 + 1&quot;</span>
+</pre></div>
+
+
+<p>(be sure not to forget the <code>.</code>)</p>
+
+<a name="186907328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186907328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186907328">Simon Hudon (Jan 29 2020 at 17:16)</a>:</h4>
+<p>Then you can skip the part where you parse from a string. If you read the string from a file, this is where I would use the <code>with_input</code> trick</p>
+
 
 {% endraw %}
 
