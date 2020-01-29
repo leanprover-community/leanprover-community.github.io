@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [set tactic](99877settactic.html) (3 messages, latest: Jan 29 2020 at 19:18)
+* [irreducible top spaces](60989irreducibletopspaces.html) (37 messages, latest: Jan 29 2020 at 20:39)
 
-* [irreducible top spaces](60989irreducibletopspaces.html) (36 messages, latest: Jan 29 2020 at 19:17)
+* [set tactic](99877settactic.html) (3 messages, latest: Jan 29 2020 at 19:18)
 
 * [Combinatorics](60782Combinatorics.html) (3 messages, latest: Jan 29 2020 at 09:48)
 

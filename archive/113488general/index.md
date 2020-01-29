@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [POPLmark challenge](71850POPLmarkchallenge.html) (5 messages, latest: Jan 29 2020 at 20:28)
+
+* [markdown module docstrings](07338markdownmoduledocstrings.html) (252 messages, latest: Jan 29 2020 at 20:22)
+
 * [moving mathlib to 3.5c](54190movingmathlibto35c.html) (19 messages, latest: Jan 29 2020 at 18:07)
 
 * [Parsing a string into an expression](93510Parsingastringintoanexpression.html) (24 messages, latest: Jan 29 2020 at 17:16)
@@ -164,8 +168,6 @@ permalink: archive/113488general/index.html
 * [tfae formatting](05308tfaeformatting.html) (26 messages, latest: Dec 28 2019 at 09:26)
 
 * [timeout when working with ideal of polynomial ring](30847timeoutwhenworkingwithidealofpolynomialring.html) (79 messages, latest: Dec 28 2019 at 07:07)
-
-* [markdown module docstrings](07338markdownmoduledocstrings.html) (250 messages, latest: Dec 28 2019 at 00:47)
 
 * [apply fails to synthesize type class instance](74812applyfailstosynthesizetypeclassinstance.html) (10 messages, latest: Dec 27 2019 at 10:46)
 
