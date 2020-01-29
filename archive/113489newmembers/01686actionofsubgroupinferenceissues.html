@@ -1,0 +1,50 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/01686actionofsubgroupinferenceissues.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/01686actionofsubgroupinferenceissues.html">action of subgroup inference issues</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186893816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/action%20of%20subgroup%20inference%20issues/near/186893816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01686actionofsubgroupinferenceissues.html#186893816">Anne Baanen (Jan 29 2020 at 15:10)</a>:</h4>
+<p>I have a group and want to talk about the action of a certain subgroup, but run into issues with typeclass inference. The following is the specific example that I want to get working:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">group_theory</span><span class="bp">.</span><span class="n">group_action</span>
+
+<span class="c1">-- My plan is to define a `mul_action` instance on any submonoid, then use inference to get it for a specific set.</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">α</span><span class="o">]</span>
+<span class="kn">instance</span> <span class="n">subset_has_scalar</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">has_scalar</span> <span class="n">α</span> <span class="n">β</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_scalar</span> <span class="n">s</span> <span class="n">β</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">s</span> <span class="n">b</span><span class="o">,</span> <span class="n">s</span><span class="bp">.</span><span class="mi">1</span> <span class="err">•</span> <span class="n">b</span><span class="bp">⟩</span>
+<span class="kn">instance</span> <span class="n">submonoid_mul_action</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">mul_action</span> <span class="n">α</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">is_submonoid</span> <span class="n">s</span><span class="o">]</span> <span class="o">:</span> <span class="n">mul_action</span> <span class="n">s</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">one_smul</span> <span class="n">α</span> <span class="n">x</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="err">•</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span><span class="o">),</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="bp">@</span><span class="n">mul_smul</span> <span class="n">α</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="n">y</span><span class="bp">.</span><span class="mi">1</span><span class="bp">⟩</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">mul_action</span> <span class="n">α</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">is_subgroup</span> <span class="n">s</span><span class="o">]</span> <span class="c1">-- these are concrete values in my situation</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">mul_action</span><span class="bp">.</span><span class="n">orbit_rel</span> <span class="n">s</span> <span class="n">β</span> <span class="c1">-- error : failed to synthesise instance for `mul_action ↥s β`</span>
+</pre></div>
+
+
+<p>The problem seems to be a mismatch between the <code>monoid</code> instances inferred. With <code>pp.all</code> on, the <code>submonoid_mul_action</code> instance looks like:</p>
+<div class="codehilite"><pre><span></span>    @mul_action.{0 0} (@coe_sort.{1 2} (set.{0} ?M_1) (@set.has_coe_to_sort.{0} ?M_1) s) ?M_2
+      (@subtype.monoid.{0} ?M_1 ?M_3 s _inst_3)
+</pre></div>
+
+
+<p>and Lean is trying to infer:</p>
+<div class="codehilite"><pre><span></span>@mul_action.{0 0} (@coe_sort.{1 2} (set.{0} α) (@set.has_coe_to_sort.{0} α) s) β
+    (@group.to_monoid.{0} (@coe_sort.{1 2} (set.{0} α) (@set.has_coe_to_sort.{0} α) s)
+       (@subtype.group.{0} α _inst_2 s _inst_4))
+</pre></div>
+
+
+<p>How do I convince Lean that <code>group.to_monoid (subtype.group ...)</code> should coincide with <code>subtype.monoid</code>? (It definitely does in the specific example.)</p>
+<p>Or is there another way to set it up so that I can write <code>mul_action.orbit_rel s β</code> without an error, without manually writing each instance on <code>s</code>?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

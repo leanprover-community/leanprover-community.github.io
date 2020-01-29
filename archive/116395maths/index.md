@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [irreducible top spaces](60989irreducibletopspaces.html) (22 messages, latest: Jan 29 2020 at 13:00)
+* [irreducible top spaces](60989irreducibletopspaces.html) (30 messages, latest: Jan 29 2020 at 15:40)
 
 * [Combinatorics](60782Combinatorics.html) (3 messages, latest: Jan 29 2020 at 09:48)
 
