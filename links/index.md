@@ -74,6 +74,7 @@ Don't forget to also follow the instructions on [Lean Projects](https://github.c
 
 ### Papers about Lean
 * Daniel Selsam, Sebastian Ullrich, and Leonardo de Moura. [*Tabled Typeclass Resolution.*](https://arxiv.org/pdf/2001.04301.pdf) arXiv 2020.
+  * The new type class resolution procedure in Lean 4.
 * Mario Carneiro. [*The Type Theory of Lean.*](https://github.com/digama0/lean-type-theory/releases) Master thesis, 2019.
   * Meta-theoretic properties of Lean 3, including soundness.
 * Sebastian Ullrich, Leonardo de Moura. [*Counting Immutable Beans: Reference Counting Optimized for Purely Functional Programming.*](https://arxiv.org/abs/1908.05647) preprint 2019.
@@ -115,8 +116,8 @@ Don't forget to also follow the instructions on [Lean Projects](https://github.c
 
 ### Unpublished works using Lean
 * Paul-Nicolas Madelaine. [*Arithmetic and Casting in Lean.*](https://lean-forward.github.io/norm_cast/norm_cast.pdf). 
-  * [Internship report](https://lean-forward.github.io/internships/arithmetic_and_casting_in_lean.pdf), 2019.
   * A description of the [`norm_cast` tactic](https://github.com/leanprover-community/mathlib/blob/master/src/tactic/norm_cast.lean) in mathlib.
+  * [Internship report](https://lean-forward.github.io/internships/arithmetic_and_casting_in_lean.pdf), 2019.
 * Neil Strickland, Nicola Bellumat [*Iterated chromatic localisation.*](https://arxiv.org/abs/1907.07801) arXiv 2019.
   * [Formalization](https://github.com/NeilStrickland/itloc)
 * Marc Huisinga. [*Formally Verified Insertion of Reference Counting Instructions.*](https://pp.ipd.kit.edu/uploads/publikationen/huisinga19bachelorarbeit.pdf) Bachelor thesis, 2019.
