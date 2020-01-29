@@ -1,0 +1,48 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/75863continuity.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/75863continuity.html">continuity</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186892636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/continuity/near/186892636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75863continuity.html#186892636">Greg Langmead (Jan 29 2020 at 14:58)</a>:</h4>
+<p>I am trying to construct unit n-spheres and prove they are smooth manifolds. I'm stuck at proving that stereographic projection is continuous. The chat room has already helped me prove continuity of a similar function on a subset of <code>ℝ×ℝ</code> (over in 'noob questions') but adding fin to the mix has me lost again. The function now has two arguments: a point on the sphere and the fin from the codomain of euclidean space, hence <code>continuous.mul</code> does not apply directly ("does not unify"). (Meta: I feel like I'm lacking some general principles to get myself unstuck in these situations!)</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">geometry</span><span class="bp">.</span><span class="n">manifold</span><span class="bp">.</span><span class="n">real_instances</span>
+
+<span class="n">noncomputable</span> <span class="n">theory</span>
+
+<span class="c1">-- note: def euclidean_space (n : ℕ) : Type := (fin n → ℝ)</span>
+
+<span class="c1">-- Unit sphere of dimension n, inside euclidean space of dimension n + 1</span>
+<span class="n">def</span> <span class="n">unit_sphere</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">x</span> <span class="o">:</span> <span class="n">euclidean_space</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">//</span> <span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span> <span class="n">i</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">}</span>
+<span class="kn">instance</span> <span class="n">sphere_top_space</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="o">(</span><span class="n">unit_sphere</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">topological_space</span>
+<span class="kn">instance</span> <span class="n">sphere_has_coe_to_euclidean_space</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="o">(</span><span class="n">unit_sphere</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">euclidean_space</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">:=</span> <span class="n">coe_subtype</span>
+
+<span class="c1">-- The unit sphere minus its north pole will be a coordinate chart via stereographic projection</span>
+<span class="n">def</span> <span class="n">unit_sphere_minus_north_pole</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">x</span> <span class="o">:</span> <span class="n">unit_sphere</span> <span class="n">n</span> <span class="bp">//</span> <span class="o">((</span><span class="n">x</span> <span class="o">:</span> <span class="o">(</span><span class="n">euclidean_space</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)))</span> <span class="n">n</span><span class="o">)</span> <span class="bp">≤</span> <span class="mi">1</span> <span class="o">}</span>
+<span class="kn">instance</span> <span class="n">sphere_minus_np_top_space</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="o">(</span><span class="n">unit_sphere_minus_north_pole</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">topological_space</span>
+<span class="kn">instance</span> <span class="n">sphere_minus_np_has_coe_to_sphere</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="o">(</span><span class="n">unit_sphere_minus_north_pole</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">unit_sphere</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">coe_subtype</span>
+<span class="kn">instance</span> <span class="n">sphere_minus_np_has_coe_to_euclidean_space</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="o">(</span><span class="n">unit_sphere_minus_north_pole</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">euclidean_space</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="n">def</span> <span class="n">stereographic_projection_north</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">unit_sphere_minus_north_pole</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="n">euclidean_space</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">:=</span>
+  <span class="bp">λ</span> <span class="n">sphere</span> <span class="n">i</span><span class="o">,</span> <span class="o">((</span><span class="n">sphere</span> <span class="o">:</span> <span class="n">euclidean_space</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">))</span> <span class="n">i</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">-</span> <span class="o">((</span><span class="n">sphere</span> <span class="o">:</span> <span class="n">euclidean_space</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">))</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)))</span><span class="bp">⁻¹</span>
+
+<span class="kn">lemma</span> <span class="n">continuous_sp_north</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">continuous</span> <span class="o">(</span><span class="n">stereographic_projection_north</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">unfold</span> <span class="n">stereographic_projection_north</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">continuous</span><span class="bp">.</span><span class="n">mul</span><span class="o">,</span> <span class="c1">-- fails to unify</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

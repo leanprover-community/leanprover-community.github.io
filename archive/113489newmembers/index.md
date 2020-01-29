@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [continuity](75863continuity.html) (1 message, latest: Jan 29 2020 at 14:58)
+
 * [more basics](41001morebasics.html) (41 messages, latest: Jan 29 2020 at 08:19)
 
 * [noob question(s)](52075noobquestions.html) (1704 messages, latest: Jan 29 2020 at 06:33)
