@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Sort* vs Type*](77480SortvsType.html) (7 messages, latest: Jan 29 2020 at 02:48)
+* [Parsing a string into an expression](93510Parsingastringintoanexpression.html) (9 messages, latest: Jan 29 2020 at 03:55)
+
+* [Sort* vs Type*](77480SortvsType.html) (8 messages, latest: Jan 29 2020 at 03:51)
 
 * [Coq as a lean type checker](81552Coqasaleantypechecker.html) (33 messages, latest: Jan 29 2020 at 01:16)
 
