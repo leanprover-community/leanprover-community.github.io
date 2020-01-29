@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Coq as a lean type checker](81552Coqasaleantypechecker.html) (39 messages, latest: Jan 29 2020 at 14:17)
+* [Parsing a string into an expression](93510Parsingastringintoanexpression.html) (20 messages, latest: Jan 29 2020 at 16:59)
 
-* [Parsing a string into an expression](93510Parsingastringintoanexpression.html) (19 messages, latest: Jan 29 2020 at 13:42)
+* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (2 messages, latest: Jan 29 2020 at 16:50)
+
+* [Coq as a lean type checker](81552Coqasaleantypechecker.html) (39 messages, latest: Jan 29 2020 at 14:17)
 
 * [Consistency strength of different theorem provers](39955Consistencystrengthofdifferenttheoremprovers.html) (23 messages, latest: Jan 29 2020 at 13:28)
 

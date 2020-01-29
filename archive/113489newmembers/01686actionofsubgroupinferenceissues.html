@@ -44,6 +44,36 @@ permalink: archive/113489newmembers/01686actionofsubgroupinferenceissues.html
 <p>How do I convince Lean that <code>group.to_monoid (subtype.group ...)</code> should coincide with <code>subtype.monoid</code>? (It definitely does in the specific example.)</p>
 <p>Or is there another way to set it up so that I can write <code>mul_action.orbit_rel s β</code> without an error, without manually writing each instance on <code>s</code>?</p>
 
+<a name="186903446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/action%20of%20subgroup%20inference%20issues/near/186903446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01686actionofsubgroupinferenceissues.html#186903446">Yury G. Kudryashov (Jan 29 2020 at 16:39)</a>:</h4>
+<p>Could you please try to redefine <code>subtype.group</code> so that it will use <code>{.. subtype.monoid}</code>?</p>
+
+<a name="186903497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/action%20of%20subgroup%20inference%20issues/near/186903497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01686actionofsubgroupinferenceissues.html#186903497">Yury G. Kudryashov (Jan 29 2020 at 16:39)</a>:</h4>
+<p>It's in <code>group_theory/subgroup</code></p>
+
+<a name="186903568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/action%20of%20subgroup%20inference%20issues/near/186903568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01686actionofsubgroupinferenceissues.html#186903568">Yury G. Kudryashov (Jan 29 2020 at 16:40)</a>:</h4>
+<p>I'm not sure if this will help</p>
+
+<a name="186904890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/action%20of%20subgroup%20inference%20issues/near/186904890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01686actionofsubgroupinferenceissues.html#186904890">Kevin Buzzard (Jan 29 2020 at 16:52)</a>:</h4>
+<p>Just to comment that one of the mul_actions uses <code>_inst_3</code> and the other uses <code>_inst_2</code> and <code>_inst_4</code> so they are almost certainly not defeq. You can probably see in the local context what is going on.</p>
+
+<a name="186905116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/action%20of%20subgroup%20inference%20issues/near/186905116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01686actionofsubgroupinferenceissues.html#186905116">Anne Baanen (Jan 29 2020 at 16:54)</a>:</h4>
+<blockquote>
+<p>Could you please try to redefine <code>subtype.group</code> so that it will use <code>{.. subtype.monoid}</code>?</p>
+</blockquote>
+<p>That doesn't seem to help, unfortunately: still the same error</p>
+
+<a name="186905606"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/action%20of%20subgroup%20inference%20issues/near/186905606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01686actionofsubgroupinferenceissues.html#186905606">Anne Baanen (Jan 29 2020 at 16:59)</a>:</h4>
+<p>Adding an extra instance declaration with an explicit <code>monoid s</code> parameter works, but it seems ugly to have two instances with exactly the same definition:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">subgroup_mul_action</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">mul_action</span> <span class="n">α</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">is_subgroup</span> <span class="n">s</span><span class="o">]</span> <span class="o">:</span> <span class="bp">@</span><span class="n">mul_action</span> <span class="n">s</span> <span class="n">β</span> <span class="o">(</span><span class="n">group</span><span class="bp">.</span><span class="n">to_monoid</span> <span class="bp">_</span><span class="o">):=</span>
+<span class="bp">⟨</span><span class="n">one_smul</span> <span class="n">α</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="bp">@</span><span class="n">mul_smul</span> <span class="n">α</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="n">y</span><span class="bp">.</span><span class="mi">1</span><span class="bp">⟩</span>
+</pre></div>
+
 
 {% endraw %}
 
