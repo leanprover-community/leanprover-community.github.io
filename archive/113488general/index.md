@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (24 messages, latest: Jan 30 2020 at 09:53)
+
 * [tfae fails](00528tfaefails.html) (4 messages, latest: Jan 30 2020 at 08:28)
 
 * [POPLmark challenge](71850POPLmarkchallenge.html) (32 messages, latest: Jan 30 2020 at 01:56)
-
-* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (23 messages, latest: Jan 30 2020 at 01:52)
 
 * [Parsing a string into an expression](93510Parsingastringintoanexpression.html) (39 messages, latest: Jan 30 2020 at 01:49)
 
