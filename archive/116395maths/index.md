@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [finset.sum_add_distrib](84005finsetsumadddistrib.html) (7 messages, latest: Jan 30 2020 at 11:29)
+* [finset.sum_add_distrib](84005finsetsumadddistrib.html) (8 messages, latest: Jan 30 2020 at 12:15)
+
+* [Inductive construction](61623Inductiveconstruction.html) (22 messages, latest: Jan 30 2020 at 12:05)
 
 * [irreducible top spaces](60989irreducibletopspaces.html) (57 messages, latest: Jan 30 2020 at 07:31)
 
@@ -24,8 +26,6 @@ permalink: archive/116395maths/index.html
 * [induction generalizing](17261inductiongeneralizing.html) (20 messages, latest: Jan 28 2020 at 22:00)
 
 * [formal roadmaps](84825formalroadmaps.html) (7 messages, latest: Jan 28 2020 at 12:14)
-
-* [Inductive construction](61623Inductiveconstruction.html) (21 messages, latest: Jan 28 2020 at 10:29)
 
 * [Refactoring polynomials](69676Refactoringpolynomials.html) (11 messages, latest: Jan 27 2020 at 20:25)
 
