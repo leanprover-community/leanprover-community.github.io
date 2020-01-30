@@ -412,6 +412,32 @@ For toy examples, the hardcore parsing as you have done would work well, but for
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186888226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186888226">Minchao Wu (Jan 29 2020 at 14:09)</a>:</h4>
 <p>I don't know, either. But there could be more well-documented meta constants that expose more internal stuff.</p>
 
+<a name="186940896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186940896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186940896">Jason Rute (Jan 29 2020 at 23:45)</a>:</h4>
+<p><span class="user-mention" data-user-id="110187">@Minchao Wu</span>  More experiments are needed, but if I work with the Lean expressions themselves, then my above issues go away.  It might still not cover all (or most?) cases, but I think it is worth exploring more...</p>
+
+<a name="186941210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/186941210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#186941210">Jason Rute (Jan 29 2020 at 23:50)</a>:</h4>
+<p>For example, the following code allows me to create a goal from an expression.</p>
+<div class="codehilite"><pre><span></span>meta def make_goal_from_expression (e : expr) : tactic unit :=
+do
+   v &lt;- tactic.mk_meta_var e,
+   gs &lt;- tactic.get_goals,
+   tactic.set_goals $ v :: gs,
+   t &lt;- tactic.target,
+   tactic.trace t,
+   return ()
+
+meta def my_expr : expr :=  ( expr.pi ( name.mk_string &quot;c&quot; name.anonymous ) binder_info.default  ( expr.sort level.zero ) ( expr.pi ( name.mk_string &quot;_inst_1&quot; name.anonymous ) binder_info.inst_implicit ( expr.app ( expr.const ( name.mk_string &quot;decidable&quot; name.anonymous ) list.nil ) ( expr.var 0 ) ) ( expr.pi ( name.mk_string &quot;a&quot; name.anonymous ) binder_info.default  ( expr.const ( name.mk_string &quot;ordering&quot; name.anonymous ) list.nil ) ( expr.pi ( name.mk_string &quot;b&quot; name.anonymous ) binder_info.default  ( expr.const ( name.mk_string &quot;ordering&quot; name.anonymous ) list.nil ) ( expr.app ( expr.app ( expr.app ( expr.const ( name.mk_string &quot;eq&quot; name.anonymous ) ( list.cons ( level.succ level.zero ) list.nil ) ) ( expr.sort level.zero ) ) ( expr.app ( expr.app ( expr.app ( expr.const ( name.mk_string &quot;eq&quot; name.anonymous ) ( list.cons ( level.succ level.zero ) list.nil ) ) ( expr.const ( name.mk_string &quot;ordering&quot; name.anonymous ) list.nil ) ) ( expr.app ( expr.app ( expr.app ( expr.app ( expr.app ( expr.const ( name.mk_string &quot;ite&quot; name.anonymous ) ( list.cons ( level.succ level.zero ) list.nil ) ) ( expr.var 3 ) ) ( expr.var 2 ) ) ( expr.const ( name.mk_string &quot;ordering&quot; name.anonymous ) list.nil ) ) ( expr.var 1 ) ) ( expr.var 0 ) ) ) ( expr.const ( name.mk_string &quot;gt&quot; ( name.mk_string &quot;ordering&quot; name.anonymous ) ) list.nil ) ) ) ( expr.app ( expr.app ( expr.app ( expr.app ( expr.app ( expr.const ( name.mk_string &quot;ite&quot; name.anonymous ) ( list.cons ( level.succ level.zero ) list.nil ) ) ( expr.var 3 ) ) ( expr.var 2 ) ) ( expr.sort level.zero ) ) ( expr.app ( expr.app ( expr.app ( expr.const ( name.mk_string &quot;eq&quot; name.anonymous ) ( list.cons ( level.succ level.zero ) list.nil ) ) ( expr.const ( name.mk_string &quot;ordering&quot; name.anonymous ) list.nil ) ) ( expr.var 1 ) ) ( expr.const ( name.mk_string &quot;gt&quot; ( name.mk_string &quot;ordering&quot; name.anonymous ) ) list.nil ) ) ) ( expr.app ( expr.app ( expr.app ( expr.const ( name.mk_string &quot;eq&quot; name.anonymous ) ( list.cons ( level.succ level.zero ) list.nil ) ) ( expr.const ( name.mk_string &quot;ordering&quot; name.anonymous ) list.nil ) ) ( expr.var 0 ) ) ( expr.const ( name.mk_string &quot;gt&quot; ( name.mk_string &quot;ordering&quot; name.anonymous ) ) list.nil ) ) ) ) ) ) ) )
+
+run_cmd make_goal_from_expression my_expr
+</pre></div>
+
+
+<p>The trace is correctly:</p>
+<div class="codehilite"><pre><span></span>∀ (c : Prop) [_inst_1 : decidable c] (a b : ordering), ite c a b = ordering.gt = ite c (a = ordering.gt) (b = ordering.gt)
+</pre></div>
+
 
 {% endraw %}
 

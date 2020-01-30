@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [continuity](75863continuity.html) (11 messages, latest: Jan 29 2020 at 22:42)
+* [continuity](75863continuity.html) (12 messages, latest: Jan 29 2020 at 23:52)
 
 * [action of subgroup inference issues](01686actionofsubgroupinferenceissues.html) (7 messages, latest: Jan 29 2020 at 16:59)
 
