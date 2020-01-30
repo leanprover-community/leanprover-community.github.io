@@ -132,6 +132,102 @@ permalink: archive/116395maths/99877settactic.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/187028274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#187028274">Kevin Buzzard (Jan 30 2020 at 20:40)</a>:</h4>
 <p>We need to get Johannes back to fix up <code>topology.subset_properties</code> :-)</p>
 
+<a name="187032422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/187032422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#187032422">Kevin Buzzard (Jan 30 2020 at 21:23)</a>:</h4>
+<p>I have a fabulous challenge :-)</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">open</span> <span class="n">set</span>
+
+<span class="c1">-- hint</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">U₁</span> <span class="n">U₂</span> <span class="n">V</span> <span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">U₁</span> <span class="err">∩</span> <span class="n">U₂</span> <span class="err">∩</span> <span class="o">(</span><span class="n">V</span> <span class="err">∩</span> <span class="n">S</span><span class="o">)</span> <span class="bp">=</span> <span class="n">V</span> <span class="err">∩</span> <span class="n">U₁</span> <span class="err">∩</span> <span class="o">(</span><span class="n">V</span> <span class="err">∩</span> <span class="n">U₂</span><span class="o">)</span> <span class="err">∩</span> <span class="n">S</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">inter_left_comm</span><span class="o">,</span> <span class="n">inter_comm</span><span class="o">,</span> <span class="n">inter_assoc</span><span class="o">],</span>
+<span class="kn">end</span>
+
+<span class="c1">-- challenge</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">S</span> <span class="n">V</span> <span class="n">U₁</span> <span class="n">U₂</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">U₁</span> <span class="err">∩</span> <span class="n">U₂</span> <span class="err">∩</span> <span class="o">(</span><span class="n">V</span> <span class="err">∩</span> <span class="n">S</span><span class="o">)</span> <span class="bp">=</span> <span class="n">V</span> <span class="err">∩</span> <span class="n">U₁</span> <span class="err">∩</span> <span class="o">(</span><span class="n">V</span> <span class="err">∩</span> <span class="n">U₂</span><span class="o">)</span> <span class="err">∩</span> <span class="n">S</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+
+<a name="187032596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/187032596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#187032596">Kevin Buzzard (Jan 30 2020 at 21:25)</a>:</h4>
+<p>Thanks to <span class="user-mention" data-user-id="110044">@Chris Hughes</span> for helping me debug this one</p>
+
+<a name="187032650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/187032650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#187032650">Kevin Buzzard (Jan 30 2020 at 21:25)</a>:</h4>
+<p>I don't know any way of solving the second goal without simply doing it by hand</p>
+
+<a name="187032712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/187032712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#187032712">Mario Carneiro (Jan 30 2020 at 21:26)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">inter_self_left</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">U</span> <span class="err">∩</span> <span class="o">(</span><span class="n">U</span> <span class="err">∩</span> <span class="n">V</span><span class="o">)</span> <span class="bp">=</span> <span class="n">U</span> <span class="err">∩</span> <span class="n">V</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">inter_assoc</span><span class="o">,</span> <span class="n">inter_self</span><span class="o">]</span>
+
+<span class="c1">-- challenge</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">S</span> <span class="n">V</span> <span class="n">U₁</span> <span class="n">U₂</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">U₁</span> <span class="err">∩</span> <span class="n">U₂</span> <span class="err">∩</span> <span class="o">(</span><span class="n">V</span> <span class="err">∩</span> <span class="n">S</span><span class="o">)</span> <span class="bp">=</span> <span class="n">V</span> <span class="err">∩</span> <span class="n">U₁</span> <span class="err">∩</span> <span class="o">(</span><span class="n">V</span> <span class="err">∩</span> <span class="n">U₂</span><span class="o">)</span> <span class="err">∩</span> <span class="n">S</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">inter_left_comm</span><span class="o">,</span> <span class="n">inter_comm</span><span class="o">,</span> <span class="n">inter_assoc</span><span class="o">,</span> <span class="n">inter_self_left</span><span class="o">]</span>
+</pre></div>
+
+<a name="187032751"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/187032751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#187032751">Kevin Buzzard (Jan 30 2020 at 21:26)</a>:</h4>
+<p>Yes <code>inter_self_left</code> is exactly what is missing</p>
+
+<a name="187032775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/187032775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#187032775">Kevin Buzzard (Jan 30 2020 at 21:27)</a>:</h4>
+<p>but I had no idea that the behaviour of <code>simp</code> would depend on the order which the variables were introduced. I was tearing my hair out until Chris pointed this out.</p>
+
+<a name="187032831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/187032831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#187032831">Patrick Massot (Jan 30 2020 at 21:27)</a>:</h4>
+<p><code>ext, split ; finish</code></p>
+
+<a name="187032841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/187032841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#187032841">Patrick Massot (Jan 30 2020 at 21:27)</a>:</h4>
+<p>No idea why that <code>split</code> seems needed.</p>
+
+<a name="187032911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/187032911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#187032911">Kevin Buzzard (Jan 30 2020 at 21:28)</a>:</h4>
+<p>In fact the reason I didn't find this one was precisely because it didn't occur to me to use <code>split</code></p>
+
+<a name="187033045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/187033045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#187033045">Jesse Michael Han (Jan 30 2020 at 21:29)</a>:</h4>
+<p><code>by tidy</code></p>
+
+<a name="187033106"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/187033106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#187033106">Kevin Buzzard (Jan 30 2020 at 21:30)</a>:</h4>
+<p>Chris suggests that this is a bug with <code>finish</code></p>
+
+<a name="187033156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/187033156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#187033156">Patrick Massot (Jan 30 2020 at 21:30)</a>:</h4>
+<p><code>tidy</code> is definitely the best answer so far. Too bad it's so slow.</p>
+
+<a name="187033183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/187033183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#187033183">Jesse Michael Han (Jan 30 2020 at 21:31)</a>:</h4>
+<p>don't look at the proof trace it emits :^)</p>
+
+<a name="187033586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/187033586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#187033586">Kevin Buzzard (Jan 30 2020 at 21:34)</a>:</h4>
+<p>ha ha it's even longer than my bare hands proof :-)</p>
+
+<a name="187033667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/187033667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#187033667">Kevin Buzzard (Jan 30 2020 at 21:35)</a>:</h4>
+<p>I was supposed to be proving results about Noetherian topological spaces this evening and all I've done is spent hours proving logical trivialities :-)</p>
+
+<a name="187033812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/187033812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#187033812">Mario Carneiro (Jan 30 2020 at 21:37)</a>:</h4>
+<p>it's always longer than your bare hands proof, that's what tactics do</p>
+
+<a name="187033860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/187033860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#187033860">Patrick Massot (Jan 30 2020 at 21:37)</a>:</h4>
+<p>Kevin's bare hand are still in tactic mode.</p>
+
+<a name="187035374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/187035374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#187035374">Jesse Michael Han (Jan 30 2020 at 21:52)</a>:</h4>
+<p><code>finish</code> makes no progress on the problem (you can see where it gets stuck by examining the goal state after <code>safe</code>; in this case it just negates the goal and nothing else triggers)</p>
+<p>if you change the intersections to <code>lattice.inf</code>, <code>finish</code> will instead time out (there are too many possible rewrites)</p>
+
 
 {% endraw %}
 

@@ -1,0 +1,74 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/33977Memoryconsumption.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/33977Memoryconsumption.html">Memory consumption</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="187034265"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Memory%20consumption/near/187034265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33977Memoryconsumption.html#187034265">Yury G. Kudryashov (Jan 30 2020 at 21:41)</a>:</h4>
+<p>Sometimes lean server (started by emacs) starts eating lots of ram (5g and more). Should I do some magic with ulimits, or there is a way to prevent this from inside lean?</p>
+
+<a name="187034374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Memory%20consumption/near/187034374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33977Memoryconsumption.html#187034374">Yury G. Kudryashov (Jan 30 2020 at 21:42)</a>:</h4>
+<p>The best way to reproduce the effect is to open a file with many not yet compiled dependencies</p>
+
+<a name="187034498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Memory%20consumption/near/187034498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33977Memoryconsumption.html#187034498">Kevin Buzzard (Jan 30 2020 at 21:43)</a>:</h4>
+<p>In VS Code there is an option to give some extra command line inputs, and <code>-M 2000</code> or something might be what you want</p>
+
+<a name="187034561"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Memory%20consumption/near/187034561" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33977Memoryconsumption.html#187034561">Kevin Buzzard (Jan 30 2020 at 21:44)</a>:</h4>
+<div class="codehilite"><pre><span></span>$ lean --help
+Lean (version 3.4.2, commit cbd2b6686ddb, Release)
+Miscellaneous:
+  --help -h          display this message
+  --version -v       display version number
+  --githash          display the git commit hash number used to build this binary
+  --run              executes the &#39;main&#39; definition
+  --doc=file -r      generate module documentation based on module doc strings
+  --make             create olean files
+  --recursive        recursively find *.lean files in directory arguments
+  --trust=num -t     trust level (default: max) 0 means do not trust any macro,
+                     and type check all imported modules
+  --quiet -q         do not print verbose messages
+  --memory=num -M    maximum amount of memory that should be used by Lean
+                     (in megabytes)
+...
+</pre></div>
+
+<a name="187034987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Memory%20consumption/near/187034987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33977Memoryconsumption.html#187034987">Yury G. Kudryashov (Jan 30 2020 at 21:48)</a>:</h4>
+<p>It runs with -M1024</p>
+
+<a name="187035061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Memory%20consumption/near/187035061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33977Memoryconsumption.html#187035061">Kevin Buzzard (Jan 30 2020 at 21:49)</a>:</h4>
+<p>And still eats 5 gigs? :-/</p>
+
+<a name="187035077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Memory%20consumption/near/187035077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33977Memoryconsumption.html#187035077">Patrick Massot (Jan 30 2020 at 21:49)</a>:</h4>
+<p>Are you sure you don't have several lean servers started?</p>
+
+<a name="187035167"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Memory%20consumption/near/187035167" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33977Memoryconsumption.html#187035167">Patrick Massot (Jan 30 2020 at 21:50)</a>:</h4>
+<p>Before I upgraded my computer I had this issue when I tried running <code>leanpkg build</code> while VScode was also asking for compilation.</p>
+
+<a name="187035247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Memory%20consumption/near/187035247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33977Memoryconsumption.html#187035247">Yury G. Kudryashov (Jan 30 2020 at 21:51)</a>:</h4>
+<p>I'm sure. I run top and see one server process eating all the memory</p>
+
+<a name="187035272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Memory%20consumption/near/187035272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33977Memoryconsumption.html#187035272">Yury G. Kudryashov (Jan 30 2020 at 21:51)</a>:</h4>
+<p>I run a locally built 3.5.0</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

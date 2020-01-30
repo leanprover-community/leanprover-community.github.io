@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [set tactic](99877settactic.html) (12 messages, latest: Jan 30 2020 at 20:40)
+* [set tactic](99877settactic.html) (30 messages, latest: Jan 30 2020 at 21:52)
 
 * [Conway addition thing](42264Conwayadditionthing.html) (11 messages, latest: Jan 30 2020 at 20:05)
 

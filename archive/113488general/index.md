@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Memory consumption](33977Memoryconsumption.html) (10 messages, latest: Jan 30 2020 at 21:51)
+
+* [POPLmark challenge](71850POPLmarkchallenge.html) (40 messages, latest: Jan 30 2020 at 21:42)
+
 * [github actions](76245githubactions.html) (44 messages, latest: Jan 30 2020 at 20:28)
 
 * [moving mathlib to 3.5c](54190movingmathlibto35c.html) (37 messages, latest: Jan 30 2020 at 17:57)
@@ -20,8 +24,6 @@ permalink: archive/113488general/index.html
 * [typeclass paper](35889typeclasspaper.html) (158 messages, latest: Jan 30 2020 at 14:17)
 
 * [Parsing a string into an expression](93510Parsingastringintoanexpression.html) (43 messages, latest: Jan 30 2020 at 13:36)
-
-* [POPLmark challenge](71850POPLmarkchallenge.html) (39 messages, latest: Jan 30 2020 at 13:13)
 
 * [tfae fails](00528tfaefails.html) (4 messages, latest: Jan 30 2020 at 08:28)
 
