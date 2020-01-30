@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [irreducible top spaces](60989irreducibletopspaces.html) (60 messages, latest: Jan 30 2020 at 14:38)
+* [irreducible top spaces](60989irreducibletopspaces.html) (61 messages, latest: Jan 30 2020 at 15:34)
 
-* [set tactic](99877settactic.html) (4 messages, latest: Jan 30 2020 at 14:34)
+* [set tactic](99877settactic.html) (5 messages, latest: Jan 30 2020 at 15:25)
 
 * [size of a finite set](71485sizeofafiniteset.html) (5 messages, latest: Jan 30 2020 at 14:25)
 
