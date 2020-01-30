@@ -99,6 +99,58 @@ We propose an initial set of benchmarks for measuring progress in this area. Bas
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/POPLmark%20challenge/near/186941949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71850POPLmarkchallenge.html#186941949">Tim Daly (Jan 29 2020 at 23:59)</a>:</h4>
 <p>There is an interesting split I've come to recognize between the ITP approach and the Type-Theory approach to things, despite the fact that they both seem to use the same judgments. ITP systems tend toward "tactics" whereas the Type-Theory approach tends to use unification.</p>
 
+<a name="186946526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/POPLmark%20challenge/near/186946526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71850POPLmarkchallenge.html#186946526">Simon Cruanes (Jan 30 2020 at 01:16)</a>:</h4>
+<p>In my (limited) view of the field, it seems like most big programs that are verified in ITPs are all based on the separation of the program to prove and the properties on the program (even CompCert, and of course, SEL4, CakeML, etc.).<br>
+I'm not aware of any actual big program written as a proof following the CH correspondence. I'd love be to proven wrong though!</p>
+
+<a name="186947152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/POPLmark%20challenge/near/186947152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71850POPLmarkchallenge.html#186947152">Tim Daly (Jan 30 2020 at 01:27)</a>:</h4>
+<p>Axiom is a collection of mathematical algorithms. Rather than prove a large program, my effort is to prove the individual algorithms. So, for instance, GCD has a specification and an implementation. There are several interesting questions that arise. Axiom actually has 22 different GCD algorithms (e.g. GCD for polynomials, Nats, etc). How can these algorithms be proven correct. How can they be proven correct in such a way that Lean can verify the proof, allowing Lean to use Axiom as an Oracle for a GCD computation.</p>
+
+<a name="186947505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/POPLmark%20challenge/near/186947505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71850POPLmarkchallenge.html#186947505">Tim Daly (Jan 30 2020 at 01:32)</a>:</h4>
+<p>Nat in Axiom is called NonNegativeInteger (NNI). The definitions, axioms, and theorems available to the NNI Domain (an Axiom term for an implementation) are all inherited. The NNI Domain also includes a "carrier" (called a REP) which specifies how elements are implemented. So, given group theory axioms (e.g. associativity), a representation, a specification, and an algorithm... use Lean's group theory and Nat, as well as pre- and post-conditions and loop invariants to prove the GCD correct in Lean.</p>
+
+<a name="186947534"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/POPLmark%20challenge/near/186947534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71850POPLmarkchallenge.html#186947534">Simon Cruanes (Jan 30 2020 at 01:33)</a>:</h4>
+<p>So what language is the algorithm expressed in?</p>
+
+<a name="186947615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/POPLmark%20challenge/near/186947615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71850POPLmarkchallenge.html#186947615">Tim Daly (Jan 30 2020 at 01:34)</a>:</h4>
+<p>SPAD, a dependently typed language built on Common Lisp. (See <a href="https://github.com/daly/PDFS/blob/master/bookvol0.pdf" target="_blank" title="https://github.com/daly/PDFS/blob/master/bookvol0.pdf">https://github.com/daly/PDFS/blob/master/bookvol0.pdf</a>)</p>
+
+<a name="186947718"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/POPLmark%20challenge/near/186947718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71850POPLmarkchallenge.html#186947718">Tim Daly (Jan 30 2020 at 01:36)</a>:</h4>
+<p>In an ideal world a GCD algorithm would be transformed into a Lean proof object, proven, and then re-generated from the proof object. The proof then becomes a certificate you can hand to a proof-checker.</p>
+
+<a name="186947833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/POPLmark%20challenge/near/186947833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71850POPLmarkchallenge.html#186947833">Simon Cruanes (Jan 30 2020 at 01:39)</a>:</h4>
+<p>Oh damn, I didn't realize it was <em>that</em> axiom, the CAS… :o</p>
+
+<a name="186947904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/POPLmark%20challenge/near/186947904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71850POPLmarkchallenge.html#186947904">Tim Daly (Jan 30 2020 at 01:40)</a>:</h4>
+<p>There are a lot of "Axiom" things around, including the new Axiom that is working on space ships. But, yes, this is the Axiom originally from IBM Research and I'm one of the original people to blame. :-)</p>
+
+<a name="186948018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/POPLmark%20challenge/near/186948018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71850POPLmarkchallenge.html#186948018">Simon Cruanes (Jan 30 2020 at 01:43)</a>:</h4>
+<blockquote>
+<p>There are a lot of "Axiom" things around</p>
+</blockquote>
+<p>well of course, that's why we have the Axiom of choice!</p>
+
+<a name="186948041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/POPLmark%20challenge/near/186948041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71850POPLmarkchallenge.html#186948041">Tim Daly (Jan 30 2020 at 01:43)</a>:</h4>
+<p>2 points on that one. I am SO stealing that.</p>
+
+<a name="186948534"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/POPLmark%20challenge/near/186948534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71850POPLmarkchallenge.html#186948534">Tim Daly (Jan 30 2020 at 01:53)</a>:</h4>
+<p>Axiom's byline is "The 30 Year Horizon" but I think you just came up with a "near miss".</p>
+
+<a name="186948614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/POPLmark%20challenge/near/186948614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71850POPLmarkchallenge.html#186948614">Simon Cruanes (Jan 30 2020 at 01:56)</a>:</h4>
+<p>you can display a catchphrase randomly sampled on the website :)</p>
+
 
 {% endraw %}
 

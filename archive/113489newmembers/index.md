@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1706 messages, latest: Jan 30 2020 at 01:44)
+
 * [continuity](75863continuity.html) (12 messages, latest: Jan 29 2020 at 23:52)
 
 * [action of subgroup inference issues](01686actionofsubgroupinferenceissues.html) (7 messages, latest: Jan 29 2020 at 16:59)
 
 * [more basics](41001morebasics.html) (41 messages, latest: Jan 29 2020 at 08:19)
-
-* [noob question(s)](52075noobquestions.html) (1704 messages, latest: Jan 29 2020 at 06:33)
 
 * [Local/city threads](73023Localcitythreads.html) (9 messages, latest: Jan 29 2020 at 04:39)
 

@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [POPLmark challenge](71850POPLmarkchallenge.html) (20 messages, latest: Jan 29 2020 at 23:59)
+* [POPLmark challenge](71850POPLmarkchallenge.html) (32 messages, latest: Jan 30 2020 at 01:56)
 
-* [Parsing a string into an expression](93510Parsingastringintoanexpression.html) (38 messages, latest: Jan 29 2020 at 23:50)
+* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (23 messages, latest: Jan 30 2020 at 01:52)
+
+* [Parsing a string into an expression](93510Parsingastringintoanexpression.html) (39 messages, latest: Jan 30 2020 at 01:49)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (253 messages, latest: Jan 29 2020 at 22:30)
-
-* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (21 messages, latest: Jan 29 2020 at 22:21)
 
 * [Coq as a lean type checker](81552Coqasaleantypechecker.html) (39 messages, latest: Jan 29 2020 at 14:17)
 
