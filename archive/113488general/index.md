@@ -9,15 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (35 messages, latest: Jan 30 2020 at 14:25)
+* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (37 messages, latest: Jan 30 2020 at 17:57)
+
+* [github actions](76245githubactions.html) (42 messages, latest: Jan 30 2020 at 17:03)
 
 * [instance alternative exceptional](62609instancealternativeexceptional.html) (1 message, latest: Jan 30 2020 at 14:25)
 
 * [Coq as a lean type checker](81552Coqasaleantypechecker.html) (40 messages, latest: Jan 30 2020 at 14:20)
 
 * [typeclass paper](35889typeclasspaper.html) (158 messages, latest: Jan 30 2020 at 14:17)
-
-* [github actions](76245githubactions.html) (41 messages, latest: Jan 30 2020 at 13:58)
 
 * [Parsing a string into an expression](93510Parsingastringintoanexpression.html) (43 messages, latest: Jan 30 2020 at 13:36)
 

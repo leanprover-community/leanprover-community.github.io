@@ -1,0 +1,67 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/21637listnthle.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/21637listnthle.html">list.nth_le</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="187009258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.nth_le/near/187009258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/21637listnthle.html#187009258">Cerek Hillen (he) (W2'20) (Jan 30 2020 at 17:23)</a>:</h4>
+<p>hey y'all, looking at the implementation of <code>list.nth_le</code>, and i was confused about how the definition works</p>
+
+<a name="187009261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.nth_le/near/187009261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/21637listnthle.html#187009261">Cerek Hillen (he) (W2'20) (Jan 30 2020 at 17:23)</a>:</h4>
+<p>ref: <a href="https://github.com/leanprover/lean/blob/master/library/init/data/list/basic.lean#L90-L93" target="_blank" title="https://github.com/leanprover/lean/blob/master/library/init/data/list/basic.lean#L90-L93">https://github.com/leanprover/lean/blob/master/library/init/data/list/basic.lean#L90-L93</a></p>
+<div class="codehilite"><pre><span></span>@[simp] def nth_le : Π (l : list α) (n), n &lt; l.length → α
+| []       n     h := absurd h (not_lt_zero n)
+| (a :: l) 0     h := a
+| (a :: l) (n+1) h := nth_le l n (le_of_succ_le_succ h)
+</pre></div>
+
+<a name="187009369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.nth_le/near/187009369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/21637listnthle.html#187009369">Cerek Hillen (he) (W2'20) (Jan 30 2020 at 17:24)</a>:</h4>
+<p>in particular, how can it use <code>le_of_succ_le_succ</code> on <code>h</code> when <code>h</code> is defining a strict inequality? i'm trying to replicate similar behavior but Lean is complaining about the differences in equality</p>
+
+<a name="187009391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.nth_le/near/187009391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/21637listnthle.html#187009391">Kevin Buzzard (Jan 30 2020 at 17:24)</a>:</h4>
+<p>On nat, <code>a &lt; b</code> is defined to mean <code>a + 1 &lt;= b</code></p>
+
+<a name="187009398"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.nth_le/near/187009398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/21637listnthle.html#187009398">Kevin Buzzard (Jan 30 2020 at 17:24)</a>:</h4>
+<p>so this is a bit of a dirty hack</p>
+
+<a name="187009446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.nth_le/near/187009446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/21637listnthle.html#187009446">Kevin Buzzard (Jan 30 2020 at 17:25)</a>:</h4>
+<p><code>example (a b : ℕ) : a &lt; b ↔ a + 1 ≤ b := iff.rfl</code></p>
+
+<a name="187009467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.nth_le/near/187009467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/21637listnthle.html#187009467">Cerek Hillen (he) (W2'20) (Jan 30 2020 at 17:25)</a>:</h4>
+<p>hahaha oh no that is definitely a dirty hack</p>
+
+<a name="187009545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.nth_le/near/187009545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/21637listnthle.html#187009545">Kevin Buzzard (Jan 30 2020 at 17:26)</a>:</h4>
+<p>For more readability they should also apply <code>a + 1 &lt;= b -&gt; a &lt; b</code> but this theorem might not even be in the library because it's true by definition :-/</p>
+
+<a name="187009578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.nth_le/near/187009578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/21637listnthle.html#187009578">Kevin Buzzard (Jan 30 2020 at 17:26)</a>:</h4>
+<p>maybe <code>nat.lt_of_succ_le</code>?</p>
+
+<a name="187009624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.nth_le/near/187009624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/21637listnthle.html#187009624">Kevin Buzzard (Jan 30 2020 at 17:27)</a>:</h4>
+<p><code>lemma lt_of_succ_le {a b : ℕ} (h : succ a ≤ b) : a &lt; b := h</code> -- from core.</p>
+
+<a name="187010081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/list.nth_le/near/187010081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/21637listnthle.html#187010081">Cerek Hillen (he) (W2'20) (Jan 30 2020 at 17:33)</a>:</h4>
+<p>i'll just provide a more explicit proof--i'm rewriting some code for the purposes of a presentation on why SWEs should like dependent typing so it's better if it's more explicit</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
