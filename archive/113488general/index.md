@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [POPLmark challenge](71850POPLmarkchallenge.html) (57 messages, latest: Jan 30 2020 at 22:54)
+
+* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (38 messages, latest: Jan 30 2020 at 22:42)
+
 * [Memory consumption](33977Memoryconsumption.html) (10 messages, latest: Jan 30 2020 at 21:51)
 
-* [POPLmark challenge](71850POPLmarkchallenge.html) (40 messages, latest: Jan 30 2020 at 21:42)
-
 * [github actions](76245githubactions.html) (44 messages, latest: Jan 30 2020 at 20:28)
-
-* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (37 messages, latest: Jan 30 2020 at 17:57)
 
 * [instance alternative exceptional](62609instancealternativeexceptional.html) (1 message, latest: Jan 30 2020 at 14:25)
 
