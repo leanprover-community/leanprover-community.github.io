@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [finset.sum_add_distrib](84005finsetsumadddistrib.html) (7 messages, latest: Jan 30 2020 at 11:29)
+
 * [irreducible top spaces](60989irreducibletopspaces.html) (57 messages, latest: Jan 30 2020 at 07:31)
 
 * [set tactic](99877settactic.html) (3 messages, latest: Jan 29 2020 at 19:18)
