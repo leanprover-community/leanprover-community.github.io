@@ -9,13 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [POPLmark challenge](71850POPLmarkchallenge.html) (35 messages, latest: Jan 30 2020 at 12:59)
+* [github actions](76245githubactions.html) (41 messages, latest: Jan 30 2020 at 13:58)
 
-* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (29 messages, latest: Jan 30 2020 at 12:40)
+* [Parsing a string into an expression](93510Parsingastringintoanexpression.html) (43 messages, latest: Jan 30 2020 at 13:36)
+
+* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (32 messages, latest: Jan 30 2020 at 13:22)
+
+* [POPLmark challenge](71850POPLmarkchallenge.html) (39 messages, latest: Jan 30 2020 at 13:13)
 
 * [tfae fails](00528tfaefails.html) (4 messages, latest: Jan 30 2020 at 08:28)
-
-* [Parsing a string into an expression](93510Parsingastringintoanexpression.html) (39 messages, latest: Jan 30 2020 at 01:49)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (253 messages, latest: Jan 29 2020 at 22:30)
 
@@ -30,8 +32,6 @@ permalink: archive/113488general/index.html
 * [Sort* vs Type*](77480SortvsType.html) (8 messages, latest: Jan 29 2020 at 03:51)
 
 * [Normalization fails in lean](41870Normalizationfailsinlean.html) (29 messages, latest: Jan 28 2020 at 23:21)
-
-* [github actions](76245githubactions.html) (39 messages, latest: Jan 28 2020 at 21:46)
 
 * [crash lean with `revert`](53254crashleanwithrevert.html) (8 messages, latest: Jan 28 2020 at 18:11)
 

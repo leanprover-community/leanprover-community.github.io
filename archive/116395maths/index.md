@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [finset.sum_add_distrib](84005finsetsumadddistrib.html) (8 messages, latest: Jan 30 2020 at 12:15)
+* [finset.sum_add_distrib](84005finsetsumadddistrib.html) (9 messages, latest: Jan 30 2020 at 13:01)
 
 * [Inductive construction](61623Inductiveconstruction.html) (22 messages, latest: Jan 30 2020 at 12:05)
 

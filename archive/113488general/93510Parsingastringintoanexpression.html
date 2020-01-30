@@ -236,6 +236,57 @@ run_cmd experiment &quot;true&quot;
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186948344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186948344">Simon Hudon (Jan 30 2020 at 01:49)</a>:</h4>
 <p>The serialization is not really legible. It's binary serialization format</p>
 
+<a name="186984918"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186984918" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186984918">Jason Rute (Jan 30 2020 at 13:20)</a>:</h4>
+<p>Thanks Simon!</p>
+
+<a name="186985892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186985892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186985892">Jason Rute (Jan 30 2020 at 13:33)</a>:</h4>
+<p>Ignoring the details of serialization for now (which have and could be solved in a number of ways), here is what I have in mind.  I tested it (with dummy serializations). This code works (and is very fast to call from say Python).</p>
+<div class="codehilite"><pre><span></span>import system.io
+open io
+
+meta def serialize_expr (e : expr) : string := sorry
+meta def deserialize_expr(s : string) : expr := sorry
+
+meta def apply_tactic_to_goal (t : tactic unit) (goal : expr) : tactic (list expr) :=
+do
+  -- set expression as goal
+  v &lt;- tactic.mk_meta_var goal,
+  tactic.set_goals $ [v],
+  -- run tactic on goal
+  t,
+  -- return results
+  gs &lt;- tactic.get_goals,
+  return gs
+
+meta def read_eval_print (_ : unit) : io_core error (option unit) :=
+do
+  do
+    -- get serialized expression from stdin
+    expr_str ← get_line,
+    let e := deserialize_expr expr_str,
+    -- run tactic (skip tactic in this case) on goal
+    gs ← io.run_tactic (apply_tactic_to_goal tactic.skip e),
+    -- print serialized goals to stdout
+    let goal_strs := gs.map serialize_expr,
+    put_str (to_string goal_strs),
+    return ()
+
+meta def main : io unit :=
+  -- loop forever
+  do iterate () read_eval_print,
+  return ()
+</pre></div>
+
+<a name="186986005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186986005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186986005">Jason Rute (Jan 30 2020 at 13:34)</a>:</h4>
+<p>When I say fast, I mean that the first call is slow, but after that it is really fast compared to the lean server.</p>
+
+<a name="186986141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parsing%20a%20string%20into%20an%20expression/near/186986141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93510Parsingastringintoanexpression.html#186986141">Jason Rute (Jan 30 2020 at 13:36)</a>:</h4>
+<p>Of course this is a prototype.  A better version needs error handling (and more features around selecting which tactics to apply).</p>
+
 
 {% endraw %}
 
