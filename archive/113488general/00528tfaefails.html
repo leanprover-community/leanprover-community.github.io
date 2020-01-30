@@ -1,0 +1,38 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/00528tfaefails.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/00528tfaefails.html">tfae fails</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="186959500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tfae%20fails/near/186959500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00528tfaefails.html#186959500">Yury G. Kudryashov (Jan 30 2020 at 07:01)</a>:</h4>
+<p>Hi, the following fails at <code>tfae_finish</code> with some strange <code>app_builder_exception</code> error. Any ideas?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">tfae</span>
+
+<span class="kn">lemma</span> <span class="n">test_tfae</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">unit</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="n">tfae</span> <span class="o">[</span><span class="n">p</span> <span class="o">(),</span> <span class="n">p</span> <span class="o">()]</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">tfae_have</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">↔</span> <span class="mi">2</span><span class="o">,</span> <span class="k">from</span> <span class="n">iff</span><span class="bp">.</span><span class="n">rfl</span><span class="o">,</span>
+  <span class="n">tfae_finish</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="186960278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tfae%20fails/near/186960278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00528tfaefails.html#186960278">Mario Carneiro (Jan 30 2020 at 07:22)</a>:</h4>
+<p>It gets confused with arrows in the context and thinks they are implications for the scc</p>
+
+<a name="186960421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tfae%20fails/near/186960421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00528tfaefails.html#186960421">Mario Carneiro (Jan 30 2020 at 07:26)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/issues/1930" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1930">#1930</a></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
