@@ -87,6 +87,43 @@ permalink: archive/116395maths/99877settactic.html
 <span class="kn">end</span>
 </pre></div>
 
+<a name="187016623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/187016623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#187016623">Alex J. Best (Jan 30 2020 at 18:40)</a>:</h4>
+<p>Would be fun to have a way to move these goals into equality in a boolean ring and call ring.</p>
+
+<a name="187016767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/187016767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#187016767">Kevin Buzzard (Jan 30 2020 at 18:41)</a>:</h4>
+<p>I'm currently struggling with this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">namespace</span> <span class="n">topology</span>
+
+<span class="kn">open</span> <span class="n">set</span>
+
+<span class="c">/-</span><span class="cm">- A subspace Y of a topological space X is *irreducible* if it is non-empty,</span>
+<span class="cm">and for every cover by two closed sets C₁ and C₂, one of the Cᵢ has to be Y. -/</span>
+<span class="n">def</span> <span class="n">is_irreducible</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">X</span><span class="o">]</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">Y</span><span class="o">)</span> <span class="bp">∧</span> <span class="bp">∀</span> <span class="n">C₁</span> <span class="n">C₂</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">,</span>
+  <span class="n">is_closed</span> <span class="n">C₁</span> <span class="bp">→</span> <span class="n">is_closed</span> <span class="n">C₂</span> <span class="bp">→</span> <span class="o">(</span><span class="n">C₁</span> <span class="err">∩</span> <span class="n">Y</span><span class="o">)</span> <span class="err">∪</span> <span class="o">(</span><span class="n">C₂</span> <span class="err">∩</span> <span class="n">Y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">Y</span> <span class="bp">→</span> <span class="n">C₁</span> <span class="err">∩</span> <span class="n">Y</span> <span class="bp">=</span> <span class="n">Y</span> <span class="bp">∨</span> <span class="n">C₂</span> <span class="err">∩</span> <span class="n">Y</span> <span class="bp">=</span> <span class="n">Y</span>
+
+<span class="kn">lemma</span> <span class="n">irred_iff_nonempty_open_dense</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">X</span><span class="o">]</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">):</span>
+<span class="n">is_irreducible</span> <span class="n">Y</span> <span class="bp">↔</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">Y</span><span class="o">)</span> <span class="bp">∧</span>
+  <span class="bp">∀</span> <span class="n">U₁</span> <span class="n">U₂</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">,</span> <span class="n">is_open</span> <span class="n">U₁</span> <span class="bp">→</span> <span class="n">is_open</span> <span class="n">U₂</span> <span class="bp">→</span>
+  <span class="n">U₁</span> <span class="err">∩</span> <span class="n">Y</span> <span class="bp">≠</span> <span class="err">∅</span> <span class="bp">→</span> <span class="n">U₂</span> <span class="err">∩</span> <span class="n">Y</span> <span class="bp">≠</span> <span class="err">∅</span> <span class="bp">→</span> <span class="n">U₁</span> <span class="err">∩</span> <span class="n">U₂</span> <span class="err">∩</span> <span class="n">Y</span> <span class="bp">≠</span> <span class="err">∅</span> <span class="o">:=</span>
+</pre></div>
+
+<a name="187016832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/187016832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#187016832">Kevin Buzzard (Jan 30 2020 at 18:42)</a>:</h4>
+<p>for me the proof is completely content-free -- I am surprised I can't just tactic my way to the end.</p>
+
+<a name="187016851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/187016851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#187016851">Kevin Buzzard (Jan 30 2020 at 18:42)</a>:</h4>
+<p>ooh Chris has just done it :-)</p>
+
+<a name="187016864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/187016864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#187016864">Kevin Buzzard (Jan 30 2020 at 18:42)</a>:</h4>
+<p>except he cheated</p>
+
 
 {% endraw %}
 
