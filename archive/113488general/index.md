@@ -9,19 +9,23 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (35 messages, latest: Jan 30 2020 at 14:25)
+
+* [instance alternative exceptional](62609instancealternativeexceptional.html) (1 message, latest: Jan 30 2020 at 14:25)
+
+* [Coq as a lean type checker](81552Coqasaleantypechecker.html) (40 messages, latest: Jan 30 2020 at 14:20)
+
+* [typeclass paper](35889typeclasspaper.html) (158 messages, latest: Jan 30 2020 at 14:17)
+
 * [github actions](76245githubactions.html) (41 messages, latest: Jan 30 2020 at 13:58)
 
 * [Parsing a string into an expression](93510Parsingastringintoanexpression.html) (43 messages, latest: Jan 30 2020 at 13:36)
-
-* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (32 messages, latest: Jan 30 2020 at 13:22)
 
 * [POPLmark challenge](71850POPLmarkchallenge.html) (39 messages, latest: Jan 30 2020 at 13:13)
 
 * [tfae fails](00528tfaefails.html) (4 messages, latest: Jan 30 2020 at 08:28)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (253 messages, latest: Jan 29 2020 at 22:30)
-
-* [Coq as a lean type checker](81552Coqasaleantypechecker.html) (39 messages, latest: Jan 29 2020 at 14:17)
 
 * [Consistency strength of different theorem provers](39955Consistencystrengthofdifferenttheoremprovers.html) (23 messages, latest: Jan 29 2020 at 13:28)
 
@@ -50,8 +54,6 @@ permalink: archive/113488general/index.html
 * [contrapose](82079contrapose.html) (19 messages, latest: Jan 25 2020 at 09:15)
 
 * [Prelude](22962Prelude.html) (2 messages, latest: Jan 23 2020 at 22:21)
-
-* [typeclass paper](35889typeclasspaper.html) (157 messages, latest: Jan 23 2020 at 20:28)
 
 * [simp vs rw](10028simpvsrw.html) (23 messages, latest: Jan 23 2020 at 19:29)
 

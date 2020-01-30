@@ -9,13 +9,17 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [irreducible top spaces](60989irreducibletopspaces.html) (60 messages, latest: Jan 30 2020 at 14:38)
+
+* [set tactic](99877settactic.html) (4 messages, latest: Jan 30 2020 at 14:34)
+
+* [size of a finite set](71485sizeofafiniteset.html) (5 messages, latest: Jan 30 2020 at 14:25)
+
+* [finset puzzle](85492finsetpuzzle.html) (22 messages, latest: Jan 30 2020 at 14:10)
+
 * [finset.sum_add_distrib](84005finsetsumadddistrib.html) (9 messages, latest: Jan 30 2020 at 13:01)
 
 * [Inductive construction](61623Inductiveconstruction.html) (22 messages, latest: Jan 30 2020 at 12:05)
-
-* [irreducible top spaces](60989irreducibletopspaces.html) (57 messages, latest: Jan 30 2020 at 07:31)
-
-* [set tactic](99877settactic.html) (3 messages, latest: Jan 29 2020 at 19:18)
 
 * [Combinatorics](60782Combinatorics.html) (3 messages, latest: Jan 29 2020 at 09:48)
 
@@ -36,8 +40,6 @@ permalink: archive/116395maths/index.html
 * [Notation for `filter.eventually`](56497Notationforfiltereventually.html) (2 messages, latest: Jan 25 2020 at 23:46)
 
 * [mv_polynomial puzzles](39684mvpolynomialpuzzles.html) (2 messages, latest: Jan 25 2020 at 13:29)
-
-* [finset puzzle](85492finsetpuzzle.html) (21 messages, latest: Jan 25 2020 at 01:30)
 
 * [integrals and pi](46934integralsandpi.html) (17 messages, latest: Jan 25 2020 at 01:18)
 

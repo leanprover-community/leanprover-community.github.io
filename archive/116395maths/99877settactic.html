@@ -53,6 +53,26 @@ permalink: archive/116395maths/99877settactic.html
 
 <p><code>finish [set.ext_iff]</code> doesn't do this one :-( Any idea why not?</p>
 
+<a name="186992078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/186992078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#186992078">Kevin Buzzard (Jan 30 2020 at 14:34)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">basic</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">tauto</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+<span class="o">(</span><span class="n">Y</span> <span class="n">U₁</span> <span class="n">U₂</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span>
+<span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">U₁</span> <span class="err">∩</span> <span class="n">U₂</span> <span class="err">∩</span> <span class="n">Y</span> <span class="bp">=</span> <span class="err">∅</span><span class="o">)</span> <span class="o">:</span>
+<span class="bp">-</span><span class="n">U₁</span> <span class="err">∩</span> <span class="n">Y</span> <span class="err">∪</span> <span class="bp">-</span><span class="n">U₂</span> <span class="err">∩</span> <span class="n">Y</span> <span class="bp">=</span> <span class="n">Y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">ext</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">set</span><span class="bp">.</span><span class="n">eq_empty_iff_forall_not_mem</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">replace</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">h</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">revert</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">set</span><span class="bp">.</span><span class="n">mem_union</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_inter_iff</span><span class="o">]</span><span class="bp">;</span> <span class="n">tauto</span><span class="bp">!</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Best I can do so far</p>
+
 
 {% endraw %}
 
