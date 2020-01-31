@@ -9,7 +9,7 @@ permalink: archive/187764Leanforteaching/index.html
 
 ### Topics:
 
-* [a = b \to f a = f b?](59915abtofafb.html) (5 messages, latest: Jan 31 2020 at 04:55)
+* [a = b \to f a = f b?](59915abtofafb.html) (6 messages, latest: Jan 31 2020 at 05:11)
 
 * [graphs](66822graphs.html) (10 messages, latest: Nov 22 2019 at 12:02)
 
