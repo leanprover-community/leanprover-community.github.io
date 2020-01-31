@@ -9780,6 +9780,68 @@ Lean 4, yep, that's the plan</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187046307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187046307">Chris B (Jan 31 2020 at 00:22)</a>:</h4>
 <p>Is the implementation of <code>nat.sqrt</code>/<code>nat.sqrt_aux</code> in mathlib original or is there somewhere I can read about it? I don't interact with bitwise stuff very frequently and I'm curious why it works the way it does.</p>
 
+<a name="187049207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187049207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187049207">Daniel Keys (Jan 31 2020 at 01:16)</a>:</h4>
+<p>Just starting chapter 4 in "Theorem proving with Lean". How does one produce an arbitrary element of type <code>α</code> in this example (among the exercises)?</p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="kn">variable</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span>
+<span class="kn">variable</span> <span class="n">r</span> <span class="o">:</span> <span class="kt">Prop</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">r</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">intro</span> <span class="n">pr</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">exists</span><span class="bp">.</span><span class="n">intro</span> <span class="bp">_</span> <span class="n">pr</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="187049488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187049488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187049488">Jeremy Avigad (Jan 31 2020 at 01:22)</a>:</h4>
+<p>If the exercise doesn't give t to you, it is a mistake: you need something like <code>variable a : α</code> in the assumptions. In Lean, types can be empty.</p>
+
+<a name="187049522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187049522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187049522">Daniel Keys (Jan 31 2020 at 01:23)</a>:</h4>
+<p>There is a <code>variable a : α</code>, but how can I make use of it inside the example?</p>
+
+<a name="187049637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187049637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187049637">Chris B (Jan 31 2020 at 01:26)</a>:</h4>
+<p>If you have <code>variable a : α</code> somewhere, you need to put <code>include &lt;variable name&gt;</code> above the term if you want to use variables in tactic blocks (between the <code>begin</code> and <code>end</code>)</p>
+<div class="codehilite"><pre><span></span>variable α : Type
+variable r : Prop
+variable a : α
+
+include a
+example : r → (∃ x : α, r) :=
+begin
+    intro pr,
+    exact exists.intro a pr
+end
+</pre></div>
+
+<a name="187049671"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187049671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187049671">Chris B (Jan 31 2020 at 01:26)</a>:</h4>
+<p>But in the snippet you only have <code>variable α : Type</code>.</p>
+
+<a name="187049697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187049697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187049697">Bryan Gin-ge Chen (Jan 31 2020 at 01:27)</a>:</h4>
+<p>You can also refer to <code>a</code> if you write the proof in term mode:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+<span class="kn">variable</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span>
+<span class="kn">variable</span> <span class="n">r</span> <span class="o">:</span> <span class="kt">Prop</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">r</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">hr</span><span class="o">,</span> <span class="n">exists</span><span class="bp">.</span><span class="n">intro</span> <span class="n">a</span> <span class="n">hr</span>
+</pre></div>
+
+<a name="187049784"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187049784" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187049784">Daniel Keys (Jan 31 2020 at 01:29)</a>:</h4>
+<p>Thanks! Including <code>a</code>, this is what I was missing! I edited the snippet and added <code>a</code> to the variables.</p>
+
+<a name="187049866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187049866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187049866">Chris B (Jan 31 2020 at 01:31)</a>:</h4>
+<p>There's some more detail and some stuff explaining why you actually need the include/omit bits in the Lean reference manual at the bottom of p. 37.</p>
+
+<a name="187050300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187050300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187050300">Bryan Gin-ge Chen (Jan 31 2020 at 01:41)</a>:</h4>
+<p>There's a discussion in <a href="https://leanprover.github.io/theorem_proving_in_lean/interacting_with_lean.html#more-on-sections" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/interacting_with_lean.html#more-on-sections">6.2</a> of TPiL as well.</p>
+
 
 {% endraw %}
 
