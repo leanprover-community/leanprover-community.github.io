@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1736 messages, latest: Jan 31 2020 at 10:50)
+* [noob question(s)](52075noobquestions.html) (1737 messages, latest: Jan 31 2020 at 11:30)
 
 * [list.nth_le](21637listnthle.html) (11 messages, latest: Jan 30 2020 at 17:33)
 
