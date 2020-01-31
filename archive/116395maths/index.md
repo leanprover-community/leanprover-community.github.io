@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [when does norm_num work?](40395whendoesnormnumwork.html) (7 messages, latest: Jan 31 2020 at 12:59)
+* [when does norm_num work?](40395whendoesnormnumwork.html) (8 messages, latest: Jan 31 2020 at 13:00)
 
 * [set tactic](99877settactic.html) (31 messages, latest: Jan 31 2020 at 00:09)
 
