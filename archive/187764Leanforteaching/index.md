@@ -9,6 +9,8 @@ permalink: archive/187764Leanforteaching/index.html
 
 ### Topics:
 
+* [a = b \to f a = f b?](59915abtofafb.html) (5 messages, latest: Jan 31 2020 at 04:55)
+
 * [graphs](66822graphs.html) (10 messages, latest: Nov 22 2019 at 12:02)
 
 * [Making Lean web games](00387MakingLeanwebgames.html) (1 message, latest: Nov 16 2019 at 10:50)

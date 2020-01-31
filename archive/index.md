@@ -18,7 +18,7 @@ permalink: archive/index.html
 
 * [Lean Together 2019](179818LeanTogether2019/index.html) (31 topics)
 
-* [Lean for teaching](187764Leanforteaching/index.html) (16 topics)
+* [Lean for teaching](187764Leanforteaching/index.html) (17 topics)
 
 * [kbb](141825kbb/index.html) (13 topics)
 
