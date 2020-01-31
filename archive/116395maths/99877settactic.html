@@ -228,6 +228,56 @@ permalink: archive/116395maths/99877settactic.html
 <p><code>finish</code> makes no progress on the problem (you can see where it gets stuck by examining the goal state after <code>safe</code>; in this case it just negates the goal and nothing else triggers)</p>
 <p>if you change the intersections to <code>lattice.inf</code>, <code>finish</code> will instead time out (there are too many possible rewrites)</p>
 
+<a name="187045515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20tactic/near/187045515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99877settactic.html#187045515">Jesse Michael Han (Jan 31 2020 at 00:09)</a>:</h4>
+<p>we frequently had to deal with this kind of reasoning in boolean algebras in <code>flypitch</code>; here's an example of our tools used for two of the problems in this thread</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- requires flypitch</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="bp">.</span><span class="n">to_mathlib</span>
+<span class="kn">import</span> <span class="bp">.</span><span class="n">bv_tauto</span>
+
+<span class="kn">namespace</span> <span class="n">tactic</span>
+<span class="kn">namespace</span> <span class="n">interactive</span>
+<span class="kn">open</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">interactive</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">types</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">bblast</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">simp_arg_list</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span>
+   <span class="n">simp_flag</span> <span class="err">←</span> <span class="n">succeeds</span> <span class="err">$</span> <span class="n">pure</span> <span class="n">hs</span><span class="o">,</span>
+   <span class="k">if</span> <span class="n">simp_flag</span> <span class="k">then</span>
+   <span class="o">(</span><span class="n">do</span> <span class="n">s</span> <span class="err">←</span> <span class="n">mk_simp_set</span> <span class="n">tt</span> <span class="o">[]</span> <span class="n">hs</span><span class="o">,</span>
+      <span class="n">simp_all</span> <span class="n">s</span><span class="bp">.</span><span class="mi">1</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span> <span class="o">{</span> <span class="n">fail_if_unchanged</span> <span class="o">:=</span> <span class="n">ff</span> <span class="o">})</span>
+   <span class="k">else</span> <span class="n">skip</span><span class="o">,</span>
+   <span class="n">is_eq</span> <span class="bp">&lt;-</span> <span class="n">target</span> <span class="bp">&gt;&gt;=</span> <span class="bp">λ</span> <span class="n">e</span><span class="o">,</span> <span class="n">succeeds</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">is_eq</span> <span class="n">e</span><span class="o">),</span>
+   <span class="k">if</span> <span class="n">is_eq</span> <span class="k">then</span> <span class="bp">`</span><span class="o">[</span><span class="n">refine</span> <span class="n">le_antisymm</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">]</span> <span class="k">else</span> <span class="n">skip</span><span class="o">,</span>
+   <span class="n">all_goals</span> <span class="n">tidy_context</span><span class="o">,</span>
+   <span class="n">done</span> <span class="bp">&lt;|&gt;</span> <span class="n">all_goals</span> <span class="o">(</span><span class="n">try</span> <span class="n">bv_tauto</span><span class="o">)</span>
+
+<span class="kn">end</span> <span class="n">interactive</span>
+<span class="kn">end</span> <span class="n">tactic</span>
+
+<span class="kn">open</span> <span class="n">set</span>
+
+<span class="kn">lemma</span> <span class="n">to_infs</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">S₁</span> <span class="n">S₂</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">}</span> <span class="o">:</span> <span class="n">S₁</span> <span class="err">∩</span> <span class="n">S₂</span> <span class="bp">=</span> <span class="n">S₁</span> <span class="err">⊓</span> <span class="n">S₂</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">S</span> <span class="n">V</span> <span class="n">U₁</span> <span class="n">U₂</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">U₁</span> <span class="err">∩</span> <span class="n">U₂</span> <span class="err">∩</span> <span class="o">(</span><span class="n">V</span> <span class="err">∩</span> <span class="n">S</span><span class="o">)</span> <span class="bp">=</span> <span class="n">V</span> <span class="err">∩</span> <span class="n">U₁</span> <span class="err">∩</span> <span class="o">(</span><span class="n">V</span> <span class="err">∩</span> <span class="n">U₂</span><span class="o">)</span> <span class="err">∩</span> <span class="n">S</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">bblast</span><span class="o">[</span><span class="n">to_infs</span><span class="o">]</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">lattice</span><span class="bp">.</span><span class="n">boolean_algebra</span> <span class="n">α</span><span class="o">]</span>
+<span class="o">(</span><span class="n">Y</span> <span class="n">U₁</span> <span class="n">U₂</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+<span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">U₁</span> <span class="err">⊓</span> <span class="n">U₂</span> <span class="err">⊓</span> <span class="n">Y</span> <span class="bp">=</span> <span class="err">⊥</span><span class="o">)</span> <span class="o">:</span>
+<span class="o">(</span><span class="bp">-</span><span class="n">U₁</span> <span class="err">⊓</span> <span class="n">Y</span><span class="o">)</span> <span class="err">⊔</span> <span class="o">(</span><span class="bp">-</span><span class="n">U₂</span> <span class="err">⊓</span> <span class="n">Y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">Y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">bblast</span><span class="o">,</span> <span class="k">have</span> <span class="o">:</span> <span class="err">Γ</span> <span class="bp">≤</span> <span class="bp">-</span><span class="o">(</span><span class="n">U₁</span> <span class="err">⊓</span> <span class="n">U₂</span> <span class="err">⊓</span> <span class="n">Y</span><span class="o">),</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">*</span><span class="o">,</span> <span class="n">bv_tauto</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+<span class="o">(</span><span class="n">Y</span> <span class="n">U₁</span> <span class="n">U₂</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span>
+<span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">U₁</span> <span class="err">∩</span> <span class="n">U₂</span> <span class="err">∩</span> <span class="n">Y</span> <span class="bp">=</span> <span class="err">∅</span><span class="o">)</span> <span class="o">:</span>
+<span class="o">(</span><span class="bp">-</span><span class="n">U₁</span> <span class="err">∩</span> <span class="n">Y</span><span class="o">)</span> <span class="err">∪</span> <span class="o">(</span><span class="bp">-</span><span class="n">U₂</span> <span class="err">∩</span> <span class="n">Y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">Y</span> <span class="o">:=</span>
+<span class="n">foo</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">h</span>
+</pre></div>
+
 
 {% endraw %}
 

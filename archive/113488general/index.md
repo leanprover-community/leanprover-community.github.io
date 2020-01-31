@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [POPLmark challenge](71850POPLmarkchallenge.html) (67 messages, latest: Jan 30 2020 at 23:48)
+* [POPLmark challenge](71850POPLmarkchallenge.html) (73 messages, latest: Jan 31 2020 at 00:30)
 
 * [moving mathlib to 3.5c](54190movingmathlibto35c.html) (38 messages, latest: Jan 30 2020 at 22:42)
 
