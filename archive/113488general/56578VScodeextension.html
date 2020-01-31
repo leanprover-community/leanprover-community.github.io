@@ -2081,6 +2081,21 @@ Collaborative editing in VScode</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20extension/near/187071029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56578VScodeextension.html#187071029">Rob Lewis (Jan 31 2020 at 10:18)</a>:</h4>
 <p>Adding latex to declaration doc strings is slightly harder, because those are also displayed in VSCode tooltips, so you'd want to process it there too.</p>
 
+<a name="187087078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20extension/near/187087078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56578VScodeextension.html#187087078">Greg Langmead (Jan 31 2020 at 14:17)</a>:</h4>
+<p>How are the docs generated from the mathlib source? From my preliminary investigation there would three customers consuming the markdown comments: the generation of the browsable docs, the fancy pane I'm proposing, and the hover panes. For now I'm assuming 1 and 2 can be brought into alignment by using the same third party support for some subset of LaTeX. But the hover panes look like they use a hardcoded more limited subset of markdown and wouldn't get to participate for now, so they'd show the raw LaTeX.</p>
+<p>VSCode's own built-in markdown support (which kicks in if you edit a file ending with .md) looks like just the experience I'd love to replicate: <a href="https://code.visualstudio.com/docs/languages/markdown" target="_blank" title="https://code.visualstudio.com/docs/languages/markdown">https://code.visualstudio.com/docs/languages/markdown</a>.</p>
+<p>Last remark for now: another tack that probably requires Lean dev time is to imitate literate Agda and have a whole other file extension like .llean with two els, which would in fact <em>be</em> a markdown document, with lean code in triple-backticked lean blocks like we use here on zulip. We'd then create an extention to markdown to render the lean, and we'd extend lean to ignore everything outside the lean blocks: <a href="https://agda.readthedocs.io/en/v2.5.3/tools/literate-programming.html" target="_blank" title="https://agda.readthedocs.io/en/v2.5.3/tools/literate-programming.html">https://agda.readthedocs.io/en/v2.5.3/tools/literate-programming.html</a></p>
+
+<a name="187090236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20extension/near/187090236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56578VScodeextension.html#187090236">Rob Lewis (Jan 31 2020 at 14:54)</a>:</h4>
+<blockquote>
+<p>How are the docs generated from the mathlib source?</p>
+</blockquote>
+<p><a href="https://github.com/leanprover-community/doc-gen" target="_blank" title="https://github.com/leanprover-community/doc-gen">https://github.com/leanprover-community/doc-gen</a><br>
+A metaprogram imports all of mathlib and builds a json file with doc strings, type info, line numbers, module doc strings, etc. Then this gets fed into a Python script that builds the HTML, including processing the markdown.</p>
+<p>I have no idea how much control the VSCode extension gives us over the hover panes.</p>
+
 
 {% endraw %}
 
