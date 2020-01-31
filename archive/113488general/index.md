@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [VScode extension](56578VScodeextension.html) (461 messages, latest: Jan 31 2020 at 03:58)
+* [POPLmark challenge](71850POPLmarkchallenge.html) (80 messages, latest: Jan 31 2020 at 06:50)
 
-* [POPLmark challenge](71850POPLmarkchallenge.html) (78 messages, latest: Jan 31 2020 at 03:08)
+* [VScode extension](56578VScodeextension.html) (461 messages, latest: Jan 31 2020 at 03:58)
 
 * [Coq as a lean type checker](81552Coqasaleantypechecker.html) (41 messages, latest: Jan 31 2020 at 02:43)
 
