@@ -68,6 +68,26 @@ permalink: archive/116395maths/40395whendoesnormnumwork.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/when%20does%20norm_num%20work%3F/near/187080920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40395whendoesnormnumwork.html#187080920">Mario Carneiro (Jan 31 2020 at 13:00)</a>:</h4>
 <p>I've mentioned this before, but the "right" solution here is a <code>cbv</code> tactic like coq's that will perform actual reduction, similar to what the VM does but with proofs</p>
 
+<a name="187117956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/when%20does%20norm_num%20work%3F/near/187117956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40395whendoesnormnumwork.html#187117956">Johan Commelin (Jan 31 2020 at 19:57)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">bernoulli_four</span>  <span class="o">:</span> <span class="n">bernoulli</span> <span class="mi">4</span> <span class="bp">=</span> <span class="bp">-</span><span class="mi">1</span><span class="bp">/</span><span class="mi">30</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">bernoulli_def</span><span class="o">],</span>
+  <span class="n">repeat</span>
+  <span class="o">{</span> <span class="n">try</span> <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="n">finset</span><span class="bp">.</span><span class="n">sum_range_succ</span><span class="o">]</span> <span class="o">},</span>
+    <span class="n">try</span> <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">choose_succ_succ</span><span class="o">]</span> <span class="o">},</span>
+    <span class="n">simp</span><span class="o">,</span> <span class="n">norm_num1</span><span class="o">,</span> <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>This runs fine now, although it isn't instant.</p>
+
+<a name="187118084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/when%20does%20norm_num%20work%3F/near/187118084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40395whendoesnormnumwork.html#187118084">Johan Commelin (Jan 31 2020 at 19:58)</a>:</h4>
+<p>Does it make sense to cache certain small computations in mathlib as simp-lemmas?<br>
+For example, do we want <code>n.choose k = foo</code> for all <code>n,k &lt;= 10</code>?</p>
+
 
 {% endraw %}
 

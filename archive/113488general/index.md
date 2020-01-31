@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Memory consumption](33977Memoryconsumption.html) (12 messages, latest: Jan 31 2020 at 18:56)
+* [VScode extension](56578VScodeextension.html) (468 messages, latest: Jan 31 2020 at 19:05)
 
-* [VScode extension](56578VScodeextension.html) (467 messages, latest: Jan 31 2020 at 17:54)
+* [Memory consumption](33977Memoryconsumption.html) (12 messages, latest: Jan 31 2020 at 18:56)
 
 * [POPLmark challenge](71850POPLmarkchallenge.html) (91 messages, latest: Jan 31 2020 at 17:06)
 
