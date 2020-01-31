@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Memory consumption](33977Memoryconsumption.html) (11 messages, latest: Jan 31 2020 at 09:17)
+
 * [POPLmark challenge](71850POPLmarkchallenge.html) (80 messages, latest: Jan 31 2020 at 06:50)
 
 * [VScode extension](56578VScodeextension.html) (461 messages, latest: Jan 31 2020 at 03:58)
@@ -18,8 +20,6 @@ permalink: archive/113488general/index.html
 * [order of input variables](79611orderofinputvariables.html) (1 message, latest: Jan 31 2020 at 02:36)
 
 * [moving mathlib to 3.5c](54190movingmathlibto35c.html) (38 messages, latest: Jan 30 2020 at 22:42)
-
-* [Memory consumption](33977Memoryconsumption.html) (10 messages, latest: Jan 30 2020 at 21:51)
 
 * [github actions](76245githubactions.html) (44 messages, latest: Jan 30 2020 at 20:28)
 
