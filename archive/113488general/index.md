@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [POPLmark challenge](71850POPLmarkchallenge.html) (90 messages, latest: Jan 31 2020 at 16:42)
+* [VScode extension](56578VScodeextension.html) (467 messages, latest: Jan 31 2020 at 17:54)
 
-* [VScode extension](56578VScodeextension.html) (465 messages, latest: Jan 31 2020 at 14:54)
+* [POPLmark challenge](71850POPLmarkchallenge.html) (91 messages, latest: Jan 31 2020 at 17:06)
 
 * [moving mathlib to 3.5c](54190movingmathlibto35c.html) (42 messages, latest: Jan 31 2020 at 12:08)
 
