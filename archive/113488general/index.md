@@ -9,7 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [POPLmark challenge](71850POPLmarkchallenge.html) (74 messages, latest: Jan 31 2020 at 01:41)
+* [POPLmark challenge](71850POPLmarkchallenge.html) (76 messages, latest: Jan 31 2020 at 02:55)
+
+* [Coq as a lean type checker](81552Coqasaleantypechecker.html) (41 messages, latest: Jan 31 2020 at 02:43)
+
+* [order of input variables](79611orderofinputvariables.html) (1 message, latest: Jan 31 2020 at 02:36)
 
 * [moving mathlib to 3.5c](54190movingmathlibto35c.html) (38 messages, latest: Jan 30 2020 at 22:42)
 
@@ -18,8 +22,6 @@ permalink: archive/113488general/index.html
 * [github actions](76245githubactions.html) (44 messages, latest: Jan 30 2020 at 20:28)
 
 * [instance alternative exceptional](62609instancealternativeexceptional.html) (1 message, latest: Jan 30 2020 at 14:25)
-
-* [Coq as a lean type checker](81552Coqasaleantypechecker.html) (40 messages, latest: Jan 30 2020 at 14:20)
 
 * [typeclass paper](35889typeclasspaper.html) (158 messages, latest: Jan 30 2020 at 14:17)
 
