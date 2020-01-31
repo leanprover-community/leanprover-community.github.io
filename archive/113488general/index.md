@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Memory consumption](33977Memoryconsumption.html) (12 messages, latest: Jan 31 2020 at 18:56)
+
 * [VScode extension](56578VScodeextension.html) (467 messages, latest: Jan 31 2020 at 17:54)
 
 * [POPLmark challenge](71850POPLmarkchallenge.html) (91 messages, latest: Jan 31 2020 at 17:06)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [moving mathlib to 3.5c](54190movingmathlibto35c.html) (42 messages, latest: Jan 31 2020 at 12:08)
 
 * [delete `mul_right_inv`](52203deletemulrightinv.html) (6 messages, latest: Jan 31 2020 at 11:52)
-
-* [Memory consumption](33977Memoryconsumption.html) (11 messages, latest: Jan 31 2020 at 09:17)
 
 * [Coq as a lean type checker](81552Coqasaleantypechecker.html) (41 messages, latest: Jan 31 2020 at 02:43)
 
