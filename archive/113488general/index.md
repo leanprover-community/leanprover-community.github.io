@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [POPLmark challenge](71850POPLmarkchallenge.html) (76 messages, latest: Jan 31 2020 at 02:55)
+* [VScode extension](56578VScodeextension.html) (461 messages, latest: Jan 31 2020 at 03:58)
+
+* [POPLmark challenge](71850POPLmarkchallenge.html) (78 messages, latest: Jan 31 2020 at 03:08)
 
 * [Coq as a lean type checker](81552Coqasaleantypechecker.html) (41 messages, latest: Jan 31 2020 at 02:43)
 
@@ -160,8 +162,6 @@ permalink: archive/113488general/index.html
 * [Lean 3.5.0c Released](69981Lean350cReleased.html) (24 messages, latest: Jan 01 2020 at 13:03)
 
 * [What do we know about Lean 4?](05425WhatdoweknowaboutLean4.html) (18 messages, latest: Dec 31 2019 at 15:27)
-
-* [VScode extension](56578VScodeextension.html) (457 messages, latest: Dec 31 2019 at 11:08)
 
 * [Beer reward](97796Beerreward.html) (35 messages, latest: Dec 30 2019 at 09:02)
 
