@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [when does norm_num work?](40395whendoesnormnumwork.html) (7 messages, latest: Jan 31 2020 at 12:59)
+
 * [set tactic](99877settactic.html) (31 messages, latest: Jan 31 2020 at 00:09)
 
 * [Conway addition thing](42264Conwayadditionthing.html) (11 messages, latest: Jan 30 2020 at 20:05)

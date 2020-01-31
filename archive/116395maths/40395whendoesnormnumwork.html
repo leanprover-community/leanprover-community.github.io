@@ -1,0 +1,70 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/40395whendoesnormnumwork.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/40395whendoesnormnumwork.html">when does norm_num work?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="187080093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/when%20does%20norm_num%20work%3F/near/187080093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40395whendoesnormnumwork.html#187080093">Johan Commelin (Jan 31 2020 at 12:50)</a>:</h4>
+<p>I've written the definition of the Bernoulli numbers, and wanted to test my implementation. <code>#eval</code> computes the first 16 numbers in a breeze. But if I want a verified computation <code>by norm_num</code> fails (because simplify, or something). What is the correct way to write a test for my definition?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">stream</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">section</span> <span class="n">bernoulli</span>
+
+<span class="n">def</span> <span class="n">bernoulli_fun</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">×</span> <span class="n">ℚ</span><span class="o">))</span> <span class="o">:</span> <span class="n">ℚ</span> <span class="o">:=</span>
+<span class="mi">1</span> <span class="bp">-</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">sum</span> <span class="err">$</span> <span class="n">l</span><span class="bp">.</span><span class="n">map</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">k</span><span class="o">,</span><span class="n">B</span><span class="bp">⟩</span><span class="o">,</span> <span class="o">(</span><span class="n">n</span><span class="bp">.</span><span class="n">choose</span> <span class="n">k</span><span class="o">)</span> <span class="bp">*</span> <span class="n">B</span> <span class="bp">/</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">k</span><span class="o">))</span>
+
+<span class="n">def</span> <span class="n">bernoulli_aux</span> <span class="o">:</span> <span class="n">stream</span> <span class="o">((</span><span class="bp">ℕ</span> <span class="bp">×</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">×</span> <span class="n">list</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">×</span> <span class="n">ℚ</span><span class="o">))</span> <span class="o">:=</span>
+<span class="n">stream</span><span class="bp">.</span><span class="n">iterate</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="bp">⟨⟨</span><span class="n">n</span><span class="o">,</span> <span class="n">B</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">l</span><span class="bp">⟩</span><span class="o">,</span> <span class="o">((</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">bernoulli_fun</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">((</span><span class="n">n</span><span class="o">,</span> <span class="n">B</span><span class="o">)</span> <span class="bp">::</span> <span class="n">l</span><span class="o">)),</span> <span class="o">((</span><span class="n">n</span><span class="o">,</span> <span class="n">B</span><span class="o">)</span> <span class="bp">::</span> <span class="n">l</span><span class="o">)))</span>
+  <span class="o">((</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">),</span> <span class="o">[])</span>
+
+<span class="n">def</span> <span class="n">bernoulli</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℚ</span> <span class="o">:=</span> <span class="o">(</span><span class="n">bernoulli_aux</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">fst</span><span class="bp">.</span><span class="n">snd</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">bernoulli_aux</span> <span class="mi">16</span>
+<span class="c1">-- ((16, -3617/510), [(15, 0), (14, 7/6), (13, 0), (12, -691/2730), (11, 0), (10, 5/66), (9, 0), (8, -1/30), (7, 0), (6, 1/42), (5, 0), (4, -1/30), (3, 0), (2, 1/6), (1, 1/2), (0, 1)]) :=</span>
+
+<span class="kn">lemma</span> <span class="n">bernoulli_zero</span>  <span class="o">:</span> <span class="n">bernoulli</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">1</span>   <span class="o">:=</span> <span class="n">rfl</span>
+<span class="kn">lemma</span> <span class="n">bernoulli_one</span>   <span class="o">:</span> <span class="n">bernoulli</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">1</span><span class="bp">/</span><span class="mi">2</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="kn">lemma</span> <span class="n">bernoulli_two</span>   <span class="o">:</span> <span class="n">bernoulli</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">1</span><span class="bp">/</span><span class="mi">6</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="kn">lemma</span> <span class="n">bernoulli_three</span> <span class="o">:</span> <span class="n">bernoulli</span> <span class="mi">3</span> <span class="bp">=</span> <span class="mi">0</span>   <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span> <span class="c1">-- fails</span>
+
+<span class="kn">end</span> <span class="n">bernoulli</span>
+</pre></div>
+
+<a name="187080477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/when%20does%20norm_num%20work%3F/near/187080477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40395whendoesnormnumwork.html#187080477">Mario Carneiro (Jan 31 2020 at 12:55)</a>:</h4>
+<p><code>norm_num</code> doesn't know anything about "your" functions. You have to use <code>norm_num [bernoulli]</code> to have any chance of this working. With luck, that's all that is necessary, as long as all the necessary <code>list.sum</code> simp lemmas are available</p>
+
+<a name="187080613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/when%20does%20norm_num%20work%3F/near/187080613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40395whendoesnormnumwork.html#187080613">Johan Commelin (Jan 31 2020 at 12:57)</a>:</h4>
+<p>Does <code>norm_num</code> look at <code>simp</code> attributes?</p>
+
+<a name="187080631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/when%20does%20norm_num%20work%3F/near/187080631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40395whendoesnormnumwork.html#187080631">Mario Carneiro (Jan 31 2020 at 12:57)</a>:</h4>
+<p><code>norm_num</code> is actually <code>repeat {norm_num1, simp}</code></p>
+
+<a name="187080698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/when%20does%20norm_num%20work%3F/near/187080698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40395whendoesnormnumwork.html#187080698">Johan Commelin (Jan 31 2020 at 12:58)</a>:</h4>
+<p>Unfortunately, it doesn't work</p>
+
+<a name="187080731"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/when%20does%20norm_num%20work%3F/near/187080731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40395whendoesnormnumwork.html#187080731">Mario Carneiro (Jan 31 2020 at 12:58)</a>:</h4>
+<p>do the usual thing: look at how it got stuck, identify the next simp lemma to get it unstuck</p>
+
+<a name="187080773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/when%20does%20norm_num%20work%3F/near/187080773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40395whendoesnormnumwork.html#187080773">Johan Commelin (Jan 31 2020 at 12:59)</a>:</h4>
+<p>I see, I'll try that</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
