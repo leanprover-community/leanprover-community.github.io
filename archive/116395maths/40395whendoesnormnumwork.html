@@ -88,6 +88,43 @@ permalink: archive/116395maths/40395whendoesnormnumwork.html
 <p>Does it make sense to cache certain small computations in mathlib as simp-lemmas?<br>
 For example, do we want <code>n.choose k = foo</code> for all <code>n,k &lt;= 10</code>?</p>
 
+<a name="187118634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/when%20does%20norm_num%20work%3F/near/187118634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40395whendoesnormnumwork.html#187118634">Mario Carneiro (Jan 31 2020 at 20:04)</a>:</h4>
+<p>You could generate those lemmas with a tactic</p>
+
+<a name="187118700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/when%20does%20norm_num%20work%3F/near/187118700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40395whendoesnormnumwork.html#187118700">Johan Commelin (Jan 31 2020 at 20:05)</a>:</h4>
+<p>Ooh, in this case I'm not too worried about manual duplication (-;</p>
+
+<a name="187118716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/when%20does%20norm_num%20work%3F/near/187118716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40395whendoesnormnumwork.html#187118716">Johan Commelin (Jan 31 2020 at 20:05)</a>:</h4>
+<p>But do we want to spend 20 seconds on verifying those simp-lemmas every build?</p>
+
+<a name="187118777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/when%20does%20norm_num%20work%3F/near/187118777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40395whendoesnormnumwork.html#187118777">Gabriel Ebner (Jan 31 2020 at 20:06)</a>:</h4>
+<p>The more important issue that the simplifier tries to apply those 11*11 simp-lemmas every time it sees <code>choose</code>.</p>
+
+<a name="187118841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/when%20does%20norm_num%20work%3F/near/187118841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40395whendoesnormnumwork.html#187118841">Mario Carneiro (Jan 31 2020 at 20:07)</a>:</h4>
+<p>stupid simp...</p>
+
+<a name="187118864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/when%20does%20norm_num%20work%3F/near/187118864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40395whendoesnormnumwork.html#187118864">Johan Commelin (Jan 31 2020 at 20:07)</a>:</h4>
+<p>Ok, we could put them in a separate set</p>
+
+<a name="187118970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/when%20does%20norm_num%20work%3F/near/187118970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40395whendoesnormnumwork.html#187118970">Mario Carneiro (Jan 31 2020 at 20:09)</a>:</h4>
+<p>This should be a norm_num extension, but I never properly set that up</p>
+
+<a name="187119156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/when%20does%20norm_num%20work%3F/near/187119156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40395whendoesnormnumwork.html#187119156">Johan Commelin (Jan 31 2020 at 20:11)</a>:</h4>
+<p>Here's what I have now: <a href="https://github.com/leanprover-community/mathlib/blob/a99538789fff693c88be290fd45a89b199ecc800/src/data/generating_function.lean#L152L179" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/a99538789fff693c88be290fd45a89b199ecc800/src/data/generating_function.lean#L152L179">https://github.com/leanprover-community/mathlib/blob/a99538789fff693c88be290fd45a89b199ecc800/src/data/generating_function.lean#L152L179</a><br>
+A nice definition of <code>bernoulli</code> required a new version of <code>nat.strong_rec_on</code></p>
+
+<a name="187119212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/when%20does%20norm_num%20work%3F/near/187119212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40395whendoesnormnumwork.html#187119212">Johan Commelin (Jan 31 2020 at 20:12)</a>:</h4>
+<p>I was very surprised to see that it was a definition that completely happened in tactic mode. Also, I couldn't prove anything about it.</p>
+
 
 {% endraw %}
 
