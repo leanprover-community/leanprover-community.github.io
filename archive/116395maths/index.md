@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [How to prove unbound_prop](60281Howtoproveunboundprop.html) (2 messages, latest: Feb 01 2020 at 06:10)
+* [How to prove unbound_prop](60281Howtoproveunboundprop.html) (5 messages, latest: Feb 01 2020 at 07:55)
 
 * [when does norm_num work?](40395whendoesnormnumwork.html) (19 messages, latest: Jan 31 2020 at 20:12)
 
