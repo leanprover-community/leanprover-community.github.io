@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [POPLmark challenge](71850POPLmarkchallenge.html) (95 messages, latest: Feb 01 2020 at 06:58)
+
 * [VScode extension](56578VScodeextension.html) (471 messages, latest: Jan 31 2020 at 23:55)
 
 * [moving mathlib to 3.5c](54190movingmathlibto35c.html) (44 messages, latest: Jan 31 2020 at 23:43)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [Bonn](14414Bonn.html) (9 messages, latest: Jan 31 2020 at 22:48)
 
 * [Memory consumption](33977Memoryconsumption.html) (12 messages, latest: Jan 31 2020 at 18:56)
-
-* [POPLmark challenge](71850POPLmarkchallenge.html) (91 messages, latest: Jan 31 2020 at 17:06)
 
 * [delete `mul_right_inv`](52203deletemulrightinv.html) (6 messages, latest: Jan 31 2020 at 11:52)
 
