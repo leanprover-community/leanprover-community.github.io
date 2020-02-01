@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [How to prove unbound_prop](60281Howtoproveunboundprop.html) (9 messages, latest: Feb 01 2020 at 11:58)
+* [when does norm_num work?](40395whendoesnormnumwork.html) (26 messages, latest: Feb 01 2020 at 12:52)
 
-* [when does norm_num work?](40395whendoesnormnumwork.html) (25 messages, latest: Feb 01 2020 at 10:53)
+* [How to prove unbound_prop](60281Howtoproveunboundprop.html) (9 messages, latest: Feb 01 2020 at 11:58)
 
 * [set tactic](99877settactic.html) (31 messages, latest: Jan 31 2020 at 00:09)
 
