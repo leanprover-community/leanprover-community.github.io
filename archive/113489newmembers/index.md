@@ -9,6 +9,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [example : ¬ (∃ x, ¬ p x) → (∀ x, p x)](34382examplexpxxpx.html) (47 messages, latest: Feb 01 2020 at 16:39)
+
+* [example : ¬ (∀ x, ¬ p x) → (∃ x, p x)](02222examplexpxxpx.html) (88 messages, latest: Feb 01 2020 at 16:38)
+
 * [noob question(s)](52075noobquestions.html) (1737 messages, latest: Jan 31 2020 at 11:30)
 
 * [list.nth_le](21637listnthle.html) (11 messages, latest: Jan 30 2020 at 17:33)
@@ -365,8 +369,6 @@ permalink: archive/113489newmembers/index.html
 
 * [commuting endomorphisms simultaneously diagonalisable](49689commutingendomorphismssimultaneouslydiagonalisable.html) (5 messages, latest: Nov 04 2019 at 22:13)
 
-* [example : ¬ (∀ x, ¬ p x) → (∃ x, p x)](02222examplexpxxpx.html) (73 messages, latest: Nov 04 2019 at 19:36)
-
 * [I proved divisibility is transitive!](29909Iproveddivisibilityistransitive.html) (30 messages, latest: Nov 04 2019 at 16:15)
 
 * [Bug with letter H?](80050BugwithletterH.html) (5 messages, latest: Nov 04 2019 at 09:51)
@@ -374,8 +376,6 @@ permalink: archive/113489newmembers/index.html
 * [Look for lemma](97673Lookforlemma.html) (4 messages, latest: Nov 02 2019 at 21:56)
 
 * [Proof review](93401Proofreview.html) (40 messages, latest: Nov 02 2019 at 15:53)
-
-* [example : ¬ (∃ x, ¬ p x) → (∀ x, p x)](34382examplexpxxpx.html) (41 messages, latest: Nov 02 2019 at 08:57)
 
 * [How to make Vec polymorphic over the universe levels?](53884HowtomakeVecpolymorphicovertheuniverselevels.html) (31 messages, latest: Nov 02 2019 at 08:42)
 

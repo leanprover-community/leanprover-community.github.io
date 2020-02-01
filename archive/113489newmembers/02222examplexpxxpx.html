@@ -374,6 +374,117 @@ permalink: archive/113489newmembers/02222examplexpxxpx.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/179867249" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#179867249">Johan Commelin (Nov 04 2019 at 19:36)</a>:</h4>
 <p>Anyway... let's do some maths (-;</p>
 
+<a name="187167340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/187167340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#187167340">Daniel Keys (Feb 01 2020 at 16:12)</a>:</h4>
+<p>Still new to chapter 4 in TPiL, although I went through chapter 5. Trying to do this same proof in tactic mode, which is more intuitive for me, but I need some help. Here is the proof term built explicitly, together with my attempt at using tactic mode:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">T06_1</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+    <span class="o">(</span><span class="k">assume</span> <span class="n">hnAxnpx</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span><span class="o">),</span>
+        <span class="n">by_contradiction</span>
+            <span class="o">(</span><span class="bp">λ</span> <span class="n">hnExpx</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">),</span>
+                <span class="o">(</span><span class="n">hnAxnpx</span>
+                    <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hpx</span><span class="o">,</span>
+                        <span class="n">hnExpx</span> <span class="o">(</span><span class="n">exists</span><span class="bp">.</span><span class="n">intro</span> <span class="n">x</span> <span class="n">hpx</span><span class="o">))))))</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">T06_1</span>
+<span class="c1">-- it appears this is needed in tactic mode</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+<span class="kn">theorem</span> <span class="n">T06_2</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">intro</span> <span class="n">hnAxnpx</span><span class="o">,</span>
+    <span class="n">by_contradiction</span><span class="o">,</span> <span class="c1">-- introduces a_1 : ¬∃ (x : α), p x</span>
+    <span class="c1">-- but I don&#39;t find a way to use it (intro does not work)</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>At this point I'm not sure why I can't grab the extra hypothesis. How can this proof in <code>T06_2</code> be completed?</p>
+
+<a name="187167555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/187167555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#187167555">Patrick Massot (Feb 01 2020 at 16:18)</a>:</h4>
+<p>There is nothing to <code>intro</code>, you are trying to prove <code>false</code></p>
+
+<a name="187167560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/187167560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#187167560">Patrick Massot (Feb 01 2020 at 16:18)</a>:</h4>
+<p>You need to use something that produces <code>false</code> aka a negation.</p>
+
+<a name="187167580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/187167580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#187167580">Patrick Massot (Feb 01 2020 at 16:19)</a>:</h4>
+<p>You should have two of them in your context. One is created by <code>by_contradiction</code>, but applying it would be going back.</p>
+
+<a name="187167639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/187167639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#187167639">Kenny Lau (Feb 01 2020 at 16:20)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span>
+<span class="kn">open</span> <span class="n">classical</span>
+
+<span class="kn">theorem</span> <span class="n">T06_1</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">hnAxnpx</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span><span class="o">),</span>
+  <span class="n">by_contradiction</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">hnExpx</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">),</span>
+      <span class="o">(</span><span class="n">hnAxnpx</span>
+        <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hpx</span><span class="o">,</span>
+          <span class="n">hnExpx</span> <span class="o">(</span><span class="n">exists</span><span class="bp">.</span><span class="n">intro</span> <span class="n">x</span> <span class="n">hpx</span><span class="o">)))))</span>
+
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+<span class="kn">theorem</span> <span class="n">T06_2</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">hnAxnpx</span><span class="o">,</span>
+  <span class="n">by_contradiction</span> <span class="n">hnExpx</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">hnAxnpx</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">hpx</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">hnExpx</span><span class="o">,</span>
+  <span class="n">existsi</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">hpx</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="187167647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/187167647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#187167647">Patrick Massot (Feb 01 2020 at 16:20)</a>:</h4>
+<p>Kenny... I was trying to lead him gently.</p>
+
+<a name="187167719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/187167719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#187167719">Daniel Keys (Feb 01 2020 at 16:22)</a>:</h4>
+<p>This would not have worked! I didn't know that I could have something like <code>by_contradiction hnExpx</code>. So that's the 'intro' I was looking for; after that you can use it. Thank you both Kenny, Patrick!</p>
+
+<a name="187167731"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/187167731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#187167731">Patrick Massot (Feb 01 2020 at 16:23)</a>:</h4>
+<p>Let's try to comment a bit on efficiency then. Note that Kenny's two lines of <code>intro</code> can be merged in one <code>intros x hpx</code>. The last two lines can also be merged into <code>use [x, hpx]</code>. Of course you could also merge with the previous line, but this clearly going towards a proof term.</p>
+
+<a name="187167776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/187167776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#187167776">Patrick Massot (Feb 01 2020 at 16:24)</a>:</h4>
+<blockquote>
+<p>This would not have worked! I didn't know that I could have something like <code>by_contradiction hnExpx</code>. So that's the 'intro' I was looking for; after that you can use it. Thank you both Kenny, Patrick!</p>
+</blockquote>
+<p>This variation is only providing an explicit name you didn't provide (you wrote Lean chose <code>a_1</code> instead of <code>hnExpx</code>).</p>
+
+<a name="187167796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/187167796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#187167796">Patrick Massot (Feb 01 2020 at 16:25)</a>:</h4>
+<p>While you're learning tactics, note also that, if you are using mathlib, you can do the proof by <code>push_neg, tauto</code>.</p>
+
+<a name="187167916"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/187167916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#187167916">Daniel Keys (Feb 01 2020 at 16:28)</a>:</h4>
+<p>The <code>intros</code> part I already knew from the natural number game. The use of <code>a_1</code> was kind of cryptic, I tried to use it (probably in a wrong way) but Lean would not allow me to work with it at all. Or maybe I should say I didn't know how to! There are so many aspects to Lean proofs. </p>
+<p>I don't want to go to the more automatic tools yet. Not until I understand how all these basics work. It is so simple in your head, and sometimes you need hours to figure it out in Lean. But things are getting better. Slowly.</p>
+
+<a name="187167939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/187167939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#187167939">Patrick Massot (Feb 01 2020 at 16:29)</a>:</h4>
+<p>I mean you should go back to the attempt you posted, and try to finish it using what you understood from our explanations.</p>
+
+<a name="187167987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/187167987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#187167987">Daniel Keys (Feb 01 2020 at 16:30)</a>:</h4>
+<p>Oh, absolutely!</p>
+
+<a name="187168053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/187168053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#187168053">Patrick Massot (Feb 01 2020 at 16:32)</a>:</h4>
+<blockquote>
+<p>The <code>intros</code> part I already knew from the natural number game. The use of <code>a_1</code> was kind of cryptic, I tried to use it (probably in a wrong way) but Lean would not allow me to work with it at all. Or maybe I should say I didn't know how to! There are so many aspects to Lean proofs. </p>
+<p>I don't want to go to the more automatic tools yet. Not until I understand how all these basics work. It is so simple in your head, and sometimes you need hours to figure it out in Lean. But things are getting better. Slowly.</p>
+</blockquote>
+<p>I think your main issue is not about knowing Lean tactics. It's about really internalizing that negation of a statement <code>P</code> is <code>P -&gt; false</code>.</p>
+
+<a name="187168248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/187168248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#187168248">Daniel Keys (Feb 01 2020 at 16:38)</a>:</h4>
+<p>Maybe, or maybe not. We don't need to believe everything we think either! -:)</p>
+
 
 {% endraw %}
 
