@@ -42,6 +42,37 @@ How to prove when r is wrong here</p>
 </blockquote>
 <p>I'm so sorry but i want to ask what is $ means here, and i know id meaning but i don't understand what its'meaning here, can you give me a explain？ thanks</p>
 
+<a name="187152905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20prove%20unbound_prop/near/187152905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60281Howtoproveunboundprop.html#187152905">Yury G. Kudryashov (Feb 01 2020 at 08:09)</a>:</h4>
+<p>Removed the dollar sign. <code>f $ x</code> is <code>f x</code>, <code>f $ g x</code> is <code>f (g x)</code> etc.</p>
+
+<a name="187153912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20prove%20unbound_prop/near/187153912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/60281Howtoproveunboundprop.html#187153912">Bryan Gin-ge Chen (Feb 01 2020 at 08:42)</a>:</h4>
+<p><code>(f $ x y z)</code> means the same thing as <code>(f (x y z))</code>. It lets you write function application with fewer parentheses.</p>
+<blockquote>
+<p>i know id meaning but i don't understand what its'meaning here</p>
+</blockquote>
+<p>Let's start by investigating <code>λ x, (H x).elim id (λ hr', absurd hr' hr)</code>. If you replace that entire term with an underscore, Lean will report an error which will tell you what the type is: </p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">{</span><span class="n">r</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span> <span class="bp">∨</span> <span class="n">r</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">∨</span> <span class="n">r</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">classical</span><span class="bp">.</span><span class="n">by_cases</span> <span class="n">or</span><span class="bp">.</span><span class="n">inr</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hr</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="err">$</span> <span class="bp">_</span><span class="o">)</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">don&#39;t know how to synthesize placeholder</span>
+<span class="cm">context:</span>
+<span class="cm">α : Type ?,</span>
+<span class="cm">p : α → Prop,</span>
+<span class="cm">r : Prop,</span>
+<span class="cm">H : ∀ (x : α), p x ∨ r,</span>
+<span class="cm">hr : ¬r</span>
+<span class="cm">⊢ ∀ (x : α), p x</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>This tells us that <code> λ x, (H x).elim id (λ hr', absurd hr' hr) : ∀ (x : α), p x</code> and hence <code>(H x).elim id (λ hr', absurd hr' hr) : p x</code>.</p>
+<p>Next, you should be able to see that <code>(H x)</code> has type <code>p x ∨ r</code> (try putting your cursor over <code>H</code> and <code>x</code> in your editor). What may be less familiar is that <code>(H x).elim</code> is short for <code>or.elim (H x)</code> (this uses Lean's "dot notation", see the text after "Lean provides another useful syntactic gadget" <a href="https://leanprover.github.io/theorem_proving_in_lean/propositions_and_proofs.html#conjunction" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/propositions_and_proofs.html#conjunction">in 3.1 of Theorem Proving in Lean</a>). </p>
+<p><code>or.elim</code> has type <code>∀ {a b c : Prop}, a ∨ b → (a → c) → (b → c) → c</code>, so <code>(H x).elim</code> has type: <code>(p x → p x) → (r → p x) → p x</code>. The type of the first argument is <code>(p x → p x)</code>, which matches the type of <code>id : Π {α : Sort u_1}, α → α</code>. You could also replace <code>id</code> with the equivalent term, <code>λ hpx, hpx</code>.</p>
+<p>Informally, the last paragraph above could be stated this way: we've shown <code>p x ∨ r</code> and we want to prove <code>p x</code>. We have two cases, and the first one is to show <code>p x</code> from <code>p x</code>. This trivial implication is <code>id</code>.</p>
+
 
 {% endraw %}
 
