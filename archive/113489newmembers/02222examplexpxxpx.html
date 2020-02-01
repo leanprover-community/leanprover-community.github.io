@@ -485,6 +485,48 @@ permalink: archive/113489newmembers/02222examplexpxxpx.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/187168248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#187168248">Daniel Keys (Feb 01 2020 at 16:38)</a>:</h4>
 <p>Maybe, or maybe not. We don't need to believe everything we think either! -:)</p>
 
+<a name="187174990"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/187174990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#187174990">Daniel Keys (Feb 01 2020 at 20:09)</a>:</h4>
+<p>Here's the other direction, where again I'm not sure how to proceed:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">T06R</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">intros</span> <span class="n">hExpx</span> <span class="n">H</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>At this point <code>H</code> and <code>hExpx</code> are so obviously in contradiction...but I don't know how to manipulate them. My idea would be to obtain an <code>x</code> for which <code>p x</code> holds, then to contrast the <code>not p</code> from <code>H</code> to obtain the needed <code>false</code>. Tried using <code>match</code> (sec. 4.4 in TPiL) with no success. Any hint on how to move forward?</p>
+
+<a name="187175240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/187175240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#187175240">Bryan Gin-ge Chen (Feb 01 2020 at 20:16)</a>:</h4>
+<p>You can use <code>rintro</code> / <code>rcases</code> on existential hypotheses:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span>
+
+<span class="kn">theorem</span> <span class="n">T06R</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rintro</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hpx</span><span class="bp">⟩</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">h</span> <span class="n">x</span> <span class="n">hpx</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>It's short for this (which doesn't need the import):</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span>
+
+<span class="kn">theorem</span> <span class="n">T06R</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">hExpx</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">hExpx</span> <span class="k">with</span> <span class="n">x</span> <span class="n">hpx</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">H</span> <span class="n">x</span> <span class="n">hpx</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="187175739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/187175739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#187175739">Daniel Keys (Feb 01 2020 at 20:33)</a>:</h4>
+<p>I definitely should have known this already! Thanks!</p>
+
 
 {% endraw %}
 

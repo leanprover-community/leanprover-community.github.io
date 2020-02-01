@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [example : ¬ (∃ x, ¬ p x) → (∀ x, p x)](34382examplexpxxpx.html) (47 messages, latest: Feb 01 2020 at 16:39)
+* [example : ¬ (∀ x, ¬ p x) → (∃ x, p x)](02222examplexpxxpx.html) (91 messages, latest: Feb 01 2020 at 20:33)
 
-* [example : ¬ (∀ x, ¬ p x) → (∃ x, p x)](02222examplexpxxpx.html) (88 messages, latest: Feb 01 2020 at 16:38)
+* [example : ¬ (∃ x, ¬ p x) → (∀ x, p x)](34382examplexpxxpx.html) (47 messages, latest: Feb 01 2020 at 16:39)
 
 * [noob question(s)](52075noobquestions.html) (1737 messages, latest: Jan 31 2020 at 11:30)
 

@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Lean for the curious mathematician](84968Leanforthecuriousmathematician.html) (11 messages, latest: Feb 01 2020 at 15:12)
+* [when does norm_num work?](40395whendoesnormnumwork.html) (29 messages, latest: Feb 01 2020 at 20:15)
 
-* [when does norm_num work?](40395whendoesnormnumwork.html) (26 messages, latest: Feb 01 2020 at 12:52)
+* [Lean for the curious mathematician](84968Leanforthecuriousmathematician.html) (11 messages, latest: Feb 01 2020 at 15:12)
 
 * [How to prove unbound_prop](60281Howtoproveunboundprop.html) (9 messages, latest: Feb 01 2020 at 11:58)
 
