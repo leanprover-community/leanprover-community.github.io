@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Lean for the curious mathematician](84968Leanforthecuriousmathematician.html) (11 messages, latest: Feb 01 2020 at 15:12)
+
 * [when does norm_num work?](40395whendoesnormnumwork.html) (26 messages, latest: Feb 01 2020 at 12:52)
 
 * [How to prove unbound_prop](60281Howtoproveunboundprop.html) (9 messages, latest: Feb 01 2020 at 11:58)
@@ -30,8 +32,6 @@ permalink: archive/116395maths/index.html
 * [Combinatorics](60782Combinatorics.html) (3 messages, latest: Jan 29 2020 at 09:48)
 
 * [set.finite.fintype](98503setfinitefintype.html) (7 messages, latest: Jan 29 2020 at 00:15)
-
-* [Lean for the curious mathematician](84968Leanforthecuriousmathematician.html) (10 messages, latest: Jan 28 2020 at 22:15)
 
 * [induction generalizing](17261inductiongeneralizing.html) (20 messages, latest: Jan 28 2020 at 22:00)
 
