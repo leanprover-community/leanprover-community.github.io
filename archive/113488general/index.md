@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [norm_cast and int.sub_nat_nat](76257normcastandintsubnatnat.html) (1 message, latest: Feb 01 2020 at 10:31)
+
 * [POPLmark challenge](71850POPLmarkchallenge.html) (97 messages, latest: Feb 01 2020 at 07:37)
 
 * [VScode extension](56578VScodeextension.html) (471 messages, latest: Jan 31 2020 at 23:55)

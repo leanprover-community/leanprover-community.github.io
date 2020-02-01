@@ -1,0 +1,52 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/76257normcastandintsubnatnat.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/76257normcastandintsubnatnat.html">norm_cast and int.sub_nat_nat</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="187157010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast%20and%20int.sub_nat_nat/near/187157010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76257normcastandintsubnatnat.html#187157010">Johan Commelin (Feb 01 2020 at 10:31)</a>:</h4>
+<p>I've got the following code:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">nat</span><span class="bp">.</span><span class="n">choose_mul_succ_eq</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span>
+  <span class="o">(</span><span class="n">n</span><span class="bp">.</span><span class="n">choose</span> <span class="n">k</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">=</span> <span class="o">((</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span><span class="bp">.</span><span class="n">choose</span> <span class="n">k</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">k</span><span class="o">)</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="bp">|</span> <span class="n">n</span> <span class="o">(</span><span class="n">k</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">by_cases</span> <span class="n">hk</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">choose_eq_zero_of_lt</span> <span class="n">hk</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">sub_eq_zero_of_le</span> <span class="n">hk</span><span class="o">,</span> <span class="n">zero_mul</span><span class="o">,</span> <span class="n">mul_zero</span><span class="o">]</span> <span class="o">},</span>
+  <span class="n">push_neg</span> <span class="n">at</span> <span class="n">hk</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">choose_succ_succ</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">add_mul</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_sub_succ</span><span class="o">],</span>
+  <span class="n">rw</span> <span class="err">←</span> <span class="n">nat</span><span class="bp">.</span><span class="n">choose_succ_right_eq</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_sub_succ</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">mul_sub_left_distrib</span><span class="o">],</span>
+  <span class="n">symmetry</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">add_sub_cancel&#39;</span><span class="o">,</span>
+  <span class="n">replace</span> <span class="n">hk</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">≤</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">le_add_right</span> <span class="n">hk</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">nat</span><span class="bp">.</span><span class="n">mul_le_mul_left</span> <span class="bp">_</span> <span class="n">hk</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hk</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">choose</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="n">k</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="err">↑</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="err">↑</span><span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="err">↑</span><span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">choose</span> <span class="n">n</span> <span class="n">k</span><span class="o">)</span> <span class="bp">*</span> <span class="err">↑</span><span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw_mod_cast</span> <span class="n">nat</span><span class="bp">.</span><span class="n">choose_mul_succ_eq</span> <span class="n">n</span> <span class="n">k</span><span class="o">,</span>
+  <span class="c1">-- ⊢ ↑(nat.choose (nat.succ n) k) * int.sub_nat_nat (n + 1) k =</span>
+  <span class="c1">-- ↑(nat.choose (n + 1) k * (n + 1 - k))</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>As you can see, I end up with <code>int.sub_nat_nat</code> after a <code>rw_mod_cast</code>. To me, that isn't exactly expected behaviour. Is this the way it's supposed to be, or is there some bad lemma somewhere?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
