@@ -76,6 +76,70 @@ permalink: archive/113488general/53839Specifyapplyandothertacticsinsideatactic.h
 <span class="kn">end</span>
 </pre></div>
 
+<a name="187222325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Specify%20%60apply%60%20and%20other%20tactics%20inside%20a%20tactic/near/187222325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53839Specifyapplyandothertacticsinsideatactic.html#187222325">Jason Rute (Feb 02 2020 at 22:13)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Where I am struggling is that <code>expr</code> is a very broad category of objects.  What form does the expression need to be in? For example, what expression would I use for <code>true.intro</code>?  How do I get that from its declaration?</p>
+
+<a name="187222368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Specify%20%60apply%60%20and%20other%20tactics%20inside%20a%20tactic/near/187222368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53839Specifyapplyandothertacticsinsideatactic.html#187222368">Mario Carneiro (Feb 02 2020 at 22:14)</a>:</h4>
+<p>true.intro has no arguments, so <code> `(true.intro)</code> suffices</p>
+
+<a name="187222373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Specify%20%60apply%60%20and%20other%20tactics%20inside%20a%20tactic/near/187222373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53839Specifyapplyandothertacticsinsideatactic.html#187222373">Mario Carneiro (Feb 02 2020 at 22:14)</a>:</h4>
+<p>Other functions are more complicated because of universe parameters and such</p>
+
+<a name="187222383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Specify%20%60apply%60%20and%20other%20tactics%20inside%20a%20tactic/near/187222383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53839Specifyapplyandothertacticsinsideatactic.html#187222383">Jason Rute (Feb 02 2020 at 22:15)</a>:</h4>
+<p><span class="user-mention" data-user-id="116045">@Jesse Michael Han</span>, thanks!  I think that gives me the answer for (1).  I use <code>tactic.apply e</code> where <code>e</code> is the object from the local context.  (I think it is of the form <code>local_const</code>.)</p>
+
+<a name="187222389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Specify%20%60apply%60%20and%20other%20tactics%20inside%20a%20tactic/near/187222389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53839Specifyapplyandothertacticsinsideatactic.html#187222389">Mario Carneiro (Feb 02 2020 at 22:15)</a>:</h4>
+<p>there is also <code>tactic.applyc</code> which takes a <code>name</code> that refers to a constant</p>
+
+<a name="187222394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Specify%20%60apply%60%20and%20other%20tactics%20inside%20a%20tactic/near/187222394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53839Specifyapplyandothertacticsinsideatactic.html#187222394">Mario Carneiro (Feb 02 2020 at 22:15)</a>:</h4>
+<p>i.e. <code>tactic.applyc ``true.intro</code></p>
+
+<a name="187222443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Specify%20%60apply%60%20and%20other%20tactics%20inside%20a%20tactic/near/187222443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53839Specifyapplyandothertacticsinsideatactic.html#187222443">Jason Rute (Feb 02 2020 at 22:16)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> So let's say, I'm willing to loop over all <code>thm</code> declarations and try apply with all of them, would <code>tactic.applyc nm</code> where <code>nm</code> is the name from the declaration be the right approach?</p>
+
+<a name="187222446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Specify%20%60apply%60%20and%20other%20tactics%20inside%20a%20tactic/near/187222446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53839Specifyapplyandothertacticsinsideatactic.html#187222446">Mario Carneiro (Feb 02 2020 at 22:16)</a>:</h4>
+<p>sure</p>
+
+<a name="187222450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Specify%20%60apply%60%20and%20other%20tactics%20inside%20a%20tactic/near/187222450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53839Specifyapplyandothertacticsinsideatactic.html#187222450">Jason Rute (Feb 02 2020 at 22:17)</a>:</h4>
+<p>(Obviously, I'm not going to do that loop, but that is the idea I'm looking for.)</p>
+
+<a name="187222467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Specify%20%60apply%60%20and%20other%20tactics%20inside%20a%20tactic/near/187222467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53839Specifyapplyandothertacticsinsideatactic.html#187222467">Mario Carneiro (Feb 02 2020 at 22:17)</a>:</h4>
+<p>note that if it is successful, you need to be sure to revert the state afterward if you want to backtrack</p>
+
+<a name="187222516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Specify%20%60apply%60%20and%20other%20tactics%20inside%20a%20tactic/near/187222516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53839Specifyapplyandothertacticsinsideatactic.html#187222516">Jason Rute (Feb 02 2020 at 22:18)</a>:</h4>
+<p>This covers <code>apply</code>.  Is there a general principle for other tactics like <code>rw</code>?</p>
+
+<a name="187222521"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Specify%20%60apply%60%20and%20other%20tactics%20inside%20a%20tactic/near/187222521" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53839Specifyapplyandothertacticsinsideatactic.html#187222521">Mario Carneiro (Feb 02 2020 at 22:18)</a>:</h4>
+<p>there are non-interactive versions of all the tactics</p>
+
+<a name="187222529"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Specify%20%60apply%60%20and%20other%20tactics%20inside%20a%20tactic/near/187222529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53839Specifyapplyandothertacticsinsideatactic.html#187222529">Mario Carneiro (Feb 02 2020 at 22:19)</a>:</h4>
+<p>those are more suitable for use from programs and drivers</p>
+
+<a name="187222536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Specify%20%60apply%60%20and%20other%20tactics%20inside%20a%20tactic/near/187222536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53839Specifyapplyandothertacticsinsideatactic.html#187222536">Jason Rute (Feb 02 2020 at 22:19)</a>:</h4>
+<p>Ok.  I think I'm going to just need to experiment and look a the code (when it is not in C++).  Thanks!</p>
+
+<a name="187222584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Specify%20%60apply%60%20and%20other%20tactics%20inside%20a%20tactic/near/187222584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53839Specifyapplyandothertacticsinsideatactic.html#187222584">Mario Carneiro (Feb 02 2020 at 22:20)</a>:</h4>
+<p>Check out <code>init.meta.tactic</code> for the list of core tactics</p>
+
+<a name="187222597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Specify%20%60apply%60%20and%20other%20tactics%20inside%20a%20tactic/near/187222597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53839Specifyapplyandothertacticsinsideatactic.html#187222597">Mario Carneiro (Feb 02 2020 at 22:21)</a>:</h4>
+<p>it's not comprehensive though; there are other files that define more core tactics, and some non-builtin tactics are also probably worth treating atomically like <code>simp</code></p>
+
 
 {% endraw %}
 
