@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Specify `apply` and other tactics inside a tactic](53839Specifyapplyandothertacticsinsideatactic.html) (3 messages, latest: Feb 02 2020 at 20:22)
+* [Specify `apply` and other tactics inside a tactic](53839Specifyapplyandothertacticsinsideatactic.html) (9 messages, latest: Feb 02 2020 at 21:41)
 
 * [VScode extension](56578VScodeextension.html) (473 messages, latest: Feb 01 2020 at 21:52)
 

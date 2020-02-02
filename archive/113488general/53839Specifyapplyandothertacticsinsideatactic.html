@@ -31,6 +31,51 @@ permalink: archive/113488general/53839Specifyapplyandothertacticsinsideatactic.h
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Specify%20%60apply%60%20and%20other%20tactics%20inside%20a%20tactic/near/187218541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53839Specifyapplyandothertacticsinsideatactic.html#187218541">Reid Barton (Feb 02 2020 at 20:22)</a>:</h4>
 <p>For 1, or more generally, you can just apply <code>tactic.apply</code> or even <code>tactic.interactive.apply</code> directly</p>
 
+<a name="187221084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Specify%20%60apply%60%20and%20other%20tactics%20inside%20a%20tactic/near/187221084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53839Specifyapplyandothertacticsinsideatactic.html#187221084">Jason Rute (Feb 02 2020 at 21:35)</a>:</h4>
+<p>Let me be more clear.  This will be done entirely programmatically and dynamically.  I assume I can't enter  <code> `[apply n] </code>, where <code>n</code> is a <code>name</code>/<code>expr</code>/other?</p>
+
+<a name="187221089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Specify%20%60apply%60%20and%20other%20tactics%20inside%20a%20tactic/near/187221089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53839Specifyapplyandothertacticsinsideatactic.html#187221089">Jason Rute (Feb 02 2020 at 21:35)</a>:</h4>
+<p>Anyway, I'm looking at this set of notes: <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md">https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md</a></p>
+
+<a name="187221213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Specify%20%60apply%60%20and%20other%20tactics%20inside%20a%20tactic/near/187221213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53839Specifyapplyandothertacticsinsideatactic.html#187221213">Mario Carneiro (Feb 02 2020 at 21:38)</a>:</h4>
+<p>You should use <code>tactic.apply</code></p>
+
+<a name="187221217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Specify%20%60apply%60%20and%20other%20tactics%20inside%20a%20tactic/near/187221217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53839Specifyapplyandothertacticsinsideatactic.html#187221217">Mario Carneiro (Feb 02 2020 at 21:38)</a>:</h4>
+<p>it takes an argument of type <code>expr</code>, which you can construct from any of the mentioned sources</p>
+
+<a name="187221295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Specify%20%60apply%60%20and%20other%20tactics%20inside%20a%20tactic/near/187221295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53839Specifyapplyandothertacticsinsideatactic.html#187221295">Mario Carneiro (Feb 02 2020 at 21:40)</a>:</h4>
+<p>the interactive <code>apply</code> tactic is just a shim over <code>tactic.apply</code> that parses the input pre-expression first</p>
+
+<a name="187221305"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Specify%20%60apply%60%20and%20other%20tactics%20inside%20a%20tactic/near/187221305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53839Specifyapplyandothertacticsinsideatactic.html#187221305">Jesse Michael Han (Feb 02 2020 at 21:41)</a>:</h4>
+<p>assuming "I know which hypothesis <code>h</code>" means a predicate <code>pred : expr -&gt; tactic bool</code>, you can try something like this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">tactic</span>
+<span class="kn">namespace</span> <span class="n">interactive</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">try_apply_pred</span> <span class="o">(</span><span class="n">pred</span> <span class="o">:</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">bool</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+  <span class="k">let</span> <span class="n">try_trace_apply</span> <span class="o">:</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+    <span class="bp">λ</span> <span class="n">e</span><span class="o">,</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">apply</span> <span class="n">e</span> <span class="bp">*&gt;</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="n">format</span><span class="bp">!</span><span class="s2">&quot;applied {e.to_string}&quot;</span> <span class="bp">&lt;|&gt;</span>
+         <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="n">format</span><span class="bp">!</span><span class="s2">&quot;failed to apply {e.to_string}&quot;</span> <span class="k">in</span>
+  <span class="n">local_context</span> <span class="bp">&gt;&gt;=</span> <span class="n">list</span><span class="bp">.</span><span class="n">mfilter</span> <span class="n">pred</span> <span class="bp">&gt;&gt;=</span> <span class="n">list</span><span class="bp">.</span><span class="n">mfoldl</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="n">e</span><span class="o">,</span> <span class="n">try_trace_apply</span> <span class="n">e</span><span class="o">)</span> <span class="o">()</span>
+
+<span class="kn">end</span> <span class="n">interactive</span>
+<span class="kn">end</span> <span class="n">tactic</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">H₁</span> <span class="o">:</span> <span class="n">false</span> <span class="bp">→</span> <span class="n">true</span><span class="o">)</span> <span class="o">(</span><span class="n">H₂</span> <span class="o">:</span> <span class="n">true</span> <span class="bp">→</span> <span class="n">true</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="c1">-- H : false → true</span>
+<span class="c1">-- ⊢ true</span>
+  <span class="n">try_apply_pred</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">return</span> <span class="n">true</span><span class="o">),</span>
+<span class="c1">-- H : false → true</span>
+<span class="c1">-- ⊢ false</span>
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
 
