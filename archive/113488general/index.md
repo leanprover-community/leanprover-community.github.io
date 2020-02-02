@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Specify `apply` and other tactics inside a tactic](53839Specifyapplyandothertacticsinsideatactic.html) (1 message, latest: Feb 02 2020 at 19:24)
+
 * [VScode extension](56578VScodeextension.html) (473 messages, latest: Feb 01 2020 at 21:52)
 
 * [export renaming](91924exportrenaming.html) (2 messages, latest: Feb 01 2020 at 21:36)
