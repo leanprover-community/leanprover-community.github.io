@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1738 messages, latest: Feb 02 2020 at 18:58)
+
 * [list.nth_le](21637listnthle.html) (12 messages, latest: Feb 01 2020 at 21:40)
 
 * [example : ¬ (∀ x, ¬ p x) → (∃ x, p x)](02222examplexpxxpx.html) (91 messages, latest: Feb 01 2020 at 20:33)
 
 * [example : ¬ (∃ x, ¬ p x) → (∀ x, p x)](34382examplexpxxpx.html) (47 messages, latest: Feb 01 2020 at 16:39)
-
-* [noob question(s)](52075noobquestions.html) (1737 messages, latest: Jan 31 2020 at 11:30)
 
 * [continuity](75863continuity.html) (16 messages, latest: Jan 30 2020 at 13:20)
 
