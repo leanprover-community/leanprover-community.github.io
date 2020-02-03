@@ -582,6 +582,37 @@ cc <span class="user-mention" data-user-id="217806">@Markus Rabe</span> <span cl
 <p>Another place that these theorems can come from is the assumption list in the goal.  I believe around 45% of the theorem arguments in the human training steps come directly from the assumption list in the current goal.  These can come from either being explicitly passed as tactic arguments, or added in bulk via an ASM_* tactic.</p>
 <p>Regarding the synthetic proofs, these arguments should all come from the theorem database as you expected.</p>
 
+<a name="187298282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/187298282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#187298282">Stanislas Polu (Feb 03 2020 at 20:05)</a>:</h4>
+<p><span class="user-mention" data-user-id="239408">@Sarah Loos</span> Thanks! Yes, talking about the human proofs.</p>
+<p>So it would be rather unfair to add these theorems to the theorem database of the prover (they should rather be re-demonstrated (in some backward way) at proof time if needed) since they do carry the forward reasoning steps that produced them (however simple they are).</p>
+<p><span class="user-mention" data-user-id="239426">@Christian Szegedy</span> mentioned that you had an internal version that would extend support for forward reasoning / conversions, are the proof logs different in that next version how would that change the overall picture here?</p>
+
+<a name="187299056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/187299056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#187299056">Stanislas Polu (Feb 03 2020 at 20:15)</a>:</h4>
+<p>(from re-reading earlier posts, I presume it would allow to technically generate these theorems through forward reasoning steps, but your current system does not cover creating the associated proof logs. Aka you added a forward reasoning API to register new theorems through conversions, but the proof logs remain the same?)</p>
+
+<a name="187299723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/187299723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#187299723">Christian Szegedy (Feb 03 2020 at 20:23)</a>:</h4>
+<blockquote>
+<p>A good number of such theorems appear to be simple REFL forms <code>t |- t</code> but that's not always true.</p>
+</blockquote>
+<p>Thanks a lot for the insight. BTW, we have part timer looking into adding the capability of applying REFLs or just enhancing the theorem database by equations in the other direction. We try to figure out the best way to go about it.</p>
+
+<a name="187299905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/187299905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#187299905">Stanislas Polu (Feb 03 2020 at 20:25)</a>:</h4>
+<blockquote>
+<p>Another place that these theorems can come from is the assumption list in the goal. I believe around 45% of the theorem arguments in the human training steps come directly from the assumption list in the current goal. These can come from either being explicitly passed as tactic arguments, or added in bulk via an ASM_* tactic.</p>
+</blockquote>
+<p>I will verify how many land in that category, but probably less than 45% given the above?</p>
+
+<a name="187300257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/187300257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#187300257">Stanislas Polu (Feb 03 2020 at 20:28)</a>:</h4>
+<blockquote>
+<p>Thanks a lot for the insight. BTW, we have part timer looking into adding the capability of applying REFLs or just enhancing the theorem database by equations in the other direction. We try to figure out the best way to go about it.</p>
+</blockquote>
+<p>The simplest cases (eg REFL) can easily be handled outside of the container; obviously with the associated decrease in trust in the proofs generated.</p>
+
 
 {% endraw %}
 
