@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [defining functions out of set](39863definingfunctionsoutofset.html) (1 message, latest: Feb 03 2020 at 17:56)
+* [defining functions out of set](39863definingfunctionsoutofset.html) (10 messages, latest: Feb 03 2020 at 21:55)
 
 * [set comprehension issue](79280setcomprehensionissue.html) (6 messages, latest: Feb 03 2020 at 17:29)
 

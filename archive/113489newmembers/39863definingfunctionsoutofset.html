@@ -16,6 +16,108 @@ permalink: archive/113489newmembers/39863definingfunctionsoutofset.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187286563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187286563">????? (Feb 03 2020 at 17:56)</a>:</h4>
 <p>I defined the set of natural numbers <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ω</mi></mrow><annotation encoding="application/x-tex">\omega</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">ω</span></span></span></span> in a language (whose terms are elements of the type Exp) as the lfp of the function<code>math f : set(Exp) \to set(Exp), s \to \{zero\} \cup \{suc(e) \mid e \in s\}</code>. Now I want to show that <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ω</mi></mrow><annotation encoding="application/x-tex">\omega</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">ω</span></span></span></span> is equivalent to <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="double-struck">N</mi></mrow><annotation encoding="application/x-tex">\N</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68889em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbb">N</span></span></span></span></span> as defined in lean. I need to define <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ω</mi><mo>→</mo><mi mathvariant="double-struck">N</mi></mrow><annotation encoding="application/x-tex">\omega \to \N</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">ω</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68889em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbb">N</span></span></span></span></span>, but this is not possible due to the Prop restriction. Is there another way of doing this (short of redefining set(A) to be <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>→</mo><mi>T</mi><mi>y</mi><mi>p</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">A \to Type</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mord mathdefault">p</span><span class="mord mathdefault">e</span></span></span></span>?</p>
 
+<a name="187305053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187305053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187305053">Reid Barton (Feb 03 2020 at 21:16)</a>:</h4>
+<p>If <code>omega : set Exp</code>, then defining a function <code>omega -&gt; nat</code> really means <code>subtype omega -&gt; nat</code>, where an element of <code>subtype omega</code> is a pair of <code>e : Exp</code> and a proof that <code>e</code> belongs to <code>omega</code>. Presuming <code>Exp</code> is an inductive type, you can then define your function by induction on <code>e</code>, using the property that <code>e</code> belongs to <code>omega</code> to discard any impossible cases.</p>
+
+<a name="187305091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187305091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187305091">Reid Barton (Feb 03 2020 at 21:16)</a>:</h4>
+<p>Also, you can write LaTeX in Zulip by surrounding it in <code>$$ ... $$</code>.</p>
+
+<a name="187305418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187305418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187305418">????? (Feb 03 2020 at 21:20)</a>:</h4>
+<p>thanks for the latex tip</p>
+
+<a name="187306166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187306166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187306166">????? (Feb 03 2020 at 21:28)</a>:</h4>
+<p>So as you said I'm defining a function <code> subtype omega -&gt; nat</code>. The "impossible cases" work fine since false has a large eliminator (for some reason). But for the case such as when <code>(e : Exp) = zero</code>, the hypothesis one gets is that <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi><mo>∈</mo><mi>z</mi><mi>e</mi><mi>r</mi><mi>o</mi><mtext>  </mtext><mo>⟺</mo><mtext>  </mtext><mi>e</mi><mo>=</mo><mi>z</mi><mi>e</mi><mi>r</mi><mi>o</mi><mo>∨</mo><mi>e</mi><mo>∈</mo><mi mathvariant="normal">∅</mi></mrow><annotation encoding="application/x-tex">e \in zero  \iff e = zero \lor e \in \emptyset</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.549em;vertical-align:-0.024em;"></span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">o</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⟺</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.55556em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">o</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∨</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.80556em;vertical-align:-0.05556em;"></span><span class="mord">∅</span></span></span></span>. For this case, after I apply or.elim, I'm stuck in Prop. Since I actually want to construct a number in this case, I can't use the same trick as before.</p>
+
+<a name="187307099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187307099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187307099">Floris van Doorn (Feb 03 2020 at 21:37)</a>:</h4>
+<p>Can you show a minimal example that we can copy, and which compiles? That helps a lot to help you.</p>
+<p>What Reid mentioned is that you want to induct on <code>e</code>. Something like</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo</span> <span class="o">:</span> <span class="n">subtype</span> <span class="n">omega</span> <span class="bp">-&gt;</span> <span class="n">nat</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">x</span> <span class="k">with</span> <span class="n">e</span> <span class="n">he</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">e</span><span class="o">,</span>
+  <span class="o">[</span><span class="bp">...</span><span class="o">]</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>(or by using pattern matching)</p>
+
+<a name="187307515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187307515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187307515">????? (Feb 03 2020 at 21:40)</a>:</h4>
+<p>That is my approach</p>
+
+<a name="187307532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187307532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187307532">????? (Feb 03 2020 at 21:40)</a>:</h4>
+<p>I will try to make an example</p>
+
+<a name="187309121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187309121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187309121">????? (Feb 03 2020 at 21:54)</a>:</h4>
+<div class="codehilite"><pre><span></span>import order.fixed_points
+
+open lattice
+
+inductive Exp
+| Zero : Exp
+| Suc : Exp → Exp
+
+open Exp
+
+instance exp.complete_lattice: complete_lattice (set Exp) := pi.complete_lattice
+
+def fsucc : set(Exp) → Exp → Prop := λ α x,
+   ∃ w, x = Suc w ∧ set.mem w α
+
+def fω := λ α, set.union { Zero } (fsucc α)
+def ω : set Exp := @lfp (set Exp) _ fω
+def w := {x : Exp // set.mem x ω}
+
+theorem fmono : monotone fω :=
+begin
+unfold monotone,
+intros a b h,
+unfold fω,
+apply set.union_subset_union,
+{
+   apply set.subset.refl
+},
+{
+  unfold fsucc,
+  intros x g,
+  induction g with w h1,
+  induction h1 with h2 h3,
+  refine ⟨ w, _ ⟩,
+  apply and.intro,
+  exact h2,
+  apply set.mem_of_subset_of_mem h,
+  exact h3
+}
+end
+
+def wtoN : w → ℕ :=
+begin
+intros,
+induction a with e p,
+induction e,
+{
+  have g : ω = fω(ω), from lfp_eq fmono,
+  rw g at p,
+  unfold fω at p,
+  unfold set.union at p,
+  apply @or.elim _ _ ℕ p,
+}
+end
+</pre></div>
+
+<a name="187309209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187309209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187309209">????? (Feb 03 2020 at 21:55)</a>:</h4>
+<p>So the last or.elim in <code> wtoN</code> does not type check since I'm trying to eliminate in <code>Type</code> instead of <code>Prop</code></p>
+
 
 {% endraw %}
 
