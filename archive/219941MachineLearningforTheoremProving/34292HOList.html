@@ -575,6 +575,13 @@ cc <span class="user-mention" data-user-id="217806">@Markus Rabe</span> <span cl
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/187274148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#187274148">Stanislas Polu (Feb 03 2020 at 15:50)</a>:</h4>
 <p>After further exploration I can see 86747 such unproven but used theorems across train/test/valid of which 56726 are trivial "REFLs" (which are therefore trivially provable).</p>
 
+<a name="187296782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/187296782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#187296782">Sarah Loos (Feb 03 2020 at 19:48)</a>:</h4>
+<p>There is a difference between the human proofs that we have logged and the synthetic proofs.  </p>
+<p>From your description, I believe you're looking at the human proofs.  We only recorded backward tactics (loosely speaking, steps of type tactic in HOL Light, which convert a goal to a new goalstate).  We did not implement logging for human theorems that are generated via forward steps (e.g. from rules that convert thm-&gt;thm in HOL Light, like SPECL).  Many human proofs are a combination of forward and backward proof steps.  In training, we keep these forward generated theorems as arguments, since they still have semantic meaning that is useful for training, but at present we would not be able to generate these exact proofs, since the forward-derived theorems are not available in our theorem database and we have not yet implemented forward proving steps.  This doesn't mean that the theorem can't be proved via DeepHOL, just that it may need to take more backward steps to close the goal. </p>
+<p>Another place that these theorems can come from is the assumption list in the goal.  I believe around 45% of the theorem arguments in the human training steps come directly from the assumption list in the current goal.  These can come from either being explicitly passed as tactic arguments, or added in bulk via an ASM_* tactic.</p>
+<p>Regarding the synthetic proofs, these arguments should all come from the theorem database as you expected.</p>
+
 
 {% endraw %}
 
