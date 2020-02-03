@@ -29,6 +29,22 @@ I'm not sure if I like it that <code>matrix.mul</code> is the standard simp form
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60simp%60%20lemmas%20for%20%60matrix.mul%60%20vs%20%60has_mul.mul%60/near/187260556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20671simplemmasformatrixmulvshasmulmul.html#187260556">Anne Baanen (Feb 03 2020 at 13:18)</a>:</h4>
 <p>I guess the true generalisation will be to state everything in terms of composition of morphisms in a category, which has its own API problems...</p>
 
+<a name="187270326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60simp%60%20lemmas%20for%20%60matrix.mul%60%20vs%20%60has_mul.mul%60/near/187270326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20671simplemmasformatrixmulvshasmulmul.html#187270326">Reid Barton (Feb 03 2020 at 15:11)</a>:</h4>
+<p>Doesn't <code>has_mul.mul</code> force the matrices to be the same size (and therefore square)?</p>
+
+<a name="187270347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60simp%60%20lemmas%20for%20%60matrix.mul%60%20vs%20%60has_mul.mul%60/near/187270347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20671simplemmasformatrixmulvshasmulmul.html#187270347">Anne Baanen (Feb 03 2020 at 15:11)</a>:</h4>
+<p>It does.</p>
+
+<a name="187271509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60simp%60%20lemmas%20for%20%60matrix.mul%60%20vs%20%60has_mul.mul%60/near/187271509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20671simplemmasformatrixmulvshasmulmul.html#187271509">Reid Barton (Feb 03 2020 at 15:24)</a>:</h4>
+<p>So having simp turn <code>matrix.mul</code> to <code>*</code>, which could only fire for square matrices, wouldn't be a good idea. If A is m x m and B is m x m and C is m x n then <code>(A.mul B).mul C = A.mul (B.mul C)</code> might first turn <code>A.mul B</code> into <code>A * B</code>, then get stuck unless there is a simp lemma for <code>(A * B).mul C</code>.</p>
+
+<a name="187272044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60simp%60%20lemmas%20for%20%60matrix.mul%60%20vs%20%60has_mul.mul%60/near/187272044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20671simplemmasformatrixmulvshasmulmul.html#187272044">Johan Commelin (Feb 03 2020 at 15:29)</a>:</h4>
+<p>So maybe we shouldn't have a simp lemma in either direction, and let the user decide.</p>
+
 
 {% endraw %}
 
