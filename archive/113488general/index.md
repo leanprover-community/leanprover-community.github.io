@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [simp arguments priority](22194simpargumentspriority.html) (1 message, latest: Feb 03 2020 at 07:47)
+
 * [VScode extension](56578VScodeextension.html) (475 messages, latest: Feb 03 2020 at 02:29)
 
 * [Specify `apply` and other tactics inside a tactic](53839Specifyapplyandothertacticsinsideatactic.html) (25 messages, latest: Feb 02 2020 at 22:21)
