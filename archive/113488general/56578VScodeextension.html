@@ -2169,6 +2169,41 @@ A metaprogram imports all of mathlib and builds a json file with doc strings, ty
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20extension/near/187230134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56578VScodeextension.html#187230134">Greg Langmead (Feb 03 2020 at 02:29)</a>:</h4>
 <p>I'm thinking the easiest change to make to the VSCode extension is to add a command that opens your browser to the right URL under <a href="https://leanprover-community.github.io/mathlib_docs/" target="_blank" title="https://leanprover-community.github.io/mathlib_docs/">https://leanprover-community.github.io/mathlib_docs/</a> if you're looking at a mathlib file. It raises questions like whether that's the same version as the one you have locally which I have not answered yet. But it seems easier than doing an on the fly HTML conversion of the lean, since both doc-gen and format_lean need to talk to lean in some nontrivial way that I'm not yet sure I could replicate from within the plugin.</p>
 
+<a name="187247855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20extension/near/187247855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56578VScodeextension.html#187247855">Rob Lewis (Feb 03 2020 at 10:05)</a>:</h4>
+<p><span class="user-mention" data-user-id="111038">@Greg Langmead</span> thanks for the PR! I'm happy to merge it, with the one concern I just commented on: I think <code>$..$</code> is off by default because it leads to lots of false positives when mixed with regular text. "Subscriptions cost $10-$15 / mo" and all that. Pretty sure Zulip uses <code>$$..$$</code> which I'll test here: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="double-struck">R</mi></mrow><annotation encoding="application/x-tex">\mathbb{R}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68889em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbb">R</span></span></span></span></span> ?</p>
+
+<a name="187247942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20extension/near/187247942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56578VScodeextension.html#187247942">Johan Commelin (Feb 03 2020 at 10:07)</a>:</h4>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> Otoh, everyone is pretty used to <code>$ foo $</code>, and I don't think we'll actually hit many false positives.</p>
+
+<a name="187247952"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20extension/near/187247952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56578VScodeextension.html#187247952">Johan Commelin (Feb 03 2020 at 10:07)</a>:</h4>
+<p>We can always print regular <code>$</code>-signs by escaping them.</p>
+
+<a name="187248053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20extension/near/187248053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56578VScodeextension.html#187248053">Johan Commelin (Feb 03 2020 at 10:08)</a>:</h4>
+<p>Can we check if there are "regular text $" occuring in mathlib right now? I doubt it.</p>
+
+<a name="187248076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20extension/near/187248076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56578VScodeextension.html#187248076">Gabriel Ebner (Feb 03 2020 at 10:09)</a>:</h4>
+<p>The only occurrence I can see is <code> `foo $ bar $ baz 10` </code></p>
+
+<a name="187248082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20extension/near/187248082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56578VScodeextension.html#187248082">Rob Lewis (Feb 03 2020 at 10:09)</a>:</h4>
+<p><code>$</code> is used in code as well. How well does MathJax avoids code blocks? If it inserts itself in <code>f $ g $ h x</code> it's a non-starter.</p>
+
+<a name="187248171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20extension/near/187248171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56578VScodeextension.html#187248171">Rob Lewis (Feb 03 2020 at 10:10)</a>:</h4>
+<p>People are used to <code>$$..$$</code> from Zulip too.</p>
+
+<a name="187248209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20extension/near/187248209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56578VScodeextension.html#187248209">Johan Commelin (Feb 03 2020 at 10:11)</a>:</h4>
+<blockquote>
+<p><code>$</code> is used in code as well. How well does MathJax avoids code blocks? If it inserts itself in <code>f $ g $ h x</code> it's a non-starter.</p>
+</blockquote>
+<p>I completely agree with that.</p>
+
 
 {% endraw %}
 

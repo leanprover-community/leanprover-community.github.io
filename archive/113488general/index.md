@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [VScode extension](56578VScodeextension.html) (483 messages, latest: Feb 03 2020 at 10:11)
+
 * [incorrect alignment of red error line in VS Code](73990incorrectalignmentofrederrorlineinVSCode.html) (16 messages, latest: Feb 03 2020 at 09:57)
 
 * [opening twice](84909openingtwice.html) (3 messages, latest: Feb 03 2020 at 09:38)
 
 * [simp arguments priority](22194simpargumentspriority.html) (1 message, latest: Feb 03 2020 at 07:47)
-
-* [VScode extension](56578VScodeextension.html) (475 messages, latest: Feb 03 2020 at 02:29)
 
 * [Specify `apply` and other tactics inside a tactic](53839Specifyapplyandothertacticsinsideatactic.html) (25 messages, latest: Feb 02 2020 at 22:21)
 

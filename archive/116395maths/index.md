@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [`simp` lemmas for `matrix.mul` vs `has_mul.mul`](20671simplemmasformatrixmulvshasmulmul.html) (2 messages, latest: Feb 03 2020 at 10:36)
+
 * [when does norm_num work?](40395whendoesnormnumwork.html) (29 messages, latest: Feb 01 2020 at 20:15)
 
 * [Lean for the curious mathematician](84968Leanforthecuriousmathematician.html) (11 messages, latest: Feb 01 2020 at 15:12)
