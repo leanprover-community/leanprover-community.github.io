@@ -118,6 +118,90 @@ end
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187309209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187309209">????? (Feb 03 2020 at 21:55)</a>:</h4>
 <p>So the last or.elim in <code> wtoN</code> does not type check since I'm trying to eliminate in <code>Type</code> instead of <code>Prop</code></p>
 
+<a name="187312626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187312626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187312626">Reid Barton (Feb 03 2020 at 22:35)</a>:</h4>
+<p>Inside the <code>{ }</code> in <code>wtoN</code>, you are already in the case that <code>e</code> is <code>Zero</code>. So you just want to return <code>0</code>.</p>
+
+<a name="187312724"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187312724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187312724">Reid Barton (Feb 03 2020 at 22:36)</a>:</h4>
+<p>In fact, for this type <code>Exp</code>, <code>w</code> is the set of all <code>Exp</code>s (<code>w = set.univ</code>).</p>
+
+<a name="187312741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187312741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187312741">Reid Barton (Feb 03 2020 at 22:36)</a>:</h4>
+<p>So you would never need the hypothesis <code>p</code>.</p>
+
+<a name="187313061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187313061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187313061">????? (Feb 03 2020 at 22:40)</a>:</h4>
+<p>ah right</p>
+
+<a name="187313098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187313098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187313098">Reid Barton (Feb 03 2020 at 22:41)</a>:</h4>
+<p>Also, it's probably better to write the recursive definition using pattern matching and not tactics.<br>
+Say you changed <code>Exp</code> to</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">Exp</span>
+<span class="bp">|</span> <span class="n">Zero</span> <span class="o">:</span> <span class="n">Exp</span>
+<span class="bp">|</span> <span class="n">Suc</span> <span class="o">:</span> <span class="n">Exp</span> <span class="bp">→</span> <span class="n">Exp</span>
+<span class="bp">|</span> <span class="n">Neg</span> <span class="o">:</span> <span class="n">Exp</span> <span class="bp">→</span> <span class="n">Exp</span>
+</pre></div>
+
+
+<p>without changing anything after that.</p>
+
+<a name="187313129"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187313129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187313129">Reid Barton (Feb 03 2020 at 22:41)</a>:</h4>
+<p>Then you could start to define <code>wtoN</code> this way:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">ωtoN</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">Exp</span><span class="o">),</span> <span class="n">e</span> <span class="err">∈</span> <span class="n">ω</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="n">Zero</span> <span class="n">h</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">Suc</span> <span class="n">e&#39;</span><span class="o">)</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">ωtoN</span> <span class="n">e&#39;</span> <span class="bp">_</span> <span class="bp">+</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">Neg</span> <span class="n">e&#39;</span><span class="o">)</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">false</span><span class="bp">.</span><span class="n">elim</span> <span class="bp">_</span>
+
+<span class="n">def</span> <span class="n">wtoN</span> <span class="o">:</span> <span class="n">w</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">ωtoN</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span>
+</pre></div>
+
+<a name="187313175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187313175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187313175">Reid Barton (Feb 03 2020 at 22:42)</a>:</h4>
+<p>You will have to fill in the two <code>_</code>s</p>
+
+<a name="187313209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187313209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187313209">Reid Barton (Feb 03 2020 at 22:42)</a>:</h4>
+<p>But these are just propositions, so you will not need large elimination</p>
+
+<a name="187313217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187313217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187313217">????? (Feb 03 2020 at 22:42)</a>:</h4>
+<p>I see, that's pretty nice.</p>
+
+<a name="187313251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187313251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187313251">????? (Feb 03 2020 at 22:43)</a>:</h4>
+<p>I tried the pattern matching definition before, but sometimes I would run into issues with size</p>
+
+<a name="187313325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187313325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187313325">????? (Feb 03 2020 at 22:43)</a>:</h4>
+<p>so size inequalities like size(e1) &lt; size(e1) + size(e2) is not automatically discharged</p>
+
+<a name="187313577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187313577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187313577">Reid Barton (Feb 03 2020 at 22:46)</a>:</h4>
+<p>Maybe you were doing recursion on the value of type <code>w</code>, rather than splitting it into two arguments like I did above</p>
+
+<a name="187313614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187313614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187313614">Reid Barton (Feb 03 2020 at 22:47)</a>:</h4>
+<p>That recursion is not quite structural, because you have to build a new proof of membership which is not contained in the original one</p>
+
+<a name="187313704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187313704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187313704">????? (Feb 03 2020 at 22:48)</a>:</h4>
+<p>that might be it. Also, in tactic mode i can do repeat { ... } for the impossible cases. I suppose this is not possible if you use pattern matching or the recursor?</p>
+
+<a name="187313853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187313853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187313853">Reid Barton (Feb 03 2020 at 22:50)</a>:</h4>
+<p>Yes, that's right. If you write definitions in tactic mode then you should be careful to use only "simple" tactics that will generate a predictable term, like <code>induction</code>, <code>refine</code>, <code>exact</code>, inside the parts of the definition that are data. Otherwise it will be hard to prove things about your definition later.</p>
+
+<a name="187313881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187313881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187313881">Reid Barton (Feb 03 2020 at 22:50)</a>:</h4>
+<p>Inside the proof parts you can use any tactics because proofs are irrelevant.</p>
+
+<a name="187313926"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20functions%20out%20of%20set/near/187313926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39863definingfunctionsoutofset.html#187313926">????? (Feb 03 2020 at 22:51)</a>:</h4>
+<p>okay thanks!</p>
+
 
 {% endraw %}
 
