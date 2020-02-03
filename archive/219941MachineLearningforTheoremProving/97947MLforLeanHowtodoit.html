@@ -467,6 +467,24 @@ run_cmd make_goal_from_expression my_expr
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/187263596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#187263596">Stanislas Polu (Feb 03 2020 at 13:55)</a>:</h4>
 <p>That sounds super encouraging! I'm still quite busy integrating against holist but as soon as I'm out of the woods on this one I'll gladly land a hand here <span aria-label="+1" class="emoji emoji-1f44d" role="img" title="+1">:+1:</span></p>
 
+<a name="187267803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/187267803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#187267803">Jason Rute (Feb 03 2020 at 14:43)</a>:</h4>
+<p>Ok, it sounds like you are busy, but since you mentioned you are eager to try it out, my notebook code is still very usable with a few caveats:</p>
+<ul>
+<li>I need to add support for universes and other binder types.</li>
+<li>I might need to switch to another Lean output format to make it more robust (so that you can more robustly plug the output of one call into the input of the next, avoiding the issues I was talking about in my previous message).</li>
+<li>It is just a bare bones low-level inference to Lean.  You would have to build your own higher-level interface for your purposes.  (However, I did provide an example of breath first search prover as an example of the ideas involved.)  In particular, it doesn't come with any of these features:<ul>
+<li>A library of theorems (for either training examples or premise selection).</li>
+<li>A curated list of tactics or a clear way to specify/enter their parameters (except as plain text).</li>
+</ul>
+</li>
+</ul>
+<p>Nonetheless, you can do a lot with it right away.  If you look at the breath first prover examples, this gives you a clear way to build a learned AI which works for minimal logic.  The tactics <code>apply _</code>, <code>cases _</code>, <code>intro</code>, <code>split</code>, <code>left</code>, and <code>right</code> should be complete for minimal propositional logic.  For intuitionistic propositional logic add the tactic <code>exfalso</code>.  So  you can train an intuitionistic logic AI for example.  You can also look at Buzzard's natural number game for other examples of tactic systems which one could play with.  It all depends what you are going for...</p>
+
+<a name="187267969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/187267969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#187267969">Jason Rute (Feb 03 2020 at 14:45)</a>:</h4>
+<p>I'll work on shoring up this prototype and I'm also working on a different prototype which directly enters the theorems to a Lean program which then parses them and runs the specified tactics.  This has some advantages and disadvantages.  I'm trying to compare and contrast both approaches.  My hope is that after I make my prototypes, someone with more time can turn them into usable systems for their (and other's) needs.</p>
+
 
 {% endraw %}
 
