@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [set comprehension issue](79280setcomprehensionissue.html) (1 message, latest: Feb 03 2020 at 16:43)
+
 * [noob question(s)](52075noobquestions.html) (1743 messages, latest: Feb 02 2020 at 19:53)
 
 * [list.nth_le](21637listnthle.html) (12 messages, latest: Feb 01 2020 at 21:40)

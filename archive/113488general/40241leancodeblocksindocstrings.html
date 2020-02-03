@@ -1,0 +1,90 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/40241leancodeblocksindocstrings.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/40241leancodeblocksindocstrings.html">lean codeblocks in docstrings</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="187275556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20codeblocks%20in%20docstrings/near/187275556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40241leancodeblocksindocstrings.html#187275556">Johan Commelin (Feb 03 2020 at 16:04)</a>:</h4>
+<p>I tried to put a codeblock as in</p>
+<div class="codehilite"><pre><span></span>```lean
+foo
+```
+</pre></div>
+
+
+<p>in a docstring. But I got a complaint, so I removed it: <a href="https://github.com/leanprover-community/mathlib/pull/1946/commits/48a5d7c99a83709e5736398db58ef39fb4bc0821#diff-e43627ca2566b806fcd077fad0fe29c9L26" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1946/commits/48a5d7c99a83709e5736398db58ef39fb4bc0821#diff-e43627ca2566b806fcd077fad0fe29c9L26">https://github.com/leanprover-community/mathlib/pull/1946/commits/48a5d7c99a83709e5736398db58ef39fb4bc0821#diff-e43627ca2566b806fcd077fad0fe29c9L26</a></p>
+<p>If you don't add the <code>lean</code> tag, then everything is fine. So</p>
+<div class="codehilite"><pre><span></span>```
+foo
+```
+</pre></div>
+
+
+<p>works fine. I can imagine that the language modifier might be useful. But it isn't crucial. Just posting to see what others think.</p>
+
+<a name="187275622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20codeblocks%20in%20docstrings/near/187275622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40241leancodeblocksindocstrings.html#187275622">Johan Commelin (Feb 03 2020 at 16:05)</a>:</h4>
+<p>FYI: the error that Lean gave was <code>invalid docstring: expected end of code block</code>, or something like that.</p>
+
+<a name="187276505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20codeblocks%20in%20docstrings/near/187276505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40241leancodeblocksindocstrings.html#187276505">Bryan Gin-ge Chen (Feb 03 2020 at 16:14)</a>:</h4>
+<p>Looks like the error message comes from the code around <a href="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/src/library/documentation.cpp#L128" target="_blank" title="https://github.com/leanprover-community/lean/blob/e1fe877236cd0c7aa4a655bfc51675e17e2353f7/src/library/documentation.cpp#L128">here</a>, so we could update that in 3.5.x to ignore such tags.</p>
+
+<a name="187276687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20codeblocks%20in%20docstrings/near/187276687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40241leancodeblocksindocstrings.html#187276687">Rob Lewis (Feb 03 2020 at 16:15)</a>:</h4>
+<p>It's handled correctly here: <a href="https://github.com/leanprover-community/mathlib/blob/master/src/tactic/reassoc_axiom.lean#L15" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/tactic/reassoc_axiom.lean#L15">https://github.com/leanprover-community/mathlib/blob/master/src/tactic/reassoc_axiom.lean#L15</a></p>
+
+<a name="187277157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20codeblocks%20in%20docstrings/near/187277157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40241leancodeblocksindocstrings.html#187277157">Yury G. Kudryashov (Feb 03 2020 at 16:19)</a>:</h4>
+<p>What's the difference?</p>
+
+<a name="187277726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20codeblocks%20in%20docstrings/near/187277726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40241leancodeblocksindocstrings.html#187277726">Bryan Gin-ge Chen (Feb 03 2020 at 16:25)</a>:</h4>
+<p>I guess there's a bug somewhere. This gives the invalid docstring error:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">!</span>
+
+<span class="cm">```lean</span>
+<span class="cm">a</span>
+<span class="cm">```</span>
+
+<span class="cm">a</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>This doesn't:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">!</span>
+
+<span class="cm">```lean</span>
+<span class="cm">a</span>
+<span class="cm">```</span>
+
+
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>Neither does this (though it should):</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">!</span>
+
+<span class="cm">```lean</span>
+<span class="cm">a</span>
+<span class="cm">```</span>
+
+<span class="cm">```</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

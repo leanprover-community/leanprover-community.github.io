@@ -9,11 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [lean codeblocks in docstrings](40241leancodeblocksindocstrings.html) (6 messages, latest: Feb 03 2020 at 16:25)
+
+* [opening twice](84909openingtwice.html) (4 messages, latest: Feb 03 2020 at 16:21)
+
 * [VScode extension](56578VScodeextension.html) (488 messages, latest: Feb 03 2020 at 15:01)
 
 * [incorrect alignment of red error line in VS Code](73990incorrectalignmentofrederrorlineinVSCode.html) (16 messages, latest: Feb 03 2020 at 09:57)
-
-* [opening twice](84909openingtwice.html) (3 messages, latest: Feb 03 2020 at 09:38)
 
 * [simp arguments priority](22194simpargumentspriority.html) (1 message, latest: Feb 03 2020 at 07:47)
 
