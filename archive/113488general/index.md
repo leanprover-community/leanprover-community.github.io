@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [norm_cast and int.sub_nat_nat](76257normcastandintsubnatnat.html) (3 messages, latest: Feb 04 2020 at 13:23)
+
 * [VScode extension](56578VScodeextension.html) (490 messages, latest: Feb 04 2020 at 11:25)
 
 * [quotients and products again](41780quotientsandproductsagain.html) (7 messages, latest: Feb 04 2020 at 06:30)
@@ -26,8 +28,6 @@ permalink: archive/113488general/index.html
 * [export renaming](91924exportrenaming.html) (2 messages, latest: Feb 01 2020 at 21:36)
 
 * [strong recursion](83992strongrecursion.html) (1 message, latest: Feb 01 2020 at 11:51)
-
-* [norm_cast and int.sub_nat_nat](76257normcastandintsubnatnat.html) (1 message, latest: Feb 01 2020 at 10:31)
 
 * [POPLmark challenge](71850POPLmarkchallenge.html) (97 messages, latest: Feb 01 2020 at 07:37)
 

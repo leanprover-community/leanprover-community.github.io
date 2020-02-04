@@ -46,6 +46,17 @@ permalink: archive/113488general/76257normcastandintsubnatnat.html
 
 <p>As you can see, I end up with <code>int.sub_nat_nat</code> after a <code>rw_mod_cast</code>. To me, that isn't exactly expected behaviour. Is this the way it's supposed to be, or is there some bad lemma somewhere?</p>
 
+<a name="187356956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast%20and%20int.sub_nat_nat/near/187356956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76257normcastandintsubnatnat.html#187356956">Floris van Doorn (Feb 04 2020 at 13:15)</a>:</h4>
+<p>It seems that the <code>move_cast</code> attribute on <code>cast_sub_nat_nat</code> causes this.  Since <code>move_cast</code>-lemmas are (sometimes) rewritten backwards, you get the ugly function.<br>
+I also noticed this. I want to add the attribute <code>attribute [move_cast] nat.add_one</code>, so that we rewrite <code>succ n</code> to <code>n + 1</code> in <code>norm_cast</code>. <br>
+But does this mean that in certain situations it will rewrite <code>nat.add_one</code> in the forward direction, so that we rewrite <code>n + 1</code> to <code>succ n</code>? (also, <code>int.coe_nat_succ</code> is marked with <code>[move_cast]</code> but it doesn't seem to fire; is the direction reversed?)</p>
+<p><span class="user-mention" data-user-id="213273">@Paul-Nicolas Madelaine</span>: what is the best way to deal with these rewrite rules that you only want to rewrite in a single direction, but never in the other one? Does <a href="https://github.com/leanprover-community/mathlib/issues/1103" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1103">#1103</a> relate to any of this?</p>
+
+<a name="187357486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast%20and%20int.sub_nat_nat/near/187357486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76257normcastandintsubnatnat.html#187357486">Rob Lewis (Feb 04 2020 at 13:23)</a>:</h4>
+<p>I think you should be able to make it work if you tag it <code>[squash_cast]</code> instead. But yes, this will change with <a href="https://github.com/leanprover-community/mathlib/issues/1103" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1103">#1103</a>.</p>
+
 
 {% endraw %}
 
