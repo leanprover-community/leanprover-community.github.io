@@ -9,9 +9,9 @@ permalink: archive/219941MachineLearningforTheoremProving/index.html
 
 ### Topics:
 
-* [HOList](34292HOList.html) (88 messages, latest: Feb 03 2020 at 22:39)
+* [ML for Lean: How to do it?](97947MLforLeanHowtodoit.html) (73 messages, latest: Feb 03 2020 at 23:03)
 
-* [ML for Lean: How to do it?](97947MLforLeanHowtodoit.html) (71 messages, latest: Feb 03 2020 at 15:00)
+* [HOList](34292HOList.html) (88 messages, latest: Feb 03 2020 at 22:39)
 
 * [Proposal: Apply premise selection to Hammer](13801ProposalApplypremiseselectiontoHammer.html) (9 messages, latest: Jan 14 2020 at 03:41)
 
