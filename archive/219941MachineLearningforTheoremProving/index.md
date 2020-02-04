@@ -9,7 +9,7 @@ permalink: archive/219941MachineLearningforTheoremProving/index.html
 
 ### Topics:
 
-* [ML for Lean: How to do it?](97947MLforLeanHowtodoit.html) (82 messages, latest: Feb 04 2020 at 14:42)
+* [ML for Lean: How to do it?](97947MLforLeanHowtodoit.html) (84 messages, latest: Feb 04 2020 at 16:46)
 
 * [HOList](34292HOList.html) (88 messages, latest: Feb 03 2020 at 22:39)
 

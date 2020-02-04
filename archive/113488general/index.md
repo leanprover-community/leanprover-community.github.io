@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (46 messages, latest: Feb 04 2020 at 16:19)
+
+* [xkcd voting](47138xkcdvoting.html) (2 messages, latest: Feb 04 2020 at 16:07)
+
 * [norm_cast and int.sub_nat_nat](76257normcastandintsubnatnat.html) (3 messages, latest: Feb 04 2020 at 13:23)
 
 * [VScode extension](56578VScodeextension.html) (490 messages, latest: Feb 04 2020 at 11:25)
@@ -30,8 +34,6 @@ permalink: archive/113488general/index.html
 * [strong recursion](83992strongrecursion.html) (1 message, latest: Feb 01 2020 at 11:51)
 
 * [POPLmark challenge](71850POPLmarkchallenge.html) (97 messages, latest: Feb 01 2020 at 07:37)
-
-* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (44 messages, latest: Jan 31 2020 at 23:43)
 
 * [Bonn](14414Bonn.html) (9 messages, latest: Jan 31 2020 at 22:48)
 
