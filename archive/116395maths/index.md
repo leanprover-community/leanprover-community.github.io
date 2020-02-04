@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Cantor's intersection thm](97730Cantorsintersectionthm.html) (2 messages, latest: Feb 04 2020 at 21:17)
+
 * [`simp` lemmas for `matrix.mul` vs `has_mul.mul`](20671simplemmasformatrixmulvshasmulmul.html) (10 messages, latest: Feb 04 2020 at 09:26)
 
 * [when does norm_num work?](40395whendoesnormnumwork.html) (29 messages, latest: Feb 01 2020 at 20:15)
