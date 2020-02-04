@@ -47,6 +47,180 @@ permalink: archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskith
 <p>Alright, understood @ topological equivalence in metric spaces! That's super clear.</p>
 <p>But, I'm not sure why I would need to define <code>rat_with_norm</code> for now?</p>
 
+<a name="187394664"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187394664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187394664">Yury G. Kudryashov (Feb 04 2020 at 20:00)</a>:</h4>
+<p>When you write <code>rat</code>, Lean tries to find the norm associated with this type. If you want to deal with two norms on the same space, you need to fool Lean into treating them as to different types.</p>
+
+<a name="187394980"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187394980" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187394980">Patrick Massot (Feb 04 2020 at 20:03)</a>:</h4>
+<p>I don't think you need such wrapper.</p>
+
+<a name="187395036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187395036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187395036">Ryan Lahfa (Feb 04 2020 at 20:04)</a>:</h4>
+<p><span class="user-mention" data-user-id="214703">@Yury G. Kudryashov</span> Oh, makes sense.</p>
+<p>Also, I'm trying to make general definitions of <code>metric_space_eq</code> like this:</p>
+<div class="codehilite"><pre><span></span>definition metric_space_eq {α : Type u} {β : Type u} [metric_space α] [metric_space β] :=
+    ({continuous_to_fun := id _, continuous_inv_fun := id _} : homeomorph α β)
+</pre></div>
+
+
+<p>And I have a lot of errors, but I guess I'm doing something super wrong, I defined some universe <code>u</code> before and imported everything I needed:</p>
+<div class="codehilite"><pre><span></span>ostrowski.lean:19:5: error
+invalid structure value { ... }, field &#39;to_fun&#39; was not provided
+ostrowski.lean:19:5: error
+invalid structure value { ... }, field &#39;inv_fun&#39; was not provided
+ostrowski.lean:19:5: error
+invalid structure value { ... }, field &#39;left_inv&#39; was not provided
+ostrowski.lean:19:5: error
+invalid structure value { ... }, field &#39;right_inv&#39; was not provided
+</pre></div>
+
+
+<p>When I use <code>to_fun</code> and <code>inv_fun</code>, it says that continuous ones are missing.</p>
+
+<a name="187395038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187395038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187395038">Patrick Massot (Feb 04 2020 at 20:04)</a>:</h4>
+<p>Also, Ryan, you should have a look at the <code>data/padics</code> in mathlib</p>
+
+<a name="187395049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187395049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187395049">Ryan Lahfa (Feb 04 2020 at 20:04)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> Yes I'm reusing most of the stuff that I can that is in there.</p>
+
+<a name="187395195"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187395195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187395195">Patrick Massot (Feb 04 2020 at 20:06)</a>:</h4>
+<p>In particular I don't think it uses doesn't  <code>analysis/normed_space</code></p>
+
+<a name="187395307"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187395307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187395307">Yury G. Kudryashov (Feb 04 2020 at 20:07)</a>:</h4>
+<p>You should reuse <code>equiv.refl</code> for many fields. Sorry, I have to go.</p>
+
+<a name="187395395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187395395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187395395">Ryan Lahfa (Feb 04 2020 at 20:08)</a>:</h4>
+<p><span class="user-mention" data-user-id="214703">@Yury G. Kudryashov</span> It's alright, thank you, I'll try to figure it out!</p>
+
+<a name="187395414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187395414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187395414">Yury G. Kudryashov (Feb 04 2020 at 20:09)</a>:</h4>
+<p>Anyway the main lemma should state that <code>id</code> is continuous. Once you prove this, packing into <code>homeomorph</code> will be easy.</p>
+
+<a name="187395443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187395443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187395443">Yury G. Kudryashov (Feb 04 2020 at 20:09)</a>:</h4>
+<p>I mean, <code>id</code> from <code>rat</code> with one norm to <code>rat</code> with standard norm.</p>
+
+<a name="187395446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187395446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187395446">Yury G. Kudryashov (Feb 04 2020 at 20:09)</a>:</h4>
+<p>And the same for reversed <code>id</code>.</p>
+
+<a name="187395788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187395788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187395788">Patrick Massot (Feb 04 2020 at 20:13)</a>:</h4>
+<p>Ryan, could you clarify what you want about "equivalent metrics"? I mean the math meaning, not Lean code.</p>
+
+<a name="187395814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187395814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187395814">Ryan Lahfa (Feb 04 2020 at 20:13)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> Topological equivalence</p>
+
+<a name="187395862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187395862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187395862">Patrick Massot (Feb 04 2020 at 20:14)</a>:</h4>
+<p>Of what?</p>
+
+<a name="187395868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187395868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187395868">Patrick Massot (Feb 04 2020 at 20:14)</a>:</h4>
+<p>Two metric structure on the same type?</p>
+
+<a name="187395876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187395876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187395876">Patrick Massot (Feb 04 2020 at 20:14)</a>:</h4>
+<p>Or different types?</p>
+
+<a name="187395904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187395904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187395904">Patrick Massot (Feb 04 2020 at 20:14)</a>:</h4>
+<p>Do you want to define a predicate or something containing data?</p>
+
+<a name="187395957"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187395957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187395957">Ryan Lahfa (Feb 04 2020 at 20:15)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> Mathematically, what I want is something that <span class="user-mention" data-user-id="214703">@Yury G. Kudryashov</span> said: I want that id : (E, d_1) → (E, d_2) is an homemorphism, implying that (E, d_1) and (E, d_2) have the same opens (so topological equivalence of topological spaces?)</p>
+
+<a name="187396014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187396014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187396014">Patrick Massot (Feb 04 2020 at 20:16)</a>:</h4>
+<p>So you want a predicate with input E, d_1 and d_2, right?</p>
+
+<a name="187396037"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187396037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187396037">Ryan Lahfa (Feb 04 2020 at 20:16)</a>:</h4>
+<p>Indeed, what I defined earlier takes two metric spaces which is not what I want in fact</p>
+
+<a name="187396053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187396053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187396053">Kevin Buzzard (Feb 04 2020 at 20:16)</a>:</h4>
+<p>Ostrowski can be formalised without any mention of topology. The guts of it is a purely algebraic statement. There is an independent fact that two norms on a field are equivalent (|.|_1=|.|_2^d) if and only if they induce the same topology, but this is somehow an independent thing.</p>
+
+<a name="187396057"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187396057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187396057">Patrick Massot (Feb 04 2020 at 20:16)</a>:</h4>
+<p>Yes, this is what I fond confusing.</p>
+
+<a name="187396075"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187396075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187396075">Patrick Massot (Feb 04 2020 at 20:17)</a>:</h4>
+<p>What you ask for is then:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">metric_space_eqv</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">d</span> <span class="n">d&#39;</span> <span class="o">:</span> <span class="n">metric_space</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="n">d</span><span class="bp">.</span><span class="n">to_uniform_space</span><span class="bp">.</span><span class="n">to_topological_space</span> <span class="bp">=</span> <span class="n">d&#39;</span><span class="bp">.</span><span class="n">to_uniform_space</span><span class="bp">.</span><span class="n">to_topological_space</span>
+</pre></div>
+
+<a name="187396099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187396099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187396099">Patrick Massot (Feb 04 2020 at 20:17)</a>:</h4>
+<p>I was answering Ryan, not Kevin.</p>
+
+<a name="187396182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187396182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187396182">Ryan Lahfa (Feb 04 2020 at 20:18)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I agree with this, I just want to port the entire theorem, it's also a way for me to get better at Lean and understand more ; though I think I'll try to isolate the algebraic statement from the topological one.</p>
+
+<a name="187396218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187396218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187396218">Patrick Massot (Feb 04 2020 at 20:18)</a>:</h4>
+<p>What Kevin says is more specific. In general there is no nice algebraic criterion for topological equivalence between metrics (for instance asking that Id is bilipschitz is much stronger).</p>
+
+<a name="187396277"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187396277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187396277">Kevin Buzzard (Feb 04 2020 at 20:19)</a>:</h4>
+<p>Yes, this is specific to fields, but Ostrowski is about <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="double-struck">Q</mi></mrow><annotation encoding="application/x-tex">\mathbb{Q}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.85556em;vertical-align:-0.16667em;"></span><span class="mord"><span class="mord mathbb">Q</span></span></span></span></span> so this topology talk is perhaps misleading.</p>
+
+<a name="187396309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187396309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187396309">Kevin Buzzard (Feb 04 2020 at 20:19)</a>:</h4>
+<p>The work is checking that every norm is one of the ones we know already. There's a proof in Cassels' book on local fields which might be pleasant to formalise.</p>
+
+<a name="187396327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187396327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187396327">Patrick Massot (Feb 04 2020 at 20:19)</a>:</h4>
+<p>Indeed, this is why I suggested reading <code>data/padics</code> instead of anything living under <code>topology</code> or <code>analysis</code>.</p>
+
+<a name="187396455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187396455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187396455">Kevin Buzzard (Feb 04 2020 at 20:21)</a>:</h4>
+<p>Cassels' proof involves taking a limit though, it might be quite an interesting project to do in Lean.</p>
+
+<a name="187396610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187396610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187396610">Ryan Lahfa (Feb 04 2020 at 20:23)</a>:</h4>
+<p>That sounds super interesting, I'm going to get the proof and study it, if I have any further issue, I'll try to come back ; BTW, are limits available in Lean?</p>
+
+<a name="187396722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187396722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187396722">Kevin Buzzard (Feb 04 2020 at 20:24)</a>:</h4>
+<p>sure, I just thought it was interesting that things like limits and logs were involved when the statement feels quite algebraic.</p>
+
+<a name="187396767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187396767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187396767">Patrick Massot (Feb 04 2020 at 20:25)</a>:</h4>
+<p>Sure, we have a lot about limits in mathlib.</p>
+
+<a name="187396775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187396775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187396775">Ryan Lahfa (Feb 04 2020 at 20:25)</a>:</h4>
+<p>Awesome :)</p>
+
+<a name="187396781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187396781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187396781">Patrick Massot (Feb 04 2020 at 20:25)</a>:</h4>
+<p>Search for <code>tendsto</code>.</p>
+
+<a name="187396864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187396864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187396864">Patrick Massot (Feb 04 2020 at 20:26)</a>:</h4>
+<p>You can use the search at <a href="https://leanprover-community.github.io/mathlib_docs/" target="_blank" title="https://leanprover-community.github.io/mathlib_docs/">https://leanprover-community.github.io/mathlib_docs/</a></p>
+
+<a name="187397005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187397005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187397005">Ryan Lahfa (Feb 04 2020 at 20:28)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> Yes, it has been super useful so far</p>
+
+<a name="187397142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187397142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187397142">Kevin Buzzard (Feb 04 2020 at 20:30)</a>:</h4>
+<p>[I just clicked on the link you posted and it looks to me like it's the same proof as in Cassels]</p>
+
 
 {% endraw %}
 

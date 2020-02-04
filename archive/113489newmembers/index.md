@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Contribution to mathlib with the Ostrowski theorem](68747ContributiontomathlibwiththeOstrowskitheorem.html) (8 messages, latest: Feb 04 2020 at 19:54)
+* [Contribution to mathlib with the Ostrowski theorem](68747ContributiontomathlibwiththeOstrowskitheorem.html) (46 messages, latest: Feb 04 2020 at 20:30)
+
+* [SAT in Lean](88768SATinLean.html) (4 messages, latest: Feb 04 2020 at 20:22)
 
 * [Fundamental Theorem of Arithmetic](29443FundamentalTheoremofArithmetic.html) (1 message, latest: Feb 04 2020 at 17:07)
 
