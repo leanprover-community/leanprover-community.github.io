@@ -518,6 +518,18 @@ run_cmd make_goal_from_expression my_expr
 </blockquote>
 <p>This is a very specific (and therefore somewhat limited) approach to AITP, I think it would be an error to over-index on that statement. Yes RL on statements works for Hammer-ish / Premise-selection-only type of automated theorem proving, but that's not everything there is to automated theorem proving, especially in Lean.</p>
 
+<a name="187353422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/187353422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#187353422">Jason Rute (Feb 04 2020 at 12:19)</a>:</h4>
+<p>First, to be clear, I was ignoring proof recording because (1) I didn't think it was easy and (2) we can do a lot without it (how much remains to be seen, but I don't think one can say with certainty that reinforcement learning only works on some types of projects and not others).  If it is indeed easy to get that data, then of course I want it!  (Also, remember that Lean proofs are human written and Lean hasn't been around for that long.  Right now I count about 8300 occurrences of the <code>theorem</code> keyword in mathlib.  I'm not sure it that is enough training data or not.)</p>
+
+<a name="187354504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/187354504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#187354504">Jason Rute (Feb 04 2020 at 12:36)</a>:</h4>
+<p>Now as for getting the theorem data, so far I have been using the above mentioned approaches which are internal to Lean (i.e. looking at the Lean environment for all the declared theorems.)  I hadn't considered doing it externally to Lean (i.e. using the Lean server to look at each line of a proof).  This is very interesting and I'm curious how well it works.  I think it would be fiddly, but it probably is the best option we have.  As an implementation detail, recall that Lean proofs don't have to be linear, so one has to take into account nested structure.  Also, recall that not all proofs are tactic proofs, some are term-mode proofs.  (The <code>format_lean</code> approach might be a bit simplistic in that it seems that the human tells the formatter where to look by adding comments to the Lean file.  We would need something that looks at the Lean file automatically, but I agree it is promising.)</p>
+
+<a name="187354536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/187354536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#187354536">Jason Rute (Feb 04 2020 at 12:37)</a>:</h4>
+<p>For now I am just going to focus on the bare essentials of getting the theorems and premises, but if you can get proof recording to work, I'm glad to help were I can.</p>
+
 
 {% endraw %}
 
