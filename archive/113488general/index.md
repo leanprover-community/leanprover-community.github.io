@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [quotients and products again](41780quotientsandproductsagain.html) (2 messages, latest: Feb 03 2020 at 23:52)
+* [quotients and products again](41780quotientsandproductsagain.html) (6 messages, latest: Feb 04 2020 at 00:32)
 
 * [lean codeblocks in docstrings](40241leancodeblocksindocstrings.html) (7 messages, latest: Feb 03 2020 at 18:30)
 
