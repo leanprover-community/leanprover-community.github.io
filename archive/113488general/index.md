@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [VScode extension](56578VScodeextension.html) (489 messages, latest: Feb 04 2020 at 10:14)
+
 * [quotients and products again](41780quotientsandproductsagain.html) (7 messages, latest: Feb 04 2020 at 06:30)
 
 * [lean codeblocks in docstrings](40241leancodeblocksindocstrings.html) (7 messages, latest: Feb 03 2020 at 18:30)
 
 * [opening twice](84909openingtwice.html) (4 messages, latest: Feb 03 2020 at 16:21)
-
-* [VScode extension](56578VScodeextension.html) (488 messages, latest: Feb 03 2020 at 15:01)
 
 * [incorrect alignment of red error line in VS Code](73990incorrectalignmentofrederrorlineinVSCode.html) (16 messages, latest: Feb 03 2020 at 09:57)
 
