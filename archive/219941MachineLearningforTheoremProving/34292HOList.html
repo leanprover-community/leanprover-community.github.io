@@ -643,6 +643,13 @@ cc <span class="user-mention" data-user-id="217806">@Markus Rabe</span> <span cl
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/187393246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#187393246">Stanislas Polu (Feb 04 2020 at 19:47)</a>:</h4>
 <p><span class="user-mention" data-user-id="239408">@Sarah Loos</span> thanks for reiterating the purpose of the human vs synthetic proof logs. Very clear <span aria-label="+1" class="emoji emoji-1f44d" role="img" title="+1">:+1:</span></p>
 
+<a name="187490923"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/187490923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#187490923">Sarah Loos (Feb 05 2020 at 20:21)</a>:</h4>
+<blockquote>
+<p>(simple ASSUME is the canonical way to turn an hypothesis into a tactic theorem argument)</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="249373">@Stanislas Polu</span> Yes, this is how you'd implement ASM_* rules that are forward proofs on theorems.  However, it's slightly different for ASM_* tactics for backward proving on goals.  In the backward case, you should use the existing theorems in the goal assumption list (see ASM function <a href="https://github.com/jrh13/hol-light/blob/b913ffef1ffd16f64a81fe1b783f62e756d33a40/tactics.ml#L304" target="_blank" title="https://github.com/jrh13/hol-light/blob/b913ffef1ffd16f64a81fe1b783f62e756d33a40/tactics.ml#L304">here</a>).  If you use ASSUME, you'll actually be creating a new theorem.  The new theorem may often (or always, depending on your specific use case) be equivalent to the one in the goal assumption list, but not necessarily.  Not sure if the distinction is relevant for you, and feel free to disregard if not!</p>
+
 
 {% endraw %}
 

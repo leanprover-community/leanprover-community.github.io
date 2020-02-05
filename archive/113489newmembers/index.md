@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Contribution to mathlib with the Ostrowski theorem](68747ContributiontomathlibwiththeOstrowskitheorem.html) (72 messages, latest: Feb 05 2020 at 19:30)
+* [Contribution to mathlib with the Ostrowski theorem](68747ContributiontomathlibwiththeOstrowskitheorem.html) (82 messages, latest: Feb 05 2020 at 20:59)
 
 * [noob question(s)](52075noobquestions.html) (1768 messages, latest: Feb 05 2020 at 16:35)
 
