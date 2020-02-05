@@ -221,6 +221,21 @@ invalid structure value { ... }, field &#39;right_inv&#39; was not provided
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187397142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187397142">Kevin Buzzard (Feb 04 2020 at 20:30)</a>:</h4>
 <p>[I just clicked on the link you posted and it looks to me like it's the same proof as in Cassels]</p>
 
+<a name="187411659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187411659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187411659">Ryan Lahfa (Feb 04 2020 at 23:33)</a>:</h4>
+<p>I come back with plenty of questions:<br>
+— let's say I want to prove that a finite product of M non-negative rationals such that the result is &lt; 1 contains at least a term such that it is &lt; 1, should I use the list type for this?<br>
+I have a lemma like this:</p>
+<div class="codehilite"><pre><span></span>lemma product_of_nonnegative_rat_le_one_contains_at_least_one_le_one_factor (L : list ℚ)  (H: ∀ a : ℚ, a ∈ L → a ≥ 0) (J: list.prod L ≤ 1)
+    : ∃ a : ℚ, a ∈ L ∧ a ≤ 1 := sorry
+</pre></div>
+
+
+<p>bonus: should I design it so that it rather show the existence of j such that nth L j ≤ 1 (that's better I suppose).</p>
+<p>— next is, I have an n0 ≥ 2, I want to apply the absolute value on its prime factor decomposition, so naively, I do <code>have afactors := list.map abv (nat.factors n0)</code> and I get a list of Q, but I have this hypothesis on n0 which is abv n0 &lt;= 1 and I want to transmit it to <code>list.prod afactors</code>, so I guess I have to use the fact that <code>list.prod (nat.factors n0) = n0</code> to get<code>list.prod (list.map abv nat.factors n0) = abv n0</code>.<br>
+Maybe I don't know enough about the mathlib to perform this easily.</p>
+<p>Thank you!</p>
+
 
 {% endraw %}
 
