@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [inter_subset_union](90816intersubsetunion.html) (5 messages, latest: Feb 05 2020 at 20:05)
+* [`choose` with `and`](15409choosewithand.html) (6 messages, latest: Feb 05 2020 at 21:58)
 
-* [`choose` with `and`](15409choosewithand.html) (4 messages, latest: Feb 05 2020 at 15:51)
+* [inter_subset_union](90816intersubsetunion.html) (5 messages, latest: Feb 05 2020 at 20:05)
 
 * [moving mathlib to 3.5c](54190movingmathlibto35c.html) (63 messages, latest: Feb 05 2020 at 12:17)
 
