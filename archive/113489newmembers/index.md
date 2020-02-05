@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1747 messages, latest: Feb 05 2020 at 14:55)
+
 * [Contribution to mathlib with the Ostrowski theorem](68747ContributiontomathlibwiththeOstrowskitheorem.html) (71 messages, latest: Feb 05 2020 at 13:17)
 
 * [SAT in Lean](88768SATinLean.html) (4 messages, latest: Feb 04 2020 at 20:22)
@@ -18,8 +20,6 @@ permalink: archive/113489newmembers/index.html
 * [defining functions out of set](39863definingfunctionsoutofset.html) (27 messages, latest: Feb 03 2020 at 22:51)
 
 * [set comprehension issue](79280setcomprehensionissue.html) (6 messages, latest: Feb 03 2020 at 17:29)
-
-* [noob question(s)](52075noobquestions.html) (1743 messages, latest: Feb 02 2020 at 19:53)
 
 * [list.nth_le](21637listnthle.html) (12 messages, latest: Feb 01 2020 at 21:40)
 
