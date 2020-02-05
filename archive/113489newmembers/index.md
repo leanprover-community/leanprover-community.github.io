@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Contribution to mathlib with the Ostrowski theorem](68747ContributiontomathlibwiththeOstrowskitheorem.html) (68 messages, latest: Feb 05 2020 at 12:59)
+* [Contribution to mathlib with the Ostrowski theorem](68747ContributiontomathlibwiththeOstrowskitheorem.html) (71 messages, latest: Feb 05 2020 at 13:17)
 
 * [SAT in Lean](88768SATinLean.html) (4 messages, latest: Feb 04 2020 at 20:22)
 
