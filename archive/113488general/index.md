@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [`choose` with `and`](15409choosewithand.html) (4 messages, latest: Feb 05 2020 at 15:51)
+
 * [moving mathlib to 3.5c](54190movingmathlibto35c.html) (63 messages, latest: Feb 05 2020 at 12:17)
 
 * [VScode extension](56578VScodeextension.html) (494 messages, latest: Feb 05 2020 at 07:39)
