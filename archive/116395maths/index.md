@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [`simp` lemmas for `matrix.mul` vs `has_mul.mul`](20671simplemmasformatrixmulvshasmulmul.html) (11 messages, latest: Feb 05 2020 at 10:29)
+
 * [Unifying `tangent_cone_at` and `pos_tangent_cone_at`](67232Unifyingtangentconeatandpostangentconeat.html) (4 messages, latest: Feb 05 2020 at 07:45)
 
 * [Cantor's intersection thm](97730Cantorsintersectionthm.html) (2 messages, latest: Feb 04 2020 at 21:17)
-
-* [`simp` lemmas for `matrix.mul` vs `has_mul.mul`](20671simplemmasformatrixmulvshasmulmul.html) (10 messages, latest: Feb 04 2020 at 09:26)
 
 * [when does norm_num work?](40395whendoesnormnumwork.html) (29 messages, latest: Feb 01 2020 at 20:15)
 
