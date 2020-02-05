@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [`choose` with `and`](15409choosewithand.html) (6 messages, latest: Feb 05 2020 at 21:58)
+* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (65 messages, latest: Feb 05 2020 at 22:48)
+
+* [`choose` with `and`](15409choosewithand.html) (7 messages, latest: Feb 05 2020 at 22:06)
 
 * [inter_subset_union](90816intersubsetunion.html) (5 messages, latest: Feb 05 2020 at 20:05)
-
-* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (63 messages, latest: Feb 05 2020 at 12:17)
 
 * [VScode extension](56578VScodeextension.html) (494 messages, latest: Feb 05 2020 at 07:39)
 
