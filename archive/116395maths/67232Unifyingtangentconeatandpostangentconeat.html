@@ -22,6 +22,29 @@ permalink: archive/116395maths/67232Unifyingtangentconeatandpostangentconeat.htm
 <p>The second approach looks like the right way to do it but it requires a lot of refactoring. What do you think?</p>
 <p>BTW, is there any technical reason to have <code>module</code> and <code>vector_space</code> instead of always dealing with a <code>semimodule</code>?</p>
 
+<a name="187430638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Unifying%20%60tangent_cone_at%60%20and%20%60pos_tangent_cone_at%60/near/187430638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/67232Unifyingtangentconeatandpostangentconeat.html#187430638">Johan Commelin (Feb 05 2020 at 07:09)</a>:</h4>
+<p>Re <code>semimodule</code>: No, I don't think so. It's just to create a (useful, I think?) air of familiarity for mathematicians</p>
+
+<a name="187431993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Unifying%20%60tangent_cone_at%60%20and%20%60pos_tangent_cone_at%60/near/187431993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/67232Unifyingtangentconeatandpostangentconeat.html#187431993">Sebastien Gouezel (Feb 05 2020 at 07:41)</a>:</h4>
+<blockquote>
+<p>I'd like to prove more properties of tangent cones. With the definitions we have now, I'll have to prove every fact twice: once for <code>tangent_cone_at</code>, and once for <code>pos_tangent_cone_at</code>. I see two ways to unify these definitions:</p>
+<ol>
+<li>Introduce <code>(M : submonoid 𝕜)</code> in the definition, and require <code>c n ∈ M</code>. This requires coercions here and there.</li>
+<li>Define semifields and normed semifields, then <code>pos_tangent_cone_at</code> becomes <code>tangent_cone_at nnreal</code>.</li>
+</ol>
+<p>The second approach looks like the right way to do it but it requires a lot of refactoring. What do you think?</p>
+</blockquote>
+<p>I would go for the first way: in any case, there will be coercions involved (in the second approach, you would need to see a real module as an nnreal semimodule), so let's keep it as simple as it can be.</p>
+
+<a name="187432160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Unifying%20%60tangent_cone_at%60%20and%20%60pos_tangent_cone_at%60/near/187432160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/67232Unifyingtangentconeatandpostangentconeat.html#187432160">Sebastien Gouezel (Feb 05 2020 at 07:45)</a>:</h4>
+<blockquote>
+<p>BTW, is there any technical reason to have <code>module</code> and <code>vector_space</code> instead of always dealing with a <code>semimodule</code>?</p>
+</blockquote>
+<p>I have tried to make <code>module</code> and <code>vector_space</code> all abbreviations for <code>semimodule</code>, but some things became too slow. I still think this is a good move, but it will probably have to wait for Lean 4. Link to the conversation: <a href="#narrow/stream/116395-maths/topic/linear.20maps.20over.20semimodule/near/185824677" title="#narrow/stream/116395-maths/topic/linear.20maps.20over.20semimodule/near/185824677">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linear.20maps.20over.20semimodule/near/185824677</a></p>
+
 
 {% endraw %}
 
