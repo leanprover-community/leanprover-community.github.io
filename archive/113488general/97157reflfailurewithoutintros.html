@@ -31,6 +31,145 @@ permalink: archive/113488general/97157reflfailurewithoutintros.html
 <span class="kn">end</span>
 </pre></div>
 
+<a name="187588214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187588214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187588214">Oliver Nash (Feb 06 2020 at 21:00)</a>:</h4>
+<p>The error I see if I replace <code>map_mul := by { intros, refl, }</code> with <code>map_mul := rfl</code> is:</p>
+<div class="codehilite"><pre><span></span>type mismatch at field &#39;map_mul&#39;
+  rfl
+has type
+  ?m_2 = ?m_2
+but is expected to have type
+  ∀ (x y : β →* γ), evb (x * y) = evb x * evb y
+</pre></div>
+
+<a name="187588258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187588258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187588258">Patrick Massot (Feb 06 2020 at 21:00)</a>:</h4>
+<p>Why would it work?</p>
+
+<a name="187588301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187588301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187588301">Oliver Nash (Feb 06 2020 at 21:01)</a>:</h4>
+<p>Erm, good question!</p>
+
+<a name="187588401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187588401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187588401">Patrick Massot (Feb 06 2020 at 21:02)</a>:</h4>
+<p>in</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>would you expect <code>refl</code> to close the goal?</p>
+
+<a name="187588421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187588421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187588421">Patrick Massot (Feb 06 2020 at 21:02)</a>:</h4>
+<p>hint: you shouldn't.</p>
+
+<a name="187588441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187588441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187588441">Oliver Nash (Feb 06 2020 at 21:02)</a>:</h4>
+<p>Oh dear, I would have expected it to close that goal <span aria-label="embarrassed" class="emoji emoji-1f633" role="img" title="embarrassed">:embarrassed:</span></p>
+
+<a name="187588513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187588513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187588513">Oliver Nash (Feb 06 2020 at 21:03)</a>:</h4>
+<p>Thank you for providing such a simplified example. Is there a simple explanation for when I should expect <code>refl</code> to work, or somewhere I should look to read more?</p>
+
+<a name="187588550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187588550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187588550">Patrick Massot (Feb 06 2020 at 21:03)</a>:</h4>
+<p>You should expect it to work when the goal is <code>x = x</code>, maybe in disguise.</p>
+
+<a name="187588555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187588555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187588555">Oliver Nash (Feb 06 2020 at 21:03)</a>:</h4>
+<p>Till now I had regarded it as a way to close goals that are just definitional equalities once you unfold sufficiently (or something along those lines).</p>
+
+<a name="187588607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187588607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187588607">Patrick Massot (Feb 06 2020 at 21:04)</a>:</h4>
+<p>Yes, exactly.</p>
+
+<a name="187588609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187588609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187588609">Oliver Nash (Feb 06 2020 at 21:04)</a>:</h4>
+<p>Right, that has been my approximate understanding.</p>
+
+<a name="187588629"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187588629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187588629">Patrick Massot (Feb 06 2020 at 21:04)</a>:</h4>
+<p>And <code>∀ n : ℕ, n = n</code> is not of that form.</p>
+
+<a name="187588634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187588634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187588634">Oliver Nash (Feb 06 2020 at 21:04)</a>:</h4>
+<p>But I'm fairly sure it has been able to succeed in the past when there was a universal qualifier "in the way".</p>
+
+<a name="187588651"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187588651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187588651">Oliver Nash (Feb 06 2020 at 21:04)</a>:</h4>
+<p>Understood, perhaps my memory misleads me.</p>
+
+<a name="187588681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187588681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187588681">Oliver Nash (Feb 06 2020 at 21:05)</a>:</h4>
+<p>Hmm, I suppose it does. There does not seem to be anything more to this.</p>
+
+<a name="187588684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187588684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187588684">Oliver Nash (Feb 06 2020 at 21:05)</a>:</h4>
+<p>Thank you!</p>
+
+<a name="187588805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187588805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187588805">Patrick Massot (Feb 06 2020 at 21:06)</a>:</h4>
+<p>If you are frustrated to have to type two tactics to close this goal you can probably try <code>tauto</code></p>
+
+<a name="187588895"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187588895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187588895">Oliver Nash (Feb 06 2020 at 21:07)</a>:</h4>
+<p>Right ho, I'll use that.</p>
+
+<a name="187588916"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187588916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187588916">Patrick Massot (Feb 06 2020 at 21:07)</a>:</h4>
+<p>I hope Mario has a good zulip filtering preventing him from seeing such suggestions...</p>
+
+<a name="187588986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187588986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187588986">Oliver Nash (Feb 06 2020 at 21:08)</a>:</h4>
+<p>You mean my original message (which I now realise was perhaps wasting people's time) or the suggestion to use <code>tauto</code>?</p>
+
+<a name="187588989"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187588989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187588989">Patrick Massot (Feb 06 2020 at 21:08)</a>:</h4>
+<p>Seriously, the right proof here is <code>lambda _ _,  rfl</code></p>
+
+<a name="187589007"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187589007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187589007">Patrick Massot (Feb 06 2020 at 21:08)</a>:</h4>
+<p>I meant the suggestion to use <code>tauto</code></p>
+
+<a name="187589024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187589024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187589024">Oliver Nash (Feb 06 2020 at 21:09)</a>:</h4>
+<p>Oh I see.</p>
+
+<a name="187589068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187589068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187589068">Patrick Massot (Feb 06 2020 at 21:09)</a>:</h4>
+<p>You are not wasting people's time. Everybody answering questions here is volunteer, and has been asking elementary questions before.</p>
+
+<a name="187589077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187589077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187589077">Oliver Nash (Feb 06 2020 at 21:09)</a>:</h4>
+<p>Well, I can believe <code>tauto</code> might be too heavyweight alright!</p>
+
+<a name="187589140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187589140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187589140">Oliver Nash (Feb 06 2020 at 21:10)</a>:</h4>
+<p>Thanks for the encouragement, and again for the clarifications.</p>
+
+<a name="187590410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187590410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187590410">Mario Carneiro (Feb 06 2020 at 21:24)</a>:</h4>
+<p>I like the proof <code>\lam _, rfl</code></p>
+
+<a name="187590462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187590462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187590462">Mario Carneiro (Feb 06 2020 at 21:25)</a>:</h4>
+<p>Note that <code>refl</code> already has problems with guessing the number of arguments because it is equivalent to <code>apply *refl</code> where <code>*refl</code> is some reflexivity lemma</p>
+
+<a name="187590538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187590538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187590538">Mario Carneiro (Feb 06 2020 at 21:26)</a>:</h4>
+<p>and the apply bug causes issues in cases like <code>le_refl</code> when le is defined as a pi</p>
+
+<a name="187590552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187590552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187590552">Mario Carneiro (Feb 06 2020 at 21:26)</a>:</h4>
+<p>maybe this is your recollection</p>
+
+<a name="187591490"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20failure%20without%20intros/near/187591490" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97157reflfailurewithoutintros.html#187591490">Oliver Nash (Feb 06 2020 at 21:38)</a>:</h4>
+<p>Thank you <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I suspect this is the case. I appreciate this further information.</p>
+
 
 {% endraw %}
 

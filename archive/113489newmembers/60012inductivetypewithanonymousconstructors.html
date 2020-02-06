@@ -25,6 +25,75 @@ permalink: archive/113489newmembers/60012inductivetypewithanonymousconstructors.
 
 <p>However, this means that when working with extended bool, I always need to destruct it and include the <strong>boolean</strong> constructor for the boolean case. Can I save myself some work by having an "anonymous" constructor? Is this considered bad coding practice?</p>
 
+<a name="187588227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductive%20type%20with%20anonymous%20constructors/near/187588227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60012inductivetypewithanonymousconstructors.html#187588227">Mario Carneiro (Feb 06 2020 at 21:00)</a>:</h4>
+<p>That looks like <code>option bool</code> to me</p>
+
+<a name="187588311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductive%20type%20with%20anonymous%20constructors/near/187588311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60012inductivetypewithanonymousconstructors.html#187588311">Mario Carneiro (Feb 06 2020 at 21:01)</a>:</h4>
+<p>Anonymous constructors unfortunately only work for types with one constructor</p>
+
+<a name="187589579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductive%20type%20with%20anonymous%20constructors/near/187589579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60012inductivetypewithanonymousconstructors.html#187589579">Vaibhav Karve (Feb 06 2020 at 21:14)</a>:</h4>
+<p>But even with option, don't I have to use <code>some</code> and <code>none</code>?  I wanted some way to say "if it is not extra, then it must be boolean, so I am not going to write it."</p>
+<p>Another example might be <code>bool ⊕ nat</code>. Is there a way for me to define functions on this type without constantly making references to <code>sum.inl</code> and <code>sum.inr</code>? As in, can Lean infer the definition of the function simply from the type of the arguments?</p>
+
+<a name="187589643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductive%20type%20with%20anonymous%20constructors/near/187589643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60012inductivetypewithanonymousconstructors.html#187589643">Patrick Massot (Feb 06 2020 at 21:15)</a>:</h4>
+<p>You can define a coercion from bool to extended_bool</p>
+
+<a name="187589778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductive%20type%20with%20anonymous%20constructors/near/187589778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60012inductivetypewithanonymousconstructors.html#187589778">Patrick Massot (Feb 06 2020 at 21:17)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">ebool</span> <span class="o">:=</span> <span class="n">option</span> <span class="n">bool</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="n">bool</span> <span class="n">ebool</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">b</span><span class="o">,</span> <span class="n">some</span> <span class="n">b</span><span class="bp">⟩</span>
+
+<span class="kn">variable</span> <span class="n">f</span> <span class="o">:</span> <span class="n">ebool</span> <span class="bp">→</span> <span class="n">ebool</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">f</span> <span class="n">tt</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">f</span> <span class="n">none</span>
+</pre></div>
+
+<a name="187589790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductive%20type%20with%20anonymous%20constructors/near/187589790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60012inductivetypewithanonymousconstructors.html#187589790">Patrick Massot (Feb 06 2020 at 21:17)</a>:</h4>
+<p>Is that what you want?</p>
+
+<a name="187590052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductive%20type%20with%20anonymous%20constructors/near/187590052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60012inductivetypewithanonymousconstructors.html#187590052">Patrick Massot (Feb 06 2020 at 21:20)</a>:</h4>
+<p>In case this is not clear, <code>option bool</code> without wrapping it already gives you that.</p>
+
+<a name="187590609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductive%20type%20with%20anonymous%20constructors/near/187590609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60012inductivetypewithanonymousconstructors.html#187590609">Mario Carneiro (Feb 06 2020 at 21:27)</a>:</h4>
+<p><code>option</code> actually already has such a coercion</p>
+
+<a name="187590626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductive%20type%20with%20anonymous%20constructors/near/187590626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60012inductivetypewithanonymousconstructors.html#187590626">Mario Carneiro (Feb 06 2020 at 21:27)</a>:</h4>
+<p>(oops, patrick already said this)</p>
+
+<a name="187590800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductive%20type%20with%20anonymous%20constructors/near/187590800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60012inductivetypewithanonymousconstructors.html#187590800">Mario Carneiro (Feb 06 2020 at 21:29)</a>:</h4>
+<p>This will work in cases like <code>bool ⊕ nat</code>, with type based dispatch, but it won't work in patterns (i.e. pattern matching requires explicit <code>inl</code> and <code>inr</code>). But I don't think it is good style, and the option coe is rarely used in mathlib</p>
+
+<a name="187592481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductive%20type%20with%20anonymous%20constructors/near/187592481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60012inductivetypewithanonymousconstructors.html#187592481">Vaibhav Karve (Feb 06 2020 at 21:52)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> yes, that is what I was looking for. That's a cool trick with <code>has_coe</code>.<br>
+<span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Yes, I can see how this can lead to smelly code. I'll try and avoid this kind of usage in practice.</p>
+<p>For the case of <code>bool ⊕ nat</code>, do I still need explicit coercion? I am not sure I understand what you mean by type-based-dispatch. So far I have:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">ebool</span> <span class="o">:=</span> <span class="n">bool</span> <span class="err">⊕</span> <span class="n">nat</span>
+
+<span class="n">def</span> <span class="n">f</span> <span class="o">:</span> <span class="n">ebool</span> <span class="bp">→</span> <span class="n">nat</span>   <span class="c1">-- throws an error</span>
+<span class="bp">|</span> <span class="n">tt</span> <span class="o">:=</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="n">ff</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="n">n</span>  <span class="o">:=</span> <span class="n">n</span>
+</pre></div>
+
+
+<p>How can I define that <code>f</code> properly?</p>
+
+<a name="187592948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductive%20type%20with%20anonymous%20constructors/near/187592948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60012inductivetypewithanonymousconstructors.html#187592948">Mario Carneiro (Feb 06 2020 at 21:58)</a>:</h4>
+<p>like I said, it won't work in patterns</p>
+
 
 {% endraw %}
 
