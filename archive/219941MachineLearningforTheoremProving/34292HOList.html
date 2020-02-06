@@ -650,6 +650,14 @@ cc <span class="user-mention" data-user-id="217806">@Markus Rabe</span> <span cl
 </blockquote>
 <p><span class="user-mention" data-user-id="249373">@Stanislas Polu</span> Yes, this is how you'd implement ASM_* rules that are forward proofs on theorems.  However, it's slightly different for ASM_* tactics for backward proving on goals.  In the backward case, you should use the existing theorems in the goal assumption list (see ASM function <a href="https://github.com/jrh13/hol-light/blob/b913ffef1ffd16f64a81fe1b783f62e756d33a40/tactics.ml#L304" target="_blank" title="https://github.com/jrh13/hol-light/blob/b913ffef1ffd16f64a81fe1b783f62e756d33a40/tactics.ml#L304">here</a>).  If you use ASSUME, you'll actually be creating a new theorem.  The new theorem may often (or always, depending on your specific use case) be equivalent to the one in the goal assumption list, but not necessarily.  Not sure if the distinction is relevant for you, and feel free to disregard if not!</p>
 
+<a name="187517473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/187517473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#187517473">Christian Szegedy (Feb 06 2020 at 03:32)</a>:</h4>
+<p><span class="user-mention" data-user-id="249373">@Stanislas Polu</span></p>
+<blockquote>
+<p>(from re-reading earlier posts, I presume it would allow to technically generate these theorems through forward reasoning steps, but your current system does not cover creating the associated proof logs. Aka you added a forward reasoning API to register new theorems through conversions, but the proof logs remain the same?)</p>
+</blockquote>
+<p>Yes the Proof-Log and proof-checker will be extended. The modification to the proof-logs is relatively minor, though. The checker changes are more work, but will be essential.</p>
+
 
 {% endraw %}
 
