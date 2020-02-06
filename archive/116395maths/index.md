@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [bundled kernels for add_comm_groups?](56204bundledkernelsforaddcommgroups.html) (9 messages, latest: Feb 06 2020 at 11:34)
+
 * [sober spaces](80251soberspaces.html) (1 message, latest: Feb 05 2020 at 17:58)
 
 * [`simp` lemmas for `matrix.mul` vs `has_mul.mul`](20671simplemmasformatrixmulvshasmulmul.html) (11 messages, latest: Feb 05 2020 at 10:29)

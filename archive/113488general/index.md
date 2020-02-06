@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [should nonempty be a structure](62243shouldnonemptybeastructure.html) (1 message, latest: Feb 06 2020 at 11:27)
+
 * [moving mathlib to 3.5c](54190movingmathlibto35c.html) (65 messages, latest: Feb 05 2020 at 22:48)
 
 * [`choose` with `and`](15409choosewithand.html) (7 messages, latest: Feb 05 2020 at 22:06)

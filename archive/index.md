@@ -8,11 +8,11 @@ permalink: archive/index.html
 
 ## Streams:
 
-* [general](113488general/index.html) (2346 topics)
+* [general](113488general/index.html) (2347 topics)
 
 * [new members](113489newmembers/index.html) (766 topics)
 
-* [maths](116395maths/index.html) (747 topics)
+* [maths](116395maths/index.html) (748 topics)
 
 * [PR reviews](144837PRreviews/index.html) (208 topics)
 
