@@ -428,6 +428,32 @@ Maybe I don't know enough about the mathlib to perform this easily.</p>
 <p>Here's new questions!</p>
 <p>I'm trying to figure out how to instantiate some fields and stuff and I often run into "failed to synthesize type class instance for […]", for example, if I try to do <code>#check \Q_[3]</code> it'll fail, I guess I have to prove that 3 is prime but I'm unsure how to inject this information? It seems like <code>apply_instance</code> is what I want but once I'm not sure how to use it.</p>
 
+<a name="187504196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187504196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187504196">Ryan Lahfa (Feb 05 2020 at 23:00)</a>:</h4>
+<p>Also, what's the difference between writing <code>\exists p : nat.primes, …</code> and <code>\exists (p), [hp: nat.prime p], …</code> ?</p>
+
+<a name="187504406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187504406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187504406">Yury G. Kudryashov (Feb 05 2020 at 23:03)</a>:</h4>
+<p>In the first case <code>p</code> is a structure with two fields: <code>p.val</code> is a number and <code>p.property</code> says that <code>p.val</code> is prime. In the latter case <code>p</code> is a number and <code>hp</code> says that it is prime.</p>
+
+<a name="187504647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187504647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187504647">Ryan Lahfa (Feb 05 2020 at 23:06)</a>:</h4>
+<p><span class="user-mention" data-user-id="214703">@Yury G. Kudryashov</span> Okay, makes sense, thank you!</p>
+
+<a name="187505412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187505412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187505412">Ryan Lahfa (Feb 05 2020 at 23:17)</a>:</h4>
+<p>New question, so if I have some absolute value |⋅| and I want to induce some metric_space using it over \Q ; like <span class="user-mention" data-user-id="214703">@Yury G. Kudryashov</span> said earlier, I have to define some <code>rat_with_abv</code> to create a new type and then I can define as an instance of metric_space for example, right? I don't think I can avoid it ; but curious question, is there a technical limitation for why we could not have:</p>
+<div class="codehilite"><pre><span></span>def field_with_abv {a: Type*} (abv: a \to a) [normed_field a] [is_absolute_value abv]: normed_field a := [build generally the normed_field using abv over a]
+</pre></div>
+
+
+<p>I'm not exactly sure that a must be a discrete_field, but whatever it has to be.</p>
+<p>And this way we could swap absolute values (or norm) for all normed fields I guess (?).</p>
+
+<a name="187505520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187505520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187505520">Ryan Lahfa (Feb 05 2020 at 23:19)</a>:</h4>
+<p>I suppose I could use the Cauchy completion by showing that from all absolute values, we can derive some norms?</p>
+
 
 {% endraw %}
 
