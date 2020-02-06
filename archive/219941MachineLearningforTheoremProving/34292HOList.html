@@ -668,6 +668,51 @@ cc <span class="user-mention" data-user-id="217806">@Markus Rabe</span> <span cl
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/187535605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#187535605">Stanislas Polu (Feb 06 2020 at 10:19)</a>:</h4>
 <p>cc <span class="user-mention" data-user-id="115715">@Jason Rute</span> if you can reproduce and let me know what you think ^ ?</p>
 
+<a name="187543215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/187543215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#187543215">Jason Rute (Feb 06 2020 at 12:26)</a>:</h4>
+<p><span class="user-mention" data-user-id="249373">@Stanislas Polu</span> Interesting.  I can try to verify later.  Have to tried plugging this into HOL Light?  I assume the problem is that HOL Light returns the goal as <code>p=T |- T =&gt; q</code>, and then HOList ApplyTactic neglects to return the hypothesis.  Is that correct?</p>
+
+<a name="187544829"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/187544829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#187544829">Stanislas Polu (Feb 06 2020 at 12:50)</a>:</h4>
+<p><span class="user-mention" data-user-id="115715">@Jason Rute</span>  As mentioned in the documentation, the tactic is invalid if the goal's assumption does not include the theorem passed as argument's assumptions:</p>
+<div class="codehilite"><pre><span></span># let pth = ASSUME `p = T`;;
+val pth : thm = p &lt;=&gt; T |- p &lt;=&gt; T
+# g `p ==&gt; q`;;
+Warning: Free variables in goal: p, q
+val it : goalstack = 1 subgoal (1 total)
+
+`p ==&gt; q`
+
+# e(SUBST1_TAC pth);;
+Exception: Failure &quot;VALID: Invalid tactic&quot;.
+</pre></div>
+
+
+<p>(which is slightly more worrying since it means that somewhere SUBST1_TAC, through the API executes where it should fail? it's not just an assumption not being returned)</p>
+<p>For completeness/reference, a valid use of the tactic:</p>
+<div class="codehilite"><pre><span></span># g `p = T ==&gt; (p ==&gt; q)`;;
+Warning: Free variables in goal: p, q
+val it : goalstack = 1 subgoal (1 total)
+
+`(p &lt;=&gt; T) ==&gt; p ==&gt; q`
+
+# e(DISCH_TAC);;
+val it : goalstack = 1 subgoal (1 total)
+
+  0 [`p &lt;=&gt; T`]
+
+`p ==&gt; q`
+
+# e(SUBST1_TAC pth);;
+val it : goalstack = 1 subgoal (1 total)
+
+  0 [`p &lt;=&gt; T`]
+
+`T ==&gt; q`
+
+#
+</pre></div>
+
 
 {% endraw %}
 
