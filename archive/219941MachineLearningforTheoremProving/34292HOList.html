@@ -713,6 +713,17 @@ val it : goalstack = 1 subgoal (1 total)
 #
 </pre></div>
 
+<a name="187565872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/187565872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#187565872">Sarah Loos (Feb 06 2020 at 16:53)</a>:</h4>
+<p>Thanks for documenting and sharing this example!  I am surprised that the same "VALID: Invalid tactic" isn't returned by HOList.  Like Jason, I would have expected HOL Light to return the theorem <code>p=T |- T =&gt; q</code>, which we don't consider to be a valid proof of the original goal (<code>|- p =&gt; q</code>), since hypotheses are added mid-proof.</p>
+<blockquote>
+<p>Could you explain how a user of holist should protect herself from this sequence of actions leading to a proof of false?</p>
+</blockquote>
+<ol>
+<li>We don't allow theorems with hypotheses in our premise set, but this is enforced purely by convention (i.e. there are none in our theorem database) and is not well documented anywhere.</li>
+<li>We rely on the proof checker, which reruns the found proof tree in HOL Light and checks that the resulting theorem object has no hypotheses and the conclusion is alpha-equiv to the original goal term.  <span class="user-mention" data-user-id="217806">@Markus Rabe</span></li>
+</ol>
+
 
 {% endraw %}
 

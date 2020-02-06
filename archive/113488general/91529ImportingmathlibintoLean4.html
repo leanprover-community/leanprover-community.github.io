@@ -1,0 +1,44 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/91529ImportingmathlibintoLean4.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/91529ImportingmathlibintoLean4.html">Importing mathlib into Lean 4</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="187561178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Importing%20mathlib%20into%20Lean%204/near/187561178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91529ImportingmathlibintoLean4.html#187561178">Gabriel Ebner (Feb 06 2020 at 16:05)</a>:</h4>
+<p>I've just come back from the workshop in Bonn where <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> patiently answered lots of questions about the Lean 4 API, and I managed to write a small importer from mathlib to Lean 4.  This just creates a Lean 4 olean file with all the mathlib declarations (taken from the textual export format), so don't get your hopes up for converting the mathlib source code.  There's no notation and no tactics.  My main motivation for this importer is to try writing automation in Lean 4. <a href="https://github.com/gebner/lean4-mathlib-import" target="_blank" title="https://github.com/gebner/lean4-mathlib-import">https://github.com/gebner/lean4-mathlib-import</a></p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">Import</span><span class="bp">.</span><span class="n">Mathlib</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="n">deriv</span> <span class="o">:</span> <span class="o">(</span><span class="n">real</span> <span class="bp">→</span> <span class="n">real</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">real</span> <span class="bp">→</span> <span class="n">real</span><span class="o">))</span>
+</pre></div>
+
+
+<p>It takes about 6 minutes and 13.5 gigabytes of RAM to import the 213 megabyte export file.  The resulting <code>Mathlib.olean</code> file is 3.2 gigabytes large (and it doesn't even contain proofs).  However importing this 3.2 gigabyte file is surprisingly snappy: it only takes 1.8 seconds on my machine.</p>
+
+<a name="187562294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Importing%20mathlib%20into%20Lean%204/near/187562294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91529ImportingmathlibintoLean4.html#187562294">Sebastian Ullrich (Feb 06 2020 at 16:16)</a>:</h4>
+<p>Any ideas on where the massive blowup is from? Does it compress well?</p>
+
+<a name="187562377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Importing%20mathlib%20into%20Lean%204/near/187562377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91529ImportingmathlibintoLean4.html#187562377">Mario Carneiro (Feb 06 2020 at 16:17)</a>:</h4>
+<p>the large size of the olean file is surprising to me, since tree duplication doesn't explain that</p>
+
+<a name="187562417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Importing%20mathlib%20into%20Lean%204/near/187562417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91529ImportingmathlibintoLean4.html#187562417">Mario Carneiro (Feb 06 2020 at 16:17)</a>:</h4>
+<p>unless it was reduplicated and not merged again</p>
+
+<a name="187562596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Importing%20mathlib%20into%20Lean%204/near/187562596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91529ImportingmathlibintoLean4.html#187562596">Mario Carneiro (Feb 06 2020 at 16:19)</a>:</h4>
+<p>If terms are getting split out into different identical subtrees with different term IDs, it might not compress well because all the addresses are different</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
