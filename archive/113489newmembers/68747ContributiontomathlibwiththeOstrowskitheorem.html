@@ -473,6 +473,43 @@ Maybe I don't know enough about the mathlib to perform this easily.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187524540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187524540">Kevin Buzzard (Feb 06 2020 at 06:57)</a>:</h4>
 <p>unless of course it's not WLOG, in which case sorting it would be non-canonical.</p>
 
+<a name="187527888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187527888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187527888">Patrick Massot (Feb 06 2020 at 08:10)</a>:</h4>
+<p>Ryan, you don't have to create an instance if you don't want to use it through type class inference. This instance stuff is all about Lean figuring out what you don't write. You always keep the possibility of not asking Lean but telling it.</p>
+
+<a name="187529292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187529292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187529292">Patrick Massot (Feb 06 2020 at 08:39)</a>:</h4>
+<p>Maybe this discussion is too abstract. Let me write some code:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">metric_space</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="n">noncomputable</span> <span class="n">theory</span>
+
+<span class="kn">open</span> <span class="n">is_absolute_value</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">metric_space_of_real_abv</span> <span class="o">(</span><span class="n">abv</span><span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">[</span><span class="n">is_absolute_value</span> <span class="n">abv</span><span class="o">]</span> <span class="o">:</span> <span class="n">metric_space</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">dist</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">abv</span> <span class="err">$</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">y</span><span class="o">,</span>
+  <span class="n">dist_self</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">show</span> <span class="n">abv</span> <span class="o">(</span><span class="n">x</span><span class="bp">-</span><span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="o">[</span><span class="n">abv_zero</span> <span class="n">abv</span><span class="o">],</span>
+  <span class="n">eq_of_dist_eq_zero</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">h</span><span class="o">,</span> <span class="n">eq_of_sub_eq_zero</span> <span class="err">$</span> <span class="o">(</span><span class="n">abv_eq_zero</span> <span class="n">abv</span><span class="o">)</span><span class="bp">.</span><span class="n">mp</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">dist_comm</span> <span class="o">:=</span> <span class="n">abv_sub</span> <span class="n">abv</span><span class="o">,</span>
+  <span class="n">dist_triangle</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span> <span class="k">begin</span>
+    <span class="n">change</span> <span class="n">abv</span> <span class="o">(</span><span class="n">x</span><span class="bp">-</span><span class="n">z</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">abv</span> <span class="o">(</span><span class="n">x</span><span class="bp">-</span><span class="n">y</span><span class="o">)</span> <span class="bp">+</span> <span class="n">abv</span> <span class="o">(</span><span class="n">y</span><span class="bp">-</span><span class="n">z</span><span class="o">),</span>
+    <span class="n">rw</span> <span class="k">show</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">z</span> <span class="bp">=</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">y</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="n">y</span> <span class="bp">-</span> <span class="n">z</span><span class="o">),</span> <span class="k">by</span> <span class="n">abel</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">abv_add</span><span class="o">,</span>
+  <span class="kn">end</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">topology_of_real_abv</span> <span class="o">(</span><span class="n">abv</span><span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">[</span><span class="n">is_absolute_value</span> <span class="n">abv</span><span class="o">]</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">metric_space_of_real_abv</span> <span class="n">abv</span><span class="o">)</span><span class="bp">.</span><span class="n">to_uniform_space</span><span class="bp">.</span><span class="n">to_topological_space</span>
+
+<span class="n">def</span> <span class="n">abv_top_eqv</span> <span class="o">(</span><span class="n">abv₁</span> <span class="n">abv₂</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">[</span><span class="n">is_absolute_value</span> <span class="n">abv₁</span><span class="o">]</span> <span class="o">[</span><span class="n">is_absolute_value</span> <span class="n">abv₂</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="n">topology_of_real_abv</span> <span class="n">abv₁</span> <span class="bp">=</span> <span class="n">topology_of_real_abv</span> <span class="n">abv₂</span>
+</pre></div>
+
+<a name="187529309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187529309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187529309">Patrick Massot (Feb 06 2020 at 08:39)</a>:</h4>
+<p>Is this what you want? This is still going toward a very weak version of the conclusion of Ostrowski.</p>
+
 
 {% endraw %}
 
