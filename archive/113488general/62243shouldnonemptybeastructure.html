@@ -17,6 +17,11 @@ permalink: archive/113488general/62243shouldnonemptybeastructure.html
 <p>This came up here: <a href="https://github.com/leanprover-community/mathlib/pull/1964#discussion_r375744750" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1964#discussion_r375744750">https://github.com/leanprover-community/mathlib/pull/1964#discussion_r375744750</a><br>
 I have no idea if it is important that it is an inductive type</p>
 
+<a name="187559580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/should%20nonempty%20be%20a%20structure/near/187559580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62243shouldnonemptybeastructure.html#187559580">Mario Carneiro (Feb 06 2020 at 15:48)</a>:</h4>
+<p>Repeating what I said there: <code>nonempty</code> can't be a structure, because it doesn't have projections. It is possible to define <code>class my_nonempty (A) : Prop := (foo : nonempty A)</code> and now it's a structure, but this has some unusual behavior when you attach it to another structure <code>bar A</code>  via <code>extends</code>. In particular, the <code>foo</code> projection will become a projection on <code>bar</code> as well, in addition to <code>to_nonempty : bar A -&gt; my_nonempty A</code>.</p>
+<p>My suggestion is to just put <code>(to_nonempty : nonempty A)</code> as a field on <code>bar</code> if you need it, and add an instance. It's not a structure.</p>
+
 
 {% endraw %}
 
