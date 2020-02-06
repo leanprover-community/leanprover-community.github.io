@@ -561,6 +561,76 @@ Maybe I don't know enough about the mathlib to perform this easily.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187550451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187550451">Johan Commelin (Feb 06 2020 at 14:08)</a>:</h4>
 <p>Could you post a self-contained piece of code that we can copy-paste (including the necessary <code>import</code> and <code>variable</code> statements etc...)</p>
 
+<a name="187568814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187568814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187568814">Ryan Lahfa (Feb 06 2020 at 17:23)</a>:</h4>
+<blockquote>
+<p>Could you post a self-contained piece of code that we can copy-paste (including the necessary <code>import</code> and <code>variable</code> statements etc...)</p>
+</blockquote>
+<p>For now, it's still somewhat a scratch file with a lot of code / sorry, but next time I post something, I'll try to give a minimal example, sure.</p>
+
+<a name="187568873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187568873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187568873">Ryan Lahfa (Feb 06 2020 at 17:24)</a>:</h4>
+<blockquote>
+<p>Also, it's good to see that you have a Lean statement now. Does it already typecheck?</p>
+</blockquote>
+<p>I did a lot of changes and it does not typecheck anymore :D</p>
+
+<a name="187570599"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187570599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187570599">Ryan Lahfa (Feb 06 2020 at 17:42)</a>:</h4>
+<p>New question, when I have, let's say I have:</p>
+<div class="codehilite"><pre><span></span>import data.nat.prime
+import data.real.basic
+import data.real.cau_seq
+import tactic.apply
+import tactic.apply_fun
+
+section
+
+open_locale classical real
+open list option
+open nat
+
+-- absolute values are monoid homemorphisms.
+def hom_of_abv {α: Type*} [hlifield: linear_ordered_field α] (abv: α → ℝ) [habv: is_absolute_value abv]: monoid_hom α ℝ :=
+{
+    to_fun := abv,
+    map_one&#39; := is_absolute_value.abv_one abv,
+    map_mul&#39; := is_absolute_value.abv_mul abv
+}
+
+
+example (z : ℕ) (f: ℚ → ℝ) [is_absolute_value f]:
+    list.prod (list.map (hom_of_abv f) (list.map (coe : ℕ → ℚ) (factors z))) = f (list.prod (list.map (coe : ℕ → ℚ) (factors z))) :=
+begin
+    exact prod_hom (list.map (coe :ℕ → ℚ) (factors z)) (hom_of_abv f)
+end
+
+example (z : ℕ) (f: ℚ → ℚ) [is_absolute_value f]: prod (map (f ∘ (coe : ℕ → ℚ)) (factors z)) = f ↑(list.prod (factors z)) :=
+    begin
+    exact prod_hom (factors z) (f ∘ (coe :ℕ → ℚ))
+end
+
+end
+</pre></div>
+
+
+<p>The second example is failing because f is not an unbundled monoid homomorphism (under the assumption that there is something which implements is_monoid_hom for f \circ g), but while reading the documentation, I see that those are deprecated and being slowed removed from mathlib.</p>
+<p>Does that mean I have to use bundled monoid homomorphism?</p>
+<p>In this example, I can trivially have a <code>hom_of_abv</code> which gives me a <code>monoid_hom Q Q</code> (or whatever) and then, I can use prod_hom on it and have a close result except that it has this upper arrow which I suppose says this is a bundled homomorphism.</p>
+<p>But, can I lift those to rewrite the unbundled version of the homomorphism?</p>
+<p>Better, I'd like to prod_hom with (f \circ (coe : N → Q)) but unsure how that's feasible w/o having something which takes (f, g), bundle the composition. How does that scale to f_1 \circ … \circ f_n ? It does not sound general enough…</p>
+
+<a name="187572034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187572034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187572034">Johan Commelin (Feb 06 2020 at 17:58)</a>:</h4>
+<p>Tip: if you write</p>
+<div class="codehilite"><pre><span></span>```lean
+code here
+```
+</pre></div>
+
+
+<p>then you even get syntax highlighting</p>
+
 
 {% endraw %}
 

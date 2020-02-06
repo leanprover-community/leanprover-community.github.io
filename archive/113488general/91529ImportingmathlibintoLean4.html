@@ -38,6 +38,13 @@ permalink: archive/113488general/91529ImportingmathlibintoLean4.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Importing%20mathlib%20into%20Lean%204/near/187562596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91529ImportingmathlibintoLean4.html#187562596">Mario Carneiro (Feb 06 2020 at 16:19)</a>:</h4>
 <p>If terms are getting split out into different identical subtrees with different term IDs, it might not compress well because all the addresses are different</p>
 
+<a name="187569653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Importing%20mathlib%20into%20Lean%204/near/187569653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91529ImportingmathlibintoLean4.html#187569653">Gabriel Ebner (Feb 06 2020 at 17:32)</a>:</h4>
+<blockquote>
+<p>Any ideas on where the massive blowup is from? Does it compress well?</p>
+</blockquote>
+<p><code>zstd</code> compresses it to 362M, the Lean 3 olean files are 70M uncompressed (including proofs).  The blowup is probably in part because I'm not deduplicating the terms (and I guess the <code>writeModule</code> function doesn't either).  Every definition duplicates the term, since I replace the names.</p>
+
 
 {% endraw %}
 
