@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1770 messages, latest: Feb 06 2020 at 12:53)
+* [Contribution to mathlib with the Ostrowski theorem](68747ContributiontomathlibwiththeOstrowskitheorem.html) (101 messages, latest: Feb 06 2020 at 13:23)
 
-* [Contribution to mathlib with the Ostrowski theorem](68747ContributiontomathlibwiththeOstrowskitheorem.html) (98 messages, latest: Feb 06 2020 at 08:39)
+* [noob question(s)](52075noobquestions.html) (1770 messages, latest: Feb 06 2020 at 12:53)
 
 * [SAT in Lean](88768SATinLean.html) (4 messages, latest: Feb 04 2020 at 20:22)
 

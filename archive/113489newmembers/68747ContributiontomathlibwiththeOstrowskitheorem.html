@@ -510,6 +510,37 @@ Maybe I don't know enough about the mathlib to perform this easily.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187529309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187529309">Patrick Massot (Feb 06 2020 at 08:39)</a>:</h4>
 <p>Is this what you want? This is still going toward a very weak version of the conclusion of Ostrowski.</p>
 
+<a name="187546822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187546822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187546822">Ryan Lahfa (Feb 06 2020 at 13:21)</a>:</h4>
+<p>It makes a lot of sense now, regarding the instance. Thank you!</p>
+
+<a name="187546921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187546921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187546921">Ryan Lahfa (Feb 06 2020 at 13:22)</a>:</h4>
+<blockquote>
+<p>Is this what you want? This is still going toward a very weak version of the conclusion of Ostrowski.</p>
+</blockquote>
+<p>What's the strong version of Ostrowski? IMHO, I was under the assumption it was a statement of the form: for all absolute values over Q, either it is equivalent to the real absolute value, or there is some prime p such that the absolute value is equivalent to the padic one.</p>
+<p>It appears to me that I need the <code>metric_space_of_real_abv</code> to have:</p>
+<div class="codehilite"><pre><span></span>theorem rat_abs_val_p_adic_or_real (abv: ℚ → ℚ)
+    [habv: is_absolute_value abv]
+    (hnontriv: abv ≠ trivial_abs):
+    (metric_space_eq
+        (metric_rat_with_abv abv)
+        (rat.metric_space))
+    ∨
+    (∃ (p) [hp: nat.prime p],
+        (metric_space_eq
+            (metric_rat_with_abv abv)
+            (padic.metric_space p)))
+</pre></div>
+
+
+<p>Something like this.</p>
+
+<a name="187546948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187546948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187546948">Ryan Lahfa (Feb 06 2020 at 13:23)</a>:</h4>
+<p>But sure, that might be better to just prove that there is directly some relation between the absolute values themselves.</p>
+
 
 {% endraw %}
 
