@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [inductive type with anonymous constructors](60012inductivetypewithanonymousconstructors.html) (13 messages, latest: Feb 06 2020 at 21:58)
+* [Contribution to mathlib with the Ostrowski theorem](68747ContributiontomathlibwiththeOstrowskitheorem.html) (176 messages, latest: Feb 06 2020 at 22:08)
 
-* [Contribution to mathlib with the Ostrowski theorem](68747ContributiontomathlibwiththeOstrowskitheorem.html) (174 messages, latest: Feb 06 2020 at 21:56)
+* [inductive type with anonymous constructors](60012inductivetypewithanonymousconstructors.html) (16 messages, latest: Feb 06 2020 at 22:05)
 
 * [`linear_map` as `add_monoid_hom`](62814linearmapasaddmonoidhom.html) (1 message, latest: Feb 06 2020 at 21:34)
 

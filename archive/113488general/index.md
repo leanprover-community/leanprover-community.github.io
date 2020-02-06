@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [beer reward](66500beerreward.html) (45 messages, latest: Feb 06 2020 at 21:54)
+* [refl failure without intros](97157reflfailurewithoutintros.html) (33 messages, latest: Feb 06 2020 at 22:09)
 
-* [refl failure without intros](97157reflfailurewithoutintros.html) (32 messages, latest: Feb 06 2020 at 21:38)
+* [beer reward](66500beerreward.html) (45 messages, latest: Feb 06 2020 at 21:54)
 
 * [quotients and products again](41780quotientsandproductsagain.html) (8 messages, latest: Feb 06 2020 at 20:07)
 
