@@ -9,6 +9,12 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [refl failure without intros](97157reflfailurewithoutintros.html) (1 message, latest: Feb 06 2020 at 20:57)
+
+* [beer reward](66500beerreward.html) (6 messages, latest: Feb 06 2020 at 20:45)
+
+* [quotients and products again](41780quotientsandproductsagain.html) (8 messages, latest: Feb 06 2020 at 20:07)
+
 * [Importing mathlib into Lean 4](91529ImportingmathlibintoLean4.html) (6 messages, latest: Feb 06 2020 at 17:32)
 
 * [should nonempty be a structure](62243shouldnonemptybeastructure.html) (2 messages, latest: Feb 06 2020 at 15:48)
@@ -24,8 +30,6 @@ permalink: archive/113488general/index.html
 * [xkcd voting](47138xkcdvoting.html) (2 messages, latest: Feb 04 2020 at 16:07)
 
 * [norm_cast and int.sub_nat_nat](76257normcastandintsubnatnat.html) (3 messages, latest: Feb 04 2020 at 13:23)
-
-* [quotients and products again](41780quotientsandproductsagain.html) (7 messages, latest: Feb 04 2020 at 06:30)
 
 * [lean codeblocks in docstrings](40241leancodeblocksindocstrings.html) (7 messages, latest: Feb 03 2020 at 18:30)
 
@@ -172,8 +176,6 @@ permalink: archive/113488general/index.html
 * [linter](19343linter.html) (14 messages, latest: Jan 06 2020 at 22:18)
 
 * [𝟙 and 𝟭 in VS Code](99821andinVSCode.html) (2 messages, latest: Jan 06 2020 at 05:01)
-
-* [beer reward](66500beerreward.html) (3 messages, latest: Jan 05 2020 at 17:26)
 
 * [zero vector space](12000zerovectorspace.html) (2 messages, latest: Jan 05 2020 at 15:20)
 

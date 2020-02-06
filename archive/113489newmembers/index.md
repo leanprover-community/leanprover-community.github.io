@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Contribution to mathlib with the Ostrowski theorem](68747ContributiontomathlibwiththeOstrowskitheorem.html) (150 messages, latest: Feb 06 2020 at 19:43)
+* [Contribution to mathlib with the Ostrowski theorem](68747ContributiontomathlibwiththeOstrowskitheorem.html) (161 messages, latest: Feb 06 2020 at 20:59)
+
+* [inductive type with anonymous constructors](60012inductivetypewithanonymousconstructors.html) (1 message, latest: Feb 06 2020 at 20:56)
 
 * [noob question(s)](52075noobquestions.html) (1795 messages, latest: Feb 06 2020 at 16:48)
 
