@@ -959,6 +959,52 @@ And go line 312, for some reason, I cannot close the goal "prime p" by using a h
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187593816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187593816">Ryan Lahfa (Feb 06 2020 at 22:08)</a>:</h4>
 <p>I can do just fine by being explicit and I never manipulate abstract prime concepts, so I'm fine with explicit <code>nat.prime</code> everywhere! Thank you :)</p>
 
+<a name="187598721"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187598721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187598721">Ryan Lahfa (Feb 06 2020 at 23:15)</a>:</h4>
+<p>I'm continuing my work on power manipulation and I am trying the abv_nonneg property of my <code>real_padic_norm</code>, so here is an example which is perfectly working:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">prime</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">cau_seq</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">exponential</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">apply</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">apply_fun</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">padics</span>
+
+<span class="kn">section</span>
+
+<span class="n">open_locale</span> <span class="n">classical</span> <span class="n">real</span>
+<span class="kn">open</span> <span class="n">list</span> <span class="n">option</span>
+<span class="kn">open</span> <span class="n">nat</span>
+
+<span class="n">def</span> <span class="n">real_padic_norm</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">):</span> <span class="n">ℚ</span> <span class="bp">→</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">,</span> <span class="n">real</span><span class="bp">.</span><span class="n">of_rat</span> <span class="o">(</span><span class="n">padic_norm</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">[</span><span class="n">hp</span><span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="n">p</span><span class="o">]:</span> <span class="n">is_absolute_value</span> <span class="o">(</span><span class="n">real_padic_norm</span> <span class="n">p</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span>
+    <span class="n">abv_nonneg</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+    <span class="n">abv_eq_zero</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+    <span class="n">abv_add</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+    <span class="n">abv_mul</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="o">}</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">[</span><span class="n">hp</span><span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="n">p</span><span class="o">]:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="o">((</span><span class="n">real_padic_norm</span> <span class="n">p</span><span class="o">)</span> <span class="n">x</span><span class="o">)</span> <span class="err">^</span> <span class="o">(</span><span class="n">y</span> <span class="bp">*</span> <span class="n">z</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(((</span><span class="n">real_padic_norm</span> <span class="n">p</span><span class="o">)</span> <span class="n">x</span><span class="o">)</span> <span class="err">^</span> <span class="n">y</span><span class="o">)</span> <span class="err">^</span> <span class="n">z</span> <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">intros</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">real</span><span class="bp">.</span><span class="n">rpow_mul</span> <span class="o">(</span><span class="n">is_absolute_value</span><span class="bp">.</span><span class="n">abv_nonneg</span> <span class="o">(</span><span class="n">real_padic_norm</span> <span class="n">p</span><span class="o">)</span> <span class="bp">_</span><span class="o">),</span>
+<span class="kn">end</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>But when I do more or less the same in the attached file, line 394, excerpt:</p>
+<div class="codehilite"><pre><span></span>      <span class="n">conv_rhs</span> <span class="n">at</span> <span class="n">this</span> <span class="o">{</span>
+          <span class="n">congr</span><span class="o">,</span> <span class="n">skip</span><span class="o">,</span>
+          <span class="n">rw</span> <span class="n">real</span><span class="bp">.</span><span class="n">rpow_mul</span> <span class="o">(</span><span class="n">is_absolute_value</span><span class="bp">.</span><span class="n">abv_nonneg</span> <span class="o">(</span><span class="n">real_padic_norm</span> <span class="n">p</span><span class="o">)</span> <span class="bp">_</span><span class="o">),</span>
+      <span class="o">},</span>
+</pre></div>
+
+
+<p>It fails to synthesize type classes and fails, unsure what's the difference with the minimal case below and this one. <a href="/user_uploads/3121/s0F5mXZfwujwMfax7PXImB65/ostrowski-ext.lean" target="_blank" title="ostrowski-ext.lean">ostrowski-ext.lean</a></p>
+
 
 {% endraw %}
 
