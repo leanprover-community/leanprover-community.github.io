@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Maximum Class-instance resolution depth has been exceeded](69773MaximumClassinstanceresolutiondepthhasbeenexceeded.html) (3 messages, latest: Feb 07 2020 at 22:30)
+
 * [`linear_map` as `add_monoid_hom`](62814linearmapasaddmonoidhom.html) (2 messages, latest: Feb 07 2020 at 09:24)
 
 * [more basics](41001morebasics.html) (44 messages, latest: Feb 07 2020 at 04:34)
