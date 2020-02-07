@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Lean for the curious mathematician](84968Leanforthecuriousmathematician.html) (12 messages, latest: Feb 07 2020 at 12:10)
+
 * [sober spaces](80251soberspaces.html) (2 messages, latest: Feb 06 2020 at 20:10)
 
 * [bundled kernels for add_comm_groups?](56204bundledkernelsforaddcommgroups.html) (9 messages, latest: Feb 06 2020 at 11:34)
@@ -20,8 +22,6 @@ permalink: archive/116395maths/index.html
 * [Cantor's intersection thm](97730Cantorsintersectionthm.html) (2 messages, latest: Feb 04 2020 at 21:17)
 
 * [when does norm_num work?](40395whendoesnormnumwork.html) (29 messages, latest: Feb 01 2020 at 20:15)
-
-* [Lean for the curious mathematician](84968Leanforthecuriousmathematician.html) (11 messages, latest: Feb 01 2020 at 15:12)
 
 * [How to prove unbound_prop](60281Howtoproveunboundprop.html) (9 messages, latest: Feb 01 2020 at 11:58)
 
