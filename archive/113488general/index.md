@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [quotients and products again](41780quotientsandproductsagain.html) (9 messages, latest: Feb 07 2020 at 05:08)
+
 * [refl failure without intros](97157reflfailurewithoutintros.html) (33 messages, latest: Feb 06 2020 at 22:09)
 
 * [beer reward](66500beerreward.html) (45 messages, latest: Feb 06 2020 at 21:54)
-
-* [quotients and products again](41780quotientsandproductsagain.html) (8 messages, latest: Feb 06 2020 at 20:07)
 
 * [Importing mathlib into Lean 4](91529ImportingmathlibintoLean4.html) (6 messages, latest: Feb 06 2020 at 17:32)
 
