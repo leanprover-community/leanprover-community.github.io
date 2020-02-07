@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Lean for the curious mathematician](84968Leanforthecuriousmathematician.html) (12 messages, latest: Feb 07 2020 at 12:10)
+* [Lean for the curious mathematician](84968Leanforthecuriousmathematician.html) (13 messages, latest: Feb 07 2020 at 19:04)
 
 * [sober spaces](80251soberspaces.html) (2 messages, latest: Feb 06 2020 at 20:10)
 
