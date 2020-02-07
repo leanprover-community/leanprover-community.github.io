@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [`linear_map` as `add_monoid_hom`](62814linearmapasaddmonoidhom.html) (2 messages, latest: Feb 07 2020 at 09:24)
+
 * [more basics](41001morebasics.html) (44 messages, latest: Feb 07 2020 at 04:34)
 
 * [continuity](75863continuity.html) (19 messages, latest: Feb 07 2020 at 02:52)
@@ -16,8 +18,6 @@ permalink: archive/113489newmembers/index.html
 * [Contribution to mathlib with the Ostrowski theorem](68747ContributiontomathlibwiththeOstrowskitheorem.html) (178 messages, latest: Feb 07 2020 at 00:10)
 
 * [inductive type with anonymous constructors](60012inductivetypewithanonymousconstructors.html) (16 messages, latest: Feb 06 2020 at 22:05)
-
-* [`linear_map` as `add_monoid_hom`](62814linearmapasaddmonoidhom.html) (1 message, latest: Feb 06 2020 at 21:34)
 
 * [noob question(s)](52075noobquestions.html) (1795 messages, latest: Feb 06 2020 at 16:48)
 
