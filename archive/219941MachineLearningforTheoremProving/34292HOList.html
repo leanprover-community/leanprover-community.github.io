@@ -759,6 +759,15 @@ val it : goalstack = 1 subgoal (1 total)
 <p>Now, what is tricker is whether to include <code>(c ==&gt; a ==&gt; b) ==&gt; a /\ ~b ==&gt; ~c</code> as a premise, when it is used in cases like <code>MATCH_MP_TAC(TAUT `(c ==&gt; a ==&gt; b) ==&gt; a /\ ~b ==&gt; ~c`)</code>.  I think "no", but that is debatable.  In Lean and Coq, such quick lemmas would be created through the <code>have</code> tactic, and again in Lean and Coq, I don't think <code>have</code> lemmas should be premises, but that is a matter of style.</p>
 <p>The best of course would be to have the AI find the <code>have</code> or <code>TAUT</code> lemmas, and that would be an amazing step forward!</p>
 
+<a name="187621028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/187621028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#187621028">Stanislas Polu (Feb 07 2020 at 08:16)</a>:</h4>
+<blockquote>
+<p>Thanks for bringing this to our attention. Yes, premises with hypotheses are not fully supported in the tactic API. However, I thought that this always results in some sort of error, which it apparently does not. This looks like a serious enough issue to warrant an update of our open source version.</p>
+</blockquote>
+<p>Thanks <span class="user-mention" data-user-id="217806">@Markus Rabe</span>, looking forward to working with the updated version.</p>
+<p>Maybe related to this issue, the human proof logs contain proof steps that appear as similarly bogus at first sight. As an example if you look at 1239658577412467327 from the validation set, it starts by a <code>DISJ_CASES_TAC</code>, no problem there, but then applies your internal <code>RAW_POP_TAC 0</code> on the two subgoals, which seems to strip the assumptions from the subgoals. The SUBST1_TAC are then applied to goals that don't have any hypothesis and should fail in native hol light.</p>
+<p>Could you describe in more detail the interplay between RAW_POP_TAC and SUBST1_TAC in the human prooflogs? Also and that's what I wanted to bing here, if you fix <code>SUBST1_TAC</code> the human proof logs as they are today may become invalid?</p>
+
 
 {% endraw %}
 
