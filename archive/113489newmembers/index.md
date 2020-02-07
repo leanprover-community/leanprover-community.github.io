@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [more basics](41001morebasics.html) (44 messages, latest: Feb 07 2020 at 04:34)
+
 * [continuity](75863continuity.html) (19 messages, latest: Feb 07 2020 at 02:52)
 
 * [Contribution to mathlib with the Ostrowski theorem](68747ContributiontomathlibwiththeOstrowskitheorem.html) (178 messages, latest: Feb 07 2020 at 00:10)
@@ -34,8 +36,6 @@ permalink: archive/113489newmembers/index.html
 * [example : ¬ (∃ x, ¬ p x) → (∀ x, p x)](34382examplexpxxpx.html) (47 messages, latest: Feb 01 2020 at 16:39)
 
 * [action of subgroup inference issues](01686actionofsubgroupinferenceissues.html) (7 messages, latest: Jan 29 2020 at 16:59)
-
-* [more basics](41001morebasics.html) (41 messages, latest: Jan 29 2020 at 08:19)
 
 * [Local/city threads](73023Localcitythreads.html) (9 messages, latest: Jan 29 2020 at 04:39)
 

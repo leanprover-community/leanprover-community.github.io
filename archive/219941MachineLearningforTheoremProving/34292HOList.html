@@ -744,6 +744,21 @@ val it : goalstack = 1 subgoal (1 total)
 <p>Thanks for bringing this to our attention. Yes, premises with hypotheses are not fully supported in the tactic API. However, I thought that this always results in some sort of error, which it apparently does not. This looks like a serious enough issue to warrant an update of our open source version.</p>
 <p><strong>The proof checker does not rely on this API</strong>, because we don't want to have to trust any of it. It was designed to catch problems like this one. The proof checker compiles the proof log into OCaml code and runs with the same guarantees that HOL Light does (modulo a couple of lines of book-keeping code written in OCaml). However, we still want the stateless API to be reliable.</p>
 
+<a name="187612581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/187612581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#187612581">Jason Rute (Feb 07 2020 at 04:24)</a>:</h4>
+<p>Here is my two cents for what it is worth:</p>
+<p>That bug seems troubling and should probably be investigated and fixed.  It is possible that there are other weird side effects out there.  (However, I agree since those theorems with the assumptions are not used in practice (and shouldn't be used) that this probably doesn't present a problem.)</p>
+<p>I also think that the "safety net" provided by the external proof checker seems reasonable.  (I don't know what "bookkeeping" means, but I assume a reasonable amount of care was put into this.  One can always go down a rabbit hole with stuff like this.)</p>
+<p><span class="user-mention" data-user-id="249373">@Stanislas Polu</span>:</p>
+<blockquote>
+<p>This is a surprising restriction, especially since the human proof logs don't comply to it.</p>
+</blockquote>
+<p>I think it is a reasonable requirement to not use theorems which have assumptions as premises.  I don't recall any human-written proofs in HOL-Light (except maybe at the lowest level, just after the kernel) which use such theorems.  Moreover, they would never be necessary.  If it is not clear, I believe all of these "refl" theorems are (1) computer generated and (2) used to prove trivial propositional theorems.  Not only is <code>c = T |- c = T</code> trivial, it is used to prove trivial propositional tautologies like <code>(c ==&gt; a ==&gt; b) ==&gt; a /\ ~b ==&gt; ~c</code>.</p>
+<p>From a prior investigation I did, it seems that they are automatic intermediate steps in the <code>TAUT</code> tool.  Because they are automatic, they aren't exactly human training data, and moreover, they are used to prove propositional tautologies that MESON could handle instantly.</p>
+<p>Just like we don't include all the intermediate theorems in the MESON tactic, it seems reasonable not to include the intermediate theorems in TAUT, even though it is not a tactic.</p>
+<p>Now, what is tricker is whether to include <code>(c ==&gt; a ==&gt; b) ==&gt; a /\ ~b ==&gt; ~c</code> as a premise, when it is used in cases like <code>MATCH_MP_TAC(TAUT `(c ==&gt; a ==&gt; b) ==&gt; a /\ ~b ==&gt; ~c`)</code>.  I think "no", but that is debatable.  In Lean and Coq, such quick lemmas would be created through the <code>have</code> tactic, and again in Lean and Coq, I don't think <code>have</code> lemmas should be premises, but that is a matter of style.</p>
+<p>The best of course would be to have the AI find the <code>have</code> or <code>TAUT</code> lemmas, and that would be an amazing step forward!</p>
+
 
 {% endraw %}
 
