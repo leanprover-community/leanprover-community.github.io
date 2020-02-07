@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [forgetful inheritance](82585forgetfulinheritance.html) (1 message, latest: Feb 07 2020 at 13:34)
+* [forgetful inheritance](82585forgetfulinheritance.html) (2 messages, latest: Feb 07 2020 at 14:51)
 
 * [Importing mathlib into Lean 4](91529ImportingmathlibintoLean4.html) (9 messages, latest: Feb 07 2020 at 09:09)
 
