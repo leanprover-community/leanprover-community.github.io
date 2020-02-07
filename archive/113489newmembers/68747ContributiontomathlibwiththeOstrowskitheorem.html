@@ -1005,6 +1005,50 @@ And go line 312, for some reason, I cannot close the goal "prime p" by using a h
 
 <p>It fails to synthesize type classes and fails, unsure what's the difference with the minimal case below and this one. <a href="/user_uploads/3121/s0F5mXZfwujwMfax7PXImB65/ostrowski-ext.lean" target="_blank" title="ostrowski-ext.lean">ostrowski-ext.lean</a></p>
 
+<a name="187602214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187602214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187602214">Ryan Lahfa (Feb 07 2020 at 00:10)</a>:</h4>
+<p>Also, is there any way to solve this kind of problems:</p>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  is_unit_int.mp a
+term
+  a
+has type
+  @is_unit ℤ
+    (@ring.to_monoid ℤ
+       (@domain.to_ring ℤ (@integral_domain.to_domain ℤ (@principal_ideal_domain.to_integral_domain ℤ _inst))))
+    x_2
+but is expected to have type
+  @is_unit ℤ int.monoid x_2
+state:
+abv : ℚ → ℝ,
+habv : is_absolute_value abv,
+hnontriv : abv ≠ trivial_abv,
+B : ℚ,
+int_lt_B : ∀ (z : ℕ), abv ↑z ≤ ↑B,
+all_nat_le_one : ∀ (z : ℕ), abv ↑z ≤ 1,
+all_int_le_one : ∀ (z : ℤ), abv ↑z ≤ 1,
+z : ℕ+,
+hz : abv ↑z &lt; 1,
+p : ℕ,
+p_fact : p ∈ factors ↑z,
+abv_p_lt_one : abv ↑p &lt; 1,
+this : ∀ (q : ℕ), coprime p q → abv ↑q = 1,
+hp : prime p,
+α : ℝ := abv ↑p,
+this : 0 &lt; -(real.log α / real.log ↑p),
+x : ℚ,
+x_1 : ℤ,
+_inst : principal_ideal_domain ℤ,
+_inst_1 : unique_factorization_domain ℤ,
+x_2 : ℤ,
+a : is_unit x_2
+⊢ abv ↑x_2 = real_padic_norm p ↑x_2 ^ -(real.log α / real.log ↑p)
+</pre></div>
+
+
+<p>More difficult, I guess, I see that <code>is_unit_int</code> provides <code>int.nat_abs x_2 = 1</code>, but this notion of absolute value is incompatible with absolute values in general I suppose.</p>
+<p>Knowing that <code>int.nat_abs x_2 = 1</code> do not give me <code>abv (coe x_2) = int.nat_abs</code> in general AFAIK. So I guess I have to work more to interface <code>nat_abs</code> with absolute values.</p>
+
 
 {% endraw %}
 

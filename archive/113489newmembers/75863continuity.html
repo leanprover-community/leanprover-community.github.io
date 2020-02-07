@@ -132,6 +132,33 @@ permalink: archive/113489newmembers/75863continuity.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/continuity/near/186984930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75863continuity.html#186984930">Greg Langmead (Jan 30 2020 at 13:20)</a>:</h4>
 <p>If a smooth manifold is a topological manifold together with its atlas then you do get a new one by adding a compatible chart, but of course they are diffeomorphic. Sometimes we have some equivalence class in mind and this detail is a distraction. Could Lean's quotients help define the equivalence class in a way that lets us work in both approaches? (Having a multiplicity of approaches feels right to me -- many equivalent definitions and proofs that they are equivalent.)</p>
 
+<a name="187604562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/continuity/near/187604562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75863continuity.html#187604562">Greg Langmead (Feb 07 2020 at 00:59)</a>:</h4>
+<p>I took the suggestions of <span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span>, and have a new question. I'm defining the inverse of stereographic projection, the function that maps euclidean space of dimension n back into the sphere of dimension n, living in euclidean space of dimension n+1. The lambda doesn't typecheck -- where, in what structure, do I provide the proof that the image of this map is in fact contained in the sphere?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">unit_sphere_minus_north_pole</span> <span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">unit_sphere</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="o">{</span><span class="n">x</span> <span class="bp">|</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="o">(</span><span class="n">euclidean_space</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)))</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="mi">1</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">stereographic_projection_inv_north</span> <span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">euclidean_space</span> <span class="n">n</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">unit_sphere</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span><span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="bp">λ</span><span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)),</span> <span class="k">if</span> <span class="n">lt</span> <span class="o">:</span> <span class="n">i</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&lt;</span> <span class="n">n</span>
+    <span class="k">then</span> <span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span> <span class="o">(</span><span class="n">fin_upgrade</span> <span class="n">n</span> <span class="n">i</span> <span class="n">lt</span><span class="o">))</span> <span class="bp">/</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span> <span class="n">i</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span><span class="o">))</span>
+    <span class="k">else</span> <span class="o">(</span><span class="bp">-</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span> <span class="n">i</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span><span class="o">))</span> <span class="bp">/</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span> <span class="n">i</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span><span class="o">)))</span>
+</pre></div>
+
+
+<p>This doesn't typecheck, it says </p>
+<div class="codehilite"><pre><span></span>type mismatch, term
+  λ (x : euclidean_space n) (i : fin (n + 1)),
+    dite (i.val &lt; n)
+      (λ (lt : i.val &lt; n), 2 * x (fin_upgrade n i lt) / (1 + finset.sum finset.univ (λ (i : fin n), x i ^ 2)))
+      (λ (lt : ¬i.val &lt; n),
+         (-1 + finset.sum finset.univ (λ (i : fin n), x i ^ 2)) /
+           (1 + finset.sum finset.univ (λ (i : fin n), x i ^ 2)))
+has type
+  euclidean_space n → fin (n + 1) → ℝ
+but is expected to have type
+  euclidean_space n → unit_sphere n
+</pre></div>
+
 
 {% endraw %}
 

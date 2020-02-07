@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Contribution to mathlib with the Ostrowski theorem](68747ContributiontomathlibwiththeOstrowskitheorem.html) (177 messages, latest: Feb 06 2020 at 23:15)
+* [continuity](75863continuity.html) (17 messages, latest: Feb 07 2020 at 00:59)
+
+* [Contribution to mathlib with the Ostrowski theorem](68747ContributiontomathlibwiththeOstrowskitheorem.html) (178 messages, latest: Feb 07 2020 at 00:10)
 
 * [inductive type with anonymous constructors](60012inductivetypewithanonymousconstructors.html) (16 messages, latest: Feb 06 2020 at 22:05)
 
@@ -30,8 +32,6 @@ permalink: archive/113489newmembers/index.html
 * [example : ¬ (∀ x, ¬ p x) → (∃ x, p x)](02222examplexpxxpx.html) (91 messages, latest: Feb 01 2020 at 20:33)
 
 * [example : ¬ (∃ x, ¬ p x) → (∀ x, p x)](34382examplexpxxpx.html) (47 messages, latest: Feb 01 2020 at 16:39)
-
-* [continuity](75863continuity.html) (16 messages, latest: Jan 30 2020 at 13:20)
 
 * [action of subgroup inference issues](01686actionofsubgroupinferenceissues.html) (7 messages, latest: Jan 29 2020 at 16:59)
 
