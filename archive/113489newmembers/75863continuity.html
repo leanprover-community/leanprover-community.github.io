@@ -159,6 +159,25 @@ but is expected to have type
   euclidean_space n → unit_sphere n
 </pre></div>
 
+<a name="187608762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/continuity/near/187608762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75863continuity.html#187608762">Mario Carneiro (Feb 07 2020 at 02:44)</a>:</h4>
+<p><code>unit_sphere</code> is a subtype, right? So you need to have a proof after it:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">stereographic_projection_inv_north</span> <span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">euclidean_space</span> <span class="n">n</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">unit_sphere</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span><span class="n">x</span><span class="o">,</span> <span class="bp">⟨λ</span><span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)),</span> <span class="k">if</span> <span class="n">lt</span> <span class="o">:</span> <span class="n">i</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&lt;</span> <span class="n">n</span>
+    <span class="k">then</span> <span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span> <span class="o">(</span><span class="n">fin_upgrade</span> <span class="n">n</span> <span class="n">i</span> <span class="n">lt</span><span class="o">))</span> <span class="bp">/</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span> <span class="n">i</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span><span class="o">))</span>
+    <span class="k">else</span> <span class="o">(</span><span class="bp">-</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span> <span class="n">i</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span><span class="o">))</span> <span class="bp">/</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span> <span class="n">i</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span><span class="o">)),</span>
+<span class="n">sorry</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="187609050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/continuity/near/187609050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75863continuity.html#187609050">Greg Langmead (Feb 07 2020 at 02:52)</a>:</h4>
+<p>Yes <code>unit_sphere</code> is a subtype</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">unit_sphere</span> <span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">x</span> <span class="o">:</span> <span class="n">euclidean_space</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">//</span> <span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span> <span class="n">i</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">}</span>
+</pre></div>
+
+
+<p>I added the sorry and it's a variation on the above error, but this gives me something to follow up on so I'll keep at it, thanks!</p>
+
 
 {% endraw %}
 

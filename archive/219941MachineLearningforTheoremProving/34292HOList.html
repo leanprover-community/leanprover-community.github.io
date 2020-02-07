@@ -739,6 +739,11 @@ val it : goalstack = 1 subgoal (1 total)
 </blockquote>
 <p>What are the guarantees / restrictions of the proof checker vs the API? Also it was my understanding from the thread that the new proof checker relied on the same API?</p>
 
+<a name="187607645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/187607645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#187607645">Markus Rabe (Feb 07 2020 at 02:16)</a>:</h4>
+<p>Thanks for bringing this to our attention. Yes, premises with hypotheses are not fully supported in the tactic API. However, I thought that this always results in some sort of error, which it apparently does not. This looks like a serious enough issue to warrant an update of our open source version.</p>
+<p><strong>The proof checker does not rely on this API</strong>, because we don't want to have to trust any of it. It was designed to catch problems like this one. The proof checker compiles the proof log into OCaml code and runs with the same guarantees that HOL Light does (modulo a couple of lines of book-keeping code written in OCaml). However, we still want the stateless API to be reliable.</p>
+
 
 {% endraw %}
 
