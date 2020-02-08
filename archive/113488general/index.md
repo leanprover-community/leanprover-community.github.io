@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [naming conventions](31665namingconventions.html) (19 messages, latest: Feb 08 2020 at 11:34)
+* [notation](26829notation.html) (6 messages, latest: Feb 08 2020 at 15:47)
+
+* [naming conventions](31665namingconventions.html) (20 messages, latest: Feb 08 2020 at 15:19)
 
 * [Creating my own pp.all = true string](73699Creatingmyownppalltruestring.html) (2 messages, latest: Feb 08 2020 at 00:08)
 
@@ -4662,8 +4664,6 @@ permalink: archive/113488general/index.html
 * [Writing a Theory](76321WritingaTheory.html) (6 messages, latest: Feb 28 2018 at 20:11)
 
 * [coinductive types](89043coinductivetypes.html) (12 messages, latest: Feb 28 2018 at 19:21)
-
-* [notation](26829notation.html) (5 messages, latest: Feb 28 2018 at 17:07)
 
 * [github notifications](81438githubnotifications.html) (35 messages, latest: Feb 28 2018 at 11:23)
 
