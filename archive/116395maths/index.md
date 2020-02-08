@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [nonempty](95771nonempty.html) (10 messages, latest: Feb 08 2020 at 21:32)
+
 * ["trivial" R-algebra hom construction](23676trivialRalgebrahomconstruction.html) (6 messages, latest: Feb 08 2020 at 15:03)
 
 * [Lean for the curious mathematician](84968Leanforthecuriousmathematician.html) (13 messages, latest: Feb 07 2020 at 19:04)
@@ -738,8 +740,6 @@ permalink: archive/116395maths/index.html
 * [localization](95274localization.html) (3 messages, latest: Mar 05 2019 at 08:59)
 
 * [Lipschitz stuff](68419Lipschitzstuff.html) (8 messages, latest: Mar 05 2019 at 08:29)
-
-* [nonempty](95771nonempty.html) (7 messages, latest: Mar 04 2019 at 23:48)
 
 * [product metric space](66706productmetricspace.html) (15 messages, latest: Mar 04 2019 at 18:08)
 

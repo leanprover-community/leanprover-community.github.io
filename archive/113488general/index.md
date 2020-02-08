@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (69 messages, latest: Feb 08 2020 at 21:03)
+
 * [SO structure question](98892SOstructurequestion.html) (1 message, latest: Feb 08 2020 at 20:37)
 
 * [push_neg](36986pushneg.html) (8 messages, latest: Feb 08 2020 at 20:23)
@@ -30,8 +32,6 @@ permalink: archive/113488general/index.html
 * [beer reward](66500beerreward.html) (45 messages, latest: Feb 06 2020 at 21:54)
 
 * [should nonempty be a structure](62243shouldnonemptybeastructure.html) (2 messages, latest: Feb 06 2020 at 15:48)
-
-* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (65 messages, latest: Feb 05 2020 at 22:48)
 
 * [`choose` with `and`](15409choosewithand.html) (7 messages, latest: Feb 05 2020 at 22:06)
 
