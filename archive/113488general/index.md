@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [naming conventions](31665namingconventions.html) (2 messages, latest: Feb 08 2020 at 01:29)
+
 * [Creating my own pp.all = true string](73699Creatingmyownppalltruestring.html) (2 messages, latest: Feb 08 2020 at 00:08)
 
 * [forgetful inheritance](82585forgetfulinheritance.html) (17 messages, latest: Feb 07 2020 at 23:44)
@@ -2946,8 +2948,6 @@ permalink: archive/113488general/index.html
 * [nat.strong_rec_on](21444natstrongrecon.html) (5 messages, latest: Sep 14 2018 at 18:22)
 
 * [adding a definition](84434addingadefinition.html) (29 messages, latest: Sep 14 2018 at 17:07)
-
-* [naming conventions](31665namingconventions.html) (1 message, latest: Sep 14 2018 at 16:56)
 
 * [local recursive function](60330localrecursivefunction.html) (6 messages, latest: Sep 14 2018 at 16:42)
 
