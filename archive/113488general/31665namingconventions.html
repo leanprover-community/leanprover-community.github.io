@@ -103,6 +103,68 @@ permalink: archive/113488general/31665namingconventions.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20conventions/near/187723175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31665namingconventions.html#187723175">Tim Daly (Feb 08 2020 at 16:45)</a>:</h4>
 <p>As near as I can tell, the current naming convention has some sort of "mental map" for those who understand it. For example, "comm_" seems to imply commutative. Those who don't know the mapping (e.g. me) find it uninformative.</p>
 
+<a name="187723706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20conventions/near/187723706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31665namingconventions.html#187723706">Mario Carneiro (Feb 08 2020 at 17:02)</a>:</h4>
+<p>There is an article about that: <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/naming.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/naming.md">https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/naming.md</a></p>
+
+<a name="187723893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20conventions/near/187723893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31665namingconventions.html#187723893">Mario Carneiro (Feb 08 2020 at 17:05)</a>:</h4>
+<p>To be clear: The main advantage of <code>group.mul_assoc</code> over <code>group_mul_assoc</code> is that lean "understands" the <code>.</code>, while <code>_</code> is just another character for making names. So you can <code>open group</code> and then refer to <code>group.mul_assoc</code> as simply <code>mul_assoc</code>, while <code>group_mul_assoc</code> has no such syntax sugar, no way to make the name locally shorter.</p>
+
+<a name="187723994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20conventions/near/187723994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31665namingconventions.html#187723994">Mario Carneiro (Feb 08 2020 at 17:08)</a>:</h4>
+<p>You might argue why we don't <em>just</em> use dots then, as in <code>group.mul.assoc</code>, but this has to do with the way that <code>open</code> and projection notation work in practice, such that it is best if <code>group.mul</code> in this case is actually a namespace rather than something you made up on the spot.</p>
+
+<a name="187724339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20conventions/near/187724339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31665namingconventions.html#187724339">Tim Daly (Feb 08 2020 at 17:19)</a>:</h4>
+<p>Ah, Grimoire! Unfortunately, while the naming convention "sort of covers" the concepts that arise in logic, the same approach fails badly when extended to other areas of computational mathematics. Take, for example, "equal". In HoTT this seems to mean univalent. In computer science (e.g. "proglib", this could mean 'eq' as in pointer equality, 'eql' as in surface equality, or 'equal' as in structure equality. In math 'eq' could mean many things depending on the branch of math encoded. And users, by their nature, tend to abuse words they like to give their own meaning of equality. </p>
+<p>Unless every library has a header (a logical .h file?? gasp) to define what is meant by 'eq', the naming convention doesn't scale. And since there are notions of encoding all of mathematics, one really wants to think about scale.</p>
+<p>But, I admit, it isn't a popular idea so I'll just drop the whole thing.</p>
+
+<a name="187724568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20conventions/near/187724568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31665namingconventions.html#187724568">Mario Carneiro (Feb 08 2020 at 17:26)</a>:</h4>
+<p>In lean, <code>eq</code> means <code>=</code>. That's the only equality in common use. There is also "defeq" but this has no syntax in the language and it never shows up in theorem statements so it doesn't enter into any theorem names</p>
+
+<a name="187724573"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20conventions/near/187724573" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31665namingconventions.html#187724573">Mario Carneiro (Feb 08 2020 at 17:26)</a>:</h4>
+<p>There are other notions of isomorphism in mathlib but they all have their own names</p>
+
+<a name="187724627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20conventions/near/187724627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31665namingconventions.html#187724627">Mario Carneiro (Feb 08 2020 at 17:28)</a>:</h4>
+<p>The naming convention scales in that each new constant gets a new name. <code>eq</code> means <code>=</code>, so if you use it to mean <code>~=</code> that's violating the naming convention (unless you are in some weird alternate prelude where the regular <code>eq</code> doesn't exist and <code>~=</code> is named <code>eq</code>).</p>
+
+<a name="187724638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20conventions/near/187724638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31665namingconventions.html#187724638">Tim Daly (Feb 08 2020 at 17:29)</a>:</h4>
+<p>Equality is one of the hardest concepts I know.</p>
+
+<a name="187724699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20conventions/near/187724699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31665namingconventions.html#187724699">Mario Carneiro (Feb 08 2020 at 17:30)</a>:</h4>
+<p>fyi, "proglib" as you keep saying is actually mathlib (the name is unfortunate but mathlib is about both programming and math)</p>
+
+<a name="187724716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20conventions/near/187724716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31665namingconventions.html#187724716">Mario Carneiro (Feb 08 2020 at 17:31)</a>:</h4>
+<p>I wanted to call it "stdlib" but leo vetoed that</p>
+
+<a name="187724777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20conventions/near/187724777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31665namingconventions.html#187724777">Tim Daly (Feb 08 2020 at 17:32)</a>:</h4>
+<p>As I mentioned previously, 'proglib' has a focus of proofs that have execution semantics, partially with an eye toward proving programs and partially with an eye to program generation. 'mathlib' doesn't seem that way.</p>
+
+<a name="187725085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20conventions/near/187725085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31665namingconventions.html#187725085">Simon Cruanes (Feb 08 2020 at 17:40)</a>:</h4>
+<p>Do you have concrete examples of what such proofs would look like?</p>
+
+<a name="187725369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20conventions/near/187725369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31665namingconventions.html#187725369">Tim Daly (Feb 08 2020 at 17:48)</a>:</h4>
+<p>Not (yet) in Lean... but see <a href="http://runtimeverification.com/blog/k-vs-coq-as-language-verification-frameworks-part-1-of-3/" target="_blank" title="http://runtimeverification.com/blog/k-vs-coq-as-language-verification-frameworks-part-1-of-3/">http://runtimeverification.com/blog/k-vs-coq-as-language-verification-frameworks-part-1-of-3/</a> and look at the Coq program listings. This is the kind of thing I am currently wrestling</p>
+
+<a name="187725494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20conventions/near/187725494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31665namingconventions.html#187725494">Tim Daly (Feb 08 2020 at 17:53)</a>:</h4>
+<p>Value equality vs reference equality vs Type equality (especially dependent type equality) are all equalities that show up in programming.</p>
+
+<a name="187725679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20conventions/near/187725679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31665namingconventions.html#187725679">Simon Cruanes (Feb 08 2020 at 17:58)</a>:</h4>
+<p>Ah, so you mean things like the "Software Verification" book? I'm not sure what a generic lib for that would look like, each language has its semantic quirks. Better automation might be possible though…</p>
+
 
 {% endraw %}
 
