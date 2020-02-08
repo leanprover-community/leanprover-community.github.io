@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Contribution to mathlib with the Ostrowski theorem](68747ContributiontomathlibwiththeOstrowskitheorem.html) (223 messages, latest: Feb 08 2020 at 20:59)
+
+* [Apply a rewrite on a precise term](19307Applyarewriteonapreciseterm.html) (5 messages, latest: Feb 08 2020 at 20:30)
+
 * [Maximum Class-instance resolution depth has been exceeded](69773MaximumClassinstanceresolutiondepthhasbeenexceeded.html) (15 messages, latest: Feb 08 2020 at 19:54)
-
-* [Contribution to mathlib with the Ostrowski theorem](68747ContributiontomathlibwiththeOstrowskitheorem.html) (213 messages, latest: Feb 08 2020 at 15:06)
-
-* [Apply a rewrite on a precise term](19307Applyarewriteonapreciseterm.html) (4 messages, latest: Feb 08 2020 at 14:38)
 
 * [`linear_map` as `add_monoid_hom`](62814linearmapasaddmonoidhom.html) (7 messages, latest: Feb 08 2020 at 14:35)
 

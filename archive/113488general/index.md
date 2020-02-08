@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [notation](26829notation.html) (11 messages, latest: Feb 08 2020 at 19:46)
+* [SO structure question](98892SOstructurequestion.html) (1 message, latest: Feb 08 2020 at 20:37)
 
-* [push_neg](36986pushneg.html) (2 messages, latest: Feb 08 2020 at 18:32)
+* [push_neg](36986pushneg.html) (8 messages, latest: Feb 08 2020 at 20:23)
+
+* [notation](26829notation.html) (11 messages, latest: Feb 08 2020 at 19:46)
 
 * [naming conventions](31665namingconventions.html) (41 messages, latest: Feb 08 2020 at 18:29)
 
