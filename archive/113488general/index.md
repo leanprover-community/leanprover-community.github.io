@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [naming conventions](31665namingconventions.html) (13 messages, latest: Feb 08 2020 at 08:51)
+* [naming conventions](31665namingconventions.html) (14 messages, latest: Feb 08 2020 at 09:35)
 
 * [Creating my own pp.all = true string](73699Creatingmyownppalltruestring.html) (2 messages, latest: Feb 08 2020 at 00:08)
 
