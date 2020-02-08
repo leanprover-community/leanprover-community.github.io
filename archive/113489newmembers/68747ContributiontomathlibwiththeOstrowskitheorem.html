@@ -1130,6 +1130,121 @@ a : is_unit x_2
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187717905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187717905">Kevin Buzzard (Feb 08 2020 at 13:57)</a>:</h4>
 <p>so then you get problems later on because now you have two different concepts of unit on the set of integers.</p>
 
+<a name="187718041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187718041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187718041">Ryan Lahfa (Feb 08 2020 at 14:01)</a>:</h4>
+<p>I discussed with my math advisor who told me that it might be interesting to rework a bit the absolute value, valuations stuff to do a complete classification of all valuations over a field (according to Artin, Algebraic Numbers &amp; Algebraic Functions), Artin makes super satisfying proofs IMHO, its proof of Ostrowski is quite the same of the Cassels' one, except he's able to make it a lot more compact by doing some work beforehand on the base $b$ expansions.</p>
+<p>So I think it makes sense to create a concept of valuations, derive the fact that valuations are always equivalent to one with triangular inequality, then I can have Ostrowski with kind of the same proof (shortened maybe) I have. Modulo base expansions.</p>
+<p>BTW, is there any plan regarding decimal/bases expansions in mathlib?</p>
+
+<a name="187718112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187718112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187718112">Kevin Buzzard (Feb 08 2020 at 14:03)</a>:</h4>
+<p>I'm not sure there is any sensible classification of all valuations over a general field?</p>
+
+<a name="187718160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187718160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187718160">Ryan Lahfa (Feb 08 2020 at 14:04)</a>:</h4>
+<blockquote>
+<p>Lean knows that the integers are a PID, you don't have to type <code>[principal_ideal_domain ℤ]</code> (which inserts a new instance of this fact into the type class inference machine) -- the instance is there already as you can see with <code>instance : principal_ideal_domain ℤ := by apply_instance</code></p>
+</blockquote>
+<p>It makes sense to me, but when I do this, I still have the same issue:</p>
+<div class="codehilite"><pre><span></span>haveI : principal_ideal_domain ℤ := by apply_instance,
+haveI : unique_factorization_domain ℤ := by apply_instance,
+apply unique_factorization_domain.induction_on_prime x_1,
+ {sorry,},
+{intros, have abs_x2_eq_one: int.nat_abs x_2 = 1 := is_unit_int.1 a},
+{ sorry },
+</pre></div>
+
+
+<p>where <code>x_1 : \Z</code>.</p>
+<p>Am I still doing something wrong?</p>
+
+<a name="187718165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187718165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187718165">Kevin Buzzard (Feb 08 2020 at 14:04)</a>:</h4>
+<p>I only know of classifications over number fields (and I can believe that there will be a classification for global fields). Anything beyond that gets hairy very quickly.</p>
+
+<a name="187718170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187718170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187718170">Kevin Buzzard (Feb 08 2020 at 14:05)</a>:</h4>
+<p>I can't answer your question about instances unless you post complete working code.</p>
+
+<a name="187718184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187718184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187718184">Kevin Buzzard (Feb 08 2020 at 14:05)</a>:</h4>
+<p>I am explicitly asking you whether you have any <code>[principal_ideal_domain ℤ]</code> <em>with the rectangular brackets</em> in your code. If you don't, the problem is elsewhere.</p>
+
+<a name="187718224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187718224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187718224">Ryan Lahfa (Feb 08 2020 at 14:06)</a>:</h4>
+<blockquote>
+<p>I'm not sure there is any sensible classification of all valuations over a general field?</p>
+</blockquote>
+<p>AFAIK, Artin provides some results regarding archimedean/non-archimedean.</p>
+
+<a name="187718228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187718228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187718228">Ryan Lahfa (Feb 08 2020 at 14:06)</a>:</h4>
+<p><a href="/user_uploads/3121/AZjjMTFRVVnaNPhiZRypzbnG/ostrowski-ext.lean" target="_blank" title="ostrowski-ext.lean">ostrowski-ext.lean</a> <br>
+Here's the long file, because whenever I extract it into a minimal case, it works, so I don't understand what's the difference, sorry for the long proof. You'll see line 414 the issue.</p>
+
+<a name="187718236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187718236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187718236">Kevin Buzzard (Feb 08 2020 at 14:07)</a>:</h4>
+<p>I can't really comment on the Artin results because I am not sure what precisely you're talking about.</p>
+
+<a name="187718291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187718291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187718291">Ryan Lahfa (Feb 08 2020 at 14:09)</a>:</h4>
+<p>Not sure I can link a PDF for a book here, I suppose. But the exact reference is "Artin, Algebraic Numbers &amp; Algebraic Functions", chapter 1, section 3, "Classifications of Valuations"</p>
+
+<a name="187718355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187718355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187718355">Ryan Lahfa (Feb 08 2020 at 14:11)</a>:</h4>
+<p>He proves a necessary &amp; sufficient condition for a field to be non-archimedean based on the boundness of the values of the rationals integers for the valuation if I read well.</p>
+<p>My advisor told me that it'd be interested to go this way in order to develop <a href="https://en.wikipedia.org/wiki/Berkovich_space" target="_blank" title="https://en.wikipedia.org/wiki/Berkovich_space">https://en.wikipedia.org/wiki/Berkovich_space</a> in Lean.</p>
+
+<a name="187718404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187718404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187718404">Kevin Buzzard (Feb 08 2020 at 14:12)</a>:</h4>
+<p>Commelin, Massot and me already developed adic spaces in Lean, probably what we did would be of some help if you wanted to do Berkovich spaces.</p>
+
+<a name="187718407"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187718407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187718407">Kevin Buzzard (Feb 08 2020 at 14:13)</a>:</h4>
+<p>It's not in mathlib though.</p>
+
+<a name="187718413"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187718413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187718413">Ryan Lahfa (Feb 08 2020 at 14:13)</a>:</h4>
+<blockquote>
+<p>It's not in mathlib though.</p>
+</blockquote>
+<p>Is it in the perfectoid repository?</p>
+
+<a name="187718414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187718414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187718414">Kevin Buzzard (Feb 08 2020 at 14:13)</a>:</h4>
+<p>Right.</p>
+
+<a name="187718421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187718421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187718421">Ryan Lahfa (Feb 08 2020 at 14:13)</a>:</h4>
+<p>That's something I'm interested in, thanks, I'll take a look to the repo then.</p>
+
+<a name="187718652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187718652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187718652">Kevin Buzzard (Feb 08 2020 at 14:20)</a>:</h4>
+<p>I am now beginning to think that the problem with your code is <code>unique_factorization_domain.induction_on_prime</code></p>
+
+<a name="187718663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187718663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187718663">Kevin Buzzard (Feb 08 2020 at 14:21)</a>:</h4>
+<div class="codehilite"><pre><span></span>unique_factorization_domain.induction_on_prime :
+  ∀ {α : Type u_2} [_inst_1 : integral_domain α] [_inst_2 : unique_factorization_domain α] {P : α → Prop}
+  (a : α),
+    P 0 → (∀ (x : α), is_unit x → P x) → (∀ (a p : α), a ≠ 0 → prime p → P a → P (p * a)) → P a
+</pre></div>
+
+<a name="187718675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187718675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187718675">Kevin Buzzard (Feb 08 2020 at 14:21)</a>:</h4>
+<p>no I'm wrong, this looks fine; unique_factorization_domain doesn't extend integral_domain</p>
+
+<a name="187719815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187719815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187719815">Kevin Buzzard (Feb 08 2020 at 14:59)</a>:</h4>
+<p>Oh! I am a twit. It shouldn't be <code>haveI</code> -- you need to change them to <code>letI</code>.</p>
+
+<a name="187719819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187719819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187719819">Ryan Lahfa (Feb 08 2020 at 14:59)</a>:</h4>
+<blockquote>
+<p>Oh! I am a twit. It shouldn't be <code>haveI</code> -- you need to change them to <code>letI</code>.</p>
+</blockquote>
+<p>Is there some docs on what's the difference between them?</p>
+
 
 {% endraw %}
 
