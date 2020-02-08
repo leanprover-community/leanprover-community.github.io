@@ -9,15 +9,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Maximum Class-instance resolution depth has been exceeded](69773MaximumClassinstanceresolutiondepthhasbeenexceeded.html) (4 messages, latest: Feb 07 2020 at 23:02)
+* [Contribution to mathlib with the Ostrowski theorem](68747ContributiontomathlibwiththeOstrowskitheorem.html) (187 messages, latest: Feb 08 2020 at 13:57)
 
-* [`linear_map` as `add_monoid_hom`](62814linearmapasaddmonoidhom.html) (2 messages, latest: Feb 07 2020 at 09:24)
+* [`linear_map` as `add_monoid_hom`](62814linearmapasaddmonoidhom.html) (3 messages, latest: Feb 08 2020 at 13:41)
+
+* [Maximum Class-instance resolution depth has been exceeded](69773MaximumClassinstanceresolutiondepthhasbeenexceeded.html) (4 messages, latest: Feb 07 2020 at 23:02)
 
 * [more basics](41001morebasics.html) (44 messages, latest: Feb 07 2020 at 04:34)
 
 * [continuity](75863continuity.html) (19 messages, latest: Feb 07 2020 at 02:52)
-
-* [Contribution to mathlib with the Ostrowski theorem](68747ContributiontomathlibwiththeOstrowskitheorem.html) (178 messages, latest: Feb 07 2020 at 00:10)
 
 * [inductive type with anonymous constructors](60012inductivetypewithanonymousconstructors.html) (16 messages, latest: Feb 06 2020 at 22:05)
 

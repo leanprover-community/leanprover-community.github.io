@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* ["trivial" R-algebra hom construction](23676trivialRalgebrahomconstruction.html) (2 messages, latest: Feb 08 2020 at 13:54)
+
 * [Lean for the curious mathematician](84968Leanforthecuriousmathematician.html) (13 messages, latest: Feb 07 2020 at 19:04)
 
 * [sober spaces](80251soberspaces.html) (2 messages, latest: Feb 06 2020 at 20:10)

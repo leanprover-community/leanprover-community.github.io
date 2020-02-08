@@ -1049,6 +1049,87 @@ a : is_unit x_2
 <p>More difficult, I guess, I see that <code>is_unit_int</code> provides <code>int.nat_abs x_2 = 1</code>, but this notion of absolute value is incompatible with absolute values in general I suppose.</p>
 <p>Knowing that <code>int.nat_abs x_2 = 1</code> do not give me <code>abv (coe x_2) = int.nat_abs</code> in general AFAIK. So I guess I have to work more to interface <code>nat_abs</code> with absolute values.</p>
 
+<a name="187716895"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187716895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187716895">Kevin Buzzard (Feb 08 2020 at 13:23)</a>:</h4>
+<p>For your first question, first a side comment. In the attachment you have <code>by infer_instance</code> and <code>infer_instance</code> isn't a tactic -- you would want to put <code>by apply_instance</code> or <code>infer_instance</code>. Another side comment is that this proof is gigantic and you might seriously want to consider breaking it up into smaller pieces if possible.</p>
+<p>The reason that <code>rw real.rpow_mul (is_absolute_value.abv_nonneg (real_padic_norm p) _)</code> is failing is that type class inference can't find an instance of <code>is_absolute_value (real_padic_norm p)</code>. The reason it won't use the instance on line 184 is that this only applies when type class inference can find an instance of <code>nat.prime p</code> and it seems to me that typeclass inference can't find an instance of that. If I insert <code>haveI : nat.prime p := by apply_instance,</code> in line 392 of your attached file, it fails. Conversely, if I write <code>haveI : nat.prime p := sorry</code> on line 392 then things work again -- although it takes a few seconds on my machine to do anything after any line is changed, and this is I guess because the proof is so long.</p>
+
+<a name="187717202"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187717202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187717202">Kevin Buzzard (Feb 08 2020 at 13:32)</a>:</h4>
+<p>For your second question, I guess I need more context. It seems to me that <code>a</code> is a proof that <code>x_2</code> is a unit wrt one monoid structure on the integers, and you want it to be a proof that <code>x_2</code> is a unit wrt another one. If these two monoid structures are definitionally equal then Lean would not be complaining. I tried to reproduce what you did but I can't:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">padics</span><span class="bp">.</span><span class="n">padic_norm</span>
+<span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">principal_ideal_domain</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">cau_seq</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">exponential</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">apply</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">apply_fun</span>
+
+<span class="kn">instance</span> <span class="n">I</span> <span class="o">:</span> <span class="n">principal_ideal_domain</span> <span class="bp">ℤ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="n">def</span> <span class="n">M1</span> <span class="o">:</span> <span class="n">monoid</span> <span class="bp">ℤ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="n">def</span> <span class="n">M2</span> <span class="o">:</span> <span class="n">monoid</span> <span class="bp">ℤ</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">@</span><span class="n">ring</span><span class="bp">.</span><span class="n">to_monoid</span> <span class="bp">ℤ</span>
+       <span class="o">(</span><span class="bp">@</span><span class="n">domain</span><span class="bp">.</span><span class="n">to_ring</span> <span class="bp">ℤ</span> <span class="o">(</span><span class="bp">@</span><span class="n">integral_domain</span><span class="bp">.</span><span class="n">to_domain</span> <span class="bp">ℤ</span> <span class="o">(</span><span class="bp">@</span><span class="n">principal_ideal_domain</span><span class="bp">.</span><span class="n">to_integral_domain</span> <span class="bp">ℤ</span> <span class="n">I</span><span class="o">))))</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">M1</span> <span class="bp">=</span> <span class="n">M2</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+
+<p>So I am totally confused by this one. Did you write <code>[principal_ideal_domain ℤ]</code> at some point? This would be bad because it means "let the integers have the structure of a principal ideal domain in a way which I am not going to tell you anything about, and in particular the underlying addition and multiplication might be completely random".</p>
+
+<a name="187717208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187717208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187717208">Kevin Buzzard (Feb 08 2020 at 13:32)</a>:</h4>
+<p>You seem to have a diamond and there should be no diamonds in mathlib.</p>
+
+<a name="187717772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187717772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187717772">Ryan Lahfa (Feb 08 2020 at 13:52)</a>:</h4>
+<blockquote>
+<p>For your first question, first a side comment. In the attachment you have <code>by infer_instance</code> and <code>infer_instance</code> isn't a tactic -- you would want to put <code>by apply_instance</code> or <code>infer_instance</code>. Another side comment is that this proof is gigantic and you might seriously want to consider breaking it up into smaller pieces if possible.</p>
+<p>The reason that <code>rw real.rpow_mul (is_absolute_value.abv_nonneg (real_padic_norm p) _)</code> is failing is that type class inference can't find an instance of <code>is_absolute_value (real_padic_norm p)</code>. The reason it won't use the instance on line 184 is that this only applies when type class inference can find an instance of <code>nat.prime p</code> and it seems to me that typeclass inference can't find an instance of that. If I insert <code>haveI : nat.prime p := by apply_instance,</code> in line 392 of your attached file, it fails. Conversely, if I write <code>haveI : nat.prime p := sorry</code> on line 392 then things work again -- although it takes a few seconds on my machine to do anything after any line is changed, and this is I guess because the proof is so long.</p>
+</blockquote>
+<p>Thank you for looking for a so long time, I totally agree on the fact that the proof is too big and I will refactor it soon.</p>
+<p>It makes a lot more sense to me now.</p>
+
+<a name="187717783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187717783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187717783">Ryan Lahfa (Feb 08 2020 at 13:53)</a>:</h4>
+<blockquote>
+<p>For your second question, I guess I need more context. It seems to me that <code>a</code> is a proof that <code>x_2</code> is a unit wrt one monoid structure on the integers, and you want it to be a proof that <code>x_2</code> is a unit wrt another one. If these two monoid structures are definitionally equal then Lean would not be complaining. I tried to reproduce what you did but I can't:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">padics</span><span class="bp">.</span><span class="n">padic_norm</span>
+<span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">principal_ideal_domain</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">cau_seq</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">exponential</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">apply</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">apply_fun</span>
+
+<span class="kn">instance</span> <span class="n">I</span> <span class="o">:</span> <span class="n">principal_ideal_domain</span> <span class="bp">ℤ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="n">def</span> <span class="n">M1</span> <span class="o">:</span> <span class="n">monoid</span> <span class="bp">ℤ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="n">def</span> <span class="n">M2</span> <span class="o">:</span> <span class="n">monoid</span> <span class="bp">ℤ</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">@</span><span class="n">ring</span><span class="bp">.</span><span class="n">to_monoid</span> <span class="bp">ℤ</span>
+       <span class="o">(</span><span class="bp">@</span><span class="n">domain</span><span class="bp">.</span><span class="n">to_ring</span> <span class="bp">ℤ</span> <span class="o">(</span><span class="bp">@</span><span class="n">integral_domain</span><span class="bp">.</span><span class="n">to_domain</span> <span class="bp">ℤ</span> <span class="o">(</span><span class="bp">@</span><span class="n">principal_ideal_domain</span><span class="bp">.</span><span class="n">to_integral_domain</span> <span class="bp">ℤ</span> <span class="n">I</span><span class="o">))))</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">M1</span> <span class="bp">=</span> <span class="n">M2</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+
+<p>So I am totally confused by this one. Did you write <code>[principal_ideal_domain ℤ]</code> at some point? This would be bad because it means "let the integers have the structure of a principal ideal domain in a way which I am not going to tell you anything about, and in particular the underlying addition and multiplication might be completely random".</p>
+</blockquote>
+<p>The reason must be the one you pointed, I wrote <code>principal_ideal_domain Z</code>at some point. Is there any way to add more details on the PID I'm looking at?</p>
+
+<a name="187717833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187717833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187717833">Kevin Buzzard (Feb 08 2020 at 13:54)</a>:</h4>
+<p>Lean knows that the integers are a PID, you don't have to type <code>[principal_ideal_domain ℤ]</code> (which inserts a new instance of this fact into the type class inference machine) -- the instance is there already as you can see with <code>instance : principal_ideal_domain ℤ := by apply_instance</code></p>
+
+<a name="187717882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187717882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187717882">Kevin Buzzard (Feb 08 2020 at 13:56)</a>:</h4>
+<p>If you type <code>[principal_ideal_domain ℤ]</code> then you just made the <em>set</em> of integers (or more precisely the type of integers) into a principal ideal domain by choosing a completely random integer and saying "this one is the 0", another completely random integer and saying "this one is the 1", choosing a random binary function and saying "this can be +" etc.</p>
+
+<a name="187717896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187717896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187717896">Kevin Buzzard (Feb 08 2020 at 13:57)</a>:</h4>
+<p>Your <code>inst_1</code> is not my <code>I</code>, I suspect.</p>
+
+<a name="187717905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contribution%20to%20mathlib%20with%20the%20Ostrowski%20theorem/near/187717905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/68747ContributiontomathlibwiththeOstrowskitheorem.html#187717905">Kevin Buzzard (Feb 08 2020 at 13:57)</a>:</h4>
+<p>so then you get problems later on because now you have two different concepts of unit on the set of integers.</p>
+
 
 {% endraw %}
 
