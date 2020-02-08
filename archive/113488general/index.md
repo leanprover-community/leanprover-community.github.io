@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Creating my own pp.all = true string](73699Creatingmyownppalltruestring.html) (1 message, latest: Feb 07 2020 at 23:45)
+* [Creating my own pp.all = true string](73699Creatingmyownppalltruestring.html) (2 messages, latest: Feb 08 2020 at 00:08)
 
 * [forgetful inheritance](82585forgetfulinheritance.html) (17 messages, latest: Feb 07 2020 at 23:44)
 
