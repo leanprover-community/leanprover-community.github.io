@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [notation](26829notation.html) (6 messages, latest: Feb 08 2020 at 15:47)
+* [naming conventions](31665namingconventions.html) (21 messages, latest: Feb 08 2020 at 16:45)
 
-* [naming conventions](31665namingconventions.html) (20 messages, latest: Feb 08 2020 at 15:19)
+* [notation](26829notation.html) (10 messages, latest: Feb 08 2020 at 16:26)
 
 * [Creating my own pp.all = true string](73699Creatingmyownppalltruestring.html) (2 messages, latest: Feb 08 2020 at 00:08)
 

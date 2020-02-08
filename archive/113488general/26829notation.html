@@ -38,6 +38,57 @@ permalink: archive/113488general/26829notation.html
 <p>Any mathematician : "Let <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span> be a ring and let <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span></span></span></span> be <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span>-algebras. Then...". Lean: <code>{R : Type*} [comm_ring R] {A : Type*} [comm_ring A] {B : Type*} [comm_ring B]
   [algebra R A] [algebra R B]</code>. Can we somehow make this Lean code look less scary to mathematicians? Of course <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span> is a type, that's why it's called <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span>. I wouldn't write "let <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> be a ring", that would be madness!</p>
 
+<a name="187722286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation/near/187722286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26829notation.html#187722286">Jason Rute (Feb 08 2020 at 16:14)</a>:</h4>
+<p>I'm not saying Lean should do this, but in Scala this thing with type classes comes up often and they have created a separate notation for it.<br>
+Assume <code>Ring</code> is a type class in Scala with a field <code>add</code> and that <code>+</code> knows to look at <code>add</code> in rings to implement addition.  Then one can write the following verbose definition in Scala.</p>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="n">double</span><span class="o">[</span><span class="kt">R</span><span class="o">](</span><span class="n">x</span><span class="k">:</span> <span class="kt">R</span><span class="o">)(</span><span class="k">implicit</span> <span class="n">ringOfR</span><span class="k">:</span> <span class="kt">Ring</span><span class="o">[</span><span class="kt">R</span><span class="o">])</span> <span class="k">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">x</span>
+</pre></div>
+
+
+<p>Notice that in Scala <code>[R]</code> is a type parameter, <code>(x:R)</code> is a regular parameter, and <code>(implicit ringOfR: Ring[R])</code> is an implicit parameter (very similar to Lean's type class parameters).</p>
+<p>One can also instead use the following shorthand type class notation where we "treat" R as if it is an element of <code>Ring</code>:</p>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="n">double</span><span class="o">[</span><span class="kt">R:</span> <span class="kt">Rign</span><span class="o">](</span><span class="n">x</span><span class="k">:</span> <span class="kt">R</span><span class="o">)</span> <span class="k">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">x</span>
+</pre></div>
+
+
+<p>Now, this notation might be less ambiguous in Scala than in Lean, since Scala treats type parameters and regular parameters differently with different notation (i.e. Scala is not dependently typed).</p>
+<p>A similar issue exists with <code>set</code>s in Lean.  (A type class is to <code>Type</code>s as sets are to <code>Prop</code>s.)   We can write the convenient notation</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">s</span><span class="o">,</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>But if we apply <code>intro</code> twice we get the messy notation</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>One could imagine an alternative notation where one writes</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>I'm not claiming the Lean notation should change, but it is food for thought...</p>
+
+<a name="187722562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation/near/187722562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26829notation.html#187722562">Rob Lewis (Feb 08 2020 at 16:25)</a>:</h4>
+<blockquote>
+<p>One could imagine an alternative notation where one writes</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+</blockquote>
+<p>This actually works exactly as you wrote it. I've never been sure if it's intentional or a "feature" enabled by the bounded quantifier syntax. Given that the <code>a ∈ s</code> hypothesis gets the default name <code>H</code>, I don't think it's something we should encourage in mathlib.</p>
+
+<a name="187722565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation/near/187722565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26829notation.html#187722565">Mario Carneiro (Feb 08 2020 at 16:25)</a>:</h4>
+<p>Here's the relevant lean 3 issue: <a href="https://github.com/leanprover/lean/issues/1522" target="_blank" title="https://github.com/leanprover/lean/issues/1522">https://github.com/leanprover/lean/issues/1522</a></p>
+
+<a name="187722617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation/near/187722617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26829notation.html#187722617">Mario Carneiro (Feb 08 2020 at 16:26)</a>:</h4>
+<p>which would have allowed us to write just <code>[algebra R A] [algebra R B]</code></p>
+
 
 {% endraw %}
 
