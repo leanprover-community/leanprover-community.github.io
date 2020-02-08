@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1803 messages, latest: Feb 08 2020 at 22:38)
+
 * [Contribution to mathlib with the Ostrowski theorem](68747ContributiontomathlibwiththeOstrowskitheorem.html) (224 messages, latest: Feb 08 2020 at 21:00)
 
 * [Apply a rewrite on a precise term](19307Applyarewriteonapreciseterm.html) (5 messages, latest: Feb 08 2020 at 20:30)
@@ -22,8 +24,6 @@ permalink: archive/113489newmembers/index.html
 * [continuity](75863continuity.html) (19 messages, latest: Feb 07 2020 at 02:52)
 
 * [inductive type with anonymous constructors](60012inductivetypewithanonymousconstructors.html) (16 messages, latest: Feb 06 2020 at 22:05)
-
-* [noob question(s)](52075noobquestions.html) (1795 messages, latest: Feb 06 2020 at 16:48)
 
 * [SAT in Lean](88768SATinLean.html) (4 messages, latest: Feb 04 2020 at 20:22)
 

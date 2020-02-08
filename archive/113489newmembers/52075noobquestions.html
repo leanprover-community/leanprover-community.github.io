@@ -10150,6 +10150,46 @@ example (x : ℤ) : x^2 = x * x := by simp
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187565467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187565467">Mario Carneiro (Feb 06 2020 at 16:48)</a>:</h4>
 <p>You can of course always write everything in tex if you want to do that, i.e. <code>$\mathtt{\color{blue}{inductive} foo (\alpha : Type) : Type}$</code></p>
 
+<a name="187733373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187733373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187733373">Daniel Keys (Feb 08 2020 at 22:11)</a>:</h4>
+<p>Anyone can show me how to construct a <code>finset ℤ</code> from <code>range n</code>, where <code>n : ℕ</code> and every member is the negative of one of the elements in the <code>range</code>? Some kind of mapping should be possible.</p>
+
+<a name="187733798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187733798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187733798">Patrick Massot (Feb 08 2020 at 22:26)</a>:</h4>
+<p><code>finset.image (λ m : ℕ, -(m : ℤ)) (finset.range n)</code></p>
+
+<a name="187733803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187733803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187733803">Patrick Massot (Feb 08 2020 at 22:27)</a>:</h4>
+<p>I have <em>no idea</em> why <code>finset.map</code> is <em>not</em> what you were looking for.</p>
+
+<a name="187733853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187733853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187733853">Chris Hughes (Feb 08 2020 at 22:29)</a>:</h4>
+<p>Also <code>finset.Ico_ℤ</code></p>
+
+<a name="187733953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187733953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187733953">Daniel Keys (Feb 08 2020 at 22:32)</a>:</h4>
+<p>Thanks <span class="user-mention" data-user-id="110031">@Patrick Massot</span> <span class="user-mention" data-user-id="110044">@Chris Hughes</span> <br>
+ I don't know how to use <code>finset.map</code> yet. For example, I tried to get the same entries (not the negatives) with <code>finset.map int.of_nat (range 5)</code>, but that doesn't work. The symbol used in <code>finset.lean</code> for the mapping function is new to me at this point (the "curved" arrow).</p>
+
+<a name="187734013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187734013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187734013">Chris Hughes (Feb 08 2020 at 22:35)</a>:</h4>
+<p>You can do it with <code>map</code> like this</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">finset</span> <span class="bp">ℤ</span> <span class="o">:=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">map</span> <span class="bp">⟨</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span><span class="o">,</span> <span class="bp">@</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span><span class="bp">.</span><span class="n">inj</span><span class="bp">⟩</span>
+  <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span>
+</pre></div>
+
+
+<p><code>map</code> only works with injective functions, the curly arrow is an <code>embedding</code>, a pair of a function, and a proof that it's injective.</p>
+<p><code>map</code> is faster for computation since it doesn't erase duplicates.</p>
+
+<a name="187734068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187734068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187734068">Patrick Massot (Feb 08 2020 at 22:37)</a>:</h4>
+<p>Why isn't called <code>fast_map</code> or <code>inj_map</code> then? It would leave the canonical name for the canonical operation.</p>
+
+<a name="187734109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187734109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187734109">Patrick Massot (Feb 08 2020 at 22:38)</a>:</h4>
+<p>Daniel, you can use "jump to definition" in VScode also on symbols.</p>
+
 
 {% endraw %}
 
