@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [forgetful inheritance](82585forgetfulinheritance.html) (16 messages, latest: Feb 07 2020 at 20:43)
+* [Creating my own pp.all = true string](73699Creatingmyownppalltruestring.html) (1 message, latest: Feb 07 2020 at 23:45)
+
+* [forgetful inheritance](82585forgetfulinheritance.html) (17 messages, latest: Feb 07 2020 at 23:44)
 
 * [Importing mathlib into Lean 4](91529ImportingmathlibintoLean4.html) (9 messages, latest: Feb 07 2020 at 09:09)
 
