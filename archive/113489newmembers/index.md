@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Maximum Class-instance resolution depth has been exceeded](69773MaximumClassinstanceresolutiondepthhasbeenexceeded.html) (15 messages, latest: Feb 08 2020 at 19:54)
+
 * [Contribution to mathlib with the Ostrowski theorem](68747ContributiontomathlibwiththeOstrowskitheorem.html) (213 messages, latest: Feb 08 2020 at 15:06)
 
 * [Apply a rewrite on a precise term](19307Applyarewriteonapreciseterm.html) (4 messages, latest: Feb 08 2020 at 14:38)
 
 * [`linear_map` as `add_monoid_hom`](62814linearmapasaddmonoidhom.html) (7 messages, latest: Feb 08 2020 at 14:35)
-
-* [Maximum Class-instance resolution depth has been exceeded](69773MaximumClassinstanceresolutiondepthhasbeenexceeded.html) (4 messages, latest: Feb 07 2020 at 23:02)
 
 * [more basics](41001morebasics.html) (44 messages, latest: Feb 07 2020 at 04:34)
 

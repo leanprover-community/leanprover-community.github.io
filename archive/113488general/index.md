@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [notation](26829notation.html) (11 messages, latest: Feb 08 2020 at 19:46)
+
 * [push_neg](36986pushneg.html) (2 messages, latest: Feb 08 2020 at 18:32)
 
 * [naming conventions](31665namingconventions.html) (41 messages, latest: Feb 08 2020 at 18:29)
-
-* [notation](26829notation.html) (10 messages, latest: Feb 08 2020 at 16:26)
 
 * [Creating my own pp.all = true string](73699Creatingmyownppalltruestring.html) (2 messages, latest: Feb 08 2020 at 00:08)
 
