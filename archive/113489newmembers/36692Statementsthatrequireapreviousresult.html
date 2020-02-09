@@ -1,0 +1,67 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/36692Statementsthatrequireapreviousresult.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/36692Statementsthatrequireapreviousresult.html">Statements that require a previous result</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="187759079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Statements%20that%20require%20a%20previous%20result/near/187759079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36692Statementsthatrequireapreviousresult.html#187759079">Markus Himmel (Feb 09 2020 at 13:31)</a>:</h4>
+<p>How do you state something that only makes sense using some previous result? Consider the following MWE:</p>
+<div class="codehilite"><pre><span></span><span class="kn">section</span>
+<span class="kn">parameters</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">B</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">A</span> <span class="o">:=</span> <span class="n">id</span>
+<span class="n">def</span> <span class="n">g</span> <span class="o">:</span> <span class="n">B</span> <span class="bp">→</span> <span class="n">B</span> <span class="o">:=</span> <span class="n">id</span>
+
+<span class="kn">lemma</span> <span class="n">A_eq_B</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">lemma</span> <span class="n">does_not_typecheck</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">:=</span> <span class="n">sorry</span> <span class="c1">-- this one is problematic</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>The lemma generates the error "type mismatch at application f = g term has type B → B but is expected to have type A → A". What would be the correct way to state this lemma in Lean that somehow uses the fact that A = B?</p>
+
+<a name="187759153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Statements%20that%20require%20a%20previous%20result/near/187759153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36692Statementsthatrequireapreviousresult.html#187759153">Mario Carneiro (Feb 09 2020 at 13:33)</a>:</h4>
+<p>There are two ways, neither very good. You can use <code>f == g</code> to assert that <code>f</code> and <code>g</code> have the same type, or you can use <code>eq.rec</code> to convert one type to the other</p>
+
+<a name="187759214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Statements%20that%20require%20a%20previous%20result/near/187759214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36692Statementsthatrequireapreviousresult.html#187759214">Mario Carneiro (Feb 09 2020 at 13:35)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">section</span>
+<span class="kn">parameters</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">B</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">A</span> <span class="o">:=</span> <span class="n">id</span>
+<span class="n">def</span> <span class="n">g</span> <span class="o">:</span> <span class="n">B</span> <span class="bp">→</span> <span class="n">B</span> <span class="o">:=</span> <span class="n">id</span>
+
+<span class="kn">lemma</span> <span class="n">A_eq_B</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">==</span> <span class="n">g</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">cases</span> <span class="n">A_eq_B</span><span class="bp">;</span> <span class="n">refl</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">A_eq_B</span> <span class="n">f</span> <span class="o">:</span> <span class="n">B</span> <span class="bp">→</span> <span class="n">B</span><span class="o">)</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">cases</span> <span class="n">A_eq_B</span><span class="bp">;</span> <span class="n">refl</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+<a name="187759216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Statements%20that%20require%20a%20previous%20result/near/187759216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36692Statementsthatrequireapreviousresult.html#187759216">Mario Carneiro (Feb 09 2020 at 13:35)</a>:</h4>
+<p>But the real answer is: don't do this</p>
+
+<a name="187759262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Statements%20that%20require%20a%20previous%20result/near/187759262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36692Statementsthatrequireapreviousresult.html#187759262">Mario Carneiro (Feb 09 2020 at 13:36)</a>:</h4>
+<p>in your real example it might be warranted, but in this example it's clearly a bad idea</p>
+
+<a name="187759402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Statements%20that%20require%20a%20previous%20result/near/187759402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36692Statementsthatrequireapreviousresult.html#187759402">Mario Carneiro (Feb 09 2020 at 13:41)</a>:</h4>
+<p>There is an easy <code>cases; refl</code> proof in this case because <code>f</code> and <code>g</code> are the same function, but in real examples the proof would be harder</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

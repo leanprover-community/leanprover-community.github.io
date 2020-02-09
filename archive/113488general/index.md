@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (72 messages, latest: Feb 09 2020 at 13:21)
+
 * [???](69406.html) (5 messages, latest: Feb 09 2020 at 12:53)
 
 * [typeclass paper](35889typeclasspaper.html) (159 messages, latest: Feb 09 2020 at 12:53)
-
-* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (70 messages, latest: Feb 09 2020 at 11:15)
 
 * [naming conventions](31665namingconventions.html) (45 messages, latest: Feb 09 2020 at 03:30)
 
