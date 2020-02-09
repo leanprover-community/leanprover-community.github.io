@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [more basics](41001morebasics.html) (45 messages, latest: Feb 09 2020 at 02:34)
+
 * [`linear_map` as `add_monoid_hom`](62814linearmapasaddmonoidhom.html) (8 messages, latest: Feb 09 2020 at 01:21)
 
 * [noob question(s)](52075noobquestions.html) (1803 messages, latest: Feb 08 2020 at 22:38)
@@ -18,8 +20,6 @@ permalink: archive/113489newmembers/index.html
 * [Apply a rewrite on a precise term](19307Applyarewriteonapreciseterm.html) (5 messages, latest: Feb 08 2020 at 20:30)
 
 * [Maximum Class-instance resolution depth has been exceeded](69773MaximumClassinstanceresolutiondepthhasbeenexceeded.html) (15 messages, latest: Feb 08 2020 at 19:54)
-
-* [more basics](41001morebasics.html) (44 messages, latest: Feb 07 2020 at 04:34)
 
 * [continuity](75863continuity.html) (19 messages, latest: Feb 07 2020 at 02:52)
 
