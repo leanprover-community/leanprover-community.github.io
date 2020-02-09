@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [nonempty](95771nonempty.html) (23 messages, latest: Feb 09 2020 at 16:38)
+* [composition of algebra structures?](35067compositionofalgebrastructures.html) (3 messages, latest: Feb 09 2020 at 20:04)
 
-* [composition of algebra structures?](35067compositionofalgebrastructures.html) (1 message, latest: Feb 09 2020 at 01:20)
+* [nonempty](95771nonempty.html) (23 messages, latest: Feb 09 2020 at 16:38)
 
 * ["trivial" R-algebra hom construction](23676trivialRalgebrahomconstruction.html) (6 messages, latest: Feb 08 2020 at 15:03)
 
