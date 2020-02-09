@@ -10222,6 +10222,301 @@ example (x : ℤ) : x^2 = x * x := by simp
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765297">Patrick Massot (Feb 09 2020 at 16:59)</a>:</h4>
 <p>I don't think this is meant as an exercise. I think Jeremy didn't want to distract readers with details of this proof.</p>
 
+<a name="187765356"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765356">Daniel Keys (Feb 09 2020 at 17:00)</a>:</h4>
+<p><span class="user-mention" data-user-id="214077">@Sayantan Majumdar</span> Here is a slightly more complex proof. Something like you want is part of it, see the <code>have h1</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">sumUpToN_1</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="n">range</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span><span class="bp">.</span><span class="n">sum</span> <span class="n">id</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+  <span class="n">refl</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">sum_range_succ</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">mul_add</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">hd</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">id</span><span class="bp">.</span><span class="n">def</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_eq_add_one</span><span class="o">,</span>
+  <span class="c1">---------- can get the goal thus</span>
+  <span class="n">rw</span> <span class="n">add_assoc</span> <span class="n">d</span> <span class="mi">1</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="err">←</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_eq_add_one</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="err">←</span> <span class="n">add_mul</span> <span class="mi">2</span> <span class="n">d</span> <span class="o">(</span><span class="n">d</span><span class="bp">+</span><span class="mi">1</span><span class="o">),</span>
+  <span class="k">have</span> <span class="n">h1</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">2</span><span class="o">,</span> <span class="k">from</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">h1</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">add_comm</span> <span class="mi">2</span> <span class="n">d</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">mul_comm</span> <span class="o">(</span><span class="n">d</span><span class="bp">+</span><span class="mi">2</span><span class="o">)</span> <span class="o">(</span><span class="n">d</span><span class="bp">+</span><span class="mi">1</span><span class="o">),</span>
+  <span class="c1">------------ or simply by:</span>
+  <span class="c1">-- ring,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="187765414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765414">Kevin Buzzard (Feb 09 2020 at 17:02)</a>:</h4>
+<p>Daniel -- instead of rewriting h1, which is true by definition, you can use the <code>change</code> tactic to just rewrite the goal to what you want it to be</p>
+
+<a name="187765419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765419">Sayantan Majumdar (Feb 09 2020 at 17:03)</a>:</h4>
+<p>I understand the h1, 1 &lt;  2 seems far too complicated to prove.  It would be easier to shift to Coq</p>
+
+<a name="187765428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765428">Patrick Massot (Feb 09 2020 at 17:03)</a>:</h4>
+<p>Again, <code>norm_num</code> proves it. What else do you want?</p>
+
+<a name="187765468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765468">Patrick Massot (Feb 09 2020 at 17:04)</a>:</h4>
+<p>How can a proof be simpler than a single tactic invocation?</p>
+
+<a name="187765480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765480">Daniel Keys (Feb 09 2020 at 17:05)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> Yes, Patrick, but we beginners need to learn the basics of expressing ourselves in Lean.</p>
+
+<a name="187765488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765488">Sayantan Majumdar (Feb 09 2020 at 17:05)</a>:</h4>
+<p>So, how do I prove it with norm_num?</p>
+
+<a name="187765527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765527">Patrick Massot (Feb 09 2020 at 17:06)</a>:</h4>
+<p><code>example  : 1 &lt; 2 := by norm_num</code></p>
+
+<a name="187765528"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765528" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765528">Daniel Keys (Feb 09 2020 at 17:06)</a>:</h4>
+<p><span class="user-mention" data-user-id="214077">@Sayantan Majumdar</span> Here is a proof for your initial quest:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span>
+<span class="kn">theorem</span> <span class="n">twoEqOneOne</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">h1</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="mi">1</span><span class="o">,</span> <span class="k">from</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">h1</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_eq_add_one</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">add_mul</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">one_mul</span><span class="o">,</span> <span class="n">done</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="187765540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765540">Sayantan Majumdar (Feb 09 2020 at 17:07)</a>:</h4>
+<p>thanks. How did you find the succ_eq_add_one? is there a good way of searching for these?</p>
+
+<a name="187765591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765591">Kevin Buzzard (Feb 09 2020 at 17:09)</a>:</h4>
+<p>Here is another proof:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span>
+<span class="kn">theorem</span> <span class="n">twoEqOneOne</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">show</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">n</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">add_mul</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">one_mul</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="187765592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765592">Patrick Massot (Feb 09 2020 at 17:09)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="mi">2</span><span class="bp">*</span><span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">ring</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="mi">2</span><span class="bp">*</span><span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">library_search</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="187765598"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765598">Daniel Keys (Feb 09 2020 at 17:09)</a>:</h4>
+<p>I had all those problems you have before going through the natural number game. Kevin Buzzard did a great job with that! It can get you started.</p>
+
+<a name="187765641"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765641">Patrick Massot (Feb 09 2020 at 17:10)</a>:</h4>
+<p>Again, either you want to suffer because you think this is a good exercise, and then I don't understand what you are complaining about. Or you can use the answers I provided one minute after you asked.</p>
+
+<a name="187765663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765663">Kevin Buzzard (Feb 09 2020 at 17:11)</a>:</h4>
+<p><span class="user-mention" data-user-id="214077">@Sayantan Majumdar</span> certain lemmas you just end up learning because they come up a lot. You can use <code>library_search</code> to find them. </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="kn">variable</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span>
+
+<span class="kn">open</span> <span class="n">nat</span>
+
+<span class="kn">theorem</span> <span class="n">what_is_this_called</span> <span class="o">:</span> <span class="n">succ</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">library_search</span> <span class="c1">-- we learn it is true by definition</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="187765664"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765664">Daniel Keys (Feb 09 2020 at 17:11)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Kevin, does <code>change</code> need <code>import tactic</code>?</p>
+
+<a name="187765668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765668">Kevin Buzzard (Feb 09 2020 at 17:12)</a>:</h4>
+<p><code>show</code> certainly doesn't. I prefer <code>change</code> because it works on hypotheses as well as goals so it's easier for the beginner.</p>
+
+<a name="187765717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765717">Kevin Buzzard (Feb 09 2020 at 17:13)</a>:</h4>
+<p><span class="user-mention" data-user-id="214077">@Sayantan Majumdar</span> there is also a naming convention which we stick to in Lean, meaning that most users can after a while <em>guess</em> that <code>succ n = n + 1</code> will be called <code>succ_eq_add_one</code>. But it takes a while to learn the conventions.</p>
+
+<a name="187765762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765762">Sayantan Majumdar (Feb 09 2020 at 17:14)</a>:</h4>
+<p>Thanks <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  <span class="user-mention" data-user-id="259186">@Daniel Keys</span>  was looking for a better way to find all the proofs available. I was using the naming convention and using print and relying on vscode intelligence</p>
+
+<a name="187765771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765771">Kevin Buzzard (Feb 09 2020 at 17:15)</a>:</h4>
+<p>I have no reason to believe that this is any harder in Lean than in Coq or any other theorem prover. There will be naming conventions, and tactics for people who don't know the names but want to get the job done.</p>
+
+<a name="187765816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765816">Kevin Buzzard (Feb 09 2020 at 17:16)</a>:</h4>
+<p>The best way to get information about this sort of thing is to ask here. The existence of this chat room is one thing which makes learning Lean easier than learning all the other systems -- for the other systems you have to ask on a mailing list or stackoverflow.</p>
+
+<a name="187765819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765819">Patrick Massot (Feb 09 2020 at 17:17)</a>:</h4>
+<p>He asked, by then decided to ignore the answer and start writing he should use Coq.</p>
+
+<a name="187765866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765866">Daniel Keys (Feb 09 2020 at 17:18)</a>:</h4>
+<p>Here's a chat newbie question, how do you get a reply box to look reddish instead of white?</p>
+
+<a name="187765868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765868">Patrick Massot (Feb 09 2020 at 17:18)</a>:</h4>
+<p>Mention some name using @</p>
+
+<a name="187765871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765871">Patrick Massot (Feb 09 2020 at 17:18)</a>:</h4>
+<p>That person will see a reddish box</p>
+
+<a name="187765872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765872">Sayantan Majumdar (Feb 09 2020 at 17:18)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span>  I have to use theorems that I have already proved to proof this, I can't use rings and norm_num because I haven't reached there yet</p>
+
+<a name="187765885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765885">Patrick Massot (Feb 09 2020 at 17:19)</a>:</h4>
+<p>Again, I think you misunderstood the status of this theorem. It's not an exercise. And if you want to make it an exercise, then why shouldn't you learn how to search properly?</p>
+
+<a name="187765887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765887">Mario Carneiro (Feb 09 2020 at 17:20)</a>:</h4>
+<p><code>1 &lt; 2</code> can also be proven by <code>dec_trivial</code></p>
+
+<a name="187765995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765995">Daniel Keys (Feb 09 2020 at 17:22)</a>:</h4>
+<p><span class="user-mention" data-user-id="214077">@Sayantan Majumdar</span> Have a look at this, it involves an inequality:</p>
+<p><a href="https://stackoverflow.com/questions/59669492/how-to-switch-types-in-lean-theorem-prover-when-constants-are-involved#comment105499922_59669492" target="_blank" title="https://stackoverflow.com/questions/59669492/how-to-switch-types-in-lean-theorem-prover-when-constants-are-involved#comment105499922_59669492">https://stackoverflow.com/questions/59669492/how-to-switch-types-in-lean-theorem-prover-when-constants-are-involved#comment105499922_59669492</a></p>
+
+<a name="187765997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187765997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187765997">Patrick Massot (Feb 09 2020 at 17:22)</a>:</h4>
+<p><code>library_search</code> would have solved both your goals.</p>
+
+<a name="187766005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187766005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187766005">Mario Carneiro (Feb 09 2020 at 17:23)</a>:</h4>
+<p>If you are working from the absolute basics, <code>1 &lt; 2</code> is <code>nat.le_refl 2</code>, where <code>nat.le_refl</code> is proven by induction</p>
+
+<a name="187766135"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187766135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187766135">Kevin Buzzard (Feb 09 2020 at 17:27)</a>:</h4>
+<p>But I think Patrick is right -- I don't think there is enough in TPIL for the learner working through the book to easily remove that sorry. It is trivial to remove using the machinery that mathlib provides but because TPIL is about Lean not mathlib, Jeremy leaves it there. If you're trying to remove it then you're moving away from the carefully chosen basic examples in TPIL and the real world of actual mathematical formalisation. mathlib has solved all your problems in lots of different ways but you have to learn mathlb like you have to learn Lean.</p>
+
+<a name="187766190"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187766190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187766190">Mario Carneiro (Feb 09 2020 at 17:28)</a>:</h4>
+<p><code>two_mul</code> has a proof using commutativity to turn it inro <code>n*2</code> which is defeq to <code>0+n+n</code></p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="n">eq</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">mul_comm</span> <span class="mi">2</span> <span class="n">n</span><span class="o">)</span> <span class="err">$</span>
+<span class="n">congr_arg</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">i</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="err">$</span> <span class="n">zero_add</span> <span class="bp">_</span>
+</pre></div>
+
+
+<p>But this is a really low level proof. Just use the theorems, or better yet, the general tactics to kill this goal.</p>
+
+<a name="187766196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187766196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187766196">Patrick Massot (Feb 09 2020 at 17:29)</a>:</h4>
+<p>For the record, the full sorry can be replaced by <code>by rw nat.div_lt_iff_lt_mul ; linarith,</code></p>
+
+<a name="187766199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187766199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187766199">Kevin Buzzard (Feb 09 2020 at 17:29)</a>:</h4>
+<p><span class="user-mention" data-user-id="214077">@Sayantan Majumdar</span> Mario's proof probably works without mathlib :-)</p>
+
+<a name="187766241"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187766241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187766241">Patrick Massot (Feb 09 2020 at 17:30)</a>:</h4>
+<p>(after  being disappointed by <code>omega</code> <span aria-label="sad" class="emoji emoji-2639" role="img" title="sad">:sad:</span>)</p>
+
+<a name="187766246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187766246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187766246">Kevin Buzzard (Feb 09 2020 at 17:30)</a>:</h4>
+<p><code>omega</code> doesn't do it??</p>
+
+<a name="187766249"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187766249" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187766249">Patrick Massot (Feb 09 2020 at 17:30)</a>:</h4>
+<p><code>omega</code> doesn't like me. It never does what I ask it to do.</p>
+
+<a name="187766259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187766259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187766259">Mario Carneiro (Feb 09 2020 at 17:31)</a>:</h4>
+<p>This works for me:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">n</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">omega</span>
+</pre></div>
+
+<a name="187766261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187766261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187766261">Kevin Buzzard (Feb 09 2020 at 17:31)</a>:</h4>
+<p>it's because you were too rude about nat subtraction a year ago</p>
+
+<a name="187766263"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187766263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187766263">Patrick Massot (Feb 09 2020 at 17:31)</a>:</h4>
+<p>This is not the full thing, Mario.</p>
+
+<a name="187766265"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187766265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187766265">Kevin Buzzard (Feb 09 2020 at 17:31)</a>:</h4>
+<p>Patrick is proving (n+2)/2&lt;n+2</p>
+
+<a name="187766268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187766268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187766268">Kevin Buzzard (Feb 09 2020 at 17:31)</a>:</h4>
+<p>that's the sorry in TPIL</p>
+
+<a name="187766269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187766269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187766269">Mario Carneiro (Feb 09 2020 at 17:31)</a>:</h4>
+<p>aha</p>
+
+<a name="187766310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187766310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187766310">Mario Carneiro (Feb 09 2020 at 17:32)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">2</span><span class="o">)</span><span class="bp">/</span><span class="mi">2</span><span class="bp">&lt;</span><span class="n">n</span><span class="bp">+</span><span class="mi">2</span> <span class="o">:=</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">div_lt_self</span> <span class="n">dec_trivial</span> <span class="n">dec_trivial</span>
+</pre></div>
+
+<a name="187766318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187766318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187766318">Kevin Buzzard (Feb 09 2020 at 17:33)</a>:</h4>
+<p>this is the problem when people know the libraries too well ;-)</p>
+
+<a name="187766319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187766319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187766319">Mario Carneiro (Feb 09 2020 at 17:33)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">2</span><span class="o">)</span><span class="bp">/</span><span class="mi">2</span><span class="bp">&lt;</span><span class="n">n</span><span class="bp">+</span><span class="mi">2</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">div_lt_iff_lt_mul</span><span class="bp">;</span> <span class="n">omega</span>
+</pre></div>
+
+<a name="187766345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187766345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187766345">Mario Carneiro (Feb 09 2020 at 17:34)</a>:</h4>
+<p>I'm not sure what omega's status is wrt integer division</p>
+
+<a name="187766361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187766361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187766361">Kevin Buzzard (Feb 09 2020 at 17:34)</a>:</h4>
+<p>so <code>omega</code> just hates Patrick personally</p>
+
+<a name="187766366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187766366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187766366">Patrick Massot (Feb 09 2020 at 17:34)</a>:</h4>
+<p>No, I meant <code>by omega</code> alone.</p>
+
+<a name="187766368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187766368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187766368">Patrick Massot (Feb 09 2020 at 17:35)</a>:</h4>
+<p>No rewriting first.</p>
+
+<a name="187766379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187766379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187766379">Kevin Buzzard (Feb 09 2020 at 17:35)</a>:</h4>
+<p>So I guess division is beyond the capabilities of <code>omega</code> is the concluson</p>
+
+<a name="187766419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187766419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187766419">Rob Lewis (Feb 09 2020 at 17:36)</a>:</h4>
+<p>FYI, <a href="https://github.com/leanprover-community/mathlib/issues/1484#issuecomment-561260385" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1484#issuecomment-561260385">https://github.com/leanprover-community/mathlib/issues/1484#issuecomment-561260385</a></p>
+
+<a name="187766421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187766421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187766421">Rob Lewis (Feb 09 2020 at 17:36)</a>:</h4>
+<p>Although <a href="https://github.com/leanprover-community/mathlib/issues/1748" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1748">#1748</a> definitely needs to be finished first.</p>
+
+<a name="187766601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187766601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187766601">Patrick Massot (Feb 09 2020 at 17:43)</a>:</h4>
+<p>Thanks Rob!</p>
+
 
 {% endraw %}
 

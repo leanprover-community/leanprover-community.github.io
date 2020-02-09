@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Statements that require a previous result](36692Statementsthatrequireapreviousresult.html) (9 messages, latest: Feb 09 2020 at 17:00)
+* [noob question(s)](52075noobquestions.html) (1866 messages, latest: Feb 09 2020 at 17:43)
 
-* [noob question(s)](52075noobquestions.html) (1811 messages, latest: Feb 09 2020 at 16:59)
+* [Statements that require a previous result](36692Statementsthatrequireapreviousresult.html) (9 messages, latest: Feb 09 2020 at 17:00)
 
 * [more basics](41001morebasics.html) (45 messages, latest: Feb 09 2020 at 02:34)
 
