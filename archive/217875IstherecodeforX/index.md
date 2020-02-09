@@ -9,6 +9,8 @@ permalink: archive/217875IstherecodeforX/index.html
 
 ### Topics:
 
+* [Getting instance from parent instance](85467Gettinginstancefromparentinstance.html) (2 messages, latest: Feb 09 2020 at 15:59)
+
 * [representation theory of finite groups](30755representationtheoryoffinitegroups.html) (4 messages, latest: Jan 17 2020 at 05:52)
 
 * [the trace of a square matrix](44557thetraceofasquarematrix.html) (1 message, latest: Jan 15 2020 at 22:44)
