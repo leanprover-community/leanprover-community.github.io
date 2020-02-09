@@ -9,6 +9,8 @@ permalink: archive/219941MachineLearningforTheoremProving/index.html
 
 ### Topics:
 
+* [Maintaining Papers with Code for Automated Theorem Proving](97526MaintainingPaperswithCodeforAutomatedTheoremProving.html) (3 messages, latest: Feb 09 2020 at 03:21)
+
 * [Paper: An Experimental Study of Formula Embeddings for Autom](01363PaperAnExperimentalStudyofFormulaEmbeddingsforAutom.html) (9 messages, latest: Feb 09 2020 at 01:13)
 
 * [HOList](34292HOList.html) (103 messages, latest: Feb 08 2020 at 00:26)
