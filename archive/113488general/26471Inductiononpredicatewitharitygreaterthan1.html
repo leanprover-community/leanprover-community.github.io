@@ -1,0 +1,41 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/26471Inductiononpredicatewitharitygreaterthan1.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/26471Inductiononpredicatewitharitygreaterthan1.html">Induction on predicate with arity greater than 1</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="187760366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Induction%20on%20predicate%20with%20arity%20greater%20than%201/near/187760366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26471Inductiononpredicatewitharitygreaterthan1.html#187760366">rory (Feb 09 2020 at 14:14)</a>:</h4>
+<p>This one is not really about math, but it's more about reasoning about program.</p>
+<p>So, I am a tutor for computing students in my university. We were discussing about structual induction.</p>
+<p>For simplicity, I will write the following content in terms of Haskell.</p>
+<p>So say you have the following data type definition.</p>
+<p><code>data A = Int | Some A</code></p>
+<p>Suppose you have a statement P(a), where a :: A(i.e. a has type A). Then if you want to prove P(a) is true for all a, then you need to prove that P(a) is true when a = i, where i :: Int, and that P(a) is true implies that P(Some a) is true for all a::A.</p>
+<p>Then my students ask: <br>
+"what if you have a statement like P(a, a)? So the predicate have arity 2.Is there a strategy for arbitrary arity? "</p>
+<p>I wish to give them an answer in the next meeting.</p>
+<p>Thanks.</p>
+
+<a name="187760560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Induction%20on%20predicate%20with%20arity%20greater%20than%201/near/187760560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26471Inductiononpredicatewitharitygreaterthan1.html#187760560">Mario Carneiro (Feb 09 2020 at 14:21)</a>:</h4>
+<p>It depends on what the second <code>a</code> is.</p>
+<ul>
+<li>If it is literally <code>P(a, a)</code>, then this is still a unary predicate, where the predicate is <code>P'(a) := P(a, a)</code>, and you do induction on that.</li>
+<li>If it is some other type, like <code>P(a, n)</code>, then you might want to hold it fixed by letting <code>P'(a) := P(a, n)</code>, and then in the induction step you will have to prove <code>P(a, n)</code> implies <code>P(Some a, n)</code>.</li>
+<li>Or maybe you want to generalize over values of <code>n</code>, in which case you let <code>P'(a) := forall n, P(a, n)</code> and then you have to prove <code>forall n, P(a, n)</code> implies <code>P(Some a, n)</code>, which is to say, you can change the value of <code>n</code> when referencing the inductive hypothesis.</li>
+<li>In more complicated situations you may need to perform a nested induction, when you need to decrease either <code>a</code> or <code>a'</code> in <code>P(a, a')</code>.</li>
+</ul>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

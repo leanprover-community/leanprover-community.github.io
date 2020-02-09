@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Induction on predicate with arity greater than 1](26471Inductiononpredicatewitharitygreaterthan1.html) (2 messages, latest: Feb 09 2020 at 14:21)
+
+* [Parsing a string into an expression](93510Parsingastringintoanexpression.html) (48 messages, latest: Feb 09 2020 at 14:11)
+
 * [moving mathlib to 3.5c](54190movingmathlibto35c.html) (72 messages, latest: Feb 09 2020 at 13:21)
 
 * [???](69406.html) (5 messages, latest: Feb 09 2020 at 12:53)
@@ -78,8 +82,6 @@ permalink: archive/113488general/index.html
 * [github actions](76245githubactions.html) (44 messages, latest: Jan 30 2020 at 20:28)
 
 * [instance alternative exceptional](62609instancealternativeexceptional.html) (1 message, latest: Jan 30 2020 at 14:25)
-
-* [Parsing a string into an expression](93510Parsingastringintoanexpression.html) (43 messages, latest: Jan 30 2020 at 13:36)
 
 * [tfae fails](00528tfaefails.html) (4 messages, latest: Jan 30 2020 at 08:28)
 

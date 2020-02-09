@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Statements that require a previous result](36692Statementsthatrequireapreviousresult.html) (6 messages, latest: Feb 09 2020 at 13:41)
+* [Statements that require a previous result](36692Statementsthatrequireapreviousresult.html) (7 messages, latest: Feb 09 2020 at 14:29)
 
 * [more basics](41001morebasics.html) (45 messages, latest: Feb 09 2020 at 02:34)
 
