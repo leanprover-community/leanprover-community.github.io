@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (70 messages, latest: Feb 09 2020 at 11:15)
+
 * [???](69406.html) (3 messages, latest: Feb 09 2020 at 10:41)
 
 * [naming conventions](31665namingconventions.html) (45 messages, latest: Feb 09 2020 at 03:30)
 
 * [Lean 4 LSP support](71361Lean4LSPsupport.html) (3 messages, latest: Feb 09 2020 at 01:00)
-
-* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (69 messages, latest: Feb 08 2020 at 21:03)
 
 * [SO structure question](98892SOstructurequestion.html) (1 message, latest: Feb 08 2020 at 20:37)
 
