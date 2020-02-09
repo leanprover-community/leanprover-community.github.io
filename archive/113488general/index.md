@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (70 messages, latest: Feb 09 2020 at 11:15)
+* [???](69406.html) (5 messages, latest: Feb 09 2020 at 12:53)
 
-* [???](69406.html) (3 messages, latest: Feb 09 2020 at 10:41)
+* [typeclass paper](35889typeclasspaper.html) (159 messages, latest: Feb 09 2020 at 12:53)
+
+* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (70 messages, latest: Feb 09 2020 at 11:15)
 
 * [naming conventions](31665namingconventions.html) (45 messages, latest: Feb 09 2020 at 03:30)
 
@@ -76,8 +78,6 @@ permalink: archive/113488general/index.html
 * [github actions](76245githubactions.html) (44 messages, latest: Jan 30 2020 at 20:28)
 
 * [instance alternative exceptional](62609instancealternativeexceptional.html) (1 message, latest: Jan 30 2020 at 14:25)
-
-* [typeclass paper](35889typeclasspaper.html) (158 messages, latest: Jan 30 2020 at 14:17)
 
 * [Parsing a string into an expression](93510Parsingastringintoanexpression.html) (43 messages, latest: Jan 30 2020 at 13:36)
 
