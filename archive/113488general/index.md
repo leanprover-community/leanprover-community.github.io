@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean 4 LSP support](71361Lean4LSPsupport.html) (1 message, latest: Feb 09 2020 at 00:52)
+
 * [moving mathlib to 3.5c](54190movingmathlibto35c.html) (69 messages, latest: Feb 08 2020 at 21:03)
 
 * [SO structure question](98892SOstructurequestion.html) (1 message, latest: Feb 08 2020 at 20:37)

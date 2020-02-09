@@ -9,7 +9,7 @@ permalink: archive/219941MachineLearningforTheoremProving/index.html
 
 ### Topics:
 
-* [Paper: An Experimental Study of Formula Embeddings for Autom](01363PaperAnExperimentalStudyofFormulaEmbeddingsforAutom.html) (5 messages, latest: Feb 08 2020 at 23:27)
+* [Paper: An Experimental Study of Formula Embeddings for Autom](01363PaperAnExperimentalStudyofFormulaEmbeddingsforAutom.html) (8 messages, latest: Feb 09 2020 at 00:50)
 
 * [HOList](34292HOList.html) (103 messages, latest: Feb 08 2020 at 00:26)
 
