@@ -68,6 +68,11 @@ Let's also wait at least for <span class="user-mention" data-user-id="111080">@F
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nonempty/near/187735090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95771nonempty.html#187735090">Yury G. Kudryashov (Feb 08 2020 at 23:09)</a>:</h4>
 <p>As for <code>pointwise_mul_action</code>,  see <a href="https://github.com/leanprover-community/mathlib/issues/1925" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1925">#1925</a></p>
 
+<a name="187750507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nonempty/near/187750507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95771nonempty.html#187750507">Sebastien Gouezel (Feb 09 2020 at 08:16)</a>:</h4>
+<p>I think the move to nonempty was an excellent move. It takes some time to find the good abstractions, but once we have them we should definitely use them! Before, the fact that a set was nonempty could be expressed in three ways (<code>(h : s ≠ ∅)</code>, or <code>(h : ∃ x, x ∈ s)</code> or <code>(x : α) (h : x ∈ s)</code>) and the three of them were used in some places in the library, making it necessary to jump through hoops when one needed one but the theorems were formulated with another one. With a standard way to express things and a nice API, everything becomes much neater. We don't have a word "pythonic" for Lean, but if we had one it would probably apply to this <code>nonempty</code> construct.</p>
+<p>Of course, it is really bad that the change broke your code. To avoid this kind of bitrot, a solution would be to put the perfectoid project in the <code>archive</code> subdirectory of mathlib, so that PRs breaking your code would also have to fix it before getting merged. This is the policy with the AFP in Isabelle, and it works extremely well. I don't know if this is the way archive has been envisioned, though. Any thoughts?</p>
+
 
 {% endraw %}
 
