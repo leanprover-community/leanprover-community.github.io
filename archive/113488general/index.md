@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean 4 LSP support](71361Lean4LSPsupport.html) (1 message, latest: Feb 09 2020 at 00:52)
+* [naming conventions](31665namingconventions.html) (42 messages, latest: Feb 09 2020 at 01:29)
+
+* [Lean 4 LSP support](71361Lean4LSPsupport.html) (3 messages, latest: Feb 09 2020 at 01:00)
 
 * [moving mathlib to 3.5c](54190movingmathlibto35c.html) (69 messages, latest: Feb 08 2020 at 21:03)
 
@@ -18,8 +20,6 @@ permalink: archive/113488general/index.html
 * [push_neg](36986pushneg.html) (8 messages, latest: Feb 08 2020 at 20:23)
 
 * [notation](26829notation.html) (11 messages, latest: Feb 08 2020 at 19:46)
-
-* [naming conventions](31665namingconventions.html) (41 messages, latest: Feb 08 2020 at 18:29)
 
 * [Creating my own pp.all = true string](73699Creatingmyownppalltruestring.html) (2 messages, latest: Feb 08 2020 at 00:08)
 
