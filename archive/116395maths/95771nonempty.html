@@ -73,6 +73,60 @@ Let's also wait at least for <span class="user-mention" data-user-id="111080">@F
 <p>I think the move to nonempty was an excellent move. It takes some time to find the good abstractions, but once we have them we should definitely use them! Before, the fact that a set was nonempty could be expressed in three ways (<code>(h : s ≠ ∅)</code>, or <code>(h : ∃ x, x ∈ s)</code> or <code>(x : α) (h : x ∈ s)</code>) and the three of them were used in some places in the library, making it necessary to jump through hoops when one needed one but the theorems were formulated with another one. With a standard way to express things and a nice API, everything becomes much neater. We don't have a word "pythonic" for Lean, but if we had one it would probably apply to this <code>nonempty</code> construct.</p>
 <p>Of course, it is really bad that the change broke your code. To avoid this kind of bitrot, a solution would be to put the perfectoid project in the <code>archive</code> subdirectory of mathlib, so that PRs breaking your code would also have to fix it before getting merged. This is the policy with the AFP in Isabelle, and it works extremely well. I don't know if this is the way archive has been envisioned, though. Any thoughts?</p>
 
+<a name="187751958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nonempty/near/187751958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95771nonempty.html#187751958">Patrick Massot (Feb 09 2020 at 09:10)</a>:</h4>
+<p>Thanks Yury and Sébastien. I should have separated more clearly the different issues. My main points were:</p>
+<ul>
+<li>this is a pretty drastic change that could have been discussed more (but of course it's difficult in a context where people's availability is very changing),</li>
+</ul>
+
+<a name="187751961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nonempty/near/187751961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95771nonempty.html#187751961">Patrick Massot (Feb 09 2020 at 09:11)</a>:</h4>
+<ul>
+<li>this makes statement less readable, so it should require extra argumentation</li>
+</ul>
+
+<a name="187751965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nonempty/near/187751965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95771nonempty.html#187751965">Patrick Massot (Feb 09 2020 at 09:12)</a>:</h4>
+<p>The point about the perfectoid code being broken is much less important (although it certainly participated in getting me to write a angry message, sorry about that).</p>
+
+<a name="187752012"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nonempty/near/187752012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95771nonempty.html#187752012">Patrick Massot (Feb 09 2020 at 09:13)</a>:</h4>
+<p>The main problem about perfectoid code is our huge backlog of things that should be PRed to mathlib. My work yesterday aimed at bringing the project up to date with mathlib to resume the PR effort.</p>
+
+<a name="187752821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nonempty/near/187752821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95771nonempty.html#187752821">Patrick Massot (Feb 09 2020 at 09:45)</a>:</h4>
+<p>All that being said, I'm not really asking to revert that <code>nonempty</code> change. Let's add this to the huge pile of things that should improve in proofs assistants (to get both readable statements and good api). We can even tag this as <span aria-label="four leaf clover" class="emoji emoji-1f340" role="img" title="four leaf clover">:four_leaf_clover:</span></p>
+
+<a name="187752863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nonempty/near/187752863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95771nonempty.html#187752863">Patrick Massot (Feb 09 2020 at 09:46)</a>:</h4>
+<p>The <code>pointwise_mul_action</code> is much more tricky. It touches an area of mathlib that has always been <em>very</em> brittle.</p>
+
+<a name="187752876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nonempty/near/187752876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95771nonempty.html#187752876">Patrick Massot (Feb 09 2020 at 09:47)</a>:</h4>
+<p>Can <span class="user-mention" data-user-id="132889">@Jean Lo</span> or anyone else who likes type class inference failure debug the following:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">pointwise</span>
+<span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">algebra</span>
+
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">set</span><span class="bp">.</span><span class="n">smul_set_action</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">A</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">R</span> <span class="n">A</span><span class="o">]</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">mul_action</span> <span class="n">R</span> <span class="o">(</span><span class="n">set</span> <span class="n">A</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- works</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">B</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">B</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">R</span> <span class="n">B</span><span class="o">]</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">mul_action</span> <span class="n">R</span> <span class="o">(</span><span class="n">set</span> <span class="n">B</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- fails</span>
+</pre></div>
+
+<a name="187753029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nonempty/near/187753029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/95771nonempty.html#187753029">Patrick Massot (Feb 09 2020 at 09:53)</a>:</h4>
+<p>To be clear: in both cases the expected answer is the new <code>set.smul_set_action</code>, and both used to work before that change.</p>
+
 
 {% endraw %}
 
