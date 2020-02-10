@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [VSCode unicode characters](08876VSCodeunicodecharacters.html) (5 messages, latest: Feb 10 2020 at 20:58)
+
 * [summer program for undergrads](74568summerprogramforundergrads.html) (1 message, latest: Feb 10 2020 at 18:20)
 
 * [SO structure question](98892SOstructurequestion.html) (4 messages, latest: Feb 10 2020 at 17:17)
