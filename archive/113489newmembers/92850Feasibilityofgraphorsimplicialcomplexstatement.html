@@ -216,6 +216,76 @@ This list helps!<br>
 <p>It is nice to be able to have them as a specialization of a cell-complex so you can cone off or add things but it depends on what you're doing. (I don't currently need it but having general cell-complex stuff implemented would be really neat)</p>
 <p>For Serre a graph is a set of edges and vertices where you think of the edges as being directed. Formally there's a map called *  from E to E such that (e<em>)</em>=e and e* != e and a initial and terminal boundary map from E to V that satisfies b_initial(e)=b_terminal(e*)</p>
 
+<a name="187847013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/187847013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#187847013">Tony (Feb 10 2020 at 19:01)</a>:</h4>
+<p>( To get from a Serre graph to a combinatorial graph you can take combinatorial edges to be pairs of directed edges {e, e*} )</p>
+
+<a name="187847033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/187847033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#187847033">Vaibhav Karve (Feb 10 2020 at 19:01)</a>:</h4>
+<p>The results I am interested in in graph theory very much require multi-edges, for example.</p>
+
+<a name="187847520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/187847520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#187847520">Yury G. Kudryashov (Feb 10 2020 at 19:06)</a>:</h4>
+<p>Then we should have something like</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">Graph</span> <span class="o">:=</span> <span class="o">(</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">start</span> <span class="kn">end</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">→</span> <span class="n">V</span><span class="o">)</span>
+</pre></div>
+
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">v</span> <span class="n">u</span>
+<span class="kn">structure</span> <span class="n">Graph</span> <span class="o">:=</span> <span class="o">(</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">edges</span> <span class="o">:</span> <span class="n">V</span> <span class="bp">→</span> <span class="n">V</span> <span class="bp">→</span> <span class="n">Sort</span> <span class="n">v</span><span class="o">)</span>
+</pre></div>
+
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">v</span> <span class="n">u</span>
+<span class="kn">structure</span> <span class="n">graph</span> <span class="o">(</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">edges</span> <span class="o">:</span> <span class="n">V</span> <span class="bp">→</span> <span class="n">V</span> <span class="bp">→</span> <span class="n">Sort</span> <span class="n">v</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Maybe this should be called <code>MultiGraph</code>, then <code>graph</code> can extend it adding the axiom <code>∀ x y, subsingleton (edges x y)</code>.</p>
+
+<a name="187848512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/187848512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#187848512">Yury G. Kudryashov (Feb 10 2020 at 19:16)</a>:</h4>
+<p>With the <code>(V, E)</code> approach you'll have a lot of equality assumptions here and there, and you'll have to rewrite on them. With the <code>edges : V → V → Sort v</code> approach you'll have troubles whenever you have <code>(x y y' z : V) (e : edges x y) (e' : edges y' z) (h : y = y') (f : Π x y z, edges x y → edges y z → α)</code> and want to write <code>f _ _ _ e e'</code>.</p>
+
+<a name="187849790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/187849790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#187849790">Vincent Beffara (Feb 10 2020 at 19:29)</a>:</h4>
+<blockquote>
+<p>Am I right that <code>llist α</code> is the set of nonempty lists?</p>
+</blockquote>
+<p>Yes, precisely. I tried with <code>V \times list V</code>, lean had trouble with recursion, so then I tried to define everything in terms of something like fold but in the end a type with explicit constructors was easier to work with</p>
+
+<a name="187849993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/187849993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#187849993">Vincent Beffara (Feb 10 2020 at 19:31)</a>:</h4>
+<blockquote>
+<p>BTW, I wouldn't include <code>symmetric</code> in the basic definition. It makes sense to consider oriented graphs in many cases.</p>
+</blockquote>
+<p>Sure, and whether <code>v</code> should be adjacent to itself (it makes some definitions easier, and graph minors awful with all the loops ...)</p>
+
+<a name="187850349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/187850349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#187850349">Vincent Beffara (Feb 10 2020 at 19:34)</a>:</h4>
+<blockquote>
+<p>I don't know if it makes sense to allow multiple edges between a given pair of vertices. On the one hand, sometimes it makes sense (e.g., interpreting a category as a graph). On the other hand, it probably makes the definition/code harder to read.</p>
+</blockquote>
+<p>It makes sense in many contexts to have <code>adj : V -&gt; V -&gt; W</code> for some labelling type <code>W</code> that would be <code>Prop</code> (or <code>bool</code> ? I seem to remember that in Coq it makes a huge difference for some reason, probably due to decidability/proof irrelevance/something) for usual graphs, but <code>W = \nat</code> gives multiplicity, probabilists like <code>W = nnreal</code>, computer scientists like to put a monoid there.</p>
+<p>Is it easy to add that after the fact, or would it be better to start in more generality?</p>
+
+<a name="187850464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/187850464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#187850464">Vincent Beffara (Feb 10 2020 at 19:36)</a>:</h4>
+<blockquote>
+<p>It is nice to be able to have them as a specialization of a cell-complex so you can cone off or add things but it depends on what you're doing. (I don't currently need it but having general cell-complex stuff implemented would be really neat)</p>
+<p>For Serre a graph is a set of edges and vertices where you think of the edges as being directed. Formally there's a map called *  from E to E such that (e<em>)</em>=e and e* != e and a initial and terminal boundary map from E to V that satisfies b_initial(e)=b_terminal(e*)</p>
+</blockquote>
+<p>That seems to be what they do in Coq libraries, they have types for both vertices and edges rather than an adjacency relation IIRC</p>
+
+<a name="187850733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/187850733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#187850733">Vincent Beffara (Feb 10 2020 at 19:39)</a>:</h4>
+<blockquote>
+<p>With the <code>(V, E)</code> approach you'll have a lot of equality assumptions here and there, and you'll have to rewrite on them. With the <code>edges : V → V → Sort v</code> approach you'll have troubles whenever you have <code>(x y y' z : V) (e : edges x y) (e' : edges y' z) (h : y = y') (f : Π x y z, edges x y → edges y z → α)</code> and want to write <code>f _ _ _ e e'</code>.</p>
+</blockquote>
+<p>Path concatenation caused me some trouble with the <code>V -&gt; V -&gt; Prop</code> option (with a <code>Path x y</code> type), indeed. Still felt more manageable to me than the <code>(V,E)</code> version.</p>
+
 
 {% endraw %}
 

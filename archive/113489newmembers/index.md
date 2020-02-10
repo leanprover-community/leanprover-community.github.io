@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Feasibility of graph or simplicial complex statement](92850Feasibilityofgraphorsimplicialcomplexstatement.html) (48 messages, latest: Feb 10 2020 at 18:59)
+* [Feasibility of graph or simplicial complex statement](92850Feasibilityofgraphorsimplicialcomplexstatement.html) (57 messages, latest: Feb 10 2020 at 19:39)
+
+* [(no topic)](79918notopic.html) (220 messages, latest: Feb 10 2020 at 19:24)
 
 * [squares](04165squares.html) (22 messages, latest: Feb 10 2020 at 16:36)
 
@@ -108,8 +110,6 @@ permalink: archive/113489newmembers/index.html
 * [distributing `or`](74778distributingor.html) (11 messages, latest: Jan 04 2020 at 15:28)
 
 * [Coercions](08998Coercions.html) (5 messages, latest: Jan 03 2020 at 19:34)
-
-* [(no topic)](79918notopic.html) (217 messages, latest: Jan 03 2020 at 19:21)
 
 * [failed to prove recursive application is decreasing](86610failedtoproverecursiveapplicationisdecreasing.html) (8 messages, latest: Jan 02 2020 at 12:23)
 
