@@ -27,6 +27,18 @@ Unique factorization domains were defined <a href="https://github.com/leanprover
 <p>Why is it better to extend the class?</p>
 <p>UFD is a rarely used class, so does that make the downside more significant relative to the upside?</p>
 
+<a name="187836083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/SO%20structure%20question/near/187836083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98892SOstructurequestion.html#187836083">Floris van Doorn (Feb 10 2020 at 17:17)</a>:</h4>
+<blockquote>
+<p>Why is it better to extend the class?</p>
+</blockquote>
+<p>I think we've noticed almost all type-class instance bottlenecks with modules/algebras/vector spaces where we have classes with other classes as arguments. Of course, those hierarchies are much larger, but I think part of the problem is the instances that are arguments to classes (which, in those cases are necessary).<br>
+There is a performance problems with a instance <code>instance [integral_domain \a] [unique_factorization_domain \a] : ...</code>. If there are multiple instance paths to <code>integral_domain \a</code> and none to <code>unique_factorization_domain \a</code> then type-class inference will go through all possibilities of the <code>integral_domain \a</code> search.</p>
+<blockquote>
+<p>UFD is a rarely used class, so does that make the downside more significant relative to the upside?</p>
+</blockquote>
+<p>Perhaps that is a good enough reason, as a workaround until we have the type-class inference of Lean 4.</p>
+
 
 {% endraw %}
 

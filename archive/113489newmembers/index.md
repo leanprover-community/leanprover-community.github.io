@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [squares](04165squares.html) (22 messages, latest: Feb 10 2020 at 16:36)
+* [Feasibility of graph or simplicial complex statement](92850Feasibilityofgraphorsimplicialcomplexstatement.html) (26 messages, latest: Feb 10 2020 at 17:57)
 
-* [Feasibility of graph or simplicial complex statement](92850Feasibilityofgraphorsimplicialcomplexstatement.html) (23 messages, latest: Feb 10 2020 at 16:30)
+* [squares](04165squares.html) (22 messages, latest: Feb 10 2020 at 16:36)
 
 * [is this a use case for quotient?](26494isthisausecaseforquotient.html) (6 messages, latest: Feb 10 2020 at 15:41)
 
