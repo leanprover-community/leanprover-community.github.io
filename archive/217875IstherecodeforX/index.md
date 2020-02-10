@@ -9,6 +9,8 @@ permalink: archive/217875IstherecodeforX/index.html
 
 ### Topics:
 
+* [mem_span if finite linear combination](13101memspaniffinitelinearcombination.html) (4 messages, latest: Feb 10 2020 at 09:56)
+
 * [Getting instance from parent instance](85467Gettinginstancefromparentinstance.html) (2 messages, latest: Feb 09 2020 at 15:59)
 
 * [representation theory of finite groups](30755representationtheoryoffinitegroups.html) (4 messages, latest: Jan 17 2020 at 05:52)
