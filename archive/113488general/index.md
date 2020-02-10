@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [typeclass paper](35889typeclasspaper.html) (164 messages, latest: Feb 10 2020 at 15:44)
+
 * [Induction on predicate with arity greater than 1](26471Inductiononpredicatewitharitygreaterthan1.html) (3 messages, latest: Feb 10 2020 at 03:37)
 
 * [SO structure question](98892SOstructurequestion.html) (3 messages, latest: Feb 10 2020 at 02:54)
-
-* [typeclass paper](35889typeclasspaper.html) (163 messages, latest: Feb 10 2020 at 02:04)
 
 * [???](69406.html) (6 messages, latest: Feb 09 2020 at 16:55)
 

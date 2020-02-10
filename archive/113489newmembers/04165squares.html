@@ -1,0 +1,92 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/04165squares.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/04165squares.html">squares</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="187825068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/squares/near/187825068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04165squares.html#187825068">Alex Kontorovich (Feb 10 2020 at 15:23)</a>:</h4>
+<p>Here's something trivial that I'm trying to formalize: If a and b are coprime and a*b is a perfect square, then a and b are squares. </p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">divides</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span><span class="bp">ℤ</span> <span class="o">)</span> <span class="o">:=</span> <span class="bp">∃</span> <span class="n">d</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">,</span> <span class="n">y</span><span class="bp">=</span><span class="n">x</span><span class="bp">*</span><span class="n">d</span>
+
+<span class="n">def</span> <span class="n">coprime</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span><span class="bp">ℤ</span>  <span class="o">)</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">d</span><span class="o">:</span><span class="bp">ℕ</span> <span class="o">,</span> <span class="o">(</span><span class="n">divides</span> <span class="n">d</span> <span class="n">x</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">divides</span> <span class="n">d</span> <span class="n">y</span><span class="o">)</span> <span class="bp">-&gt;</span> <span class="n">d</span><span class="bp">=</span><span class="mi">1</span>
+
+<span class="n">def</span> <span class="n">is_square</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="bp">ℤ</span> <span class="o">)</span> <span class="o">:=</span> <span class="bp">∃</span> <span class="n">r</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">,</span> <span class="n">x</span><span class="bp">=</span><span class="n">r</span><span class="bp">*</span><span class="n">r</span>
+
+<span class="kn">lemma</span> <span class="n">product_coprimes_square</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span><span class="bp">ℤ</span> <span class="o">)</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span> <span class="n">coprime</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">p1</span> <span class="o">:</span> <span class="n">a</span><span class="bp">*</span><span class="n">b</span><span class="bp">=</span><span class="n">c</span><span class="bp">*</span><span class="n">c</span><span class="o">):</span>
+<span class="o">((</span><span class="n">is_square</span> <span class="n">a</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">is_square</span> <span class="n">b</span><span class="o">))</span>
+<span class="o">:=</span> <span class="k">begin</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>The argument could go something like: a is a square &lt;-&gt; every prime in its factorization appears with even multiplicity. How does unique factorization work in Lean? Help please? Thanks!</p>
+
+<a name="187825273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/squares/near/187825273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04165squares.html#187825273">Alex Kontorovich (Feb 10 2020 at 15:25)</a>:</h4>
+<p>Ooh stupid subtlety: a and b need to be positive, or else it's false!... (Originally I was doing this all in naturals, but elsewhere I need to subtract ... which doesn't exist for naturals!...)</p>
+
+<a name="187825422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/squares/near/187825422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04165squares.html#187825422">Mario Carneiro (Feb 10 2020 at 15:27)</a>:</h4>
+<p>This is fine for an example, but if you want "real" theorems about primes and stuff then use the library definitions of <code>divides</code> and <code>coprime</code> (<code>is_square</code> doesn't have a definition)</p>
+
+<a name="187825586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/squares/near/187825586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04165squares.html#187825586">Mario Carneiro (Feb 10 2020 at 15:28)</a>:</h4>
+<p>You can certainly subtract on naturals, but you have to do the subtraction in <code>int</code> if you want it to mean the expected thing</p>
+
+<a name="187825701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/squares/near/187825701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04165squares.html#187825701">Mario Carneiro (Feb 10 2020 at 15:29)</a>:</h4>
+<p>Also your definition of <code>divides</code> isn't right for <code>int</code>, as it implies <code>x</code> and <code>y</code> have the same sign</p>
+
+<a name="187825794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/squares/near/187825794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04165squares.html#187825794">Mario Carneiro (Feb 10 2020 at 15:30)</a>:</h4>
+<p>do you have mathlib?</p>
+
+<a name="187827246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/squares/near/187827246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04165squares.html#187827246">Alex Kontorovich (Feb 10 2020 at 15:45)</a>:</h4>
+<p>yes I have mathlib. (How do I use it?...)</p>
+
+<a name="187827566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/squares/near/187827566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04165squares.html#187827566">Alex Kontorovich (Feb 10 2020 at 15:48)</a>:</h4>
+<p>How do I fix this with "int" so that it works? (I can "cheat" and change \N to \Z...)</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">converse</span> <span class="o">(</span><span class="n">r</span> <span class="n">s</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">px</span><span class="o">:</span> <span class="n">x</span><span class="bp">=</span> <span class="n">r</span><span class="bp">*</span><span class="n">r</span><span class="bp">-</span><span class="n">s</span><span class="bp">*</span><span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">py</span><span class="o">:</span> <span class="n">y</span><span class="bp">=</span><span class="mi">2</span><span class="bp">*</span><span class="n">r</span><span class="bp">*</span><span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">pz</span><span class="o">:</span><span class="n">z</span><span class="bp">=</span><span class="n">r</span><span class="bp">*</span><span class="n">r</span><span class="bp">+</span><span class="n">s</span><span class="bp">*</span><span class="n">s</span><span class="o">)</span>
+<span class="o">:</span>
+ <span class="n">x</span><span class="bp">*</span><span class="n">x</span><span class="bp">+</span><span class="n">y</span><span class="bp">*</span><span class="n">y</span><span class="bp">=</span><span class="n">z</span><span class="bp">*</span><span class="n">z</span> <span class="o">:=</span>
+<span class="k">begin</span>
+ <span class="n">rw</span> <span class="n">px</span><span class="o">,</span>
+ <span class="n">rw</span> <span class="n">py</span><span class="o">,</span>
+ <span class="n">rw</span> <span class="n">pz</span><span class="o">,</span>
+ <span class="n">ring</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="187827672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/squares/near/187827672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04165squares.html#187827672">Alex Kontorovich (Feb 10 2020 at 15:49)</a>:</h4>
+<p>(the goal, if it isn't clear, is to show that, if x=r^2-s^2, y=2rs, and z=r^2+s^2, then x^2+y^2=z^2...)</p>
+
+<a name="187828549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/squares/near/187828549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04165squares.html#187828549">Mario Carneiro (Feb 10 2020 at 15:57)</a>:</h4>
+<p>One option:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">ring</span>
+<span class="kn">lemma</span> <span class="n">converse</span> <span class="o">(</span><span class="n">r</span> <span class="n">s</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">px</span><span class="o">:</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span><span class="bp">*</span><span class="n">r</span><span class="bp">-</span><span class="n">s</span><span class="bp">*</span><span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">py</span><span class="o">:</span> <span class="n">y</span><span class="bp">=</span><span class="mi">2</span><span class="bp">*</span><span class="n">r</span><span class="bp">*</span><span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">pz</span><span class="o">:</span><span class="n">z</span><span class="bp">=</span><span class="n">r</span><span class="bp">*</span><span class="n">r</span><span class="bp">+</span><span class="n">s</span><span class="bp">*</span><span class="n">s</span><span class="o">)</span> <span class="o">:</span>
+ <span class="n">x</span><span class="bp">*</span><span class="n">x</span><span class="bp">+</span><span class="n">y</span><span class="bp">*</span><span class="n">y</span><span class="bp">=</span><span class="n">z</span><span class="bp">*</span><span class="n">z</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_inj</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">px</span><span class="o">,</span> <span class="n">py</span><span class="o">,</span> <span class="n">pz</span><span class="o">],</span>
+  <span class="n">ring</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

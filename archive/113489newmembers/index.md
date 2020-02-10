@@ -9,6 +9,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [squares](04165squares.html) (10 messages, latest: Feb 10 2020 at 15:57)
+
+* [is this a use case for quotient?](26494isthisausecaseforquotient.html) (6 messages, latest: Feb 10 2020 at 15:41)
+
 * [trivial ordering](84630trivialordering.html) (64 messages, latest: Feb 10 2020 at 00:09)
 
 * [noob question(s)](52075noobquestions.html) (1884 messages, latest: Feb 09 2020 at 23:21)

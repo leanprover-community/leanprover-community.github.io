@@ -1,0 +1,55 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/26494isthisausecaseforquotient.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/26494isthisausecaseforquotient.html">is this a use case for quotient?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="187824642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/is%20this%20a%20use%20case%20for%20quotient%3F/near/187824642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/26494isthisausecaseforquotient.html#187824642">Vaibhav Karve (Feb 10 2020 at 15:19)</a>:</h4>
+<p>I want to write a function that takes as input an argument of type <code>list ℤ</code> and whenever it finds that an integer <code>n</code> and <code>-n</code> are both in the list, it removes both of them and replaces them with a <code>0</code> (so in some sense the <code>n</code> and <code>-n</code> annihilate each other). Repeat process till the list is "completely reduced".</p>
+<p>My only thoughts so far have been to define an equivalence relation on <code>list ℤ</code> and then use that to create a quotient type. Is that right? Is there a simpler way I am missing.</p>
+<p>In case it is relevant to the answer, there are two other things I have in mind --</p>
+<ul>
+<li>at some point I might decide to change it from <code>list ℤ</code> to <code>multiset ℤ</code> or even <code>set ℤ</code>. So an answer that would let me switch between these would be preferable (that way I am not tied to some particular property of <code>list</code>).</li>
+<li>i then want to be able to prove other theorems about this "reduced/quotiented" object. I am somewhat scared of the <code>quot</code> API. So the easier the final type is to handle, the better.</li>
+</ul>
+
+<a name="187825033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/is%20this%20a%20use%20case%20for%20quotient%3F/near/187825033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/26494isthisausecaseforquotient.html#187825033">Mario Carneiro (Feb 10 2020 at 15:23)</a>:</h4>
+<p>The easiest way I can see to define something like that is</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">multiset</span>
+
+<span class="kn">inductive</span> <span class="n">rel</span> <span class="o">:</span> <span class="n">multiset</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">multiset</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">mk</span> <span class="o">(</span><span class="n">n</span> <span class="n">l</span><span class="o">)</span> <span class="o">:</span> <span class="n">rel</span> <span class="o">(</span><span class="n">n</span> <span class="bp">::</span> <span class="bp">-</span><span class="n">n</span> <span class="bp">::</span> <span class="n">l</span><span class="o">)</span> <span class="o">(</span><span class="mi">0</span> <span class="bp">::</span> <span class="n">l</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">quotset</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="n">quot</span> <span class="n">rel</span>
+</pre></div>
+
+<a name="187825148"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/is%20this%20a%20use%20case%20for%20quotient%3F/near/187825148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/26494isthisausecaseforquotient.html#187825148">Mario Carneiro (Feb 10 2020 at 15:24)</a>:</h4>
+<p>This definition doesn't work for <code>list</code> because it relies on being able to permute stuff. You would have to change the relation to allow permutation</p>
+
+<a name="187825214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/is%20this%20a%20use%20case%20for%20quotient%3F/near/187825214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/26494isthisausecaseforquotient.html#187825214">Mario Carneiro (Feb 10 2020 at 15:25)</a>:</h4>
+<p>It's also not clear what to do with a <code>set</code> or <code>finset</code> because you can accumulate multiple copies of <code>0</code> here</p>
+
+<a name="187826278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/is%20this%20a%20use%20case%20for%20quotient%3F/near/187826278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/26494isthisausecaseforquotient.html#187826278">Vaibhav Karve (Feb 10 2020 at 15:35)</a>:</h4>
+<p>Thanks Mario, you really blew my mind with that. <span aria-label="astonished" class="emoji emoji-1f632" role="img" title="astonished">:astonished:</span>  Till now I was using <code>inductive</code> only to write <em>nonfunction?</em> types. I had not realized I can define relations using <code>inductive</code>.</p>
+
+<a name="187826855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/is%20this%20a%20use%20case%20for%20quotient%3F/near/187826855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/26494isthisausecaseforquotient.html#187826855">Mario Carneiro (Feb 10 2020 at 15:41)</a>:</h4>
+<p>This does not define what "completely reduced" means, there is a proof obligation there quite similar to what we are doing in free groups</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
