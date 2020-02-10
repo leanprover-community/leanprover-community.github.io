@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [trivial ordering](84630trivialordering.html) (51 messages, latest: Feb 09 2020 at 23:59)
+* [trivial ordering](84630trivialordering.html) (64 messages, latest: Feb 10 2020 at 00:09)
 
 * [noob question(s)](52075noobquestions.html) (1884 messages, latest: Feb 09 2020 at 23:21)
 
