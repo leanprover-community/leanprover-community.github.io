@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [typeclass paper](35889typeclasspaper.html) (160 messages, latest: Feb 10 2020 at 01:49)
+* [SO structure question](98892SOstructurequestion.html) (3 messages, latest: Feb 10 2020 at 02:54)
+
+* [typeclass paper](35889typeclasspaper.html) (163 messages, latest: Feb 10 2020 at 02:04)
 
 * [???](69406.html) (6 messages, latest: Feb 09 2020 at 16:55)
 
@@ -22,8 +24,6 @@ permalink: archive/113488general/index.html
 * [naming conventions](31665namingconventions.html) (45 messages, latest: Feb 09 2020 at 03:30)
 
 * [Lean 4 LSP support](71361Lean4LSPsupport.html) (3 messages, latest: Feb 09 2020 at 01:00)
-
-* [SO structure question](98892SOstructurequestion.html) (1 message, latest: Feb 08 2020 at 20:37)
 
 * [push_neg](36986pushneg.html) (8 messages, latest: Feb 08 2020 at 20:23)
 

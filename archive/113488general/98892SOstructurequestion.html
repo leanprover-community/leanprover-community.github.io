@@ -16,6 +16,17 @@ permalink: archive/113488general/98892SOstructurequestion.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/SO%20structure%20question/near/187730560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98892SOstructurequestion.html#187730560">Kevin Buzzard (Feb 08 2020 at 20:37)</a>:</h4>
 <p>I always forget about the difference between extending and not extending when defining structures, so I asked a question on stackoverflow because search will then work better for me in the future: <a href="https://stackoverflow.com/questions/60130605/extending-or-inferring-pid-ufd-in-a-lean-class-definition" target="_blank" title="https://stackoverflow.com/questions/60130605/extending-or-inferring-pid-ufd-in-a-lean-class-definition">https://stackoverflow.com/questions/60130605/extending-or-inferring-pid-ufd-in-a-lean-class-definition</a></p>
 
+<a name="187784360"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/SO%20structure%20question/near/187784360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98892SOstructurequestion.html#187784360">Floris van Doorn (Feb 10 2020 at 02:26)</a>:</h4>
+<p>My guess is that the definition <code>unique_factorization_domain</code> is sub-optimal: it's generally better to extend the structure.<br>
+Unique factorization domains were defined <a href="https://github.com/leanprover-community/mathlib/commit/dd0c0aeefcaf6a438ab4273d7a1f42e1b8225847" target="_blank" title="https://github.com/leanprover-community/mathlib/commit/dd0c0aeefcaf6a438ab4273d7a1f42e1b8225847">in 2018</a> by <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span>, so  my guess is that back then we knew less well what the best way was to set up classes.</p>
+<p>There is a small downside in using <code>extends</code>: it will increase the type-class search for unrelated type-class problems, because there is now an instance <code>unique_factorization_domain -&gt; integral_domain</code>.</p>
+
+<a name="187785164"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/SO%20structure%20question/near/187785164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98892SOstructurequestion.html#187785164">Chris Hughes (Feb 10 2020 at 02:54)</a>:</h4>
+<p>Why is it better to extend the class?</p>
+<p>UFD is a rarely used class, so does that make the downside more significant relative to the upside?</p>
+
 
 {% endraw %}
 
