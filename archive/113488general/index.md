@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [typeclass paper](35889typeclasspaper.html) (160 messages, latest: Feb 10 2020 at 01:49)
+
 * [???](69406.html) (6 messages, latest: Feb 09 2020 at 16:55)
 
 * [Induction on predicate with arity greater than 1](26471Inductiononpredicatewitharitygreaterthan1.html) (2 messages, latest: Feb 09 2020 at 14:21)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [Parsing a string into an expression](93510Parsingastringintoanexpression.html) (48 messages, latest: Feb 09 2020 at 14:11)
 
 * [moving mathlib to 3.5c](54190movingmathlibto35c.html) (72 messages, latest: Feb 09 2020 at 13:21)
-
-* [typeclass paper](35889typeclasspaper.html) (159 messages, latest: Feb 09 2020 at 12:53)
 
 * [naming conventions](31665namingconventions.html) (45 messages, latest: Feb 09 2020 at 03:30)
 
