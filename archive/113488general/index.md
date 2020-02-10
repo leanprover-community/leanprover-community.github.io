@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [VSCode unicode characters](08876VSCodeunicodecharacters.html) (9 messages, latest: Feb 10 2020 at 22:25)
+
 * [moving mathlib to 3.5c](54190movingmathlibto35c.html) (75 messages, latest: Feb 10 2020 at 21:26)
 
 * [typeclass paper](35889typeclasspaper.html) (166 messages, latest: Feb 10 2020 at 21:22)
-
-* [VSCode unicode characters](08876VSCodeunicodecharacters.html) (5 messages, latest: Feb 10 2020 at 20:58)
 
 * [summer program for undergrads](74568summerprogramforundergrads.html) (1 message, latest: Feb 10 2020 at 18:20)
 
