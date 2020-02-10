@@ -35,6 +35,22 @@ permalink: archive/113488general/26471Inductiononpredicatewitharitygreaterthan1.
 <li>In more complicated situations you may need to perform a nested induction, when you need to decrease either <code>a</code> or <code>a'</code> in <code>P(a, a')</code>.</li>
 </ul>
 
+<a name="187786502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Induction%20on%20predicate%20with%20arity%20greater%20than%201/near/187786502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26471Inductiononpredicatewitharitygreaterthan1.html#187786502">Chris B (Feb 10 2020 at 03:37)</a>:</h4>
+<p>I'm not sure whether this is a helpful supplement to Mario's answer; but the induction/recursion principles you get with the elements of <code>A</code> or <code>data A</code> don't change, but there's also no hard and fast rule for how best to use them to prove P. IE <code>∀ (a b : ℕ) : a + b = b + a</code> only needs induction on one element. Sometimes you'll need to do induction on one and then cases on the other, etc. <br>
+To put it in prose like you did earlier, the proof obligations branch out with the constructors as you start destructuring :</p>
+<div class="codehilite"><pre><span></span>To prove P a1 a2 is true for all (a1 a2 : Data A),
+  show P (int) (a2)
+     - show P (int) (int)
+     -  forall a_y, show P (int) (Some a_y)
+  forall a_x, show P (Some a_x) (a2)
+     - show P (Some a_x) (int)
+     - forall a_y, show P (Some a_x) (Some a_y)
+</pre></div>
+
+
+<p>And you would have further branches for higher arities. If you had a recursive type you would get a nice induction hypothesis, but the one you gave isn't (unless I missed something).</p>
+
 
 {% endraw %}
 
