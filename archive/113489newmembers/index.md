@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1878 messages, latest: Feb 09 2020 at 22:43)
+* [trivial ordering](84630trivialordering.html) (51 messages, latest: Feb 09 2020 at 23:59)
+
+* [noob question(s)](52075noobquestions.html) (1884 messages, latest: Feb 09 2020 at 23:21)
 
 * [Statements that require a previous result](36692Statementsthatrequireapreviousresult.html) (9 messages, latest: Feb 09 2020 at 17:00)
 

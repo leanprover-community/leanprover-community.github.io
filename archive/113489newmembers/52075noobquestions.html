@@ -10570,6 +10570,58 @@ In exercise 1 at the end of chapter 3, as one of the many "other properties", th
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187776555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187776555">Sayantan Majumdar (Feb 09 2020 at 22:43)</a>:</h4>
 <p>thanks</p>
 
+<a name="187777453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187777453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187777453">Sayantan Majumdar (Feb 09 2020 at 23:04)</a>:</h4>
+<p>Anybody got any suggestions for this</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="o">((</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">*</span> <span class="mi">2</span><span class="o">))</span> <span class="o">:</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span>
+</pre></div>
+
+
+<p>was thinking about using div_lt_of_mul_lt_of_pos but there seems to be an issue</p>
+
+<a name="187777612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187777612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187777612">Kevin Buzzard (Feb 09 2020 at 23:06)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="o">((</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">*</span> <span class="mi">2</span><span class="o">))</span> <span class="o">:</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">div_lt_iff_lt_mul</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">h₁</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">h₂</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="187777644"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187777644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187777644">Kevin Buzzard (Feb 09 2020 at 23:07)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">div_lt_of_mul_lt_of_pos</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">div_lt_of_mul_lt_of_pos :</span>
+<span class="cm">  ∀ {α : Type u_1} [_inst_1 : linear_ordered_field α] {a b c : α}, c &gt; 0 → b &lt; a * c → b / c &lt; a</span>
+<span class="cm">  -/</span>
+</pre></div>
+
+
+<p><code>div_lt_of_mul_lt_of_pos</code> is a theorem about linearly ordered fields.</p>
+
+<a name="187777691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187777691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187777691">Kevin Buzzard (Feb 09 2020 at 23:08)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="o">((</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">*</span> <span class="mi">2</span><span class="o">))</span> <span class="o">:</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">div_lt_iff_lt_mul</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">h₁</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="n">h₂</span>
+</pre></div>
+
+<a name="187777699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187777699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187777699">Kevin Buzzard (Feb 09 2020 at 23:09)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="o">((</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">*</span> <span class="mi">2</span><span class="o">))</span> <span class="o">:</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">div_lt_iff_lt_mul</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">assumption</span><span class="o">},</span>
+  <span class="o">{</span> <span class="n">assumption</span><span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="187778294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187778294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187778294">Kevin Buzzard (Feb 09 2020 at 23:21)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="o">((</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">*</span> <span class="mi">2</span><span class="o">))</span> <span class="o">:</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rwa</span> <span class="n">nat</span><span class="bp">.</span><span class="n">div_lt_iff_lt_mul</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">h₁</span>
+</pre></div>
+
 
 {% endraw %}
 

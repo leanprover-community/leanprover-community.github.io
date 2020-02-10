@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [composition of algebra structures?](35067compositionofalgebrastructures.html) (3 messages, latest: Feb 09 2020 at 20:04)
+* [composition of algebra structures?](35067compositionofalgebrastructures.html) (4 messages, latest: Feb 09 2020 at 23:03)
 
 * [nonempty](95771nonempty.html) (23 messages, latest: Feb 09 2020 at 16:38)
 
