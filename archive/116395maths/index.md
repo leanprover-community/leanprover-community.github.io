@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [names?](65684names.html) (1 message, latest: Feb 10 2020 at 02:30)
+* [names?](65684names.html) (2 messages, latest: Feb 10 2020 at 08:19)
 
 * [nonempty](95771nonempty.html) (24 messages, latest: Feb 10 2020 at 02:08)
 
