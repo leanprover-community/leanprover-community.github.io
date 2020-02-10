@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Commutative diagrams](84919Commutativediagrams.html) (1 message, latest: Feb 10 2020 at 19:00)
+* [Commutative diagrams](84919Commutativediagrams.html) (2 messages, latest: Feb 10 2020 at 21:27)
 
 * [names?](65684names.html) (2 messages, latest: Feb 10 2020 at 08:19)
 

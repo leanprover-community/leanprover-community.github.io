@@ -9,21 +9,21 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (75 messages, latest: Feb 10 2020 at 21:26)
+
+* [typeclass paper](35889typeclasspaper.html) (166 messages, latest: Feb 10 2020 at 21:22)
+
 * [VSCode unicode characters](08876VSCodeunicodecharacters.html) (5 messages, latest: Feb 10 2020 at 20:58)
 
 * [summer program for undergrads](74568summerprogramforundergrads.html) (1 message, latest: Feb 10 2020 at 18:20)
 
 * [SO structure question](98892SOstructurequestion.html) (4 messages, latest: Feb 10 2020 at 17:17)
 
-* [typeclass paper](35889typeclasspaper.html) (165 messages, latest: Feb 10 2020 at 16:16)
-
 * [Induction on predicate with arity greater than 1](26471Inductiononpredicatewitharitygreaterthan1.html) (3 messages, latest: Feb 10 2020 at 03:37)
 
 * [???](69406.html) (6 messages, latest: Feb 09 2020 at 16:55)
 
 * [Parsing a string into an expression](93510Parsingastringintoanexpression.html) (48 messages, latest: Feb 09 2020 at 14:11)
-
-* [moving mathlib to 3.5c](54190movingmathlibto35c.html) (72 messages, latest: Feb 09 2020 at 13:21)
 
 * [naming conventions](31665namingconventions.html) (45 messages, latest: Feb 09 2020 at 03:30)
 
