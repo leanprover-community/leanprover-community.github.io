@@ -10635,6 +10635,14 @@ In exercise 1 at the end of chapter 3, as one of the many "other properties", th
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187911950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187911950">Rob Lewis (Feb 11 2020 at 13:43)</a>:</h4>
 <p>Depending on the exact structure of your function, Lean can probably infer that it's decidable already. You need either <code>@[reducible] def g</code> or <code>@[derive decidable] def g</code> (the latter will only work with mathlib). Then you can <code>#eval to_bool (g 1 2 3 4)</code>.</p>
 
+<a name="187914523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187914523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187914523">Matt Earnshaw (Feb 11 2020 at 14:14)</a>:</h4>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> thanks. actually my Prop was set membership, so I had to stipulate <code>finset</code> but then this works. at some point I will need to understand better what is going on with this "attribute" business but for now...</p>
+
+<a name="187915498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187915498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187915498">Rob Lewis (Feb 11 2020 at 14:23)</a>:</h4>
+<p>By default, Lean won't unfold the definition of <code>g</code> to see if it's decidable, because this gets very expensive. <code>@[reducible]</code> says "go ahead and unfold this anyway," and <code>@[derive decidable]</code> says "unfold this temporarily to check that it's decidable, and add an instance to the environment."</p>
+
 
 {% endraw %}
 
