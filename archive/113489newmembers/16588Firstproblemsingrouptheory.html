@@ -372,6 +372,68 @@ def R : perm ℝ :=<br>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/First%20problems%20in%20group%20theory/near/187956947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/16588Firstproblemsingrouptheory.html#187956947">Daniel Keys (Feb 11 2020 at 21:22)</a>:</h4>
 <p>Is there a way to take derivatives, even only point-wise, for simple functions like polynomials? I just tried to, but couldn't get more than a <code>Prop</code> so far.</p>
 
+<a name="187962753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/First%20problems%20in%20group%20theory/near/187962753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/16588Firstproblemsingrouptheory.html#187962753">Sebastien Gouezel (Feb 11 2020 at 22:24)</a>:</h4>
+<p>If <code>f</code> is a real function, <code>deriv f x</code> is the derivative of <code>f</code> at the point <code>x</code>.</p>
+
+<a name="187963189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/First%20problems%20in%20group%20theory/near/187963189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/16588Firstproblemsingrouptheory.html#187963189">Daniel Keys (Feb 11 2020 at 22:32)</a>:</h4>
+<p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span>   Right, that is what I did. What I mean is that I don't seem to be able to get a value, evaluation/reduction fails:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">calculus</span><span class="bp">.</span><span class="n">deriv</span>
+
+<span class="n">def</span> <span class="n">twoX</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">x</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">twoX</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">has_deriv_at</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">has_deriv_at</span> <span class="n">twoX</span> <span class="o">(</span><span class="mi">2</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="mi">5</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span> <span class="c1">-- type Prop</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">deriv</span> <span class="n">twoX</span> <span class="o">(</span><span class="mi">2</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span>  <span class="c1">-- type real</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">deriv</span> <span class="n">twoX</span> <span class="o">(</span><span class="mi">2</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span> <span class="c1">-- this fails</span>
+</pre></div>
+
+
+<p>Is there something I'm doing wrong?</p>
+
+<a name="187964193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/First%20problems%20in%20group%20theory/near/187964193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/16588Firstproblemsingrouptheory.html#187964193">Floris van Doorn (Feb 11 2020 at 22:46)</a>:</h4>
+<p>You cannot use Lean to <code>#eval</code> or <code>#reduce</code> anything on the real numbers: they are not computable. You have to prove that it equals a value:</p>
+<div class="codehilite"><pre><span></span>example : deriv twoX (2:ℝ) = 2 :=
+[...]
+</pre></div>
+
+<a name="187964339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/First%20problems%20in%20group%20theory/near/187964339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/16588Firstproblemsingrouptheory.html#187964339">Floris van Doorn (Feb 11 2020 at 22:49)</a>:</h4>
+<p>In proofs, you can use <code>norm_num</code> to compute with specific real numbers, like <code>example : (2:ℝ) + 3 = 5 := by norm_num</code>.<br>
+It is imaginable that at some point we will have a similar tactic for computing derivatives, but that time is not now.</p>
+
+<a name="187964481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/First%20problems%20in%20group%20theory/near/187964481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/16588Firstproblemsingrouptheory.html#187964481">Daniel Keys (Feb 11 2020 at 22:50)</a>:</h4>
+<p>OK, now it all makes sense!</p>
+
+<a name="187964541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/First%20problems%20in%20group%20theory/near/187964541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/16588Firstproblemsingrouptheory.html#187964541">Floris van Doorn (Feb 11 2020 at 22:51)</a>:</h4>
+<p>In your manual proof, try using <code>deriv_add</code> and <code>deriv_id</code>.</p>
+
+<a name="187964654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/First%20problems%20in%20group%20theory/near/187964654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/16588Firstproblemsingrouptheory.html#187964654">Daniel Keys (Feb 11 2020 at 22:51)</a>:</h4>
+<p>So do I need to prove for every point I am interested in?</p>
+
+<a name="187964981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/First%20problems%20in%20group%20theory/near/187964981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/16588Firstproblemsingrouptheory.html#187964981">Floris van Doorn (Feb 11 2020 at 22:57)</a>:</h4>
+<p>You can do it for all real numbers at the same time:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">calculus</span><span class="bp">.</span><span class="n">deriv</span>
+
+<span class="n">def</span> <span class="n">twoX</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">x</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">deriv</span> <span class="n">twoX</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">has_deriv_at</span><span class="bp">.</span><span class="n">deriv</span><span class="o">,</span> <span class="n">apply</span> <span class="n">has_deriv_at</span><span class="bp">.</span><span class="n">add</span><span class="bp">;</span> <span class="n">apply</span> <span class="n">has_deriv_at_id</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="187965071"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/First%20problems%20in%20group%20theory/near/187965071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/16588Firstproblemsingrouptheory.html#187965071">Daniel Keys (Feb 11 2020 at 22:58)</a>:</h4>
+<p>This is very helpful, very glad I asked! Thanks <span class="user-mention" data-user-id="111080">@Floris van Doorn</span></p>
+
 
 {% endraw %}
 
