@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [github actions](76245githubactions.html) (45 messages, latest: Feb 11 2020 at 11:14)
+
 * [moving mathlib to 3.5c](54190movingmathlibto35c.html) (76 messages, latest: Feb 11 2020 at 10:48)
 
 * [VSCode unicode characters](08876VSCodeunicodecharacters.html) (33 messages, latest: Feb 11 2020 at 10:20)
@@ -82,8 +84,6 @@ permalink: archive/113488general/index.html
 * [Coq as a lean type checker](81552Coqasaleantypechecker.html) (41 messages, latest: Jan 31 2020 at 02:43)
 
 * [order of input variables](79611orderofinputvariables.html) (1 message, latest: Jan 31 2020 at 02:36)
-
-* [github actions](76245githubactions.html) (44 messages, latest: Jan 30 2020 at 20:28)
 
 * [instance alternative exceptional](62609instancealternativeexceptional.html) (1 message, latest: Jan 30 2020 at 14:25)
 
