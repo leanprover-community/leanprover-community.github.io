@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [First problems in group theory](16588Firstproblemsingrouptheory.html) (27 messages, latest: Feb 11 2020 at 17:58)
+* [Using analysis/calculus/deriv.lean a bottleneck](74265Usinganalysiscalculusderivleanabottleneck.html) (5 messages, latest: Feb 11 2020 at 18:55)
+
+* [First problems in group theory](16588Firstproblemsingrouptheory.html) (39 messages, latest: Feb 11 2020 at 18:10)
 
 * [noob question(s)](52075noobquestions.html) (1888 messages, latest: Feb 11 2020 at 14:23)
 

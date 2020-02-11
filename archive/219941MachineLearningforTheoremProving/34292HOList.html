@@ -803,6 +803,27 @@ Imitation</a>, <a href="https://arxiv.org/abs/1909.11851" target="_blank" title=
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/187808401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#187808401">Stanislas Polu (Feb 10 2020 at 11:49)</a>:</h4>
 <p><span class="user-mention" data-user-id="239408">@Sarah Loos</span> finally, sorry for the multiple questions, can you shed the same kind of lights on the use of RAW_POP_ALL_TAC ?</p>
 
+<a name="187938943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/187938943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#187938943">Sarah Loos (Feb 11 2020 at 18:25)</a>:</h4>
+<blockquote>
+<p>On the RL argument, if we look at the big picture, even the RL approach you mention relies on some form of supervision:  the statements and how they shape the space being searched.</p>
+</blockquote>
+<p>Couldn't agree more with this statement!  I think this is all a matter of degree - ultimately we'd like to rely less and less on formal human proofs and formal  human-generated theorem statements, since this comprises a relatively small fraction of natural language mathematics.  Hopefully there are enough of them that they can bootstrap learning from natural language mathematics.</p>
+
+<a name="187939406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/187939406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#187939406">Sarah Loos (Feb 11 2020 at 18:29)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="239408">Sarah Loos</span> finally, sorry for the multiple questions, can you shed the same kind of lights on the use of RAW_POP_ALL_TAC ?</p>
+</blockquote>
+<p>See POP_ASSUM vs. POP_ASSUM_LIST in HOL Light.</p>
+
+<a name="187940564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/187940564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#187940564">Sarah Loos (Feb 11 2020 at 18:40)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="239408">Sarah Loos</span> concerning RAW_POP_TAC I see the rationale for logging purposes. I will check the logs to convince myself that  that the popped assumptions are used in subsequent proof steps. An approach could be to maintain the popped assumption as valid theorem argument in subsequent steps when sampling proofs that attempt to use this tactic.</p>
+</blockquote>
+<p>The goal state already has this - it's the assumption list!  If you look at the POP_ASSUM <a href="https://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/POP_ASSUM.html" target="_blank" title="https://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/POP_ASSUM.html">man page</a>, you'll see that it's really more of a convenience function than absolutely necessary.  It's essentially using an assumption combined with weakening the goal.  If you use a tactic that doesn't include all the assumptions from the assumption list (i.e. don't use ASM_* tactics), then the two should be equivalent steps.  RAW_POP_TAC is still an available tactic, but now it's just the weakening step.</p>
+
 
 {% endraw %}
 
