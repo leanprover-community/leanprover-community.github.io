@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Using analysis/calculus/deriv.lean a bottleneck](74265Usinganalysiscalculusderivleanabottleneck.html) (5 messages, latest: Feb 11 2020 at 18:55)
+* [Using analysis/calculus/deriv.lean a bottleneck](74265Usinganalysiscalculusderivleanabottleneck.html) (10 messages, latest: Feb 11 2020 at 19:17)
 
 * [First problems in group theory](16588Firstproblemsingrouptheory.html) (39 messages, latest: Feb 11 2020 at 18:10)
 

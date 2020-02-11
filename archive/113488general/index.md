@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [VSCode unicode characters](08876VSCodeunicodecharacters.html) (36 messages, latest: Feb 11 2020 at 19:48)
+
 * [typeclass paper](35889typeclasspaper.html) (168 messages, latest: Feb 11 2020 at 17:36)
 
 * [POPLmark challenge](71850POPLmarkchallenge.html) (99 messages, latest: Feb 11 2020 at 17:19)
-
-* [VSCode unicode characters](08876VSCodeunicodecharacters.html) (35 messages, latest: Feb 11 2020 at 16:39)
 
 * [github actions](76245githubactions.html) (45 messages, latest: Feb 11 2020 at 11:14)
 
