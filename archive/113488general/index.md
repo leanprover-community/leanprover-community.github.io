@@ -9,13 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [typeclass paper](35889typeclasspaper.html) (168 messages, latest: Feb 11 2020 at 17:36)
+
+* [POPLmark challenge](71850POPLmarkchallenge.html) (99 messages, latest: Feb 11 2020 at 17:19)
+
 * [VSCode unicode characters](08876VSCodeunicodecharacters.html) (35 messages, latest: Feb 11 2020 at 16:39)
 
 * [github actions](76245githubactions.html) (45 messages, latest: Feb 11 2020 at 11:14)
 
 * [moving mathlib to 3.5c](54190movingmathlibto35c.html) (76 messages, latest: Feb 11 2020 at 10:48)
-
-* [typeclass paper](35889typeclasspaper.html) (167 messages, latest: Feb 10 2020 at 23:50)
 
 * [summer program for undergrads](74568summerprogramforundergrads.html) (1 message, latest: Feb 10 2020 at 18:20)
 
@@ -72,8 +74,6 @@ permalink: archive/113488general/index.html
 * [export renaming](91924exportrenaming.html) (2 messages, latest: Feb 01 2020 at 21:36)
 
 * [strong recursion](83992strongrecursion.html) (1 message, latest: Feb 01 2020 at 11:51)
-
-* [POPLmark challenge](71850POPLmarkchallenge.html) (97 messages, latest: Feb 01 2020 at 07:37)
 
 * [Bonn](14414Bonn.html) (9 messages, latest: Jan 31 2020 at 22:48)
 
