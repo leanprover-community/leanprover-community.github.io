@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [First problems in group theory](16588Firstproblemsingrouptheory.html) (13 messages, latest: Feb 11 2020 at 15:27)
+* [First problems in group theory](16588Firstproblemsingrouptheory.html) (15 messages, latest: Feb 11 2020 at 16:58)
 
 * [noob question(s)](52075noobquestions.html) (1888 messages, latest: Feb 11 2020 at 14:23)
 

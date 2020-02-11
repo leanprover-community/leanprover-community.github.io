@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [VSCode unicode characters](08876VSCodeunicodecharacters.html) (35 messages, latest: Feb 11 2020 at 16:39)
+
 * [github actions](76245githubactions.html) (45 messages, latest: Feb 11 2020 at 11:14)
 
 * [moving mathlib to 3.5c](54190movingmathlibto35c.html) (76 messages, latest: Feb 11 2020 at 10:48)
-
-* [VSCode unicode characters](08876VSCodeunicodecharacters.html) (33 messages, latest: Feb 11 2020 at 10:20)
 
 * [typeclass paper](35889typeclasspaper.html) (167 messages, latest: Feb 10 2020 at 23:50)
 
