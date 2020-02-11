@@ -10622,6 +10622,19 @@ In exercise 1 at the end of chapter 3, as one of the many "other properties", th
 <span class="k">by</span> <span class="n">rwa</span> <span class="n">nat</span><span class="bp">.</span><span class="n">div_lt_iff_lt_mul</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">h₁</span>
 </pre></div>
 
+<a name="187911569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187911569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187911569">Matt Earnshaw (Feb 11 2020 at 13:38)</a>:</h4>
+<p>I have a function producing <code>Prop</code>s a bit like the following (but in general there can be any finite number of disjuncts)</p>
+<div class="codehilite"><pre><span></span>def g (p q r s : ℕ) : Prop := (p = q) ∨ (r = s) ∨ false
+</pre></div>
+
+
+<p>now I suppose these should be decidable and hence printable, which is my aim. I have read a bit about decidable props but can't quite figure out how to reduce an application of g to a <code>true</code> or <code>false</code></p>
+
+<a name="187911950"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187911950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187911950">Rob Lewis (Feb 11 2020 at 13:43)</a>:</h4>
+<p>Depending on the exact structure of your function, Lean can probably infer that it's decidable already. You need either <code>@[reducible] def g</code> or <code>@[derive decidable] def g</code> (the latter will only work with mathlib). Then you can <code>#eval to_bool (g 1 2 3 4)</code>.</p>
+
 
 {% endraw %}
 

@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1886 messages, latest: Feb 11 2020 at 13:43)
+
 * [Feasibility of graph or simplicial complex statement](92850Feasibilityofgraphorsimplicialcomplexstatement.html) (59 messages, latest: Feb 10 2020 at 23:13)
 
 * [(no topic)](79918notopic.html) (220 messages, latest: Feb 10 2020 at 19:24)
@@ -18,8 +20,6 @@ permalink: archive/113489newmembers/index.html
 * [is this a use case for quotient?](26494isthisausecaseforquotient.html) (6 messages, latest: Feb 10 2020 at 15:41)
 
 * [trivial ordering](84630trivialordering.html) (64 messages, latest: Feb 10 2020 at 00:09)
-
-* [noob question(s)](52075noobquestions.html) (1884 messages, latest: Feb 09 2020 at 23:21)
 
 * [Statements that require a previous result](36692Statementsthatrequireapreviousresult.html) (9 messages, latest: Feb 09 2020 at 17:00)
 
