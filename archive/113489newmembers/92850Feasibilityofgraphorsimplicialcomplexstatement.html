@@ -441,6 +441,38 @@ This list helps!<br>
 <p>I never used parameters. <code>variable</code> is just a shorthand: it means that instead of writing <code>my_beautiful_theorem {V : Type*} {G : Graph V} ...</code> you can just write <code>my_beautiful_theorem ...</code>. The theorems with one syntax or the other are <em>exactly</em> the same.</p>
 <p>The summary is: if you will just use one graph structure on your type, go for typeclasses. Otherwise, use a structure, and pass it as one of the arguments of all your theorems, eiter as <code>{G : Graph V}</code> if it can be inferred by some other data in the statement of the theorem, or as <code>(G : Graph V)</code> otherwise. This can be done explicitly in all your statements if needed, or using a <code>variable</code> at the beginning of the section to avoid repetitions.</p>
 
+<a name="188051714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188051714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188051714">Vincent Beffara (Feb 12 2020 at 20:46)</a>:</h4>
+<p>So like this ?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">carrier</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="n">Graph</span> <span class="n">V</span><span class="o">)</span> <span class="o">:=</span> <span class="n">V</span>
+
+<span class="n">noncomputable</span> <span class="kn">instance</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="n">Graph</span> <span class="n">V</span><span class="o">)</span> <span class="o">[</span><span class="n">Graph</span><span class="bp">.</span><span class="n">connected_graph</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_dist</span> <span class="o">(</span><span class="n">carrier</span> <span class="n">G</span><span class="o">)</span>
+    <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">G</span><span class="bp">.</span><span class="n">dist</span> <span class="n">x</span> <span class="n">y</span><span class="bp">⟩</span>
+
+<span class="n">def</span> <span class="n">id_S</span> <span class="o">:</span> <span class="n">carrier</span> <span class="o">(</span><span class="n">Cay</span> <span class="n">S1</span><span class="o">)</span> <span class="bp">-&gt;</span> <span class="n">carrier</span> <span class="o">(</span><span class="n">Cay</span> <span class="n">S2</span><span class="o">)</span> <span class="o">:=</span> <span class="n">id</span>
+
+<span class="kn">theorem</span> <span class="n">bilipschitz</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">K</span><span class="o">,</span> <span class="n">lipschitz_with</span> <span class="n">K</span> <span class="o">(</span><span class="n">id_S</span> <span class="n">S1</span> <span class="n">S2</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="188051823"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188051823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188051823">Johan Commelin (Feb 12 2020 at 20:48)</a>:</h4>
+<p>Aside: wouldn't it be more natural to use <code>vertices</code> instead of <code>carrier</code> (in this context)?</p>
+
+<a name="188052069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188052069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188052069">Vincent Beffara (Feb 12 2020 at 20:51)</a>:</h4>
+<blockquote>
+<p>Aside: wouldn't it be more natural to use <code>vertices</code> instead of <code>carrier</code> (in this context)?</p>
+</blockquote>
+<p>It would :-)</p>
+
+<a name="188052391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188052391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188052391">Vincent Beffara (Feb 12 2020 at 20:56)</a>:</h4>
+<p>Shouldn't I be afraid that lean will see through what I am trying to do, unfold (Cay S1).vertices and (Cay S2).vertices, see that they are the underlying group, forget about the graphs, and then fail to select the right instance of has_dist?</p>
+
+<a name="188052412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188052412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188052412">Vincent Beffara (Feb 12 2020 at 20:56)</a>:</h4>
+<p>(Well probably not, since it seems to work...)</p>
+
 
 {% endraw %}
 

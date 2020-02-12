@@ -9,9 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Intermediate Value Theorem](56141IntermediateValueTheorem.html) (7 messages, latest: Feb 12 2020 at 19:46)
+* [Feasibility of graph or simplicial complex statement](92850Feasibilityofgraphorsimplicialcomplexstatement.html) (85 messages, latest: Feb 12 2020 at 20:56)
 
-* [Feasibility of graph or simplicial complex statement](92850Feasibilityofgraphorsimplicialcomplexstatement.html) (80 messages, latest: Feb 12 2020 at 19:31)
+* [Intermediate Value Theorem](56141IntermediateValueTheorem.html) (33 messages, latest: Feb 12 2020 at 20:48)
+
+* [Trouble Installing Mathlib](21684TroubleInstallingMathlib.html) (4 messages, latest: Feb 12 2020 at 20:35)
 
 * [contradiction](22034contradiction.html) (4 messages, latest: Feb 12 2020 at 16:48)
 
