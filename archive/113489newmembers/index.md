@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Feasibility of graph or simplicial complex statement](92850Feasibilityofgraphorsimplicialcomplexstatement.html) (77 messages, latest: Feb 12 2020 at 18:27)
+* [Intermediate Value Theorem](56141IntermediateValueTheorem.html) (7 messages, latest: Feb 12 2020 at 19:46)
+
+* [Feasibility of graph or simplicial complex statement](92850Feasibilityofgraphorsimplicialcomplexstatement.html) (80 messages, latest: Feb 12 2020 at 19:31)
 
 * [contradiction](22034contradiction.html) (4 messages, latest: Feb 12 2020 at 16:48)
 

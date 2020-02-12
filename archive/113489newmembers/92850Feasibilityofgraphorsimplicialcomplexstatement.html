@@ -425,6 +425,22 @@ This list helps!<br>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188039120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188039120">Yury G. Kudryashov (Feb 12 2020 at 18:27)</a>:</h4>
 <p>(deleted)</p>
 
+<a name="188043683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188043683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188043683">Vincent Beffara (Feb 12 2020 at 19:14)</a>:</h4>
+<blockquote>
+<p>One subtely though: metric space structures are implicit type classes in all mathlib, because most of the time you use just one such structure on the space, and you don't want to specify it all the time. This means that if you want to put a metric space structure on a type using the graph distance, then different graphs will give you different distances, and things will become messy. A trick in situations like that (which is in fact more than a trick) is to have copies of the same type, but with different names. For instance, if you have a group <code>G</code> and a generating set <code>S</code>, then you could define <code>Cay S</code> to be a copy of <code>G</code>, and endow it with the graph distance coming from the Cayley graph structure for the generating <code>S</code>. In this way, you get different metric spaces structures on the different <code>Cay S</code>, which to Lean kernel are the same, but to typeclass resolution are different. If the graph structure was a typeclass, then this would also work well here, as you would put different graph structures on different <code>Cay S</code>.</p>
+</blockquote>
+<p>This seems to have something to do with the fact that a graph structure given a type is not canonical, while a metric structure given a graph is canonical (are there cases where a graph is endowed with a metric that is not the graph distance ?) At least lurking in this chatroom, and reading some of your comments, makes me afraid to use typeclasses here.</p>
+
+<a name="188043831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188043831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188043831">Vincent Beffara (Feb 12 2020 at 19:16)</a>:</h4>
+<p>Isn't the case where you have one graph structure that you want to talk about covered by <code>parameter (G : Graph V)</code> or perhaps <code>variable {G : Graph V}</code> ?</p>
+
+<a name="188045312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188045312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188045312">Sebastien Gouezel (Feb 12 2020 at 19:31)</a>:</h4>
+<p>I never used parameters. <code>variable</code> is just a shorthand: it means that instead of writing <code>my_beautiful_theorem {V : Type*} {G : Graph V} ...</code> you can just write <code>my_beautiful_theorem ...</code>. The theorems with one syntax or the other are <em>exactly</em> the same.</p>
+<p>The summary is: if you will just use one graph structure on your type, go for typeclasses. Otherwise, use a structure, and pass it as one of the arguments of all your theorems, eiter as <code>{G : Graph V}</code> if it can be inferred by some other data in the statement of the theorem, or as <code>(G : Graph V)</code> otherwise. This can be done explicitly in all your statements if needed, or using a <code>variable</code> at the beginning of the section to avoid repetitions.</p>
+
 
 {% endraw %}
 
