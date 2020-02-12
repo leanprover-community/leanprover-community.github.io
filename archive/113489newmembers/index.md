@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1892 messages, latest: Feb 12 2020 at 14:56)
+
+* [Feasibility of graph or simplicial complex statement](92850Feasibilityofgraphorsimplicialcomplexstatement.html) (65 messages, latest: Feb 12 2020 at 14:50)
+
 * [First problems in group theory](16588Firstproblemsingrouptheory.html) (65 messages, latest: Feb 12 2020 at 07:37)
 
 * [Using analysis/calculus/deriv.lean a bottleneck](74265Usinganalysiscalculusderivleanabottleneck.html) (41 messages, latest: Feb 11 2020 at 23:32)
-
-* [noob question(s)](52075noobquestions.html) (1888 messages, latest: Feb 11 2020 at 14:23)
-
-* [Feasibility of graph or simplicial complex statement](92850Feasibilityofgraphorsimplicialcomplexstatement.html) (59 messages, latest: Feb 10 2020 at 23:13)
 
 * [(no topic)](79918notopic.html) (220 messages, latest: Feb 10 2020 at 19:24)
 

@@ -300,6 +300,64 @@ This list helps!<br>
 </blockquote>
 <p>AFAIK <code>parameter</code>s will not work in Lean 4. Try <code>variable</code>s.</p>
 
+<a name="188012485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188012485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188012485">Sebastien Gouezel (Feb 12 2020 at 14:09)</a>:</h4>
+<blockquote>
+<p>BTW, is there a canonical way to say "I wrote something that does not quite fit in a chat like here, is definitely PR material, and I would like to get some feedback"?</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="242586">@Vincent Beffara</span> , here is some feedback :) </p>
+<p>Let me just look at the first line of your file, i.e.,</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">Graph</span> <span class="o">:=</span> <span class="o">(</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">adj</span> <span class="o">:</span> <span class="n">V</span> <span class="bp">-&gt;</span> <span class="n">V</span> <span class="bp">-&gt;</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">sym</span> <span class="o">:</span> <span class="n">symmetric</span> <span class="n">adj</span><span class="o">)</span>
+</pre></div>
+
+
+<p>because there is a lot to say on this, and it determines everything that follows. What you are doing here is called a fully bundled approach, i.e., a <code>Graph</code> object contains a carrier type, and additional data on this type. This is the way things are typically done in coq. The usual approach in Lean is just a little bit more unbundled: we would start from a type, say <code>V</code>, and then we would tell Lean that this type has a graph structure by registering a graph typeclass. An advantage of this approach is that you work with a single underlying type, and you can put several structures on it (a graph structure, a group structure, and so on), and you can discuss how they relate "from the inside". It would read something like</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">Graph</span> <span class="o">(</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">adj</span> <span class="o">:</span> <span class="n">V</span> <span class="bp">-&gt;</span> <span class="n">V</span> <span class="bp">-&gt;</span> <span class="kt">Prop</span><span class="o">)</span>
+<span class="o">(</span><span class="n">sym</span> <span class="o">:</span> <span class="n">symmetric</span> <span class="n">adj</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Let me show what the next lines could look like, to show how one uses such typeclasses:</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">Graph</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">V&#39;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Graph</span> <span class="n">V</span><span class="o">]</span>  <span class="o">[</span><span class="n">Graph</span> <span class="n">V&#39;</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">linked</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">V</span><span class="o">)</span> <span class="o">:=</span> <span class="n">relation</span><span class="bp">.</span><span class="n">refl_trans_gen</span> <span class="n">adj</span> <span class="n">x</span> <span class="n">y</span>
+
+<span class="n">class</span> <span class="n">connected_graph</span> <span class="o">(</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">Graph</span> <span class="n">V</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">connected</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">V</span><span class="o">)</span> <span class="n">y</span><span class="o">,</span> <span class="n">linked</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">ext</span><span class="o">]</span> <span class="kn">structure</span> <span class="n">edge</span> <span class="o">(</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">Graph</span> <span class="n">V</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">V</span><span class="o">}</span>
+<span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">adj</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span>
+</pre></div>
+
+
+<p>First, I enter a namespace, to make sure that I keep my names separated from other areas where one could use the words <code>edge</code>, for instance, and also to make <code>adj</code> available. Then, I declare some variables and some typeclasses that will be available from this point on, to avoid restating them all the time. The interesting point is when I define <code>linked</code>: there is no explicit reference to the graph structure, but since I am mentioning points on <code>V</code> Lean will try to find the graph structure on <code>V</code> (which is given by the typeclass declared two lines above) and understand by itself that <code>adj</code> refers to this graph structure.</p>
+<p>Then in your file you have two definitions of connected, that I have merged in one single definition because I don't see why we would need two. And I have declared it as a type class extending <code>Graph</code>, which means that you will only need to  declare <code>[connected_graph V]</code> if you want to assume that there is a connected graph structure on <code>V</code>, without writing <code>[Graph V]</code> first.</p>
+<p>If you have some questions about what I have just written, or if you would be interested in the same kind of "standardification" on some other parts of your files, don't hesitate to ask!</p>
+
+<a name="188014231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188014231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188014231">Yury G. Kudryashov (Feb 12 2020 at 14:28)</a>:</h4>
+<p>I'm not sure that I like graphs as typeclasses. I assume that typeclasses are for canonical structures, and I can't think of any canonical graph structure on a type.</p>
+
+<a name="188014278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188014278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188014278">Yury G. Kudryashov (Feb 12 2020 at 14:29)</a>:</h4>
+<p>I'd go with <code>structure</code>, though maybe <code>structure Graph V := ...</code>.</p>
+
+<a name="188016043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188016043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188016043">Sebastien Gouezel (Feb 12 2020 at 14:48)</a>:</h4>
+<p>For instance, if <code>G</code> is a group and <code>S</code> is a generating set, then its Cayley graph <code>Cay S</code> (which, as a type, is just a copy of <code>G</code>, but it really should be distinguished from <code>G</code>) has a canonical graph structure. I think it is important to do it this way because then you want to deduce a distance on <code>Cay S</code> and do some analysis/geometry, for which you need the metric space typeclass. You can not get the metric space typeclass if you don't have first a graph typeclass to start with.</p>
+
+<a name="188016200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188016200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188016200">Yury G. Kudryashov (Feb 12 2020 at 14:50)</a>:</h4>
+<p>You can have a generic type tag <code>graph_dist V G := V</code>.</p>
+
+<a name="188016275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188016275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188016275">Yury G. Kudryashov (Feb 12 2020 at 14:50)</a>:</h4>
+<p>(probably with a better name)</p>
+
 
 {% endraw %}
 
