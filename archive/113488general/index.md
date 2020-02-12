@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean in the wild](43625Leaninthewild.html) (420 messages, latest: Feb 12 2020 at 11:34)
+* [pp.all with more @](29047ppallwithmore.html) (9 messages, latest: Feb 12 2020 at 12:35)
 
-* [pp.all with more @](29047ppallwithmore.html) (8 messages, latest: Feb 12 2020 at 05:12)
+* [Lean in the wild](43625Leaninthewild.html) (420 messages, latest: Feb 12 2020 at 11:34)
 
 * [VSCode unicode characters](08876VSCodeunicodecharacters.html) (37 messages, latest: Feb 11 2020 at 20:09)
 

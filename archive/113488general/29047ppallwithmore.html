@@ -85,6 +85,17 @@ lemma jasons_def : @eq (Π (a : @bool), @bool) (@id @bool)
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pp.all%20with%20more%20%40/near/187982192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29047ppallwithmore.html#187982192">Chris B (Feb 12 2020 at 05:12)</a>:</h4>
 <p>Ah that makes sense.</p>
 
+<a name="188005600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pp.all%20with%20more%20%40/near/188005600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29047ppallwithmore.html#188005600">Jason Rute (Feb 12 2020 at 12:35)</a>:</h4>
+<p>Since this is becoming "issues with the pretty printer", here is another:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">system</span><span class="bp">.</span><span class="n">random</span>
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">all</span> <span class="n">true</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">rand_nat_aux</span><span class="bp">._</span><span class="n">main</span><span class="bp">._</span><span class="n">pack</span><span class="bp">._</span><span class="n">wf_rec_mk_dec_tactic</span><span class="bp">._</span><span class="n">aux_1</span>
+</pre></div>
+
+
+<p>The resulting Prop has near the end, the bad names <code> .nat</code>, <code> .nat.has_add</code>, and <code> .nat.has_one</code>.  Oddly enough, if one copies the theorem fixes the extra <code>.</code>s and puts it back into Lean, then it will pretty print it correctly.  Maybe the issue is with the underlying expression.</p>
+
 
 {% endraw %}
 
