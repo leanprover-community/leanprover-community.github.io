@@ -473,6 +473,24 @@ This list helps!<br>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188052412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188052412">Vincent Beffara (Feb 12 2020 at 20:56)</a>:</h4>
 <p>(Well probably not, since it seems to work...)</p>
 
+<a name="188056365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188056365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188056365">Sebastien Gouezel (Feb 12 2020 at 21:47)</a>:</h4>
+<p>Typeclass search will never unfold anything, unless it is marked reducible. So, the following would work if you had defined graphs as typeclasses (I understand that you don't want to do it, but still I would like to show how it would work :)</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">Graph</span> <span class="o">(</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">adj</span> <span class="o">:</span> <span class="n">V</span> <span class="bp">→</span> <span class="n">V</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="n">Graph</span><span class="bp">.</span><span class="n">to_metric_space</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Graph</span> <span class="n">V</span><span class="o">]</span> <span class="o">:</span> <span class="n">metric_space</span> <span class="n">V</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="n">def</span> <span class="n">Cay</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span> <span class="o">:=</span> <span class="n">G</span>
+
+<span class="kn">instance</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">Graph</span> <span class="o">(</span><span class="n">Cay</span> <span class="n">S</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">instance</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">metric_space</span> <span class="o">(</span><span class="n">Cay</span> <span class="n">S</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+
+<p>In the first sorry, you would explain to Lean how a graph structure gives a metric space structure. In the second sorry, you would construct the Cayley graph structure on <code>Cay S</code>, which is just <code>G</code> in disguise. And then Lean knows that <code>Cay S</code> is a graph, and therefore a metric space thanks to the first instance. The last line is only there to check that Lean does indeed know this, but it can be safely removed.</p>
+
 
 {% endraw %}
 

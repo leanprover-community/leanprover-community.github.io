@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [converting between `\[foo\] and "foo"](81281convertingbetweenfooandfoo.html) (1 message, latest: Feb 12 2020 at 21:45)
+
 * [pi instances](66274piinstances.html) (26 messages, latest: Feb 12 2020 at 15:25)
 
 * [pp.all with more @](29047ppallwithmore.html) (9 messages, latest: Feb 12 2020 at 12:35)
