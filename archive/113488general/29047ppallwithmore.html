@@ -1,0 +1,37 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/29047ppallwithmore.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/29047ppallwithmore.html">pp.all with more @</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="187978354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pp.all%20with%20more%20%40/near/187978354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29047ppallwithmore.html#187978354">Jason Rute (Feb 12 2020 at 03:16)</a>:</h4>
+<p>I don't suppose there is a pretty printer that is even more ambitious with @'s, is there?  For example, consider the <code>pp.all</code> version of theorem <code>or.symm.equations._eqn_1</code>: </p>
+<div class="codehilite"><pre><span></span>@eq.{0} (∀ {a b : Prop}, or a b → or b a) or.symm or.swap
+</pre></div>
+
+
+<p>If you enter this into Lean it will give a "type mismatch" error.  The trick is to enter it as follows:</p>
+<div class="codehilite"><pre><span></span>@eq.{0} (∀ {a b : Prop}, or a b → or b a) @or.symm @or.swap
+</pre></div>
+
+
+<p>This is because <code>or.symm</code> has type <code>or.symm : ∀ {a b : Prop}, a ∨ b → b ∨ a</code>.  Now, I think this is a minor bug and I if others agree can make an issue about it, but I also wonder if there is already a pretty printer that is more ambitious with the <code>@</code> symbol.  For example, it is ok to enter this as follows:</p>
+<div class="codehilite"><pre><span></span>@eq.{0} (∀ {a b : Prop}, @or @a @b → @or @b @a) @or.symm @or.swap
+</pre></div>
+
+
+<p>(If you can't tell, I'm trying to take the <code>pp.all</code> output of Lean and plug it back in to Lean.  Exceptions like this make it less than 100% robust.)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
