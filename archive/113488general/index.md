@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (420 messages, latest: Feb 12 2020 at 11:34)
+
 * [pp.all with more @](29047ppallwithmore.html) (8 messages, latest: Feb 12 2020 at 05:12)
 
 * [VSCode unicode characters](08876VSCodeunicodecharacters.html) (37 messages, latest: Feb 11 2020 at 20:09)
@@ -112,8 +114,6 @@ permalink: archive/113488general/index.html
 * [recreating `trace_state`](84788recreatingtracestate.html) (4 messages, latest: Jan 27 2020 at 13:37)
 
 * [Reduction rule when declaring structure](03826Reductionrulewhendeclaringstructure.html) (28 messages, latest: Jan 27 2020 at 11:00)
-
-* [Lean in the wild](43625Leaninthewild.html) (418 messages, latest: Jan 26 2020 at 18:58)
 
 * [huge term trees](96965hugetermtrees.html) (53 messages, latest: Jan 25 2020 at 10:49)
 
