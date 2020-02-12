@@ -382,6 +382,36 @@ This list helps!<br>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188018687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188018687">Sebastien Gouezel (Feb 12 2020 at 15:15)</a>:</h4>
 <p>Or just <code>structure Graph V := ...</code> and <code>attribute [class] Graph</code>, but many theorems would be stated with the structure as an explicit argument. It is a little bit like the problem for measure spaces, where one would like to have an implicit measure when building the theory or when doing probability, but an explicit measure when doing analysis.</p>
 
+<a name="188026446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188026446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188026446">Vincent Beffara (Feb 12 2020 at 16:27)</a>:</h4>
+<p>I'm trying to understand this whole typeclass thing ... I get the unbundling of the carrier type, but certainly</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">ext</span><span class="o">]</span> <span class="kn">structure</span> <span class="n">edge</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="n">Graph</span> <span class="n">V</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">V</span><span class="o">}</span>
+<span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">adj</span> <span class="n">G</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span>
+</pre></div>
+
+
+<p>feels more natural to me than</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">ext</span><span class="o">]</span> <span class="kn">structure</span> <span class="n">edge</span> <span class="o">(</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">Graph</span> <span class="n">V</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">V</span><span class="o">}</span>
+<span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">adj</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I don't see how having the graph structure being implicit would help comparing two graphs on the same carrier?</p>
+
+<a name="188026745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188026745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188026745">Vincent Beffara (Feb 12 2020 at 16:30)</a>:</h4>
+<p>(At the beginning I did have <code>Graph V</code>, I tried bundling to also try coercions at the same time)</p>
+
+<a name="188029291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188029291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188029291">Sebastien Gouezel (Feb 12 2020 at 16:54)</a>:</h4>
+<blockquote>
+<p>I don't see how having the graph structure being implicit would help comparing two graphs on the same carrier?</p>
+</blockquote>
+<p>The graph structure being implicit is useful when you have one single graph on some type, and you want to talk about it without ever modifying it. If you want to modify a graph, or have several graph structures, then you should go for the structure approach (but still with <code>Graph V</code> instead of having <code>V</code> as a data inside the graph structure, as this is the way everything is done in Lean, so once you want to interface with other parts of the library it will be much easier this way).</p>
+<p>One subtely though: metric space structures are implicit type classes in all mathlib, because most of the time you use just one such structure on the space, and you don't want to specify it all the time. This means that if you want to put a metric space structure on a type using the graph distance, then different graphs will give you different distances, and things will become messy. A trick in situations like that (which is in fact more than a trick) is to have copies of the same type, but with different names. For instance, if you have a group <code>G</code> and a generating set <code>S</code>, then you could define <code>Cay S</code> to be a copy of <code>G</code>, and endow it with the graph distance coming from the Cayley graph structure for the generating <code>S</code>. In this way, you get different metric spaces structures on the different <code>Cay S</code>, which to Lean kernel are the same, but to typeclass resolution are different. If the graph structure was a typeclass, then this would also work well here, as you would put different graph structures on different <code>Cay S</code>.</p>
+
 
 {% endraw %}
 

@@ -9,9 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1899 messages, latest: Feb 12 2020 at 15:35)
+* [Feasibility of graph or simplicial complex statement](92850Feasibilityofgraphorsimplicialcomplexstatement.html) (74 messages, latest: Feb 12 2020 at 16:54)
 
-* [Feasibility of graph or simplicial complex statement](92850Feasibilityofgraphorsimplicialcomplexstatement.html) (71 messages, latest: Feb 12 2020 at 15:15)
+* [contradiction](22034contradiction.html) (4 messages, latest: Feb 12 2020 at 16:48)
+
+* [noob question(s)](52075noobquestions.html) (1901 messages, latest: Feb 12 2020 at 16:31)
 
 * [First problems in group theory](16588Firstproblemsingrouptheory.html) (65 messages, latest: Feb 12 2020 at 07:37)
 
