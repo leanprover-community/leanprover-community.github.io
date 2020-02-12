@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [pi instances](66274piinstances.html) (26 messages, latest: Feb 12 2020 at 15:25)
+
 * [pp.all with more @](29047ppallwithmore.html) (9 messages, latest: Feb 12 2020 at 12:35)
 
 * [Lean in the wild](43625Leaninthewild.html) (420 messages, latest: Feb 12 2020 at 11:34)
@@ -4562,8 +4564,6 @@ permalink: archive/113488general/index.html
 * [notation in topological space file](42157notationintopologicalspacefile.html) (4 messages, latest: Mar 12 2018 at 18:54)
 
 * [path issues?](37897pathissues.html) (7 messages, latest: Mar 12 2018 at 13:56)
-
-* [pi instances](66274piinstances.html) (25 messages, latest: Mar 12 2018 at 10:14)
 
 * [named theorems](07437namedtheorems.html) (11 messages, latest: Mar 12 2018 at 10:01)
 
