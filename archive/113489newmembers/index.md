@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [action of subgroup inference issues](01686actionofsubgroupinferenceissues.html) (10 messages, latest: Feb 13 2020 at 06:24)
+* [action of subgroup inference issues](01686actionofsubgroupinferenceissues.html) (11 messages, latest: Feb 13 2020 at 08:11)
 
 * [Feasibility of graph or simplicial complex statement](92850Feasibilityofgraphorsimplicialcomplexstatement.html) (90 messages, latest: Feb 13 2020 at 01:24)
 

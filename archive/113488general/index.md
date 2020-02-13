@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [subtype.* diamonds](39380subtypediamonds.html) (11 messages, latest: Feb 13 2020 at 07:38)
+* [subtype.* diamonds](39380subtypediamonds.html) (12 messages, latest: Feb 13 2020 at 08:10)
 
 * [CI nightlies](93428CInightlies.html) (1 message, latest: Feb 13 2020 at 07:00)
 
