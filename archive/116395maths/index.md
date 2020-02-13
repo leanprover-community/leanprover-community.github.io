@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [DVRs](81120DVRs.html) (11 messages, latest: Feb 13 2020 at 19:54)
+* [class groups of number fields?](94955classgroupsofnumberfields.html) (3 messages, latest: Feb 13 2020 at 20:38)
+
+* [DVRs](81120DVRs.html) (14 messages, latest: Feb 13 2020 at 20:16)
 
 * [proof basics](46332proofbasics.html) (5 messages, latest: Feb 13 2020 at 19:33)
 

@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Can't define Chebyshev polynomials](78641CantdefineChebyshevpolynomials.html) (30 messages, latest: Feb 13 2020 at 19:58)
+* [Can't define Chebyshev polynomials](78641CantdefineChebyshevpolynomials.html) (31 messages, latest: Feb 13 2020 at 20:27)
 
 * [induction over nested sigma](15742inductionovernestedsigma.html) (4 messages, latest: Feb 13 2020 at 17:24)
 
