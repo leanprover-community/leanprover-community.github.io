@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Commutative diagrams](84919Commutativediagrams.html) (10 messages, latest: Feb 13 2020 at 11:43)
+* [subquotients](74711subquotients.html) (1 message, latest: Feb 13 2020 at 12:07)
+
+* [Commutative diagrams](84919Commutativediagrams.html) (12 messages, latest: Feb 13 2020 at 12:04)
 
 * [\[h : nonempty alpha\]](96411hnonemptyalpha.html) (4 messages, latest: Feb 13 2020 at 07:47)
 
