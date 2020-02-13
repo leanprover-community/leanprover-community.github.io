@@ -78,6 +78,59 @@ permalink: archive/113489newmembers/01686actionofsubgroupinferenceissues.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/action%20of%20subgroup%20inference%20issues/near/188079038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01686actionofsubgroupinferenceissues.html#188079038">Yury G. Kudryashov (Feb 13 2020 at 05:21)</a>:</h4>
 <p>Redefined <code>subtype.*</code> without using <code>subtype_instance</code>; compiling.</p>
 
+<a name="188081406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/action%20of%20subgroup%20inference%20issues/near/188081406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01686actionofsubgroupinferenceissues.html#188081406">Yury G. Kudryashov (Feb 13 2020 at 06:18)</a>:</h4>
+<p>These definitions make it work:</p>
+<div class="codehilite"><pre><span></span><span class="gh">diff --git a/src/group_theory/subgroup.lean b/src/group_theory/subgroup.lean</span>
+<span class="gh">index d54cd8eba..ac0b1dbcb 100644</span>
+<span class="gd">--- a/src/group_theory/subgroup.lean</span>
+<span class="gi">+++ b/src/group_theory/subgroup.lean</span>
+<span class="gu">@@ -50,11 +50,13 @@ theorem multiplicative.is_subgroup_iff</span>
+
+ @[to_additive add_group]
+ instance subtype.group {s : set α} [is_subgroup s] : group s :=
+<span class="gd">-by subtype_instance</span>
+<span class="gi">+{ inv := λ x, ⟨(x:α)⁻¹, is_subgroup.inv_mem x.2⟩,</span>
+<span class="gi">+  mul_left_inv := λ x, subtype.eq $ mul_left_inv x.1,</span>
+<span class="gi">+  .. subtype.monoid }</span>
+
+ @[to_additive add_comm_group]
+ instance subtype.comm_group {α : Type*} [comm_group α] {s : set α} [is_subgroup s] : comm_group s :=
+<span class="gd">-by subtype_instance</span>
+<span class="gi">+{ .. subtype.group, .. subtype.comm_monoid }</span>
+
+ @[simp, to_additive]
+ lemma is_subgroup.coe_inv {s : set α} [is_subgroup s] (a : s) : ((a⁻¹ : s) : α) = a⁻¹ := rfl
+<span class="gh">diff --git a/src/group_theory/submonoid.lean b/src/group_theory/submonoid.lean</span>
+<span class="gh">index e9fa5895e..c644e06d9 100644</span>
+<span class="gd">--- a/src/group_theory/submonoid.lean</span>
+<span class="gi">+++ b/src/group_theory/submonoid.lean</span>
+<span class="gu">@@ -221,12 +221,17 @@ end is_submonoid</span>
+ /-- Submonoids are themselves monoids. -/
+ @[to_additive add_monoid &quot;An `add_submonoid` is itself an `add_monoid`.&quot;]
+ instance subtype.monoid {s : set α} [is_submonoid s] : monoid s :=
+<span class="gd">-by subtype_instance</span>
+<span class="gi">+{ one := ⟨1, is_submonoid.one_mem s⟩,</span>
+<span class="gi">+  mul := λ x y, ⟨x * y, is_submonoid.mul_mem x.2 y.2⟩,</span>
+<span class="gi">+  mul_one := λ x, subtype.eq $ mul_one x.1,</span>
+<span class="gi">+  one_mul := λ x, subtype.eq $ one_mul x.1,</span>
+<span class="gi">+  mul_assoc := λ x y z, subtype.eq $ mul_assoc x.1 y.1 z.1 }</span>
+
+ /-- Submonoids of commutative monoids are themselves commutative monoids. -/
+ @[to_additive add_comm_monoid &quot;An `add_submonoid` of a commutative `add_monoid` is itself a commutative `add_monoid`. &quot;]
+ instance subtype.comm_monoid {α} [comm_monoid α] {s : set α} [is_submonoid s] : comm_monoid s :=
+<span class="gd">-by subtype_instance</span>
+<span class="gi">+{ mul_comm := λ x y, subtype.eq $ mul_comm x.1 y.1,</span>
+<span class="gi">+  .. subtype.monoid }</span>
+
+ /-- Submonoids inherit the 1 of the monoid. -/
+ @[simp, to_additive &quot;An `add_submonoid` inherits the 0 of the `add_monoid`. &quot;]
+</pre></div>
+
+<a name="188081625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/action%20of%20subgroup%20inference%20issues/near/188081625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01686actionofsubgroupinferenceissues.html#188081625">Yury G. Kudryashov (Feb 13 2020 at 06:24)</a>:</h4>
+<p>See also <a href="#narrow/stream/113488-general/topic/subtype.2E*.20diamonds" title="#narrow/stream/113488-general/topic/subtype.2E*.20diamonds">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subtype.2E*.20diamonds</a></p>
+
 
 {% endraw %}
 

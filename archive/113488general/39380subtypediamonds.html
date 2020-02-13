@@ -1,0 +1,74 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/39380subtypediamonds.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/39380subtypediamonds.html">subtype.* diamonds</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188081582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subtype.%2A%20diamonds/near/188081582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39380subtypediamonds.html#188081582">Yury G. Kudryashov (Feb 13 2020 at 06:23)</a>:</h4>
+<p>With current definitions Lean fails to unify <code>group.to_monoid subtype.group</code> with <code>subtype.monoid group.to_monoid</code>. This diff makes it work:</p>
+<div class="codehilite"><pre><span></span><span class="gh">diff --git a/src/group_theory/subgroup.lean b/src/group_theory/subgroup.lean</span>
+<span class="gh">index d54cd8eba..ac0b1dbcb 100644</span>
+<span class="gd">--- a/src/group_theory/subgroup.lean</span>
+<span class="gi">+++ b/src/group_theory/subgroup.lean</span>
+<span class="gu">@@ -50,11 +50,13 @@ theorem multiplicative.is_subgroup_iff</span>
+
+ @[to_additive add_group]
+ instance subtype.group {s : set α} [is_subgroup s] : group s :=
+<span class="gd">-by subtype_instance</span>
+<span class="gi">+{ inv := λ x, ⟨(x:α)⁻¹, is_subgroup.inv_mem x.2⟩,</span>
+<span class="gi">+  mul_left_inv := λ x, subtype.eq $ mul_left_inv x.1,</span>
+<span class="gi">+  .. subtype.monoid }</span>
+
+ @[to_additive add_comm_group]
+ instance subtype.comm_group {α : Type*} [comm_group α] {s : set α} [is_subgroup s] : comm_group s :=
+<span class="gd">-by subtype_instance</span>
+<span class="gi">+{ .. subtype.group, .. subtype.comm_monoid }</span>
+
+ @[simp, to_additive]
+ lemma is_subgroup.coe_inv {s : set α} [is_subgroup s] (a : s) : ((a⁻¹ : s) : α) = a⁻¹ := rfl
+<span class="gh">diff --git a/src/group_theory/submonoid.lean b/src/group_theory/submonoid.lean</span>
+<span class="gh">index e9fa5895e..c644e06d9 100644</span>
+<span class="gd">--- a/src/group_theory/submonoid.lean</span>
+<span class="gi">+++ b/src/group_theory/submonoid.lean</span>
+<span class="gu">@@ -221,12 +221,17 @@ end is_submonoid</span>
+ /-- Submonoids are themselves monoids. -/
+ @[to_additive add_monoid &quot;An `add_submonoid` is itself an `add_monoid`.&quot;]
+ instance subtype.monoid {s : set α} [is_submonoid s] : monoid s :=
+<span class="gd">-by subtype_instance</span>
+<span class="gi">+{ one := ⟨1, is_submonoid.one_mem s⟩,</span>
+<span class="gi">+  mul := λ x y, ⟨x * y, is_submonoid.mul_mem x.2 y.2⟩,</span>
+<span class="gi">+  mul_one := λ x, subtype.eq $ mul_one x.1,</span>
+<span class="gi">+  one_mul := λ x, subtype.eq $ one_mul x.1,</span>
+<span class="gi">+  mul_assoc := λ x y z, subtype.eq $ mul_assoc x.1 y.1 z.1 }</span>
+
+ /-- Submonoids of commutative monoids are themselves commutative monoids. -/
+ @[to_additive add_comm_monoid &quot;An `add_submonoid` of a commutative `add_monoid` is itself a commutative `add_monoid`. &quot;]
+ instance subtype.comm_monoid {α} [comm_monoid α] {s : set α} [is_submonoid s] : comm_monoid s :=
+<span class="gd">-by subtype_instance</span>
+<span class="gi">+{ mul_comm := λ x y, subtype.eq $ mul_comm x.1 y.1,</span>
+<span class="gi">+  .. subtype.monoid }</span>
+
+ /-- Submonoids inherit the 1 of the monoid. -/
+ @[simp, to_additive &quot;An `add_submonoid` inherits the 0 of the `add_monoid`. &quot;]
+</pre></div>
+
+
+<p>However I understand that a proper fix should modify the <code>subtype_instance</code> tactic, and I fail to understand how it works.</p>
+
+<a name="188081656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subtype.%2A%20diamonds/near/188081656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39380subtypediamonds.html#188081656">Yury G. Kudryashov (Feb 13 2020 at 06:25)</a>:</h4>
+<p>Motivated by <a href="#narrow/stream/113489-new-members/topic/action.20of.20subgroup.20inference.20issues" title="#narrow/stream/113489-new-members/topic/action.20of.20subgroup.20inference.20issues">https://leanprover.zulipchat.com/#narrow/stream/113489-new-members/topic/action.20of.20subgroup.20inference.20issues</a></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
