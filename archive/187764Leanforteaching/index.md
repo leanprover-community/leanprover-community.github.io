@@ -9,7 +9,7 @@ permalink: archive/187764Leanforteaching/index.html
 
 ### Topics:
 
-* [natural number game](77211naturalnumbergame.html) (25 messages, latest: Feb 12 2020 at 02:37)
+* [natural number game](77211naturalnumbergame.html) (26 messages, latest: Feb 13 2020 at 00:08)
 
 * [a = b \to f a = f b?](59915abtofafb.html) (7 messages, latest: Jan 31 2020 at 22:25)
 
