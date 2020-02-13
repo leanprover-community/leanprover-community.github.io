@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [induction over nested sigma](15742inductionovernestedsigma.html) (3 messages, latest: Feb 13 2020 at 15:25)
+* [induction over nested sigma](15742inductionovernestedsigma.html) (4 messages, latest: Feb 13 2020 at 17:24)
 
 * [action of subgroup inference issues](01686actionofsubgroupinferenceissues.html) (11 messages, latest: Feb 13 2020 at 08:11)
 

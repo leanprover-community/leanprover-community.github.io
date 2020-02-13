@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [converting between `\[foo\] and "foo"](81281convertingbetweenfooandfoo.html) (4 messages, latest: Feb 13 2020 at 17:04)
+
 * [subtype.* diamonds](39380subtypediamonds.html) (12 messages, latest: Feb 13 2020 at 08:10)
 
 * [CI nightlies](93428CInightlies.html) (1 message, latest: Feb 13 2020 at 07:00)
@@ -18,8 +20,6 @@ permalink: archive/113488general/index.html
 * [interesting paper](15493interestingpaper.html) (1 message, latest: Feb 13 2020 at 03:53)
 
 * [/-!](98238.html) (11 messages, latest: Feb 12 2020 at 22:54)
-
-* [converting between `\[foo\] and "foo"](81281convertingbetweenfooandfoo.html) (3 messages, latest: Feb 12 2020 at 22:44)
 
 * [pi instances](66274piinstances.html) (26 messages, latest: Feb 12 2020 at 15:25)
 
