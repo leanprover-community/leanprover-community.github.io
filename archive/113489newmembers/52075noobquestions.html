@@ -10698,6 +10698,75 @@ In exercise 1 at the end of chapter 3, as one of the many "other properties", th
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188026905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188026905">Kevin Buzzard (Feb 12 2020 at 16:31)</a>:</h4>
 <p>There will be <code>functor.comp</code> or something like that.</p>
 
+<a name="188062821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188062821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188062821">Matt E (Feb 12 2020 at 23:15)</a>:</h4>
+<blockquote>
+<p>There will be <code>functor.comp</code> or something like that.</p>
+</blockquote>
+<p>I really needed their categorial <em>product</em>, not comp, but I have realized now that my mistake is that I want their product in the functor category <code>Fun(Type, Type)</code> (which is "calculated pointwise"), not their product in the category <code>Type</code> (which is what <code>functor.prod</code> gives, essentially)...</p>
+<p>In defense of the idea that we might identify <code>Type</code> with <code>Type × Type</code>, it is the difference between whether there are only (types of) things in the world or if pairs (of types) of things are distinct, and not themselves (types of) things. In other words, I was thinking that if <code>Type</code> is sort of like a "universe of sets", and we thought that "everything is a set" then a pair of sets should itself be a set. Again, naively this doesn't work but I thought there might be some kind of "universe trick" or the like... something like the following (although this fails):</p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="n">f</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="err">⥤</span> <span class="kt">Type</span> <span class="n">u</span>
+<span class="kn">variable</span> <span class="n">g</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span> <span class="err">⥤</span> <span class="kt">Type</span> <span class="n">w</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">functor</span><span class="bp">.</span><span class="n">prod</span> <span class="n">f</span> <span class="n">g</span>
+ <span class="c1">-- functor.prod f g : Type u × Type w ⥤ Type u × Type w</span>
+
+<span class="n">def</span> <span class="n">dummy</span> <span class="o">(</span><span class="n">fg</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="o">(</span><span class="n">w</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">u</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span> <span class="err">⥤</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="o">(</span><span class="n">w</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">u</span><span class="bp">+</span><span class="mi">1</span><span class="o">)))</span> <span class="o">:=</span> <span class="mi">0</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">dummy</span> <span class="o">(</span><span class="n">functor</span><span class="bp">.</span><span class="n">prod</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span>  <span class="c1">-- fails</span>
+</pre></div>
+
+<a name="188062940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188062940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188062940">Kevin Buzzard (Feb 12 2020 at 23:17)</a>:</h4>
+<p>It's just not true that Type = Type x Type -- does this help?</p>
+
+<a name="188062954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188062954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188062954">Kevin Buzzard (Feb 12 2020 at 23:17)</a>:</h4>
+<p>This equality says that given a set there is some nice way to get two sets from it.</p>
+
+<a name="188063063"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188063063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188063063">Kevin Buzzard (Feb 12 2020 at 23:18)</a>:</h4>
+<p>You can certainly bundle together two types to get a new type, but there's no natural inverse map from Type to Type x Type because most types are not two other types bundled together.</p>
+
+<a name="188063100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188063100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188063100">Kevin Buzzard (Feb 12 2020 at 23:19)</a>:</h4>
+<p>BTW if you write <code> ```lean </code> instead of just <code> ``` </code> at the top of your quoted code then you get syntax highlighting :-)</p>
+
+<a name="188063172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188063172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188063172">Matt E (Feb 12 2020 at 23:20)</a>:</h4>
+<p>no argument there</p>
+
+<a name="188063212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188063212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188063212">Kevin Buzzard (Feb 12 2020 at 23:21)</a>:</h4>
+<blockquote>
+<p>In other words, I was thinking that if Type is sort of like a "universe of sets", and we thought that "everything is a set" then a pair of sets should itself be a set. </p>
+</blockquote>
+<p>This part is fine -- that's going from Type x Type to Type.</p>
+
+<a name="188063297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188063297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188063297">Kevin Buzzard (Feb 12 2020 at 23:22)</a>:</h4>
+<p>This is called <code>sum</code> in Lean, with notation <code>⊕</code> (in VS Code it's <code>\oplus</code>)</p>
+
+<a name="188063429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188063429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188063429">Chris Hughes (Feb 12 2020 at 23:24)</a>:</h4>
+<p>I'm not sure it's fine in the sense that it was meant, there's some natural functions <code>Type x Type</code> to <code>Type</code>, but I can't just give Lean a pair of types when it expects a <code>Type</code>.</p>
+
+<a name="188063558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188063558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188063558">Chris Hughes (Feb 12 2020 at 23:26)</a>:</h4>
+<p>sums of Types are not pairs of Types.</p>
+
+<a name="188063593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188063593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188063593">Kevin Buzzard (Feb 12 2020 at 23:26)</a>:</h4>
+<p>Oh of course you're right.</p>
+
+<a name="188063929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188063929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188063929">Kevin Buzzard (Feb 12 2020 at 23:31)</a>:</h4>
+<p>so it's hard to get <code>dummy</code> to typecheck because given a pair of types I can manufacture a type, but I can't go the other way, so I can't construct a functor Type -&gt; Type from a functor Type^2 -&gt; Type^2</p>
+
+<a name="188064537"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188064537" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188064537">Chris Hughes (Feb 12 2020 at 23:40)</a>:</h4>
+<p>And even though in ZFC, a pair of sets is a set, this is a useless construction categorically, since it's always just a set with two elements I think.</p>
+
 
 {% endraw %}
 
