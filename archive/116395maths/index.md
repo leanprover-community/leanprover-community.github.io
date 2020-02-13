@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [proof basics](46332proofbasics.html) (4 messages, latest: Feb 13 2020 at 18:13)
+* [DVRs](81120DVRs.html) (11 messages, latest: Feb 13 2020 at 19:54)
+
+* [proof basics](46332proofbasics.html) (5 messages, latest: Feb 13 2020 at 19:33)
 
 * [subquotients](74711subquotients.html) (1 message, latest: Feb 13 2020 at 12:07)
 
