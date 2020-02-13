@@ -855,6 +855,29 @@ Imitation</a>, <a href="https://arxiv.org/abs/1909.11851" target="_blank" title=
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/188067518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#188067518">Jason Rute (Feb 13 2020 at 00:22)</a>:</h4>
 <p>I might just add that it seems to me that logging Lean proofs will be quite the task too if we ever decide to do it.  There is a lot of flexibility in Lean proofs; the tactic language is a full programming language and is readily extendible; the community has been quite productive in making custom tactics; one has to deal with tactic parameters which get interpreted according to the context; the behavior of some tactics change as other theorems are proved (for example I believe theorems can be added to the <code>simp</code> tactic); and one can at any point in a proof switch from tactic mode to term mode (forward proving).  (Also implicit parameters, type classes, and private theorems add their own complexities.)  All these things make Lean great as a programming language and theorem prover, but will make tactic logging difficult.</p>
 
+<a name="188083341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/188083341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#188083341">Christian Szegedy (Feb 13 2020 at 07:08)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="239408">Sarah Loos</span> <span class="user-mention silent" data-user-id="217806">Markus Rabe</span> <code>4244727170697809164</code> is also interesting as the last ACCEPT_TAC is, I believe, inconsistent as well (preceded with a RAW_POP_TAC that removes the required hypothesis)</p>
+</blockquote>
+<p>BTW, we are about to release an update to the HOL-Light RPC API, hopefully by end of this week, including:</p>
+<ul>
+<li>Verifying that theorem parameters do not have hypotheses. (This is a bit restrictive, but it seems that they just cause trouble for now. Hypotheses can be replaced by implications, so we can live with that for now.)</li>
+<li>Some experimental forward reasoning support. It is not supported by the proof checker, but feel free to play with it.</li>
+<li>Fixed fingerprinting. (Correct fingerprint returned).</li>
+<li>Better support of goal assumptions.</li>
+</ul>
+<p>We are in the process of verifying that the new API is compatible with the open-sourced DeepHOL code base. We might need to cherry-pick some of the changes if they conflict with the DeepHOL code we have not updated in the open-source version.</p>
+
+<a name="188083567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/188083567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#188083567">Christian Szegedy (Feb 13 2020 at 07:15)</a>:</h4>
+<p><span class="user-mention" data-user-id="115715">@Jason Rute</span> </p>
+<blockquote>
+<p>I might just add that it seems to me that logging Lean proofs will be quite the task too if we ever decide to do it.  </p>
+</blockquote>
+<p>In the longer term, we are working on a more generic variant of DeepHOL that does not rely on an engineered, internal view of the goal stack.  Basically, the AI  would just interact by normal character sequences, similar to those a human user would produce. Also it could use extra side-information from stored human proofs or interactive interaction instead of structured proof-logs. This would allow us to simplify the system while relying more heavily of current state-of-the-art AI/Deep-Learning methods.</p>
+<p>Also this could mean that it will interface easier with Lean and could utilize sloppier training signals in a more flexible manner.</p>
+
 
 {% endraw %}
 

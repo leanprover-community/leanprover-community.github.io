@@ -68,6 +68,52 @@ permalink: archive/113488general/39380subtypediamonds.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subtype.%2A%20diamonds/near/188081656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39380subtypediamonds.html#188081656">Yury G. Kudryashov (Feb 13 2020 at 06:25)</a>:</h4>
 <p>Motivated by <a href="#narrow/stream/113489-new-members/topic/action.20of.20subgroup.20inference.20issues" title="#narrow/stream/113489-new-members/topic/action.20of.20subgroup.20inference.20issues">https://leanprover.zulipchat.com/#narrow/stream/113489-new-members/topic/action.20of.20subgroup.20inference.20issues</a></p>
 
+<a name="188083200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subtype.%2A%20diamonds/near/188083200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39380subtypediamonds.html#188083200">Yury G. Kudryashov (Feb 13 2020 at 07:04)</a>:</h4>
+<p>Header says that <code>subtype_instance</code> was written by <span class="user-mention" data-user-id="110026">@Simon Hudon</span> . Simon, could you please explain how it works (or even better fix it)?</p>
+
+<a name="188083227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subtype.%2A%20diamonds/near/188083227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39380subtypediamonds.html#188083227">Yury G. Kudryashov (Feb 13 2020 at 07:05)</a>:</h4>
+<p>E.g., I see that <code>subtype.monoid</code> has some rewrite on a <code>rfl</code> in the definition of <code>one</code> and I can't understand where it comes from.</p>
+
+<a name="188083576"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subtype.%2A%20diamonds/near/188083576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39380subtypediamonds.html#188083576">Simon Hudon (Feb 13 2020 at 07:15)</a>:</h4>
+<p>I don't know that there's a simple solution to make those instances commute. You maybe have to prove that they are equal</p>
+
+<a name="188083701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subtype.%2A%20diamonds/near/188083701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39380subtypediamonds.html#188083701">Johan Commelin (Feb 13 2020 at 07:19)</a>:</h4>
+<p>But Yury gave a diff that makes them defeq, right?</p>
+
+<a name="188084128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subtype.%2A%20diamonds/near/188084128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39380subtypediamonds.html#188084128">Yury G. Kudryashov (Feb 13 2020 at 07:31)</a>:</h4>
+<p>The following code works with definition from the diff:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">group_theory</span><span class="bp">.</span><span class="n">group_action</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">M</span> <span class="n">G</span> <span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span>
+<span class="kn">instance</span> <span class="n">subset_has_scalar</span> <span class="o">[</span><span class="n">has_scalar</span> <span class="n">M</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="n">has_scalar</span> <span class="n">s</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">s</span> <span class="n">b</span><span class="o">,</span> <span class="n">s</span><span class="bp">.</span><span class="mi">1</span> <span class="err">•</span> <span class="n">b</span><span class="bp">⟩</span>
+<span class="kn">instance</span> <span class="n">submonoid_mul_action</span> <span class="o">[</span><span class="n">mul_action</span> <span class="n">M</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">M</span><span class="o">)</span> <span class="o">[</span><span class="n">is_submonoid</span> <span class="n">s</span><span class="o">]</span> <span class="o">:</span> <span class="n">mul_action</span> <span class="n">s</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">one_smul</span> <span class="n">M</span> <span class="n">x</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="err">•</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span><span class="o">),</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="bp">@</span><span class="n">mul_smul</span> <span class="n">M</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="n">y</span><span class="bp">.</span><span class="mi">1</span><span class="bp">⟩</span>
+
+<span class="kn">variables</span> <span class="o">[</span><span class="n">mul_action</span> <span class="n">G</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)</span> <span class="o">[</span><span class="n">is_subgroup</span> <span class="n">s</span><span class="o">]</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">mul_action</span><span class="bp">.</span><span class="n">orbit_rel</span> <span class="n">s</span> <span class="n">α</span>
+</pre></div>
+
+<a name="188084194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subtype.%2A%20diamonds/near/188084194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39380subtypediamonds.html#188084194">Yury G. Kudryashov (Feb 13 2020 at 07:32)</a>:</h4>
+<p>It fails with current definitions, and proving equality wouldn't help.</p>
+
+<a name="188084395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subtype.%2A%20diamonds/near/188084395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39380subtypediamonds.html#188084395">Simon Hudon (Feb 13 2020 at 07:38)</a>:</h4>
+<p>Sorry, it's not straightforward and I won't have time to look into it in the near future</p>
+
+<a name="188084402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subtype.%2A%20diamonds/near/188084402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39380subtypediamonds.html#188084402">Simon Hudon (Feb 13 2020 at 07:38)</a>:</h4>
+<p>You may have to go with your version until someone can adapt the tactics</p>
+
+<a name="188084408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subtype.%2A%20diamonds/near/188084408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39380subtypediamonds.html#188084408">Yury G. Kudryashov (Feb 13 2020 at 07:38)</a>:</h4>
+<p>OK.</p>
+
 
 {% endraw %}
 

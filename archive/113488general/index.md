@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [VScode message window](12770VScodemessagewindow.html) (1 message, latest: Feb 13 2020 at 06:39)
+* [subtype.* diamonds](39380subtypediamonds.html) (11 messages, latest: Feb 13 2020 at 07:38)
 
-* [subtype.* diamonds](39380subtypediamonds.html) (2 messages, latest: Feb 13 2020 at 06:25)
+* [CI nightlies](93428CInightlies.html) (1 message, latest: Feb 13 2020 at 07:00)
+
+* [VScode message window](12770VScodemessagewindow.html) (1 message, latest: Feb 13 2020 at 06:39)
 
 * [interesting paper](15493interestingpaper.html) (1 message, latest: Feb 13 2020 at 03:53)
 

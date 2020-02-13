@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Heine–Borel](47123HeineBorel.html) (6 messages, latest: Feb 13 2020 at 06:31)
+* [\[h : nonempty alpha\]](96411hnonemptyalpha.html) (4 messages, latest: Feb 13 2020 at 07:47)
 
-* [\[h : nonempty alpha\]](96411hnonemptyalpha.html) (3 messages, latest: Feb 13 2020 at 01:27)
+* [Heine–Borel](47123HeineBorel.html) (7 messages, latest: Feb 13 2020 at 07:47)
 
 * [Commutative diagrams](84919Commutativediagrams.html) (9 messages, latest: Feb 12 2020 at 22:12)
 
