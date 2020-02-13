@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [action of subgroup inference issues](01686actionofsubgroupinferenceissues.html) (8 messages, latest: Feb 13 2020 at 05:21)
+
 * [Feasibility of graph or simplicial complex statement](92850Feasibilityofgraphorsimplicialcomplexstatement.html) (90 messages, latest: Feb 13 2020 at 01:24)
 
 * [noob question(s)](52075noobquestions.html) (1914 messages, latest: Feb 12 2020 at 23:40)
@@ -60,8 +62,6 @@ permalink: archive/113489newmembers/index.html
 * [example : ¬ (∀ x, ¬ p x) → (∃ x, p x)](02222examplexpxxpx.html) (91 messages, latest: Feb 01 2020 at 20:33)
 
 * [example : ¬ (∃ x, ¬ p x) → (∀ x, p x)](34382examplexpxxpx.html) (47 messages, latest: Feb 01 2020 at 16:39)
-
-* [action of subgroup inference issues](01686actionofsubgroupinferenceissues.html) (7 messages, latest: Jan 29 2020 at 16:59)
 
 * [Local/city threads](73023Localcitythreads.html) (9 messages, latest: Jan 29 2020 at 04:39)
 
