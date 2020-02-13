@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [coe_fn and class instances](16860coefnandclassinstances.html) (10 messages, latest: Feb 13 2020 at 21:51)
+* [coe_fn and class instances](16860coefnandclassinstances.html) (11 messages, latest: Feb 13 2020 at 22:47)
 
 * [Lean in the wild](43625Leaninthewild.html) (424 messages, latest: Feb 13 2020 at 21:04)
 
