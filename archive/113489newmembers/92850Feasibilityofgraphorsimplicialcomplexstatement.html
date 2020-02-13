@@ -507,6 +507,58 @@ This list helps!<br>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188070615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188070615">Yury G. Kudryashov (Feb 13 2020 at 01:24)</a>:</h4>
 <p>One of the downsides of using <code>structure Graph</code> instead of <code>structure Graph V</code> is that with <code>structure Graph</code> it's much harder to consider two graphs on the same type because you can't rely on <code>G.V = G'.V</code> being a <code>rfl</code> anymore.</p>
 
+<a name="188154554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188154554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188154554">Vincent Beffara (Feb 13 2020 at 21:35)</a>:</h4>
+<p>So I tried the type class route, but I'm confused about something:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">ext</span><span class="o">]</span> <span class="n">class</span> <span class="n">Graph</span> <span class="o">(</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">adj</span> <span class="o">:</span> <span class="n">V</span> <span class="bp">-&gt;</span> <span class="n">V</span> <span class="bp">-&gt;</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">sym</span> <span class="o">:</span> <span class="n">symmetric</span> <span class="n">adj</span><span class="o">)</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">Graph</span><span class="bp">.</span><span class="n">adj</span> <span class="c1">-- Graph.adj : ?M_1 → ?M_1 → Prop</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">Graph</span><span class="bp">.</span><span class="n">sym</span> <span class="c1">-- Graph.sym : ∀ (V : Type) [c : Graph V], symmetric Graph.adj</span>
+</pre></div>
+
+
+<p>Why is the <code>V</code> parameter implicit (or meta-variable-ish) in <code>adj</code> and not in <code>sym</code>? Is there a way to set things up so that one can use the symmetry assumption as <code>Graph.sym</code> rather than <code>Graph.sym G</code>? In all cases I met, <code>Graph.sym _</code> works just fine ...</p>
+
+<a name="188155333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188155333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188155333">Vincent Beffara (Feb 13 2020 at 21:43)</a>:</h4>
+<p>Second question, still following the type class option, how do you say "there is a graph structure on type <code>G</code> that satisfies this and that property"? Is it just <code>∃ C : Graph G</code> and then use all the definitions and theorems with <code>@</code> all over to specify the instance every time?</p>
+
+<a name="188155419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188155419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188155419">Reid Barton (Feb 13 2020 at 21:44)</a>:</h4>
+<p>Try adding <code>{}</code> after <code>sym</code> like so: <code>(sym {} : symmetric adj)</code></p>
+
+<a name="188155463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188155463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188155463">Reid Barton (Feb 13 2020 at 21:44)</a>:</h4>
+<p>For the second question, usually you should also be able to write <code>∃ C : Graph G, by exactI ...</code></p>
+
+<a name="188155595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188155595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188155595">Reid Barton (Feb 13 2020 at 21:46)</a>:</h4>
+<p><code>by exactI ...</code> is a variant of <code>by exact ...</code> (which in turn is more or less the same as just the <code>...</code>) that makes all variables in the context available for instance search.</p>
+
+<a name="188155691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188155691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188155691">Reid Barton (Feb 13 2020 at 21:47)</a>:</h4>
+<p>Normally, the rule is that only variables to the left of the <code>:</code> in the def/lemma statement are available. Variables introduced by a pi/exists/etc. are not.</p>
+
+<a name="188155828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188155828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188155828">Vincent Beffara (Feb 13 2020 at 21:48)</a>:</h4>
+<blockquote>
+<p>Try adding <code>{}</code> after <code>sym</code> like so: <code>(sym {} : symmetric adj)</code></p>
+</blockquote>
+<p>Ah, thanks, that works! (but the notation is not easy to guess ;-) )</p>
+
+<a name="188156344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188156344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188156344">Yury G. Kudryashov (Feb 13 2020 at 21:54)</a>:</h4>
+<p><span class="user-mention" data-user-id="242586">@Vincent Beffara</span> I'd go with <code>@[class] structure Graph V := (adj : V → V → Prop)</code>, then you'll have a normal <code>structure</code> for non-canonical graphs while being able to write <code>instance ... : Graph V</code> for canonical graphs.</p>
+
+<a name="188156776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feasibility%20of%20graph%20or%20simplicial%20complex%20statement/near/188156776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92850Feasibilityofgraphorsimplicialcomplexstatement.html#188156776">Yury G. Kudryashov (Feb 13 2020 at 21:58)</a>:</h4>
+<p>As of now, I see one use case of a canonical graph (auto coercion to a metric space), and I'd do it with</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">graph_space</span> <span class="o">{</span><span class="n">V</span><span class="o">}</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="n">Graph</span> <span class="n">V</span><span class="o">)</span> <span class="o">:=</span> <span class="n">V</span>
+<span class="kn">instance</span> <span class="n">graph_space</span><span class="bp">.</span><span class="n">emetric_space</span> <span class="o">{</span><span class="n">V</span><span class="o">}</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="n">Graph</span> <span class="n">V</span><span class="o">}</span> <span class="o">:</span> <span class="n">emetric_space</span> <span class="o">(</span><span class="n">graph_space</span> <span class="n">G</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">edist</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">G</span><span class="bp">.</span><span class="n">edist</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="bp">..</span> <span class="o">}</span>
+<span class="kn">instance</span> <span class="n">graph_space</span><span class="bp">.</span><span class="n">metric_space</span> <span class="o">{</span><span class="n">V</span><span class="o">}</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="n">Graph</span> <span class="n">V</span><span class="o">}</span> <span class="o">[</span><span class="n">connected_graph</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="n">metric_space</span> <span class="o">(</span><span class="n">graph_space</span> <span class="n">G</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">...</span>
+</pre></div>
+
 
 {% endraw %}
 

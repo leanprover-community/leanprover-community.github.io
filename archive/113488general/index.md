@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean in the wild](43625Leaninthewild.html) (422 messages, latest: Feb 13 2020 at 20:45)
+* [coe_fn and class instances](16860coefnandclassinstances.html) (10 messages, latest: Feb 13 2020 at 21:51)
+
+* [Lean in the wild](43625Leaninthewild.html) (424 messages, latest: Feb 13 2020 at 21:04)
 
 * [nested comment blocks](42453nestedcommentblocks.html) (5 messages, latest: Feb 13 2020 at 18:17)
 

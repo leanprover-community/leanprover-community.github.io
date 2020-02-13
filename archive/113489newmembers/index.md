@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Feasibility of graph or simplicial complex statement](92850Feasibilityofgraphorsimplicialcomplexstatement.html) (99 messages, latest: Feb 13 2020 at 21:58)
+
 * [Can't define Chebyshev polynomials](78641CantdefineChebyshevpolynomials.html) (31 messages, latest: Feb 13 2020 at 20:27)
 
 * [induction over nested sigma](15742inductionovernestedsigma.html) (4 messages, latest: Feb 13 2020 at 17:24)
 
 * [action of subgroup inference issues](01686actionofsubgroupinferenceissues.html) (11 messages, latest: Feb 13 2020 at 08:11)
-
-* [Feasibility of graph or simplicial complex statement](92850Feasibilityofgraphorsimplicialcomplexstatement.html) (90 messages, latest: Feb 13 2020 at 01:24)
 
 * [noob question(s)](52075noobquestions.html) (1914 messages, latest: Feb 12 2020 at 23:40)
 
