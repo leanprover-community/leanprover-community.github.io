@@ -113,6 +113,63 @@ permalink: archive/113489newmembers/78641CantdefineChebyshevpolynomials.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Can%27t%20define%20Chebyshev%20polynomials/near/154993839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/78641CantdefineChebyshevpolynomials.html#154993839">Mario Carneiro (Jan 12 2019 at 18:13)</a>:</h4>
 <p>just like the naive fib algorithm</p>
 
+<a name="188132510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Can%27t%20define%20Chebyshev%20polynomials/near/188132510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/78641CantdefineChebyshevpolynomials.html#188132510">Daniel Keys (Feb 13 2020 at 18:02)</a>:</h4>
+<p>It seems some things may have changed since this discussion took place. Trying to get started working with polynomials; <code>analysis.polynomial</code> is not a valid import any longer. In the following I try to reproduce Kevin's piece of code listed above in this same topic, but it doesn't work on my computer because of the VM not having code for <code>classical.choice</code>. Am I missing something? Also, the definition of <code>p1</code> is non-computable; do we have a way to compute (like <code>#eval</code>) a value from it (or any other polynomial on the reals, or even nats) at a given point?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">polynomial</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="c1">-- this is noncomputable</span>
+<span class="n">def</span> <span class="n">p1</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">C</span> <span class="o">(</span><span class="mi">2</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span>
+<span class="c1">-- these check but I can&#39;t produce a value</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">polynomial</span><span class="bp">.</span><span class="kn">eval</span> <span class="o">(</span> <span class="mi">5</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">)</span> <span class="o">(</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">C</span> <span class="o">(</span><span class="mi">2</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span> <span class="o">)</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">C</span> <span class="mi">1</span>
+
+<span class="n">def</span> <span class="n">chebyshev</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">polynomial</span> <span class="bp">ℤ</span> <span class="c1">-- fails,  VM: no classical.choice</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">C</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">X</span> <span class="bp">*</span> <span class="n">chebyshev</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">-</span> <span class="n">chebyshev</span> <span class="n">n</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">chebyshev</span> <span class="mi">3</span> <span class="c1">--fails, VM: no classical.choice</span>
+</pre></div>
+
+<a name="188133163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Can%27t%20define%20Chebyshev%20polynomials/near/188133163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/78641CantdefineChebyshevpolynomials.html#188133163">Johan Commelin (Feb 13 2020 at 18:09)</a>:</h4>
+<p>choice will certainly be uncomputable. That's a fact of life that we'll need to deal with.</p>
+
+<a name="188133213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Can%27t%20define%20Chebyshev%20polynomials/near/188133213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/78641CantdefineChebyshevpolynomials.html#188133213">Johan Commelin (Feb 13 2020 at 18:09)</a>:</h4>
+<p>So you will want</p>
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="n">theory</span>
+</pre></div>
+
+
+<p>at the top of your file, just after the <code>import</code>s</p>
+
+<a name="188133370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Can%27t%20define%20Chebyshev%20polynomials/near/188133370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/78641CantdefineChebyshevpolynomials.html#188133370">Johan Commelin (Feb 13 2020 at 18:11)</a>:</h4>
+<p>Next, <code>#eval</code> won't work, so you can't simply compute the value. But you could write some <code>simp</code>-lemmas that can do some work for you.</p>
+
+<a name="188133380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Can%27t%20define%20Chebyshev%20polynomials/near/188133380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/78641CantdefineChebyshevpolynomials.html#188133380">Johan Commelin (Feb 13 2020 at 18:11)</a>:</h4>
+<p>Which is almost as good.</p>
+
+<a name="188133574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Can%27t%20define%20Chebyshev%20polynomials/near/188133574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/78641CantdefineChebyshevpolynomials.html#188133574">Johan Commelin (Feb 13 2020 at 18:13)</a>:</h4>
+<p>It is unfortunate that it is currently not easy to run the simplifier against an expression like <code>chebyshev 3</code>. You need to write <code>example : chebyshev 3 = the_answer := by simp [chebyshev]</code>, which defeats the purpose because you will have to precompute the answer. And then Lean will tell you that it agrees <span aria-label="expressionless" class="emoji emoji-1f611" role="img" title="expressionless">:expressionless:</span></p>
+
+<a name="188133652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Can%27t%20define%20Chebyshev%20polynomials/near/188133652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/78641CantdefineChebyshevpolynomials.html#188133652">Rob Lewis (Feb 13 2020 at 18:13)</a>:</h4>
+<p>Maybe we should define a command <code>#simp</code> that behaves like <code>#eval</code> except using the simplifier.</p>
+
+<a name="188133885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Can%27t%20define%20Chebyshev%20polynomials/near/188133885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/78641CantdefineChebyshevpolynomials.html#188133885">Daniel Keys (Feb 13 2020 at 18:16)</a>:</h4>
+<p>Just wondering how Kevin could <code>#eval chebyshev 17</code>, as he shows above (that is, the older messages on the same topic).</p>
+
+<a name="188134036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Can%27t%20define%20Chebyshev%20polynomials/near/188134036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/78641CantdefineChebyshevpolynomials.html#188134036">Rob Lewis (Feb 13 2020 at 18:18)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/issues/1391" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1391">#1391</a> removed this. It worked on toy examples, but isn't very helpful in practice and causes problems elsewhere.</p>
+
 
 {% endraw %}
 

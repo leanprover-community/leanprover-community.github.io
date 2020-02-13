@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Can't define Chebyshev polynomials](78641CantdefineChebyshevpolynomials.html) (29 messages, latest: Feb 13 2020 at 18:18)
+
 * [induction over nested sigma](15742inductionovernestedsigma.html) (4 messages, latest: Feb 13 2020 at 17:24)
 
 * [action of subgroup inference issues](01686actionofsubgroupinferenceissues.html) (11 messages, latest: Feb 13 2020 at 08:11)
@@ -1048,8 +1050,6 @@ permalink: archive/113489newmembers/index.html
 * [Style Guide](93056StyleGuide.html) (4 messages, latest: Jan 14 2019 at 13:57)
 
 * [Proving termination w/ (n' < n \/ (n' = n /\ m' < m))](98570Provingterminationwnnnnmm.html) (6 messages, latest: Jan 13 2019 at 20:24)
-
-* [Can't define Chebyshev polynomials](78641CantdefineChebyshevpolynomials.html) (20 messages, latest: Jan 12 2019 at 18:13)
 
 * [Why is is_subfield not a Prop?](72368WhyisissubfieldnotaProp.html) (6 messages, latest: Jan 12 2019 at 16:41)
 
