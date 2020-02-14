@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [lean codeblocks in docstrings](40241leancodeblocksindocstrings.html) (8 messages, latest: Feb 14 2020 at 03:20)
+
 * [coe_fn and class instances](16860coefnandclassinstances.html) (15 messages, latest: Feb 14 2020 at 01:51)
 
 * [Let assumptions in theorems](82602Letassumptionsintheorems.html) (3 messages, latest: Feb 14 2020 at 01:30)
@@ -84,8 +86,6 @@ permalink: archive/113488general/index.html
 * [xkcd voting](47138xkcdvoting.html) (2 messages, latest: Feb 04 2020 at 16:07)
 
 * [norm_cast and int.sub_nat_nat](76257normcastandintsubnatnat.html) (3 messages, latest: Feb 04 2020 at 13:23)
-
-* [lean codeblocks in docstrings](40241leancodeblocksindocstrings.html) (7 messages, latest: Feb 03 2020 at 18:30)
 
 * [opening twice](84909openingtwice.html) (4 messages, latest: Feb 03 2020 at 16:21)
 
