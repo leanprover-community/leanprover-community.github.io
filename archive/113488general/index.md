@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Notation for matrices and vectors](84581Notationformatricesandvectors.html) (10 messages, latest: Feb 14 2020 at 11:55)
+* [Notation for matrices and vectors](84581Notationformatricesandvectors.html) (13 messages, latest: Feb 14 2020 at 12:35)
 
 * [Let assumptions in theorems](82602Letassumptionsintheorems.html) (4 messages, latest: Feb 14 2020 at 09:53)
 
