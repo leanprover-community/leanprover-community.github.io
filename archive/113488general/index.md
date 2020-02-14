@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [nested comment blocks](42453nestedcommentblocks.html) (6 messages, latest: Feb 14 2020 at 05:42)
+
 * [coe_fn and class instances](16860coefnandclassinstances.html) (16 messages, latest: Feb 14 2020 at 04:43)
 
 * [lean codeblocks in docstrings](40241leancodeblocksindocstrings.html) (8 messages, latest: Feb 14 2020 at 03:20)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [Let assumptions in theorems](82602Letassumptionsintheorems.html) (3 messages, latest: Feb 14 2020 at 01:30)
 
 * [Lean in the wild](43625Leaninthewild.html) (424 messages, latest: Feb 13 2020 at 21:04)
-
-* [nested comment blocks](42453nestedcommentblocks.html) (5 messages, latest: Feb 13 2020 at 18:17)
 
 * [converting between `\[foo\] and "foo"](81281convertingbetweenfooandfoo.html) (4 messages, latest: Feb 13 2020 at 17:04)
 
