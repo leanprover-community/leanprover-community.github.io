@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [coe_fn and class instances](16860coefnandclassinstances.html) (17 messages, latest: Feb 14 2020 at 07:55)
+* [coe_fn and class instances](16860coefnandclassinstances.html) (20 messages, latest: Feb 14 2020 at 08:22)
 
 * [nested comment blocks](42453nestedcommentblocks.html) (6 messages, latest: Feb 14 2020 at 05:42)
 
