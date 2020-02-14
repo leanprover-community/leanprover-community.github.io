@@ -8,7 +8,7 @@ permalink: archive/index.html
 
 ## Streams:
 
-* [general](113488general/index.html) (2369 topics)
+* [general](113488general/index.html) (2370 topics)
 
 * [new members](113489newmembers/index.html) (783 topics)
 
@@ -18,7 +18,7 @@ permalink: archive/index.html
 
 * [Lean Together 2019](179818LeanTogether2019/index.html) (31 topics)
 
-* [Lean for teaching](187764Leanforteaching/index.html) (17 topics)
+* [Lean for teaching](187764Leanforteaching/index.html) (18 topics)
 
 * [kbb](141825kbb/index.html) (13 topics)
 

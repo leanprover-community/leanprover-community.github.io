@@ -9,6 +9,8 @@ permalink: archive/187764Leanforteaching/index.html
 
 ### Topics:
 
+* [Hints?](56166Hints.html) (2 messages, latest: Feb 14 2020 at 22:51)
+
 * [natural number game](77211naturalnumbergame.html) (26 messages, latest: Feb 13 2020 at 00:08)
 
 * [a = b \to f a = f b?](59915abtofafb.html) (7 messages, latest: Jan 31 2020 at 22:25)
