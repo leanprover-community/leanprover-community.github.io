@@ -75,6 +75,230 @@ code goes here
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188246030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188246030">ROCKY KAMEN-RUBIO (Feb 14 2020 at 20:59)</a>:</h4>
 <p>Thank you!!! I was trying to figure out how to do that.</p>
 
+<a name="188246301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188246301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188246301">Johan Commelin (Feb 14 2020 at 21:02)</a>:</h4>
+<p><span class="user-mention" data-user-id="261068">@ROCKY KAMEN-RUBIO</span> Instead of <code>repeat { rw foobar at s }</code>, you could do <code>simp only [foobar] at s</code>.</p>
+
+<a name="188246322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188246322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188246322">Johan Commelin (Feb 14 2020 at 21:02)</a>:</h4>
+<p>I would also simp <code>myIsEven</code> and <code>myIsOdd</code> away.</p>
+
+<a name="188246341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188246341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188246341">Johan Commelin (Feb 14 2020 at 21:03)</a>:</h4>
+<p>Be sure to use <code>simp only</code>, because without the <code>only</code> Lean might try lots of other stuff as well.</p>
+
+<a name="188246360"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188246360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188246360">Johan Commelin (Feb 14 2020 at 21:03)</a>:</h4>
+<p>In fact, you could even use <code>dsimp only</code>.</p>
+
+<a name="188246384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188246384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188246384">Johan Commelin (Feb 14 2020 at 21:03)</a>:</h4>
+<p>After that, I would try feeding it to <code>tauto</code>.</p>
+
+<a name="188246479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188246479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188246479">Johan Commelin (Feb 14 2020 at 21:04)</a>:</h4>
+<p>But really, here an external solver would be very helpful. Some people are working on this, but atm it isn't easy to use.</p>
+
+<a name="188247800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188247800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188247800">ROCKY KAMEN-RUBIO (Feb 14 2020 at 21:17)</a>:</h4>
+<p><code>dsimp only </code> is giving me a "failed to simplify state" error, and  <code> tauto </code> is updating forever.</p>
+
+<a name="188248110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188248110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188248110">Kevin Buzzard (Feb 14 2020 at 21:20)</a>:</h4>
+<p>Setting the class instance max depth to such a high value might well cause timeout problems. Why are you changing the max depth at all?</p>
+
+<a name="188248194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188248194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188248194">Kevin Buzzard (Feb 14 2020 at 21:21)</a>:</h4>
+<p>Actually you don't even seem to be using any typeclasses :-)</p>
+
+<a name="188248591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188248591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188248591">ROCKY KAMEN-RUBIO (Feb 14 2020 at 21:26)</a>:</h4>
+<p>I was getting class instance max depth exceeded errors so I increased the max depth. I'm still pretty new to lean so I don't fully understand the best practices. Any suggestions would be very much appreciated!</p>
+
+<a name="188248629"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188248629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188248629">Kevin Buzzard (Feb 14 2020 at 21:26)</a>:</h4>
+<p>I'm a bit confused by this because your code doesn't have any typeclasses in.</p>
+
+<a name="188248696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188248696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188248696">Kevin Buzzard (Feb 14 2020 at 21:27)</a>:</h4>
+<p>What's the human-readable argument that proves this theorem?</p>
+
+<a name="188248996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188248996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188248996">Kevin Buzzard (Feb 14 2020 at 21:31)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">noStrategy2</span> <span class="o">(</span><span class="n">strategy</span> <span class="o">:</span> <span class="o">((</span><span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">×</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">)))</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">checkStrategy</span> <span class="o">(</span><span class="n">strategy</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intro</span> <span class="n">s</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">checkStrategy</span> <span class="n">at</span> <span class="n">s</span><span class="o">,</span>
+<span class="n">repeat</span> <span class="o">{</span><span class="n">rw</span> <span class="n">checkStrategyrc</span> <span class="n">at</span> <span class="n">s</span><span class="o">},</span>
+<span class="n">simp</span> <span class="n">at</span> <span class="n">s</span><span class="o">,</span>
+<span class="n">revert</span> <span class="n">s</span><span class="o">,</span>
+<span class="n">unfold</span> <span class="n">myIsEven</span><span class="o">,</span>
+<span class="n">unfold</span> <span class="n">myIsOdd</span><span class="o">,</span>
+<span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">↔</span> <span class="n">false</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+<span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">↔</span> <span class="n">false</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+<span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="mi">3</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">↔</span> <span class="n">false</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+<span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">3</span> <span class="bp">↔</span> <span class="n">false</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+<span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="mi">3</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">↔</span> <span class="n">false</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+<span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">3</span> <span class="bp">↔</span> <span class="n">false</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+<span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">false_and</span><span class="o">,</span> <span class="n">false_or</span><span class="o">],</span>
+<span class="n">tauto</span><span class="bp">!</span><span class="o">,</span> <span class="c1">-- fails</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="188249060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188249060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188249060">Kevin Buzzard (Feb 14 2020 at 21:32)</a>:</h4>
+<div class="codehilite"><pre><span></span>⊢ ((strategy.fst 1).fst + ((strategy.fst 1).snd.fst + (strategy.fst 1).snd.snd) =
+         ((strategy.fst 1).fst + ((strategy.fst 1).snd.fst + (strategy.fst 1).snd.snd)) / 2 * 2 ∧
+       ¬(strategy.snd 1).fst + ((strategy.snd 1).snd.fst + (strategy.snd 1).snd.snd) =
+             ((strategy.snd 1).fst + ((strategy.snd 1).snd.fst + (strategy.snd 1).snd.snd)) / 2 * 2 ∧
+         ((strategy.fst 1).fst = (strategy.snd 1).fst ∨ false)) ∧
+    ((strategy.fst 1).fst + ((strategy.fst 1).snd.fst + (strategy.fst 1).snd.snd) =
+           ((strategy.fst 1).fst + ((strategy.fst 1).snd.fst + (strategy.fst 1).snd.snd)) / 2 * 2 ∧
+         ¬(strategy.snd 2).fst + ((strategy.snd 2).snd.fst + (strategy.snd 2).snd.snd) =
+               ((strategy.snd 2).fst + ((strategy.snd 2).snd.fst + (strategy.snd 2).snd.snd)) / 2 * 2 ∧
+           ((strategy.fst 1).snd.fst = (strategy.snd 2).fst ∨ false)) ∧
+      ((strategy.fst 1).fst + ((strategy.fst 1).snd.fst + (strategy.fst 1).snd.snd) =
+             ((strategy.fst 1).fst + ((strategy.fst 1).snd.fst + (strategy.fst 1).snd.snd)) / 2 * 2 ∧
+           ¬(strategy.snd 3).fst + ((strategy.snd 3).snd.fst + (strategy.snd 3).snd.snd) =
+                 ((strategy.snd 3).fst + ((strategy.snd 3).snd.fst + (strategy.snd 3).snd.snd)) / 2 * 2 ∧
+             ((strategy.fst 1).snd.snd = (strategy.snd 3).fst ∨ false)) ∧
+        ((strategy.fst 2).fst + ((strategy.fst 2).snd.fst + (strategy.fst 2).snd.snd) =
+               ((strategy.fst 2).fst + ((strategy.fst 2).snd.fst + (strategy.fst 2).snd.snd)) / 2 * 2 ∧
+             ¬(strategy.snd 1).fst + ((strategy.snd 1).snd.fst + (strategy.snd 1).snd.snd) =
+                   ((strategy.snd 1).fst + ((strategy.snd 1).snd.fst + (strategy.snd 1).snd.snd)) / 2 * 2 ∧
+               ((strategy.fst 2).fst = (strategy.snd 1).snd.fst ∨ false)) ∧
+          ((strategy.fst 2).fst + ((strategy.fst 2).snd.fst + (strategy.fst 2).snd.snd) =
+                 ((strategy.fst 2).fst + ((strategy.fst 2).snd.fst + (strategy.fst 2).snd.snd)) / 2 * 2 ∧
+               ¬(strategy.snd 2).fst + ((strategy.snd 2).snd.fst + (strategy.snd 2).snd.snd) =
+                     ((strategy.snd 2).fst + ((strategy.snd 2).snd.fst + (strategy.snd 2).snd.snd)) / 2 * 2 ∧
+                 ((strategy.fst 2).snd.fst = (strategy.snd 2).snd.fst ∨ false)) ∧
+            ((strategy.fst 2).fst + ((strategy.fst 2).snd.fst + (strategy.fst 2).snd.snd) =
+                   ((strategy.fst 2).fst + ((strategy.fst 2).snd.fst + (strategy.fst 2).snd.snd)) / 2 * 2 ∧
+                 ¬(strategy.snd 3).fst + ((strategy.snd 3).snd.fst + (strategy.snd 3).snd.snd) =
+                       ((strategy.snd 3).fst + ((strategy.snd 3).snd.fst + (strategy.snd 3).snd.snd)) / 2 * 2 ∧
+                   ((strategy.fst 2).snd.snd = (strategy.snd 3).snd.fst ∨ false)) ∧
+              ((strategy.fst 3).fst + ((strategy.fst 3).snd.fst + (strategy.fst 3).snd.snd) =
+                     ((strategy.fst 3).fst + ((strategy.fst 3).snd.fst + (strategy.fst 3).snd.snd)) / 2 * 2 ∧
+                   ¬(strategy.snd 1).fst + ((strategy.snd 1).snd.fst + (strategy.snd 1).snd.snd) =
+                         ((strategy.snd 1).fst + ((strategy.snd 1).snd.fst + (strategy.snd 1).snd.snd)) / 2 * 2 ∧
+                     ((strategy.fst 3).fst = (strategy.snd 1).snd.snd ∨ false)) ∧
+                ((strategy.fst 3).fst + ((strategy.fst 3).snd.fst + (strategy.fst 3).snd.snd) =
+                       ((strategy.fst 3).fst + ((strategy.fst 3).snd.fst + (strategy.fst 3).snd.snd)) / 2 * 2 ∧
+                     ¬(strategy.snd 2).fst + ((strategy.snd 2).snd.fst + (strategy.snd 2).snd.snd) =
+                           ((strategy.snd 2).fst + ((strategy.snd 2).snd.fst + (strategy.snd 2).snd.snd)) / 2 * 2 ∧
+                       ((strategy.fst 3).snd.fst = (strategy.snd 2).snd.snd ∨ false)) ∧
+                  (strategy.fst 3).fst + ((strategy.fst 3).snd.fst + (strategy.fst 3).snd.snd) =
+                      ((strategy.fst 3).fst + ((strategy.fst 3).snd.fst + (strategy.fst 3).snd.snd)) / 2 * 2 ∧
+                    ¬(strategy.snd 3).fst + ((strategy.snd 3).snd.fst + (strategy.snd 3).snd.snd) =
+                          ((strategy.snd 3).fst + ((strategy.snd 3).snd.fst + (strategy.snd 3).snd.snd)) / 2 * 2 ∧
+                      (strategy.fst 3).snd.snd = (strategy.snd 3).snd.snd →
+  false
+</pre></div>
+
+<a name="188249244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188249244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188249244">ROCKY KAMEN-RUBIO (Feb 14 2020 at 21:34)</a>:</h4>
+<p>The argument goes something like: Alice and Bob need both of their strategies to be consistent. This means that we can think of their strategies as sampling from a single coloring of the 3x3 board with Green/Red tiles (represented by 1 and 0). If we impose the condition that each row has an even number of green tiles, and each column has an odd number of tiles, then the total number of green tiles should be even by summing the rows, but odd by summing the columns, which is impossible. </p>
+<p>My strategy is more of a brute force approach though. I figured this would be easier to implement in lean and once i got this working I'd go to more complex arguments.</p>
+
+<a name="188249297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188249297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188249297">Kevin Buzzard (Feb 14 2020 at 21:35)</a>:</h4>
+<p>I don't know anything about the board or tiles or strategy that you're talking about so I don't understand your argument.</p>
+
+<a name="188249674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188249674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188249674">Yury G. Kudryashov (Feb 14 2020 at 21:40)</a>:</h4>
+<p>Could you please describe the game in English? I can try to decode Lean but it takes some time.</p>
+
+<a name="188251011"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188251011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188251011">Kevin Buzzard (Feb 14 2020 at 21:56)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">noStrategy2</span> <span class="o">(</span><span class="n">strategy</span> <span class="o">:</span> <span class="o">((</span><span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">×</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">)))</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">checkStrategy</span> <span class="o">(</span><span class="n">strategy</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intro</span> <span class="n">s</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">checkStrategy</span> <span class="n">at</span> <span class="n">s</span><span class="o">,</span>
+<span class="n">repeat</span> <span class="o">{</span><span class="n">rw</span> <span class="n">checkStrategyrc</span> <span class="n">at</span> <span class="n">s</span><span class="o">},</span>
+<span class="n">simp</span> <span class="n">at</span> <span class="n">s</span><span class="o">,</span>
+<span class="n">revert</span> <span class="n">s</span><span class="o">,</span>
+<span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">↔</span> <span class="n">false</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+<span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">↔</span> <span class="n">false</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+<span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="mi">3</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">↔</span> <span class="n">false</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+<span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">3</span> <span class="bp">↔</span> <span class="n">false</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+<span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="mi">3</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">↔</span> <span class="n">false</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+<span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">3</span> <span class="bp">↔</span> <span class="n">false</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+<span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">false_and</span><span class="o">,</span> <span class="n">false_or</span><span class="o">,</span> <span class="n">or_false</span><span class="o">],</span>
+<span class="k">have</span> <span class="n">h</span> <span class="o">:</span> <span class="n">myIsOdd</span> <span class="bp">=</span> <span class="n">myIsOdd&#39;</span> <span class="o">:=</span> <span class="n">rfl</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">unfold</span> <span class="n">myIsOdd&#39;</span><span class="o">,</span>
+<span class="n">intro</span> <span class="n">s</span><span class="o">,</span>
+<span class="n">rcases</span> <span class="n">s</span> <span class="k">with</span> <span class="bp">⟨⟨</span><span class="n">s1</span><span class="o">,</span> <span class="n">t1</span><span class="o">,</span> <span class="n">u1</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">s2</span><span class="o">,</span> <span class="n">t2</span><span class="o">,</span> <span class="n">u2</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">s3</span><span class="o">,</span> <span class="n">t3</span><span class="o">,</span> <span class="n">u3</span><span class="bp">⟩</span><span class="o">,</span>
+               <span class="bp">⟨</span><span class="n">s4</span><span class="o">,</span> <span class="n">t4</span><span class="o">,</span> <span class="n">u4</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">s5</span><span class="o">,</span> <span class="n">t5</span><span class="o">,</span> <span class="n">u5</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">s6</span><span class="o">,</span> <span class="n">t6</span><span class="o">,</span> <span class="n">u6</span><span class="bp">⟩</span><span class="o">,</span>
+               <span class="bp">⟨</span><span class="n">s7</span><span class="o">,</span> <span class="n">t7</span><span class="o">,</span> <span class="n">u7</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">s8</span><span class="o">,</span> <span class="n">t8</span><span class="o">,</span> <span class="n">u8</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">s9</span><span class="o">,</span> <span class="n">t9</span><span class="o">,</span> <span class="n">u9</span><span class="bp">⟩⟩</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">u1</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">u2</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">u3</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">u4</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">u5</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">u6</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">u7</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">u8</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">u9</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+<span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>gets us to</p>
+<div class="codehilite"><pre><span></span>1 goal
+strategy : (ℕ → ℕ × ℕ × ℕ) × (ℕ → ℕ × ℕ × ℕ),
+h : myIsOdd = myIsOdd&#39;,
+t1 : ¬myIsEven ((strategy.snd 1).fst + ((strategy.snd 1).snd.fst + (strategy.snd 1).snd.snd)),
+u1 : (strategy.fst 1).fst = (strategy.snd 1).fst,
+t2 : ¬myIsEven ((strategy.snd 2).fst + ((strategy.snd 2).snd.fst + (strategy.snd 2).snd.snd)),
+u2 : (strategy.fst 1).snd.fst = (strategy.snd 2).fst,
+t3 : ¬myIsEven ((strategy.snd 3).fst + ((strategy.snd 3).snd.fst + (strategy.snd 3).snd.snd)),
+u3 : (strategy.fst 1).snd.snd = (strategy.snd 3).fst,
+t4 : ¬myIsEven ((strategy.snd 1).fst + ((strategy.snd 1).snd.fst + (strategy.snd 1).snd.snd)),
+u4 : (strategy.fst 2).fst = (strategy.snd 1).snd.fst,
+t5 : ¬myIsEven ((strategy.snd 2).fst + ((strategy.snd 2).snd.fst + (strategy.snd 2).snd.snd)),
+u5 : (strategy.fst 2).snd.fst = (strategy.snd 2).snd.fst,
+t6 : ¬myIsEven ((strategy.snd 3).fst + ((strategy.snd 3).snd.fst + (strategy.snd 3).snd.snd)),
+u6 : (strategy.fst 2).snd.snd = (strategy.snd 3).snd.fst,
+t7 : ¬myIsEven ((strategy.snd 1).fst + ((strategy.snd 1).snd.fst + (strategy.snd 1).snd.snd)),
+u7 : (strategy.fst 3).fst = (strategy.snd 1).snd.snd,
+t8 : ¬myIsEven ((strategy.snd 2).fst + ((strategy.snd 2).snd.fst + (strategy.snd 2).snd.snd)),
+u8 : (strategy.fst 3).snd.fst = (strategy.snd 2).snd.snd,
+t9 : ¬myIsEven ((strategy.snd 3).fst + ((strategy.snd 3).snd.fst + (strategy.snd 3).snd.snd)),
+u9 : (strategy.fst 3).snd.snd = (strategy.snd 3).snd.snd,
+s1 s2 s3 : myIsEven ((strategy.snd 1).fst + ((strategy.snd 2).fst + (strategy.snd 3).fst)),
+s4 s5 s6 : myIsEven ((strategy.snd 1).snd.fst + ((strategy.snd 2).snd.fst + (strategy.snd 3).snd.fst)),
+s7 s8 s9 : myIsEven ((strategy.snd 1).snd.snd + ((strategy.snd 2).snd.snd + (strategy.snd 3).snd.snd))
+⊢ false
+</pre></div>
+
+<a name="188251087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188251087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188251087">ROCKY KAMEN-RUBIO (Feb 14 2020 at 21:57)</a>:</h4>
+<p>Sorry, I don't think I've been very clear. Here is a more detailed explanation:</p>
+<p><strong>The Game: </strong>Alice is assigned a row and Bob is assigned a column of a 3x3 board. Neither knows the assignment of the other. The task is for each of them to color their respective row/column with Green and Red tiles (aka 1s and 0s) while meeting the following criteria:</p>
+<ol>
+<li>Rows must have an even number of Green tiles</li>
+<li>Columns must have an odd number of Green tiles</li>
+<li>The two colorings must be consistent - they must agree on the color of the shared tile</li>
+</ol>
+<p>They can plan a strategy beforehand but can't communicate after each gets their respective assignment. </p>
+<p><strong>My goal</strong> is to prove that there is no guaranteed successful strategy. </p>
+<p><strong>Lean Proof</strong> We can think of a strategy as a pair of maps, one from a row number to a triple of values we use to fill that row, the other from a column number to a triple of values we use to fill that column. <code>checkStrategyrc</code> checks that a given strategy works for a specific row r and column c by showing that the row sum is even, the column sum is odd, and the two agree at the intersection. <code>checkStrategy </code> calls <code>checkStrategy </code> on every combination of r and c in the 3x3 grid. Now we just need to show that no strategy passes checkStrategy.</p>
+<p><strong>More Intuitive proof</strong> (This is what I would like to implement next) Since Alice and Bob must agree on the value of the intersection of their respective row/column, and the location of this intersection is arbitrary, we can think of their strategies as sampling from a single tiled 3x3 board. Summing the values in the rows of this single board we get an even number, but summing the values in the columns we get an odd number. The sums of the values in all the tiles should be the same whether we do it by rows or columns, so we get a contradiction.</p>
+
+<a name="188251159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188251159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188251159">Kevin Buzzard (Feb 14 2020 at 21:58)</a>:</h4>
+<p>And now it seems to me that you might be able to prove it by observing that something like t1,t2,t3 (or whatever) together say that the sum of 9 terms is odd, and s1,s4,s7 (or whatever) say that the sum of the same 9 terms is even. But you can't expect Lean to figure this argument out because it knows no properties at all about your <code>myIsEven</code> and <code>myIsOdd</code></p>
+
+<a name="188251264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188251264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188251264">ROCKY KAMEN-RUBIO (Feb 14 2020 at 21:59)</a>:</h4>
+<p>I also want to add that there are probably a number of ways to do what I'm attempting to do in much more efficient ways, both mathematically and in lean. I am open to any/all suggestions.</p>
+
+<a name="188251286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188251286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188251286">Kevin Buzzard (Feb 14 2020 at 21:59)</a>:</h4>
+<p>So this is why it gets stuck, I suspect. Your proof involves summing all nine entries of the board. But no tactic will even prove <code>myIsEven(x) \and myIsEven(y) -&gt; myIsEven(x+y)</code></p>
+
 
 {% endraw %}
 
