@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [coe_fn and class instances](16860coefnandclassinstances.html) (22 messages, latest: Feb 14 2020 at 15:03)
+
 * [VScode message window](12770VScodemessagewindow.html) (7 messages, latest: Feb 14 2020 at 14:25)
 
 * [Notation for matrices and vectors](84581Notationformatricesandvectors.html) (13 messages, latest: Feb 14 2020 at 12:35)
 
 * [Let assumptions in theorems](82602Letassumptionsintheorems.html) (4 messages, latest: Feb 14 2020 at 09:53)
-
-* [coe_fn and class instances](16860coefnandclassinstances.html) (20 messages, latest: Feb 14 2020 at 08:22)
 
 * [nested comment blocks](42453nestedcommentblocks.html) (6 messages, latest: Feb 14 2020 at 05:42)
 
