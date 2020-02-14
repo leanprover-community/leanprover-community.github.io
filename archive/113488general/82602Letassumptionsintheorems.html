@@ -1,0 +1,48 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/82602Letassumptionsintheorems.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/82602Letassumptionsintheorems.html">Let assumptions in theorems</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188165562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Let%20assumptions%20in%20theorems/near/188165562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82602Letassumptionsintheorems.html#188165562">Jason Rute (Feb 13 2020 at 23:58)</a>:</h4>
+<p>Consider the following partial proof:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="k">let</span> <span class="n">x</span> <span class="o">:=</span> <span class="mi">0</span> <span class="k">in</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">intro</span><span class="o">,</span> <span class="kn">end</span>
+</pre></div>
+
+
+<p>If I put the curser right before <code>end</code> the goal is</p>
+<div class="codehilite"><pre><span></span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="err">⊢</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span>
+</pre></div>
+
+
+<p>However, if I tried to enter that into Lean as follows:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">begin</span> <span class="kn">end</span>
+</pre></div>
+
+
+<p>However, I get a different goal (which is neither equivalent nor even true).</p>
+<div class="codehilite"><pre><span></span><span class="n">x</span> <span class="o">:</span> <span class="n">opt_param</span> <span class="bp">ℕ</span> <span class="mi">0</span>
+<span class="err">⊢</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span>
+</pre></div>
+
+
+<p>My questions:</p>
+<ol>
+<li>Is there a way to enter the goal <code>x : ℕ := 0 ⊢ x = 0</code> into Lean with the <code>x : ℕ := 0</code> on the left hand side?</li>
+<li>Is there a way to tactic programmatically know that <code>x</code> in the first example is a <code>let</code> binder (or whatever the appropriate terminology is) and that <code>0</code> is the value assigned to <code>x</code>?</li>
+</ol>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
