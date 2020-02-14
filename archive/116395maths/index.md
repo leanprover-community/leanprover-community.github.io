@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Carlos Simpson and VHS](36146CarlosSimpsonandVHS.html) (7 messages, latest: Feb 14 2020 at 18:59)
+* [Carlos Simpson and VHS](36146CarlosSimpsonandVHS.html) (8 messages, latest: Feb 14 2020 at 19:01)
 
 * [class groups of number fields?](94955classgroupsofnumberfields.html) (14 messages, latest: Feb 14 2020 at 16:22)
 
