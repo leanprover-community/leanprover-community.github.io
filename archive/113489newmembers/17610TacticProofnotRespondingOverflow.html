@@ -1,0 +1,81 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/17610TacticProofnotRespondingOverflow.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html">Tactic Proof not Responding. Overflow?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188245630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188245630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188245630">ROCKY KAMEN-RUBIO (Feb 14 2020 at 20:54)</a>:</h4>
+<p>Hi everyone! I'm trying to do a tactic proof that ends with a very long proposition that should simplify to false. Rather than going through it manually, I'm trying to use simp, finish, norm_num, etc. The problem is that the window with the goal state just goes to "updating" indefinitely. Have I reached the limit of what these tactics can do, or am I doing something wrong? Thanks!</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">init</span><span class="bp">.</span><span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">init</span><span class="bp">.</span><span class="n">algebra</span><span class="bp">.</span><span class="n">ring</span>
+<span class="kn">import</span> <span class="n">init</span><span class="bp">.</span><span class="n">algebra</span><span class="bp">.</span><span class="n">norm_num</span>
+<span class="kn">import</span> <span class="n">tactic</span>
+<span class="kn">set_option</span> <span class="n">class</span><span class="bp">.</span><span class="n">instance_max_depth</span> <span class="mi">15000000</span>
+
+<span class="n">def</span> <span class="n">myIsEven</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">n</span> <span class="bp">=</span> <span class="o">(</span><span class="n">n</span><span class="bp">/</span><span class="mi">2</span><span class="o">)</span><span class="bp">*</span><span class="mi">2</span>
+<span class="n">def</span> <span class="n">myIsOdd</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">n</span> <span class="bp">=</span> <span class="o">(</span><span class="n">n</span><span class="bp">/</span><span class="mi">2</span><span class="o">)</span><span class="bp">*</span><span class="mi">2</span><span class="o">)</span>
+
+<span class="c1">--Alice only sees r and Bob only sees c. The strategy isn&#39;t (r,c) → (...) but two maps, r→(r1 r2 r3) and c → (c1 c2 c3)</span>
+<span class="c1">--I&#39;m using 0 and 1 instead of Green and Red as the two options to fill squares. This makes checking parity of strategies easier</span>
+
+<span class="n">def</span> <span class="n">checkStrategyrc</span> <span class="o">(</span><span class="n">r</span> <span class="n">c</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">strategy</span> <span class="o">:</span> <span class="o">((</span><span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">×</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">)))</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+        <span class="c1">--functionalize this with lists.</span>
+        <span class="k">let</span> <span class="n">r1</span> <span class="o">:=</span> <span class="o">(</span><span class="n">strategy</span><span class="bp">.</span><span class="mi">1</span> <span class="n">r</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+        <span class="n">r2</span> <span class="o">:=</span> <span class="o">(</span><span class="n">strategy</span><span class="bp">.</span><span class="mi">1</span> <span class="n">r</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+        <span class="n">r3</span> <span class="o">:=</span> <span class="o">(</span><span class="n">strategy</span><span class="bp">.</span><span class="mi">1</span> <span class="n">r</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+        <span class="n">c1</span> <span class="o">:=</span> <span class="o">(</span><span class="n">strategy</span><span class="bp">.</span><span class="mi">2</span> <span class="n">c</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+        <span class="n">c2</span> <span class="o">:=</span> <span class="o">(</span><span class="n">strategy</span><span class="bp">.</span><span class="mi">2</span> <span class="n">c</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+        <span class="n">c3</span> <span class="o">:=</span> <span class="o">(</span><span class="n">strategy</span><span class="bp">.</span><span class="mi">2</span> <span class="n">c</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span>
+
+        <span class="k">in</span> <span class="n">myIsEven</span><span class="o">(</span><span class="n">r1</span> <span class="bp">+</span> <span class="n">r2</span> <span class="bp">+</span> <span class="n">r3</span><span class="o">)</span> <span class="bp">∧</span> <span class="n">myIsOdd</span><span class="o">(</span><span class="n">c1</span> <span class="bp">+</span> <span class="n">c2</span> <span class="bp">+</span> <span class="n">c3</span><span class="o">)</span> <span class="bp">∧</span>
+        <span class="o">((</span><span class="n">r</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">∧</span> <span class="n">c</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">∧</span> <span class="n">r1</span> <span class="bp">=</span> <span class="n">c1</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="n">r</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">∧</span> <span class="n">c</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">∧</span> <span class="n">r2</span> <span class="bp">=</span> <span class="n">c1</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="n">r</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">∧</span> <span class="n">c</span> <span class="bp">=</span> <span class="mi">3</span> <span class="bp">∧</span> <span class="n">r3</span> <span class="bp">=</span> <span class="n">c1</span><span class="o">)</span>
+        <span class="bp">∨</span><span class="o">(</span><span class="n">r</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">∧</span> <span class="n">c</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">∧</span> <span class="n">r1</span> <span class="bp">=</span> <span class="n">c2</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="n">r</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">∧</span> <span class="n">c</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">∧</span> <span class="n">r2</span> <span class="bp">=</span> <span class="n">c2</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="n">r</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">∧</span> <span class="n">c</span> <span class="bp">=</span> <span class="mi">3</span> <span class="bp">∧</span> <span class="n">r3</span> <span class="bp">=</span> <span class="n">c2</span><span class="o">)</span>
+        <span class="bp">∨</span><span class="o">(</span><span class="n">r</span> <span class="bp">=</span> <span class="mi">3</span> <span class="bp">∧</span> <span class="n">c</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">∧</span> <span class="n">r1</span> <span class="bp">=</span> <span class="n">c3</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="n">r</span> <span class="bp">=</span> <span class="mi">3</span> <span class="bp">∧</span> <span class="n">c</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">∧</span> <span class="n">r2</span> <span class="bp">=</span> <span class="n">c3</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="n">r</span> <span class="bp">=</span> <span class="mi">3</span> <span class="bp">∧</span> <span class="n">c</span> <span class="bp">=</span> <span class="mi">3</span> <span class="bp">∧</span> <span class="n">r3</span> <span class="bp">=</span> <span class="n">c3</span><span class="o">))</span>
+
+<span class="c1">--checks all three conditions are met for the strategy</span>
+<span class="n">def</span> <span class="n">checkStrategy</span> <span class="o">(</span><span class="n">strategy</span> <span class="o">:</span> <span class="o">((</span><span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">×</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">)))</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+    <span class="o">(</span><span class="n">checkStrategyrc</span> <span class="mi">1</span> <span class="mi">1</span> <span class="n">strategy</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">checkStrategyrc</span> <span class="mi">1</span> <span class="mi">2</span> <span class="n">strategy</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">checkStrategyrc</span> <span class="mi">1</span> <span class="mi">3</span> <span class="n">strategy</span><span class="o">)</span> <span class="bp">∧</span>
+    <span class="o">(</span><span class="n">checkStrategyrc</span> <span class="mi">2</span> <span class="mi">1</span> <span class="n">strategy</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">checkStrategyrc</span> <span class="mi">2</span> <span class="mi">2</span> <span class="n">strategy</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">checkStrategyrc</span> <span class="mi">2</span> <span class="mi">3</span> <span class="n">strategy</span><span class="o">)</span> <span class="bp">∧</span>
+    <span class="o">(</span><span class="n">checkStrategyrc</span> <span class="mi">3</span> <span class="mi">1</span> <span class="n">strategy</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">checkStrategyrc</span> <span class="mi">3</span> <span class="mi">2</span> <span class="n">strategy</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">checkStrategyrc</span> <span class="mi">3</span> <span class="mi">3</span> <span class="n">strategy</span><span class="o">)</span>
+
+<span class="c1">--someone on Zulip said to try putting this not directly after the import statements. This seems to have helped</span>
+<span class="n">open_locale</span> <span class="n">classical</span>
+<span class="c1">--given a strategy, we can&#39;t have it satisfy all the conditions</span>
+<span class="kn">theorem</span> <span class="n">noStrategy2</span> <span class="o">(</span><span class="n">strategy</span> <span class="o">:</span> <span class="o">((</span><span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">×</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">)))</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">checkStrategy</span> <span class="o">(</span><span class="n">strategy</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intro</span> <span class="n">s</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">checkStrategy</span> <span class="n">at</span> <span class="n">s</span><span class="o">,</span>
+<span class="n">repeat</span> <span class="o">{</span><span class="n">rw</span> <span class="n">checkStrategyrc</span> <span class="n">at</span> <span class="n">s</span><span class="o">},</span>
+<span class="n">simp</span> <span class="n">at</span> <span class="n">s</span><span class="o">,</span>
+<span class="n">revert</span> <span class="n">s</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="188245876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188245876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188245876">Johan Commelin (Feb 14 2020 at 20:57)</a>:</h4>
+<p><span class="user-mention" data-user-id="261068">@ROCKY KAMEN-RUBIO</span> Pro tip: If you wrap your code in</p>
+<div class="codehilite"><pre><span></span>```lean
+code goes here
+```
+</pre></div>
+
+
+<p>then you'll get pretty formatting with syntax highlighting.</p>
+
+<a name="188246030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188246030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188246030">ROCKY KAMEN-RUBIO (Feb 14 2020 at 20:59)</a>:</h4>
+<p>Thank you!!! I was trying to figure out how to do that.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

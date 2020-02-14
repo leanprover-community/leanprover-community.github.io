@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Let assumptions in theorems](82602Letassumptionsintheorems.html) (6 messages, latest: Feb 14 2020 at 17:50)
+* [Let assumptions in theorems](82602Letassumptionsintheorems.html) (7 messages, latest: Feb 14 2020 at 20:12)
 
 * [coe_fn and class instances](16860coefnandclassinstances.html) (22 messages, latest: Feb 14 2020 at 15:03)
 

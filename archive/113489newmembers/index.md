@@ -9,6 +9,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Tactic Proof not Responding. Overflow?](17610TacticProofnotRespondingOverflow.html) (3 messages, latest: Feb 14 2020 at 20:59)
+
+* [Trouble Installing Mathlib](21684TroubleInstallingMathlib.html) (6 messages, latest: Feb 14 2020 at 20:36)
+
 * [Rewrite tactic](43515Rewritetactic.html) (4 messages, latest: Feb 14 2020 at 16:19)
 
 * [Feasibility of graph or simplicial complex statement](92850Feasibilityofgraphorsimplicialcomplexstatement.html) (103 messages, latest: Feb 13 2020 at 23:32)
@@ -22,8 +26,6 @@ permalink: archive/113489newmembers/index.html
 * [noob question(s)](52075noobquestions.html) (1914 messages, latest: Feb 12 2020 at 23:40)
 
 * [Intermediate Value Theorem](56141IntermediateValueTheorem.html) (35 messages, latest: Feb 12 2020 at 21:31)
-
-* [Trouble Installing Mathlib](21684TroubleInstallingMathlib.html) (5 messages, latest: Feb 12 2020 at 21:29)
 
 * [contradiction](22034contradiction.html) (4 messages, latest: Feb 12 2020 at 16:48)
 
