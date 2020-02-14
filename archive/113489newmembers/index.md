@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Rewrite tactic](43515Rewritetactic.html) (3 messages, latest: Feb 14 2020 at 14:36)
+
 * [Feasibility of graph or simplicial complex statement](92850Feasibilityofgraphorsimplicialcomplexstatement.html) (103 messages, latest: Feb 13 2020 at 23:32)
 
 * [Can't define Chebyshev polynomials](78641CantdefineChebyshevpolynomials.html) (31 messages, latest: Feb 13 2020 at 20:27)

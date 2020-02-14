@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [VScode message window](12770VScodemessagewindow.html) (7 messages, latest: Feb 14 2020 at 14:25)
+
 * [Notation for matrices and vectors](84581Notationformatricesandvectors.html) (13 messages, latest: Feb 14 2020 at 12:35)
 
 * [Let assumptions in theorems](82602Letassumptionsintheorems.html) (4 messages, latest: Feb 14 2020 at 09:53)
-
-* [VScode message window](12770VScodemessagewindow.html) (5 messages, latest: Feb 14 2020 at 09:21)
 
 * [coe_fn and class instances](16860coefnandclassinstances.html) (20 messages, latest: Feb 14 2020 at 08:22)
 
