@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [class groups of number fields?](94955classgroupsofnumberfields.html) (5 messages, latest: Feb 14 2020 at 15:08)
+* [class groups of number fields?](94955classgroupsofnumberfields.html) (14 messages, latest: Feb 14 2020 at 16:22)
 
 * [DVRs](81120DVRs.html) (14 messages, latest: Feb 13 2020 at 20:16)
 
