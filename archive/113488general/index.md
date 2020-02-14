@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Notation for matrices and vectors](84581Notationformatricesandvectors.html) (10 messages, latest: Feb 14 2020 at 11:55)
+
 * [Let assumptions in theorems](82602Letassumptionsintheorems.html) (4 messages, latest: Feb 14 2020 at 09:53)
 
 * [VScode message window](12770VScodemessagewindow.html) (5 messages, latest: Feb 14 2020 at 09:21)
