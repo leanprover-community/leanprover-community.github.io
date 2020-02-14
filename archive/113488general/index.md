@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [nested comment blocks](42453nestedcommentblocks.html) (6 messages, latest: Feb 14 2020 at 05:42)
+* [coe_fn and class instances](16860coefnandclassinstances.html) (17 messages, latest: Feb 14 2020 at 07:55)
 
-* [coe_fn and class instances](16860coefnandclassinstances.html) (16 messages, latest: Feb 14 2020 at 04:43)
+* [nested comment blocks](42453nestedcommentblocks.html) (6 messages, latest: Feb 14 2020 at 05:42)
 
 * [lean codeblocks in docstrings](40241leancodeblocksindocstrings.html) (8 messages, latest: Feb 14 2020 at 03:20)
 
