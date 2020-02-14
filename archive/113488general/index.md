@@ -9,13 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Let assumptions in theorems](82602Letassumptionsintheorems.html) (4 messages, latest: Feb 14 2020 at 09:53)
+
+* [VScode message window](12770VScodemessagewindow.html) (5 messages, latest: Feb 14 2020 at 09:21)
+
 * [coe_fn and class instances](16860coefnandclassinstances.html) (20 messages, latest: Feb 14 2020 at 08:22)
 
 * [nested comment blocks](42453nestedcommentblocks.html) (6 messages, latest: Feb 14 2020 at 05:42)
 
 * [lean codeblocks in docstrings](40241leancodeblocksindocstrings.html) (8 messages, latest: Feb 14 2020 at 03:20)
-
-* [Let assumptions in theorems](82602Letassumptionsintheorems.html) (3 messages, latest: Feb 14 2020 at 01:30)
 
 * [Lean in the wild](43625Leaninthewild.html) (424 messages, latest: Feb 13 2020 at 21:04)
 
@@ -24,8 +26,6 @@ permalink: archive/113488general/index.html
 * [subtype.* diamonds](39380subtypediamonds.html) (12 messages, latest: Feb 13 2020 at 08:10)
 
 * [CI nightlies](93428CInightlies.html) (1 message, latest: Feb 13 2020 at 07:00)
-
-* [VScode message window](12770VScodemessagewindow.html) (1 message, latest: Feb 13 2020 at 06:39)
 
 * [interesting paper](15493interestingpaper.html) (1 message, latest: Feb 13 2020 at 03:53)
 
