@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Let assumptions in theorems](82602Letassumptionsintheorems.html) (1 message, latest: Feb 13 2020 at 23:58)
+* [coe_fn and class instances](16860coefnandclassinstances.html) (15 messages, latest: Feb 14 2020 at 01:51)
 
-* [coe_fn and class instances](16860coefnandclassinstances.html) (12 messages, latest: Feb 13 2020 at 23:13)
+* [Let assumptions in theorems](82602Letassumptionsintheorems.html) (3 messages, latest: Feb 14 2020 at 01:30)
 
 * [Lean in the wild](43625Leaninthewild.html) (424 messages, latest: Feb 13 2020 at 21:04)
 
