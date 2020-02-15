@@ -9,7 +9,7 @@ permalink: archive/187764Leanforteaching/index.html
 
 ### Topics:
 
-* [Hints?](56166Hints.html) (6 messages, latest: Feb 14 2020 at 23:41)
+* [Hints?](56166Hints.html) (11 messages, latest: Feb 15 2020 at 07:41)
 
 * [natural number game](77211naturalnumbergame.html) (26 messages, latest: Feb 13 2020 at 00:08)
 
