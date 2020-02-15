@@ -1,0 +1,57 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/17603finsetltwffails.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/17603finsetltwffails.html">finset.lt_wf fails</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188290463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finset.lt_wf%20fails/near/188290463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17603finsetltwffails.html#188290463">Anton Lorenzen (Feb 15 2020 at 16:55)</a>:</h4>
+<p>I want to define a procedure for generating fresh names like</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">fresh_help</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">string</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">-&gt;</span> <span class="n">string</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">),</span> <span class="n">string</span>
+<span class="bp">|</span> <span class="n">s</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">n</span><span class="o">,</span> <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="n">f</span> <span class="n">n</span> <span class="err">∈</span> <span class="n">s</span> <span class="k">then</span>
+   <span class="k">have</span> <span class="n">finset</span><span class="bp">.</span><span class="n">erase</span> <span class="n">s</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="o">)</span> <span class="err">⊂</span> <span class="n">s</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">finset</span><span class="bp">.</span><span class="n">erase_ssubset</span> <span class="n">h</span><span class="o">],</span>
+   <span class="n">fresh_help</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">erase</span> <span class="n">s</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="o">))</span> <span class="n">f</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="k">else</span> <span class="n">f</span> <span class="n">n</span>
+<span class="n">using_well_founded</span> <span class="o">{</span><span class="n">rel_tac</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">`</span><span class="o">[</span><span class="n">exact</span> <span class="bp">⟨_</span><span class="o">,(</span><span class="bp">@</span><span class="n">finset</span><span class="bp">.</span><span class="n">lt_wf</span> <span class="n">string</span><span class="o">)</span><span class="bp">⟩</span><span class="o">]}</span>
+
+<span class="c1">-- | Find a fresh name that is close to x</span>
+<span class="n">def</span> <span class="n">fresh</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">Exp</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">string</span><span class="o">)</span> <span class="o">:</span> <span class="n">string</span> <span class="o">:=</span>
+  <span class="n">fresh_help</span> <span class="o">(</span><span class="n">free_vars</span> <span class="n">e</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">n</span> <span class="n">x</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span> <span class="bp">_</span><span class="o">,</span> <span class="n">x</span> <span class="bp">++</span> <span class="s2">&quot; &quot;</span> <span class="bp">++</span> <span class="n">repr</span> <span class="n">n</span><span class="o">))</span> <span class="mi">0</span>
+</pre></div>
+
+
+<p>However, lean can't find the 'have' for the well-foundedness:</p>
+<div class="codehilite"><pre><span></span><span class="bp">/</span><span class="n">home</span><span class="bp">/</span><span class="n">anton</span><span class="bp">/</span><span class="n">orga</span><span class="bp">/</span><span class="n">coc</span><span class="bp">/</span><span class="n">src</span><span class="bp">/</span><span class="n">CoC</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="mi">103</span><span class="o">:</span><span class="mi">3</span><span class="o">:</span> <span class="n">error</span><span class="o">:</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">prove</span> <span class="n">recursive</span> <span class="n">application</span> <span class="n">is</span> <span class="n">decreasing</span><span class="o">,</span> <span class="n">well</span> <span class="n">founded</span> <span class="n">relation</span>
+  <span class="bp">@</span><span class="n">has_well_founded</span><span class="bp">.</span><span class="n">r</span> <span class="o">(</span><span class="n">finset</span> <span class="n">string</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">@</span><span class="n">has_well_founded</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">finset</span> <span class="n">string</span><span class="o">)</span>
+       <span class="o">(</span><span class="bp">@</span><span class="n">has_lt</span><span class="bp">.</span><span class="n">lt</span> <span class="o">(</span><span class="n">finset</span> <span class="n">string</span><span class="o">)</span>
+          <span class="o">(</span><span class="bp">@</span><span class="n">preorder</span><span class="bp">.</span><span class="n">to_has_lt</span> <span class="o">(</span><span class="n">finset</span> <span class="n">string</span><span class="o">)</span>
+             <span class="o">(</span><span class="bp">@</span><span class="n">partial_order</span><span class="bp">.</span><span class="n">to_preorder</span> <span class="o">(</span><span class="n">finset</span> <span class="n">string</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">finset</span><span class="bp">.</span><span class="n">partial_order</span> <span class="n">string</span><span class="o">))))</span>
+       <span class="bp">_</span><span class="o">)</span>
+<span class="n">The</span> <span class="n">nested</span> <span class="n">exception</span> <span class="n">contains</span> <span class="n">the</span> <span class="n">failure</span> <span class="n">state</span> <span class="n">for</span> <span class="n">the</span> <span class="n">decreasing</span> <span class="n">tactic</span><span class="bp">.</span>
+<span class="n">nested</span> <span class="n">exception</span> <span class="n">message</span><span class="o">:</span>
+<span class="k">match</span> <span class="n">failed</span>
+<span class="n">state</span><span class="o">:</span>
+<span class="n">fresh_help</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">string</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">string</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">string</span><span class="o">,</span>
+<span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">string</span><span class="o">,</span>
+<span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">string</span><span class="o">,</span>
+<span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">h</span> <span class="o">:</span> <span class="n">f</span> <span class="n">n</span> <span class="err">∈</span> <span class="n">s</span><span class="o">,</span>
+<span class="n">this</span> <span class="o">:</span> <span class="n">finset</span><span class="bp">.</span><span class="n">erase</span> <span class="n">s</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="o">)</span> <span class="err">⊂</span> <span class="n">s</span>
+<span class="err">⊢</span> <span class="n">finset</span><span class="bp">.</span><span class="n">erase</span> <span class="n">s</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="o">)</span> <span class="err">⊂</span> <span class="n">s</span>
+</pre></div>
+
+
+<p>Do you know how I can fix this?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

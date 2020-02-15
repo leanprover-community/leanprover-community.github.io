@@ -9,13 +9,13 @@ permalink: archive/219941MachineLearningforTheoremProving/index.html
 
 ### Topics:
 
+* [ML for Lean: How to do it?](97947MLforLeanHowtodoit.html) (90 messages, latest: Feb 15 2020 at 16:11)
+
 * [HOList](34292HOList.html) (120 messages, latest: Feb 15 2020 at 09:49)
 
 * [Paper: An Experimental Study of Formula Embeddings for Autom](01363PaperAnExperimentalStudyofFormulaEmbeddingsforAutom.html) (18 messages, latest: Feb 09 2020 at 18:55)
 
 * [Maintaining Papers with Code for Automated Theorem Proving](97526MaintainingPaperswithCodeforAutomatedTheoremProving.html) (3 messages, latest: Feb 09 2020 at 03:21)
-
-* [ML for Lean: How to do it?](97947MLforLeanHowtodoit.html) (89 messages, latest: Feb 06 2020 at 10:22)
 
 * [Proposal: Apply premise selection to Hammer](13801ProposalApplypremiseselectiontoHammer.html) (9 messages, latest: Jan 14 2020 at 03:41)
 
