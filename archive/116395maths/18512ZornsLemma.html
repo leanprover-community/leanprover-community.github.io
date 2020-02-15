@@ -48,6 +48,166 @@ permalink: archive/116395maths/18512ZornsLemma.html
 </blockquote>
 <p>As a mathematician I still feel slightly weird about this. Do we <em>ever</em> use this in mathematics when the relation is not reflexive? Is there some lemma saying that if we can prove it in the reflexive case then we can deduce it in the general case by applying the theorem to the reflexification of the relation or something?</p>
 
+<a name="188290691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188290691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188290691">Kevin Buzzard (Feb 15 2020 at 17:02)</a>:</h4>
+<p>I think I'm saying "Can one easily prove <a href="https://leanprover-community.github.io/mathlib_docs/order/zorn.html#zorn.exists_maximal_of_chains_bounded" target="_blank" title="https://leanprover-community.github.io/mathlib_docs/order/zorn.html#zorn.exists_maximal_of_chains_bounded"><code>zorn.exists_maximal_of_chains_bounded</code></a> (a statement about transitive relations) from <a href="https://en.wikipedia.org/wiki/Zorn%27s_lemma#Statement_of_the_lemma" target="_blank" title="https://en.wikipedia.org/wiki/Zorn%27s_lemma#Statement_of_the_lemma">Zorn's Lemma</a> (a statement about partially ordered sets)?"</p>
+
+<a name="188290828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188290828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188290828">Chris Hughes (Feb 15 2020 at 17:07)</a>:</h4>
+<p>I suppose you could take the reflexive closure and quotient by <code>a \le b and b \le a</code> and then prove there's a maximal element in the quotient which can give you a maximal element in the set you started with. But that's kind of silly, you might as well prove it in the correct generality to start with if reflexivity and antisymmetry are never even mentioned in the proof.</p>
+
+<a name="188290889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188290889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188290889">Chris Hughes (Feb 15 2020 at 17:09)</a>:</h4>
+<p>I used the more general version in constructing algebraic closure. The set I was applying it to was partially ordered, but proving antisymmetry was messy and unnecessary.</p>
+
+<a name="188290940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188290940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188290940">Kevin Buzzard (Feb 15 2020 at 17:10)</a>:</h4>
+<p>But this is only because you have some definition of a chain which is also far too general, right? Do you think it would be possible to think of like 5 different definitions of "chain" that happened to work for transitive relations but were all equivalent when applied to partial orders -- which one do you choose for your definition of <code>chain</code>?</p>
+
+<a name="188290947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188290947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188290947">Kevin Buzzard (Feb 15 2020 at 17:11)</a>:</h4>
+<p>For example "for all a and b in the chain, <code>r a b</code> or <code>r b a</code>". That's also "the definition of a chain" for me</p>
+
+<a name="188290949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188290949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188290949">Mario Carneiro (Feb 15 2020 at 17:11)</a>:</h4>
+<p>That's in the API for zorn.chain</p>
+
+<a name="188290992"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188290992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188290992">Mario Carneiro (Feb 15 2020 at 17:12)</a>:</h4>
+<p>it's that, when the relation is reflexive, and <code>r a b \/ a = b \/ r b a</code> when the relation is irreflexive</p>
+
+<a name="188290994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188290994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188290994">Mario Carneiro (Feb 15 2020 at 17:12)</a>:</h4>
+<p>mathematicians are also not consistent about whether strict orders can be considered partial orders</p>
+
+<a name="188291000"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188291000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188291000">Mario Carneiro (Feb 15 2020 at 17:13)</a>:</h4>
+<p>because it doesn't matter</p>
+
+<a name="188291002"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188291002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188291002">Mario Carneiro (Feb 15 2020 at 17:13)</a>:</h4>
+<p>but it so happens that zorn's lemma works with both <code>&lt;</code> and <code>&lt;=</code></p>
+
+<a name="188291116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188291116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188291116">Chris Hughes (Feb 15 2020 at 17:16)</a>:</h4>
+<p>Isn't there some version of Zorn's lemma where the chains are all well ordered? Is that useful?</p>
+
+<a name="188291174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188291174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188291174">Mario Carneiro (Feb 15 2020 at 17:18)</a>:</h4>
+<p>I'm not sure, but that is another example of the <code>&lt;</code>/ <code>&lt;=</code> inconsistency; generally partial orders and preorders are done with <code>&lt;=</code> because that's more convenient, but when talking about well orders <code>&lt;</code> becomes more convenient and authors retrofit that convention</p>
+
+<a name="188291186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188291186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188291186">Kevin Buzzard (Feb 15 2020 at 17:19)</a>:</h4>
+<p>I'm not sure proper mathematicians use well-orders.</p>
+
+<a name="188291238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188291238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188291238">Kevin Buzzard (Feb 15 2020 at 17:20)</a>:</h4>
+<p>Zorn doesn't need them and is probably the way AC is applied most of the time by "proper mathematicians", modulo lots of countable dependent choice done by the analysts.</p>
+
+<a name="188291248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188291248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188291248">Mario Carneiro (Feb 15 2020 at 17:21)</a>:</h4>
+<p>There are occasional constructions by transfinite induction, although maybe you consider it set theory just to use those words</p>
+
+<a name="188291253"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188291253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188291253">Mario Carneiro (Feb 15 2020 at 17:21)</a>:</h4>
+<p>Like there is some topology thing where you apply the limit points operation transfinitely many times</p>
+
+<a name="188291255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188291255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188291255">Chris Hughes (Feb 15 2020 at 17:21)</a>:</h4>
+<p><a href="https://www.math.uni-bonn.de/people/scholze/Condensed.pdf" target="_blank" title="https://www.math.uni-bonn.de/people/scholze/Condensed.pdf">https://www.math.uni-bonn.de/people/scholze/Condensed.pdf</a> Peter Scholze isn't a proper mathematician. This mentions ordinals.</p>
+
+<a name="188291302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188291302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188291302">Mario Carneiro (Feb 15 2020 at 17:22)</a>:</h4>
+<p>or the iterative construction of the Borel sets (maybe that's "descriptive set theory"?)</p>
+
+<a name="188291307"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188291307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188291307">Mario Carneiro (Feb 15 2020 at 17:22)</a>:</h4>
+<p>Also things like Hamel bases for vector spaces, dunno how you class that</p>
+
+<a name="188291322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188291322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188291322">Mario Carneiro (Feb 15 2020 at 17:23)</a>:</h4>
+<p>It's just really convenient when you want to say "do it over and over... and over and over until it's done"</p>
+
+<a name="188291369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188291369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188291369">Kevin Buzzard (Feb 15 2020 at 17:24)</a>:</h4>
+<p>Oh I ran into a great article about <a href="https://t.co/tcPbLvpXx3?amp=1" target="_blank" title="https://t.co/tcPbLvpXx3?amp=1">ideal mathematicians</a> on Twitter! That link is going through Twitter right now, if anyone has a better one I'd be interested to know.</p>
+
+<a name="188291371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188291371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188291371">Mario Carneiro (Feb 15 2020 at 17:24)</a>:</h4>
+<p>I think <span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> had an example of this with midpoint construction in his talk in pittsburgh</p>
+
+<a name="188291398"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188291398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188291398">Kevin Buzzard (Feb 15 2020 at 17:25)</a>:</h4>
+<p>His talk contained an extremely interesting and surprising (to me) application of the calculus of inductive constructions to do what looked to me like a very elaborate induction proof in an extremely clean way.</p>
+
+<a name="188291535"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188291535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188291535">Kevin Buzzard (Feb 15 2020 at 17:28)</a>:</h4>
+<p>It's interesting isn't it. We just say "oh now this is just done by induction" and then people like Reid Barton come along and start saying "hey wait a minute" in his Pittsburgh talk.</p>
+
+<a name="188291550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188291550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188291550">Kevin Buzzard (Feb 15 2020 at 17:29)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> can you do your induction by writing some kind of crazy inductive type like Sebastien did?</p>
+
+<a name="188291593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188291593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188291593">Kevin Buzzard (Feb 15 2020 at 17:30)</a>:</h4>
+<p>These computer guys are supposed to be good at induction.</p>
+
+<a name="188291676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188291676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188291676">Johan Commelin (Feb 15 2020 at 17:33)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Do you mean this link: <a href="https://personalpages.manchester.ac.uk/staff/hung.bui/ideal.pdf" target="_blank" title="https://personalpages.manchester.ac.uk/staff/hung.bui/ideal.pdf">https://personalpages.manchester.ac.uk/staff/hung.bui/ideal.pdf</a></p>
+
+<a name="188291860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188291860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188291860">Mario Carneiro (Feb 15 2020 at 17:38)</a>:</h4>
+<p>Well, Sebastien's point was that the transfinite construction can be replaced by an inductive type, because inductive types do transfinite induction, and of course lean's support for the latter is much better than the former</p>
+
+<a name="188291937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188291937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188291937">Mario Carneiro (Feb 15 2020 at 17:40)</a>:</h4>
+<p>I don't think it's reasonable to argue that the mathematicians had it wrong though, because they are working in a different setting where that construction is not "obvious". I've always viewed the addition of inductive types in CIC as a huge cheat, a tremendous and complicated axiomatic extension with no intrinsic justification and a very non-obvious extrinsic justification</p>
+
+<a name="188292023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188292023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188292023">Chris Hughes (Feb 15 2020 at 17:43)</a>:</h4>
+<p>What's the non-obvious extrinsic justification?</p>
+
+<a name="188292029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188292029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188292029">Mario Carneiro (Feb 15 2020 at 17:43)</a>:</h4>
+<p>If you aren't steeped in belief in the lean way of doing things, it is a completely natural question to ask why the inductive type that Sebastien described should exist, or why it should have those recursion principles, and it amounts to relying on a very heavyweight theorem about inductive types</p>
+
+<a name="188292073"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188292073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188292073">Mario Carneiro (Feb 15 2020 at 17:44)</a>:</h4>
+<p>The extrinsic justification is the proof of consistency of lean, which relies on some inaccessible cardinals and some messy set constructions in my thesis</p>
+
+<a name="188292134"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188292134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188292134">Mario Carneiro (Feb 15 2020 at 17:46)</a>:</h4>
+<p>Those are the moves a set theory based mathematician would need to perform in order to justify the existence of all of lean's inductive types</p>
+
+<a name="188292148"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188292148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188292148">Chris Hughes (Feb 15 2020 at 17:47)</a>:</h4>
+<p>By justification, I thought you meant a motivation for it being there.</p>
+
+<a name="188292153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188292153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188292153">Mario Carneiro (Feb 15 2020 at 17:47)</a>:</h4>
+<p>I mean a justification of why it should be true</p>
+
+<a name="188292190"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188292190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188292190">Mario Carneiro (Feb 15 2020 at 17:47)</a>:</h4>
+<p>the motivation is some computer science thing that is probably not accessible to mathematicians</p>
+
+<a name="188292242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188292242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188292242">Chris Hughes (Feb 15 2020 at 17:48)</a>:</h4>
+<p>I guess it's also quite a hard theorem to state on paper, or to understand the statement of.</p>
+
+<a name="188292287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188292287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188292287">Mario Carneiro (Feb 15 2020 at 17:50)</a>:</h4>
+<p>If you are starting from a ZFC-esque foundation, it is a very circuitous route to the goal, and transfinite induction looks more direct</p>
+
+<a name="188292363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188292363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188292363">Chris Hughes (Feb 15 2020 at 17:52)</a>:</h4>
+<p>But that circuitous route has already been proven, so the mathematicians could have just cited that computer science paper when writing their proof.</p>
+
+<a name="188292442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zorn%27s%20Lemma/near/188292442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18512ZornsLemma.html#188292442">Mario Carneiro (Feb 15 2020 at 17:54)</a>:</h4>
+<p>Yes, indeed they could. Kevin probably has a clearer idea of what would happen, but my guess is that the strange subject matter would be more off putting than the fact that the proof is requiring large cardinals for no reason</p>
+
 
 {% endraw %}
 
