@@ -1,0 +1,106 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/82163metaquestions.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/82163metaquestions.html">`meta` questions</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188294492"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60meta%60%20questions/near/188294492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82163metaquestions.html#188294492">Yury G. Kudryashov (Feb 15 2020 at 19:00)</a>:</h4>
+<p>How do I do the following inside a <code>meta def</code>?</p>
+<ol>
+<li>Define a <code>structure</code> type?</li>
+<li>Define a <code>structure</code> instance from field values?</li>
+<li>Is it possible to define <code>protected</code> lemmas/definitions with Lean 3.5?</li>
+</ol>
+
+<a name="188294512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60meta%60%20questions/near/188294512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82163metaquestions.html#188294512">Yury G. Kudryashov (Feb 15 2020 at 19:01)</a>:</h4>
+<p>I want to write a command that will generate some basic definitions/lemmas about <code>monoid_hom</code>, <code>ring_hom</code> etc.</p>
+
+<a name="188295373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60meta%60%20questions/near/188295373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82163metaquestions.html#188295373">Mario Carneiro (Feb 15 2020 at 19:29)</a>:</h4>
+<p>You can create structures using some lean 3.5 additions</p>
+
+<a name="188295517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60meta%60%20questions/near/188295517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82163metaquestions.html#188295517">Mario Carneiro (Feb 15 2020 at 19:34)</a>:</h4>
+<p>The internal interface to <code>protected</code> suggests that you can post hoc protect any definition, but it lacks a public API</p>
+
+<a name="188295641"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60meta%60%20questions/near/188295641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82163metaquestions.html#188295641">Yury G. Kudryashov (Feb 15 2020 at 19:39)</a>:</h4>
+<p>Where can I read about these additions?</p>
+
+<a name="188295703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60meta%60%20questions/near/188295703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82163metaquestions.html#188295703">Mario Carneiro (Feb 15 2020 at 19:40)</a>:</h4>
+<p>oh, I think I was mistaken. We added the ability to mimic the <code>inductive</code> command, but not <code>structure</code>. You can of course mimic it with an inductive, but structure projections get some fancy internal markings that you can't replicate</p>
+
+<a name="188295719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60meta%60%20questions/near/188295719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82163metaquestions.html#188295719">Mario Carneiro (Feb 15 2020 at 19:41)</a>:</h4>
+<p>looks like the structure command does its magic right from the parser, so that will require some refactoring</p>
+
+<a name="188295792"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60meta%60%20questions/near/188295792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82163metaquestions.html#188295792">Yury G. Kudryashov (Feb 15 2020 at 19:43)</a>:</h4>
+<p>OK, I can't mimic <code>structure</code>. How do I create a <code>def</code> producing a <code>structure</code>?</p>
+
+<a name="188295797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60meta%60%20questions/near/188295797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82163metaquestions.html#188295797">Mario Carneiro (Feb 15 2020 at 19:43)</a>:</h4>
+<p>Also, there is always the parser hack: use <code>with_input</code> to parse a string that contains the structure definition</p>
+
+<a name="188295802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60meta%60%20questions/near/188295802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82163metaquestions.html#188295802">Mario Carneiro (Feb 15 2020 at 19:44)</a>:</h4>
+<p>that works for pretty much anything, it's like <code>eval</code> for lean</p>
+
+<a name="188295841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60meta%60%20questions/near/188295841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82163metaquestions.html#188295841">Mario Carneiro (Feb 15 2020 at 19:44)</a>:</h4>
+<p>what do you mean by a def producing a structure?</p>
+
+<a name="188295924"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60meta%60%20questions/near/188295924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82163metaquestions.html#188295924">Yury G. Kudryashov (Feb 15 2020 at 19:47)</a>:</h4>
+<p>I mean something like</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">N</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">mM</span> <span class="o">:</span> <span class="n">monoid</span> <span class="n">M</span><span class="o">}</span> <span class="o">{</span><span class="n">mN</span> <span class="o">:</span> <span class="n">monoid</span> <span class="n">N</span><span class="o">}</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">M</span> <span class="bp">→*</span> <span class="n">N</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨_</span><span class="o">,</span> <span class="n">monoid_hom</span><span class="bp">.</span><span class="n">to_fun</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>or <code>monoid_hom.id</code>.</p>
+
+<a name="188295987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60meta%60%20questions/near/188295987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82163metaquestions.html#188295987">Yury G. Kudryashov (Feb 15 2020 at 19:48)</a>:</h4>
+<p>I'll try <code>with_input</code>. Can I use some quotation magic in the argument?</p>
+
+<a name="188296044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60meta%60%20questions/near/188296044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82163metaquestions.html#188296044">Mario Carneiro (Feb 15 2020 at 19:50)</a>:</h4>
+<p>That's just sugar for a structure constructor. Is there a reason you can't just call that?</p>
+
+<a name="188296047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60meta%60%20questions/near/188296047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82163metaquestions.html#188296047">Mario Carneiro (Feb 15 2020 at 19:51)</a>:</h4>
+<p>I think the angle brackets notation is a <code>pexpr</code> that you may or may not be able to create from lean</p>
+
+<a name="188296127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60meta%60%20questions/near/188296127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82163metaquestions.html#188296127">Yury G. Kudryashov (Feb 15 2020 at 19:53)</a>:</h4>
+<p>Ah, indeed this was a stupid question.</p>
+
+<a name="188296169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60meta%60%20questions/near/188296169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82163metaquestions.html#188296169">Mario Carneiro (Feb 15 2020 at 19:54)</a>:</h4>
+<p>This will construct the anonymous brackets though:</p>
+<div class="codehilite"><pre><span></span><span class="n">run_cmd</span> <span class="n">do</span>
+  <span class="k">let</span> <span class="n">p</span> <span class="o">:=</span> <span class="bp">``</span><span class="o">(</span><span class="n">monoid_hom</span><span class="bp">.</span><span class="n">to_fun</span><span class="o">),</span>
+  <span class="k">let</span> <span class="n">e</span> <span class="o">:=</span> <span class="bp">```</span><span class="o">(</span><span class="bp">⟨_</span><span class="o">,</span> <span class="err">%%</span><span class="n">p</span><span class="bp">⟩</span><span class="o">),</span>
+  <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="n">e</span>
+</pre></div>
+
+<a name="188296182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60meta%60%20questions/near/188296182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82163metaquestions.html#188296182">Mario Carneiro (Feb 15 2020 at 19:54)</a>:</h4>
+<p>when you run <code>to_expr</code> it will use the target type to resolve what constructor it is, as usual</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
