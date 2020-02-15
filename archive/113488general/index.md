@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [semicolon and tactic state](85878semicolonandtacticstate.html) (8 messages, latest: Feb 15 2020 at 21:58)
+* [hardware verification](75506hardwareverification.html) (6 messages, latest: Feb 15 2020 at 22:54)
+
+* [semicolon and tactic state](85878semicolonandtacticstate.html) (9 messages, latest: Feb 15 2020 at 22:53)
 
 * [Bundled `sub*` and `center`](49191Bundledsubandcenter.html) (2 messages, latest: Feb 15 2020 at 20:53)
 
@@ -18,8 +20,6 @@ permalink: archive/113488general/index.html
 * [Dataset of “info” command over all of mathlib](30479Datasetofinfocommandoverallofmathlib.html) (9 messages, latest: Feb 15 2020 at 15:55)
 
 * [coe_fn and class instances](16860coefnandclassinstances.html) (23 messages, latest: Feb 15 2020 at 14:56)
-
-* [hardware verification](75506hardwareverification.html) (4 messages, latest: Feb 15 2020 at 14:12)
 
 * [Let assumptions in theorems](82602Letassumptionsintheorems.html) (7 messages, latest: Feb 14 2020 at 20:12)
 
