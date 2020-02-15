@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Dataset of “info” command over all of mathlib](30479Datasetofinfocommandoverallofmathlib.html) (1 message, latest: Feb 14 2020 at 22:59)
+* [Dataset of “info” command over all of mathlib](30479Datasetofinfocommandoverallofmathlib.html) (2 messages, latest: Feb 15 2020 at 02:33)
 
 * [Let assumptions in theorems](82602Letassumptionsintheorems.html) (7 messages, latest: Feb 14 2020 at 20:12)
 
