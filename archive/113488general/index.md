@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Dataset of “info” command over all of mathlib](30479Datasetofinfocommandoverallofmathlib.html) (9 messages, latest: Feb 15 2020 at 15:55)
+
 * [coe_fn and class instances](16860coefnandclassinstances.html) (23 messages, latest: Feb 15 2020 at 14:56)
 
 * [hardware verification](75506hardwareverification.html) (4 messages, latest: Feb 15 2020 at 14:12)
-
-* [Dataset of “info” command over all of mathlib](30479Datasetofinfocommandoverallofmathlib.html) (8 messages, latest: Feb 15 2020 at 04:06)
 
 * [Let assumptions in theorems](82602Letassumptionsintheorems.html) (7 messages, latest: Feb 14 2020 at 20:12)
 
