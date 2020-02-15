@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [hardware verification](75506hardwareverification.html) (2 messages, latest: Feb 15 2020 at 13:49)
+
 * [Dataset of “info” command over all of mathlib](30479Datasetofinfocommandoverallofmathlib.html) (8 messages, latest: Feb 15 2020 at 04:06)
 
 * [Let assumptions in theorems](82602Letassumptionsintheorems.html) (7 messages, latest: Feb 14 2020 at 20:12)
