@@ -602,6 +602,17 @@ run_cmd make_goal_from_expression my_expr
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/188289018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#188289018">Jason Rute (Feb 15 2020 at 16:11)</a>:</h4>
 <p>I improved my prototype notebook which uses the Lean server to make a theorem proving API: <a href="https://github.com/jasonrute/communicating-with-lean/blob/master/communicate_with_lean.ipynb" target="_blank" title="https://github.com/jasonrute/communicating-with-lean/blob/master/communicate_with_lean.ipynb">https://github.com/jasonrute/communicating-with-lean/blob/master/communicate_with_lean.ipynb</a>  The big changes are to the output format which makes it more robust and I've also added the ability to add universes and imports.  I also added a section mentioning all the current issues I've seen so far.</p>
 
+<a name="188296878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/ML%20for%20Lean%3A%20How%20to%20do%20it%3F/near/188296878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/97947MLforLeanHowtodoit.html#188296878">Jason Rute (Feb 15 2020 at 20:13)</a>:</h4>
+<p>I'm now working on scrapping all of the Lean files.  I should be able to get the following quite easily:</p>
+<ul>
+<li>Every goal state which occurs inside a Lean tactic proof in its pretty printed form (and with a tiny amount more work, in its <code>pp.all</code> form).</li>
+<li>The tactic command (including arguments) used on that goal state.  (Some caveats here: if semicolons are used, that will fuse multiple tactic commands into one.  With more work, I can separate them, but then it starts to get more complicated. Also, it might take some work to make sure I get a complete tactic command with arguments if that tactic command invokes other tactics.  Parentheses matching is the first step.)</li>
+<li>The doc string for each tactic used.  (I don't think I have to manually identify which keywords are tactics verse theorems, etc. which is nice.)</li>
+<li>Meta information about theorems and terms used as tactic arguments.</li>
+</ul>
+<p>This will be a lot of really good information.  Cross your fingers that this works...</p>
+
 
 {% endraw %}
 

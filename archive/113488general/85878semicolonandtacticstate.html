@@ -1,0 +1,32 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/85878semicolonandtacticstate.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/85878semicolonandtacticstate.html">semicolon and tactic state</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188297575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semicolon%20and%20tactic%20state/near/188297575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85878semicolonandtacticstate.html#188297575">Bryan Gin-ge Chen (Feb 15 2020 at 20:34)</a>:</h4>
+<p><a href="#narrow/stream/219941-Machine-Learning.20for.20Theorem.20Proving/topic/ML.20for.20Lean.3A.20How.20to.20do.20it.3F/near/188296878" title="#narrow/stream/219941-Machine-Learning.20for.20Theorem.20Proving/topic/ML.20for.20Lean.3A.20How.20to.20do.20it.3F/near/188296878">Jason's post in the "ML for Lean" topic</a> reminded me of this. It's really too bad that we can't see how the goals change before / after semicolons. </p>
+<p>I made a half-hearted attempt to see whether there was any way to implement this for 3.5.x, but I didn't get very far. I did manage to figure out that the relevant code is around <a href="https://github.com/leanprover-community/lean/blob/0d2b2697d163416d759f52e417d5579685e01d9e/library/init/meta/tactic.lean#L1029" target="_blank" title="https://github.com/leanprover-community/lean/blob/0d2b2697d163416d759f52e417d5579685e01d9e/library/init/meta/tactic.lean#L1029">here</a>, but I think I got stuck when I couldn't figure out how to get the cursor position to change the tactic state display using <code>save_info</code> (?).</p>
+<p>Does anyone have any suggestions for this?</p>
+
+<a name="188297631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semicolon%20and%20tactic%20state/near/188297631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85878semicolonandtacticstate.html#188297631">Mario Carneiro (Feb 15 2020 at 20:36)</a>:</h4>
+<p>I would actually be curious to see how the tactic state reporting after <code>,</code> in <code>rw [a, b]</code> works, since that's unlike any other tactic; maybe we can generalize that to other contexts</p>
+
+<a name="188297690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semicolon%20and%20tactic%20state/near/188297690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85878semicolonandtacticstate.html#188297690">Bryan Gin-ge Chen (Feb 15 2020 at 20:39)</a>:</h4>
+<p>Yeah, I remember trying to understand that as well, I think it's around <a href="https://github.com/leanprover-community/lean/blob/dacb70b83853b23b2fc20afdc4d5888cee0d4363/library/init/meta/interactive.lean#L358" target="_blank" title="https://github.com/leanprover-community/lean/blob/dacb70b83853b23b2fc20afdc4d5888cee0d4363/library/init/meta/interactive.lean#L358">here</a>. I guess I should study <code>parser</code>.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

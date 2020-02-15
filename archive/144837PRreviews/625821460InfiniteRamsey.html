@@ -403,6 +403,71 @@ But the name <code>color_equiv_fin2.inv_fun</code>, is pretty long and quickly b
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180938033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180938033">Jared Corduan (Nov 17 2019 at 02:16)</a>:</h4>
 <p>ok, thanks!</p>
 
+<a name="188296466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/188296466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#188296466">Jared Corduan (Feb 15 2020 at 20:02)</a>:</h4>
+<p>I'm having trouble proving things about definitions that use if-then-else. (relating to me trying to provide a more mathlib friendly interface to my version of ramsey's theorem.)</p>
+<p>In particular, the usual trick for extending ramsey's theorem from two colors to multiple colors involves turning a coloring of <code>k</code>-many colors into a coloring of two colors:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">color</span>
+<span class="bp">|</span> <span class="n">red</span> <span class="o">:</span> <span class="n">color</span>
+<span class="bp">|</span> <span class="n">blue</span> <span class="o">:</span> <span class="n">color</span>
+
+<span class="n">def</span> <span class="n">split_coloring</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">fin</span> <span class="o">(</span><span class="n">succ</span> <span class="n">k</span><span class="o">))</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">color</span> <span class="o">:=</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">k</span><span class="o">)</span> <span class="k">then</span> <span class="n">red</span> <span class="k">else</span> <span class="n">blue</span>
+</pre></div>
+
+
+<p>I then want to be able to make conclusions about <code>split_coloring</code>, such as:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">red_split</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">fin</span> <span class="o">(</span><span class="n">succ</span> <span class="n">k</span><span class="o">))</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">split_coloring</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">red</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">unfold</span> <span class="n">split_coloring</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>But I get stuck trying to conclude that <code>f a = k</code> from <code> ite (f a = k) red blue = red</code>.</p>
+
+<a name="188296480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/188296480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#188296480">Johan Commelin (Feb 15 2020 at 20:03)</a>:</h4>
+<p>Try <code>split_ifs</code></p>
+
+<a name="188296519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/188296519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#188296519">Johan Commelin (Feb 15 2020 at 20:04)</a>:</h4>
+<p><span class="user-mention" data-user-id="115237">@Jared Corduan</span> That will give you to goals.</p>
+
+<a name="188296524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/188296524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#188296524">Johan Commelin (Feb 15 2020 at 20:04)</a>:</h4>
+<p>The first you can close by <code>assumption</code></p>
+
+<a name="188296526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/188296526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#188296526">Jared Corduan (Feb 15 2020 at 20:04)</a>:</h4>
+<p>ok, thanks!</p>
+
+<a name="188296530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/188296530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#188296530">Johan Commelin (Feb 15 2020 at 20:04)</a>:</h4>
+<p>The second will be <code>exfalso, proof_that_blue_ne_red</code></p>
+
+<a name="188296542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/188296542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#188296542">Jared Corduan (Feb 15 2020 at 20:05)</a>:</h4>
+<p>I suppose I should spend more time seeing what tactics are available. :)</p>
+
+<a name="188296551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/188296551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#188296551">Johan Commelin (Feb 15 2020 at 20:05)</a>:</h4>
+<p>Hmm, maybe not <code>exfalso</code> but <code>by_contradiction</code></p>
+
+<a name="188296569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/188296569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#188296569">Reid Barton (Feb 15 2020 at 20:05)</a>:</h4>
+<p>or <code>simp</code></p>
+
+<a name="188296648"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/188296648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#188296648">Jared Corduan (Feb 15 2020 at 20:07)</a>:</h4>
+<p>do you mean <code>simp</code> for my original problem? <code>simp</code> is one of my few tactics I've been trying to use, it did not work her. maybe I need to open some libraries to make <code>simp</code> work for this case?</p>
+
+<a name="188297919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/188297919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#188297919">Reid Barton (Feb 15 2020 at 20:46)</a>:</h4>
+<p>No, after some <code>split_ifs</code> invocation. For example <code>split_ifs at h; simpa</code> or <code>revert h, split_ifs, simp</code></p>
+
 
 {% endraw %}
 

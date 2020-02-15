@@ -900,6 +900,22 @@ Imitation</a>, <a href="https://arxiv.org/abs/1909.11851" target="_blank" title=
 </ul>
 <p>Thanks!</p>
 
+<a name="188297032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/188297032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#188297032">Christian Szegedy (Feb 15 2020 at 20:17)</a>:</h4>
+<p><span class="user-mention" data-user-id="249373">@Stanislas Polu</span> </p>
+<ul>
+<li>Prrof logs have not been not updated. Fingerprinting changes affect only theorems with hypotheses, that we disallow in our proofs (not in human proofs though). AFAICR, the proof-logs contain the theorem text for all intermediate  theorems, so their fingerprints could recomputed on the python side easily if necessary. BTW, since the python side fingerprinting did not change, I think that old proof-logs could still be completely valid. We can verify that.</li>
+<li>We have no extra documentation for rules. You have an extra RPC call: ApplyRule and the request should be of the form:<br>
+&lt;RULE&gt; &lt;PRM1&gt; &lt;PRM2&gt; ...<br>
+where PRMi can be either a parameter or a list of parameters enclosed in braces (space around braces is mandatory). The theorems are given as THM  &lt;FINGERPRINT&gt;<br>
+For the possible rules, it is best referred to:<br>
+<a href="https://github.com/brain-research/hol-light/blob/35956b7edf34b1ba3fb5c54f4eb108ab08eada03/parse_tactic.ml#L165" target="_blank" title="https://github.com/brain-research/hol-light/blob/35956b7edf34b1ba3fb5c54f4eb108ab08eada03/parse_tactic.ml#L165">https://github.com/brain-research/hol-light/blob/35956b7edf34b1ba3fb5c54f4eb108ab08eada03/parse_tactic.ml#L165</a><br>
+fore example:<br>
+rule: "CONJUNCT1 THM 3889194075140062007"<br>
+or:<br>
+rule: "ASM_REWRITE_RULE [ ] THM 4453115153695028333"</li>
+</ul>
+
 
 {% endraw %}
 
