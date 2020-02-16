@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [`hint` tactic](53516hinttactic.html) (11 messages, latest: Feb 16 2020 at 02:42)
+* [`add_monoid.smul`, `add_group.gsmul`](49653addmonoidsmuladdgroupgsmul.html) (4 messages, latest: Feb 16 2020 at 03:07)
 
-* [`add_monoid.smul`, `add_group.gsmul`](49653addmonoidsmuladdgroupgsmul.html) (2 messages, latest: Feb 16 2020 at 02:11)
+* [`hint` tactic](53516hinttactic.html) (11 messages, latest: Feb 16 2020 at 02:42)
 
 * [hardware verification](75506hardwareverification.html) (52 messages, latest: Feb 16 2020 at 00:48)
 
