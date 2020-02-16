@@ -257,6 +257,31 @@ hSgen : x ∈ ↑(algebra.adjoin k ↑S)
 
 <p>This is what I need to make the induction work. <code>algebra.adjoin</code> and <code>↑</code> is a Galois insertion between subsets and sub-R-algebras. My problem is that R changes from k to L.</p>
 
+<a name="188339499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite-dimensionality%20of%20field%20over%20subfield/near/188339499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61145finitedimensionalityoffieldoversubfield.html#188339499">Kevin Buzzard (Feb 16 2020 at 21:08)</a>:</h4>
+<p>and all the proper mathematicians are looking at me and laughing because <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo><mo>⊆</mo><mi>L</mi><mo stretchy="false">(</mo><mi>S</mi><mo>−</mo><mo stretchy="false">{</mo><mi>s</mi><mo stretchy="false">}</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">k(S)\subseteq L(S-\{s\})</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⊆</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">L</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord mathdefault">s</span><span class="mclose">}</span><span class="mclose">)</span></span></span></span> is trivial.</p>
+
+<a name="188339826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite-dimensionality%20of%20field%20over%20subfield/near/188339826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61145finitedimensionalityoffieldoversubfield.html#188339826">Chris Hughes (Feb 16 2020 at 21:18)</a>:</h4>
+<p><code>algebra.adjoin</code> as a set is just <code>ring.closure</code> of <code>k \cup S</code> right? So it's easy if you write it like that.</p>
+
+<a name="188339871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite-dimensionality%20of%20field%20over%20subfield/near/188339871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61145finitedimensionalityoffieldoversubfield.html#188339871">Chris Hughes (Feb 16 2020 at 21:18)</a>:</h4>
+<p>That's probably even the definition of the set.</p>
+
+<a name="188340202"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite-dimensionality%20of%20field%20over%20subfield/near/188340202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61145finitedimensionalityoffieldoversubfield.html#188340202">Kevin Buzzard (Feb 16 2020 at 21:29)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="err">⊢</span> <span class="n">ring</span><span class="bp">.</span><span class="n">closure</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">range</span> <span class="o">(</span><span class="n">algebra_map</span> <span class="n">K</span><span class="o">)</span> <span class="err">∪</span> <span class="n">finset</span><span class="bp">.</span><span class="n">to_set</span> <span class="n">S</span><span class="o">)</span> <span class="bp">≤</span>
+    <span class="n">ring</span><span class="bp">.</span><span class="n">closure</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">range</span> <span class="o">(</span><span class="n">algebra_map</span> <span class="n">K</span><span class="o">)</span> <span class="err">∪</span> <span class="n">finset</span><span class="bp">.</span><span class="n">to_set</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">erase</span> <span class="n">S</span> <span class="n">s</span><span class="o">))</span>
+</pre></div>
+
+
+<p>Looks wrong but there are two different <code>algebra_map</code>s involved; one from k and one from L.</p>
+
+<a name="188340528"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite-dimensionality%20of%20field%20over%20subfield/near/188340528" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/61145finitedimensionalityoffieldoversubfield.html#188340528">Kevin Buzzard (Feb 16 2020 at 21:39)</a>:</h4>
+<p>I'm still not there. If <code>(L : set K) [is_subfield L]</code> then I need that <code>L = range (algebra_map K)</code> with the obvious instance of <code>[algebra L K]</code></p>
+
 
 {% endraw %}
 
