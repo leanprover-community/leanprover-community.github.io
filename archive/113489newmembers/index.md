@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [finset.lt_wf fails](17603finsetltwffails.html) (2 messages, latest: Feb 16 2020 at 09:26)
+* [Getting equation from match](27738Gettingequationfrommatch.html) (3 messages, latest: Feb 16 2020 at 13:59)
 
-* [Getting equation from match](27738Gettingequationfrommatch.html) (1 message, latest: Feb 16 2020 at 09:05)
+* [finset.lt_wf fails](17603finsetltwffails.html) (2 messages, latest: Feb 16 2020 at 09:26)
 
 * [Tactic Proof not Responding. Overflow?](17610TacticProofnotRespondingOverflow.html) (41 messages, latest: Feb 14 2020 at 22:33)
 

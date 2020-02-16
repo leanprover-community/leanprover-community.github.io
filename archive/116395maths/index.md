@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [why `nonempty`?](83058whynonempty.html) (7 messages, latest: Feb 16 2020 at 12:38)
+* [finite-dimensionality of field over subfield](61145finitedimensionalityoffieldoversubfield.html) (23 messages, latest: Feb 16 2020 at 13:59)
 
-* [finite-dimensionality of field over subfield](61145finitedimensionalityoffieldoversubfield.html) (1 message, latest: Feb 16 2020 at 12:33)
+* [why `nonempty`?](83058whynonempty.html) (7 messages, latest: Feb 16 2020 at 12:38)
 
 * [MathLib installing](36823MathLibinstalling.html) (10 messages, latest: Feb 16 2020 at 08:47)
 
