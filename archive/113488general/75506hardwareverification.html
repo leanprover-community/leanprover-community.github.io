@@ -37,6 +37,134 @@ permalink: archive/113488general/75506hardwareverification.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188302174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188302174">Tim Daly (Feb 15 2020 at 22:54)</a>:</h4>
 <p>(sorry, wrote thread). A more (mealy?) interesting question: Can CIC be implemented in finite state machines?</p>
 
+<a name="188302581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188302581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188302581">Mario Carneiro (Feb 15 2020 at 23:08)</a>:</h4>
+<p>yes?</p>
+
+<a name="188302586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188302586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188302586">Mario Carneiro (Feb 15 2020 at 23:08)</a>:</h4>
+<p>What's the actual question? Of course everything is possible in principle</p>
+
+<a name="188302763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188302763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188302763">Tim Daly (Feb 15 2020 at 23:14)</a>:</h4>
+<p>The X86 instruction set is beyond my powers to fully specify (I've tried). So trying to validate an implementation is also outside the possible (at least for me). However, an "instruction set" that is specific to proof checking and/or CIC and is well designed (say, as an FSM) then it would be easier to validate.</p>
+
+<a name="188302829"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188302829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188302829">Tim Daly (Feb 15 2020 at 23:16)</a>:</h4>
+<p>In addition, data centers used FPGAs all over the place (e.g. they run compression algorithms "on the wire" so the CPU can send/receive at higher bandwidth, they run encryption/decryption "on the wire" so data in flight can't be read or modified). So if code "carried proofs" then you could check, in parallel, that the code is valid.</p>
+
+<a name="188302903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188302903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188302903">Tim Daly (Feb 15 2020 at 23:18)</a>:</h4>
+<p>Modern Intel CPUs contain an FPGA which, in principle, allows you to define your own instructions. So you could "side load" a proof checker.</p>
+
+<a name="188302971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188302971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188302971">Tim Daly (Feb 15 2020 at 23:21)</a>:</h4>
+<p>So you package the proof checker FPGA binfile, the code, the code proof, all "under signed encryption", and then I (well, not <em>I</em> since I don't have access to the new CPUs) can send a "proven GCD" algorithm.</p>
+
+<a name="188303072"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303072">Tim Daly (Feb 15 2020 at 23:24)</a>:</h4>
+<p>I have a couple FPGAs and I'm looking at the question of validating FSMs for my own chosen instruction set. The game is to design the instruction set to underlie the proof checker.</p>
+
+<a name="188303349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303349">Tim Daly (Feb 15 2020 at 23:33)</a>:</h4>
+<p>Rather than a Peano succ(succ(succ zero))) computation you'd rather work in normal machine binary (which, as I understand Univalence, says they are "equal"). So Lean can use much higher level (h-level) kinds of reasoning if you can "insert a computer algebra system" into Lean. But you need proven algorithms, presumably "down to the metal".</p>
+
+<a name="188303400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303400">Mario Carneiro (Feb 15 2020 at 23:34)</a>:</h4>
+<p>Yes, this is possible, but lean is not optimally positioned for such an effort. You really want a simplified kernel that doesn't take tens of thousands of lines to write and especially to specify</p>
+
+<a name="188303409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303409">Tim Daly (Feb 15 2020 at 23:35)</a>:</h4>
+<p>I've been looking at Andromeda (Bauer) which could (possibly) use Lean's CIC rules in declarative form.</p>
+
+<a name="188303455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303455">Mario Carneiro (Feb 15 2020 at 23:37)</a>:</h4>
+<p>FYI, in case you weren't aware, you are describing <a href="https://github.com/digama0/mm0" target="_blank" title="https://github.com/digama0/mm0">my current project</a> almost exactly</p>
+
+<a name="188303461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303461">Mario Carneiro (Feb 15 2020 at 23:37)</a>:</h4>
+<p>I'm not targeting an FPGA, although it could be done</p>
+
+<a name="188303508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303508">Tim Daly (Feb 15 2020 at 23:38)</a>:</h4>
+<p>Sorry, I'm not trying to step on your turf. I'm coming at it from the question of "computational mathematics", merging proof and computer algebra.</p>
+
+<a name="188303511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303511">Mario Carneiro (Feb 15 2020 at 23:38)</a>:</h4>
+<p>I just wasn't sure if you were trolling me ;)</p>
+
+<a name="188303519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303519">Chris B (Feb 15 2020 at 23:39)</a>:</h4>
+<p>It's too late for that now. Pistols at dawn.</p>
+
+<a name="188303520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303520">Tim Daly (Feb 15 2020 at 23:39)</a>:</h4>
+<p>I assume you've seen my "paper" on the Intel instruction semantics.</p>
+
+<a name="188303523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303523">Mario Carneiro (Feb 15 2020 at 23:39)</a>:</h4>
+<p>The 7000 page one?</p>
+
+<a name="188303573"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303573" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303573">Tim Daly (Feb 15 2020 at 23:40)</a>:</h4>
+<p>Yeah (Intel is big, the Intel reference book pile is a couple feet tall)</p>
+
+<a name="188303579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303579">Mario Carneiro (Feb 15 2020 at 23:40)</a>:</h4>
+<p>You don't need the entire instruction set to write a proof checker though</p>
+
+<a name="188303586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303586">Tim Daly (Feb 15 2020 at 23:40)</a>:</h4>
+<p>Leave Dawn out of this . She is innocent.</p>
+
+<a name="188303640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303640">Tim Daly (Feb 15 2020 at 23:43)</a>:</h4>
+<p>Yep, you don't need all that semantics. You only (maybe) need a finite state machine with a few, validated, and carefully crafted instructions.</p>
+
+<a name="188303697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303697">Tim Daly (Feb 15 2020 at 23:45)</a>:</h4>
+<p>I tried to do an FPGA startup so I have some Altera FPGA hardware (which is the company Intel bought) and I've been playing around "in the sand", thinking about a validated proof checker.</p>
+
+<a name="188303705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303705">Tim Daly (Feb 15 2020 at 23:45)</a>:</h4>
+<p>I will look deeper into what you're doing. I'm seriously not trying to step on your turf.</p>
+
+<a name="188303748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303748">Mario Carneiro (Feb 15 2020 at 23:46)</a>:</h4>
+<p>you know, there are other options than stepping on turf, you could come in the front door</p>
+
+<a name="188303756"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303756">Tim Daly (Feb 15 2020 at 23:46)</a>:</h4>
+<p>Rumor has it someone has a bullet with my name on it :-)</p>
+
+<a name="188303757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303757">Mario Carneiro (Feb 15 2020 at 23:46)</a>:</h4>
+<p>I'm sure there are ways to collaborate</p>
+
+<a name="188303761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303761">Mario Carneiro (Feb 15 2020 at 23:46)</a>:</h4>
+<p>without the pistols</p>
+
+<a name="188303842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303842">Tim Daly (Feb 15 2020 at 23:49)</a>:</h4>
+<p>Let me get up to speed on your links and see if I can help</p>
+
+<a name="188303850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303850">Mario Carneiro (Feb 15 2020 at 23:49)</a>:</h4>
+<p>This might be a place to start: <a href="https://arxiv.org/pdf/1907.01283.pdf" target="_blank" title="https://arxiv.org/pdf/1907.01283.pdf">https://arxiv.org/pdf/1907.01283.pdf</a></p>
+
+<a name="188303913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303913">Tim Daly (Feb 15 2020 at 23:50)</a>:</h4>
+<p>Printing it now. Thanks.</p>
+
+<a name="188303981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188303981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188303981">Tim Daly (Feb 15 2020 at 23:53)</a>:</h4>
+<p>I've been looking at your paper on the Type theory of Lean, trying to figure out how to wedge that into Andromeda</p>
+
+<a name="188304154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hardware%20verification/near/188304154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75506hardwareverification.html#188304154">Mario Carneiro (Feb 15 2020 at 23:58)</a>:</h4>
+<p>The last question at <a href="http://www.andromeda-prover.org/answers.html" target="_blank" title="http://www.andromeda-prover.org/answers.html">http://www.andromeda-prover.org/answers.html</a> suggests that Andromeda is too "opinionated" to be general purpose, and in particular cannot support CIC</p>
+
 
 {% endraw %}
 

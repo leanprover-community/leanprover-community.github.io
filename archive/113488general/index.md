@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [hardware verification](75506hardwareverification.html) (6 messages, latest: Feb 15 2020 at 22:54)
+* [hardware verification](75506hardwareverification.html) (38 messages, latest: Feb 15 2020 at 23:58)
 
 * [semicolon and tactic state](85878semicolonandtacticstate.html) (9 messages, latest: Feb 15 2020 at 22:53)
 
