@@ -445,6 +445,65 @@ s7 : myIsEven ((strategy.snd 1).snd.snd + ((strategy.snd 2).snd.snd + (strategy.
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188333263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188333263">Yury G. Kudryashov (Feb 16 2020 at 17:55)</a>:</h4>
 <p>Did you <code>import algebra.big_operators</code>?</p>
 
+<a name="188333504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188333504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188333504">Rocky Kamen-Rubio (Feb 16 2020 at 18:03)</a>:</h4>
+<p>Just added that and I'm still getting the same errors.</p>
+
+<a name="188334064"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188334064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188334064">Yury G. Kudryashov (Feb 16 2020 at 18:20)</a>:</h4>
+<p>Please copy+paste the file from start to the first error.</p>
+
+<a name="188334085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188334085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188334085">Rocky Kamen-Rubio (Feb 16 2020 at 18:21)</a>:</h4>
+<div class="codehilite"><pre><span></span>import init.data.nat.basic
+import init.algebra.ring
+import init.algebra.norm_num
+import init
+import tactic
+import data.nat.parity
+import data.finset
+import algebra.big_operators
+set_option class.instance_max_depth 15000000
+
+
+
+
+def checkStrategymn {m n : nat} (strategyA : fin m → fin n → nat) (strategy B: fin n → fin m → nat) : Prop :=
+∀ r : fin m, (finset.univ.sum (strategyA r)).even
+</pre></div>
+
+<a name="188334597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188334597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188334597">Yury G. Kudryashov (Feb 16 2020 at 18:36)</a>:</h4>
+<p>Compiles with no errors here.</p>
+
+<a name="188334739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188334739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188334739">Rocky Kamen-Rubio (Feb 16 2020 at 18:41)</a>:</h4>
+<p>Weird... Any ideas?</p>
+
+<a name="188334744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188334744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188334744">Bryan Gin-ge Chen (Feb 16 2020 at 18:41)</a>:</h4>
+<p>What version of mathlib are you using?</p>
+
+<a name="188334872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188334872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188334872">Bryan Gin-ge Chen (Feb 16 2020 at 18:45)</a>:</h4>
+<p>I just tried with an older version of mathlib and you might need to try adding <code>import data.fintype</code>. By the way, I think I said this before, but you can delete everything that starts with <code>import init</code> since all of that is imported automatically by Lean.</p>
+
+<a name="188334994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188334994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188334994">Rocky Kamen-Rubio (Feb 16 2020 at 18:49)</a>:</h4>
+<p>Ok I added <code>import data.fintype</code> and that seems to have resolved the issue. That's interesting the issue would be mathlib being out of date because I only downloaded it about two weeks ago. Was there an update since then? Maybe I downloaded it from the wrong source by mistake...</p>
+
+<a name="188335054"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188335054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188335054">Bryan Gin-ge Chen (Feb 16 2020 at 18:51)</a>:</h4>
+<p>From playing around with commenting / uncommenting imports, it looks like something in <code>import tactic</code> now has <code>data.fintype</code> as a dependency, whereas it didn't previously.</p>
+
+<a name="188335126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188335126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188335126">Bryan Gin-ge Chen (Feb 16 2020 at 18:53)</a>:</h4>
+<p>Hah, I guess I was the culprit: see <a href="https://github.com/leanprover-community/mathlib/pull/1962/files#diff-73f60479a7373d7694e4543439a5cb5fR36" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1962/files#diff-73f60479a7373d7694e4543439a5cb5fR36">PR #1962</a>. I added <code>fin_cases</code> to the imports in <code>tactic.default</code>, and that <a href="https://github.com/leanprover-community/mathlib/blob/master/src/tactic/fin_cases.lean#L10" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/tactic/fin_cases.lean#L10">indeed depends on <code>data.fintype</code></a>.</p>
+
+<a name="188335131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188335131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188335131">Bryan Gin-ge Chen (Feb 16 2020 at 18:53)</a>:</h4>
+<p>mathlib is a continuously moving target, for better or worse...</p>
+
 
 {% endraw %}
 
