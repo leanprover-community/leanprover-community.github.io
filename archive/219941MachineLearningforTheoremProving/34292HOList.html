@@ -923,6 +923,41 @@ rule: "ASM_REWRITE_RULE [ ] THM 4453115153695028333"</li>
 <p>Also, what about the third question?</p>
 <p>Thanks again for your help and all the productive exchanges with you and the rest of the team (and looking forward to continuing those!)</p>
 
+<a name="188319714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/188319714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#188319714">Christian Szegedy (Feb 16 2020 at 09:41)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="249373">Stanislas Polu</span></p>
+<blockquote>
+<p>I personally feel (but might be wrong) that these changes make Holist quite specialized towards RL approaches.</p>
+</blockquote>
+<p>Our first focus soundness. We've known for a long time that using theorems with hypotheses yielded unsound results, that's why we have filtered them out from our theorem database. The recent changes just make those earlier decisions more explicit. We have a definitive proof verifier at the end, but we don't want to rely on that during normal use.</p>
+<p>The new changes just represent a safe-guard that seems necessary at this point in time. We will remove parts of those safe-guards as we start to allow more forward reasoning capabilities. For now, we err on the conservative side.</p>
+<p>I can see several alternatives forward:</p>
+<ul>
+<li>
+<p>We make sure that all backward tactic applications are completely sound in the presence of theorem parameter hypotheses. (<br>
+This would require a lot of extra work and validations, as we don't exactly know all the possible causes of unsoundnesses in each tactic.)</p>
+</li>
+<li>
+<p>Allow forward rules to create and register theorems with hypotheses, but we would disallow them for being used in all backward rules.</p>
+</li>
+<li>Every time we try to register a theorem with hypotheses, we would turn it into an implication without hypotheses.</li>
+</ul>
+<p>However, I think that Instead of allowing theorems with hypotheses, it is much higher priority to make forward rules being utilized and supported fully, since that what makes hypotheses compelling in the first place.</p>
+
+<a name="188320108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/188320108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#188320108">Christian Szegedy (Feb 16 2020 at 09:57)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="249373">Stanislas Polu</span></p>
+<blockquote>
+<ul>
+<li>Does the safer theorem registration fixes all inconsistencies in the API? If so can you explain how it fixes it?<br>
+Thanks!</li>
+</ul>
+</blockquote>
+<p>The problem is that some of the tactics can be unsound in the presence of hypotheses. For example, in the case of SUBST the unsoundness is removed by extra checks outside the tactic. In our first RL experiments, the system managed to figure out and utilize those unsound operations, so we removed theorems with hypotheses from our theorem database. Since then, none of our RL loops (which used many thousand CPU years, so far) could not create any unsound proofs (as we verify them with our forward proof-checker that goes through the kernel.) This is a very strong indication that our current backward-reasoning system is sound too with the current setup.</p>
+<p>Checking the soundness of isolated backward reasoning steps is much harder than complete forward proof traces, since individual backward reasoning steps can't be checked easily in the current setup, so we can fully trust only the final proofs if we verified them with the proof-checker, however we do that step rarely as it adds extra complexity.</p>
+<p>The correctness of forward rules can be trusted more, since all the steps are immediately verified with the kernel.</p>
+<p>Therefore I think that the highest priority is to support forward proofs more (in the verifier and DeepHOL) and once we can use them, we can allow theorems with hypotheses to selected tactics one-by-one, if we want.</p>
+
 
 {% endraw %}
 
