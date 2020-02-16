@@ -9,17 +9,17 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Standard well-founded tactics on later argument](07003Standardwellfoundedtacticsonlaterargument.html) (7 messages, latest: Feb 16 2020 at 16:57)
+* [Tactic Proof not Responding. Overflow?](17610TacticProofnotRespondingOverflow.html) (44 messages, latest: Feb 16 2020 at 17:55)
+
+* [Getting equation from match](27738Gettingequationfrommatch.html) (4 messages, latest: Feb 16 2020 at 17:45)
+
+* [Standard well-founded tactics on later argument](07003Standardwellfoundedtacticsonlaterargument.html) (11 messages, latest: Feb 16 2020 at 17:26)
 
 * [Brackets after unification symbol?](11568Bracketsafterunificationsymbol.html) (6 messages, latest: Feb 16 2020 at 16:23)
 
 * [noob question(s)](52075noobquestions.html) (1918 messages, latest: Feb 16 2020 at 15:59)
 
-* [Getting equation from match](27738Gettingequationfrommatch.html) (3 messages, latest: Feb 16 2020 at 13:59)
-
 * [finset.lt_wf fails](17603finsetltwffails.html) (2 messages, latest: Feb 16 2020 at 09:26)
-
-* [Tactic Proof not Responding. Overflow?](17610TacticProofnotRespondingOverflow.html) (41 messages, latest: Feb 14 2020 at 22:33)
 
 * [Trouble Installing Mathlib](21684TroubleInstallingMathlib.html) (6 messages, latest: Feb 14 2020 at 20:36)
 

@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [MathLib installing](36823MathLibinstalling.html) (11 messages, latest: Feb 16 2020 at 17:26)
+
 * [finite-dimensionality of field over subfield](61145finitedimensionalityoffieldoversubfield.html) (49 messages, latest: Feb 16 2020 at 16:43)
 
 * [`⊢ S \ {s} ⊂ S`](77930SsS.html) (7 messages, latest: Feb 16 2020 at 16:23)
@@ -16,8 +18,6 @@ permalink: archive/116395maths/index.html
 * [finset.inter](31578finsetinter.html) (6 messages, latest: Feb 16 2020 at 16:14)
 
 * [why `nonempty`?](83058whynonempty.html) (7 messages, latest: Feb 16 2020 at 12:38)
-
-* [MathLib installing](36823MathLibinstalling.html) (10 messages, latest: Feb 16 2020 at 08:47)
 
 * [Zorn's Lemma](18512ZornsLemma.html) (46 messages, latest: Feb 15 2020 at 17:54)
 

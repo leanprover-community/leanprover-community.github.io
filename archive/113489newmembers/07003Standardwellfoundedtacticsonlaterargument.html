@@ -50,6 +50,48 @@ permalink: archive/113489newmembers/07003Standardwellfoundedtacticsonlaterargume
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Standard%20well-founded%20tactics%20on%20later%20argument/near/188331528" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07003Standardwellfoundedtacticsonlaterargument.html#188331528">Reid Barton (Feb 16 2020 at 16:57)</a>:</h4>
 <p>Or pattern matching let/in or lambda</p>
 
+<a name="188331955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Standard%20well-founded%20tactics%20on%20later%20argument/near/188331955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07003Standardwellfoundedtacticsonlaterargument.html#188331955">Anton Lorenzen (Feb 16 2020 at 17:10)</a>:</h4>
+<p>Thanks. It is a bit weird though. Lean is happy with this:</p>
+<div class="codehilite"><pre><span></span><span class="n">using_well_founded</span> <span class="o">{</span> <span class="n">rel_tac</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">`</span><span class="o">[</span><span class="n">exact</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">measure_wf</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">j</span><span class="o">,</span> <span class="k">begin</span>
+<span class="n">rcases</span> <span class="n">j</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">g</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">a</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">b</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">t</span><span class="o">,</span> <span class="n">j</span><span class="bp">⟩⟩⟩⟩⟩</span><span class="o">,</span> <span class="n">exact</span> <span class="n">Judgement</span><span class="bp">.</span><span class="n">sizeof</span> <span class="n">g</span> <span class="o">(</span><span class="n">Exp</span><span class="bp">.</span><span class="n">pi</span> <span class="n">x</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="n">t</span> <span class="n">j</span><span class="o">,</span> <span class="kn">end</span><span class="o">)</span><span class="bp">⟩</span> <span class="o">]</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>But not with:</p>
+<div class="codehilite"><pre><span></span><span class="n">using_well_founded</span> <span class="o">{</span> <span class="n">rel_tac</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">`</span><span class="o">[</span><span class="n">exact</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">measure_wf</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="bp">⟨</span><span class="n">g</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">a</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">b</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">t</span><span class="o">,</span> <span class="n">j</span><span class="bp">⟩⟩⟩⟩⟩</span><span class="o">,</span> <span class="n">Judgement</span><span class="bp">.</span><span class="n">sizeof</span> <span class="n">g</span> <span class="o">(</span><span class="n">Exp</span><span class="bp">.</span><span class="n">pi</span> <span class="n">x</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="n">t</span> <span class="n">j</span><span class="o">)</span><span class="bp">⟩</span> <span class="o">]</span> <span class="o">}</span>
+</pre></div>
+
+<a name="188331970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Standard%20well-founded%20tactics%20on%20later%20argument/near/188331970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07003Standardwellfoundedtacticsonlaterargument.html#188331970">Anton Lorenzen (Feb 16 2020 at 17:11)</a>:</h4>
+<p>It says it can't show</p>
+<div class="codehilite"><pre><span></span><span class="err">⊢</span> <span class="n">id_rhs</span> <span class="bp">ℕ</span> <span class="o">(</span><span class="n">Judgement</span><span class="bp">.</span><span class="n">sizeof</span> <span class="n">g</span> <span class="o">(</span><span class="n">Exp</span><span class="bp">.</span><span class="n">pi</span> <span class="n">x</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="bp">_</span><span class="n">x</span> <span class="n">tr</span><span class="o">)</span> <span class="bp">&lt;</span>
+    <span class="n">id_rhs</span> <span class="bp">ℕ</span>
+      <span class="o">(</span><span class="n">Context</span><span class="bp">.</span><span class="n">sizeof</span> <span class="n">g</span> <span class="bp">+</span>
+         <span class="o">(</span><span class="n">Exp</span><span class="bp">.</span><span class="n">sizeof</span> <span class="n">a</span> <span class="bp">+</span>
+            <span class="o">(</span><span class="n">Exp</span><span class="bp">.</span><span class="n">sizeof</span> <span class="n">b</span> <span class="bp">+</span>
+               <span class="o">(</span><span class="n">Exp</span><span class="bp">.</span><span class="n">sizeof</span> <span class="n">t</span> <span class="bp">+</span>
+                  <span class="o">(</span><span class="n">Exp</span><span class="bp">.</span><span class="n">sizeof</span> <span class="bp">_</span><span class="n">x</span> <span class="bp">+</span>
+                     <span class="o">(</span><span class="n">PTSSort</span><span class="bp">.</span><span class="n">sizeof</span> <span class="bp">_</span><span class="n">x</span> <span class="bp">+</span>
+                        <span class="o">(</span><span class="n">string</span><span class="bp">.</span><span class="n">length</span> <span class="n">x</span> <span class="bp">+</span>
+                           <span class="o">(</span><span class="n">BetaExp</span><span class="bp">.</span><span class="n">sizeof</span> <span class="bp">_</span><span class="n">x</span> <span class="n">t</span> <span class="bp">_</span><span class="n">x</span> <span class="bp">+</span>
+                              <span class="o">(</span><span class="mi">2</span> <span class="bp">+</span>
+                                 <span class="o">(</span><span class="n">Judgement</span><span class="bp">.</span><span class="n">sizeof</span> <span class="n">g</span> <span class="n">t</span> <span class="o">(</span><span class="n">Exp</span><span class="bp">.</span><span class="n">sort</span> <span class="bp">_</span><span class="n">x</span><span class="o">)</span> <span class="bp">_</span><span class="n">x</span> <span class="bp">+</span>
+                                    <span class="n">Judgement</span><span class="bp">.</span><span class="n">sizeof</span> <span class="n">g</span> <span class="o">(</span><span class="n">Exp</span><span class="bp">.</span><span class="n">pi</span> <span class="n">x</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="bp">_</span><span class="n">x</span> <span class="n">tr</span><span class="o">))))))))))</span>
+</pre></div>
+
+
+<p>(Which is true since the lhs term occurs on the rhs too and there is a "+2")</p>
+
+<a name="188332235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Standard%20well-founded%20tactics%20on%20later%20argument/near/188332235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07003Standardwellfoundedtacticsonlaterargument.html#188332235">Anton Lorenzen (Feb 16 2020 at 17:21)</a>:</h4>
+<p>What is the policy on Lean bug reports btw? Should I report something like this to the <a href="http://github.com/lean-community/lean" target="_blank" title="http://github.com/lean-community/lean">github.com/lean-community/lean</a> repo?</p>
+
+<a name="188332407"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Standard%20well-founded%20tactics%20on%20later%20argument/near/188332407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07003Standardwellfoundedtacticsonlaterargument.html#188332407">Chris Hughes (Feb 16 2020 at 17:26)</a>:</h4>
+<p>It probably doesn't unfold the <code>id_rhs</code></p>
+
 
 {% endraw %}
 
