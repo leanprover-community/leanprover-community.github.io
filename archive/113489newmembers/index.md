@@ -9,6 +9,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1918 messages, latest: Feb 16 2020 at 15:59)
+
+* [Standard well-founded tactics on later argument](07003Standardwellfoundedtacticsonlaterargument.html) (5 messages, latest: Feb 16 2020 at 15:37)
+
 * [Getting equation from match](27738Gettingequationfrommatch.html) (3 messages, latest: Feb 16 2020 at 13:59)
 
 * [finset.lt_wf fails](17603finsetltwffails.html) (2 messages, latest: Feb 16 2020 at 09:26)
@@ -26,8 +30,6 @@ permalink: archive/113489newmembers/index.html
 * [induction over nested sigma](15742inductionovernestedsigma.html) (4 messages, latest: Feb 13 2020 at 17:24)
 
 * [action of subgroup inference issues](01686actionofsubgroupinferenceissues.html) (11 messages, latest: Feb 13 2020 at 08:11)
-
-* [noob question(s)](52075noobquestions.html) (1914 messages, latest: Feb 12 2020 at 23:40)
 
 * [Intermediate Value Theorem](56141IntermediateValueTheorem.html) (35 messages, latest: Feb 12 2020 at 21:31)
 
