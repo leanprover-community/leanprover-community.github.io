@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [finite-dimensionality of field over subfield](61145finitedimensionalityoffieldoversubfield.html) (23 messages, latest: Feb 16 2020 at 13:59)
+* [finite-dimensionality of field over subfield](61145finitedimensionalityoffieldoversubfield.html) (44 messages, latest: Feb 16 2020 at 14:33)
 
 * [why `nonempty`?](83058whynonempty.html) (7 messages, latest: Feb 16 2020 at 12:38)
 
