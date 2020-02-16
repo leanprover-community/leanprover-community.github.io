@@ -56,6 +56,43 @@ permalink: archive/116395maths/36823MathLibinstalling.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/MathLib%20installing/near/188332416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36823MathLibinstalling.html#188332416">Patrick Massot (Feb 16 2020 at 17:26)</a>:</h4>
 <p>Yes, I was waiting for the GitHub action transition to settle down, but I guess now it's ready.</p>
 
+<a name="188336440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/MathLib%20installing/near/188336440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36823MathLibinstalling.html#188336440">Patrick Massot (Feb 16 2020 at 19:35)</a>:</h4>
+<p>I've done a bit a research about this idea. Clearly there is no way we can distribute VScode while respecting the license. So we'll need to use <code>https://github.com/VSCodium/vscodium</code> which is a free binary release of VScode (yes, Microsoft's open sourcing is weird). The next step is to install the extension and I immediately hit <a href="https://github.com/VSCodium/vscodium/issues/332" target="_blank" title="https://github.com/VSCodium/vscodium/issues/332">a bug</a>. I'll wait a bit to see whether this bug could be fixed quickly, but most probably we'll need a hack to install the extension. <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> how hard would it be for you to also release a version of the VScode extension that could simply be copied in the state the installation procedure creates?</p>
+
+<a name="188336552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/MathLib%20installing/near/188336552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36823MathLibinstalling.html#188336552">Gabriel Ebner (Feb 16 2020 at 19:38)</a>:</h4>
+<p>Can't you just extract the <code>.vsix</code> file?  (click "download extension" <a href="https://marketplace.visualstudio.com/items?itemName=jroesch.lean" target="_blank" title="https://marketplace.visualstudio.com/items?itemName=jroesch.lean">here</a>).  The vsix file is just a zip file.  AFAICT it contains exactly the same directory structure as <code>~/.vscode/extensions/jroesch.lean-0.14.11/</code> on my machine.</p>
+
+<a name="188336609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/MathLib%20installing/near/188336609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36823MathLibinstalling.html#188336609">Patrick Massot (Feb 16 2020 at 19:40)</a>:</h4>
+<p>I'm looking for a link I could actually follow from a script.</p>
+
+<a name="188336624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/MathLib%20installing/near/188336624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36823MathLibinstalling.html#188336624">Patrick Massot (Feb 16 2020 at 19:41)</a>:</h4>
+<p>I would prefer not to use selenium to download our own extension...</p>
+
+<a name="188336729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/MathLib%20installing/near/188336729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36823MathLibinstalling.html#188336729">Gabriel Ebner (Feb 16 2020 at 19:44)</a>:</h4>
+<div class="codehilite"><pre><span></span>git clone https://github.com/leanprover/vscode-lean
+cd vscode-lean
+npm i
+./node_modules/.bin/vsce package
+ls *.vsix       # voilà
+</pre></div>
+
+<a name="188336741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/MathLib%20installing/near/188336741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36823MathLibinstalling.html#188336741">Patrick Massot (Feb 16 2020 at 19:45)</a>:</h4>
+<p>Doing that for every mathlib nightly feels a bit silly, right? Why not doing it as part of your release workflow and have the vsix file as a GitHub artefact somewhere?</p>
+
+<a name="188336855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/MathLib%20installing/near/188336855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36823MathLibinstalling.html#188336855">Gabriel Ebner (Feb 16 2020 at 19:49)</a>:</h4>
+<p>I'll see what I can do.  Don't hold your breath though.</p>
+
+<a name="188337022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/MathLib%20installing/near/188337022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36823MathLibinstalling.html#188337022">Gabriel Ebner (Feb 16 2020 at 19:55)</a>:</h4>
+<p><a href="https://github.com/leanprover/vscode-lean/releases/download/v0.14.11/lean-0.14.11.vsix" target="_blank" title="https://github.com/leanprover/vscode-lean/releases/download/v0.14.11/lean-0.14.11.vsix">https://github.com/leanprover/vscode-lean/releases/download/v0.14.11/lean-0.14.11.vsix</a></p>
+
 
 {% endraw %}
 

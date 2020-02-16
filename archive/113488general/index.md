@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [VSCode unicode characters](08876VSCodeunicodecharacters.html) (38 messages, latest: Feb 16 2020 at 19:14)
+
 * [`hint` tactic](53516hinttactic.html) (13 messages, latest: Feb 16 2020 at 16:41)
 
 * [`add_monoid.smul`, `add_group.gsmul`](49653addmonoidsmuladdgroupgsmul.html) (4 messages, latest: Feb 16 2020 at 03:07)
@@ -50,8 +52,6 @@ permalink: archive/113488general/index.html
 * [pi instances](66274piinstances.html) (26 messages, latest: Feb 12 2020 at 15:25)
 
 * [pp.all with more @](29047ppallwithmore.html) (9 messages, latest: Feb 12 2020 at 12:35)
-
-* [VSCode unicode characters](08876VSCodeunicodecharacters.html) (37 messages, latest: Feb 11 2020 at 20:09)
 
 * [typeclass paper](35889typeclasspaper.html) (168 messages, latest: Feb 11 2020 at 17:36)
 
