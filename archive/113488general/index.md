@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [`hint` tactic](53516hinttactic.html) (2 messages, latest: Feb 16 2020 at 00:59)
+* [`hint` tactic](53516hinttactic.html) (9 messages, latest: Feb 16 2020 at 01:38)
 
 * [hardware verification](75506hardwareverification.html) (52 messages, latest: Feb 16 2020 at 00:48)
 
