@@ -9,9 +9,9 @@ permalink: archive/219941MachineLearningforTheoremProving/index.html
 
 ### Topics:
 
-* [HOList](34292HOList.html) (121 messages, latest: Feb 15 2020 at 20:17)
+* [ML for Lean: How to do it?](97947MLforLeanHowtodoit.html) (92 messages, latest: Feb 16 2020 at 08:59)
 
-* [ML for Lean: How to do it?](97947MLforLeanHowtodoit.html) (91 messages, latest: Feb 15 2020 at 20:13)
+* [HOList](34292HOList.html) (122 messages, latest: Feb 16 2020 at 08:55)
 
 * [Paper: An Experimental Study of Formula Embeddings for Autom](01363PaperAnExperimentalStudyofFormulaEmbeddingsforAutom.html) (18 messages, latest: Feb 09 2020 at 18:55)
 
