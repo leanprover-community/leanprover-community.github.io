@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Tactic Proof not Responding. Overflow?](17610TacticProofnotRespondingOverflow.html) (55 messages, latest: Feb 16 2020 at 18:53)
+* [Tactic Proof not Responding. Overflow?](17610TacticProofnotRespondingOverflow.html) (57 messages, latest: Feb 16 2020 at 20:40)
 
 * [Getting equation from match](27738Gettingequationfrommatch.html) (4 messages, latest: Feb 16 2020 at 17:45)
 
