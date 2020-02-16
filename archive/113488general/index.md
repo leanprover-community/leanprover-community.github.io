@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [`hint` tactic](53516hinttactic.html) (12 messages, latest: Feb 16 2020 at 09:42)
+* [`hint` tactic](53516hinttactic.html) (13 messages, latest: Feb 16 2020 at 16:41)
 
 * [`add_monoid.smul`, `add_group.gsmul`](49653addmonoidsmuladdgroupgsmul.html) (4 messages, latest: Feb 16 2020 at 03:07)
 

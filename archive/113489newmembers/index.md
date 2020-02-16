@@ -9,9 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1918 messages, latest: Feb 16 2020 at 15:59)
+* [Standard well-founded tactics on later argument](07003Standardwellfoundedtacticsonlaterargument.html) (7 messages, latest: Feb 16 2020 at 16:57)
 
-* [Standard well-founded tactics on later argument](07003Standardwellfoundedtacticsonlaterargument.html) (5 messages, latest: Feb 16 2020 at 15:37)
+* [Brackets after unification symbol?](11568Bracketsafterunificationsymbol.html) (6 messages, latest: Feb 16 2020 at 16:23)
+
+* [noob question(s)](52075noobquestions.html) (1918 messages, latest: Feb 16 2020 at 15:59)
 
 * [Getting equation from match](27738Gettingequationfrommatch.html) (3 messages, latest: Feb 16 2020 at 13:59)
 
