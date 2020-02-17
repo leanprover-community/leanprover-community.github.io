@@ -564,6 +564,34 @@ end
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188360281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188360281">Kevin Buzzard (Feb 17 2020 at 08:32)</a>:</h4>
 <p>So it will turn not forall into exists not</p>
 
+<a name="188363730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188363730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188363730">Patrick Massot (Feb 17 2020 at 09:34)</a>:</h4>
+<p>Rocky, your question is a bit hard to answer without knowing whether you want a low-level answer or learn how to crush such a goal. You can still have a look at the following variations.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_ne_zero</span> <span class="mi">1</span> <span class="o">(</span><span class="n">h</span> <span class="mi">0</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_ne_zero</span> <span class="mi">1</span> <span class="o">(</span><span class="n">h</span> <span class="mi">0</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">specialize</span> <span class="n">h</span> <span class="mi">0</span><span class="o">,</span>
+  <span class="n">tauto</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">push_neg</span><span class="o">,</span>
+  <span class="n">use</span> <span class="mi">0</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
 
