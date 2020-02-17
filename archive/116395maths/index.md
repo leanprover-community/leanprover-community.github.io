@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [MathLib installing](36823MathLibinstalling.html) (102 messages, latest: Feb 17 2020 at 04:14)
+* [finite-dimensionality of field over subfield](61145finitedimensionalityoffieldoversubfield.html) (60 messages, latest: Feb 17 2020 at 18:02)
 
-* [finite-dimensionality of field over subfield](61145finitedimensionalityoffieldoversubfield.html) (59 messages, latest: Feb 16 2020 at 23:02)
+* [MathLib installing](36823MathLibinstalling.html) (102 messages, latest: Feb 17 2020 at 04:14)
 
 * [`⊢ S \ {s} ⊂ S`](77930SsS.html) (8 messages, latest: Feb 16 2020 at 18:36)
 

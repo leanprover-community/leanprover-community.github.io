@@ -9,7 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1919 messages, latest: Feb 17 2020 at 17:29)
+* [noob question(s)](52075noobquestions.html) (1923 messages, latest: Feb 17 2020 at 18:45)
+
+* [Tactic Proof not Responding. Overflow?](17610TacticProofnotRespondingOverflow.html) (69 messages, latest: Feb 17 2020 at 18:41)
+
+* [Local/city threads](73023Localcitythreads.html) (10 messages, latest: Feb 17 2020 at 18:29)
 
 * [VSCode](21253VSCode.html) (5 messages, latest: Feb 17 2020 at 17:19)
 
@@ -18,8 +22,6 @@ permalink: archive/113489newmembers/index.html
 * [more basics](41001morebasics.html) (62 messages, latest: Feb 17 2020 at 15:33)
 
 * [Getting Started with Lean with prior experience in Coq](90352GettingStartedwithLeanwithpriorexperienceinCoq.html) (15 messages, latest: Feb 17 2020 at 13:47)
-
-* [Tactic Proof not Responding. Overflow?](17610TacticProofnotRespondingOverflow.html) (68 messages, latest: Feb 17 2020 at 09:34)
 
 * [Defining a symmetric function](54601Definingasymmetricfunction.html) (17 messages, latest: Feb 17 2020 at 02:38)
 
@@ -86,8 +88,6 @@ permalink: archive/113489newmembers/index.html
 * [example : ¬ (∀ x, ¬ p x) → (∃ x, p x)](02222examplexpxxpx.html) (91 messages, latest: Feb 01 2020 at 20:33)
 
 * [example : ¬ (∃ x, ¬ p x) → (∀ x, p x)](34382examplexpxxpx.html) (47 messages, latest: Feb 01 2020 at 16:39)
-
-* [Local/city threads](73023Localcitythreads.html) (9 messages, latest: Jan 29 2020 at 04:39)
 
 * [sets in lean](66871setsinlean.html) (3 messages, latest: Jan 26 2020 at 20:56)
 

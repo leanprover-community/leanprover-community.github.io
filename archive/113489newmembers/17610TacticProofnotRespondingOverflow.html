@@ -592,6 +592,104 @@ end
 <span class="kn">end</span>
 </pre></div>
 
+<a name="188399196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188399196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188399196">Rocky Kamen-Rubio (Feb 17 2020 at 18:41)</a>:</h4>
+<p>Thank you all for your replies! This has been very useful. Here are the two more complex cases I've been working with where I have trouble negotiating the universal quantifiers. I copied my previous post explaining what I'm trying to prove below.  I'm having trouble producing a counterexample, and feel like it would be easier to use predicate logic to reduce the expression to something false, though I'm not totally sure how to best handle expressions like <code>finset.univ.sum</code> in cases like this. Any thoughts would be appreciate! </p>
+<div class="codehilite"><pre><span></span>open_locale classical
+def checkStrategyMN {m n : nat} (strategyA : fin m → fin n → nat) (strategyB: fin n → fin m → nat) : Prop :=
+(∀ r : fin m, (∀ c : fin n, ((finset.univ.sum (strategyA r)).even) ∧ (¬ (finset.univ.sum (strategyB c)).even) ∧ ((strategyA r c) = (strategyB c r))))
+
+theorem noStrategyMN {m n : nat} (strategyA : fin m → fin n → nat) (strategyB: fin n → fin m → nat) : ((¬ m.even) ∧ (¬ n.even)) → ¬ (checkStrategyMN strategyA strategyB) :=
+begin
+rw checkStrategyMN,
+intros h1,
+finish,
+end
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>def board {m n : nat} (strategyA : fin m → fin n → nat) (strategyB: fin n → fin m → nat) : fin m → fin n → nat := strategyA --woah man...these representations are THE SAME!!!! (function that returns a vector and a matrix)
+
+def consistent {m n : nat} (strategyA : fin m → fin n → nat) (strategyB: fin n → fin m → nat) : Prop
+:= ∀ (r : fin m) (c : fin n), (strategyA r c) = (strategyB c r)
+
+def sampleA {m n : nat} (board : fin m → fin n → nat) : fin m → fin n → nat := board
+
+def sampleB {m n : nat} (board : fin m → fin n → nat) : fin n → fin m → nat := λ (n : fin n) (m : fin m), board m n
+#check sampleA
+#check sampleB
+
+lemma board_equiv_strategy {m n : nat} (strategyA : fin m → fin n → nat) (strategyB: fin n → fin m → nat) :
+(consistent strategyA strategyB) → (strategyA = ((sampleA (board strategyA strategyB))) ∧ (strategyB = (sampleB (board strategyA strategyB))))
+:=
+begin
+intro h,
+split,
+
+rw sampleA,
+rw board,
+
+rw consistent at h,
+rw sampleB,
+rw board,
+rw h,
+end
+
+def each_row_sum_even {m n : nat} (board : fin m → fin n → nat) : Prop := ∀ (r : fin m), (finset.univ.sum (sampleA board r)).even
+
+def each_col_sum_odd {m n : nat} (board : fin m → fin n → nat) : Prop := ∀ (c : fin n), ¬(finset.univ.sum (sampleB board c)).even
+
+def even_strategy {m n : nat} (strategyA : fin m → fin n → nat) : Prop := (∀ r : fin m, (∀ c : fin n, ((finset.univ.sum (strategyA r)).even)))
+
+def odd_strategy {m n : nat} (strategyB : fin n → fin m → nat) : Prop := (∀ r : fin m, (∀ c : fin n, (¬ (finset.univ.sum (strategyB c)).even)))
+
+lemma even_strategy_implies_even_rows {m n : nat} (strategyA : fin m → fin n → nat) (strategyB : fin n → fin m → nat)
+: (even_strategy strategyA) → each_row_sum_even (board strategyA strategyB)
+:=
+begin
+sorry
+end
+
+lemma odd_strategy_implies_odd_cols {m n : nat} (strategyA : fin m → fin n → nat) (strategyB : fin n → fin m → nat)
+: (odd_strategy strategyB) → each_col_sum_odd (board strategyA strategyB)
+:=
+begin
+sorry
+end
+
+def row_sum {m n : nat} (board : fin m → fin n → nat) : nat := (finset.univ.sum (sampleA board))
+
+def col_sum {m n : nat} (board : fin m → fin n → nat) : nat := (finset.univ.sum (sampleB board))
+
+lemma row_sum_eq_col_sum {m n : nat} (board : fin m → fin n → nat) : row_sum board = col_sum board
+:=
+begin
+sorry
+end
+
+theorem noStrategyMN2 {m n : nat} (strategyA : fin m → fin n → nat) (strategyB: fin n → fin m → nat) : ¬ ((consistent strategyA strategyB) ∧  (even_strategy strategyA) ∧ (odd_strategy strategyB))
+:=
+begin
+intro h,
+cases h with c y,
+cases y with even odd,
+have x := even_strategy_implies_even_rows strategyA strategyB even,
+have y := odd_strategy_implies_odd_cols strategyA strategyB odd,
+end
+</pre></div>
+
+
+<p><strong>The Game:</strong> Alice is assigned a row and Bob is assigned a column of a <del>3x3</del> mxn board for odd m and n. Neither knows the assignment of the other. The task is for each of them to color their respective row/column with Green and Red tiles (aka 1s and 0s) while meeting the following criteria:</p>
+<ol>
+<li>Rows must have an even number of Green tiles</li>
+<li>Columns must have an odd number of Green tiles</li>
+<li>The two colorings must be consistent - they must agree on the color of the shared tile</li>
+<li>They can plan a strategy beforehand but can't communicate after each gets their respective assignment.</li>
+</ol>
+<p>My goal is to prove that there is no guaranteed successful strategy.</p>
+<p><strong>Lean Proof 1</strong>:  We can think of a strategy as two maps (<code>strategyA</code> and <code>strategyB</code>) one from a row number to a map from column number to element of that row, the other from a column number to a map from row number to element in that column. <code>checkStrategy</code> checks that a given strategy satisfies the conditions listed.</p>
+<p><strong>Lean Proof 2</strong>:  Since Alice and Bob must agree on the value of the intersection of their respective row/column, and the location of this intersection is arbitrary, we can think of their strategies as sampling from a single tiled <del>3x3</del> m x n board. Summing the values in the rows of this single board we get an even number, but summing the values in the columns we get an odd number. The sums of the values in all the tiles should be the same whether we do it by rows or columns, so we get a contradiction. To do this in lean, I start by defining the equivalent board, and what sampleA and sampleB would be from that board. Next, I am trying to prove board_equiv: the statement that sampling from this board is equivalent to both strategies if all the conditions are met. Next I show that the rows of the board must have even sums and the cols have odd sums, if the original strategies have even and odd sums. From here, I'm hoping showing the contradiction shouldn't be too hard, but I haven't gotten that far yet.</p>
+
 
 {% endraw %}
 
