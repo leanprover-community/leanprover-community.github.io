@@ -10813,6 +10813,72 @@ If it's not possible, does <code>type_with</code> already exists in lean standar
 <p>Thanks for the responses,<br>
 sigma looks almost equivalent to my <code>type_with</code> , but it looks like I loose instance inference</p>
 
+<a name="188401295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188401295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188401295">Reid Barton (Feb 17 2020 at 19:20)</a>:</h4>
+<p>I'm not sure what instance inference you have with <code>type_with</code>...?</p>
+
+<a name="188402025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188402025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188402025">Gabriel Ruiz (Feb 17 2020 at 19:33)</a>:</h4>
+<p>Hi everyone! I'm beginning my journey in Lean, and I'm following along the tutorial here: <br>
+<a href="https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html">https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html</a></p>
+<p>Why is it that when you input <code>#check Type</code> to lean's interpreter(?), you're returned <code>Type 1</code> instead of <code>Type 0</code>?</p>
+
+<a name="188402255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188402255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188402255">Reid Barton (Feb 17 2020 at 19:37)</a>:</h4>
+<p><code>Type 0</code> is the same as <code>Type</code>. If we had <code>Type : Type</code>, then the system would be logically inconsistent (you could encode Cantor's paradox or something).</p>
+
+<a name="188402323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188402323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188402323">Reid Barton (Feb 17 2020 at 19:38)</a>:</h4>
+<p><code>Type 1</code> is a "bigger universe" which can contain things like <code>Type = Type 0</code>, and <code>Type 1</code> is itself a type that lives in the next larger universe <code>Type 2</code>, and so on</p>
+
+<a name="188402719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188402719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188402719">Yury G. Kudryashov (Feb 17 2020 at 19:46)</a>:</h4>
+<p><span class="user-mention" data-user-id="110025">@Andrew Ashworth</span> You can write <code>def bundle_to_string (α : Type) [h : has_to_string α]  : Σ α : Type, has_to_string α := ⟨α, h⟩</code> (didn't test).</p>
+
+<a name="188402851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188402851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188402851">Reid Barton (Feb 17 2020 at 19:49)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110032">Reid Barton</span> <a href="#narrow/stream/113489-new-members/topic/noob.20question(s)/near/188402323" title="#narrow/stream/113489-new-members/topic/noob.20question(s)/near/188402323">said</a>:</p>
+<blockquote>
+<p><code>Type 1</code> is a "bigger universe" which can contain things like <code>Type = Type 0</code>, and <code>Type 1</code> is itself a type that lives in the next larger universe <code>Type 2</code>, and so on</p>
+</blockquote>
+<p>I realize now I pretty much explained just the same thing it already says in <a href="https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html#types-as-objects" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html#types-as-objects">https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html#types-as-objects</a></p>
+
+<a name="188402929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188402929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188402929">Gabriel Ruiz (Feb 17 2020 at 19:50)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> I'm following, and now I'm starting to see my confusion. What then does <code>#check</code> do?</p>
+
+<a name="188402938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188402938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188402938">Reid Barton (Feb 17 2020 at 19:51)</a>:</h4>
+<p><code>#check</code> tells you the type of something</p>
+
+<a name="188402950"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188402950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188402950">Reid Barton (Feb 17 2020 at 19:51)</a>:</h4>
+<p>e.g. <code>#check 3</code> will print something like <code>3 : nat</code></p>
+
+<a name="188403127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188403127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188403127">Gabriel Ruiz (Feb 17 2020 at 19:54)</a>:</h4>
+<p>Right, which is why I'm perplexed that it doesn't actually return <code>Type 0</code>  when I put in <code>#check Type 0</code>. I understand that it's <em>also</em> of <code>Type 1</code>, but why does it tell me that instead of its actual type: <code>Type 0</code>?</p>
+
+<a name="188403141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188403141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188403141">Johan Commelin (Feb 17 2020 at 19:54)</a>:</h4>
+<p>Because that is not its type</p>
+
+<a name="188403154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188403154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188403154">Johan Commelin (Feb 17 2020 at 19:55)</a>:</h4>
+<p>You can't be your own type</p>
+
+<a name="188403156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188403156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188403156">Gabriel Ruiz (Feb 17 2020 at 19:55)</a>:</h4>
+<p>Ohhhhhhhhhhhhhhhh</p>
+
+<a name="188403170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188403170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188403170">Gabriel Ruiz (Feb 17 2020 at 19:55)</a>:</h4>
+<p>That clicked, thank you!</p>
+
+<a name="188403224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188403224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188403224">Johan Commelin (Feb 17 2020 at 19:56)</a>:</h4>
+<p>Similarly, <code>Type 1</code> will have type <code>Type 2</code>, and <code>Type 2</code> will have type ...</p>
+
 
 {% endraw %}
 

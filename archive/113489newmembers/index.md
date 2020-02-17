@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1923 messages, latest: Feb 17 2020 at 18:45)
+* [noob question(s)](52075noobquestions.html) (1938 messages, latest: Feb 17 2020 at 19:56)
 
-* [Tactic Proof not Responding. Overflow?](17610TacticProofnotRespondingOverflow.html) (69 messages, latest: Feb 17 2020 at 18:41)
+* [Tactic Proof not Responding. Overflow?](17610TacticProofnotRespondingOverflow.html) (70 messages, latest: Feb 17 2020 at 19:47)
 
 * [Local/city threads](73023Localcitythreads.html) (10 messages, latest: Feb 17 2020 at 18:29)
 
