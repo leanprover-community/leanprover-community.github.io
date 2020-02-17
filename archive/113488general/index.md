@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean4 lemma names](88981Lean4lemmanames.html) (5 messages, latest: Feb 17 2020 at 11:30)
+* [Lean4 lemma names](88981Lean4lemmanames.html) (10 messages, latest: Feb 17 2020 at 12:45)
 
 * [Adding Lean support to Codewars](64096AddingLeansupporttoCodewars.html) (11 messages, latest: Feb 17 2020 at 10:01)
 
