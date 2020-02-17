@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [more basics](41001morebasics.html) (56 messages, latest: Feb 17 2020 at 14:49)
+
 * [Getting Started with Lean with prior experience in Coq](90352GettingStartedwithLeanwithpriorexperienceinCoq.html) (15 messages, latest: Feb 17 2020 at 13:47)
 
 * [Tactic Proof not Responding. Overflow?](17610TacticProofnotRespondingOverflow.html) (68 messages, latest: Feb 17 2020 at 09:34)
@@ -54,8 +56,6 @@ permalink: archive/113489newmembers/index.html
 * [trivial ordering](84630trivialordering.html) (64 messages, latest: Feb 10 2020 at 00:09)
 
 * [Statements that require a previous result](36692Statementsthatrequireapreviousresult.html) (9 messages, latest: Feb 09 2020 at 17:00)
-
-* [more basics](41001morebasics.html) (45 messages, latest: Feb 09 2020 at 02:34)
 
 * [`linear_map` as `add_monoid_hom`](62814linearmapasaddmonoidhom.html) (8 messages, latest: Feb 09 2020 at 01:21)
 

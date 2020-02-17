@@ -342,6 +342,68 @@ permalink: archive/113489newmembers/41001morebasics.html
 <span class="kn">end</span>
 </pre></div>
 
+<a name="188380848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/188380848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#188380848">Dan Stanescu (Feb 17 2020 at 14:14)</a>:</h4>
+<p>Newbie question: is there a built-in way to change a goal of the form <code>a ≠ b</code> to <code>a = b -&gt; false</code>? I tried doing <code>by_contradiction</code> on it, but it changes instead to <code>¬a ≠ b</code>. I can get what I want by something like:</p>
+<div class="codehilite"><pre><span></span>theorem zNEo1 : (0 ≠ 1) = ¬ (0 = 1) := rfl
+theorem zNEo2 : ¬ (0 = 1) → (0 ≠ 1) :=
+begin
+    intro h,
+    rw zNEo1,
+    exact h,
+end
+</pre></div>
+
+
+<p>but I feel there should be a better way.</p>
+
+<a name="188380987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/188380987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#188380987">Patrick Massot (Feb 17 2020 at 14:16)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">zNEo2</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≠</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">change</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">→</span> <span class="n">false</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Is this what you want?</p>
+
+<a name="188382765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/188382765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#188382765">Dan Stanescu (Feb 17 2020 at 14:38)</a>:</h4>
+<p>Yes, apparently this takes care of it. Didn't encounter <code>change</code> before. Thank you!</p>
+
+<a name="188382836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/188382836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#188382836">Chris Hughes (Feb 17 2020 at 14:39)</a>:</h4>
+<p>It might also be useful to just <code>intro h</code>, and it automatically unfolds <code>\ne</code></p>
+
+<a name="188382839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/188382839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#188382839">Patrick Massot (Feb 17 2020 at 14:39)</a>:</h4>
+<p>It changes the goal to anything which is the same by definition (in a very precise sense).</p>
+
+<a name="188383343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/188383343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#188383343">Dan Stanescu (Feb 17 2020 at 14:45)</a>:</h4>
+<p>I thought I tried <code>intro</code>, but apparently not. So <code>0 ≠ 1</code> is indeed defined as <code>0 = 1 → false</code> then?</p>
+
+<a name="188383353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/188383353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#188383353">Patrick Massot (Feb 17 2020 at 14:45)</a>:</h4>
+<p>Yes.</p>
+
+<a name="188383445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/188383445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#188383445">Patrick Massot (Feb 17 2020 at 14:46)</a>:</h4>
+<p>Are you using VScode?</p>
+
+<a name="188383468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/188383468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#188383468">Dan Stanescu (Feb 17 2020 at 14:46)</a>:</h4>
+<p>Yes.</p>
+
+<a name="188383578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/188383578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#188383578">Patrick Massot (Feb 17 2020 at 14:48)</a>:</h4>
+<p>You can right-click on the <code>≠</code> symbol, choose "Go to definition" to get to <a href="https://github.com/leanprover/lean/blob/master/library/init/logic.lean#L97-L98" target="_blank" title="https://github.com/leanprover/lean/blob/master/library/init/logic.lean#L97-L98">https://github.com/leanprover/lean/blob/master/library/init/logic.lean#L97-L98</a> then do the same on the negation symbol to go to <a href="https://github.com/leanprover/lean/blob/master/library/init/core.lean#L142-L143" target="_blank" title="https://github.com/leanprover/lean/blob/master/library/init/core.lean#L142-L143">https://github.com/leanprover/lean/blob/master/library/init/core.lean#L142-L143</a></p>
+
+<a name="188383686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/188383686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#188383686">Patrick Massot (Feb 17 2020 at 14:49)</a>:</h4>
+<p>This may look like a hard way of learning (sounds like: code is the documentation). But this is actually part of why proof assistants are so cool compared to traditional textbooks: you can always ask and get the answer.</p>
+
 
 {% endraw %}
 
