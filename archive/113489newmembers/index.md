@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Getting Started with Lean with prior experience in Coq](90352GettingStartedwithLeanwithpriorexperienceinCoq.html) (7 messages, latest: Feb 17 2020 at 06:29)
+
 * [Tactic Proof not Responding. Overflow?](17610TacticProofnotRespondingOverflow.html) (65 messages, latest: Feb 17 2020 at 05:56)
 
 * [Defining a symmetric function](54601Definingasymmetricfunction.html) (17 messages, latest: Feb 17 2020 at 02:38)
