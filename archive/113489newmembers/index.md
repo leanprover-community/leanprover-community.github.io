@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Defining a symmetric function](54601Definingasymmetricfunction.html) (13 messages, latest: Feb 17 2020 at 01:42)
+* [Defining a symmetric function](54601Definingasymmetricfunction.html) (17 messages, latest: Feb 17 2020 at 02:38)
 
 * [Tactic Proof not Responding. Overflow?](17610TacticProofnotRespondingOverflow.html) (58 messages, latest: Feb 16 2020 at 21:04)
 
