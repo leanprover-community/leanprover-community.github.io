@@ -10927,6 +10927,56 @@ I thought maybe the <code>real.sqrt 3</code> was confusing things, so I tried to
 <p>(I was trying <code>exact absurd h dec_trivial</code>, which wasn't working, where there is now a <code>norm_cast</code>, thanks again! :)).<br>
 Is it really this hard? Why doesn't <code>dec_trivial</code> work here (it worked in very similar circumstances before)</p>
 
+<a name="188409388"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188409388" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188409388">Kevin Buzzard (Feb 17 2020 at 22:03)</a>:</h4>
+<p><code>dec_trivial</code> won't prove anything about the complexes, because the complexes don't have decidable equality.</p>
+
+<a name="188409434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188409434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188409434">Kevin Buzzard (Feb 17 2020 at 22:04)</a>:</h4>
+<p><code>dec_trivial</code> works for naturals, integers and rationals, not for reals, complexes or <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span></span></span></span>-adics.</p>
+
+<a name="188409658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188409658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188409658">Kevin Buzzard (Feb 17 2020 at 22:10)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">lemma</span> <span class="n">lol&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">/</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">field_simp</span><span class="o">,</span>
+  <span class="n">ring</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="188409754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188409754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188409754">Paul van Wamelen (Feb 17 2020 at 22:11)</a>:</h4>
+<p><code>field_simp</code>!!!!!!</p>
+
+<a name="188409824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188409824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188409824">Kevin Buzzard (Feb 17 2020 at 22:13)</a>:</h4>
+<p><code>ring</code> doesn't always work when you have denominators, for obvious reasons. <code>field_simp</code> is, I think, some kind of denominator tactic. It's the first time I ever used it; I remembered people talking about it a month or two ago and I just looked it up in <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md">the tactic list</a>.</p>
+
+<a name="188409899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188409899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188409899">Paul van Wamelen (Feb 17 2020 at 22:14)</a>:</h4>
+<p>Thanks for the <code>dec_trivial</code> explanation. I had <code>h : 2 = 0</code> but couldn't figure out in which ring 2 and 0 were. Is there a <code>#print</code> setting that will show me?</p>
+
+<a name="188409926"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188409926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188409926">Kevin Buzzard (Feb 17 2020 at 22:14)</a>:</h4>
+<p>You can <code>set_option pp.all true</code> before your proof. Then you'll see what Lean is actually doing behind the scenes. Be warned though, it's not a pretty sight sometimes.</p>
+
+<a name="188409946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188409946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188409946">Paul van Wamelen (Feb 17 2020 at 22:15)</a>:</h4>
+<p>:) Thanks!</p>
+
+<a name="188410022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188410022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188410022">Kevin Buzzard (Feb 17 2020 at 22:16)</a>:</h4>
+<p>Maybe you could try <code>set_option pp.numerals false</code> instead but I'm not sure what will happen then.</p>
+
+<a name="188410142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188410142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188410142">Rob Lewis (Feb 17 2020 at 22:19)</a>:</h4>
+<blockquote>
+<p><code>lemma lol' (x : ℂ) : x = 2 * x / 2</code></p>
+</blockquote>
+<p>This should be provable by <code>ring</code> alone -- notice it works if you change C to R. IIRC there's something in the C++ <code>norm_num</code> that looks for an order instance unnecessarily when it does denominator cancellation. Probably fixable in 3.5c.</p>
+
 
 {% endraw %}
 
