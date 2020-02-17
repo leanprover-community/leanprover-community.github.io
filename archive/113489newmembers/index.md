@@ -9,6 +9,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [VSCode](21253VSCode.html) (4 messages, latest: Feb 17 2020 at 16:59)
+
+* [noncomputable](28696noncomputable.html) (5 messages, latest: Feb 17 2020 at 16:37)
+
 * [more basics](41001morebasics.html) (62 messages, latest: Feb 17 2020 at 15:33)
 
 * [Getting Started with Lean with prior experience in Coq](90352GettingStartedwithLeanwithpriorexperienceinCoq.html) (15 messages, latest: Feb 17 2020 at 13:47)
