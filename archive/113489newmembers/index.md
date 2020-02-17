@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1938 messages, latest: Feb 17 2020 at 19:56)
+* [VSCode](21253VSCode.html) (7 messages, latest: Feb 17 2020 at 20:47)
 
-* [Tactic Proof not Responding. Overflow?](17610TacticProofnotRespondingOverflow.html) (70 messages, latest: Feb 17 2020 at 19:47)
+* [noob question(s)](52075noobquestions.html) (1939 messages, latest: Feb 17 2020 at 20:25)
+
+* [Tactic Proof not Responding. Overflow?](17610TacticProofnotRespondingOverflow.html) (71 messages, latest: Feb 17 2020 at 20:09)
 
 * [Local/city threads](73023Localcitythreads.html) (10 messages, latest: Feb 17 2020 at 18:29)
-
-* [VSCode](21253VSCode.html) (5 messages, latest: Feb 17 2020 at 17:19)
 
 * [noncomputable](28696noncomputable.html) (6 messages, latest: Feb 17 2020 at 17:16)
 

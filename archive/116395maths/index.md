@@ -9,13 +9,15 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [algebra is not scaling for me](49270algebraisnotscalingforme.html) (4 messages, latest: Feb 17 2020 at 20:56)
+
+* [finset.inter](31578finsetinter.html) (7 messages, latest: Feb 17 2020 at 20:53)
+
+* [MathLib installing](36823MathLibinstalling.html) (103 messages, latest: Feb 17 2020 at 20:49)
+
 * [finite-dimensionality of field over subfield](61145finitedimensionalityoffieldoversubfield.html) (60 messages, latest: Feb 17 2020 at 18:02)
 
-* [MathLib installing](36823MathLibinstalling.html) (102 messages, latest: Feb 17 2020 at 04:14)
-
 * [`⊢ S \ {s} ⊂ S`](77930SsS.html) (8 messages, latest: Feb 16 2020 at 18:36)
-
-* [finset.inter](31578finsetinter.html) (6 messages, latest: Feb 16 2020 at 16:14)
 
 * [why `nonempty`?](83058whynonempty.html) (7 messages, latest: Feb 16 2020 at 12:38)
 

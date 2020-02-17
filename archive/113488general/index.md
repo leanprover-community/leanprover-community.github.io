@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Proving for Fun](94070ProvingforFun.html) (162 messages, latest: Feb 17 2020 at 20:09)
+
 * [New user bundles](27895Newuserbundles.html) (8 messages, latest: Feb 17 2020 at 15:35)
 
 * [mathlib nightlies](44201mathlibnightlies.html) (22 messages, latest: Feb 17 2020 at 15:12)
@@ -510,8 +512,6 @@ permalink: archive/113488general/index.html
 * [`let` = `have`](00711lethave.html) (11 messages, latest: Nov 03 2019 at 13:01)
 
 * [unfortunate failures of `library_search`](02134unfortunatefailuresoflibrarysearch.html) (18 messages, latest: Nov 03 2019 at 04:06)
-
-* [Proving for Fun](94070ProvingforFun.html) (161 messages, latest: Nov 02 2019 at 21:12)
 
 * [modifying tactic framework](20461modifyingtacticframework.html) (4 messages, latest: Nov 01 2019 at 23:07)
 
