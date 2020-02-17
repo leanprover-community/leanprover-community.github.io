@@ -68,6 +68,22 @@ permalink: archive/113489newmembers/17603finsetltwffails.html
 
 <p>I get "tactic failed, there are no goals to be solved" which seems better?</p>
 
+<a name="188408469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finset.lt_wf%20fails/near/188408469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17603finsetltwffails.html#188408469">Floris van Doorn (Feb 17 2020 at 21:43)</a>:</h4>
+<p>This seems to work for me</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+
+<span class="n">def</span> <span class="n">fresh_help</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">string</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">-&gt;</span> <span class="n">string</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">),</span> <span class="n">string</span>
+<span class="bp">|</span> <span class="n">s</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">n</span><span class="o">,</span> <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="n">f</span> <span class="n">n</span> <span class="err">∈</span> <span class="n">s</span> <span class="k">then</span>
+   <span class="k">have</span> <span class="n">finset</span><span class="bp">.</span><span class="n">erase</span> <span class="n">s</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="o">)</span> <span class="err">⊂</span> <span class="n">s</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">finset</span><span class="bp">.</span><span class="n">erase_ssubset</span> <span class="n">h</span><span class="o">],</span>
+   <span class="n">fresh_help</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">erase</span> <span class="n">s</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="o">))</span> <span class="n">f</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="k">else</span> <span class="n">f</span> <span class="n">n</span>
+<span class="n">using_well_founded</span> <span class="o">{</span><span class="n">rel_tac</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">`</span><span class="o">[</span><span class="n">exact</span> <span class="bp">⟨_</span><span class="o">,(</span><span class="bp">@</span><span class="n">finset</span><span class="bp">.</span><span class="n">lt_wf</span> <span class="n">string</span><span class="o">)</span><span class="bp">⟩</span><span class="o">],</span>
+  <span class="n">dec_tac</span> <span class="o">:=</span> <span class="bp">`</span><span class="o">[</span><span class="n">assumption</span><span class="o">]</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>I have no idea why specifying <code>dec_tac</code> explicitly helps here. I thought that <code>assumption</code> was the default tactic for proving well-foundedness.</p>
+
 
 {% endraw %}
 

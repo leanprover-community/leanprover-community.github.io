@@ -9,9 +9,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [VSCode](21253VSCode.html) (7 messages, latest: Feb 17 2020 at 20:47)
+* [noob question(s)](52075noobquestions.html) (1941 messages, latest: Feb 17 2020 at 21:58)
 
-* [noob question(s)](52075noobquestions.html) (1939 messages, latest: Feb 17 2020 at 20:25)
+* [finset.lt_wf fails](17603finsetltwffails.html) (3 messages, latest: Feb 17 2020 at 21:43)
+
+* [VSCode](21253VSCode.html) (8 messages, latest: Feb 17 2020 at 21:39)
+
+* [Standard well-founded tactics on later argument](07003Standardwellfoundedtacticsonlaterargument.html) (12 messages, latest: Feb 17 2020 at 21:33)
+
+* [Getting equation from match](27738Gettingequationfrommatch.html) (6 messages, latest: Feb 17 2020 at 21:31)
 
 * [Tactic Proof not Responding. Overflow?](17610TacticProofnotRespondingOverflow.html) (71 messages, latest: Feb 17 2020 at 20:09)
 
@@ -25,13 +31,7 @@ permalink: archive/113489newmembers/index.html
 
 * [Defining a symmetric function](54601Definingasymmetricfunction.html) (17 messages, latest: Feb 17 2020 at 02:38)
 
-* [Getting equation from match](27738Gettingequationfrommatch.html) (4 messages, latest: Feb 16 2020 at 17:45)
-
-* [Standard well-founded tactics on later argument](07003Standardwellfoundedtacticsonlaterargument.html) (11 messages, latest: Feb 16 2020 at 17:26)
-
 * [Brackets after unification symbol?](11568Bracketsafterunificationsymbol.html) (6 messages, latest: Feb 16 2020 at 16:23)
-
-* [finset.lt_wf fails](17603finsetltwffails.html) (2 messages, latest: Feb 16 2020 at 09:26)
 
 * [Trouble Installing Mathlib](21684TroubleInstallingMathlib.html) (6 messages, latest: Feb 14 2020 at 20:36)
 

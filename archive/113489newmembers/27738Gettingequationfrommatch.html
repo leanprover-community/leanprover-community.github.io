@@ -35,6 +35,22 @@ permalink: archive/113489newmembers/27738Gettingequationfrommatch.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20equation%20from%20match/near/188332970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27738Gettingequationfrommatch.html#188332970">Anton Lorenzen (Feb 16 2020 at 17:45)</a>:</h4>
 <p>Also, isn't this what <code>set_option eqn_compiler.lemmas true</code> is supposed to be doing? Or am I confusing something here?</p>
 
+<a name="188407811"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20equation%20from%20match/near/188407811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27738Gettingequationfrommatch.html#188407811">Floris van Doorn (Feb 17 2020 at 21:29)</a>:</h4>
+<p>The short answer is "no": in the body of a <code>match</code> statement like that, you should not use the variable <code>ab</code> anymore.<br>
+There is probably some <code>match</code>-trickery you can do to mimic the behavior you want, though...</p>
+
+<a name="188407896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20equation%20from%20match/near/188407896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27738Gettingequationfrommatch.html#188407896">Floris van Doorn (Feb 17 2020 at 21:31)</a>:</h4>
+<p>Here is you match trickery:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">AB</span> <span class="bp">|</span> <span class="n">A</span> <span class="bp">|</span> <span class="n">B</span>
+
+<span class="n">def</span> <span class="n">useAB</span> <span class="o">(</span><span class="n">ab</span> <span class="o">:</span> <span class="n">AB</span><span class="o">)</span> <span class="o">:</span> <span class="n">unit</span> <span class="o">:=</span> <span class="k">match</span> <span class="o">(</span><span class="bp">⟨</span><span class="n">ab</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span> <span class="o">:</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">AB</span> <span class="bp">//</span> <span class="n">ab</span> <span class="bp">=</span> <span class="n">x</span><span class="o">})</span> <span class="k">with</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="n">AB</span><span class="bp">.</span><span class="n">A</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="k">let</span> <span class="n">h</span> <span class="o">:</span> <span class="n">ab</span> <span class="bp">=</span> <span class="n">AB</span><span class="bp">.</span><span class="n">A</span> <span class="o">:=</span> <span class="n">h</span> <span class="k">in</span> <span class="bp">⟨⟩</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="n">AB</span><span class="bp">.</span><span class="n">B</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="k">let</span> <span class="n">h</span> <span class="o">:</span> <span class="n">ab</span> <span class="bp">=</span> <span class="n">AB</span><span class="bp">.</span><span class="n">B</span> <span class="o">:=</span> <span class="n">h</span> <span class="k">in</span> <span class="bp">⟨⟩</span>
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
 
