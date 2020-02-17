@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [more basics](41001morebasics.html) (56 messages, latest: Feb 17 2020 at 14:49)
+* [more basics](41001morebasics.html) (62 messages, latest: Feb 17 2020 at 15:33)
 
 * [Getting Started with Lean with prior experience in Coq](90352GettingStartedwithLeanwithpriorexperienceinCoq.html) (15 messages, latest: Feb 17 2020 at 13:47)
 
