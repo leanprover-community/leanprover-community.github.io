@@ -520,6 +520,42 @@ def checkStrategymn {m n : nat} (strategyA : fin m → fin n → nat) (strategy 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188339354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188339354">Rocky Kamen-Rubio (Feb 16 2020 at 21:04)</a>:</h4>
 <p>Fascinating. This actually explains a lot...</p>
 
+<a name="188353379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188353379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188353379">Rocky Kamen-Rubio (Feb 17 2020 at 05:14)</a>:</h4>
+<p>Thank you all for you amazing support! Another potentially basic question. How do I get rid of a universal quantifier when there is a negation in front of it? It seems like generally one would use <code>intro</code> and then just prove the statement generally. If there's a negation though, this seems to not work, and I get stuck with a proposition with a quantifier that I can't use with <code>rw</code> or other common tactics.</p>
+
+<a name="188353527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188353527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188353527">Bryan Gin-ge Chen (Feb 17 2020 at 05:19)</a>:</h4>
+<p>Try <code>rw</code> or <code>simp</code> with <code>not_forall</code>. You might need to <code>open_locale classical</code> before to work with classical logic if you aren't already.</p>
+
+<a name="188353532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188353532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188353532">Scott Morrison (Feb 17 2020 at 05:19)</a>:</h4>
+<p>(we really need <code>rw_hint</code>... it shouldn't be hard)</p>
+
+<a name="188353741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188353741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188353741">Mario Carneiro (Feb 17 2020 at 05:27)</a>:</h4>
+<p>You probably don't need to use classical for this. Just prove a contradiction from the forall assumption, presumably by constructing a counterexample</p>
+
+<a name="188353839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188353839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188353839">Rocky Kamen-Rubio (Feb 17 2020 at 05:30)</a>:</h4>
+<p>I tried doing both <code>rw not_forall at h,</code> and <code>simp only [not_forall] at h,</code> but neither was successful. Here's a more specific minimal example of the type of situation I'm struggling with.  </p>
+<div class="codehilite"><pre><span></span>theorem myTheorem : ¬ (∀ x : nat, x = 2) :=
+begin
+intro h,
+end
+</pre></div>
+
+
+<p>Edit: I've already done <code>open_locale classical</code> earlier in the file, so I assume that's not the issue. I feel like there's something about the way lean handles quantifiers that I'm not understanding (I remember the book talking about them being somehow equivalent to Pi functions, but the example they gave was pretty different from this)</p>
+
+<a name="188353963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188353963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188353963">Yury G. Kudryashov (Feb 17 2020 at 05:34)</a>:</h4>
+<p>After <code>intro h</code> you no longer have a negation in front of <code>∀</code>. You can try <code>replace h := h 1, norm_num at h</code>.</p>
+
+<a name="188354589"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tactic%20Proof%20not%20Responding.%20Overflow%3F/near/188354589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/17610TacticProofnotRespondingOverflow.html#188354589">Scott Morrison (Feb 17 2020 at 05:56)</a>:</h4>
+<p>Note that <code>intro h</code> here is doing exactly what <code>by_contradiction h</code> would do, which may help understand what's happening.</p>
+
 
 {% endraw %}
 

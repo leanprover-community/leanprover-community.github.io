@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Adding Lean support to Codewars](64096AddingLeansupporttoCodewars.html) (6 messages, latest: Feb 17 2020 at 05:57)
+
 * [VSCode unicode characters](08876VSCodeunicodecharacters.html) (39 messages, latest: Feb 17 2020 at 01:35)
 
 * [`hint` tactic](53516hinttactic.html) (13 messages, latest: Feb 16 2020 at 16:41)
