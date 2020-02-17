@@ -9,9 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [VSCode](21253VSCode.html) (4 messages, latest: Feb 17 2020 at 16:59)
+* [noob question(s)](52075noobquestions.html) (1919 messages, latest: Feb 17 2020 at 17:29)
 
-* [noncomputable](28696noncomputable.html) (5 messages, latest: Feb 17 2020 at 16:37)
+* [VSCode](21253VSCode.html) (5 messages, latest: Feb 17 2020 at 17:19)
+
+* [noncomputable](28696noncomputable.html) (6 messages, latest: Feb 17 2020 at 17:16)
 
 * [more basics](41001morebasics.html) (62 messages, latest: Feb 17 2020 at 15:33)
 
@@ -26,8 +28,6 @@ permalink: archive/113489newmembers/index.html
 * [Standard well-founded tactics on later argument](07003Standardwellfoundedtacticsonlaterargument.html) (11 messages, latest: Feb 16 2020 at 17:26)
 
 * [Brackets after unification symbol?](11568Bracketsafterunificationsymbol.html) (6 messages, latest: Feb 16 2020 at 16:23)
-
-* [noob question(s)](52075noobquestions.html) (1918 messages, latest: Feb 16 2020 at 15:59)
 
 * [finset.lt_wf fails](17603finsetltwffails.html) (2 messages, latest: Feb 16 2020 at 09:26)
 

@@ -9,6 +9,8 @@ permalink: archive/208328IMOgrandchallenge/index.html
 
 ### Topics:
 
+* [geometry problems](00977geometryproblems.html) (9 messages, latest: Feb 17 2020 at 17:07)
+
 * [Extracting an existential witness](57312Extractinganexistentialwitness.html) (1 message, latest: Jan 07 2020 at 20:42)
 
 * [Reading list/sample AI](10546ReadinglistsampleAI.html) (35 messages, latest: Dec 18 2019 at 07:14)
@@ -18,8 +20,6 @@ permalink: archive/208328IMOgrandchallenge/index.html
 * [Intermediate Language](92224IntermediateLanguage.html) (8 messages, latest: Oct 23 2019 at 23:01)
 
 * [folklore problems](12899folkloreproblems.html) (1 message, latest: Oct 23 2019 at 10:34)
-
-* [geometry problems](00977geometryproblems.html) (8 messages, latest: Oct 08 2019 at 13:35)
 
 * [problems: the source](55793problemsthesource.html) (12 messages, latest: Oct 06 2019 at 13:15)
 
