@@ -1428,6 +1428,70 @@ i have  got one more connected question. How do i prove the two below? Thought i
 <span class="kn">end</span>
 </pre></div>
 
+<a name="188477897"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/188477897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#188477897">Rocky Kamen-Rubio (Feb 18 2020 at 18:33)</a>:</h4>
+<p>Amazing, thank you! I'm having trouble getting this into a form that I can use to finish my goal state though. I understand conceptually why it works, but the usual tactics like <code>rw</code>  <code>apply</code> etc don't seem to be working here (even though mathematically it seems like that's what I'm doing). I've had a similar issue come up as well when I got to the following tactic and goals states. I feel like I'm missing something potentially simple and obvious.</p>
+<div class="codehilite"><pre><span></span><span class="mi">1</span> <span class="n">goal</span>
+<span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">strategyA</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">strategyB</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">fin</span> <span class="n">m</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">m</span><span class="o">)</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">),</span> <span class="n">strategyA</span> <span class="n">r</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">strategyB</span> <span class="n">c</span> <span class="n">r</span>
+<span class="err">⊢</span> <span class="n">strategyB</span> <span class="bp">=</span> <span class="bp">λ</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">m</span><span class="o">),</span> <span class="n">strategyA</span> <span class="n">m</span> <span class="n">n</span>
+</pre></div>
+
+<a name="188477990"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/188477990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#188477990">Kevin Buzzard (Feb 18 2020 at 18:34)</a>:</h4>
+<p><code>ext</code></p>
+
+<a name="188478041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/188478041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#188478041">Kevin Buzzard (Feb 18 2020 at 18:34)</a>:</h4>
+<p>You need to check that two functions are equal iff they agree everywhere. In term mode this is <code>funext</code> and in tactic mode it's <code>ext i</code> (or perhaps <code>ext c r</code> in your case)</p>
+
+<a name="188478099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/188478099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#188478099">Kevin Buzzard (Feb 18 2020 at 18:35)</a>:</h4>
+<p>"Extensionality" is the general principle that two objects are equal if and only if they're made from equal things. I think it's one of those things which computer scientists sometimes make a fuss about, it might be an axiom or something.</p>
+
+<a name="188478178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/188478178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#188478178">Kevin Buzzard (Feb 18 2020 at 18:36)</a>:</h4>
+<p>It results from a lack of understanding of mathematical equality ;-)</p>
+
+<a name="188479304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/188479304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#188479304">Rocky Kamen-Rubio (Feb 18 2020 at 18:48)</a>:</h4>
+<p>Fascinating. So lean doesn't automatically know that two objects made of equal parts are equal? I guess that makes sense but something feels a little absurd about that... Like I'm telling lean that instead of this equality holding for every element of a set, I'm telling it that it holds for a general element of a set, and it recognizes that as an equality but not the former?</p>
+<p>Either way, it worked for the more recent goal state I posted but it doesn't seem to be working for the "reverse order of summation" goal state. I'm getting the following error</p>
+<p><a href="/user_uploads/3121/6PRB-IbCr_wcTevp4USNqaTe/Screen-Shot-2020-02-18-at-1.44.34-PM.png" target="_blank" title="Screen-Shot-2020-02-18-at-1.44.34-PM.png">Screen-Shot-2020-02-18-at-1.44.34-PM.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/6PRB-IbCr_wcTevp4USNqaTe/Screen-Shot-2020-02-18-at-1.44.34-PM.png" target="_blank" title="Screen-Shot-2020-02-18-at-1.44.34-PM.png"><img src="/user_uploads/3121/6PRB-IbCr_wcTevp4USNqaTe/Screen-Shot-2020-02-18-at-1.44.34-PM.png"></a></div>
+
+<a name="188479385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/188479385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#188479385">Bryan Gin-ge Chen (Feb 18 2020 at 18:49)</a>:</h4>
+<p>There are a lot errors like that in the docstrings; I'm not sure what the precise cause is but they shouldn't affect the validity of the actual Lean code.</p>
+
+<a name="188479508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/188479508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#188479508">Patrick Massot (Feb 18 2020 at 18:51)</a>:</h4>
+<p>Rocky: saying that two functions are equal if they take the same value when evaluated on the same input is absurd from a computer science point of view. For instance it completely disregard execution time or memory consumption for functions that can be actually run.</p>
+
+<a name="188479517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/188479517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#188479517">Kevin Buzzard (Feb 18 2020 at 18:51)</a>:</h4>
+<p>The error in the docstring is irrelevant, that's just some parser issue.</p>
+
+<a name="188479656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/188479656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#188479656">Kevin Buzzard (Feb 18 2020 at 18:53)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+<span class="o">(</span><span class="n">strategyA</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span>
+<span class="o">(</span><span class="n">strategyB</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">fin</span> <span class="n">m</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span>
+<span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">m</span><span class="o">)</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">),</span> <span class="n">strategyA</span> <span class="n">r</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">strategyB</span> <span class="n">c</span> <span class="n">r</span><span class="o">)</span>
+<span class="o">:</span> <span class="n">strategyB</span> <span class="bp">=</span> <span class="bp">λ</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">m</span><span class="o">),</span> <span class="n">strategyA</span> <span class="n">m</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">ext</span> <span class="n">c</span> <span class="n">r</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">h</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Oh -- this is the one you can do? <code>ext</code> only works if the goal is of the form <code>f = g</code> where <code>f</code> and <code>g</code> are, say, functions or sets.</p>
+
 
 {% endraw %}
 

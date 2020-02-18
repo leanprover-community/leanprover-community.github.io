@@ -9,9 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [(no topic)](79918notopic.html) (239 messages, latest: Feb 18 2020 at 17:20)
+* [(no topic)](79918notopic.html) (249 messages, latest: Feb 18 2020 at 18:53)
 
-* [spheres](99675spheres.html) (8 messages, latest: Feb 18 2020 at 16:14)
+* [spheres](99675spheres.html) (16 messages, latest: Feb 18 2020 at 18:46)
+
+* [definition unpacking](72874definitionunpacking.html) (12 messages, latest: Feb 18 2020 at 18:45)
 
 * [noob question(s)](52075noobquestions.html) (1968 messages, latest: Feb 18 2020 at 16:10)
 
