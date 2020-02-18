@@ -10977,6 +10977,27 @@ Is it really this hard? Why doesn't <code>dec_trivial</code> work here (it worke
 </blockquote>
 <p>This should be provable by <code>ring</code> alone -- notice it works if you change C to R. IIRC there's something in the C++ <code>norm_num</code> that looks for an order instance unnecessarily when it does denominator cancellation. Probably fixable in 3.5c.</p>
 
+<a name="188414786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188414786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188414786">Matt E (Feb 18 2020 at 00:14)</a>:</h4>
+<p>I am defining a type of automata (DFA). Initially I had something like:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">DFA</span> <span class="o">:=</span>
+ <span class="o">(</span><span class="n">Alphabet</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">State</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>  <span class="o">(</span><span class="n">initialState</span> <span class="o">:</span> <span class="n">Q</span><span class="o">)</span>  <span class="o">(</span><span class="n">AcceptingStates</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">Q</span><span class="o">)</span> <span class="o">(</span><span class="n">δ</span> <span class="o">:</span> <span class="n">State</span> <span class="bp">→</span> <span class="n">Alphabet</span> <span class="bp">→</span> <span class="n">State</span><span class="o">)</span>
+</pre></div>
+
+
+<p>this works ok for a while, I can define some enumerated type for an alphabet and so on. but then for some applications, it would be really useful to be able to <code>map</code> <code>δ</code> over all of the letters of the alphabet. So it has to be a list,</p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+<span class="kn">structure</span> <span class="n">DFA</span> <span class="o">:=</span>
+ <span class="o">(</span><span class="n">Alphabet</span> <span class="o">:</span> <span class="n">list</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">State</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">initialState</span> <span class="o">:</span> <span class="n">Q</span><span class="o">)</span>  <span class="o">(</span><span class="n">AcceptingStates</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">Q</span><span class="o">)</span> <span class="o">(</span><span class="n">δ</span> <span class="o">:</span> <span class="n">State</span> <span class="bp">→</span> <span class="n">Alphabet</span> <span class="bp">→</span> <span class="n">State</span><span class="o">)</span>
+</pre></div>
+
+
+<p>but of course now we have bad syntax at <code>δ</code> because <code>Alphabet</code> has become a term. I can change it to <code>δ : forall a \in Alphabet, State → State)</code>, say, but then it seems like I have to provide proofs of membership all the time. Of course there is the basic solution <code>δ : Q → list β → Q</code>, but this is not a very expressive type since we do not want any old <code>list  β</code>. Is there another possibility I've missed?</p>
+
+<a name="188415257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188415257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188415257">Matt E (Feb 18 2020 at 00:29)</a>:</h4>
+<p>the other possibility is my original structure is good and my desire to <code>map</code> is a hangover from other languages. Actually, maybe I can use <code>rec</code> on my alphabets qua enumerated types instead... will see if that can give the intended effect tomorrow.</p>
+
 
 {% endraw %}
 

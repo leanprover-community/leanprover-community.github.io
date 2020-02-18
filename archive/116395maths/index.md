@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [finset of coeffts of a poly](38147finsetofcoefftsofapoly.html) (1 message, latest: Feb 18 2020 at 00:26)
+
 * [algebra is not scaling for me](49270algebraisnotscalingforme.html) (5 messages, latest: Feb 17 2020 at 21:43)
 
 * [finset.inter](31578finsetinter.html) (7 messages, latest: Feb 17 2020 at 20:53)
