@@ -9,7 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [New user bundles](27895Newuserbundles.html) (16 messages, latest: Feb 18 2020 at 11:57)
+* [mathlib-tools PR #12](50888mathlibtoolsPR12.html) (6 messages, latest: Feb 18 2020 at 12:51)
+
+* [github actions](76245githubactions.html) (54 messages, latest: Feb 18 2020 at 12:40)
+
+* [New user bundles](27895Newuserbundles.html) (18 messages, latest: Feb 18 2020 at 12:18)
 
 * [Experimenting with leanchecker](27185Experimentingwithleanchecker.html) (4 messages, latest: Feb 18 2020 at 10:27)
 
@@ -68,8 +72,6 @@ permalink: archive/113488general/index.html
 * [typeclass paper](35889typeclasspaper.html) (168 messages, latest: Feb 11 2020 at 17:36)
 
 * [POPLmark challenge](71850POPLmarkchallenge.html) (99 messages, latest: Feb 11 2020 at 17:19)
-
-* [github actions](76245githubactions.html) (45 messages, latest: Feb 11 2020 at 11:14)
 
 * [moving mathlib to 3.5c](54190movingmathlibto35c.html) (76 messages, latest: Feb 11 2020 at 10:48)
 
