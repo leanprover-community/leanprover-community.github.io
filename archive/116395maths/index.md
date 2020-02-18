@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [union of a finset of finsets](77562unionofafinsetoffinsets.html) (5 messages, latest: Feb 18 2020 at 19:58)
+* [union of a finset of finsets](77562unionofafinsetoffinsets.html) (9 messages, latest: Feb 18 2020 at 20:14)
 
 * [well-ordering principle](19426wellorderingprinciple.html) (8 messages, latest: Feb 18 2020 at 08:49)
 
