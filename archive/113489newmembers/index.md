@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [(no topic)](79918notopic.html) (224 messages, latest: Feb 18 2020 at 15:54)
+* [(no topic)](79918notopic.html) (238 messages, latest: Feb 18 2020 at 16:44)
 
-* [noob question(s)](52075noobquestions.html) (1967 messages, latest: Feb 18 2020 at 15:20)
+* [spheres](99675spheres.html) (8 messages, latest: Feb 18 2020 at 16:14)
 
-* [spheres](99675spheres.html) (7 messages, latest: Feb 18 2020 at 15:19)
+* [noob question(s)](52075noobquestions.html) (1968 messages, latest: Feb 18 2020 at 16:10)
 
 * [Getting equation from match](27738Gettingequationfrommatch.html) (11 messages, latest: Feb 18 2020 at 11:13)
 
