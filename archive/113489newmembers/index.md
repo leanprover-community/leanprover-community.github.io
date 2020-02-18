@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1957 messages, latest: Feb 18 2020 at 10:17)
+
 * [(no topic)](79918notopic.html) (223 messages, latest: Feb 18 2020 at 08:58)
 
 * [Getting equation from match](27738Gettingequationfrommatch.html) (8 messages, latest: Feb 18 2020 at 08:24)
 
 * [finset.lt_wf fails](17603finsetltwffails.html) (5 messages, latest: Feb 18 2020 at 03:29)
-
-* [noob question(s)](52075noobquestions.html) (1954 messages, latest: Feb 18 2020 at 01:40)
 
 * [VSCode](21253VSCode.html) (8 messages, latest: Feb 17 2020 at 21:39)
 

@@ -80,6 +80,25 @@ permalink: archive/113488general/27185Experimentingwithleanchecker.html
 <p>When I compile the files using <code>lean SolutionTest.lean</code>, I get a few warnings regarding the usage of <code>sorry</code> but nothing more (which I assume is a success). However, if I compile the files using <code>lean SolutionTest.lean -E SolutionTest.out</code>, I get <code>&lt;unknown&gt;:1:1: error: failed to expand macro</code> on top of the warnings about <code>sorry</code>. When I then run <code>leanchecker SolutionTest.out submission</code> to check the axioms used in <code>submission</code>, I get <code>unknown declaration 'submission'</code>.</p>
 <p>Any hints on how to fix this would be much appreciated <span aria-label="smile" class="emoji emoji-263a" role="img" title="smile">:smile:</span></p>
 
+<a name="188438753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Experimenting%20with%20leanchecker/near/188438753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27185Experimentingwithleanchecker.html#188438753">Gabriel Ebner (Feb 18 2020 at 10:19)</a>:</h4>
+<p>The text export (i.e. <code>lean -E</code>) fails if there are sorrys in the lean file.  This is by design: the export is intended for proof checkers, and sorrys are never valid proofs.  An easy workaround is to change <code>theorem one_plus_one_is_three</code> to <code>axiom one_plus_one_is_three</code>.</p>
+
+<a name="188438878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Experimenting%20with%20leanchecker/near/188438878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27185Experimentingwithleanchecker.html#188438878">Kevin Buzzard (Feb 18 2020 at 10:21)</a>:</h4>
+<blockquote>
+<p>An easy workaround is to change <code>theorem one_plus_one_is_three</code> to <code>axiom one_plus_one_is_three</code>.</p>
+</blockquote>
+<p>I might tell some of my colleagues in the maths department about this trick</p>
+
+<a name="188439242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Experimenting%20with%20leanchecker/near/188439242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27185Experimentingwithleanchecker.html#188439242">Donald Sebastian Leung (Feb 18 2020 at 10:27)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110043">Gabriel Ebner</span> <a href="#narrow/stream/113488-general/topic/Experimenting.20with.20leanchecker/near/188438753" title="#narrow/stream/113488-general/topic/Experimenting.20with.20leanchecker/near/188438753">said</a>:</p>
+<blockquote>
+<p>The text export (i.e. <code>lean -E</code>) fails if there are sorrys in the lean file.  This is by design: the export is intended for proof checkers, and sorrys are never valid proofs.  An easy workaround is to change <code>theorem one_plus_one_is_three</code> to <code>axiom one_plus_one_is_three</code>.</p>
+</blockquote>
+<p>Thanks - I changed it to an axiom and the export + <code>leanchecker</code> worked as intended.</p>
+
 
 {% endraw %}
 
