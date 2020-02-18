@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [spheres](99675spheres.html) (6 messages, latest: Feb 18 2020 at 14:32)
+* [(no topic)](79918notopic.html) (224 messages, latest: Feb 18 2020 at 15:54)
 
-* [noob question(s)](52075noobquestions.html) (1965 messages, latest: Feb 18 2020 at 14:25)
+* [noob question(s)](52075noobquestions.html) (1967 messages, latest: Feb 18 2020 at 15:20)
+
+* [spheres](99675spheres.html) (7 messages, latest: Feb 18 2020 at 15:19)
 
 * [Getting equation from match](27738Gettingequationfrommatch.html) (11 messages, latest: Feb 18 2020 at 11:13)
-
-* [(no topic)](79918notopic.html) (223 messages, latest: Feb 18 2020 at 08:58)
 
 * [finset.lt_wf fails](17603finsetltwffails.html) (5 messages, latest: Feb 18 2020 at 03:29)
 
