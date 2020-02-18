@@ -11020,6 +11020,66 @@ Is it really this hard? Why doesn't <code>dec_trivial</code> work here (it worke
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188438678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188438678">Kevin Buzzard (Feb 18 2020 at 10:17)</a>:</h4>
 <p>Maybe it's as simple as using <code>set.range</code>?</p>
 
+<a name="188453690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188453690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188453690">Matt E (Feb 18 2020 at 14:17)</a>:</h4>
+<p><span class="user-mention" data-user-id="228466">@Chris B</span> that is indeed probably what I want. so I can put <code>structure DFA (α : Type) [fintype α] := ...</code> so far so good. now let</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">decidable_eq</span><span class="o">]</span>
+<span class="kn">inductive</span> <span class="n">α</span> <span class="bp">|</span> <span class="n">A</span> <span class="bp">|</span> <span class="n">B</span> <span class="bp">|</span> <span class="n">C</span>
+</pre></div>
+
+
+<p>now I need an instance of fintype, but I'm stuck at:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">α_fin</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">α</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="n">refine</span> <span class="o">{</span><span class="n">elems</span> <span class="o">:=</span> <span class="o">{</span><span class="n">α</span><span class="bp">.</span><span class="n">A</span><span class="o">,</span> <span class="n">α</span><span class="bp">.</span><span class="n">B</span><span class="o">,</span> <span class="n">α</span><span class="bp">.</span><span class="n">C</span><span class="o">},</span> <span class="n">complete</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">},</span>
+  <span class="n">intro</span><span class="o">,</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="188453958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188453958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188453958">Kevin Buzzard (Feb 18 2020 at 14:20)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">α_fin</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">α</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="n">refine</span> <span class="o">{</span><span class="n">elems</span> <span class="o">:=</span> <span class="o">{</span><span class="n">α</span><span class="bp">.</span><span class="n">A</span><span class="o">,</span> <span class="n">α</span><span class="bp">.</span><span class="n">B</span><span class="o">,</span> <span class="n">α</span><span class="bp">.</span><span class="n">C</span><span class="o">},</span> <span class="n">complete</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">},</span>
+  <span class="n">intro</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">x</span><span class="bp">;</span> <span class="n">simp</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="188454010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188454010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188454010">Kevin Buzzard (Feb 18 2020 at 14:21)</a>:</h4>
+<p><code>cases</code> is your friend here. Given <code>x : α</code> where <code>α</code> is any inductive type, <code>cases</code> will split into a case for each constructor.</p>
+
+<a name="188454107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188454107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188454107">Matt E (Feb 18 2020 at 14:22)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113489-new-members/topic/noob.20question(s)/near/188438678" title="#narrow/stream/113489-new-members/topic/noob.20question(s)/near/188438678">said</a>:</p>
+<blockquote>
+<p>Maybe it's as simple as using <code>set.range</code>?</p>
+</blockquote>
+<p>that might work once I have this fintype stuff working, the real block is having something that is finite, decidable etc.</p>
+
+<a name="188454126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188454126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188454126">Matt E (Feb 18 2020 at 14:22)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113489-new-members/topic/noob.20question(s)/near/188454010" title="#narrow/stream/113489-new-members/topic/noob.20question(s)/near/188454010">said</a>:</p>
+<blockquote>
+<p><code>cases</code> is your friend here. Given <code>x : α</code> where <code>α</code> is any inductive type, <code>cases</code> will split into a case for each constructor.</p>
+</blockquote>
+<p>perfect, thanks!</p>
+
+<a name="188454176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188454176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188454176">Kevin Buzzard (Feb 18 2020 at 14:23)</a>:</h4>
+<p>Using tactic mode to define data is something I instinctively avoid doing. It is probably not an issue here, but my instinct would be <code>instance α_fin : fintype α := {elems := {α.A, α.B, α.C}, complete := λ x, by cases x; simp}</code>.</p>
+
+<a name="188454288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188454288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188454288">Kevin Buzzard (Feb 18 2020 at 14:24)</a>:</h4>
+<p>The logic is that some tactics make terrifying terms which mean that it becomes hard to reason about the objects you've defined. I strongly suspect that <code>refine</code> is not one of them, but I am never sure. I do know that <code>rw</code> can really make things scary.</p>
+
+<a name="188454376"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188454376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188454376">Kevin Buzzard (Feb 18 2020 at 14:25)</a>:</h4>
+<blockquote>
+<p>that might work once I have this fintype stuff working, the real block is having something that is finite, decidable etc.</p>
+</blockquote>
+<p>Is your alphabet finite and decidable? You can just add these as assumptions of course.</p>
+
 
 {% endraw %}
 
