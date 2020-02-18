@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [vscode syntax highlighting](96610vscodesyntaxhighlighting.html) (6 messages, latest: Feb 18 2020 at 19:33)
+
 * [mathlib-tools PR #12](50888mathlibtoolsPR12.html) (11 messages, latest: Feb 18 2020 at 18:15)
 
 * [github actions](76245githubactions.html) (64 messages, latest: Feb 18 2020 at 13:38)
