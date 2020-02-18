@@ -1,0 +1,60 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/99675spheres.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/99675spheres.html">spheres</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188451346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/spheres/near/188451346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99675spheres.html#188451346">Greg Langmead (Feb 18 2020 at 13:46)</a>:</h4>
+<p>Currently I am trying to supply the proof that the inverse of stereographic projection lands in the sphere, but because it's a summation I don't know what sort of tools to use. The new <code>hint</code> tactic lists a few tactics that make progress but it's not really actionable since I can't assemble them into a proof so far. Am I looking for a combination of standard tactics like <code>field_simp</code>/<code>norm_num</code>/<code>ring</code> or is something additional needed due to the sum?</p>
+<p>And as a meta-question, what techniques am I missing that would enable me to understand at least a sketch of what I need to do next? My only methods are to try a few tactics I know and see if they magically work. I don't know how to incrementally build something.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">geometry</span><span class="bp">.</span><span class="n">manifold</span><span class="bp">.</span><span class="n">real_instances</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">hint</span>
+
+<span class="n">noncomputable</span> <span class="n">theory</span>
+
+<span class="kn">variable</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">fin_upgrade</span> <span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">(</span><span class="n">lt</span> <span class="o">:</span> <span class="n">i</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span>
+  <span class="n">val</span> <span class="o">:=</span> <span class="n">i</span><span class="bp">.</span><span class="n">val</span><span class="o">,</span>
+  <span class="n">is_lt</span> <span class="o">:=</span> <span class="n">lt</span>
+<span class="o">}</span>
+
+<span class="c1">-- Unit sphere of dimension n, inside euclidean space of dimension n + 1</span>
+<span class="n">def</span> <span class="n">unit_sphere</span> <span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">x</span> <span class="o">:</span> <span class="n">euclidean_space</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">//</span> <span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span> <span class="n">i</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">stereographic_projection_inv_north</span> <span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">euclidean_space</span> <span class="n">n</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">unit_sphere</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span><span class="n">x</span><span class="o">,</span> <span class="bp">⟨λ</span><span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)),</span> <span class="o">(</span><span class="k">if</span> <span class="n">lt</span> <span class="o">:</span> <span class="n">i</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&lt;</span> <span class="n">n</span>
+    <span class="k">then</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span> <span class="o">(</span><span class="n">fin_upgrade</span> <span class="n">n</span> <span class="n">i</span> <span class="n">lt</span><span class="o">))</span> <span class="bp">/</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">j</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span> <span class="n">j</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span>
+    <span class="k">else</span> <span class="o">(((</span><span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span><span class="n">j</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span> <span class="n">j</span><span class="o">)</span><span class="err">^</span><span class="mi">2</span><span class="o">)</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">/</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">j</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span> <span class="n">j</span><span class="o">)</span><span class="err">^</span><span class="mi">2</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)))),</span>
+<span class="k">begin</span>
+  <span class="n">sorry</span><span class="o">,</span>
+  <span class="c1">-- hint recommends: ring, norm_num, simp at *, dsimp at *</span>
+<span class="kn">end</span>
+<span class="bp">⟩</span>
+</pre></div>
+
+<a name="188451764"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/spheres/near/188451764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99675spheres.html#188451764">Kevin Buzzard (Feb 18 2020 at 13:52)</a>:</h4>
+<p>I would not take what <code>hint</code> recommends too seriously. It's supposed to be used for "simple" problems, and if you think this is simple then you're miscalibrated.</p>
+
+<a name="188451979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/spheres/near/188451979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99675spheres.html#188451979">Kevin Buzzard (Feb 18 2020 at 13:55)</a>:</h4>
+<p>Looking at what you have, it seems to me that the first step is to break up the sum from 0 to n as a sum from 0 to n-1, plus the n'th term. This will enable you to get rid of the "if". Then you want to take the division outside the sum.</p>
+
+<a name="188452194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/spheres/near/188452194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99675spheres.html#188452194">Kevin Buzzard (Feb 18 2020 at 13:58)</a>:</h4>
+<p>Then the question should become a question in ring theory, and you'll still have some work to do. But step 1 should be getting rid of the <code>if</code> and step 2 getting rid of the denominators.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

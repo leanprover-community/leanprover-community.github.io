@@ -265,6 +265,46 @@ To https://github.com/leanprover-community/mathlib-nightly.git
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/github%20actions/near/188447049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76245githubactions.html#188447049">Patrick Massot (Feb 18 2020 at 12:40)</a>:</h4>
 <p>I'll try to find time for the bundle thing, so I'll leave cache-olean to Bryan. Note that any work on this should probably start with fixing the huge UX bug in cache-olean and update-mathlib that we talk to GitHub before trying to find a local archive.</p>
 
+<a name="188448574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/github%20actions/near/188448574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76245githubactions.html#188448574">Bryan Gin-ge Chen (Feb 18 2020 at 13:04)</a>:</h4>
+<p>It looks like Github authentication is required to use any of the Github actions API endpoints, so <code>cache-olean</code> users who want to download artifacts will have to supply a <a href="https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line" target="_blank" title="https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line">personal access token</a> somehow.</p>
+
+<a name="188448957"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/github%20actions/near/188448957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76245githubactions.html#188448957">Patrick Massot (Feb 18 2020 at 13:10)</a>:</h4>
+<p>What about trying to do what elan does to avoid using this API?</p>
+
+<a name="188448988"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/github%20actions/near/188448988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76245githubactions.html#188448988">Patrick Massot (Feb 18 2020 at 13:11)</a>:</h4>
+<p>In the case of mathlib nightlies we can even directly use the url which is predictable</p>
+
+<a name="188449333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/github%20actions/near/188449333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76245githubactions.html#188449333">Bryan Gin-ge Chen (Feb 18 2020 at 13:17)</a>:</h4>
+<p>As far as I can tell the github artifact URLs for each PR are not really predictable.</p>
+
+<a name="188449526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/github%20actions/near/188449526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76245githubactions.html#188449526">Bryan Gin-ge Chen (Feb 18 2020 at 13:19)</a>:</h4>
+<p>The alternative would be to upload all generated olean files to some server that we control. I believe this was the original plan when it was still unclear whether / when an official github artifact API would become available.</p>
+
+<a name="188450390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/github%20actions/near/188450390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76245githubactions.html#188450390">Rob Lewis (Feb 18 2020 at 13:32)</a>:</h4>
+<p>I guess cache-olean and update-mathlib could ask the user to give a token during installation? It could be optional, and if there's no token they could default to the current behavior.</p>
+
+<a name="188450435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/github%20actions/near/188450435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76245githubactions.html#188450435">Rob Lewis (Feb 18 2020 at 13:32)</a>:</h4>
+<p>It would probably be asking for trouble to generate a default PAT ourselves, right?</p>
+
+<a name="188450564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/github%20actions/near/188450564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76245githubactions.html#188450564">Patrick Massot (Feb 18 2020 at 13:34)</a>:</h4>
+<p>What is a PAT?</p>
+
+<a name="188450709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/github%20actions/near/188450709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76245githubactions.html#188450709">Rob Lewis (Feb 18 2020 at 13:37)</a>:</h4>
+<p>An acronym I made up because I didn't want to type personal access token.</p>
+
+<a name="188450833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/github%20actions/near/188450833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76245githubactions.html#188450833">Patrick Massot (Feb 18 2020 at 13:38)</a>:</h4>
+<p>This all sounds a bit silly. It may be faster to work on other hosting solutions.</p>
+
 
 {% endraw %}
 
