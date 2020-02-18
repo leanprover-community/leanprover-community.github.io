@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [What is an automorphic representation?](20797Whatisanautomorphicrepresentation.html) (4 messages, latest: Feb 18 2020 at 22:22)
+
 * [union of a finset of finsets](77562unionofafinsetoffinsets.html) (9 messages, latest: Feb 18 2020 at 20:14)
 
 * [well-ordering principle](19426wellorderingprinciple.html) (8 messages, latest: Feb 18 2020 at 08:49)
