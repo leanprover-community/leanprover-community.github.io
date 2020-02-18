@@ -37,6 +37,32 @@ permalink: archive/116395maths/19426wellorderingprinciple.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188427457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188427457">Johan Commelin (Feb 18 2020 at 06:51)</a>:</h4>
 <p>If you hit <code>Ctrl</code>-<code>Shift</code>-<code>p</code> in VScode, and then type <code>#nat.find</code> you'll find all the lemmas about it.</p>
 
+<a name="188431362"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188431362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188431362">Kevin Buzzard (Feb 18 2020 at 08:20)</a>:</h4>
+<p>(and yes, mathlib has a bunch of stuff about general well-orderings as well, although in the case of nat there is more)</p>
+
+<a name="188432471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188432471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188432471">Kevin Buzzard (Feb 18 2020 at 08:43)</a>:</h4>
+<p>PS <code>k ≥ n</code> is the same as <code>n ≤ k</code> and as a general convention we stick to <code>≤</code> because e.g. then you don't have to state every lemma involving <code>≤</code> twice.</p>
+
+<a name="188432727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188432727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188432727">Kevin Buzzard (Feb 18 2020 at 08:49)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="n">def</span> <span class="n">yadayadayada</span> <span class="o">:=</span> <span class="mi">37</span>
+
+<span class="n">open_locale</span> <span class="n">classical</span>
+
+<span class="kn">lemma</span> <span class="n">WOP</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">k</span><span class="o">,</span> <span class="n">f</span><span class="o">(</span><span class="n">k</span><span class="o">))</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span><span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="bp">∧</span> <span class="bp">∀</span> <span class="n">k</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span><span class="o">(</span><span class="n">k</span><span class="o">)</span> <span class="bp">→</span> <span class="n">k</span> <span class="bp">≥</span> <span class="n">n</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">use</span> <span class="n">nat</span><span class="bp">.</span><span class="n">find</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">nat</span><span class="bp">.</span><span class="n">find_spec</span> <span class="n">h</span><span class="o">},</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">k</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">nat</span><span class="bp">.</span><span class="n">find_min&#39;</span> <span class="n">h</span><span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
 

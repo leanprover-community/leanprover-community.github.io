@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [(no topic)](79918notopic.html) (221 messages, latest: Feb 18 2020 at 04:30)
+* [(no topic)](79918notopic.html) (223 messages, latest: Feb 18 2020 at 08:58)
+
+* [Getting equation from match](27738Gettingequationfrommatch.html) (8 messages, latest: Feb 18 2020 at 08:24)
 
 * [finset.lt_wf fails](17603finsetltwffails.html) (5 messages, latest: Feb 18 2020 at 03:29)
-
-* [Getting equation from match](27738Gettingequationfrommatch.html) (7 messages, latest: Feb 18 2020 at 03:26)
 
 * [noob question(s)](52075noobquestions.html) (1954 messages, latest: Feb 18 2020 at 01:40)
 
