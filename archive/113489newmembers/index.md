@@ -9,15 +9,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1954 messages, latest: Feb 18 2020 at 01:40)
+* [finset.lt_wf fails](17603finsetltwffails.html) (5 messages, latest: Feb 18 2020 at 03:29)
 
-* [finset.lt_wf fails](17603finsetltwffails.html) (3 messages, latest: Feb 17 2020 at 21:43)
+* [Getting equation from match](27738Gettingequationfrommatch.html) (7 messages, latest: Feb 18 2020 at 03:26)
+
+* [noob question(s)](52075noobquestions.html) (1954 messages, latest: Feb 18 2020 at 01:40)
 
 * [VSCode](21253VSCode.html) (8 messages, latest: Feb 17 2020 at 21:39)
 
 * [Standard well-founded tactics on later argument](07003Standardwellfoundedtacticsonlaterargument.html) (12 messages, latest: Feb 17 2020 at 21:33)
-
-* [Getting equation from match](27738Gettingequationfrommatch.html) (6 messages, latest: Feb 17 2020 at 21:31)
 
 * [Tactic Proof not Responding. Overflow?](17610TacticProofnotRespondingOverflow.html) (71 messages, latest: Feb 17 2020 at 20:09)
 
