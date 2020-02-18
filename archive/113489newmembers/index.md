@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [(no topic)](79918notopic.html) (221 messages, latest: Feb 18 2020 at 04:30)
+
 * [finset.lt_wf fails](17603finsetltwffails.html) (5 messages, latest: Feb 18 2020 at 03:29)
 
 * [Getting equation from match](27738Gettingequationfrommatch.html) (7 messages, latest: Feb 18 2020 at 03:26)
@@ -52,8 +54,6 @@ permalink: archive/113489newmembers/index.html
 * [First problems in group theory](16588Firstproblemsingrouptheory.html) (65 messages, latest: Feb 12 2020 at 07:37)
 
 * [Using analysis/calculus/deriv.lean a bottleneck](74265Usinganalysiscalculusderivleanabottleneck.html) (41 messages, latest: Feb 11 2020 at 23:32)
-
-* [(no topic)](79918notopic.html) (220 messages, latest: Feb 10 2020 at 19:24)
 
 * [squares](04165squares.html) (22 messages, latest: Feb 10 2020 at 16:36)
 

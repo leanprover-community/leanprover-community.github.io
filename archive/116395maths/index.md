@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [finset of coeffts of a poly](38147finsetofcoefftsofapoly.html) (1 message, latest: Feb 18 2020 at 00:26)
+* [well-ordering principle](19426wellorderingprinciple.html) (4 messages, latest: Feb 18 2020 at 04:51)
+
+* [finset of coeffts of a poly](38147finsetofcoefftsofapoly.html) (2 messages, latest: Feb 18 2020 at 04:25)
 
 * [algebra is not scaling for me](49270algebraisnotscalingforme.html) (5 messages, latest: Feb 17 2020 at 21:43)
 
