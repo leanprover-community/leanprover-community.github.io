@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Experimenting with leanchecker](27185Experimentingwithleanchecker.html) (1 message, latest: Feb 18 2020 at 09:35)
+
 * [Proving for Fun](94070ProvingforFun.html) (163 messages, latest: Feb 17 2020 at 22:14)
 
 * [New user bundles](27895Newuserbundles.html) (8 messages, latest: Feb 17 2020 at 15:35)
