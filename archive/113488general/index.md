@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [omega](89194omega.html) (21 messages, latest: Feb 19 2020 at 12:30)
+
 * [doc_gen](23504docgen.html) (2 messages, latest: Feb 19 2020 at 11:20)
 
 * [VScode message window](12770VScodemessagewindow.html) (10 messages, latest: Feb 19 2020 at 11:15)
@@ -1496,8 +1498,6 @@ permalink: archive/113488general/index.html
 * [Lean tutorial broken](10454Leantutorialbroken.html) (9 messages, latest: Apr 19 2019 at 00:22)
 
 * [using_well_founded](47902usingwellfounded.html) (26 messages, latest: Apr 18 2019 at 18:07)
-
-* [omega](89194omega.html) (20 messages, latest: Apr 18 2019 at 17:36)
 
 * [qpf/no_confusion](00103qpfnoconfusion.html) (4 messages, latest: Apr 17 2019 at 20:23)
 
