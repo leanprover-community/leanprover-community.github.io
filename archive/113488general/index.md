@@ -9,15 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [omega](89194omega.html) (21 messages, latest: Feb 19 2020 at 12:30)
+* [VScode message window](12770VScodemessagewindow.html) (13 messages, latest: Feb 19 2020 at 14:55)
+
+* [omega](89194omega.html) (22 messages, latest: Feb 19 2020 at 14:51)
+
+* [Leanprover-community: getting rid of underlining](31408Leanprovercommunitygettingridofunderlining.html) (10 messages, latest: Feb 19 2020 at 14:46)
 
 * [doc_gen](23504docgen.html) (2 messages, latest: Feb 19 2020 at 11:20)
 
-* [VScode message window](12770VScodemessagewindow.html) (10 messages, latest: Feb 19 2020 at 11:15)
-
 * [vscode syntax highlighting](96610vscodesyntaxhighlighting.html) (12 messages, latest: Feb 19 2020 at 09:30)
-
-* [Leanprover-community: getting rid of underlining](31408Leanprovercommunitygettingridofunderlining.html) (9 messages, latest: Feb 19 2020 at 02:42)
 
 * [mathlib-tools PR #12](50888mathlibtoolsPR12.html) (13 messages, latest: Feb 19 2020 at 01:26)
 
