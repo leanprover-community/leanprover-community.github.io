@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [definition unpacking](72874definitionunpacking.html) (13 messages, latest: Feb 19 2020 at 18:18)
+
 * [noob question(s)](52075noobquestions.html) (1970 messages, latest: Feb 19 2020 at 12:58)
 
 * [spheres](99675spheres.html) (26 messages, latest: Feb 19 2020 at 04:15)
 
 * [(no topic)](79918notopic.html) (256 messages, latest: Feb 18 2020 at 19:16)
-
-* [definition unpacking](72874definitionunpacking.html) (12 messages, latest: Feb 18 2020 at 18:45)
 
 * [Getting equation from match](27738Gettingequationfrommatch.html) (11 messages, latest: Feb 18 2020 at 11:13)
 

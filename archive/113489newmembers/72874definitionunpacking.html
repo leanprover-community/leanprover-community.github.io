@@ -80,6 +80,28 @@ permalink: archive/113489newmembers/72874definitionunpacking.html
 <span class="n">def</span> <span class="n">H</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">int</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">p</span> <span class="n">x</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
 </pre></div>
 
+<a name="188569960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/definition%20unpacking/near/188569960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72874definitionunpacking.html#188569960">Floris van Doorn (Feb 19 2020 at 18:18)</a>:</h4>
+<p>Either of the following two will also work:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">variable</span> <span class="o">[</span><span class="n">decidable_pred</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">x</span><span class="o">)]</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">decidable</span><span class="o">]</span> <span class="n">def</span> <span class="n">p</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">x</span>
+<span class="n">def</span> <span class="n">H</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">int</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">p</span> <span class="n">x</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
+</pre></div>
+
+
+<p>This first just syntax for Kevin's solution.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">variable</span> <span class="o">[</span><span class="n">decidable_pred</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">x</span><span class="o">)]</span>
+<span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="n">p</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">x</span>
+<span class="n">def</span> <span class="n">H</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">int</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">p</span> <span class="n">x</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
+</pre></div>
+
+
+<p><code>reducible</code> means Lean will unfold <code>p</code> during type-class resolution (when checking that it is decidable).</p>
+
 
 {% endraw %}
 
