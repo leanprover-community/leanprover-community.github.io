@@ -357,6 +357,33 @@ Once I have the function I need to prove its values have norm 1. Does Lean know 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/spheres/near/188498791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99675spheres.html#188498791">Kevin Buzzard (Feb 18 2020 at 22:40)</a>:</h4>
 <p>You can even step through the rewrites term by term, by clicking near the commas.</p>
 
+<a name="188513840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/spheres/near/188513840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99675spheres.html#188513840">Daniel Keys (Feb 19 2020 at 03:52)</a>:</h4>
+<p>I have a statement that a set is non-empty and need to produce a statement that a member of that set exists. Something along this line:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="o">{</span><span class="n">X</span>  <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+<span class="kn">variable</span> <span class="n">set1</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span>
+<span class="kn">variable</span> <span class="n">nonEmptySetProp</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">set1</span> <span class="bp">=</span> <span class="err">∅</span><span class="o">)</span>
+</pre></div>
+
+
+<p>and need to produce <code>∃ x, x ∈ set1</code>. The only thing I can find in <code>data/set/basic</code> is <code>set.exists_mem_of_nonempty</code> which doesn't work here. Any idea how to proceed appreciated!</p>
+
+<a name="188514040"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/spheres/near/188514040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99675spheres.html#188514040">Alex J. Best (Feb 19 2020 at 03:58)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">variable</span> <span class="o">{</span><span class="n">X</span>  <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+<span class="kn">variable</span> <span class="n">set1</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span>
+<span class="kn">variable</span> <span class="n">nonEmptySetProp</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">set1</span> <span class="bp">=</span> <span class="err">∅</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">a</span><span class="o">,</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">set1</span> <span class="o">:=</span>
+<span class="n">set</span><span class="bp">.</span><span class="n">ne_empty_iff_nonempty</span><span class="bp">.</span><span class="n">mp</span> <span class="n">nonEmptySetProp</span>
+</pre></div>
+
+<a name="188514049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/spheres/near/188514049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99675spheres.html#188514049">Alex J. Best (Feb 19 2020 at 03:59)</a>:</h4>
+<p>As of quite recently <code>set1.nonempty</code> which literally means <code>∃ a, a ∈ set1</code> is the preferred way of expressing the sentiment that <code>s \ne \emptyset</code></p>
+
 
 {% endraw %}
 
