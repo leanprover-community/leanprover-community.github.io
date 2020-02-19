@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Leanprover-community: getting rid of underlining](31408Leanprovercommunitygettingridofunderlining.html) (8 messages, latest: Feb 18 2020 at 23:59)
+
+* [doc_gen](23504docgen.html) (1 message, latest: Feb 18 2020 at 23:03)
+
 * [vscode syntax highlighting](96610vscodesyntaxhighlighting.html) (7 messages, latest: Feb 18 2020 at 22:27)
 
 * [github actions](76245githubactions.html) (65 messages, latest: Feb 18 2020 at 22:26)
