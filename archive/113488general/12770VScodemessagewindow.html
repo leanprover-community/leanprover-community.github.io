@@ -101,6 +101,122 @@ I understand that maybe this would require that the tactic script reports follow
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20message%20window/near/188551080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12770VScodemessagewindow.html#188551080">Rob Lewis (Feb 19 2020 at 14:55)</a>:</h4>
 <p>Yes, I'd prefer all indented lines instead of having the tactics print a single long line.</p>
 
+<a name="188579881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20message%20window/near/188579881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12770VScodemessagewindow.html#188579881">Alexander Bentkamp (Feb 19 2020 at 20:07)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110596">Rob Lewis</span> <a href="#narrow/stream/113488-general/topic/VScode.20message.20window/near/188528964" title="#narrow/stream/113488-general/topic/VScode.20message.20window/near/188528964">said</a>:</p>
+<blockquote>
+<p>A very minor bug report/feature request: when you use this on a tactic call with a trailing comma, it deletes the comma. Would it be possible to replace until the next unbracketed comma instead of the end of the line? Or is there an ambiguity there I'm not seeing?</p>
+</blockquote>
+<p>How far should be replaced if the code says something like <code>by squeeze_simp</code>? Then there is no comma. Maybe the code should check whether the tactic is preceded by <code>by</code> to recognize this situation?</p>
+
+<a name="188580061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20message%20window/near/188580061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12770VScodemessagewindow.html#188580061">Rob Lewis (Feb 19 2020 at 20:09)</a>:</h4>
+<p>The next comma, EOL, or unmatched close paren, whichever comes first?</p>
+
+<a name="188580186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20message%20window/near/188580186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12770VScodemessagewindow.html#188580186">Rob Lewis (Feb 19 2020 at 20:11)</a>:</h4>
+<p>Maybe the grammar here is too complicated to be worth implementing, heh.</p>
+
+<a name="188580222"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20message%20window/near/188580222" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12770VScodemessagewindow.html#188580222">Mario Carneiro (Feb 19 2020 at 20:11)</a>:</h4>
+<p>Can the lean parser report this information?</p>
+
+<a name="188580446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20message%20window/near/188580446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12770VScodemessagewindow.html#188580446">Rob Lewis (Feb 19 2020 at 20:14)</a>:</h4>
+<p>Honestly, "until the next line break" is like 95% of what you need and it's nice to keep the implementation entirely in the VSCode extension.</p>
+
+<a name="188580588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20message%20window/near/188580588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12770VScodemessagewindow.html#188580588">Mario Carneiro (Feb 19 2020 at 20:16)</a>:</h4>
+<p>Oh I see, vscode only gets the first word of the tactic?</p>
+
+<a name="188580620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20message%20window/near/188580620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12770VScodemessagewindow.html#188580620">Mario Carneiro (Feb 19 2020 at 20:17)</a>:</h4>
+<p>next unbracketed (comma or semicolon or newline) I think</p>
+
+<a name="188580713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20message%20window/near/188580713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12770VScodemessagewindow.html#188580713">Rob Lewis (Feb 19 2020 at 20:18)</a>:</h4>
+<p>Yeah, e.g.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">true</span> <span class="bp">∧</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">squeeze_simp</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ_pos</span><span class="o">]</span>
+</pre></div>
+
+
+<p>reports the message only at <code>squeeze_simp</code>.</p>
+
+<a name="188580750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20message%20window/near/188580750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12770VScodemessagewindow.html#188580750">Mario Carneiro (Feb 19 2020 at 20:19)</a>:</h4>
+<p>I can imagine stuff like</p>
+<div class="codehilite"><pre><span></span><span class="n">simp</span> <span class="o">[</span><span class="n">foo</span><span class="o">,</span> <span class="n">bar</span><span class="o">,</span>
+  <span class="n">baz</span><span class="o">]</span>
+</pre></div>
+
+
+<p>so bracket matching is important, I think</p>
+
+<a name="188580892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20message%20window/near/188580892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12770VScodemessagewindow.html#188580892">Mario Carneiro (Feb 19 2020 at 20:20)</a>:</h4>
+<p>There are still some outliers I can think of, like</p>
+<div class="codehilite"><pre><span></span><span class="n">rcases</span> <span class="o">(</span><span class="n">very</span> <span class="n">long</span> <span class="n">expr</span><span class="o">)</span>
+  <span class="k">with</span> <span class="bp">⟨</span><span class="n">very</span><span class="o">,</span> <span class="n">long</span><span class="o">,</span> <span class="n">pattern</span><span class="bp">⟩</span><span class="o">,</span>
+</pre></div>
+
+<a name="188581043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20message%20window/near/188581043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12770VScodemessagewindow.html#188581043">Johan Commelin (Feb 19 2020 at 20:22)</a>:</h4>
+<p>But <code>rcases</code> is not a problem right?</p>
+
+<a name="188581052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20message%20window/near/188581052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12770VScodemessagewindow.html#188581052">Johan Commelin (Feb 19 2020 at 20:23)</a>:</h4>
+<p>Because then you just need to replace <code>rcases?</code></p>
+
+<a name="188581062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20message%20window/near/188581062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12770VScodemessagewindow.html#188581062">Bryan Gin-ge Chen (Feb 19 2020 at 20:23)</a>:</h4>
+<p>Another example is: </p>
+<div class="codehilite"><pre><span></span><span class="n">tidy</span><span class="err">?</span> <span class="o">{</span>
+  <span class="n">tactics</span> <span class="o">:=</span> <span class="o">[</span><span class="n">tactic1</span><span class="o">,</span>
+    <span class="n">tactic2</span><span class="o">]</span>
+<span class="o">}</span>
+</pre></div>
+
+<a name="188581082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20message%20window/near/188581082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12770VScodemessagewindow.html#188581082">Mario Carneiro (Feb 19 2020 at 20:23)</a>:</h4>
+<p>that's bracketed so it's okay</p>
+
+<a name="188581085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20message%20window/near/188581085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12770VScodemessagewindow.html#188581085">Rob Lewis (Feb 19 2020 at 20:23)</a>:</h4>
+<p>I think we can grant that it won't be perfect and "next unbracketed (comma or semicolon or newline)" is a good (and easy?) approximation.</p>
+
+<a name="188581217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20message%20window/near/188581217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12770VScodemessagewindow.html#188581217">Mario Carneiro (Feb 19 2020 at 20:24)</a>:</h4>
+<p>(by bracketed I mean tracking all bracket characters)</p>
+
+<a name="188581291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20message%20window/near/188581291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12770VScodemessagewindow.html#188581291">Johan Commelin (Feb 19 2020 at 20:25)</a>:</h4>
+<p>The proper solution would be to reimplement VScode in Lean.</p>
+
+<a name="188581311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20message%20window/near/188581311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12770VScodemessagewindow.html#188581311">Mario Carneiro (Feb 19 2020 at 20:25)</a>:</h4>
+<p>or lean in vscode...</p>
+
+<a name="188581441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20message%20window/near/188581441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12770VScodemessagewindow.html#188581441">Mario Carneiro (Feb 19 2020 at 20:26)</a>:</h4>
+<p>Since lean is handling all the high level bracket matching, I think you can just keep a single counter, increase it every time you see <code>([{⟨⦃</code> and decrease on <code>⦄⟩}])</code></p>
+
+<a name="188581470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20message%20window/near/188581470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12770VScodemessagewindow.html#188581470">Patrick Massot (Feb 19 2020 at 20:27)</a>:</h4>
+<p>I just tried that "Try this" thing, and it eats my commas.</p>
+
+<a name="188581508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20message%20window/near/188581508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12770VScodemessagewindow.html#188581508">Mario Carneiro (Feb 19 2020 at 20:27)</a>:</h4>
+<p>Maybe if you click on the colon in "Try this:" it will put the punctuation in</p>
+
+<a name="188581851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20message%20window/near/188581851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12770VScodemessagewindow.html#188581851">Patrick Massot (Feb 19 2020 at 20:30)</a>:</h4>
+<p>Also the tooltip when hovering over a suggestion is pretty distracting (and uninformative).</p>
+
+<a name="188581873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20message%20window/near/188581873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12770VScodemessagewindow.html#188581873">Patrick Massot (Feb 19 2020 at 20:30)</a>:</h4>
+<p>But it's still all very nice!</p>
+
 
 {% endraw %}
 

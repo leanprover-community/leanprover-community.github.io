@@ -9,17 +9,17 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Try this](83032Trythis.html) (3 messages, latest: Feb 19 2020 at 19:49)
+* [Try this](83032Trythis.html) (8 messages, latest: Feb 19 2020 at 20:58)
+
+* [New user bundles](27895Newuserbundles.html) (23 messages, latest: Feb 19 2020 at 20:33)
+
+* [VScode message window](12770VScodemessagewindow.html) (36 messages, latest: Feb 19 2020 at 20:30)
 
 * [Lean installation in CoCalc](56079LeaninstallationinCoCalc.html) (31 messages, latest: Feb 19 2020 at 19:14)
-
-* [New user bundles](27895Newuserbundles.html) (21 messages, latest: Feb 19 2020 at 18:43)
 
 * [omega](89194omega.html) (23 messages, latest: Feb 19 2020 at 17:09)
 
 * [Markdown syntax highlighting in /-! comments -/](92855Markdownsyntaxhighlightingincomments.html) (3 messages, latest: Feb 19 2020 at 16:32)
-
-* [VScode message window](12770VScodemessagewindow.html) (13 messages, latest: Feb 19 2020 at 14:55)
 
 * [Leanprover-community: getting rid of underlining](31408Leanprovercommunitygettingridofunderlining.html) (10 messages, latest: Feb 19 2020 at 14:46)
 
