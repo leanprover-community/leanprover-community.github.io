@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [well-ordering principle](19426wellorderingprinciple.html) (15 messages, latest: Feb 19 2020 at 04:46)
+
 * [What is an automorphic representation?](20797Whatisanautomorphicrepresentation.html) (12 messages, latest: Feb 19 2020 at 01:44)
 
 * [union of a finset of finsets](77562unionofafinsetoffinsets.html) (9 messages, latest: Feb 18 2020 at 20:14)
-
-* [well-ordering principle](19426wellorderingprinciple.html) (8 messages, latest: Feb 18 2020 at 08:49)
 
 * [finset of coeffts of a poly](38147finsetofcoefftsofapoly.html) (2 messages, latest: Feb 18 2020 at 04:25)
 
