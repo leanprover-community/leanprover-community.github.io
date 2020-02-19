@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Leanprover-community: getting rid of underlining](31408Leanprovercommunitygettingridofunderlining.html) (9 messages, latest: Feb 19 2020 at 02:42)
+* [VScode message window](12770VScodemessagewindow.html) (9 messages, latest: Feb 19 2020 at 09:43)
 
-* [vscode syntax highlighting](96610vscodesyntaxhighlighting.html) (10 messages, latest: Feb 19 2020 at 01:30)
+* [vscode syntax highlighting](96610vscodesyntaxhighlighting.html) (12 messages, latest: Feb 19 2020 at 09:30)
+
+* [Leanprover-community: getting rid of underlining](31408Leanprovercommunitygettingridofunderlining.html) (9 messages, latest: Feb 19 2020 at 02:42)
 
 * [mathlib-tools PR #12](50888mathlibtoolsPR12.html) (13 messages, latest: Feb 19 2020 at 01:26)
 
@@ -50,8 +52,6 @@ permalink: archive/113488general/index.html
 * [coe_fn and class instances](16860coefnandclassinstances.html) (23 messages, latest: Feb 15 2020 at 14:56)
 
 * [Let assumptions in theorems](82602Letassumptionsintheorems.html) (7 messages, latest: Feb 14 2020 at 20:12)
-
-* [VScode message window](12770VScodemessagewindow.html) (7 messages, latest: Feb 14 2020 at 14:25)
 
 * [Notation for matrices and vectors](84581Notationformatricesandvectors.html) (13 messages, latest: Feb 14 2020 at 12:35)
 
