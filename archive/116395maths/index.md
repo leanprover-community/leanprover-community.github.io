@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [well-ordering principle](19426wellorderingprinciple.html) (15 messages, latest: Feb 19 2020 at 04:46)
+* [well-ordering principle](19426wellorderingprinciple.html) (18 messages, latest: Feb 19 2020 at 05:01)
 
 * [What is an automorphic representation?](20797Whatisanautomorphicrepresentation.html) (12 messages, latest: Feb 19 2020 at 01:44)
 
