@@ -1,0 +1,82 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/56079LeaninstallationinCoCalc.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html">Lean installation in CoCalc</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188563583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188563583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188563583">Rob Lewis (Feb 19 2020 at 17:06)</a>:</h4>
+<p>The CoCalc talk in another thread reminded me that I should start getting things ready for my course next year. This led to a chat with <span class="user-mention" data-user-id="128565">@Harald Schilly</span> about how CoCalc installs Lean/mathlib. Irrelevant for my course, but probably relevant to others, so I'm bringing it here.</p>
+<p>It would probably be good to install Lean through the version manager elan, with a reasonable default version (3.5.1?) and a handful of options pre-installed. Right now it's a plain install of a 3.4.2 binary.</p>
+<p>What about pre-installing versions of mathlib? leanpkg has a notion of a global install of a package. But I'm not sure it's the best move here. <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> doesn't think it will play well with elan. And it probably interacts badly with non-global mathlib dependencies, which people might use if they want a newer version than whatever CoCalc gives.</p>
+<p>CoCalc could provide directories containing (compiled) mathlibs for each Lean version it pre-installs. Users would have to set up projects with leanpkg.toml files pointing to the right spot. Fine for courses that can distribute this project, trickier for someone who just wants to open a .lean file in CoCalc and start using real numbers.</p>
+<p>As I understand it, free CoCalc doesn't allow accessing external websites. So adding packages from GitHub won't work, nor will elan on new versions of Lean, nor will cache-olean/update-mathlib. This is why I'm suggesting pre-installing things, although of course this a reason to pay for CoCalc :) </p>
+<p>Thoughts? ( cc <span class="user-mention" data-user-id="116034">@William Stein</span> )</p>
+
+<a name="188564988"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188564988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188564988">William Stein (Feb 19 2020 at 17:23)</a>:</h4>
+<p>I can tell you that by default it is very confusing for people to get access to mathlib on CoCalc if they aren't experts.   We CoCalc admins definitely do NOT know what to do in order to make mathlib (or other libraries?) available by default, though we've tried and failed repeatedly.    If you want to see precisely what our lean install is on cocalc now, just open a Terminal in any cocalc project (+New --&gt; Terminal), then type <code>cd /ext/lean</code> and <code>ls</code>:</p>
+
+<a name="188564993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188564993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188564993">William Stein (Feb 19 2020 at 17:23)</a>:</h4>
+<div class="codehilite"><pre><span></span>
+</pre></div>
+
+<a name="188565163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188565163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188565163">William Stein (Feb 19 2020 at 17:25)</a>:</h4>
+<div class="codehilite"><pre><span></span>/ext/lean$ ls
+lean  lean-3.4.1-linux  lean-3.4.2-linux
+/ext/lean$ which lean
+/ext/bin/lean
+/ext/lean$ ls -l lean
+lrwxrwxrwx 1 salvus salvus 16 Feb 12  2019 lean -&gt; lean-3.4.2-linux
+/ext/lean$ cd lean-3.4.2-linux/
+/ext/lean/lean-3.4.2-linux$ ls
+bin  include  lib  mathlib  mathlib-lean-3.4.2
+/ext/lean/lean-3.4.2-linux$ lean --path
+{
+  &quot;is_user_leanpkg_path&quot;: true,
+  &quot;leanpkg_path_file&quot;: &quot;/home/user/.lean/leanpkg.path&quot;,
+  &quot;path&quot;: [
+    &quot;/ext/lean/lean-3.4.2-linux/bin/../library&quot;,
+    &quot;/ext/lean/lean-3.4.2-linux/bin/../lib/lean/library&quot;
+  ]
+}
+</pre></div>
+
+
+<p>Note that we have a copy of mathlib but it's not in either of the directories of the default lean search path, which might be why it doesn't work.  Should we move it into a subdirectory called "library"?</p>
+
+<a name="188566515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188566515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188566515">Rob Lewis (Feb 19 2020 at 17:40)</a>:</h4>
+<p>The <code>library</code> subdirectory is for the core Lean library. I'm guessing you'd have trouble moving mathlib there. With your current setup, you can do the following:</p>
+<div class="codehilite"><pre><span></span>~$ leanpkg install /ext/lean/lean-3.4.2-linux/mathlib-lean-3.4.2/
+</pre></div>
+
+
+<p>(don't do it inside <code>/ext/lean/lean-3.4.2-linux/</code>, apparently). This is a global install of mathlib so it should be available whenever you open a Lean file -- you might need  to restart the Lean server if it was running already.</p>
+
+<a name="188566571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188566571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188566571">Rob Lewis (Feb 19 2020 at 17:41)</a>:</h4>
+<p>This is fine if your users are okay with a fixed version of Lean and mathlib.</p>
+
+<a name="188567078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188567078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188567078">Patrick Massot (Feb 19 2020 at 17:47)</a>:</h4>
+<p>One can think that users of CoCalc don't need many versions of mathlib (they would use Lean locally if they were that serious about it). But I'm worried for teachers: what if I start a course using mathlib and suddenly CoCalc updates mathlib? What I did last year was to distribute a compiled mathlib using CoCalc distribution mechanism. Let's dream a bit here. Let's say some script downloads a mathlib nightly on the first of every month and call it <code>mathlib_january</code> etc. Then users could add a leanpkg dependency to <code>mathlib_february</code> or something. Then every year automatically erases ancient mathlibs.</p>
+
+<a name="188567134"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188567134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188567134">Patrick Massot (Feb 19 2020 at 17:47)</a>:</h4>
+<p>This shouldn't be a Lean specific issue however. What happens to existing projects when Sage is updated? I guess Sage has some breaking changes from times to times.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

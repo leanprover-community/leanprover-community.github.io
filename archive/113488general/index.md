@@ -9,11 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [New user bundles](27895Newuserbundles.html) (20 messages, latest: Feb 19 2020 at 17:56)
+
+* [Lean installation in CoCalc](56079LeaninstallationinCoCalc.html) (8 messages, latest: Feb 19 2020 at 17:47)
+
+* [omega](89194omega.html) (23 messages, latest: Feb 19 2020 at 17:09)
+
 * [Markdown syntax highlighting in /-! comments -/](92855Markdownsyntaxhighlightingincomments.html) (3 messages, latest: Feb 19 2020 at 16:32)
 
 * [VScode message window](12770VScodemessagewindow.html) (13 messages, latest: Feb 19 2020 at 14:55)
-
-* [omega](89194omega.html) (22 messages, latest: Feb 19 2020 at 14:51)
 
 * [Leanprover-community: getting rid of underlining](31408Leanprovercommunitygettingridofunderlining.html) (10 messages, latest: Feb 19 2020 at 14:46)
 
@@ -24,8 +28,6 @@ permalink: archive/113488general/index.html
 * [mathlib-tools PR #12](50888mathlibtoolsPR12.html) (13 messages, latest: Feb 19 2020 at 01:26)
 
 * [github actions](76245githubactions.html) (65 messages, latest: Feb 18 2020 at 22:26)
-
-* [New user bundles](27895Newuserbundles.html) (18 messages, latest: Feb 18 2020 at 12:18)
 
 * [Experimenting with leanchecker](27185Experimentingwithleanchecker.html) (4 messages, latest: Feb 18 2020 at 10:27)
 

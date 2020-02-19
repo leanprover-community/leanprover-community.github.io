@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [one_ne_zero in commutative rings: funny types](22395onenezeroincommutativeringsfunnytypes.html) (21 messages, latest: Feb 19 2020 at 17:50)
+
 * [well-ordering principle](19426wellorderingprinciple.html) (18 messages, latest: Feb 19 2020 at 05:01)
 
 * [What is an automorphic representation?](20797Whatisanautomorphicrepresentation.html) (12 messages, latest: Feb 19 2020 at 01:44)
