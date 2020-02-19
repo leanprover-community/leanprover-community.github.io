@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean installation in CoCalc](56079LeaninstallationinCoCalc.html) (30 messages, latest: Feb 19 2020 at 18:54)
+* [Try this](83032Trythis.html) (3 messages, latest: Feb 19 2020 at 19:49)
+
+* [Lean installation in CoCalc](56079LeaninstallationinCoCalc.html) (31 messages, latest: Feb 19 2020 at 19:14)
 
 * [New user bundles](27895Newuserbundles.html) (21 messages, latest: Feb 19 2020 at 18:43)
 
