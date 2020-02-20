@@ -9,6 +9,10 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [product with variable number of factors](02708productwithvariablenumberoffactors.html) (4 messages, latest: Feb 20 2020 at 16:20)
+
+* [finset of coeffts of a poly](38147finsetofcoefftsofapoly.html) (3 messages, latest: Feb 20 2020 at 16:15)
+
 * [well-ordering principle](19426wellorderingprinciple.html) (35 messages, latest: Feb 20 2020 at 08:43)
 
 * [one_ne_zero in commutative rings: funny types](22395onenezeroincommutativeringsfunnytypes.html) (24 messages, latest: Feb 19 2020 at 20:07)
@@ -16,8 +20,6 @@ permalink: archive/116395maths/index.html
 * [What is an automorphic representation?](20797Whatisanautomorphicrepresentation.html) (12 messages, latest: Feb 19 2020 at 01:44)
 
 * [union of a finset of finsets](77562unionofafinsetoffinsets.html) (9 messages, latest: Feb 18 2020 at 20:14)
-
-* [finset of coeffts of a poly](38147finsetofcoefftsofapoly.html) (2 messages, latest: Feb 18 2020 at 04:25)
 
 * [algebra is not scaling for me](49270algebraisnotscalingforme.html) (5 messages, latest: Feb 17 2020 at 21:43)
 

@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [On the side of logic](81703Onthesideoflogic.html) (26 messages, latest: Feb 20 2020 at 15:59)
+* [On the side of logic](81703Onthesideoflogic.html) (36 messages, latest: Feb 20 2020 at 16:08)
 
 * [Specific selection of terms with rw](62066Specificselectionoftermswithrw.html) (12 messages, latest: Feb 20 2020 at 14:47)
 
