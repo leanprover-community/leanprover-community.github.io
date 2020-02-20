@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean installation in CoCalc](56079LeaninstallationinCoCalc.html) (54 messages, latest: Feb 20 2020 at 11:15)
+* [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (13 messages, latest: Feb 20 2020 at 12:05)
 
-* [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (11 messages, latest: Feb 20 2020 at 10:53)
+* [Lean installation in CoCalc](56079LeaninstallationinCoCalc.html) (54 messages, latest: Feb 20 2020 at 11:15)
 
 * [Try this](83032Trythis.html) (54 messages, latest: Feb 20 2020 at 10:45)
 
