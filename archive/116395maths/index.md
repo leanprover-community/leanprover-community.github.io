@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [well-ordering principle](19426wellorderingprinciple.html) (30 messages, latest: Feb 20 2020 at 04:52)
+* [well-ordering principle](19426wellorderingprinciple.html) (31 messages, latest: Feb 20 2020 at 05:27)
 
 * [one_ne_zero in commutative rings: funny types](22395onenezeroincommutativeringsfunnytypes.html) (24 messages, latest: Feb 19 2020 at 20:07)
 
