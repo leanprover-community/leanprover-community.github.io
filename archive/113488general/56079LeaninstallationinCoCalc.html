@@ -237,6 +237,47 @@ bin  include  lib  mathlib  mathlib-lean-3.4.2
 </blockquote>
 <p>thank you, I discovered that already. However, regarding mathlib, my impression is that it is fine to grab the master-tip of the repository, but there are also "snapshot" like releases in it's repo. Last one from Oct'19, though. I'm aware of that mathlib-tool, and reading the sources of that script, it looks like grabbing the nightly build is what I should do. For me, as an "outsider" to lean, this is a little bit confusing ^^</p>
 
+<a name="188620172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188620172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188620172">Rob Lewis (Feb 20 2020 at 09:03)</a>:</h4>
+<p>I think it's extra complicated because the CoCalc install isn't (and shouldn't be) following the "standard" installation model.</p>
+
+<a name="188620223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188620223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188620223">Rob Lewis (Feb 20 2020 at 09:04)</a>:</h4>
+<p>I have no idea what the snapshot releases in the mathlib repo are for. Maybe we should delete those?</p>
+
+<a name="188620317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188620317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188620317">Rob Lewis (Feb 20 2020 at 09:05)</a>:</h4>
+<p>Using the master tip of mathlib is fine, if you're building it yourself. There are supporting scripts for downloading pre-built olean files. But there's no need to install them in CoCalc. You could do it locally to create the mathlib image if you wanted.</p>
+
+<a name="188620407"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188620407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188620407">Rob Lewis (Feb 20 2020 at 09:06)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="188620505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188620505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188620505">Rob Lewis (Feb 20 2020 at 09:08)</a>:</h4>
+<p>The easiest way to get a fully built mathlib repo manually is through the CI. Download the build artifact here: <a href="https://github.com/leanprover-community/mathlib/runs/456786112" target="_blank" title="https://github.com/leanprover-community/mathlib/runs/456786112">https://github.com/leanprover-community/mathlib/runs/456786112</a></p>
+
+<a name="188620532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188620532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188620532">Rob Lewis (Feb 20 2020 at 09:08)</a>:</h4>
+<p>That will give you the master version of mathlib with pre-built oleans.</p>
+
+<a name="188622620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188622620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188622620">Harald Schilly (Feb 20 2020 at 09:39)</a>:</h4>
+<p>thank you <span class="user-mention" data-user-id="110596">@Rob Lewis</span> … yes, it's different. So, what I ended up is writing a script to grab the latest nightly build of mathlib from the mathlib-nightly repo. Just one minor detail was off: it extracts as "src/*" without these two toml and path files. I ended up writing them on my own, without specifying the lean version. With what <span class="user-mention" data-user-id="116034">@William Stein</span> came up with will point to the matlib path, which will be next to the default version of lean we at cocalc symlink to. Therefore, the mathlib package will correspond to whatever the default version is, i.e. 3.5.1 right now.</p>
+
+<a name="188622884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188622884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188622884">Harald Schilly (Feb 20 2020 at 09:42)</a>:</h4>
+<p>net result: the file william shared yesterday will process fine, see screenshot below. This isn't live on cocalc yet, but will be part of our next update (during the weekend). </p>
+<p><a href="/user_uploads/3121/TQg6twJfkNI-F4HCDdkl4ttN/2020-02-20-lean-mathlib-3.5.1-cocalc.png" target="_blank" title="2020-02-20-lean-mathlib-3.5.1-cocalc.png">2020-02-20-lean-mathlib-3.5.1-cocalc.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/TQg6twJfkNI-F4HCDdkl4ttN/2020-02-20-lean-mathlib-3.5.1-cocalc.png" target="_blank" title="2020-02-20-lean-mathlib-3.5.1-cocalc.png"><img src="/user_uploads/3121/TQg6twJfkNI-F4HCDdkl4ttN/2020-02-20-lean-mathlib-3.5.1-cocalc.png"></a></div>
+
+<a name="188622900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188622900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188622900">Patrick Massot (Feb 20 2020 at 09:43)</a>:</h4>
+<blockquote>
+<p>I have no idea what the snapshot releases in the mathlib repo are for. Maybe we should delete those?</p>
+</blockquote>
+<p>Does anyone has enough admin power to get rid of those? They are useless and confusing.</p>
+
 
 {% endraw %}
 
