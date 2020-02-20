@@ -183,6 +183,42 @@ permalink: archive/116395maths/19426wellorderingprinciple.html
 <span class="err">⊢</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="n">a</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">a</span> <span class="bp">+</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">p</span>
 </pre></div>
 
+<a name="188609703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188609703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188609703">Alex J. Best (Feb 20 2020 at 04:34)</a>:</h4>
+<p>Not that it matters too much to the answer but : What is the cast <code>↑</code> to? Integers, reals? I.e. what is the actual lemma statement you are proving ?</p>
+
+<a name="188609775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188609775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188609775">Mario Carneiro (Feb 20 2020 at 04:36)</a>:</h4>
+<p>Seems like <code>norm_cast</code> will help a lot to clean that up</p>
+
+<a name="188610115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188610115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188610115">Nicholas McConnell (Feb 20 2020 at 04:45)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="127136">Alex J. Best</span> <a href="#narrow/stream/116395-maths/topic/well-ordering.20principle/near/188609703" title="#narrow/stream/116395-maths/topic/well-ordering.20principle/near/188609703">said</a>:</p>
+<blockquote>
+<p>Not that it matters too much to the answer but : What is the cast <code>↑</code> to? Integers, reals? I.e. what is the actual lemma statement you are proving ?</p>
+</blockquote>
+<p>Integers.  I confess that I didn't know ↑ had multiple meanings</p>
+
+<a name="188610176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188610176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188610176">Alex J. Best (Feb 20 2020 at 04:47)</a>:</h4>
+<p>It means cast in general, so it could be casting nats to reals or rationals or whatever and it will just be printed in the same way. As mario says, whenever you have such a cast the tactic norm_cast can often reduce you back to the case where there are none.</p>
+
+<a name="188610295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188610295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188610295">Alex J. Best (Feb 20 2020 at 04:50)</a>:</h4>
+<p>Don't know if you wanted a full answer or not, but here is one way of concluding:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="o">(</span><span class="err">↑</span><span class="n">a</span> <span class="o">:</span><span class="bp">ℤ</span><span class="o">)</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="o">(</span><span class="err">↑</span><span class="n">p</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">)</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">≤</span> <span class="err">↑</span><span class="n">a</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">a</span> <span class="bp">+</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">p</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≠</span> <span class="o">(</span><span class="err">↑</span><span class="n">p</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">)</span> <span class="bp">→</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="n">p</span> <span class="err">^</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="n">a</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">a</span> <span class="bp">+</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">p</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">norm_cast</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+<span class="n">specialize</span> <span class="n">s</span> <span class="o">(</span><span class="n">ne_of_lt</span> <span class="n">hp</span><span class="o">),</span>
+<span class="n">rw</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">pow_two</span><span class="o">]</span> <span class="n">at</span> <span class="n">s</span><span class="o">,</span>
+<span class="n">exact</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_of_lt_of_le</span> <span class="n">s</span> <span class="n">r</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="188610363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188610363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188610363">Alex J. Best (Feb 20 2020 at 04:52)</a>:</h4>
+<p>And the exact same proof still applies even if we started with reals or whatever as after norm_cast we end up in the same state.</p>
+
 
 {% endraw %}
 
