@@ -9,15 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Add lemma to root namespace without leaving a namespace](42706Addlemmatorootnamespacewithoutleavinganamespace.html) (5 messages, latest: Feb 20 2020 at 07:14)
+* [Lean installation in CoCalc](56079LeaninstallationinCoCalc.html) (37 messages, latest: Feb 20 2020 at 08:54)
+
+* [Try this](83032Trythis.html) (48 messages, latest: Feb 20 2020 at 08:52)
+
+* [Add lemma to root namespace without leaving a namespace](42706Addlemmatorootnamespacewithoutleavinganamespace.html) (6 messages, latest: Feb 20 2020 at 08:01)
 
 * [vscode syntax highlighting](96610vscodesyntaxhighlighting.html) (13 messages, latest: Feb 20 2020 at 07:10)
 
-* [Lean installation in CoCalc](56079LeaninstallationinCoCalc.html) (33 messages, latest: Feb 20 2020 at 06:54)
-
 * [New user bundles](27895Newuserbundles.html) (89 messages, latest: Feb 19 2020 at 23:12)
-
-* [Try this](83032Trythis.html) (45 messages, latest: Feb 19 2020 at 21:41)
 
 * [VScode message window](12770VScodemessagewindow.html) (36 messages, latest: Feb 19 2020 at 20:30)
 
