@@ -1,0 +1,145 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/81703Onthesideoflogic.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html">On the side of logic</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188640790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188640790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188640790">Dan Stanescu (Feb 20 2020 at 14:20)</a>:</h4>
+<p>Hi everyone: The manual online has this example among the problems at the very end of chapter 3:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">P</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">P</span> <span class="o">:=</span>  <span class="n">sorry</span>
+</pre></div>
+
+
+<p>and states classical reasoning is needed. I came up with the following:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="n">P</span> <span class="o">:</span> <span class="kt">Prop</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">P</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">P</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">by_contradiction</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">push_neg</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">h</span><span class="bp">.</span><span class="n">left</span><span class="o">,</span> <span class="n">exact</span> <span class="n">h</span><span class="bp">.</span><span class="n">right</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>but am wondering if someone with a stronger foundation in logic could comment: is there a more first-principles proof than this?</p>
+
+<a name="188641026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188641026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188641026">Donald Sebastian Leung (Feb 20 2020 at 14:23)</a>:</h4>
+<p>A simpler proof would just use <code>classical.em</code>. If you really want to prove it from first principles then you would probably have to somehow derive it from <code>propext</code>, <code>quot.sound</code> and <code>classical.choice</code> (all of which the built-in <code>classical.em</code> depends on)</p>
+
+<a name="188641047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188641047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188641047">Dan Stanescu (Feb 20 2020 at 14:23)</a>:</h4>
+<p>Also, watching a Coq video inspired me to try this:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- prove Peirce &lt;-&gt; em</span>
+<span class="n">def</span> <span class="n">peirce</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">P</span> <span class="n">Q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">,</span>  <span class="o">((</span> <span class="n">P</span> <span class="bp">→</span> <span class="n">Q</span> <span class="o">)</span> <span class="bp">→</span> <span class="n">P</span> <span class="o">)</span> <span class="bp">→</span> <span class="n">P</span>
+<span class="n">def</span> <span class="n">lem</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">P</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">,</span> <span class="n">P</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">P</span>
+
+<span class="kn">theorem</span> <span class="n">peirce_imp_em</span> <span class="o">:</span> <span class="n">peirce</span> <span class="bp">→</span> <span class="n">lem</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">unfold</span> <span class="n">peirce</span><span class="o">,</span>
+    <span class="n">intros</span> <span class="n">pei</span> <span class="n">P</span><span class="o">,</span>
+    <span class="n">by_contradiction</span> <span class="n">npOnp</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">H1</span> <span class="o">:=</span> <span class="n">pei</span> <span class="o">(</span><span class="n">P</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">P</span><span class="o">),</span>
+    <span class="k">have</span> <span class="n">H2</span> <span class="o">:</span> <span class="n">P</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">P</span> <span class="bp">→</span> <span class="n">P</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">P</span><span class="o">,</span> <span class="k">from</span> <span class="n">self_to_self</span> <span class="o">(</span><span class="n">P</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">P</span><span class="o">),</span>
+</pre></div>
+
+
+<p>but I'm having trouble completing this proof because of what appears to be not enough knowledge of Lean. Anyone can help?</p>
+
+<a name="188641133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188641133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188641133">Dan Stanescu (Feb 20 2020 at 14:24)</a>:</h4>
+<p><span class="user-mention" data-user-id="264734">@Donald Sebastian Leung</span>  Right, using classical.em is very easy because it is totally equivalent. But it's not very illuminating.</p>
+
+<a name="188641253"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188641253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188641253">Donald Sebastian Leung (Feb 20 2020 at 14:25)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="259857">Dan Stanescu</span> <a href="#narrow/stream/113489-new-members/topic/On.20the.20side.20of.20logic/near/188641133" title="#narrow/stream/113489-new-members/topic/On.20the.20side.20of.20logic/near/188641133">said</a>:</p>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="264734">Donald Sebastian Leung</span>  Right, using classical.em is very easy because it is totally equivalent. But it's not very illuminating.</p>
+</blockquote>
+<p>True - the first principles proof would probably need all 3 of those axioms as I mentioned above (which I have not attempted to prove).</p>
+
+<a name="188641336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188641336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188641336">Rob Lewis (Feb 20 2020 at 14:26)</a>:</h4>
+<p>The answer kind of depends on what "first principles" you want to start from. If your first principles are "the axioms of Lean including its version of choice," the argument can be seen here: <a href="https://github.com/leanprover-community/lean/blob/master/library/init/classical.lean" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/library/init/classical.lean">https://github.com/leanprover-community/lean/blob/master/library/init/classical.lean</a></p>
+
+<a name="188641354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188641354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188641354">Rob Lewis (Feb 20 2020 at 14:26)</a>:</h4>
+<p>It's not trivial to follow.</p>
+
+<a name="188641421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188641421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188641421">Dan Stanescu (Feb 20 2020 at 14:27)</a>:</h4>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> Great, I'll take a look. I'm just wondering what the authors of the manual meant by a proof at that point.</p>
+
+<a name="188641510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188641510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188641510">Donald Sebastian Leung (Feb 20 2020 at 14:28)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="259857">Dan Stanescu</span> <a href="#narrow/stream/113489-new-members/topic/On.20the.20side.20of.20logic/near/188641047" title="#narrow/stream/113489-new-members/topic/On.20the.20side.20of.20logic/near/188641047">said</a>:</p>
+<blockquote>
+<p>Also, watching a Coq video inspired me to try this:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- prove Peirce &lt;-&gt; em</span>
+<span class="n">def</span> <span class="n">peirce</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">P</span> <span class="n">Q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">,</span>  <span class="o">((</span> <span class="n">P</span> <span class="bp">→</span> <span class="n">Q</span> <span class="o">)</span> <span class="bp">→</span> <span class="n">P</span> <span class="o">)</span> <span class="bp">→</span> <span class="n">P</span>
+<span class="n">def</span> <span class="n">lem</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">P</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">,</span> <span class="n">P</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">P</span>
+
+<span class="kn">theorem</span> <span class="n">peirce_imp_em</span> <span class="o">:</span> <span class="n">peirce</span> <span class="bp">→</span> <span class="n">lem</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">unfold</span> <span class="n">peirce</span><span class="o">,</span>
+    <span class="n">intros</span> <span class="n">pei</span> <span class="n">P</span><span class="o">,</span>
+    <span class="n">by_contradiction</span> <span class="n">npOnp</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">H1</span> <span class="o">:=</span> <span class="n">pei</span> <span class="o">(</span><span class="n">P</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">P</span><span class="o">),</span>
+    <span class="k">have</span> <span class="n">H2</span> <span class="o">:</span> <span class="n">P</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">P</span> <span class="bp">→</span> <span class="n">P</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">P</span><span class="o">,</span> <span class="k">from</span> <span class="n">self_to_self</span> <span class="o">(</span><span class="n">P</span> <span class="bp">∨</span> <span class="bp">¬</span><span class="n">P</span><span class="o">),</span>
+</pre></div>
+
+
+<p>but I'm having trouble completing this proof because of what appears to be not enough knowledge of Lean. Anyone can help?</p>
+</blockquote>
+<p>I've probably done this in Coq before since I completed Chapter 6 of Logical Foundations quite a while ago but I can't remember off the top of my head. Anyway, if you decide to attempt that exercise then you should completely avoid classical reasoning</p>
+
+<a name="188641677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188641677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188641677">Anne Baanen (Feb 20 2020 at 14:30)</a>:</h4>
+<p>My suggestion is to show <code>¬¬(P ∨ ¬P)</code> without using classical reasoning, then use one of the various classical axioms (e.g. Peirce) to show that this implies <code>P ∨ ¬P</code>.</p>
+
+<a name="188641928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188641928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188641928">Rob Lewis (Feb 20 2020 at 14:32)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="259857">Dan Stanescu</span> <a href="#narrow/stream/113489-new-members/topic/On.20the.20side.20of.20logic/near/188641421" title="#narrow/stream/113489-new-members/topic/On.20the.20side.20of.20logic/near/188641421">said</a>:</p>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="110596">Rob Lewis</span> Great, I'll take a look. I'm just wondering what the authors of the manual meant by a proof at that point.</p>
+</blockquote>
+<p>Honestly, I have no idea :) the easier exercise is to prove it using <code>classical.by_contradiction</code> (avoiding <code>classical.em</code> and any of the tactics that will use classical logic implicitly).</p>
+
+<a name="188641986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188641986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188641986">Rob Lewis (Feb 20 2020 at 14:33)</a>:</h4>
+<p>In your tactic proof, <code>by_contradiction</code> is fine, but <code>push_neg</code> is cheating.</p>
+
+<a name="188642149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188642149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188642149">Bryan Gin-ge Chen (Feb 20 2020 at 14:35)</a>:</h4>
+<p>In fact, tactics aren't introduced at all until chapter 5, so the intended proof should probably be in term mode.</p>
+
+<a name="188642319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188642319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188642319">Rob Lewis (Feb 20 2020 at 14:36)</a>:</h4>
+<p>To clarify: by "cheating" I don't mean that it's using classical logic, I mean that it's doing some reasoning you may want to practice.</p>
+
+<a name="188643173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188643173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188643173">Dan Stanescu (Feb 20 2020 at 14:43)</a>:</h4>
+<p>Thanks to all! I did get hooked to tactics before term mode because of my initial contact with Lean being through some YouTube videos, but I should turn back to term mode. <br>
+<span class="user-mention" data-user-id="238446">@Anne Baanen</span> Either way I still have trouble producing in Lean the required term to which I could apply Peirce. Nevertheless, thanks for the advice!</p>
+
+<a name="188643565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/On%20the%20side%20of%20logic/near/188643565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81703Onthesideoflogic.html#188643565">Donald Sebastian Leung (Feb 20 2020 at 14:46)</a>:</h4>
+<blockquote>
+<p>I did get hooked to tactics before term mode ...</p>
+</blockquote>
+<p>Understandable, IMO constructing a proof using tactics is much more pleasant than doing it in term mode, especially when you get to use <del>black magick</del> automation <span aria-label="wink" class="emoji emoji-1f609" role="img" title="wink">:wink:</span> It sometimes makes me wonder how it feels to be an Agda developer ...</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
