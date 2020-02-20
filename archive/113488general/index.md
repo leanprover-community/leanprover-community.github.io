@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Add lemma to root namespace without leaving a namespace](42706Addlemmatorootnamespacewithoutleavinganamespace.html) (5 messages, latest: Feb 20 2020 at 07:14)
+
+* [vscode syntax highlighting](96610vscodesyntaxhighlighting.html) (13 messages, latest: Feb 20 2020 at 07:10)
+
 * [Lean installation in CoCalc](56079LeaninstallationinCoCalc.html) (33 messages, latest: Feb 20 2020 at 06:54)
 
 * [New user bundles](27895Newuserbundles.html) (89 messages, latest: Feb 19 2020 at 23:12)
@@ -24,8 +28,6 @@ permalink: archive/113488general/index.html
 * [Leanprover-community: getting rid of underlining](31408Leanprovercommunitygettingridofunderlining.html) (10 messages, latest: Feb 19 2020 at 14:46)
 
 * [doc_gen](23504docgen.html) (2 messages, latest: Feb 19 2020 at 11:20)
-
-* [vscode syntax highlighting](96610vscodesyntaxhighlighting.html) (12 messages, latest: Feb 19 2020 at 09:30)
 
 * [mathlib-tools PR #12](50888mathlibtoolsPR12.html) (13 messages, latest: Feb 19 2020 at 01:26)
 
