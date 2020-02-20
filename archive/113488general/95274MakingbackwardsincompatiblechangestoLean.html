@@ -30,6 +30,39 @@ permalink: archive/113488general/95274MakingbackwardsincompatiblechangestoLean.h
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Making%20backwards-incompatible%20changes%20to%20Lean/near/188622836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95274MakingbackwardsincompatiblechangestoLean.html#188622836">Patrick Massot (Feb 20 2020 at 09:42)</a>:</h4>
 <p>I guess most thing that simplify using <code>add_comm</code> and <code>add_assoc</code> should be using <code>ring</code> or <code>abel</code> anyway. So I vote yes to all those changes.</p>
 
+<a name="188624584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Making%20backwards-incompatible%20changes%20to%20Lean/near/188624584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95274MakingbackwardsincompatiblechangestoLean.html#188624584">Rob Lewis (Feb 20 2020 at 10:06)</a>:</h4>
+<p>I'm on board, it's time to fix the things we've spent years complaining about.</p>
+
+<a name="188624997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Making%20backwards-incompatible%20changes%20to%20Lean/near/188624997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95274MakingbackwardsincompatiblechangestoLean.html#188624997">Gabriel Ebner (Feb 20 2020 at 10:12)</a>:</h4>
+<p>PR for <code>sub_eq_add_neg</code>: <a href="https://github.com/leanprover-community/lean/pull/117" target="_blank" title="https://github.com/leanprover-community/lean/pull/117">https://github.com/leanprover-community/lean/pull/117</a></p>
+
+<a name="188626049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Making%20backwards-incompatible%20changes%20to%20Lean/near/188626049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95274MakingbackwardsincompatiblechangestoLean.html#188626049">Sebastien Gouezel (Feb 20 2020 at 10:28)</a>:</h4>
+<p>How does this interact with updating mathlib? I mean, when we do such a change to Lean, then mathlib will break, and we will need to fix it. But once it is fixed, it will become incompatible with previous versions of Lean. So, things should be coordinated in a way.</p>
+
+<a name="188626140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Making%20backwards-incompatible%20changes%20to%20Lean/near/188626140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95274MakingbackwardsincompatiblechangestoLean.html#188626140">Rob Lewis (Feb 20 2020 at 10:30)</a>:</h4>
+<p>mathlib specifies which Lean version it uses in the toml file. Right now it's 3.5.1.</p>
+
+<a name="188626147"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Making%20backwards-incompatible%20changes%20to%20Lean/near/188626147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95274MakingbackwardsincompatiblechangestoLean.html#188626147">Rob Lewis (Feb 20 2020 at 10:30)</a>:</h4>
+<p>It won't know about any changes to Lean until we update the toml.</p>
+
+<a name="188626167"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Making%20backwards-incompatible%20changes%20to%20Lean/near/188626167" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95274MakingbackwardsincompatiblechangestoLean.html#188626167">Rob Lewis (Feb 20 2020 at 10:31)</a>:</h4>
+<p>The PR that makes that change should also fix any breakage.</p>
+
+<a name="188626181"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Making%20backwards-incompatible%20changes%20to%20Lean/near/188626181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95274MakingbackwardsincompatiblechangestoLean.html#188626181">Rob Lewis (Feb 20 2020 at 10:31)</a>:</h4>
+<p>It's probably a good idea to keep a branch of mathlib updated to Lean nightlies, so we don't have to make these fixes all at once.</p>
+
+<a name="188627497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Making%20backwards-incompatible%20changes%20to%20Lean/near/188627497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95274MakingbackwardsincompatiblechangestoLean.html#188627497">Gabriel Ebner (Feb 20 2020 at 10:53)</a>:</h4>
+<p>I vaguely recall that somebody complained about <code>∘</code> being reducible.  Do we want to change this as well?<br>
+(Occasion: I'm currently debugging a simp loop with <code>[simplify.rewrite] [equiv.conj_comp]: ⇑(equiv.conj e) f ==&gt; ⇑(equiv.conj e) f ∘ ⇑(equiv.conj e) (λ (x : α), x)</code>)</p>
+
 
 {% endraw %}
 

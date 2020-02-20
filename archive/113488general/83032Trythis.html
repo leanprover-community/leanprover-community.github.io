@@ -300,6 +300,30 @@ Try this: refl
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Try%20this/near/188619554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83032Trythis.html#188619554">Jasmin Blanchette (Feb 20 2020 at 08:52)</a>:</h4>
 <p>I'd say <code>library_search</code> has a quite different role to play than the other two and should be kept separate. There are all sorts of situations where you're looking for a specific lemma and not an arbitrary tactical proof.</p>
 
+<a name="188624714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Try%20this/near/188624714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83032Trythis.html#188624714">Rob Lewis (Feb 20 2020 at 10:08)</a>:</h4>
+<p><code>suggest</code> and <code>library_search</code> share most of an implementation but have different use cases, they should definitely stay separate.</p>
+
+<a name="188624749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Try%20this/near/188624749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83032Trythis.html#188624749">Rob Lewis (Feb 20 2020 at 10:09)</a>:</h4>
+<p>One could argue that <code>hint</code> should call <code>suggest</code>, since applying a lemma is another tactic that can make progress.</p>
+
+<a name="188624772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Try%20this/near/188624772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83032Trythis.html#188624772">Rob Lewis (Feb 20 2020 at 10:09)</a>:</h4>
+<p>But <code>suggest</code> will usually be way slower than <code>hint</code>.</p>
+
+<a name="188624777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Try%20this/near/188624777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83032Trythis.html#188624777">Patrick Massot (Feb 20 2020 at 10:09)</a>:</h4>
+<p>Could you explain how suggest and library_search have different use cases?</p>
+
+<a name="188624993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Try%20this/near/188624993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83032Trythis.html#188624993">Rob Lewis (Feb 20 2020 at 10:12)</a>:</h4>
+<p>Often I care if a lemma is in the library already, but not if some random terms make progress, since I know how to bash it away. <code>library_search</code> is what I want there, and it will stop as soon as it solves the goal. <code>suggest</code> potentially gives me a long list of things I don't care about and it takes a long time to find it.</p>
+
+<a name="188627011"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Try%20this/near/188627011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83032Trythis.html#188627011">Rob Lewis (Feb 20 2020 at 10:45)</a>:</h4>
+<p>Maybe it's reasonable to have <code>hint!</code> call both <code>hint</code> and <code>suggest</code>. I really don't think we should combine them by default though.</p>
+
 
 {% endraw %}
 
