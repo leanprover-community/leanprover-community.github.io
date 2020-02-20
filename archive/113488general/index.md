@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [VScode message window](12770VScodemessagewindow.html) (37 messages, latest: Feb 20 2020 at 22:44)
+
+* [Try this](83032Trythis.html) (55 messages, latest: Feb 20 2020 at 22:40)
+
 * [Lean installation in CoCalc](56079LeaninstallationinCoCalc.html) (77 messages, latest: Feb 20 2020 at 21:38)
 
 * [community web editor](75147communitywebeditor.html) (7 messages, latest: Feb 20 2020 at 21:22)
@@ -21,15 +25,11 @@ permalink: archive/113488general/index.html
 
 * [Set notation](69785Setnotation.html) (1 message, latest: Feb 20 2020 at 17:00)
 
-* [Try this](83032Trythis.html) (54 messages, latest: Feb 20 2020 at 10:45)
-
 * [Add lemma to root namespace without leaving a namespace](42706Addlemmatorootnamespacewithoutleavinganamespace.html) (6 messages, latest: Feb 20 2020 at 08:01)
 
 * [vscode syntax highlighting](96610vscodesyntaxhighlighting.html) (13 messages, latest: Feb 20 2020 at 07:10)
 
 * [New user bundles](27895Newuserbundles.html) (89 messages, latest: Feb 19 2020 at 23:12)
-
-* [VScode message window](12770VScodemessagewindow.html) (36 messages, latest: Feb 19 2020 at 20:30)
 
 * [omega](89194omega.html) (23 messages, latest: Feb 19 2020 at 17:09)
 

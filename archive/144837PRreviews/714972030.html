@@ -1,0 +1,49 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/144837PRreviews/714972030.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/144837PRreviews/index.html">PR reviews</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/144837PRreviews/714972030.html">#2030</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188684993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232030/near/188684993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/714972030.html#188684993">Scott Morrison (Feb 20 2020 at 22:19)</a>:</h4>
+<p>I just made another hint tactic, this one called <code>rw_hint</code>. It just tries out every hypothesis and lemma in the environment, and reports which ones are usable as rewrites against the current goal.</p>
+
+<a name="188685046"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232030/near/188685046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/714972030.html#188685046">Scott Morrison (Feb 20 2020 at 22:20)</a>:</h4>
+<div class="codehilite"><pre><span></span>## rw_hint
+
+The tactic `rw_hint` will try to rewrite the goal using all available lemmas and hypotheses,
+reporting those that make progress.
+
+```
+example (P Q : Prop) (h : P ↔ Q) (p : P) : Q :=
+begin
+  rw_hint, -- Prints &quot;Try this: rw ←h&quot;
+  rw ←h, exact p,
+end
+```
+
+For now, it really reports everything it finds, with no filter,
+so for many goals (particularly those involving numerals) you will see a lot of spurious junk.
+</pre></div>
+
+<a name="188685080"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232030/near/188685080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/714972030.html#188685080">Scott Morrison (Feb 20 2020 at 22:20)</a>:</h4>
+<p>As you might expect there's some junk in the output, but it often seems useful.</p>
+
+<a name="188685107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232030/near/188685107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/714972030.html#188685107">Scott Morrison (Feb 20 2020 at 22:21)</a>:</h4>
+<p>(One day we'll summon the energy to get <code>rewrite_search</code> into mathlib, and then we'll really be cooking with gas.)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
