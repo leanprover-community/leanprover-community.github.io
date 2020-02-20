@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Specific selection of terms with rw](62066Specificselectionoftermswithrw.html) (10 messages, latest: Feb 20 2020 at 13:58)
+
 * [Cannot start tutorials, nor import topology.basic, nor...](28257Cannotstarttutorialsnorimporttopologybasicnor.html) (64 messages, latest: Feb 19 2020 at 22:07)
 
 * [definition unpacking](72874definitionunpacking.html) (13 messages, latest: Feb 19 2020 at 18:18)
