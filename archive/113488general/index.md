@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [update-mathlib update](59285updatemathlibupdate.html) (13 messages, latest: Feb 20 2020 at 20:57)
+* [Lean installation in CoCalc](56079LeaninstallationinCoCalc.html) (77 messages, latest: Feb 20 2020 at 21:38)
 
-* [Lean installation in CoCalc](56079LeaninstallationinCoCalc.html) (70 messages, latest: Feb 20 2020 at 20:52)
+* [community web editor](75147communitywebeditor.html) (7 messages, latest: Feb 20 2020 at 21:22)
+
+* [update-mathlib update](59285updatemathlibupdate.html) (14 messages, latest: Feb 20 2020 at 21:02)
 
 * [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (19 messages, latest: Feb 20 2020 at 20:50)
-
-* [community web editor](75147communitywebeditor.html) (6 messages, latest: Feb 20 2020 at 20:46)
 
 * [Is web editor good-enough for IDE plugin?](16485IswebeditorgoodenoughforIDEplugin.html) (7 messages, latest: Feb 20 2020 at 20:29)
 
