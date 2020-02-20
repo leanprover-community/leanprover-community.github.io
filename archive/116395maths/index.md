@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [MathLib installing](36823MathLibinstalling.html) (106 messages, latest: Feb 20 2020 at 18:31)
+
 * [well-ordering principle](19426wellorderingprinciple.html) (41 messages, latest: Feb 20 2020 at 17:33)
 
 * [product with variable number of factors](02708productwithvariablenumberoffactors.html) (4 messages, latest: Feb 20 2020 at 16:20)
@@ -24,8 +26,6 @@ permalink: archive/116395maths/index.html
 * [algebra is not scaling for me](49270algebraisnotscalingforme.html) (5 messages, latest: Feb 17 2020 at 21:43)
 
 * [finset.inter](31578finsetinter.html) (7 messages, latest: Feb 17 2020 at 20:53)
-
-* [MathLib installing](36823MathLibinstalling.html) (103 messages, latest: Feb 17 2020 at 20:49)
 
 * [finite-dimensionality of field over subfield](61145finitedimensionalityoffieldoversubfield.html) (60 messages, latest: Feb 17 2020 at 18:02)
 

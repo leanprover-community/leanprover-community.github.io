@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (14 messages, latest: Feb 20 2020 at 17:37)
+* [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (16 messages, latest: Feb 20 2020 at 18:36)
+
+* [update-mathlib update](59285updatemathlibupdate.html) (1 message, latest: Feb 20 2020 at 18:24)
 
 * [Set notation](69785Setnotation.html) (1 message, latest: Feb 20 2020 at 17:00)
 
