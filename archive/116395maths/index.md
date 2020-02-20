@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [well-ordering principle](19426wellorderingprinciple.html) (41 messages, latest: Feb 20 2020 at 17:33)
+
 * [product with variable number of factors](02708productwithvariablenumberoffactors.html) (4 messages, latest: Feb 20 2020 at 16:20)
 
 * [finset of coeffts of a poly](38147finsetofcoefftsofapoly.html) (3 messages, latest: Feb 20 2020 at 16:15)
-
-* [well-ordering principle](19426wellorderingprinciple.html) (35 messages, latest: Feb 20 2020 at 08:43)
 
 * [one_ne_zero in commutative rings: funny types](22395onenezeroincommutativeringsfunnytypes.html) (24 messages, latest: Feb 19 2020 at 20:07)
 

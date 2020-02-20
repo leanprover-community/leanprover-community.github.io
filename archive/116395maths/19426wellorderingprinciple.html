@@ -248,6 +248,31 @@ permalink: archive/116395maths/19426wellorderingprinciple.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188619069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188619069">Patrick Massot (Feb 20 2020 at 08:43)</a>:</h4>
 <p>But it's true that library_search would find the variations. That would be a job for Gabriel.</p>
 
+<a name="188656833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188656833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188656833">Nicholas McConnell (Feb 20 2020 at 17:09)</a>:</h4>
+<p><a href="/user_uploads/3121/KNUIIBNpeX8YqZtMhhe9pVR4/bandicam-2020-02-20-12-06-47-319.mp4" target="_blank" title="bandicam-2020-02-20-12-06-47-319.mp4">bandicam-2020-02-20-12-06-47-319.mp4</a> </p>
+<p>So I tried using nat.find.  You say I'm supposed to pass in a proposition that a natural number satisfying a certain property exists, and then it'll return the smallest one.  I thought in the general case, it would return a new variable and adjoin conditions "it satisfies it" and "nothing smaller satisfies it."  But this is happening instead.  What should I really do?</p>
+
+<a name="188657112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188657112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188657112">Kevin Buzzard (Feb 20 2020 at 17:12)</a>:</h4>
+<p>I can't watch the video on my phone because of download issues but iirc nat.find just produces a natural, and then lean also supplies the theorems saying that nat.find h satisfies all the things you want it to satisfy</p>
+
+<a name="188657147"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188657147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188657147">Kevin Buzzard (Feb 20 2020 at 17:12)</a>:</h4>
+<p>But the theorems are a different part of the api</p>
+
+<a name="188658806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188658806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188658806">Floris van Doorn (Feb 20 2020 at 17:31)</a>:</h4>
+<p>You want to write <code>open_locale classical</code> near the top of your file (but not directly after the <code>import</code> statements). Then Lean will stop complaining about predicates being decidable.</p>
+
+<a name="188658898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188658898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188658898">Floris van Doorn (Feb 20 2020 at 17:32)</a>:</h4>
+<p>Also, you want to use <code>let ds := nat.find d</code>, not <code>have</code>. <code>have</code> is for proofs of propositions, and Lean will forget how you proved them. <code>let</code> is for data, and Lean will remember how you defined them.</p>
+
+<a name="188658969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188658969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188658969">Floris van Doorn (Feb 20 2020 at 17:33)</a>:</h4>
+<p><code>nat.find</code> itself will only give you the natural number. You can then use <code>nat.find_spec</code> and <code>nat.find_min</code> (or <code>nat.find_min'</code>) to know the properties about this natural number.</p>
+
 
 {% endraw %}
 
