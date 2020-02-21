@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [mathlib nightlies](44201mathlibnightlies.html) (31 messages, latest: Feb 21 2020 at 08:46)
+
+* [Rewrite with add_sub doesn't work](94408Rewritewithaddsubdoesntwork.html) (22 messages, latest: Feb 21 2020 at 08:42)
+
 * [Limits in the stdlib](72909Limitsinthestdlib.html) (10 messages, latest: Feb 21 2020 at 02:53)
 
 * [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (22 messages, latest: Feb 21 2020 at 01:09)
@@ -48,8 +52,6 @@ permalink: archive/113488general/index.html
 * [Experimenting with leanchecker](27185Experimentingwithleanchecker.html) (4 messages, latest: Feb 18 2020 at 10:27)
 
 * [Proving for Fun](94070ProvingforFun.html) (163 messages, latest: Feb 17 2020 at 22:14)
-
-* [mathlib nightlies](44201mathlibnightlies.html) (22 messages, latest: Feb 17 2020 at 15:12)
 
 * [Lean4 lemma names](88981Lean4lemmanames.html) (10 messages, latest: Feb 17 2020 at 12:45)
 
