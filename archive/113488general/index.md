@@ -9,11 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [assertion violation hell](14931assertionviolationhell.html) (1 message, latest: Feb 21 2020 at 17:59)
+
+* [New user bundles](27895Newuserbundles.html) (115 messages, latest: Feb 21 2020 at 17:54)
+
+* [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (35 messages, latest: Feb 21 2020 at 17:00)
+
 * [Farewell to mini_crush, smt2_interface, etc.](89663Farewelltominicrushsmt2interfaceetc.html) (24 messages, latest: Feb 21 2020 at 16:55)
-
-* [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (34 messages, latest: Feb 21 2020 at 16:52)
-
-* [New user bundles](27895Newuserbundles.html) (113 messages, latest: Feb 21 2020 at 16:25)
 
 * [mathlib nightlies](44201mathlibnightlies.html) (66 messages, latest: Feb 21 2020 at 16:24)
 
