@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [extending structures with implicit parameters](52630extendingstructureswithimplicitparameters.html) (1 message, latest: Feb 21 2020 at 19:55)
+
 * [natural number game questions](52294naturalnumbergamequestions.html) (20 messages, latest: Feb 21 2020 at 09:31)
 
 * [On the side of logic](81703Onthesideoflogic.html) (36 messages, latest: Feb 20 2020 at 16:08)
