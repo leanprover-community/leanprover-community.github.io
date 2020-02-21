@@ -9,6 +9,8 @@ permalink: archive/208328IMOgrandchallenge/index.html
 
 ### Topics:
 
+* [solving procedure](05996solvingprocedure.html) (2 messages, latest: Feb 21 2020 at 13:53)
+
 * [geometry problems](00977geometryproblems.html) (11 messages, latest: Feb 18 2020 at 07:31)
 
 * [Extracting an existential witness](57312Extractinganexistentialwitness.html) (1 message, latest: Jan 07 2020 at 20:42)
