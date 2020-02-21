@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [assertion violation hell](14931assertionviolationhell.html) (1 message, latest: Feb 21 2020 at 17:59)
+* [How to prove this seemingly trivial lemma?](58537Howtoprovethisseeminglytriviallemma.html) (19 messages, latest: Feb 21 2020 at 18:48)
 
-* [New user bundles](27895Newuserbundles.html) (115 messages, latest: Feb 21 2020 at 17:54)
+* [New user bundles](27895Newuserbundles.html) (123 messages, latest: Feb 21 2020 at 18:40)
+
+* [assertion violation hell](14931assertionviolationhell.html) (8 messages, latest: Feb 21 2020 at 18:20)
 
 * [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (35 messages, latest: Feb 21 2020 at 17:00)
 
