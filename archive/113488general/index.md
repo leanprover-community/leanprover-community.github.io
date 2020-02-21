@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [mathlib nightlies](44201mathlibnightlies.html) (60 messages, latest: Feb 21 2020 at 13:33)
+* [New user bundles](27895Newuserbundles.html) (110 messages, latest: Feb 21 2020 at 15:59)
 
-* [Farewell to mini_crush, smt2_interface, etc.](89663Farewelltominicrushsmt2interfaceetc.html) (14 messages, latest: Feb 21 2020 at 13:06)
+* [Farewell to mini_crush, smt2_interface, etc.](89663Farewelltominicrushsmt2interfaceetc.html) (17 messages, latest: Feb 21 2020 at 15:59)
+
+* [mathlib nightlies](44201mathlibnightlies.html) (64 messages, latest: Feb 21 2020 at 15:19)
 
 * [VScode calc](45240VScodecalc.html) (9 messages, latest: Feb 21 2020 at 12:44)
 
@@ -38,8 +40,6 @@ permalink: archive/113488general/index.html
 * [Add lemma to root namespace without leaving a namespace](42706Addlemmatorootnamespacewithoutleavinganamespace.html) (6 messages, latest: Feb 20 2020 at 08:01)
 
 * [vscode syntax highlighting](96610vscodesyntaxhighlighting.html) (13 messages, latest: Feb 20 2020 at 07:10)
-
-* [New user bundles](27895Newuserbundles.html) (89 messages, latest: Feb 19 2020 at 23:12)
 
 * [omega](89194omega.html) (23 messages, latest: Feb 19 2020 at 17:09)
 
