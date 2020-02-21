@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [mathlib nightlies](44201mathlibnightlies.html) (31 messages, latest: Feb 21 2020 at 08:46)
+* [mathlib nightlies](44201mathlibnightlies.html) (53 messages, latest: Feb 21 2020 at 09:46)
 
-* [Rewrite with add_sub doesn't work](94408Rewritewithaddsubdoesntwork.html) (22 messages, latest: Feb 21 2020 at 08:42)
+* [Lean installation in CoCalc](56079LeaninstallationinCoCalc.html) (83 messages, latest: Feb 21 2020 at 09:37)
+
+* [Rewrite with add_sub doesn't work](94408Rewritewithaddsubdoesntwork.html) (25 messages, latest: Feb 21 2020 at 09:30)
 
 * [Limits in the stdlib](72909Limitsinthestdlib.html) (10 messages, latest: Feb 21 2020 at 02:53)
 
@@ -20,8 +22,6 @@ permalink: archive/113488general/index.html
 * [VScode message window](12770VScodemessagewindow.html) (37 messages, latest: Feb 20 2020 at 22:44)
 
 * [Try this](83032Trythis.html) (55 messages, latest: Feb 20 2020 at 22:40)
-
-* [Lean installation in CoCalc](56079LeaninstallationinCoCalc.html) (77 messages, latest: Feb 20 2020 at 21:38)
 
 * [community web editor](75147communitywebeditor.html) (7 messages, latest: Feb 20 2020 at 21:22)
 
