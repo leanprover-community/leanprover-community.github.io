@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (21 messages, latest: Feb 20 2020 at 23:55)
+
 * [VScode message window](12770VScodemessagewindow.html) (37 messages, latest: Feb 20 2020 at 22:44)
 
 * [Try this](83032Trythis.html) (55 messages, latest: Feb 20 2020 at 22:40)
@@ -18,8 +20,6 @@ permalink: archive/113488general/index.html
 * [community web editor](75147communitywebeditor.html) (7 messages, latest: Feb 20 2020 at 21:22)
 
 * [update-mathlib update](59285updatemathlibupdate.html) (14 messages, latest: Feb 20 2020 at 21:02)
-
-* [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (19 messages, latest: Feb 20 2020 at 20:50)
 
 * [Is web editor good-enough for IDE plugin?](16485IswebeditorgoodenoughforIDEplugin.html) (7 messages, latest: Feb 20 2020 at 20:29)
 
