@@ -46,6 +46,82 @@ permalink: archive/113489newmembers/52294naturalnumbergamequestions.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/184299677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#184299677">Craig Citro (Dec 27 2019 at 05:10)</a>:</h4>
 <p>awesome, thanks!</p>
 
+<a name="188696501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/188696501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#188696501">Emily Riehl (Feb 21 2020 at 01:25)</a>:</h4>
+<p>Inspired by <span class="user-mention" data-user-id="110087">@Scott Morrison</span> I returned to the natural numbers game this weekend and was delighted to see all the new tactics and new levels. I feel like I'm getting somewhere now. Thanks everyone.</p>
+
+<a name="188696615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/188696615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#188696615">Emily Riehl (Feb 21 2020 at 01:29)</a>:</h4>
+<p>Now here's my question: I'm stuck on  mul_left_cancel in the advanced multiplication world. I'd like to prove (a !=0) -&gt; (a b = a c) -&gt; b = c by (strong) double induction on b and c. This should give me four cases, three of which involve the hypothesis that either b or c is zero. Then for the fourth the plan is to use add_left_cancel to conclude from the hypothesis</p>
+<p>a (succ b) =  a (succ c)</p>
+<p>that </p>
+<p>a b = a c.</p>
+<p>Then the inductive hypothesis should give me b = c, whence succ b = succ c.</p>
+<p>But I have no idea how to set up this double induction. The hint says to use revert but I don't see where it would help.</p>
+
+<a name="188696818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/188696818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#188696818">Scott Morrison (Feb 21 2020 at 01:34)</a>:</h4>
+<p>My guess is that you want a <code>forall</code> in the goal at the moment you invoke <code>induction</code>, and to achieve that you need to use <code>revert</code>.</p>
+
+<a name="188696834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/188696834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#188696834">Scott Morrison (Feb 21 2020 at 01:34)</a>:</h4>
+<p>Spoiler:</p>
+<div class="codehilite"><pre><span></span>revert c,
+induction b,
+{ intro c, sorry, },
+{ intro c, induction c,
+  { sorry, },
+  { sorry, } }
+</pre></div>
+
+<a name="188696843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/188696843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#188696843">Scott Morrison (Feb 21 2020 at 01:35)</a>:</h4>
+<p>(I haven't actually tried doing the proof after that step, I'm just guessing that's the structure you wanted.)</p>
+
+<a name="188697223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/188697223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#188697223">Emily Riehl (Feb 21 2020 at 01:44)</a>:</h4>
+<p>Thanks <span class="user-mention" data-user-id="110087">@Scott Morrison</span> . That did the trick. </p>
+<p>Here's the full gory thing (spoiler below):</p>
+<p>revert c,<br>
+induction b with x hx,<br>
+intro c,<br>
+rw mul_zero,<br>
+intro hyp,<br>
+symmetry at hyp,<br>
+have lem := eq_zero_or_eq_zero_of_mul_eq_zero _ _ hyp,<br>
+cases lem with p q,<br>
+exfalso,<br>
+exact ha p,<br>
+symmetry,<br>
+assumption,<br>
+intro c,<br>
+induction c with y hy,<br>
+intro hyp,<br>
+rw mul_zero at hyp,<br>
+have lem := eq_zero_or_eq_zero_of_mul_eq_zero _ _ hyp,<br>
+cases lem with p q,<br>
+exfalso,<br>
+exact ha p,<br>
+assumption,<br>
+intro hyp,<br>
+repeat {rw mul_succ at hyp},<br>
+have lem := add_right_cancel _ _ _ hyp,<br>
+have step := hx y lem,<br>
+apply succ_eq_succ_of_eq,<br>
+assumption,</p>
+
+<a name="188697300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/188697300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#188697300">Scott Morrison (Feb 21 2020 at 01:46)</a>:</h4>
+<p>Next you need some braces and indenting. :-)</p>
+
+<a name="188697319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/188697319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#188697319">Emily Riehl (Feb 21 2020 at 01:46)</a>:</h4>
+<p>Haha on point ;)</p>
+
+<a name="188697320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/188697320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#188697320">Scott Morrison (Feb 21 2020 at 01:46)</a>:</h4>
+<p>Ah, earlier I couldn't work out why <code>ex_falso</code> didn't exist... Apparently because it's <code>exfalso</code>, but <code>by_contradiction</code>.</p>
+
 
 {% endraw %}
 

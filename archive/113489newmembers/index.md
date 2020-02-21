@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [natural number game questions](52294naturalnumbergamequestions.html) (14 messages, latest: Feb 21 2020 at 01:46)
+
 * [On the side of logic](81703Onthesideoflogic.html) (36 messages, latest: Feb 20 2020 at 16:08)
 
 * [Specific selection of terms with rw](62066Specificselectionoftermswithrw.html) (12 messages, latest: Feb 20 2020 at 14:47)
@@ -172,8 +174,6 @@ permalink: archive/113489newmembers/index.html
 * [Basic question](30875Basicquestion.html) (9 messages, latest: Dec 27 2019 at 22:52)
 
 * [universes in lean](98716universesinlean.html) (9 messages, latest: Dec 27 2019 at 07:15)
-
-* [natural number game questions](52294naturalnumbergamequestions.html) (5 messages, latest: Dec 27 2019 at 05:10)
 
 * [Symmetry of equality applied to a hypothesis](35681Symmetryofequalityappliedtoahypothesis.html) (6 messages, latest: Dec 26 2019 at 21:57)
 
