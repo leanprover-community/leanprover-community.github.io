@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [semicolon and tactic state](85878semicolonandtacticstate.html) (10 messages, latest: Feb 21 2020 at 20:58)
+
 * [New user bundles](27895Newuserbundles.html) (126 messages, latest: Feb 21 2020 at 19:12)
 
 * [How to prove this seemingly trivial lemma?](58537Howtoprovethisseeminglytriviallemma.html) (19 messages, latest: Feb 21 2020 at 18:48)
@@ -72,8 +74,6 @@ permalink: archive/113488general/index.html
 * [`add_monoid.smul`, `add_group.gsmul`](49653addmonoidsmuladdgroupgsmul.html) (4 messages, latest: Feb 16 2020 at 03:07)
 
 * [hardware verification](75506hardwareverification.html) (52 messages, latest: Feb 16 2020 at 00:48)
-
-* [semicolon and tactic state](85878semicolonandtacticstate.html) (9 messages, latest: Feb 15 2020 at 22:53)
 
 * [Bundled `sub*` and `center`](49191Bundledsubandcenter.html) (2 messages, latest: Feb 15 2020 at 20:53)
 
