@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (31 messages, latest: Feb 21 2020 at 11:46)
+
+* [mathlib nightlies](44201mathlibnightlies.html) (54 messages, latest: Feb 21 2020 at 11:37)
+
 * [Lean installation in CoCalc](56079LeaninstallationinCoCalc.html) (85 messages, latest: Feb 21 2020 at 10:39)
-
-* [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (25 messages, latest: Feb 21 2020 at 10:24)
-
-* [mathlib nightlies](44201mathlibnightlies.html) (53 messages, latest: Feb 21 2020 at 09:46)
 
 * [Rewrite with add_sub doesn't work](94408Rewritewithaddsubdoesntwork.html) (25 messages, latest: Feb 21 2020 at 09:30)
 
