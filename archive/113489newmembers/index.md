@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [natural number game questions](52294naturalnumbergamequestions.html) (14 messages, latest: Feb 21 2020 at 01:46)
+* [natural number game questions](52294naturalnumbergamequestions.html) (15 messages, latest: Feb 21 2020 at 03:07)
 
 * [On the side of logic](81703Onthesideoflogic.html) (36 messages, latest: Feb 20 2020 at 16:08)
 
