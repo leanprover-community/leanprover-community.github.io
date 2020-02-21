@@ -9,15 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [New user bundles](27895Newuserbundles.html) (110 messages, latest: Feb 21 2020 at 15:59)
+* [Farewell to mini_crush, smt2_interface, etc.](89663Farewelltominicrushsmt2interfaceetc.html) (24 messages, latest: Feb 21 2020 at 16:55)
 
-* [Farewell to mini_crush, smt2_interface, etc.](89663Farewelltominicrushsmt2interfaceetc.html) (17 messages, latest: Feb 21 2020 at 15:59)
+* [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (34 messages, latest: Feb 21 2020 at 16:52)
 
-* [mathlib nightlies](44201mathlibnightlies.html) (64 messages, latest: Feb 21 2020 at 15:19)
+* [New user bundles](27895Newuserbundles.html) (113 messages, latest: Feb 21 2020 at 16:25)
+
+* [mathlib nightlies](44201mathlibnightlies.html) (66 messages, latest: Feb 21 2020 at 16:24)
 
 * [VScode calc](45240VScodecalc.html) (9 messages, latest: Feb 21 2020 at 12:44)
-
-* [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (32 messages, latest: Feb 21 2020 at 12:42)
 
 * [Lean installation in CoCalc](56079LeaninstallationinCoCalc.html) (86 messages, latest: Feb 21 2020 at 12:00)
 
