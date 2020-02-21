@@ -95,6 +95,46 @@ permalink: archive/113489newmembers/52630extendingstructureswithimplicitparamete
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/extending%20structures%20with%20implicit%20parameters/near/188775623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52630extendingstructureswithimplicitparameters.html#188775623">Mario Carneiro (Feb 21 2020 at 21:20)</a>:</h4>
 <p>But as Kenny and Kevin say, I can't see any reason for <code>foo</code> as defined to make sense. Lean can never infer that argument so it should not be implicit</p>
 
+<a name="188779630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/extending%20structures%20with%20implicit%20parameters/near/188779630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52630extendingstructureswithimplicitparameters.html#188779630">Arjun Pitchanathan (Feb 21 2020 at 22:10)</a>:</h4>
+<p>Okay, I just figured out that <code>\a</code> is always implicit in<code>foo.mk</code>, which was what I was really trying to do. I now realize that Kevin was probably asking how lean could infer <code>\a</code> in a general context when one uses <code>foo</code> rather than in my snippet, after <code>extends</code>.  It makes sense to me now, thanks!</p>
+
+<a name="188779800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/extending%20structures%20with%20implicit%20parameters/near/188779800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52630extendingstructureswithimplicitparameters.html#188779800">Arjun Pitchanathan (Feb 21 2020 at 22:13)</a>:</h4>
+<p>Also, here is one possible example where lean can infer the argument</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">option</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">none</span> <span class="o">{}</span> <span class="o">:</span> <span class="n">option</span>
+<span class="bp">|</span> <span class="n">some</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">option</span>
+<span class="n">def</span> <span class="n">has_val</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">option</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">option</span><span class="bp">.</span><span class="n">none</span> <span class="o">:=</span> <span class="n">false</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">option</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">))</span> <span class="o">:=</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span>
+</pre></div>
+
+<a name="188779933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/extending%20structures%20with%20implicit%20parameters/near/188779933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52630extendingstructureswithimplicitparameters.html#188779933">Mario Carneiro (Feb 21 2020 at 22:15)</a>:</h4>
+<p>I notice you put a type ascription on <code>b</code> though</p>
+
+<a name="188779999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/extending%20structures%20with%20implicit%20parameters/near/188779999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52630extendingstructureswithimplicitparameters.html#188779999">Arjun Pitchanathan (Feb 21 2020 at 22:16)</a>:</h4>
+<p>Ah, right</p>
+
+<a name="188780003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/extending%20structures%20with%20implicit%20parameters/near/188780003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52630extendingstructureswithimplicitparameters.html#188780003">Arjun Pitchanathan (Feb 21 2020 at 22:16)</a>:</h4>
+<p>But it also seems to work without it</p>
+
+<a name="188780258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/extending%20structures%20with%20implicit%20parameters/near/188780258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52630extendingstructureswithimplicitparameters.html#188780258">Mario Carneiro (Feb 21 2020 at 22:20)</a>:</h4>
+<p>I guess this is an instance of the fact that lean can infer the argument to <code>foo</code> in <code>F</code> in the following pattern:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="o">(</span><span class="n">foo</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">},</span> <span class="kt">Type</span><span class="o">)</span>
+<span class="kn">variable</span> <span class="o">(</span><span class="n">bar</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span>
+<span class="kn">variable</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span><span class="o">},</span> <span class="bp">@</span><span class="n">foo</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">bar</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">λ</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">foo</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">bar</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">f</span> <span class="n">F</span> <span class="bp">=</span> <span class="n">b</span>
+</pre></div>
+
+
+<p>In your case, <code>f</code> is <code>foo.rec</code></p>
+
 
 {% endraw %}
 

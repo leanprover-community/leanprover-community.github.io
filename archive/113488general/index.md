@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [assertion violation hell](14931assertionviolationhell.html) (9 messages, latest: Feb 21 2020 at 22:59)
+
 * [semicolon and tactic state](85878semicolonandtacticstate.html) (11 messages, latest: Feb 21 2020 at 21:51)
 
 * [New user bundles](27895Newuserbundles.html) (126 messages, latest: Feb 21 2020 at 19:12)
 
 * [How to prove this seemingly trivial lemma?](58537Howtoprovethisseeminglytriviallemma.html) (19 messages, latest: Feb 21 2020 at 18:48)
-
-* [assertion violation hell](14931assertionviolationhell.html) (8 messages, latest: Feb 21 2020 at 18:20)
 
 * [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (35 messages, latest: Feb 21 2020 at 17:00)
 
