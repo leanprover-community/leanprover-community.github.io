@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [semicolon and tactic state](85878semicolonandtacticstate.html) (10 messages, latest: Feb 21 2020 at 20:58)
+* [semicolon and tactic state](85878semicolonandtacticstate.html) (11 messages, latest: Feb 21 2020 at 21:51)
 
 * [New user bundles](27895Newuserbundles.html) (126 messages, latest: Feb 21 2020 at 19:12)
 

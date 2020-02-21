@@ -1,0 +1,42 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/24197helpwithfintype.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html">help with fintype</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188777502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188777502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188777502">Matt E (Feb 21 2020 at 21:42)</a>:</h4>
+<p>I have a type of words over alphabets (which I am treating as enumerated types). </p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="err">Γ</span> <span class="bp">|</span> <span class="n">X</span> <span class="bp">|</span> <span class="n">Y</span>
+
+<span class="kn">inductive</span> <span class="n">word</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">ε</span> <span class="o">{}</span> <span class="o">:</span> <span class="n">word</span>
+<span class="bp">|</span> <span class="n">nonempty</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">word</span> <span class="bp">→</span> <span class="n">word</span>
+<span class="kn">infixr</span> <span class="bp">`</span> <span class="err">∙</span> <span class="bp">`</span> <span class="o">:</span><span class="mi">100</span> <span class="o">:=</span> <span class="n">word</span><span class="bp">.</span><span class="n">nonempty</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="err">Γ</span><span class="bp">.</span><span class="n">X</span> <span class="err">∙</span> <span class="n">ε</span> <span class="o">:</span> <span class="n">word</span> <span class="err">Γ</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I would like to have a <code>matrix (word Γ) (word Γ) _</code>, but this doesn't work as we would need <code>instance : fintype (word Γ)</code> (which surely is not constructible). So I started an attempt at finite words</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">max_length</span> <span class="o">:=</span> <span class="mi">1000</span>
+<span class="kn">inductive</span> <span class="n">finword</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">empty</span> <span class="o">:</span> <span class="n">finword</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="n">nonempty</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">{</span><span class="n">h</span> <span class="o">:</span> <span class="n">n</span><span class="bp">+</span><span class="mi">1</span> <span class="bp">&lt;=</span> <span class="n">max_length</span><span class="o">}</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">finword</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">finword</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I have no idea really how to prove <code>fintype</code> for this. Maybe I need to rethink my approach. Thanks in advance for any suggestions. For reference I am trying to model what is called on slide 7 here "Closed and Consistent Finite Hankel Matrices", which as you can see are in the first instance finite matrices indexed by words in a language (hopefully once I have the correct type for such a matrix, then the closed &amp; consistent predicates will be easy) <a href="https://borjaballe.github.io/slides/turing18.pdf" target="_blank" title="https://borjaballe.github.io/slides/turing18.pdf">https://borjaballe.github.io/slides/turing18.pdf</a></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
