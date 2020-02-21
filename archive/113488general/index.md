@@ -9,15 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [mathlib nightlies](44201mathlibnightlies.html) (53 messages, latest: Feb 21 2020 at 09:46)
+* [Lean installation in CoCalc](56079LeaninstallationinCoCalc.html) (85 messages, latest: Feb 21 2020 at 10:39)
 
-* [Lean installation in CoCalc](56079LeaninstallationinCoCalc.html) (83 messages, latest: Feb 21 2020 at 09:37)
+* [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (25 messages, latest: Feb 21 2020 at 10:24)
+
+* [mathlib nightlies](44201mathlibnightlies.html) (53 messages, latest: Feb 21 2020 at 09:46)
 
 * [Rewrite with add_sub doesn't work](94408Rewritewithaddsubdoesntwork.html) (25 messages, latest: Feb 21 2020 at 09:30)
 
 * [Limits in the stdlib](72909Limitsinthestdlib.html) (10 messages, latest: Feb 21 2020 at 02:53)
-
-* [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (22 messages, latest: Feb 21 2020 at 01:09)
 
 * [VScode message window](12770VScodemessagewindow.html) (37 messages, latest: Feb 20 2020 at 22:44)
 
