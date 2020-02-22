@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Why doesn't this loop?](60190Whydoesntthisloop.html) (3 messages, latest: Feb 22 2020 at 20:39)
+
 * [Simp normal form](26007Simpnormalform.html) (13 messages, latest: Feb 22 2020 at 19:43)
 
 * [default toolchain](61703defaulttoolchain.html) (2 messages, latest: Feb 22 2020 at 18:56)
