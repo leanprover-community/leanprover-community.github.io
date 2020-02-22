@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [missing doc](95569missingdoc.html) (2 messages, latest: Feb 22 2020 at 07:07)
+
 * [cache-olean and authentication](55076cacheoleanandauthentication.html) (8 messages, latest: Feb 22 2020 at 05:19)
 
 * [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (36 messages, latest: Feb 22 2020 at 03:03)
 
 * [Simp normal form](26007Simpnormalform.html) (3 messages, latest: Feb 22 2020 at 00:57)
-
-* [missing doc](95569missingdoc.html) (1 message, latest: Feb 21 2020 at 23:13)
 
 * [assertion violation hell](14931assertionviolationhell.html) (9 messages, latest: Feb 21 2020 at 22:59)
 
