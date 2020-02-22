@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [default toolchain](61703defaulttoolchain.html) (2 messages, latest: Feb 22 2020 at 18:56)
+* [Simp normal form](26007Simpnormalform.html) (13 messages, latest: Feb 22 2020 at 19:43)
 
-* [Simp normal form](26007Simpnormalform.html) (6 messages, latest: Feb 22 2020 at 18:55)
+* [default toolchain](61703defaulttoolchain.html) (2 messages, latest: Feb 22 2020 at 18:56)
 
 * [determine imports of current file](17380determineimportsofcurrentfile.html) (9 messages, latest: Feb 22 2020 at 18:17)
 

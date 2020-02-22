@@ -36,6 +36,51 @@ permalink: archive/113488general/26007Simpnormalform.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simp%20normal%20form/near/188828808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26007Simpnormalform.html#188828808">Kevin Buzzard (Feb 22 2020 at 18:55)</a>:</h4>
 <p>So no other simp lemma will change it. But this doesn't seem to be what people wiser than me are saying in the discussion</p>
 
+<a name="188829903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simp%20normal%20form/near/188829903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26007Simpnormalform.html#188829903">Gabriel Ebner (Feb 22 2020 at 19:27)</a>:</h4>
+<p>The question is not about the current goal.  The simplifier simplifies terms inside-out, that is, it first simplifies the arguments of a function before simplifying the function.  Hence a simp lemma is only ever used to rewrite terms where the arguments are already fully simplified (= in simp-normal form).  Corollary: if the left-hand side of your simp lemma has an argument that is not fully simplified, then this simp lemma is never used to rewrite a term by the simplifier and is hence useless.</p>
+
+<a name="188829906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simp%20normal%20form/near/188829906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26007Simpnormalform.html#188829906">Johan Commelin (Feb 22 2020 at 19:27)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> What's being discussed is maybe best illustrated with an example. Both you and me would think that for the prime spectrum of a ring</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">zero_locus_bot</span> <span class="o">:</span> <span class="n">zero_locus</span> <span class="o">(</span><span class="err">\</span><span class="n">bot</span> <span class="o">:</span> <span class="n">ideal</span> <span class="n">R</span><span class="o">)</span> <span class="bp">=</span> <span class="n">univ</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>is a very good simp-lemma. But there is a catch:<code>zero_locus</code> expects a subset, so the ideal is coerced to a set. So in fact, the lemma is saying: <code>zero_locus \u\bot = univ</code>, with a little up-arrow.</p>
+<p>Now suppose that <code>zero_locus \u\bot</code> occurs in your goal, and you call <code>simp</code>. Then the simplifier starts doing its little tricks, and one of the first things it realises is that</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">coe_bot</span> <span class="o">:</span> <span class="o">((</span><span class="err">\</span><span class="n">bot</span> <span class="o">:</span> <span class="n">ideal</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="n">R</span><span class="o">)</span> <span class="bp">=</span> <span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>is a wonderful simp-lemma that applies to this goal. So it applies it.<br>
+The goal now contains <code>zero_locus {0}</code> and hence the simp-lemma <code>zero_locus_bot</code> will never trigger.<br>
+<del>I guess that this could be fixed by carefully applying priorities.</del> But another way to fix it is to make sure that the LHS of a simp-lemma can't be further simplified, aka, is in simp normal form.</p>
+
+<a name="188829965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simp%20normal%20form/near/188829965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26007Simpnormalform.html#188829965">Johan Commelin (Feb 22 2020 at 19:29)</a>:</h4>
+<p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> Please correct me if I just wrote a bunch of nonsense.</p>
+
+<a name="188830038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simp%20normal%20form/near/188830038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26007Simpnormalform.html#188830038">Gabriel Ebner (Feb 22 2020 at 19:31)</a>:</h4>
+<p>Everything you say is correct, except for:</p>
+<blockquote>
+<p>I guess that this could be fixed by carefully applying priorities.</p>
+</blockquote>
+<p>This cannot be fixed using priorities since the simplifier works inside-out (= innermost first = arguments first).  It never tries to rewrite the term <code>zero_locus ↑⊥</code>, the first time it comes to a term of the form <code>zero_locus _</code> it is already rewritten to <code>zero_locus {0}</code>.</p>
+
+<a name="188830319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simp%20normal%20form/near/188830319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26007Simpnormalform.html#188830319">Johan Commelin (Feb 22 2020 at 19:41)</a>:</h4>
+<p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> But whether something is in simp-normal-form may depend on the imported files, right?</p>
+
+<a name="188830328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simp%20normal%20form/near/188830328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26007Simpnormalform.html#188830328">Gabriel Ebner (Feb 22 2020 at 19:41)</a>:</h4>
+<p>Precisely.</p>
+
+<a name="188830384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simp%20normal%20form/near/188830384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26007Simpnormalform.html#188830384">Johan Commelin (Feb 22 2020 at 19:43)</a>:</h4>
+<p>So I can maneuver myself into a situation where some simp-lemmas are still useless, even thought they look potentially useful.</p>
+
 
 {% endraw %}
 
