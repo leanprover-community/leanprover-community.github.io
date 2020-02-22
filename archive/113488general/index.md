@@ -9,11 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Simp normal form](26007Simpnormalform.html) (14 messages, latest: Feb 22 2020 at 21:54)
+
+* [default toolchain](61703defaulttoolchain.html) (11 messages, latest: Feb 22 2020 at 21:44)
+
+* [Lean in the wild](43625Leaninthewild.html) (427 messages, latest: Feb 22 2020 at 21:18)
+
 * [Why doesn't this loop?](60190Whydoesntthisloop.html) (3 messages, latest: Feb 22 2020 at 20:39)
-
-* [Simp normal form](26007Simpnormalform.html) (13 messages, latest: Feb 22 2020 at 19:43)
-
-* [default toolchain](61703defaulttoolchain.html) (2 messages, latest: Feb 22 2020 at 18:56)
 
 * [determine imports of current file](17380determineimportsofcurrentfile.html) (9 messages, latest: Feb 22 2020 at 18:17)
 
@@ -102,8 +104,6 @@ permalink: archive/113488general/index.html
 * [nested comment blocks](42453nestedcommentblocks.html) (6 messages, latest: Feb 14 2020 at 05:42)
 
 * [lean codeblocks in docstrings](40241leancodeblocksindocstrings.html) (8 messages, latest: Feb 14 2020 at 03:20)
-
-* [Lean in the wild](43625Leaninthewild.html) (424 messages, latest: Feb 13 2020 at 21:04)
 
 * [converting between `\[foo\] and "foo"](81281convertingbetweenfooandfoo.html) (4 messages, latest: Feb 13 2020 at 17:04)
 

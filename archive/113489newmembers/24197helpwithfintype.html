@@ -120,6 +120,34 @@ permalink: archive/113489newmembers/24197helpwithfintype.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188821509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188821509">Matt E (Feb 22 2020 at 15:21)</a>:</h4>
 <p>and further, for a moderately sized table, lean does not want to compile it (<code>deep recursion was detected at 'replace'</code>)</p>
 
+<a name="188833441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188833441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188833441">Mario Carneiro (Feb 22 2020 at 21:13)</a>:</h4>
+<p>This is not what you want - each <code>finword A n i</code> is isomorphic to <code>A</code>, so it doesn't represent the type of words. You need <code>empty</code> and <code>nonempty</code> to be able to inhabit the same type for that. I suggest:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">finword</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">empty</span> <span class="o">{}</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">finword</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">nonempty</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">finword</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">finword</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+</pre></div>
+
+<a name="188833513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188833513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188833513">Mario Carneiro (Feb 22 2020 at 21:15)</a>:</h4>
+<p>Where <code>fin</code> comes in is that you can define a bijection between <code>finword A n</code> and <code>fin n -&gt; A</code></p>
+
+<a name="188834255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188834255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188834255">Matt E (Feb 22 2020 at 21:37)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> that's perfect, thanks. I got into a subtle confusion but I see now</p>
+
+<a name="188834310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188834310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188834310">Mario Carneiro (Feb 22 2020 at 21:39)</a>:</h4>
+<p>Actually, I think <code>empty</code> needs type <code>finword 0</code> if you want this to be like the type <code>vector A n</code></p>
+
+<a name="188834362"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188834362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188834362">Matt E (Feb 22 2020 at 21:40)</a>:</h4>
+<p>true</p>
+
+<a name="188834489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188834489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188834489">Matt E (Feb 22 2020 at 21:45)</a>:</h4>
+<p>I think the original should work for my purposes</p>
+
 
 {% endraw %}
 

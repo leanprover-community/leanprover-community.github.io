@@ -81,6 +81,26 @@ The goal now contains <code>zero_locus {0}</code> and hence the simp-lemma <code
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simp%20normal%20form/near/188830384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26007Simpnormalform.html#188830384">Johan Commelin (Feb 22 2020 at 19:43)</a>:</h4>
 <p>So I can maneuver myself into a situation where some simp-lemmas are still useless, even thought they look potentially useful.</p>
 
+<a name="188834788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simp%20normal%20form/near/188834788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26007Simpnormalform.html#188834788">Alex J. Best (Feb 22 2020 at 21:54)</a>:</h4>
+<p>I saw one example recently where a simp lemma I thought should fire didn't, it seems like the same problem but it looks like it wasn't changed in <a href="https://github.com/leanprover-community/mathlib/issues/2017" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/2017">#2017</a>, can anyone explain:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">s</span><span class="bp">.</span><span class="n">nonempty</span><span class="o">)</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">≠</span> <span class="err">∅</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">simpa</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>should work as <code>set.ne_empty_iff_nonempty</code> is a simp lemma, but we have to do</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">s</span><span class="bp">.</span><span class="n">nonempty</span><span class="o">)</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">≠</span> <span class="err">∅</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">simpa</span> <span class="o">[</span><span class="bp">-</span><span class="n">ne</span><span class="bp">.</span><span class="n">def</span><span class="o">],</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>instead as simp first changes <code>s ≠ ∅</code> to <code>⊢ ¬s = ∅</code>.</p>
+
 
 {% endraw %}
 
