@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [help with fintype](24197helpwithfintype.html) (11 messages, latest: Feb 22 2020 at 09:11)
+
 * [Complexity of a propositional formula](24622Complexityofapropositionalformula.html) (8 messages, latest: Feb 22 2020 at 08:29)
 
 * [Boolean equality on nats](34402Booleanequalityonnats.html) (4 messages, latest: Feb 22 2020 at 06:47)
-
-* [help with fintype](24197helpwithfintype.html) (10 messages, latest: Feb 22 2020 at 02:56)
 
 * [extending structures with implicit parameters](52630extendingstructureswithimplicitparameters.html) (23 messages, latest: Feb 22 2020 at 02:20)
 
