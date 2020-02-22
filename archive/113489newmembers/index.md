@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Complexity of a propositional formula](24622Complexityofapropositionalformula.html) (5 messages, latest: Feb 22 2020 at 07:23)
+* [Complexity of a propositional formula](24622Complexityofapropositionalformula.html) (8 messages, latest: Feb 22 2020 at 08:29)
 
 * [Boolean equality on nats](34402Booleanequalityonnats.html) (4 messages, latest: Feb 22 2020 at 06:47)
 
