@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [extending structures with implicit parameters](52630extendingstructureswithimplicitparameters.html) (20 messages, latest: Feb 21 2020 at 22:20)
+* [extending structures with implicit parameters](52630extendingstructureswithimplicitparameters.html) (21 messages, latest: Feb 21 2020 at 23:16)
+
+* [noob question(s)](52075noobquestions.html) (1971 messages, latest: Feb 21 2020 at 23:04)
 
 * [help with fintype](24197helpwithfintype.html) (4 messages, latest: Feb 21 2020 at 22:16)
 
@@ -22,8 +24,6 @@ permalink: archive/113489newmembers/index.html
 * [Cannot start tutorials, nor import topology.basic, nor...](28257Cannotstarttutorialsnorimporttopologybasicnor.html) (64 messages, latest: Feb 19 2020 at 22:07)
 
 * [definition unpacking](72874definitionunpacking.html) (13 messages, latest: Feb 19 2020 at 18:18)
-
-* [noob question(s)](52075noobquestions.html) (1970 messages, latest: Feb 19 2020 at 12:58)
 
 * [spheres](99675spheres.html) (26 messages, latest: Feb 19 2020 at 04:15)
 
