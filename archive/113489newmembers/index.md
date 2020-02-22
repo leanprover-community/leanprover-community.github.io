@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [help with fintype](24197helpwithfintype.html) (10 messages, latest: Feb 22 2020 at 02:56)
+
+* [extending structures with implicit parameters](52630extendingstructureswithimplicitparameters.html) (23 messages, latest: Feb 22 2020 at 02:20)
+
 * [noob question(s)](52075noobquestions.html) (1978 messages, latest: Feb 22 2020 at 01:30)
-
-* [extending structures with implicit parameters](52630extendingstructureswithimplicitparameters.html) (21 messages, latest: Feb 21 2020 at 23:16)
-
-* [help with fintype](24197helpwithfintype.html) (4 messages, latest: Feb 21 2020 at 22:16)
 
 * [natural number game questions](52294naturalnumbergamequestions.html) (20 messages, latest: Feb 21 2020 at 09:31)
 

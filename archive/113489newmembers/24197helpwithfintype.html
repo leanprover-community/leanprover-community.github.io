@@ -48,6 +48,41 @@ permalink: archive/113489newmembers/24197helpwithfintype.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188779994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188779994">Matt E (Feb 21 2020 at 22:16)</a>:</h4>
 <p>hm, yes I suppose a "partial" function <code>word α -&gt; word α -&gt; option bool</code> could work... I was thinking it would be useful to draw on the <code>matrix</code> methods, but actually it does not have the main thing I need which is some kind of <code>add_row</code>. let's see if I can define that...</p>
 
+<a name="188793709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188793709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188793709">Matt E (Feb 22 2020 at 02:32)</a>:</h4>
+<p>so this is working well enough so far:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span>
+<span class="kn">notation</span> <span class="bp">`</span><span class="n">table</span><span class="bp">`</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">word</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">word</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">bool</span>
+
+<span class="n">def</span> <span class="n">add_row</span> <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">table</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">row</span> <span class="o">:</span> <span class="n">word</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">entries</span> <span class="o">:</span> <span class="n">word</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">bool</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="n">function</span><span class="bp">.</span><span class="n">update</span> <span class="n">t</span> <span class="n">row</span> <span class="n">entries</span>
+
+<span class="n">def</span> <span class="n">consistent</span> <span class="o">(</span><span class="n">T</span> <span class="o">:</span> <span class="n">table</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">p₁</span> <span class="n">p₂</span> <span class="o">:</span> <span class="n">word</span> <span class="n">α</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">T</span> <span class="n">p₁</span> <span class="bp">=</span> <span class="n">T</span> <span class="n">p₂</span> <span class="bp">→</span> <span class="n">T</span> <span class="o">(</span><span class="n">a</span><span class="err">∙</span><span class="n">p₁</span><span class="o">)</span> <span class="bp">=</span> <span class="n">T</span> <span class="o">(</span><span class="n">a</span><span class="err">∙</span><span class="n">p₂</span><span class="o">)</span>
+</pre></div>
+
+
+<p>now, ideally I would have a function that for any table, either proves consistency or gives a counterexample (or at least gives a bool answer for consistent or not). I should be able to construct that function as a term of some type right? I'm having trouble getting started</p>
+
+<a name="188794472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188794472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188794472">Mario Carneiro (Feb 22 2020 at 02:53)</a>:</h4>
+<p>You should probably make <code>table</code> a definition rather than a notation</p>
+
+<a name="188794516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188794516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188794516">Mario Carneiro (Feb 22 2020 at 02:54)</a>:</h4>
+<p>You can't decide <code>consistent T</code> unless <code>word A</code> is finite</p>
+
+<a name="188794526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188794526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188794526">Mario Carneiro (Feb 22 2020 at 02:54)</a>:</h4>
+<p>and <code>A</code></p>
+
+<a name="188794545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188794545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188794545">Mario Carneiro (Feb 22 2020 at 02:55)</a>:</h4>
+<p>The type you want to construct is <code>decidable (consistent T)</code></p>
+
+<a name="188794551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188794551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188794551">Mario Carneiro (Feb 22 2020 at 02:56)</a>:</h4>
+<p>although this is only the weaker form; for the stronger form you need some specialized proof-or-counterexample type</p>
+
 
 {% endraw %}
 
