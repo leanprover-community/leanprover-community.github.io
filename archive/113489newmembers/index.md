@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1977 messages, latest: Feb 22 2020 at 00:51)
+* [noob question(s)](52075noobquestions.html) (1978 messages, latest: Feb 22 2020 at 01:30)
 
 * [extending structures with implicit parameters](52630extendingstructureswithimplicitparameters.html) (21 messages, latest: Feb 21 2020 at 23:16)
 
