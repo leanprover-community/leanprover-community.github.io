@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [extending structures with implicit parameters](52630extendingstructureswithimplicitparameters.html) (21 messages, latest: Feb 21 2020 at 23:16)
+* [noob question(s)](52075noobquestions.html) (1977 messages, latest: Feb 22 2020 at 00:51)
 
-* [noob question(s)](52075noobquestions.html) (1971 messages, latest: Feb 21 2020 at 23:04)
+* [extending structures with implicit parameters](52630extendingstructureswithimplicitparameters.html) (21 messages, latest: Feb 21 2020 at 23:16)
 
 * [help with fintype](24197helpwithfintype.html) (4 messages, latest: Feb 21 2020 at 22:16)
 

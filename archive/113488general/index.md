@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Simp normal form](26007Simpnormalform.html) (3 messages, latest: Feb 22 2020 at 00:57)
+
 * [missing doc](95569missingdoc.html) (1 message, latest: Feb 21 2020 at 23:13)
 
 * [assertion violation hell](14931assertionviolationhell.html) (9 messages, latest: Feb 21 2020 at 22:59)
