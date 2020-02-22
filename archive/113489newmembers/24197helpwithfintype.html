@@ -87,6 +87,35 @@ permalink: archive/113489newmembers/24197helpwithfintype.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188808316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188808316">Matt E (Feb 22 2020 at 09:11)</a>:</h4>
 <p>thanks. so I'm back to square one - I know how to deal with proving <code>fintype A</code> but <code>word A</code> just isn't finite (it is basically <code>list A</code>). so was my original <code>finword</code>sketch possibly a non insane idea?</p>
 
+<a name="188819826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188819826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188819826">Matt E (Feb 22 2020 at 14:33)</a>:</h4>
+<p>right, so I'm pretty happy with this</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">x</span>
+<span class="kn">inductive</span> <span class="n">fin</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">zero</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">succ</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+
+<span class="kn">inductive</span> <span class="n">finword</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">empty</span>    <span class="o">{}</span>      <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span>     <span class="o">:</span> <span class="n">finword</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">fin</span><span class="bp">.</span><span class="n">zero</span>
+<span class="bp">|</span> <span class="n">nonempty</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">{</span><span class="n">len</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">}</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">finword</span> <span class="n">n</span> <span class="n">len</span> <span class="bp">→</span> <span class="n">finword</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">len</span><span class="bp">.</span><span class="n">succ</span>
+
+<span class="kn">infixr</span> <span class="bp">`</span> <span class="err">∙</span> <span class="bp">`</span> <span class="o">:</span><span class="mi">100</span> <span class="o">:=</span> <span class="n">finword</span><span class="bp">.</span><span class="n">nonempty</span>
+<span class="kn">notation</span> <span class="bp">`</span><span class="n">ε</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">finword</span><span class="bp">.</span><span class="n">empty</span>
+</pre></div>
+
+
+<p>but now I'm stuck on the type of tables:<br>
+<code>def mytable : finword α 100 _ → finword α 100 _ → option bool |  ε ε := tt ...</code> clearly isn't valid, but neither is filling in any particular <code>fin</code> for the <code>_</code>. so it seems I would need to make that argument implicit in <code>finword</code>, but I'm not sure if that's possible...</p>
+
+<a name="188820722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20with%20fintype/near/188820722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24197helpwithfintype.html#188820722">Matt E (Feb 22 2020 at 14:59)</a>:</h4>
+<p>this works, including the word lengths manually but is not very elegant</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">mytable</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">n</span> <span class="n">m</span> <span class="o">:</span> <span class="n">fin</span> <span class="mi">10</span><span class="o">,</span> <span class="n">finword</span> <span class="err">Γ</span> <span class="mi">10</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">finword</span> <span class="err">Γ</span> <span class="mi">10</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">bool</span>
+<span class="bp">|</span> <span class="n">fin</span><span class="bp">.</span><span class="n">zero</span>  <span class="n">fin</span><span class="bp">.</span><span class="n">zero</span>  <span class="n">ε</span>          <span class="n">ε</span> <span class="o">:=</span> <span class="n">tt</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">fin</span><span class="bp">.</span><span class="n">succ</span> <span class="n">fin</span><span class="bp">.</span><span class="n">zero</span><span class="o">)</span> <span class="n">fin</span><span class="bp">.</span><span class="n">zero</span> <span class="o">(</span><span class="err">Γ</span><span class="bp">.</span><span class="n">X</span><span class="err">∙</span><span class="n">ε</span><span class="o">)</span> <span class="n">ε</span> <span class="o">:=</span> <span class="n">tt</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">none</span>
+</pre></div>
+
 
 {% endraw %}
 

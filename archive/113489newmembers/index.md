@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [help with fintype](24197helpwithfintype.html) (11 messages, latest: Feb 22 2020 at 09:11)
+* [help with fintype](24197helpwithfintype.html) (13 messages, latest: Feb 22 2020 at 14:59)
 
 * [Complexity of a propositional formula](24622Complexityofapropositionalformula.html) (8 messages, latest: Feb 22 2020 at 08:29)
 
