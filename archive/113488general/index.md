@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [determine imports of current file](17380determineimportsofcurrentfile.html) (6 messages, latest: Feb 22 2020 at 17:50)
+* [default toolchain](61703defaulttoolchain.html) (2 messages, latest: Feb 22 2020 at 18:56)
 
-* [Simp normal form](26007Simpnormalform.html) (4 messages, latest: Feb 22 2020 at 17:39)
+* [Simp normal form](26007Simpnormalform.html) (6 messages, latest: Feb 22 2020 at 18:55)
+
+* [determine imports of current file](17380determineimportsofcurrentfile.html) (9 messages, latest: Feb 22 2020 at 18:17)
 
 * [cache-olean and authentication](55076cacheoleanandauthentication.html) (14 messages, latest: Feb 22 2020 at 17:30)
 
