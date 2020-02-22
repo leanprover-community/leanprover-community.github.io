@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Simp normal form](26007Simpnormalform.html) (14 messages, latest: Feb 22 2020 at 21:54)
+* [Simp normal form](26007Simpnormalform.html) (16 messages, latest: Feb 22 2020 at 22:25)
 
 * [default toolchain](61703defaulttoolchain.html) (11 messages, latest: Feb 22 2020 at 21:44)
 
