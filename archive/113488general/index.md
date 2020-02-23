@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [explain behaviour of norm_num?](53014explainbehaviourofnormnum.html) (7 messages, latest: Feb 23 2020 at 06:47)
+* [explain behaviour of norm_num?](53014explainbehaviourofnormnum.html) (13 messages, latest: Feb 23 2020 at 07:15)
 
 * [community web editor](75147communitywebeditor.html) (8 messages, latest: Feb 23 2020 at 06:28)
 

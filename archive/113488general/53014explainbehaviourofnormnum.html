@@ -62,6 +62,35 @@ end
 
 <p>just gives <code>h : n = 1 + ite (2 ≤ 3) 3 2</code>.</p>
 
+<a name="188854315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explain%20behaviour%20of%20norm_num%3F/near/188854315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53014explainbehaviourofnormnum.html#188854315">Mario Carneiro (Feb 23 2020 at 07:00)</a>:</h4>
+<p>does <code>norm_num [max] at h</code> not work?</p>
+
+<a name="188854381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explain%20behaviour%20of%20norm_num%3F/near/188854381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53014explainbehaviourofnormnum.html#188854381">Mario Carneiro (Feb 23 2020 at 07:01)</a>:</h4>
+<p>This works for me:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">max</span> <span class="o">(</span><span class="n">max</span> <span class="err">⊥</span> <span class="mi">2</span><span class="o">)</span> <span class="mi">3</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="k">begin</span>
+ <span class="n">norm_num</span> <span class="o">[</span><span class="n">max</span><span class="o">]</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="188854417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explain%20behaviour%20of%20norm_num%3F/near/188854417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53014explainbehaviourofnormnum.html#188854417">Mario Carneiro (Feb 23 2020 at 07:01)</a>:</h4>
+<p>with <code>true</code> as the goal <code>simp</code> accidentally solves the goal</p>
+
+<a name="188855949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explain%20behaviour%20of%20norm_num%3F/near/188855949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53014explainbehaviourofnormnum.html#188855949">Scott Morrison (Feb 23 2020 at 07:14)</a>:</h4>
+<p>okay, using <code>norm_num [max] at h</code> does indeed work.</p>
+
+<a name="188855957"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explain%20behaviour%20of%20norm_num%3F/near/188855957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53014explainbehaviourofnormnum.html#188855957">Scott Morrison (Feb 23 2020 at 07:15)</a>:</h4>
+<p>I can work around <code>conv at h { norm_num [max] }</code> not working, but I do worry that that is a bug</p>
+
+<a name="188855959"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explain%20behaviour%20of%20norm_num%3F/near/188855959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53014explainbehaviourofnormnum.html#188855959">Mario Carneiro (Feb 23 2020 at 07:15)</a>:</h4>
+<p>Using <code>conv at h {norm_num [max]}</code> repeatedly makes progress, so there must be something wrong with the repeat ending early</p>
+
 
 {% endraw %}
 
