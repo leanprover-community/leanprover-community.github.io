@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1979 messages, latest: Feb 23 2020 at 03:00)
+* [error about instances](36782erroraboutinstances.html) (2 messages, latest: Feb 23 2020 at 04:23)
 
-* [error about instances](36782erroraboutinstances.html) (1 message, latest: Feb 23 2020 at 02:06)
+* [noob question(s)](52075noobquestions.html) (1979 messages, latest: Feb 23 2020 at 03:00)
 
 * [help with fintype](24197helpwithfintype.html) (25 messages, latest: Feb 23 2020 at 01:41)
 

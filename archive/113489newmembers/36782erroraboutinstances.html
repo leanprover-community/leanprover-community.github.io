@@ -52,6 +52,17 @@ permalink: archive/113489newmembers/36782erroraboutinstances.html
 
 <p>What is happening, and how do I fix it?</p>
 
+<a name="188848796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/error%20about%20instances/near/188848796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36782erroraboutinstances.html#188848796">Chris Hughes (Feb 23 2020 at 04:23)</a>:</h4>
+<p>What's happening is that when you <code>rw eq_comm</code> it has to change the type of the <code>decidable_pred</code> instance from <code> (λ x, x = a)</code> to <code> (λ x, a = x)</code>. This is done using <code>eq.rec</code>. The problem is that the decidable instance in <code>countp_eq_countp</code> comes from <code>classical.prop_decidable</code>, and the decidable instance in your goal is a cast of the decidable instance for <code>(λ x, x = a)</code>. These two instances are not definitionally equal. There are a couple of solutions to this. One is to change the statement of <code>countp_eq_countp</code> to</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">count_eq_countp</span> <span class="o">{</span><span class="n">h</span> <span class="o">:</span> <span class="n">decidable_pred</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)}</span> <span class="o">:</span>
+  <span class="n">l</span><span class="bp">.</span><span class="n">count</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">l</span><span class="bp">.</span><span class="n">countp</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+
+
+<p>This way the decidable instance is an argument that will be filled in with whatever instance is in your goal. This approach has a downside if you try to use this with <code>rw</code> then Lean will not be able to infer the argument <code>h</code>.</p>
+<p>Another approach is to use <code>convert</code> instead of <code>exact</code>. This will use the fact that <code>decidable_pred (λ x, x = a)</code> is a subsingleton to close the goal.</p>
+
 
 {% endraw %}
 
