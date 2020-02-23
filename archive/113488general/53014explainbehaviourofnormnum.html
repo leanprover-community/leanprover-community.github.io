@@ -35,6 +35,18 @@ end
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explain%20behaviour%20of%20norm_num%3F/near/188847224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53014explainbehaviourofnormnum.html#188847224">Mario Carneiro (Feb 23 2020 at 03:44)</a>:</h4>
 <p>You should be able to explicitly rewrite with this and then use <code>norm_num</code> to prove the rest</p>
 
+<a name="188850737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explain%20behaviour%20of%20norm_num%3F/near/188850737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53014explainbehaviourofnormnum.html#188850737">Scott Morrison (Feb 23 2020 at 05:18)</a>:</h4>
+<p>Ah! I was confused how <code>norm_num</code> was doing anything, but of course it was just the internal call to <code>simp</code> that made progress.</p>
+
+<a name="188850915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explain%20behaviour%20of%20norm_num%3F/near/188850915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53014explainbehaviourofnormnum.html#188850915">Scott Morrison (Feb 23 2020 at 05:21)</a>:</h4>
+<p>Hmm... so if I'm expecting to expressions which look like <code>max (max (max a b) c) d</code> to some arbitrary depth, and all arguments explicit <code>nat</code>s (or <code>int</code>s or something), what's the least effort simplifier?</p>
+
+<a name="188851306"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explain%20behaviour%20of%20norm_num%3F/near/188851306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53014explainbehaviourofnormnum.html#188851306">Mario Carneiro (Feb 23 2020 at 05:30)</a>:</h4>
+<p>I think if you rewrite with <code>max</code>, it will unfold to the if definition, then norm_num will be able to simplify the target to true or false, then simp will make progress. So <code>norm_num [max]</code> should do the trick</p>
+
 
 {% endraw %}
 
