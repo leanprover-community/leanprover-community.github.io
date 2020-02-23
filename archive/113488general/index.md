@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Possible incorrect explanation in Theorem Proving in Lean](66165PossibleincorrectexplanationinTheoremProvinginLean.html) (4 messages, latest: Feb 23 2020 at 09:54)
+* [Possible incorrect explanation in Theorem Proving in Lean](66165PossibleincorrectexplanationinTheoremProvinginLean.html) (5 messages, latest: Feb 23 2020 at 10:12)
 
 * [hardware verification](75506hardwareverification.html) (54 messages, latest: Feb 23 2020 at 09:39)
 
