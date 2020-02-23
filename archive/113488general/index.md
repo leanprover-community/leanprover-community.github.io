@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [mathlib nightlies](44201mathlibnightlies.html) (75 messages, latest: Feb 23 2020 at 14:00)
+
+* [default toolchain](61703defaulttoolchain.html) (12 messages, latest: Feb 23 2020 at 13:45)
+
 * [Possible incorrect explanation in Theorem Proving in Lean](66165PossibleincorrectexplanationinTheoremProvinginLean.html) (5 messages, latest: Feb 23 2020 at 10:12)
 
 * [hardware verification](75506hardwareverification.html) (54 messages, latest: Feb 23 2020 at 09:39)
@@ -18,8 +22,6 @@ permalink: archive/113488general/index.html
 * [community web editor](75147communitywebeditor.html) (8 messages, latest: Feb 23 2020 at 06:28)
 
 * [Simp normal form](26007Simpnormalform.html) (18 messages, latest: Feb 22 2020 at 23:33)
-
-* [default toolchain](61703defaulttoolchain.html) (11 messages, latest: Feb 22 2020 at 21:44)
 
 * [Lean in the wild](43625Leaninthewild.html) (427 messages, latest: Feb 22 2020 at 21:18)
 
@@ -42,8 +44,6 @@ permalink: archive/113488general/index.html
 * [How to prove this seemingly trivial lemma?](58537Howtoprovethisseeminglytriviallemma.html) (19 messages, latest: Feb 21 2020 at 18:48)
 
 * [Farewell to mini_crush, smt2_interface, etc.](89663Farewelltominicrushsmt2interfaceetc.html) (24 messages, latest: Feb 21 2020 at 16:55)
-
-* [mathlib nightlies](44201mathlibnightlies.html) (66 messages, latest: Feb 21 2020 at 16:24)
 
 * [VScode calc](45240VScodecalc.html) (9 messages, latest: Feb 21 2020 at 12:44)
 
