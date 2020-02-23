@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [explain behaviour of norm_num?](53014explainbehaviourofnormnum.html) (3 messages, latest: Feb 23 2020 at 03:44)
+
 * [Simp normal form](26007Simpnormalform.html) (18 messages, latest: Feb 22 2020 at 23:33)
 
 * [default toolchain](61703defaulttoolchain.html) (11 messages, latest: Feb 22 2020 at 21:44)

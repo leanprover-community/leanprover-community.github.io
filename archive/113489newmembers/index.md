@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1979 messages, latest: Feb 23 2020 at 03:00)
+
 * [error about instances](36782erroraboutinstances.html) (1 message, latest: Feb 23 2020 at 02:06)
 
 * [help with fintype](24197helpwithfintype.html) (25 messages, latest: Feb 23 2020 at 01:41)
@@ -18,8 +20,6 @@ permalink: archive/113489newmembers/index.html
 * [Boolean equality on nats](34402Booleanequalityonnats.html) (4 messages, latest: Feb 22 2020 at 06:47)
 
 * [extending structures with implicit parameters](52630extendingstructureswithimplicitparameters.html) (23 messages, latest: Feb 22 2020 at 02:20)
-
-* [noob question(s)](52075noobquestions.html) (1978 messages, latest: Feb 22 2020 at 01:30)
 
 * [natural number game questions](52294naturalnumbergamequestions.html) (20 messages, latest: Feb 21 2020 at 09:31)
 

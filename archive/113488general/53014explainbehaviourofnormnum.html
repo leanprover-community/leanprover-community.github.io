@@ -1,0 +1,41 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/53014explainbehaviourofnormnum.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/53014explainbehaviourofnormnum.html">explain behaviour of norm_num?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188846186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explain%20behaviour%20of%20norm_num%3F/near/188846186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53014explainbehaviourofnormnum.html#188846186">Scott Morrison (Feb 23 2020 at 03:13)</a>:</h4>
+<p>In</p>
+<div class="codehilite"><pre><span></span>import tactic.norm_num
+
+example (n : ℕ) (h : n = max (max ⊥ 2) 3 + 1) : true :=
+begin
+ conv at h { norm_num, },
+ trivial,
+end
+</pre></div>
+
+
+<p>The invocation of <code>norm_num</code> converts <code>max (max ⊥ 2) 3 + 1</code> to <code>1 + max 2 3</code>. Why? I really wish it would do a little more, and give me just <code>n = 4</code>.</p>
+
+<a name="188847222"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explain%20behaviour%20of%20norm_num%3F/near/188847222" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53014explainbehaviourofnormnum.html#188847222">Mario Carneiro (Feb 23 2020 at 03:44)</a>:</h4>
+<p><code>norm_num</code> doesn't know about <code>max</code>. Unfortunately it doesn't interact optimally with simp when it comes to applying conditional rewrite rules and proving the side conditions (like <code>a &lt;= b -&gt; max a b = b</code> in this case).</p>
+
+<a name="188847224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explain%20behaviour%20of%20norm_num%3F/near/188847224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53014explainbehaviourofnormnum.html#188847224">Mario Carneiro (Feb 23 2020 at 03:44)</a>:</h4>
+<p>You should be able to explicitly rewrite with this and then use <code>norm_num</code> to prove the rest</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
