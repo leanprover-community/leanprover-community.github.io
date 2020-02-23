@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Using mathlib in Lean project created using leanpkg](25878UsingmathlibinLeanprojectcreatedusingleanpkg.html) (33 messages, latest: Feb 23 2020 at 14:59)
+
 * [noob question(s)](52075noobquestions.html) (1980 messages, latest: Feb 23 2020 at 08:09)
 
 * [error about instances](36782erroraboutinstances.html) (2 messages, latest: Feb 23 2020 at 04:23)
