@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [explain behaviour of norm_num?](53014explainbehaviourofnormnum.html) (6 messages, latest: Feb 23 2020 at 05:30)
+* [explain behaviour of norm_num?](53014explainbehaviourofnormnum.html) (7 messages, latest: Feb 23 2020 at 06:47)
+
+* [community web editor](75147communitywebeditor.html) (8 messages, latest: Feb 23 2020 at 06:28)
 
 * [Simp normal form](26007Simpnormalform.html) (18 messages, latest: Feb 22 2020 at 23:33)
 
@@ -50,8 +52,6 @@ permalink: archive/113488general/index.html
 * [VScode message window](12770VScodemessagewindow.html) (37 messages, latest: Feb 20 2020 at 22:44)
 
 * [Try this](83032Trythis.html) (55 messages, latest: Feb 20 2020 at 22:40)
-
-* [community web editor](75147communitywebeditor.html) (7 messages, latest: Feb 20 2020 at 21:22)
 
 * [update-mathlib update](59285updatemathlibupdate.html) (14 messages, latest: Feb 20 2020 at 21:02)
 

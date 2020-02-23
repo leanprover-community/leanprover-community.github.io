@@ -47,6 +47,21 @@ end
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explain%20behaviour%20of%20norm_num%3F/near/188851306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53014explainbehaviourofnormnum.html#188851306">Mario Carneiro (Feb 23 2020 at 05:30)</a>:</h4>
 <p>I think if you rewrite with <code>max</code>, it will unfold to the if definition, then norm_num will be able to simplify the target to true or false, then simp will make progress. So <code>norm_num [max]</code> should do the trick</p>
 
+<a name="188853911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/explain%20behaviour%20of%20norm_num%3F/near/188853911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53014explainbehaviourofnormnum.html#188853911">Scott Morrison (Feb 23 2020 at 06:47)</a>:</h4>
+<p>oh... oops. I thought this was working, but it's not.</p>
+<div class="codehilite"><pre><span></span>import tactic.norm_num
+
+example (n : ℕ) (h : n = max (max ⊥ 2) 3 + 1) : true :=
+begin
+ conv at h { norm_num [max], },
+ trivial,
+end
+</pre></div>
+
+
+<p>just gives <code>h : n = 1 + ite (2 ≤ 3) 3 2</code>.</p>
+
 
 {% endraw %}
 
