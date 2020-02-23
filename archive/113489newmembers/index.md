@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [subtype coercion](10559subtypecoercion.html) (16 messages, latest: Feb 23 2020 at 20:25)
+* [(no topic)](79918notopic.html) (268 messages, latest: Feb 23 2020 at 21:52)
 
-* [(no topic)](79918notopic.html) (265 messages, latest: Feb 23 2020 at 20:17)
+* [subtype coercion](10559subtypecoercion.html) (16 messages, latest: Feb 23 2020 at 20:25)
 
 * [Subtype Coercion](78847SubtypeCoercion.html) (1 message, latest: Feb 23 2020 at 20:15)
 

@@ -1,0 +1,41 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/62589newmathlibtools.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html">new mathlib tools</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188884880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/188884880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#188884880">Patrick Massot (Feb 23 2020 at 21:19)</a>:</h4>
+<p>I need infrastructure testers again. This thread is for you if you want to help users, especially beginners, and you have a working elan+python3+pip installation (and are not afraid of temporarily screwing up your mathlib tools). The install procedure is:</p>
+<ul>
+<li><code>git clone https://github.com/leanprover-community/mathlib-tools.git</code> if you don't already have it</li>
+<li><code>cd mathlib-tools</code></li>
+<li><code>git checkout refactor</code></li>
+<li>
+<p><code>sudo pip3 install .</code><br>
+Then you should have a brand new <code>leancli</code> toy (whose name is up for discussion). It is meant to replace <code>leanpkg</code>+<code>update-mathlib</code>+<code>cache_olean</code> except that one task corresponds to one command. Things to try out:</p>
+</li>
+<li>
+<p><code>leancli new myprojet</code> should create a new lean project with mathlib ready to go.</p>
+</li>
+<li>in a project depending on mathlib, <code>leancli upgrade-mathlib</code> should upgrade mathlib, including oleans</li>
+<li>in mathlib, <code>leancli upgrade-mathlib</code> should upgrade mathlib, including oleans</li>
+<li>in a project not depending on mathlib (?!),  <code>leancli add-mathlib</code> should make it a decent Lean project, including oleans</li>
+<li>in any project, <code>leancli mk-cache</code> and <code>lean-cli get-cache</code> should make and fetch olean cache. If this project is mathlib, that cache will live in <code>$HOME/.mathlib</code>, else it will live in <code>_cache</code> in the project</li>
+<li>in any project, <code>leancli build</code> should do a <code>leanpkg build</code></li>
+<li>in any project, <code>leancli hooks</code> should do what <code>setup-git-hooks</code> used to do</li>
+<li><code>leancli get tutorials</code> should give you the tutorials project, ready to use (alternative commands: <code>leancli get leanprover-community/tutorials</code> or <code>leancli get https://github.com/leanprover-community/tutorials.git</code>)</li>
+</ul>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
