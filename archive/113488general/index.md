@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Possible incorrect explanation in Theorem Proving in Lean](66165PossibleincorrectexplanationinTheoremProvinginLean.html) (4 messages, latest: Feb 23 2020 at 09:54)
+
+* [hardware verification](75506hardwareverification.html) (54 messages, latest: Feb 23 2020 at 09:39)
+
 * [explain behaviour of norm_num?](53014explainbehaviourofnormnum.html) (13 messages, latest: Feb 23 2020 at 07:15)
 
 * [community web editor](75147communitywebeditor.html) (8 messages, latest: Feb 23 2020 at 06:28)
@@ -88,8 +92,6 @@ permalink: archive/113488general/index.html
 * [`hint` tactic](53516hinttactic.html) (13 messages, latest: Feb 16 2020 at 16:41)
 
 * [`add_monoid.smul`, `add_group.gsmul`](49653addmonoidsmuladdgroupgsmul.html) (4 messages, latest: Feb 16 2020 at 03:07)
-
-* [hardware verification](75506hardwareverification.html) (52 messages, latest: Feb 16 2020 at 00:48)
 
 * [Bundled `sub*` and `center`](49191Bundledsubandcenter.html) (2 messages, latest: Feb 15 2020 at 20:53)
 
