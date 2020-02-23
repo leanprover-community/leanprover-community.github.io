@@ -1,0 +1,58 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/36782erroraboutinstances.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/36782erroraboutinstances.html">error about instances</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188843691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/error%20about%20instances/near/188843691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36782erroraboutinstances.html#188843691">Arjun Pitchanathan (Feb 23 2020 at 02:06)</a>:</h4>
+<p>I have this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span>
+<span class="n">noncomputable</span> <span class="n">theory</span>
+<span class="n">open_locale</span> <span class="n">classical</span>
+<span class="kn">universe</span> <span class="n">u</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="kn">theorem</span> <span class="n">count_eq_countp</span> <span class="o">:</span> <span class="n">l</span><span class="bp">.</span><span class="n">count</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">l</span><span class="bp">.</span><span class="n">countp</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">theorem</span> <span class="n">count_eq_countp&#39;</span> <span class="o">:</span> <span class="n">l</span><span class="bp">.</span><span class="n">count</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">l</span><span class="bp">.</span><span class="n">countp</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">conv</span> <span class="k">in</span> <span class="o">(</span><span class="bp">_</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">eq_comm</span><span class="o">,</span> <span class="o">},</span>
+  <span class="n">exact</span> <span class="o">(</span><span class="n">count_eq_countp</span> <span class="n">a</span> <span class="n">l</span><span class="o">),</span> <span class="c1">-- error here</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>And I get this mystifying error:</p>
+<div class="codehilite"><pre><span></span><span class="n">invalid</span> <span class="n">type</span> <span class="n">ascription</span><span class="o">,</span> <span class="n">term</span> <span class="n">has</span> <span class="n">type</span>
+  <span class="bp">@</span><span class="n">list</span><span class="bp">.</span><span class="n">count</span> <span class="n">α</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span> <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">))</span> <span class="n">a</span> <span class="n">l</span> <span class="bp">=</span>
+    <span class="bp">@</span><span class="n">list</span><span class="bp">.</span><span class="n">countp</span> <span class="n">α</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">a_1</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span> <span class="o">((</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span> <span class="n">a_1</span><span class="o">))</span> <span class="n">l</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="bp">@</span><span class="n">list</span><span class="bp">.</span><span class="n">count</span> <span class="n">α</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span> <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">))</span> <span class="n">a</span> <span class="n">l</span> <span class="bp">=</span>
+    <span class="bp">@</span><span class="n">list</span><span class="bp">.</span><span class="n">countp</span> <span class="n">α</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span>
+      <span class="o">(</span><span class="bp">@</span><span class="n">eq</span><span class="bp">.</span><span class="n">rec</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">),</span> <span class="bp">@</span><span class="n">decidable_pred</span> <span class="n">α</span> <span class="n">p</span><span class="o">)</span>
+         <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">a_1</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span> <span class="o">((</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span> <span class="n">a_1</span><span class="o">))</span>
+         <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span>
+         <span class="bp">_</span><span class="o">)</span>
+      <span class="n">l</span>
+<span class="n">state</span><span class="o">:</span>
+<span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">,</span>
+<span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span>
+<span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span>
+<span class="err">⊢</span> <span class="n">list</span><span class="bp">.</span><span class="n">count</span> <span class="n">a</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">list</span><span class="bp">.</span><span class="n">countp</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span> <span class="n">l</span>
+</pre></div>
+
+
+<p>What is happening, and how do I fix it?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

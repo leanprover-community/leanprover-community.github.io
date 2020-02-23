@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [error about instances](36782erroraboutinstances.html) (1 message, latest: Feb 23 2020 at 02:06)
+
 * [help with fintype](24197helpwithfintype.html) (25 messages, latest: Feb 23 2020 at 01:41)
 
 * [Complexity of a propositional formula](24622Complexityofapropositionalformula.html) (8 messages, latest: Feb 22 2020 at 08:29)
