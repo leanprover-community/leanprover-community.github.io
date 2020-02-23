@@ -9,7 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [(no topic)](79918notopic.html) (264 messages, latest: Feb 23 2020 at 19:47)
+* [subtype coercion](10559subtypecoercion.html) (16 messages, latest: Feb 23 2020 at 20:25)
+
+* [(no topic)](79918notopic.html) (265 messages, latest: Feb 23 2020 at 20:17)
+
+* [Subtype Coercion](78847SubtypeCoercion.html) (1 message, latest: Feb 23 2020 at 20:15)
 
 * [Using mathlib in Lean project created using leanpkg](25878UsingmathlibinLeanprojectcreatedusingleanpkg.html) (43 messages, latest: Feb 23 2020 at 15:18)
 
@@ -516,8 +520,6 @@ permalink: archive/113489newmembers/index.html
 * [How to make `to_the_right_of` function?](06057Howtomaketotherightoffunction.html) (10 messages, latest: Oct 25 2019 at 08:21)
 
 * [empty cone](51733emptycone.html) (49 messages, latest: Oct 24 2019 at 13:08)
-
-* [subtype coercion](10559subtypecoercion.html) (15 messages, latest: Oct 23 2019 at 23:44)
 
 * [How do I map a list along with proof of membership?](55801HowdoImapalistalongwithproofofmembership.html) (3 messages, latest: Oct 23 2019 at 14:19)
 

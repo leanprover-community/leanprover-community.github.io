@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [proposition manipulation](69752propositionmanipulation.html) (6 messages, latest: Feb 23 2020 at 17:56)
+* [MathLib installing](36823MathLibinstalling.html) (107 messages, latest: Feb 23 2020 at 20:28)
 
-* [MathLib installing](36823MathLibinstalling.html) (106 messages, latest: Feb 20 2020 at 18:31)
+* [proposition manipulation](69752propositionmanipulation.html) (6 messages, latest: Feb 23 2020 at 17:56)
 
 * [well-ordering principle](19426wellorderingprinciple.html) (41 messages, latest: Feb 20 2020 at 17:33)
 
