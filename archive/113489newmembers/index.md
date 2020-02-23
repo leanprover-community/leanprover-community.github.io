@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [(no topic)](79918notopic.html) (257 messages, latest: Feb 23 2020 at 18:47)
+
 * [Using mathlib in Lean project created using leanpkg](25878UsingmathlibinLeanprojectcreatedusingleanpkg.html) (43 messages, latest: Feb 23 2020 at 15:18)
 
 * [noob question(s)](52075noobquestions.html) (1980 messages, latest: Feb 23 2020 at 08:09)
@@ -34,8 +36,6 @@ permalink: archive/113489newmembers/index.html
 * [definition unpacking](72874definitionunpacking.html) (13 messages, latest: Feb 19 2020 at 18:18)
 
 * [spheres](99675spheres.html) (26 messages, latest: Feb 19 2020 at 04:15)
-
-* [(no topic)](79918notopic.html) (256 messages, latest: Feb 18 2020 at 19:16)
 
 * [Getting equation from match](27738Gettingequationfrommatch.html) (11 messages, latest: Feb 18 2020 at 11:13)
 
