@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [new mathlib tools](62589newmathlibtools.html) (4 messages, latest: Feb 23 2020 at 23:59)
+* [Possible incorrect explanation in Theorem Proving in Lean](66165PossibleincorrectexplanationinTheoremProvinginLean.html) (6 messages, latest: Feb 24 2020 at 00:48)
+
+* [new mathlib tools](62589newmathlibtools.html) (8 messages, latest: Feb 24 2020 at 00:09)
 
 * [QED manifesto revisited](70480QEDmanifestorevisited.html) (2 messages, latest: Feb 23 2020 at 22:35)
 
@@ -18,8 +20,6 @@ permalink: archive/113488general/index.html
 * [mathlib nightlies](44201mathlibnightlies.html) (80 messages, latest: Feb 23 2020 at 16:59)
 
 * [default toolchain](61703defaulttoolchain.html) (12 messages, latest: Feb 23 2020 at 13:45)
-
-* [Possible incorrect explanation in Theorem Proving in Lean](66165PossibleincorrectexplanationinTheoremProvinginLean.html) (5 messages, latest: Feb 23 2020 at 10:12)
 
 * [hardware verification](75506hardwareverification.html) (54 messages, latest: Feb 23 2020 at 09:39)
 
