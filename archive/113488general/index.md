@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [What should be @\[simp\]?](20315Whatshouldbesimp.html) (3 messages, latest: Feb 24 2020 at 04:47)
+* [Request for review of a leftpad proof](13759Requestforreviewofaleftpadproof.html) (16 messages, latest: Feb 24 2020 at 05:55)
+
+* [What should be @\[simp\]?](20315Whatshouldbesimp.html) (4 messages, latest: Feb 24 2020 at 05:00)
 
 * [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (39 messages, latest: Feb 24 2020 at 03:01)
 
