@@ -9,9 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Basic Question](53627BasicQuestion.html) (9 messages, latest: Feb 24 2020 at 19:36)
+* [Simplifying Prop with Known False Statements](85769SimplifyingPropwithKnownFalseStatements.html) (2 messages, latest: Feb 24 2020 at 20:41)
 
-* [noob question(s)](52075noobquestions.html) (1987 messages, latest: Feb 24 2020 at 18:42)
+* [natural number game questions](52294naturalnumbergamequestions.html) (21 messages, latest: Feb 24 2020 at 20:31)
+
+* [noob question(s)](52075noobquestions.html) (1988 messages, latest: Feb 24 2020 at 20:29)
+
+* [Basic Question](53627BasicQuestion.html) (9 messages, latest: Feb 24 2020 at 19:36)
 
 * [zero versus 0](54969zeroversus0.html) (3 messages, latest: Feb 24 2020 at 15:55)
 
@@ -32,8 +36,6 @@ permalink: archive/113489newmembers/index.html
 * [Boolean equality on nats](34402Booleanequalityonnats.html) (4 messages, latest: Feb 22 2020 at 06:47)
 
 * [extending structures with implicit parameters](52630extendingstructureswithimplicitparameters.html) (23 messages, latest: Feb 22 2020 at 02:20)
-
-* [natural number game questions](52294naturalnumbergamequestions.html) (20 messages, latest: Feb 21 2020 at 09:31)
 
 * [On the side of logic](81703Onthesideoflogic.html) (36 messages, latest: Feb 20 2020 at 16:08)
 
