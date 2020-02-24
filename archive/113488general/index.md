@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [new mathlib tools](62589newmathlibtools.html) (12 messages, latest: Feb 24 2020 at 07:50)
+
 * [Request for review of a leftpad proof](13759Requestforreviewofaleftpadproof.html) (26 messages, latest: Feb 24 2020 at 06:52)
 
 * [What should be @\[simp\]?](20315Whatshouldbesimp.html) (4 messages, latest: Feb 24 2020 at 05:00)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (39 messages, latest: Feb 24 2020 at 03:01)
 
 * [Possible incorrect explanation in Theorem Proving in Lean](66165PossibleincorrectexplanationinTheoremProvinginLean.html) (6 messages, latest: Feb 24 2020 at 00:48)
-
-* [new mathlib tools](62589newmathlibtools.html) (8 messages, latest: Feb 24 2020 at 00:09)
 
 * [QED manifesto revisited](70480QEDmanifestorevisited.html) (2 messages, latest: Feb 23 2020 at 22:35)
 
