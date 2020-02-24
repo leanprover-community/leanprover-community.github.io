@@ -129,6 +129,23 @@ permalink: archive/113488general/65824liftingcompletelattices.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20complete%20lattices/near/188954814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65824liftingcompletelattices.html#188954814">Mario Carneiro (Feb 24 2020 at 18:59)</a>:</h4>
 <p>The function <code>complete_lattice.copy</code> is there to fix up any bad definitional equalities caused by another definition</p>
 
+<a name="188955327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20complete%20lattices/near/188955327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65824liftingcompletelattices.html#188955327">Johan Commelin (Feb 24 2020 at 19:04)</a>:</h4>
+<p>Yes, but it doesn't help here. Because <code>supr</code> and <code>infi</code> are defined in terms of range.</p>
+
+<a name="188955397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20complete%20lattices/near/188955397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65824liftingcompletelattices.html#188955397">Johan Commelin (Feb 24 2020 at 19:04)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="kn">help</span> <span class="o">{</span><span class="n">ι</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u&#39;</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="o">{</span><span class="n">s&#39;</span> <span class="bp">//</span> <span class="n">s&#39;</span> <span class="err">⊆</span> <span class="n">s</span><span class="o">})</span> <span class="o">:</span>
+  <span class="o">(((</span><span class="err">⨅</span> <span class="n">i</span><span class="o">,</span> <span class="n">f</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span> <span class="o">{</span><span class="n">s&#39;</span> <span class="bp">//</span> <span class="n">s&#39;</span> <span class="err">⊆</span> <span class="n">s</span><span class="o">})</span> <span class="o">:</span> <span class="n">set</span> <span class="n">E</span><span class="o">)</span> <span class="bp">=</span> <span class="n">s</span> <span class="err">∩</span> <span class="o">(</span><span class="err">⋂</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="n">i</span> <span class="o">:</span> <span class="n">set</span> <span class="n">E</span><span class="o">))</span> <span class="o">:=</span>
+</pre></div>
+
+
+<p>looks like it should be a triviality, but it isn't.</p>
+
+<a name="188955440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20complete%20lattices/near/188955440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65824liftingcompletelattices.html#188955440">Johan Commelin (Feb 24 2020 at 19:05)</a>:</h4>
+<p>And I now realised that this has nothing to do with <code>complete_lattice.copy</code> or <code>lift_complete_lattice</code>. It's just an inherent problem with <code>supr</code> and <code>infi</code>.</p>
+
 
 {% endraw %}
 

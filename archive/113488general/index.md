@@ -9,15 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [lifting complete lattices](65824liftingcompletelattices.html) (7 messages, latest: Feb 24 2020 at 18:59)
+* [new mathlib tools](62589newmathlibtools.html) (34 messages, latest: Feb 24 2020 at 19:07)
+
+* [lifting complete lattices](65824liftingcompletelattices.html) (10 messages, latest: Feb 24 2020 at 19:05)
 
 * [What should be @\[simp\]?](20315Whatshouldbesimp.html) (5 messages, latest: Feb 24 2020 at 18:52)
 
 * [Notation for matrices and vectors](84581Notationformatricesandvectors.html) (17 messages, latest: Feb 24 2020 at 18:44)
 
 * [Why doesn't this loop?](60190Whydoesntthisloop.html) (4 messages, latest: Feb 24 2020 at 18:26)
-
-* [new mathlib tools](62589newmathlibtools.html) (31 messages, latest: Feb 24 2020 at 18:07)
 
 * [New user bundles](27895Newuserbundles.html) (145 messages, latest: Feb 24 2020 at 17:54)
 
