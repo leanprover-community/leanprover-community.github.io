@@ -9,21 +9,23 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [lifting complete lattices](65824liftingcompletelattices.html) (7 messages, latest: Feb 24 2020 at 18:59)
+
+* [What should be @\[simp\]?](20315Whatshouldbesimp.html) (5 messages, latest: Feb 24 2020 at 18:52)
+
+* [Notation for matrices and vectors](84581Notationformatricesandvectors.html) (17 messages, latest: Feb 24 2020 at 18:44)
+
+* [Why doesn't this loop?](60190Whydoesntthisloop.html) (4 messages, latest: Feb 24 2020 at 18:26)
+
+* [new mathlib tools](62589newmathlibtools.html) (31 messages, latest: Feb 24 2020 at 18:07)
+
 * [New user bundles](27895Newuserbundles.html) (145 messages, latest: Feb 24 2020 at 17:54)
 
-* [new mathlib tools](62589newmathlibtools.html) (30 messages, latest: Feb 24 2020 at 17:22)
-
-* [lifting complete lattices](65824liftingcompletelattices.html) (6 messages, latest: Feb 24 2020 at 16:14)
-
 * [Download speed from new olean storage on Azure](99760DownloadspeedfromnewoleanstorageonAzure.html) (9 messages, latest: Feb 24 2020 at 15:21)
-
-* [Notation for matrices and vectors](84581Notationformatricesandvectors.html) (16 messages, latest: Feb 24 2020 at 13:26)
 
 * [Is this a good simp lemma?](43715Isthisagoodsimplemma.html) (5 messages, latest: Feb 24 2020 at 12:40)
 
 * [Request for review of a leftpad proof](13759Requestforreviewofaleftpadproof.html) (26 messages, latest: Feb 24 2020 at 06:52)
-
-* [What should be @\[simp\]?](20315Whatshouldbesimp.html) (4 messages, latest: Feb 24 2020 at 05:00)
 
 * [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (39 messages, latest: Feb 24 2020 at 03:01)
 
@@ -44,8 +46,6 @@ permalink: archive/113488general/index.html
 * [Simp normal form](26007Simpnormalform.html) (18 messages, latest: Feb 22 2020 at 23:33)
 
 * [Lean in the wild](43625Leaninthewild.html) (427 messages, latest: Feb 22 2020 at 21:18)
-
-* [Why doesn't this loop?](60190Whydoesntthisloop.html) (3 messages, latest: Feb 22 2020 at 20:39)
 
 * [determine imports of current file](17380determineimportsofcurrentfile.html) (9 messages, latest: Feb 22 2020 at 18:17)
 

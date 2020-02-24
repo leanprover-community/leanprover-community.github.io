@@ -1,0 +1,90 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/53627BasicQuestion.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/53627BasicQuestion.html">Basic Question</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188950398"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20Question/near/188950398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53627BasicQuestion.html#188950398">Callum MacAskill (Feb 24 2020 at 18:07)</a>:</h4>
+<p>I was wondering if I could get some help on a fairly basic question? I'm currently working on a project comparing Coq and Lean, and as part of it I'm coding basic group theory into both. I've adapted the code from Coq to Lean and it all seems fine, but breaks down when I start trying to prove further lemmas, I'm getting a "don't know how to synthesize placeholder" error. I know I'm missing something simple, could anyone point it out?</p>
+<div class="codehilite"><pre><span></span>class Group (G : Type) :=
+(Op: G → (G → G))
+(Inv : G → G)
+(e : G)
+(Power : G → nat → G)
+(InvPower : G → nat → G)
+(RightId : ∀ x : G, Op e x = x)
+(Associativity: ∀ x y z:G, Op (Op x y) z = Op x (Op y z))
+(LeftInverse : ∀ x : G, Op (Inv x) x = e)
+(LeftIdentity : ∀ x : G, Op e x = x)
+
+namespace Group
+variables {G : Type} [Group G] [e : G]
+
+
+theorem RightIdentity: ∀ (x : G), Op x e =  x :=
+ begin
+  intro x,
+</pre></div>
+
+<a name="188950747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20Question/near/188950747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53627BasicQuestion.html#188950747">Rob Lewis (Feb 24 2020 at 18:11)</a>:</h4>
+<p>You can delete <code>[e : G]</code> from the <code>variables</code> line. You've already declared <code>e</code> as a component of <code>Group</code>.</p>
+
+<a name="188951472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20Question/near/188951472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53627BasicQuestion.html#188951472">Callum MacAskill (Feb 24 2020 at 18:20)</a>:</h4>
+<p>That was in my original code, however when I don't declare it I get the error message</p>
+<div class="codehilite"><pre><span></span>group.lean:21:34: error
+type mismatch at application
+  Op x e
+term
+  e
+has type
+  Π (G : Type) [c : Group G], G : Type 1
+but is expected to have type
+  G : Type
+</pre></div>
+
+
+<p>I'm assuming I've done something wrong when setting up the group axioms, but still can't see it?</p>
+
+<a name="188951507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20Question/near/188951507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53627BasicQuestion.html#188951507">Patrick Massot (Feb 24 2020 at 18:21)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="266189">Callum MacAskill</span> <a href="#narrow/stream/113489-new-members/topic/Basic.20Question/near/188950398" title="#narrow/stream/113489-new-members/topic/Basic.20Question/near/188950398">said</a>:</p>
+<blockquote>
+<p>I was wondering if I could get some help on a fairly basic question? </p>
+</blockquote>
+<p>Yes, this is the right place.</p>
+<blockquote>
+<p>I'm currently working on a project comparing Coq and Lean, and as part of it I'm coding basic group theory into both. I've adapted the code from Coq to Lean and it all seems fine</p>
+</blockquote>
+<p>This sounds like a very bad way of comparing Coq and Lean. Directly translating a Coq file into a Lean file will simply prove that Lean is not good at being Coq. The same would work in the opposite direction. You should try to do the same math in idiomatic Coq and then in idiomatic Lean. Your definition of <code>Group</code> is nothing you would see in a Lean file</p>
+
+<a name="188951603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20Question/near/188951603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53627BasicQuestion.html#188951603">Patrick Massot (Feb 24 2020 at 18:22)</a>:</h4>
+<p>We would never write such a definition without inserting a notation for <code>Op</code> right after <code>(Op: G → (G → G))</code> (and we wouldn't put that many parentheses).</p>
+
+<a name="188951621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20Question/near/188951621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53627BasicQuestion.html#188951621">Patrick Massot (Feb 24 2020 at 18:22)</a>:</h4>
+<p>Dinner is calling, other people will probably rewrite your code.</p>
+
+<a name="188952004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20Question/near/188952004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53627BasicQuestion.html#188952004">Kevin Buzzard (Feb 24 2020 at 18:27)</a>:</h4>
+<p>Here's how I'd define groups from scratch in Lean: <a href="https://github.com/kbuzzard/group-theory-game/blob/master/src/group/definitions.lean" target="_blank" title="https://github.com/kbuzzard/group-theory-game/blob/master/src/group/definitions.lean">https://github.com/kbuzzard/group-theory-game/blob/master/src/group/definitions.lean</a> . Check out the repo for the Lean idiomatic way to do things. Note: none of this <code>Op</code> stuff -- we use the standard notation <code>*</code> right from square 1.</p>
+
+<a name="188952088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20Question/near/188952088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53627BasicQuestion.html#188952088">Kevin Buzzard (Feb 24 2020 at 18:28)</a>:</h4>
+<p>Here are some examples of how to start setting up the theory, with comments: <a href="https://github.com/kbuzzard/group-theory-game/blob/master/src/group/theorems.lean" target="_blank" title="https://github.com/kbuzzard/group-theory-game/blob/master/src/group/theorems.lean">https://github.com/kbuzzard/group-theory-game/blob/master/src/group/theorems.lean</a></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

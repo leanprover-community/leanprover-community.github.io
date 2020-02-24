@@ -173,6 +173,44 @@ One annoyance is that I usually checkout <code>origin/lean-3.5.1</code> which ma
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/188946506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#188946506">Johan Commelin (Feb 24 2020 at 17:22)</a>:</h4>
 <p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> Thanks a lot for investing time in building this tool</p>
 
+<a name="188950445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/188950445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#188950445">Sebastien Gouezel (Feb 24 2020 at 18:07)</a>:</h4>
+<p>I just got a failure</p>
+<div class="codehilite"><pre><span></span>PS C:\Users\sebas\Desktop\mathlib_master - Copie&gt; leancli upgrade-mathlib
+Looking for local mathlib oleans
+Looking for Azure mathlib oleans
+Trying to download https://oleanstorage.blob.core.windows.net/mathlib/8030469cccb4306230015df55ba50a5e280727bf.tar.gz to C:\Users\sebas\.mathlib\8030469cccb4306230015df55ba50a5e280727bf.tar.gz
+Traceback (most recent call last):
+  File &quot;C:\Program Files\Python37\Scripts\leancli-script.py&quot;, line 11, in &lt;module&gt;
+    load_entry_point(&#39;mathlibtools==0.0.3&#39;, &#39;console_scripts&#39;, &#39;leancli&#39;)()
+  File &quot;c:\program files\python37\lib\site-packages\mathlibtools\leancli.py&quot;, line 75, in main
+    &#39;hooks&#39;: hooks,
+  File &quot;c:\program files\python37\lib\site-packages\fire\core.py&quot;, line 138, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+  File &quot;c:\program files\python37\lib\site-packages\fire\core.py&quot;, line 471, in _Fire
+    target=component.__name__)
+  File &quot;c:\program files\python37\lib\site-packages\fire\core.py&quot;, line 675, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+  File &quot;c:\program files\python37\lib\site-packages\mathlibtools\leancli.py&quot;, line 26, in upgrade_mathlib
+    proj().upgrade_mathlib()
+  File &quot;c:\program files\python37\lib\site-packages\mathlibtools\leanproject.py&quot;, line 317, in upgrade_mathlib
+    self.get_mathlib_olean()
+  File &quot;c:\program files\python37\lib\site-packages\mathlibtools\leanproject.py&quot;, line 227, in get_mathlib_olean
+    unpack_archive(get_mathlib_archive(self.mathlib_rev),
+  File &quot;c:\program files\python37\lib\site-packages\mathlibtools\leanproject.py&quot;, line 117, in get_mathlib_archive
+    download(AZURE_URL+fname, path)
+  File &quot;c:\program files\python37\lib\site-packages\mathlibtools\leanproject.py&quot;, line 96, in download
+    with target.open(&#39;wb&#39;) as tgt:
+  File &quot;c:\program files\python37\lib\pathlib.py&quot;, line 1165, in open
+    opener=self._opener)
+  File &quot;c:\program files\python37\lib\pathlib.py&quot;, line 1019, in _opener
+    return self._accessor.open(self, flags, mode)
+FileNotFoundError: [Errno 2] No such file or directory: &#39;C:\\Users\\sebas\\.mathlib\\8030469cccb4306230015df55ba50a5e280727bf.tar.gz&#39;
+</pre></div>
+
+
+<p>I then created by hand the directory <code>'C:\\Users\\sebas\\.mathlib</code> and tried again, and it worked.</p>
+
 
 {% endraw %}
 

@@ -11163,6 +11163,81 @@ Is it really this hard? Why doesn't <code>dec_trivial</code> work here (it worke
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188904859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188904859">Kevin Buzzard (Feb 24 2020 at 07:23)</a>:</h4>
 <p>Yeah, screenshots are much harder to view on mobile. Post code!</p>
 
+<a name="188949915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188949915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188949915">Rocky Kamen-Rubio (Feb 24 2020 at 18:01)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110087">Scott Morrison</span> <a href="#narrow/stream/113489-new-members/topic/noob.20question(s)/near/188899263" title="#narrow/stream/113489-new-members/topic/noob.20question(s)/near/188899263">said</a>:</p>
+<blockquote>
+<p>(I'd recommend not using screenshots: it's worth your effort, and everyone's here, to prepare minimum working examples of the problems you're having. Generally, at least half the time while I'm trying to prepare an example to post here for help, the process of minimising makes me realise what  I'm doing wrong.)</p>
+</blockquote>
+<p>I'll keep that in mind going forward. I did post the code below the screenshot as well, but maybe got hidden because it was only one line. I do think I've relied maybe a little too heavily on screenshots here so I will be more conscientious of that. Thank you!</p>
+<p><span class="user-mention silent" data-user-id="127136">Alex J. Best</span> <a href="#narrow/stream/113489-new-members/topic/noob.20question(s)/near/188898243" title="#narrow/stream/113489-new-members/topic/noob.20question(s)/near/188898243">said</a>:</p>
+<blockquote>
+<p>Did you copy this from <a href="#narrow/stream/113488-general/topic/Notation.20for.20matrices.20and.20vectors" title="#narrow/stream/113488-general/topic/Notation.20for.20matrices.20and.20vectors">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Notation.20for.20matrices.20and.20vectors</a> ? I don't think this way of defining matrices is standard at all.</p>
+</blockquote>
+<p>I did! Looking back at that post I'm realizing that initially I thought that notation was standard and the post was about defining new notation for other operations. I got it to work using functions, but am still wondering if there's a better way to define a matrix with arbitrary values than defining a function like this</p>
+<div class="codehilite"><pre><span></span><span class="c1">--Lambda definition. This seems ok if there&#39;s a functional relationship between the values x and y and the element at position (x,y)</span>
+<span class="n">def</span> <span class="n">m</span> <span class="o">:</span> <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">5</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">5</span><span class="o">)</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">5</span><span class="o">),</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span> <span class="o">:</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">5</span><span class="o">),</span> <span class="o">(</span><span class="mi">10</span><span class="bp">*</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">))</span>
+
+<span class="c1">--inconvenient function definition. I know I could condense this down to a single lambda statement, but it still doesn&#39;t seem great if I have a list of values I want to turn into a matrix. Is this a necessary consequence of functional programming? I&#39;m not seeing a more convenient &quot;constructor &quot; in mathlib/src/data/matrix</span>
+
+<span class="n">def</span> <span class="n">r1</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">3</span><span class="o">))</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">y</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">y</span> <span class="bp">=</span> <span class="mi">2</span><span class="o">)</span> <span class="k">then</span> <span class="mi">2</span> <span class="k">else</span>
+  <span class="mi">3</span>
+
+<span class="n">def</span> <span class="n">r2</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">3</span><span class="o">)):</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">y</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="k">then</span> <span class="mi">4</span> <span class="k">else</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">y</span> <span class="bp">=</span> <span class="mi">2</span><span class="o">)</span> <span class="k">then</span> <span class="mi">5</span> <span class="k">else</span>
+  <span class="mi">6</span>
+
+<span class="n">def</span> <span class="n">r3</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">3</span><span class="o">)):</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">y</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="k">then</span> <span class="mi">7</span> <span class="k">else</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">y</span> <span class="bp">=</span> <span class="mi">2</span><span class="o">)</span> <span class="k">then</span> <span class="mi">8</span> <span class="k">else</span>
+  <span class="mi">9</span>
+
+<span class="n">def</span> <span class="n">c</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">3</span><span class="o">))</span> <span class="o">:</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">3</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="k">if</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="k">then</span> <span class="n">r1</span> <span class="k">else</span>
+<span class="k">if</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">2</span> <span class="k">then</span> <span class="n">r2</span> <span class="k">else</span>
+<span class="n">r3</span>
+
+<span class="n">def</span> <span class="n">myMatrix</span> <span class="o">:</span> <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">3</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">3</span><span class="o">)</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">c</span>
+
+<span class="c1">--EDIT: somewhat better way of representing a matrix but this still doesn&#39;t seem great.</span>
+<span class="n">def</span> <span class="n">myMatrix2</span> <span class="o">:</span> <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">3</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">3</span><span class="o">)</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">fin</span> <span class="mi">3</span><span class="o">),</span>
+<span class="k">if</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="k">then</span>
+  <span class="k">if</span> <span class="n">y</span> <span class="bp">=</span> <span class="mi">1</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span>
+  <span class="k">if</span> <span class="n">y</span> <span class="bp">=</span> <span class="mi">2</span> <span class="k">then</span> <span class="mi">2</span> <span class="k">else</span>
+  <span class="mi">3</span>
+<span class="k">else</span> <span class="k">if</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">2</span> <span class="k">then</span>
+  <span class="k">if</span> <span class="n">y</span> <span class="bp">=</span> <span class="mi">1</span> <span class="k">then</span> <span class="mi">4</span> <span class="k">else</span>
+  <span class="k">if</span> <span class="n">y</span> <span class="bp">=</span> <span class="mi">2</span> <span class="k">then</span> <span class="mi">5</span> <span class="k">else</span>
+  <span class="mi">6</span>
+<span class="k">else</span>
+  <span class="k">if</span> <span class="n">y</span> <span class="bp">=</span> <span class="mi">1</span> <span class="k">then</span> <span class="mi">7</span> <span class="k">else</span>
+  <span class="k">if</span> <span class="n">y</span> <span class="bp">=</span> <span class="mi">2</span> <span class="k">then</span> <span class="mi">8</span> <span class="k">else</span>
+  <span class="mi">9</span>
+</pre></div>
+
+<a name="188951206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188951206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188951206">Bryan Gin-ge Chen (Feb 24 2020 at 18:16)</a>:</h4>
+<p>Do you know about <a href="https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#pattern-matching" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#pattern-matching">pattern-matching syntax</a>?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">r1</span> <span class="o">:</span> <span class="n">fin</span> <span class="mi">3</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="mi">1</span><span class="o">,</span> <span class="bp">_⟩</span> <span class="o">:=</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="mi">2</span><span class="o">,</span> <span class="bp">_⟩</span> <span class="o">:=</span> <span class="mi">2</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="o">:=</span> <span class="mi">3</span>
+</pre></div>
+
+<a name="188953287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188953287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188953287">Alex J. Best (Feb 24 2020 at 18:42)</a>:</h4>
+<p>You could define a little helper function like this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">inhabited</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">list_of_list_to_mat</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">ll</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="o">(</span><span class="n">ll</span><span class="bp">.</span><span class="n">inth</span> <span class="o">(</span><span class="err">↑</span><span class="n">x</span><span class="o">))</span><span class="bp">.</span><span class="n">inth</span> <span class="o">(</span><span class="err">↑</span><span class="n">y</span><span class="o">)</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="o">(</span><span class="n">list_of_list_to_mat</span> <span class="o">[[</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">],[</span><span class="mi">0</span><span class="o">,</span><span class="mi">2</span><span class="o">]]</span> <span class="o">:</span> <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">2</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">ℤ</span><span class="o">)</span>  <span class="mi">1</span> <span class="mi">0</span>
+</pre></div>
+
 
 {% endraw %}
 
