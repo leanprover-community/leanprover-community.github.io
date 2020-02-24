@@ -9,7 +9,7 @@ permalink: archive/217875IstherecodeforX/index.html
 
 ### Topics:
 
-* [distance preserving maps](24386distancepreservingmaps.html) (5 messages, latest: Feb 24 2020 at 07:35)
+* [distance preserving maps](24386distancepreservingmaps.html) (8 messages, latest: Feb 24 2020 at 16:30)
 
 * [General linear groups](53242Generallineargroups.html) (3 messages, latest: Feb 21 2020 at 23:20)
 
