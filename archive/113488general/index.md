@@ -9,11 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [New user bundles](27895Newuserbundles.html) (145 messages, latest: Feb 24 2020 at 17:54)
+
+* [new mathlib tools](62589newmathlibtools.html) (30 messages, latest: Feb 24 2020 at 17:22)
+
 * [lifting complete lattices](65824liftingcompletelattices.html) (6 messages, latest: Feb 24 2020 at 16:14)
 
 * [Download speed from new olean storage on Azure](99760DownloadspeedfromnewoleanstorageonAzure.html) (9 messages, latest: Feb 24 2020 at 15:21)
-
-* [new mathlib tools](62589newmathlibtools.html) (28 messages, latest: Feb 24 2020 at 14:09)
 
 * [Notation for matrices and vectors](84581Notationformatricesandvectors.html) (16 messages, latest: Feb 24 2020 at 13:26)
 
@@ -28,8 +30,6 @@ permalink: archive/113488general/index.html
 * [Possible incorrect explanation in Theorem Proving in Lean](66165PossibleincorrectexplanationinTheoremProvinginLean.html) (6 messages, latest: Feb 24 2020 at 00:48)
 
 * [QED manifesto revisited](70480QEDmanifestorevisited.html) (2 messages, latest: Feb 23 2020 at 22:35)
-
-* [New user bundles](27895Newuserbundles.html) (136 messages, latest: Feb 23 2020 at 21:17)
 
 * [mathlib nightlies](44201mathlibnightlies.html) (80 messages, latest: Feb 23 2020 at 16:59)
 
