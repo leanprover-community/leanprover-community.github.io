@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Formalization of the statement that 0.999... = 1](05245Formalizationofthestatementthat09991.html) (1 message, latest: Feb 24 2020 at 09:58)
+* [Formalization of the statement that 0.999... = 1](05245Formalizationofthestatementthat09991.html) (31 messages, latest: Feb 24 2020 at 10:52)
 
 * [What should be my next step here?](09391Whatshouldbemynextstephere.html) (5 messages, latest: Feb 24 2020 at 03:51)
 

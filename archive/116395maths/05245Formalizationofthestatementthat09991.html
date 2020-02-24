@@ -40,6 +40,160 @@ permalink: archive/116395maths/05245Formalizationofthestatementthat09991.html
 <li>My formalization of the statement <code>0.999... = 1</code> seems rather clumsy to me - is there any way I could state it more cleanly (whatever that may mean)?</li>
 </ul>
 
+<a name="188914007"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188914007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188914007">Johan Commelin (Feb 24 2020 at 10:21)</a>:</h4>
+<p><span class="user-mention" data-user-id="264734">@Donald Sebastian Leung</span> Just to comfort you: mathematicians also don't know what a filter is <span aria-label="rolling on the floor laughing" class="emoji emoji-1f923" role="img" title="rolling on the floor laughing">:rolling_on_the_floor_laughing:</span></p>
+
+<a name="188914109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188914109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188914109">Mario Carneiro (Feb 24 2020 at 10:22)</a>:</h4>
+<p>I think you can use an infinite sum directly rather than a limit of a finite sum</p>
+
+<a name="188914134"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188914134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188914134">Johan Commelin (Feb 24 2020 at 10:23)</a>:</h4>
+<p><code>local notation</code> means that the notation is local to that file, so you would have to repeat that <code>local notation</code> in your file.</p>
+
+<a name="188914136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188914136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188914136">Donald Sebastian Leung (Feb 24 2020 at 10:23)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/116395-maths/topic/Formalization.20of.20the.20statement.20that.200.2E999.2E.2E.2E.20.3D.201/near/188914109" title="#narrow/stream/116395-maths/topic/Formalization.20of.20the.20statement.20that.200.2E999.2E.2E.2E.20.3D.201/near/188914109">said</a>:</p>
+<blockquote>
+<p>I think you can use an infinite sum directly rather than a limit of a finite sum</p>
+</blockquote>
+<p>Nice. How so?</p>
+
+<a name="188914345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188914345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188914345">Mario Carneiro (Feb 24 2020 at 10:26)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">algebra</span><span class="bp">.</span><span class="n">infinite_sum</span>
+
+<span class="kn">open</span> <span class="n">filter</span>
+
+<span class="c1">-- 0.999... = 1</span>
+<span class="c1">-- Or, more formally:</span>
+<span class="c1">-- \lim_{n\to+\infty} \frac{9}{10} \sum_{i = 0}^{n - 1} (\frac{1}{10})^i = 1</span>
+<span class="n">def</span> <span class="n">SUBMISSION</span> <span class="o">:=</span> <span class="n">has_sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">,</span> <span class="mi">9</span> <span class="bp">/</span> <span class="mi">10</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">/</span> <span class="mi">10</span><span class="o">)</span> <span class="err">^</span> <span class="n">i</span><span class="o">)</span> <span class="mi">1</span>
+<span class="c1">-- Cheat prevention</span>
+<span class="kn">notation</span> <span class="bp">`</span><span class="n">SUBMISSION</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">SUBMISSION</span>
+</pre></div>
+
+<a name="188914370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188914370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188914370">Donald Sebastian Leung (Feb 24 2020 at 10:27)</a>:</h4>
+<p>Thank you!</p>
+
+<a name="188914462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188914462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188914462">Mario Carneiro (Feb 24 2020 at 10:28)</a>:</h4>
+<p>You could also use <code>(∑ i:ℕ, 9 / 10 * (1 / 10) ^ i) = 1</code> which looks nicer but doesn't exactly assert that the sum is convergent (although if it's not convergent you almost certainly wouldn't be able to prove the equality)</p>
+
+<a name="188914508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188914508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188914508">Donald Sebastian Leung (Feb 24 2020 at 10:29)</a>:</h4>
+<p>So is your first example a more faithful rendering of <code>0.999... = 1</code>, or does it not really matter?</p>
+
+<a name="188914509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188914509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188914509">Mario Carneiro (Feb 24 2020 at 10:29)</a>:</h4>
+<p>oh, well actually it is defined to return 0 on nonconvergent sums, so that is actually provably equivalent in this case</p>
+
+<a name="188914565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188914565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188914565">Donald Sebastian Leung (Feb 24 2020 at 10:30)</a>:</h4>
+<p>Thanks, I think I will go with your second example then.</p>
+
+<a name="188914591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188914591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188914591">Mario Carneiro (Feb 24 2020 at 10:30)</a>:</h4>
+<p>in practice people will almost certainly have to prove the first statement, but there is an easy lemma to go from that to the second statement</p>
+
+<a name="188914626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188914626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188914626">Mario Carneiro (Feb 24 2020 at 10:31)</a>:</h4>
+<p>fwiw the metamath theorem asserting this uses the second form: <a href="http://us.metamath.org/mpeuni/0.999....html" target="_blank" title="http://us.metamath.org/mpeuni/0.999....html">0.999...</a></p>
+
+<a name="188914674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188914674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188914674">Mario Carneiro (Feb 24 2020 at 10:32)</a>:</h4>
+<p>(yes, the name of the theorem is actually <code>0.999...</code>. Dot is a valid label character and someone had fun with naming here)</p>
+
+<a name="188914944"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188914944" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188914944">Mario Carneiro (Feb 24 2020 at 10:36)</a>:</h4>
+<p>However, none of this really helps with the total load time. If you want that, you will probably have to define your own version of the definitions</p>
+
+<a name="188915060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188915060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188915060">Mario Carneiro (Feb 24 2020 at 10:38)</a>:</h4>
+<p>Oops, you need to write it as <code>def SUBMISSION := (∑ i:ℕ, (9 / 10 * (1 / 10) ^ i : ℝ)) = 1</code> or else it will be false</p>
+
+<a name="188915063"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188915063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188915063">Donald Sebastian Leung (Feb 24 2020 at 10:38)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/116395-maths/topic/Formalization.20of.20the.20statement.20that.200.2E999.2E.2E.2E.20.3D.201/near/188914944" title="#narrow/stream/116395-maths/topic/Formalization.20of.20the.20statement.20that.200.2E999.2E.2E.2E.20.3D.201/near/188914944">said</a>:</p>
+<blockquote>
+<p>However, none of this really helps with the total load time. If you want that, you will probably have to define your own version of the definitions</p>
+</blockquote>
+<p>What is the general stance of defining stuff yourself that is already in the stdlib/mathlib in one form or another, e.g. in order to speed up compilation time?</p>
+
+<a name="188915107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188915107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188915107">Mario Carneiro (Feb 24 2020 at 10:39)</a>:</h4>
+<p>generally frowned upon. It's fine for local work, but if you want to feed back into mathlib you should instead see if you can restructure things to make the definitions have less dependencies</p>
+
+<a name="188915157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188915157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188915157">Mario Carneiro (Feb 24 2020 at 10:40)</a>:</h4>
+<p>which might mean reorganizing files</p>
+
+<a name="188915188"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188915188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188915188">Donald Sebastian Leung (Feb 24 2020 at 10:40)</a>:</h4>
+<p>What if it is intended to be published as an (beginner) exercise on an online platform? Would that be akin to teaching bad practices?</p>
+
+<a name="188915193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188915193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188915193">Mario Carneiro (Feb 24 2020 at 10:41)</a>:</h4>
+<p>For a theorem like this, if you are okay with using rational numbers, you can get the statement in only a few lines, skipping the whole theory of topology</p>
+
+<a name="188915228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188915228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188915228">Donald Sebastian Leung (Feb 24 2020 at 10:41)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/116395-maths/topic/Formalization.20of.20the.20statement.20that.200.2E999.2E.2E.2E.20.3D.201/near/188915193" title="#narrow/stream/116395-maths/topic/Formalization.20of.20the.20statement.20that.200.2E999.2E.2E.2E.20.3D.201/near/188915193">said</a>:</p>
+<blockquote>
+<p>For a theorem like this, if you are okay with using rational numbers, you can get the statement in only a few lines, skipping the whole theory of topology</p>
+</blockquote>
+<p>It's fine as long as it correctly states (something logically equivalent to) <code>0.999... = 1</code></p>
+
+<a name="188915230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188915230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188915230">Mario Carneiro (Feb 24 2020 at 10:41)</a>:</h4>
+<p>For a beginner exercise you absolutely want to use mathlib definitions, because newbies can't write the theory</p>
+
+<a name="188915281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188915281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188915281">Donald Sebastian Leung (Feb 24 2020 at 10:42)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/116395-maths/topic/Formalization.20of.20the.20statement.20that.200.2E999.2E.2E.2E.20.3D.201/near/188915230" title="#narrow/stream/116395-maths/topic/Formalization.20of.20the.20statement.20that.200.2E999.2E.2E.2E.20.3D.201/near/188915230">said</a>:</p>
+<blockquote>
+<p>For a beginner exercise you absolutely want to use mathlib definitions, because newbies can't write the theory</p>
+</blockquote>
+<p>Noted</p>
+
+<a name="188915325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188915325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188915325">Mario Carneiro (Feb 24 2020 at 10:43)</a>:</h4>
+<p>for example a newbie knows that the sum f + g is the sum of f plus the sum of g, but they are not ready to prove that themselves</p>
+
+<a name="188915415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188915415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188915415">Mario Carneiro (Feb 24 2020 at 10:44)</a>:</h4>
+<p>if you give them an undergraduate level definition of the limit, they can probably work with it but that's a separate exercise</p>
+
+<a name="188915624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188915624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188915624">Donald Sebastian Leung (Feb 24 2020 at 10:48)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/116395-maths/topic/Formalization.20of.20the.20statement.20that.200.2E999.2E.2E.2E.20.3D.201/near/188915415" title="#narrow/stream/116395-maths/topic/Formalization.20of.20the.20statement.20that.200.2E999.2E.2E.2E.20.3D.201/near/188915415">said</a>:</p>
+<blockquote>
+<p>if you give them an undergraduate level definition of the limit, they can probably work with it but that's a separate exercise</p>
+</blockquote>
+<p>If I intend to post the <code>0.999...</code> exercise as a way for beginners to practice with the concept of a limit (as taught at the undergraduate level), would it be fine to (re-)define the concept in the exercise instead of using the more general definition from mathlib?</p>
+
+<a name="188915671"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188915671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188915671">Mario Carneiro (Feb 24 2020 at 10:48)</a>:</h4>
+<p>yes</p>
+
+<a name="188915693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188915693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188915693">Donald Sebastian Leung (Feb 24 2020 at 10:48)</a>:</h4>
+<p>Thanks for your feedback and guidance!</p>
+
+<a name="188915769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188915769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188915769">Mario Carneiro (Feb 24 2020 at 10:50)</a>:</h4>
+<p>teaching material often uses redefinitions, in particular because it makes it easier to prevent students from accidentally or otherwise reusing lemmas from the library that they are supposed to be proving, but this stuff generally doesn't feed back to mathlib</p>
+
+<a name="188915872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188915872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188915872">Donald Sebastian Leung (Feb 24 2020 at 10:52)</a>:</h4>
+<p>Got it. So basically:</p>
+<ul>
+<li>For teaching elementary concepts, redefining stuff already in mathlib is acceptable (and sometimes encouraged)</li>
+<li>For the development of mathlib itself, definitely use as many existing definitions as possible</li>
+</ul>
+
 
 {% endraw %}
 

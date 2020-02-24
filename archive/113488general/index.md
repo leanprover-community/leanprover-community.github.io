@@ -9,7 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [new mathlib tools](62589newmathlibtools.html) (14 messages, latest: Feb 24 2020 at 09:48)
+* [Download speed from new olean storage on Azure](99760DownloadspeedfromnewoleanstorageonAzure.html) (1 message, latest: Feb 24 2020 at 10:31)
+
+* [new mathlib tools](62589newmathlibtools.html) (15 messages, latest: Feb 24 2020 at 10:24)
+
+* [Notation for matrices and vectors](84581Notationformatricesandvectors.html) (15 messages, latest: Feb 24 2020 at 10:21)
 
 * [Request for review of a leftpad proof](13759Requestforreviewofaleftpadproof.html) (26 messages, latest: Feb 24 2020 at 06:52)
 
@@ -110,8 +114,6 @@ permalink: archive/113488general/index.html
 * [coe_fn and class instances](16860coefnandclassinstances.html) (23 messages, latest: Feb 15 2020 at 14:56)
 
 * [Let assumptions in theorems](82602Letassumptionsintheorems.html) (7 messages, latest: Feb 14 2020 at 20:12)
-
-* [Notation for matrices and vectors](84581Notationformatricesandvectors.html) (13 messages, latest: Feb 14 2020 at 12:35)
 
 * [nested comment blocks](42453nestedcommentblocks.html) (6 messages, latest: Feb 14 2020 at 05:42)
 
