@@ -1,0 +1,33 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/54969zeroversus0.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html">zero versus 0</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188934090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/188934090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#188934090">Shing Tak Lam (Feb 24 2020 at 15:08)</a>:</h4>
+<p>Hello, I'm just getting started using Lean, and I've been looking at the Natural Numbers game. I've copied the definitions over from the Github repository, but the behaviour seems to be different on my local version versus the online version.</p>
+<p>So for example for the first exercise in the Addition world, the goal on the online version is <code>0 + 0 = 0</code>, but on my local version is <code>0 + zero = zero</code>. I've defined <code>instance : has_zero mynat : ⟨mynat.zero⟩</code> like in the repository. I could obviously use <code>rw mynat_zero_eq_zero,</code>, but then it would be nice to know why and how to fix this, as a way to learn more about how Lean itself works. So is there a way for Lean to know (or for me to tell Lean) that <code>zero</code> and <code>0</code> are the same thing?</p>
+<p>Is this something that is defined custom for the Natural Numbers Game, as I see that some of the code in the repo <code>open lean</code>, or am I missing something?</p>
+<p>Thank you very much,</p>
+
+<a name="188937541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/188937541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#188937541">Kevin Buzzard (Feb 24 2020 at 15:47)</a>:</h4>
+<p>Yeah. What actually happens in the natural number game is that it isn't really honest Lean because honest Lean's induction tactic has this problem and i would constantly see this causing problems to students. So in the natural number game I change the induction tactic so that after it's applied, lean rewrites all the <code>zero</code>s to 0s</p>
+
+<a name="188938294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/188938294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#188938294">Kevin Buzzard (Feb 24 2020 at 15:55)</a>:</h4>
+<p>It will take me a while to remember the details, but <a href="https://github.com/ImperialCollegeLondon/natural_number_game/blob/2d764f72669ae30861f6a1057fce0257f3e466c4/src/tactic/modded.lean#L70" target="_blank" title="https://github.com/ImperialCollegeLondon/natural_number_game/blob/2d764f72669ae30861f6a1057fce0257f3e466c4/src/tactic/modded.lean#L70">here</a> is an example of me defining a new tactic <code>induction'</code> which is "apply induction, and then run the simplifier" and <a href="https://github.com/ImperialCollegeLondon/natural_number_game/blob/d39858f7c2fbb1891dbbb1ee7bbb3f110567f5fe/src/mynat/definition.lean#L23" target="_blank" title="https://github.com/ImperialCollegeLondon/natural_number_game/blob/d39858f7c2fbb1891dbbb1ee7bbb3f110567f5fe/src/mynat/definition.lean#L23">here</a> is where I tag that zero should be rewritten to 0. Finally <a href="https://github.com/ImperialCollegeLondon/natural_number_game/blob/2d764f72669ae30861f6a1057fce0257f3e466c4/src/tactic/nat_num_game.lean#L51" target="_blank" title="https://github.com/ImperialCollegeLondon/natural_number_game/blob/2d764f72669ae30861f6a1057fce0257f3e466c4/src/tactic/nat_num_game.lean#L51">here</a> is where I tell Lean to use my induction tactic not the inbuilt one. Note that Rob Lewis did most of the technical work here.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

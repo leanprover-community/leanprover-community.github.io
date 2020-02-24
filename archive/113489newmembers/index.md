@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [zero versus 0](54969zeroversus0.html) (3 messages, latest: Feb 24 2020 at 15:55)
+
 * [error about instances](36782erroraboutinstances.html) (4 messages, latest: Feb 24 2020 at 14:24)
 
 * [noob question(s)](52075noobquestions.html) (1984 messages, latest: Feb 24 2020 at 07:23)
