@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Notation for matrices and vectors](84581Notationformatricesandvectors.html) (16 messages, latest: Feb 24 2020 at 13:26)
+
 * [new mathlib tools](62589newmathlibtools.html) (27 messages, latest: Feb 24 2020 at 12:53)
 
 * [Is this a good simp lemma?](43715Isthisagoodsimplemma.html) (5 messages, latest: Feb 24 2020 at 12:40)
 
 * [Download speed from new olean storage on Azure](99760DownloadspeedfromnewoleanstorageonAzure.html) (1 message, latest: Feb 24 2020 at 10:31)
-
-* [Notation for matrices and vectors](84581Notationformatricesandvectors.html) (15 messages, latest: Feb 24 2020 at 10:21)
 
 * [Request for review of a leftpad proof](13759Requestforreviewofaleftpadproof.html) (26 messages, latest: Feb 24 2020 at 06:52)
 

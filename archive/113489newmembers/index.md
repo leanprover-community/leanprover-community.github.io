@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [error about instances](36782erroraboutinstances.html) (3 messages, latest: Feb 24 2020 at 13:44)
+
 * [noob question(s)](52075noobquestions.html) (1984 messages, latest: Feb 24 2020 at 07:23)
 
 * [(no topic)](79918notopic.html) (269 messages, latest: Feb 23 2020 at 22:02)
@@ -18,8 +20,6 @@ permalink: archive/113489newmembers/index.html
 * [Subtype Coercion](78847SubtypeCoercion.html) (1 message, latest: Feb 23 2020 at 20:15)
 
 * [Using mathlib in Lean project created using leanpkg](25878UsingmathlibinLeanprojectcreatedusingleanpkg.html) (43 messages, latest: Feb 23 2020 at 15:18)
-
-* [error about instances](36782erroraboutinstances.html) (2 messages, latest: Feb 23 2020 at 04:23)
 
 * [help with fintype](24197helpwithfintype.html) (25 messages, latest: Feb 23 2020 at 01:41)
 
