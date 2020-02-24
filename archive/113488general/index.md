@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [QED manifesto revisited](70480QEDmanifestorevisited.html) (2 messages, latest: Feb 23 2020 at 22:35)
+* [new mathlib tools](62589newmathlibtools.html) (4 messages, latest: Feb 23 2020 at 23:59)
 
-* [new mathlib tools](62589newmathlibtools.html) (1 message, latest: Feb 23 2020 at 21:19)
+* [QED manifesto revisited](70480QEDmanifestorevisited.html) (2 messages, latest: Feb 23 2020 at 22:35)
 
 * [New user bundles](27895Newuserbundles.html) (136 messages, latest: Feb 23 2020 at 21:17)
 
