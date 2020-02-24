@@ -1,0 +1,46 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/05245Formalizationofthestatementthat09991.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html">Formalization of the statement that 0.999... = 1</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188912631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Formalization%20of%20the%20statement%20that%200.999...%20%3D%201/near/188912631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05245Formalizationofthestatementthat09991.html#188912631">Donald Sebastian Leung (Feb 24 2020 at 09:58)</a>:</h4>
+<p>So, after spending about two hours browsing through the standard library for the definition of a limit (among other things) and wrapping my head around the fact that limits are defined from a somewhat more general concept of filters (which I have no idea of as a CS major), I finally got down the following statement (named <code>SUBMISSION</code> in the code example below) which I <em>believe</em> should be logically equivalent to <code>0.999... = 1</code>:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm"> Preloaded.lean -/</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">rat</span><span class="bp">.</span><span class="n">basic</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">geom_sum</span> <span class="n">order</span><span class="bp">.</span><span class="n">filter</span><span class="bp">.</span><span class="n">basic</span> <span class="n">topology</span><span class="bp">.</span><span class="n">basic</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">specific_limits</span>
+
+<span class="kn">open</span> <span class="n">filter</span>
+
+<span class="kn">notation</span> <span class="bp">`</span><span class="err">𝓝</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">nhds</span>
+
+<span class="c1">-- 0.999... = 1</span>
+<span class="c1">-- Or, more formally:</span>
+<span class="c1">-- \lim_{n\to+\infty} \frac{9}{10} \sum_{i = 0}^{n - 1} (\frac{1}{10})^i = 1</span>
+<span class="n">def</span> <span class="n">SUBMISSION</span> <span class="o">:=</span>
+  <span class="n">tendsto</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="mi">9</span> <span class="bp">*</span> <span class="n">geom_series</span> <span class="o">(</span><span class="n">rat</span><span class="bp">.</span><span class="n">mk</span> <span class="mi">1</span> <span class="mi">10</span><span class="o">)</span> <span class="n">n</span> <span class="bp">/</span> <span class="mi">10</span><span class="o">)</span> <span class="n">at_top</span> <span class="o">(</span><span class="err">𝓝</span> <span class="mi">1</span><span class="o">)</span>
+<span class="c1">-- Cheat prevention</span>
+<span class="kn">notation</span> <span class="bp">`</span><span class="n">SUBMISSION</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">SUBMISSION</span>
+</pre></div>
+
+
+<p>I would like to ask for feedback on possible improvements (or corrections) to my formalization above. In particular:</p>
+<ul>
+<li>Are there any redundant <code>import</code>s that my statement (<code>SUBMISSION</code>) does not depend on? Ideally, I would like to import as few libraries from mathlib as possible, importing just enough for the statement to compile</li>
+<li>Is there any way I can speed up the compilation time of my file, most of which (I think) is currently spent on importing stuff? I timed <code>lean Preloaded.lean</code> with a stopwatch and it took about 14s to compile and I would like to get it down to well under 12 seconds (the faster the better)</li>
+<li>I noticed in <code>analysis/specific_limits.lean</code> from mathlib that <code>𝓝</code> is notation for <code>filter.nhds</code> but I can't seem to use it myself. I also noticed that this was declared as <code>local notation</code> for <code>topological_space</code> (whatever that means). In the meantime, my workaround was to (re-)declare this notation myself to use it in my statement. Is there a way to avoid this workaround, or would you recommend that I just type <code>nhds</code> explicitly in my statement?</li>
+<li>My formalization of the statement <code>0.999... = 1</code> seems rather clumsy to me - is there any way I could state it more cleanly (whatever that may mean)?</li>
+</ul>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
