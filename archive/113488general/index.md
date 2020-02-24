@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (37 messages, latest: Feb 24 2020 at 02:58)
+* [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (39 messages, latest: Feb 24 2020 at 03:01)
 
 * [Possible incorrect explanation in Theorem Proving in Lean](66165PossibleincorrectexplanationinTheoremProvinginLean.html) (6 messages, latest: Feb 24 2020 at 00:48)
 

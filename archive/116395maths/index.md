@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [proposition manipulation](69752propositionmanipulation.html) (22 messages, latest: Feb 24 2020 at 02:59)
+* [What should be my next step here?](09391Whatshouldbemynextstephere.html) (5 messages, latest: Feb 24 2020 at 03:51)
+
+* [proposition manipulation](69752propositionmanipulation.html) (53 messages, latest: Feb 24 2020 at 03:44)
 
 * [MathLib installing](36823MathLibinstalling.html) (107 messages, latest: Feb 23 2020 at 20:28)
 

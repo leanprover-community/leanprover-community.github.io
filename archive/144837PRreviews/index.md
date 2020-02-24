@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1596 case_bash on nat](526901596casebashonnat.html) (2 messages, latest: Feb 24 2020 at 03:48)
+
 * [category PRs](66100categoryPRs.html) (1 message, latest: Feb 21 2020 at 14:39)
 
 * [#2030](714972030.html) (4 messages, latest: Feb 20 2020 at 22:21)
@@ -24,8 +26,6 @@ permalink: archive/144837PRreviews/index.html
 * [#1835 more lie basics](507431835moreliebasics.html) (6 messages, latest: Jan 12 2020 at 22:09)
 
 * [#1823](477621823.html) (3 messages, latest: Dec 23 2019 at 12:35)
-
-* [#1596 case_bash on nat](526901596casebashonnat.html) (1 message, latest: Dec 19 2019 at 09:28)
 
 * [#1800](890051800.html) (3 messages, latest: Dec 13 2019 at 17:16)
 

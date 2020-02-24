@@ -1,0 +1,102 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/09391Whatshouldbemynextstephere.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/09391Whatshouldbemynextstephere.html">What should be my next step here?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="188897079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/What%20should%20be%20my%20next%20step%20here%3F/near/188897079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/09391Whatshouldbemynextstephere.html#188897079">Nicholas McConnell (Feb 24 2020 at 03:45)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+<span class="kn">universe</span> <span class="n">u</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+
+<span class="kn">lemma</span> <span class="n">bezout</span> <span class="o">(</span><span class="n">a</span> <span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="n">prime</span> <span class="n">p</span><span class="o">)</span> <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">divides</span> <span class="n">p</span> <span class="n">a</span><span class="o">))</span> <span class="o">:</span>
+  <span class="bp">∃</span><span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">),</span> <span class="o">(</span><span class="bp">∃</span><span class="o">(</span><span class="n">y</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">),</span> <span class="o">(</span><span class="n">x</span><span class="bp">*</span><span class="n">a</span> <span class="bp">+</span> <span class="n">y</span><span class="bp">*</span><span class="n">p</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">rw</span> <span class="n">prime</span> <span class="n">at</span> <span class="n">hp</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">hp</span> <span class="k">with</span> <span class="n">hp1</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">zero_lt_one</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_succ_self</span> <span class="mi">0</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">p_pos</span> <span class="o">:=</span> <span class="n">lt_trans</span> <span class="n">zero_lt_one</span> <span class="n">hp1</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">dh</span> <span class="o">:</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">d</span> <span class="bp">∧</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">),</span> <span class="n">x</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">a</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">=</span> <span class="err">↑</span><span class="n">d</span> <span class="o">:=</span> <span class="n">LCex</span> <span class="n">a</span> <span class="n">p</span> <span class="n">p_pos</span><span class="o">,</span>
+<span class="k">let</span> <span class="n">d</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">find</span><span class="o">(</span><span class="n">dh</span><span class="o">),</span>
+<span class="k">have</span> <span class="n">dx</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">d</span> <span class="bp">∧</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">),</span> <span class="n">x</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">a</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">=</span> <span class="err">↑</span><span class="n">d</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">find_spec</span> <span class="n">dh</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">dm</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">d&#39;</span><span class="o">,</span> <span class="o">(</span><span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">d&#39;</span> <span class="bp">∧</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">),</span> <span class="n">x</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">a</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">=</span> <span class="err">↑</span><span class="n">d&#39;</span><span class="o">)</span> <span class="bp">→</span> <span class="n">d</span> <span class="bp">≤</span> <span class="n">d&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">d&#39;</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">find_min&#39;</span> <span class="n">dh</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">dx</span> <span class="k">with</span> <span class="n">dx1</span> <span class="n">dx2</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">lt_trichotomy</span> <span class="mi">1</span> <span class="n">d</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">h</span> <span class="k">with</span> <span class="n">h1</span> <span class="n">h2</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">r1</span> <span class="o">:=</span> <span class="n">div_alg</span> <span class="n">a</span> <span class="n">d</span> <span class="n">dx1</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">r1</span> <span class="k">with</span> <span class="n">r</span> <span class="n">hr</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">hr</span> <span class="k">with</span> <span class="n">q</span> <span class="n">hq</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">hq</span> <span class="k">with</span> <span class="n">hq1</span> <span class="n">hq2</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">dx2</span> <span class="k">with</span> <span class="n">x_ex</span> <span class="n">hx</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">hx</span> <span class="k">with</span> <span class="n">y_ex</span> <span class="n">hy</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">thing</span> <span class="o">:=</span> <span class="n">dm</span> <span class="n">r</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">htr</span> <span class="o">:=</span> <span class="n">lt_trichotomy</span> <span class="mi">0</span> <span class="n">r</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">htr</span> <span class="k">with</span> <span class="n">htr1</span> <span class="n">htr2</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">claim</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span><span class="bp">-</span><span class="n">x_ex</span><span class="bp">*</span><span class="n">q</span><span class="o">)</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">a</span> <span class="bp">+</span> <span class="o">(</span><span class="bp">-</span><span class="n">y_ex</span><span class="bp">*</span><span class="n">q</span><span class="o">)</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">=</span> <span class="err">↑</span><span class="n">r</span><span class="o">,</span>
+<span class="n">ring</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">sub_mul</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">one_mul</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">hq1</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">hq1</span> <span class="n">at</span> <span class="n">hy</span><span class="o">,</span>
+
+<span class="c1">-- ...</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I'm not sure how to deal with this subordinate claim with all the differences between integers and naturals:</p>
+<div class="codehilite"><pre><span></span><span class="mi">4</span> <span class="n">goals</span>
+<span class="n">a</span> <span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">ha</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">divides</span> <span class="n">p</span> <span class="n">a</span><span class="o">,</span>
+<span class="n">hp1</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">&lt;</span> <span class="n">p</span><span class="o">,</span>
+<span class="n">hp2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">divides</span> <span class="n">k</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">k</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">∨</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">p</span><span class="o">,</span>
+<span class="n">zero_lt_one</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="mi">1</span><span class="o">,</span>
+<span class="n">p_pos</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">p</span><span class="o">,</span>
+<span class="n">dh</span> <span class="o">:</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">d</span> <span class="bp">∧</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">),</span> <span class="n">x</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">a</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">=</span> <span class="err">↑</span><span class="n">d</span><span class="o">,</span>
+<span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">find</span> <span class="n">dh</span><span class="o">,</span>
+<span class="n">dm</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">d&#39;</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="o">(</span><span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">d&#39;</span> <span class="bp">∧</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">),</span> <span class="n">x</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">a</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">=</span> <span class="err">↑</span><span class="n">d&#39;</span><span class="o">)</span> <span class="bp">→</span> <span class="n">d</span> <span class="bp">≤</span> <span class="n">d&#39;</span><span class="o">,</span>
+<span class="n">dx1</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">d</span><span class="o">,</span>
+<span class="n">h1</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">&lt;</span> <span class="n">d</span><span class="o">,</span>
+<span class="n">r</span> <span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">hq1</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">d</span> <span class="bp">*</span> <span class="n">q</span> <span class="bp">+</span> <span class="n">r</span><span class="o">,</span>
+<span class="n">hq2</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">&lt;</span> <span class="n">d</span><span class="o">,</span>
+<span class="n">x_ex</span> <span class="n">y_ex</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span>
+<span class="n">thing</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">r</span> <span class="bp">∧</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">),</span> <span class="n">x</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">a</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">=</span> <span class="err">↑</span><span class="n">r</span><span class="o">)</span> <span class="bp">→</span> <span class="n">d</span> <span class="bp">≤</span> <span class="n">r</span><span class="o">,</span>
+<span class="n">htr1</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">r</span><span class="o">,</span>
+<span class="n">hy</span> <span class="o">:</span> <span class="n">x_ex</span> <span class="bp">*</span> <span class="err">↑</span><span class="o">(</span><span class="n">d</span> <span class="bp">*</span> <span class="n">q</span> <span class="bp">+</span> <span class="n">r</span><span class="o">)</span> <span class="bp">+</span> <span class="n">y_ex</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">=</span> <span class="err">↑</span><span class="n">d</span>
+<span class="err">⊢</span> <span class="err">↑</span><span class="o">(</span><span class="n">d</span> <span class="bp">*</span> <span class="n">q</span> <span class="bp">+</span> <span class="n">r</span><span class="o">)</span> <span class="bp">-</span> <span class="n">x_ex</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">q</span> <span class="bp">*</span> <span class="err">↑</span><span class="o">(</span><span class="n">d</span> <span class="bp">*</span> <span class="n">q</span> <span class="bp">+</span> <span class="n">r</span><span class="o">)</span> <span class="bp">-</span> <span class="n">y_ex</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">q</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">=</span> <span class="err">↑</span><span class="n">r</span>
+</pre></div>
+
+<a name="188897139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/What%20should%20be%20my%20next%20step%20here%3F/near/188897139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/09391Whatshouldbemynextstephere.html#188897139">Scott Morrison (Feb 24 2020 at 03:47)</a>:</h4>
+<p>I'm not going to look at this now --- but, when Mario suggested a "minimum working example", the "minimum" part is helpful advice. If I'm stuck on a proof, I really try to minimise it. You might consider things like</p>
+<ul>
+<li>use <code>clear</code> to discard irrelevant hypotheses</li>
+<li>use <code>extract_goal</code> to restate the current goal as a lemma, and try proving that earlier in the file</li>
+</ul>
+
+<a name="188897201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/What%20should%20be%20my%20next%20step%20here%3F/near/188897201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/09391Whatshouldbemynextstephere.html#188897201">Mario Carneiro (Feb 24 2020 at 03:49)</a>:</h4>
+<p>oh, I hadn't noticed <code>extract_goal</code>, that looks really nice for this</p>
+
+<a name="188897254"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/What%20should%20be%20my%20next%20step%20here%3F/near/188897254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/09391Whatshouldbemynextstephere.html#188897254">Mario Carneiro (Feb 24 2020 at 03:51)</a>:</h4>
+<p>also those imports don't work for me</p>
+
+<a name="188897255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/What%20should%20be%20my%20next%20step%20here%3F/near/188897255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/09391Whatshouldbemynextstephere.html#188897255">Nicholas McConnell (Feb 24 2020 at 03:51)</a>:</h4>
+<p>Yikes :</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
