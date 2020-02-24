@@ -681,6 +681,23 @@ drwxrwxr-x@  4 user  staff     128 Feb 19 17:33 buffer
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20user%20bundles/near/188949359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27895Newuserbundles.html#188949359">Alex J. Best (Feb 24 2020 at 17:54)</a>:</h4>
 <p>Next issue, the lean extension is not picked up.</p>
 
+<a name="188974507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20user%20bundles/near/188974507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27895Newuserbundles.html#188974507">Bryan Gin-ge Chen (Feb 24 2020 at 22:46)</a>:</h4>
+<p>I just tested the new bundle, and it didn't open when I double clicked (“VSCodium.app” can’t be opened because Apple cannot check it for malicious software.). I had to right-click VSCodium.app and select "Open" to open it. (I am using macOS 10.14.6 so this is expected, according to the note on <a href="https://vscodium.com/" target="_blank" title="https://vscodium.com/">https://vscodium.com/</a>). After VSCodium opened, it didn't find the extension. This is apparently related to the quarantine, see <a href="https://code.visualstudio.com/docs/editor/portable#_macos" target="_blank" title="https://code.visualstudio.com/docs/editor/portable#_macos">the VS Code page on portable mode and macoS</a>. I next removed the quarantine attribute by hand by running <code>xattr -dr com.apple.quarantine VSCodium.app/</code> and then launched VSCodium. However, the extension still didn't load.</p>
+<p>In a final attempt, I tried extracting the bundle again in a new directory, and then I ran the <code>xattr</code> command in the console before opening the app with right click. This time, success! I was able to open VSCodium.app by double clicking, and the extension loaded (and worked perfectly) after I opened the <code>src/</code> directory.</p>
+
+<a name="188974680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20user%20bundles/near/188974680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27895Newuserbundles.html#188974680">Patrick Massot (Feb 24 2020 at 22:49)</a>:</h4>
+<p>Thank you very much Bryan!</p>
+
+<a name="188974698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20user%20bundles/near/188974698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27895Newuserbundles.html#188974698">Patrick Massot (Feb 24 2020 at 22:49)</a>:</h4>
+<p>I guess this is almost something we could tell users to do.</p>
+
+<a name="188974792"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20user%20bundles/near/188974792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27895Newuserbundles.html#188974792">Patrick Massot (Feb 24 2020 at 22:50)</a>:</h4>
+<p>I guess we can't do much more without building a proper installer (which would defeat the purpose of those packages that are guaranteed to install nothing outside of a designated folder and depend on nothing).</p>
+
 
 {% endraw %}
 

@@ -659,6 +659,72 @@ unknown identifier &#39;divides&#39;
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188970300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188970300">Nicholas McConnell (Feb 24 2020 at 21:54)</a>:</h4>
 <p>Alright, my apologies for that.</p>
 
+<a name="188971547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188971547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188971547">Kevin Buzzard (Feb 24 2020 at 22:08)</a>:</h4>
+<p>I guess the other thing worth saying is that once you learn how to post MWEs and not just WEs, you start stripping away the irrelevant stuff and you then often end up solving your own problems. If you had done that here, you would see that the goal was created by <code>claim2</code> and once everything else was stripped away you would have ended up with</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="kn">lemma</span> <span class="n">MWE</span> <span class="o">(</span><span class="n">a</span> <span class="n">d</span> <span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hq1</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">d</span> <span class="bp">*</span> <span class="n">q</span> <span class="bp">+</span> <span class="n">r</span><span class="o">)</span>
+  <span class="o">:</span> <span class="n">false</span> <span class="c1">-- irrelevant goal</span>
+  <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="k">have</span> <span class="n">claim2</span> <span class="o">:</span> <span class="err">↑</span><span class="n">a</span><span class="bp">-</span><span class="err">↑</span><span class="n">d</span><span class="bp">*</span><span class="err">↑</span><span class="n">q</span> <span class="bp">=</span> <span class="err">↑</span><span class="n">r</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">hq1</span><span class="o">,</span>
+<span class="n">push_cast</span><span class="o">,</span>
+<span class="n">repeat</span> <span class="o">{</span><span class="n">sorry</span><span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>You could have made that yourself. Now look at what happens after <code>claim2</code> -- the number of goals goes from 1 to 9. So now you can see where the problem probably is.</p>
+
+<a name="188972512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188972512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188972512">Kevin Buzzard (Feb 24 2020 at 22:20)</a>:</h4>
+<p>Other notes: <code>square_eq_times_itself</code> is already in mathlib and is called <code>pow_two</code>. Of course it's very good practice for a beginner to prove these things themselves, but don't forget <code>library_search</code>. We have <code>mul_self_pos</code> and <code>mul_self_nonneg</code> as well, which will make some of those sorrys easy to remove. The rule of thumb is: if it's obvious, it's already there.</p>
+
+<a name="188974255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188974255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188974255">Nicholas McConnell (Feb 24 2020 at 22:43)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="188974572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188974572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188974572">Kevin Buzzard (Feb 24 2020 at 22:48)</a>:</h4>
+<p>In tactic mode you can just do this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="o">(</span><span class="n">foo</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">test</span> <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="bp">∀</span><span class="o">(</span><span class="n">x</span> <span class="n">y</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">),(</span><span class="n">foo</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">x</span><span class="bp">+</span><span class="n">y</span><span class="bp">=</span><span class="mi">0</span><span class="o">))</span> <span class="o">:</span> <span class="bp">∀</span><span class="o">(</span><span class="n">x</span> <span class="n">y</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">),(</span><span class="n">foo</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">y</span><span class="bp">+</span><span class="n">x</span><span class="bp">=</span><span class="mi">0</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">x</span> <span class="n">y</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">add_comm</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">hp</span> <span class="n">x</span> <span class="n">y</span> <span class="n">h</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>In term mode you can use the stupid triangle which I can never get to work.</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">test&#39;</span> <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="bp">∀</span><span class="o">(</span><span class="n">x</span> <span class="n">y</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">),(</span><span class="n">foo</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">x</span><span class="bp">+</span><span class="n">y</span><span class="bp">=</span><span class="mi">0</span><span class="o">))</span> <span class="o">:</span> <span class="bp">∀</span><span class="o">(</span><span class="n">x</span> <span class="n">y</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">),(</span><span class="n">foo</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">y</span><span class="bp">+</span><span class="n">x</span><span class="bp">=</span><span class="mi">0</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">h</span><span class="o">,</span> <span class="n">add_comm</span> <span class="bp">▸</span> <span class="n">hp</span> <span class="n">x</span> <span class="n">y</span> <span class="n">h</span> <span class="c1">-- doesn&#39;t work</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>
+</pre></div>
+
+<a name="188974635"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188974635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188974635">Kevin Buzzard (Feb 24 2020 at 22:48)</a>:</h4>
+<p>oh I got it:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">test&#39;</span> <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="bp">∀</span><span class="o">(</span><span class="n">x</span> <span class="n">y</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">),(</span><span class="n">foo</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">x</span><span class="bp">+</span><span class="n">y</span><span class="bp">=</span><span class="mi">0</span><span class="o">))</span> <span class="o">:</span> <span class="bp">∀</span><span class="o">(</span><span class="n">x</span> <span class="n">y</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">),(</span><span class="n">foo</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">y</span><span class="bp">+</span><span class="n">x</span><span class="bp">=</span><span class="mi">0</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">h</span><span class="o">,</span> <span class="n">add_comm</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">▸</span> <span class="n">hp</span> <span class="n">x</span> <span class="n">y</span> <span class="n">h</span>
+</pre></div>
+
+<a name="188974644"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188974644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188974644">Kevin Buzzard (Feb 24 2020 at 22:48)</a>:</h4>
+<p>I always forget it's not as smart as <code>rw</code></p>
+
+<a name="188974649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188974649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188974649">Nicholas McConnell (Feb 24 2020 at 22:48)</a>:</h4>
+<p>Thanks, even though I figured it out</p>
+
 
 {% endraw %}
 
