@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Is this a good simp lemma?](43715Isthisagoodsimplemma.html) (4 messages, latest: Feb 24 2020 at 11:45)
+* [new mathlib tools](62589newmathlibtools.html) (27 messages, latest: Feb 24 2020 at 12:53)
+
+* [Is this a good simp lemma?](43715Isthisagoodsimplemma.html) (5 messages, latest: Feb 24 2020 at 12:40)
 
 * [Download speed from new olean storage on Azure](99760DownloadspeedfromnewoleanstorageonAzure.html) (1 message, latest: Feb 24 2020 at 10:31)
-
-* [new mathlib tools](62589newmathlibtools.html) (15 messages, latest: Feb 24 2020 at 10:24)
 
 * [Notation for matrices and vectors](84581Notationformatricesandvectors.html) (15 messages, latest: Feb 24 2020 at 10:21)
 
