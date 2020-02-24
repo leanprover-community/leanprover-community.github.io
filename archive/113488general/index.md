@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (37 messages, latest: Feb 24 2020 at 02:58)
+
 * [Possible incorrect explanation in Theorem Proving in Lean](66165PossibleincorrectexplanationinTheoremProvinginLean.html) (6 messages, latest: Feb 24 2020 at 00:48)
 
 * [new mathlib tools](62589newmathlibtools.html) (8 messages, latest: Feb 24 2020 at 00:09)
@@ -38,8 +40,6 @@ permalink: archive/113488general/index.html
 * [cache-olean and authentication](55076cacheoleanandauthentication.html) (14 messages, latest: Feb 22 2020 at 17:30)
 
 * [missing doc](95569missingdoc.html) (2 messages, latest: Feb 22 2020 at 07:07)
-
-* [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (36 messages, latest: Feb 22 2020 at 03:03)
 
 * [assertion violation hell](14931assertionviolationhell.html) (9 messages, latest: Feb 21 2020 at 22:59)
 

@@ -58,6 +58,95 @@ permalink: archive/116395maths/69752propositionmanipulation.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proposition%20manipulation/near/188877659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69752propositionmanipulation.html#188877659">Patrick Massot (Feb 23 2020 at 17:56)</a>:</h4>
 <p>We are discussing statistics and you were within 40% of the correct answer, there is no problem at all.</p>
 
+<a name="188894914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proposition%20manipulation/near/188894914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69752propositionmanipulation.html#188894914">Nicholas McConnell (Feb 24 2020 at 02:38)</a>:</h4>
+<p>Is there a Lean command (such as or.assoc for a∨(b∨c)=(a∨b)∨c) to get the addition law, p implies p∨q?</p>
+
+<a name="188894935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proposition%20manipulation/near/188894935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69752propositionmanipulation.html#188894935">Alex J. Best (Feb 24 2020 at 02:39)</a>:</h4>
+<p><code>or.intro_left</code>?</p>
+
+<a name="188894981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proposition%20manipulation/near/188894981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69752propositionmanipulation.html#188894981">Mario Carneiro (Feb 24 2020 at 02:40)</a>:</h4>
+<p>or just <code>or.inl</code></p>
+
+<a name="188894982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proposition%20manipulation/near/188894982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69752propositionmanipulation.html#188894982">Nicholas McConnell (Feb 24 2020 at 02:40)</a>:</h4>
+<p>Thanks.  Bear with me, there are tons of commands I don't know</p>
+
+<a name="188894984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proposition%20manipulation/near/188894984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69752propositionmanipulation.html#188894984">Mario Carneiro (Feb 24 2020 at 02:40)</a>:</h4>
+<p>or <code>left</code></p>
+
+<a name="188894985"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proposition%20manipulation/near/188894985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69752propositionmanipulation.html#188894985">Bryan Gin-ge Chen (Feb 24 2020 at 02:40)</a>:</h4>
+<p>If you're in tactic mode, <code>left</code> will change a goal like <code>p∨q</code> to <code>p</code>.</p>
+
+<a name="188895011"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proposition%20manipulation/near/188895011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69752propositionmanipulation.html#188895011">Mario Carneiro (Feb 24 2020 at 02:42)</a>:</h4>
+<p>Technically, <code>or.inl</code> isn't a command, it's a theorem. There are tens of thousands of them and probably no one knows the whole list so you shouldn't be ashamed to not know one. It is good to know how to find them though</p>
+
+<a name="188895269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proposition%20manipulation/near/188895269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69752propositionmanipulation.html#188895269">Nicholas McConnell (Feb 24 2020 at 02:49)</a>:</h4>
+<p>And just out of curiosity, are there Lean lemmas of this form?</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">not_all_eq_ex_not</span> <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">t</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">¬</span><span class="o">(</span><span class="bp">∀</span><span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="n">t</span><span class="o">),</span> <span class="n">p</span><span class="o">(</span><span class="n">x</span><span class="o">))</span> <span class="bp">↔</span> <span class="bp">∃</span><span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="n">t</span><span class="o">),</span> <span class="bp">¬</span><span class="n">p</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">sorry</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">not_ex_eq_all_not</span> <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">t</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">¬</span><span class="o">(</span><span class="bp">∃</span><span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="n">t</span><span class="o">),</span> <span class="n">p</span><span class="o">(</span><span class="n">x</span><span class="o">))</span> <span class="bp">↔</span> <span class="bp">∀</span><span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="n">t</span><span class="o">),</span> <span class="bp">¬</span><span class="n">p</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Because I think they'd be useful to prove the well-ordering principle:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">WOP</span> <span class="o">(</span><span class="n">pr</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">he</span> <span class="o">:</span> <span class="bp">∃</span><span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">),(</span><span class="n">pr</span><span class="o">(</span><span class="n">x</span><span class="o">)))</span> <span class="o">:</span>
+  <span class="bp">∃</span><span class="o">(</span><span class="n">m</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">),(</span><span class="n">pr</span><span class="o">(</span><span class="n">m</span><span class="o">)</span> <span class="bp">∧</span> <span class="bp">∀</span><span class="o">(</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">),(</span><span class="n">pr</span><span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="bp">→</span> <span class="n">n</span> <span class="bp">≥</span> <span class="n">m</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>
+</pre></div>
+
+<a name="188895411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proposition%20manipulation/near/188895411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69752propositionmanipulation.html#188895411">Bryan Gin-ge Chen (Feb 24 2020 at 02:53)</a>:</h4>
+<p>Those are <code>not_forall</code> and <code>not_exists</code> in mathlib's <code>logic.basic</code>, respectively.</p>
+
+<a name="188895459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proposition%20manipulation/near/188895459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69752propositionmanipulation.html#188895459">Nicholas McConnell (Feb 24 2020 at 02:54)</a>:</h4>
+<p>Okay, thanks.  I already wrote my own De Morgan's Laws lemmas for finite conjunctions and disjunctions (with some of your help), so I wonder if Lean has them builtin</p>
+
+<a name="188895463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proposition%20manipulation/near/188895463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69752propositionmanipulation.html#188895463">Mario Carneiro (Feb 24 2020 at 02:54)</a>:</h4>
+<p>and what you are calling the well ordering principle is <code>nat.find</code> and its lemmas</p>
+
+<a name="188895473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proposition%20manipulation/near/188895473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69752propositionmanipulation.html#188895473">Mario Carneiro (Feb 24 2020 at 02:55)</a>:</h4>
+<p>We usually represent finite conjunctions by iterating <code>and</code>, and there are de morgan's laws for them, also in <code>logic.basic</code></p>
+
+<a name="188895516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proposition%20manipulation/near/188895516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69752propositionmanipulation.html#188895516">Mario Carneiro (Feb 24 2020 at 02:56)</a>:</h4>
+<p>In fact, you should just browse through the file to get an idea of what to expect</p>
+
+<a name="188895535"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proposition%20manipulation/near/188895535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69752propositionmanipulation.html#188895535">Nicholas McConnell (Feb 24 2020 at 02:57)</a>:</h4>
+<p>Okay, maybe I'll put my useless lemmas in another file XD</p>
+
+<a name="188895582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proposition%20manipulation/near/188895582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69752propositionmanipulation.html#188895582">Mario Carneiro (Feb 24 2020 at 02:58)</a>:</h4>
+<p>Generally, you will get a feel for what "should be in mathlib", which is to say, it either already exists and so you should find it, or it doesn't exist and you should PR it</p>
+
+<a name="188895602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proposition%20manipulation/near/188895602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/69752propositionmanipulation.html#188895602">Mario Carneiro (Feb 24 2020 at 02:59)</a>:</h4>
+<p>any logical manipulation involving 3 or fewer variables should already be proven</p>
+
 
 {% endraw %}
 
