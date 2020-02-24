@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Request for review of a leftpad proof](13759Requestforreviewofaleftpadproof.html) (16 messages, latest: Feb 24 2020 at 05:55)
+* [Request for review of a leftpad proof](13759Requestforreviewofaleftpadproof.html) (26 messages, latest: Feb 24 2020 at 06:52)
 
 * [What should be @\[simp\]?](20315Whatshouldbesimp.html) (4 messages, latest: Feb 24 2020 at 05:00)
 
