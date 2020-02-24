@@ -9,17 +9,17 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Simplifying Prop with Known False Statements](85769SimplifyingPropwithKnownFalseStatements.html) (2 messages, latest: Feb 24 2020 at 20:41)
+* [error about instances](36782erroraboutinstances.html) (5 messages, latest: Feb 24 2020 at 21:39)
 
-* [natural number game questions](52294naturalnumbergamequestions.html) (21 messages, latest: Feb 24 2020 at 20:31)
+* [natural number game questions](52294naturalnumbergamequestions.html) (24 messages, latest: Feb 24 2020 at 21:25)
+
+* [Simplifying Prop with Known False Statements](85769SimplifyingPropwithKnownFalseStatements.html) (3 messages, latest: Feb 24 2020 at 21:19)
 
 * [noob question(s)](52075noobquestions.html) (1988 messages, latest: Feb 24 2020 at 20:29)
 
 * [Basic Question](53627BasicQuestion.html) (9 messages, latest: Feb 24 2020 at 19:36)
 
 * [zero versus 0](54969zeroversus0.html) (3 messages, latest: Feb 24 2020 at 15:55)
-
-* [error about instances](36782erroraboutinstances.html) (4 messages, latest: Feb 24 2020 at 14:24)
 
 * [(no topic)](79918notopic.html) (269 messages, latest: Feb 23 2020 at 22:02)
 

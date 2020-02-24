@@ -33,6 +33,10 @@ permalink: archive/113489newmembers/85769SimplifyingPropwithKnownFalseStatements
 </blockquote>
 <p>I'm now wanting to repeat this procedure but with matrices in each column instead of integers, and taking the matrix product of all the matrices in each row. <code>finset.univ.prod</code> (understandably) doesn't use <code>matrix.mul</code> automatically when its input is a matrix. Is there a way to feed it an arbitrary function (à la MapReduce) , or should I be thinking about this differently? I could see a benefit to implementing this matrix data structure differently, maybe as a 2D linked list, to facilitate recursive matrix multiplication of its elements over a given row or column, but I feel like that shouldn't be necessary.</p>
 
+<a name="188967088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20Prop%20with%20Known%20False%20Statements/near/188967088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85769SimplifyingPropwithKnownFalseStatements.html#188967088">Kevin Buzzard (Feb 24 2020 at 21:19)</a>:</h4>
+<p><code>finset.univ.prod</code> should work fine. If the function is taking values in anything which Lean knows is a monoid then it will use the monoid multiplication....oh wait. It's not commutative. Then yes you're right, you'll have to use something like <code>list.prod</code></p>
+
 
 {% endraw %}
 
