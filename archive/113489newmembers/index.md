@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1983 messages, latest: Feb 24 2020 at 04:53)
+
 * [(no topic)](79918notopic.html) (269 messages, latest: Feb 23 2020 at 22:02)
 
 * [subtype coercion](10559subtypecoercion.html) (16 messages, latest: Feb 23 2020 at 20:25)
@@ -16,8 +18,6 @@ permalink: archive/113489newmembers/index.html
 * [Subtype Coercion](78847SubtypeCoercion.html) (1 message, latest: Feb 23 2020 at 20:15)
 
 * [Using mathlib in Lean project created using leanpkg](25878UsingmathlibinLeanprojectcreatedusingleanpkg.html) (43 messages, latest: Feb 23 2020 at 15:18)
-
-* [noob question(s)](52075noobquestions.html) (1980 messages, latest: Feb 23 2020 at 08:09)
 
 * [error about instances](36782erroraboutinstances.html) (2 messages, latest: Feb 23 2020 at 04:23)
 

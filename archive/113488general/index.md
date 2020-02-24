@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [What should be @\[simp\]?](20315Whatshouldbesimp.html) (3 messages, latest: Feb 24 2020 at 04:47)
+
 * [Making backwards-incompatible changes to Lean](95274MakingbackwardsincompatiblechangestoLean.html) (39 messages, latest: Feb 24 2020 at 03:01)
 
 * [Possible incorrect explanation in Theorem Proving in Lean](66165PossibleincorrectexplanationinTheoremProvinginLean.html) (6 messages, latest: Feb 24 2020 at 00:48)
