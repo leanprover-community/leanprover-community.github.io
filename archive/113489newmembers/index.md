@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [zero versus 0](54969zeroversus0.html) (7 messages, latest: Feb 25 2020 at 04:46)
+* [zero versus 0](54969zeroversus0.html) (9 messages, latest: Feb 25 2020 at 05:43)
+
+* [Simplifying Prop with Known False Statements](85769SimplifyingPropwithKnownFalseStatements.html) (4 messages, latest: Feb 25 2020 at 05:33)
 
 * [error about instances](36782erroraboutinstances.html) (7 messages, latest: Feb 24 2020 at 23:35)
 
 * [natural number game questions](52294naturalnumbergamequestions.html) (24 messages, latest: Feb 24 2020 at 21:25)
-
-* [Simplifying Prop with Known False Statements](85769SimplifyingPropwithKnownFalseStatements.html) (3 messages, latest: Feb 24 2020 at 21:19)
 
 * [noob question(s)](52075noobquestions.html) (1988 messages, latest: Feb 24 2020 at 20:29)
 
