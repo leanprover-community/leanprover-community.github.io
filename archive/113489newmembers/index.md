@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Should I be using classes here?](21751ShouldIbeusingclasseshere.html) (7 messages, latest: Feb 25 2020 at 14:59)
+* [deep recursion error reducing strings](54910deeprecursionerrorreducingstrings.html) (3 messages, latest: Feb 25 2020 at 15:28)
+
+* [Should I be using classes here?](21751ShouldIbeusingclasseshere.html) (11 messages, latest: Feb 25 2020 at 15:17)
 
 * [natural number game questions](52294naturalnumbergamequestions.html) (36 messages, latest: Feb 25 2020 at 14:24)
 
