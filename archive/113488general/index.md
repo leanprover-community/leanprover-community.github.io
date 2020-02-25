@@ -9,15 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [hardware verification](75506hardwareverification.html) (85 messages, latest: Feb 25 2020 at 14:49)
+* [Call to action: porting mathlib to Lean 3.6](76502CalltoactionportingmathlibtoLean36.html) (2 messages, latest: Feb 25 2020 at 16:51)
 
-* [Call to action: porting mathlib to Lean 3.6](76502CalltoactionportingmathlibtoLean36.html) (1 message, latest: Feb 25 2020 at 13:17)
+* [new mathlib tools](62589newmathlibtools.html) (66 messages, latest: Feb 25 2020 at 16:16)
+
+* [hardware verification](75506hardwareverification.html) (85 messages, latest: Feb 25 2020 at 14:49)
 
 * [Error in sudo pip3 install mathlibtools](54178Errorinsudopip3installmathlibtools.html) (11 messages, latest: Feb 25 2020 at 13:09)
 
 * [Trust "down to the metal"](74934Trustdowntothemetal.html) (16 messages, latest: Feb 25 2020 at 13:00)
-
-* [new mathlib tools](62589newmathlibtools.html) (65 messages, latest: Feb 25 2020 at 09:42)
 
 * [proof](69959proof.html) (72 messages, latest: Feb 25 2020 at 07:35)
 
