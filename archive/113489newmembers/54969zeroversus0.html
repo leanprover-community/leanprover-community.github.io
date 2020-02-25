@@ -81,6 +81,25 @@ then just calling <code>dsimp</code> should replace all your <code>zero</code>s 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/188993369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#188993369">Mario Carneiro (Feb 25 2020 at 05:43)</a>:</h4>
 <p>you can prove <code>add_left_comm</code> using the other two</p>
 
+<a name="188993894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/188993894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#188993894">Shing Tak Lam (Feb 25 2020 at 06:00)</a>:</h4>
+<p>I know, it's quite simple to prove using just <code>add_assoc</code> and <code>add_comm</code>. My comment about the Natural numbers game is that <code>simp</code> can solve it in the game, even though I can't seem to find <code>add_left_comm</code>defined in the game (at least not in the repo).</p>
+<p>I think what's happening is that there is more behind the scenes 'magic' (for the lack of a better word) in the Natural Numbers game than I thought.</p>
+
+<a name="188994365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/188994365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#188994365">Mario Carneiro (Feb 25 2020 at 06:14)</a>:</h4>
+<p>There was a recent move to remove the <code>@[simp]</code> attribute from <code>add_comm</code>, <code>add_assoc</code> and <code>add_left_comm</code>. Most likely this is not reflected in NNG</p>
+
+<a name="188994374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/188994374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#188994374">Mario Carneiro (Feb 25 2020 at 06:15)</a>:</h4>
+<p>I don't think NNG uses <code>simp</code> much</p>
+
+<a name="188995461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/188995461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#188995461">Shing Tak Lam (Feb 25 2020 at 06:47)</a>:</h4>
+<p>I think it might be namespaces? If I understand this correctly (VSCode go to definition on <code>add_comm</code> isn't very useful), <code>add_comm</code> is defined in by lean, but as all of the theorems are in the same namespace (<code>namespace mynat</code>) for the NNG, there is a <code>mynat.add_comm</code>. So when a theorem uses <code>rw add_comm</code> in the NNG it would use <code>mynat.add_comm</code> and not the one in lean's library. So changes in the library shouldn't change the NNG.</p>
+<p>But then none of the <code>theorem</code>s are tagged with <code>@[simp]</code> in the repo... So now I'm not sure anymore. I mean I have it working on my end now, so I should probably focus my effort on completing the game before (attempting and failing at) reverse engineering the NNG.</p>
+<p><code>simp</code> is often useful as a final step in the NNG, when the goal just requires commutativity/associativity to solve. It's not strictly required but it's great as a quality of life thing.</p>
+
 
 {% endraw %}
 
