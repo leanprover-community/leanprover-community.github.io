@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [log (a ^ n) = n * log a in mathlib?](89168logannlogainmathlib.html) (1 message, latest: Feb 25 2020 at 11:55)
+
 * [Failure to halve an odd number](37771Failuretohalveanoddnumber.html) (8 messages, latest: Feb 25 2020 at 07:10)
 
 * [well-ordering principle](19426wellorderingprinciple.html) (106 messages, latest: Feb 24 2020 at 22:48)

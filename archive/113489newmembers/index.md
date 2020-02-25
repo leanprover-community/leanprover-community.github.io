@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Simplifying Prop with Known False Statements](85769SimplifyingPropwithKnownFalseStatements.html) (8 messages, latest: Feb 25 2020 at 11:43)
+
 * [by_cases message](90543bycasesmessage.html) (4 messages, latest: Feb 25 2020 at 10:57)
 
 * [Theorem-searching mechanism in Lean?](50625TheoremsearchingmechanisminLean.html) (8 messages, latest: Feb 25 2020 at 10:47)
 
 * [natural number game questions](52294naturalnumbergamequestions.html) (27 messages, latest: Feb 25 2020 at 10:45)
-
-* [Simplifying Prop with Known False Statements](85769SimplifyingPropwithKnownFalseStatements.html) (7 messages, latest: Feb 25 2020 at 09:31)
 
 * [zero versus 0](54969zeroversus0.html) (21 messages, latest: Feb 25 2020 at 09:21)
 
