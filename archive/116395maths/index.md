@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [nat case bashing](99100natcasebashing.html) (3 messages, latest: Feb 25 2020 at 17:54)
+
 * [log (a ^ n) = n * log a in mathlib?](89168logannlogainmathlib.html) (8 messages, latest: Feb 25 2020 at 13:44)
 
 * [Failure to halve an odd number](37771Failuretohalveanoddnumber.html) (8 messages, latest: Feb 25 2020 at 07:10)

@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [set.sum?](03791setsum.html) (4 messages, latest: Feb 25 2020 at 17:23)
+
 * [deep recursion error reducing strings](54910deeprecursionerrorreducingstrings.html) (5 messages, latest: Feb 25 2020 at 16:30)
 
 * [Should I be using classes here?](21751ShouldIbeusingclasseshere.html) (11 messages, latest: Feb 25 2020 at 15:17)
