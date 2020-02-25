@@ -50,6 +50,29 @@ permalink: archive/113489newmembers/85769SimplifyingPropwithKnownFalseStatements
 <span class="k">if</span> <span class="o">(</span><span class="n">c</span> <span class="bp">=</span> <span class="n">n</span><span class="o">)</span> <span class="k">then</span> <span class="n">mat</span> <span class="n">r</span> <span class="n">c</span> <span class="k">else</span> <span class="n">matrix</span><span class="bp">.</span><span class="n">mul</span> <span class="o">(</span><span class="n">mat</span> <span class="n">r</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">row_product_helper</span> <span class="n">mat</span> <span class="n">r</span> <span class="o">(</span><span class="n">c</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span>
 </pre></div>
 
+<a name="189003202"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20Prop%20with%20Known%20False%20Statements/near/189003202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85769SimplifyingPropwithKnownFalseStatements.html#189003202">Kevin Buzzard (Feb 25 2020 at 09:27)</a>:</h4>
+<blockquote>
+<p>(unless there's a snazzy way to get the rows and columns from a matrix as a list instead of as vectors, but it seems like that's not possible). </p>
+</blockquote>
+<p>I don't really know what you mean. Anything is possible. Just write the function.</p>
+<blockquote>
+<p>I tried implementing this recursive algorithm on my matrix in the meantime too, but keep getting that the recursive call is an "unknown identifier". Is there an import statement or something I'm missing</p>
+</blockquote>
+<p>I can't help you unless you post complete fully working code.</p>
+
+<a name="189003309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20Prop%20with%20Known%20False%20Statements/near/189003309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85769SimplifyingPropwithKnownFalseStatements.html#189003309">Mario Carneiro (Feb 25 2020 at 09:28)</a>:</h4>
+<p>You have to use the equation compiler if you want to write a recursive function like that, i.e.</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo</span> <span class="o">:</span> <span class="n">type</span>
+<span class="bp">|</span> <span class="n">case1</span> <span class="o">:=</span> <span class="n">bla</span>
+<span class="bp">|</span> <span class="n">case2</span> <span class="o">:=</span> <span class="n">foo</span> <span class="n">bar</span>
+</pre></div>
+
+<a name="189003449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20Prop%20with%20Known%20False%20Statements/near/189003449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85769SimplifyingPropwithKnownFalseStatements.html#189003449">Kevin Buzzard (Feb 25 2020 at 09:31)</a>:</h4>
+<p>Is the issue simply that <code>row_product_helper</code> is defined after you use it in <code>row_product</code>? No import will help you there, you have to define things before you use them.</p>
+
 
 {% endraw %}
 
