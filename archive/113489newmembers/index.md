@@ -9,13 +9,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Theorem-searching mechanism in Lean?](50625TheoremsearchingmechanisminLean.html) (12 messages, latest: Feb 25 2020 at 13:02)
+* [Should I be using classes here?](21751ShouldIbeusingclasseshere.html) (7 messages, latest: Feb 25 2020 at 14:59)
+
+* [natural number game questions](52294naturalnumbergamequestions.html) (36 messages, latest: Feb 25 2020 at 14:24)
+
+* [Theorem-searching mechanism in Lean?](50625TheoremsearchingmechanisminLean.html) (16 messages, latest: Feb 25 2020 at 14:24)
 
 * [Simplifying Prop with Known False Statements](85769SimplifyingPropwithKnownFalseStatements.html) (8 messages, latest: Feb 25 2020 at 11:43)
 
 * [by_cases message](90543bycasesmessage.html) (4 messages, latest: Feb 25 2020 at 10:57)
-
-* [natural number game questions](52294naturalnumbergamequestions.html) (27 messages, latest: Feb 25 2020 at 10:45)
 
 * [zero versus 0](54969zeroversus0.html) (21 messages, latest: Feb 25 2020 at 09:21)
 

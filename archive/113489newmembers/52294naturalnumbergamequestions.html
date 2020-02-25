@@ -179,6 +179,48 @@ h : succ (n + b) = succ n<br>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189008370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189008370">Kevin Buzzard (Feb 25 2020 at 10:45)</a>:</h4>
 <p>I'm not sure it's officially documented anywhere that there's an official solution set :-)</p>
 
+<a name="189022609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189022609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189022609">Ethan Horsfall (Feb 25 2020 at 14:16)</a>:</h4>
+<p>when calling a function, such as succ_inj or mul_pos, how do you pass in arguments which themselves are functions? </p>
+<p>For instance,<br>
+have f := mul_pos a b,</p>
+<p>works but<br>
+have f := mul_pos succ(a) succ(b), <br>
+does not work, with the error message indicating that it expected something of type mynat, whereas it read s succ as a function from mynat to mynat.</p>
+<p>thank you:)</p>
+
+<a name="189022698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189022698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189022698">Donald Sebastian Leung (Feb 25 2020 at 14:17)</a>:</h4>
+<p>You probably need to wrap <code>succ(a)</code> and <code>succ(b)</code> itself in parentheses, like so: <code>have f := mul_pos (succ(a)) (succ(b))</code></p>
+
+<a name="189022816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189022816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189022816">Bryan Gin-ge Chen (Feb 25 2020 at 14:18)</a>:</h4>
+<p>The parentheses around <code>a</code> and <code>b</code> in <code>succ(a)</code> and <code>succ(b)</code> are unnecessary. Note that you can also take advantage of "dot notation" and write <code>have f := mul_pos a.succ b.succ</code>.</p>
+
+<a name="189022835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189022835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189022835">Ethan Horsfall (Feb 25 2020 at 14:18)</a>:</h4>
+<p>thank you both:)</p>
+
+<a name="189022863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189022863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189022863">Donald Sebastian Leung (Feb 25 2020 at 14:19)</a>:</h4>
+<p>You're welcome <span aria-label="smile" class="emoji emoji-263a" role="img" title="smile">:smile:</span></p>
+
+<a name="189023158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189023158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189023158">Kevin Buzzard (Feb 25 2020 at 14:23)</a>:</h4>
+<p>I always put the parentheses in <code>succ(a)</code> in the natural number game because I felt it was less intimidating for mathematicians</p>
+
+<a name="189023248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189023248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189023248">Ethan Horsfall (Feb 25 2020 at 14:24)</a>:</h4>
+<p>yes I find that much more natural</p>
+
+<a name="189023250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189023250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189023250">Kevin Buzzard (Feb 25 2020 at 14:24)</a>:</h4>
+<p>However this shows a downside to this idea -- <code>succ(a)</code> looks like an irreducible gadget to a mathematician, but is apparently parsed as <code>succ a</code> and hence <code>succ</code> can fall off and be eaten by an earlier function.</p>
+
+<a name="189023291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189023291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189023291">Donald Sebastian Leung (Feb 25 2020 at 14:24)</a>:</h4>
+<p><span class="user-mention" data-user-id="266070">@Ethan Horsfall</span> FYI the notation for function application in (functional) programming differs from that in conventional mathematics, for example <code>f(x)</code> in mathematics could be simply written as <code>f x</code> in Lean</p>
+
 
 {% endraw %}
 
