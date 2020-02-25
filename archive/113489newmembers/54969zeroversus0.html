@@ -38,6 +38,40 @@ permalink: archive/113489newmembers/54969zeroversus0.html
 <code>@[simp] lemma mynat_zero_eq_zero : zero = 0 := rfl</code><br>
 then just calling <code>dsimp</code> should replace all your <code>zero</code>s with <code>0</code>s.</p>
 
+<a name="188990290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/188990290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#188990290">Shing Tak Lam (Feb 25 2020 at 04:19)</a>:</h4>
+<p>Alright I see, so <code>@[simp]</code> is an attribute to tell lean that it can use it for simplifying? If so, I've added the <code>@[simp]</code> attribute to <code>add_assoc</code> and <code>add_comm</code>, but the simplifier isn't able to solve a goal that only consists of <code>add_assoc</code> and <code>add_comm</code>. Does it matter that they are in different files? I've imported those files into my working file and they are all in the same namespace.</p>
+<p>The goal is</p>
+<div class="codehilite"><pre><span></span>a * t + b * t + (a + b) = a * t + a + (b * t + b)
+</pre></div>
+
+
+<p>My manual proof to solve it is:</p>
+<div class="codehilite"><pre><span></span>rw add_assoc, rw &lt;-add_assoc (b*t), rw add_comm (b*t), rw add_assoc (a), rw add_assoc (a*t)
+</pre></div>
+
+
+<p>But running <code>simp</code> gives me a new goal, which isn't any simpler than the original.</p>
+<div class="codehilite"><pre><span></span>a + (b * t + (b + a * t)) = a + (a * t + (b + b * t))
+</pre></div>
+
+
+<p>In the docs it says <code>simp</code> doesn't recognise <code>&lt;-</code>, however even if I do the parts with the <code>&lt;-</code> manually then use <code>simp</code></p>
+<div class="codehilite"><pre><span></span>rw add_assoc,rw &lt;-add_assoc (b*t), simp,
+</pre></div>
+
+
+<p>It still doesn't solve it, and generates a new goal which it should be able to solve with only <code>add_comm</code> and <code>add_assoc</code></p>
+<div class="codehilite"><pre><span></span>a * t + b * t + (a + b) = a * t + a + (b * t + b)
+</pre></div>
+
+
+<p>Another question, from looking at the docs, it says <code>dsimp</code> is similar to <code>simp</code>, except it uses definitional equalities only. So does that mean that <code>simp</code> uses them as well, or is it only <code>dsimp</code>?</p>
+
+<a name="188991328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero%20versus%200/near/188991328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54969zeroversus0.html#188991328">Mario Carneiro (Feb 25 2020 at 04:46)</a>:</h4>
+<p>you should also simp with <code>add_left_comm</code></p>
+
 
 {% endraw %}
 
