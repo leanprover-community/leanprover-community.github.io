@@ -9,17 +9,19 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Simplifying Prop with Known False Statements](85769SimplifyingPropwithKnownFalseStatements.html) (7 messages, latest: Feb 25 2020 at 09:31)
+* [by_cases message](90543bycasesmessage.html) (4 messages, latest: Feb 25 2020 at 10:57)
 
-* [by_cases message](90543bycasesmessage.html) (3 messages, latest: Feb 25 2020 at 09:29)
+* [Theorem-searching mechanism in Lean?](50625TheoremsearchingmechanisminLean.html) (8 messages, latest: Feb 25 2020 at 10:47)
+
+* [natural number game questions](52294naturalnumbergamequestions.html) (27 messages, latest: Feb 25 2020 at 10:45)
+
+* [Simplifying Prop with Known False Statements](85769SimplifyingPropwithKnownFalseStatements.html) (7 messages, latest: Feb 25 2020 at 09:31)
 
 * [zero versus 0](54969zeroversus0.html) (21 messages, latest: Feb 25 2020 at 09:21)
 
 * [Automated tactic for solving trivial (in)equalities on reals](77107Automatedtacticforsolvingtrivialinequalitiesonreals.html) (3 messages, latest: Feb 25 2020 at 08:20)
 
 * [error about instances](36782erroraboutinstances.html) (7 messages, latest: Feb 24 2020 at 23:35)
-
-* [natural number game questions](52294naturalnumbergamequestions.html) (24 messages, latest: Feb 24 2020 at 21:25)
 
 * [noob question(s)](52075noobquestions.html) (1988 messages, latest: Feb 24 2020 at 20:29)
 
