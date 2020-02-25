@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [error about instances](36782erroraboutinstances.html) (5 messages, latest: Feb 24 2020 at 21:39)
+* [error about instances](36782erroraboutinstances.html) (7 messages, latest: Feb 24 2020 at 23:35)
 
 * [natural number game questions](52294naturalnumbergamequestions.html) (24 messages, latest: Feb 24 2020 at 21:25)
 

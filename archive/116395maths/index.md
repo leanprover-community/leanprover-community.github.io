@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Failure to halve an odd number](37771Failuretohalveanoddnumber.html) (6 messages, latest: Feb 24 2020 at 23:15)
+
 * [well-ordering principle](19426wellorderingprinciple.html) (106 messages, latest: Feb 24 2020 at 22:48)
 
 * [Formalization of the statement that 0.999... = 1](05245Formalizationofthestatementthat09991.html) (31 messages, latest: Feb 24 2020 at 10:52)
