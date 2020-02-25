@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Failure to halve an odd number](37771Failuretohalveanoddnumber.html) (6 messages, latest: Feb 24 2020 at 23:15)
+* [Failure to halve an odd number](37771Failuretohalveanoddnumber.html) (7 messages, latest: Feb 25 2020 at 02:59)
 
 * [well-ordering principle](19426wellorderingprinciple.html) (106 messages, latest: Feb 24 2020 at 22:48)
 

@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [zero versus 0](54969zeroversus0.html) (4 messages, latest: Feb 25 2020 at 01:51)
+* [zero versus 0](54969zeroversus0.html) (5 messages, latest: Feb 25 2020 at 02:25)
 
 * [error about instances](36782erroraboutinstances.html) (7 messages, latest: Feb 24 2020 at 23:35)
 
