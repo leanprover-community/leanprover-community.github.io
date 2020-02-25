@@ -77,6 +77,58 @@ permalink: archive/113489newmembers/85769SimplifyingPropwithKnownFalseStatements
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20Prop%20with%20Known%20False%20Statements/near/189012124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85769SimplifyingPropwithKnownFalseStatements.html#189012124">Kevin Buzzard (Feb 25 2020 at 11:43)</a>:</h4>
 <p>PS I found <a href="http://learnyouahaskell.com/" target="_blank" title="http://learnyouahaskell.com/">learn you a haskell</a> really helpful when I was trying to figure out what functional languages looked like in general.</p>
 
+<a name="189057294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20Prop%20with%20Known%20False%20Statements/near/189057294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85769SimplifyingPropwithKnownFalseStatements.html#189057294">Rocky Kamen-Rubio (Feb 25 2020 at 20:23)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113489-new-members/topic/Simplifying.20Prop.20with.20Known.20False.20Statements/near/189003202" title="#narrow/stream/113489-new-members/topic/Simplifying.20Prop.20with.20Known.20False.20Statements/near/189003202">said</a>:</p>
+<blockquote>
+<blockquote>
+<p>(unless there's a snazzy way to get the rows and columns from a matrix as a list instead of as vectors, but it seems like that's not possible). </p>
+</blockquote>
+<p>I don't really know what you mean. Anything is possible. Just write the function.</p>
+</blockquote>
+<p>Looking at the documentation for <code>row</code> it looks like it returns a vector not a list. You're right though that I could just convert it to a list and then product. Maybe this is an indication that a more functional approach would be preferred/more in line with how Lean is built?</p>
+<blockquote>
+<blockquote>
+<p>I tried implementing this recursive algorithm on my matrix in the meantime too, but keep getting that the recursive call is an "unknown identifier". Is there an import statement or something I'm missing</p>
+</blockquote>
+<p>I can't help you unless you post complete fully working code.</p>
+</blockquote>
+<p>I posted the code I have below the text. Is it not visible to you? Do you mean that I need to include all my import statements as well?</p>
+
+<a name="189057456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20Prop%20with%20Known%20False%20Statements/near/189057456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85769SimplifyingPropwithKnownFalseStatements.html#189057456">Rocky Kamen-Rubio (Feb 25 2020 at 20:25)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113489-new-members/topic/Simplifying.20Prop.20with.20Known.20False.20Statements/near/189003449" title="#narrow/stream/113489-new-members/topic/Simplifying.20Prop.20with.20Known.20False.20Statements/near/189003449">said</a>:</p>
+<blockquote>
+<p>Is the issue simply that <code>row_product_helper</code> is defined after you use it in <code>row_product</code>? No import will help you there, you have to define things before you use them.</p>
+</blockquote>
+<p>Even reversing the order of the two definitions, the recursive call in <code>row_product_helper</code> gives me an error. I'll check out learn you a haskell and see if that gives me more clarity. Thank you!</p>
+
+<a name="189057510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20Prop%20with%20Known%20False%20Statements/near/189057510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85769SimplifyingPropwithKnownFalseStatements.html#189057510">Kevin Buzzard (Feb 25 2020 at 20:26)</a>:</h4>
+<p>I cut and pasted the code you posted and it didn't work. Yes, include everything which makes it work!</p>
+
+<a name="189057549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20Prop%20with%20Known%20False%20Statements/near/189057549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85769SimplifyingPropwithKnownFalseStatements.html#189057549">Rocky Kamen-Rubio (Feb 25 2020 at 20:26)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113489-new-members/topic/Simplifying.20Prop.20with.20Known.20False.20Statements/near/189003309" title="#narrow/stream/113489-new-members/topic/Simplifying.20Prop.20with.20Known.20False.20Statements/near/189003309">said</a>:</p>
+<blockquote>
+<p>You have to use the equation compiler if you want to write a recursive function like that, i.e.</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo</span> <span class="o">:</span> <span class="n">type</span>
+<span class="bp">|</span> <span class="n">case1</span> <span class="o">:=</span> <span class="n">bla</span>
+<span class="bp">|</span> <span class="n">case2</span> <span class="o">:=</span> <span class="n">foo</span> <span class="n">bar</span>
+</pre></div>
+
+
+</blockquote>
+<p>Interesting. I'll try rewriting my function like this and see if it helps. Thank you!</p>
+
+<a name="189057995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20Prop%20with%20Known%20False%20Statements/near/189057995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85769SimplifyingPropwithKnownFalseStatements.html#189057995">Rocky Kamen-Rubio (Feb 25 2020 at 20:30)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113489-new-members/topic/Simplifying.20Prop.20with.20Known.20False.20Statements/near/189057510" title="#narrow/stream/113489-new-members/topic/Simplifying.20Prop.20with.20Known.20False.20Statements/near/189057510">said</a>:</p>
+<blockquote>
+<p>I cut and pasted the code you posted and it didn't work. Yes, include everything which makes it work!</p>
+</blockquote>
+<p>I added the import statements. I'll be sure to include them in future posts.</p>
+
 
 {% endraw %}
 

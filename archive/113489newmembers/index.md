@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Simplifying Prop with Known False Statements](85769SimplifyingPropwithKnownFalseStatements.html) (13 messages, latest: Feb 25 2020 at 20:30)
+
 * [more basics](41001morebasics.html) (85 messages, latest: Feb 25 2020 at 19:17)
 
 * [set.sum?](03791setsum.html) (4 messages, latest: Feb 25 2020 at 17:23)
@@ -20,8 +22,6 @@ permalink: archive/113489newmembers/index.html
 * [natural number game questions](52294naturalnumbergamequestions.html) (36 messages, latest: Feb 25 2020 at 14:24)
 
 * [Theorem-searching mechanism in Lean?](50625TheoremsearchingmechanisminLean.html) (16 messages, latest: Feb 25 2020 at 14:24)
-
-* [Simplifying Prop with Known False Statements](85769SimplifyingPropwithKnownFalseStatements.html) (8 messages, latest: Feb 25 2020 at 11:43)
 
 * [by_cases message](90543bycasesmessage.html) (4 messages, latest: Feb 25 2020 at 10:57)
 
