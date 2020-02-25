@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [more basics](41001morebasics.html) (74 messages, latest: Feb 25 2020 at 18:58)
+
 * [set.sum?](03791setsum.html) (4 messages, latest: Feb 25 2020 at 17:23)
 
 * [deep recursion error reducing strings](54910deeprecursionerrorreducingstrings.html) (5 messages, latest: Feb 25 2020 at 16:30)
@@ -72,8 +74,6 @@ permalink: archive/113489newmembers/index.html
 * [Local/city threads](73023Localcitythreads.html) (10 messages, latest: Feb 17 2020 at 18:29)
 
 * [noncomputable](28696noncomputable.html) (6 messages, latest: Feb 17 2020 at 17:16)
-
-* [more basics](41001morebasics.html) (62 messages, latest: Feb 17 2020 at 15:33)
 
 * [Getting Started with Lean with prior experience in Coq](90352GettingStartedwithLeanwithpriorexperienceinCoq.html) (15 messages, latest: Feb 17 2020 at 13:47)
 
