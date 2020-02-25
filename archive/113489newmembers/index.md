@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Automated tactic for solving trivial (in)equalities on reals](77107Automatedtacticforsolvingtrivialinequalitiesonreals.html) (2 messages, latest: Feb 25 2020 at 07:11)
+* [Automated tactic for solving trivial (in)equalities on reals](77107Automatedtacticforsolvingtrivialinequalitiesonreals.html) (3 messages, latest: Feb 25 2020 at 08:20)
 
 * [zero versus 0](54969zeroversus0.html) (13 messages, latest: Feb 25 2020 at 06:47)
 
