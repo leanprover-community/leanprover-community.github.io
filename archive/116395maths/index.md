@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [log (a ^ n) = n * log a in mathlib?](89168logannlogainmathlib.html) (4 messages, latest: Feb 25 2020 at 12:32)
+* [log (a ^ n) = n * log a in mathlib?](89168logannlogainmathlib.html) (8 messages, latest: Feb 25 2020 at 13:44)
 
 * [Failure to halve an odd number](37771Failuretohalveanoddnumber.html) (8 messages, latest: Feb 25 2020 at 07:10)
 
