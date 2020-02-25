@@ -129,6 +129,22 @@ permalink: archive/113489newmembers/85769SimplifyingPropwithKnownFalseStatements
 </blockquote>
 <p>I added the import statements. I'll be sure to include them in future posts.</p>
 
+<a name="189062310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20Prop%20with%20Known%20False%20Statements/near/189062310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85769SimplifyingPropwithKnownFalseStatements.html#189062310">Kevin Buzzard (Feb 25 2020 at 21:17)</a>:</h4>
+<p>Your code doesn't work because you use <code>row_product_helper</code> before you define it. And if you switch the order of <code>row_product_helper</code> and <code>row_product</code> it doesn't work because <code>mat r c</code> doesn't make sense because <code>r</code> has type <code>nat</code> and not type <code>fin m</code>.  But even if you fix that it won't work because you can't use <code>row_product_helper</code> in the definition of <code>row_product_helper</code>, that doesn't make sense in functional programming.</p>
+
+<a name="189064024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simplifying%20Prop%20with%20Known%20False%20Statements/near/189064024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85769SimplifyingPropwithKnownFalseStatements.html#189064024">Kevin Buzzard (Feb 25 2020 at 21:39)</a>:</h4>
+<p>I now understand Mario's reply (I'm much less good than some other people at "guessing what the user meant"). You can use the definition of X when defining X, as long as you only run X on strictly "smaller" things. Here's a less abstract example:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Fib</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="mi">1</span> <span class="o">:=</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:=</span> <span class="n">Fib</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">Fib</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span>
+</pre></div>
+
+
+<p>You might want to read about how the equation compiler works in <a href="https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html">Theorem Proving In Lean</a>, although depending on what you know you might have to read a bunch of earlier chapters first.</p>
+
 
 {% endraw %}
 

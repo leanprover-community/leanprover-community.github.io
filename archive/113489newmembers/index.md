@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Simplifying Prop with Known False Statements](85769SimplifyingPropwithKnownFalseStatements.html) (13 messages, latest: Feb 25 2020 at 20:30)
+* [Simplifying Prop with Known False Statements](85769SimplifyingPropwithKnownFalseStatements.html) (15 messages, latest: Feb 25 2020 at 21:39)
 
 * [more basics](41001morebasics.html) (85 messages, latest: Feb 25 2020 at 19:17)
 
