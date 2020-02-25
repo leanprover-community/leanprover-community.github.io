@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [more basics](41001morebasics.html) (74 messages, latest: Feb 25 2020 at 18:58)
+* [more basics](41001morebasics.html) (85 messages, latest: Feb 25 2020 at 19:17)
 
 * [set.sum?](03791setsum.html) (4 messages, latest: Feb 25 2020 at 17:23)
 
