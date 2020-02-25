@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [proof](69959proof.html) (72 messages, latest: Feb 25 2020 at 07:35)
+
 * [olean files in VSCode](32030oleanfilesinVSCode.html) (3 messages, latest: Feb 25 2020 at 06:35)
 
 * [Complex number doesn't have has_repr](41934Complexnumberdoesnthavehasrepr.html) (2 messages, latest: Feb 25 2020 at 03:26)
-
-* [proof](69959proof.html) (70 messages, latest: Feb 25 2020 at 03:14)
 
 * [new mathlib tools](62589newmathlibtools.html) (47 messages, latest: Feb 24 2020 at 22:51)
 
