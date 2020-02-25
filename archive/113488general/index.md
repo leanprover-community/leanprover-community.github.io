@@ -9,13 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Complex number doesn't have has_repr](41934Complexnumberdoesnthavehasrepr.html) (2 messages, latest: Feb 25 2020 at 03:26)
+
+* [proof](69959proof.html) (70 messages, latest: Feb 25 2020 at 03:14)
+
 * [new mathlib tools](62589newmathlibtools.html) (47 messages, latest: Feb 24 2020 at 22:51)
 
 * [New user bundles](27895Newuserbundles.html) (149 messages, latest: Feb 24 2020 at 22:50)
 
 * [cache in CI](95480cacheinCI.html) (2 messages, latest: Feb 24 2020 at 21:42)
-
-* [proof](69959proof.html) (69 messages, latest: Feb 24 2020 at 20:59)
 
 * [lifting complete lattices](65824liftingcompletelattices.html) (15 messages, latest: Feb 24 2020 at 20:40)
 
