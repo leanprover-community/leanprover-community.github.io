@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [zero versus 0](54969zeroversus0.html) (4 messages, latest: Feb 25 2020 at 01:51)
+
 * [error about instances](36782erroraboutinstances.html) (7 messages, latest: Feb 24 2020 at 23:35)
 
 * [natural number game questions](52294naturalnumbergamequestions.html) (24 messages, latest: Feb 24 2020 at 21:25)
@@ -18,8 +20,6 @@ permalink: archive/113489newmembers/index.html
 * [noob question(s)](52075noobquestions.html) (1988 messages, latest: Feb 24 2020 at 20:29)
 
 * [Basic Question](53627BasicQuestion.html) (9 messages, latest: Feb 24 2020 at 19:36)
-
-* [zero versus 0](54969zeroversus0.html) (3 messages, latest: Feb 24 2020 at 15:55)
 
 * [(no topic)](79918notopic.html) (269 messages, latest: Feb 23 2020 at 22:02)
 
