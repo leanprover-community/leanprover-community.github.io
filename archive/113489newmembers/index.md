@@ -9,7 +9,23 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Simplifying Prop with Known False Statements](85769SimplifyingPropwithKnownFalseStatements.html) (15 messages, latest: Feb 25 2020 at 21:39)
+* [implicit parameters in conv mode](28226implicitparametersinconvmode.html) (2 messages, latest: Feb 27 2020 at 00:24)
+
+* [natural number game questions](52294naturalnumbergamequestions.html) (61 messages, latest: Feb 26 2020 at 21:16)
+
+* [Simplifying Prop with Known False Statements](85769SimplifyingPropwithKnownFalseStatements.html) (16 messages, latest: Feb 26 2020 at 20:27)
+
+* [induction with abbreviations](07507inductionwithabbreviations.html) (26 messages, latest: Feb 26 2020 at 19:57)
+
+* [help with fintype](24197helpwithfintype.html) (77 messages, latest: Feb 26 2020 at 18:56)
+
+* [even not odd](25623evennotodd.html) (20 messages, latest: Feb 26 2020 at 17:09)
+
+* [defining power on groups](71919definingpowerongroups.html) (20 messages, latest: Feb 26 2020 at 16:08)
+
+* [Basic building block tactics](24711Basicbuildingblocktactics.html) (35 messages, latest: Feb 26 2020 at 07:41)
+
+* [Vector space syntax](50599Vectorspacesyntax.html) (20 messages, latest: Feb 25 2020 at 23:05)
 
 * [more basics](41001morebasics.html) (85 messages, latest: Feb 25 2020 at 19:17)
 
@@ -18,8 +34,6 @@ permalink: archive/113489newmembers/index.html
 * [deep recursion error reducing strings](54910deeprecursionerrorreducingstrings.html) (5 messages, latest: Feb 25 2020 at 16:30)
 
 * [Should I be using classes here?](21751ShouldIbeusingclasseshere.html) (11 messages, latest: Feb 25 2020 at 15:17)
-
-* [natural number game questions](52294naturalnumbergamequestions.html) (36 messages, latest: Feb 25 2020 at 14:24)
 
 * [Theorem-searching mechanism in Lean?](50625TheoremsearchingmechanisminLean.html) (16 messages, latest: Feb 25 2020 at 14:24)
 
@@ -42,8 +56,6 @@ permalink: archive/113489newmembers/index.html
 * [Subtype Coercion](78847SubtypeCoercion.html) (1 message, latest: Feb 23 2020 at 20:15)
 
 * [Using mathlib in Lean project created using leanpkg](25878UsingmathlibinLeanprojectcreatedusingleanpkg.html) (43 messages, latest: Feb 23 2020 at 15:18)
-
-* [help with fintype](24197helpwithfintype.html) (25 messages, latest: Feb 23 2020 at 01:41)
 
 * [Complexity of a propositional formula](24622Complexityofapropositionalformula.html) (8 messages, latest: Feb 22 2020 at 08:29)
 

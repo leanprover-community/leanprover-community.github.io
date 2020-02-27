@@ -221,6 +221,146 @@ does not work, with the error message indicating that it expected something of t
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189023291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189023291">Donald Sebastian Leung (Feb 25 2020 at 14:24)</a>:</h4>
 <p><span class="user-mention" data-user-id="266070">@Ethan Horsfall</span> FYI the notation for function application in (functional) programming differs from that in conventional mathematics, for example <code>f(x)</code> in mathematics could be simply written as <code>f x</code> in Lean</p>
 
+<a name="189130994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189130994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189130994">Ethan Horsfall (Feb 26 2020 at 16:31)</a>:</h4>
+<p>on the last level of advanced multiplication world, i have got it to the point where I have the hypothesis<br>
+c : mynat,<br>
+c_ih : ∀ (a : mynat), a ≠ 0 → ∀ (b : mynat), a * b = a * c → b = c, ###<br>
+a : mynat,<br>
+ha : a ≠ 0, ###<br>
+n : mynat,<br>
+g : a * n + a = a * c + a,<br>
+W : a * n + a = a * c + a → a * n = a * c<br>
+⊢ a * n = a * c → n = c  ###</p>
+<p>I have put ### by the remaining relevant propositions</p>
+<p>which should be very simple as if we only look at c_ih and ha, the goal is just a restatement of this. but i cannot work out how to introduce the right variables into c_ih or revert the goal correctly. The propositions in the middle muddle it up when I use revert</p>
+
+<a name="189134027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134027">Kevin Buzzard (Feb 26 2020 at 17:05)</a>:</h4>
+<p>Does <code>exact c_ih a ha n</code> work?</p>
+
+<a name="189134144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134144">Kevin Buzzard (Feb 26 2020 at 17:06)</a>:</h4>
+<p>You can think of <code>c_ih</code> as a function, which takes as input a natural number <code>a</code>, a proof that it's not zero, and a natural number <code>b</code>, and returns a proof that <code>ab=ac -&gt; b=c</code>.</p>
+
+<a name="189134839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134839">Reid Barton (Feb 26 2020 at 17:12)</a>:</h4>
+<p>Also you should be able to <code>apply c_ih</code> and let Lean work out what additional arguments are needed.</p>
+
+<a name="189134909"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134909">Reid Barton (Feb 26 2020 at 17:13)</a>:</h4>
+<p>(either supplying them automatically or turning them into new goals)</p>
+
+<a name="189151261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189151261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189151261">Ethan Horsfall (Feb 26 2020 at 19:44)</a>:</h4>
+<p>thank you, that seems to have worked. the slightly weird thing is that it now just says 'no goals' instead of proof complete. viewing it as a function makes a lot of sense</p>
+
+<a name="189130994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189130994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189130994">Ethan Horsfall (Feb 26 2020 at 16:31)</a>:</h4>
+<p>on the last level of advanced multiplication world, i have got it to the point where I have the hypothesis<br>
+c : mynat,<br>
+c_ih : ∀ (a : mynat), a ≠ 0 → ∀ (b : mynat), a * b = a * c → b = c, ###<br>
+a : mynat,<br>
+ha : a ≠ 0, ###<br>
+n : mynat,<br>
+g : a * n + a = a * c + a,<br>
+W : a * n + a = a * c + a → a * n = a * c<br>
+⊢ a * n = a * c → n = c  ###</p>
+<p>I have put ### by the remaining relevant propositions</p>
+<p>which should be very simple as if we only look at c_ih and ha, the goal is just a restatement of this. but i cannot work out how to introduce the right variables into c_ih or revert the goal correctly. The propositions in the middle muddle it up when I use revert</p>
+
+<a name="189134027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134027">Kevin Buzzard (Feb 26 2020 at 17:05)</a>:</h4>
+<p>Does <code>exact c_ih a ha n</code> work?</p>
+
+<a name="189134144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134144">Kevin Buzzard (Feb 26 2020 at 17:06)</a>:</h4>
+<p>You can think of <code>c_ih</code> as a function, which takes as input a natural number <code>a</code>, a proof that it's not zero, and a natural number <code>b</code>, and returns a proof that <code>ab=ac -&gt; b=c</code>.</p>
+
+<a name="189134839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134839">Reid Barton (Feb 26 2020 at 17:12)</a>:</h4>
+<p>Also you should be able to <code>apply c_ih</code> and let Lean work out what additional arguments are needed.</p>
+
+<a name="189134909"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134909">Reid Barton (Feb 26 2020 at 17:13)</a>:</h4>
+<p>(either supplying them automatically or turning them into new goals)</p>
+
+<a name="189151261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189151261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189151261">Ethan Horsfall (Feb 26 2020 at 19:44)</a>:</h4>
+<p>thank you, that seems to have worked. the slightly weird thing is that it now just says 'no goals' instead of proof complete. viewing it as a function makes a lot of sense</p>
+
+<a name="189130994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189130994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189130994">Ethan Horsfall (Feb 26 2020 at 16:31)</a>:</h4>
+<p>on the last level of advanced multiplication world, i have got it to the point where I have the hypothesis<br>
+c : mynat,<br>
+c_ih : ∀ (a : mynat), a ≠ 0 → ∀ (b : mynat), a * b = a * c → b = c, ###<br>
+a : mynat,<br>
+ha : a ≠ 0, ###<br>
+n : mynat,<br>
+g : a * n + a = a * c + a,<br>
+W : a * n + a = a * c + a → a * n = a * c<br>
+⊢ a * n = a * c → n = c  ###</p>
+<p>I have put ### by the remaining relevant propositions</p>
+<p>which should be very simple as if we only look at c_ih and ha, the goal is just a restatement of this. but i cannot work out how to introduce the right variables into c_ih or revert the goal correctly. The propositions in the middle muddle it up when I use revert</p>
+
+<a name="189134027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134027">Kevin Buzzard (Feb 26 2020 at 17:05)</a>:</h4>
+<p>Does <code>exact c_ih a ha n</code> work?</p>
+
+<a name="189134144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134144">Kevin Buzzard (Feb 26 2020 at 17:06)</a>:</h4>
+<p>You can think of <code>c_ih</code> as a function, which takes as input a natural number <code>a</code>, a proof that it's not zero, and a natural number <code>b</code>, and returns a proof that <code>ab=ac -&gt; b=c</code>.</p>
+
+<a name="189134839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134839">Reid Barton (Feb 26 2020 at 17:12)</a>:</h4>
+<p>Also you should be able to <code>apply c_ih</code> and let Lean work out what additional arguments are needed.</p>
+
+<a name="189134909"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134909">Reid Barton (Feb 26 2020 at 17:13)</a>:</h4>
+<p>(either supplying them automatically or turning them into new goals)</p>
+
+<a name="189151261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189151261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189151261">Ethan Horsfall (Feb 26 2020 at 19:44)</a>:</h4>
+<p>thank you, that seems to have worked. the slightly weird thing is that it now just says 'no goals' instead of proof complete. viewing it as a function makes a lot of sense</p>
+
+<a name="189130994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189130994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189130994">Ethan Horsfall (Feb 26 2020 at 16:31)</a>:</h4>
+<p>on the last level of advanced multiplication world, i have got it to the point where I have the hypothesis<br>
+c : mynat,<br>
+c_ih : ∀ (a : mynat), a ≠ 0 → ∀ (b : mynat), a * b = a * c → b = c, ###<br>
+a : mynat,<br>
+ha : a ≠ 0, ###<br>
+n : mynat,<br>
+g : a * n + a = a * c + a,<br>
+W : a * n + a = a * c + a → a * n = a * c<br>
+⊢ a * n = a * c → n = c  ###</p>
+<p>I have put ### by the remaining relevant propositions</p>
+<p>which should be very simple as if we only look at c_ih and ha, the goal is just a restatement of this. but i cannot work out how to introduce the right variables into c_ih or revert the goal correctly. The propositions in the middle muddle it up when I use revert</p>
+
+<a name="189134027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134027">Kevin Buzzard (Feb 26 2020 at 17:05)</a>:</h4>
+<p>Does <code>exact c_ih a ha n</code> work?</p>
+
+<a name="189134144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134144">Kevin Buzzard (Feb 26 2020 at 17:06)</a>:</h4>
+<p>You can think of <code>c_ih</code> as a function, which takes as input a natural number <code>a</code>, a proof that it's not zero, and a natural number <code>b</code>, and returns a proof that <code>ab=ac -&gt; b=c</code>.</p>
+
+<a name="189134839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134839">Reid Barton (Feb 26 2020 at 17:12)</a>:</h4>
+<p>Also you should be able to <code>apply c_ih</code> and let Lean work out what additional arguments are needed.</p>
+
+<a name="189134909"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134909">Reid Barton (Feb 26 2020 at 17:13)</a>:</h4>
+<p>(either supplying them automatically or turning them into new goals)</p>
+
+<a name="189151261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189151261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189151261">Ethan Horsfall (Feb 26 2020 at 19:44)</a>:</h4>
+<p>thank you, that seems to have worked. the slightly weird thing is that it now just says 'no goals' instead of proof complete. viewing it as a function makes a lot of sense</p>
+
+<a name="189160091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189160091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189160091">Kevin Buzzard (Feb 26 2020 at 21:16)</a>:</h4>
+<p>?? I'm impressed :-) I thought Mohammad had managed to completely banish "no goals"!</p>
+
 
 {% endraw %}
 

@@ -9,7 +9,19 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Call to action: porting mathlib to Lean 3.6](76502CalltoactionportingmathlibtoLean36.html) (20 messages, latest: Feb 25 2020 at 20:06)
+* [abbreviation vs reducible def](41374abbreviationvsreducibledef.html) (1 message, latest: Feb 26 2020 at 23:02)
+
+* [3.6c](4165936c.html) (2 messages, latest: Feb 26 2020 at 21:22)
+
+* [Decidability nightmare](73447Decidabilitynightmare.html) (6 messages, latest: Feb 26 2020 at 20:59)
+
+* [Adding Lean support to Codewars](64096AddingLeansupporttoCodewars.html) (59 messages, latest: Feb 26 2020 at 14:51)
+
+* [`decidable_eq` got removed from `field`](06519decidableeqgotremovedfromfield.html) (21 messages, latest: Feb 26 2020 at 13:55)
+
+* [Call to action: porting mathlib to Lean 3.6](76502CalltoactionportingmathlibtoLean36.html) (27 messages, latest: Feb 26 2020 at 12:29)
+
+* [parser help](27863parserhelp.html) (24 messages, latest: Feb 26 2020 at 04:23)
 
 * [new mathlib tools](62589newmathlibtools.html) (66 messages, latest: Feb 25 2020 at 16:16)
 
@@ -114,8 +126,6 @@ permalink: archive/113488general/index.html
 * [Proving for Fun](94070ProvingforFun.html) (163 messages, latest: Feb 17 2020 at 22:14)
 
 * [Lean4 lemma names](88981Lean4lemmanames.html) (10 messages, latest: Feb 17 2020 at 12:45)
-
-* [Adding Lean support to Codewars](64096AddingLeansupporttoCodewars.html) (11 messages, latest: Feb 17 2020 at 10:01)
 
 * [VSCode unicode characters](08876VSCodeunicodecharacters.html) (39 messages, latest: Feb 17 2020 at 01:35)
 

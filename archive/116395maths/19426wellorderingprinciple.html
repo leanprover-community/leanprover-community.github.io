@@ -725,6 +725,226 @@ unknown identifier &#39;divides&#39;
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/188974649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#188974649">Nicholas McConnell (Feb 24 2020 at 22:48)</a>:</h4>
 <p>Thanks, even though I figured it out</p>
 
+<a name="189086513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/189086513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#189086513">Nicholas McConnell (Feb 26 2020 at 05:03)</a>:</h4>
+<p>How do I change a hypothesis from 0 ≤ 2 * r to 0 ≤ 2 * ↑r (involving integers)?  I don't see how to use norm_cast while specifying I want it to go to integers.</p>
+<p>In other words, given</p>
+<div class="codehilite"><pre><span></span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">b_pos</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">ho</span> <span class="o">:</span> <span class="n">odd</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">r</span> <span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">tri1</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">r</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">divq1</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">q</span> <span class="bp">+</span> <span class="n">r</span><span class="o">,</span>
+<span class="n">divq2</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">thing</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">r</span>
+</pre></div>
+
+
+<p>how can I get thing2 : 0 ≤ 2 * ↑r ?</p>
+
+<a name="189086524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/189086524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#189086524">Nicholas McConnell (Feb 26 2020 at 05:03)</a>:</h4>
+<p>[I trust that since this is not a problem-diagnosing question I don't need to put an MWE]</p>
+
+<a name="189086632"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/189086632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#189086632">Nicholas McConnell (Feb 26 2020 at 05:06)</a>:</h4>
+<p>By the way, my ambition is to prove that (-2) * ↑r ≤ 0</p>
+
+<a name="189086824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/189086824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#189086824">Bryan Gin-ge Chen (Feb 26 2020 at 05:14)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">thing</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">r</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">thing2</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="bp">≤</span> <span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">))</span> <span class="o">:=</span>
+    <span class="k">by</span> <span class="o">{</span> <span class="n">norm_cast</span><span class="o">,</span> <span class="n">exact</span> <span class="n">thing</span> <span class="o">},</span>
+  <span class="n">trivial</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>[MWEs are always preferable because it's easier to give a good suggestion when we can quickly check whether it works. Very few of us can emulate Lean + mathlib perfectly in our heads.]</p>
+
+<a name="189086938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/189086938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#189086938">Nicholas McConnell (Feb 26 2020 at 05:17)</a>:</h4>
+<p>Thanks.  Also, I'll keep that in mind.</p>
+
+<a name="189086513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/189086513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#189086513">Nicholas McConnell (Feb 26 2020 at 05:03)</a>:</h4>
+<p>How do I change a hypothesis from 0 ≤ 2 * r to 0 ≤ 2 * ↑r (involving integers)?  I don't see how to use norm_cast while specifying I want it to go to integers.</p>
+<p>In other words, given</p>
+<div class="codehilite"><pre><span></span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">b_pos</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">ho</span> <span class="o">:</span> <span class="n">odd</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">r</span> <span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">tri1</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">r</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">divq1</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">q</span> <span class="bp">+</span> <span class="n">r</span><span class="o">,</span>
+<span class="n">divq2</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">thing</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">r</span>
+</pre></div>
+
+
+<p>how can I get thing2 : 0 ≤ 2 * ↑r ?</p>
+
+<a name="189086524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/189086524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#189086524">Nicholas McConnell (Feb 26 2020 at 05:03)</a>:</h4>
+<p>[I trust that since this is not a problem-diagnosing question I don't need to put an MWE]</p>
+
+<a name="189086632"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/189086632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#189086632">Nicholas McConnell (Feb 26 2020 at 05:06)</a>:</h4>
+<p>By the way, my ambition is to prove that (-2) * ↑r ≤ 0</p>
+
+<a name="189086824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/189086824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#189086824">Bryan Gin-ge Chen (Feb 26 2020 at 05:14)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">thing</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">r</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">thing2</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="bp">≤</span> <span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">))</span> <span class="o">:=</span>
+    <span class="k">by</span> <span class="o">{</span> <span class="n">norm_cast</span><span class="o">,</span> <span class="n">exact</span> <span class="n">thing</span> <span class="o">},</span>
+  <span class="n">trivial</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>[MWEs are always preferable because it's easier to give a good suggestion when we can quickly check whether it works. Very few of us can emulate Lean + mathlib perfectly in our heads.]</p>
+
+<a name="189086938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/189086938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#189086938">Nicholas McConnell (Feb 26 2020 at 05:17)</a>:</h4>
+<p>Thanks.  Also, I'll keep that in mind.</p>
+
+<a name="189086513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/189086513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#189086513">Nicholas McConnell (Feb 26 2020 at 05:03)</a>:</h4>
+<p>How do I change a hypothesis from 0 ≤ 2 * r to 0 ≤ 2 * ↑r (involving integers)?  I don't see how to use norm_cast while specifying I want it to go to integers.</p>
+<p>In other words, given</p>
+<div class="codehilite"><pre><span></span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">b_pos</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">ho</span> <span class="o">:</span> <span class="n">odd</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">r</span> <span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">tri1</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">r</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">divq1</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">q</span> <span class="bp">+</span> <span class="n">r</span><span class="o">,</span>
+<span class="n">divq2</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">thing</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">r</span>
+</pre></div>
+
+
+<p>how can I get thing2 : 0 ≤ 2 * ↑r ?</p>
+
+<a name="189086524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/189086524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#189086524">Nicholas McConnell (Feb 26 2020 at 05:03)</a>:</h4>
+<p>[I trust that since this is not a problem-diagnosing question I don't need to put an MWE]</p>
+
+<a name="189086632"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/189086632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#189086632">Nicholas McConnell (Feb 26 2020 at 05:06)</a>:</h4>
+<p>By the way, my ambition is to prove that (-2) * ↑r ≤ 0</p>
+
+<a name="189086824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/189086824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#189086824">Bryan Gin-ge Chen (Feb 26 2020 at 05:14)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">thing</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">r</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">thing2</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="bp">≤</span> <span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">))</span> <span class="o">:=</span>
+    <span class="k">by</span> <span class="o">{</span> <span class="n">norm_cast</span><span class="o">,</span> <span class="n">exact</span> <span class="n">thing</span> <span class="o">},</span>
+  <span class="n">trivial</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>[MWEs are always preferable because it's easier to give a good suggestion when we can quickly check whether it works. Very few of us can emulate Lean + mathlib perfectly in our heads.]</p>
+
+<a name="189086938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/189086938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#189086938">Nicholas McConnell (Feb 26 2020 at 05:17)</a>:</h4>
+<p>Thanks.  Also, I'll keep that in mind.</p>
+
+<a name="189086513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/189086513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#189086513">Nicholas McConnell (Feb 26 2020 at 05:03)</a>:</h4>
+<p>How do I change a hypothesis from 0 ≤ 2 * r to 0 ≤ 2 * ↑r (involving integers)?  I don't see how to use norm_cast while specifying I want it to go to integers.</p>
+<p>In other words, given</p>
+<div class="codehilite"><pre><span></span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">b_pos</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">ho</span> <span class="o">:</span> <span class="n">odd</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">r</span> <span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">tri1</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">r</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">divq1</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">q</span> <span class="bp">+</span> <span class="n">r</span><span class="o">,</span>
+<span class="n">divq2</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">thing</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">r</span>
+</pre></div>
+
+
+<p>how can I get thing2 : 0 ≤ 2 * ↑r ?</p>
+
+<a name="189086524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/189086524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#189086524">Nicholas McConnell (Feb 26 2020 at 05:03)</a>:</h4>
+<p>[I trust that since this is not a problem-diagnosing question I don't need to put an MWE]</p>
+
+<a name="189086632"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/189086632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#189086632">Nicholas McConnell (Feb 26 2020 at 05:06)</a>:</h4>
+<p>By the way, my ambition is to prove that (-2) * ↑r ≤ 0</p>
+
+<a name="189086824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/189086824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#189086824">Bryan Gin-ge Chen (Feb 26 2020 at 05:14)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">thing</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">r</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">thing2</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="bp">≤</span> <span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">))</span> <span class="o">:=</span>
+    <span class="k">by</span> <span class="o">{</span> <span class="n">norm_cast</span><span class="o">,</span> <span class="n">exact</span> <span class="n">thing</span> <span class="o">},</span>
+  <span class="n">trivial</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>[MWEs are always preferable because it's easier to give a good suggestion when we can quickly check whether it works. Very few of us can emulate Lean + mathlib perfectly in our heads.]</p>
+
+<a name="189086938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/189086938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#189086938">Nicholas McConnell (Feb 26 2020 at 05:17)</a>:</h4>
+<p>Thanks.  Also, I'll keep that in mind.</p>
+
+<a name="189086513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/189086513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#189086513">Nicholas McConnell (Feb 26 2020 at 05:03)</a>:</h4>
+<p>How do I change a hypothesis from 0 ≤ 2 * r to 0 ≤ 2 * ↑r (involving integers)?  I don't see how to use norm_cast while specifying I want it to go to integers.</p>
+<p>In other words, given</p>
+<div class="codehilite"><pre><span></span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">b_pos</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">ho</span> <span class="o">:</span> <span class="n">odd</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">r</span> <span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">tri1</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">r</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">divq1</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">q</span> <span class="bp">+</span> <span class="n">r</span><span class="o">,</span>
+<span class="n">divq2</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">,</span>
+<span class="n">thing</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">r</span>
+</pre></div>
+
+
+<p>how can I get thing2 : 0 ≤ 2 * ↑r ?</p>
+
+<a name="189086524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/189086524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#189086524">Nicholas McConnell (Feb 26 2020 at 05:03)</a>:</h4>
+<p>[I trust that since this is not a problem-diagnosing question I don't need to put an MWE]</p>
+
+<a name="189086632"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/189086632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#189086632">Nicholas McConnell (Feb 26 2020 at 05:06)</a>:</h4>
+<p>By the way, my ambition is to prove that (-2) * ↑r ≤ 0</p>
+
+<a name="189086824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/189086824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#189086824">Bryan Gin-ge Chen (Feb 26 2020 at 05:14)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">thing</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">r</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">thing2</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="bp">≤</span> <span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">))</span> <span class="o">:=</span>
+    <span class="k">by</span> <span class="o">{</span> <span class="n">norm_cast</span><span class="o">,</span> <span class="n">exact</span> <span class="n">thing</span> <span class="o">},</span>
+  <span class="n">trivial</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>[MWEs are always preferable because it's easier to give a good suggestion when we can quickly check whether it works. Very few of us can emulate Lean + mathlib perfectly in our heads.]</p>
+
+<a name="189086938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-ordering%20principle/near/189086938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19426wellorderingprinciple.html#189086938">Nicholas McConnell (Feb 26 2020 at 05:17)</a>:</h4>
+<p>Thanks.  Also, I'll keep that in mind.</p>
+
 
 {% endraw %}
 

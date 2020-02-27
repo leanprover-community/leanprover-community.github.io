@@ -9,21 +9,27 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [addition in opposite](57591additioninopposite.html) (25 messages, latest: Feb 26 2020 at 18:03)
+
+* [Formalization of the statement that 0.999... = 1](05245Formalizationofthestatementthat09991.html) (36 messages, latest: Feb 26 2020 at 17:30)
+
+* [Failure to halve an odd number](37771Failuretohalveanoddnumber.html) (78 messages, latest: Feb 26 2020 at 16:11)
+
+* [well-ordering principle](19426wellorderingprinciple.html) (131 messages, latest: Feb 26 2020 at 05:17)
+
+* [(no topic)](79918notopic.html) (6 messages, latest: Feb 26 2020 at 05:14)
+
+* [MathLib installing](36823MathLibinstalling.html) (113 messages, latest: Feb 26 2020 at 03:53)
+
+* [Zorn's Lemma](18512ZornsLemma.html) (82 messages, latest: Feb 26 2020 at 00:55)
+
+* [log (a ^ n) = n * log a in mathlib?](89168logannlogainmathlib.html) (14 messages, latest: Feb 25 2020 at 22:57)
+
 * [nat case bashing](99100natcasebashing.html) (3 messages, latest: Feb 25 2020 at 17:54)
-
-* [log (a ^ n) = n * log a in mathlib?](89168logannlogainmathlib.html) (8 messages, latest: Feb 25 2020 at 13:44)
-
-* [Failure to halve an odd number](37771Failuretohalveanoddnumber.html) (8 messages, latest: Feb 25 2020 at 07:10)
-
-* [well-ordering principle](19426wellorderingprinciple.html) (106 messages, latest: Feb 24 2020 at 22:48)
-
-* [Formalization of the statement that 0.999... = 1](05245Formalizationofthestatementthat09991.html) (31 messages, latest: Feb 24 2020 at 10:52)
 
 * [What should be my next step here?](09391Whatshouldbemynextstephere.html) (5 messages, latest: Feb 24 2020 at 03:51)
 
 * [proposition manipulation](69752propositionmanipulation.html) (53 messages, latest: Feb 24 2020 at 03:44)
-
-* [MathLib installing](36823MathLibinstalling.html) (107 messages, latest: Feb 23 2020 at 20:28)
 
 * [product with variable number of factors](02708productwithvariablenumberoffactors.html) (4 messages, latest: Feb 20 2020 at 16:20)
 
@@ -44,8 +50,6 @@ permalink: archive/116395maths/index.html
 * [`⊢ S \ {s} ⊂ S`](77930SsS.html) (8 messages, latest: Feb 16 2020 at 18:36)
 
 * [why `nonempty`?](83058whynonempty.html) (7 messages, latest: Feb 16 2020 at 12:38)
-
-* [Zorn's Lemma](18512ZornsLemma.html) (46 messages, latest: Feb 15 2020 at 17:54)
 
 * [Carlos Simpson and VHS](36146CarlosSimpsonandVHS.html) (11 messages, latest: Feb 15 2020 at 12:05)
 
@@ -162,8 +166,6 @@ permalink: archive/116395maths/index.html
 * [`a ≤ b → f b ≤ f a`](38187abfbfa.html) (12 messages, latest: Jan 14 2020 at 13:25)
 
 * [set.not_mem_Inter_iff](22431setnotmemInteriff.html) (9 messages, latest: Jan 13 2020 at 23:06)
-
-* [(no topic)](79918notopic.html) (1 message, latest: Jan 13 2020 at 22:23)
 
 * [Algebraic closure Roadmap](47612AlgebraicclosureRoadmap.html) (3 messages, latest: Jan 13 2020 at 00:09)
 
