@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Speeding up compilation time for Lean project](42977SpeedingupcompilationtimeforLeanproject.html) (27 messages, latest: Feb 27 2020 at 16:46)
+* [Speeding up compilation time for Lean project](42977SpeedingupcompilationtimeforLeanproject.html) (28 messages, latest: Feb 27 2020 at 17:13)
 
 * [Adding Lean support to Codewars](64096AddingLeansupporttoCodewars.html) (69 messages, latest: Feb 27 2020 at 15:08)
 

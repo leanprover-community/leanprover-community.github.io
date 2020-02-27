@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [natural number game questions](52294naturalnumbergamequestions.html) (68 messages, latest: Feb 27 2020 at 16:58)
+* [natural number game questions](52294naturalnumbergamequestions.html) (72 messages, latest: Feb 27 2020 at 17:54)
 
 * [Divisibility Argument](35577DivisibilityArgument.html) (11 messages, latest: Feb 27 2020 at 16:27)
 
