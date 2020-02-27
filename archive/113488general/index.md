@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Speeding up compilation time for Lean project](42977SpeedingupcompilationtimeforLeanproject.html) (24 messages, latest: Feb 27 2020 at 09:35)
+* [Lean 3.6.0](99350Lean360.html) (3 messages, latest: Feb 27 2020 at 10:06)
 
-* [Lean installation in CoCalc](56079LeaninstallationinCoCalc.html) (99 messages, latest: Feb 27 2020 at 09:28)
+* [Lean installation in CoCalc](56079LeaninstallationinCoCalc.html) (100 messages, latest: Feb 27 2020 at 10:00)
+
+* [Speeding up compilation time for Lean project](42977SpeedingupcompilationtimeforLeanproject.html) (24 messages, latest: Feb 27 2020 at 09:35)
 
 * [abbreviation vs reducible def](41374abbreviationvsreducibledef.html) (1 message, latest: Feb 26 2020 at 23:02)
 
