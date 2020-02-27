@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [semicolon and tactic state](85878semicolonandtacticstate.html) (13 messages, latest: Feb 27 2020 at 13:54)
+* [Adding Lean support to Codewars](64096AddingLeansupporttoCodewars.html) (67 messages, latest: Feb 27 2020 at 14:34)
 
-* [Adding Lean support to Codewars](64096AddingLeansupporttoCodewars.html) (66 messages, latest: Feb 27 2020 at 13:49)
+* [Call to action: porting mathlib to Lean 3.6](76502CalltoactionportingmathlibtoLean36.html) (29 messages, latest: Feb 27 2020 at 14:22)
+
+* [semicolon and tactic state](85878semicolonandtacticstate.html) (13 messages, latest: Feb 27 2020 at 13:54)
 
 * [Speeding up compilation time for Lean project](42977SpeedingupcompilationtimeforLeanproject.html) (25 messages, latest: Feb 27 2020 at 13:42)
 
@@ -26,8 +28,6 @@ permalink: archive/113488general/index.html
 * [Decidability nightmare](73447Decidabilitynightmare.html) (6 messages, latest: Feb 26 2020 at 20:59)
 
 * [`decidable_eq` got removed from `field`](06519decidableeqgotremovedfromfield.html) (21 messages, latest: Feb 26 2020 at 13:55)
-
-* [Call to action: porting mathlib to Lean 3.6](76502CalltoactionportingmathlibtoLean36.html) (27 messages, latest: Feb 26 2020 at 12:29)
 
 * [parser help](27863parserhelp.html) (24 messages, latest: Feb 26 2020 at 04:23)
 
