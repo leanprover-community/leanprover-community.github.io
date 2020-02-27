@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [dealing with natural number subtraction](74815dealingwithnaturalnumbersubtraction.html) (31 messages, latest: Feb 27 2020 at 18:14)
+* [dealing with natural number subtraction](74815dealingwithnaturalnumbersubtraction.html) (34 messages, latest: Feb 27 2020 at 19:59)
 
 * [addition in opposite](57591additioninopposite.html) (25 messages, latest: Feb 26 2020 at 18:03)
 
