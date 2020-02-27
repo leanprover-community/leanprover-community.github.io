@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Advanced multiplication world final level](38415Advancedmultiplicationworldfinallevel.html) (18 messages, latest: Feb 27 2020 at 21:52)
+* [Advanced multiplication world final level](38415Advancedmultiplicationworldfinallevel.html) (39 messages, latest: Feb 27 2020 at 22:48)
+
+* [Instances for forgetful inheritance](47176Instancesforforgetfulinheritance.html) (1 message, latest: Feb 27 2020 at 22:28)
 
 * [Speeding up compilation time for Lean project](42977SpeedingupcompilationtimeforLeanproject.html) (33 messages, latest: Feb 27 2020 at 20:29)
 
