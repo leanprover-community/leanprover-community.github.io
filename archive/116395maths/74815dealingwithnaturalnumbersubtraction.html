@@ -296,6 +296,52 @@ end
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/dealing%20with%20natural%20number%20subtraction/near/189238048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/74815dealingwithnaturalnumbersubtraction.html#189238048">Kevin Buzzard (Feb 27 2020 at 17:59)</a>:</h4>
 <p>It's interesting that <code>norm_cast</code> worked really well and <code>push_cast</code> did all sorts of crazy things.</p>
 
+<a name="189238438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/dealing%20with%20natural%20number%20subtraction/near/189238438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/74815dealingwithnaturalnumbersubtraction.html#189238438">Scott Morrison (Feb 27 2020 at 18:02)</a>:</h4>
+<p>Here's my version, with the "finding the right lemmas" cruft at the top left in, for pedagogical purposes:</p>
+<div class="codehilite"><pre><span></span>import tactic.norm_cast
+import tactic.ring
+import algebra.group_power
+
+example (x y : ℕ) (h : (x : ℤ) = (y : ℤ)) : x = y := by suggest
+
+example (x : ℕ) : ((x^2 : ℕ) : ℤ) = (x : ℤ)^2 := by library_search
+
+-- This attribute is missing, and should be added to mathlib
+attribute [push_cast] int.coe_nat_pow
+
+example (x y : ℕ) : ((x - y : ℕ) : ℤ) = (x : ℤ) - (y : ℤ) := by suggest
+-- down the list we find `int.coe_nat_sub`
+
+#print int.coe_nat_sub
+
+example (x y : ℕ) (h : x ≤ y) :
+  2 * (x ^ 2 + y ^ 2) = (y + x) ^ 2 + (y - x) ^ 2 :=
+begin
+  apply int.coe_nat_inj,
+  push_cast,
+  rw int.coe_nat_sub h, -- it would be nice if `push_cast` managed this itself.
+  ring,                 -- the output is a bit wonky here
+  simp,
+end
+</pre></div>
+
+<a name="189238726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/dealing%20with%20natural%20number%20subtraction/near/189238726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/74815dealingwithnaturalnumbersubtraction.html#189238726">Kevin Buzzard (Feb 27 2020 at 18:05)</a>:</h4>
+<p>Oh so it does come out nice in the end.</p>
+
+<a name="189238836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/dealing%20with%20natural%20number%20subtraction/near/189238836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/74815dealingwithnaturalnumbersubtraction.html#189238836">Kevin Buzzard (Feb 27 2020 at 18:06)</a>:</h4>
+<p>Related: <code>library_search</code> suggested <code>int.coe_nat_sub.reversed</code> for me, which I was surprised by; you can <code>#check int.coe_nat_sub.reversed</code> to see what it says (and compare with <code>int.coe_nat_sub</code>). But if you right click and go to definition then something surprising happens!</p>
+
+<a name="189238925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/dealing%20with%20natural%20number%20subtraction/near/189238925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/74815dealingwithnaturalnumbersubtraction.html#189238925">Kevin Buzzard (Feb 27 2020 at 18:07)</a>:</h4>
+<p>Why use <code>suggest</code> when you can use <code>library_search</code>? Oh -- because your lemma isn't even true!</p>
+
+<a name="189239677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/dealing%20with%20natural%20number%20subtraction/near/189239677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/74815dealingwithnaturalnumbersubtraction.html#189239677">Nicholas McConnell (Feb 27 2020 at 18:14)</a>:</h4>
+<p>Thanks very much, Scott and Kevin.  I followed Scott's latest approach</p>
+
 
 {% endraw %}
 
