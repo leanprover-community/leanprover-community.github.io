@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Speeding up compilation time for Lean project](42977SpeedingupcompilationtimeforLeanproject.html) (27 messages, latest: Feb 27 2020 at 16:46)
+
 * [Adding Lean support to Codewars](64096AddingLeansupporttoCodewars.html) (69 messages, latest: Feb 27 2020 at 15:08)
 
 * [Call to action: porting mathlib to Lean 3.6](76502CalltoactionportingmathlibtoLean36.html) (29 messages, latest: Feb 27 2020 at 14:22)
 
 * [semicolon and tactic state](85878semicolonandtacticstate.html) (13 messages, latest: Feb 27 2020 at 13:54)
-
-* [Speeding up compilation time for Lean project](42977SpeedingupcompilationtimeforLeanproject.html) (25 messages, latest: Feb 27 2020 at 13:42)
 
 * [Lean 3.6.0](99350Lean360.html) (5 messages, latest: Feb 27 2020 at 12:07)
 

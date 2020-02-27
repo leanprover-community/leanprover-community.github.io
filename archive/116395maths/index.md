@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [dealing with natural number subtraction](74815dealingwithnaturalnumbersubtraction.html) (4 messages, latest: Feb 27 2020 at 16:56)
+
 * [addition in opposite](57591additioninopposite.html) (25 messages, latest: Feb 26 2020 at 18:03)
 
 * [Formalization of the statement that 0.999... = 1](05245Formalizationofthestatementthat09991.html) (36 messages, latest: Feb 26 2020 at 17:30)
