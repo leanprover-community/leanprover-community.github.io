@@ -9,11 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Divisibility Argument](35577DivisibilityArgument.html) (4 messages, latest: Feb 27 2020 at 11:58)
+
+* [natural number game questions](52294naturalnumbergamequestions.html) (62 messages, latest: Feb 27 2020 at 11:55)
+
 * [Basic building block tactics](24711Basicbuildingblocktactics.html) (41 messages, latest: Feb 27 2020 at 08:59)
 
 * [implicit parameters in conv mode](28226implicitparametersinconvmode.html) (2 messages, latest: Feb 27 2020 at 00:24)
-
-* [natural number game questions](52294naturalnumbergamequestions.html) (61 messages, latest: Feb 26 2020 at 21:16)
 
 * [Simplifying Prop with Known False Statements](85769SimplifyingPropwithKnownFalseStatements.html) (16 messages, latest: Feb 26 2020 at 20:27)
 

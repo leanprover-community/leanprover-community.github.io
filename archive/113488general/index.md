@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean 3.6.0](99350Lean360.html) (3 messages, latest: Feb 27 2020 at 10:06)
+* [Lean 3.6.0](99350Lean360.html) (4 messages, latest: Feb 27 2020 at 11:18)
 
 * [Lean installation in CoCalc](56079LeaninstallationinCoCalc.html) (100 messages, latest: Feb 27 2020 at 10:00)
 
