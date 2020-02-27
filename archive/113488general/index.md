@@ -9,19 +9,21 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [semicolon and tactic state](85878semicolonandtacticstate.html) (13 messages, latest: Feb 27 2020 at 13:54)
+
+* [Adding Lean support to Codewars](64096AddingLeansupporttoCodewars.html) (66 messages, latest: Feb 27 2020 at 13:49)
+
+* [Speeding up compilation time for Lean project](42977SpeedingupcompilationtimeforLeanproject.html) (25 messages, latest: Feb 27 2020 at 13:42)
+
 * [Lean 3.6.0](99350Lean360.html) (5 messages, latest: Feb 27 2020 at 12:07)
 
 * [Lean installation in CoCalc](56079LeaninstallationinCoCalc.html) (100 messages, latest: Feb 27 2020 at 10:00)
-
-* [Speeding up compilation time for Lean project](42977SpeedingupcompilationtimeforLeanproject.html) (24 messages, latest: Feb 27 2020 at 09:35)
 
 * [abbreviation vs reducible def](41374abbreviationvsreducibledef.html) (1 message, latest: Feb 26 2020 at 23:02)
 
 * [3.6c](4165936c.html) (2 messages, latest: Feb 26 2020 at 21:22)
 
 * [Decidability nightmare](73447Decidabilitynightmare.html) (6 messages, latest: Feb 26 2020 at 20:59)
-
-* [Adding Lean support to Codewars](64096AddingLeansupporttoCodewars.html) (59 messages, latest: Feb 26 2020 at 14:51)
 
 * [`decidable_eq` got removed from `field`](06519decidableeqgotremovedfromfield.html) (21 messages, latest: Feb 26 2020 at 13:55)
 
@@ -86,8 +88,6 @@ permalink: archive/113488general/index.html
 * [missing doc](95569missingdoc.html) (2 messages, latest: Feb 22 2020 at 07:07)
 
 * [assertion violation hell](14931assertionviolationhell.html) (9 messages, latest: Feb 21 2020 at 22:59)
-
-* [semicolon and tactic state](85878semicolonandtacticstate.html) (11 messages, latest: Feb 21 2020 at 21:51)
 
 * [How to prove this seemingly trivial lemma?](58537Howtoprovethisseeminglytriviallemma.html) (19 messages, latest: Feb 21 2020 at 18:48)
 
