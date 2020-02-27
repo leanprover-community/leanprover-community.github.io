@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Divisibility Argument](35577DivisibilityArgument.html) (4 messages, latest: Feb 27 2020 at 11:58)
+* [natural number game questions](52294naturalnumbergamequestions.html) (63 messages, latest: Feb 27 2020 at 12:02)
 
-* [natural number game questions](52294naturalnumbergamequestions.html) (62 messages, latest: Feb 27 2020 at 11:55)
+* [Divisibility Argument](35577DivisibilityArgument.html) (5 messages, latest: Feb 27 2020 at 12:00)
 
 * [Basic building block tactics](24711Basicbuildingblocktactics.html) (41 messages, latest: Feb 27 2020 at 08:59)
 
