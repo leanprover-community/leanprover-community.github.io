@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Speeding up compilation time for Lean project](42977SpeedingupcompilationtimeforLeanproject.html) (1 message, latest: Feb 27 2020 at 08:03)
+
 * [abbreviation vs reducible def](41374abbreviationvsreducibledef.html) (1 message, latest: Feb 26 2020 at 23:02)
 
 * [3.6c](4165936c.html) (2 messages, latest: Feb 26 2020 at 21:22)

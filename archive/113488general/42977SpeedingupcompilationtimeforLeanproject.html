@@ -1,0 +1,67 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html">Speeding up compilation time for Lean project</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="189193673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Speeding%20up%20compilation%20time%20for%20Lean%20project/near/189193673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42977SpeedingupcompilationtimeforLeanproject.html#189193673">Donald Sebastian Leung (Feb 27 2020 at 08:03)</a>:</h4>
+<p><em>This is broadly related to <a href="#narrow/stream/113488-general/topic/Adding.20Lean.20support.20to.20Codewars" title="#narrow/stream/113488-general/topic/Adding.20Lean.20support.20to.20Codewars">Adding Lean Support to Codewars</a>, but this time I'm directly testing out on my PC instead of on Codewars' servers.</em></p>
+<p>So suppose I create a Lean project as follows:</p>
+<div class="codehilite"><pre><span></span>$ leanpkg new my_project
+$ <span class="nb">cd</span> my_project
+$ leanpkg add leanprover-community/mathlib
+</pre></div>
+
+
+<p>I then remove <code>_target/deps/mathlib/src/</code> entirely and replace it with <a href="https://github.com/leanprover-community/mathlib-nightly/releases/download/nightly-2020-02-17/mathlib-olean-nightly-2020-02-17.tar.gz" target="_blank" title="https://github.com/leanprover-community/mathlib-nightly/releases/download/nightly-2020-02-17/mathlib-olean-nightly-2020-02-17.tar.gz">nightly <code>.olean</code> files for mathlib</a>. Then, after that, I return to the command line:</p>
+<div class="codehilite"><pre><span></span>$ find _target <span class="p">|</span> grep <span class="s2">&quot;[.]lean</span>$<span class="s2">&quot;</span> <span class="p">|</span> xargs rm <span class="c1"># Remove all .lean files from mathlib</span>
+$ find _target <span class="p">|</span> grep <span class="s2">&quot;[.]olean</span>$<span class="s2">&quot;</span> <span class="p">|</span> xargs touch <span class="c1"># Give same timestamp to all .olean files</span>
+</pre></div>
+
+
+<p>Now that the setup is complete, I go to <code>src/</code> in my project directory and create three files <code>Preloaded.lean</code>, <code>Solution.lean</code> and <code>SolutionTest.lean</code> of the following format:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm"> Preloaded.lean -/</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">specific_limits</span> <span class="c1">-- Import something from mathlib</span>
+
+<span class="n">def</span> <span class="n">SUBMISSION</span> <span class="o">:=</span> <span class="n">some_mathematical_statement</span>
+<span class="kn">notation</span> <span class="bp">`</span><span class="n">SUBMISSION</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">SUBMISSION</span> <span class="c1">-- cheat prevention; prevent override of SUBMISSION</span>
+
+<span class="c">/-</span><span class="cm"> Solution.lean -/</span>
+<span class="kn">import</span> <span class="n">Preloaded</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span> <span class="c1">-- maybe import some more from mathlib</span>
+
+<span class="c1">-- Solution likely uses some results from mathlib</span>
+<span class="kn">theorem</span> <span class="n">solution</span> <span class="o">:</span> <span class="n">some_mathematical_statement</span> <span class="o">:=</span> <span class="n">some_proof</span>
+
+<span class="c">/-</span><span class="cm"> SolutionTest.lean -/</span>
+<span class="kn">import</span> <span class="n">Preloaded</span> <span class="n">Solution</span>
+
+<span class="kn">theorem</span> <span class="n">submission</span> <span class="o">:</span> <span class="n">SUBMISSION</span> <span class="o">:=</span> <span class="n">solution</span>
+</pre></div>
+
+
+<p>However, I get extremely slow performance when I run:</p>
+<div class="codehilite"><pre><span></span>$ lean SolutionTest.lean -E SolutionTest.out --only-export<span class="o">=</span>submission <span class="o">&amp;&amp;</span> leanchecker SolutionTest.out submission
+</pre></div>
+
+
+<p>For example, doing this on a proof that <code>0.999... = 1</code> takes 1m30s on my machine when it should take only about 8 seconds. Even just compiling <code>SolutionTest.lean</code> as follows takes half a minute:</p>
+<div class="codehilite"><pre><span></span>$ lean SolutionTest.lean
+</pre></div>
+
+
+<p>Does anyone know what I'm doing wrong which is causing this subpar performance? I thought using pre-compiled <code>.olean</code> files (and deleting the original <code>.lean</code> files!) for mathlib should speed up the compilation process?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

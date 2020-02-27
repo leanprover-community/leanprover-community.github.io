@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Basic building block tactics](24711Basicbuildingblocktactics.html) (40 messages, latest: Feb 27 2020 at 07:13)
+* [Basic building block tactics](24711Basicbuildingblocktactics.html) (41 messages, latest: Feb 27 2020 at 08:59)
 
 * [implicit parameters in conv mode](28226implicitparametersinconvmode.html) (2 messages, latest: Feb 27 2020 at 00:24)
 
