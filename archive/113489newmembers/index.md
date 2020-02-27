@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [defining power on groups](71919definingpowerongroups.html) (27 messages, latest: Feb 27 2020 at 20:53)
+
 * [natural number game questions](52294naturalnumbergamequestions.html) (76 messages, latest: Feb 27 2020 at 18:15)
 
 * [Divisibility Argument](35577DivisibilityArgument.html) (11 messages, latest: Feb 27 2020 at 16:27)
@@ -24,8 +26,6 @@ permalink: archive/113489newmembers/index.html
 * [help with fintype](24197helpwithfintype.html) (77 messages, latest: Feb 26 2020 at 18:56)
 
 * [even not odd](25623evennotodd.html) (20 messages, latest: Feb 26 2020 at 17:09)
-
-* [defining power on groups](71919definingpowerongroups.html) (20 messages, latest: Feb 26 2020 at 16:08)
 
 * [Vector space syntax](50599Vectorspacesyntax.html) (20 messages, latest: Feb 25 2020 at 23:05)
 
