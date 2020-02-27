@@ -82,6 +82,42 @@ h : a * b = a * succ d<br>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Advanced%20multiplication%20world%20final%20level/near/189246751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38415Advancedmultiplicationworldfinallevel.html#189246751">Andrew Helwer (Feb 27 2020 at 19:18)</a>:</h4>
 <p>huh... actually that probably would have worked because then I could just use mul_comm and the inductive hypothesis? I will try this!</p>
 
+<a name="189260247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Advanced%20multiplication%20world%20final%20level/near/189260247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38415Advancedmultiplicationworldfinallevel.html#189260247">Andrew Helwer (Feb 27 2020 at 21:41)</a>:</h4>
+<p>All right I throw in the towel... does anyone have a proof of this? Would love to go over it line by line.</p>
+
+<a name="189261251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Advanced%20multiplication%20world%20final%20level/near/189261251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38415Advancedmultiplicationworldfinallevel.html#189261251">Alex J. Best (Feb 27 2020 at 21:52)</a>:</h4>
+<p>Credit : I copied this (with some light edits) from the solutions, but I won't link to them unless you ask for it as I don't want to spoil any fun ;):</p>
+<div class="codehilite"><pre><span></span>  <span class="n">revert</span> <span class="n">b</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">c</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">b</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">mul_zero</span><span class="o">,</span>
+    <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="o">(</span><span class="n">eq_zero_or_eq_zero_of_mul_eq_zero</span> <span class="n">a</span> <span class="n">b</span> <span class="n">h</span><span class="o">),</span>
+      <span class="n">exfalso</span><span class="o">,</span>
+      <span class="n">apply</span> <span class="n">ha</span><span class="o">,</span>
+      <span class="n">assumption</span><span class="o">,</span>
+    <span class="n">assumption</span><span class="o">,</span>
+  <span class="o">},</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">b</span> <span class="n">hb</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="n">b</span> <span class="k">with</span> <span class="n">c</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">rw</span> <span class="n">mul_zero</span> <span class="n">at</span> <span class="n">hb</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="n">mul_succ</span> <span class="n">at</span> <span class="n">hb</span><span class="o">,</span>
+      <span class="n">exfalso</span><span class="o">,</span>
+      <span class="n">apply</span> <span class="n">ha</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="n">eq_comm</span> <span class="n">at</span> <span class="n">hb</span><span class="o">,</span>
+      <span class="n">apply</span> <span class="n">add_left_eq_zero</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">d</span><span class="o">)</span> <span class="n">a</span> <span class="n">hb</span><span class="o">,</span>
+    <span class="o">},</span>
+    <span class="o">{</span> <span class="n">congr</span><span class="o">,</span> <span class="c1">-- c = d -&gt; succ c = succ d</span>
+      <span class="n">apply</span> <span class="n">hd</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="n">mul_succ</span> <span class="n">at</span> <span class="n">hb</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="n">mul_succ</span> <span class="n">at</span> <span class="n">hb</span><span class="o">,</span>
+      <span class="n">apply</span> <span class="n">add_right_cancel</span> <span class="o">(</span><span class="n">a</span><span class="bp">*</span><span class="n">c</span><span class="o">)</span> <span class="n">a</span> <span class="o">(</span><span class="n">a</span><span class="bp">*</span><span class="n">d</span><span class="o">)</span> <span class="n">hb</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+</pre></div>
+
 
 {% endraw %}
 

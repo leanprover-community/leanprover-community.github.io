@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [defining power on groups](71919definingpowerongroups.html) (27 messages, latest: Feb 27 2020 at 20:53)
+* [defining power on groups](71919definingpowerongroups.html) (29 messages, latest: Feb 27 2020 at 21:12)
 
 * [natural number game questions](52294naturalnumbergamequestions.html) (76 messages, latest: Feb 27 2020 at 18:15)
 
