@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Adding Lean support to Codewars](64096AddingLeansupporttoCodewars.html) (67 messages, latest: Feb 27 2020 at 14:34)
+* [Adding Lean support to Codewars](64096AddingLeansupporttoCodewars.html) (69 messages, latest: Feb 27 2020 at 15:08)
 
 * [Call to action: porting mathlib to Lean 3.6](76502CalltoactionportingmathlibtoLean36.html) (29 messages, latest: Feb 27 2020 at 14:22)
 
