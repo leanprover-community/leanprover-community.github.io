@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Basic building block tactics](24711Basicbuildingblocktactics.html) (39 messages, latest: Feb 27 2020 at 01:48)
+
 * [implicit parameters in conv mode](28226implicitparametersinconvmode.html) (2 messages, latest: Feb 27 2020 at 00:24)
 
 * [natural number game questions](52294naturalnumbergamequestions.html) (61 messages, latest: Feb 26 2020 at 21:16)
@@ -22,8 +24,6 @@ permalink: archive/113489newmembers/index.html
 * [even not odd](25623evennotodd.html) (20 messages, latest: Feb 26 2020 at 17:09)
 
 * [defining power on groups](71919definingpowerongroups.html) (20 messages, latest: Feb 26 2020 at 16:08)
-
-* [Basic building block tactics](24711Basicbuildingblocktactics.html) (35 messages, latest: Feb 26 2020 at 07:41)
 
 * [Vector space syntax](50599Vectorspacesyntax.html) (20 messages, latest: Feb 25 2020 at 23:05)
 

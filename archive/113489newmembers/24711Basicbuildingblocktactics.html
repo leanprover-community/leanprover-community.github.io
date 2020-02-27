@@ -162,6 +162,42 @@ permalink: archive/113489newmembers/24711Basicbuildingblocktactics.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189091945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189091945">Kevin Buzzard (Feb 26 2020 at 07:41)</a>:</h4>
 <p>I guess it's theoretically possible to prove any statement in lean without using any tactics at all, because you can just use term mode. I think Agda might look like this?</p>
 
+<a name="189178089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189178089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189178089">Lucas Allen (Feb 27 2020 at 01:05)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113489-new-members/topic/Basic.20building.20block.20tactics/near/189083718" title="#narrow/stream/113489-new-members/topic/Basic.20building.20block.20tactics/near/189083718">said</a>:</p>
+<blockquote>
+<p>You can probably get away with <code>intro</code> and <code>apply</code>, since that covers application and lambda</p>
+<p><code>change</code> is important for triggering definitional conversion</p>
+</blockquote>
+<p>I see, thanks.</p>
+<p>If <code>solve_by_elim</code> was extended so that it could also do <code>intro</code> and <code>change</code>, would it then be a proof search? I.e. if <code>max_reps := n</code>would it always find a proof of length less than or equal to <code>n</code> if one exists?</p>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113489-new-members/topic/Basic.20building.20block.20tactics/near/189091945" title="#narrow/stream/113489-new-members/topic/Basic.20building.20block.20tactics/near/189091945">said</a>:</p>
+<blockquote>
+<p>I guess it's theoretically possible to prove any statement in lean without using any tactics at all, because you can just use term mode. I think Agda might look like this?</p>
+</blockquote>
+<p>I guess this is why <code>exact</code> does everything. But that's no fun. :)</p>
+
+<a name="189178281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189178281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189178281">Scott Morrison (Feb 27 2020 at 01:08)</a>:</h4>
+<p>No. Remember <code>solve_by_elim</code> only applies local hypotheses.</p>
+
+<a name="189178367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189178367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189178367">Scott Morrison (Feb 27 2020 at 01:10)</a>:</h4>
+<p>Also, <code>change</code> requires an explicit user provided argument, so I don't know what you're hoping it would do for you automatically.</p>
+
+<a name="189180117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189180117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189180117">Lucas Allen (Feb 27 2020 at 01:48)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110087">Scott Morrison</span> <a href="#narrow/stream/113489-new-members/topic/Basic.20building.20block.20tactics/near/189178281" title="#narrow/stream/113489-new-members/topic/Basic.20building.20block.20tactics/near/189178281">said</a>:</p>
+<blockquote>
+<p>No. Remember <code>solve_by_elim</code> only applies local hypotheses.</p>
+</blockquote>
+<p>Right, but I thought if something can be proved then it can be proved only using local hypotheses, you just take the proof of lemma or theorem you'd normally use and insert in into the correct spot in your proof. Is that wrong? </p>
+<p><span class="user-mention silent" data-user-id="110087">Scott Morrison</span> <a href="#narrow/stream/113489-new-members/topic/Basic.20building.20block.20tactics/near/189178367" title="#narrow/stream/113489-new-members/topic/Basic.20building.20block.20tactics/near/189178367">said</a>:</p>
+<blockquote>
+<p>Also, <code>change</code> requires an explicit user provided argument, so I don't know what you're hoping it would do for you automatically.</p>
+</blockquote>
+<p>I have no experience with <code>change</code>, and it's not in <code>tactics.md</code>. I'm going to spend a bit of time seeing what I can find out.</p>
+
 
 {% endraw %}
 
