@@ -462,6 +462,58 @@ excessive memory consumption detected at &#39;replace&#39; (potential solution: 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/188725219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#188725219">Johan Commelin (Feb 21 2020 at 12:00)</a>:</h4>
 <p>Nice! That works really smoothly. And for my test it was really responsive. This is cool!</p>
 
+<a name="189197701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189197701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189197701">Harald Schilly (Feb 27 2020 at 09:22)</a>:</h4>
+<p>quick update from my perspective at cocalc: I tried to upgrade to lean 3.6.0 + mathlib 2020-02-27 nightly, but it doesn't work. I have no idea why. The symptoms are high (never ending) cpu usage and then it fails with "excessive memory usage error" or the whole cocalc interface is unresponsive. So, something must have changed that causes an issue. Hence there won't be 3.6.0 on cocalc for now.</p>
+
+<a name="189197801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189197801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189197801">Johan Commelin (Feb 27 2020 at 09:24)</a>:</h4>
+<p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> <span class="user-mention" data-user-id="110596">@Rob Lewis</span> <span aria-label="up" class="emoji emoji-2b06" role="img" title="up">:up:</span></p>
+
+<a name="189197822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189197822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189197822">Kevin Buzzard (Feb 27 2020 at 09:25)</a>:</h4>
+<p>One thing you could try is this: upgrade the Lean binary to 3.6, upgrade the mathlib Lean files, and then compile them yourself with <code>lean --make src</code> in the mathlib root directory. It will take a while but it might be the easiest way to just make everything work.</p>
+
+<a name="189197840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189197840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189197840">Johan Commelin (Feb 27 2020 at 09:25)</a>:</h4>
+<p><span class="user-mention" data-user-id="137337">@Harald Schilly</span> Currently mathlib is not compatible with <code>lean 3.6.0</code></p>
+
+<a name="189197853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189197853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189197853">Kevin Buzzard (Feb 27 2020 at 09:25)</a>:</h4>
+<p>Oh!</p>
+
+<a name="189197858"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189197858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189197858">Johan Commelin (Feb 27 2020 at 09:25)</a>:</h4>
+<p>Lean 3.6.0 was released yesterday, and we'll first have to fix mathlib.</p>
+
+<a name="189197861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189197861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189197861">Harald Schilly (Feb 27 2020 at 09:25)</a>:</h4>
+<p>ahh!</p>
+
+<a name="189197888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189197888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189197888">Johan Commelin (Feb 27 2020 at 09:25)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/leanpkg.toml" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/leanpkg.toml">https://github.com/leanprover-community/mathlib/blob/master/leanpkg.toml</a></p>
+
+<a name="189197928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189197928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189197928">Johan Commelin (Feb 27 2020 at 09:26)</a>:</h4>
+<p>Still says <code>3.5.1</code> <span aria-label="grinning" class="emoji emoji-1f600" role="img" title="grinning">:grinning:</span></p>
+
+<a name="189197946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189197946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189197946">Harald Schilly (Feb 27 2020 at 09:26)</a>:</h4>
+<p>ok. that explains everything. hence just updating mathlib nightly ^^</p>
+
+<a name="189197953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189197953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189197953">Johan Commelin (Feb 27 2020 at 09:26)</a>:</h4>
+<p>No worries.</p>
+
+<a name="189197987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189197987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189197987">Johan Commelin (Feb 27 2020 at 09:27)</a>:</h4>
+<p>Probably in a couple of days there will be a big change in mathlib. From then on mathlib wont work with lean 3.4.2 anymore but only with lean 3.6.*</p>
+
+<a name="189198046"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20installation%20in%20CoCalc/near/189198046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56079LeaninstallationinCoCalc.html#189198046">Johan Commelin (Feb 27 2020 at 09:28)</a>:</h4>
+<p>3.5.1 exists as some sort of transition.</p>
+
 
 {% endraw %}
 

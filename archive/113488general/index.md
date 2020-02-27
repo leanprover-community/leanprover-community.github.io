@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Speeding up compilation time for Lean project](42977SpeedingupcompilationtimeforLeanproject.html) (1 message, latest: Feb 27 2020 at 08:03)
+* [Speeding up compilation time for Lean project](42977SpeedingupcompilationtimeforLeanproject.html) (24 messages, latest: Feb 27 2020 at 09:35)
+
+* [Lean installation in CoCalc](56079LeaninstallationinCoCalc.html) (99 messages, latest: Feb 27 2020 at 09:28)
 
 * [abbreviation vs reducible def](41374abbreviationvsreducibledef.html) (1 message, latest: Feb 26 2020 at 23:02)
 
@@ -90,8 +92,6 @@ permalink: archive/113488general/index.html
 * [Farewell to mini_crush, smt2_interface, etc.](89663Farewelltominicrushsmt2interfaceetc.html) (24 messages, latest: Feb 21 2020 at 16:55)
 
 * [VScode calc](45240VScodecalc.html) (9 messages, latest: Feb 21 2020 at 12:44)
-
-* [Lean installation in CoCalc](56079LeaninstallationinCoCalc.html) (86 messages, latest: Feb 21 2020 at 12:00)
 
 * [Rewrite with add_sub doesn't work](94408Rewritewithaddsubdoesntwork.html) (25 messages, latest: Feb 21 2020 at 09:30)
 
