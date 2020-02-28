@@ -1,0 +1,62 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/11947applyingdefinitionstotheorems.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html">applying definitions to theorems</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="189322998"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189322998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189322998">Danila Kurganov (Feb 28 2020 at 16:02)</a>:</h4>
+<p>Hi, I'm having trouble trying to use my own definitions and applying them to theorems, <br>
+how should I approach the following if I wanted to unpack my definition once lean knows there's a proof of it?</p>
+<div class="codehilite"><pre><span></span>def equivalency (p q : Prop) : Prop := p → q ∧ q → p
+
+theorem (p q : Prop) : equivalency p q → p ∧ q :=
+begin
+  intro eq_pq,
+  -- how do I unpack my definition now?
+end
+</pre></div>
+
+
+<p>Thanks!</p>
+
+<a name="189323102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189323102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189323102">Donald Sebastian Leung (Feb 28 2020 at 16:03)</a>:</h4>
+<p>Try <code>unfold equivalency at *</code></p>
+
+<a name="189323408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189323408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189323408">Danila Kurganov (Feb 28 2020 at 16:06)</a>:</h4>
+<p>Thanks, that works perfectly-  If I wanted to find out more about the unfold tactic (source code maybe?) where should I go? I've not found the tactic codes so far..</p>
+
+<a name="189324062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189324062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189324062">Kevin Buzzard (Feb 28 2020 at 16:13)</a>:</h4>
+<p>There are <a href="https://leanprover-community.github.io/mathlib_docs/tactics.html" target="_blank" title="https://leanprover-community.github.io/mathlib_docs/tactics.html">lots of tactics</a>, and I picked up the ones which were useful for me by just asking lots of questions.</p>
+
+<a name="189324241"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189324241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189324241">Danila Kurganov (Feb 28 2020 at 16:16)</a>:</h4>
+<p>That's  a neat site, thanks.</p>
+
+<a name="189324780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189324780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189324780">Bryan Gin-ge Chen (Feb 28 2020 at 16:21)</a>:</h4>
+<p>The doc page that Kevin linked to mostly discusses tactics in mathlib. The source code for those tactics can be found in the <a href="https://github.com/leanprover-community/mathlib/tree/master/src/tactic" target="_blank" title="https://github.com/leanprover-community/mathlib/tree/master/src/tactic"><code>src/tactic</code> directory of mathlib</a>. The <code>unfold</code> tactic is provided in the core library and its source code is <a href="https://github.com/leanprover-community/lean/blob/master/library/init/meta/interactive.lean#L1464" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/library/init/meta/interactive.lean#L1464">here</a>. It relies on much of the same code as the very important <code>simp</code> tactic, which you can read more about <a href="https://leanprover-community.github.io/mathlib_docs/simp.html" target="_blank" title="https://leanprover-community.github.io/mathlib_docs/simp.html">here</a>.</p>
+
+<a name="189326937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189326937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189326937">Danila Kurganov (Feb 28 2020 at 16:45)</a>:</h4>
+<p>Will have a read- and I forgot to check src! good to know it's all there. Didn't know simp was much more intricate under-the-hood, good to know</p>
+
+<a name="189327495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/applying%20definitions%20to%20theorems/near/189327495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11947applyingdefinitionstotheorems.html#189327495">Reid Barton (Feb 28 2020 at 16:50)</a>:</h4>
+<p>Some tactics (like <code>cases</code>/<code>rcases</code> which is probably coming next) will automatically see through definitional equalities, making <code>unfold</code> redundant once you know what the next step should be.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

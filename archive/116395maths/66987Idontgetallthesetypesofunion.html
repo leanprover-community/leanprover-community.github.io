@@ -1,0 +1,44 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/66987Idontgetallthesetypesofunion.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/66987Idontgetallthesetypesofunion.html">I don't get all these types of union</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="189325015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/I%20don%27t%20get%20all%20these%20types%20of%20union/near/189325015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66987Idontgetallthesetypesofunion.html#189325015">Kevin Buzzard (Feb 28 2020 at 16:24)</a>:</h4>
+<p>I noticed recently that I often make a real meal of arguments involving arbitrary unions. I am beginning to wonder whether I'm missing some tips and tricks.</p>
+<p>I have a goal</p>
+<div class="codehilite"><pre><span></span>f : Y -&gt; X
+I : set (set X),
+⊢ f ⁻¹&#39; ⋃₀ I ∈ F.sets
+</pre></div>
+
+
+<p>and if I <code>rw preimage_sUnion</code> I get </p>
+<div class="codehilite"><pre><span></span>⊢ (⋃ (t : set X) (H : t ∈ I), f ⁻¹&#39; t) ∈ F.sets
+</pre></div>
+
+
+<p>Later on the goal gets reduced to </p>
+<div class="codehilite"><pre><span></span>⊢ f ⁻¹&#39; U ⊆ ⋃ (t : set X) (H : t ∈ I), f ⁻¹&#39; t
+</pre></div>
+
+
+<p>and I have a proof that <code>U \in I</code> but now the sUnion appears to be a Union and <code>apply subset_Union</code> fails. Am I already in some kind of trouble when I have <code>⋃ (t : set X) (H : t ∈ I), ...</code>? I don't know where to learn about how to control all these unions sensibly.</p>
+
+<a name="189325248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/I%20don%27t%20get%20all%20these%20types%20of%20union/near/189325248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66987Idontgetallthesetypesofunion.html#189325248">Kevin Buzzard (Feb 28 2020 at 16:26)</a>:</h4>
+<p>Is this now a bUnion or something? Aah bingo, <code>apply subset_bUnion_of_mem</code> works. I find all this very confusing.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
