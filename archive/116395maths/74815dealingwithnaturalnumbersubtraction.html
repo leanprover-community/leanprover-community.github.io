@@ -407,6 +407,37 @@ end
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/dealing%20with%20natural%20number%20subtraction/near/189283496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/74815dealingwithnaturalnumbersubtraction.html#189283496">Scott Morrison (Feb 28 2020 at 04:42)</a>:</h4>
 <p>(Unfortunately you do need to have the right imports open, which sometimes is a deal-breaker if you really don't know yet what you're looking for. The advantage of Mario's method is that if you can guess at least a fragment of the name, you can search for it across all files in mathlib.)</p>
 
+<a name="189284921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/dealing%20with%20natural%20number%20subtraction/near/189284921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/74815dealingwithnaturalnumbersubtraction.html#189284921">Mario Carneiro (Feb 28 2020 at 05:22)</a>:</h4>
+<p>By the way, it may not have been obvious, but my first comment "that's a general theorem about ordered rings" was actually a search clue. When looking for an algebraic lemma, you should ask yourself if it is a theorem about general algebraic structures of some kind like rings or fields, or if they are particular to the specific set you are working over (e.g. things about natural number subtraction). If they are general, they will usually be in the root namespace (and be in one of the <code>algebra/</code> files), and if they are specific then they will be in <code>data.int.basic</code> or <code>data.nat.basic</code> or similar and will be in that type's namespace.</p>
+
+<a name="189284945"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/dealing%20with%20natural%20number%20subtraction/near/189284945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/74815dealingwithnaturalnumbersubtraction.html#189284945">Johan Commelin (Feb 28 2020 at 05:23)</a>:</h4>
+<p><span class="user-mention" data-user-id="263857">@Nicholas McConnell</span> It seems that you want to know about the <code>lift</code> tactic.</p>
+
+<a name="189284995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/dealing%20with%20natural%20number%20subtraction/near/189284995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/74815dealingwithnaturalnumbersubtraction.html#189284995">Johan Commelin (Feb 28 2020 at 05:24)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md#lift" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md#lift">https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md#lift</a></p>
+
+<a name="189285022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/dealing%20with%20natural%20number%20subtraction/near/189285022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/74815dealingwithnaturalnumbersubtraction.html#189285022">Johan Commelin (Feb 28 2020 at 05:25)</a>:</h4>
+<p>From the docs:</p>
+<blockquote>
+<p>If <code>n : ℤ</code> and <code>hn : n ≥ 0</code> then the tactic <code>lift n to ℕ using hn</code> creates a new constant of type <code>ℕ</code>, also named <code>n</code> and replaces all occurrences of the old variable <code>(n : ℤ)</code> with <code>↑n</code> (where <code>n</code> in the new variable). It will remove <code>n</code> and <code>hn</code> from the context. </p>
+</blockquote>
+
+<a name="189285610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/dealing%20with%20natural%20number%20subtraction/near/189285610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/74815dealingwithnaturalnumbersubtraction.html#189285610">Andrew Ashworth (Feb 28 2020 at 05:41)</a>:</h4>
+<p>&lt;_&lt; I would've thought this would be named descend since natural numbers are a subset of the integers</p>
+
+<a name="189285654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/dealing%20with%20natural%20number%20subtraction/near/189285654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/74815dealingwithnaturalnumbersubtraction.html#189285654">Andrew Ashworth (Feb 28 2020 at 05:42)</a>:</h4>
+<p>I don't understand when a thing is a lift or when it is a descent, probably</p>
+
+<a name="189285664"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/dealing%20with%20natural%20number%20subtraction/near/189285664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/74815dealingwithnaturalnumbersubtraction.html#189285664">Johan Commelin (Feb 28 2020 at 05:43)</a>:</h4>
+<p>That's because there are two very much conflicting naming traditions</p>
+
 
 {% endraw %}
 
