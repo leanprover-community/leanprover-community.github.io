@@ -213,6 +213,26 @@ permalink: archive/113489newmembers/24711Basicbuildingblocktactics.html
     <span class="n">apply</span> <span class="n">hhf</span>
 </pre></div>
 
+<a name="189271847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189271847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189271847">Lucas Allen (Feb 28 2020 at 00:16)</a>:</h4>
+<p>I'm interested in learning about the fundamental building blocks of proofs in Lean. In order to do this do I need to learn some CS stuff to the point I completely understand section 2 of Mario's thesis, or is it possible to understand what the basic building blocks are from existing tactics? I.e. are there tactics that emulate the various typing judgements, such as <code>intro</code> for example? Or am I way off base about how Lean works?</p>
+
+<a name="189273625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189273625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189273625">Mario Carneiro (Feb 28 2020 at 00:46)</a>:</h4>
+<p>I think a good place to start is by understanding term proofs, and how tactics are just mechanisms for building particular terms (which you can see with <code>#print</code>)</p>
+
+<a name="189273729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189273729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189273729">Mario Carneiro (Feb 28 2020 at 00:48)</a>:</h4>
+<p>In a tactic proof, each goal corresponds to an <code>_</code> (a hole to be filled) in the corresponding term proof, and each tactic replaces that hole with a term, usually containing more holes inside it. For example, <code>intro x</code> will replace the hole with <code>\lam x, _</code>.</p>
+
+<a name="189273778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189273778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189273778">Mario Carneiro (Feb 28 2020 at 00:49)</a>:</h4>
+<p>and <code>apply f</code> replaces the hole with <code>f _ _ _</code> (depending on how many arguments <code>f</code> has)</p>
+
+<a name="189273873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189273873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189273873">Mario Carneiro (Feb 28 2020 at 00:50)</a>:</h4>
+<p>It also might help to look at the definition of the <code>expr</code> type in lean, which shows all the kind of things that can appear in a term</p>
+
 
 {% endraw %}
 

@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Basic building block tactics](24711Basicbuildingblocktactics.html) (46 messages, latest: Feb 28 2020 at 00:50)
+
 * [defining power on groups](71919definingpowerongroups.html) (29 messages, latest: Feb 27 2020 at 21:12)
 
 * [natural number game questions](52294naturalnumbergamequestions.html) (76 messages, latest: Feb 27 2020 at 18:15)
 
 * [Divisibility Argument](35577DivisibilityArgument.html) (11 messages, latest: Feb 27 2020 at 16:27)
-
-* [Basic building block tactics](24711Basicbuildingblocktactics.html) (41 messages, latest: Feb 27 2020 at 08:59)
 
 * [implicit parameters in conv mode](28226implicitparametersinconvmode.html) (2 messages, latest: Feb 27 2020 at 00:24)
 
