@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Triggering reduction of ifthenelse in case analysis](58931Triggeringreductionofifthenelseincaseanalysis.html) (5 messages, latest: Feb 28 2020 at 14:54)
+* [Triggering reduction of ifthenelse in case analysis](58931Triggeringreductionofifthenelseincaseanalysis.html) (6 messages, latest: Feb 28 2020 at 15:25)
+
+* [Substitute away let binding in tactic mode](28771Substituteawayletbindingintacticmode.html) (1 message, latest: Feb 28 2020 at 15:09)
 
 * [Divisibility Argument](35577DivisibilityArgument.html) (25 messages, latest: Feb 28 2020 at 09:14)
 
