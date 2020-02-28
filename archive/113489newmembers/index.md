@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [applying definitions to theorems](11947applyingdefinitionstotheorems.html) (12 messages, latest: Feb 28 2020 at 17:32)
+* [applying definitions to theorems](11947applyingdefinitionstotheorems.html) (17 messages, latest: Feb 28 2020 at 18:06)
 
 * [Substitute away let binding in tactic mode](28771Substituteawayletbindingintacticmode.html) (9 messages, latest: Feb 28 2020 at 16:56)
 
