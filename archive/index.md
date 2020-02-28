@@ -30,6 +30,8 @@ permalink: archive/index.html
 
 * [Machine Learning for Theorem Proving](219941MachineLearningforTheoremProving/index.html) (9 topics)
 
+* [Geographic locality](224796Geographiclocality/index.html) (5 topics)
+
 * [concrete semantics](187724concretesemantics/index.html) (4 topics)
 
 * [Big Proof 2019](198800BigProof2019/index.html) (3 topics)

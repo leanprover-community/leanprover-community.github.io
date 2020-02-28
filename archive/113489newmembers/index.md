@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Local/city threads](73023Localcitythreads.html) (11 messages, latest: Feb 28 2020 at 03:44)
+
 * [Basic building block tactics](24711Basicbuildingblocktactics.html) (74 messages, latest: Feb 28 2020 at 02:29)
 
 * [Divisibility Argument](35577DivisibilityArgument.html) (12 messages, latest: Feb 28 2020 at 01:30)
@@ -84,8 +86,6 @@ permalink: archive/113489newmembers/index.html
 * [Standard well-founded tactics on later argument](07003Standardwellfoundedtacticsonlaterargument.html) (12 messages, latest: Feb 17 2020 at 21:33)
 
 * [Tactic Proof not Responding. Overflow?](17610TacticProofnotRespondingOverflow.html) (71 messages, latest: Feb 17 2020 at 20:09)
-
-* [Local/city threads](73023Localcitythreads.html) (10 messages, latest: Feb 17 2020 at 18:29)
 
 * [noncomputable](28696noncomputable.html) (6 messages, latest: Feb 17 2020 at 17:16)
 
