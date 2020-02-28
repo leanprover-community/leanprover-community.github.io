@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Divisibility Argument](35577DivisibilityArgument.html) (25 messages, latest: Feb 28 2020 at 09:14)
+
 * [Local/city threads](73023Localcitythreads.html) (12 messages, latest: Feb 28 2020 at 04:03)
 
 * [Basic building block tactics](24711Basicbuildingblocktactics.html) (74 messages, latest: Feb 28 2020 at 02:29)
-
-* [Divisibility Argument](35577DivisibilityArgument.html) (12 messages, latest: Feb 28 2020 at 01:30)
 
 * [defining power on groups](71919definingpowerongroups.html) (29 messages, latest: Feb 27 2020 at 21:12)
 

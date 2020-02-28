@@ -135,6 +135,71 @@ permalink: archive/113489newmembers/35577DivisibilityArgument.html
 </ul>
 <p>I guess these are all beginner mistakes, and more practice would be better, and hopefully I'd be better at actually doing proofs when I start uni at October, which would hopefully translate into better Lean.</p>
 
+<a name="189290513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Divisibility%20Argument/near/189290513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35577DivisibilityArgument.html#189290513">Kevin Buzzard (Feb 28 2020 at 08:02)</a>:</h4>
+<p>Kenny's approach uses the full force of uniqueness of factorization of integers into primes, that's why it looks so much shorter (it imports so much more -- once you know that p divides ab implies p divides a or p divides b then your problem becomes easy, but the usual proof of this uses Euclid's algorithm etc). The <code>ring</code> tactic will do all the expanding out stuff for you.</p>
+<p>Finally, there is not really any correlation between better Lean code and more maths knowledge, you can goof around with Lean in your spare time after A-levels in July and this will teach you far more about Lean than any maths degree will (although hopefully next year I'll be teaching a Lean course as part of Imperial's curriculum...)</p>
+
+<a name="189291931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Divisibility%20Argument/near/189291931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35577DivisibilityArgument.html#189291931">Patrick Massot (Feb 28 2020 at 08:33)</a>:</h4>
+<p>Kevin, I don't think your account of Kenny's proof is accurate. What he uses is Z/p is a domain when p is prime. This has nothing to do with uniqueness of factorization. And he could have done in two lines instead of three by putting the <code>(by norm_num : nat.prime 3)</code> instead of this in the second line.</p>
+
+<a name="189291954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Divisibility%20Argument/near/189291954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35577DivisibilityArgument.html#189291954">Shing Tak Lam (Feb 28 2020 at 08:33)</a>:</h4>
+<p>Thanks a lot. My point about Maths knowledge was referring to me not even knowing the definitions at the moment, so learning the Maths would be useful to know what I should be looking at in the first place. And what to <code>Ctrl-P</code> for. I guess it's like programming, where knowing what to search for is half the struggle (for me at least). It's a bit hard for me right now if I don't know what to search for. </p>
+<p>( Part about Imperial sounds great. You're seriously tempting me to firm Imperial :) Do you know if Lean is offered at any other Universities (UK)?)</p>
+
+<a name="189293430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Divisibility%20Argument/near/189293430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35577DivisibilityArgument.html#189293430">Mario Carneiro (Feb 28 2020 at 09:02)</a>:</h4>
+<p>Oh, I hadn't looked closely and thought Kenny gave the Euclid's lemma argument, which is definitely the easiest:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">prime</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="mi">3</span> <span class="err">∣</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="mi">3</span> <span class="err">∣</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">have</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="mi">3</span><span class="o">,</span> <span class="k">from</span> <span class="bp">@</span><span class="n">of_as_true</span> <span class="bp">_</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">decidable_prime_1</span> <span class="mi">3</span><span class="o">)</span> <span class="bp">⟨⟩</span><span class="o">,</span>
+<span class="o">(</span><span class="n">or_self</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="o">((</span><span class="n">nat</span><span class="bp">.</span><span class="n">prime</span><span class="bp">.</span><span class="n">dvd_mul</span> <span class="n">this</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="n">h</span><span class="o">)</span>
+</pre></div>
+
+<a name="189293520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Divisibility%20Argument/near/189293520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35577DivisibilityArgument.html#189293520">Mario Carneiro (Feb 28 2020 at 09:04)</a>:</h4>
+<p>golfed with <code>norm_num</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">norm_num</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="mi">3</span> <span class="err">∣</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="mi">3</span> <span class="err">∣</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">or_self</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="o">((</span><span class="n">nat</span><span class="bp">.</span><span class="n">prime</span><span class="bp">.</span><span class="n">dvd_mul</span> <span class="o">(</span><span class="k">by</span> <span class="n">norm_num</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="mi">3</span><span class="o">))</span><span class="bp">.</span><span class="mi">1</span> <span class="n">h</span><span class="o">)</span>
+</pre></div>
+
+<a name="189293817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Divisibility%20Argument/near/189293817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35577DivisibilityArgument.html#189293817">Kevin Buzzard (Feb 28 2020 at 09:09)</a>:</h4>
+<p>What he uses is that Z/p is a domain when p is prime, which is the statement that if p divides ab then p divides a or p divides b. You're right it's not 100% the full force of uniqueness of factorization, but this is the key lemma which makes uniqueness of factorization easy by induction.</p>
+
+<a name="189293885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Divisibility%20Argument/near/189293885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35577DivisibilityArgument.html#189293885">Mario Carneiro (Feb 28 2020 at 09:10)</a>:</h4>
+<p>I don't think the proof of Euclid's lemma in mathlib is at all high powered</p>
+
+<a name="189293925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Divisibility%20Argument/near/189293925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35577DivisibilityArgument.html#189293925">Mario Carneiro (Feb 28 2020 at 09:11)</a>:</h4>
+<p>you need to know that <code>prime.coprime_iff_not_dvd</code> but this is more or less true by the definitions</p>
+
+<a name="189293979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Divisibility%20Argument/near/189293979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35577DivisibilityArgument.html#189293979">Mario Carneiro (Feb 28 2020 at 09:12)</a>:</h4>
+<p>oh but <code>coprime.dvd_of_dvd_mul_left</code> relies on <code>dvd_gcd</code> which is basically the euclidean algorithm proof</p>
+
+<a name="189293989"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Divisibility%20Argument/near/189293989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35577DivisibilityArgument.html#189293989">Kevin Buzzard (Feb 28 2020 at 09:12)</a>:</h4>
+<p>Is Euclid's Lemma this p|ab implies p|a or p|b statement? This lemma is exactly the door to uniqueness of factorization. If you ask a new undergrad to prove uniqueness of factorization they usually reduce it easily to this statement, but then they claim this statement is obvious because p is prime and when you press them for details they use uniqueness of factorization. Euclid's Lemma needs an idea.</p>
+
+<a name="189294016"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Divisibility%20Argument/near/189294016" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35577DivisibilityArgument.html#189294016">Mario Carneiro (Feb 28 2020 at 09:13)</a>:</h4>
+<p>I am willing to grant that <code>dvd_gcd</code>, or the existence of the gcd in general, is nontrivial</p>
+
+<a name="189294019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Divisibility%20Argument/near/189294019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35577DivisibilityArgument.html#189294019">Kevin Buzzard (Feb 28 2020 at 09:13)</a>:</h4>
+<p>I usually explain to them that the assertion that p is prime is an assertion about all the numbers less than p (they don't divide p), so perhaps it isn't obvious that if p divides the product of two numbers much larger than p then it divides one of them. Prime iff irreducible isn't true in an arbitrary integral domain, this is somehow where the tension is.</p>
+
+<a name="189294103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Divisibility%20Argument/near/189294103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35577DivisibilityArgument.html#189294103">Kevin Buzzard (Feb 28 2020 at 09:14)</a>:</h4>
+<p>Interestingly, I do know a direct proof of p|ab implies p|a or p|b by induction, which doesn't use Euclid, but it also relies on an idea.</p>
+
 
 {% endraw %}
 
