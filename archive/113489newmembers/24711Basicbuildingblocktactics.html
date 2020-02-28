@@ -342,6 +342,26 @@ permalink: archive/113489newmembers/24711Basicbuildingblocktactics.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189276432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189276432">Lucas Allen (Feb 28 2020 at 01:41)</a>:</h4>
 <p>I have a bit to think about now. Thanks.</p>
 
+<a name="189277748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189277748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189277748">Lucas Allen (Feb 28 2020 at 02:06)</a>:</h4>
+<p>Is <code>unfold</code> just another version of <code>change</code>? I looked at the code and <code>unfold</code> uses the simplifier, which is complex and confusing.</p>
+
+<a name="189277755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189277755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189277755">Lucas Allen (Feb 28 2020 at 02:07)</a>:</h4>
+<p>Does <code>simp</code> use <code>change</code>?</p>
+
+<a name="189278478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189278478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189278478">Mario Carneiro (Feb 28 2020 at 02:26)</a>:</h4>
+<p><code>dsimp</code> and <code>dunfold</code> act like <code>change</code>, which is to say, they don't add anything to the term but rather just assert a new type for the term and let the kernel figure it out. (Actually that's a lie. In order to keep up performance in the kernel, the goal is actually replaced with <code>@id foo _</code> instead so that the kernel also gets the same definitional reduction hint as the elaborator. If you have <code>@id foo (@id bar x)</code>, lean's kernel is forced to prove that <code>foo</code> and <code>bar</code> are definitionally equal so that the term is well typed.)</p>
+
+<a name="189278546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189278546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189278546">Mario Carneiro (Feb 28 2020 at 02:28)</a>:</h4>
+<p><code>simp</code> and <code>unfold</code> actually insert equality theorems. It's kind of like <code>rw</code> but instead of using a single <code>eq.rec</code> term with a complicated motive, it is a <code>cast</code> applied to a bunch of congruence lemmas with types like <code>x = y -&gt; z = w -&gt; x + z = y + w</code>.</p>
+
+<a name="189278571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189278571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189278571">Mario Carneiro (Feb 28 2020 at 02:29)</a>:</h4>
+<p>This approach allows you to do extra things in the course of those lemmas, like for example ignoring equalities of arguments that are known to be in subsingleton types, as well as generally using equality proofs that are not definitional</p>
+
 
 {% endraw %}
 

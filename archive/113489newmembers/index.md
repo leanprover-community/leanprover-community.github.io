@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Basic building block tactics](24711Basicbuildingblocktactics.html) (69 messages, latest: Feb 28 2020 at 01:41)
+* [Basic building block tactics](24711Basicbuildingblocktactics.html) (74 messages, latest: Feb 28 2020 at 02:29)
 
 * [Divisibility Argument](35577DivisibilityArgument.html) (12 messages, latest: Feb 28 2020 at 01:30)
 
