@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Substitute away let binding in tactic mode](28771Substituteawayletbindingintacticmode.html) (9 messages, latest: Feb 28 2020 at 16:56)
+* [applying definitions to theorems](11947applyingdefinitionstotheorems.html) (12 messages, latest: Feb 28 2020 at 17:32)
 
-* [applying definitions to theorems](11947applyingdefinitionstotheorems.html) (8 messages, latest: Feb 28 2020 at 16:50)
+* [Substitute away let binding in tactic mode](28771Substituteawayletbindingintacticmode.html) (9 messages, latest: Feb 28 2020 at 16:56)
 
 * [Triggering reduction of ifthenelse in case analysis](58931Triggeringreductionofifthenelseincaseanalysis.html) (7 messages, latest: Feb 28 2020 at 16:20)
 

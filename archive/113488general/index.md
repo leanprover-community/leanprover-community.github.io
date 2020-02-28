@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Instances for forgetful inheritance](47176Instancesforforgetfulinheritance.html) (2 messages, latest: Feb 28 2020 at 17:12)
+
 * [context irrelevance of defeq](06320contextirrelevanceofdefeq.html) (1 message, latest: Feb 28 2020 at 15:31)
 
 * [Extremely slow simp](45630Extremelyslowsimp.html) (6 messages, latest: Feb 27 2020 at 23:48)
 
 * [Advanced multiplication world final level](38415Advancedmultiplicationworldfinallevel.html) (39 messages, latest: Feb 27 2020 at 22:48)
-
-* [Instances for forgetful inheritance](47176Instancesforforgetfulinheritance.html) (1 message, latest: Feb 27 2020 at 22:28)
 
 * [Speeding up compilation time for Lean project](42977SpeedingupcompilationtimeforLeanproject.html) (33 messages, latest: Feb 27 2020 at 20:29)
 
