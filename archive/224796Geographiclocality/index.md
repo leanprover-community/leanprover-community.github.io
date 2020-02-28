@@ -9,9 +9,9 @@ permalink: archive/224796Geographiclocality/index.html
 
 ### Topics:
 
-* [Los Angeles, USA](59939LosAngelesUSA.html) (1 message, latest: Feb 28 2020 at 03:53)
+* [San Francisco Bay Area, USA](28421SanFranciscoBayAreaUSA.html) (2 messages, latest: Feb 28 2020 at 04:13)
 
-* [San Francisco Bay Area, USA](28421SanFranciscoBayAreaUSA.html) (1 message, latest: Feb 28 2020 at 03:52)
+* [Los Angeles, USA](59939LosAngelesUSA.html) (1 message, latest: Feb 28 2020 at 03:53)
 
 * [Cambridge, UK](66219CambridgeUK.html) (1 message, latest: Feb 28 2020 at 03:43)
 

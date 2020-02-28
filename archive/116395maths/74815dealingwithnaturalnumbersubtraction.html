@@ -370,6 +370,43 @@ end
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/dealing%20with%20natural%20number%20subtraction/near/189281837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/74815dealingwithnaturalnumbersubtraction.html#189281837">Nicholas McConnell (Feb 28 2020 at 03:56)</a>:</h4>
 <p>Thanks</p>
 
+<a name="189282060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/dealing%20with%20natural%20number%20subtraction/near/189282060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/74815dealingwithnaturalnumbersubtraction.html#189282060">Nicholas McConnell (Feb 28 2020 at 04:03)</a>:</h4>
+<p>What's the best way to get from a &gt; 0 and b &lt; 0 to a*b &lt; 0 in the <em>integers</em>?  I looked in int\basic.lean and found nothing that does anything like this</p>
+
+<a name="189282102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/dealing%20with%20natural%20number%20subtraction/near/189282102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/74815dealingwithnaturalnumbersubtraction.html#189282102">Mario Carneiro (Feb 28 2020 at 04:04)</a>:</h4>
+<p>That's a general theorem about ordered rings</p>
+
+<a name="189282106"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/dealing%20with%20natural%20number%20subtraction/near/189282106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/74815dealingwithnaturalnumbersubtraction.html#189282106">Nicholas McConnell (Feb 28 2020 at 04:04)</a>:</h4>
+<p>Yeah, so is there a Lean command for it?</p>
+
+<a name="189282122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/dealing%20with%20natural%20number%20subtraction/near/189282122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/74815dealingwithnaturalnumbersubtraction.html#189282122">Mario Carneiro (Feb 28 2020 at 04:04)</a>:</h4>
+<p>it looks like you want a <code>mul</code> to be <code>neg</code> given <code>pos</code> and <code>neg</code>. Let me look that up...</p>
+
+<a name="189282130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/dealing%20with%20natural%20number%20subtraction/near/189282130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/74815dealingwithnaturalnumbersubtraction.html#189282130">Mario Carneiro (Feb 28 2020 at 04:05)</a>:</h4>
+<p>oh hey <code>mul_neg_of_pos_of_neg</code> :)</p>
+
+<a name="189282253"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/dealing%20with%20natural%20number%20subtraction/near/189282253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/74815dealingwithnaturalnumbersubtraction.html#189282253">Scott Morrison (Feb 28 2020 at 04:08)</a>:</h4>
+<p>Mario's method is an excellent one, but there's also</p>
+<div class="codehilite"><pre><span></span>example (a b : ℤ) (ha : 0 &lt; a) (hb : b &lt; 0) : a * b &lt; 0 := by library_search
+</pre></div>
+
+
+<p>(which reports the same answer)</p>
+
+<a name="189283440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/dealing%20with%20natural%20number%20subtraction/near/189283440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/74815dealingwithnaturalnumbersubtraction.html#189283440">Nicholas McConnell (Feb 28 2020 at 04:41)</a>:</h4>
+<p>Okay, I confess, I should try using "by library_search" more often</p>
+
+<a name="189283496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/dealing%20with%20natural%20number%20subtraction/near/189283496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/74815dealingwithnaturalnumbersubtraction.html#189283496">Scott Morrison (Feb 28 2020 at 04:42)</a>:</h4>
+<p>(Unfortunately you do need to have the right imports open, which sometimes is a deal-breaker if you really don't know yet what you're looking for. The advantage of Mario's method is that if you can guess at least a fragment of the name, you can search for it across all files in mathlib.)</p>
+
 
 {% endraw %}
 

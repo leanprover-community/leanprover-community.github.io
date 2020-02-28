@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Local/city threads](73023Localcitythreads.html) (11 messages, latest: Feb 28 2020 at 03:44)
+* [Local/city threads](73023Localcitythreads.html) (12 messages, latest: Feb 28 2020 at 04:03)
 
 * [Basic building block tactics](24711Basicbuildingblocktactics.html) (74 messages, latest: Feb 28 2020 at 02:29)
 
