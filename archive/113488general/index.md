@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Instances for forgetful inheritance](47176Instancesforforgetfulinheritance.html) (2 messages, latest: Feb 28 2020 at 17:12)
+* [context irrelevance of defeq](06320contextirrelevanceofdefeq.html) (3 messages, latest: Feb 28 2020 at 21:32)
 
-* [context irrelevance of defeq](06320contextirrelevanceofdefeq.html) (1 message, latest: Feb 28 2020 at 15:31)
+* [Instances for forgetful inheritance](47176Instancesforforgetfulinheritance.html) (2 messages, latest: Feb 28 2020 at 17:12)
 
 * [Extremely slow simp](45630Extremelyslowsimp.html) (6 messages, latest: Feb 27 2020 at 23:48)
 
