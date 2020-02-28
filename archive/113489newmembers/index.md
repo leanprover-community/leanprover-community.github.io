@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Triggering reduction of ifthenelse in case analysis](58931Triggeringreductionofifthenelseincaseanalysis.html) (5 messages, latest: Feb 28 2020 at 14:54)
+
 * [Divisibility Argument](35577DivisibilityArgument.html) (25 messages, latest: Feb 28 2020 at 09:14)
 
 * [Local/city threads](73023Localcitythreads.html) (12 messages, latest: Feb 28 2020 at 04:03)
