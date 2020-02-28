@@ -233,6 +233,115 @@ permalink: archive/113489newmembers/24711Basicbuildingblocktactics.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189273873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189273873">Mario Carneiro (Feb 28 2020 at 00:50)</a>:</h4>
 <p>It also might help to look at the definition of the <code>expr</code> type in lean, which shows all the kind of things that can appear in a term</p>
 
+<a name="189274813"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189274813" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189274813">Lucas Allen (Feb 28 2020 at 01:07)</a>:</h4>
+<p>Ok, I think I'm pretty comfortable with the idea of metavariables, but I'm might go through theorem proving in Lean again to pick up some of the things I missed the first time as well as understand what specifically different tactics are doing to the terms.</p>
+<p>I'm not so comfortable with <code>expr</code>s, however, but I'll put some time into learning.</p>
+<p>I'd still like to understand how a proof search tactic might work. Maybe I'll ask again after I've learned these things.</p>
+<p>Thanks.</p>
+
+<a name="189275113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189275113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189275113">Mario Carneiro (Feb 28 2020 at 01:13)</a>:</h4>
+<p>A quick overview:</p>
+<ul>
+<li><code>intro x</code> replaces the goal with <code>\lam x, _</code></li>
+<li><code>apply f</code> replaces the goal with <code>f _ _ _</code></li>
+<li><code>refine e1 (e2 _) (e3 _)</code> replaces the goal with <code>e1 (e2 _) (e3 _)</code> (which should make it clear why I say sometimes that <code>refine</code> is the "universal" tactic, capable of playing the role of all others)</li>
+<li><code>exact e</code> replaces the goal with <code>e</code></li>
+<li><code>change foo</code> replaces the goal with <code>(_ : foo)</code></li>
+<li><code>rw foo</code> replaces the goal with <code>eq.rec_on foo _</code></li>
+<li><code>induction foo</code> replaces the goal with <code>T.rec_on foo _ _</code> where <code>T</code> is the type of <code>foo</code></li>
+<li><code>cases foo</code>  replaces the goal with <code>T.cases_on foo _ _</code> where <code>T</code> is the type of <code>foo</code></li>
+<li><code>split</code> replaces the goal with <code>and.intro _ _</code></li>
+<li><code>have x := t</code> replaces the goal with <code>(\lam x, _) t</code></li>
+<li><code>let x := t</code> replaces the goal with <code>let x := t in _</code></li>
+<li><code>revert x</code> replaces the goal with <code>_ x</code></li>
+</ul>
+
+<a name="189275577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189275577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189275577">Mario Carneiro (Feb 28 2020 at 01:22)</a>:</h4>
+<p><code>simp</code>, <code>norm_num</code>, <code>ring</code>, <code>omega</code>, <code>library_search</code>, <code>tidy</code>, <code>rcases</code>, <code>rintro</code> do more complicated or iterative things to the goal, but fundamentally they all have the same form as the above tactics: they look at the current type of the target hole and use that to determine some term, possibly with more holes in it, to fill the target</p>
+
+<a name="189275675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189275675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189275675">Lucas Allen (Feb 28 2020 at 01:24)</a>:</h4>
+<p>Awesome!</p>
+
+<a name="189275768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189275768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189275768">Lucas Allen (Feb 28 2020 at 01:26)</a>:</h4>
+<p>Can <code>induction</code> be used instead of <code>rw</code>? For example, given <code>h : a = b</code>, can we always use <code>induction h</code> instead of <code>rw h</code>? Or are there some cases where funny things happen with <code>expr</code>s?</p>
+
+<a name="189275771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189275771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189275771">Mario Carneiro (Feb 28 2020 at 01:26)</a>:</h4>
+<p>Yep!</p>
+
+<a name="189275798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189275798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189275798">Mario Carneiro (Feb 28 2020 at 01:27)</a>:</h4>
+<p>However it usually won't be able to calculate the "motive", a hidden extra argument to <code>eq.rec_on</code>, correctly if you use <code>induction h</code></p>
+
+<a name="189275811"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189275811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189275811">Mario Carneiro (Feb 28 2020 at 01:27)</a>:</h4>
+<p>However if one side of the equality is a variable, <code>induction h</code>, <code>cases h</code>, and <code>subst h</code> all act more or less the same way</p>
+
+<a name="189275859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189275859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189275859">Lucas Allen (Feb 28 2020 at 01:28)</a>:</h4>
+<p>Also, are there situations where <code>cases</code> works, but induction doesn't? This might be covered in theorem proving in Lean.</p>
+
+<a name="189275903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189275903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189275903">Mario Carneiro (Feb 28 2020 at 01:29)</a>:</h4>
+<p>The reason is that unlike <code>induction</code>, <code>cases</code> is able to make use of the equality between the input and the values in the cases to eliminate some of the constructors. (If you were to do this in <code>induction</code>, the inductive hypothesis would end up being useless in most cases)</p>
+
+<a name="189275940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189275940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189275940">Mario Carneiro (Feb 28 2020 at 01:30)</a>:</h4>
+<p>Internally, <code>cases</code> actually first reverts the input variable and adds an equality</p>
+
+<a name="189275966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189275966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189275966">Lucas Allen (Feb 28 2020 at 01:30)</a>:</h4>
+<p>Oh, so <code>eq.rec_on</code> is different somehow to other <code>rec_on</code>'s for inductive types?</p>
+
+<a name="189275983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189275983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189275983">Mario Carneiro (Feb 28 2020 at 01:30)</a>:</h4>
+<p>No, it is just that <code>rw</code> uses an algorithm which is different from the generic one that is more useful for equalities</p>
+
+<a name="189276066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189276066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189276066">Lucas Allen (Feb 28 2020 at 01:32)</a>:</h4>
+<p>Right, because <code>induction</code> rewrites everything it can everywhere.</p>
+
+<a name="189276075"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189276075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189276075">Mario Carneiro (Feb 28 2020 at 01:32)</a>:</h4>
+<p>You can always specify the motive yourself, but it's a pain. <code>eq.rec_on</code> says that from <code>a = b</code> and <code>C a</code> derive <code>C b</code>, so if you are faced with a goal that has <code>b</code>'s in it you want to reverse engineer what <code>C</code> should be so that <code>C b</code> evaluates to the goal and <code>C a</code> evaluates to something more useful</p>
+
+<a name="189276240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189276240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189276240">Lucas Allen (Feb 28 2020 at 01:36)</a>:</h4>
+<p>Ok, so <code>rewrite</code> is a convenience thing, built for humans.</p>
+
+<a name="189276248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189276248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189276248">Mario Carneiro (Feb 28 2020 at 01:36)</a>:</h4>
+<p>yep, most tactics are like that</p>
+
+<a name="189276267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189276267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189276267">Lucas Allen (Feb 28 2020 at 01:36)</a>:</h4>
+<p>Yeah, what about <code>Ext</code>? can that be broken down into simpler tactics?</p>
+
+<a name="189276268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189276268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189276268">Mario Carneiro (Feb 28 2020 at 01:36)</a>:</h4>
+<p>you <em>could</em> write the term if you wanted to, but you don't want to</p>
+
+<a name="189276282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189276282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189276282">Mario Carneiro (Feb 28 2020 at 01:37)</a>:</h4>
+<p><code>ext</code> is just <code>try {apply f}</code> for every <code>f</code> that has been marked <code>@[ext]</code></p>
+
+<a name="189276290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189276290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189276290">Mario Carneiro (Feb 28 2020 at 01:37)</a>:</h4>
+<p>in practice, these lemmas tend to be about extensionality</p>
+
+<a name="189276297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189276297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189276297">Lucas Allen (Feb 28 2020 at 01:37)</a>:</h4>
+<p>Yeah, makes sense.</p>
+
+<a name="189276432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189276432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189276432">Lucas Allen (Feb 28 2020 at 01:41)</a>:</h4>
+<p>I have a bit to think about now. Thanks.</p>
+
 
 {% endraw %}
 
