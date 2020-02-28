@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [context irrelevance of defeq](06320contextirrelevanceofdefeq.html) (3 messages, latest: Feb 28 2020 at 21:32)
+* [context irrelevance of defeq](06320contextirrelevanceofdefeq.html) (4 messages, latest: Feb 28 2020 at 22:32)
 
 * [Instances for forgetful inheritance](47176Instancesforforgetfulinheritance.html) (2 messages, latest: Feb 28 2020 at 17:12)
 
