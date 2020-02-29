@@ -28,9 +28,9 @@ permalink: archive/index.html
 
 * [Is there code for X?](217875IstherecodeforX/index.html) (12 topics)
 
-* [Machine Learning for Theorem Proving](219941MachineLearningforTheoremProving/index.html) (9 topics)
+* [Geographic locality](224796Geographiclocality/index.html) (10 topics)
 
-* [Geographic locality](224796Geographiclocality/index.html) (9 topics)
+* [Machine Learning for Theorem Proving](219941MachineLearningforTheoremProving/index.html) (9 topics)
 
 * [concrete semantics](187724concretesemantics/index.html) (4 topics)
 
