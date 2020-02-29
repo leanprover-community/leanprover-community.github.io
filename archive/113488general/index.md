@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Logic & Proof](02939LogicProof.html) (109 messages, latest: Feb 29 2020 at 06:57)
+
 * [context irrelevance of defeq](06320contextirrelevanceofdefeq.html) (6 messages, latest: Feb 29 2020 at 03:04)
 
 * [Instances for forgetful inheritance](47176Instancesforforgetfulinheritance.html) (2 messages, latest: Feb 28 2020 at 17:12)
@@ -3448,8 +3450,6 @@ permalink: archive/113488general/index.html
 * [idle software developer to help make lean more easily usable](69840idlesoftwaredevelopertohelpmakeleanmoreeasilyusable.html) (25 messages, latest: Aug 09 2018 at 14:58)
 
 * [print list name](59403printlistname.html) (24 messages, latest: Aug 09 2018 at 08:53)
-
-* [Logic & Proof](02939LogicProof.html) (108 messages, latest: Aug 09 2018 at 08:03)
 
 * [tactic for applying at appropriate assumptions](52230tacticforapplyingatappropriateassumptions.html) (50 messages, latest: Aug 09 2018 at 07:18)
 
