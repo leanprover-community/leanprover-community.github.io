@@ -38,6 +38,10 @@ I : set (set X),
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/I%20don%27t%20get%20all%20these%20types%20of%20union/near/189325248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66987Idontgetallthesetypesofunion.html#189325248">Kevin Buzzard (Feb 28 2020 at 16:26)</a>:</h4>
 <p>Is this now a bUnion or something? Aah bingo, <code>apply subset_bUnion_of_mem</code> works. I find all this very confusing.</p>
 
+<a name="189361139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/I%20don%27t%20get%20all%20these%20types%20of%20union/near/189361139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66987Idontgetallthesetypesofunion.html#189361139">Mario Carneiro (Feb 28 2020 at 23:21)</a>:</h4>
+<p>There are three kinds of arbitrary union. <code>sUnion</code> is <code>⋃₀ S</code>, which applies when S is a set of sets and takes the union of all of them. <code>Union</code> is <code>⋃ i:I, f i</code> which applies when <code>f : I -&gt; set A</code> and is in some sense the most type theoretically natural union of a family. <code>bUnion</code> is written <code>⋃ t ∈ S, f t</code> and works when <code>f : I -&gt; set A</code> and <code>S : set I</code>, that is, it is a union bounded by a set in the index. However, because of the way the lean parser works on relations in the binders, this is just a double <code>Union</code>, with the second one ranging over proofs that <code> t ∈ S</code>, that is, <code>⋃ (t : I), ⋃ (H : t ∈ S), f t</code>. So you can usually apply <code>Union</code> theorems to these expressions, and in that sense <code>bUnion</code> is just a shortcut for this special case.</p>
+
 
 {% endraw %}
 
