@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [I don't get all these types of union](66987Idontgetallthesetypesofunion.html) (8 messages, latest: Feb 29 2020 at 09:38)
+* [topological space from filter](14020topologicalspacefromfilter.html) (34 messages, latest: Feb 29 2020 at 13:49)
 
-* [topological space from filter](14020topologicalspacefromfilter.html) (29 messages, latest: Feb 29 2020 at 01:50)
+* [I don't get all these types of union](66987Idontgetallthesetypesofunion.html) (8 messages, latest: Feb 29 2020 at 09:38)
 
 * [proofs in cocalc](10422proofsincocalc.html) (1 message, latest: Feb 29 2020 at 00:38)
 
