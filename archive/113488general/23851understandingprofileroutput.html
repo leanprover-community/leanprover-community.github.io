@@ -292,6 +292,26 @@ elaboration of closed_pr2_of_compact took 262ms
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20profiler%20output/near/189387121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23851understandingprofileroutput.html#189387121">Sebastian Ullrich (Feb 29 2020 at 11:32)</a>:</h4>
 <p>That quickest run is definitely curious (assuming it wasn't a run where the proof was simply broken). You could try running Lean from the cmdline using <code>lean -j0</code> to get hopefully more stable timings. You can also set <code>profiler</code> from there: <code>lean -j0 -Dprofiler=true</code>.</p>
 
+<a name="189388633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20profiler%20output/near/189388633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23851understandingprofileroutput.html#189388633">Kevin Buzzard (Feb 29 2020 at 12:23)</a>:</h4>
+<p>Even with my more unscientific method I can see the difference after just changing a bunch of <code>apply h1, exact h2</code> to <code>exact h1 h2</code> and <code>split, exact h3, exact h4</code> to <code>exact ⟨h3, h4⟩</code>.</p>
+<div class="codehilite"><pre><span></span>/-
+elaboration of closed_pr2_of_compact took 150ms
+elaboration of closed_pr2_of_compact took 80.6ms
+elaboration of closed_pr2_of_compact took 93.1ms
+elaboration of closed_pr2_of_compact took 89.5ms
+elaboration of closed_pr2_of_compact took 111ms
+elaboration of closed_pr2_of_compact took 137ms
+elaboration of closed_pr2_of_compact took 135ms
+elaboration of closed_pr2_of_compact took 168ms
+elaboration of closed_pr2_of_compact took 177ms
+elaboration of closed_pr2_of_compact took 168ms
+-/
+</pre></div>
+
+
+<p>Does each tactic come with some sort of overhead which really means that e.g. <code>rw X, rw Y</code> is appreciably slower than <code>rw [X,Y]</code>?</p>
+
 
 {% endraw %}
 

@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [understanding profiler output](23851understandingprofileroutput.html) (63 messages, latest: Feb 29 2020 at 11:32)
+* [How to use the simplifier?](42931Howtousethesimplifier.html) (7 messages, latest: Feb 29 2020 at 12:35)
+
+* [understanding profiler output](23851understandingprofileroutput.html) (64 messages, latest: Feb 29 2020 at 12:23)
 
 * [Logic & Proof](02939LogicProof.html) (111 messages, latest: Feb 29 2020 at 11:17)
 
