@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [I don't get all these types of union](66987Idontgetallthesetypesofunion.html) (5 messages, latest: Feb 29 2020 at 08:47)
+* [I don't get all these types of union](66987Idontgetallthesetypesofunion.html) (8 messages, latest: Feb 29 2020 at 09:38)
 
 * [topological space from filter](14020topologicalspacefromfilter.html) (29 messages, latest: Feb 29 2020 at 01:50)
 
