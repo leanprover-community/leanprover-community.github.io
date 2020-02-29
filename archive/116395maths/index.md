@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [I don't get all these types of union](66987Idontgetallthesetypesofunion.html) (5 messages, latest: Feb 29 2020 at 08:47)
+
 * [topological space from filter](14020topologicalspacefromfilter.html) (29 messages, latest: Feb 29 2020 at 01:50)
 
 * [proofs in cocalc](10422proofsincocalc.html) (1 message, latest: Feb 29 2020 at 00:38)
-
-* [I don't get all these types of union](66987Idontgetallthesetypesofunion.html) (3 messages, latest: Feb 28 2020 at 23:21)
 
 * [dealing with natural number subtraction](74815dealingwithnaturalnumbersubtraction.html) (58 messages, latest: Feb 28 2020 at 06:09)
 
