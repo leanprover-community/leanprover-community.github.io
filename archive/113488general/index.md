@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Logic & Proof](02939LogicProof.html) (109 messages, latest: Feb 29 2020 at 06:57)
+* [Logic & Proof](02939LogicProof.html) (110 messages, latest: Feb 29 2020 at 07:01)
 
 * [context irrelevance of defeq](06320contextirrelevanceofdefeq.html) (6 messages, latest: Feb 29 2020 at 03:04)
 
