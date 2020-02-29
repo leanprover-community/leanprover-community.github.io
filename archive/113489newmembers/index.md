@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Basic building block tactics](24711Basicbuildingblocktactics.html) (91 messages, latest: Feb 29 2020 at 15:34)
+* [Basic building block tactics](24711Basicbuildingblocktactics.html) (93 messages, latest: Feb 29 2020 at 16:59)
+
+* [noob question(s)](52075noobquestions.html) (1993 messages, latest: Feb 29 2020 at 16:58)
 
 * [Inequalities and coercions](32742Inequalitiesandcoercions.html) (5 messages, latest: Feb 29 2020 at 08:56)
 
@@ -56,8 +58,6 @@ permalink: archive/113489newmembers/index.html
 * [Automated tactic for solving trivial (in)equalities on reals](77107Automatedtacticforsolvingtrivialinequalitiesonreals.html) (3 messages, latest: Feb 25 2020 at 08:20)
 
 * [error about instances](36782erroraboutinstances.html) (7 messages, latest: Feb 24 2020 at 23:35)
-
-* [noob question(s)](52075noobquestions.html) (1988 messages, latest: Feb 24 2020 at 20:29)
 
 * [Basic Question](53627BasicQuestion.html) (9 messages, latest: Feb 24 2020 at 19:36)
 
