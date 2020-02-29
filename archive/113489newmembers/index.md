@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Basic building block tactics](24711Basicbuildingblocktactics.html) (86 messages, latest: Feb 29 2020 at 09:00)
+* [Basic building block tactics](24711Basicbuildingblocktactics.html) (87 messages, latest: Feb 29 2020 at 14:24)
 
 * [Inequalities and coercions](32742Inequalitiesandcoercions.html) (5 messages, latest: Feb 29 2020 at 08:56)
 

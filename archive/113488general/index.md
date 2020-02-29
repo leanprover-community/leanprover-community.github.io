@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [context irrelevance of defeq](06320contextirrelevanceofdefeq.html) (7 messages, latest: Feb 29 2020 at 14:30)
+
 * [How to use the simplifier?](42931Howtousethesimplifier.html) (7 messages, latest: Feb 29 2020 at 12:35)
 
 * [understanding profiler output](23851understandingprofileroutput.html) (64 messages, latest: Feb 29 2020 at 12:23)
 
 * [Logic & Proof](02939LogicProof.html) (111 messages, latest: Feb 29 2020 at 11:17)
-
-* [context irrelevance of defeq](06320contextirrelevanceofdefeq.html) (6 messages, latest: Feb 29 2020 at 03:04)
 
 * [Instances for forgetful inheritance](47176Instancesforforgetfulinheritance.html) (2 messages, latest: Feb 28 2020 at 17:12)
 
