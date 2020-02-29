@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Logic & Proof](02939LogicProof.html) (110 messages, latest: Feb 29 2020 at 07:01)
+* [understanding profiler output](23851understandingprofileroutput.html) (63 messages, latest: Feb 29 2020 at 11:32)
+
+* [Logic & Proof](02939LogicProof.html) (111 messages, latest: Feb 29 2020 at 11:17)
 
 * [context irrelevance of defeq](06320contextirrelevanceofdefeq.html) (6 messages, latest: Feb 29 2020 at 03:04)
 
@@ -4084,8 +4086,6 @@ permalink: archive/113488general/index.html
 * [nth_map](01960nthmap.html) (36 messages, latest: May 13 2018 at 22:56)
 
 * [good names](60926goodnames.html) (1 message, latest: May 13 2018 at 20:26)
-
-* [understanding profiler output](23851understandingprofileroutput.html) (61 messages, latest: May 13 2018 at 20:13)
 
 * [pointing the equation compiler right](69993pointingtheequationcompilerright.html) (29 messages, latest: May 13 2018 at 13:39)
 
