@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Basic building block tactics](24711Basicbuildingblocktactics.html) (75 messages, latest: Feb 29 2020 at 00:22)
+
 * [applying definitions to theorems](11947applyingdefinitionstotheorems.html) (17 messages, latest: Feb 28 2020 at 18:06)
 
 * [Substitute away let binding in tactic mode](28771Substituteawayletbindingintacticmode.html) (9 messages, latest: Feb 28 2020 at 16:56)
@@ -18,8 +20,6 @@ permalink: archive/113489newmembers/index.html
 * [Divisibility Argument](35577DivisibilityArgument.html) (25 messages, latest: Feb 28 2020 at 09:14)
 
 * [Local/city threads](73023Localcitythreads.html) (12 messages, latest: Feb 28 2020 at 04:03)
-
-* [Basic building block tactics](24711Basicbuildingblocktactics.html) (74 messages, latest: Feb 28 2020 at 02:29)
 
 * [defining power on groups](71919definingpowerongroups.html) (29 messages, latest: Feb 27 2020 at 21:12)
 
