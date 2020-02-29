@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [topological space from filter](14020topologicalspacefromfilter.html) (40 messages, latest: Feb 29 2020 at 17:15)
+* [topological space from filter](14020topologicalspacefromfilter.html) (45 messages, latest: Feb 29 2020 at 19:31)
 
 * [I don't get all these types of union](66987Idontgetallthesetypesofunion.html) (8 messages, latest: Feb 29 2020 at 09:38)
 
