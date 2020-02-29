@@ -382,6 +382,32 @@ permalink: archive/113489newmembers/24711Basicbuildingblocktactics.html
 <p>It gives me <code>λ (n m : ℕ), ⁇</code> and red sqiggle under <code>nat.brec_on</code> with the error message "invalid 'nat.brec_on' application, elaborator has special support for this kind of application (it is handled as an "eliminator"), but the expected type must be known."</p>
 <p>Does it want know the type of <code>succ_add</code>? And is there some way to reduce a proof term to the type it's proving?</p>
 
+<a name="189367615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189367615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189367615">Reid Barton (Feb 29 2020 at 01:07)</a>:</h4>
+<p>The term displayed by Lean might not contain enough information to reconstruct the original term, as implicit arguments (here the motive for <code>nat.brec_on</code>) may not be inferable, or at least not by the algorithm Lean uses. Here maybe it would help to add a type ascription <code>(... : succ n + m = succ (n + m))</code> or whatever the correct type is to the body of the lambda.</p>
+
+<a name="189367685"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189367685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189367685">Reid Barton (Feb 29 2020 at 01:08)</a>:</h4>
+<p>But in this case, you might as well just write <code>#reduce nat.succ_add</code>.</p>
+
+<a name="189367702"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189367702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189367702">Reid Barton (Feb 29 2020 at 01:09)</a>:</h4>
+<p>(I'm assuming you did something like <code>#print succ_add</code>, and then copy and pasted the result into <code>#reduce</code>.)</p>
+
+<a name="189368260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189368260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189368260">Lucas Allen (Feb 29 2020 at 01:22)</a>:</h4>
+<p>I couldn't get the type ascription to work.</p>
+<p>I had a go at turn implicit arguments off and reducing the larger proof term, but now I get a "type mismatch at application" under <code>@nat.rec</code>.</p>
+<p>But the red squiggle under <code>@nat.brec_on</code> is gone.</p>
+
+<a name="189368270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20building%20block%20tactics/near/189368270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24711Basicbuildingblocktactics.html#189368270">Lucas Allen (Feb 29 2020 at 01:22)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110032">Reid Barton</span> <a href="#narrow/stream/113489-new-members/topic/Basic.20building.20block.20tactics/near/189367702" title="#narrow/stream/113489-new-members/topic/Basic.20building.20block.20tactics/near/189367702">said</a>:</p>
+<blockquote>
+<p>(I'm assuming you did something like <code>#print succ_add</code>, and then copy and pasted the result into <code>#reduce</code>.)</p>
+</blockquote>
+<p>Yes, exactly. :)</p>
+
 
 {% endraw %}
 

@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Basic building block tactics](24711Basicbuildingblocktactics.html) (75 messages, latest: Feb 29 2020 at 00:22)
+* [Basic building block tactics](24711Basicbuildingblocktactics.html) (80 messages, latest: Feb 29 2020 at 01:22)
 
 * [applying definitions to theorems](11947applyingdefinitionstotheorems.html) (17 messages, latest: Feb 28 2020 at 18:06)
 
