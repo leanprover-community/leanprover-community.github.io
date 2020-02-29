@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (2000 messages, latest: Feb 29 2020 at 19:54)
+* [noob question(s)](52075noobquestions.html) (2002 messages, latest: Feb 29 2020 at 20:55)
 
 * [Basic building block tactics](24711Basicbuildingblocktactics.html) (93 messages, latest: Feb 29 2020 at 16:59)
 
