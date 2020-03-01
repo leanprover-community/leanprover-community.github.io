@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [product with variable number of factors](02708productwithvariablenumberoffactors.html) (18 messages, latest: Mar 01 2020 at 18:55)
+* [product with variable number of factors](02708productwithvariablenumberoffactors.html) (19 messages, latest: Mar 01 2020 at 19:11)
 
 * [Collinear in incidence geometry](45407Collinearinincidencegeometry.html) (18 messages, latest: Mar 01 2020 at 17:35)
 
