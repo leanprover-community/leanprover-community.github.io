@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [nolint doc](59595nolintdoc.html) (3 messages, latest: Mar 01 2020 at 09:26)
+* [nolint doc](59595nolintdoc.html) (10 messages, latest: Mar 01 2020 at 10:59)
 
 * [The omega tactic](55779Theomegatactic.html) (3 messages, latest: Mar 01 2020 at 06:16)
 
