@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [new mathlib tools](62589newmathlibtools.html) (88 messages, latest: Mar 01 2020 at 15:00)
+* [mergify](77684mergify.html) (2 messages, latest: Mar 01 2020 at 20:15)
 
-* [library_search](97355librarysearch.html) (67 messages, latest: Mar 01 2020 at 14:26)
+* [library_search](97355librarysearch.html) (68 messages, latest: Mar 01 2020 at 20:03)
+
+* [new mathlib tools](62589newmathlibtools.html) (88 messages, latest: Mar 01 2020 at 15:00)
 
 * [nolint doc](59595nolintdoc.html) (14 messages, latest: Mar 01 2020 at 11:10)
 
@@ -1322,8 +1324,6 @@ permalink: archive/113488general/index.html
 * [simplifier](47605simplifier.html) (6 messages, latest: Jun 05 2019 at 20:20)
 
 * [Structures in meta](37699Structuresinmeta.html) (15 messages, latest: Jun 05 2019 at 20:02)
-
-* [mergify](77684mergify.html) (1 message, latest: Jun 05 2019 at 07:47)
 
 * [record stub](00190recordstub.html) (15 messages, latest: Jun 05 2019 at 02:01)
 

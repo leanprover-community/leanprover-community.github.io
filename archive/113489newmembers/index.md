@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Splitting multiple conjunctions in one go](90615Splittingmultipleconjunctionsinonego.html) (2 messages, latest: Mar 01 2020 at 15:43)
+* [more basics](41001morebasics.html) (102 messages, latest: Mar 01 2020 at 20:59)
 
-* [more basics](41001morebasics.html) (92 messages, latest: Mar 01 2020 at 15:16)
+* [Splitting multiple conjunctions in one go](90615Splittingmultipleconjunctionsinonego.html) (2 messages, latest: Mar 01 2020 at 15:43)
 
 * [noob question(s)](52075noobquestions.html) (2006 messages, latest: Feb 29 2020 at 22:39)
 
