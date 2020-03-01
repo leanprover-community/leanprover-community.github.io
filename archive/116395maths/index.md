@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Euclidean geometry in mathlib?](82062Euclideangeometryinmathlib.html) (6 messages, latest: Mar 01 2020 at 07:48)
+* [Collinear in incidence geometry](45407Collinearinincidencegeometry.html) (7 messages, latest: Mar 01 2020 at 15:18)
 
-* [Collinear in incidence geometry](45407Collinearinincidencegeometry.html) (5 messages, latest: Mar 01 2020 at 07:42)
+* [Euclidean geometry in mathlib?](82062Euclideangeometryinmathlib.html) (6 messages, latest: Mar 01 2020 at 07:48)
 
 * [product with variable number of factors](02708productwithvariablenumberoffactors.html) (17 messages, latest: Mar 01 2020 at 00:06)
 
