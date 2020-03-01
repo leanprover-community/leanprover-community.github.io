@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [product with variable number of factors](02708productwithvariablenumberoffactors.html) (18 messages, latest: Mar 01 2020 at 18:55)
+
 * [Collinear in incidence geometry](45407Collinearinincidencegeometry.html) (18 messages, latest: Mar 01 2020 at 17:35)
 
 * [Euclidean geometry in mathlib?](82062Euclideangeometryinmathlib.html) (6 messages, latest: Mar 01 2020 at 07:48)
-
-* [product with variable number of factors](02708productwithvariablenumberoffactors.html) (17 messages, latest: Mar 01 2020 at 00:06)
 
 * [condensed etale cohomology](72799condensedetalecohomology.html) (2 messages, latest: Feb 29 2020 at 23:30)
 
