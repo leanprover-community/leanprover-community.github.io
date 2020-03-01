@@ -401,6 +401,50 @@ I would also like to see this error message when the pull fails two lines after 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/189434219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#189434219">Gabriel Ebner (Mar 01 2020 at 13:58)</a>:</h4>
 <p><code>leanproject upgrade-lean</code> could also be part of the next PR.  I think <code>leanproject</code> is sufficiently polished and tested now that we should merge the PR and make a new release on pypi.</p>
 
+<a name="189435662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/189435662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#189435662">Patrick Massot (Mar 01 2020 at 14:46)</a>:</h4>
+<p>This will be quick to implement, I can do it tonight if we decide what we want.</p>
+
+<a name="189435725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/189435725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#189435725">Rob Lewis (Mar 01 2020 at 14:48)</a>:</h4>
+<p>I think <code>leanproject upgrade-lean</code> should probably take an optional Lean version. So with no version given it upgrades to the newest Lean it can find, and <code>leanproject upgrade-lean 3.6.1</code> does what you'd expect even after 3.6.2 is released.</p>
+
+<a name="189435739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/189435739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#189435739">Patrick Massot (Mar 01 2020 at 14:49)</a>:</h4>
+<p>Do I understand correctly that you both think <code>leanproject upgrade-mathlib</code> should not silently upgrade the lean version?</p>
+
+<a name="189435793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/189435793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#189435793">Rob Lewis (Mar 01 2020 at 14:51)</a>:</h4>
+<p>We could have a flag for it. <code>leanproject upgrade-mathlib --upgrade-lean</code>if the default is not to, or swap the default. I'm not sure which is better.</p>
+
+<a name="189435840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/189435840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#189435840">Rob Lewis (Mar 01 2020 at 14:52)</a>:</h4>
+<p>My instinct is to do less by default.</p>
+
+<a name="189435847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/189435847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#189435847">Patrick Massot (Mar 01 2020 at 14:53)</a>:</h4>
+<p>Given that we don't backport anything to old mathlib branches, I would say people who want to upgrade mathlib want to upgrade Lean. But we could at least ask for confirmation.</p>
+
+<a name="189435906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/189435906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#189435906">Rob Lewis (Mar 01 2020 at 14:55)</a>:</h4>
+<p>Actually, I'd skip the step of asking for confirmation. As long as there's an option <code>upgrade-mathlib --no-lean-upgrade</code> or whatever, I think it's fine.</p>
+
+<a name="189435912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/189435912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#189435912">Rob Lewis (Mar 01 2020 at 14:55)</a>:</h4>
+<p>Adding prompts just makes the directions for new users more confusing.</p>
+
+<a name="189435953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/189435953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#189435953">Patrick Massot (Mar 01 2020 at 14:56)</a>:</h4>
+<p>Currently <code>leanproject check</code> prompts before touching oleans.</p>
+
+<a name="189435965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/189435965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#189435965">Rob Lewis (Mar 01 2020 at 14:57)</a>:</h4>
+<p>That's fine, it's not part of the normal workflow, right?</p>
+
+<a name="189436007"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/189436007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#189436007">Patrick Massot (Mar 01 2020 at 14:58)</a>:</h4>
+<p>It's part of making Jason feel safer (and also of helping debugging new users on Zulip).</p>
+
 
 {% endraw %}
 
