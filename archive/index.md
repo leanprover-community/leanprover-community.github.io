@@ -28,7 +28,7 @@ permalink: archive/index.html
 
 * [FoMM / Lean Together 2020](218272FoMMLeanTogether2020/index.html) (13 topics)
 
-* [Geographic locality](224796Geographiclocality/index.html) (10 topics)
+* [Geographic locality](224796Geographiclocality/index.html) (11 topics)
 
 * [Machine Learning for Theorem Proving](219941MachineLearningforTheoremProving/index.html) (9 topics)
 

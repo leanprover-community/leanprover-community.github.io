@@ -55,6 +55,22 @@ permalink: archive/113488general/59595nolintdoc.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nolint%20doc/near/189429219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59595nolintdoc.html#189429219">Rob Lewis (Mar 01 2020 at 10:59)</a>:</h4>
 <p>But the <code>nolints.txt</code> stuff only matters if you want to change the CI process.</p>
 
+<a name="189429284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nolint%20doc/near/189429284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59595nolintdoc.html#189429284">Patrick Massot (Mar 01 2020 at 11:01)</a>:</h4>
+<p>Yes, but we do change the CI process from time to times.</p>
+
+<a name="189429452"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nolint%20doc/near/189429452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59595nolintdoc.html#189429452">Rob Lewis (Mar 01 2020 at 11:07)</a>:</h4>
+<p>The short summary is, <code>mk_nolints.lean</code> is a script that runs the linters and makes a list of which declarations fails which tests. If you run <code>mk_all.sh</code> with the right flag, it will generate an extra file that adds <code>@[nolint]</code> to each declaration in this list, and import this in <code>lint_mathlib.lean</code>.</p>
+
+<a name="189429501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nolint%20doc/near/189429501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59595nolintdoc.html#189429501">Rob Lewis (Mar 01 2020 at 11:08)</a>:</h4>
+<p>So any declaration that failed a lint test at the time <code>mk_nolints</code> was run is ignored by that test in <code>lint_mathlib</code>.</p>
+
+<a name="189429558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nolint%20doc/near/189429558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59595nolintdoc.html#189429558">Rob Lewis (Mar 01 2020 at 11:10)</a>:</h4>
+<p>We only run <code>mk_nolints</code> on master. So errors that appear in PRs aren't on the list, but errors that already exist in mathlib are. If errors get fixed, they're removed from the list as soon as the master build finishes.</p>
+
 
 {% endraw %}
 

@@ -301,6 +301,28 @@ In type theory, to each type former, there is a number of rules associated to it
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/183289883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#183289883">Johan Commelin (Dec 12 2019 at 18:59)</a>:</h4>
 <p><code>suggest</code> wouldn't close the goal either, but would hopefully suggest <code>refine L _ H3</code>. And after that <code>suggest</code> and <code>library_search</code> should both close the goal via <code>solve_by_elim</code></p>
 
+<a name="189430252"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/189430252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#189430252">Sebastien Gouezel (Mar 01 2020 at 11:37)</a>:</h4>
+<p>I am always amazed by library_search. I thought it was only supposed to try to apply all lemmas in the library, filling them with things in the context. But look at what happens in the following situation:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">card</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="o">(</span><span class="n">ordered_partition2</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="o">(</span><span class="n">finset</span> <span class="o">(</span><span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">-</span><span class="mi">1</span><span class="o">)))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">let</span> <span class="o">:</span> <span class="n">ordered_partition2</span> <span class="n">n</span> <span class="err">≃</span> <span class="n">finset</span> <span class="o">(</span><span class="n">fin</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">))</span> <span class="o">:=</span> <span class="n">order_partition2_equiv</span> <span class="n">n</span><span class="o">,</span>
+  <span class="n">library_search</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I wanted to get the name of the lemma saying that if one has an equiv between two fintypes they have the same cardinal, so I asked <code>library_search</code> in my context. Its answer is:</p>
+<div class="codehilite"><pre><span></span><span class="n">Try</span> <span class="n">this</span><span class="o">:</span> <span class="n">exact</span> <span class="n">list</span><span class="bp">.</span><span class="n">length_map</span>
+  <span class="err">⇑</span><span class="o">{</span><span class="n">to_fun</span> <span class="o">:=</span> <span class="err">⇑</span><span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">order_partition2_equiv</span> <span class="n">n</span><span class="o">)),</span>
+     <span class="n">inj</span> <span class="o">:=</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">of_bijective</span><span class="bp">._</span><span class="n">proof_1</span> <span class="err">⇑</span><span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">order_partition2_equiv</span> <span class="n">n</span><span class="o">))</span>
+              <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">bijective</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">order_partition2_equiv</span> <span class="n">n</span><span class="o">)))}</span>
+  <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">pmap</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">multiset</span><span class="bp">.</span><span class="n">powerset_aux</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">fin_range</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)))</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">powerset</span><span class="bp">._</span><span class="n">proof_1</span> <span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="o">))</span>
+</pre></div>
+
+
+<p>and it works perfectly well :) (Still, I will rather go with <code>exact fintype.card_congr this</code>)</p>
+
 
 {% endraw %}
 
