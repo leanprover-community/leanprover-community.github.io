@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [more basics](41001morebasics.html) (90 messages, latest: Mar 01 2020 at 07:21)
+
 * [noob question(s)](52075noobquestions.html) (2006 messages, latest: Feb 29 2020 at 22:39)
 
 * [Basic building block tactics](24711Basicbuildingblocktactics.html) (93 messages, latest: Feb 29 2020 at 16:59)
@@ -40,8 +42,6 @@ permalink: archive/113489newmembers/index.html
 * [even not odd](25623evennotodd.html) (20 messages, latest: Feb 26 2020 at 17:09)
 
 * [Vector space syntax](50599Vectorspacesyntax.html) (20 messages, latest: Feb 25 2020 at 23:05)
-
-* [more basics](41001morebasics.html) (85 messages, latest: Feb 25 2020 at 19:17)
 
 * [set.sum?](03791setsum.html) (4 messages, latest: Feb 25 2020 at 17:23)
 
