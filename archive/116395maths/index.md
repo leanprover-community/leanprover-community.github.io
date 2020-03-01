@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Euclidean geometry in mathlib?](82062Euclideangeometryinmathlib.html) (1 message, latest: Mar 01 2020 at 06:20)
+
 * [product with variable number of factors](02708productwithvariablenumberoffactors.html) (17 messages, latest: Mar 01 2020 at 00:06)
 
 * [condensed etale cohomology](72799condensedetalecohomology.html) (2 messages, latest: Feb 29 2020 at 23:30)

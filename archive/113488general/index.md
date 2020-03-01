@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [The omega tactic](55779Theomegatactic.html) (3 messages, latest: Mar 01 2020 at 06:16)
+
 * [context irrelevance of defeq](06320contextirrelevanceofdefeq.html) (7 messages, latest: Feb 29 2020 at 14:30)
 
 * [How to use the simplifier?](42931Howtousethesimplifier.html) (7 messages, latest: Feb 29 2020 at 12:35)
