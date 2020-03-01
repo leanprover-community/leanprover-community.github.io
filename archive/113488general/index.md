@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [nolint doc](59595nolintdoc.html) (3 messages, latest: Mar 01 2020 at 09:26)
+
 * [The omega tactic](55779Theomegatactic.html) (3 messages, latest: Mar 01 2020 at 06:16)
 
 * [context irrelevance of defeq](06320contextirrelevanceofdefeq.html) (7 messages, latest: Feb 29 2020 at 14:30)
@@ -686,8 +688,6 @@ permalink: archive/113488general/index.html
 * [instances and parameters](56368instancesandparameters.html) (41 messages, latest: Oct 21 2019 at 15:15)
 
 * [Strong binding power](90950Strongbindingpower.html) (2 messages, latest: Oct 21 2019 at 13:41)
-
-* [nolint doc](59595nolintdoc.html) (2 messages, latest: Oct 20 2019 at 20:42)
 
 * [algebraic closure](74840algebraicclosure.html) (216 messages, latest: Oct 16 2019 at 22:09)
 

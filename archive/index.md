@@ -24,9 +24,9 @@ permalink: archive/index.html
 
 * [kbb](141825kbb/index.html) (13 topics)
 
-* [FoMM / Lean Together 2020](218272FoMMLeanTogether2020/index.html) (13 topics)
+* [Is there code for X?](217875IstherecodeforX/index.html) (13 topics)
 
-* [Is there code for X?](217875IstherecodeforX/index.html) (12 topics)
+* [FoMM / Lean Together 2020](218272FoMMLeanTogether2020/index.html) (13 topics)
 
 * [Geographic locality](224796Geographiclocality/index.html) (10 topics)
 
