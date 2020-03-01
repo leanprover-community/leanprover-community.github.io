@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [condensed etale cohomology](72799condensedetalecohomology.html) (1 message, latest: Feb 29 2020 at 22:42)
+* [product with variable number of factors](02708productwithvariablenumberoffactors.html) (15 messages, latest: Feb 29 2020 at 23:57)
+
+* [condensed etale cohomology](72799condensedetalecohomology.html) (2 messages, latest: Feb 29 2020 at 23:30)
 
 * [topological space from filter](14020topologicalspacefromfilter.html) (46 messages, latest: Feb 29 2020 at 21:51)
 
@@ -40,8 +42,6 @@ permalink: archive/116395maths/index.html
 * [What should be my next step here?](09391Whatshouldbemynextstephere.html) (5 messages, latest: Feb 24 2020 at 03:51)
 
 * [proposition manipulation](69752propositionmanipulation.html) (53 messages, latest: Feb 24 2020 at 03:44)
-
-* [product with variable number of factors](02708productwithvariablenumberoffactors.html) (4 messages, latest: Feb 20 2020 at 16:20)
 
 * [finset of coeffts of a poly](38147finsetofcoefftsofapoly.html) (3 messages, latest: Feb 20 2020 at 16:15)
 
