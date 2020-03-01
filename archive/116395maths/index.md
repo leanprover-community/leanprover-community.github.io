@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Collinear in incidence geometry](45407Collinearinincidencegeometry.html) (15 messages, latest: Mar 01 2020 at 16:36)
+* [Collinear in incidence geometry](45407Collinearinincidencegeometry.html) (18 messages, latest: Mar 01 2020 at 17:35)
 
 * [Euclidean geometry in mathlib?](82062Euclideangeometryinmathlib.html) (6 messages, latest: Mar 01 2020 at 07:48)
 

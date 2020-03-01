@@ -72,6 +72,20 @@ permalink: archive/116395maths/45407Collinearinincidencegeometry.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Collinear%20in%20incidence%20geometry/near/189439036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/45407Collinearinincidencegeometry.html#189439036">Patrick Massot (Mar 01 2020 at 16:36)</a>:</h4>
 <p>I'll tell Julien Narboux he should come here.</p>
 
+<a name="189440637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Collinear%20in%20incidence%20geometry/near/189440637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/45407Collinearinincidencegeometry.html#189440637">Julien Narboux (Mar 01 2020 at 17:28)</a>:</h4>
+<p>You are right our definition is wrong, because it does not include the case of the right triangle  ! thank you for pointing this. It has to be noted that we even proved Lemma orthocenter_per : ∀ A B C H, Per A B C →is_orthocenter H A B C → H=B. without noticing that the hypotheses imply False !<br>
+The orthocenter is not used much in GeoCoq, I guess by using it more we would have detected this error.</p>
+
+<a name="189440762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Collinear%20in%20incidence%20geometry/near/189440762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/45407Collinearinincidencegeometry.html#189440762">Julien Narboux (Mar 01 2020 at 17:32)</a>:</h4>
+<p>Our are right that giving good definitions is not always as trivial as it looks. My favorite example of this is the definition of a point being inside an angle. if you say that  a point P is inside an angle ABC if there are points X and Y such that P belongs to segment XY: this definition works nicely in euclidean geometry, but does not work in neutral geometry. This confusion led to a flawed proof by Legendre of the parallel postulate.</p>
+
+<a name="189440836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Collinear%20in%20incidence%20geometry/near/189440836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/45407Collinearinincidencegeometry.html#189440836">Julien Narboux (Mar 01 2020 at 17:35)</a>:</h4>
+<p>About collinearity, we have in GeoCoq, a predicate Col taking only three points as input, and Col A A B holds. Then we have a tactic to deal with pseudo-transitivity of collinearity: A&lt;&gt;B -&gt; Col A B P -&gt; Col  A B Q -&gt; Col A B R -&gt; Col P Q R. I think it is convenient to allow in the definition of Col equal points because in many case you do not know if the point are distinct.<br>
+In education, and in the Elements, there is some kind of implicit assumptions that points are in general position, but when you do it in Coq, you have a lot of problems with degenerated cases.</p>
+
 
 {% endraw %}
 
