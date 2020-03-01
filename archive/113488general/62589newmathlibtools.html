@@ -363,6 +363,44 @@ FileNotFoundError: [Errno 2] No such file or directory: &#39;C:\\Users\\sebas\\.
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/189432552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#189432552">Patrick Massot (Mar 01 2020 at 12:59)</a>:</h4>
 <p>Gabriel, I don't understand your latest comment on this PR. Could you clarify what you wish?</p>
 
+<a name="189432775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/189432775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#189432775">Gabriel Ebner (Mar 01 2020 at 13:06)</a>:</h4>
+<p>Let me rephrase it:  when I run <code>leanproject up</code> on an up-to-date mathlib branch, it fetches oleans.  But when I run <code>leanproject up</code> on something that is not a mathlib branch, I suddenly get an error message from <code>git</code> with no further explanation.<br>
+There is already a helpful error message when <code>leanproject</code> can't find the mathlib remote here:  <a href="https://github.com/leanprover-community/mathlib-tools/blob/fc2d84d5cc798a79fb16cf29f433fc77d56b5a25/mathlibtools/lib.py#L373-L375" target="_blank" title="https://github.com/leanprover-community/mathlib-tools/blob/fc2d84d5cc798a79fb16cf29f433fc77d56b5a25/mathlibtools/lib.py#L373-L375">https://github.com/leanprover-community/mathlib-tools/blob/fc2d84d5cc798a79fb16cf29f433fc77d56b5a25/mathlibtools/lib.py#L373-L375</a><br>
+I would also like to see this error message when the pull fails two lines after that: <a href="https://github.com/leanprover-community/mathlib-tools/blob/fc2d84d5cc798a79fb16cf29f433fc77d56b5a25/mathlibtools/lib.py#L377" target="_blank" title="https://github.com/leanprover-community/mathlib-tools/blob/fc2d84d5cc798a79fb16cf29f433fc77d56b5a25/mathlibtools/lib.py#L377">https://github.com/leanprover-community/mathlib-tools/blob/fc2d84d5cc798a79fb16cf29f433fc77d56b5a25/mathlibtools/lib.py#L377</a> (at least that's where I think the error comes from)</p>
+
+<a name="189432834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/189432834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#189432834">Patrick Massot (Mar 01 2020 at 13:09)</a>:</h4>
+<p>Those lines will be executed when you are not working on mathlib.</p>
+
+<a name="189432876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/189432876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#189432876">Patrick Massot (Mar 01 2020 at 13:10)</a>:</h4>
+<p>When you are not working on mathlib, git pulling mathlib is handled by <code>leanpkg</code>.</p>
+
+<a name="189433171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/189433171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#189433171">Gabriel Ebner (Mar 01 2020 at 13:20)</a>:</h4>
+<p>AFAICT <code>leanproject up</code> executes <code>proj().upgrade_mathlib()</code>.  The lines I've quoted are then executed if <code>self.is_mathlib</code> is true (which I hope is the case if I'm working on mathlib).</p>
+
+<a name="189433217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/189433217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#189433217">Gabriel Ebner (Mar 01 2020 at 13:22)</a>:</h4>
+<p>By "not a mathlib branch", I mean a branch in mathlib that is only on my own fork (i.e. no corresponding branch on <code>leanprover-community</code>), or I've checked out some random commit (which is on <code>leanprover-community/mathlib</code> but doesn't correspond to any branch).</p>
+
+<a name="189433227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/189433227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#189433227">Patrick Massot (Mar 01 2020 at 13:22)</a>:</h4>
+<p>Ok, I misunderstood "not a mathlib branch".</p>
+
+<a name="189433772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/189433772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#189433772">Patrick Massot (Mar 01 2020 at 13:43)</a>:</h4>
+<p>This should be fixed now.</p>
+
+<a name="189433889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/189433889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#189433889">Patrick Massot (Mar 01 2020 at 13:47)</a>:</h4>
+<p>I think I emptied the request stream. The only thing that is missing is upgrading mathlib to a new version of Lean. One thing we can do is <code>leanproject upgrade-mathlib</code> could ask GitHub whether there is a leanprover-community/mathlib branch named <code>lean-X.Y.Z</code> with <code>X.Y.Z</code> bigger than the Lean version currently used by the project (note this would cost a bit of  time). Then we could change the project Lean version and upgrade mathlib. Do we want that? Do we want <code>leanproject</code> to ask for confirmation before doing that? Or should this be a manual only operation (or a new command in <code>leanproject</code>)?</p>
+
+<a name="189434219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/189434219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#189434219">Gabriel Ebner (Mar 01 2020 at 13:58)</a>:</h4>
+<p><code>leanproject upgrade-lean</code> could also be part of the next PR.  I think <code>leanproject</code> is sufficiently polished and tested now that we should merge the PR and make a new release on pypi.</p>
+
 
 {% endraw %}
 
