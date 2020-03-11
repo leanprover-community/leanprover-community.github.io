@@ -1,0 +1,118 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/66053Productofunivfinsetoption.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/66053Productofunivfinsetoption.html">Product of `univ : finset (option α)`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="189490955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Product%20of%20%60univ%20%3A%20finset%20%28option%20%CE%B1%29%60/near/189490955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66053Productofunivfinsetoption.html#189490955">Anne Baanen (Mar 02 2020 at 13:35)</a>:</h4>
+<p>What is the best approach to proving the following goal:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">v</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_monoid</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">β</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="bp">.</span><span class="n">prod</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">option</span> <span class="n">β</span><span class="o">),</span> <span class="n">i</span><span class="bp">.</span><span class="n">elim</span> <span class="n">x</span> <span class="n">v</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="bp">.</span><span class="n">prod</span> <span class="n">v</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+
+
+<p>I guess <code>finset.sum_insert</code> would be the first step?</p>
+
+<a name="189491403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Product%20of%20%60univ%20%3A%20finset%20%28option%20%CE%B1%29%60/near/189491403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66053Productofunivfinsetoption.html#189491403">Johan Commelin (Mar 02 2020 at 13:42)</a>:</h4>
+<p>I would show that <code>univ : finset (option β)</code> is the same as <code>insert none (erase none univ)</code></p>
+
+<a name="189491442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Product%20of%20%60univ%20%3A%20finset%20%28option%20%CE%B1%29%60/near/189491442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66053Productofunivfinsetoption.html#189491442">Johan Commelin (Mar 02 2020 at 13:42)</a>:</h4>
+<p>After that, I think there are enough library lemmas to just follow your nose.</p>
+
+<a name="189491471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Product%20of%20%60univ%20%3A%20finset%20%28option%20%CE%B1%29%60/near/189491471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66053Productofunivfinsetoption.html#189491471">Johan Commelin (Mar 02 2020 at 13:43)</a>:</h4>
+<p>(Just a guess...) If you get stuck, then you've certainly found a hole in the library.</p>
+
+<a name="189491961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Product%20of%20%60univ%20%3A%20finset%20%28option%20%CE%B1%29%60/near/189491961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66053Productofunivfinsetoption.html#189491961">Patrick Massot (Mar 02 2020 at 13:49)</a>:</h4>
+<p>I can't even parse the statement. Can someone translate this into LaTeX for me?</p>
+
+<a name="189492056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Product%20of%20%60univ%20%3A%20finset%20%28option%20%CE%B1%29%60/near/189492056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66053Productofunivfinsetoption.html#189492056">Chris Hughes (Mar 02 2020 at 13:50)</a>:</h4>
+<p>What is LateX for <code>option.none</code>?</p>
+
+<a name="189492081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Product%20of%20%60univ%20%3A%20finset%20%28option%20%CE%B1%29%60/near/189492081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66053Productofunivfinsetoption.html#189492081">Patrick Massot (Mar 02 2020 at 13:50)</a>:</h4>
+<p>I guess it depends on context.</p>
+
+<a name="189492084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Product%20of%20%60univ%20%3A%20finset%20%28option%20%CE%B1%29%60/near/189492084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66053Productofunivfinsetoption.html#189492084">Chris Hughes (Mar 02 2020 at 13:50)</a>:</h4>
+<p>Here's a proof.</p>
+<div class="codehilite"><pre><span></span><span class="k">calc</span> <span class="n">univ</span><span class="bp">.</span><span class="n">prod</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">option</span> <span class="n">β</span><span class="o">),</span> <span class="n">i</span><span class="bp">.</span><span class="n">elim</span> <span class="n">x</span> <span class="n">v</span><span class="o">)</span>
+    <span class="bp">=</span> <span class="n">x</span> <span class="bp">*</span> <span class="o">(</span><span class="n">univ</span><span class="bp">.</span><span class="n">erase</span> <span class="o">(</span><span class="n">none</span><span class="o">))</span><span class="bp">.</span><span class="n">prod</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">option</span> <span class="n">β</span><span class="o">),</span> <span class="n">i</span><span class="bp">.</span><span class="n">elim</span> <span class="n">x</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span>
+  <span class="k">begin</span>
+    <span class="n">conv_lhs</span> <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">insert_erase</span> <span class="o">(</span><span class="n">mem_univ</span> <span class="o">(</span><span class="n">none</span> <span class="o">:</span> <span class="n">option</span> <span class="n">β</span><span class="o">))]</span> <span class="o">},</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">prod_insert</span> <span class="o">(</span><span class="n">not_mem_erase</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)],</span> <span class="n">refl</span>
+  <span class="kn">end</span>
+<span class="bp">...</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="bp">.</span><span class="n">prod</span> <span class="n">v</span> <span class="o">:</span>
+  <span class="k">begin</span>
+    <span class="n">refine</span> <span class="n">congr_arg2</span> <span class="bp">_</span> <span class="n">rfl</span> <span class="o">(</span><span class="n">prod_bij</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="bp">_</span><span class="o">,</span> <span class="n">some</span> <span class="n">a</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">simp</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">intros</span><span class="o">,</span> <span class="n">refl</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">simp</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="k">assume</span> <span class="n">b</span><span class="o">,</span>
+      <span class="n">cases</span> <span class="n">b</span> <span class="k">with</span> <span class="n">b</span><span class="o">,</span>
+      <span class="o">{</span> <span class="n">simp</span> <span class="o">},</span>
+      <span class="o">{</span> <span class="n">intro</span><span class="o">,</span> <span class="n">use</span> <span class="n">b</span><span class="o">,</span> <span class="n">simp</span> <span class="o">}</span> <span class="o">}</span>
+  <span class="kn">end</span>
+</pre></div>
+
+<a name="189492170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Product%20of%20%60univ%20%3A%20finset%20%28option%20%CE%B1%29%60/near/189492170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66053Productofunivfinsetoption.html#189492170">Patrick Massot (Mar 02 2020 at 13:51)</a>:</h4>
+<p>I think I understand the statement now.</p>
+
+<a name="189492952"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Product%20of%20%60univ%20%3A%20finset%20%28option%20%CE%B1%29%60/near/189492952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66053Productofunivfinsetoption.html#189492952">Kevin Buzzard (Mar 02 2020 at 14:00)</a>:</h4>
+<blockquote>
+<p>Here's a proof.</p>
+</blockquote>
+<p>but where's your proof that it's the best approach? ;-)</p>
+
+<a name="189492960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Product%20of%20%60univ%20%3A%20finset%20%28option%20%CE%B1%29%60/near/189492960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66053Productofunivfinsetoption.html#189492960">Anne Baanen (Mar 02 2020 at 14:00)</a>:</h4>
+<p>Ah, <code>prod_bij</code> is what I was missing!</p>
+
+<a name="189493085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Product%20of%20%60univ%20%3A%20finset%20%28option%20%CE%B1%29%60/near/189493085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66053Productofunivfinsetoption.html#189493085">Anne Baanen (Mar 02 2020 at 14:01)</a>:</h4>
+<p>Would it be worth it to include this in mathlib (as a <code>@[simp]</code> lemma)?</p>
+
+<a name="189493091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Product%20of%20%60univ%20%3A%20finset%20%28option%20%CE%B1%29%60/near/189493091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66053Productofunivfinsetoption.html#189493091">Chris Hughes (Mar 02 2020 at 14:01)</a>:</h4>
+<p><code>prod_bij</code> is really handy. We need docs that say things like <code>prod_bij</code> is how you prove a lot of things about products.</p>
+
+<a name="189493500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Product%20of%20%60univ%20%3A%20finset%20%28option%20%CE%B1%29%60/near/189493500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66053Productofunivfinsetoption.html#189493500">Kevin Buzzard (Mar 02 2020 at 14:06)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110031">Patrick Massot</span> <a href="#narrow/stream/116395-maths/topic/Product.20of.20.60univ.20.3A.20finset.20(option.20.CE.B1).60/near/189491961" title="#narrow/stream/116395-maths/topic/Product.20of.20.60univ.20.3A.20finset.20(option.20.CE.B1).60/near/189491961">said</a>:</p>
+<blockquote>
+<p>I can't even parse the statement. Can someone translate this into LaTeX for me?</p>
+</blockquote>
+<p>It says <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><msub><mo>∏</mo><mrow><mi>i</mi><mo>∈</mo><mi>β</mi></mrow></msub><mi>v</mi><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo><mo>=</mo><mi>x</mi><msub><mo>∏</mo><mrow><mi>i</mi><mo>∈</mo><mi>β</mi></mrow></msub><mi>v</mi><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">x\prod_{i\in\beta}v(i)=x\prod_{i\in\beta}v(i)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1.185818em;vertical-align:-0.43581800000000004em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∏</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.18639799999999984em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">∈</span><span class="mord mathdefault mtight" style="margin-right:0.05278em;">β</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.43581800000000004em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mopen">(</span><span class="mord mathdefault">i</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.185818em;vertical-align:-0.43581800000000004em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∏</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.18639799999999984em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">∈</span><span class="mord mathdefault mtight" style="margin-right:0.05278em;">β</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.43581800000000004em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mopen">(</span><span class="mord mathdefault">i</span><span class="mclose">)</span></span></span></span></p>
+
+<a name="189493681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Product%20of%20%60univ%20%3A%20finset%20%28option%20%CE%B1%29%60/near/189493681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66053Productofunivfinsetoption.html#189493681">Patrick Massot (Mar 02 2020 at 14:08)</a>:</h4>
+<p>That translation explains why this is a hard Lean problem. Empty math implies hard Lean almost surely.</p>
+
+<a name="189493723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Product%20of%20%60univ%20%3A%20finset%20%28option%20%CE%B1%29%60/near/189493723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66053Productofunivfinsetoption.html#189493723">Kevin Buzzard (Mar 02 2020 at 14:09)</a>:</h4>
+<p>Nice proof Chris. This is exactly, I guess, why one needs <code>prod_bij</code>: it says "the products over two sets that mathematicians might not be able to tell the difference between, are equal"</p>
+
+<a name="189493801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Product%20of%20%60univ%20%3A%20finset%20%28option%20%CE%B1%29%60/near/189493801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66053Productofunivfinsetoption.html#189493801">Yury G. Kudryashov (Mar 02 2020 at 14:10)</a>:</h4>
+<p>(deleted)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,335 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/55691Univalence.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html">Univalence</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="190027207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190027207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190027207">Bas Spitters (Mar 08 2020 at 20:40)</a>:</h4>
+<p>I believe univalence can consistently be added to lean, since classical logic is valid in the simplicial set model<br>
+(<a href="https://www.math.uwo.ca/faculty/kapulkin/notes/LEM_in_sSet.pdf" target="_blank" title="https://www.math.uwo.ca/faculty/kapulkin/notes/LEM_in_sSet.pdf">https://www.math.uwo.ca/faculty/kapulkin/notes/LEM_in_sSet.pdf</a>).<br>
+Moreover, that model also interprets strict propositions.<br>
+One would of course need to disable UIP for universes. Would that be possible?</p>
+
+<a name="190027361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190027361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190027361">Chris Hughes (Mar 08 2020 at 20:46)</a>:</h4>
+<p>Have you seen <a href="https://github.com/gebner/hott3" target="_blank" title="https://github.com/gebner/hott3">https://github.com/gebner/hott3</a> ?</p>
+
+<a name="190027386"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190027386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190027386">Kevin Buzzard (Mar 08 2020 at 20:46)</a>:</h4>
+<p>I thought that the issue was that <code>bool = bool</code> was a singleton in Lean but <code>bool \equiv bool</code> was not.</p>
+
+<a name="190027394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190027394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190027394">Chris Hughes (Mar 08 2020 at 20:47)</a>:</h4>
+<p>That's why you have to disable <code>Prop</code>, or at least large elimination from <code>Prop</code>s</p>
+
+<a name="190027398"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190027398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190027398">Chris Hughes (Mar 08 2020 at 20:47)</a>:</h4>
+<p>And redefine equality to be a <code>Type</code></p>
+
+<a name="190027403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190027403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190027403">Kevin Buzzard (Mar 08 2020 at 20:47)</a>:</h4>
+<p>and this breaks all of mathlib immediately, right?</p>
+
+<a name="190027405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190027405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190027405">Chris Hughes (Mar 08 2020 at 20:47)</a>:</h4>
+<p>Yes</p>
+
+<a name="190027659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190027659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190027659">Kevin Buzzard (Mar 08 2020 at 20:56)</a>:</h4>
+<p>and also it means that it would be much harder to make it all again, because the cool tricks we can get away with because any two terms of type P : Prop are equal won't work any more, so it might not even be possible to make parts of mathlib again if we have univalence.</p>
+
+<a name="190030722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190030722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190030722">Reid Barton (Mar 08 2020 at 22:33)</a>:</h4>
+<p>I understand why equality can't be a Prop but once that is changed I don't understand why Prop itself causes any problems.</p>
+
+<a name="190030917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190030917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190030917">Mario Carneiro (Mar 08 2020 at 22:38)</a>:</h4>
+<p>If <code>eq : A -&gt; A -&gt; Prop</code> exists then you can prove that <code>eq' : A -&gt; A -&gt; Type</code> is equivalent to it and hence also satisfies UIP</p>
+
+<a name="190030918"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190030918" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190030918">Chris Hughes (Mar 08 2020 at 22:38)</a>:</h4>
+<p>Because this is inconsistent right?</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">eq2</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">refl</span> <span class="o">:</span> <span class="n">eq2</span> <span class="n">a</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="n">h₂</span> <span class="o">:</span> <span class="n">eq2</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">eq2</span> <span class="n">h₁</span> <span class="n">h₂</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">cases</span> <span class="n">h₁</span><span class="bp">;</span> <span class="n">cases</span> <span class="n">h₂</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">eq2</span><span class="bp">.</span><span class="n">refl</span>  <span class="bp">_</span>
+</pre></div>
+
+<a name="190030928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190030928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190030928">Mario Carneiro (Mar 08 2020 at 22:39)</a>:</h4>
+<p>which is basically what Chris's proof does, because <code>cases</code> is implicitly using <code>eq</code></p>
+
+<a name="190031311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190031311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190031311">Reid Barton (Mar 08 2020 at 22:51)</a>:</h4>
+<p>I was going to say maybe this just means you need to adjust the rules for large elimination of Props to not allow smuggling in eq, but possibly that eliminates all interesting uses?</p>
+
+<a name="190031324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190031324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190031324">Mario Carneiro (Mar 08 2020 at 22:51)</a>:</h4>
+<p>If prop looked like type there wouldn't be any issues</p>
+
+<a name="190031367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190031367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190031367">Reid Barton (Mar 08 2020 at 22:52)</a>:</h4>
+<p>Well then it might as well not exist, right?</p>
+
+<a name="190031376"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190031376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190031376">Mario Carneiro (Mar 08 2020 at 22:53)</a>:</h4>
+<p>I am not sure if the impredicativity is also bad but if you don't have UIP in prop then I think it would be bad</p>
+
+<a name="190031378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190031378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190031378">Reid Barton (Mar 08 2020 at 22:53)</a>:</h4>
+<p>I guess the question is how much stuff can you put into a definitionally proof-irrelevant Prop while remaining consistent with univalence, and is that amount enough to be useful</p>
+
+<a name="190031422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190031422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190031422">Mario Carneiro (Mar 08 2020 at 22:54)</a>:</h4>
+<p>You could remove all large elimination. just have all inductive types act like <code>exists</code></p>
+
+<a name="190031426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190031426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190031426">Mario Carneiro (Mar 08 2020 at 22:54)</a>:</h4>
+<p>then Prop becomes a one-way path so it can't cause problems... I hope</p>
+
+<a name="190031431"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190031431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190031431">Reid Barton (Mar 08 2020 at 22:55)</a>:</h4>
+<p>Right, I should go back to: how permissive can the large elimination rules be</p>
+
+<a name="190031435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190031435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190031435">Reid Barton (Mar 08 2020 at 22:55)</a>:</h4>
+<p>E.g. I imagine that large elimination for <code>true</code> is ok</p>
+
+<a name="190031438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190031438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190031438">Reid Barton (Mar 08 2020 at 22:55)</a>:</h4>
+<p>But it's also not that exciting</p>
+
+<a name="190031441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190031441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190031441">Mario Carneiro (Mar 08 2020 at 22:55)</a>:</h4>
+<p>Some large elimination principles are provable without assuming them, like <code>and</code></p>
+
+<a name="190031468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190031468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190031468">Reid Barton (Mar 08 2020 at 22:56)</a>:</h4>
+<p>There's surely going to be issues with propext next, I guess</p>
+
+<a name="190031483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190031483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190031483">Mario Carneiro (Mar 08 2020 at 22:56)</a>:</h4>
+<p>but those are basically the only okay ones</p>
+
+<a name="190031536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190031536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190031536">Reid Barton (Mar 08 2020 at 22:58)</a>:</h4>
+<p>Oh maybe there is no issue with propext as long as its type itself doesn't have large elimination</p>
+
+<a name="190031542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190031542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190031542">Mario Carneiro (Mar 08 2020 at 22:58)</a>:</h4>
+<p>propext is actually univalence for propositions</p>
+
+<a name="190031735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190031735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190031735">Reid Barton (Mar 08 2020 at 23:03)</a>:</h4>
+<p>Ok, I think what I was imagining is not a real issue</p>
+
+<a name="190031834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190031834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190031834">Reid Barton (Mar 08 2020 at 23:06)</a>:</h4>
+<p>I guess if you can track the h-levels of types syntactically then you can also allow large elimination when appropriate. Is this what Arend does?</p>
+
+<a name="190031839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190031839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190031839">Reid Barton (Mar 08 2020 at 23:06)</a>:</h4>
+<p>Hmm this isn't very obvious actually</p>
+
+<a name="190032414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190032414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190032414">Kevin Buzzard (Mar 08 2020 at 23:27)</a>:</h4>
+<p>This theorising is all well and good but you seem to be saying "if lean's core logic is changed a bit then it would be interesting to see what still works" and I'm merely pointing out that it might be much much harder to develop a proper maths library, which is my impression of what happens the moment you go univalent: you can compute homotopy types of synthetic spheres and then the only thing you can do is higher topos theory</p>
+
+<a name="190032456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190032456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190032456">Kevin Buzzard (Mar 08 2020 at 23:28)</a>:</h4>
+<p>Because you can't use <code>cases</code> any more</p>
+
+<a name="190033516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190033516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190033516">Mario Carneiro (Mar 09 2020 at 00:06)</a>:</h4>
+<p>in principle, lean tactics could be modified to be less HoTT-unfriendly. In practice, the people who are capable of doing a good job of it are not interested</p>
+
+<a name="190049505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190049505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190049505">Bas Spitters (Mar 09 2020 at 08:50)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> Thanks. Does one still have classical logic?<br>
+Instead of singleton elimination, I guess one wants this: <span class="user-mention" data-user-id="243878">@Gaëtan Gilbert</span> is also involved in that.<br>
+<a href="https://jesper.sikanda.be/files/definitional-proof-irrelevance-without-K.pdf" target="_blank" title="https://jesper.sikanda.be/files/definitional-proof-irrelevance-without-K.pdf">https://jesper.sikanda.be/files/definitional-proof-irrelevance-without-K.pdf</a></p>
+
+<a name="190049784"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190049784" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190049784">Bas Spitters (Mar 09 2020 at 08:56)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Most of basic maths happens at the lowest type level, so things wouldn't change much. Only the first universe becomes a groupoid, the second a 2-groupoid, etc.<br>
+One would notice it when formalizing presheaves, and there I would expect it to be the more natural thing to do. Unless one is "evil":<br>
+<a href="https://ncatlab.org/nlab/show/principle+of+equivalence" target="_blank" title="https://ncatlab.org/nlab/show/principle+of+equivalence">https://ncatlab.org/nlab/show/principle+of+equivalence</a></p>
+
+<a name="190051752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190051752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190051752">Kevin Buzzard (Mar 09 2020 at 09:28)</a>:</h4>
+<p>Presheaves are just a fancy word for functors and I'm sure there will be no problems with functors in a HoTT theory. I want to go much further than this. I want to see the proof that the presheaf of rings on an affine scheme is a sheaf, ie not just a definition of presheaves but a proof that they can be used. This took a team of complete amateurs a few months in Lean -- we were all mathematicians who knew nothing about computer proof systems or type theory one year earlier. I genuinely don't know whether the reason this isn't done in any computer HoTT system is because the systems aren't capable or because there just isn't anyone interested in doing it. I believe that there are classical hypotheses everywhere in the argument.</p>
+
+<a name="190052297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190052297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190052297">Kevin Buzzard (Mar 09 2020 at 09:37)</a>:</h4>
+<p>The reason I am banging on about this is that if your original assertion is supposed to imply that adding univalence does not in theory break anything, then I am pointing at an explicit piece of MSc level mathematics whose proof will be completely broken by it and am trying to ask the question "is there any evidence that it can actually be fixed in practice?". I am arguing that it took a team of amateurs a few months to make this proof in Lean in their spare time, so it does not seem like an unreasonable practical challenge. In my mind, one of the main things lean has going for it is a whole bunch of examples of mathematics at MSc level and above being done with relative ease by the community -- a proof that the proof assistant is usable in practice to do "fashionable mathematics".</p>
+<p>However this might well be a long way from the point you were trying to make originally and so I'll now stop banging on about this on this thread. Sorry to derail. </p>
+<p>I think Chris' original comment on Gabriel's work on HoTT in Lean 3 is the place to start. Both he and Floris van Doorn are experts in doing HoTT in Lean, but currently I don't think either of them are doing any, and perhaps this is only because the community is not there yet.</p>
+
+<a name="190052547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190052547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190052547">Kevin Buzzard (Mar 09 2020 at 09:41)</a>:</h4>
+<p>I could envisage someone setting an undergraduate project on doing some HoTT formalisation in Lean using Gabriel's library and then a stream being set up here for HoTT In Lean and one could just see how easy it is to do mathematics in practice in this mode. It would definitely be an interesting and worthwhile project. One could imagine the UniMath library and the HoTT book as being useful resources and one could ask whether this Lean framework is easier to use than the corresponding Coq framework</p>
+
+<a name="190054327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190054327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190054327">Bas Spitters (Mar 09 2020 at 10:08)</a>:</h4>
+<p>Of course, I would start from the HoTT library, not UniMath. It is better engineered and doesn't have the imho arbitrary restriction on the use of e.g. record types.<br>
+<a href="https://github.com/HoTT/HoTT" target="_blank" title="https://github.com/HoTT/HoTT">https://github.com/HoTT/HoTT</a></p>
+
+<a name="190056901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190056901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190056901">Kevin Buzzard (Mar 09 2020 at 10:45)</a>:</h4>
+<p>Thanks for reminding me of this library! I see that it is actively growing too :D People are currently thinking about groups, judging by recent commits. Can you state Sylow's theorems? Can you prove them?</p>
+<p>To give you some sort of data point for comparison, when I arrived at Lean they had in their maths library a theory of groups, rings and topological spaces, and a good theory of finite sets. They had the naturals, integers, rationals and reals, and perhaps not too much more of interest to a "working mathematician" (although my memory might be inaccurate). This was definitely enough to get me interested though. Within a year Chris Hughes had proved Sylow's theorems, and he was a 1st year undergraduate mathematician with training in computer proof systems; Kenny Lau had set up a theory of localisation of rings, and he was also a 1st year undergraduate mathematician with no prior training in computer proof systems, and the three of us had proved this result about schemes. The reason I'm mentioning it is that one could ask what the "bare minimum"is that one needs to get mathematicians involved. And in my experience it's undergraduate mathematicians you can start with, especially when you say to them "hey there's this cool system and there's a whole bunch of undergraduate level maths in it which you can do and which we need". </p>
+<p>Are you considering the possibility of porting this library to Lean? Is that the question you're really asking -- whether the logics of the systems are sufficiently compatible?</p>
+
+<a name="190057399"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190057399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190057399">Chris Hughes (Mar 09 2020 at 10:52)</a>:</h4>
+<p>Impredicativity isn't compatible with HoTT right? This is something that seems quite important to do normal maths.</p>
+
+<a name="190058144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190058144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190058144">Mario Carneiro (Mar 09 2020 at 11:03)</a>:</h4>
+<p>Actually, impredicativity can be done in HoTT but it doesn't look the same. There is a well known result that says that two impredicative universes is inconsistent, and one impredicative universe is System F which does not have the "standard semantics" we like to have for function types and such. In the standard HoTT foundations you can define what it means for a type to be a proposition, but you end up with a subset of the universe at each level that are propositions, and there may be "more propositions" at the higher levels; this is what we mean by predicativity.</p>
+<p>In order to reflect these propositions down to the lowest level to get something more impredicative, there is Voevodsky's "universe resizing" rule. IIRC it says that if <code>A : Type u</code> and <code>is_prop A</code> (which we would render as <code>subsingleton A</code>), then there exists <code>A' : Type 0</code> such that <code>equiv A A'</code> (and a forteriori <code>is_prop A'</code> as well).</p>
+
+<a name="190058447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190058447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190058447">Mario Carneiro (Mar 09 2020 at 11:07)</a>:</h4>
+<p>In classical logic, this is trivial, because every proposition is either true or false and both true and false can be found in the lowest universe.</p>
+
+<a name="190058840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190058840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190058840">Bas Spitters (Mar 09 2020 at 11:12)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> <br>
+Impredicativity is called the resizing axiom in the HoTT book. It holds in most (classical) models of HoTT, e.g. simplicial sets.</p>
+
+<a name="190059013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190059013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190059013">Mario Carneiro (Mar 09 2020 at 11:15)</a>:</h4>
+<p>But it is an axiom, yes? This by contrast to the way lean's impredicativity works, by a different typing rule for the Pi</p>
+
+<a name="190059015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190059015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190059015">Bas Spitters (Mar 09 2020 at 11:15)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> In the simplicial set model, the hProps are not the booleans, so the issue is somewhat more subtle:<br>
+Any contractible type is equivalent to a point (e.g. the unit type in the lowest universe)</p>
+
+<a name="190059083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190059083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190059083">Mario Carneiro (Mar 09 2020 at 11:16)</a>:</h4>
+<p>I suspect that Kevin et al really want the hProps to be equivalent to bool</p>
+
+<a name="190059192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190059192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190059192">Bas Spitters (Mar 09 2020 at 11:18)</a>:</h4>
+<p>One could use strict propositions for that, as developed by <span class="user-mention" data-user-id="243878">@Gaëtan Gilbert</span> in Coq</p>
+
+<a name="190059326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190059326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190059326">Mario Carneiro (Mar 09 2020 at 11:20)</a>:</h4>
+<p>is there a motivating example for why hProp can't be bool, in a classical HoTT model?</p>
+
+<a name="190059371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190059371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190059371">Mario Carneiro (Mar 09 2020 at 11:21)</a>:</h4>
+<p>I would have thought equality would be an example but it's not even an hProp unless the type is a hSet</p>
+
+<a name="190059487"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190059487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190059487">Mario Carneiro (Mar 09 2020 at 11:23)</a>:</h4>
+<p>I'm not really sure how strict propositions (by which I assume you mean Coq's SProp) differs from lean's Prop, and in particular what they do to avoid the exact same constructions shown by Chris above that trivialize the equality relation</p>
+
+<a name="190060309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190060309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190060309">Bas Spitters (Mar 09 2020 at 11:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> <span class="user-mention" data-user-id="110044">@Chris Hughes</span>  Indeed, with classical logic, hProp ~ bool. Cor 4 of:<br>
+<a href="https://www.math.uwo.ca/faculty/kapulkin/notes/LEM_in_sSet.pdf" target="_blank" title="https://www.math.uwo.ca/faculty/kapulkin/notes/LEM_in_sSet.pdf">https://www.math.uwo.ca/faculty/kapulkin/notes/LEM_in_sSet.pdf</a></p>
+
+<a name="190060582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190060582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190060582">Johan Commelin (Mar 09 2020 at 11:44)</a>:</h4>
+<p><span class="user-mention" data-user-id="259452">@Bas Spitters</span> Does this mean that we can assume all types (or at least all types <code>X</code> with <code>is_Set X</code>) are either empty or have a term?</p>
+
+<a name="190063579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190063579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190063579">Bas Spitters (Mar 09 2020 at 12:34)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> Yes, that should be provable. Assuming classical logic and choice, hSets form a model of Lawvere's structural set theory.</p>
+
+<a name="190063618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190063618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190063618">Johan Commelin (Mar 09 2020 at 12:35)</a>:</h4>
+<p>Maybe with the new tooling it becomes easier to switch back and forth between mathlib and the hott3 project...</p>
+
+<a name="190063622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190063622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190063622">Johan Commelin (Mar 09 2020 at 12:35)</a>:</h4>
+<p>I wouldn't mind playing with it.</p>
+
+<a name="190063720"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190063720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190063720">Bas Spitters (Mar 09 2020 at 12:37)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Consider a huge type what paths between all terms. This is contractible, so an hprop, but this is obviously not a boolean.</p>
+
+<a name="190063746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190063746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190063746">Mario Carneiro (Mar 09 2020 at 12:37)</a>:</h4>
+<p>isn't it equivalent to true?</p>
+
+<a name="190063777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190063777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190063777">Mario Carneiro (Mar 09 2020 at 12:37)</a>:</h4>
+<p>what makes it "huge"?</p>
+
+<a name="190063844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190063844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190063844">Mario Carneiro (Mar 09 2020 at 12:38)</a>:</h4>
+<p>or are you saying it has higher structure like loops or something</p>
+
+<a name="190064048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190064048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190064048">Bas Spitters (Mar 09 2020 at 12:42)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> We can also consider the universe of strict sets. Here is a constructive development, which will not be easy to read, but may give an idea of the type theory.<br>
+<a href="http://www.cse.chalmers.se/~coquand/bishop.pdf" target="_blank" title="http://www.cse.chalmers.se/~coquand/bishop.pdf">http://www.cse.chalmers.se/~coquand/bishop.pdf</a></p>
+
+<a name="190064117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190064117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190064117">Johan Commelin (Mar 09 2020 at 12:43)</a>:</h4>
+<p>What is the difference between an hSet and a strict set?</p>
+
+<a name="190064223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190064223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190064223">Mario Carneiro (Mar 09 2020 at 12:45)</a>:</h4>
+<p>two equalities of fixed values in a strict set are defeq</p>
+
+<a name="190064233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190064233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190064233">Mario Carneiro (Mar 09 2020 at 12:45)</a>:</h4>
+<p>in other words, lean types</p>
+
+<a name="190064355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190064355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190064355">Johan Commelin (Mar 09 2020 at 12:46)</a>:</h4>
+<p>Aha... but can you have those in a HoTT system?</p>
+
+<a name="190064390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190064390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190064390">Mario Carneiro (Mar 09 2020 at 12:47)</a>:</h4>
+<p>that is based on skimming Bas's link</p>
+
+<a name="190064420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190064420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190064420">Mario Carneiro (Mar 09 2020 at 12:47)</a>:</h4>
+<p>I don't think that type theory is classical, although probably you can just throw that in</p>
+
+<a name="190064517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190064517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190064517">Mario Carneiro (Mar 09 2020 at 12:49)</a>:</h4>
+<p>but the upshot of all this is still not clear to me. It sounds like you are offering most of the features lean has already. What are we giving up? Clearly something has to give since univalence in lean is disprovable</p>
+
+<a name="190064721"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190064721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190064721">Mario Carneiro (Mar 09 2020 at 12:52)</a>:</h4>
+<p>the stuff about simplicial sets or cubical set models is not relevant for the lean user, since we are working <em>in</em> the theory not <em>on</em> the theory. (Formalizing type theories would be a worthy project but quite independent of tweaks to lean foundations.)</p>
+
+<a name="190072108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190072108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190072108">Bas Spitters (Mar 09 2020 at 14:08)</a>:</h4>
+<p>One would have a type theory with two kinds of propositions, strict ones and hProps.<br>
+set level mathematics should go through at the bottom universe, but the other universes can be univalent.<br>
+So one would need to give up UIP for the higher universes.</p>
+
+<a name="190134462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190134462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190134462">Mario Carneiro (Mar 10 2020 at 01:12)</a>:</h4>
+<p>Wait, so the lowest universe is not univalent in this scheme? Isn't that where all the interesting maths would go? For example, I guess one desideratum would be to have <code>real = real x {0}</code> be provable, as well as similar statements for the corresponding elements of a fully bundled type <code>Ring := Sigma (A : Type 0) (mul : A -&gt; A -&gt; A), ...</code>. As I understand it this is the main selling point of having univalence around, but these objects are h-sets, possibly strict sets if you prefer, and live in the bottom universe. (<code>Ring</code> lives in the next universe but equality of rings, which should mean ring isomorphism, depends on equality in <code>Type 0</code>, and so needs the bottom universe to be univalent.)</p>
+
+<a name="190134631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190134631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190134631">Mario Carneiro (Mar 10 2020 at 01:16)</a>:</h4>
+<p>While UIP is tremendously convenient, it doesn't actually enable any particular kind of maths, as long as you can obtain the (non-judgmental) equality by other means. It would still require a lot of engineering effort to recover the same level of ease of use that you get with UIP, but at least in principle I can see giving it up provided that things like the resizing axiom are around to allow us to do long well founded recursions and such.</p>
+
+<a name="190134746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Univalence/near/190134746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/55691Univalence.html#190134746">Reid Barton (Mar 10 2020 at 01:19)</a>:</h4>
+<p>I think <code>@eq A a b</code> is a Prop if <code>A : Type 0</code>. That doesn't prevent <code>Type</code> itself from satisfying univalence</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

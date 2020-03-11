@@ -86,6 +86,34 @@ The orthocenter is not used much in GeoCoq, I guess by using it more we would ha
 <p>About collinearity, we have in GeoCoq, a predicate Col taking only three points as input, and Col A A B holds. Then we have a tactic to deal with pseudo-transitivity of collinearity: A&lt;&gt;B -&gt; Col A B P -&gt; Col  A B Q -&gt; Col A B R -&gt; Col P Q R. I think it is convenient to allow in the definition of Col equal points because in many case you do not know if the point are distinct.<br>
 In education, and in the Elements, there is some kind of implicit assumptions that points are in general position, but when you do it in Coq, you have a lot of problems with degenerated cases.</p>
 
+<a name="189458719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Collinear%20in%20incidence%20geometry/near/189458719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/45407Collinearinincidencegeometry.html#189458719">Donald Sebastian Leung (Mar 02 2020 at 02:32)</a>:</h4>
+<p>Thanks <span class="user-mention" data-user-id="110032">@Reid Barton</span>  and <span class="user-mention" data-user-id="268018">@Julien Narboux</span> for your input (and thanks <span class="user-mention" data-user-id="110031">@Patrick Massot</span>  for mentioning GeoCoq). On a note related to incorrectly formalizing definitions, I think I read somewhere that Andrew W. Appel formalized a predicative type system and proved its soundness (in Coq) and even published a paper on it that got accepted, but only later realized that he wanted an impredicative type system when trying to integrate it into part of a larger research project. It's interesting how one can trip up on definitions despite being well-trained in formal methods.</p>
+
+<a name="189470497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Collinear%20in%20incidence%20geometry/near/189470497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/45407Collinearinincidencegeometry.html#189470497">Patrick Massot (Mar 02 2020 at 08:09)</a>:</h4>
+<p>I have a question for Julien. I one hour, I'll be teaching my geometry class for future school teachers. I'll "prove" that every simple polygon can be triangulated without adding interior vertices (and then deduce the formula for the sum of angles of polygons). Each time I've explained this since I started formalized math I feel guilty (thinking I would have a very hard time formalizing this proof). Is this formalized in GeoCoq?</p>
+
+<a name="189471066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Collinear%20in%20incidence%20geometry/near/189471066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/45407Collinearinincidencegeometry.html#189471066">Julien Narboux (Mar 02 2020 at 08:22)</a>:</h4>
+<p>Patrick, no it is not formalized in GeoCoq. I think, Harrison has formalized the fact that simple polygon can be triangulated without adding interior vertices in HOL light for the proof of Pick's theorem. We worked on Pick's theorem in Coq a long time ago with a student but we never finished the formalization.</p>
+
+<a name="189471146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Collinear%20in%20incidence%20geometry/near/189471146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/45407Collinearinincidencegeometry.html#189471146">Julien Narboux (Mar 02 2020 at 08:23)</a>:</h4>
+<p>Moreover, it is funny because the proof that the sum of angles of a triangle is 180° is one of the examples I give to explain that proofs given in high-school and in textbooks, often "read facts from the figure". See <a href="https://dpt-info.u-strasbg.fr/~narboux/slides/slides_toulouse.pdf" target="_blank" title="https://dpt-info.u-strasbg.fr/~narboux/slides/slides_toulouse.pdf">https://dpt-info.u-strasbg.fr/~narboux/slides/slides_toulouse.pdf</a> near slide 18.</p>
+
+<a name="189471441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Collinear%20in%20incidence%20geometry/near/189471441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/45407Collinearinincidencegeometry.html#189471441">Julien Narboux (Mar 02 2020 at 08:28)</a>:</h4>
+<p>The usual proof of the sum of angles of a just a triangle, is to consider the parallel line to one side going through the third vertex. And then, from the fact that we have alternate angles, we can conclude that the sum is 180°. But doing it formally requires some work , I wrote a short (unpublished) note about this a few years ago: <a href="https://www.overleaf.com/read/xxzrndcfycfy" target="_blank" title="https://www.overleaf.com/read/xxzrndcfycfy">https://www.overleaf.com/read/xxzrndcfycfy</a></p>
+
+<a name="189489539"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Collinear%20in%20incidence%20geometry/near/189489539" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/45407Collinearinincidencegeometry.html#189489539">Patrick Massot (Mar 02 2020 at 13:16)</a>:</h4>
+<p>I know the triangle case is already based on pure cheating. I learned that from Arsac's book a long time ago.</p>
+
+<a name="189489668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Collinear%20in%20incidence%20geometry/near/189489668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/45407Collinearinincidencegeometry.html#189489668">Patrick Massot (Mar 02 2020 at 13:18)</a>:</h4>
+<p>Your Toulouse slides are really nice. On Page 63 you can add "Orsay (Lean)" next to Nijmegen and Nice.</p>
+
 
 {% endraw %}
 

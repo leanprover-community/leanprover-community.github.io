@@ -247,6 +247,31 @@ If you insert <code>#where</code> in a file, Lean will print a message explainin
 <p>(This is joint work with a student Lucas Allen at the ANU.)</p>
 <p>Bug reports, or suggestions for improvements in its behaviour, very welcome. There's still a lot of low-hanging fruit in this direction.</p>
 
+<a name="189647055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%27s%20new%20in%20mathlib/near/189647055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80721Whatsnewinmathlib.html#189647055">Scott Morrison (Mar 03 2020 at 23:46)</a>:</h4>
+<p><code>interval_cases</code> has landed in mathlib. It's good for situations where you know <code>n &lt; 3</code>, and just want to be given the cases <code>n = 0</code>, <code>n=1</code>, and <code>n=2</code> to deal with separately.</p>
+<p>Just call it as <code>interval_cases n</code>, and it will automatically look for appropriate bounds.</p>
+
+<a name="189647077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%27s%20new%20in%20mathlib/near/189647077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80721Whatsnewinmathlib.html#189647077">Scott Morrison (Mar 03 2020 at 23:47)</a>:</h4>
+<p>It currently works with a variable in <code>nat</code>, <code>int</code>, or <code>pnat</code>: it's not so hard to add support for others, so please let me know if there are specific other types that would be useful to you.</p>
+
+<a name="189651001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%27s%20new%20in%20mathlib/near/189651001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80721Whatsnewinmathlib.html#189651001">Mario Carneiro (Mar 04 2020 at 00:54)</a>:</h4>
+<p>is this the evolution of <code>fin_cases</code>?</p>
+
+<a name="189658477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%27s%20new%20in%20mathlib/near/189658477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80721Whatsnewinmathlib.html#189658477">Scott Morrison (Mar 04 2020 at 03:47)</a>:</h4>
+<p>Yes, under the hood it is just assembling the pieces into a new hypotheses <code>n \mem set.Ico a b</code>, and then calling <code>fin_cases</code> on that.</p>
+
+<a name="189658554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%27s%20new%20in%20mathlib/near/189658554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80721Whatsnewinmathlib.html#189658554">Scott Morrison (Mar 04 2020 at 03:49)</a>:</h4>
+<p>So as long as there is a <code>fintype (set.Ico a b)</code> instance available for a type, this has a chance of working. It needs some lattice-type instances in order to combine multiple bounds if they appear, and to automatically find lower bounds for e.g. nat.</p>
+
+<a name="189658561"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%27s%20new%20in%20mathlib/near/189658561" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80721Whatsnewinmathlib.html#189658561">Scott Morrison (Mar 04 2020 at 03:49)</a>:</h4>
+<p><code>fin_cases</code> is still there, as before.</p>
+
 
 {% endraw %}
 

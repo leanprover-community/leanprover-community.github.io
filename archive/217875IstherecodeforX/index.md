@@ -11,7 +11,7 @@ permalink: archive/217875IstherecodeforX/index.html
 
 * [Sorted set](27550Sortedset.html) (2 messages, latest: Mar 01 2020 at 10:06)
 
-* [If there is an inverse, it's unique?](91560Ifthereisaninverseitsunique.html) (24 messages, latest: Feb 26 2020 at 11:30)
+* [If there is an inverse, it's unique?](91560Ifthereisaninverseitsunique.html) (2 messages, latest: Feb 26 2020 at 11:30)
 
 * [distance preserving maps](24386distancepreservingmaps.html) (12 messages, latest: Feb 24 2020 at 19:48)
 

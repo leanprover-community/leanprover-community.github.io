@@ -22,22 +22,22 @@ permalink: archive/113488general/00598typeclassesfordatastructures.html
 <a name="175694177"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclasses%20for%20data%20structures/near/175694177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00598typeclassesfordatastructures.html#175694177">Scott Morrison (Sep 14 2019 at 10:25)</a>:</h4>
 <p>My API might look something like:</p>
-<div class="codehilite"><pre><span></span>class priority_queue_ops (α Q : Type u) [decidable_linear_order α] :=
-(size : Q → ℕ)
-(insert : α → Q → Q)
-(peek : Π (q : Q), 0 &lt; size q → α)
-(pull : Π (q : Q), 0 &lt; size q → (α × Q))
+<div class="codehilite"><pre><span></span>class priority_queue_ops (Q : Π (α : Type u) [decidable_linear_order α], Type u) :=
+(size   : Π {α : Type u} [decidable_linear_order α], Q α → ℕ)
+(insert : Π {α : Type u} [decidable_linear_order α], α → Q α → Q α)
+(peek   : Π {α : Type u} [decidable_linear_order α], Π (q : Q α), 0 &lt; size q → α)
+(pull   : Π {α : Type u} [decidable_linear_order α], Π (q : Q α), 0 &lt; size q → (α × Q α))
 
-class priority_queue (α Q : Type u) [decidable_linear_order α] extends priority_queue_ops α Q :=
-(peek_eq_pull : ∀ (q : Q) (h : 0 &lt; size q), peek q h = (pull q h).1)
-(insert_size : ∀ (q : Q) (a : α), size (insert a q) = size q + 1)
-(pull_size : ∀ (q : Q) (h : 0 &lt; size q), size (pull q h).2 = size q - 1)
-(count : α → Q → ℕ)
-(pull_min : ∀ (q : Q) (h : 0 &lt; size q) (a : α) (w : 0 &lt; count a (pull q h).2), (pull q h).1 ≤ a)
-(count_insert : ∀ (a b : α) (q : Q), count a (insert b q) = count a q + (if a = b then 1 else 0))
-(count_pull : ∀ (a : α) (q : Q) (h : 0 &lt; size q), count a (pull q h).2 = count a q - (if a = (pull q h).1 then 1 else 0))
+class priority_queue (Q : Π (α : Type u) [decidable_linear_order α], Type u) extends priority_queue_ops Q :=
+(peek_eq_pull : ∀ {α : Type u} [decidable_linear_order α] (q : Q α) (h : 0 &lt; size q), peek q h = (pull q h).1)
+(insert_size  : ∀ {α : Type u} [decidable_linear_order α] (q : Q α) (a : α), size (insert a q) = size q + 1)
+(pull_size    : ∀ {α : Type u} [decidable_linear_order α] (q : Q α) (h : 0 &lt; size q), size (pull q h).2 = size q - 1)
+(count        : Π {α : Type u} [decidable_linear_order α], α → Q α → ℕ)
+(pull_min     : ∀ {α : Type u} [decidable_linear_order α] (q : Q α) (h : 0 &lt; size q) (a : α) (w : 0 &lt; count a (pull q h).2), (pull q h).1 ≤ a)
+(count_insert : ∀ {α : Type u} [decidable_linear_order α] (a b : α) (q : Q α), count a (insert b q) = count a q + (if a = b then 1 else 0))
+(count_pull   : ∀ {α : Type u} [decidable_linear_order α] (a : α) (q : Q α) (h : 0 &lt; size q), count a (pull q h).2 = count a q - (if a = (pull q h).1 then 1 else 0))
 
-instance (α : Type u) [decidable_linear_order α] : priority_queue α (Σ&#39; L : list α, L.sorted (≤)) := ...
+instance sorted_list_priority_queue : priority_queue (λ α _, by exactI (Σ&#39; L : list α, L.sorted (≤))) := ...
 </pre></div>
 
 <a name="175694220"></a>
@@ -102,7 +102,7 @@ instance (α : Type u) [decidable_linear_order α] : priority_queue α (Σ&#39; 
 
 <a name="175701673"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclasses%20for%20data%20structures/near/175701673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00598typeclassesfordatastructures.html#175701673">Jason Rute (Sep 14 2019 at 13:32)</a>:</h4>
-<p>(I know this is now beside the point, but) I think it is possible to satisfy your contact in a few paradoxical ways.  First an ordered list  where size is one minus the length of the list should satisfy it I think.</p>
+<p>(I know this is now beside the point, but) I think it is possible to satisfy your contract in a few paradoxical ways.  First an ordered list  where size is one minus the length of the list should satisfy it I think.</p>
 
 
 {% endraw %}

@@ -505,8 +505,28 @@ h2 : ∀ (x : ℕ), p x
 
 <a name="176670625"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176670625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176670625">Alexandre Rademaker (Sep 26 2019 at 15:56)</a>:</h4>
-<p>Hi <span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> , nice I learned one more thing! The <code>apply_instance</code> tactic seems to use the previous definition of <code>nat</code> as non empty right? Trying it with the type <code>α</code> didn't work. In other words, it is not a replacement of <code>[hne : nonempty α]</code> in the lemma declaration. </p>
-<p>Sorry for so many questions. I am just trying to understand what is going on.</p>
+<p>Hi <span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> , nice I learned one more thing! The <code>apply_instance</code> tactic seems to use the previous definition of <code>nat</code> as non empty right? Trying it with the type <code>α</code> didn't work. </p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">((</span><span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">p</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">q</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)))</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">q</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+ <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+ <span class="n">cases</span> <span class="n">h</span> <span class="k">with</span> <span class="n">h1</span> <span class="n">h2</span><span class="o">,</span>
+ <span class="k">have</span> <span class="n">h3</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">p</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">),</span> <span class="k">assume</span> <span class="n">a</span><span class="o">,</span> <span class="k">from</span> <span class="n">h2</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">),</span>
+ <span class="k">have</span> <span class="n">h4</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">q</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">),</span> <span class="k">from</span> <span class="o">(</span><span class="n">h1</span> <span class="n">h3</span><span class="o">),</span>
+
+ <span class="k">have</span> <span class="n">hne</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">α</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span><span class="o">,</span> <span class="n">cases</span> <span class="n">hne</span> <span class="k">with</span> <span class="n">a</span><span class="o">,</span>
+ <span class="n">existsi</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">),</span> <span class="n">exact</span> <span class="o">(</span><span class="n">h4</span> <span class="n">a</span><span class="o">),</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>causes the error:</p>
+<div class="codehilite"><pre><span></span>tactic.mk_instance failed to generate instance for
+  nonempty α
+</pre></div>
+
+
+<p>In other words, the line <code>have hne : nonempty α := by apply_instance, cases hne with a,</code> is not a replacement of <code>[hne : nonempty α]</code> in the lemma declaration.  Sorry for so many questions. I am just trying to understand what is going on.</p>
 
 <a name="176670693"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176670693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176670693">Alexandre Rademaker (Sep 26 2019 at 15:57)</a>:</h4>
@@ -685,7 +705,7 @@ h2 : ∀ (x : ℕ), p x
 
 <a name="176846767"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176846767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176846767">Alexandre Rademaker (Sep 28 2019 at 23:45)</a>:</h4>
-<p>Thank you <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> ! <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> , is there any alternative to the classical mathlib tactic? I am tryin to avoid introduce mathlib before get things more clear.</p>
+<p>Thank you <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> ! <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> , is there any alternative to the classical mathlib tactic? I am trying to avoid introduce mathlib before get things more clear.</p>
 
 <a name="176846810"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176846810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176846810">Mario Carneiro (Sep 28 2019 at 23:46)</a>:</h4>

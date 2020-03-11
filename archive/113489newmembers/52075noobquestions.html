@@ -1154,7 +1154,7 @@ For a more concrete example which is close to what I'm doing, say I define a lis
 <a name="159866654"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159866654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159866654">drocta (Mar 03 2019 at 21:57)</a>:</h4>
 <p>I am trying to say something about free objects, using an existing definition of concrete categories in mathlib.<br>
-I couldn't find an existing definition in mathlib for free objects, so I was going to define them myself.<br>
+I couldn't find an existing definition in mathlib for free objects (edit: really, I just need to define free objects over a set or type with one element), so I was going to define them myself.<br>
 I have mathlib installed using leanpkg, and it looks like because I have lean version 3.4.1 installed, leanpkg used the branch with that name from the mathlib repository.<br>
 However, I notice that the master branch and the 3.4.1 branch have the definition of concrete categories in different places.<br>
 Should I go ahead and use the version which is defined in the 3.4.1 branch, and is in the category.lean file, or ought I somehow use the version in the concrete_category.lean version currently in the master branch?</p>
@@ -1169,7 +1169,8 @@ Should I go ahead and use the version which is defined in the 3.4.1 branch, and 
 
 <a name="159870797"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159870797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159870797">drocta (Mar 03 2019 at 23:56)</a>:</h4>
-<p>thank you</p>
+<p>thank you<br>
+(edit 7:33 : that worked for me)</p>
 
 <a name="159876903"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/159876903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#159876903">drocta (Mar 04 2019 at 02:48)</a>:</h4>
@@ -1854,7 +1855,8 @@ And if I don't want to force two variables to be both for example <code>Type 2</
 </pre></div>
 
 
-<p>Can you spot the difference? :) (it's the order of arguments). To me this seems like an eqn_compiler bug</p>
+<p>Can you spot the difference? :) (it's the order of arguments). To me this seems like an eqn_compiler bug<br>
+And indeed this stupid-simple fix works on my actual code :D</p>
 
 <a name="162947094"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/162947094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#162947094">Wojciech Nawrocki (Apr 09 2019 at 20:30)</a>:</h4>
@@ -4314,7 +4316,7 @@ h : prod.lex has_lt.lt has_lt.lt (y, z) (y + 3, z + 3)
 <a name="168776998"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168776998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168776998">Adrian Chu (Jun 23 2019 at 03:59)</a>:</h4>
 <p>I am trying to prove the following variant of Bazout lemma:</p>
-<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">baz</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">a</span><span class="bp">*</span><span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">b</span><span class="bp">*</span><span class="n">y</span> <span class="o">:=</span>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">baz</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span><span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">coprime</span> <span class="n">a</span> <span class="n">b</span><span class="o">):</span> <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">a</span><span class="bp">*</span><span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">b</span><span class="bp">*</span><span class="n">y</span> <span class="o">:=</span>
 <span class="n">sorry</span>
 </pre></div>
 
@@ -4564,24 +4566,18 @@ h : prod.lex has_lt.lt has_lt.lt (y, z) (y + 3, z + 3)
   <span class="n">existsi</span> <span class="n">nat_abs</span> <span class="n">y</span><span class="o">,</span>
   <span class="n">apply</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_inj</span><span class="o">,</span>
   <span class="k">calc</span>
-    <span class="o">(</span><span class="n">a</span><span class="bp">*</span><span class="o">(</span><span class="n">nat_abs</span> <span class="n">x</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">*</span><span class="o">(</span><span class="n">nat_abs</span> <span class="n">x</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span>
-      <span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">hx</span>
-      <span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">*</span><span class="o">(</span><span class="bp">-</span><span class="n">nat</span><span class="bp">.</span><span class="n">gcd_a</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">*</span><span class="n">k</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span>
-      <span class="bp">...</span> <span class="bp">=</span> <span class="bp">-</span> <span class="n">a</span><span class="bp">*</span><span class="n">nat</span><span class="bp">.</span><span class="n">gcd_a</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">+</span> <span class="n">a</span><span class="bp">*</span><span class="n">b</span><span class="bp">*</span><span class="n">k</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">mul_add</span><span class="o">,</span> <span class="n">mul_assoc</span><span class="o">,</span> <span class="n">add_assoc</span><span class="o">]</span>
-      <span class="bp">...</span> <span class="bp">=</span> <span class="bp">-</span> <span class="n">a</span><span class="bp">*</span><span class="n">nat</span><span class="bp">.</span><span class="n">gcd_a</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="err">↑</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">a</span><span class="bp">*</span><span class="n">b</span><span class="bp">*</span><span class="n">k</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span>
-      <span class="bp">...</span> <span class="bp">=</span> <span class="bp">-</span> <span class="n">a</span><span class="bp">*</span><span class="n">nat</span><span class="bp">.</span><span class="n">gcd_a</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">nat</span><span class="bp">.</span><span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">a</span><span class="bp">*</span><span class="n">b</span><span class="bp">*</span><span class="n">k</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">h</span>
+    <span class="o">(</span><span class="n">a</span><span class="bp">*</span><span class="o">(</span><span class="n">nat_abs</span> <span class="n">x</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">hx</span><span class="bp">.</span><span class="n">symm</span><span class="o">]</span>
+      <span class="bp">...</span> <span class="bp">=</span> <span class="bp">-</span> <span class="n">a</span><span class="bp">*</span><span class="n">nat</span><span class="bp">.</span><span class="n">gcd_a</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">nat</span><span class="bp">.</span><span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">a</span><span class="bp">*</span><span class="n">b</span><span class="bp">*</span><span class="n">k</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">mul_add</span><span class="o">,</span> <span class="n">mul_assoc</span><span class="o">,</span> <span class="n">add_assoc</span><span class="o">,</span> <span class="n">h</span><span class="o">]</span>
       <span class="bp">...</span> <span class="bp">=</span> <span class="bp">-</span> <span class="n">a</span><span class="bp">*</span><span class="n">nat</span><span class="bp">.</span><span class="n">gcd_a</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">a</span><span class="bp">*</span><span class="n">nat</span><span class="bp">.</span><span class="n">gcd_a</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">*</span><span class="n">nat</span><span class="bp">.</span><span class="n">gcd_b</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">a</span><span class="bp">*</span><span class="n">b</span><span class="bp">*</span><span class="n">k</span> <span class="o">:</span> <span class="k">by</span> <span class="n">sorry</span>
       <span class="bp">...</span> <span class="bp">=</span> <span class="n">b</span><span class="bp">*</span><span class="n">nat</span><span class="bp">.</span><span class="n">gcd_b</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">*</span><span class="n">a</span><span class="bp">*</span><span class="n">k</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">add_neg_self</span><span class="o">,</span> <span class="n">mul_comm</span><span class="o">]</span>
-      <span class="bp">...</span> <span class="bp">=</span> <span class="n">b</span><span class="bp">*</span><span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">gcd_b</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">a</span><span class="bp">*</span><span class="n">k</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">mul_add</span><span class="o">,</span> <span class="n">mul_assoc</span><span class="o">]</span>
-      <span class="bp">...</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">y</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span>
-      <span class="bp">...</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">*</span> <span class="o">(</span><span class="n">nat_abs</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">hy</span>
-      <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="o">(</span><span class="n">nat_abs</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span>
+      <span class="bp">...</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">y</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">mul_add</span><span class="o">,</span> <span class="n">mul_assoc</span><span class="o">]</span>
+      <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="o">(</span><span class="n">nat_abs</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">hy</span><span class="bp">.</span><span class="n">symm</span><span class="o">]</span>
 <span class="kn">end</span>
 </pre></div>
 
 <a name="168822703"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168822703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168822703">Adrian Chu (Jun 24 2019 at 05:06)</a>:</h4>
-<p>I have trouble to finish the last sorry (on the 7th last line)</p>
+<p>I have trouble to finish the last sorry (on the 5th last line)</p>
 
 <a name="168822720"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168822720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168822720">Adrian Chu (Jun 24 2019 at 05:07)</a>:</h4>
@@ -5405,7 +5401,7 @@ but is expected to have type
   <span class="k">show</span> <span class="bp">_</span> <span class="bp">=</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">),</span>
   <span class="n">rw</span> <span class="err">←</span><span class="n">abs_gcd_eq_int_gcd</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="n">b</span><span class="o">,</span>
   <span class="n">convert</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat_nat_abs_eq_of_nonneg</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span>
-  <span class="c1">-- ⊢ gcd ↑a ↑b ≥ 0</span>
+  <span class="c1">-- ⊢ euclidean_domain.gcd ↑a ↑b ≥ 0</span>
   <span class="n">apply</span> <span class="n">useful2</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">int</span><span class="bp">.</span><span class="n">of_nat_nonneg</span> <span class="bp">_</span><span class="o">,</span>
 <span class="kn">end</span>
 </pre></div>
@@ -5569,7 +5565,7 @@ A : ℕ,
 
 <a name="168950242"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168950242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168950242">Adrian Chu (Jun 25 2019 at 15:50)</a>:</h4>
-<p>I'm not able to figure out the first sorry (with 20 characters only). i know we need to use <code>gcd_eq_gcd_ab</code></p>
+<p>I'm not able to figure out the first sorry (with 20 characters only). i know we need to use <code>gcd_eq_gcd_ab</code> <span class="user-mention" data-user-id="110031">@Patrick Massot</span></p>
 
 <a name="168950598"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168950598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168950598">Adrian Chu (Jun 25 2019 at 15:55)</a>:</h4>
@@ -5853,10 +5849,10 @@ A : ℕ,
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169006690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169006690">Adrian Chu (Jun 26 2019 at 07:37)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
 
-<span class="kn">theorem</span> <span class="n">mythm</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hr</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">r</span> <span class="n">i</span><span class="o">)</span>
+<span class="kn">theorem</span> <span class="n">mythm</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hr</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="mi">1</span> <span class="bp">≤</span> <span class="n">r</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">≤</span> <span class="n">s</span><span class="o">)</span>
   <span class="o">(</span><span class="n">coprime</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">coprime</span> <span class="o">(</span><span class="n">r</span> <span class="n">i</span><span class="o">)</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span>
   <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
-  <span class="o">(</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">x</span> <span class="n">i</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="mi">0</span> <span class="bp">≤</span> <span class="n">y</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span> <span class="n">i</span><span class="o">)</span><span class="err">^</span><span class="o">(</span><span class="n">r</span> <span class="n">i</span><span class="o">))</span> <span class="bp">=</span> <span class="n">y</span><span class="err">^</span><span class="n">s</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="o">(</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="mi">1</span> <span class="bp">≤</span> <span class="n">x</span> <span class="n">i</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="mi">0</span> <span class="bp">≤</span> <span class="n">y</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span> <span class="n">i</span><span class="o">)</span><span class="err">^</span><span class="o">(</span><span class="n">r</span> <span class="n">i</span><span class="o">))</span> <span class="bp">=</span> <span class="n">y</span><span class="err">^</span><span class="n">s</span><span class="o">)</span> <span class="o">:=</span>
 <span class="n">sorry</span>
 </pre></div>
 
@@ -9156,7 +9152,7 @@ My second question has to do with sets in Lean. In our discrete math class obvio
 </pre></div>
 
 
-<p>The switch from finite sets to inductive types will be painful. I constantly tell the student that a term of type <code>fin 9</code> is a pair consisting of a number and a proof, and eventually this will dawn on them.</p>
+<p>The switch from finite sets to types will be painful. I constantly tell the student that a term of type <code>fin 9</code> is a pair consisting of a number and a proof, and eventually this will dawn on them.</p>
 
 <a name="185652123"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/185652123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#185652123">Spencer Peters (Jan 14 2020 at 23:17)</a>:</h4>
@@ -9203,7 +9199,7 @@ They are all here if anyone is interested :) <br>
 <p>Thank you! I'll dig into these. Much appreciated :)</p>
 
 <a name="185833027"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/185833027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#185833027">Anton Felix Lorenzen (Jan 16 2020 at 16:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/185833027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#185833027">Anton Lorenzen (Jan 16 2020 at 16:40)</a>:</h4>
 <p>Do you know how I can tell Lean that for c, d, e in Prop and c decidable, "c -&gt; d" and "c -&gt; ite c d e" are the same type? Or lift a value of the first type to a value of the second? (This is my first post here, so I hope this is the right place to ask that)</p>
 
 <a name="185835672"></a>
@@ -9213,7 +9209,7 @@ They are all here if anyone is interested :) <br>
 </pre></div>
 
 <a name="185836033"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/185836033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#185836033">Anton Felix Lorenzen (Jan 16 2020 at 17:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/185836033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#185836033">Anton Lorenzen (Jan 16 2020 at 17:08)</a>:</h4>
 <p><span class="user-mention" data-user-id="127148">@Joe</span> Yes</p>
 
 <a name="185836376"></a>
@@ -9230,7 +9226,7 @@ They are all here if anyone is interested :) <br>
 </pre></div>
 
 <a name="185837091"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/185837091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#185837091">Anton Felix Lorenzen (Jan 16 2020 at 17:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/185837091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#185837091">Anton Lorenzen (Jan 16 2020 at 17:18)</a>:</h4>
 <p>Got this with <code>if_pos</code>. Looks good!</p>
 <div class="codehilite"><pre><span></span>lemma foo (c d e : Prop) [decidable c] : (c → d) ↔ (c → if c then d else e) :=
   iff.intro (λ f c, eq.mp (eq.symm (if_pos c)) (f c)) (λ f c, eq.mp (if_pos c) (f c))
@@ -10041,7 +10037,7 @@ example (x : ℤ) : x^2 = x * x := by simp
 <p>Ok, maybe I was exagerating. Your explanation is more exciting anyway <span aria-label="slight smile" class="emoji emoji-1f642" role="img" title="slight smile">:slight_smile:</span></p>
 
 <a name="187543560"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187543560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187543560">Matt Earnshaw (Feb 06 2020 at 12:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187543560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187543560">Matt E (Feb 06 2020 at 12:31)</a>:</h4>
 <p>is there a way to "unfold" what a tactic is doing in a particular case? for example I can prove <code>x \in {x}</code> by <code>finish</code> (which is how <code>set.mem_singleton</code> is defined), but I'm a bit curious what's going on there</p>
 
 <a name="187544991"></a>
@@ -10069,7 +10065,7 @@ example (x : ℤ) : x^2 = x * x := by simp
 <p>Works great, thank you!</p>
 
 <a name="187551798"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187551798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187551798">Matt Earnshaw (Feb 06 2020 at 14:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187551798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187551798">Matt E (Feb 06 2020 at 14:25)</a>:</h4>
 <p><span class="user-mention" data-user-id="259186">@Daniel Keys</span> <span class="user-mention" data-user-id="259240">@Cerek Hillen (he) (W2'20)</span> perfect thanks</p>
 
 <a name="187558256"></a>
@@ -10623,7 +10619,7 @@ In exercise 1 at the end of chapter 3, as one of the many "other properties", th
 </pre></div>
 
 <a name="187911569"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187911569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187911569">Matt Earnshaw (Feb 11 2020 at 13:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187911569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187911569">Matt E (Feb 11 2020 at 13:38)</a>:</h4>
 <p>I have a function producing <code>Prop</code>s a bit like the following (but in general there can be any finite number of disjuncts)</p>
 <div class="codehilite"><pre><span></span>def g (p q r s : ℕ) : Prop := (p = q) ∨ (r = s) ∨ false
 </pre></div>
@@ -10636,7 +10632,7 @@ In exercise 1 at the end of chapter 3, as one of the many "other properties", th
 <p>Depending on the exact structure of your function, Lean can probably infer that it's decidable already. You need either <code>@[reducible] def g</code> or <code>@[derive decidable] def g</code> (the latter will only work with mathlib). Then you can <code>#eval to_bool (g 1 2 3 4)</code>.</p>
 
 <a name="187914523"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187914523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187914523">Matt Earnshaw (Feb 11 2020 at 14:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/187914523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#187914523">Matt E (Feb 11 2020 at 14:14)</a>:</h4>
 <p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> thanks. actually my Prop was set membership, so I had to stipulate <code>finset</code> but then this works. at some point I will need to understand better what is going on with this "attribute" business but for now...</p>
 
 <a name="187915498"></a>
@@ -10644,7 +10640,7 @@ In exercise 1 at the end of chapter 3, as one of the many "other properties", th
 <p>By default, Lean won't unfold the definition of <code>g</code> to see if it's decidable, because this gets very expensive. <code>@[reducible]</code> says "go ahead and unfold this anyway," and <code>@[derive decidable]</code> says "unfold this temporarily to check that it's decidable, and add an instance to the environment."</p>
 
 <a name="188015695"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188015695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188015695">Matt Earnshaw (Feb 12 2020 at 14:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188015695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188015695">Matt E (Feb 12 2020 at 14:44)</a>:</h4>
 <p>is there an isomorphism <code>Type x Type</code> with <code>Type</code>? I have two endofunctors on <code>Type</code> and it would seem nice to be able to see their product as again being (via isomorphism) another such endofunctor. perhaps this is nonsense</p>
 
 <a name="188016004"></a>
@@ -10656,7 +10652,7 @@ In exercise 1 at the end of chapter 3, as one of the many "other properties", th
 <p>Disclaimer: I'm not an expert in category theory.</p>
 
 <a name="188016819"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188016819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188016819">Matt Earnshaw (Feb 12 2020 at 14:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188016819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188016819">Matt E (Feb 12 2020 at 14:56)</a>:</h4>
 <p>well, it can just be the diagonal, but if we say <code>def f : Type ⥤ (Type × Type) := λx, x × x</code>, it does not typecheck</p>
 
 <a name="188017533"></a>
@@ -10676,7 +10672,7 @@ In exercise 1 at the end of chapter 3, as one of the many "other properties", th
 <p>You can define functors <code>diag : Type ⥤ (Type × Type)</code> and <code>prod : (Type × Type) ⥤ Type</code>. What relations on these functors do you want?</p>
 
 <a name="188018925"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188018925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188018925">Matt Earnshaw (Feb 12 2020 at 15:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188018925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188018925">Matt E (Feb 12 2020 at 15:18)</a>:</h4>
 <p>yes, excuse me. I mean, I think clearly this does not work in the naive sense. So let me rephrase, why should <code>N x N : Type</code>? I think you can say something like type formation applies to types of a particular universe and not on that universe itself. But this typechecking example seems to indicate that we shoil be able to view any product of types as itself a Type. Am I hopelessly confused?</p>
 
 <a name="188019371"></a>
@@ -10684,7 +10680,7 @@ In exercise 1 at the end of chapter 3, as one of the many "other properties", th
 <p>You can view <code>(×)</code> as a function <code>prod : Type → Type → Type</code>, Thus, <code>ℕ : Type</code> implies <code>prod ℕ ℕ : Type</code>, just like <code>mul : ℕ → ℕ → ℕ</code> implies that <code>mul 1 2 : ℕ</code>. Does that help?</p>
 
 <a name="188020635"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188020635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188020635">Matt Earnshaw (Feb 12 2020 at 15:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188020635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188020635">Matt E (Feb 12 2020 at 15:35)</a>:</h4>
 <p>thanks. I'm not sure now how this "thought" got off the ground at all, will press on</p>
 
 <a name="188026877"></a>
@@ -11230,7 +11226,9 @@ Is it really this hard? Why doesn't <code>dec_trivial</code> work here (it worke
 <a name="188953287"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/188953287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#188953287">Alex J. Best (Feb 24 2020 at 18:42)</a>:</h4>
 <p>You could define a little helper function like this:</p>
-<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">inhabited</span> <span class="n">α</span><span class="o">]</span>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span><span class="bp">.</span><span class="n">defs</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">inhabited</span> <span class="n">α</span><span class="o">]</span>
 
 <span class="n">def</span> <span class="n">list_of_list_to_mat</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
 <span class="bp">λ</span> <span class="n">ll</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="o">(</span><span class="n">ll</span><span class="bp">.</span><span class="n">inth</span> <span class="o">(</span><span class="err">↑</span><span class="n">x</span><span class="o">))</span><span class="bp">.</span><span class="n">inth</span> <span class="o">(</span><span class="err">↑</span><span class="n">y</span><span class="o">)</span>
@@ -11325,6 +11323,637 @@ code like this gets highlighted
 <a name="189408384"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189408384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189408384">Bryan Gin-ge Chen (Feb 29 2020 at 22:39)</a>:</h4>
 <p>Haha, you could bind both ctrl+S and ctrl+Q to <code>lean.infoView.toggleUpdating</code> for that old-school feel if you really wanted.</p>
+
+<a name="189460298"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189460298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189460298">Bobby Lindsey (Mar 02 2020 at 03:21)</a>:</h4>
+<p>Hey guys, hoping I can contribute to this project. But having a hard time figuring out where (other than "issues" list in GitHub). E.g. this page of list of theorems that have been proved lead to 404 errors: <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/theories.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/theories.md">https://github.com/leanprover-community/mathlib/blob/master/docs/theories.md</a>. Recommendations for good places to start?</p>
+
+<a name="189460398"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189460398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189460398">Yury G. Kudryashov (Mar 02 2020 at 03:24)</a>:</h4>
+<p>Which area of mathematics do you prefer?</p>
+
+<a name="189460403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189460403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189460403">Yury G. Kudryashov (Mar 02 2020 at 03:24)</a>:</h4>
+<p>There are plenty of holes in any area.</p>
+
+<a name="189460420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189460420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189460420">Yury G. Kudryashov (Mar 02 2020 at 03:26)</a>:</h4>
+<p>By "holes" I mean "not yet formalized definitions/theorems".</p>
+
+<a name="189460459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189460459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189460459">Bobby Lindsey (Mar 02 2020 at 03:26)</a>:</h4>
+<p>Probability, stats, or linear algebra. But not sure if all undergrad theorems/lemma have been implemented already... I only have a M.S. in math. I'd be happy to attempt to contribute elsewhere though if need be</p>
+
+<a name="189460641"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189460641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189460641">Yury G. Kudryashov (Mar 02 2020 at 03:32)</a>:</h4>
+<p>We have some linear algebra and measure theory. There should be quite a few holes in our linear algebra library but I notice them only when I need them, so let's wait for someone who has better understanding of the current state of <code>src/linear_algebra</code>.</p>
+
+<a name="189460717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189460717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189460717">Mario Carneiro (Mar 02 2020 at 03:35)</a>:</h4>
+<p>Not sure what's up with the broken links. <span class="user-mention" data-user-id="110032">@Reid Barton</span> you were the last one to touch this file, where have the <code>functions.md</code> et al files gone?</p>
+
+<a name="189460763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189460763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189460763">Reid Barton (Mar 02 2020 at 03:36)</a>:</h4>
+<p>The topology one isn't broken <span aria-label="upside down" class="emoji emoji-1f643" role="img" title="upside down">:upside_down:</span></p>
+
+<a name="189460765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189460765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189460765">Bobby Lindsey (Mar 02 2020 at 03:36)</a>:</h4>
+<p>Other than cross referencing linear algebra theorems/lemmas with those mentioned in textbooks, is there any better way to enumerate these holes? Better yet, an index of what has been proven would go a long way... perhaps this documentation is something I can help out with as well</p>
+
+<a name="189460780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189460780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189460780">Mario Carneiro (Mar 02 2020 at 03:37)</a>:</h4>
+<p>The enumeration of holes is difficult because the set of holes in mathlib is cofinite</p>
+
+<a name="189460886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189460886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189460886">Mario Carneiro (Mar 02 2020 at 03:40)</a>:</h4>
+<p>As for what has been proven, there are of course the source files themselves, which take some getting used to but are not an unreasonable way to familiarize yourself with the contents. But the <a href="https://leanprover-community.github.io/mathlib_docs/linear_algebra/basic.html" target="_blank" title="https://leanprover-community.github.io/mathlib_docs/linear_algebra/basic.html">mathlib docs</a> are a less intimidating view on the source files</p>
+
+<a name="189460942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189460942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189460942">Yury G. Kudryashov (Mar 02 2020 at 03:42)</a>:</h4>
+<p>If you see a theorem that has a name, then adding a docstring with this name is definitely worth a PR.</p>
+
+<a name="189461125"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189461125" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189461125">Bobby Lindsey (Mar 02 2020 at 03:48)</a>:</h4>
+<p>Thanks <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> , I'll check those docs out. And thanks <span class="user-mention" data-user-id="214703">@Yury G. Kudryashov</span> for the suggestion. I'll start combing through the linear_algebra module and cross-referencing its contents with theorems/lemmas in some textbooks I have, and try to fill in any documentation and missing theorems/lemmas along the way. Thanks guys :)</p>
+
+<a name="189511138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189511138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189511138">Sam Stites (Mar 02 2020 at 16:59)</a>:</h4>
+<p>I'm trying to say the following lemma: Let A be a ring with the following properties: for all rings R, there exists a unique homomorphism A → R. Then A ≅ ℤ.</p>
+<p>I have a few attempts, but could someone help me formulate this? My first attempt looks like the following (It's basically how I would do this in haskell):</p>
+<div class="codehilite"><pre><span></span>import algebra.ring
+import logic.unique
+
+variables (A : ring Type) (R : ring Type)
+lemma lemma03_v0 : A → (∀ R → unique (A → R)) → (A ≅ ℤ) := sorry
+</pre></div>
+
+
+<p>Things that I think are wrong: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∀</mi></mrow><annotation encoding="application/x-tex">\forall</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord">∀</span></span></span></span> should be <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∃</mi></mrow><annotation encoding="application/x-tex">\exists</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord">∃</span></span></span></span> and maybe there should only be one  → before A ≅ ℤ? I still get a lot of unexpected tokens or invalid expressions, though.</p>
+
+<a name="189511383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189511383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189511383">Anne Baanen (Mar 02 2020 at 17:01)</a>:</h4>
+<p>To say "A is a ring", you can write <code>variables (A : Type*) [ring A]</code>. In Haskell terms, <code>[ring A]</code> can be interpreted as the typeclass constraint <code>(Ring A) =&gt; ...</code></p>
+
+<a name="189511584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189511584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189511584">Anne Baanen (Mar 02 2020 at 17:03)</a>:</h4>
+<p>The next error is <code>∀ R → ...</code>: the <code>→</code> should be a <code>,</code> (something that I still mess up continually, coming from Agda)</p>
+
+<a name="189511929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189511929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189511929">Reid Barton (Mar 02 2020 at 17:07)</a>:</h4>
+<p>This kind of thing is easier using the bundled/category theory approach</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">category</span><span class="bp">.</span><span class="n">CommRing</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">Ring</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">})</span>
+<span class="kn">lemma</span> <span class="n">lemma03_v0</span> <span class="o">:</span> <span class="o">(</span><span class="bp">Π</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="n">Ring</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}),</span> <span class="n">unique</span> <span class="o">(</span><span class="n">A</span> <span class="err">⟶</span> <span class="n">R</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="n">A</span> <span class="err">≅</span> <span class="n">Ring</span><span class="bp">.</span><span class="n">of</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+
+<a name="189512999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189512999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189512999">Reid Barton (Mar 02 2020 at 17:17)</a>:</h4>
+<p>otherwise, I think it's</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">A</span><span class="o">]</span>
+<span class="kn">lemma</span> <span class="n">lemma03_v0</span> <span class="o">:</span> <span class="o">(</span><span class="bp">Π</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">],</span> <span class="k">by</span> <span class="n">exactI</span> <span class="n">unique</span> <span class="o">(</span><span class="n">ring_hom</span> <span class="n">A</span> <span class="n">R</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="n">A</span> <span class="err">≃</span><span class="bp">+*</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+
+<a name="189513225"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189513225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189513225">Patrick Massot (Mar 02 2020 at 17:18)</a>:</h4>
+<p>Why would you use the Pi notation instead of forall here? I know they are the same to Lean, I'm asking about psychology</p>
+
+<a name="189513296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189513296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189513296">Reid Barton (Mar 02 2020 at 17:19)</a>:</h4>
+<p>Well, <code>unique</code> is data. Really it should be <code>def</code> too, and not <code>lemma</code></p>
+
+<a name="189513392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189513392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189513392">Patrick Massot (Mar 02 2020 at 17:20)</a>:</h4>
+<p>Oh. I would have never suspected <code>unique</code> to be data.</p>
+
+<a name="189513458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189513458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189513458">Johan Commelin (Mar 02 2020 at 17:20)</a>:</h4>
+<p>Yeah, I should have called it <code>cunique</code>...</p>
+
+<a name="189513488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189513488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189513488">Johan Commelin (Mar 02 2020 at 17:21)</a>:</h4>
+<p>But now you have a chance to PR <code>discrete_unique</code>. Doesn't that make you feel happy?</p>
+
+<a name="189513724"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189513724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189513724">Sam Stites (Mar 02 2020 at 17:23)</a>:</h4>
+<p>cool!  thanks for all of this -- I'm running into some weird compilation stuff right now (probably need to clean up this experiment-repo).</p>
+
+<a name="189513824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189513824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189513824">Patrick Massot (Mar 02 2020 at 17:24)</a>:</h4>
+<p>The version without category stuff doesn't read nice, but I guess this is fair: the lemma is really category theoretic in flavor.</p>
+
+<a name="189513857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189513857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189513857">Patrick Massot (Mar 02 2020 at 17:24)</a>:</h4>
+<p>Sam, do you understand what <code>exactI</code> is doing?</p>
+
+<a name="189514110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189514110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189514110">Sam Stites (Mar 02 2020 at 17:27)</a>:</h4>
+<p>not at the moment (I was going to wait for matlib to rebuild before examining in depth). I am also wondering what the longer arrow is in your unique (A --&gt; R) is.</p>
+
+<a name="189514150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189514150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189514150">Patrick Massot (Mar 02 2020 at 17:27)</a>:</h4>
+<p>Why are you rebuilding mathlib?</p>
+
+<a name="189514227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189514227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189514227">Patrick Massot (Mar 02 2020 at 17:28)</a>:</h4>
+<p>Reid's longer arrow is Hom in the category library.</p>
+
+<a name="189514228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189514228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189514228">Sam Stites (Mar 02 2020 at 17:28)</a>:</h4>
+<p>Oh! it's a tactic? I was about to start reading that chapter next.</p>
+
+<a name="189514247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189514247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189514247">Sam Stites (Mar 02 2020 at 17:28)</a>:</h4>
+<p>cool</p>
+
+<a name="189514267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189514267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189514267">Patrick Massot (Mar 02 2020 at 17:28)</a>:</h4>
+<p>Yes, <code>exactI</code> is a tactic, and not the easiest one to understand.</p>
+
+<a name="189514314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189514314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189514314">Patrick Massot (Mar 02 2020 at 17:28)</a>:</h4>
+<p>But first we need to make sure you don't need to rebuild mathlib. Why do you think you need to do that?</p>
+
+<a name="189514564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189514564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189514564">Sam Stites (Mar 02 2020 at 17:31)</a>:</h4>
+<p>ehh... it's a little silly -- I am using emacs for the first time (normally I use vim) and flycheck seems to be maxing out on errors. I think it's a caching issue since I was trying to use some certigrad files.</p>
+
+<a name="189514650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189514650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189514650">Patrick Massot (Mar 02 2020 at 17:31)</a>:</h4>
+<p>Lean is already difficult, don't add emacs difficulty on top of it if you are not a emacs user.</p>
+
+<a name="189514735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189514735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189514735">Patrick Massot (Mar 02 2020 at 17:32)</a>:</h4>
+<p>Why don't you use VScode?</p>
+
+<a name="189514751"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189514751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189514751">Sam Stites (Mar 02 2020 at 17:32)</a>:</h4>
+<p>ah, it's working out fine, actually! that's not my main concern : )</p>
+
+<a name="189514811"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189514811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189514811">Sam Stites (Mar 02 2020 at 17:33)</a>:</h4>
+<p>Yeah, so I've cleaned up the repo and rebuilt with <code>leanpkg build</code> -- the flycheck seems to be working perfectly fine now</p>
+
+<a name="189514936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189514936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189514936">Sam Stites (Mar 02 2020 at 17:34)</a>:</h4>
+<p>I'm at the point in my programming career where it's quite painful not to use vim and emacs has good support for this via spacemacs. It's self-inflicted pain, no need to worry about it!</p>
+
+<a name="189514965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189514965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189514965">Johan Commelin (Mar 02 2020 at 17:34)</a>:</h4>
+<p>VScode has a vim plugin</p>
+
+<a name="189514976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189514976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189514976">Johan Commelin (Mar 02 2020 at 17:34)</a>:</h4>
+<p>Both Patrick and I use it.</p>
+
+<a name="189515031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189515031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189515031">Johan Commelin (Mar 02 2020 at 17:35)</a>:</h4>
+<p>It doesn't have <em>all</em> the goodies of regular vim, but it's quite close.</p>
+
+<a name="189515064"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189515064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189515064">Sam Stites (Mar 02 2020 at 17:35)</a>:</h4>
+<p>okay! I'll check it out as well</p>
+
+<a name="189515143"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189515143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189515143">Patrick Massot (Mar 02 2020 at 17:36)</a>:</h4>
+<p>I still strongly advise you to use VScode. But let's go back to <code>exactI</code> because I have very little time before leaving my office (Paris time-zone). So the issue is <code>ring_hom A R</code> expects to find a (semi)-ring structure on <code>A</code> and <code>R</code> by type class search. The one on <code>A</code> will be found without problem, because it's there from the beginning. The one on <code>R</code> is mentioned too late in the game to be picked up if you don't ask Lean to search. That's what <code>exactI</code> is doing (asking Lean).</p>
+
+<a name="189515288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189515288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189515288">Patrick Massot (Mar 02 2020 at 17:37)</a>:</h4>
+<p>If you want to avoid that <code>exactI</code> you'll need to tell Lean to forget about how this semi-ring structure was meant to be found, and provide it yourself. This would be:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">lemma03_v0&#39;</span> <span class="o">:</span>
+<span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span> <span class="n">hR</span> <span class="o">:</span> <span class="n">ring</span> <span class="n">R</span><span class="o">),</span> <span class="bp">∃!</span> <span class="n">φ</span> <span class="o">:</span> <span class="bp">@</span><span class="n">ring_hom</span> <span class="n">A</span> <span class="n">R</span> <span class="bp">_</span> <span class="n">hR</span><span class="bp">.</span><span class="n">to_semiring</span><span class="o">,</span> <span class="n">true</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">A</span> <span class="err">≃</span><span class="bp">+*</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+
+
+<p>which also has a silly way of saying there exists a unique <code>φ</code> with type <code>@ring_hom A R _ hR.to_semiring</code>.</p>
+
+<a name="189515340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189515340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189515340">Patrick Massot (Mar 02 2020 at 17:38)</a>:</h4>
+<p>Now I need to go. Have fun!</p>
+
+<a name="189515397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189515397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189515397">Sam Stites (Mar 02 2020 at 17:38)</a>:</h4>
+<p>thank you!</p>
+
+<a name="189518730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189518730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189518730">Kevin Buzzard (Mar 02 2020 at 18:10)</a>:</h4>
+<p>If you move the universal hypothesis before the colon, you don't need all this exactI stuff:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">algebra</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">A</span><span class="o">]</span>
+
+<span class="kn">lemma</span> <span class="n">lemma03_v0&#39;</span> <span class="o">(</span><span class="n">huniv</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">],</span> <span class="bp">∃!</span> <span class="n">φ</span> <span class="o">:</span> <span class="n">ring_hom</span> <span class="n">A</span> <span class="n">R</span><span class="o">,</span> <span class="n">true</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">A</span> <span class="err">≃</span><span class="bp">+*</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+
+<a name="189520450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189520450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189520450">Kevin Buzzard (Mar 02 2020 at 18:29)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">algebra</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">A</span><span class="o">]</span>
+
+<span class="n">noncomputable</span> <span class="kn">lemma</span> <span class="n">lemma03_v0&#39;</span> <span class="o">(</span><span class="n">huniv</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">],</span> <span class="bp">∃!</span> <span class="n">φ</span> <span class="o">:</span> <span class="n">ring_hom</span> <span class="n">A</span> <span class="n">R</span><span class="o">,</span> <span class="n">true</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">A</span> <span class="err">≃</span><span class="bp">+*</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="n">huniv</span> <span class="bp">ℤ</span><span class="o">))</span><span class="bp">.</span><span class="n">to_fun</span><span class="o">,</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">sorry</span><span class="o">,</span> <span class="c1">-- what&#39;s the map from ℤ to an arbitrary ring?</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">map_mul&#39;</span> <span class="o">:=</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="n">huniv</span> <span class="bp">ℤ</span><span class="o">))</span><span class="bp">.</span><span class="n">map_mul</span><span class="o">,</span>
+  <span class="n">map_add&#39;</span> <span class="o">:=</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="n">huniv</span> <span class="bp">ℤ</span><span class="o">))</span><span class="bp">.</span><span class="n">map_add</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>Once I figure out the name of the canonical map from the integers to an arbitrary ring, I think we're nearly done (the ring hom A -&gt; A must be the identity by uniqueness).</p>
+
+<a name="189520662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189520662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189520662">Kevin Buzzard (Mar 02 2020 at 18:31)</a>:</h4>
+<p>Oh -- I hadn't seen the <code>unique</code> trick, that makes it cleaner.</p>
+
+<a name="189520688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189520688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189520688">Reid Barton (Mar 02 2020 at 18:31)</a>:</h4>
+<p>I hadn't realized the "left of the colon" would work that way in this context, thanks.</p>
+
+<a name="189520789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189520789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189520789">Kevin Buzzard (Mar 02 2020 at 18:32)</a>:</h4>
+<p>Funnily enough, I realised this myself just the other day when I was trying to formalise the assertion that if <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>×</mo><mi>Y</mi><mo>→</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X\times Y\to Y</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span></span></span></span> was always closed then <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span></span></span> was compact.</p>
+
+<a name="189520886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189520886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189520886">Kevin Buzzard (Mar 02 2020 at 18:33)</a>:</h4>
+<p>Another thing I noticed was that if I restricted to <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span></span></span></span> in the same universe as <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span></span></span> then the result was actually stronger not weaker -- universe monomorphism FTW. The same is going on in here (possibly unintentionally)</p>
+
+<a name="189521038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189521038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189521038">Kevin Buzzard (Mar 02 2020 at 18:34)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">algebra</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">A</span><span class="o">]</span>
+
+<span class="kn">lemma</span> <span class="n">lemma03_v0&#39;</span> <span class="o">(</span><span class="n">huniv</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">],</span> <span class="n">unique</span> <span class="o">(</span><span class="n">ring_hom</span> <span class="n">A</span> <span class="n">R</span><span class="o">))</span> <span class="o">:</span> <span class="o">(</span><span class="n">A</span> <span class="err">≃</span><span class="bp">+*</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="o">(</span><span class="n">huniv</span> <span class="bp">ℤ</span><span class="o">)</span><span class="bp">.</span><span class="n">default</span><span class="bp">.</span><span class="n">to_fun</span><span class="o">,</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">sorry</span><span class="o">,</span> <span class="c1">-- what&#39;s the map from ℤ to an arbitrary ring?</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">map_mul&#39;</span> <span class="o">:=</span> <span class="o">(</span><span class="n">huniv</span> <span class="bp">ℤ</span><span class="o">)</span><span class="bp">.</span><span class="n">default</span><span class="bp">.</span><span class="n">map_mul</span><span class="o">,</span>
+  <span class="n">map_add&#39;</span> <span class="o">:=</span> <span class="o">(</span><span class="n">huniv</span> <span class="bp">ℤ</span><span class="o">)</span><span class="bp">.</span><span class="n">default</span><span class="bp">.</span><span class="n">map_add</span> <span class="o">}</span>
+</pre></div>
+
+<a name="189521070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189521070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189521070">Yury G. Kudryashov (Mar 02 2020 at 18:34)</a>:</h4>
+<p>I don't think that it's stronger because you can't say "for all <code>Y</code> from all universes"</p>
+
+<a name="189521122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189521122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189521122">Kevin Buzzard (Mar 02 2020 at 18:35)</a>:</h4>
+<p>Yes but this is an input, not an output, so if I know it for all Y in all universes, I can deduce it for all Y in the same universe as X, which is all I need.</p>
+
+<a name="189521133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189521133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189521133">Yury G. Kudryashov (Mar 02 2020 at 18:35)</a>:</h4>
+<p>So, if you use <code>(X : Type u) (Y : Type v)</code>, then it says "if for all <code>Y</code> from some universe <code>v</code> (possibly not <code>u</code>), then ..."</p>
+
+<a name="189521298"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189521298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189521298">Kevin Buzzard (Mar 02 2020 at 18:37)</a>:</h4>
+<p>Yes.</p>
+
+<a name="189521335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189521335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189521335">Yury G. Kudryashov (Mar 02 2020 at 18:37)</a>:</h4>
+<p>And this does not immediately imply "for all <code>Y : Type u</code>"</p>
+
+<a name="189521347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189521347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189521347">Kevin Buzzard (Mar 02 2020 at 18:37)</a>:</h4>
+<p>Yes.</p>
+
+<a name="189521402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189521402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189521402">Kevin Buzzard (Mar 02 2020 at 18:38)</a>:</h4>
+<p>But u might equal v</p>
+
+<a name="189521419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189521419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189521419">Kevin Buzzard (Mar 02 2020 at 18:38)</a>:</h4>
+<p>so in this case, I win (and I agree that usually I lose)</p>
+
+<a name="189521461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189521461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189521461">Yury G. Kudryashov (Mar 02 2020 at 18:38)</a>:</h4>
+<p>So, the result with <code>(X : Type u) (Y : Type v)</code> is stronger.</p>
+
+<a name="189521471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189521471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189521471">Kevin Buzzard (Mar 02 2020 at 18:38)</a>:</h4>
+<p>No</p>
+
+<a name="189521485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189521485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189521485">Kevin Buzzard (Mar 02 2020 at 18:39)</a>:</h4>
+<p>because I am demanding more from my input and only getting the same for my output</p>
+
+<a name="189521597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189521597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189521597">Kevin Buzzard (Mar 02 2020 at 18:40)</a>:</h4>
+<p>The point is exactly that this is not <code>def f (X : Type u) (Y : Type v) ...</code></p>
+
+<a name="189521736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189521736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189521736">Kevin Buzzard (Mar 02 2020 at 18:41)</a>:</h4>
+<p>I'm saying "assume that something is true for all Y in the same universe as X. Then P(X)", which is a better thing to do than saying "assume that something is true for all Y in all universes, including X's and others. Then P(X)"</p>
+
+<a name="189521739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189521739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189521739">Yury G. Kudryashov (Mar 02 2020 at 18:41)</a>:</h4>
+<p>Try this:</p>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">v</span> <span class="n">u</span>
+<span class="kn">constant</span> <span class="n">P</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="kn">axiom</span> <span class="n">L1</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="n">X</span> <span class="n">Y</span>
+<span class="kn">lemma</span> <span class="n">L2</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="n">X</span> <span class="n">Y</span> <span class="o">:=</span> <span class="n">L1</span> <span class="n">X</span> <span class="n">Y</span>
+</pre></div>
+
+<a name="189521755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189521755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189521755">Kevin Buzzard (Mar 02 2020 at 18:42)</a>:</h4>
+<p>Your examples are not a good mirror of what is going on here.</p>
+
+<a name="189521831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189521831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189521831">Kevin Buzzard (Mar 02 2020 at 18:42)</a>:</h4>
+<p>Read the statement of the lemma.</p>
+
+<a name="189521883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189521883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189521883">Yury G. Kudryashov (Mar 02 2020 at 18:43)</a>:</h4>
+<p>OK, which lemma are we talking about?</p>
+
+<a name="189521928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189521928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189521928">Kevin Buzzard (Mar 02 2020 at 18:43)</a>:</h4>
+<p><code>lemma lemma03_v0' (A : Type) [ring A]  (huniv : ∀ (R : Type) [ring R], unique (ring_hom A R)) : (A ≃+* ℤ) := ...</code></p>
+
+<a name="189522000"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189522000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189522000">Kevin Buzzard (Mar 02 2020 at 18:44)</a>:</h4>
+<p>If I let <code>R : Type u</code> then <code>huniv</code> is harder to verify, but the result is still the same.</p>
+
+<a name="189522076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189522076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189522076">Kevin Buzzard (Mar 02 2020 at 18:45)</a>:</h4>
+<p>So it seems to be a weird case where less polymorphism is better. I noticed this last week when I was proving that if <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>×</mo><mi>Y</mi><mo>→</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X\times Y\to Y</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span></span></span></span> is closed for all <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span></span></span></span> then <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span></span></span> is compact.</p>
+
+<a name="189522090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189522090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189522090">Yury G. Kudryashov (Mar 02 2020 at 18:45)</a>:</h4>
+<p>Ah, it should be</p>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">v</span> <span class="n">u</span>
+<span class="kn">constant</span> <span class="n">p</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="kn">constant</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="kn">axiom</span> <span class="n">L1</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">,</span> <span class="n">p</span> <span class="n">X</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:</span> <span class="n">q</span> <span class="n">X</span>
+<span class="kn">lemma</span> <span class="n">L2</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">,</span> <span class="n">p</span> <span class="n">X</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:</span> <span class="n">q</span> <span class="n">X</span> <span class="o">:=</span> <span class="n">L1</span> <span class="n">X</span> <span class="n">H</span>
+</pre></div>
+
+<a name="189522261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189522261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189522261">Kevin Buzzard (Mar 02 2020 at 18:46)</a>:</h4>
+<p>I was trying to prove this for all <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span></span></span></span> in all universes, and then I ran into some issue with universes, so then I thought "crap I am going to have to restrict to <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span></span></span></span> in the same universe as <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span></span></span>" and then I thought "oh wait, that's a <em>stronger</em> result!"</p>
+
+<a name="189522372"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189522372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189522372">Kevin Buzzard (Mar 02 2020 at 18:47)</a>:</h4>
+<p>wait -- so you're still saying I'm wrong? :-/</p>
+
+<a name="189522952"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189522952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189522952">Yury G. Kudryashov (Mar 02 2020 at 18:53)</a>:</h4>
+<p>Actually <code>L1</code> is not one axiom but a series of axioms enumerated by <code>v</code> and <code>u</code>.</p>
+
+<a name="189523336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189523336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189523336">Kevin Buzzard (Mar 02 2020 at 18:56)</a>:</h4>
+<p>I completely see that your code compiles. However what is wrong with the argument that says the following: I have X and I want to prove <code>q X</code>. Now <code>X</code> is in a universe <code>u</code>. Would I rather prove <code>H X Y</code> for all <code>Y</code> in all universes <code>v</code>, or would I rather prove <code>H X Y</code> in the easier case that <code>Y</code> is in universe <code>u</code> as well? Clearly I would rather stick to <code>Y</code> in universe <code>u</code>, so <code>L2</code> is a more useful lemma than <code>L1</code> because it applies more widely.</p>
+
+<a name="189523452"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189523452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189523452">Reid Barton (Mar 02 2020 at 18:57)</a>:</h4>
+<p>Kevin you're comparing <code>L2</code> with a hypothetical <code>L2'</code> that can't be expressed in Lean, but would look something like <code>(X : Type u) (H : forall v (Y : Type v), p X Y) -&gt; q X</code></p>
+
+<a name="189523489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189523489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189523489">Reid Barton (Mar 02 2020 at 18:58)</a>:</h4>
+<p>And you're correct that <code>L2</code> is stronger than <code>L2'</code></p>
+
+<a name="189523547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189523547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189523547">Johan Commelin (Mar 02 2020 at 18:58)</a>:</h4>
+<p>Apparently in Lean it's not <code>forall v</code> but <code>exists v</code></p>
+
+<a name="189523553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189523553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189523553">Kevin Buzzard (Mar 02 2020 at 18:58)</a>:</h4>
+<p>L1?</p>
+
+<a name="189523562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189523562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189523562">Reid Barton (Mar 02 2020 at 18:58)</a>:</h4>
+<p>Yury's <code>L1</code> becomes <code>L2</code> when you specialize it to <code>v = u</code></p>
+
+<a name="189523564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189523564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189523564">Johan Commelin (Mar 02 2020 at 18:58)</a>:</h4>
+<p>Unless you require <code>v = u</code></p>
+
+<a name="189523623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189523623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189523623">Reid Barton (Mar 02 2020 at 18:59)</a>:</h4>
+<p>Probably <code>L1</code> is false in this setting if you allow <code>v &lt; u</code>. You would only be able to show compactness for <code>v</code>-sized filters, roughly</p>
+
+<a name="189523810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189523810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189523810">Reid Barton (Mar 02 2020 at 19:00)</a>:</h4>
+<p>The other thing going on here is that in the implication in the other direction, you can state it for all <code>v</code> (because now <code>v</code> is at the outer level) and it is true.</p>
+
+<a name="189523858"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189523858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189523858">Reid Barton (Mar 02 2020 at 19:01)</a>:</h4>
+<p>So for <code>X : Top.{u}</code>, you have "<code>X</code> is <code>u</code>-universally closed" =&gt; "<code>X</code> is compact" =&gt; "for any <code>v</code>, <code>X</code> is <code>v</code>-universally closed"</p>
+
+<a name="189523868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189523868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189523868">Reid Barton (Mar 02 2020 at 19:01)</a>:</h4>
+<p>and in that sense you've proved a stronger statement than you expected</p>
+
+<a name="189524363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189524363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189524363">Kevin Buzzard (Mar 02 2020 at 19:06)</a>:</h4>
+<p>No wonder I was having trouble proving it in the fully polymorphic setting! I wanted to let Y be this <code>option X</code> with a filter topology.</p>
+
+<a name="189524615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189524615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189524615">Reid Barton (Mar 02 2020 at 19:08)</a>:</h4>
+<p>To take a slightly silly extreme case, it's clearly not true if you only allow <code>Y</code> to range over <code>Prop</code>/subsingletons</p>
+
+<a name="189524699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189524699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189524699">Kevin Buzzard (Mar 02 2020 at 19:09)</a>:</h4>
+<p>That was surprisingly interesting/insightful. So back to the original question -- if we make the construction fully universe polymorphic then it seems to me that things get a bit more tedious because I have to start using <code>ulift</code> to get the map from <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="double-struck">Z</mi></mrow><annotation encoding="application/x-tex">\mathbb{Z}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68889em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbb">Z</span></span></span></span></span> to <code>A</code></p>
+
+<a name="189524992"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189524992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189524992">Reid Barton (Mar 02 2020 at 19:12)</a>:</h4>
+<p>Yeah, I stuck to <code>Type 0</code> in order to avoid this <code>ulift</code> stuff. In the "category theory" version it will appear already in the statement, but even in the unbundled version it will appear in the proof.</p>
+
+<a name="189527214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189527214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189527214">Kevin Buzzard (Mar 02 2020 at 19:31)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">algebra</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group_power</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">A</span><span class="o">]</span>
+
+<span class="n">open_locale</span> <span class="n">add_group</span> <span class="c1">-- breakthrough</span>
+
+<span class="kn">lemma</span> <span class="n">lemma03_v0&#39;</span> <span class="o">(</span><span class="n">huniv</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">],</span> <span class="n">unique</span> <span class="o">(</span><span class="n">ring_hom</span> <span class="n">A</span> <span class="n">R</span><span class="o">))</span> <span class="o">:</span> <span class="o">(</span><span class="n">A</span> <span class="err">≃</span><span class="bp">+*</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="o">(</span><span class="n">huniv</span> <span class="bp">ℤ</span><span class="o">)</span><span class="bp">.</span><span class="n">default</span><span class="bp">.</span><span class="n">to_fun</span><span class="o">,</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">n</span> <span class="err">•</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">map_mul&#39;</span> <span class="o">:=</span> <span class="o">(</span><span class="n">huniv</span> <span class="bp">ℤ</span><span class="o">)</span><span class="bp">.</span><span class="n">default</span><span class="bp">.</span><span class="n">map_mul</span><span class="o">,</span>
+  <span class="n">map_add&#39;</span> <span class="o">:=</span> <span class="o">(</span><span class="n">huniv</span> <span class="bp">ℤ</span><span class="o">)</span><span class="bp">.</span><span class="n">default</span><span class="bp">.</span><span class="n">map_add</span> <span class="o">}</span>
+</pre></div>
+
+<a name="189527980"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189527980" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189527980">Kevin Buzzard (Mar 02 2020 at 19:39)</a>:</h4>
+<p>Is this not a thing in mathlib?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">of_int</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">A</span><span class="o">]</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→+*</span> <span class="n">A</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">n</span> <span class="err">•</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">map_one&#39;</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span><span class="o">,</span>
+  <span class="n">map_mul&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="k">show</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="err">•</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span><span class="bp">=</span> <span class="n">x</span> <span class="err">•</span> <span class="mi">1</span> <span class="bp">*</span> <span class="o">(</span><span class="n">y</span> <span class="err">•</span> <span class="mi">1</span><span class="o">),</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">gsmul_eq_mul</span><span class="o">],</span>
+  <span class="n">map_zero&#39;</span> <span class="o">:=</span> <span class="n">zero_gsmul</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">map_add&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">add_gsmul</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">}</span>
+</pre></div>
+
+<a name="189537884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189537884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189537884">Mario Carneiro (Mar 02 2020 at 21:17)</a>:</h4>
+<p>That's <code>int.cast</code></p>
+
+<a name="189537902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189537902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189537902">Mario Carneiro (Mar 02 2020 at 21:17)</a>:</h4>
+<p>not sure if it's been bundled yet</p>
+
+<a name="189537986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189537986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189537986">Kevin Buzzard (Mar 02 2020 at 21:18)</a>:</h4>
+<p>Thanks. I was pretty sure I'd seen it before.</p>
+
+<a name="189538029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189538029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189538029">Mario Carneiro (Mar 02 2020 at 21:18)</a>:</h4>
+<p>also known as the coercion from int to a ring</p>
+
+<a name="189542182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189542182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189542182">Kevin Buzzard (Mar 02 2020 at 22:00)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">algebra</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group_power</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">A</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">of_int</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→+*</span> <span class="n">A</span> <span class="o">:=</span> <span class="n">ring_hom</span><span class="bp">.</span><span class="n">of</span> <span class="n">coe</span>
+
+<span class="kn">theorem</span> <span class="n">eq_of_int</span> <span class="o">(</span><span class="n">φ</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→+*</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">φ</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">int</span><span class="bp">.</span><span class="n">induction_on&#39;</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">φ</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span> <span class="n">a</span> <span class="mi">0</span>
+   <span class="n">φ</span><span class="bp">.</span><span class="n">map_zero</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">k</span> <span class="bp">_</span> <span class="n">hk</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">φ</span><span class="bp">.</span><span class="n">map_add</span><span class="o">,</span> <span class="n">hk</span><span class="o">,</span> <span class="n">φ</span><span class="bp">.</span><span class="n">map_one</span><span class="o">])</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">k</span> <span class="bp">_</span> <span class="n">hk</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">φ</span><span class="bp">.</span><span class="n">map_sub</span><span class="o">,</span> <span class="n">hk</span><span class="o">,</span> <span class="n">φ</span><span class="bp">.</span><span class="n">map_one</span><span class="o">])</span>
+
+<span class="kn">lemma</span> <span class="n">eq_int_of_unique_hom</span> <span class="o">(</span><span class="n">huniv</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">],</span> <span class="n">unique</span> <span class="o">(</span><span class="n">ring_hom</span> <span class="n">A</span> <span class="n">R</span><span class="o">))</span> <span class="o">:</span> <span class="o">(</span><span class="n">A</span> <span class="err">≃</span><span class="bp">+*</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="o">(</span><span class="n">huniv</span> <span class="bp">ℤ</span><span class="o">)</span><span class="bp">.</span><span class="n">default</span><span class="o">,</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="n">of_int</span> <span class="n">A</span><span class="o">,</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">intro</span> <span class="n">x</span><span class="o">,</span>
+    <span class="k">show</span> <span class="bp">_</span> <span class="bp">=</span> <span class="o">(</span><span class="n">ring_hom</span><span class="bp">.</span><span class="n">id</span> <span class="n">A</span><span class="o">)</span> <span class="n">x</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">h1</span> <span class="o">:=</span> <span class="o">(</span><span class="n">huniv</span> <span class="n">A</span><span class="o">)</span><span class="bp">.</span><span class="n">uniq</span> <span class="o">(</span><span class="n">ring_hom</span><span class="bp">.</span><span class="n">id</span> <span class="n">A</span><span class="o">),</span>
+    <span class="k">have</span> <span class="n">h2</span> <span class="o">:=</span> <span class="o">(</span><span class="n">huniv</span> <span class="n">A</span><span class="o">)</span><span class="bp">.</span><span class="n">uniq</span> <span class="o">((</span><span class="n">of_int</span> <span class="n">A</span><span class="o">)</span><span class="bp">.</span><span class="n">comp</span> <span class="o">(</span><span class="n">huniv</span> <span class="bp">ℤ</span><span class="o">)</span><span class="bp">.</span><span class="n">default</span><span class="o">),</span>
+    <span class="n">rw</span> <span class="err">←</span><span class="n">h1</span> <span class="n">at</span> <span class="n">h2</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="err">←</span><span class="n">h2</span><span class="o">,</span>
+    <span class="n">refl</span><span class="o">,</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">eq_of_int</span> <span class="o">((</span><span class="n">huniv</span> <span class="bp">ℤ</span><span class="o">)</span><span class="bp">.</span><span class="n">default</span><span class="bp">.</span><span class="n">comp</span> <span class="o">(</span><span class="n">of_int</span> <span class="n">A</span><span class="o">))</span> <span class="n">n</span><span class="o">,</span>
+  <span class="n">map_mul&#39;</span> <span class="o">:=</span> <span class="o">(</span><span class="n">huniv</span> <span class="bp">ℤ</span><span class="o">)</span><span class="bp">.</span><span class="n">default</span><span class="bp">.</span><span class="n">map_mul</span><span class="o">,</span>
+  <span class="n">map_add&#39;</span> <span class="o">:=</span> <span class="o">(</span><span class="n">huniv</span> <span class="bp">ℤ</span><span class="o">)</span><span class="bp">.</span><span class="n">default</span><span class="bp">.</span><span class="n">map_add</span> <span class="o">}</span>
+</pre></div>
+
+<a name="189542738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189542738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189542738">Kevin Buzzard (Mar 02 2020 at 22:05)</a>:</h4>
+<p>I hadn't found the coercion earlier because I didn't have the right import. Kind of annoying that I don't know how to say "hey Lean, I want a coercion from int to a ring, go find me one in mathlib". All I knew was that when I tried it, it didn't work.</p>
+
+<a name="189542889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189542889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189542889">Kevin Buzzard (Mar 02 2020 at 22:06)</a>:</h4>
+<p>I thought data.equiv.algebra would give me everything ringy, but it was in data.int.basic. I guess this just shows that I don't understand the import tree well enough. I would have guessed integers were more fundamental than ring stuff (probably because I learnt them earlier in my mathematical education)</p>
+
+<a name="189549948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189549948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189549948">Bobby Lindsey (Mar 02 2020 at 23:48)</a>:</h4>
+<p>How are we using Kolmogorov axioms for probability theorems? For example, what would lean code look like for P(empty set) = 0. Do we have to appeal to measury theory instead? Sorry, still trying to find my way around this project... but I'm trying to write all probability and stats theorems/lemmas in an undergrad textbook with lean.</p>
+
+<a name="189550091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189550091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189550091">Yury G. Kudryashov (Mar 02 2020 at 23:50)</a>:</h4>
+<p>As far as I understand, we don't plan to have a separate probability theory. Just deal with a measure space of total measure one.</p>
+
+<a name="189550227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189550227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189550227">Bobby Lindsey (Mar 02 2020 at 23:52)</a>:</h4>
+<p>Would anyone think it'd be useful? I know I would have loved to have something like this while going through probability theory as a student - if anything just to exercise proof-solving skills. But many students who take probability theory don't go on to take measure theory (unless they're math majors).</p>
+
+<a name="189550769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189550769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189550769">Bryan Gin-ge Chen (Mar 03 2020 at 00:00)</a>:</h4>
+<p>We're not currently suffering from an overabundance of expository Lean files (to say the least), so yes, I think it'd be very useful!</p>
+
+<a name="189550938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189550938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189550938">Bobby Lindsey (Mar 03 2020 at 00:03)</a>:</h4>
+<p><span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> :) any suggestions for where to put it in the mathlib project? Like maybe src/probability_theory? Or should expository stuff go somewhere else</p>
+
+<a name="189551029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189551029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189551029">Scott Morrison (Mar 03 2020 at 00:04)</a>:</h4>
+<p>Well... it's not exactly clear what place there is for purely "expository" stuff at all.</p>
+
+<a name="189551050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189551050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189551050">Scott Morrison (Mar 03 2020 at 00:05)</a>:</h4>
+<p>We do have the <code>docs/tutorial/</code> folder, which I think is a great place to show people how to do "standard" / "undergraduate" stuff using the highbrow API that Lean tends to provide.</p>
+
+<a name="189551314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189551314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189551314">Bobby Lindsey (Mar 03 2020 at 00:10)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> Cool, thanks for the suggestion. Now to figure out how to create all these axioms and whatnot...</p>
+
+<a name="189551548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189551548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189551548">Bryan Gin-ge Chen (Mar 03 2020 at 00:15)</a>:</h4>
+<p>It really depends what you end up formalizing. Stuff that will be useful for future developments shouldn't (only) be in <code>docs/tutorial</code> and should go in something like <code>src/probability_theory</code>. I wouldn't worry about it too much now though.</p>
+
+<a name="189553251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189553251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189553251">Bobby Lindsey (Mar 03 2020 at 00:50)</a>:</h4>
+<p>Sooo.. I might be out of my depth here. I'm trying to figure out how to define a sample space to start building Kolmogorov axioms but have no idea how to fit this into LEAN's type theory. I'm afraid I've bit off more than I can chew :( How did you experts bootstrap this learning curve?</p>
+
+<a name="189553690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189553690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189553690">Mario Carneiro (Mar 03 2020 at 00:56)</a>:</h4>
+<p>I think it might help to focus your question a bit more. What did you try and how did you get stuck?</p>
+
+<a name="189553811"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189553811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189553811">Mario Carneiro (Mar 03 2020 at 00:58)</a>:</h4>
+<p>Regarding probability theory, I think we have some things about <code>measure_space</code> and possibly <code>probability_space</code> if <span class="user-mention" data-user-id="116448">@Koundinya Vajjha</span> PR'd his stuff</p>
+
+<a name="189553927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189553927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189553927">Mario Carneiro (Mar 03 2020 at 01:00)</a>:</h4>
+<p>If you look at the definition of <code>outer_measure</code>, <code>measure</code> and <code>measure_space</code> you will get an idea how we do things like <code>P(empty set) = 0</code>. (hint: we write <code>P ∅ = 0</code>)</p>
+
+<a name="189556943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189556943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189556943">Scott Morrison (Mar 03 2020 at 02:03)</a>:</h4>
+<p>You might also tell us your background: have you tried formalising anything simpler yet? Have you played the natural numbers game, and/or read some of Theorem Proving in Lean?</p>
+
+<a name="189557835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189557835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189557835">Bobby Lindsey (Mar 03 2020 at 02:24)</a>:</h4>
+<p>Haven't formalized anything simple yet - currently working through the natural numbers game. Love it so far. I'm probably getting ahead of myself though which is why looking at formalizing Kolmogorov axioms seems so daunted to me atm :/.</p>
+
+<a name="189596844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189596844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189596844">Bobby Lindsey (Mar 03 2020 at 14:27)</a>:</h4>
+<p>How would I go about defining a probability space in LEAN? This would be some probability triple but what data type would a sample space belong to? I started trying to define the first axioms like <code>def prob_event_nonnegative (E: set ℝ) := { x : ℝ | x ≥ 0}</code> and <code>def prob_sample_space_is_one (Ω: ??) := </code> but I soon realized I don't have a probability space defined. Not sure if I'm on the right track or not, just trying to get to a point where I can start writing prob 101 theorems and solving them</p>
+
+<a name="189598308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189598308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189598308">Johan Commelin (Mar 03 2020 at 14:41)</a>:</h4>
+<p>I'm not a probability theorist, so I don't know the maths definitions. Is a probability space just a measure space such that the measure of the total space is 1?</p>
+
+<a name="189599052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189599052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189599052">Bobby Lindsey (Mar 03 2020 at 14:49)</a>:</h4>
+<p>Yeah, that's right. I'd like to define it separately so as to assume no knowledge of measure theory though, but having a hard time as to how it should be typed.</p>
+
+<a name="189599531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189599531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189599531">Reid Barton (Mar 03 2020 at 14:53)</a>:</h4>
+<p>Do you know about <code>structure</code>s in general?</p>
+
+<a name="189600415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189600415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189600415">Bobby Lindsey (Mar 03 2020 at 15:00)</a>:</h4>
+<p>I do not. Just found it in the docs though :)</p>
+
+<a name="189600475"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189600475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189600475">Reid Barton (Mar 03 2020 at 15:01)</a>:</h4>
+<p>If the definitions of measure space and probability space have 90% overlap, then someone interested in probability spaces cannot really have no knowledge of measure theory</p>
+
+<a name="189600728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189600728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189600728">Reid Barton (Mar 03 2020 at 15:03)</a>:</h4>
+<p>quite aside from the practical advantages of reusing the existing formalization (no reinvention of wheels, near-duplication of proofs, etc)</p>
+
+<a name="189601161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189601161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189601161">Reid Barton (Mar 03 2020 at 15:08)</a>:</h4>
+<p>Of course if your goal is to reinvent wheels and reformalize proofs for learning purposes, that's another matter</p>
+
+<a name="189601613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189601613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189601613">Bobby Lindsey (Mar 03 2020 at 15:13)</a>:</h4>
+<p>It's mostly for learning purposes. I'm taking the viewpoint of a student who takes probability theory, like an engineer, but does not go on to taking measure theory.</p>
+
+<a name="189603822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189603822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189603822">Reid Barton (Mar 03 2020 at 15:33)</a>:</h4>
+<p>There is "measure theory" and then there is the definition of a measure space. A student who missed the lecture on the axiom "the probability of the whole space is 1" knows the definition of a measure space. (Okay, maybe not quite since a measure can also take the value <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow><annotation encoding="application/x-tex">+\infty</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord">+</span><span class="mord">∞</span></span></span></span>.)</p>
+
+<a name="189605270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189605270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189605270">Arjun Pitchanathan (Mar 03 2020 at 15:50)</a>:</h4>
+<p>Maybe it would be interesting to formalize the proofs of the Markov and Chebyshev inequalities. As far as I can tell they don't exist in mathlib already.</p>
+
+<a name="189655940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/189655940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#189655940">Koundinya Vajjha (Mar 04 2020 at 02:47)</a>:</h4>
+<p>I have the Markov+Chebyshev inequalities proven in another repository. I really should PR them. Feel free to build off of these, in any case. </p>
+<p><a href="https://github.com/jtristan/stump-learnable/blob/21358ffd6746d838f76b6d1a275d361d5ea66125/src/lib/attributed/to_mathlib.lean#L154" target="_blank" title="https://github.com/jtristan/stump-learnable/blob/21358ffd6746d838f76b6d1a275d361d5ea66125/src/lib/attributed/to_mathlib.lean#L154">https://github.com/jtristan/stump-learnable/blob/21358ffd6746d838f76b6d1a275d361d5ea66125/src/lib/attributed/to_mathlib.lean#L154</a></p>
 
 
 {% endraw %}

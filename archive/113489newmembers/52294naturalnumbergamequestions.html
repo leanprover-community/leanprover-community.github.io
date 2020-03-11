@@ -38,7 +38,7 @@ permalink: archive/113489newmembers/52294naturalnumbergamequestions.html
 <a name="184299070"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/184299070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#184299070">Bryan Gin-ge Chen (Dec 27 2019 at 04:49)</a>:</h4>
 <ol>
-<li>You can do it using <code>by_cases hq : Q,</code> and <code>exfalso</code> (I guess that shows up in the next level though...)</li>
+<li>You can do it using <code>by_cases hq : Q,</code> and <code>exfalso</code> (I guess that shows up in the next level though...) (<strong>edit</strong>: and you can replace <code>exfalso</code> by either using the term <code>false.elim</code> or by using <code>cases H</code> on a hypothesis <code>H : false</code>.)</li>
 <li>I'm guessing Kevin was thinking of the line <code>import tactic.finish</code> in the source Lean file <a href="https://github.com/ImperialCollegeLondon/natural_number_game/blob/b83e7ebd56a82351e2fd8a187de543803074818b/src/game/world7/level8.lean" target="_blank" title="https://github.com/ImperialCollegeLondon/natural_number_game/blob/b83e7ebd56a82351e2fd8a187de543803074818b/src/game/world7/level8.lean">here</a> and that paragraph was a subtle hint for you to try the <code>finish</code> tactic. Unfortunately, the import isn't visible in the generated HTML...</li>
 </ol>
 
@@ -255,108 +255,6 @@ W : a * n + a = a * c + a → a * n = a * c<br>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189151261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189151261">Ethan Horsfall (Feb 26 2020 at 19:44)</a>:</h4>
 <p>thank you, that seems to have worked. the slightly weird thing is that it now just says 'no goals' instead of proof complete. viewing it as a function makes a lot of sense</p>
 
-<a name="189130994"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189130994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189130994">Ethan Horsfall (Feb 26 2020 at 16:31)</a>:</h4>
-<p>on the last level of advanced multiplication world, i have got it to the point where I have the hypothesis<br>
-c : mynat,<br>
-c_ih : ∀ (a : mynat), a ≠ 0 → ∀ (b : mynat), a * b = a * c → b = c, ###<br>
-a : mynat,<br>
-ha : a ≠ 0, ###<br>
-n : mynat,<br>
-g : a * n + a = a * c + a,<br>
-W : a * n + a = a * c + a → a * n = a * c<br>
-⊢ a * n = a * c → n = c  ###</p>
-<p>I have put ### by the remaining relevant propositions</p>
-<p>which should be very simple as if we only look at c_ih and ha, the goal is just a restatement of this. but i cannot work out how to introduce the right variables into c_ih or revert the goal correctly. The propositions in the middle muddle it up when I use revert</p>
-
-<a name="189134027"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134027">Kevin Buzzard (Feb 26 2020 at 17:05)</a>:</h4>
-<p>Does <code>exact c_ih a ha n</code> work?</p>
-
-<a name="189134144"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134144">Kevin Buzzard (Feb 26 2020 at 17:06)</a>:</h4>
-<p>You can think of <code>c_ih</code> as a function, which takes as input a natural number <code>a</code>, a proof that it's not zero, and a natural number <code>b</code>, and returns a proof that <code>ab=ac -&gt; b=c</code>.</p>
-
-<a name="189134839"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134839">Reid Barton (Feb 26 2020 at 17:12)</a>:</h4>
-<p>Also you should be able to <code>apply c_ih</code> and let Lean work out what additional arguments are needed.</p>
-
-<a name="189134909"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134909">Reid Barton (Feb 26 2020 at 17:13)</a>:</h4>
-<p>(either supplying them automatically or turning them into new goals)</p>
-
-<a name="189151261"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189151261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189151261">Ethan Horsfall (Feb 26 2020 at 19:44)</a>:</h4>
-<p>thank you, that seems to have worked. the slightly weird thing is that it now just says 'no goals' instead of proof complete. viewing it as a function makes a lot of sense</p>
-
-<a name="189130994"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189130994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189130994">Ethan Horsfall (Feb 26 2020 at 16:31)</a>:</h4>
-<p>on the last level of advanced multiplication world, i have got it to the point where I have the hypothesis<br>
-c : mynat,<br>
-c_ih : ∀ (a : mynat), a ≠ 0 → ∀ (b : mynat), a * b = a * c → b = c, ###<br>
-a : mynat,<br>
-ha : a ≠ 0, ###<br>
-n : mynat,<br>
-g : a * n + a = a * c + a,<br>
-W : a * n + a = a * c + a → a * n = a * c<br>
-⊢ a * n = a * c → n = c  ###</p>
-<p>I have put ### by the remaining relevant propositions</p>
-<p>which should be very simple as if we only look at c_ih and ha, the goal is just a restatement of this. but i cannot work out how to introduce the right variables into c_ih or revert the goal correctly. The propositions in the middle muddle it up when I use revert</p>
-
-<a name="189134027"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134027">Kevin Buzzard (Feb 26 2020 at 17:05)</a>:</h4>
-<p>Does <code>exact c_ih a ha n</code> work?</p>
-
-<a name="189134144"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134144">Kevin Buzzard (Feb 26 2020 at 17:06)</a>:</h4>
-<p>You can think of <code>c_ih</code> as a function, which takes as input a natural number <code>a</code>, a proof that it's not zero, and a natural number <code>b</code>, and returns a proof that <code>ab=ac -&gt; b=c</code>.</p>
-
-<a name="189134839"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134839">Reid Barton (Feb 26 2020 at 17:12)</a>:</h4>
-<p>Also you should be able to <code>apply c_ih</code> and let Lean work out what additional arguments are needed.</p>
-
-<a name="189134909"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134909">Reid Barton (Feb 26 2020 at 17:13)</a>:</h4>
-<p>(either supplying them automatically or turning them into new goals)</p>
-
-<a name="189151261"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189151261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189151261">Ethan Horsfall (Feb 26 2020 at 19:44)</a>:</h4>
-<p>thank you, that seems to have worked. the slightly weird thing is that it now just says 'no goals' instead of proof complete. viewing it as a function makes a lot of sense</p>
-
-<a name="189130994"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189130994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189130994">Ethan Horsfall (Feb 26 2020 at 16:31)</a>:</h4>
-<p>on the last level of advanced multiplication world, i have got it to the point where I have the hypothesis<br>
-c : mynat,<br>
-c_ih : ∀ (a : mynat), a ≠ 0 → ∀ (b : mynat), a * b = a * c → b = c, ###<br>
-a : mynat,<br>
-ha : a ≠ 0, ###<br>
-n : mynat,<br>
-g : a * n + a = a * c + a,<br>
-W : a * n + a = a * c + a → a * n = a * c<br>
-⊢ a * n = a * c → n = c  ###</p>
-<p>I have put ### by the remaining relevant propositions</p>
-<p>which should be very simple as if we only look at c_ih and ha, the goal is just a restatement of this. but i cannot work out how to introduce the right variables into c_ih or revert the goal correctly. The propositions in the middle muddle it up when I use revert</p>
-
-<a name="189134027"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134027">Kevin Buzzard (Feb 26 2020 at 17:05)</a>:</h4>
-<p>Does <code>exact c_ih a ha n</code> work?</p>
-
-<a name="189134144"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134144">Kevin Buzzard (Feb 26 2020 at 17:06)</a>:</h4>
-<p>You can think of <code>c_ih</code> as a function, which takes as input a natural number <code>a</code>, a proof that it's not zero, and a natural number <code>b</code>, and returns a proof that <code>ab=ac -&gt; b=c</code>.</p>
-
-<a name="189134839"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134839">Reid Barton (Feb 26 2020 at 17:12)</a>:</h4>
-<p>Also you should be able to <code>apply c_ih</code> and let Lean work out what additional arguments are needed.</p>
-
-<a name="189134909"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189134909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189134909">Reid Barton (Feb 26 2020 at 17:13)</a>:</h4>
-<p>(either supplying them automatically or turning them into new goals)</p>
-
-<a name="189151261"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189151261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189151261">Ethan Horsfall (Feb 26 2020 at 19:44)</a>:</h4>
-<p>thank you, that seems to have worked. the slightly weird thing is that it now just says 'no goals' instead of proof complete. viewing it as a function makes a lot of sense</p>
-
 <a name="189160091"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189160091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189160091">Kevin Buzzard (Feb 26 2020 at 21:16)</a>:</h4>
 <p>?? I'm impressed :-) I thought Mohammad had managed to completely banish "no goals"!</p>
@@ -424,6 +322,126 @@ W : a * n + a = a * c + a → a * n = a * c<br>
 <a name="189239778"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189239778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189239778">Edward Ayers (Feb 27 2020 at 18:15)</a>:</h4>
 <p>Hi <span class="user-mention" data-user-id="266070">@Ethan Horsfall</span> I've added you to the secret Cambridge group. meetings are 15:00 to 18:00 on Wednesdays somewhere in the CMS room TBC. The meeting is for all skill levels, there are 3 or 4 people learning the natural numbers game. If anyone else wants to be added to the cambridge group then ask me. I think if you are a member of the group you can add new members?</p>
+
+<a name="189523020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189523020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189523020">Vaibhav Karve (Mar 02 2020 at 18:53)</a>:</h4>
+<p>Level 8 of the Advanced Proposition World says</p>
+<blockquote>
+<p>Pro tip<br>
+    Did you spot the import? What do you think it does?</p>
+</blockquote>
+<p>I do not see any import though. What am I missing? Was it a mathlib import?</p>
+
+<a name="189523634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189523634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189523634">Kevin Buzzard (Mar 02 2020 at 18:59)</a>:</h4>
+<p>Let's look in the source code :-)</p>
+
+<a name="189523871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189523871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189523871">Kevin Buzzard (Mar 02 2020 at 19:01)</a>:</h4>
+<p><a href="https://github.com/ImperialCollegeLondon/natural_number_game/blob/master/src/game/world7/level8.lean" target="_blank" title="https://github.com/ImperialCollegeLondon/natural_number_game/blob/master/src/game/world7/level8.lean">I seem to be importing <code>finish</code></a></p>
+
+<a name="189523878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189523878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189523878">Kevin Buzzard (Mar 02 2020 at 19:01)</a>:</h4>
+<p>Does <code>finish</code> just finish the level in one move?</p>
+
+<a name="189524028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189524028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189524028">Kevin Buzzard (Mar 02 2020 at 19:02)</a>:</h4>
+<p>This looks like an outdated comment -- it is impossible to spot the import if you're playing the game because of the <code>--hide</code></p>
+
+<a name="189524146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189524146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189524146">Kevin Buzzard (Mar 02 2020 at 19:03)</a>:</h4>
+<p>Looks like there was <a href="https://github.com/ImperialCollegeLondon/natural_number_game/commit/b83e7ebd56a82351e2fd8a187de543803074818b" target="_blank" title="https://github.com/ImperialCollegeLondon/natural_number_game/commit/b83e7ebd56a82351e2fd8a187de543803074818b">a commit</a> where I hid the import, but didn't change the comment.</p>
+
+<a name="189530583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/189530583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#189530583">Vaibhav Karve (Mar 02 2020 at 20:03)</a>:</h4>
+<p>Cool. Thanks!</p>
+
+<a name="190035313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/190035313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#190035313">Simon Liesinger (Mar 09 2020 at 01:09)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> ,  I noticed that the statement of pow_succ in the sidebar is wrong. it says that <code>pow_succ (a b : mynat) :
+  a ^ succ(b) = a ^ b * b</code>, but I think it should be <code>a^b*a</code></p>
+
+<a name="190045904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/190045904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#190045904">Kevin Buzzard (Mar 09 2020 at 07:23)</a>:</h4>
+<p>Yeah I know, it's on the list of things to fix. Thanks.</p>
+
+<a name="190055296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/190055296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#190055296">ohhaimark (Mar 09 2020 at 10:23)</a>:</h4>
+<p>How would one go writing a tactic that will select the first assumption in context that can be <code>apply</code>ed to the goal?</p>
+
+<a name="190055328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/190055328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#190055328">ohhaimark (Mar 09 2020 at 10:23)</a>:</h4>
+<p>and apply it</p>
+
+<a name="190055562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/190055562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#190055562">Anne Baanen (Mar 09 2020 at 10:26)</a>:</h4>
+<p>The spoilery way is to look at the implementation of the <code>assumption</code> tactic <a href="https://github.com/leanprover-community/lean/blob/master/library/init/meta/tactic.lean#L866" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/library/init/meta/tactic.lean#L866">in core Lean</a>:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">assumption</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="o">{</span> <span class="n">ctx</span> <span class="err">←</span> <span class="n">local_context</span><span class="o">,</span>
+     <span class="n">t</span>   <span class="err">←</span> <span class="n">target</span><span class="o">,</span>
+     <span class="n">H</span>   <span class="err">←</span> <span class="n">find_same_type</span> <span class="n">t</span> <span class="n">ctx</span><span class="o">,</span>
+     <span class="n">exact</span> <span class="n">H</span> <span class="o">}</span>
+<span class="bp">&lt;|&gt;</span> <span class="n">fail</span> <span class="s2">&quot;assumption tactic failed&quot;</span>
+</pre></div>
+
+<a name="190055681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/190055681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#190055681">Anne Baanen (Mar 09 2020 at 10:28)</a>:</h4>
+<p>Here, <code>local_context</code> gets the list of hypotheses, and <code>target</code> gives the goal type.</p>
+
+<a name="190055869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/190055869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#190055869">Anne Baanen (Mar 09 2020 at 10:30)</a>:</h4>
+<p>So instead of <code>find_same_type</code>, which finds the hypothesis with the exact same type as the goal, we could iterate over the <code>local_context</code> and try to <code>apply</code> each element in turn until it succeeds.</p>
+
+<a name="190056999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/190056999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#190056999">ohhaimark (Mar 09 2020 at 10:47)</a>:</h4>
+<p>Thanks. It somehow didn't occur to me to look at the definition of the basic tactics.</p>
+
+<a name="190057034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/190057034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#190057034">Kevin Buzzard (Mar 09 2020 at 10:47)</a>:</h4>
+<p>The best introduction we have to learning to write tactics in Lean is <a href="https://leanprover.github.io/programming_in_lean/programming_in_lean.pdf" target="_blank" title="https://leanprover.github.io/programming_in_lean/programming_in_lean.pdf">programming in Lean</a>, which is a bit out of date but which does contain lots of juicy information. After that people just tend to ask in the chat.</p>
+
+<a name="190064416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/190064416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#190064416">Bryan Gin-ge Chen (Mar 09 2020 at 12:47)</a>:</h4>
+<blockquote>
+<p>The best introduction we have to learning to write tactics in Lean is programming in Lean,</p>
+</blockquote>
+<p>I think the <a href="https://lean-forward.github.io/logical-verification/2019/index.html" target="_blank" title="https://lean-forward.github.io/logical-verification/2019/index.html">Logical Verification notes</a> are also a good source (certainly less out of date).</p>
+
+<a name="190065932"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/190065932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#190065932">Jasmin Blanchette (Mar 09 2020 at 13:08)</a>:</h4>
+<p>We're working on a 2nd edition. Keep an eye on the same URL, but with 2020 instead of 2019.</p>
+
+<a name="190091229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/190091229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#190091229">Patrick Massot (Mar 09 2020 at 16:51)</a>:</h4>
+<p>Recall we also have <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md">documentation in  mathlib</a>.</p>
+
+<a name="190135853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/190135853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#190135853">Scott Morrison (Mar 10 2020 at 01:45)</a>:</h4>
+<p>Do we know why sometimes we get stuck with "Lean is busy" in the natural numbers game?</p>
+
+<a name="190135880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/190135880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#190135880">Scott Morrison (Mar 10 2020 at 01:46)</a>:</h4>
+<p>It's happened to us again.</p>
+
+<a name="190137110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/190137110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#190137110">Scott Morrison (Mar 10 2020 at 02:20)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>, I was just looking at the natural numbers game repo, and wondering about some a few things.</p>
+
+<a name="190137121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/190137121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#190137121">Scott Morrison (Mar 10 2020 at 02:20)</a>:</h4>
+<p>Are the <code>src/my_solutions/</code> and <code>src/solutions/</code> directories obsolete?</p>
+
+<a name="190137136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/190137136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#190137136">Scott Morrison (Mar 10 2020 at 02:21)</a>:</h4>
+<p>(The README currently suggests that if you wan to play the game in VSCode to use those directories, but they seem quite out of date relative to the <code>src/game/</code> directory.)</p>
+
+<a name="190141238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/190141238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#190141238">Scott Morrison (Mar 10 2020 at 04:17)</a>:</h4>
+<p>It would be fun to be able to hack on this.</p>
+
+<a name="190147333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20questions/near/190147333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52294naturalnumbergamequestions.html#190147333">Kevin Buzzard (Mar 10 2020 at 07:18)</a>:</h4>
+<p>Yes I can quite believe that those directories are obsolete. I have no idea about any of the web issues. <span class="user-mention" data-user-id="132175">@Mohammad Pedramfar</span> ?</p>
 
 
 {% endraw %}

@@ -62,156 +62,6 @@ Thanks in advance!</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189128512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189128512">Jason KY. (Feb 26 2020 at 16:08)</a>:</h4>
 <p>Wow! That worked perfectly! Thanks</p>
 
-<a name="189128229"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189128229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189128229">Jason KY. (Feb 26 2020 at 16:05)</a>:</h4>
-<p>Hi! I am trying to experiment a bit with groups and I am a bit confused about the following,</p>
-<p>I have defined my powers as</p>
-<div class="codehilite"><pre><span></span><span class="c1">-- definition of powers</span>
-<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">def</span> <span class="n">group_pow_nat</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">G</span>
-<span class="bp">|</span> <span class="n">g</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">1</span>
-<span class="bp">|</span> <span class="n">g</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">group_pow_nat</span> <span class="n">g</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">g</span>
-<span class="kn">instance</span> <span class="n">group_has_pow_nat</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_pow</span> <span class="n">G</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">group_pow_nat</span><span class="bp">⟩</span>
-
-<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">def</span> <span class="n">group_pow</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">→</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">G</span>
-<span class="bp">|</span> <span class="n">g</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:=</span> <span class="mi">1</span>
-<span class="bp">|</span> <span class="n">g</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">group_pow_nat</span> <span class="n">g</span> <span class="n">n</span>
-<span class="bp">|</span> <span class="n">g</span> <span class="bp">-</span><span class="o">[</span><span class="mi">1</span><span class="bp">+</span> <span class="n">n</span><span class="o">]</span> <span class="o">:=</span> <span class="n">group_pow_nat</span> <span class="n">g</span><span class="bp">⁻¹</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span>
-<span class="kn">instance</span> <span class="n">group_has_pow</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_pow</span> <span class="n">G</span> <span class="bp">ℤ</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">group_pow</span><span class="bp">⟩</span>
-</pre></div>
-
-
-<p>Which seems to work as I want it to. So my question is how should I show the following</p>
-<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">pow_int_of_nat</span> <span class="o">{</span><span class="n">g</span> <span class="o">:</span> <span class="n">G</span><span class="o">}</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">g</span> <span class="err">^</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">group_pow_nat</span> <span class="n">g</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">sorry</span>
-</pre></div>
-
-
-<p>I thought <code>rfl</code>would work however it seems that is not the case.<br>
-Thanks in advance!</p>
-
-<a name="189128369"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189128369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189128369">Jason KY. (Feb 26 2020 at 16:07)</a>:</h4>
-<p>Btw I am using this definition as groups</p>
-<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">has_group_notation</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">has_mul</span> <span class="n">G</span><span class="o">,</span> <span class="n">has_one</span> <span class="n">G</span><span class="o">,</span> <span class="n">has_inv</span> <span class="n">G</span>
-
-<span class="c1">-- definition of the group structure</span>
-<span class="n">class</span> <span class="n">group</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">has_group_notation</span> <span class="n">G</span> <span class="o">:=</span>
-<span class="o">(</span><span class="n">mul_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">))</span>
-<span class="o">(</span><span class="n">one_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span>
-<span class="o">(</span><span class="n">mul_left_inv</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
-</pre></div>
-
-<a name="189128391"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189128391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189128391">Reid Barton (Feb 26 2020 at 16:07)</a>:</h4>
-<p>You would at least need a pattern match on <code>n</code> into <code>0</code> and other because there is one in the definition of <code>group_pow</code>. But then the pattern match there is quite unnecessary, isn't it?</p>
-
-<a name="189128427"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189128427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189128427">Reid Barton (Feb 26 2020 at 16:07)</a>:</h4>
-<p>i.e. just delete the first line of the definition of <code>group_pow</code>, and it looks okay</p>
-
-<a name="189128512"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189128512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189128512">Jason KY. (Feb 26 2020 at 16:08)</a>:</h4>
-<p>Wow! That worked perfectly! Thanks</p>
-
-<a name="189128229"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189128229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189128229">Jason KY. (Feb 26 2020 at 16:05)</a>:</h4>
-<p>Hi! I am trying to experiment a bit with groups and I am a bit confused about the following,</p>
-<p>I have defined my powers as</p>
-<div class="codehilite"><pre><span></span><span class="c1">-- definition of powers</span>
-<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">def</span> <span class="n">group_pow_nat</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">G</span>
-<span class="bp">|</span> <span class="n">g</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">1</span>
-<span class="bp">|</span> <span class="n">g</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">group_pow_nat</span> <span class="n">g</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">g</span>
-<span class="kn">instance</span> <span class="n">group_has_pow_nat</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_pow</span> <span class="n">G</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">group_pow_nat</span><span class="bp">⟩</span>
-
-<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">def</span> <span class="n">group_pow</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">→</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">G</span>
-<span class="bp">|</span> <span class="n">g</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:=</span> <span class="mi">1</span>
-<span class="bp">|</span> <span class="n">g</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">group_pow_nat</span> <span class="n">g</span> <span class="n">n</span>
-<span class="bp">|</span> <span class="n">g</span> <span class="bp">-</span><span class="o">[</span><span class="mi">1</span><span class="bp">+</span> <span class="n">n</span><span class="o">]</span> <span class="o">:=</span> <span class="n">group_pow_nat</span> <span class="n">g</span><span class="bp">⁻¹</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span>
-<span class="kn">instance</span> <span class="n">group_has_pow</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_pow</span> <span class="n">G</span> <span class="bp">ℤ</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">group_pow</span><span class="bp">⟩</span>
-</pre></div>
-
-
-<p>Which seems to work as I want it to. So my question is how should I show the following</p>
-<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">pow_int_of_nat</span> <span class="o">{</span><span class="n">g</span> <span class="o">:</span> <span class="n">G</span><span class="o">}</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">g</span> <span class="err">^</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">group_pow_nat</span> <span class="n">g</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">sorry</span>
-</pre></div>
-
-
-<p>I thought <code>rfl</code>would work however it seems that is not the case.<br>
-Thanks in advance!</p>
-
-<a name="189128369"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189128369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189128369">Jason KY. (Feb 26 2020 at 16:07)</a>:</h4>
-<p>Btw I am using this definition as groups</p>
-<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">has_group_notation</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">has_mul</span> <span class="n">G</span><span class="o">,</span> <span class="n">has_one</span> <span class="n">G</span><span class="o">,</span> <span class="n">has_inv</span> <span class="n">G</span>
-
-<span class="c1">-- definition of the group structure</span>
-<span class="n">class</span> <span class="n">group</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">has_group_notation</span> <span class="n">G</span> <span class="o">:=</span>
-<span class="o">(</span><span class="n">mul_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">))</span>
-<span class="o">(</span><span class="n">one_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span>
-<span class="o">(</span><span class="n">mul_left_inv</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
-</pre></div>
-
-<a name="189128391"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189128391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189128391">Reid Barton (Feb 26 2020 at 16:07)</a>:</h4>
-<p>You would at least need a pattern match on <code>n</code> into <code>0</code> and other because there is one in the definition of <code>group_pow</code>. But then the pattern match there is quite unnecessary, isn't it?</p>
-
-<a name="189128427"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189128427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189128427">Reid Barton (Feb 26 2020 at 16:07)</a>:</h4>
-<p>i.e. just delete the first line of the definition of <code>group_pow</code>, and it looks okay</p>
-
-<a name="189128512"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189128512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189128512">Jason KY. (Feb 26 2020 at 16:08)</a>:</h4>
-<p>Wow! That worked perfectly! Thanks</p>
-
-<a name="189128229"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189128229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189128229">Jason KY. (Feb 26 2020 at 16:05)</a>:</h4>
-<p>Hi! I am trying to experiment a bit with groups and I am a bit confused about the following,</p>
-<p>I have defined my powers as</p>
-<div class="codehilite"><pre><span></span><span class="c1">-- definition of powers</span>
-<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">def</span> <span class="n">group_pow_nat</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">G</span>
-<span class="bp">|</span> <span class="n">g</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">1</span>
-<span class="bp">|</span> <span class="n">g</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">group_pow_nat</span> <span class="n">g</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">g</span>
-<span class="kn">instance</span> <span class="n">group_has_pow_nat</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_pow</span> <span class="n">G</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">group_pow_nat</span><span class="bp">⟩</span>
-
-<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">def</span> <span class="n">group_pow</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">→</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">G</span>
-<span class="bp">|</span> <span class="n">g</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:=</span> <span class="mi">1</span>
-<span class="bp">|</span> <span class="n">g</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">group_pow_nat</span> <span class="n">g</span> <span class="n">n</span>
-<span class="bp">|</span> <span class="n">g</span> <span class="bp">-</span><span class="o">[</span><span class="mi">1</span><span class="bp">+</span> <span class="n">n</span><span class="o">]</span> <span class="o">:=</span> <span class="n">group_pow_nat</span> <span class="n">g</span><span class="bp">⁻¹</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span>
-<span class="kn">instance</span> <span class="n">group_has_pow</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_pow</span> <span class="n">G</span> <span class="bp">ℤ</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">group_pow</span><span class="bp">⟩</span>
-</pre></div>
-
-
-<p>Which seems to work as I want it to. So my question is how should I show the following</p>
-<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">pow_int_of_nat</span> <span class="o">{</span><span class="n">g</span> <span class="o">:</span> <span class="n">G</span><span class="o">}</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">g</span> <span class="err">^</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">group_pow_nat</span> <span class="n">g</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">sorry</span>
-</pre></div>
-
-
-<p>I thought <code>rfl</code>would work however it seems that is not the case.<br>
-Thanks in advance!</p>
-
-<a name="189128369"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189128369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189128369">Jason KY. (Feb 26 2020 at 16:07)</a>:</h4>
-<p>Btw I am using this definition as groups</p>
-<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">has_group_notation</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">has_mul</span> <span class="n">G</span><span class="o">,</span> <span class="n">has_one</span> <span class="n">G</span><span class="o">,</span> <span class="n">has_inv</span> <span class="n">G</span>
-
-<span class="c1">-- definition of the group structure</span>
-<span class="n">class</span> <span class="n">group</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">has_group_notation</span> <span class="n">G</span> <span class="o">:=</span>
-<span class="o">(</span><span class="n">mul_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">))</span>
-<span class="o">(</span><span class="n">one_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span>
-<span class="o">(</span><span class="n">mul_left_inv</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
-</pre></div>
-
-<a name="189128391"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189128391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189128391">Reid Barton (Feb 26 2020 at 16:07)</a>:</h4>
-<p>You would at least need a pattern match on <code>n</code> into <code>0</code> and other because there is one in the definition of <code>group_pow</code>. But then the pattern match there is quite unnecessary, isn't it?</p>
-
-<a name="189128427"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189128427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189128427">Reid Barton (Feb 26 2020 at 16:07)</a>:</h4>
-<p>i.e. just delete the first line of the definition of <code>group_pow</code>, and it looks okay</p>
-
-<a name="189128512"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189128512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189128512">Jason KY. (Feb 26 2020 at 16:08)</a>:</h4>
-<p>Wow! That worked perfectly! Thanks</p>
-
 <a name="189250927"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189250927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189250927">Jason KY. (Feb 27 2020 at 20:01)</a>:</h4>
 <p>Hi again!<br>
@@ -250,6 +100,53 @@ Is there an easy way of solving this?</p>
 <a name="189257668"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189257668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189257668">Simon Hudon (Feb 27 2020 at 21:12)</a>:</h4>
 <p>It's planned. I should have time to put on mathlib in a few weeks, I can do it then</p>
+
+<a name="189826548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189826548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189826548">Jason KY. (Mar 05 2020 at 19:19)</a>:</h4>
+<p>I am trying to define normal and central subgroups for a bundled subgroup and I am wondering whats the best way of doing it.<br>
+Is it better to define it as a class or should it be a prop?</p>
+<p>This is how I've done it for now:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">center</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">:=</span> <span class="o">{</span><span class="n">g</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">|</span> <span class="bp">∀</span> <span class="n">k</span> <span class="o">:</span> <span class="n">G</span><span class="o">,</span> <span class="n">k</span> <span class="bp">*</span> <span class="n">g</span> <span class="bp">=</span> <span class="n">g</span> <span class="bp">*</span> <span class="n">k</span><span class="o">}</span>
+
+<span class="n">class</span> <span class="n">central_subgroup</span> <span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="n">subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">center</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">k</span> <span class="err">∈</span> <span class="n">K</span><span class="o">,</span> <span class="n">k</span> <span class="err">∈</span> <span class="n">mygroup</span><span class="bp">.</span><span class="n">center</span> <span class="n">G</span><span class="o">)</span>
+</pre></div>
+
+<a name="189826731"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189826731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189826731">Kevin Buzzard (Mar 05 2020 at 19:21)</a>:</h4>
+<p>If you're bundling subgroups then <code>center G</code> should have type <code>subgroup G</code> rather than <code>set G</code></p>
+
+<a name="189826807"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189826807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189826807">Kevin Buzzard (Mar 05 2020 at 19:22)</a>:</h4>
+<p>But I don't know whether <code>central_subgroup</code> should be a predicate <code>is_central</code> or a class or another structure</p>
+
+<a name="189841120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189841120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189841120">Reid Barton (Mar 05 2020 at 21:55)</a>:</h4>
+<p>Class versus not depends on whether you want to use type class inference. I wouldn't want to use it here, but tastes differ.</p>
+
+<a name="189841222"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189841222" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189841222">Reid Barton (Mar 05 2020 at 21:56)</a>:</h4>
+<p>Structure versus just making a def that's a Prop doesn't make a big difference, you can think of the structure as introducing a little bit of abstraction</p>
+
+<a name="189841271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189841271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189841271">Reid Barton (Mar 05 2020 at 21:57)</a>:</h4>
+<p>The structure is pretty much a slightly more heavyweight way to do the same thing</p>
+
+<a name="189841326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189841326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189841326">Reid Barton (Mar 05 2020 at 21:57)</a>:</h4>
+<p>Note if you have a class/structure it will never be inferred as a Prop, so you would definitely want to add that</p>
+
+<a name="189841343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189841343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189841343">Reid Barton (Mar 05 2020 at 21:57)</a>:</h4>
+<p>I would tend to call it <code>is_central</code></p>
+
+<a name="189841653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189841653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189841653">Jason KY. (Mar 05 2020 at 22:00)</a>:</h4>
+<p>Alright! I will make it a prop then, it'll be easier to work with! :)</p>
+
+<a name="189842155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20power%20on%20groups/near/189842155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71919definingpowerongroups.html#189842155">Reid Barton (Mar 05 2020 at 22:05)</a>:</h4>
+<p>For normal subgroups there might be a specific reason to use a class, namely so that you can make the quotient a group. But another way to handle it is to bundle the subgroup + proof that it's normal and define the quotient by that.</p>
 
 
 {% endraw %}

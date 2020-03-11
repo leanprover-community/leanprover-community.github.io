@@ -34,6 +34,29 @@ permalink: archive/116395maths/10422proofsincocalc.html
 
 <p>Thank you guys soooo much !!!</p>
 
+<a name="189478075"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proofs%20in%20cocalc/near/189478075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10422proofsincocalc.html#189478075">Anne Baanen (Mar 02 2020 at 10:24)</a>:</h4>
+<p>To get started, it's good to realize <code>¬ p</code> is the same as <code>p → false</code>, and <code>x ≠ y</code> is the same as <code>¬ (x = y)</code>, which is the same as <code>(x = y) → false</code>.</p>
+
+<a name="189478622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proofs%20in%20cocalc/near/189478622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/10422proofsincocalc.html#189478622">Kevin Buzzard (Mar 02 2020 at 10:33)</a>:</h4>
+<p>A lot of these axioms are things which one can prove in Lean anyway. Here's an axiom-free proof of the first one:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">le_not_symmetric</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">symmetric</span> <span class="n">nat</span><span class="bp">.</span><span class="n">less_than_or_equal</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">h</span><span class="o">,</span> <span class="c1">-- proof by &quot;mathematician&#39;s contradiction&quot;, i.e. assume it&#39;s symmetric</span>
+  <span class="c1">-- and get a contradiction</span>
+  <span class="n">unfold</span> <span class="n">symmetric</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span> <span class="c1">-- says x ≤ y → y ≤ x</span>
+  <span class="k">have</span> <span class="n">h12</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">≤</span> <span class="mi">2</span> <span class="o">:=</span> <span class="n">dec_trivial</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h21</span> <span class="o">:</span> <span class="bp">¬</span> <span class="mi">2</span> <span class="bp">≤</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">dec_trivial</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">h21</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">h12</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>but it's hard to work out if this is what you're looking for.</p>
+
 
 {% endraw %}
 

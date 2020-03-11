@@ -73,21 +73,31 @@ permalink: archive/116395maths/30749inverse.html
 <a name="160014206"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/inverse/near/160014206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/30749inverse.html#160014206">matt rice (Mar 05 2019 at 15:54)</a>:</h4>
 <p>thought i would throw this up here, in case something like it was wanted as well, haven't much looked at mathlib/mathlib style yet though apologies</p>
-<div class="codehilite"><pre><span></span>def inverse_comp {α : Type*} {β : Type*} (f : α → β) (g : β → α) (fog : function.inverse g f)
-: (∀ a, (g ∘ f) a = a) ∧ (∀ b, (f ∘ g) b = b) :=
-  ⟨λ a, fog.left a, λ b, fog.right b⟩
+<div class="codehilite"><pre><span></span>def inverse_rev {α : Type*} {β : Type*} {g : β → α} {f : α → β} (fg_inv : inverse g f)
+: inverse f g
+:= ⟨fg_inv.right,fg_inv.left⟩
 
-def inverse_comp_id {α : Type*} {β : Type*} (f : α → β) (g : β → α) (fog : function.inverse g f)
+def inverse_comp {α : Type*} {β : Type*} (f : α → β) (g : β → α) (fg_inv : inverse g f)
+: (∀ a, (g ∘ f) a = a) ∧ (∀ b, (f ∘ g) b = b) :=
+  ⟨fg_inv.left, fg_inv.right⟩
+
+def inverse_comp_id {α : Type*} {β : Type*} (f : α → β) (g : β → α) (fg_inv  : inverse g f)
 : (g ∘ f = id) ∧ (f ∘ g = id)
-:= ⟨funext (λ a&#39;,
-           show (g ∘ f) a&#39; = id a&#39;,
-             from calc (g ∘ f) a&#39; = a&#39;    : by rw (inverse_comp f g fog).left a&#39;
-                              ... = id a&#39; : by refl),
-    funext (assume b&#39;,
-            show (f ∘ g) b&#39; = id b&#39;,
-              from calc (f ∘ g) b&#39; = b&#39;    : by rw (inverse_comp f g fog).right b&#39;
-                               ... = id b&#39; : by refl)
-   ⟩
+:= ⟨funext (λ a, by rw [(inverse_comp f g fg_inv).left, id]),
+    funext (λ b, by rw [(inverse_comp f g fg_inv).right, id])⟩
+
+def inverse_bijective {α : Type*} {β : Type*} (f : α → β) (g : β → α) (gf_inv  : inverse g f)
+: bijective f ∧ bijective g
+:= have fg_inv : inverse f g, from inverse_rev gf_inv,
+   have injective f,
+    from (λ x₁ x₂, λ (h : f x₁ = f x₂),
+          show x₁ = x₂, by rw [&lt;- gf_inv.left x₁, h, gf_inv.left]),
+   have surjective f, from (λ y, exists.intro (g y) (gf_inv.right y)),
+   have injective g,
+    from (λ y₁ y₂, λ (h : g y₁ = g y₂),
+      show y₁ = y₂, by rw [&lt;- fg_inv.left y₁, h, fg_inv.left]),
+   have surjective g, from (λ x, exists.intro (f x) (fg_inv.right x)),
+   ⟨⟨‹injective f›, ‹surjective f›⟩, ⟨‹injective g›, ‹surjective g ›⟩⟩
 </pre></div>
 
 <a name="160428174"></a>

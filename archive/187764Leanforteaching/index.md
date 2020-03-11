@@ -9,6 +9,8 @@ permalink: archive/187764Leanforteaching/index.html
 
 ### Topics:
 
+* [Logipedia Club of Teachers](44409LogipediaClubofTeachers.html) (6 messages, latest: Mar 02 2020 at 13:02)
+
 * [Hints?](56166Hints.html) (12 messages, latest: Feb 15 2020 at 08:03)
 
 * [natural number game](77211naturalnumbergame.html) (26 messages, latest: Feb 13 2020 at 00:08)
@@ -43,7 +45,9 @@ permalink: archive/187764Leanforteaching/index.html
 
 * [Scott's course](09945Scottscourse.html) (37 messages, latest: Mar 05 2019 at 23:08)
 
-* [hello](47413hello.html) (2 messages, latest: Mar 01 2019 at 00:16)
+* [Discrete Mathematics - Kevin Sullivan](61308DiscreteMathematicsKevinSullivan.html) (1 message, latest: Mar 01 2019 at 00:16)
+
+* [hello](47413hello.html) (1 message, latest: Feb 28 2019 at 21:02)
 
 
 {% include archive_update.html %}

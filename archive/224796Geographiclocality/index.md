@@ -9,13 +9,13 @@ permalink: archive/224796Geographiclocality/index.html
 
 ### Topics:
 
+* [Cambridge, UK](66219CambridgeUK.html) (3 messages, latest: Mar 04 2020 at 08:43)
+
 * [Bonn, DE](08611BonnDE.html) (1 message, latest: Mar 01 2020 at 11:45)
 
 * [Boston, USA](25355BostonUSA.html) (1 message, latest: Feb 29 2020 at 04:24)
 
 * [Dublin, Ireland](85034DublinIreland.html) (1 message, latest: Feb 28 2020 at 12:49)
-
-* [Cambridge, UK](66219CambridgeUK.html) (2 messages, latest: Feb 28 2020 at 11:04)
 
 * [Karlsruhe, DE](19047KarlsruheDE.html) (1 message, latest: Feb 28 2020 at 10:46)
 

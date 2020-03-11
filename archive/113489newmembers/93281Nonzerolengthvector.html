@@ -16,10 +16,11 @@ permalink: archive/113489newmembers/93281Nonzerolengthvector.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Non%20zero%20length%20vector/near/183520743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93281Nonzerolengthvector.html#183520743">Mukesh Tiwari (Dec 16 2019 at 05:25)</a>:</h4>
 <div class="codehilite"><pre><span></span>def prod {F G : Type}(f : F → G → G) (g : G → G → G):
        Π {n : ℕ},
-       vector G (1 + n) →
-       vector F (1 + n) → G
-      | .(1) (h :: nil) (m :: nil) :=  f m h
-      | .(n + 1)(h :: hs) (m :: ms) := g (f m h) (prod hs ms)
+       vector G (n + 1) →
+       vector F (n + 1) → G
+      | .(0) (h :: _) (m :: _) :=  f m h
+      | .(n + 1)(vector.cons h hs) (vector.cons m ms) :=
+           g (f m h) (prod hs ms)
 </pre></div>
 
 <a name="183520796"></a>

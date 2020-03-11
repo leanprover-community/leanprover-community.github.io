@@ -9,9 +9,37 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [product with variable number of factors](02708productwithvariablenumberoffactors.html) (19 messages, latest: Mar 01 2020 at 19:11)
+* [issue with bundled subgroups](71886issuewithbundledsubgroups.html) (196 messages, latest: Mar 10 2020 at 06:13)
 
-* [Collinear in incidence geometry](45407Collinearinincidencegeometry.html) (18 messages, latest: Mar 01 2020 at 17:35)
+* [bundling subgroups -- kernel](61273bundlingsubgroupskernel.html) (37 messages, latest: Mar 10 2020 at 04:15)
+
+* [Univalence](55691Univalence.html) (73 messages, latest: Mar 10 2020 at 01:19)
+
+* [topos](42838topos.html) (34 messages, latest: Mar 09 2020 at 19:35)
+
+* [Basic category theory observations](46363Basiccategorytheoryobservations.html) (87 messages, latest: Mar 08 2020 at 22:34)
+
+* [nat.mod_mul_mod](69630natmodmulmod.html) (6 messages, latest: Mar 06 2020 at 08:59)
+
+* [tendsto.nhds_congr](98581tendstonhdscongr.html) (2 messages, latest: Mar 03 2020 at 18:57)
+
+* [Failure to halve an odd number](37771Failuretohalveanoddnumber.html) (30 messages, latest: Mar 03 2020 at 17:38)
+
+* [log (a ^ n) = n * log a in mathlib?](89168logannlogainmathlib.html) (105 messages, latest: Mar 03 2020 at 11:47)
+
+* [Product of `univ : finset (option α)`](66053Productofunivfinsetoption.html) (17 messages, latest: Mar 02 2020 at 14:10)
+
+* [Collinear in incidence geometry](45407Collinearinincidencegeometry.html) (25 messages, latest: Mar 02 2020 at 13:18)
+
+* [3.6.1 mathlib?](84695361mathlib.html) (2 messages, latest: Mar 02 2020 at 11:08)
+
+* [proofs in cocalc](10422proofsincocalc.html) (3 messages, latest: Mar 02 2020 at 10:33)
+
+* [zmodp](49611zmodp.html) (95 messages, latest: Mar 02 2020 at 08:34)
+
+* [(uniform) inducing vs embedding](28043uniforminducingvsembedding.html) (9 messages, latest: Mar 02 2020 at 07:44)
+
+* [product with variable number of factors](02708productwithvariablenumberoffactors.html) (19 messages, latest: Mar 01 2020 at 19:11)
 
 * [Euclidean geometry in mathlib?](82062Euclideangeometryinmathlib.html) (6 messages, latest: Mar 01 2020 at 07:48)
 
@@ -21,25 +49,19 @@ permalink: archive/116395maths/index.html
 
 * [I don't get all these types of union](66987Idontgetallthesetypesofunion.html) (8 messages, latest: Feb 29 2020 at 09:38)
 
-* [proofs in cocalc](10422proofsincocalc.html) (1 message, latest: Feb 29 2020 at 00:38)
-
 * [dealing with natural number subtraction](74815dealingwithnaturalnumbersubtraction.html) (58 messages, latest: Feb 28 2020 at 06:09)
 
-* [addition in opposite](57591additioninopposite.html) (25 messages, latest: Feb 26 2020 at 18:03)
+* [addition in opposite](57591additioninopposite.html) (5 messages, latest: Feb 26 2020 at 18:03)
 
-* [Formalization of the statement that 0.999... = 1](05245Formalizationofthestatementthat09991.html) (36 messages, latest: Feb 26 2020 at 17:30)
+* [Formalization of the statement that 0.999... = 1](05245Formalizationofthestatementthat09991.html) (32 messages, latest: Feb 26 2020 at 17:30)
 
-* [Failure to halve an odd number](37771Failuretohalveanoddnumber.html) (78 messages, latest: Feb 26 2020 at 16:11)
+* [well-ordering principle](19426wellorderingprinciple.html) (111 messages, latest: Feb 26 2020 at 05:17)
 
-* [well-ordering principle](19426wellorderingprinciple.html) (131 messages, latest: Feb 26 2020 at 05:17)
+* [(no topic)](79918notopic.html) (2 messages, latest: Feb 26 2020 at 05:14)
 
-* [(no topic)](79918notopic.html) (6 messages, latest: Feb 26 2020 at 05:14)
+* [MathLib installing](36823MathLibinstalling.html) (108 messages, latest: Feb 26 2020 at 03:53)
 
-* [MathLib installing](36823MathLibinstalling.html) (113 messages, latest: Feb 26 2020 at 03:53)
-
-* [Zorn's Lemma](18512ZornsLemma.html) (82 messages, latest: Feb 26 2020 at 00:55)
-
-* [log (a ^ n) = n * log a in mathlib?](89168logannlogainmathlib.html) (14 messages, latest: Feb 25 2020 at 22:57)
+* [Zorn's Lemma](18512ZornsLemma.html) (52 messages, latest: Feb 26 2020 at 00:55)
 
 * [nat case bashing](99100natcasebashing.html) (3 messages, latest: Feb 25 2020 at 17:54)
 
@@ -539,7 +561,7 @@ permalink: archive/116395maths/index.html
 
 * [partial derivatives](29140partialderivatives.html) (3 messages, latest: Jul 12 2019 at 15:03)
 
-* [Perfectoid spaces](04805Perfectoidspaces.html) (3116 messages, latest: Jul 11 2019 at 16:49)
+* [Perfectoid spaces](04805Perfectoidspaces.html) (3025 messages, latest: Jul 11 2019 at 16:49)
 
 * [cache-olean instructions](43334cacheoleaninstructions.html) (14 messages, latest: Jul 11 2019 at 12:29)
 
@@ -555,9 +577,7 @@ permalink: archive/116395maths/index.html
 
 * [function extension](82180functionextension.html) (23 messages, latest: Jul 08 2019 at 16:04)
 
-* [groups (bundling etc)](00257groupsbundlingetc.html) (40 messages, latest: Jul 08 2019 at 14:07)
-
-* [simple groups](91723simplegroups.html) (1 message, latest: Jul 08 2019 at 07:22)
+* [groups (bundling etc)](00257groupsbundlingetc.html) (41 messages, latest: Jul 08 2019 at 14:07)
 
 * [`category_theory` results and universes](65570categorytheoryresultsanduniverses.html) (41 messages, latest: Jul 05 2019 at 20:33)
 
@@ -729,9 +749,7 @@ permalink: archive/116395maths/index.html
 
 * [continuous functions into a topological X form an X](64828continuousfunctionsintoatopologicalXformanX.html) (4 messages, latest: Apr 08 2019 at 06:56)
 
-* [binomial coefficients](90398binomialcoefficients.html) (58 messages, latest: Apr 08 2019 at 06:20)
-
-* [n choose k](65051nchoosek.html) (19 messages, latest: Apr 08 2019 at 01:57)
+* [binomial coefficients](90398binomialcoefficients.html) (77 messages, latest: Apr 08 2019 at 06:20)
 
 * [ordered commutative monoid](67162orderedcommutativemonoid.html) (5 messages, latest: Apr 06 2019 at 14:56)
 
@@ -871,7 +889,7 @@ permalink: archive/116395maths/index.html
 
 * [localisation of rings](78299localisationofrings.html) (38 messages, latest: Feb 13 2019 at 16:41)
 
-* [bundling functions](72781bundlingfunctions.html) (3 messages, latest: Feb 12 2019 at 14:47)
+* [bundling functions](72781bundlingfunctions.html) (94 messages, latest: Feb 12 2019 at 14:47)
 
 * [ring modulo maximal](79786ringmodulomaximal.html) (1 message, latest: Feb 12 2019 at 10:00)
 

@@ -9,17 +9,55 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [more basics](41001morebasics.html) (102 messages, latest: Mar 01 2020 at 20:59)
+* [searching theorems](12924searchingtheorems.html) (3 messages, latest: Mar 11 2020 at 10:57)
 
-* [Splitting multiple conjunctions in one go](90615Splittingmultipleconjunctionsinonego.html) (2 messages, latest: Mar 01 2020 at 15:43)
+* [more basics](41001morebasics.html) (154 messages, latest: Mar 11 2020 at 01:08)
 
-* [noob question(s)](52075noobquestions.html) (2006 messages, latest: Feb 29 2020 at 22:39)
+* [natural number game questions](52294naturalnumbergamequestions.html) (84 messages, latest: Mar 10 2020 at 07:18)
 
-* [Basic building block tactics](24711Basicbuildingblocktactics.html) (93 messages, latest: Feb 29 2020 at 16:59)
+* [TPIL Chapter 4 Exercises](63296TPILChapter4Exercises.html) (31 messages, latest: Mar 10 2020 at 02:07)
+
+* [hyperreal.lean in math lib](54195hyperrealleaninmathlib.html) (26 messages, latest: Mar 08 2020 at 19:51)
+
+* [euclid_lemma](64834euclidlemma.html) (5 messages, latest: Mar 08 2020 at 14:31)
+
+* [gsmul_int_int](10109gsmulintint.html) (3 messages, latest: Mar 07 2020 at 05:33)
+
+* [creating git project](00457creatinggitproject.html) (10 messages, latest: Mar 06 2020 at 18:22)
+
+* [Introducing a new variable](82840Introducinganewvariable.html) (4 messages, latest: Mar 06 2020 at 17:56)
+
+* [enumerated types are fintypes?](62281enumeratedtypesarefintypes.html) (8 messages, latest: Mar 06 2020 at 17:34)
+
+* [defining power on groups](71919definingpowerongroups.html) (24 messages, latest: Mar 05 2020 at 22:05)
+
+* [TPIL Chapter 3 Exercises](42399TPILChapter3Exercises.html) (21 messages, latest: Mar 05 2020 at 21:53)
+
+* [Improving injectivity proof](88980Improvinginjectivityproof.html) (19 messages, latest: Mar 05 2020 at 19:02)
+
+* [Typeclasses in category_theory/limits](21377Typeclassesincategorytheorylimits.html) (7 messages, latest: Mar 05 2020 at 07:57)
+
+* [noob question(s)](52075noobquestions.html) (2135 messages, latest: Mar 04 2020 at 02:47)
+
+* [best way to prove](48687bestwaytoprove.html) (3 messages, latest: Mar 03 2020 at 20:33)
+
+* [Specializing filters to sequences](81995Specializingfilterstosequences.html) (11 messages, latest: Mar 03 2020 at 20:09)
+
+* [applying definitions to theorems](11947applyingdefinitionstotheorems.html) (26 messages, latest: Mar 03 2020 at 16:59)
+
+* [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (251 messages, latest: Mar 03 2020 at 08:01)
+
+* [premeasures?](86700premeasures.html) (1 message, latest: Mar 03 2020 at 02:35)
+
+* [Sum type cancellation](08613Sumtypecancellation.html) (10 messages, latest: Mar 02 2020 at 16:21)
+
+* [How to state this problem](60156Howtostatethisproblem.html) (52 messages, latest: Mar 02 2020 at 10:58)
+
+* [Basic building block tactics](24711Basicbuildingblocktactics.html) (69 messages, latest: Mar 02 2020 at 02:36)
+
+* [Splitting multiple conjunctions in one go](90615Splittingmultipleconjunctionsinonego.html) (3 messages, latest: Mar 02 2020 at 02:07)
 
 * [Inequalities and coercions](32742Inequalitiesandcoercions.html) (5 messages, latest: Feb 29 2020 at 08:56)
-
-* [applying definitions to theorems](11947applyingdefinitionstotheorems.html) (17 messages, latest: Feb 28 2020 at 18:06)
 
 * [Substitute away let binding in tactic mode](28771Substituteawayletbindingintacticmode.html) (9 messages, latest: Feb 28 2020 at 16:56)
 
@@ -29,21 +67,17 @@ permalink: archive/113489newmembers/index.html
 
 * [Local/city threads](73023Localcitythreads.html) (12 messages, latest: Feb 28 2020 at 04:03)
 
-* [defining power on groups](71919definingpowerongroups.html) (29 messages, latest: Feb 27 2020 at 21:12)
-
-* [natural number game questions](52294naturalnumbergamequestions.html) (76 messages, latest: Feb 27 2020 at 18:15)
-
 * [implicit parameters in conv mode](28226implicitparametersinconvmode.html) (2 messages, latest: Feb 27 2020 at 00:24)
 
-* [Simplifying Prop with Known False Statements](85769SimplifyingPropwithKnownFalseStatements.html) (16 messages, latest: Feb 26 2020 at 20:27)
+* [Simplifying Prop with Known False Statements](85769SimplifyingPropwithKnownFalseStatements.html) (68 messages, latest: Feb 26 2020 at 20:27)
 
-* [induction with abbreviations](07507inductionwithabbreviations.html) (26 messages, latest: Feb 26 2020 at 19:57)
+* [induction with abbreviations](07507inductionwithabbreviations.html) (8 messages, latest: Feb 26 2020 at 19:57)
 
-* [help with fintype](24197helpwithfintype.html) (77 messages, latest: Feb 26 2020 at 18:56)
+* [help with fintype](24197helpwithfintype.html) (38 messages, latest: Feb 26 2020 at 18:56)
 
-* [even not odd](25623evennotodd.html) (20 messages, latest: Feb 26 2020 at 17:09)
+* [even not odd](25623evennotodd.html) (5 messages, latest: Feb 26 2020 at 17:09)
 
-* [Vector space syntax](50599Vectorspacesyntax.html) (20 messages, latest: Feb 25 2020 at 23:05)
+* [Vector space syntax](50599Vectorspacesyntax.html) (4 messages, latest: Feb 25 2020 at 23:05)
 
 * [set.sum?](03791setsum.html) (4 messages, latest: Feb 25 2020 at 17:23)
 
@@ -62,8 +96,6 @@ permalink: archive/113489newmembers/index.html
 * [error about instances](36782erroraboutinstances.html) (7 messages, latest: Feb 24 2020 at 23:35)
 
 * [Basic Question](53627BasicQuestion.html) (9 messages, latest: Feb 24 2020 at 19:36)
-
-* [(no topic)](79918notopic.html) (269 messages, latest: Feb 23 2020 at 22:02)
 
 * [subtype coercion](10559subtypecoercion.html) (16 messages, latest: Feb 23 2020 at 20:25)
 
@@ -85,7 +117,7 @@ permalink: archive/113489newmembers/index.html
 
 * [definition unpacking](72874definitionunpacking.html) (13 messages, latest: Feb 19 2020 at 18:18)
 
-* [spheres](99675spheres.html) (26 messages, latest: Feb 19 2020 at 04:15)
+* [spheres](99675spheres.html) (45 messages, latest: Feb 19 2020 at 04:15)
 
 * [Getting equation from match](27738Gettingequationfrommatch.html) (11 messages, latest: Feb 18 2020 at 11:13)
 
@@ -141,13 +173,11 @@ permalink: archive/113489newmembers/index.html
 
 * [Maximum Class-instance resolution depth has been exceeded](69773MaximumClassinstanceresolutiondepthhasbeenexceeded.html) (15 messages, latest: Feb 08 2020 at 19:54)
 
-* [continuity](75863continuity.html) (19 messages, latest: Feb 07 2020 at 02:52)
-
 * [inductive type with anonymous constructors](60012inductivetypewithanonymousconstructors.html) (16 messages, latest: Feb 06 2020 at 22:05)
 
 * [SAT in Lean](88768SATinLean.html) (4 messages, latest: Feb 04 2020 at 20:22)
 
-* [Fundamental Theorem of Arithmetic](29443FundamentalTheoremofArithmetic.html) (1 message, latest: Feb 04 2020 at 17:07)
+* [Fundamental Theorem of Arithmetic](29443FundamentalTheoremofArithmetic.html) (9 messages, latest: Feb 04 2020 at 17:07)
 
 * [defining functions out of set](39863definingfunctionsoutofset.html) (27 messages, latest: Feb 03 2020 at 22:51)
 
@@ -170,8 +200,6 @@ permalink: archive/113489newmembers/index.html
 * [_match_2](17342match2.html) (7 messages, latest: Jan 23 2020 at 20:10)
 
 * [Analysis tools](56566Analysistools.html) (3 messages, latest: Jan 23 2020 at 17:51)
-
-* [formalizing Hilbert's axioms for plane geometry](57307formalizingHilbertsaxiomsforplanegeometry.html) (205 messages, latest: Jan 23 2020 at 16:27)
 
 * [basics](17142basics.html) (117 messages, latest: Jan 23 2020 at 14:30)
 
@@ -245,7 +273,7 @@ permalink: archive/113489newmembers/index.html
 
 * [difference between two forms](54455differencebetweentwoforms.html) (9 messages, latest: Dec 22 2019 at 05:41)
 
-* [cache-olean user confusion?](49795cacheoleanuserconfusion.html) (23 messages, latest: Dec 21 2019 at 19:43)
+* [cache-olean user confusion?](49795cacheoleanuserconfusion.html) (31 messages, latest: Dec 21 2019 at 19:43)
 
 * [a concrete group](48802aconcretegroup.html) (66 messages, latest: Dec 21 2019 at 17:21)
 
@@ -273,19 +301,15 @@ permalink: archive/113489newmembers/index.html
 
 * [iff negation](17803iffnegation.html) (14 messages, latest: Dec 16 2019 at 22:40)
 
-* [cache-olean dangerous?](08888cacheoleandangerous.html) (8 messages, latest: Dec 16 2019 at 21:59)
-
 * [How do I show that sum of trivial vector of ℝ is zero?](10664HowdoIshowthatsumoftrivialvectorofiszero.html) (12 messages, latest: Dec 16 2019 at 21:23)
 
 * [Non zero length vector](93281Nonzerolengthvector.html) (13 messages, latest: Dec 16 2019 at 11:31)
 
 * [Issue with NNG Multiplication World Level 1?](41799IssuewithNNGMultiplicationWorldLevel1.html) (4 messages, latest: Dec 15 2019 at 10:23)
 
-* [adding vectors](68494addingvectors.html) (4 messages, latest: Dec 15 2019 at 09:19)
+* [adding vectors](68494addingvectors.html) (5 messages, latest: Dec 15 2019 at 09:19)
 
 * [How does quot work?](96869Howdoesquotwork.html) (20 messages, latest: Dec 15 2019 at 07:33)
-
-* [car and cdr](29475carandcdr.html) (1 message, latest: Dec 15 2019 at 06:27)
 
 * [Lean act slowly when proof gets long](25534Leanactslowlywhenproofgetslong.html) (60 messages, latest: Dec 15 2019 at 02:29)
 
@@ -307,7 +331,7 @@ permalink: archive/113489newmembers/index.html
 
 * [How do I "cast" inequalities?](03462HowdoIcastinequalities.html) (4 messages, latest: Dec 13 2019 at 19:00)
 
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (217 messages, latest: Dec 13 2019 at 12:08)
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (324 messages, latest: Dec 13 2019 at 12:08)
 
 * [How do I go from < to ≤](42659HowdoIgofromto.html) (31 messages, latest: Dec 13 2019 at 00:47)
 
@@ -547,8 +571,6 @@ permalink: archive/113489newmembers/index.html
 
 * [cone morphisms](71784conemorphisms.html) (141 messages, latest: Oct 27 2019 at 06:22)
 
-* [natural number game](77211naturalnumbergame.html) (106 messages, latest: Oct 27 2019 at 02:10)
-
 * [non-empty lists, again](58819nonemptylistsagain.html) (22 messages, latest: Oct 26 2019 at 21:51)
 
 * [endomorphism algebra](03140endomorphismalgebra.html) (8 messages, latest: Oct 26 2019 at 15:43)
@@ -611,7 +633,7 @@ permalink: archive/113489newmembers/index.html
 
 * [Giry monad](88715Girymonad.html) (26 messages, latest: Oct 14 2019 at 19:36)
 
-* [How to fold statements into the calc block?](32311Howtofoldstatementsintothecalcblock.html) (19 messages, latest: Oct 14 2019 at 13:19)
+* [How to fold statements into the calc block?](32311Howtofoldstatementsintothecalcblock.html) (23 messages, latest: Oct 14 2019 at 13:19)
 
 * [emacs lean mathlib](84267emacsleanmathlib.html) (53 messages, latest: Oct 14 2019 at 02:36)
 
@@ -793,13 +815,15 @@ permalink: archive/113489newmembers/index.html
 
 * [lexicographic ordering on pi types](37320lexicographicorderingonpitypes.html) (28 messages, latest: Jun 27 2019 at 11:25)
 
-* [INduction_](38413INduction.html) (8 messages, latest: Jun 26 2019 at 21:25)
+* [INduction_](38413INduction.html) (16 messages, latest: Jun 26 2019 at 21:25)
 
 * [help with measurability proof](32743helpwithmeasurabilityproof.html) (1 message, latest: Jun 26 2019 at 19:20)
 
 * [leanpkg args](55408leanpkgargs.html) (5 messages, latest: Jun 26 2019 at 18:51)
 
 * [Samuel Lelièvre](94598SamuelLelivre.html) (1 message, latest: Jun 26 2019 at 16:30)
+
+* [(no topic)](79918notopic.html) (191 messages, latest: Jun 26 2019 at 07:26)
 
 * [tactic failed, result contains meta-variables](97429tacticfailedresultcontainsmetavariables.html) (3 messages, latest: Jun 25 2019 at 08:15)
 
@@ -921,8 +945,6 @@ permalink: archive/113489newmembers/index.html
 
 * [Weird error message](91403Weirderrormessage.html) (73 messages, latest: May 01 2019 at 06:58)
 
-* [INduction](74638INduction.html) (8 messages, latest: Apr 27 2019 at 22:25)
-
 * [Proving Cayley's Theorem](10331ProvingCayleysTheorem.html) (80 messages, latest: Apr 26 2019 at 22:29)
 
 * [arithmetic proof with big constants](80700arithmeticproofwithbigconstants.html) (36 messages, latest: Apr 25 2019 at 07:41)
@@ -945,15 +967,13 @@ permalink: archive/113489newmembers/index.html
 
 * [Help with explicit sets](19943Helpwithexplicitsets.html) (7 messages, latest: Apr 08 2019 at 16:55)
 
-* [transcendental number](40544transcendentalnumber.html) (10 messages, latest: Apr 05 2019 at 16:13)
+* [transcendental number](40544transcendentalnumber.html) (11 messages, latest: Apr 05 2019 at 16:13)
 
 * [fundamental theorem of algebra](61287fundamentaltheoremofalgebra.html) (6 messages, latest: Apr 05 2019 at 11:06)
 
 * [{a} a](88059aa.html) (12 messages, latest: Apr 05 2019 at 05:23)
 
 * [Zmod37 tutorial](59577Zmod37tutorial.html) (6 messages, latest: Apr 04 2019 at 19:01)
-
-* [algebraic number](63524algebraicnumber.html) (1 message, latest: Apr 04 2019 at 08:59)
 
 * [closing a case](79789closingacase.html) (6 messages, latest: Apr 03 2019 at 14:27)
 
@@ -975,11 +995,9 @@ permalink: archive/113489newmembers/index.html
 
 * [simp and nats](31075simpandnats.html) (15 messages, latest: Mar 23 2019 at 09:21)
 
-* [hello! (dual spaces)](75852hellodualspaces.html) (2 messages, latest: Mar 23 2019 at 00:26)
+* [dual spaces](91878dualspaces.html) (6 messages, latest: Mar 23 2019 at 00:26)
 
 * [Borsuk Ulam theorem](56506BorsukUlamtheorem.html) (71 messages, latest: Mar 22 2019 at 20:46)
-
-* [hello!](40822hello.html) (4 messages, latest: Mar 22 2019 at 10:57)
 
 * [How to install Lean](30889HowtoinstallLean.html) (68 messages, latest: Mar 21 2019 at 16:32)
 
@@ -991,7 +1009,7 @@ permalink: archive/113489newmembers/index.html
 
 * [coe additive monoid hom](61036coeadditivemonoidhom.html) (14 messages, latest: Mar 16 2019 at 12:26)
 
-* [rw failure](50770rwfailure.html) (13 messages, latest: Mar 16 2019 at 10:03)
+* [rw failure](50770rwfailure.html) (26 messages, latest: Mar 16 2019 at 10:03)
 
 * [wrote a definition for free objects, requesting feedback](20711wroteadefinitionforfreeobjectsrequestingfeedback.html) (5 messages, latest: Mar 16 2019 at 02:32)
 
@@ -1013,7 +1031,7 @@ permalink: archive/113489newmembers/index.html
 
 * [Easy way to lift the entire structure?](47470Easywaytolifttheentirestructure.html) (2 messages, latest: Mar 11 2019 at 20:25)
 
-* [Draft book using Lean for CS Discrete Math](23869DraftbookusingLeanforCSDiscreteMath.html) (4 messages, latest: Mar 11 2019 at 05:17)
+* [Draft book using Lean for CS Discrete Math](23869DraftbookusingLeanforCSDiscreteMath.html) (18 messages, latest: Mar 11 2019 at 05:17)
 
 * [Declaring canonical instance of typeclass?](55379Declaringcanonicalinstanceoftypeclass.html) (17 messages, latest: Mar 09 2019 at 21:52)
 
@@ -1030,8 +1048,6 @@ permalink: archive/113489newmembers/index.html
 * [Simplifying pattern matches](29775Simplifyingpatternmatches.html) (38 messages, latest: Mar 05 2019 at 19:41)
 
 * [rw div insufficient for defining equation](31557rwdivinsufficientfordefiningequation.html) (22 messages, latest: Mar 04 2019 at 23:35)
-
-* [Kevin Sullivan, UVa CS](37530KevinSullivanUVaCS.html) (24 messages, latest: Mar 04 2019 at 20:45)
 
 * [Why sometime no no_confusion?](56392Whysometimenonoconfusion.html) (6 messages, latest: Mar 04 2019 at 20:14)
 
@@ -1085,7 +1101,7 @@ permalink: archive/113489newmembers/index.html
 
 * [universal properties for topology](31979universalpropertiesfortopology.html) (19 messages, latest: Feb 11 2019 at 00:53)
 
-* [typing up solutions in Lean](35624typingupsolutionsinLean.html) (20 messages, latest: Feb 10 2019 at 21:44)
+* [typing up solutions in Lean](35624typingupsolutionsinLean.html) (13 messages, latest: Feb 10 2019 at 21:44)
 
 * [Trouble with simple goal/has_sizeof](94465Troublewithsimplegoalhassizeof.html) (37 messages, latest: Feb 09 2019 at 23:35)
 
@@ -1095,7 +1111,7 @@ permalink: archive/113489newmembers/index.html
 
 * [Coinduction](02528Coinduction.html) (18 messages, latest: Feb 08 2019 at 13:09)
 
-* [invalid reference to undefined universe level parameter 'v'](70330invalidreferencetoundefineduniverselevelparameterv.html) (4 messages, latest: Feb 08 2019 at 02:56)
+* [elaborator bug](31466elaboratorbug.html) (11 messages, latest: Feb 08 2019 at 04:13)
 
 * [hiding from prelude](75961hidingfromprelude.html) (6 messages, latest: Feb 07 2019 at 04:22)
 
@@ -1578,6 +1594,8 @@ permalink: archive/113489newmembers/index.html
 * [Why does my goal change?](34322Whydoesmygoalchange.html) (4 messages, latest: Aug 04 2018 at 11:35)
 
 * [monotonicity again](40653monotonicityagain.html) (11 messages, latest: Aug 04 2018 at 11:30)
+
+* [Kevin Sullivan, UVa CS](37530KevinSullivanUVaCS.html) (10 messages, latest: Aug 03 2018 at 11:10)
 
 * [Error message in VS Code](85867ErrormessageinVSCode.html) (2 messages, latest: Aug 02 2018 at 11:40)
 

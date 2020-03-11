@@ -1,0 +1,533 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html">Pure functional programming and pointer-based optimization</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="189663010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189663010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189663010">Simon Hudon (Mar 04 2020 at 05:48)</a>:</h4>
+<p>Hi all! Here's a shameless plug of a paper I wrote with <span class="user-mention" data-user-id="230999">@Daniel Selsam</span> and <span class="user-mention" data-user-id="112857">@Leonardo de Moura</span> about programming techniques that can sometimes get us exponential speedups on functional programs written on expressions. Comments and questions welcome.</p>
+<p><a href="https://arxiv.org/abs/2003.01685" target="_blank" title="https://arxiv.org/abs/2003.01685">https://arxiv.org/abs/2003.01685</a></p>
+
+<a name="189663078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189663078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189663078">Simon Hudon (Mar 04 2020 at 05:50)</a>:</h4>
+<p>The techniques are more generally applicable than for writing theorem provers, I should add</p>
+
+<a name="189663746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189663746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189663746">Mario Carneiro (Mar 04 2020 at 06:08)</a>:</h4>
+<p>Is there a reason that functions like <code>withPtrAddr</code> are written in CPS rather than returning a <code>Squash Addr</code>?</p>
+
+<a name="189663884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189663884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189663884">Mario Carneiro (Mar 04 2020 at 06:10)</a>:</h4>
+<p>In your <code>PtrCache</code> example, it appears to be impossible to prove that the item you placed is still in the same location when you retrieve it later</p>
+
+<a name="189663991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189663991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189663991">Simon Hudon (Mar 04 2020 at 06:12)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/Pure.20functional.20programming.20and.20pointer-based.20optimization/near/189663884" title="#narrow/stream/113488-general/topic/Pure.20functional.20programming.20and.20pointer-based.20optimization/near/189663884">said</a>:</p>
+<blockquote>
+<p>In your <code>PtrCache</code> example, it appears to be impossible to prove that the item you placed is still in the same location when you retrieve it later</p>
+</blockquote>
+<p>That's true and we're going to get duplicates if looking up two objects encoding the same value. That's one possible trade-off we can choose and it can be very appealing to pay the price</p>
+
+<a name="189664008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189664008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189664008">Simon Hudon (Mar 04 2020 at 06:12)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/Pure.20functional.20programming.20and.20pointer-based.20optimization/near/189663746" title="#narrow/stream/113488-general/topic/Pure.20functional.20programming.20and.20pointer-based.20optimization/near/189663746">said</a>:</p>
+<blockquote>
+<p>Is there a reason that functions like <code>withPtrAddr</code> are written in CPS rather than returning a <code>Squash Addr</code>?</p>
+</blockquote>
+<p>I don't think we have considered <code>Squash Addr</code>. Do you see a benefit to encoding it that way?</p>
+
+<a name="189664026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189664026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189664026">Mario Carneiro (Mar 04 2020 at 06:13)</a>:</h4>
+<p>it's more direct; it will probably get optimized away regardless of how it's written</p>
+
+<a name="189664087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189664087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189664087">Mario Carneiro (Mar 04 2020 at 06:14)</a>:</h4>
+<p>but with the <code>Squash Addr</code> approach it seems more likely that you could exploit common subexpression elimination</p>
+
+<a name="189664229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189664229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189664229">Simon Hudon (Mar 04 2020 at 06:16)</a>:</h4>
+<p>In the context that we studied, we needed the value of the pointer at the same time that we were producing the value so we're pretty much merging <code>ptrAddr</code> and <code>Squash.lift</code></p>
+
+<a name="189664260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189664260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189664260">Mario Carneiro (Mar 04 2020 at 06:17)</a>:</h4>
+<p>Sure, but in general you can do other things with the value rather than examine it immediately, e.g. you could store it in a data structure</p>
+
+<a name="189664270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189664270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189664270">Mario Carneiro (Mar 04 2020 at 06:17)</a>:</h4>
+<p>Since <code>Squash Addr</code> is just an int, it lowers to C very directly</p>
+
+<a name="189664322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189664322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189664322">Mario Carneiro (Mar 04 2020 at 06:18)</a>:</h4>
+<p>What's the status of mutable cells in lean 4 (a la my lean 3 <code>cached</code> proposal)? This stuff looks really close to finally having proper thunks</p>
+
+<a name="189664369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189664369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189664369">Mario Carneiro (Mar 04 2020 at 06:19)</a>:</h4>
+<p>(BTW you can still use <code>withPtrAddr</code> as a "get pointer value" function if you call <code>withPtrAddr x Squash.mk</code>)</p>
+
+<a name="189664418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189664418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189664418">Simon Hudon (Mar 04 2020 at 06:20)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/Pure.20functional.20programming.20and.20pointer-based.20optimization/near/189664270" title="#narrow/stream/113488-general/topic/Pure.20functional.20programming.20and.20pointer-based.20optimization/near/189664270">said</a>:</p>
+<blockquote>
+<p>Since <code>Squash Addr</code> is just an int, it lowers to C very directly</p>
+</blockquote>
+<p>I'd love to see an example of that if you find one. My intuition is that it's going to be hard to make use of the pointer long term because globally, we can't even prove that two objects are equal if their addresses are equal</p>
+
+<a name="189664495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189664495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189664495">Mario Carneiro (Mar 04 2020 at 06:22)</a>:</h4>
+<p>You are right, it is subject to the same limitations as <code>PtrCache</code> that I mentioned above. This <code>getPtr</code> function has properties that can be exploited but cannot be expressed in lean, so it will be possible to write correct programs (using only safe code) that cannot be proven correct</p>
+
+<a name="189664503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189664503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189664503">Simon Hudon (Mar 04 2020 at 06:22)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/Pure.20functional.20programming.20and.20pointer-based.20optimization/near/189664322" title="#narrow/stream/113488-general/topic/Pure.20functional.20programming.20and.20pointer-based.20optimization/near/189664322">said</a>:</p>
+<blockquote>
+<p>What's the status of mutable cells in lean 4 (a la my lean 3 <code>cached</code> proposal)? This stuff looks really close to finally having proper thunks</p>
+</blockquote>
+<p>We were planning on including mutable cells in the paper but then we found this <a href="https://link.springer.com/chapter/10.1007/978-3-642-39634-2_24" target="_blank" title="https://link.springer.com/chapter/10.1007/978-3-642-39634-2_24">paper</a> and noticed that they had all our examples and because they are extracting to OCaml, they did not have to deal with the issues of implementing it in a pure programming language</p>
+
+<a name="189664536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189664536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189664536">Mario Carneiro (Mar 04 2020 at 06:23)</a>:</h4>
+<p>You should mention that it can be done (is being done?) and cite the paper then</p>
+
+<a name="189664596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189664596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189664596">Simon Hudon (Mar 04 2020 at 06:25)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/Pure.20functional.20programming.20and.20pointer-based.20optimization/near/189664495" title="#narrow/stream/113488-general/topic/Pure.20functional.20programming.20and.20pointer-based.20optimization/near/189664495">said</a>:</p>
+<blockquote>
+<p>so it will be possible to write correct programs (using only safe code) that cannot be proven correct</p>
+</blockquote>
+<p>With <code>PtrCache</code> we still have a proof of functional correctness. We just can reason about duplicates, cache hits / miss. Also, the pointer itself doesn't give you anything that the value doesn't give you. With the value, you can use its pointer and you can dereference it (i.e. you look at the value itself). If you only have the address, you lose access to the value</p>
+
+<a name="189664647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189664647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189664647">Simon Hudon (Mar 04 2020 at 06:26)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/Pure.20functional.20programming.20and.20pointer-based.20optimization/near/189664536" title="#narrow/stream/113488-general/topic/Pure.20functional.20programming.20and.20pointer-based.20optimization/near/189664536">said</a>:</p>
+<blockquote>
+<p>You should mention that it can be done (is being done?) and cite the paper then</p>
+</blockquote>
+<p>That's really a separate project and a separate topic at this point so we gain nothing by including it in our discussion</p>
+
+<a name="189664662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189664662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189664662">Mario Carneiro (Mar 04 2020 at 06:26)</a>:</h4>
+<p>Here's an example of an algorithm that is correct but not provably correct: <code>withPtrAddr x (\u -&gt; withPtrAddr x (\v -&gt; assert (u = v)))</code></p>
+
+<a name="189664732"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189664732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189664732">Mario Carneiro (Mar 04 2020 at 06:28)</a>:</h4>
+<p>You can dress that up with a pointer cache, but it's ultimately the same problem. If you store x in a hash table at location <code>hash &amp;x</code>, then if you later look up the bucket for <code>hash &amp;x</code> you will get a bucket that contains x, but you can't prove that</p>
+
+<a name="189664747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189664747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189664747">Simon Hudon (Mar 04 2020 at 06:29)</a>:</h4>
+<p>As I said, there's a whole area where we can't specify the properties. If your specification is about addresses (e.g. if you're writing a device driver), this won't cut it. If you want to write a program that computes a value but you want to go faster, you can get a proof of functional correctness with our approach</p>
+
+<a name="189664809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189664809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189664809">Mario Carneiro (Mar 04 2020 at 06:30)</a>:</h4>
+<p>I'm saying that's not the case. The hash algorithm cannot be proven to <em>work at all</em> without knowing that addresses are stable</p>
+
+<a name="189664823"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189664823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189664823">Mario Carneiro (Mar 04 2020 at 06:30)</a>:</h4>
+<p>unless it falls back on searching the whole table or something (which will not happen but lean can't tell)</p>
+
+<a name="189664828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189664828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189664828">Simon Hudon (Mar 04 2020 at 06:30)</a>:</h4>
+<p>We have a proof of the examples in the paper. They type check</p>
+
+<a name="189664842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189664842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189664842">Mario Carneiro (Mar 04 2020 at 06:31)</a>:</h4>
+<p>I don't see any proofs in the paper</p>
+
+<a name="189664847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189664847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189664847">Mario Carneiro (Mar 04 2020 at 06:31)</a>:</h4>
+<p>I see programs</p>
+
+<a name="189664901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189664901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189664901">Mario Carneiro (Mar 04 2020 at 06:32)</a>:</h4>
+<p>functional correctness has not been stated for <code>PtrCache</code>, and I am asserting that there are natural properties that you can assert that it satisfies, and you will not be able to prove them</p>
+
+<a name="189664948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189664948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189664948">Simon Hudon (Mar 04 2020 at 06:34)</a>:</h4>
+<p>If you look at page 14, the proofs are in the types. We're using subsingleton's and subtypes which very neatly encapsulates them</p>
+
+<a name="189664955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189664955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189664955">Simon Hudon (Mar 04 2020 at 06:34)</a>:</h4>
+<p>The functional correctness is that <code>evalNatPtrCache</code> produces the same result as <code>evalNatNaive</code></p>
+
+<a name="189665052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665052">Simon Hudon (Mar 04 2020 at 06:37)</a>:</h4>
+<blockquote>
+<p>natural properties that you can assert that it satisfies, and you will not be able to prove them</p>
+</blockquote>
+<p>We agree. There's a whole lot that you can't do. But you can optimize your programs and prove that you're producing the same behavior. Pointers have only a superficial presence in the logic even if you get a narrow window into the run-time with these features.</p>
+
+<a name="189665104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665104">Mario Carneiro (Mar 04 2020 at 06:38)</a>:</h4>
+<p>Why are pointer values stable in the first place? In haskell they definitely aren't</p>
+
+<a name="189665238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665238">Simon Hudon (Mar 04 2020 at 06:41)</a>:</h4>
+<p>Haskell has a moving garbage collector (but <a href="https://hackage.haskell.org/package/base-4.12.0.0/docs/System-Mem-StableName.html" target="_blank" title="https://hackage.haskell.org/package/base-4.12.0.0/docs/System-Mem-StableName.html"><code>StableName</code></a> helps compensate). Lean's memory management doesn't move objects. It's malloc style plus reference counting</p>
+
+<a name="189665289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665289">Mario Carneiro (Mar 04 2020 at 06:42)</a>:</h4>
+<p>I saw that <code>Semidecidable</code> was recently added. I think that this type can be usable in these kind of contexts, but it has to be squashed (e.g. <code>isPtrEq x y : Squash (Semidecidable (x = y))</code>)</p>
+
+<a name="189665300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665300">Mario Carneiro (Mar 04 2020 at 06:43)</a>:</h4>
+<p>again, the nice thing being that the memory representation of this type is exactly the same as <code>bool</code></p>
+
+<a name="189665313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665313">Simon Hudon (Mar 04 2020 at 06:43)</a>:</h4>
+<p>That's why it was added but then we judged the name wasn't right and we renamed it. It should be gone from git too now</p>
+
+<a name="189665356"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665356">Mario Carneiro (Mar 04 2020 at 06:44)</a>:</h4>
+<p>what is it called now? <code>SemiDecidable</code>?</p>
+
+<a name="189665359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665359">Simon Hudon (Mar 04 2020 at 06:44)</a>:</h4>
+<p>That I could imagine there's some use for</p>
+
+<a name="189665360"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665360">Simon Hudon (Mar 04 2020 at 06:44)</a>:</h4>
+<p><code>PtrEqResult</code></p>
+
+<a name="189665363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665363">Mario Carneiro (Mar 04 2020 at 06:44)</a>:</h4>
+<p>oh so it's just specialized on x = y?</p>
+
+<a name="189665373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665373">Mario Carneiro (Mar 04 2020 at 06:45)</a>:</h4>
+<p>I think semidecidable is a good type (modulo bikeshedding on the name)</p>
+
+<a name="189665444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665444">Simon Hudon (Mar 04 2020 at 06:46)</a>:</h4>
+<p>Yes, that's right. I think so too but without a good name, it's awkward to add. <code>SemiDecidable</code> doesn't quite cut it</p>
+
+<a name="189665472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665472">Mario Carneiro (Mar 04 2020 at 06:47)</a>:</h4>
+<p>I don't see why semidecidable is even not accurate</p>
+
+<a name="189665483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665483">Simon Hudon (Mar 04 2020 at 06:47)</a>:</h4>
+<p>As I recall, Coq has a special notation for this. I don't remember the name of the functions but I think you can write <code>{ some proof } + ErrorType</code></p>
+
+<a name="189665487"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665487">Mario Carneiro (Mar 04 2020 at 06:47)</a>:</h4>
+<p>Sure, it's <code>option p</code></p>
+
+<a name="189665538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665538">Mario Carneiro (Mar 04 2020 at 06:48)</a>:</h4>
+<p>When you have an honestly semidecidable problem, you can run a program with a timeout and it will say <code>yes</code> or <code>unknown</code></p>
+
+<a name="189665551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665551">Simon Hudon (Mar 04 2020 at 06:49)</a>:</h4>
+<p>If you have a value of <code>Decidable p</code>, that's a proof that <code>p</code> is decidable. If you have a value of type <code>SemiDecidable p</code> (if you call it that), it's not a proof that <code>p</code> is semi-decidable. You need to state separately that, if <code>p</code> is true and you try hard enough (for some notion of trying hard enough), you'll get a proof of <code>p</code></p>
+
+<a name="189665606"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665606">Mario Carneiro (Mar 04 2020 at 06:50)</a>:</h4>
+<p>yeah but who cares about liveness</p>
+
+<a name="189665614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665614">Simon Hudon (Mar 04 2020 at 06:50)</a>:</h4>
+<p>I encoded that separately as:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">SemiDecision</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">isTrue</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">SemiDecision</span>
+<span class="bp">|</span> <span class="n">unknown</span> <span class="o">{}</span> <span class="o">:</span> <span class="n">SemiDecision</span>
+
+<span class="kn">open</span> <span class="n">SemiDecision</span>
+
+<span class="n">def</span> <span class="n">IsSemiDecisionProcedure</span> <span class="o">{</span><span class="n">p</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">SemiDecision</span> <span class="n">p</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="bp">∀</span> <span class="n">hp</span> <span class="o">:</span> <span class="n">p</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">i</span><span class="o">,</span> <span class="n">f</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">isTrue</span> <span class="n">hp</span>
+
+<span class="n">def</span> <span class="n">SemiDecidable</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">SemiDecision</span> <span class="n">p</span> <span class="bp">//</span> <span class="n">IsSemiDecisionProcedure</span> <span class="n">f</span> <span class="o">}</span>
+</pre></div>
+
+<a name="189665642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665642">Mario Carneiro (Mar 04 2020 at 06:51)</a>:</h4>
+<p>I'm also hoping you guys discover the <code>roption</code> trick for doing general recursion without that fuel stuff</p>
+
+<a name="189665720"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665720">Simon Hudon (Mar 04 2020 at 06:53)</a>:</h4>
+<p>The usefulness of the fuel vs the <code>roption</code> trick are very different. The point of the fuel is to permit functions for which we don't bother proving that they terminate and still be able to run them. Not having an equation compiler yet and well-founded recursion, that's often useful for code we want to run but not prove anything about it</p>
+
+<a name="189665775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665775">Mario Carneiro (Mar 04 2020 at 06:54)</a>:</h4>
+<p>it's poisonous just like <code>meta</code></p>
+
+<a name="189665778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665778">Simon Hudon (Mar 04 2020 at 06:54)</a>:</h4>
+<p>it's just a way of allowing those functions in without making the logic inconsistent</p>
+
+<a name="189665779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665779">Mario Carneiro (Mar 04 2020 at 06:54)</a>:</h4>
+<p>and I'm not even sure it is consistent</p>
+
+<a name="189665795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665795">Mario Carneiro (Mar 04 2020 at 06:55)</a>:</h4>
+<p>or rather, "realistic" in the sense of VM matching the logic</p>
+
+<a name="189665856"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665856">Simon Hudon (Mar 04 2020 at 06:56)</a>:</h4>
+<p>We can't use the trick unless the return type is non-empty</p>
+
+<a name="189665860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665860">Mario Carneiro (Mar 04 2020 at 06:56)</a>:</h4>
+<p><code>roption</code> requires no such hack</p>
+
+<a name="189665870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665870">Simon Hudon (Mar 04 2020 at 06:57)</a>:</h4>
+<p>You need to make your code monadic as soon as you use it though</p>
+
+<a name="189665874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665874">Mario Carneiro (Mar 04 2020 at 06:57)</a>:</h4>
+<p>equation compiler can do that</p>
+
+<a name="189665913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665913">Mario Carneiro (Mar 04 2020 at 06:58)</a>:</h4>
+<p>you just stick the <code>partial</code> keyword on and it does the magic</p>
+
+<a name="189665920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665920">Mario Carneiro (Mar 04 2020 at 06:58)</a>:</h4>
+<p>but yeah, it is a monad</p>
+
+<a name="189665923"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665923">Mario Carneiro (Mar 04 2020 at 06:58)</a>:</h4>
+<p>if you want to cheat and get out of the monad, use <code>roption.unwrap</code></p>
+
+<a name="189665937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665937">Mario Carneiro (Mar 04 2020 at 06:59)</a>:</h4>
+<p>but it's the only method that actually allows you to write a general recursive function and prove it is defined later</p>
+
+<a name="189665949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665949">Simon Hudon (Mar 04 2020 at 06:59)</a>:</h4>
+<p>It's inconvenient with the calling code. Right now, we don't have tactics to do a lot of proofs and we don't have an equation compiler but we still need to write the compiler and the prover itself. I don't know if partial is here to stay but at the moment, it's a good solution</p>
+
+<a name="189665995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189665995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189665995">Mario Carneiro (Mar 04 2020 at 07:00)</a>:</h4>
+<p>just use <code>meta</code></p>
+
+<a name="189666000"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189666000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189666000">Simon Hudon (Mar 04 2020 at 07:00)</a>:</h4>
+<p>It's not there anymore</p>
+
+<a name="189666004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189666004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189666004">Mario Carneiro (Mar 04 2020 at 07:00)</a>:</h4>
+<p>is there a reason that approach is no longer possible</p>
+
+<a name="189666026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189666026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189666026">Mario Carneiro (Mar 04 2020 at 07:01)</a>:</h4>
+<p>At least meta didn't add things into pure code where they could possibly cause unsoundness</p>
+
+<a name="189666077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189666077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189666077">Mario Carneiro (Mar 04 2020 at 07:02)</a>:</h4>
+<p>all these "pure primitives" require a soundness justification</p>
+
+<a name="189666083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189666083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189666083">Simon Hudon (Mar 04 2020 at 07:02)</a>:</h4>
+<p>The idea is to separate it between <code>partial</code> and <code>unsafe</code>. <code>unsafe</code> is contagious while <code>partial</code> is not. We can restrict <code>unsafe</code> to very little code and use normal Lean to write automation</p>
+
+<a name="189666091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189666091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189666091">Simon Hudon (Mar 04 2020 at 07:02)</a>:</h4>
+<p>The justification is there</p>
+
+<a name="189666101"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189666101" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189666101">Simon Hudon (Mar 04 2020 at 07:03)</a>:</h4>
+<p>What you have a problem with is the difference between the logic and the code generated by the compiler</p>
+
+<a name="189666107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189666107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189666107">Mario Carneiro (Mar 04 2020 at 07:03)</a>:</h4>
+<p>yes, this property needs a name</p>
+
+<a name="189666156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189666156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189666156">Mario Carneiro (Mar 04 2020 at 07:04)</a>:</h4>
+<p>Reid suggested "realism" but this is also possibly confusing</p>
+
+<a name="189666160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189666160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189666160">Simon Hudon (Mar 04 2020 at 07:04)</a>:</h4>
+<p>How about faithfulness of the execution model?</p>
+
+<a name="189666166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189666166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189666166">Mario Carneiro (Mar 04 2020 at 07:04)</a>:</h4>
+<p>sure, wordy I guess</p>
+
+<a name="189666172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189666172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189666172">Mario Carneiro (Mar 04 2020 at 07:05)</a>:</h4>
+<p>It becomes harder to prove this property when you are explicitly lying to pure code</p>
+
+<a name="189666192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189666192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189666192">Mario Carneiro (Mar 04 2020 at 07:05)</a>:</h4>
+<p>like telling it that there is an infinite natural number, or saying that a function that returns 0xdeadbeef in practice always returns 0</p>
+
+<a name="189666235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189666235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189666235">Mario Carneiro (Mar 04 2020 at 07:06)</a>:</h4>
+<p>I think the whole story is more complicated than you think</p>
+
+<a name="189666241"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189666241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189666241">Simon Hudon (Mar 04 2020 at 07:06)</a>:</h4>
+<p>I don't think Lean is ready for that kind of proof</p>
+
+<a name="189666245"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189666245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189666245">Mario Carneiro (Mar 04 2020 at 07:06)</a>:</h4>
+<p>that's for sure</p>
+
+<a name="189666259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189666259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189666259">Simon Hudon (Mar 04 2020 at 07:07)</a>:</h4>
+<p>or that it's the highest priority right now</p>
+
+<a name="189666266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189666266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189666266">Mario Carneiro (Mar 04 2020 at 07:07)</a>:</h4>
+<p>I'm worried that lean 4 is taking a step away from full stack soundness because of all the new programming features, the proof stuff is being left behind</p>
+
+<a name="189666316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189666316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189666316">Mario Carneiro (Mar 04 2020 at 07:08)</a>:</h4>
+<p>sure it's not <code>meta</code>/<code>unsafe</code> anymore, but being pure code means less now than it used to</p>
+
+<a name="189666338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189666338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189666338">Mario Carneiro (Mar 04 2020 at 07:09)</a>:</h4>
+<p>all for very good reasons of course, but just try not to forget about full functional correctness proofs</p>
+
+<a name="189666419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189666419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189666419">Mario Carneiro (Mar 04 2020 at 07:10)</a>:</h4>
+<p>all I ever wanted was fast and provably correct programs. Lean 3 fails on the first point, and lean 4 is so close to being able to satisfy this but might end up failing on the second</p>
+
+<a name="189666591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189666591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189666591">Simon Hudon (Mar 04 2020 at 07:14)</a>:</h4>
+<p>I think regardless, Lean 4 is going to be a step forward. If you do manage to prove its correctness, that's going to be interesting.  Now that it's in large part written in Lean, that <code>Expr</code> is in safe code, that might be more accessible. At the very least, I think a lot of mistakes are being ruled out so we can make progress faster</p>
+
+<a name="189666684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189666684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189666684">Simon Hudon (Mar 04 2020 at 07:16)</a>:</h4>
+<p>Btw, here is the Coq construct I was referring to earlier:</p>
+<div class="codehilite"><pre><span></span><span class="n">Inductive</span> <span class="n">sumor</span> <span class="o">(</span><span class="n">A</span><span class="o">:</span><span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">B</span><span class="o">:</span><span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span>
+  <span class="bp">|</span> <span class="n">inleft</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">-&gt;</span> <span class="n">A</span> <span class="bp">+</span> <span class="o">{</span><span class="n">B</span><span class="o">}</span>
+  <span class="bp">|</span> <span class="n">inright</span> <span class="o">:</span> <span class="n">B</span> <span class="bp">-&gt;</span> <span class="n">A</span> <span class="bp">+</span> <span class="o">{</span><span class="n">B</span><span class="o">}</span>
+ <span class="n">where</span> <span class="s2">&quot;A + { B }&quot;</span> <span class="o">:=</span> <span class="o">(</span><span class="n">sumor</span> <span class="n">A</span> <span class="n">B</span><span class="o">)</span> <span class="o">:</span> <span class="n">type_scope</span><span class="bp">.</span>
+</pre></div>
+
+<a name="189669432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189669432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189669432">Mario Carneiro (Mar 04 2020 at 08:11)</a>:</h4>
+<p>I guess that's just <code>A + plift B</code> for us</p>
+
+<a name="189678814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189678814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189678814">Anton Lorenzen (Mar 04 2020 at 10:44)</a>:</h4>
+<p>What is "that fuel stuff"? Is that a Lean 4 thing?</p>
+
+<a name="189681130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189681130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189681130">Marc Huisinga (Mar 04 2020 at 11:15)</a>:</h4>
+<p>presumably passing in another parameter that dictates the maximum amount of steps that you run a function so that it always terminates. you run the function until it runs out of fuel.</p>
+
+<a name="189681203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189681203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189681203">Mario Carneiro (Mar 04 2020 at 11:16)</a>:</h4>
+<p>and then there is a magic value that you can pass that acts like infinity for unbounded recursions</p>
+
+<a name="189682348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189682348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189682348">Chris B (Mar 04 2020 at 11:32)</a>:</h4>
+<p>How do you pull that part off?</p>
+
+<a name="189682889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189682889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189682889">Mario Carneiro (Mar 04 2020 at 11:41)</a>:</h4>
+<p>I looked into it a while ago, and I forget the details, but I think this constant is marked such that you can't use it in proofs. It interacts with <code>partial</code> functions in a weird way though and having a "largest natural number" lying around doesn't make me happy</p>
+
+<a name="189683140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189683140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189683140">Sebastian Ullrich (Mar 04 2020 at 11:45)</a>:</h4>
+<p>It's a <code>constant</code>, it doesn't really have a value. <code>partial def</code>s are irreducible for all intents and purposes.</p>
+
+<a name="189683451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189683451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189683451">Mario Carneiro (Mar 04 2020 at 11:50)</a>:</h4>
+<p>Still, it is one more place where the logic and the VM disagree about something, and the constant can go in lots of places</p>
+
+<a name="189683552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189683552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189683552">Mario Carneiro (Mar 04 2020 at 11:53)</a>:</h4>
+<p>It doesn't matter what number it is, it's a <code>nat</code> and lean knows that <code>nat</code> has certain properties. For example if you evaluate a partial function at depth <code>infinity+1</code> then it will return none, even if in reality this is impossible</p>
+
+<a name="189683728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189683728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189683728">Mario Carneiro (Mar 04 2020 at 11:55)</a>:</h4>
+<p>In other words, every <code>partial</code> function is provably non-total, in the sense <code>\ex n, f n = none</code></p>
+
+<a name="189683794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189683794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189683794">Mario Carneiro (Mar 04 2020 at 11:56)</a>:</h4>
+<p>even if the recursion equations are actually perfectly well defined</p>
+
+<a name="189684171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189684171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189684171">Mario Carneiro (Mar 04 2020 at 12:02)</a>:</h4>
+<p>Now I wonder if you can combind the pointer equality trick, which gives you true properties that you can't prove (two calls to <code>withPtrEq</code> give the same result), with the infinite recursion, which gives you true but not finitely observable properties that you can disprove (the <code>partial</code> function <code>f 0 = 1</code> and <code>f(n+1) = f n</code> never returns <code>0</code>), to get a true and finitely observable fact that is disprovable</p>
+
+<a name="189686491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189686491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189686491">Gabriel Ebner (Mar 04 2020 at 12:38)</a>:</h4>
+<p>(I'm still reading through the discussion, I hope I didn't miss too much.  These are just my first thoughts after skimming the paper.)  I like that these features will be available in Lean 4.  However the paper comes across as unorganized and without a clear and uniform design.  There are two primitives for pointer equality tests, <code>withPtrEq</code> and <code>withPtrEqResult</code>.  (For some reason there's only one version of <code>withPtrAddr</code> and <em>of course</em> it works like <code>withPtrEqResult</code> and not like <code>withPtrEq</code>....)  And then there's squashes thrown in as yet another way to do the same thing: i.e., to control the elimination principle.  I think it would be good idea to reduce the number of primitive (concepts) here.  Why can't you just add <code>ptrAddr : α → ∥Addr∥</code> and <code>ptrEq : ∀ a b, ∥PtrEqResult a b∥</code> like <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> suggested?  Then it would be clear that all such "implementation details" like pointer equality are supposed to be in the squash monad.  And you only need to learn one elimination principle.  Or if that's too sophisticated, present at most one of the variants, i.e., only <code>withPtrEqResult</code> and not <code>withPtrEq</code>.</p>
+
+<a name="189687405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189687405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189687405">Gabriel Ebner (Mar 04 2020 at 12:53)</a>:</h4>
+<p>The <code>Result</code> structure is also somewhat confusingly named.  1) It is not related to <code>PtrEqResult</code>.  2) It is not related to Rust's <code>Result</code> (= <code>Except</code> = <code>Either</code>).   3) Why does it even mention the function and argument separately?  <code>def Result (y : β) := { output // output = y }</code> works as well.  4) I like subtypes better, how about <code>{ output // output = f x }</code> instead of <code>Result f x</code>?</p>
+
+<a name="189691776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189691776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189691776">Reid Barton (Mar 04 2020 at 13:52)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110026">Simon Hudon</span> <a href="#narrow/stream/113488-general/topic/Pure.20functional.20programming.20and.20pointer-based.20optimization/near/189666591" title="#narrow/stream/113488-general/topic/Pure.20functional.20programming.20and.20pointer-based.20optimization/near/189666591">said</a>:</p>
+<blockquote>
+<p>I think regardless, Lean 4 is going to be a step forward. If you do manage to prove its correctness, that's going to be interesting.  Now that it's in large part written in Lean, that <code>Expr</code> is in safe code, that might be more accessible. At the very least, I think a lot of mistakes are being ruled out so we can make progress faster</p>
+</blockquote>
+<p>I know that currently the only Lean 4 program is Lean itself but I don't really care that much about proving the correctness of Lean. I do care about writing other fast and provably correct programs like computer algebra systems and algorithms in number theory and algebraic topology and cryptography. Lean 4 is like 90% of the way to what I want but this <code>partial</code> stuff looks like a big headache.</p>
+
+<a name="189691974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189691974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189691974">Patrick Massot (Mar 04 2020 at 13:54)</a>:</h4>
+<p>Are we talking about proving the part of Lean that will be used to write tactics? If yes then why do we care? The kernel will still check the proofs in the end, right? And the story you discuss today doesn't require more trust in the kernel, right?</p>
+
+<a name="189692385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189692385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189692385">Reid Barton (Mar 04 2020 at 13:59)</a>:</h4>
+<p>I am talking about using Lean for more than theorem proving. For example writing a program to compute the number of points on an elliptic curve and proving it correct, and being able to compile the program to an executable which has similar performance to a C implementation.</p>
+
+<a name="189692954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189692954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189692954">Sebastian Ullrich (Mar 04 2020 at 14:04)</a>:</h4>
+<p>The biggest reason we are using <code>partial</code> right now is because we can't do wellfoundedness proofs right now. If you want to prove your function total, that will of course continue to work.</p>
+
+<a name="189692981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189692981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189692981">Sebastian Ullrich (Mar 04 2020 at 14:04)</a>:</h4>
+<p><code>partial</code> is mostly for when you don't care about proofs</p>
+
+<a name="189693422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189693422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189693422">Reid Barton (Mar 04 2020 at 14:09)</a>:</h4>
+<p>But it has some special treatment with the equation compiler and general recursion, right?</p>
+
+<a name="189695403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189695403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189695403">Sebastian Ullrich (Mar 04 2020 at 14:26)</a>:</h4>
+<p>It does, but it's really shallow. Add a new <code>Nat</code> param, recurse on it, and start it with <code>hugeFuel</code>.</p>
+
+<a name="189708774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189708774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189708774">Reid Barton (Mar 04 2020 at 16:35)</a>:</h4>
+<p>I guess my remaining question is whether a hand-rolled total function defined by general recursion plus a separate proof of termination can have zero overhead relative to the code I would get from <code>partial</code></p>
+
+<a name="189712594"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189712594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189712594">Sebastian Ullrich (Mar 04 2020 at 17:11)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> The compiler output is independent of the mode of recursion: <a href="https://github.com/leanprover/lean4/blob/50207e2c5af73af8006f2f9652c6b90694066a50/src/library/util.h#L302-L304" target="_blank" title="https://github.com/leanprover/lean4/blob/50207e2c5af73af8006f2f9652c6b90694066a50/src/library/util.h#L302-L304">https://github.com/leanprover/lean4/blob/50207e2c5af73af8006f2f9652c6b90694066a50/src/library/util.h#L302-L304</a><br>
+If you want to encode general recursion in something custom like <code>roption</code>, I suppose it will depend on how customizable the equation compiler is.</p>
+
+<a name="189728457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189728457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189728457">Simon Hudon (Mar 04 2020 at 19:54)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110032">Reid Barton</span> <a href="#narrow/stream/113488-general/topic/Pure.20functional.20programming.20and.20pointer-based.20optimization/near/189691776" title="#narrow/stream/113488-general/topic/Pure.20functional.20programming.20and.20pointer-based.20optimization/near/189691776">said</a>:</p>
+<blockquote>
+<p>I know that currently the only Lean 4 program is Lean itself but I don't really care that much about proving the correctness of Lean. I do care about writing other fast and provably correct programs like computer algebra systems and algorithms in number theory and algebraic topology and cryptography. Lean 4 is like 90% of the way to what I want but this <code>partial</code> stuff looks like a big headache.</p>
+</blockquote>
+<p>What I was getting at is that, if 10% of Lean is implemented at all, that means that we have very few features to rely on to write Lean in Lean itself. When we go up to 20%, new features are available and we can make use of them in the implementation of Lean. Loops are something that we need from day 1 and well-founded recursion is not the first feature on the list. <code>partial</code> is a great way around that even if it is schedule to disappear after WF recursion comes in -- I don't know if it actually is scheduled but when we do have WF recursion or even general recursion, you don't have to care about <code>partial</code> in the programs that you write and prove</p>
+
+<a name="189730345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189730345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189730345">Mario Carneiro (Mar 04 2020 at 20:13)</a>:</h4>
+<p>There is a general mechanism to take the equations of the equation compiler and produce a relation that relates all input values to all calls (where it should be "decreasing"). You construct an inductive relation with these constructors and then <code>acc</code> applied to that is the unique most general well foundedness condition, that allows you to say "a function with these equations computes here". There are no constraints on this compilation procedure, assuming the arguments have been tupled up as in lean 3 wf recursive compilation.</p>
+<p>The upshot is that you can write any equations you want, and you can produce a function from some proposition, asserting that the particular input terminates, to the result value. If you don't want to prove well foundedness, you can either call it in the <code>roption</code> monad, or you can pass a fake proof. Writing the equations and proving termination become separated, and you don't need any magic at all.</p>
+
+<a name="189766243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pure%20functional%20programming%20and%20pointer-based%20optimization/near/189766243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22362Purefunctionalprogrammingandpointerbasedoptimization.html#189766243">Patrick Stevens (Mar 05 2020 at 07:33)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="258922">Anton Lorenzen</span> <a href="#narrow/stream/113488-general/topic/Pure.20functional.20programming.20and.20pointer-based.20optimization/near/189678814" title="#narrow/stream/113488-general/topic/Pure.20functional.20programming.20and.20pointer-based.20optimization/near/189678814">said</a>:</p>
+<blockquote>
+<p>What is "that fuel stuff"? Is that a Lean 4 thing?</p>
+</blockquote>
+<p>This probably refers to "petrol-driven computation". If you have a computation whose halting behaviour you don't know, a total language might not let you run it (because it might not terminate); but you can still always run it for some maximum number of computation steps, unfolding the state of the computation as you go. After a thousand steps, maybe it's terminated or maybe it hasn't, but you can certainly unfold the computation up to that point. We say you've "provided 1000 fuel" to the computation, and this may or may not be enough to complete it.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -15,39 +15,39 @@ permalink: archive/113488general/42931Howtousethesimplifier.html
 <a name="189387949"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20use%20the%20simplifier%3F/near/189387949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/42931Howtousethesimplifier.html#189387949">Kevin Buzzard (Feb 29 2020 at 12:00)</a>:</h4>
 <p>I never use <code>simp</code> really, because I don't understand how it works. Here is a simple example <a href="#narrow/stream/116395-maths/topic/topological.20space.20from.20filter/near/189336789" title="#narrow/stream/116395-maths/topic/topological.20space.20from.20filter/near/189336789">from this thread</a> where I write a simple 7 line tactic mode proof of something which any mathematician would be able to work out in their head.</p>
-<div class="codehilite"><pre><span></span>import tactic
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
 
-universes u v
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
 
-open set
+<span class="kn">open</span> <span class="n">set</span>
 
--- Say X and Y are types, U=univ is a subset of X
--- and V is a subset of Y. If C is a subset of X × Y
--- such that U × V is in the complement of C, then
--- V is in the complement of the projection of C down to Y.
--- Maths proof : &quot;if you can&#39;t solve this, you shouldn&#39;t be taking my class&quot;
--- Alternate maths proof: &quot;draw a rectangle&quot;.
+<span class="c1">-- Say X and Y are types, U=univ is a subset of X</span>
+<span class="c1">-- and V is a subset of Y. If C is a subset of X × Y</span>
+<span class="c1">-- such that U × V is in the complement of C, then</span>
+<span class="c1">-- V is in the complement of the projection of C down to Y.</span>
+<span class="c1">-- Maths proof : &quot;if you can&#39;t solve this, you shouldn&#39;t be taking my class&quot;</span>
+<span class="c1">-- Alternate maths proof: &quot;draw a rectangle&quot;.</span>
 
-example (X : Type u) (Y : Type v) (U : set X) (hXU : univ ⊆ U)
-  (V : set Y) (C : set (X × Y)) (hUV : set.prod U V ⊆ -C) :
-  V ⊆ -(prod.snd &#39;&#39; C) :=
--- my Lean proof:
-begin
-  -- Suppose for a contradiction that the intersection is non-empty.
-  -- Then we must have an element of C whose second component is in V
-  rintros v hvV ⟨uv, huv, rfl⟩,
-  -- To get the contradiction it suffices to prove that this element is in U × V
-  revert huv,
-  apply hUV,
-  -- so we need to check its first component is in U and its second is in V
-  rw set.mem_prod,
-  split,
-    -- but U is all of X so the first component must be in U
-    apply hXU, apply set.mem_univ,
-  -- and by assumption the second component is in V
-  exact hvV,
-  -- so done
-end
+<span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">hXU</span> <span class="o">:</span> <span class="n">univ</span> <span class="err">⊆</span> <span class="n">U</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">V</span> <span class="o">:</span> <span class="n">set</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">X</span> <span class="bp">×</span> <span class="n">Y</span><span class="o">))</span> <span class="o">(</span><span class="n">hUV</span> <span class="o">:</span> <span class="n">set</span><span class="bp">.</span><span class="n">prod</span> <span class="n">U</span> <span class="n">V</span> <span class="err">⊆</span> <span class="bp">-</span><span class="n">C</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">V</span> <span class="err">⊆</span> <span class="bp">-</span><span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">snd</span> <span class="err">&#39;&#39;</span> <span class="n">C</span><span class="o">)</span> <span class="o">:=</span>
+<span class="c1">-- my Lean proof:</span>
+<span class="k">begin</span>
+  <span class="c1">-- Suppose for a contradiction that the intersection is non-empty.</span>
+  <span class="c1">-- Then we must have an element of C whose second component is in V</span>
+  <span class="n">rintros</span> <span class="n">v</span> <span class="n">hvV</span> <span class="bp">⟨</span><span class="n">uv</span><span class="o">,</span> <span class="n">huv</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="c1">-- To get the contradiction it suffices to prove that this element is in U × V</span>
+  <span class="n">revert</span> <span class="n">huv</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">hUV</span><span class="o">,</span>
+  <span class="c1">-- so we need to check its first component is in U and its second is in V</span>
+  <span class="n">rw</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_prod</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span>
+    <span class="c1">-- but U is all of X so the first component must be in U</span>
+    <span class="n">apply</span> <span class="n">hXU</span><span class="o">,</span> <span class="n">apply</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_univ</span><span class="o">,</span>
+  <span class="c1">-- and by assumption the second component is in V</span>
+  <span class="n">exact</span> <span class="n">hvV</span><span class="o">,</span>
+  <span class="c1">-- so done</span>
+<span class="kn">end</span>
 </pre></div>
 
 

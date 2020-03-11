@@ -222,7 +222,7 @@ I'm very excited to see this! I really hope we will have a <code>back</code> in 
 <p>Here is a cheat sheet:</p>
 <div class="codehilite"><pre><span></span>α-equivalence: λ x, f x ≡ λ y, f y
 β-reduction: (λ x, f x) a ≡ f a
-δ-reduction: unfold a definition
+δ-reduction: id ≡ λ {α : Sort*} (x : α), x (i.e. unfold a definition)
 η-reduction: λ x, f x ≡ f (η-expansion is in the other direction)
 ι-reduction: nat.rec P₀ Pₛ 0 ≡ P₀ and nat.rec P₀ Pₛ n.succ ≡ Pₛ n (nat.rec P₀ Pₛ n)
 ζ-reduction: (let x := a in f x) ≡ f a
@@ -231,7 +231,7 @@ I'm very excited to see this! I really hope we will have a <code>back</code> in 
 </pre></div>
 
 
-<p>all reduction rules are directed (from left to right), but if you take the congruence closure (that is, the smallest equivalence relation that respects all ways to make a term), you get the corresponding equivalence</p>
+<p>all reduction rules are directed (from left to right), but if you take the congruence closure (that is, the smallest equivalence relation that respects all ways to make a term), you get the corresponding equivalence. "Definitional equality" is the smallest congruence closure containing all of the above relations (except η-reduction for records).</p>
 
 <a name="182062071"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182062071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182062071">Floris van Doorn (Nov 27 2019 at 21:58)</a>:</h4>
@@ -247,16 +247,15 @@ I'm very excited to see this! I really hope we will have a <code>back</code> in 
 
 <a name="182065700"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182065700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182065700">Floris van Doorn (Nov 27 2019 at 22:53)</a>:</h4>
-<p>The last two names are maybe informal usage of these names. Yes, the second <code>beta</code> is indeed a combination of <code>delta</code> and <code>iota</code> in Lean. This is because products are defined as a inductive type. If records are primitive (not special cases of inductive types) then it could be its own rule.</p>
+<p>Yes, the second <code>beta</code> is indeed a combination of <code>delta</code> and <code>iota</code> in Lean. This is because products are defined as a inductive type. If records are primitive (not special cases of inductive types) then it could be its own rule.</p>
 <p>Sometimes <code>ι</code>-reduction is also called "<code>β</code>-reduction for inductive types". To explain this terminology, we have to take a step back.<br>
 In type theory, to each type former, there is a number of rules associated to it. I will explain these rules by using the natural numbers as an example.</p>
 <ul>
 <li>(Type) formation rules: when can I form this type? For natural numbers, we have <code>nat : Type</code></li>
 <li>(Term) introduction rules: when can I form an element of this type? For natural numbers: <code>0 : nat</code> and if <code>n : nat</code> then <code>n.succ : nat</code></li>
 <li>(Term) elimination rules: how can I eliminate out of this type? For natural numbers this is <code>nat.rec</code>.</li>
-<li>Then there are computation rules. These have two flavors<p>- What happens if I apply an elimination rule to an introduction rule? In general, this is sometimes called <code>beta</code>-reduction (since it corresponds to <br>
-<code>beta</code>-reduction when talking about functions). For natural numbers, these are the <code>iota</code>-reduction rules mentioned above.<br>
-- What happens if I apply an introduction rule to an elimination rule? These are called <code>eta</code>-conversion rules. The natural numbers don't really have them (I think you can write something like an eta-rule down, but it's not that useful. For functions and products, it's the eta rule I mentioned above.</p>
+<li>Then there are computation rules. These have two flavors<p>- What happens if I apply an elimination rule to an introduction rule? In general, this is sometimes called <code>beta</code>-reduction (since it corresponds to <code>beta</code>-reduction when talking about functions). For natural numbers, these are the <code>iota</code>-reduction rules mentioned above.<br>
+- What happens if I apply an introduction rule to an elimination rule? These are called <code>eta</code>-conversion rules. The natural numbers don't really have them (I think you can write something like an eta-rule down, but it's not that useful). For functions and products, it's the eta rule I mentioned above.</p>
 </li>
 </ul>
 <p>This is the reason that different rules have the name <code>beta</code>/<code>eta</code>-reductions: they are the corresponding reduction rules for those type formers.</p>
@@ -406,6 +405,14 @@ In type theory, to each type former, there is a number of rules associated to it
 <a name="189445654"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/189445654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#189445654">Jeremy Avigad (Mar 01 2020 at 20:03)</a>:</h4>
 <p>No, I am not working on tactics for inductive types. What Mario is thinking of is this: there is a general strategy for showing finitely branching inductive types are encodable: <a href="https://github.com/leanprover-community/mathlib/blob/master/archive/examples/prop_encodable.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/archive/examples/prop_encodable.lean">https://github.com/leanprover-community/mathlib/blob/master/archive/examples/prop_encodable.lean</a>. There is a lot of boilerplate involved, but that sort of thing can also be automated. (But I am not planning to do it.)</p>
+
+<a name="189458109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/189458109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#189458109">Yury G. Kudryashov (Mar 02 2020 at 02:13)</a>:</h4>
+<p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> Where do you use <code>ordered_partition2</code>?</p>
+
+<a name="189467369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/189467369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#189467369">Sebastien Gouezel (Mar 02 2020 at 06:53)</a>:</h4>
+<p>I am working on analytic functions (in good generality, i.e., possibly on Banach spaces). These are the functions that have locally an expansion <code>f(x + h) = \Sigma_n f_n(h, ..., h)</code> where <code>f_n</code> is a continuous <code>n</code>-multilinear map. To show that the composition of analytic functions is analytic, you need to write the composition of two such things as a series of multilinear maps, which is kind of dirty. I use <code>ordered_partition2</code> there.</p>
 
 
 {% endraw %}

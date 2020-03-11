@@ -17,26 +17,26 @@ permalink: archive/113489newmembers/20711wroteadefinitionforfreeobjectsrequestin
 <p>I tried to write a definition of free objects in a category over a type, and what I wrote type-checks, but I'm not certain it does the right thing, and if it does, I suspect there is a cleaner/better way to write it, but I don't know how.<br>
 My code does not yet conform to the mathlib library style conventions.<br>
 Would anyone be willing to look over my code to evaluate whether it does the right thing, and whether there are substantially better ways I could organize it?</p>
-<div class="codehilite"><pre><span></span>import category_theory.category
-import category_theory.concrete_category
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">category</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">concrete_category</span>
 
-open category_theory
+<span class="kn">open</span> <span class="n">category_theory</span>
 
-section
+<span class="kn">section</span>
 
-universes u_1 u_2
+<span class="n">universes</span> <span class="n">u_1</span> <span class="n">u_2</span>
 
--- typical example for c is a typeclass, like topological_space , with hom being something like continuous.
-variables (c : Type u_1 -&gt; Type u_2) (hom : (Pi {alpha beta : Type u_1}, c alpha -&gt; c beta -&gt; (alpha -&gt; beta) -&gt; Prop))
-variable my_concrete_category : concrete_category @hom
+<span class="c1">-- typical example for c is a typeclass, like topological_space , with hom being something like continuous.</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_1</span> <span class="bp">-&gt;</span> <span class="kt">Type</span> <span class="n">u_2</span><span class="o">)</span> <span class="o">(</span><span class="n">hom</span> <span class="o">:</span> <span class="o">(</span><span class="k">Pi</span> <span class="o">{</span><span class="n">alpha</span> <span class="n">beta</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_1</span><span class="o">},</span> <span class="n">c</span> <span class="n">alpha</span> <span class="bp">-&gt;</span> <span class="n">c</span> <span class="n">beta</span> <span class="bp">-&gt;</span> <span class="o">(</span><span class="n">alpha</span> <span class="bp">-&gt;</span> <span class="n">beta</span><span class="o">)</span> <span class="bp">-&gt;</span> <span class="kt">Prop</span><span class="o">))</span>
+<span class="kn">variable</span> <span class="n">my_concrete_category</span> <span class="o">:</span> <span class="n">concrete_category</span> <span class="bp">@</span><span class="n">hom</span>
 
-def is_free_over (X : bundled c) (generators_of_X : Type u_1 ) (i : generators_of_X -&gt; (@forget c @hom my_concrete_category).obj X) : Prop :=
-  forall (Y : bundled c) (f : generators_of_X -&gt; ((@forget c @hom my_concrete_category).obj Y)),
-    ∃! (g : has_hom.hom X Y), f = ((@forget c @hom my_concrete_category).map g) ∘ i
+<span class="n">def</span> <span class="n">is_free_over</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">bundled</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">generators_of_X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_1</span> <span class="o">)</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">generators_of_X</span> <span class="bp">-&gt;</span> <span class="o">(</span><span class="bp">@</span><span class="n">forget</span> <span class="n">c</span> <span class="bp">@</span><span class="n">hom</span> <span class="n">my_concrete_category</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+  <span class="k">forall</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="n">bundled</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">generators_of_X</span> <span class="bp">-&gt;</span> <span class="o">((</span><span class="bp">@</span><span class="n">forget</span> <span class="n">c</span> <span class="bp">@</span><span class="n">hom</span> <span class="n">my_concrete_category</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span> <span class="n">Y</span><span class="o">)),</span>
+    <span class="bp">∃!</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">has_hom</span><span class="bp">.</span><span class="n">hom</span> <span class="n">X</span> <span class="n">Y</span><span class="o">),</span> <span class="n">f</span> <span class="bp">=</span> <span class="o">((</span><span class="bp">@</span><span class="n">forget</span> <span class="n">c</span> <span class="bp">@</span><span class="n">hom</span> <span class="n">my_concrete_category</span><span class="o">)</span><span class="bp">.</span><span class="n">map</span> <span class="n">g</span><span class="o">)</span> <span class="err">∘</span> <span class="n">i</span>
 
-#check is_free_over
+<span class="bp">#</span><span class="kn">check</span> <span class="n">is_free_over</span>
 
-end
+<span class="kn">end</span>
 </pre></div>
 
 

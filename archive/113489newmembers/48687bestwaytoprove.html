@@ -1,0 +1,39 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/48687bestwaytoprove.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/48687bestwaytoprove.html">best way to prove</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="189558705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/best%20way%20to%20prove/near/189558705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48687bestwaytoprove.html#189558705">Arjun Pitchanathan (Mar 03 2020 at 02:49)</a>:</h4>
+<p>What's the best way to prove this? I have a proof (strong induction on l1.length) but it's upwards of a hundred lines...</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span>
+<span class="n">noncomputable</span> <span class="n">theory</span>
+<span class="n">open_locale</span> <span class="n">classical</span>
+<span class="kn">universe</span> <span class="n">u</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+<span class="kn">example</span> <span class="o">{</span><span class="n">l₁</span> <span class="n">l₂</span> <span class="o">:</span> <span class="n">list</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">r</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">nodup</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">),</span>
+    <span class="n">x</span> <span class="bp">≠</span> <span class="n">y</span> <span class="bp">→</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">r</span> <span class="n">x</span> <span class="n">b</span> <span class="bp">∧</span> <span class="n">r</span> <span class="n">y</span> <span class="n">b</span><span class="o">))</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">l₁</span><span class="bp">.</span><span class="n">countp</span> <span class="o">(</span><span class="n">r</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="n">l₂</span><span class="bp">.</span><span class="n">countp</span> <span class="o">(</span><span class="n">r</span> <span class="n">a</span><span class="o">))</span> <span class="bp">→</span>
+    <span class="n">l₁</span><span class="bp">.</span><span class="n">countp</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">b</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">a</span><span class="o">,</span> <span class="n">r</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">l₂</span><span class="bp">.</span><span class="n">countp</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">b</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">a</span><span class="o">,</span> <span class="n">r</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="189628077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/best%20way%20to%20prove/near/189628077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48687bestwaytoprove.html#189628077">Bryan Gin-ge Chen (Mar 03 2020 at 19:56)</a>:</h4>
+<p>I took a crack at this but I wasn't able to succeed. Can you post your proof or link to a gist?</p>
+
+<a name="189631371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/best%20way%20to%20prove/near/189631371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/48687bestwaytoprove.html#189631371">Arjun Pitchanathan (Mar 03 2020 at 20:33)</a>:</h4>
+<p><a href="https://gist.github.com/Superty/37d755fe1d4cabd50b8a2b4d2da4ca34#file-countp_nodup-lean-L97" target="_blank" title="https://gist.github.com/Superty/37d755fe1d4cabd50b8a2b4d2da4ca34#file-countp_nodup-lean-L97">Here</a> it is. I'm not sure how readable it is. I tried to add some explanatory comments.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

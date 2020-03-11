@@ -9,15 +9,23 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#1540 (short games and domineering)](898241540shortgamesanddomineering.html) (1 message, latest: Feb 28 2020 at 18:09)
+* [#2004 monoid localisation](917942004monoidlocalisation.html) (5 messages, latest: Mar 06 2020 at 17:22)
 
-* [#1540](234701540.html) (2 messages, latest: Feb 28 2020 at 17:27)
+* [#2064 bump lean](519722064bumplean.html) (3 messages, latest: Mar 05 2020 at 13:17)
+
+* [#1368 `fin_enum` class](530531368finenumclass.html) (3 messages, latest: Mar 05 2020 at 00:56)
+
+* [#1926 seminorms](861631926seminorms.html) (6 messages, latest: Mar 04 2020 at 19:54)
+
+* [#2030](714972030.html) (44 messages, latest: Mar 03 2020 at 04:27)
+
+* [#2052 galois insertion lemmas](834942052galoisinsertionlemmas.html) (4 messages, latest: Mar 02 2020 at 07:06)
+
+* [#1540 (short games and domineering)](898241540shortgamesanddomineering.html) (3 messages, latest: Feb 28 2020 at 18:09)
 
 * [#1596 case_bash on nat](526901596casebashonnat.html) (2 messages, latest: Feb 24 2020 at 03:48)
 
 * [category PRs](66100categoryPRs.html) (1 message, latest: Feb 21 2020 at 14:39)
-
-* [#2030](714972030.html) (4 messages, latest: Feb 20 2020 at 22:21)
 
 * [#1914 formal roadmap](775281914formalroadmap.html) (5 messages, latest: Feb 19 2020 at 17:29)
 
@@ -83,11 +91,9 @@ permalink: archive/144837PRreviews/index.html
 
 * [#1391 use classical](493901391useclassical.html) (2 messages, latest: Sep 06 2019 at 11:13)
 
-* [#1356 derive finite_products](551401356derivefiniteproducts.html) (48 messages, latest: Aug 31 2019 at 00:23)
+* [#1356 derive finite_products](551401356derivefiniteproducts.html) (65 messages, latest: Aug 31 2019 at 00:23)
 
 * [#1368 `enumerable` class](823481368enumerableclass.html) (6 messages, latest: Aug 30 2019 at 20:14)
-
-* [#1365 derive finite_products](206761365derivefiniteproducts.html) (17 messages, latest: Aug 30 2019 at 17:57)
 
 * [#1366 add a `lt` relation independent from `le` for with_top](091241366addaltrelationindependentfromleforwithtop.html) (7 messages, latest: Aug 30 2019 at 15:38)
 
@@ -193,7 +199,7 @@ permalink: archive/144837PRreviews/index.html
 
 * [#923 ring of ctu functions](49740923ringofctufunctions.html) (1 message, latest: Apr 15 2019 at 08:45)
 
-* [#726 bundled bounded linear maps \[wip\]](27446726bundledboundedlinearmapswip.html) (35 messages, latest: Apr 14 2019 at 08:59)
+* [#726 bundled bounded linear maps \[wip\]](27446726bundledboundedlinearmapswip.html) (44 messages, latest: Apr 14 2019 at 08:59)
 
 * [#893 whiskering natural isomorphisms](14855893whiskeringnaturalisomorphisms.html) (2 messages, latest: Apr 08 2019 at 23:56)
 
@@ -213,19 +219,17 @@ permalink: archive/144837PRreviews/index.html
 
 * [#854 pointwise operations for sets](87825854pointwiseoperationsforsets.html) (10 messages, latest: Apr 03 2019 at 06:32)
 
-* [#822 first three digits of π](19784822firstthreedigitsof.html) (47 messages, latest: Apr 01 2019 at 17:09)
+* [#822 Compute the first three digits of pi](53872822Computethefirstthreedigitsofpi.html) (47 messages, latest: Apr 01 2019 at 17:09)
 
 * [#819 card finite fields](64086819cardfinitefields.html) (3 messages, latest: Apr 01 2019 at 06:56)
 
 * [#820 lexicographic orders](43215820lexicographicorders.html) (15 messages, latest: Mar 31 2019 at 23:47)
 
-* [#766 cache-olean](84759766cacheolean.html) (35 messages, latest: Mar 31 2019 at 23:37)
+* [#766 cache-olean](84759766cacheolean.html) (83 messages, latest: Mar 31 2019 at 23:37)
 
 * [#850 mul_action](83628850mulaction.html) (58 messages, latest: Mar 28 2019 at 06:43)
 
 * [#851 FTA](82749851FTA.html) (12 messages, latest: Mar 26 2019 at 21:25)
-
-* [#766](67655766.html) (48 messages, latest: Mar 26 2019 at 13:03)
 
 * [#789 extensions of equiv](48571789extensionsofequiv.html) (34 messages, latest: Mar 21 2019 at 12:41)
 
@@ -270,8 +274,6 @@ permalink: archive/144837PRreviews/index.html
 * [#717 field_hom](70410717fieldhom.html) (8 messages, latest: Feb 16 2019 at 20:51)
 
 * [#728 continuation passing monad](45060728continuationpassingmonad.html) (12 messages, latest: Feb 15 2019 at 06:05)
-
-* [#726 operator norm \[wip\]](01971726operatornormwip.html) (9 messages, latest: Feb 15 2019 at 02:38)
 
 * [#707 Automate the deployment of nightly builds](13083707Automatethedeploymentofnightlybuilds.html) (46 messages, latest: Feb 12 2019 at 14:51)
 

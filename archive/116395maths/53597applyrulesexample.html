@@ -148,7 +148,7 @@ continuous.comp (continuous.comp continuous_sin continuous_sin) continuous_sin
 
 <a name="166086086"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166086086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166086086">Joseph Corneli (May 20 2019 at 13:47)</a>:</h4>
-<p>... and here's some revised code that looks very close to working.  <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  it gets up to an application of <code>exact</code> but for some reason that fails and the goal doesn't close.</p>
+<p>... and here's some revised code that looks very close to working.  <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  it gets up to an application of <code>exact</code> but for some reason that fails and accordingly the goal doesn't close.</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">basic</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">exponential</span>
 <span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">core</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span><span class="bp">.</span><span class="n">defs</span>
 <span class="kn">open</span> <span class="n">real</span> <span class="n">set</span>
@@ -201,8 +201,7 @@ continuous.comp (continuous.comp continuous_sin continuous_sin) continuous_sin
                                   <span class="c1">-- guess: we can refine iff the expression is a lambda?</span>
                                   <span class="c1">-- oh, but we need to peel off the &quot;continuous&quot; part</span>
                                   <span class="o">(</span><span class="n">do</span> <span class="n">t</span> <span class="err">←</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">target</span><span class="o">,</span>
-                                      <span class="n">trace</span> <span class="n">t</span><span class="o">,</span>
-                                      <span class="k">let</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">expr</span><span class="bp">.</span><span class="n">app_arg</span> <span class="n">t</span><span class="o">,</span>
+                                        <span class="k">let</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">expr</span><span class="bp">.</span><span class="n">app_arg</span> <span class="n">t</span><span class="o">,</span>
                                         <span class="k">if</span> <span class="n">expr</span><span class="bp">.</span><span class="n">is_lambda</span> <span class="n">a</span> <span class="k">then</span> <span class="n">refine_list_expr</span> <span class="n">r</span>
                                         <span class="k">else</span> <span class="n">fail</span> <span class="s2">&quot;can&#39;t refine&quot;</span><span class="o">)</span> <span class="bp">&lt;|&gt;</span>
                                   <span class="o">(</span><span class="n">sin_sin</span><span class="bp">.</span><span class="n">apply_list_expr</span> <span class="n">a</span><span class="o">)</span> <span class="bp">&lt;|&gt;</span>
@@ -254,7 +253,7 @@ continuous.comp (continuous.comp continuous_sin continuous_sin) continuous_sin
 
 <a name="166086384"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166086384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166086384">Joseph Corneli (May 20 2019 at 13:50)</a>:</h4>
-<p>You'll see I separated out the rules for <code>apply</code>, <code>refine</code>, and <code>exact</code>, and that here there's just one rule available for each such step.  So obvs. this preliminary to anything more general.</p>
+<p>You'll see I separated out the rules for <code>apply</code>, <code>refine</code>, and <code>exact</code>, and that here there's just one rule available for each such step.  So obvs. this is preliminary to anything more general.</p>
 
 <a name="166164744"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166164744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166164744">Joseph Corneli (May 21 2019 at 11:51)</a>:</h4>

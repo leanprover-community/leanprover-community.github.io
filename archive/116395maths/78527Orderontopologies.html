@@ -319,73 +319,91 @@ then you should use Patrick's order, with the discrete topology at the bottom an
 
 <a name="168079905"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/168079905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#168079905">Patrick Massot (Jun 13 2019 at 19:56)</a>:</h4>
-<p>import topology.basic</p>
-<p>open set filter lattice <br>
-universes u v w</p>
-<p>namespace topological_space<br>
-variables {α : Type u}</p>
-<p>/-- The least topology containing a collection of basic sets. -/<br>
-inductive generate_open (g : set (set α)) : set α → Prop<br>
-| basic  : ∀s∈g, generate_open s<br>
-| univ   : generate_open univ<br>
-| inter  : ∀s t, generate_open s → generate_open t → generate_open (s ∩ t)<br>
-| sUnion : ∀k, (∀s∈k, generate_open s) → generate_open (⋃₀ k)</p>
-<p>/-- The smallest topological space containing the collection <code>g</code> of basic sets -/<br>
-def generate_from (g : set (set α)) : topological_space α :=<br>
-{ is_open        := generate_open g,<br>
-  is_open_univ   := generate_open.univ g,<br>
-  is_open_inter  := generate_open.inter,<br>
-  is_open_sUnion := generate_open.sUnion  }</p>
-<p>section lattice</p>
-<p>def old_order : partial_order (topological_space α) :=<br>
-{ le          := λt s, t.is_open ≤ s.is_open,<br>
-  le_antisymm := assume t s h₁ h₂, topological_space_eq $ le_antisymm h₁ h₂,<br>
-  le_refl     := assume t, le_refl t.is_open,<br>
-  le_trans    := assume a b c h₁ h₂, @le_trans _ _ a.is_open b.is_open c.is_open h₁ h₂ }</p>
-<p>local attribute [instance] old_order</p>
-<p>lemma generate_from_le_iff_subset_is_open {g : set (set α)} {t : topological_space α} :<br>
-  topological_space.generate_from g ≤ t ↔ g ⊆ {s | t.is_open s} :=<br>
-iff.intro<br>
-  (assume ht s hs, ht _ $ topological_space.generate_open.basic s hs)<br>
-  (assume hg s hs, hs.rec_on (assume v hv, hg hv)<br>
-    t.is_open_univ (assume u v _ _, t.is_open_inter u v) (assume k _, t.is_open_sUnion k))</p>
-<p>protected def mk_of_closure (s : set (set α))<br>
-  (hs : {u | (topological_space.generate_from s).is_open u} = s) : topological_space α :=<br>
-{ is_open        := λu, u ∈ s,<br>
-  is_open_univ   := hs ▸ topological_space.generate_open.univ _,<br>
-  is_open_inter  := hs ▸ topological_space.generate_open.inter,<br>
-  is_open_sUnion := hs ▸ topological_space.generate_open.sUnion }</p>
-<p>lemma mk_of_closure_sets {s : set (set α)}<br>
-  {hs : {u | (topological_space.generate_from s).is_open u} = s} :<br>
-  topological_space.mk_of_closure s hs = topological_space.generate_from s :=<br>
-topological_space_eq hs.symm</p>
-<p>def gi_generate_from (α : Type*) :<br>
-  galois_insertion topological_space.generate_from (λt:topological_space α, {s | t.is_open s}) :=<br>
-{ gc        := assume g t, generate_from_le_iff_subset_is_open,<br>
-  le_l_u    := assume ts s hs, topological_space.generate_open.basic s hs,<br>
-  choice    := λg hg, topological_space.mk_of_closure g<br>
-    (subset.antisymm hg $ generate_from_le_iff_subset_is_open.1 $ le_refl _),<br>
-  choice_eq := assume s hs, mk_of_closure_sets }</p>
-<p>lemma generate_from_mono {α} {g₁ g₂ : set (set α)} (h : g₁ ⊆ g₂) :<br>
-  topological_space.generate_from g₁ ≤ topological_space.generate_from g₂ :=<br>
-(gi_generate_from _).gc.monotone_l h</p>
-<p>def old_complete_lattice {α : Type u} : complete_lattice (topological_space α) :=<br>
-(gi_generate_from α).lift_complete_lattice<br>
-end lattice</p>
-<p>instance : partial_order (topological_space α) :=<br>
-{ le          := λ t s, s.is_open ≤ t.is_open,<br>
-  le_antisymm := assume t s h₁ h₂, topological_space_eq $ le_antisymm h₂ h₁,<br>
-  le_refl     := assume t, le_refl t.is_open,<br>
-  le_trans    := assume a b c h₁ h₂, le_trans h₂ h₁ }</p>
-<p>instance : complete_lattice (topological_space α) :=<br>
-@order_dual.lattice.complete_lattice _ old_complete_lattice<br>
-end topological_space</p>
-<p>class discrete_topology (α : Type*) [t : topological_space α] : Prop :=<br>
-(eq_top : t = ⊥)</p>
-<p>@[simp] lemma is_open_discrete {α : Type*} [topological_space α] [discrete_topology α] (s : set α) :<br>
-  is_open s :=<br>
-(discrete_topology.eq_top α).symm ▸ trivial</p>
-<div class="codehilite"><pre><span></span>
+<div class="codehilite"><pre><span></span>import topology.basic
+
+open set filter lattice
+universes u v w
+
+namespace topological_space
+variables {α : Type u}
+
+/-- The least topology containing a collection of basic sets. -/
+inductive generate_open (g : set (set α)) : set α → Prop
+| basic  : ∀s∈g, generate_open s
+| univ   : generate_open univ
+| inter  : ∀s t, generate_open s → generate_open t → generate_open (s ∩ t)
+| sUnion : ∀k, (∀s∈k, generate_open s) → generate_open (⋃₀ k)
+
+/-- The smallest topological space containing the collection `g` of basic sets -/
+def generate_from (g : set (set α)) : topological_space α :=
+{ is_open        := generate_open g,
+  is_open_univ   := generate_open.univ g,
+  is_open_inter  := generate_open.inter,
+  is_open_sUnion := generate_open.sUnion  }
+
+section lattice
+
+def old_order : partial_order (topological_space α) :=
+{ le          := λt s, t.is_open ≤ s.is_open,
+  le_antisymm := assume t s h₁ h₂, topological_space_eq $ le_antisymm h₁ h₂,
+  le_refl     := assume t, le_refl t.is_open,
+  le_trans    := assume a b c h₁ h₂, @le_trans _ _ a.is_open b.is_open c.is_open h₁ h₂ }
+
+local attribute [instance] old_order
+
+lemma generate_from_le_iff_subset_is_open {g : set (set α)} {t : topological_space α} :
+  topological_space.generate_from g ≤ t ↔ g ⊆ {s | t.is_open s} :=
+iff.intro
+  (assume ht s hs, ht _ $ topological_space.generate_open.basic s hs)
+  (assume hg s hs, hs.rec_on (assume v hv, hg hv)
+    t.is_open_univ (assume u v _ _, t.is_open_inter u v) (assume k _, t.is_open_sUnion k))
+
+protected def mk_of_closure (s : set (set α))
+  (hs : {u | (topological_space.generate_from s).is_open u} = s) : topological_space α :=
+{ is_open        := λu, u ∈ s,
+  is_open_univ   := hs ▸ topological_space.generate_open.univ _,
+  is_open_inter  := hs ▸ topological_space.generate_open.inter,
+  is_open_sUnion := hs ▸ topological_space.generate_open.sUnion }
+
+lemma mk_of_closure_sets {s : set (set α)}
+  {hs : {u | (topological_space.generate_from s).is_open u} = s} :
+  topological_space.mk_of_closure s hs = topological_space.generate_from s :=
+topological_space_eq hs.symm
+
+def gi_generate_from (α : Type*) :
+  galois_insertion topological_space.generate_from (λt:topological_space α, {s | t.is_open s}) :=
+{ gc        := assume g t, generate_from_le_iff_subset_is_open,
+  le_l_u    := assume ts s hs, topological_space.generate_open.basic s hs,
+  choice    := λg hg, topological_space.mk_of_closure g
+    (subset.antisymm hg $ generate_from_le_iff_subset_is_open.1 $ le_refl _),
+  choice_eq := assume s hs, mk_of_closure_sets }
+
+lemma generate_from_mono {α} {g₁ g₂ : set (set α)} (h : g₁ ⊆ g₂) :
+  topological_space.generate_from g₁ ≤ topological_space.generate_from g₂ :=
+(gi_generate_from _).gc.monotone_l h
+
+def old_complete_lattice {α : Type u} : complete_lattice (topological_space α) :=
+(gi_generate_from α).lift_complete_lattice
+end lattice
+
+
+instance : partial_order (topological_space α) :=
+{ le          := λ t s, s.is_open ≤ t.is_open,
+  le_antisymm := assume t s h₁ h₂, topological_space_eq $ le_antisymm h₂ h₁,
+  le_refl     := assume t, le_refl t.is_open,
+  le_trans    := assume a b c h₁ h₂, le_trans h₂ h₁ }
+
+instance : complete_lattice (topological_space α) :=
+@order_dual.lattice.complete_lattice _ old_complete_lattice
+end topological_space
+
+
+class discrete_topology (α : Type*) [t : topological_space α] : Prop :=
+(eq_top : t = ⊥)
+
+@[simp] lemma is_open_discrete {α : Type*} [topological_space α] [discrete_topology α] (s : set α) :
+  is_open s :=
+(discrete_topology.eq_top α).symm ▸ trivial
 </pre></div>
 
 <a name="168080086"></a>

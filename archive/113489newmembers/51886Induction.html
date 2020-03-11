@@ -516,18 +516,17 @@ N : pre_term<br>
 
 <a name="160354739"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160354739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160354739">Patrick Thomas (Mar 09 2019 at 06:59)</a>:</h4>
-<p>Hmm. I'm not sure how the case where substitution is not defined is going to work in this definition. It seems there has to be an <code>else</code> for each <code>if, then</code> and for</p>
-<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">sub</span> <span class="o">:</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">var</span> <span class="bp">→</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">pre_term</span>
-<span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">:=</span> <span class="k">if</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="k">then</span> <span class="n">N</span> <span class="k">else</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span>
-<span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="n">P</span> <span class="n">Q</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">:=</span> <span class="n">sub_is_def</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span> <span class="bp">→</span> <span class="n">sub_is_def</span> <span class="n">Q</span> <span class="n">x</span> <span class="n">N</span> <span class="bp">→</span> <span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="o">(</span><span class="n">sub</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span><span class="o">)</span> <span class="o">(</span><span class="n">sub</span> <span class="n">Q</span> <span class="n">x</span> <span class="n">N</span><span class="o">)</span>
+<p>I get the same kind of error for</p>
+<div class="codehilite"><pre><span></span><span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="n">P</span> <span class="n">Q</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">sub_is_def</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span> <span class="bp">∧</span> <span class="n">sub_is_def</span> <span class="n">Q</span> <span class="n">x</span> <span class="n">N</span> <span class="k">then</span> <span class="o">(</span> <span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="o">(</span><span class="n">sub</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span><span class="o">)</span> <span class="o">(</span><span class="n">sub</span> <span class="n">Q</span> <span class="n">x</span> <span class="n">N</span><span class="o">)</span> <span class="o">)</span>
 </pre></div>
 
 
-<p>I get<br>
-type expected at<br>
-  pre_term.app (sub P x N) (sub Q x N)<br>
-term has type<br>
-  pre_term</p>
+<p>failed to synthesize type class instance for<br>
+sub : pre_term → var → pre_term → pre_term,<br>
+P Q : pre_term,<br>
+x : var,<br>
+N : pre_term<br>
+⊢ decidable (sub_is_def P x N ∧ sub_is_def Q x N)</p>
 
 <a name="160355540"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/160355540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#160355540">Mario Carneiro (Mar 09 2019 at 07:24)</a>:</h4>

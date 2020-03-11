@@ -330,6 +330,7 @@ What I meant is that we have a new proof checker that bypasses the API and inste
 <a name="186409482"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186409482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186409482">Christian Szegedy (Jan 23 2020 at 16:56)</a>:</h4>
 <p><span class="user-mention" data-user-id="249373">@Stanislas Polu</span> If you mean by "replay" proving the theorem in a different way, then yes. It happens a lot. Actually, machine generated proofs tend to be quite different from human proofs, even if premise selection was trained by imitation only. Also logging (and training on) "theorems" (or true statements) produced by the conversions is still useful for training the models that decides which tactic parameters are the most useful, even if the prover process cannot do conversions. That's what we do.</p>
+<p>Also, thanks for the feedback, we will discuss how to update the github repo with the API extensions with minimum effort. The problem is that our internal version diverged so much from the open source that it makes it hard for us to easily submit the changes, but we will look into that.</p>
 
 <a name="186421586"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186421586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186421586">Stanislas Polu (Jan 23 2020 at 18:52)</a>:</h4>
@@ -523,13 +524,13 @@ cc <span class="user-mention" data-user-id="217806">@Markus Rabe</span> <span cl
 [0] <a href="https://arxiv.org/pdf/1904.03241.pdf" target="_blank" title="https://arxiv.org/pdf/1904.03241.pdf">https://arxiv.org/pdf/1904.03241.pdf</a><br>
 [1] <a href="https://arxiv.org/pdf/1905.10006.pdf" target="_blank" title="https://arxiv.org/pdf/1905.10006.pdf">https://arxiv.org/pdf/1905.10006.pdf</a></p>
 </blockquote>
-<p>Sarah has rerun the model from the GNN paper for the validation and training set and verified the validation set performance at 49.98% (we proved 1 theorem less with the current code , which is in noise range), the test set performance is 46.89% (1493 theorem proved out of 3184). We will update the paper accordingly. We don't think that the 2% gap is the result of overfitting, since during the test set construction, we needed to deduplicate some simple theorems that occurred in both the training, validation and test sets and ended up in the training and validation sets, depending on which sets they were contained in.</p>
-<p>We are also waiting for the "deeper wavenet" result from the HOList paper and will update that paper as well.</p>
+<p>Sarah has rerun the model from the GNN paper for the validation and training set and verified the validation set performance at 49.98% (we proved 1 theorem less with the current code , which is in noise range), the test set performance is 46.89% (1493 theorem proved out of 3184). We will update the paper accordingly. We don't think that the 2% gap is the result of overfitting, since during the test set construction, we needed to deduplicate some simple theorems  that occurred in the validation and test sets and ended up in the validation set.</p>
+<p>Accordingly, the (open sourced) "Deeper WaveNet" model proves 30.1% of the test set .</p>
 <p>Thanks a lot for constructive suggestion!</p>
 
 <a name="186760332"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186760332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186760332">Stanislas Polu (Jan 28 2020 at 08:01)</a>:</h4>
-<p><span class="user-mention" data-user-id="239426">@Christian Szegedy</span> thanks for the quick answer (and thanks to Sarah et al for re-running the model on the test set \o/)</p>
+<p><span class="user-mention" data-user-id="239426">@Christian Szegedy</span> thanks for the quick answer (and thanks to <span class="user-mention" data-user-id="239408">@Sarah Loos</span> et al for re-running the model on the test set \o/)</p>
 
 <a name="186777567"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/186777567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#186777567">Stanislas Polu (Jan 28 2020 at 12:28)</a>:</h4>
@@ -559,9 +560,10 @@ cc <span class="user-mention" data-user-id="217806">@Markus Rabe</span> <span cl
 
 <a name="187261298"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/187261298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#187261298">Stanislas Polu (Feb 03 2020 at 13:26)</a>:</h4>
-<p><span class="user-mention" data-user-id="239408">@Sarah Loos</span> <span class="user-mention" data-user-id="239426">@Christian Szegedy</span> could you shed some light on the nature of the theorems used as arguments of tactics in the proof logs but that are never proved in the proof logs and do not appear in the theorem database. A good number of such theorems appear to be simple REFL forms <code>t |- t</code> but that's not always true. A few interesting examples that are never proved and do not appear immediately trivial (there are thousands of those):</p>
-<div class="codehilite"><pre><span></span>- 1922886628595100084 used in [&quot;3005304601846519849&quot;]
-- 4128119696079773064 used in [&quot;1490865809968625449&quot;, &quot;203472435947866096&quot;, &quot;2108783368615713599&quot;, &quot;2832673211645131567&quot;, &quot;954493053183470525&quot;]
+<p><span class="user-mention" data-user-id="239408">@Sarah Loos</span> <span class="user-mention" data-user-id="239426">@Christian Szegedy</span> could you shed some light on the nature of the theorems used as arguments of tactics in the proof logs but that are never proved in the proof logs and do not appear in the theorem database. A good number of such theorems appear to be simple REFL forms <code>t |- t</code> but that's not always true. A couple examples that are never proved and do not appear as immediately trivial (there are number of those):</p>
+<div class="codehilite"><pre><span></span>- 1922886628595100084 used in [&quot;1040308614564293951&quot;, &quot;1068224724366208851&quot;, &quot;1112690888686785731&quot;, &quot;1158014677968443900&quot;, &quot;1164501139575860811&quot;, &quot;130472234907213660&quot;, &quot;1343784825924590900&quot;, &quot;1352911036261694414&quot;, &quot;1418978342581894759&quot;, &quot;1474549535369966656&quot;, &quot;1513888587157156538&quot;, &quot;1572453226266457388&quot;, &quot;1599750970754608282&quot;, &quot;1620034501266471566&quot;, &quot;1769559777913546939&quot;, &quot;205743562540180251&quot;, &quot;2109293764129290517&quot;, &quot;2126361288542869040&quot;, &quot;2277895992876250526&quot;, &quot;2293215433400331757&quot;, &quot;256901751634745145&quot;, &quot;2607920021777763754&quot;, &quot;2756227240911330037&quot;, &quot;2814672109419638476&quot;, &quot;2870558538778029314&quot;, &quot;288796831567879679&quot;, &quot;2926604530781841183&quot;, &quot;294378225568766821&quot;, &quot;2962920115237185377&quot;, &quot;3005304601846519849&quot;, &quot;3017833332354727747&quot;, &quot;3073340668359178974&quot;, &quot;3259640035187228089&quot;, &quot;3295559022993975824&quot;, &quot;3336700799157016006&quot;, &quot;3392958071979927571&quot;, &quot;3417040980091477675&quot;, &quot;3481134151910663053&quot;, &quot;3506191389615981736&quot;, &quot;3604528285204124469&quot;, &quot;360880980515827351&quot;, &quot;3644717466658263822&quot;, &quot;3704608103438291317&quot;, &quot;3714364479833122652&quot;, &quot;3723658874948739190&quot;, &quot;3853086673632578265&quot;, &quot;3886915657877240313&quot;, &quot;3984011009279567911&quot;, &quot;4143882562872306321&quot;, &quot;4166654576449910877&quot;, &quot;4215257151813055174&quot;, &quot;4327049118031780666&quot;, &quot;438205370349448367&quot;, &quot;4527762605576935742&quot;, &quot;4571588623963401944&quot;, &quot;4588263066752175426&quot;, &quot;552208215923821302&quot;, &quot;744097452034251800&quot;, &quot;799704810144038539&quot;, &quot;849058353815678716&quot;, &quot;955717506610167167&quot;, &quot;976594976798091141&quot;]
+- 1557372991274822741 used in [&#39;1710726984666665793&#39;, &#39;1775991960234953438&#39;, &#39;2674137462841098894&#39;, &#39;2814672109419638476&#39;, &#39;3261843337692443473&#39;, &#39;3365009944937700598&#39;, &#39;352808503728591300&#39;, &#39;3780566399882342374&#39;, &#39;3836286049713174388&#39;, &#39;3949756777445235777&#39;, &#39;527345757246532498&#39;, &#39;695832356799713264&#39;, &#39;709680727040550934&#39;]
+- 3887972958511973677 used in [&#39;1671664489604345755&#39;, &#39;2044835932020195874&#39;]
 </pre></div>
 
 
@@ -569,11 +571,11 @@ cc <span class="user-mention" data-user-id="217806">@Markus Rabe</span> <span cl
 
 <a name="187263434"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/187263434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#187263434">Stanislas Polu (Feb 03 2020 at 13:53)</a>:</h4>
-<p>(and if so) under which ordering constraints</p>
+<p>(and if so) under which ordering constraints.</p>
 
 <a name="187274148"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/187274148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#187274148">Stanislas Polu (Feb 03 2020 at 15:50)</a>:</h4>
-<p>After further exploration I can see 86747 such unproven but used theorems across train/test/valid of which 56726 are trivial "REFLs" (which are therefore trivially provable).</p>
+<p>After further exploration I can see 86747 such unproven but used theorems across train/test/valid of which 56726 are trivial "REFLs" (which are therefore trivially provable), but it's harder to characterize clearly the 30k others.</p>
 
 <a name="187296782"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/187296782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#187296782">Sarah Loos (Feb 03 2020 at 19:48)</a>:</h4>
@@ -709,8 +711,6 @@ val it : goalstack = 1 subgoal (1 total)
   0 [`p &lt;=&gt; T`]
 
 `T ==&gt; q`
-
-#
 </pre></div>
 
 <a name="187565872"></a>
@@ -929,18 +929,14 @@ rule: "ASM_REWRITE_RULE [ ] THM 4453115153695028333"</li>
 <blockquote>
 <p>I personally feel (but might be wrong) that these changes make Holist quite specialized towards RL approaches.</p>
 </blockquote>
-<p>Our first focus soundness. We've known for a long time that using theorems with hypotheses yielded unsound results, that's why we have filtered them out from our theorem database. The recent changes just make those earlier decisions more explicit. We have a definitive proof verifier at the end, but we don't want to rely on that during normal use.</p>
+<p>Our first focus is soundness. We've known for a long time that using theorems with hypotheses yielded unsound results, that's why we have filtered them out from our theorem database. The recent changes just make those earlier decisions more explicit. We have a definitive proof verifier at the end, but we don't want to rely on that during normal use.</p>
 <p>The new changes just represent a safe-guard that seems necessary at this point in time. We will remove parts of those safe-guards as we start to allow more forward reasoning capabilities. For now, we err on the conservative side.</p>
 <p>I can see several alternatives forward:</p>
 <ul>
-<li>
-<p>We make sure that all backward tactic applications are completely sound in the presence of theorem parameter hypotheses. (<br>
-This would require a lot of extra work and validations, as we don't exactly know all the possible causes of unsoundnesses in each tactic.)</p>
-</li>
-<li>
-<p>Allow forward rules to create and register theorems with hypotheses, but we would disallow them for being used in all backward rules.</p>
-</li>
+<li>We make sure that all backward tactic applications are completely sound in the presence of theorem parameter hypotheses. (This would require a lot of extra work and validations, as we don't exactly know all the possible causes of unsoundnesses in each tactic.)</li>
+<li>Allow forward rules to create and register theorems with hypotheses, but we would disallow them for being used in all backward rules.</li>
 <li>Every time we try to register a theorem with hypotheses, we would turn it into an implication without hypotheses.</li>
+<li>At every tactic application step we would create a definitive forward proof that the produced goals would imply the input goal.</li>
 </ul>
 <p>However, I think that Instead of allowing theorems with hypotheses, it is much higher priority to make forward rules being utilized and supported fully, since that what makes hypotheses compelling in the first place.</p>
 
@@ -954,9 +950,9 @@ Thanks!</li>
 </ul>
 </blockquote>
 <p>The problem is that some of the tactics can be unsound in the presence of hypotheses. For example, in the case of SUBST the unsoundness is removed by extra checks outside the tactic. In our first RL experiments, the system managed to figure out and utilize those unsound operations, so we removed theorems with hypotheses from our theorem database. Since then, none of our RL loops (which used many thousand CPU years, so far) could not create any unsound proofs (as we verify them with our forward proof-checker that goes through the kernel.) This is a very strong indication that our current backward-reasoning system is sound too with the current setup.</p>
-<p>Checking the soundness of isolated backward reasoning steps is much harder than complete forward proof traces, since individual backward reasoning steps can't be checked easily in the current setup, so we can fully trust only the final proofs if we verified them with the proof-checker, however we do that step rarely as it adds extra complexity.</p>
+<p>Checking the soundness of isolated backward reasoning steps is much harder than complete forward proof traces, since individual backward reasoning steps can't be checked easily in the current setup, so we can fully trust only the final proofs if we verify them with the proof-checker, however we do that step rarely as it adds extra complexity.</p>
 <p>The correctness of forward rules can be trusted more, since all the steps are immediately verified with the kernel.</p>
-<p>Therefore I think that the highest priority is to support forward proofs more (in the verifier and DeepHOL) and once we can use them, we can allow theorems with hypotheses to selected tactics one-by-one, if we want.</p>
+<p>Therefore I think that the highest priority is to support forward proofs more (in the verifier and DeepHOL) and once we can use them, we can allow theorems with hypotheses to be parameters of selected tactics then.</p>
 
 
 {% endraw %}

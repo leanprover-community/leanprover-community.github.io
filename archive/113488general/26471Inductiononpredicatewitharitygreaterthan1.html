@@ -40,12 +40,12 @@ permalink: archive/113488general/26471Inductiononpredicatewitharitygreaterthan1.
 <p>I'm not sure whether this is a helpful supplement to Mario's answer; but the induction/recursion principles you get with the elements of <code>A</code> or <code>data A</code> don't change, but there's also no hard and fast rule for how best to use them to prove P. IE <code>∀ (a b : ℕ) : a + b = b + a</code> only needs induction on one element. Sometimes you'll need to do induction on one and then cases on the other, etc. <br>
 To put it in prose like you did earlier, the proof obligations branch out with the constructors as you start destructuring :</p>
 <div class="codehilite"><pre><span></span>To prove P a1 a2 is true for all (a1 a2 : Data A),
-  show P (int) (a2)
-     - show P (int) (int)
-     -  forall a_y, show P (int) (Some a_y)
-  forall a_x, show P (Some a_x) (a2)
-     - show P (Some a_x) (int)
-     - forall a_y, show P (Some a_x) (Some a_y)
+  branch 1 : show P (int) (a2)
+     goal 1_1 : show P (int) (int)
+     goal 1_2 : forall a_y, show P (int) (Some a_y)
+  branch 2 : forall a_x, show P (Some a_x) (a2)
+     goal 2_1 : show P (Some a_x) (int)
+     goal 2_2 : forall a_y, show P (Some a_x) (Some a_y)
 </pre></div>
 
 
