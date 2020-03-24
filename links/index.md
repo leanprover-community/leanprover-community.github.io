@@ -73,6 +73,8 @@ Don't forget to also follow the instructions on [Lean Projects](https://github.c
 * [Official list of publications](https://leanprover.github.io/publications/)
 
 ### Papers about Lean
+* Daniel Selsam, Simon Hudon, and Leonardo de Moura. [*Sealing Pointer-Based Optimizations Behind Pure Functions*](https://arxiv.org/abs/2003.01685) arXiv 2020.
+* Sebastian Ullrich, and Leonardo de Moura. [*Beyond Notations: Hygienic Macro Expansion for Theorem Proving Languages*](https://arxiv.org/abs/2001.10490) arXiv 2020. 
 * Daniel Selsam, Sebastian Ullrich, and Leonardo de Moura. [*Tabled Typeclass Resolution.*](https://arxiv.org/pdf/2001.04301.pdf) arXiv 2020.
   * The new type class resolution procedure in Lean 4.
 * Mario Carneiro. [*The Type Theory of Lean.*](https://github.com/digama0/lean-type-theory/releases) Master thesis, 2019.
@@ -89,6 +91,8 @@ Don't forget to also follow the instructions on [Lean Projects](https://github.c
   * Elaboration in Lean 2.
 
 ### Papers using Lean
+* Floris van Doorn, Gabriel Ebner, and Robert Y. Lewis. [*Maintaining a Library of Formal Mathematics*](https://lean-forward.github.io/mathlib-maintenance/paper.pdf)
+* Robert Y. Lewis, and Paul-Nicolas Madelaine. [*Normalizing Casts and Coercions*](https://arxiv.org/abs/2001.10594) arXiv 2020.
 * The mathlib Community. [*The Lean mathematical library.*](https://arxiv.org/abs/1910.09336) CPP 2020.
   * [mathlib](https://github.com/leanprover-community/mathlib)
 * Kevin Buzzard, Johan Commelin, Patrick Massot. [*Formalising perfectoid spaces.*](https://arxiv.org/abs/1910.12320) CPP 2020.
