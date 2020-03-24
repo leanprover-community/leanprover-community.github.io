@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#2106 bump lean](271372106bumplean.html) (2 messages, latest: Mar 18 2020 at 17:24)
+
 * [#2004 monoid localisation](917942004monoidlocalisation.html) (5 messages, latest: Mar 06 2020 at 17:22)
 
 * [#2064 bump lean](519722064bumplean.html) (3 messages, latest: Mar 05 2020 at 13:17)

@@ -1,0 +1,152 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/16426groupwithzero.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/16426groupwithzero.html">group with zero</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="191599493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group%20with%20zero/near/191599493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16426groupwithzero.html#191599493">Johan Commelin (Mar 24 2020 at 12:01)</a>:</h4>
+<p>For the perfectoid project we need gadgets of the form <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Γ</mi><mo>∪</mo><mo stretchy="false">{</mo><mn>0</mn><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\Gamma \cup \{0\}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">Γ</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∪</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord">0</span><span class="mclose">}</span></span></span></span>, and we formalised this using a type class <code>group_with_zero</code>. Examples are (i) fields and division rings, (ii) <code>nnreal</code>, (iii) <code>with_zero G</code> for any group <code>G</code>.</p>
+<p>It would be very helpful if we could inject this structure below <code>field</code> in the algebraic hierarchy. What is the best way to do this? Should I make a PR to core lean? Can this be done without touching core? Should fields be moved out of core to mathlib?</p>
+
+<a name="191600159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group%20with%20zero/near/191600159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16426groupwithzero.html#191600159">Mario Carneiro (Mar 24 2020 at 12:10)</a>:</h4>
+<p>Would it suffice to have a typeclass instance?</p>
+
+<a name="191600169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group%20with%20zero/near/191600169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16426groupwithzero.html#191600169">Mario Carneiro (Mar 24 2020 at 12:11)</a>:</h4>
+<p><code>instance [field F] : group_with_zero F := ...</code></p>
+
+<a name="191600278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group%20with%20zero/near/191600278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16426groupwithzero.html#191600278">Mario Carneiro (Mar 24 2020 at 12:12)</a>:</h4>
+<p>(also, I think this should assume <code>division_ring</code> instead, no? <code>field</code> would give you a <code>comm_group_with_zero</code>)</p>
+
+<a name="191600308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group%20with%20zero/near/191600308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16426groupwithzero.html#191600308">Johan Commelin (Mar 24 2020 at 12:12)</a>:</h4>
+<p>Yes, <code>division_ring</code> is better.</p>
+
+<a name="191600593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group%20with%20zero/near/191600593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16426groupwithzero.html#191600593">Mario Carneiro (Mar 24 2020 at 12:15)</a>:</h4>
+<p>what are the axioms of <code>group_with_zero</code>?</p>
+
+<a name="191600662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group%20with%20zero/near/191600662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16426groupwithzero.html#191600662">Johan Commelin (Mar 24 2020 at 12:16)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">group_with_zero</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+  <span class="kn">extends</span> <span class="n">monoid</span> <span class="n">α</span><span class="o">,</span> <span class="n">has_inv</span> <span class="n">α</span><span class="o">,</span> <span class="n">zero_ne_one_class</span> <span class="n">α</span><span class="o">,</span> <span class="n">mul_zero_class</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">[</span><span class="n">has_decidable_eq</span> <span class="o">:</span> <span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span>
+<span class="o">(</span><span class="n">inv_zero</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
+<span class="o">(</span><span class="n">mul_inv_cancel</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span><span class="o">:</span><span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
+</pre></div>
+
+<a name="191600682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group%20with%20zero/near/191600682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16426groupwithzero.html#191600682">Johan Commelin (Mar 24 2020 at 12:16)</a>:</h4>
+<p>The <code>decidable_eq</code> is an artifact</p>
+
+<a name="191600730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group%20with%20zero/near/191600730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16426groupwithzero.html#191600730">Mario Carneiro (Mar 24 2020 at 12:17)</a>:</h4>
+<p>I forget where we ended up regarding <code>decidable_eq</code> for <code>division_ring</code></p>
+
+<a name="191600781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group%20with%20zero/near/191600781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16426groupwithzero.html#191600781">Mario Carneiro (Mar 24 2020 at 12:17)</a>:</h4>
+<p>I think we just use classical logic, in which case it would be consistent to do the same here</p>
+
+<a name="191600912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group%20with%20zero/near/191600912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16426groupwithzero.html#191600912">Johan Commelin (Mar 24 2020 at 12:18)</a>:</h4>
+<p>Yes, this is old code</p>
+
+<a name="191601959"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group%20with%20zero/near/191601959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16426groupwithzero.html#191601959">Johan Commelin (Mar 24 2020 at 12:31)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> The reason that it would be really nice to inject it below <code>division_ring</code> is that lemmas like <code>inv_zero</code> could have a nice name and work for both of the cases. Currently we need to use <code>group_with_zero.inv_zero</code> because the assumptions on <code>inv_zero</code> are "too strong".</p>
+
+<a name="191602003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group%20with%20zero/near/191602003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16426groupwithzero.html#191602003">Mario Carneiro (Mar 24 2020 at 12:31)</a>:</h4>
+<p>meh, that's already done in core in a few places</p>
+
+<a name="191602009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group%20with%20zero/near/191602009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16426groupwithzero.html#191602009">Johan Commelin (Mar 24 2020 at 12:31)</a>:</h4>
+<p>Idem dito for</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">mul_inv_cancel&#39;</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="n">group_with_zero</span><span class="bp">.</span><span class="n">mul_inv_cancel</span> <span class="n">a</span> <span class="n">h</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">mul_inv_cancel_assoc_left</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="k">calc</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">⁻¹</span><span class="o">)</span> <span class="o">:</span> <span class="n">mul_assoc</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span>
+               <span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span>             <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">mul_inv_cancel_assoc_right</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">calc</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">a</span><span class="bp">⁻¹</span><span class="o">)</span> <span class="bp">*</span> <span class="n">b</span> <span class="o">:</span> <span class="o">(</span><span class="n">mul_assoc</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
+               <span class="bp">...</span> <span class="bp">=</span> <span class="n">b</span>             <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span>
+
+<span class="kn">lemma</span> <span class="n">inv_ne_zero&#39;</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">a_eq_0</span><span class="o">,</span> <span class="k">by</span> <span class="n">simpa</span> <span class="o">[</span><span class="n">a_eq_0</span><span class="o">]</span> <span class="kn">using</span> <span class="n">mul_inv_cancel&#39;</span> <span class="n">a</span> <span class="n">h</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">inv_mul_cancel&#39;</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">calc</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span><span class="o">)</span> <span class="bp">*</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span><span class="bp">⁻¹⁻¹</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">inv_ne_zero&#39;</span> <span class="bp">_</span> <span class="n">h</span><span class="o">]</span>
+         <span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span><span class="bp">⁻¹⁻¹</span>             <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span>
+         <span class="bp">...</span> <span class="bp">=</span> <span class="mi">1</span>                       <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">inv_ne_zero&#39;</span> <span class="bp">_</span> <span class="n">h</span><span class="o">]</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">inv_mul_cancel_assoc_left</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">⁻¹</span><span class="o">)</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="k">calc</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">⁻¹</span><span class="o">)</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">mul_assoc</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span>
+               <span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span>             <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">inv_mul_cancel_assoc_right</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">calc</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span><span class="o">)</span> <span class="bp">*</span> <span class="n">b</span> <span class="o">:</span> <span class="o">(</span><span class="n">mul_assoc</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
+               <span class="bp">...</span> <span class="bp">=</span> <span class="n">b</span>             <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span>
+</pre></div>
+
+<a name="191602031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group%20with%20zero/near/191602031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16426groupwithzero.html#191602031">Mario Carneiro (Mar 24 2020 at 12:32)</a>:</h4>
+<p>for example most of the <code>division_ring</code> lemmas have namespace <code>division_ring</code> because they conflict with group lemmas</p>
+
+<a name="191602076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group%20with%20zero/near/191602076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16426groupwithzero.html#191602076">Johan Commelin (Mar 24 2020 at 12:32)</a>:</h4>
+<p>Is there a reason why <code>field</code> and <code>division_ring</code> should stay in core?</p>
+
+<a name="191602107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group%20with%20zero/near/191602107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16426groupwithzero.html#191602107">Johan Commelin (Mar 24 2020 at 12:32)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/group.20with.20zero/near/191602031" title="#narrow/stream/113488-general/topic/group.20with.20zero/near/191602031">said</a>:</p>
+<blockquote>
+<p>for example most of the <code>division_ring</code> lemmas have namespace <code>division_ring</code> because they conflict with group lemmas</p>
+</blockquote>
+<p>Right, and now we'll have a third conflict. Why not reduce them?</p>
+
+<a name="191607630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group%20with%20zero/near/191607630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16426groupwithzero.html#191607630">Johan Commelin (Mar 24 2020 at 13:20)</a>:</h4>
+<p><code>mk0</code> will also be duplicated.</p>
+
+<a name="191607685"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group%20with%20zero/near/191607685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16426groupwithzero.html#191607685">Johan Commelin (Mar 24 2020 at 13:20)</a>:</h4>
+<p>Although that one is in mathlib. So we could deduplicate, I guess.</p>
+
+<a name="191610484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group%20with%20zero/near/191610484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16426groupwithzero.html#191610484">Kevin Buzzard (Mar 24 2020 at 13:42)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="112680">Johan Commelin</span> <a href="#narrow/stream/113488-general/topic/group.20with.20zero/near/191602107" title="#narrow/stream/113488-general/topic/group.20with.20zero/near/191602107">said</a>:</p>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/group.20with.20zero/near/191602031" title="#narrow/stream/113488-general/topic/group.20with.20zero/near/191602031">said</a>:</p>
+<blockquote>
+<p>for example most of the <code>division_ring</code> lemmas have namespace <code>division_ring</code> because they conflict with group lemmas</p>
+</blockquote>
+<p>Right, and now we'll have a third conflict. Why not reduce them?</p>
+</blockquote>
+<p>I don't think there will be a third conflict. For lemmas about division there are two kinds -- those that work under no assumptions about zero-ness (perhaps because they are theorems about monoids or groups, which don't have a zero) and those which have explicit assumptions that something has to be non-zero. The group ones v the field ones, basically.</p>
+<p>In fact can you just load all the group_with_zero lemmas into <code>monoid</code> but just ask for the typeclass <code>with_zero</code> on your monoid, and also <code>with_inv</code> if you want it to be a group with 0. How many of them work with that set-up?</p>
+
+<a name="191612112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group%20with%20zero/near/191612112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16426groupwithzero.html#191612112">Johan Commelin (Mar 24 2020 at 13:54)</a>:</h4>
+<p>I meant a third naming conflict.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

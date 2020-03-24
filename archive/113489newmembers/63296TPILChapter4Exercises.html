@@ -189,6 +189,65 @@ but is expected to have type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190136645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190136645">Reid Barton (Mar 10 2020 at 02:07)</a>:</h4>
 <p>「」looks like the "round towards 0" operation (ceiling if negative, floor if positive)</p>
 
+<a name="190631151"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190631151" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190631151">Rocky Kamen-Rubio (Mar 15 2020 at 05:33)</a>:</h4>
+<p>I'm getting an error message when I try to use <code>exp_log_eq</code> in term mode below for Chapter 6 Exercise 6.</p>
+<div class="codehilite"><pre><span></span><span class="c1">--6. Give a calculational proof of the theorem log_mul below.</span>
+
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">real</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">ordered_ring</span> <span class="n">real</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">log</span> <span class="n">exp</span> <span class="o">:</span> <span class="n">real</span> <span class="bp">→</span> <span class="n">real</span><span class="o">)</span>
+<span class="kn">variable</span>  <span class="n">log_exp_eq</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">log</span> <span class="o">(</span><span class="n">exp</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span>
+<span class="kn">variable</span>  <span class="n">exp_log_eq</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">x</span><span class="o">},</span> <span class="n">x</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">exp</span> <span class="o">(</span><span class="n">log</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span>
+<span class="kn">variable</span>  <span class="n">exp_pos</span>    <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">exp</span> <span class="n">x</span> <span class="bp">&gt;</span> <span class="mi">0</span>
+<span class="kn">variable</span>  <span class="n">exp_add</span>    <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">exp</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">exp</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">exp</span> <span class="n">y</span>
+
+<span class="c1">-- this ensures the assumptions are available in tactic proofs</span>
+<span class="n">include</span> <span class="n">log_exp_eq</span> <span class="n">exp_log_eq</span> <span class="n">exp_pos</span> <span class="n">exp_add</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">real</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">exp</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">+</span> <span class="n">z</span><span class="o">)</span> <span class="bp">=</span> <span class="n">exp</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">exp</span> <span class="n">y</span> <span class="bp">*</span> <span class="n">exp</span> <span class="n">z</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">exp_add</span><span class="o">,</span> <span class="n">exp_add</span><span class="o">]</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">real</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span>  <span class="o">:</span> <span class="n">exp</span> <span class="o">(</span><span class="n">log</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">exp_log_eq</span> <span class="n">h</span>
+
+<span class="kn">theorem</span> <span class="n">log_mul</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">real</span><span class="o">}</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">hy</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">log</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">log</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">log</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">calc</span>
+  <span class="n">log</span><span class="o">(</span><span class="n">x</span><span class="bp">*</span><span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">log</span><span class="o">(</span><span class="n">x</span><span class="bp">*</span><span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">refl</span>
+  <span class="bp">...</span> <span class="bp">=</span> <span class="n">log</span><span class="o">(</span><span class="n">exp</span><span class="o">(</span><span class="n">log</span> <span class="n">x</span><span class="o">)</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="o">(</span><span class="n">exp_log_eq</span> <span class="n">hx</span><span class="o">)</span> <span class="c1">--??????????</span>
+  <span class="bp">...</span> <span class="bp">=</span> <span class="n">log</span><span class="o">(</span><span class="n">exp</span><span class="o">(</span><span class="n">log</span> <span class="n">x</span><span class="o">)</span> <span class="bp">*</span> <span class="n">exp</span><span class="o">(</span><span class="n">log</span> <span class="n">y</span><span class="o">))</span> <span class="o">:</span> <span class="k">by</span> <span class="o">(</span><span class="n">exp_log_eq</span> <span class="n">hy</span><span class="o">)</span> <span class="c1">--??????????</span>
+  <span class="bp">...</span> <span class="bp">=</span> <span class="n">log</span><span class="o">(</span><span class="n">exp</span><span class="o">(</span><span class="n">log</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">log</span> <span class="n">y</span><span class="o">))</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">exp_add</span>
+  <span class="bp">...</span> <span class="bp">=</span> <span class="n">log</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">log</span> <span class="n">y</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">log_exp_eq</span>
+</pre></div>
+
+
+<p>I got it to work in tactic mode, but I want to understand what I'm doing wrong. </p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">log_mul</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">real</span><span class="o">}</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">hy</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">log</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">log</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">log</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="k">have</span> <span class="n">h1</span> <span class="o">:=</span> <span class="n">exp_log_eq</span> <span class="n">hx</span><span class="o">,</span> <span class="bp">-</span>
+<span class="n">rw</span> <span class="err">←</span> <span class="n">h1</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">h2</span> <span class="o">:=</span> <span class="n">exp_log_eq</span> <span class="n">hy</span><span class="o">,</span>
+<span class="n">rw</span> <span class="err">←</span> <span class="n">h2</span><span class="o">,</span>
+<span class="n">rw</span> <span class="err">←</span> <span class="n">exp_add</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">h1</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">h2</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">log_exp_eq</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="190631207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190631207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190631207">Mario Carneiro (Mar 15 2020 at 05:35)</a>:</h4>
+<p><code>by rw exp_log_eq hx</code></p>
+
+<a name="190631211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190631211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190631211">Mario Carneiro (Mar 15 2020 at 05:35)</a>:</h4>
+<p><code>by exp_log_eq hx</code> doesn't work because <code>exp_log_eq</code> is not a tactic</p>
+
+<a name="190631255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20Chapter%204%20Exercises/near/190631255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/63296TPILChapter4Exercises.html#190631255">Mario Carneiro (Mar 15 2020 at 05:36)</a>:</h4>
+<p>remember that <code>by tac</code> is shorthand for <code>begin tac, end</code></p>
+
 
 {% endraw %}
 

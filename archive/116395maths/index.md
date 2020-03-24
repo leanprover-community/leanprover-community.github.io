@@ -9,15 +9,37 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Pigeonhole for arbitrary cardinals?](93106Pigeonholeforarbitrarycardinals.html) (9 messages, latest: Mar 23 2020 at 20:01)
+
+* [colimits in an arbitrary equational theory](74089colimitsinanarbitraryequationaltheory.html) (49 messages, latest: Mar 21 2020 at 22:04)
+
+* [ring_hom ≃ algebra](29840ringhomalgebra.html) (5 messages, latest: Mar 21 2020 at 19:06)
+
+* [Homological algebra "project"](40536Homologicalalgebraproject.html) (3 messages, latest: Mar 21 2020 at 18:09)
+
+* [subgroup of free group is free](26426subgroupoffreegroupisfree.html) (18 messages, latest: Mar 21 2020 at 16:37)
+
+* [algebra is not scaling for me](49270algebraisnotscalingforme.html) (128 messages, latest: Mar 21 2020 at 15:37)
+
+* [Category exercice](40487Categoryexercice.html) (55 messages, latest: Mar 20 2020 at 17:44)
+
+* [topos](42838topos.html) (54 messages, latest: Mar 18 2020 at 13:32)
+
+* [Homological algebra](88189Homologicalalgebra.html) (5 messages, latest: Mar 18 2020 at 11:41)
+
+* [Basic category theory observations](46363Basiccategorytheoryobservations.html) (90 messages, latest: Mar 15 2020 at 08:08)
+
+* [long exact sequence of cohomology](72916longexactsequenceofcohomology.html) (100 messages, latest: Mar 14 2020 at 19:11)
+
+* [Univalence](55691Univalence.html) (364 messages, latest: Mar 13 2020 at 21:08)
+
+* [Bilinear forms](16078Bilinearforms.html) (25 messages, latest: Mar 12 2020 at 21:38)
+
+* ["nice" group homs](94920nicegrouphoms.html) (10 messages, latest: Mar 12 2020 at 14:48)
+
 * [issue with bundled subgroups](71886issuewithbundledsubgroups.html) (196 messages, latest: Mar 10 2020 at 06:13)
 
 * [bundling subgroups -- kernel](61273bundlingsubgroupskernel.html) (37 messages, latest: Mar 10 2020 at 04:15)
-
-* [Univalence](55691Univalence.html) (73 messages, latest: Mar 10 2020 at 01:19)
-
-* [topos](42838topos.html) (34 messages, latest: Mar 09 2020 at 19:35)
-
-* [Basic category theory observations](46363Basiccategorytheoryobservations.html) (87 messages, latest: Mar 08 2020 at 22:34)
 
 * [nat.mod_mul_mod](69630natmodmulmod.html) (6 messages, latest: Mar 06 2020 at 08:59)
 
@@ -76,8 +98,6 @@ permalink: archive/116395maths/index.html
 * [What is an automorphic representation?](20797Whatisanautomorphicrepresentation.html) (12 messages, latest: Feb 19 2020 at 01:44)
 
 * [union of a finset of finsets](77562unionofafinsetoffinsets.html) (9 messages, latest: Feb 18 2020 at 20:14)
-
-* [algebra is not scaling for me](49270algebraisnotscalingforme.html) (5 messages, latest: Feb 17 2020 at 21:43)
 
 * [finset.inter](31578finsetinter.html) (7 messages, latest: Feb 17 2020 at 20:53)
 
@@ -233,7 +253,7 @@ permalink: archive/116395maths/index.html
 
 * [functor ext lemma?](19198functorextlemma.html) (47 messages, latest: Dec 23 2019 at 12:19)
 
-* [category theory](81338categorytheory.html) (6 messages, latest: Dec 23 2019 at 10:15)
+* [category theory](81338categorytheory.html) (458 messages, latest: Dec 23 2019 at 10:15)
 
 * [bundling submonoids](35255bundlingsubmonoids.html) (28 messages, latest: Dec 20 2019 at 18:39)
 
@@ -261,7 +281,7 @@ permalink: archive/116395maths/index.html
 
 * [Proving physical laws](62138Provingphysicallaws.html) (22 messages, latest: Dec 12 2019 at 09:38)
 
-* [manifolds](86782manifolds.html) (35 messages, latest: Dec 11 2019 at 09:17)
+* [manifolds](86782manifolds.html) (127 messages, latest: Dec 11 2019 at 09:17)
 
 * [Categories and Universes in Lean](19477CategoriesandUniversesinLean.html) (33 messages, latest: Dec 08 2019 at 18:35)
 
@@ -499,8 +519,6 @@ permalink: archive/116395maths/index.html
 
 * [IMO problems](23946IMOproblems.html) (45 messages, latest: Aug 09 2019 at 11:14)
 
-* [Category theory](24026Categorytheory.html) (452 messages, latest: Aug 08 2019 at 05:20)
-
 * [characteristic predicate](27003characteristicpredicate.html) (3 messages, latest: Aug 07 2019 at 20:48)
 
 * [IMO2019](14898IMO2019.html) (69 messages, latest: Aug 06 2019 at 19:32)
@@ -660,8 +678,6 @@ permalink: archive/116395maths/index.html
 * [non-terminal simp in complex.lean](36395nonterminalsimpincomplexlean.html) (4 messages, latest: May 25 2019 at 19:19)
 
 * [Topological vector spaces](52784Topologicalvectorspaces.html) (4 messages, latest: May 24 2019 at 13:30)
-
-* [Manifolds](12382Manifolds.html) (92 messages, latest: May 24 2019 at 07:28)
 
 * [topology on roption](50982topologyonroption.html) (43 messages, latest: May 24 2019 at 02:48)
 

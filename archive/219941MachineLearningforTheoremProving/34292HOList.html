@@ -954,6 +954,62 @@ Thanks!</li>
 <p>The correctness of forward rules can be trusted more, since all the steps are immediately verified with the kernel.</p>
 <p>Therefore I think that the highest priority is to support forward proofs more (in the verifier and DeepHOL) and once we can use them, we can allow theorems with hypotheses to be parameters of selected tactics then.</p>
 
+<a name="190524330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/190524330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#190524330">Grant G (Mar 13 2020 at 16:29)</a>:</h4>
+<p>I am trying to experiment with changing the NN in the Deephol prover system.  However,  the jupyter notebook example doesn't work for me, and the Dockerfile has issues. Does anyone have a fully functioning environment, where they can compile and train a new network?</p>
+
+<a name="190526215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/190526215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#190526215">Stanislas Polu (Mar 13 2020 at 16:45)</a>:</h4>
+<p>I would recommend using the Docker directly, using <span class="user-mention" data-user-id="115715">@Jason Rute</span> 's notebook as a starting point. Happy to help!</p>
+
+<a name="190526330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/190526330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#190526330">Stanislas Polu (Mar 13 2020 at 16:46)</a>:</h4>
+<p><a href="https://github.com/jasonrute/holist-communication-example" target="_blank" title="https://github.com/jasonrute/holist-communication-example">https://github.com/jasonrute/holist-communication-example</a></p>
+
+<a name="190599487"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/190599487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#190599487">Jason Rute (Mar 14 2020 at 14:30)</a>:</h4>
+<p><span class="user-mention" data-user-id="248602">@Grant G</span> There are two levels of abstraction/API for HOList.  One is a python API which should let you change the neural network model being used.  It is well documented by Aaron Hadley and others in a Jupyter notebook.  (See the first message in this HOList thread for links.)  The is also another gRPC API for connecting directly to HOL Light.  That is documented in another notebook by me.  (Again see the first message for links.)  Can you be more clear about what issues you are facing including which notebook and docker files you are having trouble with and what sort of problems you are facing?  Also, I think you should be using the notebook by Aaron and others.  I think it better fits your use case.  Second, if you are using my notebook, there have been recent changes to the HOList docker. And I don’t know if my notebook still works.  Let me know if it doesn’t (or if it is inaccurate) and I’ll try to update it.</p>
+
+<a name="190750023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/190750023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#190750023">Grant G (Mar 16 2020 at 16:52)</a>:</h4>
+<p>Thanks for helping me out with the issue. I will give an outline of what is going on, and I will try to get the details later. (I have to work on my other project today). I tried to use Aaron's jupyter notebook first. When I tried to build using bazel I had a compilation error </p>
+<p>external/grpc/src/core/lib/gpr/log_linux.cc:43:13: error: ambiguating new declaration of 'long int gettid()'</p>
+<p>I did some googling and it seems like it is a version issue. Next I tried to build the Docker file, but that also had issues compiling due to  the docker file having non-absolute versioning.  I tried to fix that and was able to compile, but  when I called main it would throw an error  unable to import numpy. </p>
+<p>So I am just trying to bypass all this debugging by getting something stable to work with TBH. </p>
+<p>I also attached the Docker file that works up until the python import error.  I added the lines to reinstall the python dependence in the hope that it would fix things, and I changed the base containers. Otherwise it is the Docker file from deepmath-jupyter.<br>
+<a href="/user_uploads/3121/Y-oHgTNqc0lksojKvzDejxy9/Dockerfile" target="_blank" title="Dockerfile">Dockerfile</a></p>
+
+<a name="190758080"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/190758080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#190758080">Kshitij Bansal (Mar 16 2020 at 17:50)</a>:</h4>
+<p>Can you try with the bazel version 0.24.1 in the Dockerfile instead of latest?</p>
+<p>That is,</p>
+<p>FROM <a href="http://l.gcr.io/google/bazel:0.24.1" target="_blank" title="http://l.gcr.io/google/bazel:0.24.1">l.gcr.io/google/bazel:0.24.1</a></p>
+
+<a name="190759968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/190759968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#190759968">Grant G (Mar 16 2020 at 18:05)</a>:</h4>
+<p><a href="/user_uploads/3121/EK4c1r75rJVTHAAR9oF8kIlC/Dockerfile" target="_blank" title="Dockerfile">Dockerfile</a> <br>
+Sorry I uploaded the wrong file I used. 0.21.0. I will update the version and give it another run tonight.</p>
+
+<a name="190783389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/190783389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#190783389">Kshitij Bansal (Mar 16 2020 at 21:39)</a>:</h4>
+<p>Actually I tried with 0.24.1 and still get the import numpy issue. I am not sure what has changed, since the image <a href="http://gcr.io/deepmath/deephol" target="_blank" title="http://gcr.io/deepmath/deephol">gcr.io/deepmath/deephol</a> is still working, which was built using bazel version 0.24.1 (at the time latest) and the provided Dockerfile.</p>
+
+<a name="190791037"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/190791037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#190791037">Kshitij Bansal (Mar 16 2020 at 23:06)</a>:</h4>
+<p>So, I don't know what the issue is. But I am able to build a working one if I go back to an older commit in the deepmath repo &amp; also update the bazel version.</p>
+<p>To summarize, I tested the following works:</p>
+<ol>
+<li>Clone the deepmath repo.</li>
+<li>git checkout 882f84a</li>
+<li>Change the first line of the Dockerfile to "FROM <a href="http://l.gcr.io/google/bazel:0.24.1" target="_blank" title="http://l.gcr.io/google/bazel:0.24.1">l.gcr.io/google/bazel:0.24.1</a>"</li>
+<li>Built the docker image.</li>
+<li>Tested using the instructions on the website (<a href="http://deephol.org" target="_blank" title="http://deephol.org">deephol.org</a>) using this docker image instead of <a href="http://gcr.io/deepmath/deephol" target="_blank" title="http://gcr.io/deepmath/deephol">gcr.io/deepmath/deephol</a></li>
+</ol>
+
+<a name="191258708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/HOList/near/191258708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/34292HOList.html#191258708">Grant G (Mar 20 2020 at 15:33)</a>:</h4>
+<p>Thanks! It builds and doesn't have the same python errors.</p>
+
 
 {% endraw %}
 

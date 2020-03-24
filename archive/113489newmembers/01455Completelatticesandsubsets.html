@@ -1,0 +1,178 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/01455Completelatticesandsubsets.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html">Complete lattices and subsets</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="191418070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191418070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191418070">Ryan Lahfa (Mar 22 2020 at 21:51)</a>:</h4>
+<p>Continuing on my example of defining a sequence of strictly increasing elements based on some hypothesis over orders.</p>
+<p>I'm trying to see what are the minimal hypothesis on the order to define such a sequence. Mathematically, it seems like I only need to have the existence of min over the set S of X.</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">st_increasing_seq</span> <span class="o">[</span><span class="n">linear_order</span> <span class="n">X</span><span class="o">]</span> <span class="o">{</span><span class="n">S</span><span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">}</span> <span class="o">(</span><span class="n">Hlattice</span><span class="o">:</span> <span class="n">complete_lattice</span> <span class="n">S</span><span class="o">)</span> <span class="o">(</span><span class="n">Hinf</span><span class="o">:</span> <span class="n">set</span><span class="bp">.</span><span class="n">infinite</span> <span class="n">S</span><span class="o">):</span>
+  <span class="o">(</span><span class="bp">∀</span> <span class="n">M</span> <span class="err">⊆</span> <span class="n">S</span><span class="o">,</span> <span class="n">M</span><span class="bp">.</span><span class="n">nonempty</span> <span class="bp">→</span> <span class="o">(</span><span class="n">complete_lattice</span><span class="bp">.</span><span class="n">Inf</span> <span class="n">M</span> <span class="err">∈</span> <span class="n">M</span><span class="o">))</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">X</span><span class="o">,</span> <span class="n">st_increasing</span> <span class="n">x</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">range</span> <span class="n">x</span><span class="o">)</span> <span class="err">⊆</span> <span class="n">S</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>The closest to I wanted was <code>complete_lattice</code> (but it also requires sups…), I wanted to use semilattice for infs only but it does not define a Inf over sets.</p>
+<p>Worse, the above code does not type-check because it complains about the fact that X is not a complete lattice, which I understand.<br>
+But at the same time, I don't want all X to be a complete lattice, it could be a conditionally complete lattice in fact only.</p>
+<p>Also, it seems like what I really want is (S, ≤) is well-ordered, maybe it could solve everything.</p>
+<p>What's the best thing to do?</p>
+
+<a name="191418138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191418138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191418138">Kevin Buzzard (Mar 22 2020 at 21:52)</a>:</h4>
+<p>There are things like <code>semilattice_inf</code> if this helps.</p>
+
+<a name="191418140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191418140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191418140">Kevin Buzzard (Mar 22 2020 at 21:52)</a>:</h4>
+<p>There are a gazillion kinds of lattice.</p>
+
+<a name="191418149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191418149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191418149">Ryan Lahfa (Mar 22 2020 at 21:52)</a>:</h4>
+<p>It does not declare a <code>Inf: set a → a</code>, right? <a href="https://leanprover-community.github.io/mathlib_docs/order/lattice.html#lattice.to_semilattice_inf" target="_blank" title="https://leanprover-community.github.io/mathlib_docs/order/lattice.html#lattice.to_semilattice_inf">https://leanprover-community.github.io/mathlib_docs/order/lattice.html#lattice.to_semilattice_inf</a></p>
+
+<a name="191418166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191418166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191418166">Kevin Buzzard (Mar 22 2020 at 21:53)</a>:</h4>
+<p>There's a difference between <code>inf</code> (inf of two elements) and <code>Inf</code> (inf of arbitrary set of elements)</p>
+
+<a name="191418209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191418209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191418209">Ryan Lahfa (Mar 22 2020 at 21:54)</a>:</h4>
+<p>Indeed, so that's why I resorted to complete_lattice / conditionally_complete_lattice which seems to be the only one to declare the <code>Inf</code> (and not <code>inf</code>).</p>
+
+<a name="191418211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191418211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191418211">Kevin Buzzard (Mar 22 2020 at 21:54)</a>:</h4>
+<p>I just made up semilattice_inf, hang on.</p>
+
+<a name="191418246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191418246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191418246">Kevin Buzzard (Mar 22 2020 at 21:55)</a>:</h4>
+<p>Can you ask your question again? I don't really know what I'm looking for.</p>
+
+<a name="191418284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191418284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191418284">Kevin Buzzard (Mar 22 2020 at 21:56)</a>:</h4>
+<p>There is a ton of stuff in <code>order.lattice</code></p>
+
+<a name="191418315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191418315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191418315">Ryan Lahfa (Mar 22 2020 at 21:57)</a>:</h4>
+<p>I would like to be able to take the Inf of a set, without supposing that there is a complete_lattice over X (the type), but over the set S and be able to get the complete_lattice property for all subsets of S.</p>
+
+<a name="191418377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191418377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191418377">Ryan Lahfa (Mar 22 2020 at 21:58)</a>:</h4>
+<p>let's say X = R, S = [a, +infty[, if you prefer. S is a semilattice_inf and all its subsets too.<br>
+But right now, I don't know how to translate those facts in Lean.</p>
+
+<a name="191418400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191418400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191418400">Ryan Lahfa (Mar 22 2020 at 21:59)</a>:</h4>
+<p>I don't see any Inf in <code>order.lattice</code>, it does not define operations over arbitrary sets. :/</p>
+
+<a name="191419148"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191419148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191419148">Kevin Buzzard (Mar 22 2020 at 22:16)</a>:</h4>
+<p>I really don't know my way around the lattice stuff. Is it called <code>infi</code>?</p>
+
+<a name="191419151"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191419151" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191419151">Kevin Buzzard (Mar 22 2020 at 22:16)</a>:</h4>
+<p>It certainly exists.</p>
+
+<a name="191419234"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191419234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191419234">Kevin Buzzard (Mar 22 2020 at 22:18)</a>:</h4>
+<p><code>infi</code> is in <code>order.complete_lattice</code></p>
+
+<a name="191419236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191419236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191419236">Kevin Buzzard (Mar 22 2020 at 22:18)</a>:</h4>
+<p>as is <code>Inf</code></p>
+
+<a name="191419275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191419275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191419275">Kevin Buzzard (Mar 22 2020 at 22:19)</a>:</h4>
+<p>I see, there is nothing about them</p>
+
+<a name="191419316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191419316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191419316">Ryan Lahfa (Mar 22 2020 at 22:20)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113489-new-members/topic/Complete.20lattices.20and.20subsets/near/191419148" title="#narrow/stream/113489-new-members/topic/Complete.20lattices.20and.20subsets/near/191419148">said</a>:</p>
+<blockquote>
+<p>I really don't know my way around the lattice stuff. Is it called <code>infi</code>?</p>
+</blockquote>
+<p>As far as I understand it, <code>infi</code> is indexed inf, which is something I don't think I need</p>
+
+<a name="191419334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191419334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191419334">Kevin Buzzard (Mar 22 2020 at 22:21)</a>:</h4>
+<p>You can just make what you want, right?</p>
+
+<a name="191419339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191419339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191419339">Ryan Lahfa (Mar 22 2020 at 22:21)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113489-new-members/topic/Complete.20lattices.20and.20subsets/near/191419275" title="#narrow/stream/113489-new-members/topic/Complete.20lattices.20and.20subsets/near/191419275">said</a>:</p>
+<blockquote>
+<p>I see, there is nothing about them</p>
+</blockquote>
+<p>I could PR something to add <code>Inf</code> for semilattice_inf, etc, if that's something mathlib would be interested in. But I'd need some guidance for math relevance.</p>
+
+<a name="191419343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191419343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191419343">Ryan Lahfa (Mar 22 2020 at 22:21)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113489-new-members/topic/Complete.20lattices.20and.20subsets/near/191419334" title="#narrow/stream/113489-new-members/topic/Complete.20lattices.20and.20subsets/near/191419334">said</a>:</p>
+<blockquote>
+<p>You can just make what you want, right?</p>
+</blockquote>
+<p>Indeed, just wanted to ensure that I was not reinventing the wheel.</p>
+
+<a name="191419481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191419481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191419481">Kevin Buzzard (Mar 22 2020 at 22:24)</a>:</h4>
+<p>Yeah you should talk to a more latticy person.</p>
+
+<a name="191428179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191428179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191428179">Mario Carneiro (Mar 23 2020 at 02:38)</a>:</h4>
+<p>Existence of <code>Inf</code>  implies existence of <code>Sup</code> and vice versa</p>
+
+<a name="191428199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191428199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191428199">Mario Carneiro (Mar 23 2020 at 02:39)</a>:</h4>
+<p>Actually, I think you want to not have any lattice like assumption, and just have a hypothesis that says every set in <code>M</code> has a minimal element, this exists as a predicate</p>
+
+<a name="191428248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191428248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191428248">Mario Carneiro (Mar 23 2020 at 02:40)</a>:</h4>
+<p><span class="user-mention" data-user-id="262143">@Ryan Lahfa</span></p>
+
+<a name="191428308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191428308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191428308">Yury G. Kudryashov (Mar 23 2020 at 02:42)</a>:</h4>
+<p>BTW, probably we should add a constructor for <code>complete_lattice</code> that takes <code>Inf</code> and autogenerates <code>Sup</code>, and use it for <code>submonoid</code>s, <code>subgroup</code>s etc.</p>
+
+<a name="191428786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191428786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191428786">Mario Carneiro (Mar 23 2020 at 02:56)</a>:</h4>
+<p>I thought that already existed</p>
+
+<a name="191428845"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191428845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191428845">Yury G. Kudryashov (Mar 23 2020 at 02:58)</a>:</h4>
+<p>Can't find it in <code>complete_lattice</code>.</p>
+
+<a name="191457032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191457032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191457032">Ryan Lahfa (Mar 23 2020 at 10:54)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113489-new-members/topic/Complete.20lattices.20and.20subsets/near/191428199" title="#narrow/stream/113489-new-members/topic/Complete.20lattices.20and.20subsets/near/191428199">said</a>:</p>
+<blockquote>
+<p>Actually, I think you want to not have any lattice like assumption, and just have a hypothesis that says every set in <code>M</code> has a minimal element, this exists as a predicate</p>
+</blockquote>
+<p>Looks the simplest way, but I'd need some way to get it for free for obvious fields which verifies complete_linear_order or even conditionnally_complete_linear_order X which are complete_linear_order over a bounded subset.</p>
+
+<a name="191457089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191457089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191457089">Johan Commelin (Mar 23 2020 at 10:55)</a>:</h4>
+<p>Make it a simp-lemma if the instance exists.</p>
+
+<a name="191457100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191457100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191457100">Johan Commelin (Mar 23 2020 at 10:55)</a>:</h4>
+<p>Then it doesn't vanish completely</p>
+
+<a name="191457182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191457182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191457182">Johan Commelin (Mar 23 2020 at 10:56)</a>:</h4>
+<p>Or alternatively provide a special case of the lemma if the instance is there</p>
+
+<a name="191457259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Complete%20lattices%20and%20subsets/near/191457259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01455Completelatticesandsubsets.html#191457259">Ryan Lahfa (Mar 23 2020 at 10:57)</a>:</h4>
+<p>Sounds good!</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

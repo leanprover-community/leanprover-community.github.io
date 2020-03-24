@@ -1,0 +1,47 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/15488foo.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/15488foo.html">@foo _ _ _ _ _</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="190647583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40foo%20_%20_%20_%20_%20_/near/190647583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15488foo.html#190647583">Kevin Buzzard (Mar 15 2020 at 13:41)</a>:</h4>
+<p><a href="#narrow/stream/113489-new-members/topic/Representation.20Theory/near/190645290" title="#narrow/stream/113489-new-members/topic/Representation.20Theory/near/190645290">this conversation</a> made me realise that I can't search mathlib for all occurrences of <code>linear_equiv.refl</code> (which is the theorem that <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mo>≅</mo><mi>M</mi></mrow><annotation encoding="application/x-tex">M\cong M</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≅</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span></span></span></span> as an <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span>-module) in order to see whether <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span> should be an explicit or an implicit variable. Is there any way of doing this? I conjecture that there might be some <code>@</code>ed instances which could be fixed by making <code>R</code> explicit but I don't know how to check.</p>
+<p>Whilst poking around and failing to do this, I did notice that <code>is_noetherian_of_linear_equiv</code> is used four times in mathlib, and three of them have <code>@</code>s and a whole ton of <code>_</code>'s :-) This is an indication that there's something wrong here, right? There are 40 occurrences of <code>_ _ _ _ _ _ _</code> in mathlib :-)</p>
+
+<a name="190665582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40foo%20_%20_%20_%20_%20_/near/190665582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15488foo.html#190665582">Yury G. Kudryashov (Mar 15 2020 at 20:32)</a>:</h4>
+<p>Does <code>git grep</code> help?</p>
+
+<a name="190666045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40foo%20_%20_%20_%20_%20_/near/190666045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15488foo.html#190666045">Kevin Buzzard (Mar 15 2020 at 20:42)</a>:</h4>
+<p>git grep finds all the <code>_ _ _ _ ...</code> stuff but I think that trying to figure out whether a <code>refl</code> in the library is a <code>linear_equiv.refl</code> is too much for a regular expression.</p>
+
+<a name="190666126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40foo%20_%20_%20_%20_%20_/near/190666126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15488foo.html#190666126">Yury G. Kudryashov (Mar 15 2020 at 20:44)</a>:</h4>
+<p>Make it <code>protected</code>, recompile. I understand that this is a workaround.</p>
+
+<a name="190666216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40foo%20_%20_%20_%20_%20_/near/190666216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15488foo.html#190666216">Yury G. Kudryashov (Mar 15 2020 at 20:47)</a>:</h4>
+<p>A proper approach would be to make a tool that takes a compiled directory tree, and creates a computer readable "dependency graph".</p>
+
+<a name="190666881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40foo%20_%20_%20_%20_%20_/near/190666881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15488foo.html#190666881">Mario Carneiro (Mar 15 2020 at 21:03)</a>:</h4>
+<p>Doesn't something like this already exist? I thought Patrick had some python script for making graphs that used this info</p>
+
+<a name="191370459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40foo%20_%20_%20_%20_%20_/near/191370459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15488foo.html#191370459">Kevin Buzzard (Mar 21 2020 at 23:28)</a>:</h4>
+<p>The advantage of the proper approach is that I wouldn't then have to spend 20 minutes recompiling half of mathlib :-) Reminded me of the old days...</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

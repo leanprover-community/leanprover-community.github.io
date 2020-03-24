@@ -1,0 +1,184 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/69544VSCodehoverandnotation.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html">VS Code hover and notation</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="190655935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190655935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190655935">Kevin Buzzard (Mar 15 2020 at 16:59)</a>:</h4>
+<p>I just noticed something interesting with hovering over the <code>\gg</code> notation in the category theory library. <a href="/user_uploads/3121/gUhpb7LFiM3VhCis4UcHOpgJ/tensorclip.png" target="_blank" title="tensorclip.png">tensorclip.png</a> <a href="/user_uploads/3121/jjD_Bn8en27R70x3zqd4Z4SY/ggclip.png" target="_blank" title="ggclip.png">ggclip.png</a> <a href="/user_uploads/3121/v-LcuFrGbcya2pqFoaduAAhe/compclip.png" target="_blank" title="compclip.png">compclip.png</a> </p>
+<div class="message_inline_image"><a href="/user_uploads/3121/gUhpb7LFiM3VhCis4UcHOpgJ/tensorclip.png" target="_blank" title="tensorclip.png"><img src="/user_uploads/3121/gUhpb7LFiM3VhCis4UcHOpgJ/tensorclip.png"></a></div><div class="message_inline_image"><a href="/user_uploads/3121/jjD_Bn8en27R70x3zqd4Z4SY/ggclip.png" target="_blank" title="ggclip.png"><img src="/user_uploads/3121/jjD_Bn8en27R70x3zqd4Z4SY/ggclip.png"></a></div><div class="message_inline_image"><a href="/user_uploads/3121/v-LcuFrGbcya2pqFoaduAAhe/compclip.png" target="_blank" title="compclip.png"><img src="/user_uploads/3121/v-LcuFrGbcya2pqFoaduAAhe/compclip.png"></a></div><p>If I hover over the tensor <code>⊗</code> symbol then I get simultaneously the keyboard shortcut for the notation and the type of the term which the notation stands for. I've noticed in the past that for some notation this doesn't work, one just gets the shortcut (which is annoying when you're trying to learn the category theory library and are trying to get on top of an infinite amount of notation). For example if you hover over the <code>\gg</code> <code>≫</code> symbol then you only get its keyboard shortcut, not what it means. But I noticed today that if you hover slightly to the left of the symbol then you get the type of the term! Is this intended?</p>
+
+<a name="190656232"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190656232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190656232">Bryan Gin-ge Chen (Mar 15 2020 at 17:04)</a>:</h4>
+<p>My guess is that VS Code (or vscode-lean) sees the \gg symbol as multiple characters so the positions might get screwed up. Unicode strikes again!</p>
+
+<a name="190656328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190656328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190656328">Bryan Gin-ge Chen (Mar 15 2020 at 17:06)</a>:</h4>
+<p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> any ideas on whether we could fix this?</p>
+
+<a name="190656621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190656621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190656621">Gabriel Ebner (Mar 15 2020 at 17:13)</a>:</h4>
+<p>One possible theory: the hover for the notation and the type have different ranges.  Vscode picks the first range.  Maybe it's also a problem that the range for the type is actually a position (I.e. length 0).</p>
+
+<a name="190656911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190656911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190656911">Kevin Buzzard (Mar 15 2020 at 17:19)</a>:</h4>
+<p>Personally I'm just really pleased that I've stumbled upon this workaround :-)</p>
+
+<a name="190657352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190657352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190657352">Gabriel Ebner (Mar 15 2020 at 17:30)</a>:</h4>
+<p>This is a bit weird.  I see both hovers in <code>functor.lean</code> no matter which parts of the <code>&gt;&gt;</code> I'm on, but in <code>monoidal/category.lean</code> I have the problem for both <code>(X)</code> and <code>&gt;&gt;</code>.</p>
+
+<a name="190657374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190657374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190657374">Gabriel Ebner (Mar 15 2020 at 17:31)</a>:</h4>
+<p>Ah, ah, oh no, arrgh.</p>
+
+<a name="190657426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190657426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190657426">Gabriel Ebner (Mar 15 2020 at 17:32)</a>:</h4>
+<p>Of course it's a Unicode issue.  The hover works as expected for the <em>first</em> symbol on a line, but fails on the following ones.</p>
+
+<a name="190657496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190657496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190657496">Gabriel Ebner (Mar 15 2020 at 17:34)</a>:</h4>
+<p>And this makes it obvious what the bug is: Lean counts <code>⊗</code> as one character, vscode counts it as two characters.  So for the first symbol in a line the two counts coincide and hence the notation and the type hovers agree on the column.  For the second symbol, they are off by one character.</p>
+
+<a name="190657652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190657652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190657652">Mario Carneiro (Mar 15 2020 at 17:37)</a>:</h4>
+<p>is there a more permanent way to fix this? like making lean respect vscode counting conventions</p>
+
+<a name="190657655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190657655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190657655">Gabriel Ebner (Mar 15 2020 at 17:37)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="123965">Bryan Gin-ge Chen</span> <a href="#narrow/stream/113488-general/topic/VS.20Code.20hover.20and.20notation/near/190656328" title="#narrow/stream/113488-general/topic/VS.20Code.20hover.20and.20notation/near/190656328">said</a>:</p>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="110043">Gabriel Ebner</span> any ideas on whether we could fix this?</p>
+</blockquote>
+<p>We need to translate the UTF-16 positions used in vscode to the Unicode codepoint positions used in Lean, and back.  So when we receive positions from Lean, we need to translate to UTF-16.  And the other way around when we ask lean something.</p>
+
+<a name="190657720"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190657720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190657720">Bryan Gin-ge Chen (Mar 15 2020 at 17:38)</a>:</h4>
+<p>Would it be better to do this in Lean itself or should we write something in lean-client-js?</p>
+
+<a name="190657836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190657836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190657836">Gabriel Ebner (Mar 15 2020 at 17:41)</a>:</h4>
+<blockquote>
+<p>like making lean respect vscode counting conventions<br>
+Would it be better to do this in Lean itself</p>
+</blockquote>
+<p>I don't believe it is worth the effort to change Lean to internally store positions in UTF-16.  (It also seems just <em>wrong</em> to me.)</p>
+<p>We can put the translation code between the two "formats" on either the Lean side or the javascript side.  I don't know what will happen in 4, and for now it's probably easier to do in javascript.  Whether we do this in the <code>lean-client-js</code> library or in the vscode extension itself, I don't have a strong opinion on.</p>
+
+<a name="190657927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190657927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190657927">Patrick Massot (Mar 15 2020 at 17:43)</a>:</h4>
+<p>I think there will be more and more ways of interacting with Lean besides the VScode extension (format_lean, leancrawler, machine learning, new pedagogical tools...) so it would be nice to fix the problem close to the Lean end, unless VS code is clearly wrong and Lean is right.</p>
+
+<a name="190658029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190658029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190658029">Bryan Gin-ge Chen (Mar 15 2020 at 17:45)</a>:</h4>
+<p>OK, maybe <code>lean-client-js</code> is the right place then. I wasn't thinking of making any very deep changes to Lean, just adding some functions in <code>src/shell/server.cpp</code> to tweak the positions in the JSON output.</p>
+
+<a name="190658089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190658089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190658089">Patrick Massot (Mar 15 2020 at 17:46)</a>:</h4>
+<p>I think everything using python to talk to Lean currently bypasses `lean-client-js.</p>
+
+<a name="190658114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190658114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190658114">Bryan Gin-ge Chen (Mar 15 2020 at 17:47)</a>:</h4>
+<p><del>Oh, that's a good argument in favor of making changes to the Lean server then.</del></p>
+
+<a name="190658133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190658133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190658133">Gabriel Ebner (Mar 15 2020 at 17:47)</a>:</h4>
+<p>In this case I think it's really vscode that is weird.  I think only javascript (and java) count <code>𝟙</code> as two characters.  Most other languages (including python for example) count it as one.</p>
+
+<a name="190658291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190658291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190658291">Sebastian Ullrich (Mar 15 2020 at 17:51)</a>:</h4>
+<p>See also this fun thread: <a href="https://github.com/microsoft/language-server-protocol/issues/376" target="_blank" title="https://github.com/microsoft/language-server-protocol/issues/376">https://github.com/microsoft/language-server-protocol/issues/376</a></p>
+
+<a name="190658298"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190658298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190658298">Bryan Gin-ge Chen (Mar 15 2020 at 17:51)</a>:</h4>
+<p>Oh, I get it. Yes, I retract my earlier statements.</p>
+
+<a name="190658304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190658304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190658304">Gabriel Ebner (Mar 15 2020 at 17:51)</a>:</h4>
+<p>I don't think that we should change this in the Lean server.  This just shifts the problem, then python tools will break.  I still think the easiest fix is in the vscode extension or lean-client-js.</p>
+
+<a name="190658373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190658373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190658373">Gabriel Ebner (Mar 15 2020 at 17:53)</a>:</h4>
+<p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> Any executive decisions on string length in Lean 4?  UTF-8 byte count, UTF-16 code units, Unicode codepoints, graphemes?</p>
+
+<a name="190658392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190658392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190658392">Sebastian Ullrich (Mar 15 2020 at 17:53)</a>:</h4>
+<p>UTF-8 byte count + Unicode codepoints</p>
+
+<a name="190658733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190658733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190658733">Gabriel Ebner (Mar 15 2020 at 17:59)</a>:</h4>
+<p>Just to clarify: I made an error.  The character <code>⊗</code> is represented as a single UTF-16 code unit and is hence fine.  However <code>𝟙</code> requires two UTF-16 code units and therefore causes the issue at hand.</p>
+
+<a name="190658955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190658955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190658955">Mario Carneiro (Mar 15 2020 at 18:02)</a>:</h4>
+<p>why does unicode codepoint count matter?</p>
+
+<a name="190659017"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190659017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190659017">Mario Carneiro (Mar 15 2020 at 18:03)</a>:</h4>
+<p>I see byte count for lean + utf-16 codepoints for vscode/js</p>
+
+<a name="190659108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190659108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190659108">Mario Carneiro (Mar 15 2020 at 18:05)</a>:</h4>
+<p>the nature of the breakage seems to suggest that lean is sending utf-8 codepoint count to vscode</p>
+
+<a name="190659110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190659110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190659110">Gabriel Ebner (Mar 15 2020 at 18:05)</a>:</h4>
+<p>I dunno.  Some people probably expect <code>example : "𝟙".length = 1 := rfl</code> to work.</p>
+
+<a name="190659125"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190659125" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190659125">Mario Carneiro (Mar 15 2020 at 18:05)</a>:</h4>
+<p>It should, but that's another matter</p>
+
+<a name="190659138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190659138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190659138">Mario Carneiro (Mar 15 2020 at 18:05)</a>:</h4>
+<p>That's just the behavior of the lean <code>string.length</code> function</p>
+
+<a name="190659140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190659140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190659140">Gabriel Ebner (Mar 15 2020 at 18:05)</a>:</h4>
+<p>There is no such thing as "UTF-8 codepoint".  There are Unicode codepoints, and there are UTF-8 bytes.</p>
+
+<a name="190659181"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190659181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190659181">Mario Carneiro (Mar 15 2020 at 18:06)</a>:</h4>
+<p>I don't know what terminology to use here</p>
+
+<a name="190659199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190659199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190659199">Gabriel Ebner (Mar 15 2020 at 18:06)</a>:</h4>
+<p>Lean sends (number of) Unicode codepoints to vscode.  In vscode we interpret this number as a number of UTF-16 code units.</p>
+
+<a name="190659200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190659200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190659200">Mario Carneiro (Mar 15 2020 at 18:06)</a>:</h4>
+<p>I mean the thing where <code>𝟙</code> has 1 unicode codepoint, two utf-16 code units(?) and three bytes</p>
+
+<a name="190659217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190659217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190659217">Gabriel Ebner (Mar 15 2020 at 18:07)</a>:</h4>
+<p>Yes, that's the terminology.  But it's four bytes in UTF-8.</p>
+
+<a name="190659233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190659233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190659233">Mario Carneiro (Mar 15 2020 at 18:07)</a>:</h4>
+<p>why doesn't lean send byte counts via its RPC and client-js converts to utf-16</p>
+
+<a name="190659341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190659341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190659341">Gabriel Ebner (Mar 15 2020 at 18:09)</a>:</h4>
+<p>Because that would be just as awkward and Lean doesn't store the byte count anywhere?  Internally, Lean 3 only stores the <code>(line, column)</code> pair that you see in the error messages on the command line.  This <code>column</code> is calculated using Unicode code points.</p>
+
+<a name="190659349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190659349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190659349">Mario Carneiro (Mar 15 2020 at 18:09)</a>:</h4>
+<p>oh, I thought it was bytes internally</p>
+
+<a name="190660354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20and%20notation/near/190660354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69544VSCodehoverandnotation.html#190660354">Kevin Buzzard (Mar 15 2020 at 18:27)</a>:</h4>
+<p>I'm glad category theory has found this practical application to coding.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

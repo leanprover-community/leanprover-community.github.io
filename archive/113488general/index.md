@@ -9,21 +9,103 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [new mathlib tools](62589newmathlibtools.html) (253 messages, latest: Mar 11 2020 at 13:00)
+* [new mathlib tools](62589newmathlibtools.html) (386 messages, latest: Mar 24 2020 at 14:38)
 
-* [My favorite group lemma](92672Myfavoritegrouplemma.html) (33 messages, latest: Mar 11 2020 at 12:56)
+* [group with zero](16426groupwithzero.html) (21 messages, latest: Mar 24 2020 at 13:54)
+
+* [What is worth a paper?](75613Whatisworthapaper.html) (16 messages, latest: Mar 24 2020 at 13:25)
+
+* [lean 3.7.2 failed to download](65465lean372failedtodownload.html) (10 messages, latest: Mar 24 2020 at 10:59)
+
+* [`group` tactic](81254grouptactic.html) (51 messages, latest: Mar 24 2020 at 05:51)
+
+* [Mathlib docs le vs lt](39493Mathlibdocslevslt.html) (17 messages, latest: Mar 23 2020 at 22:05)
+
+* [Calculus of Constructions](55440CalculusofConstructions.html) (9 messages, latest: Mar 23 2020 at 21:41)
+
+* [Category theory zulip](12078Categorytheoryzulip.html) (1 message, latest: Mar 23 2020 at 21:33)
+
+* [goal selectors](96728goalselectors.html) (13 messages, latest: Mar 23 2020 at 17:17)
+
+* [linter](19343linter.html) (21 messages, latest: Mar 23 2020 at 10:17)
+
+* [typeclass inference from inside structures](14044typeclassinferencefrominsidestructures.html) (15 messages, latest: Mar 22 2020 at 19:24)
+
+* [Map from sum in standard lib?](19046Mapfromsuminstandardlib.html) (14 messages, latest: Mar 22 2020 at 15:38)
+
+* [@foo _ _ _ _ _](15488foo.html) (7 messages, latest: Mar 21 2020 at 23:28)
+
+* [hott zulip](83924hottzulip.html) (5 messages, latest: Mar 21 2020 at 16:57)
+
+* [elaboration issue challenge](89725elaborationissuechallenge.html) (44 messages, latest: Mar 21 2020 at 16:06)
+
+* [equiv.pi_congr_left](18292equivpicongrleft.html) (48 messages, latest: Mar 21 2020 at 15:54)
+
+* [mathlib is on 3.7!](54388mathlibison37.html) (29 messages, latest: Mar 20 2020 at 21:58)
+
+* [maintenance paper](96572maintenancepaper.html) (5 messages, latest: Mar 20 2020 at 19:20)
+
+* [doc display](10061docdisplay.html) (26 messages, latest: Mar 20 2020 at 19:16)
+
+* [new linkifier](43912newlinkifier.html) (12 messages, latest: Mar 20 2020 at 13:09)
+
+* [how do I step through proofs?](16384howdoIstepthroughproofs.html) (4 messages, latest: Mar 20 2020 at 07:29)
+
+* [Riesz extension thm](58228Rieszextensionthm.html) (24 messages, latest: Mar 19 2020 at 19:10)
+
+* [new VS code freeze button](77836newVScodefreezebutton.html) (22 messages, latest: Mar 19 2020 at 17:12)
+
+* [result contains metavariables](80351resultcontainsmetavariables.html) (4 messages, latest: Mar 18 2020 at 21:22)
+
+* [My favorite group lemma](92672Myfavoritegrouplemma.html) (142 messages, latest: Mar 17 2020 at 22:50)
+
+* [typeclass resolution](43661typeclassresolution.html) (6 messages, latest: Mar 17 2020 at 09:44)
+
+* [Lean 3.7.0 released!](83933Lean370released.html) (24 messages, latest: Mar 16 2020 at 23:59)
+
+* [subtype of finset](69547subtypeoffinset.html) (2 messages, latest: Mar 16 2020 at 16:42)
+
+* [Hammers, SMT](55758HammersSMT.html) (13 messages, latest: Mar 16 2020 at 12:22)
+
+* [postponed conferences](84648postponedconferences.html) (12 messages, latest: Mar 16 2020 at 11:50)
+
+* [coronavirus PSA](27936coronavirusPSA.html) (54 messages, latest: Mar 16 2020 at 07:48)
+
+* [highlightjs](69590highlightjs.html) (6 messages, latest: Mar 16 2020 at 04:28)
+
+* [VS Code hover and notation](69544VSCodehoverandnotation.html) (39 messages, latest: Mar 15 2020 at 18:27)
+
+* [default toolchain](61703defaulttoolchain.html) (13 messages, latest: Mar 15 2020 at 15:17)
+
+* [locating instance definitions](07427locatinginstancedefinitions.html) (41 messages, latest: Mar 14 2020 at 20:25)
+
+* [pygments](17208pygments.html) (60 messages, latest: Mar 14 2020 at 19:43)
+
+* [lean hott](76256leanhott.html) (37 messages, latest: Mar 13 2020 at 15:21)
+
+* [autolinks in docs](19739autolinksindocs.html) (2 messages, latest: Mar 13 2020 at 09:10)
+
+* [3.7 and maths](6253737andmaths.html) (16 messages, latest: Mar 13 2020 at 07:48)
+
+* [github issues](27936githubissues.html) (5 messages, latest: Mar 13 2020 at 06:24)
+
+* [cases on list defined by `let`](76344casesonlistdefinedbylet.html) (4 messages, latest: Mar 13 2020 at 02:44)
+
+* [Prime Theorem Help](16635PrimeTheoremHelp.html) (2 messages, latest: Mar 12 2020 at 23:53)
+
+* [mathlib push access](06900mathlibpushaccess.html) (2 messages, latest: Mar 12 2020 at 18:22)
+
+* [help with typeclass timeout](29317helpwithtypeclasstimeout.html) (4 messages, latest: Mar 12 2020 at 08:31)
+
+* [Lea(r)n you a scheme](63575Learnyouascheme.html) (13 messages, latest: Mar 11 2020 at 21:40)
 
 * [strings](73643strings.html) (6 messages, latest: Mar 11 2020 at 11:31)
-
-* [help wanted](99757helpwanted.html) (21 messages, latest: Mar 11 2020 at 09:37)
 
 * [advice on making PRs from experimental branches](46974adviceonmakingPRsfromexperimentalbranches.html) (35 messages, latest: Mar 11 2020 at 09:05)
 
 * [write access to the repository](40898writeaccesstotherepository.html) (7 messages, latest: Mar 11 2020 at 05:18)
 
 * [Lean '' is released!](69265Leanisreleased.html) (13 messages, latest: Mar 10 2020 at 10:19)
-
-* [postponed conferences](84648postponedconferences.html) (5 messages, latest: Mar 10 2020 at 05:42)
 
 * [recursive def with match](48433recursivedefwithmatch.html) (25 messages, latest: Mar 10 2020 at 01:45)
 
@@ -38,8 +120,6 @@ permalink: archive/113488general/index.html
 * [weird vscode troubles?](19983weirdvscodetroubles.html) (25 messages, latest: Mar 08 2020 at 17:53)
 
 * [simp only \[\]](91028simponly.html) (6 messages, latest: Mar 08 2020 at 12:16)
-
-* [3.7 and maths](6253737andmaths.html) (14 messages, latest: Mar 08 2020 at 12:07)
 
 * [𝟙 and 𝟭 in VS Code](99821andinVSCode.html) (26 messages, latest: Mar 07 2020 at 19:38)
 
@@ -164,8 +244,6 @@ permalink: archive/113488general/index.html
 * [QED manifesto revisited](70480QEDmanifestorevisited.html) (2 messages, latest: Feb 23 2020 at 22:35)
 
 * [mathlib nightlies](44201mathlibnightlies.html) (80 messages, latest: Feb 23 2020 at 16:59)
-
-* [default toolchain](61703defaulttoolchain.html) (12 messages, latest: Feb 23 2020 at 13:45)
 
 * [explain behaviour of norm_num?](53014explainbehaviourofnormnum.html) (13 messages, latest: Feb 23 2020 at 07:15)
 
@@ -293,7 +371,7 @@ permalink: archive/113488general/index.html
 
 * [refl failure without intros](97157reflfailurewithoutintros.html) (33 messages, latest: Feb 06 2020 at 22:09)
 
-* [beer reward](66500beerreward.html) (45 messages, latest: Feb 06 2020 at 21:54)
+* [beer reward](66500beerreward.html) (80 messages, latest: Feb 06 2020 at 21:54)
 
 * [should nonempty be a structure](62243shouldnonemptybeastructure.html) (2 messages, latest: Feb 06 2020 at 15:48)
 
@@ -301,7 +379,7 @@ permalink: archive/113488general/index.html
 
 * [inter_subset_union](90816intersubsetunion.html) (5 messages, latest: Feb 05 2020 at 20:05)
 
-* [VScode extension](56578VScodeextension.html) (494 messages, latest: Feb 05 2020 at 07:39)
+* [VScode extension](56578VScodeextension.html) (497 messages, latest: Feb 05 2020 at 07:39)
 
 * [xkcd voting](47138xkcdvoting.html) (2 messages, latest: Feb 04 2020 at 16:07)
 
@@ -437,8 +515,6 @@ permalink: archive/113488general/index.html
 
 * [guides](94498guides.html) (7 messages, latest: Jan 07 2020 at 14:14)
 
-* [linter](19343linter.html) (14 messages, latest: Jan 06 2020 at 22:18)
-
 * [zero vector space](12000zerovectorspace.html) (2 messages, latest: Jan 05 2020 at 15:20)
 
 * [AI and theorem proving continued](66080AIandtheoremprovingcontinued.html) (11 messages, latest: Jan 04 2020 at 21:29)
@@ -457,8 +533,6 @@ permalink: archive/113488general/index.html
 
 * [What do we know about Lean 4?](05425WhatdoweknowaboutLean4.html) (18 messages, latest: Dec 31 2019 at 15:27)
 
-* [Beer reward](97796Beerreward.html) (35 messages, latest: Dec 30 2019 at 09:02)
-
 * [abbreviation](53591abbreviation.html) (15 messages, latest: Dec 29 2019 at 17:42)
 
 * [suffices to prove](57736sufficestoprove.html) (15 messages, latest: Dec 29 2019 at 01:34)
@@ -473,13 +547,9 @@ permalink: archive/113488general/index.html
 
 * [apply fails to synthesize type class instance](74812applyfailstosynthesizetypeclassinstance.html) (10 messages, latest: Dec 27 2019 at 10:46)
 
-* [VSCode extension](96418VSCodeextension.html) (3 messages, latest: Dec 27 2019 at 02:38)
-
 * [monotonocity attribute](35815monotonocityattribute.html) (13 messages, latest: Dec 26 2019 at 21:49)
 
 * [Making one step (in top-down,](48569Makingonestepintopdown.html) (13 messages, latest: Dec 26 2019 at 21:32)
-
-* [highlightjs](69590highlightjs.html) (1 message, latest: Dec 26 2019 at 09:31)
 
 * [How to prove decidability?](00132Howtoprovedecidability.html) (15 messages, latest: Dec 26 2019 at 01:50)
 
@@ -657,7 +727,7 @@ permalink: archive/113488general/index.html
 
 * [wlog](90586wlog.html) (25 messages, latest: Nov 15 2019 at 19:20)
 
-* [Travis](06426Travis.html) (204 messages, latest: Nov 14 2019 at 15:25)
+* [Travis](06426Travis.html) (207 messages, latest: Nov 14 2019 at 15:25)
 
 * [std_basis](18397stdbasis.html) (2 messages, latest: Nov 13 2019 at 20:38)
 
@@ -1385,7 +1455,7 @@ permalink: archive/113488general/index.html
 
 * [travis: fork cannot allocate memory](22503travisforkcannotallocatememory.html) (5 messages, latest: Jun 05 2019 at 22:57)
 
-* [simplifier](47605simplifier.html) (6 messages, latest: Jun 05 2019 at 20:20)
+* [simplifier](47605simplifier.html) (18 messages, latest: Jun 05 2019 at 20:20)
 
 * [Structures in meta](37699Structuresinmeta.html) (15 messages, latest: Jun 05 2019 at 20:02)
 
@@ -1419,7 +1489,7 @@ permalink: archive/113488general/index.html
 
 * [functor.map_const](80084functormapconst.html) (10 messages, latest: May 29 2019 at 10:41)
 
-* [Tutorial](44981Tutorial.html) (23 messages, latest: May 28 2019 at 19:46)
+* [Tutorial](44981Tutorial.html) (430 messages, latest: May 28 2019 at 19:46)
 
 * [addition of surreals](26515additionofsurreals.html) (6 messages, latest: May 28 2019 at 16:40)
 
@@ -1441,7 +1511,7 @@ permalink: archive/113488general/index.html
 
 * [finset bUnion](89621finsetbUnion.html) (13 messages, latest: May 26 2019 at 11:33)
 
-* [Big Proof](59609BigProof.html) (10 messages, latest: May 25 2019 at 16:29)
+* [Big Proof](59609BigProof.html) (11 messages, latest: May 25 2019 at 16:29)
 
 * [transitivity](39163transitivity.html) (49 messages, latest: May 25 2019 at 15:33)
 
@@ -1528,8 +1598,6 @@ permalink: archive/113488general/index.html
 * [Sigma types](75591Sigmatypes.html) (6 messages, latest: May 12 2019 at 21:54)
 
 * [contraposition](54269contraposition.html) (29 messages, latest: May 12 2019 at 21:43)
-
-* [pygments](17208pygments.html) (54 messages, latest: May 12 2019 at 14:22)
 
 * [Giry monad for product measures](05624Girymonadforproductmeasures.html) (54 messages, latest: May 12 2019 at 13:07)
 
@@ -1641,7 +1709,7 @@ permalink: archive/113488general/index.html
 
 * [suppressing warnings in `leanpkg build`](14422suppressingwarningsinleanpkgbuild.html) (3 messages, latest: Apr 21 2019 at 01:00)
 
-* [Lean Community Fork](51160LeanCommunityFork.html) (43 messages, latest: Apr 21 2019 at 00:39)
+* [Lean Community Fork](51160LeanCommunityFork.html) (62 messages, latest: Apr 21 2019 at 00:39)
 
 * [sorrying a set of goals](40822sorryingasetofgoals.html) (1 message, latest: Apr 20 2019 at 22:15)
 
@@ -1725,8 +1793,6 @@ permalink: archive/113488general/index.html
 
 * [map_map](93532mapmap.html) (7 messages, latest: Apr 07 2019 at 22:12)
 
-* [travis](89370travis.html) (3 messages, latest: Apr 07 2019 at 20:42)
-
 * [qpf and type class instances](08315qpfandtypeclassinstances.html) (10 messages, latest: Apr 07 2019 at 16:08)
 
 * [bundled presheaves with preorders on the stalks](21303bundledpresheaveswithpreordersonthestalks.html) (54 messages, latest: Apr 07 2019 at 03:53)
@@ -1777,7 +1843,7 @@ permalink: archive/113488general/index.html
 
 * [libgmp dependency](88411libgmpdependency.html) (15 messages, latest: Mar 31 2019 at 12:44)
 
-* [Style](98834Style.html) (59 messages, latest: Mar 31 2019 at 09:50)
+* [Style](98834Style.html) (64 messages, latest: Mar 31 2019 at 09:50)
 
 * [sparse categories](26037sparsecategories.html) (9 messages, latest: Mar 30 2019 at 10:35)
 
@@ -1995,8 +2061,6 @@ permalink: archive/113488general/index.html
 
 * [simp lemma for subtype.property](47692simplemmaforsubtypeproperty.html) (14 messages, latest: Feb 26 2019 at 08:57)
 
-* [lean community fork](45880leancommunityfork.html) (19 messages, latest: Feb 25 2019 at 20:33)
-
 * [Picking a `case` with mutually inductive types](67804Pickingacasewithmutuallyinductivetypes.html) (4 messages, latest: Feb 25 2019 at 16:38)
 
 * [infer_instance'](52816inferinstance.html) (1 message, latest: Feb 25 2019 at 10:26)
@@ -2153,7 +2217,7 @@ permalink: archive/113488general/index.html
 
 * [simp lemmas with hypotheses](94305simplemmaswithhypotheses.html) (17 messages, latest: Feb 08 2019 at 23:56)
 
-* [programming in lean](20507programminginlean.html) (1 message, latest: Feb 08 2019 at 22:45)
+* [programming in lean](20507programminginlean.html) (55 messages, latest: Feb 08 2019 at 22:45)
 
 * [eq.rec goal](53122eqrecgoal.html) (231 messages, latest: Feb 08 2019 at 21:56)
 
@@ -2823,8 +2887,6 @@ permalink: archive/113488general/index.html
 
 * [leanpkg refer to branches](71104leanpkgrefertobranches.html) (2 messages, latest: Oct 24 2018 at 11:43)
 
-* [Simplifier](76053Simplifier.html) (12 messages, latest: Oct 23 2018 at 18:38)
-
 * [head reduction](58432headreduction.html) (6 messages, latest: Oct 23 2018 at 16:47)
 
 * [implementation issues](15619implementationissues.html) (51 messages, latest: Oct 23 2018 at 16:13)
@@ -2948,8 +3010,6 @@ permalink: archive/113488general/index.html
 * [expr.is_internal_cnstr](88943exprisinternalcnstr.html) (7 messages, latest: Oct 09 2018 at 19:45)
 
 * [option troubles](48938optiontroubles.html) (9 messages, latest: Oct 09 2018 at 18:38)
-
-* [tutorial](22229tutorial.html) (407 messages, latest: Oct 09 2018 at 16:48)
 
 * [tokens](40789tokens.html) (38 messages, latest: Oct 08 2018 at 18:08)
 
@@ -3351,8 +3411,6 @@ permalink: archive/113488general/index.html
 
 * [transfer between mv_polynomial unit and polynomial](38861transferbetweenmvpolynomialunitandpolynomial.html) (3 messages, latest: Sep 03 2018 at 20:12)
 
-* [big proof](19801bigproof.html) (1 message, latest: Sep 03 2018 at 19:37)
-
 * [source code browser](57681sourcecodebrowser.html) (54 messages, latest: Sep 03 2018 at 18:44)
 
 * [#reduce "X"++"Y" fails](49562reduceXYfails.html) (8 messages, latest: Sep 03 2018 at 15:22)
@@ -3740,8 +3798,6 @@ permalink: archive/113488general/index.html
 * [level.imax](81718levelimax.html) (2 messages, latest: Jul 16 2018 at 06:59)
 
 * [future unbundled class hierarchy](51122futureunbundledclasshierarchy.html) (33 messages, latest: Jul 15 2018 at 11:39)
-
-* [Programming in Lean](85947ProgramminginLean.html) (54 messages, latest: Jul 14 2018 at 12:26)
 
 * [matrices](04281matrices.html) (15 messages, latest: Jul 13 2018 at 14:34)
 
@@ -4496,8 +4552,6 @@ permalink: archive/113488general/index.html
 * [spot the metavariable](91157spotthemetavariable.html) (23 messages, latest: Apr 09 2018 at 11:26)
 
 * [structure turned into class](71476structureturnedintoclass.html) (18 messages, latest: Apr 08 2018 at 22:58)
-
-* [style](84626style.html) (5 messages, latest: Apr 08 2018 at 22:39)
 
 * [propaganda](84894propaganda.html) (4 messages, latest: Apr 08 2018 at 20:24)
 

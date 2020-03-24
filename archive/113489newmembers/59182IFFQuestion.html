@@ -1,0 +1,101 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/59182IFFQuestion.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/59182IFFQuestion.html">IFF Question</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="191135504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/IFF%20Question/near/191135504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/59182IFFQuestion.html#191135504">Dev-Indra (Mar 19 2020 at 16:07)</a>:</h4>
+<p>Here is the <code>iff</code> lemma I am trying to prove:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">another_helper</span> <span class="o">(</span><span class="n">u</span> <span class="n">v</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">v</span> <span class="bp">≤</span> <span class="n">u</span> <span class="bp">↔</span> <span class="n">v</span><span class="bp">*</span><span class="n">v</span> <span class="bp">≤</span> <span class="n">v</span><span class="bp">*</span><span class="n">u</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">split</span><span class="o">,</span>
+
+    <span class="n">induction</span> <span class="n">v</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">mul_zero</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">zero_mul</span><span class="o">,</span>
+    <span class="n">simp</span><span class="o">,</span>
+
+    <span class="n">rw</span> <span class="n">succ_eq_add_one</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">mul_add</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">mul_one</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">mul_comm</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">mul_add</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">mul_one</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">add_mul</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">one_mul</span><span class="o">,</span>
+
+
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I am trying to prove the first goal with induction, but I am stuck after the last line. Can anyone help, or suggest a better way to prove this?</p>
+
+<a name="191141324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/IFF%20Question/near/191141324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/59182IFFQuestion.html#191141324">Kevin Buzzard (Mar 19 2020 at 16:48)</a>:</h4>
+<p>You should use <code>{}</code> brackets to ensure that you only have one goal at all times. Your question is hard for me to understand because your code doesn't compile and I'm not entirely sure which rewrites are supposed to apply to which goals.</p>
+
+<a name="191141373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/IFF%20Question/near/191141373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/59182IFFQuestion.html#191141373">Shing Tak Lam (Mar 19 2020 at 16:48)</a>:</h4>
+<p>There is a lemma in <code>mathlib</code> called <code>mul_le_mul_left</code>, which you can use by importing <code>data.nat.basic</code>. To solve your inductive case here, you can just use</p>
+<div class="codehilite"><pre><span></span><span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">mul_le_mul_left</span> <span class="o">(</span><span class="n">succ</span> <span class="n">d</span><span class="o">)</span> <span class="n">h</span><span class="o">,</span>
+</pre></div>
+
+
+<p>instead of the bunch of <code>rw</code>s. Which will close the goal.</p>
+<p>Also you don't need induction here, since you don't need the induction hypotheses.</p>
+<p>As <code>mul_le_mul_left</code> is already an iff statement, you can pretty much just use it to solve your goal without needing to <code>split</code> it.</p>
+<p>A complete proof just using <code>mul_le_mul_left</code> as an <code>iff</code> statement is like this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">another_helper</span> <span class="o">(</span><span class="n">u</span> <span class="n">v</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">v</span> <span class="bp">≤</span> <span class="n">u</span> <span class="bp">↔</span> <span class="n">v</span><span class="bp">*</span><span class="n">v</span> <span class="bp">≤</span> <span class="n">v</span><span class="bp">*</span><span class="n">u</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">v</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">split</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+      <span class="n">simp</span><span class="o">,</span>
+    <span class="o">},</span>
+    <span class="n">intro</span><span class="o">,</span> <span class="n">exact</span> <span class="n">zero_le</span> <span class="n">u</span><span class="o">,</span>
+  <span class="o">},</span>
+  <span class="o">{</span>
+    <span class="n">symmetry</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">mul_le_mul_left</span><span class="o">,</span>
+    <span class="n">simp</span><span class="o">,</span>
+  <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="191141478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/IFF%20Question/near/191141478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/59182IFFQuestion.html#191141478">Kevin Buzzard (Mar 19 2020 at 16:49)</a>:</h4>
+<p><span class="user-mention" data-user-id="272522">@Dev-Indra</span>: note the brackets <span class="user-mention" data-user-id="266440">@Shing Tak Lam</span> used!</p>
+
+<a name="191142481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/IFF%20Question/near/191142481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/59182IFFQuestion.html#191142481">Shing Tak Lam (Mar 19 2020 at 16:56)</a>:</h4>
+<p>I've golfed it slightly :) Apparently <code>norm_num</code> is a lot more powerful than I thought.</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">another_helper</span> <span class="o">(</span><span class="n">u</span> <span class="n">v</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">v</span> <span class="bp">≤</span> <span class="n">u</span> <span class="bp">↔</span> <span class="n">v</span><span class="bp">*</span><span class="n">v</span> <span class="bp">≤</span> <span class="n">v</span><span class="bp">*</span><span class="n">u</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">v</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">norm_num</span> <span class="o">},</span>
+  <span class="n">norm_num</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Curiously, just <code>norm_num</code> by itself doesn't work, but using <code>cases</code>then <code>norm_num</code> does.</p>
+
+<a name="191142921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/IFF%20Question/near/191142921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/59182IFFQuestion.html#191142921">Dev-Indra (Mar 19 2020 at 16:58)</a>:</h4>
+<p>Thanks.  <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  I will take note of the use of {}</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

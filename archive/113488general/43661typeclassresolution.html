@@ -1,0 +1,52 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/43661typeclassresolution.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/43661typeclassresolution.html">typeclass resolution</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="190788248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20resolution/near/190788248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43661typeclassresolution.html#190788248">Bhavik Mehta (Mar 16 2020 at 22:31)</a>:</h4>
+<p>Out of interest, how does typeclass resolution happen in lean? For example, is it acceptable and/or sensible to write both of the following:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">mono_prod_of_left</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="n">Z</span> <span class="o">:</span> <span class="n">C</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="err">⟶</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">X</span> <span class="err">⟶</span> <span class="n">Z</span><span class="o">)</span> <span class="o">[</span><span class="n">mono</span> <span class="n">f</span><span class="o">]</span> <span class="o">:</span> <span class="n">mono</span> <span class="o">(</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">lift</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">:=</span>
+<span class="kn">instance</span> <span class="n">mono_prod_of_right</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="n">Z</span> <span class="o">:</span> <span class="n">C</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="err">⟶</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">X</span> <span class="err">⟶</span> <span class="n">Z</span><span class="o">)</span> <span class="o">[</span><span class="n">mono</span> <span class="n">g</span><span class="o">]</span> <span class="o">:</span> <span class="n">mono</span> <span class="o">(</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">lift</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">:=</span>
+</pre></div>
+
+
+<p>In Haskell for instance, I'd get complained at because of overlapping instances - do we get similar problems in lean?</p>
+
+<a name="190788397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20resolution/near/190788397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43661typeclassresolution.html#190788397">Mario Carneiro (Mar 16 2020 at 22:33)</a>:</h4>
+<p>No, you have a different problem in lean, exponential blowup, because lean tries all the paths if you do this</p>
+
+<a name="190788413"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20resolution/near/190788413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43661typeclassresolution.html#190788413">Mario Carneiro (Mar 16 2020 at 22:33)</a>:</h4>
+<p>it is sensible to do, it is like prolog</p>
+
+<a name="190788578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20resolution/near/190788578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43661typeclassresolution.html#190788578">Bhavik Mehta (Mar 16 2020 at 22:35)</a>:</h4>
+<p>Okay great, thanks!</p>
+
+<a name="190823856"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20resolution/near/190823856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43661typeclassresolution.html#190823856">Gabriel Ebner (Mar 17 2020 at 09:27)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/typeclass.20resolution/near/190788397" title="#narrow/stream/113488-general/topic/typeclass.20resolution/near/190788397">said</a>:</p>
+<blockquote>
+<p>No, you have a different problem in lean, exponential blowup, because lean tries all the paths if you do this</p>
+</blockquote>
+<p>Where does exponential blow-up happen here?  Is there some other <code>mono</code> instance I'm missing?  With these two instances, Lean will only search <code>mono h</code> for all subterms <code>h</code>, so this should be linear.  Following me, Bhavik's instances are perfectly fine (or at least just as bad as every instance we have in mathlib).</p>
+
+<a name="190825443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20resolution/near/190825443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43661typeclassresolution.html#190825443">Mario Carneiro (Mar 17 2020 at 09:44)</a>:</h4>
+<p>ah that's true, I shouldn't have suggested that that instance setup is exponential. I meant in general it can lead to exponential blowup, but with just those instances it is linear.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

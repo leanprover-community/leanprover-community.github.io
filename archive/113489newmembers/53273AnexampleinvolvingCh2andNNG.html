@@ -1,0 +1,531 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html">An example involving Ch.2 and NNG</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="190791538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190791538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190791538">Debendro Mookerjee (Mar 16 2020 at 23:13)</a>:</h4>
+<p>In chapter 2 in Theorem Proving in Lean, we learn about definitions, so to try it out I made this definition: <br>
+<code>def dvd (m n: ℕ): Prop := ∃ k, n = m * k</code><br>
+In the Natural Number Game, we learn about tactics like rw,etc. So I was wondering how to rewrite a goal with a definition.  I have this statement in my tatic state: <br>
+<code>hbleft : n = a * b</code>. Clearly we see that a divides  n. But when I say <code>rw dvd at hbleft</code> Lean rejects this as a valid piece of code. So I can I apply <code>dvd</code> to the statement <code>hbleft</code> to show a divides n?</p>
+
+<a name="190791674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190791674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190791674">Kenny Lau (Mar 16 2020 at 23:15)</a>:</h4>
+<p><code>have hadn : dvd a n := \&lt;_, hbleft\&gt;</code></p>
+
+<a name="190792242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190792242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190792242">Debendro Mookerjee (Mar 16 2020 at 23:22)</a>:</h4>
+<p>Thanks, it works now</p>
+
+<a name="190792882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190792882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190792882">Debendro Mookerjee (Mar 16 2020 at 23:31)</a>:</h4>
+<p>Also in the natural number game we could use the <code>rw</code> tactic to invoke previous theorems; does that same thing work for conditional sentences that I assume to be true? For instance I have a conditional sentence <code>hp : dvd p n → q</code> and in my tactic state I have <code>hadn : dvd a n</code> Can I use my <code>hp</code>to rewrite <code>hadn</code>. I tried <code>rw hp at hadn</code> and <code>apply hp at hadn</code> but Lean stated that code was not valid. How to I use hp to simplify hadn?</p>
+
+<a name="190793769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190793769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190793769">Reid Barton (Mar 16 2020 at 23:44)</a>:</h4>
+<p>You can only <code>rw</code> with an equality or an iff. An implication is just a function, so you can apply it, but there is no such thing as <code>apply at</code>. Here, you could write <code>replace hadn := hp hadn</code></p>
+
+<a name="190793773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190793773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190793773">Reid Barton (Mar 16 2020 at 23:44)</a>:</h4>
+<p>Or just use <code>hp hadn</code> directly wherever you need it</p>
+
+<a name="190793796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190793796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190793796">Reid Barton (Mar 16 2020 at 23:45)</a>:</h4>
+<p>Or <code>have hq : q, { apply hp, exact hadn },</code> or many other variations.</p>
+
+<a name="190794579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190794579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190794579">Debendro Mookerjee (Mar 16 2020 at 23:57)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span>  I used  <code>have hq : q, { apply hp, exact hadn },</code> and <code>replace hadn := hp hadn</code> but got this error:</p>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  hp hadn
+term
+  hadn
+has type
+  dvd a n
+but is expected to have type
+  dvd p n
+</pre></div>
+
+<a name="190794659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190794659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190794659">Reid Barton (Mar 16 2020 at 23:58)</a>:</h4>
+<p>Ah, well, yeah</p>
+
+<a name="190794682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190794682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190794682">Reid Barton (Mar 16 2020 at 23:58)</a>:</h4>
+<p>I missed that it was a trick question. <code>a</code> is not <code>p</code>.</p>
+
+<a name="190794972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190794972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190794972">Debendro Mookerjee (Mar 17 2020 at 00:02)</a>:</h4>
+<p>But when I replace a with p I get the error:</p>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  hp hadn
+term
+  hadn
+has type
+  dvd p n
+but is expected to have type
+  dvd p n
+types contain aliased name(s): p
+remark: the tactic `dedup` can be used to rename aliases
+</pre></div>
+
+<a name="190795003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190795003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190795003">Debendro Mookerjee (Mar 17 2020 at 00:03)</a>:</h4>
+<p>So what is <code>dedup</code> and how is it used?</p>
+
+<a name="190795013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190795013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190795013">Kenny Lau (Mar 17 2020 at 00:03)</a>:</h4>
+<p>It means you have two variables with the same name <code>p</code></p>
+
+<a name="190795115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190795115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190795115">Reid Barton (Mar 17 2020 at 00:04)</a>:</h4>
+<p>You've done something wrong earlier.</p>
+
+<a name="190795128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190795128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190795128">Debendro Mookerjee (Mar 17 2020 at 00:04)</a>:</h4>
+<p>But if I use difference variable names a and p I still get the Type Mismatch</p>
+
+<a name="190795161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190795161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190795161">Bryan Gin-ge Chen (Mar 17 2020 at 00:05)</a>:</h4>
+<p>Please post your code. It's very hard to help without seeing what you're working with.</p>
+
+<a name="190795327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190795327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190795327">Debendro Mookerjee (Mar 17 2020 at 00:07)</a>:</h4>
+<p><code>def composite (d : ℕ): Prop:= ¬ prime d</code></p>
+<p><code>theorem composite_fact (c: ℕ) : composite c ↔ ∃ (a b: ℕ), c = a*b ∧ a ≤ b := sorry</code></p>
+<p>Main part:</p>
+<div class="codehilite"><pre><span></span>theorem practice (n p : ℕ) (hn : n &gt; 1) (hp : dvd p n → p*p &gt;  n) : ¬ composite  n :=
+begin
+  intro h,
+  rw composite_fact at h,
+  cases h with p ha,
+  cases ha with b hb,
+
+  have hbleft: n = p*b, from and.left hb,
+  have hbright: p ≤ b, from and.right hb,
+
+  have hadn : dvd p n,
+
+  rw dvd,
+  use b,
+  rw hbleft,
+
+  replace hadn := hp hadn,
+
+end
+</pre></div>
+
+<a name="190795568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190795568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190795568">Reid Barton (Mar 17 2020 at 00:10)</a>:</h4>
+<p>This proof, and possibly statement, doesn't make sense</p>
+
+<a name="190795572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190795572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190795572">Kevin Buzzard (Mar 17 2020 at 00:10)</a>:</h4>
+<p>please can you post exactly one code block containing all imports and opens, so people can just cut and paste to see your problem.</p>
+
+<a name="190795594"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190795594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190795594">Reid Barton (Mar 17 2020 at 00:11)</a>:</h4>
+<p>What are you trying to prove in English?</p>
+
+<a name="190795904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190795904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190795904">Debendro Mookerjee (Mar 17 2020 at 00:15)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="190795914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190795914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190795914">Kevin Buzzard (Mar 17 2020 at 00:15)</a>:</h4>
+<p>but 1 is a factor of n</p>
+
+<a name="190795960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190795960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190795960">Kevin Buzzard (Mar 17 2020 at 00:16)</a>:</h4>
+<p>just because it's called p doesn't make it prime :-)</p>
+
+<a name="190795968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190795968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190795968">Reid Barton (Mar 17 2020 at 00:16)</a>:</h4>
+<p>It's not what your <code>practice</code> statement says anyways.</p>
+
+<a name="190795976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190795976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190795976">Kevin Buzzard (Mar 17 2020 at 00:16)</a>:</h4>
+<p>Unrelated: if you put <code> ```lean </code> at the top of where you quote your code, then it comes out in neat colours</p>
+
+<a name="190797187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190797187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190797187">Debendro Mookerjee (Mar 17 2020 at 00:37)</a>:</h4>
+<p>Wait really?</p>
+
+<a name="190797191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190797191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190797191">Debendro Mookerjee (Mar 17 2020 at 00:37)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">practice</span> <span class="o">(</span><span class="n">n</span> <span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hn</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="n">dvd</span> <span class="n">p</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">p</span><span class="bp">*</span><span class="n">p</span> <span class="bp">&gt;</span>  <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">composite</span>  <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">composite_fact</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">h</span> <span class="k">with</span> <span class="n">p</span> <span class="n">ha</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">ha</span> <span class="k">with</span> <span class="n">b</span> <span class="n">hb</span><span class="o">,</span>
+
+  <span class="k">have</span> <span class="n">hbleft</span><span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">p</span><span class="bp">*</span><span class="n">b</span><span class="o">,</span> <span class="k">from</span> <span class="n">and</span><span class="bp">.</span><span class="n">left</span> <span class="n">hb</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">hbright</span><span class="o">:</span> <span class="n">p</span> <span class="bp">≤</span> <span class="n">b</span><span class="o">,</span> <span class="k">from</span> <span class="n">and</span><span class="bp">.</span><span class="n">right</span> <span class="n">hb</span><span class="o">,</span>
+
+  <span class="k">have</span> <span class="n">hadn</span> <span class="o">:</span> <span class="n">dvd</span> <span class="n">p</span> <span class="n">n</span><span class="o">,</span>
+
+  <span class="n">rw</span> <span class="n">dvd</span><span class="o">,</span>
+  <span class="n">use</span> <span class="n">b</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">hbleft</span><span class="o">,</span>
+
+  <span class="n">replace</span> <span class="n">hadn</span> <span class="o">:=</span> <span class="n">hp</span> <span class="n">hadn</span><span class="o">,</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+<a name="190797232"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190797232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190797232">Debendro Mookerjee (Mar 17 2020 at 00:38)</a>:</h4>
+<p>Oh wow...</p>
+
+<a name="190798064"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190798064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190798064">Kevin Buzzard (Mar 17 2020 at 00:52)</a>:</h4>
+<p>Your hypothesis <code>hp</code> says "if the fixed number <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span></span></span></span> you chose at the beginning divides <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>, then also assume that <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>p</mi><mn>2</mn></msup><mo>&gt;</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">p^2&gt;n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1.008548em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>. So for example <code>practice 7 5</code> says "if 7&gt;1, and if the statement 'if 5 divides 7 then 5^2&gt;7' is true (which it is, because 5 doesn't divide 7) then 7 is not composite". In particular <code>practice 7 5</code> is false so you can't prove <code>practice</code> in general. You need to learn to work basic logic before you can get to Hungerford.</p>
+
+<a name="190820288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190820288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190820288">jack (Mar 17 2020 at 08:50)</a>:</h4>
+<p>Hi there, I m stuck again <span aria-label="rolling on the floor laughing" class="emoji emoji-1f923" role="img" title="rolling on the floor laughing">:rolling_on_the_floor_laughing:</span></p>
+
+<a name="190820383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190820383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190820383">jack (Mar 17 2020 at 08:51)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">Equivalence1</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span>
+<span class="o">(</span><span class="n">A</span> <span class="bp">→</span> <span class="n">B</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">¬</span> <span class="n">A</span> <span class="bp">∨</span> <span class="n">B</span><span class="o">)</span> <span class="o">:=</span>
+<span class="c1">-- classical should be used</span>
+<span class="k">assume</span> <span class="n">h</span><span class="o">,</span>
+<span class="c1">--classical.by_contradiction $</span>
+<span class="c1">--assume h1,</span>
+<span class="bp">_</span>
+
+<span class="kn">theorem</span> <span class="n">Equivalence2</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span>
+<span class="o">(</span><span class="bp">¬</span> <span class="n">A</span> <span class="bp">∨</span> <span class="n">B</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">A</span> <span class="bp">→</span> <span class="n">B</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">h</span><span class="o">,</span>
+<span class="k">assume</span> <span class="n">a</span><span class="o">,</span>
+<span class="bp">_</span>
+</pre></div>
+
+<a name="190820453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190820453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190820453">jack (Mar 17 2020 at 08:52)</a>:</h4>
+<p>Maybe equivalence2 is simpler.</p>
+
+<a name="190820506"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190820506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190820506">Johan Commelin (Mar 17 2020 at 08:53)</a>:</h4>
+<p>If you use</p>
+<div class="codehilite"><pre><span></span>```lean
+code goes here
+```
+</pre></div>
+
+
+<p>for your codeblocks, you even get fancy colors (-;</p>
+
+<a name="190820614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190820614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190820614">jack (Mar 17 2020 at 08:54)</a>:</h4>
+<p>This is not the homework, but I would like to challenge myself.</p>
+
+<a name="190820647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190820647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190820647">jack (Mar 17 2020 at 08:55)</a>:</h4>
+<p>Still SO difficult ...</p>
+
+<a name="190820746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190820746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190820746">Johan Commelin (Mar 17 2020 at 08:56)</a>:</h4>
+<p>Hint: <code>or.cases_on</code></p>
+
+<a name="190820925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190820925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190820925">jack (Mar 17 2020 at 08:58)</a>:</h4>
+<p><code>#check @or.cases_on</code> seems similar to <code>or.elim</code>... actually I see no difference between them.</p>
+
+<a name="190821036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190821036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190821036">Marc Huisinga (Mar 17 2020 at 08:59)</a>:</h4>
+<p>it is!</p>
+<p>for the first one, i'd try using <code>(classical.em A).elim</code> instead, maybe you had the law of excluded middle in class to motivate things like <code>by_contradiction</code></p>
+
+<a name="190821206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190821206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190821206">jack (Mar 17 2020 at 09:01)</a>:</h4>
+<p>100% correct!</p>
+
+<a name="190821698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190821698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190821698">Marc Huisinga (Mar 17 2020 at 09:06)</a>:</h4>
+<p>(note that <code>(classical.em A).elim</code> is just <code>or.elim (classical.em A)</code>, i should perhaps be careful with using notation that might not have been introduced yet)</p>
+
+<a name="190822289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190822289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190822289">jack (Mar 17 2020 at 09:12)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">Equivalence2</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span>
+<span class="o">(</span><span class="bp">¬</span> <span class="n">A</span> <span class="bp">∨</span> <span class="n">B</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">A</span> <span class="bp">→</span> <span class="n">B</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">h</span><span class="o">,</span>
+<span class="k">assume</span> <span class="n">a</span><span class="o">,</span>
+<span class="n">or</span><span class="bp">.</span><span class="n">cases_on</span> <span class="n">h</span>
+<span class="o">(</span><span class="k">assume</span> <span class="n">na</span> <span class="o">,</span>
+<span class="n">or</span><span class="bp">.</span><span class="n">cases_on</span> <span class="n">h</span> <span class="o">(</span>
+<span class="k">assume</span> <span class="n">na</span><span class="o">,</span>
+<span class="bp">_</span>
+<span class="o">)</span> <span class="err">$</span>
+<span class="k">assume</span> <span class="n">b</span><span class="o">:</span> <span class="n">B</span><span class="o">,</span> <span class="n">b</span>
+<span class="o">)</span> <span class="err">$</span> <span class="k">assume</span> <span class="n">b</span> <span class="o">:</span> <span class="n">B</span><span class="o">,</span> <span class="n">b</span>
+</pre></div>
+
+
+<p>I m getting into a circle.</p>
+
+<a name="190822388"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190822388" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190822388">Johan Commelin (Mar 17 2020 at 09:13)</a>:</h4>
+<p>Hint: <code>false.elim</code></p>
+
+<a name="190822482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190822482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190822482">Johan Commelin (Mar 17 2020 at 09:14)</a>:</h4>
+<p>You should remove the second block of <code>or.cases_on h _ _</code></p>
+
+<a name="190822562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190822562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190822562">jack (Mar 17 2020 at 09:15)</a>:</h4>
+<p><code>#check @false.elim</code> gives me <code>Π {C : Sort u_1}, false → C</code>. Is it pi-calculus?</p>
+
+<a name="190822572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190822572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190822572">Marc Huisinga (Mar 17 2020 at 09:15)</a>:</h4>
+<p>think about the proof you'd write on paper. you've got <code>¬ A ∨ B</code> and <code>A</code>. in the first case, where you've got <code>¬ A</code>, you've got a contradiction on your hands that allows you to get <code>false</code>, and thus prove anything (with <code>false.elim</code>).</p>
+
+<a name="190822685"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190822685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190822685">Marc Huisinga (Mar 17 2020 at 09:16)</a>:</h4>
+<p>this is known as the principle of explosion, "from falsehood, anything follows"</p>
+
+<a name="190822791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190822791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190822791">Johan Commelin (Mar 17 2020 at 09:17)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="272189">jack</span> <a href="#narrow/stream/113489-new-members/topic/An.20example.20involving.20Ch.2E2.20and.20NNG/near/190822562" title="#narrow/stream/113489-new-members/topic/An.20example.20involving.20Ch.2E2.20and.20NNG/near/190822562">said</a>:</p>
+<blockquote>
+<p><code>#check @false.elim</code> gives me <code>Π {C : Sort u_1}, false → C</code>. Is it pi-calculus?</p>
+</blockquote>
+<p>I don't know anything about calculus, but this is telling you that if you can find a contradiction (i.e., proof of <code>false</code>), then you can prove everything.</p>
+
+<a name="190822884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190822884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190822884">jack (Mar 17 2020 at 09:18)</a>:</h4>
+<p>OK got you. After adding a <code>false.elim</code> I 've got a <code>A</code> and <code>\not A</code>, then I can get a false <code>\not A A</code>. Cheers!</p>
+
+<a name="190823101"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190823101" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190823101">jack (Mar 17 2020 at 09:21)</a>:</h4>
+<p>My proves seems like this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">Equivalence2</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span>
+<span class="o">(</span><span class="bp">¬</span> <span class="n">A</span> <span class="bp">∨</span> <span class="n">B</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">A</span> <span class="bp">→</span> <span class="n">B</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">h</span><span class="o">,</span>
+<span class="k">assume</span> <span class="n">a</span><span class="o">,</span>
+<span class="n">or</span><span class="bp">.</span><span class="n">cases_on</span> <span class="n">h</span>
+<span class="o">(</span>
+<span class="k">assume</span> <span class="n">na</span><span class="o">,</span>
+<span class="n">false</span><span class="bp">.</span><span class="n">elim</span> <span class="err">$</span>
+<span class="n">na</span> <span class="n">a</span>
+<span class="o">)</span> <span class="err">$</span> <span class="k">assume</span> <span class="n">b</span> <span class="o">:</span> <span class="n">B</span><span class="o">,</span> <span class="n">b</span>
+</pre></div>
+
+
+<p>I'm wondering if I can use <code>$</code> to remove the parentheses.</p>
+
+<a name="190823260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190823260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190823260">Kevin Buzzard (Mar 17 2020 at 09:22)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="272189">jack</span> <a href="#narrow/stream/113489-new-members/topic/An.20example.20involving.20Ch.2E2.20and.20NNG/near/190822562" title="#narrow/stream/113489-new-members/topic/An.20example.20involving.20Ch.2E2.20and.20NNG/near/190822562">said</a>:</p>
+<blockquote>
+<p><code>#check @false.elim</code> gives me <code>Π {C : Sort u_1}, false → C</code>. Is it pi-calculus?</p>
+</blockquote>
+<p>Pi is the name of the types, lambda is the name of the terms. <code>λ a, b</code> has type <code>Π A, B</code></p>
+
+<a name="190823309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190823309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190823309">jack (Mar 17 2020 at 09:22)</a>:</h4>
+<p><code>or.elim</code> is a 3-parameter operator, where comes the problem.</p>
+
+<a name="190823317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190823317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190823317">Marc Huisinga (Mar 17 2020 at 09:22)</a>:</h4>
+<p>i don't think so, <code>$</code> won't allow you to eliminate all parentheses, only the ones at the end. the proof looks good!</p>
+
+<a name="190823326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190823326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190823326">jack (Mar 17 2020 at 09:22)</a>:</h4>
+<p>Thank you <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span></p>
+
+<a name="190823413"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190823413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190823413">jack (Mar 17 2020 at 09:23)</a>:</h4>
+<p>Thanks to all of you <span aria-label="grinning face with smiling eyes" class="emoji emoji-1f601" role="img" title="grinning face with smiling eyes">:grinning_face_with_smiling_eyes:</span> I have only 50% left.</p>
+
+<a name="190823682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190823682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190823682">Johan Commelin (Mar 17 2020 at 09:26)</a>:</h4>
+<p><span class="user-mention" data-user-id="272189">@jack</span> If you wanna golf: <code>assume b : B, b</code> is the same as <code>id</code></p>
+
+<a name="190823835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190823835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190823835">Johan Commelin (Mar 17 2020 at 09:27)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">Equivalence2</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span>
+<span class="o">(</span><span class="bp">¬</span> <span class="n">A</span> <span class="bp">∨</span> <span class="n">B</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">A</span> <span class="bp">→</span> <span class="n">B</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">h</span> <span class="n">a</span><span class="o">,</span> <span class="n">h</span><span class="bp">.</span><span class="n">cases_on</span> <span class="o">(</span><span class="n">false</span><span class="bp">.</span><span class="n">elim</span> <span class="err">∘</span> <span class="n">absurd</span> <span class="n">a</span><span class="o">)</span> <span class="n">id</span>
+</pre></div>
+
+<a name="190824027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190824027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190824027">jack (Mar 17 2020 at 09:29)</a>:</h4>
+<p>Do you invent this language <span class="user-mention" data-user-id="112680">@Johan Commelin</span> ? Or do you use it every day?</p>
+
+<a name="190824185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190824185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190824185">Johan Commelin (Mar 17 2020 at 09:30)</a>:</h4>
+<p>What do you mean?</p>
+
+<a name="190824244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190824244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190824244">Johan Commelin (Mar 17 2020 at 09:30)</a>:</h4>
+<p>I use Lean pretty much every day. But I usually don't write my proofs like this.</p>
+
+<a name="190824257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190824257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190824257">Johan Commelin (Mar 17 2020 at 09:30)</a>:</h4>
+<p>I prefer tactic mode.</p>
+
+<a name="190824336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190824336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190824336">jack (Mar 17 2020 at 09:31)</a>:</h4>
+<p>Maybe I'll learn to use it at the end of this semester.</p>
+
+<a name="190824623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190824623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190824623">jack (Mar 17 2020 at 09:34)</a>:</h4>
+<p>Could you please explain <code>∘</code> a little more? Never seen this in the class.</p>
+
+<a name="190824643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190824643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190824643">Johan Commelin (Mar 17 2020 at 09:35)</a>:</h4>
+<p>It is called "function composition"</p>
+
+<a name="190824672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190824672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190824672">Johan Commelin (Mar 17 2020 at 09:35)</a>:</h4>
+<p><code>f ∘ g = \lambda x, f (g x)</code></p>
+
+<a name="190824851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190824851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190824851">jack (Mar 17 2020 at 09:37)</a>:</h4>
+<p>Does it mean <code>false.elim ∘ absurd a</code> is the same as <code>false.elim (absurd a)</code>?</p>
+
+<a name="190824868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190824868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190824868">Johan Commelin (Mar 17 2020 at 09:37)</a>:</h4>
+<p>Nope</p>
+
+<a name="190824923"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190824923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190824923">Johan Commelin (Mar 17 2020 at 09:38)</a>:</h4>
+<p>It's the same as <code>assume blabla, false.elim (absurd a blabla)</code></p>
+
+<a name="190825129"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190825129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190825129">jack (Mar 17 2020 at 09:41)</a>:</h4>
+<p>Amazing!</p>
+
+<a name="190827078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190827078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190827078">jack (Mar 17 2020 at 10:00)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">h</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">B</span>
+<span class="err">⊢</span> <span class="bp">¬</span><span class="n">A</span> <span class="bp">∨</span> <span class="n">B</span>
+</pre></div>
+
+
+<p>May I have some hint please?</p>
+
+<a name="190827153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190827153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190827153">Kenny Lau (Mar 17 2020 at 10:01)</a>:</h4>
+<p>case on whether <code>A</code> is true or false</p>
+
+<a name="190827630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190827630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190827630">jack (Mar 17 2020 at 10:05)</a>:</h4>
+<p>Do you mean <code>or.cases_on</code>? Which only works with a <code>... \or ...</code> but there isn't.</p>
+
+<a name="190828300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190828300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190828300">Kenny Lau (Mar 17 2020 at 10:13)</a>:</h4>
+<p>use <code>classical.em</code></p>
+
+<a name="190830267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190830267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190830267">jack (Mar 17 2020 at 10:34)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">Equivalence1</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span>
+<span class="o">(</span><span class="n">A</span> <span class="bp">→</span> <span class="n">B</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">¬</span> <span class="n">A</span> <span class="bp">∨</span> <span class="n">B</span><span class="o">)</span> <span class="o">:=</span>
+<span class="c1">-- classical should be used</span>
+<span class="k">assume</span> <span class="n">h</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">h1</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">∨</span> <span class="bp">¬</span> <span class="n">A</span><span class="o">,</span> <span class="k">from</span> <span class="n">classical</span><span class="bp">.</span><span class="n">em</span> <span class="n">A</span><span class="o">,</span>
+<span class="n">h1</span><span class="bp">.</span><span class="n">cases_on</span>
+<span class="o">(</span><span class="k">assume</span> <span class="n">a</span> <span class="o">:</span> <span class="n">A</span><span class="o">,</span>
+ <span class="n">or</span><span class="bp">.</span><span class="n">intro_right</span> <span class="bp">_</span> <span class="err">$</span> <span class="n">h</span> <span class="n">a</span>
+<span class="o">)</span> <span class="err">$</span>
+ <span class="k">assume</span> <span class="n">na</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">A</span><span class="o">,</span>
+ <span class="n">or</span><span class="bp">.</span><span class="n">intro_left</span> <span class="bp">_</span> <span class="n">na</span>
+</pre></div>
+
+<a name="190830344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190830344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190830344">jack (Mar 17 2020 at 10:35)</a>:</h4>
+<p>Finally I made it <span aria-label="tada" class="emoji emoji-1f389" role="img" title="tada">:tada:</span> There must be some fancy syntax which could simplify the prove.</p>
+
+<a name="190830379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190830379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190830379">jack (Mar 17 2020 at 10:35)</a>:</h4>
+<p>Thanks a lot <span class="user-mention" data-user-id="110064">@Kenny Lau</span></p>
+
+<a name="190836505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190836505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190836505">Kevin Buzzard (Mar 17 2020 at 11:48)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">Equivalence1</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">A</span> <span class="bp">→</span> <span class="n">B</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">¬</span> <span class="n">A</span> <span class="bp">∨</span> <span class="n">B</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">em</span> <span class="n">A</span><span class="o">)</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">intro_right</span> <span class="bp">_</span> <span class="err">$</span> <span class="n">h</span> <span class="n">a</span><span class="o">)</span> <span class="err">$</span> <span class="n">or</span><span class="bp">.</span><span class="n">intro_left</span> <span class="bp">_</span>
+</pre></div>
+
+<a name="190836536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190836536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190836536">Kevin Buzzard (Mar 17 2020 at 11:49)</a>:</h4>
+<p>Same proof but bundled up into a more compact form.</p>
+
+<a name="190836703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190836703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190836703">Kevin Buzzard (Mar 17 2020 at 11:51)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="n">run_cmd</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">skip</span> <span class="c1">-- working around open_locale bug</span>
+
+<span class="n">open_locale</span> <span class="n">classical</span>
+
+<span class="kn">theorem</span> <span class="n">Equivalence1</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">A</span> <span class="bp">→</span> <span class="n">B</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">¬</span> <span class="n">A</span> <span class="bp">∨</span> <span class="n">B</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">hAB</span><span class="o">,</span>
+  <span class="n">by_cases</span> <span class="n">A</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">right</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">hAB</span><span class="o">,</span>
+    <span class="n">assumption</span>
+  <span class="o">},</span>
+  <span class="o">{</span> <span class="n">left</span><span class="o">,</span>
+    <span class="n">assumption</span>
+  <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Same proof but in tactic mode.</p>
+
+<a name="190836892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190836892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190836892">anas himmi (Mar 17 2020 at 11:54)</a>:</h4>
+<p>what does the $ sign mean?</p>
+
+<a name="190840088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190840088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190840088">jack (Mar 17 2020 at 12:31)</a>:</h4>
+<p>It means saving some paratheses, e.g. <code>foo $ a b c &lt;-&gt; foo (a b c)</code></p>
+
+<a name="190841449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190841449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190841449">Kevin Buzzard (Mar 17 2020 at 12:44)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">Equivalence1</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">A</span> <span class="bp">→</span> <span class="n">B</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">¬</span> <span class="n">A</span> <span class="bp">∨</span> <span class="n">B</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">em</span> <span class="n">A</span><span class="o">)</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">intro_right</span> <span class="bp">_</span> <span class="o">(</span><span class="n">h</span> <span class="n">a</span><span class="o">))</span> <span class="o">(</span><span class="n">or</span><span class="bp">.</span><span class="n">intro_left</span> <span class="bp">_</span><span class="o">)</span>
+</pre></div>
+
+
+<p>$-free version</p>
+
+<a name="190843848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190843848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190843848">anas himmi (Mar 17 2020 at 13:04)</a>:</h4>
+<p>thank you!</p>
+
+<a name="190843861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190843861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190843861">Kevin Buzzard (Mar 17 2020 at 13:04)</a>:</h4>
+<p><span class="user-mention" data-user-id="272823">@anas himmi</span> you can work out what most things mean in Lean if you know how. For example, if you realise that <code>$</code> is notation then <code>#print notation $</code> is the next step. It tells you <code>_ </code>$<code>:1 _:0 := #1 #0</code> which is a rather encrypted way of saying that <code>f $ g</code> means <code>f g</code> except that the binding power of <code>$</code> is 1, which is very low.</p>
+
+<a name="190843979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190843979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190843979">Kevin Buzzard (Mar 17 2020 at 13:05)</a>:</h4>
+<p>This means that the composition happens last, saving you from having to write the brackets (which have super-high binding power). I wrote a blog post about binding power in Lean <a href="https://xenaproject.wordpress.com/2019/01/20/a-word-on-bidmas/" target="_blank" title="https://xenaproject.wordpress.com/2019/01/20/a-word-on-bidmas/">here</a>.</p>
+
+<a name="190844020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190844020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190844020">Kevin Buzzard (Mar 17 2020 at 13:05)</a>:</h4>
+<p>You can compare with <code>#print notation +</code> and so on.</p>
+
+<a name="190844117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/An%20example%20involving%20Ch.2%20and%20NNG/near/190844117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53273AnexampleinvolvingCh2andNNG.html#190844117">anas himmi (Mar 17 2020 at 13:06)</a>:</h4>
+<p>i tested it out before asking but didn't understand the notation. now i see it better</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,137 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/83933Lean370released.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/83933Lean370released.html">Lean 3.7.0 released!</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="190534276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.7.0%20released%21/near/190534276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83933Lean370released.html#190534276">Gabriel Ebner (Mar 13 2020 at 17:47)</a>:</h4>
+<p>It is my great pleasure to announce the <em>crowning</em> pinnacle of the latest release cycle of the Lean community fork, Lean 3.7.0.  This release focused on bringing new and exciting features to the C++ codebase, including:</p>
+<ul>
+<li>simp can now rewrite in subsingletons (<span class="user-mention" data-user-id="238446">@Anne Baanen</span>)</li>
+<li><code>(+)</code> now unifies with <code>(λ x y, x + y)</code> (<span class="user-mention" data-user-id="238446">@Anne Baanen</span>)</li>
+<li>the <code>apply</code> tactic now synthesizes type class arguments in the right order (<span class="user-mention" data-user-id="110032">@Reid Barton</span>)</li>
+<li><code>touch **/*.olean</code> is finally a thing of the past (<span class="user-mention" data-user-id="128280">@Wojciech Nawrocki</span>)</li>
+<li>metaprogramming API for <code>protected</code> definitions (<span class="user-mention" data-user-id="110026">@Simon Hudon</span>)</li>
+<li>metaprogramming API for persistent attributes (<span class="user-mention" data-user-id="110026">@Simon Hudon</span>)</li>
+<li>fixed coercion from <code>parser</code> to <code>tactic</code>(original PR from <span class="user-mention" data-user-id="111080">@Floris van Doorn</span>)</li>
+<li>typeclass arguments for instances are resolved right-to-left (like in Lean 4)</li>
+<li>typeclass resolution skips instances that have already been assigned via unification</li>
+<li><code>simp</code> no longer fails if an exception occurs during type class resolution</li>
+</ul>
+
+<a name="190534427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.7.0%20released%21/near/190534427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83933Lean370released.html#190534427">Gabriel Ebner (Mar 13 2020 at 17:48)</a>:</h4>
+<p>The accompanying mathlib PR is also ready: <a href="https://github.com/leanprover-community/mathlib/issues/2106" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/2106">#2106</a></p>
+
+<a name="190534431"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.7.0%20released%21/near/190534431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83933Lean370released.html#190534431">Reid Barton (Mar 13 2020 at 17:48)</a>:</h4>
+<p>Thanks for all your work on this!</p>
+
+<a name="190534614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.7.0%20released%21/near/190534614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83933Lean370released.html#190534614">Patrick Massot (Mar 13 2020 at 17:50)</a>:</h4>
+<p>Congratulations! What is the parser to tactic thing?</p>
+
+<a name="190534961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.7.0%20released%21/near/190534961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83933Lean370released.html#190534961">Gabriel Ebner (Mar 13 2020 at 17:52)</a>:</h4>
+<p>Lean tactics can specify a parser for their arguments (this is how the left-arrows etc. work).  Inside a parser, you can call a tactic.  Previously you would get a VM exception if this tactic failed.  So mathlib included a <code>parser.of_tactic'</code> function as a workaround.  Now this workaround is no longer necessary (and removed in <a href="https://github.com/leanprover-community/mathlib/issues/2106" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/2106">#2106</a>).</p>
+
+<a name="190536082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.7.0%20released%21/near/190536082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83933Lean370released.html#190536082">Kevin Buzzard (Mar 13 2020 at 18:02)</a>:</h4>
+<p>The typeclass changes look very interesting.</p>
+
+<a name="190536403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.7.0%20released%21/near/190536403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83933Lean370released.html#190536403">Sebastien Gouezel (Mar 13 2020 at 18:05)</a>:</h4>
+<p>Does it mean we should revert <a href="https://github.com/leanprover-community/mathlib/issues/877" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/877">#877</a>?</p>
+
+<a name="190536423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.7.0%20released%21/near/190536423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83933Lean370released.html#190536423">Gabriel Ebner (Mar 13 2020 at 18:05)</a>:</h4>
+<p>I'm not sure if they are a completely positive change, the mathlib build time has increased by a few minutes with the change to 3.7.0 (but this might also be to the other changes).  But they fix some real issues: for example issue <a href="https://github.com/leanprover-community/mathlib/issues/1561" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1561">#1561</a> about the <code>has_scalar ℝ (ℝ → ℝ)</code> instance now works as expected after the change.</p>
+
+<a name="190536509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.7.0%20released%21/near/190536509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83933Lean370released.html#190536509">Gabriel Ebner (Mar 13 2020 at 18:06)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110050">Sebastien Gouezel</span> <a href="#narrow/stream/113488-general/topic/Lean.203.2E7.2E0.20released!/near/190536403" title="#narrow/stream/113488-general/topic/Lean.203.2E7.2E0.20released!/near/190536403">said</a>:</p>
+<blockquote>
+<p>Does it mean we should revert <a href="https://github.com/leanprover-community/mathlib/issues/877" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/877">#877</a>?</p>
+</blockquote>
+<p>Yes!</p>
+
+<a name="190536581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.7.0%20released%21/near/190536581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83933Lean370released.html#190536581">Gabriel Ebner (Mar 13 2020 at 18:07)</a>:</h4>
+<p>But the underlying issue is exactly the same as before: the instances need to be in the right order.  In Lean &lt;=3.6, this meant that the most specific instance should come first.  In Lean &gt;=3.7, the most specific instance should come last.</p>
+
+<a name="190659957"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.7.0%20released%21/near/190659957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83933Lean370released.html#190659957">Bryan Gin-ge Chen (Mar 15 2020 at 18:21)</a>:</h4>
+<p><span class="user-mention" data-user-id="128280">@Wojciech Nawrocki</span> After <a href="https://github.com/leanprover-community/lean/pull/140" target="_blank" title="https://github.com/leanprover-community/lean/pull/140">https://github.com/leanprover-community/lean/pull/140</a> does Lean now require the .lean files to be around in addition to the .olean files for imports to work?</p>
+
+<a name="190661913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.7.0%20released%21/near/190661913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83933Lean370released.html#190661913">Bryan Gin-ge Chen (Mar 15 2020 at 19:01)</a>:</h4>
+<p><span class="user-mention" data-user-id="121918">@Edward Ayers</span> and I have been trying to get to the bottom of some issues with the web editor with Lean 3.7.0 and we're running into some trouble which I think is related to that PR. After we add the .lean files to the library.zip bundle, the Lean server seems to work on the first run, but making edits or hovering leads to a bunch of errors (like <code>"Error: ENOENT: No such file or directory., '/init.lean'"</code>).</p>
+<p>I take it Lean 3.7.0 has been working fine in VS Code? <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span></p>
+
+<a name="190662027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.7.0%20released%21/near/190662027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83933Lean370released.html#190662027">Gabriel Ebner (Mar 15 2020 at 19:03)</a>:</h4>
+<p>Well, yes, that's how I ported mathlib.  I didn't check, but your suspicion seems plausible.  What happens if you include the <code>*.lean</code> files in <code>library.zip</code>?</p>
+
+<a name="190662041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.7.0%20released%21/near/190662041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83933Lean370released.html#190662041">Bryan Gin-ge Chen (Mar 15 2020 at 19:03)</a>:</h4>
+<p>We did include the .lean files in library.zip, but then we ran into this other error (where it tries to look for <code>/init.lean</code>).</p>
+
+<a name="190662129"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.7.0%20released%21/near/190662129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83933Lean370released.html#190662129">Gabriel Ebner (Mar 15 2020 at 19:05)</a>:</h4>
+<p>Ah I missed that, sorry.</p>
+
+<a name="190662291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.7.0%20released%21/near/190662291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83933Lean370released.html#190662291">Bryan Gin-ge Chen (Mar 15 2020 at 19:08)</a>:</h4>
+<p>If you clone <a href="https://github.com/bryangingechen/lean-web-editor" target="_blank" title="https://github.com/bryangingechen/lean-web-editor">https://github.com/bryangingechen/lean-web-editor</a>, run </p>
+<div class="codehilite"><pre><span></span>npm install
+./node_modules/.bin/webpack-dev-server
+</pre></div>
+
+
+<p>and then unzip <a href="/user_uploads/3121/6qoRbLWkMtKe0NBpDP20xUFo/dist.zip" target="_blank" title="dist.zip">dist.zip</a> into the <code>dist/</code> folder before opening <code>localhost:8080</code> you should be able to reproduce what we've been seeing.</p>
+
+<a name="190662442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.7.0%20released%21/near/190662442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83933Lean370released.html#190662442">Gabriel Ebner (Mar 15 2020 at 19:12)</a>:</h4>
+<p>I'll leave this to <span class="user-mention" data-user-id="128280">@Wojciech Nawrocki</span>.</p>
+
+<a name="190669336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.7.0%20released%21/near/190669336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83933Lean370released.html#190669336">Edward Ayers (Mar 15 2020 at 22:07)</a>:</h4>
+<p>Hold fire with this. I think it's more likely I didn't build the wasm properly.</p>
+
+<a name="190679260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.7.0%20released%21/near/190679260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83933Lean370released.html#190679260">Wojciech Nawrocki (Mar 16 2020 at 02:43)</a>:</h4>
+<p>I did absolutely assume .lean files would exist when making that change - I'll fix this ASAP, sorry! However, it's not currently clear to me why it would fail even if they <em>are</em> present. I'll try to always test changes with the web editor as well from now on, since the CI doesn't cover it (could it?).</p>
+
+<a name="190679465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.7.0%20released%21/near/190679465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83933Lean370released.html#190679465">Bryan Gin-ge Chen (Mar 16 2020 at 02:50)</a>:</h4>
+<p>Yeah, I'm not sure what happened when we included the .lean files and I haven't yet tried using the official 3.7.0 browser builds, so it's possible that it's due to some issue with Ed's build.</p>
+
+<a name="190680172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.7.0%20released%21/near/190680172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83933Lean370released.html#190680172">Bryan Gin-ge Chen (Mar 16 2020 at 03:04)</a>:</h4>
+<p>OK, I just tried out the browser build of Lean 3.7.0c from the <a href="https://github.com/leanprover-community/lean/releases" target="_blank" title="https://github.com/leanprover-community/lean/releases">releases page</a> with the Lean web editor and it works, provided I include the .lean files in the library.zip. If I don't include the .lean files then it fails to import <code>init</code>.</p>
+
+<a name="190680600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.7.0%20released%21/near/190680600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83933Lean370released.html#190680600">Wojciech Nawrocki (Mar 16 2020 at 03:13)</a>:</h4>
+<p>Okay! I'll PR a fix to read .oleans even if no source files are present, so that they don't have to exist in the web bundle.</p>
+
+<a name="190790729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.7.0%20released%21/near/190790729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83933Lean370released.html#190790729">Bryan Gin-ge Chen (Mar 16 2020 at 23:02)</a>:</h4>
+<p><span class="user-mention" data-user-id="128280">@Wojciech Nawrocki</span> Just tried the browser build of Lean 3.7.1c and it works perfectly without .lean files in the ZIP! Thanks so much for the quick fix!</p>
+
+<a name="190794725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%203.7.0%20released%21/near/190794725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83933Lean370released.html#190794725">Wojciech Nawrocki (Mar 16 2020 at 23:59)</a>:</h4>
+<p>Great! np</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

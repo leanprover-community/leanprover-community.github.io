@@ -9,13 +9,107 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [2006 STEP 3 Question 8](297362006STEP3Question8.html) (100 messages, latest: Mar 24 2020 at 13:47)
+
+* [Type theory books?](43323Typetheorybooks.html) (16 messages, latest: Mar 24 2020 at 05:35)
+
+* [Schnorr Group](54733SchnorrGroup.html) (38 messages, latest: Mar 24 2020 at 01:25)
+
+* [noob question(s)](52075noobquestions.html) (2608 messages, latest: Mar 23 2020 at 23:15)
+
+* [working with sets](94269workingwithsets.html) (20 messages, latest: Mar 23 2020 at 20:51)
+
+* [quot of fintype is fintype?](26328quotoffintypeisfintype.html) (13 messages, latest: Mar 23 2020 at 12:45)
+
+* [Complete lattices and subsets](01455Completelatticesandsubsets.html) (33 messages, latest: Mar 23 2020 at 10:57)
+
+* [Encoding Field as Abelian Group](00729EncodingFieldasAbelianGroup.html) (6 messages, latest: Mar 23 2020 at 08:28)
+
+* [Bezout's identity](61086Bezoutsidentity.html) (26 messages, latest: Mar 23 2020 at 02:53)
+
+* [ring morphism from Z](74894ringmorphismfromZ.html) (30 messages, latest: Mar 22 2020 at 23:12)
+
+* [more basics](41001morebasics.html) (264 messages, latest: Mar 22 2020 at 22:12)
+
+* [residue class](96840residueclass.html) (24 messages, latest: Mar 22 2020 at 22:08)
+
+* [Build a sequence (N → X) by strong induction](17569BuildasequenceNXbystronginduction.html) (16 messages, latest: Mar 22 2020 at 21:04)
+
+* [symmetric function](49220symmetricfunction.html) (13 messages, latest: Mar 22 2020 at 19:14)
+
+* [Proving Something is False](03707ProvingSomethingisFalse.html) (19 messages, latest: Mar 22 2020 at 19:03)
+
+* [Not Equal To](38413NotEqualTo.html) (4 messages, latest: Mar 22 2020 at 18:07)
+
+* [On the side of logic](81703Onthesideoflogic.html) (64 messages, latest: Mar 22 2020 at 17:23)
+
+* [Sizeof for types in Prop](05829SizeoffortypesinProp.html) (37 messages, latest: Mar 22 2020 at 15:56)
+
+* [Representation Theory](30735RepresentationTheory.html) (228 messages, latest: Mar 22 2020 at 02:08)
+
+* [tactics](22316tactics.html) (23 messages, latest: Mar 22 2020 at 00:01)
+
+* [make a group](24781makeagroup.html) (48 messages, latest: Mar 21 2020 at 21:13)
+
+* [more more basics](91420moremorebasics.html) (170 messages, latest: Mar 21 2020 at 17:20)
+
+* [Natural Number addition definition](89430NaturalNumberadditiondefinition.html) (47 messages, latest: Mar 21 2020 at 13:28)
+
+* [using theorem with existential quantifier](57305usingtheoremwithexistentialquantifier.html) (9 messages, latest: Mar 21 2020 at 03:43)
+
+* [How to prove (¬ (∀ x, P x)) → (∃ y, ¬ (P y)) in Lean](49920HowtoprovexPxyPyinLean.html) (17 messages, latest: Mar 21 2020 at 00:34)
+
+* [Silly Question?](39301SillyQuestion.html) (5 messages, latest: Mar 20 2020 at 17:01)
+
+* [Composite and DeMorgan](51732CompositeandDeMorgan.html) (2 messages, latest: Mar 20 2020 at 16:41)
+
+* [Using An Existing Theorem: Simple Example](64101UsingAnExistingTheoremSimpleExample.html) (10 messages, latest: Mar 20 2020 at 16:36)
+
+* [preferred definition of subobject?](43262preferreddefinitionofsubobject.html) (41 messages, latest: Mar 20 2020 at 10:27)
+
+* [show tactic state](43195showtacticstate.html) (22 messages, latest: Mar 19 2020 at 18:40)
+
+* [IFF Question](59182IFFQuestion.html) (6 messages, latest: Mar 19 2020 at 16:58)
+
+* [TPIL Chapter 7](98392TPILChapter7.html) (45 messages, latest: Mar 19 2020 at 08:31)
+
+* [mathlib installation](38548mathlibinstallation.html) (20 messages, latest: Mar 19 2020 at 07:45)
+
+* [TPIL chaper 8 Ackermann function](60219TPILchaper8Ackermannfunction.html) (21 messages, latest: Mar 17 2020 at 19:32)
+
+* [Splitting the Goal](03011SplittingtheGoal.html) (4 messages, latest: Mar 17 2020 at 16:27)
+
+* [fintype + decidability](55954fintypedecidability.html) (8 messages, latest: Mar 17 2020 at 15:18)
+
+* [An example involving Ch.2 and NNG](53273AnexampleinvolvingCh2andNNG.html) (86 messages, latest: Mar 17 2020 at 13:06)
+
+* [Understanding Contradiction](15688UnderstandingContradiction.html) (16 messages, latest: Mar 16 2020 at 22:39)
+
+* [Inequality World 2](80320InequalityWorld2.html) (97 messages, latest: Mar 16 2020 at 22:22)
+
+* [How to use equation compiler](06816Howtouseequationcompiler.html) (4 messages, latest: Mar 16 2020 at 22:07)
+
+* [leanpkg issues (no more issue)](08841leanpkgissuesnomoreissue.html) (7 messages, latest: Mar 16 2020 at 19:21)
+
+* [Natural Numbers Game](36974NaturalNumbersGame.html) (30 messages, latest: Mar 15 2020 at 14:08)
+
+* [Inequality World](58926InequalityWorld.html) (111 messages, latest: Mar 15 2020 at 08:14)
+
+* [TPIL Chapter 4 Exercises](63296TPILChapter4Exercises.html) (35 messages, latest: Mar 15 2020 at 05:36)
+
+* [a > a is false](18280aaisfalse.html) (4 messages, latest: Mar 15 2020 at 01:26)
+
+* [home pages](02170homepages.html) (13 messages, latest: Mar 13 2020 at 17:59)
+
+* [Prime Theorem Help](16635PrimeTheoremHelp.html) (16 messages, latest: Mar 13 2020 at 00:44)
+
+* [has_binary_products etc.](25502hasbinaryproductsetc.html) (8 messages, latest: Mar 12 2020 at 15:43)
+
+* [natural number game questions](52294naturalnumbergamequestions.html) (85 messages, latest: Mar 12 2020 at 13:14)
+
+* [naturals nonnegative](44425naturalsnonnegative.html) (6 messages, latest: Mar 11 2020 at 16:18)
+
 * [searching theorems](12924searchingtheorems.html) (3 messages, latest: Mar 11 2020 at 10:57)
-
-* [more basics](41001morebasics.html) (154 messages, latest: Mar 11 2020 at 01:08)
-
-* [natural number game questions](52294naturalnumbergamequestions.html) (84 messages, latest: Mar 10 2020 at 07:18)
-
-* [TPIL Chapter 4 Exercises](63296TPILChapter4Exercises.html) (31 messages, latest: Mar 10 2020 at 02:07)
 
 * [hyperreal.lean in math lib](54195hyperrealleaninmathlib.html) (26 messages, latest: Mar 08 2020 at 19:51)
 
@@ -36,8 +130,6 @@ permalink: archive/113489newmembers/index.html
 * [Improving injectivity proof](88980Improvinginjectivityproof.html) (19 messages, latest: Mar 05 2020 at 19:02)
 
 * [Typeclasses in category_theory/limits](21377Typeclassesincategorytheorylimits.html) (7 messages, latest: Mar 05 2020 at 07:57)
-
-* [noob question(s)](52075noobquestions.html) (2135 messages, latest: Mar 04 2020 at 02:47)
 
 * [best way to prove](48687bestwaytoprove.html) (3 messages, latest: Mar 03 2020 at 20:33)
 
@@ -95,11 +187,9 @@ permalink: archive/113489newmembers/index.html
 
 * [error about instances](36782erroraboutinstances.html) (7 messages, latest: Feb 24 2020 at 23:35)
 
-* [Basic Question](53627BasicQuestion.html) (9 messages, latest: Feb 24 2020 at 19:36)
+* [Basic Question](53627BasicQuestion.html) (18 messages, latest: Feb 24 2020 at 19:36)
 
-* [subtype coercion](10559subtypecoercion.html) (16 messages, latest: Feb 23 2020 at 20:25)
-
-* [Subtype Coercion](78847SubtypeCoercion.html) (1 message, latest: Feb 23 2020 at 20:15)
+* [subtype coercion](10559subtypecoercion.html) (17 messages, latest: Feb 23 2020 at 20:25)
 
 * [Using mathlib in Lean project created using leanpkg](25878UsingmathlibinLeanprojectcreatedusingleanpkg.html) (43 messages, latest: Feb 23 2020 at 15:18)
 
@@ -108,8 +198,6 @@ permalink: archive/113489newmembers/index.html
 * [Boolean equality on nats](34402Booleanequalityonnats.html) (4 messages, latest: Feb 22 2020 at 06:47)
 
 * [extending structures with implicit parameters](52630extendingstructureswithimplicitparameters.html) (23 messages, latest: Feb 22 2020 at 02:20)
-
-* [On the side of logic](81703Onthesideoflogic.html) (36 messages, latest: Feb 20 2020 at 16:08)
 
 * [Specific selection of terms with rw](62066Specificselectionoftermswithrw.html) (12 messages, latest: Feb 20 2020 at 14:47)
 
@@ -189,7 +277,7 @@ permalink: archive/113489newmembers/index.html
 
 * [example : ¬ (∃ x, ¬ p x) → (∀ x, p x)](34382examplexpxxpx.html) (47 messages, latest: Feb 01 2020 at 16:39)
 
-* [sets in lean](66871setsinlean.html) (3 messages, latest: Jan 26 2020 at 20:56)
+* [sets in lean](66871setsinlean.html) (50 messages, latest: Jan 26 2020 at 20:56)
 
 * [Permission to push create branch on main mathlib repo](47016Permissiontopushcreatebranchonmainmathlibrepo.html) (6 messages, latest: Jan 26 2020 at 18:25)
 
@@ -201,7 +289,7 @@ permalink: archive/113489newmembers/index.html
 
 * [Analysis tools](56566Analysistools.html) (3 messages, latest: Jan 23 2020 at 17:51)
 
-* [basics](17142basics.html) (117 messages, latest: Jan 23 2020 at 14:30)
+* [basics](17142basics.html) (136 messages, latest: Jan 23 2020 at 14:30)
 
 * [Using `rw`](59824Usingrw.html) (13 messages, latest: Jan 23 2020 at 07:51)
 
@@ -257,13 +345,9 @@ permalink: archive/113489newmembers/index.html
 
 * [`or` implication](85659orimplication.html) (5 messages, latest: Dec 29 2019 at 22:52)
 
-* [Basic question](30875Basicquestion.html) (9 messages, latest: Dec 27 2019 at 22:52)
-
 * [universes in lean](98716universesinlean.html) (9 messages, latest: Dec 27 2019 at 07:15)
 
 * [Symmetry of equality applied to a hypothesis](35681Symmetryofequalityappliedtoahypothesis.html) (6 messages, latest: Dec 26 2019 at 21:57)
-
-* [Basics](34198Basics.html) (19 messages, latest: Dec 26 2019 at 20:18)
 
 * [hello! + how to get started on math?](95375hellohowtogetstartedonmath.html) (9 messages, latest: Dec 24 2019 at 14:30)
 
@@ -611,8 +695,6 @@ permalink: archive/113489newmembers/index.html
 
 * [How to destructure `fin` using pattern matching?](70935Howtodestructurefinusingpatternmatching.html) (12 messages, latest: Oct 18 2019 at 14:42)
 
-* [Representation Theory](30735RepresentationTheory.html) (22 messages, latest: Oct 18 2019 at 07:50)
-
 * [How to write out variable declarations involving typeclasses](26656Howtowriteoutvariabledeclarationsinvolvingtypeclasses.html) (5 messages, latest: Oct 17 2019 at 19:00)
 
 * [Do lenses fit anywhere in mathlib?](81179Dolensesfitanywhereinmathlib.html) (15 messages, latest: Oct 17 2019 at 14:43)
@@ -623,8 +705,6 @@ permalink: archive/113489newmembers/index.html
 
 * [example: (p ∨ q) ∧ (p ∨ r) → p ∨ (q ∧ r)](93506examplepqprpqr.html) (16 messages, latest: Oct 16 2019 at 22:33)
 
-* [sets in Lean](78231setsinLean.html) (47 messages, latest: Oct 16 2019 at 21:46)
-
 * ['eliminator' elaboration was not used](69024eliminatorelaborationwasnotused.html) (26 messages, latest: Oct 16 2019 at 10:58)
 
 * [How to prove `¬ (↑(list.length l) + 1) = (0 : rat)`?](25529Howtoprovelistlengthl10rat.html) (3 messages, latest: Oct 15 2019 at 13:17)
@@ -633,7 +713,7 @@ permalink: archive/113489newmembers/index.html
 
 * [Giry monad](88715Girymonad.html) (26 messages, latest: Oct 14 2019 at 19:36)
 
-* [How to fold statements into the calc block?](32311Howtofoldstatementsintothecalcblock.html) (23 messages, latest: Oct 14 2019 at 13:19)
+* [How to fold statements into the calc block?](32311Howtofoldstatementsintothecalcblock.html) (69 messages, latest: Oct 14 2019 at 13:19)
 
 * [emacs lean mathlib](84267emacsleanmathlib.html) (53 messages, latest: Oct 14 2019 at 02:36)
 
@@ -815,7 +895,7 @@ permalink: archive/113489newmembers/index.html
 
 * [lexicographic ordering on pi types](37320lexicographicorderingonpitypes.html) (28 messages, latest: Jun 27 2019 at 11:25)
 
-* [INduction_](38413INduction.html) (16 messages, latest: Jun 26 2019 at 21:25)
+* [INduction_](38413INduction.html) (26 messages, latest: Jun 26 2019 at 21:25)
 
 * [help with measurability proof](32743helpwithmeasurabilityproof.html) (1 message, latest: Jun 26 2019 at 19:20)
 
@@ -823,11 +903,9 @@ permalink: archive/113489newmembers/index.html
 
 * [Samuel Lelièvre](94598SamuelLelivre.html) (1 message, latest: Jun 26 2019 at 16:30)
 
-* [(no topic)](79918notopic.html) (191 messages, latest: Jun 26 2019 at 07:26)
-
 * [tactic failed, result contains meta-variables](97429tacticfailedresultcontainsmetavariables.html) (3 messages, latest: Jun 25 2019 at 08:15)
 
-* [Induction](51886Induction.html) (241 messages, latest: Jun 25 2019 at 06:25)
+* [Induction](51886Induction.html) (231 messages, latest: Jun 25 2019 at 06:25)
 
 * [SIGABRT while building Lean](46516SIGABRTwhilebuildingLean.html) (40 messages, latest: Jun 24 2019 at 12:08)
 
@@ -921,7 +999,7 @@ permalink: archive/113489newmembers/index.html
 
 * [int div nat eq floor rat](67601intdivnateqfloorrat.html) (6 messages, latest: May 14 2019 at 12:15)
 
-* [Guarantee a set to be a finset](76606Guaranteeasettobeafinset.html) (7 messages, latest: May 14 2019 at 09:36)
+* [Guarantee a set to be a finset](76606Guaranteeasettobeafinset.html) (87 messages, latest: May 14 2019 at 09:36)
 
 * [Definition of simple functions and its integral](11899Definitionofsimplefunctionsanditsintegral.html) (33 messages, latest: May 13 2019 at 18:39)
 
@@ -1009,7 +1087,7 @@ permalink: archive/113489newmembers/index.html
 
 * [coe additive monoid hom](61036coeadditivemonoidhom.html) (14 messages, latest: Mar 16 2019 at 12:26)
 
-* [rw failure](50770rwfailure.html) (26 messages, latest: Mar 16 2019 at 10:03)
+* [rw failure](50770rwfailure.html) (64 messages, latest: Mar 16 2019 at 10:03)
 
 * [wrote a definition for free objects, requesting feedback](20711wroteadefinitionforfreeobjectsrequestingfeedback.html) (5 messages, latest: Mar 16 2019 at 02:32)
 
@@ -1031,7 +1109,7 @@ permalink: archive/113489newmembers/index.html
 
 * [Easy way to lift the entire structure?](47470Easywaytolifttheentirestructure.html) (2 messages, latest: Mar 11 2019 at 20:25)
 
-* [Draft book using Lean for CS Discrete Math](23869DraftbookusingLeanforCSDiscreteMath.html) (18 messages, latest: Mar 11 2019 at 05:17)
+* [Draft book using Lean for CS Discrete Math](23869DraftbookusingLeanforCSDiscreteMath.html) (28 messages, latest: Mar 11 2019 at 05:17)
 
 * [Declaring canonical instance of typeclass?](55379Declaringcanonicalinstanceoftypeclass.html) (17 messages, latest: Mar 09 2019 at 21:52)
 
@@ -1595,8 +1673,6 @@ permalink: archive/113489newmembers/index.html
 
 * [monotonicity again](40653monotonicityagain.html) (11 messages, latest: Aug 04 2018 at 11:30)
 
-* [Kevin Sullivan, UVa CS](37530KevinSullivanUVaCS.html) (10 messages, latest: Aug 03 2018 at 11:10)
-
 * [Error message in VS Code](85867ErrormessageinVSCode.html) (2 messages, latest: Aug 02 2018 at 11:40)
 
 * [defining a hilbert space](89980definingahilbertspace.html) (88 messages, latest: Aug 02 2018 at 11:34)
@@ -1670,6 +1746,8 @@ permalink: archive/113489newmembers/index.html
 * [this is interesting](49953thisisinteresting.html) (4 messages, latest: Feb 27 2018 at 00:00)
 
 * [Kenny Lau](58824KennyLau.html) (1 message, latest: Feb 26 2018 at 23:09)
+
+* [(no topic)](79918notopic.html) (27 messages, latest: Feb 26 2018 at 19:10)
 
 * [Andrew Ashworth](85298AndrewAshworth.html) (15 messages, latest: Feb 26 2018 at 16:21)
 

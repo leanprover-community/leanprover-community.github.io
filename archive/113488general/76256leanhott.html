@@ -1,0 +1,187 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/76256leanhott.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html">lean hott</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="190502443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190502443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190502443">Johan Commelin (Mar 13 2020 at 13:31)</a>:</h4>
+<p>There is some form of HoTT for Lean 3. <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> I think you know more about this.<br>
+With all our new cool tools, can I now easily work on this in one directory, and after that seamlessly switch VS code to a mathlib project?<br>
+Can <code>leanproject</code> support HoTT? Or does it already do it by chance?</p>
+
+<a name="190502896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190502896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190502896">Gabriel Ebner (Mar 13 2020 at 13:35)</a>:</h4>
+<p>The <code>hott3</code> project doesn't require any modifications to Lean.  There is a <code>@[hott]</code> attribute that forbids the use of <code>eq.rec</code> and <code>heq.rec</code>, and that's it.</p>
+
+<a name="190503013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190503013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190503013">Gabriel Ebner (Mar 13 2020 at 13:36)</a>:</h4>
+<p>However, as soon as you forbid <code>eq.rec</code> you can essentially say goodbye to the core library (or mathlib).  You can use the same <code>list</code>, <code>nat</code>, <code>prod</code>, etc.  But you can't reuse any theorems.</p>
+
+<a name="190503063"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190503063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190503063">Gabriel Ebner (Mar 13 2020 at 13:37)</a>:</h4>
+<p>If you want to check it out, you can just <code>leanproject get gebner/hott3</code>.</p>
+
+<a name="190503100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190503100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190503100">Gabriel Ebner (Mar 13 2020 at 13:37)</a>:</h4>
+<p>I've just added a <code>lean_version</code> field so that elan should pick up the right lean version.</p>
+
+<a name="190503377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190503377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190503377">Gabriel Ebner (Mar 13 2020 at 13:40)</a>:</h4>
+<p>You also need to say goodbye to lots of built-in features such as <code>cases</code> or <code>rw</code> or the equation compiler (in general, it still works for lists and natural numbers and such).  So we have <code>eq_cases</code>, <code>hinduction</code>, <code>hsimp</code>, <code>hintro</code>.</p>
+
+<a name="190504528"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190504528" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190504528">Johan Commelin (Mar 13 2020 at 13:51)</a>:</h4>
+<div class="codehilite"><pre><span></span>Cloning from https://github.com/gebner/hott3.git
+error: override toolchain &#39;leanprover-community/lean:3.7.0&#39; is not installed
+info: caused by: the toolchain file at &#39;/home/jmc/data/math/hott3/leanpkg.toml&#39; specifies an uninstalled toolchain
+</pre></div>
+
+
+<p>Should leanproject install this for me automatically?</p>
+
+<a name="190504544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190504544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190504544">Johan Commelin (Mar 13 2020 at 13:51)</a>:</h4>
+<p>Or do we want users to ask elan to do this</p>
+
+<a name="190504757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190504757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190504757">Gabriel Ebner (Mar 13 2020 at 13:53)</a>:</h4>
+<p>Are you by any chance on windows?  The 3.7.0 builds will probably take another hour or so.</p>
+
+<a name="190504830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190504830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190504830">Johan Commelin (Mar 13 2020 at 13:54)</a>:</h4>
+<p>Nope... linux <span aria-label="penguin" class="emoji emoji-1f427" role="img" title="penguin">:penguin:</span></p>
+
+<a name="190504908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190504908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190504908">Gabriel Ebner (Mar 13 2020 at 13:55)</a>:</h4>
+<p>Mmmh, then it should work out of the box.  And if doesn't, then mathlib will break for you as well soon.</p>
+
+<a name="190504972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190504972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190504972">Gabriel Ebner (Mar 13 2020 at 13:56)</a>:</h4>
+<p>Did you need to do anything for the mathlib upgrade to 3.6.0?</p>
+
+<a name="190504999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190504999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190504999">Johan Commelin (Mar 13 2020 at 13:56)</a>:</h4>
+<p>I haven't done that yet on this box. Let me try.</p>
+
+<a name="190505204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190505204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190505204">Johan Commelin (Mar 13 2020 at 13:59)</a>:</h4>
+<p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> </p>
+<div class="codehilite"><pre><span></span>(error: override toolchain &#39;leanprover-community/lean:3.6.1&#39; is not installed, the toolchain file at &#39;/home/jmc/data/math/mathlib/leanpkg.toml&#39; specifies an uninstalled toolchain)
+</pre></div>
+
+<a name="190505215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190505215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190505215">Johan Commelin (Mar 13 2020 at 13:59)</a>:</h4>
+<p>Maybe my <code>elan</code> is really old...</p>
+
+<a name="190505223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190505223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190505223">Gabriel Ebner (Mar 13 2020 at 13:59)</a>:</h4>
+<p>I think elan can update itself.</p>
+
+<a name="190505238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190505238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190505238">Gabriel Ebner (Mar 13 2020 at 13:59)</a>:</h4>
+<p><code>elan self update</code></p>
+
+<a name="190505245"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190505245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190505245">Gabriel Ebner (Mar 13 2020 at 13:59)</a>:</h4>
+<p>Does this work for you?</p>
+
+<a name="190505272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190505272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190505272">Johan Commelin (Mar 13 2020 at 13:59)</a>:</h4>
+<div class="codehilite"><pre><span></span>$ elan self update
+info: checking <span class="k">for</span> self-updates
+info: downloading self-update
+Error<span class="o">(</span>Download<span class="o">(</span>HttpStatus<span class="o">(</span><span class="m">404</span><span class="o">))</span>, State <span class="o">{</span> next_error: None, backtrace: None <span class="o">})</span>
+error: could not download file from <span class="s1">&#39;https://github.com/Kha/elan/releases/download/v0.8.0&amp;quot;,&amp;quot;user_id&amp;quot;:null%7D%7D/elan-x86_64-unknown-linux-gnu.tar.gz&#39;</span> to <span class="s1">&#39;/tmp/elan-update.xzw5tBCb62Kj/elan-x86_64-unknown-linux-gnu.tar.gz&#39;</span>
+info: caused by: http request returned an unsuccessful status code: <span class="m">404</span>
+</pre></div>
+
+<a name="190505378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190505378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190505378">Gabriel Ebner (Mar 13 2020 at 14:00)</a>:</h4>
+<p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> This looks like an elan bug ^^</p>
+
+<a name="190505389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190505389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190505389">Gabriel Ebner (Mar 13 2020 at 14:00)</a>:</h4>
+<p>I guess you need to reinstall elan.</p>
+
+<a name="190505412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190505412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190505412">Koundinya Vajjha (Mar 13 2020 at 14:00)</a>:</h4>
+<p>FWIW, I get the same error too.</p>
+
+<a name="190505483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190505483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190505483">Sebastian Ullrich (Mar 13 2020 at 14:01)</a>:</h4>
+<p>Huh, I guess HTML parsing isn't very stable after all</p>
+
+<a name="190505731"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190505731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190505731">Marc Huisinga (Mar 13 2020 at 14:04)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110024">Sebastian Ullrich</span> <a href="#narrow/stream/113488-general/topic/update-mathlib.20update/near/188675980" title="#narrow/stream/113488-general/topic/update-mathlib.20update/near/188675980">said</a>:</p>
+<blockquote>
+<p>I parse HTML using regexes, of course</p>
+</blockquote>
+
+<a name="190505847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190505847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190505847">Johan Commelin (Mar 13 2020 at 14:05)</a>:</h4>
+<blockquote>
+<p>he comes he comes do not fi​ght he com̡e̶s, ̕h̵i​s un̨ho͞ly radiańcé destro҉ying all enli̍̈́̂̈́ghtenment, HTML tags lea͠ki̧n͘g fr̶ǫm ̡yo​͟ur eye͢s̸ ̛l̕ik͏e liq​uid pain, the song of re̸gular exp​ression parsing will exti​nguish the voices of mor​tal man from the sp​here I can see it can you see ̲͚̖͔̙î̩́t̲͎̩̱͔́̋̀ it is beautiful t​he final snuffing of the lie​s of Man ALL IS LOŚ͖̩͇̗̪̏̈́T ALL I​S LOST the pon̷y he comes he c̶̮omes he comes the ich​or permeates all MY FACE MY FACE</p>
+</blockquote>
+
+<a name="190506418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190506418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190506418">Marc Huisinga (Mar 13 2020 at 14:11)</a>:</h4>
+<p>even joking about it will attract h̵i​s wrath</p>
+
+<a name="190507199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190507199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190507199">Johan Commelin (Mar 13 2020 at 14:18)</a>:</h4>
+<p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> Reinstalling <code>elan</code> helped</p>
+
+<a name="190508554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190508554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190508554">Sebastian Ullrich (Mar 13 2020 at 14:30)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> Does the error persist after the manual update?</p>
+
+<a name="190508608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190508608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190508608">Johan Commelin (Mar 13 2020 at 14:31)</a>:</h4>
+<p>No, it seems to be gone.</p>
+
+<a name="190508656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190508656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190508656">Johan Commelin (Mar 13 2020 at 14:31)</a>:</h4>
+<p>My CPU's are currently maxing out while checking <code>cubical/*.lean</code></p>
+
+<a name="190508859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190508859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190508859">Sebastian Ullrich (Mar 13 2020 at 14:32)</a>:</h4>
+<p>Great, then the bug has been long fixed</p>
+
+<a name="190509922"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190509922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190509922">Johan Commelin (Mar 13 2020 at 14:40)</a>:</h4>
+<p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> Currently <code>master</code> contains <code>sorry</code>. Do you have any idea how hard it would be to make it <code>sorry</code>-free?</p>
+
+<a name="190510451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190510451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190510451">Gabriel Ebner (Mar 13 2020 at 14:44)</a>:</h4>
+<p><code>hott3</code> is pretty much unmaintained.  <span class="user-mention" data-user-id="111080">@Floris van Doorn</span> has been merging a lot of PRs, but I don't think anybody actually has a use for it.</p>
+
+<a name="190510512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190510512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190510512">Gabriel Ebner (Mar 13 2020 at 14:45)</a>:</h4>
+<p>Also <code>hott3</code> is far from "finished".  Most of the files are a direct port of the Lean 2 HoTT library.  But only like 5% is ported.  The <code>sorry</code> should be the least of your worries.</p>
+
+<a name="190513293"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190513293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190513293">Johan Commelin (Mar 13 2020 at 15:06)</a>:</h4>
+<p>Is it at all reasonable to think that we can try to prove quadratic reciprocity in HoTT3?</p>
+
+<a name="190513333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190513333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190513333">Johan Commelin (Mar 13 2020 at 15:06)</a>:</h4>
+<p>Or should we switch to cubical agda, or something similar, if we want to do such an experiment?</p>
+
+<a name="190515365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hott/near/190515365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76256leanhott.html#190515365">Gabriel Ebner (Mar 13 2020 at 15:21)</a>:</h4>
+<p>Other people are probably more qualified than me to answer this question.  <code>hott3</code> is at a point where I think you could try this experiment (if you have way too much free time).  On the plus side, there is a simplifier and you already know the syntax.  If I wanted to it, I would probably also look at other HoTT systems with mathematical libraries first, such as the HoTT library in Coq.  I wouldn't do it in cubical Agda, because AFAICT there are no tactics and I wouldn't want to work without <code>rw</code> or <code>simp</code>.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

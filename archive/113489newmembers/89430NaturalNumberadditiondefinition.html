@@ -1,0 +1,396 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/89430NaturalNumberadditiondefinition.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html">Natural Number addition definition</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="191339898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191339898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191339898">Mukesh Tiwari (Mar 21 2020 at 10:50)</a>:</h4>
+<p>Hi everyone, </p>
+<p>I have defined a algebraic structure (monoid), and I want make my custom natural number and addition as a instance of monoid. However, my addition function definition is giving this error : equation compiler failed (use 'set_option trace.eqn_compiler.elim_match true' for additional details). <a href="/user_uploads/3121/USwNzmbjUBg8Apd8AmLz9bHS/algebraic.lean" target="_blank" title="algebraic.lean">algebraic.lean</a></p>
+
+<a name="191339956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191339956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191339956">Mukesh Tiwari (Mar 21 2020 at 10:52)</a>:</h4>
+<div class="codehilite"><pre><span></span>namespace Structures
+
+structure monoid {A : Type} (f : A → A → A) (e : A) :=
+(Hassoc : ∀ a b c : A, f (f a b) c = f a (f b c))
+(Hidl : ∀ a : A, f e a = a)
+(Hidr : ∀ a : A, f a e = a)
+
+
+/- Proofs about monoid -/
+
+
+/- end proof of monoid -/
+end Structures
+
+namespace mynat
+
+inductive nat : Type
+| Z : nat
+| S : nat → nat
+
+open nat
+def add : nat -&gt; nat -&gt; nat
+| Z n := n
+| (S m) n := S (add m n)
+
+end mynat
+
+namespace mylist
+
+inductive list (A : Type) :  Type
+| Nil {} : list
+| Cons : A -&gt; list -&gt; list
+
+def append {A : Type} : list A → list A → list A
+| Nil l := l
+| (Cons x xs) l := Cons x (append xs l)
+
+
+end mylist
+#check mylist.list.Nil
+#check (mylist.list.Cons mynat.nat.Z mylist.list.Nil)
+</pre></div>
+
+<a name="191340114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191340114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191340114">Johan Commelin (Mar 21 2020 at 10:57)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">custom</span>
+
+<span class="kn">structure</span> <span class="n">monoid</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">Hassoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">A</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">a</span> <span class="o">(</span><span class="n">f</span> <span class="n">b</span> <span class="n">c</span><span class="o">))</span>
+<span class="o">(</span><span class="n">Hidl</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">A</span><span class="o">,</span> <span class="n">f</span> <span class="n">e</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">Hidr</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">A</span><span class="o">,</span> <span class="n">f</span> <span class="n">a</span> <span class="n">e</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span>
+
+<span class="kn">inductive</span> <span class="n">mynat</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">Z</span> <span class="o">:</span> <span class="n">mynat</span>
+<span class="bp">|</span> <span class="n">S</span> <span class="o">:</span> <span class="n">mynat</span> <span class="bp">→</span> <span class="n">mynat</span>
+
+<span class="kn">namespace</span> <span class="n">mynat</span>
+
+<span class="n">def</span> <span class="n">add</span> <span class="o">:</span> <span class="n">mynat</span> <span class="bp">-&gt;</span> <span class="n">mynat</span> <span class="bp">-&gt;</span> <span class="n">mynat</span>
+<span class="bp">|</span> <span class="n">Z</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">S</span> <span class="n">m</span><span class="o">)</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">S</span> <span class="o">(</span><span class="n">add</span> <span class="n">m</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">monoid</span> <span class="o">:</span> <span class="n">monoid</span> <span class="n">add</span> <span class="n">Z</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">Hassoc</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">Hidl</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">Hidr</span> <span class="o">:=</span> <span class="bp">_</span> <span class="o">}</span>
+
+<span class="kn">end</span> <span class="n">mynat</span>
+
+<span class="kn">end</span> <span class="n">custom</span>
+</pre></div>
+
+<a name="191340120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191340120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191340120">Johan Commelin (Mar 21 2020 at 10:57)</a>:</h4>
+<p>I didn't test the code, but I think you want something like that <span aria-label="up" class="emoji emoji-2b06" role="img" title="up">:up:</span></p>
+
+<a name="191340129"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191340129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191340129">Johan Commelin (Mar 21 2020 at 10:57)</a>:</h4>
+<p>Pro-tip: with</p>
+<div class="codehilite"><pre><span></span>```lean
+code goes here
+```
+</pre></div>
+
+
+<p>you get pretty syntax highlighting</p>
+
+<a name="191340495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191340495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191340495">Mukesh Tiwari (Mar 21 2020 at 11:06)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span>  Thanks for the answer, but I still did not understand the problem in my code.  I see that you created a top level namespace custom, then defined monoid and mynat (while I closed the namespace after monoid definition and created a new namespace). Anyway, I would like to know what is wrong with my structuring?</p>
+
+<a name="191340539"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191340539" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191340539">Johan Commelin (Mar 21 2020 at 11:07)</a>:</h4>
+<p>Sorry, need to run to prepare some lunch for my kids.</p>
+
+<a name="191340615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191340615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191340615">Mukesh Tiwari (Mar 21 2020 at 11:09)</a>:</h4>
+<p>No worries.</p>
+
+<a name="191341293"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191341293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191341293">Johan Commelin (Mar 21 2020 at 11:28)</a>:</h4>
+<p>Quick answer: my guess is that maybe your code got confused with the <code>nat</code> that already exists. That's why I renamed everything to <code>mynat</code> in your code.</p>
+
+<a name="191341302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191341302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191341302">Johan Commelin (Mar 21 2020 at 11:29)</a>:</h4>
+<p>But I don't know of that is actually what went wrong.</p>
+
+<a name="191341450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191341450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191341450">Mukesh Tiwari (Mar 21 2020 at 11:33)</a>:</h4>
+<p>I figured it out. I don't know why 'open nat' is not working, so I replace every Z with nat.Z and S with nat.S in add, and type checker is happy.</p>
+
+<a name="191341503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191341503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191341503">Mukesh Tiwari (Mar 21 2020 at 11:34)</a>:</h4>
+<p>Also, when I need to change structure to class (I don't know why) to make type checker happy because it was complaining that 'Structures.monoid' is not a class</p>
+
+<a name="191341908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191341908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191341908">Patrick Massot (Mar 21 2020 at 11:45)</a>:</h4>
+<p><code>open nat</code> only gives access to stuff defined before that command.</p>
+
+<a name="191341975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191341975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191341975">Patrick Massot (Mar 21 2020 at 11:47)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="239476">Mukesh Tiwari</span> <a href="#narrow/stream/113489-new-members/topic/Natural.20Number.20addition.20definition/near/191341503" title="#narrow/stream/113489-new-members/topic/Natural.20Number.20addition.20definition/near/191341503">said</a>:</p>
+<blockquote>
+<p>Also, when I need to change structure to class (I don't know why) to make type checker happy because it was complaining that 'Structures.monoid' is not a class</p>
+</blockquote>
+<p>We need more code to help you here, although we can guess you tried to use square brackets around a structure argument (which is absurd).</p>
+
+<a name="191342176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191342176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191342176">Mukesh Tiwari (Mar 21 2020 at 11:53)</a>:</h4>
+<div class="codehilite"><pre><span></span>namespace AlgebraicStructures
+
+
+class monoid {A : Type} (e : A) (f : A → A → A)  :=
+(Hassoc : ∀ a b c : A, f a (f b c) = f (f a b) c)
+(Hidl : ∀ a : A, f e a = a)
+(Hidr : ∀ a : A, f a e = a)
+
+
+class group {A : Type} (e : A) (f : A → A → A) (inv : A → A) :=
+ (Hmon : @monoid A e f)
+ (Hinvl : ∀ x, f (inv x) x = e)
+ (Hinvr : ∀ x, f x (inv x) = e)
+
+
+end AlgebraicStructures
+
+namespace mynat
+
+inductive nat : Type
+| Z : nat
+| S : nat → nat
+
+
+def add : nat -&gt; nat -&gt; nat
+| nat.Z n := n
+| (nat.S m) n := nat.S (add m n)
+
+theorem add_zerol : ∀ (n : nat), add nat.Z n = n :=
+begin
+  intro n, trivial
+end
+
+theorem add_zeror : ∀ (n : nat), add n nat.Z = n :=
+begin
+ intro n, induction n,
+ trivial,
+ sorry
+end
+
+theorem add_assoc : ∀ n m r : nat, add n (add m r) = add (add n m) r :=
+sorry
+
+
+instance monoid : AlgebraicStructures.monoid nat.Z add :=
+{
+  Hassoc := add_assoc,
+  Hidl := add_zerol,
+  Hidr := add_zeror
+}
+
+
+
+end mynat
+</pre></div>
+
+
+<p>Changing class monoid to structure monoid makes typechecker unhappy about the 'instance monoid : : AlgebraicStructures.monoid nat.Z add'.</p>
+
+<a name="191342229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191342229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191342229">Patrick Massot (Mar 21 2020 at 11:54)</a>:</h4>
+<p>Ok, this is even worse than what I expected.</p>
+
+<a name="191342239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191342239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191342239">Patrick Massot (Mar 21 2020 at 11:55)</a>:</h4>
+<p>But don't worry, you'll be fine. What do you think <code>instance</code> means?</p>
+
+<a name="191342518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191342518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191342518">Mukesh Tiwari (Mar 21 2020 at 12:03)</a>:</h4>
+<p>I understand that it is a way to generate a concrete instance of some abstract structure (but my understanding is very much influenced by Haskell, so pardon me for my stupidity)</p>
+
+<a name="191342900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191342900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191342900">Patrick Massot (Mar 21 2020 at 12:15)</a>:</h4>
+<p>No, they declare instances (concrete or not) of <em>classes</em>. There is no stupidity issue here. Everybody is welcome to learn. The standard reference here is <a href="https://leanprover.github.io/theorem_proving_in_lean/type_classes.html" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/type_classes.html">https://leanprover.github.io/theorem_proving_in_lean/type_classes.html</a></p>
+
+<a name="191342970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191342970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191342970">Mukesh Tiwari (Mar 21 2020 at 12:17)</a>:</h4>
+<p>Thanks <span class="user-mention" data-user-id="110031">@Patrick Massot</span> .  I will have a more careful look at the tutorial.</p>
+
+<a name="191343030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191343030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191343030">Mukesh Tiwari (Mar 21 2020 at 12:19)</a>:</h4>
+<p>Also if you don't mind, then can you post your version of my code?</p>
+
+<a name="191343939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191343939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191343939">Patrick Massot (Mar 21 2020 at 12:42)</a>:</h4>
+<p>I don't know what you expect from "my version". Did you look at how it's done in the standard library? The differences are pretty visible.</p>
+
+<a name="191344018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191344018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191344018">Patrick Massot (Mar 21 2020 at 12:44)</a>:</h4>
+<p>About building algebraic hierarchy, the <a href="https://arxiv.org/abs/1910.09336" target="_blank" title="https://arxiv.org/abs/1910.09336">mathlib paper</a> has explanation, and even the more recent <a href="https://lean-forward.github.io/mathlib-maintenance/paper.pdf" target="_blank" title="https://lean-forward.github.io/mathlib-maintenance/paper.pdf">maintenance paper</a> has relevant bits.</p>
+
+<a name="191344200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191344200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191344200">Kevin Buzzard (Mar 21 2020 at 12:49)</a>:</h4>
+<p>What's the question here? <code>instance</code> makes terms of classes, and if you change the class to a structure you get an error saying it's not a class, so as far as I can see everything is consistent.</p>
+
+<a name="191344429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191344429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191344429">Mukesh Tiwari (Mar 21 2020 at 12:56)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110031">Patrick Massot</span> <a href="#narrow/stream/113489-new-members/topic/Natural.20Number.20addition.20definition/near/191342229" title="#narrow/stream/113489-new-members/topic/Natural.20Number.20addition.20definition/near/191342229">said</a>:</p>
+<blockquote>
+<p>Ok, this is even worse than what I expected.</p>
+</blockquote>
+<p>Based on your response, I thought I have deviated horribly from idiomatic Lean way; hence the reason for asking about your version.</p>
+
+<a name="191344436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191344436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191344436">Kevin Buzzard (Mar 21 2020 at 12:57)</a>:</h4>
+<p>Oh yes you did that too :-)</p>
+
+<a name="191344482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191344482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191344482">Mukesh Tiwari (Mar 21 2020 at 12:58)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  and now I am curious :) (care to rewrite it if you have time).</p>
+
+<a name="191344484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191344484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191344484">Kevin Buzzard (Mar 21 2020 at 12:58)</a>:</h4>
+<p>In idiomatic Lean we use notation for the identity and multiplication, rather than letting <code>monoid</code> take these functions as input.</p>
+
+<a name="191344497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191344497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191344497">Kevin Buzzard (Mar 21 2020 at 12:59)</a>:</h4>
+<p>The way it's set up in Lean's maths library is something like this:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">has_group_notation</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">has_mul</span> <span class="n">G</span><span class="o">,</span> <span class="n">has_one</span> <span class="n">G</span><span class="o">,</span> <span class="n">has_inv</span> <span class="n">G</span>
+
+<span class="c1">-- definition of the group structure</span>
+<span class="n">class</span> <span class="n">group</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">has_group_notation</span> <span class="n">G</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">mul_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">))</span>
+<span class="o">(</span><span class="n">one_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">mul_left_inv</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
+</pre></div>
+
+<a name="191344499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191344499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191344499">Kevin Buzzard (Mar 21 2020 at 12:59)</a>:</h4>
+<p>but without the inverses</p>
+
+<a name="191344549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191344549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191344549">Kevin Buzzard (Mar 21 2020 at 13:00)</a>:</h4>
+<p>This has the downside that we need a second class <code>add_monoid</code> extending <code>has_add</code> and <code>has_zero</code>.</p>
+
+<a name="191344556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191344556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191344556">Kevin Buzzard (Mar 21 2020 at 13:00)</a>:</h4>
+<p>but we have machinery which transfers lemmas about one structure to lemmas about the other.</p>
+
+<a name="191344646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191344646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191344646">Mukesh Tiwari (Mar 21 2020 at 13:03)</a>:</h4>
+<p>What is the advantage of bundling the three (e : A) (f : A → A → A) (inv : A → A) in a separate type class  (has_group_notation) ?</p>
+
+<a name="191344693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191344693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191344693">Kevin Buzzard (Mar 21 2020 at 13:04)</a>:</h4>
+<p>I am not a type theory person so I can't talk about the relative advantages and disadvantages, but I can tell you that we have managed to make a whole ton of algebra doing it like this and it works fine.</p>
+
+<a name="191344698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191344698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191344698">Kevin Buzzard (Mar 21 2020 at 13:04)</a>:</h4>
+<p>oh -- sorry, that's not the question you asked.</p>
+
+<a name="191344706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191344706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191344706">Kevin Buzzard (Mar 21 2020 at 13:05)</a>:</h4>
+<p>That was just me trying to be clever.They don't do that in the maths library</p>
+
+<a name="191344722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191344722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191344722">Kevin Buzzard (Mar 21 2020 at 13:05)</a>:</h4>
+<p>In the maths library they just extend has_one, has_mul</p>
+
+<a name="191344801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191344801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191344801">Kevin Buzzard (Mar 21 2020 at 13:07)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">monoid&#39;</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">has_mul</span> <span class="n">M</span><span class="o">,</span> <span class="n">has_one</span> <span class="n">M</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">mul_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">M</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">))</span>
+<span class="o">(</span><span class="n">one_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">M</span><span class="o">),</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">mul_one</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">M</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span>
+</pre></div>
+
+
+<p>That is a pretty faithful representation of what is actually in the library</p>
+
+<a name="191344845"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191344845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191344845">Kevin Buzzard (Mar 21 2020 at 13:08)</a>:</h4>
+<p>Just write <code>#check monoid</code> in VS Code and right click on monoid and go to the definition</p>
+
+<a name="191344870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191344870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191344870">Mukesh Tiwari (Mar 21 2020 at 13:08)</a>:</h4>
+<p>Thank Kevin for all the explanation. Maybe I need to write  more Lean code to understand it better (the problem is my fallback to Coq, but this time, I am fairly determined.)</p>
+
+<a name="191344891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191344891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191344891">Kevin Buzzard (Mar 21 2020 at 13:09)</a>:</h4>
+<p>The difference between your definition and the one in Lean is that in Lean you have to use <code>*</code> for the group law. But because you can define the multiplication on <code>M</code> to be whatever you like, it works out fine.</p>
+
+<a name="191345403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191345403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191345403">Mukesh Tiwari (Mar 21 2020 at 13:21)</a>:</h4>
+<p>What do you think about this one ? </p>
+<div class="codehilite"><pre><span></span>class monoid {A : Type*} (e : A) (f : A → A → A)  :=
+ (Hassoc : ∀ a b c : A, f a (f b c) = f (f a b) c)
+ (Hidl : ∀ a : A, f e a = a)
+ (Hidr : ∀ a : A, f a e = a)
+
+
+class group {A : Type*} (e : A) (f : A → A → A)
+ (inv : A → A) [@monoid A e f] :=
+ (Hinvl : ∀ x, f (inv x) x = e)
+ (Hinvr : ∀ x, f x (inv x) = e)
+
+class abelian_group {A : Type*} (e : A) (f : A → A → A)
+ (inv : A → A) [Hm : @monoid A e f] [@group A e f inv Hm]:=
+ (Hcomm : ∀ x y : A, f x y = f y x)
+</pre></div>
+
+<a name="191345414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191345414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191345414">Kevin Buzzard (Mar 21 2020 at 13:21)</a>:</h4>
+<p>They're not how it's done in mathlib but I can understand that it is possible to do it like this.</p>
+
+<a name="191345458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191345458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191345458">Kevin Buzzard (Mar 21 2020 at 13:22)</a>:</h4>
+<p>the <del>mathlib</del>core Lean way looks less clunky to me</p>
+
+<a name="191345481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191345481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191345481">Kevin Buzzard (Mar 21 2020 at 13:23)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">semigroup</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">has_mul</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">mul_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">))</span>
+
+<span class="n">class</span> <span class="n">comm_semigroup</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">semigroup</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">mul_comm</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">a</span><span class="o">)</span>
+
+<span class="n">class</span> <span class="n">left_cancel_semigroup</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">semigroup</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">mul_left_cancel</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span><span class="o">)</span>
+
+<span class="n">class</span> <span class="n">right_cancel_semigroup</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">semigroup</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">mul_right_cancel</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">c</span><span class="o">)</span>
+
+<span class="n">class</span> <span class="n">monoid</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">semigroup</span> <span class="n">α</span><span class="o">,</span> <span class="n">has_one</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">one_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">mul_one</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span>
+
+<span class="n">class</span> <span class="n">comm_monoid</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">monoid</span> <span class="n">α</span><span class="o">,</span> <span class="n">comm_semigroup</span> <span class="n">α</span>
+
+<span class="n">class</span> <span class="n">group</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">monoid</span> <span class="n">α</span><span class="o">,</span> <span class="n">has_inv</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">mul_left_inv</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
+
+<span class="n">class</span> <span class="n">comm_group</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">group</span> <span class="n">α</span><span class="o">,</span> <span class="n">comm_monoid</span> <span class="n">α</span>
+</pre></div>
+
+<a name="191345565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191345565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191345565">Kevin Buzzard (Mar 21 2020 at 13:25)</a>:</h4>
+<p>You have <code>f (inv x) x = e</code>, Lean has <code>a⁻¹ * a = 1</code>, so the Lean way kind of looks nicer</p>
+
+<a name="191345687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Number%20addition%20definition/near/191345687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89430NaturalNumberadditiondefinition.html#191345687">Mukesh Tiwari (Mar 21 2020 at 13:28)</a>:</h4>
+<p>Now, I see your point. I agree that it is much cleaner.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

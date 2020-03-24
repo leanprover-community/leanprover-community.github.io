@@ -1244,11 +1244,717 @@ git.exc.NoSuchPathError: /home/kody/projects/myproject
 </pre></div>
 
 
-<p>I am on Arch Linux and on python 3.8.1 as it shows.</p>
+<p>I am on Arch Linux and on python 3.8.1 as it shows. I do have a built-from-source copy of Lean4 which is maybe messing it up.</p>
 
 <a name="190277846"></a>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190277846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190277846">Koundinya Vajjha (Mar 11 2020 at 13:00)</a>:</h4>
-<p>The script is picking up the Lean4 library path for some reason...?</p>
+<p>The script is picking up the Lean4 library path (which doesn't exist) for some reason...?</p>
+
+<a name="190279327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190279327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190279327">Patrick Massot (Mar 11 2020 at 13:17)</a>:</h4>
+<p>I knew there would be people waiting for the release to start testing...</p>
+
+<a name="190279447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190279447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190279447">Patrick Massot (Mar 11 2020 at 13:18)</a>:</h4>
+<p>I need more information. Is there a lean4 folder in <code>projects</code>? Can you paste the output of <code>elan toolchain list</code>?</p>
+
+<a name="190279534"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190279534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190279534">Patrick Massot (Mar 11 2020 at 13:19)</a>:</h4>
+<p>Could you try to run <code>leanpkg new my_test</code> and tell us whether this succeeds?</p>
+
+<a name="190279837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190279837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190279837">Koundinya Vajjha (Mar 11 2020 at 13:22)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110031">Patrick Massot</span> <a href="#narrow/stream/113488-general/topic/new.20mathlib.20tools/near/190279447" title="#narrow/stream/113488-general/topic/new.20mathlib.20tools/near/190279447">said</a>:</p>
+<blockquote>
+<p>I need more information. Is there a lean4 folder in <code>projects</code>? Can you paste the output of <code>elan toolchain list</code>?</p>
+</blockquote>
+<p>Yes. I do have such a folder. <br>
+Output of <code>elan toolchain list</code>:</p>
+<div class="codehilite"><pre><span></span>stable
+nightly
+nightly-2018-06-21
+nightly-2018-11-13
+nightly-2019-01-13
+leanprover-community-lean-3.5.1
+master (default)
+3.4.1
+3.4.2
+</pre></div>
+
+<a name="190279943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190279943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190279943">Koundinya Vajjha (Mar 11 2020 at 13:23)</a>:</h4>
+<p><code>leanpkg new my_test</code> gives the same error:</p>
+<div class="codehilite"><pre><span></span>error: ill-formed search path entry &#39;/home/kody/projects/lean4/library&#39;, should be of form &#39;pkg=path&#39;
+</pre></div>
+
+<a name="190280125"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190280125" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190280125">Koundinya Vajjha (Mar 11 2020 at 13:25)</a>:</h4>
+<p>I remember changing the default toolchain on elan a long while back to be able to use Lean4.</p>
+
+<a name="190280230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190280230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190280230">Patrick Massot (Mar 11 2020 at 13:26)</a>:</h4>
+<p>Ok, so this is indeed a <code>leanpkg</code> bug. Maybe even a Lean4 bug if this is <code>leanpkg</code> from Lean4.</p>
+
+<a name="190280275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190280275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190280275">Koundinya Vajjha (Mar 11 2020 at 13:26)</a>:</h4>
+<p>Oh yes. Any <code>leanpkg</code> incantation is giving me that error.</p>
+
+<a name="190280332"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190280332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190280332">Patrick Massot (Mar 11 2020 at 13:27)</a>:</h4>
+<p>So we should really stop relying on <code>leanpkg</code> in <code>leanproject</code>. I need to do other things this afternoon but PR is welcome.</p>
+
+<a name="190280400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190280400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190280400">Patrick Massot (Mar 11 2020 at 13:28)</a>:</h4>
+<p>In the meantime the workaround is to change your default elan toolchain to <code>leanprover-community-lean-3.6.1</code></p>
+
+<a name="190283224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190283224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190283224">Sebastian Ullrich (Mar 11 2020 at 13:54)</a>:</h4>
+<p>Alright, to avoid future confusion: <a href="https://github.com/leanprover/lean4/commit/10f161353e361f20ac18a7383f46466b149fdfa5" target="_blank" title="https://github.com/leanprover/lean4/commit/10f161353e361f20ac18a7383f46466b149fdfa5">https://github.com/leanprover/lean4/commit/10f161353e361f20ac18a7383f46466b149fdfa5</a></p>
+
+<a name="190291789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190291789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190291789">Patrick Massot (Mar 11 2020 at 15:08)</a>:</h4>
+<p>Nice. I don't know if you followed the discussion around our new package management tool, but I think nobody from the Lean core development team should waste time working on this kind of tooling. It would be much easier if Lean could at least report why it recompiles files (maybe when ran with some debug flag), but otherwise this is all engineering grunt work that is best done by the user community.</p>
+
+<a name="190293849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190293849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190293849">Sebastian Ullrich (Mar 11 2020 at 15:24)</a>:</h4>
+<p>Yeah, I doubt Lean 4 will come with a package manager in the core repo. You might have already heard that the <code>lean</code> main process will not recompile dependencies anymore at all, though if we have a language server in the core repo, then I suppose it will want to reimplement that.</p>
+
+<a name="190294396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190294396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190294396">Sebastian Ullrich (Mar 11 2020 at 15:28)</a>:</h4>
+<p>I've already linked to the import trace I added to Lean 4 before we ripped out that whole module, feel free to adapt: <a href="#narrow/stream/113488-general/topic/Lean.203.2E7/near/189816815" title="#narrow/stream/113488-general/topic/Lean.203.2E7/near/189816815">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean.203.2E7/near/189816815</a></p>
+
+<a name="190297340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190297340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190297340">Wojciech Nawrocki (Mar 11 2020 at 15:51)</a>:</h4>
+<p>How does one get oleans for the mathlib revision stored in <code>leanpkg.toml</code>? It seems that <code>leanproject up</code> always pulls the most recent revision, while <code>leanproject build</code> in a directory with no <code>_target/</code> just clones mathlib, but doesn't download oleans and then starts building everything including mathlib.</p>
+
+<a name="190298920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190298920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190298920">Gabriel Ebner (Mar 11 2020 at 16:03)</a>:</h4>
+<p><code>leanproject get-cache</code></p>
+
+<a name="190302801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190302801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190302801">Patrick Massot (Mar 11 2020 at 16:36)</a>:</h4>
+<p>I just created <a href="https://github.com/leanprover-community/lean/issues/145" target="_blank" title="https://github.com/leanprover-community/lean/issues/145">https://github.com/leanprover-community/lean/issues/145</a> so that we don't forget again. What do you mean by "the lean main process will not recompile dependencies anymore at all"? Will Lean trust every declaration from every import after parsing their statement?</p>
+
+<a name="190302920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190302920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190302920">Sebastian Ullrich (Mar 11 2020 at 16:37)</a>:</h4>
+<p>It only cares about .olean files for imports. It doesn't look at their .lean files at all.</p>
+
+<a name="190303256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190303256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190303256">Wojciech Nawrocki (Mar 11 2020 at 16:41)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110043">Gabriel Ebner</span> <a href="#narrow/stream/113488-general/topic/new.20mathlib.20tools/near/190298920" title="#narrow/stream/113488-general/topic/new.20mathlib.20tools/near/190298920">said</a>:</p>
+<blockquote>
+<p><code>leanproject get-cache</code></p>
+</blockquote>
+<p>This tells me "Failed to fetch mathlib oleans"</p>
+
+<a name="190303695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190303695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190303695">Patrick Massot (Mar 11 2020 at 16:44)</a>:</h4>
+<p>Gabriel's answer is not correct if you work on a project depending on mathlib (as opposed to working on mathlib) itself.</p>
+
+<a name="190303743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190303743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190303743">Patrick Massot (Mar 11 2020 at 16:45)</a>:</h4>
+<p>Your use case is not covered by <code>leanproject</code>. Are you sure you really want to do that?</p>
+
+<a name="190303861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190303861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190303861">Patrick Massot (Mar 11 2020 at 16:46)</a>:</h4>
+<p>To be more explicit: typing <code>leanproject get-cache</code> asks leanproject to find oleans for the current project, not for its dependencies.</p>
+
+<a name="190303920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190303920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190303920">Patrick Massot (Mar 11 2020 at 16:46)</a>:</h4>
+<p>Adding a command <code>leanproject get-mathlib-cache</code> would be trivial to implement if you really want this.</p>
+
+<a name="190304192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190304192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190304192">Gabriel Ebner (Mar 11 2020 at 16:49)</a>:</h4>
+<p>Without <code>get-mathlib-cache</code>, how would you work on an external project like <code>lean-perfectoid-spaces</code>?  You definitely don't want to upgrade the mathlib version there.</p>
+
+<a name="190304510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190304510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190304510">Wojciech Nawrocki (Mar 11 2020 at 16:52)</a>:</h4>
+<p>Yep, as Gabriel says : the problem is that I might work on a project at mathlib revision <code>a</code>, then push it to GitHub, and because in the meanwhile mathlib got updated to revision <code>b</code> s.t. the project doesn't compile under <code>b</code>, the CI will fail after <code>leanproject upgrade-mathlib</code> runs (it has to, since it seems to be the only way currently to get the .oleans). It'd be better to allow users to update mathlib when they want with <code>leanproject upgrade-mathlib</code>, but for CI to just pull the .oleans as <code>update-mathlib</code> used to do.</p>
+
+<a name="190306717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190306717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190306717">Patrick Massot (Mar 11 2020 at 17:10)</a>:</h4>
+<p>leanproject get perfectoid-spaces will get you mathlib oleans.</p>
+
+<a name="190306741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190306741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190306741">Edward Ayers (Mar 11 2020 at 17:10)</a>:</h4>
+<p>We are having problems with <code>leanproject</code> and github actions, the action <code>actions/checkout@v2</code> doesn't create a <code>.git</code> in the working directory but <code>leanproject</code> crashes if the working directory is not a valid git repository.</p>
+
+<a name="190306891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190306891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190306891">Patrick Massot (Mar 11 2020 at 17:11)</a>:</h4>
+<p>But I agree we still need something if mathlib is upgraded upstream and you git pull.</p>
+
+<a name="190307011"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190307011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190307011">Patrick Massot (Mar 11 2020 at 17:12)</a>:</h4>
+<p>Ed, where do you see this issue?</p>
+
+<a name="190307090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190307090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190307090">Wojciech Nawrocki (Mar 11 2020 at 17:12)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110031">Patrick Massot</span> <a href="#narrow/stream/113488-general/topic/new.20mathlib.20tools/near/190307011" title="#narrow/stream/113488-general/topic/new.20mathlib.20tools/near/190307011">said</a>:</p>
+<blockquote>
+<p>Ed, where do you see this issue?</p>
+</blockquote>
+<p>This is the failing build : <a href="https://github.com/b-mehta/topos/runs/501075989" target="_blank" title="https://github.com/b-mehta/topos/runs/501075989">https://github.com/b-mehta/topos/runs/501075989</a></p>
+
+<a name="190307747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190307747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190307747">Gabriel Ebner (Mar 11 2020 at 17:18)</a>:</h4>
+<p>I think you need to upgrade git in your docker container:</p>
+<blockquote>
+<p>To create a local Git repository instead, add Git 2.18 or higher to the PATH</p>
+</blockquote>
+
+<a name="190307872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190307872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190307872">Gabriel Ebner (Mar 11 2020 at 17:19)</a>:</h4>
+<div class="codehilite"><pre><span></span>$ docker run --rm edayers/lean git version
+git version 2.17.1
+</pre></div>
+
+<a name="190308587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190308587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190308587">Edward Ayers (Mar 11 2020 at 17:25)</a>:</h4>
+<p>Hi I don't think this is right, everything works if I do this in <code>docker run -it --rm edayers/lean</code>:</p>
+<div class="codehilite"><pre><span></span>git clone https://github.com/b-mehta/topos.git
+cd topos
+# this works:
+leanproject upgrade-mathlib
+rm -rf .git
+# this fails:
+leanproject upgrade-mathlib
+</pre></div>
+
+
+<p>I think the problem is that <code>leanproject upgrade-mathlib</code> is assuming it's in a git repo.</p>
+
+<a name="190309767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190309767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190309767">Edward Ayers (Mar 11 2020 at 17:36)</a>:</h4>
+<p>We worked around this by using <code>uses actions/checkout@v1</code> in the github actions yaml. The problem was that <code>actions/checkout@v2</code> is worse than <code>actions/checkout@v1</code>.</p>
+
+<a name="190309896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190309896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190309896">Gabriel Ebner (Mar 11 2020 at 17:37)</a>:</h4>
+<p>Let me rephrase that: the <code>checkout@v2</code> action usually creates a git repository.  But it only does it if you have git &gt;=2.18 installed.  If you have an old git version it will fall back and download a tarball.</p>
+
+<a name="190309942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190309942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190309942">Edward Ayers (Mar 11 2020 at 17:37)</a>:</h4>
+<p>Ah ok</p>
+
+<a name="190310059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190310059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190310059">Edward Ayers (Mar 11 2020 at 17:38)</a>:</h4>
+<p>This actions file works for us: <span aria-label="+1" class="emoji emoji-1f44d" role="img" title="+1">:+1:</span> <span aria-label="+1" class="emoji emoji-1f44d" role="img" title="+1">:+1:</span></p>
+<div class="codehilite"><pre><span></span>on: [push]
+
+jobs:
+  build_job:
+    runs-on: ubuntu-latest
+    container: edayers/lean
+    name: Run leanproject build
+    steps:
+    - uses: actions/checkout@v1
+    - run: leanproject upgrade-mathlib
+    - run: leanproject build
+</pre></div>
+
+<a name="190334471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190334471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190334471">Patrick Massot (Mar 11 2020 at 21:37)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="121918">Edward Ayers</span> <a href="#narrow/stream/113488-general/topic/new.20mathlib.20tools/near/190308587" title="#narrow/stream/113488-general/topic/new.20mathlib.20tools/near/190308587">said</a>:</p>
+<blockquote>
+<div class="codehilite"><pre><span></span>git clone https://github.com/b-mehta/topos.git
+cd topos
+# this works:
+leanproject upgrade-mathlib
+rm -rf .git
+# this fails:
+leanproject upgrade-mathlib
+</pre></div>
+
+
+<p>I think the problem is that <code>leanproject upgrade-mathlib</code> is assuming it's in a git repo.</p>
+</blockquote>
+<p>I can't reproduce this issue. At don't get any failure here.</p>
+
+<a name="190336772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190336772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190336772">Gabriel Ebner (Mar 11 2020 at 22:01)</a>:</h4>
+<p>I get the same error as Ed:</p>
+<div class="codehilite"><pre><span></span>Traceback (most recent call last):
+  File &quot;/nix/store/gfy9cp7iinqqpbqq7d175j912wj90yah-mathlib-tools-0.0.3/lib/python3.7/site-packages/mathlibtools/lib.py&quot;, line 233, in from_path
+    repo = Repo(path, search_parent_directories=True)
+  File &quot;/nix/store/m1y8zxyzbsqijnkw5qj76sxm3nwngiqv-python3.7-GitPython-3.0.5/lib/python3.7/site-packages/git/repo/base.py&quot;, line 184, in __init__
+    raise InvalidGitRepositoryError(epath)
+git.exc.InvalidGitRepositoryError: /home/gebner/tmp2/topos
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &quot;/nix/store/gfy9cp7iinqqpbqq7d175j912wj90yah-mathlib-tools-0.0.3/lib/python3.7/site-packages/mathlibtools/leanproject.py&quot;, line 89, in upgrade_mathlib
+    proj().upgrade_mathlib()
+  File &quot;/nix/store/gfy9cp7iinqqpbqq7d175j912wj90yah-mathlib-tools-0.0.3/lib/python3.7/site-packages/mathlibtools/leanproject.py&quot;, line 40, in proj
+    lean_upgrade)
+  File &quot;/nix/store/gfy9cp7iinqqpbqq7d175j912wj90yah-mathlib-tools-0.0.3/lib/python3.7/site-packages/mathlibtools/lib.py&quot;, line 235, in from_path
+    raise InvalidLeanProject(&#39;Invalid git repository&#39;)
+mathlibtools.lib.InvalidLeanProject: Invalid git repository
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &quot;/nix/store/gfy9cp7iinqqpbqq7d175j912wj90yah-mathlib-tools-0.0.3/bin/.leanproject-wrapped&quot;, line 9, in &lt;module&gt;
+    sys.exit(cli())
+  File &quot;/nix/store/vis123mfyi0ajqg6f321h16wzs595cqw-python3.7-click-7.0/lib/python3.7/site-packages/click/core.py&quot;, line 764, in __call__
+    return self.main(*args, **kwargs)
+  File &quot;/nix/store/vis123mfyi0ajqg6f321h16wzs595cqw-python3.7-click-7.0/lib/python3.7/site-packages/click/core.py&quot;, line 717, in main
+    rv = self.invoke(ctx)
+  File &quot;/nix/store/vis123mfyi0ajqg6f321h16wzs595cqw-python3.7-click-7.0/lib/python3.7/site-packages/click/core.py&quot;, line 1137, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+  File &quot;/nix/store/vis123mfyi0ajqg6f321h16wzs595cqw-python3.7-click-7.0/lib/python3.7/site-packages/click/core.py&quot;, line 956, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File &quot;/nix/store/vis123mfyi0ajqg6f321h16wzs595cqw-python3.7-click-7.0/lib/python3.7/site-packages/click/core.py&quot;, line 555, in invoke
+    return callback(*args, **kwargs)
+  File &quot;/nix/store/gfy9cp7iinqqpbqq7d175j912wj90yah-mathlib-tools-0.0.3/lib/python3.7/site-packages/mathlibtools/leanproject.py&quot;, line 95, in upgrade_mathlib
+    project.upgrade_mathlib()
+  File &quot;/nix/store/gfy9cp7iinqqpbqq7d175j912wj90yah-mathlib-tools-0.0.3/lib/python3.7/site-packages/mathlibtools/lib.py&quot;, line 474, in upgrade_mathlib
+    if mathlib_lean &gt; self.lean_version:
+  File &quot;/nix/store/gfy9cp7iinqqpbqq7d175j912wj90yah-mathlib-tools-0.0.3/lib/python3.7/site-packages/mathlibtools/lib.py&quot;, line 289, in lean_version
+    return parse_version(self.pkg_config[&#39;lean_version&#39;])
+KeyError: &#39;lean_version&#39;
+</pre></div>
+
+<a name="190434468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190434468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190434468">Kevin Buzzard (Mar 12 2020 at 19:34)</a>:</h4>
+<p>Many many thanks <span class="user-mention" data-user-id="110031">@Patrick Massot</span> , I'm at Xena and I've updated three people (some not remotely computer-literate but all of whom had carefully followed the old installation instructions) to Lean 3.6.1 + mathlib master + oleans completely painlessly with <code>leanproject</code> <span aria-label="heart" class="emoji emoji-2764" role="img" title="heart">:heart:</span> <span aria-label="heart" class="emoji emoji-2764" role="img" title="heart">:heart:</span> <span aria-label="heart" class="emoji emoji-2764" role="img" title="heart">:heart:</span></p>
+
+<a name="190442956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190442956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190442956">Kevin Buzzard (Mar 12 2020 at 20:46)</a>:</h4>
+<p>It was important because one of them needed <code>interval_cases</code> which isn't in 3.4.2.</p>
+
+<a name="190606804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190606804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190606804">Kevin Buzzard (Mar 14 2020 at 17:57)</a>:</h4>
+<p>How do I do <code>cache-olean --fetch</code> now? I have <code>leanproject</code> and I've just pulled mathlib and I want to work on a (existing) branch, which is pretty up to date with master. Can I get oleans from master and then just compile the few changed files? I can't see it in <a href="https://github.com/leanprover-community/mathlib-tools" target="_blank" title="https://github.com/leanprover-community/mathlib-tools">these docs</a></p>
+
+<a name="190606857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190606857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190606857">Patrick Massot (Mar 14 2020 at 17:58)</a>:</h4>
+<p><code>leanproject get-cache</code></p>
+
+<a name="190606871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190606871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190606871">Patrick Massot (Mar 14 2020 at 17:58)</a>:</h4>
+<p>See also <a href="https://github.com/leanprover-community/mathlib-tools/blob/master/README.md" target="_blank" title="https://github.com/leanprover-community/mathlib-tools/blob/master/README.md">https://github.com/leanprover-community/mathlib-tools/blob/master/README.md</a> for more information.</p>
+
+<a name="190606939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190606939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190606939">Kevin Buzzard (Mar 14 2020 at 18:00)</a>:</h4>
+<p>gaargh I just successfully ran <code>pip3 install mathlibtools</code> on Ubuntu 18.04 and leanproject isn't in my path :-/</p>
+
+<a name="190606951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190606951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190606951">Johan Commelin (Mar 14 2020 at 18:00)</a>:</h4>
+<p>Did you login again?</p>
+
+<a name="190606958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190606958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190606958">Johan Commelin (Mar 14 2020 at 18:00)</a>:</h4>
+<p>Maybe your path isn't updated yet</p>
+
+<a name="190606959"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190606959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190606959">Kevin Buzzard (Mar 14 2020 at 18:00)</a>:</h4>
+<p>no</p>
+
+<a name="190606975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190606975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190606975">Kevin Buzzard (Mar 14 2020 at 18:01)</a>:</h4>
+<p><code>~/.mathlib/bin</code> is in my path but there's no <code>leanproject</code> in there.</p>
+
+<a name="190607034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190607034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190607034">Kevin Buzzard (Mar 14 2020 at 18:02)</a>:</h4>
+<p>oh my <code>.profile</code> doesn't seem to have changed. I just want to fix it manually but I don't know where it is and <code>find</code> is taking an age</p>
+
+<a name="190607037"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190607037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190607037">Johan Commelin (Mar 14 2020 at 18:02)</a>:</h4>
+<p>No, it's installed in some python path thingy...</p>
+
+<a name="190607220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190607220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190607220">Kevin Buzzard (Mar 14 2020 at 18:07)</a>:</h4>
+<p>I am reluctant to log out and in again because I don't see what this would do right now -- <code>source .profile</code> doesn't fix the problem.</p>
+
+<a name="190607276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190607276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190607276">Johan Commelin (Mar 14 2020 at 18:08)</a>:</h4>
+<p>Weird...</p>
+
+<a name="190607284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190607284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190607284">Johan Commelin (Mar 14 2020 at 18:08)</a>:</h4>
+<div class="codehilite"><pre><span></span>$ which leanproject
+/home/jmc/.local/bin/leanproject
+</pre></div>
+
+<a name="190607295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190607295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190607295">Gabriel Ebner (Mar 14 2020 at 18:09)</a>:</h4>
+<p>That's why we have <code>sudo pip3 install mathlibtools</code> in the documentation.  That installs the binaries in <code>/usr/local/bin</code>, which should already be in your path.</p>
+
+<a name="190607301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190607301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190607301">Gabriel Ebner (Mar 14 2020 at 18:10)</a>:</h4>
+<p>If you run <code>pip</code> as a normal user, you need to add <code>~/.local/bin</code> to your path.  Unfortunately, I don't think it is in the default path on any distribution.</p>
+
+<a name="190607754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190607754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190607754">Kevin Buzzard (Mar 14 2020 at 18:22)</a>:</h4>
+<p>I read the documentation as "try it without sudo, and if you get an error try it again with sudo"</p>
+
+<a name="190607775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190607775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190607775">Kevin Buzzard (Mar 14 2020 at 18:23)</a>:</h4>
+<p>I ran it with sudo and got warnings and it didn't fix the problem ;-) </p>
+<div class="codehilite"><pre><span></span>The directory &#39;/home/buzzard/.cache/pip/http&#39; or its parent directory is not owned by the current user and the cache has been disabled. Please check the permissions and owner of that directory. If executing pip with sudo, you may want sudo&#39;s -H flag.
+The directory &#39;/home/buzzard/.cache/pip&#39; or its parent directory is not owned by the current user and caching wheels has been disabled. check the permissions and owner of that directory. If executing pip with sudo, you may want sudo&#39;s -H flag.
+Requirement already satisfied: mathlibtools in ./.local/lib/python3.6/site-packages
+Requirement already satisfied: gitpython in ./.local/lib/python3.6/site-packages (from mathlibtools)
+Requirement already satisfied: requests in ./.local/lib/python3.6/site-packages (from mathlibtools)
+Requirement already satisfied: Click in ./.local/lib/python3.6/site-packages (from mathlibtools)
+Requirement already satisfied: PyGithub in ./.local/lib/python3.6/site-packages (from mathlibtools)
+Requirement already satisfied: toml in ./.local/lib/python3.6/site-packages (from mathlibtools)
+Requirement already satisfied: certifi in ./.local/lib/python3.6/site-packages (from mathlibtools)
+Requirement already satisfied: tqdm in ./.local/lib/python3.6/site-packages (from mathlibtools)
+Requirement already satisfied: paramiko in ./.local/lib/python3.6/site-packages (from mathlibtools)
+Requirement already satisfied: gitdb&lt;5,&gt;=4.0.1 in ./.local/lib/python3.6/site-packages (from gitpython-&gt;mathlibtools)
+Requirement already satisfied: idna&lt;3,&gt;=2.5 in ./.local/lib/python3.6/site-packages (from requests-&gt;mathlibtools)
+Requirement already satisfied: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in ./.local/lib/python3.6/site-packages (from requests-&gt;mathlibtools)
+Requirement already satisfied: chardet&lt;4,&gt;=3.0.2 in ./.local/lib/python3.6/site-packages (from requests-&gt;mathlibtools)
+Requirement already satisfied: deprecated in ./.local/lib/python3.6/site-packages (from PyGithub-&gt;mathlibtools)
+Requirement already satisfied: pyjwt in ./.local/lib/python3.6/site-packages (from PyGithub-&gt;mathlibtools)
+Requirement already satisfied: cryptography&gt;=2.5 in ./.local/lib/python3.6/site-packages (from paramiko-&gt;mathlibtools)
+Requirement already satisfied: pynacl&gt;=1.0.1 in ./.local/lib/python3.6/site-packages (from paramiko-&gt;mathlibtools)
+Requirement already satisfied: bcrypt&gt;=3.1.3 in ./.local/lib/python3.6/site-packages (from paramiko-&gt;mathlibtools)
+Requirement already satisfied: smmap&lt;4,&gt;=3.0.1 in ./.local/lib/python3.6/site-packages (from gitdb&lt;5,&gt;=4.0.1-&gt;gitpython-&gt;mathlibtools)
+Requirement already satisfied: wrapt&lt;2,&gt;=1.10 in ./.local/lib/python3.6/site-packages (from deprecated-&gt;PyGithub-&gt;mathlibtools)
+Requirement already satisfied: six&gt;=1.4.1 in ./.local/lib/python3.6/site-packages (from cryptography&gt;=2.5-&gt;paramiko-&gt;mathlibtools)
+Requirement already satisfied: cffi!=1.11.3,&gt;=1.8 in ./.local/lib/python3.6/site-packages (from cryptography&gt;=2.5-&gt;paramiko-&gt;mathlibtools)
+Requirement already satisfied: pycparser in ./.local/lib/python3.6/site-packages (from cffi!=1.11.3,&gt;=1.8-&gt;cryptography&gt;=2.5-&gt;paramiko-&gt;mathlibtools)
+</pre></div>
+
+<a name="190607893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190607893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190607893">Johan Commelin (Mar 14 2020 at 18:26)</a>:</h4>
+<p>Do you have a <code>leanproject</code> in the <code>.local/bin/</code> in your home directory?</p>
+
+<a name="190607895"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190607895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190607895">Kevin Buzzard (Mar 14 2020 at 18:26)</a>:</h4>
+<p>Yes, it's working now.</p>
+
+<a name="190607899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190607899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190607899">Johan Commelin (Mar 14 2020 at 18:26)</a>:</h4>
+<p>Because otherwise I would just add that dir to your path</p>
+
+<a name="190607902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190607902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190607902">Kevin Buzzard (Mar 14 2020 at 18:26)</a>:</h4>
+<p>exactly what I did</p>
+
+<a name="190608301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190608301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190608301">Gabriel Ebner (Mar 14 2020 at 18:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Which ubuntu version are you on?  All ubuntu versions I could quickly test actually add <code>~/.local/bin</code> to your PATH.  (But only if it exists, so you might have to restart your shell.)</p>
+
+<a name="190608372"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190608372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190608372">Kevin Buzzard (Mar 14 2020 at 18:40)</a>:</h4>
+<p>All I did was <code>source .profile</code> and it didn't work. I don't know what else happens if you actually log out and log in again (and don't want to find out right now). I'm on 18.04</p>
+
+<a name="190608667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190608667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190608667">Gabriel Ebner (Mar 14 2020 at 18:49)</a>:</h4>
+<p>That should've actually worked.. at least it does in a docker container.  I guess we should keep in mind now that <code>sudo pip3 install mathlibtools</code> doesn't help if you've already installed without sudo.</p>
+
+<a name="190734716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190734716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190734716">Vincent Beffara (Mar 16 2020 at 15:05)</a>:</h4>
+<p>Is it expected that <code>leanproject up</code> triggers a <code>git clone</code> of <code>mathlib</code> at each invocation, rather than a <code>git pull</code> or something lighter like that?</p>
+
+<a name="190738609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190738609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190738609">Johan Commelin (Mar 16 2020 at 15:32)</a>:</h4>
+<p>No, it shouldn't clone</p>
+
+<a name="190738630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190738630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190738630">Johan Commelin (Mar 16 2020 at 15:32)</a>:</h4>
+<p>Only <code>leanproject get</code> should clone</p>
+
+<a name="190739266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190739266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190739266">Gabriel Ebner (Mar 16 2020 at 15:36)</a>:</h4>
+<p>Apparently, <code>leanproject</code> actually removes the mathlib directory first: <a href="https://github.com/leanprover-community/mathlib-tools/blob/dbc357d2cf8f3edba8394052ede26796548f04fd/mathlibtools/lib.py#L468" target="_blank" title="https://github.com/leanprover-community/mathlib-tools/blob/dbc357d2cf8f3edba8394052ede26796548f04fd/mathlibtools/lib.py#L468">https://github.com/leanprover-community/mathlib-tools/blob/dbc357d2cf8f3edba8394052ede26796548f04fd/mathlibtools/lib.py#L468</a></p>
+
+<a name="190752443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190752443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190752443">Rob Lewis (Mar 16 2020 at 17:10)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110031">Patrick Massot</span> <a href="#narrow/stream/113488-general/topic/new.20mathlib.20tools/near/190303920" title="#narrow/stream/113488-general/topic/new.20mathlib.20tools/near/190303920">said</a>:</p>
+<blockquote>
+<p>Adding a command <code>leanproject get-mathlib-cache</code> would be trivial to implement if you really want this.</p>
+</blockquote>
+<p>I wasn't really following this discussion before, but now I find myself needing this! Yes, we really want this.</p>
+
+<a name="190752581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190752581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190752581">Rob Lewis (Mar 16 2020 at 17:10)</a>:</h4>
+<p>I can mimic it by running <code>leanproject get-cache</code> in <code>_target/deps/mathlib</code></p>
+
+<a name="190798948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190798948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190798948">Kevin Buzzard (Mar 17 2020 at 01:08)</a>:</h4>
+<p>If I am working on some random (non-master) branch of mathlib, and I just pulled someone else's latest commits, should I expect <code>leanproject get-cache</code> to return the correct olean files?</p>
+
+<a name="190798998"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190798998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190798998">Kevin Buzzard (Mar 17 2020 at 01:08)</a>:</h4>
+<p>[I ask because I just tried it and it didn't fail but it gave me a broken system, and I've just tried manually compiling and <del>it seems OK</del> actually it's not OK, I think the branch might be broken. Is <code>leanproject get-cache</code> really that amazing?]</p>
+
+<a name="190813065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190813065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190813065">Johan Commelin (Mar 17 2020 at 07:03)</a>:</h4>
+<p>At least the branch of a PR should give you oleans</p>
+
+<a name="190813068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190813068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190813068">Johan Commelin (Mar 17 2020 at 07:03)</a>:</h4>
+<p>Other branches, I don't know</p>
+
+<a name="190818341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190818341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190818341">Kevin Buzzard (Mar 17 2020 at 08:28)</a>:</h4>
+<p>Is it possible that Scott somehow pushed oleans from a WIP branch and then I could pick them up?</p>
+
+<a name="190818879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190818879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190818879">Johan Commelin (Mar 17 2020 at 08:35)</a>:</h4>
+<p>Hmm... I don't know</p>
+
+<a name="190819039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190819039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190819039">Johan Commelin (Mar 17 2020 at 08:36)</a>:</h4>
+<p>Maybe we could have</p>
+<div class="codehilite"><pre><span></span>leanproject export-current-oleans foobar.tar.gz
+<span class="c1"># and then send foobar.tar.gz to your collaborator who writes</span>
+leanproject import-foreign-oleans foobar.tar.gz
+</pre></div>
+
+
+<p>Alternatively, we could have a server where we can push the oleans... but I don't know how easy it would be to set that up.</p>
+
+<a name="190821516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190821516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190821516">Rob Lewis (Mar 17 2020 at 09:04)</a>:</h4>
+<p>Oleans get uploaded from every branch of leanprover-community/master, whether or not the build succeeds, whether or not there's a PR. If it doesn't compile, you get the oleans up to the point where it fails. Obviously there's a delay here since it has to run the build.</p>
+
+<a name="190821633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190821633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190821633">Rob Lewis (Mar 17 2020 at 09:05)</a>:</h4>
+<p>Allowing this from arbitrary branches (away from the community repo) is equivalent to letting anyone upload anything they want to our server, so that's not going to happen.</p>
+
+<a name="190823024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190823024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190823024">Kevin Buzzard (Mar 17 2020 at 09:20)</a>:</h4>
+<blockquote>
+<p>every branch of leanprover-community/master</p>
+</blockquote>
+<p>What does that mean? Is the <code>enriched</code> branch of <code>mathlib</code> a "branch of leanprover-community/master" or "an arbitrary branch"?</p>
+
+<a name="190823359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190823359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190823359">Gabriel Ebner (Mar 17 2020 at 09:23)</a>:</h4>
+<p>Rob meant to say "branch in leanprover-community/<em>mathlib</em>".</p>
+
+<a name="190823447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190823447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190823447">Gabriel Ebner (Mar 17 2020 at 09:24)</a>:</h4>
+<p>And yes, the <code>enriched</code> branch has oleans available.  It does not matter whether there is a PR or not.</p>
+
+<a name="190824252"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190824252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190824252">Kevin Buzzard (Mar 17 2020 at 09:30)</a>:</h4>
+<p>Oh ok so I will go back to my original position of "wow"! This has just made collaborative work on a branch of mathlib much easier. Scott seems to be able to see a route to abelian categories which would be a pretty cool milestone and hopefully I can help him get there. Many thanks to everyone who has made this tooling and these backups, they make a genuine difference further down the line!</p>
+
+<a name="190826232"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190826232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190826232">Rob Lewis (Mar 17 2020 at 09:52)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110043">Gabriel Ebner</span> <a href="#narrow/stream/113488-general/topic/new.20mathlib.20tools/near/190823359" title="#narrow/stream/113488-general/topic/new.20mathlib.20tools/near/190823359">said</a>:</p>
+<blockquote>
+<p>Rob meant to say "branch in leanprover-community/<em>mathlib</em>".</p>
+</blockquote>
+<p>Ah, yes, thanks. I shouldn't post here before my morning coffee.</p>
+
+<a name="190846453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190846453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190846453">Patrick Massot (Mar 17 2020 at 13:26)</a>:</h4>
+<p>Please create issues in the mathlib-tools GitHub when you have issues or feature requests</p>
+
+<a name="190847995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190847995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190847995">Kevin Buzzard (Mar 17 2020 at 13:38)</a>:</h4>
+<p>Currently I just have love, although I have found myself writing "notes to self" about how to do the <code>leanproject</code> things which form my usual workflow. This is just because I have to do something ten times before I can remember it though :-)</p>
+
+<a name="190848667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190848667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190848667">Patrick Massot (Mar 17 2020 at 13:43)</a>:</h4>
+<p>This would still be good to have those notes. Maybe the README is not clear enough, or doesn't focus on the right things</p>
+
+<a name="190849847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190849847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190849847">Kevin Buzzard (Mar 17 2020 at 13:52)</a>:</h4>
+<p>currently they just tell me "leanproject get-cache gets oleans (works on mathlib and on non-mathlib projects); leanproject new makes a new project IN THE CURRENT DIRECTORY SO MAKE A SUBDIRECTORY FIRST and it uses up to date Lean and also pulls mathlib oleans"</p>
+
+<a name="190850194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190850194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190850194">Kevin Buzzard (Mar 17 2020 at 13:54)</a>:</h4>
+<p>Note that <code>leanpkg new</code> made a project in a new directory and I will need to be told 10 times that this is not the behaviour of leanproject new (I'm not suggesting you change it, I'm suggesting I'm a slow learner)</p>
+
+<a name="190850348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190850348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190850348">Kevin Buzzard (Mar 17 2020 at 13:55)</a>:</h4>
+<p>I will add a third line on the day I clone another Lean project from github and want to figure out the analogue of <code>leanpkg configure, update-mathlib</code></p>
+
+<a name="190850757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190850757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190850757">Kevin Buzzard (Mar 17 2020 at 13:58)</a>:</h4>
+<p>The point is simply that my notes file (in my lean-projects directory) is easier for me to find than the leanproject documentation.</p>
+
+<a name="190851480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190851480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190851480">Kevin Buzzard (Mar 17 2020 at 14:03)</a>:</h4>
+<p>OK I added it: "leanproject get git@github.com/leanprover-community/lean-perfectoid-spaces.git gets a project from github and creates it in a subdirectory and also downloads mathlib oleans"</p>
+
+<a name="190851502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190851502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190851502">Kevin Buzzard (Mar 17 2020 at 14:03)</a>:</h4>
+<p>and that's all I personally need to know right now.</p>
+
+<a name="190852947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190852947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190852947">Patrick Massot (Mar 17 2020 at 14:14)</a>:</h4>
+<p>I don't get your complain about <code>new</code>. How do you want <code>leanproject</code> to guess the folder name you want if you don't write it?</p>
+
+<a name="190852992"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190852992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190852992">Patrick Massot (Mar 17 2020 at 14:15)</a>:</h4>
+<p><code>leanproject new my_shiny_folder_name</code> should work just fine</p>
+
+<a name="190853056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190853056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190853056">Patrick Massot (Mar 17 2020 at 14:15)</a>:</h4>
+<p><code>leanproject get lean-perfectoid-spaces</code> should work too</p>
+
+<a name="190853741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190853741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190853741">Gabriel Ebner (Mar 17 2020 at 14:20)</a>:</h4>
+<p>Oh wow, you can leave out the project name in <code>leanpkg new</code>?</p>
+
+<a name="190853791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190853791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190853791">Patrick Massot (Mar 17 2020 at 14:21)</a>:</h4>
+<p><code>leanproject new</code> without a project name is a better version of <code>leanpkg init</code></p>
+
+<a name="190853805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190853805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190853805">Patrick Massot (Mar 17 2020 at 14:21)</a>:</h4>
+<p>which acts on the current directory</p>
+
+<a name="190855465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190855465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190855465">Patrick Massot (Mar 17 2020 at 14:32)</a>:</h4>
+<p>/me really wonders what is unclear in <a href="https://github.com/leanprover-community/mathlib-tools/blob/master/README.md#creating-a-new-projet" target="_blank" title="https://github.com/leanprover-community/mathlib-tools/blob/master/README.md#creating-a-new-projet">https://github.com/leanprover-community/mathlib-tools/blob/master/README.md#creating-a-new-projet</a></p>
+
+<a name="190856239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190856239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190856239">Gabriel Ebner (Mar 17 2020 at 14:37)</a>:</h4>
+<p>I only read the code snippets, and the only example specifies the project name.  I expected an error message if I leave out the argument.</p>
+
+<a name="190875984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/190875984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#190875984">Kevin Buzzard (Mar 17 2020 at 16:39)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110031">Patrick Massot</span> <a href="#narrow/stream/113488-general/topic/new.20mathlib.20tools/near/190852947" title="#narrow/stream/113488-general/topic/new.20mathlib.20tools/near/190852947">said</a>:</p>
+<blockquote>
+<p>I don't get your complain about <code>new</code>. How do you want <code>leanproject</code> to guess the folder name you want if you don't write it?</p>
+</blockquote>
+<p>I'm not saying anything other than "I am a stupid old man" but often before I use a command I often write <code>command --help</code> to remind myself how to use it. <code>leanpkg --help</code> tells me <code>leanpkg new &lt;dir&gt;</code> so I write the directory, <code>leanproject --help</code> tells me <code>leanproject new</code> so I don't. I write notes to help me use command line commands because my own notes are easier for me to read. I am not suggesting my notes are useful for anyone else other than to help my stupid self, I only posted them because you asked. I just like to know exactly what to type in the very few use cases I have.</p>
+
+<a name="191007314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191007314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191007314">Patrick Massot (Mar 18 2020 at 16:38)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110043">Gabriel Ebner</span> <a href="#narrow/stream/113488-general/topic/new.20mathlib.20tools/near/190739266" title="#narrow/stream/113488-general/topic/new.20mathlib.20tools/near/190739266">said</a>:</p>
+<blockquote>
+<p>Apparently, <code>leanproject</code> actually removes the mathlib directory first: <a href="https://github.com/leanprover-community/mathlib-tools/blob/dbc357d2cf8f3edba8394052ede26796548f04fd/mathlibtools/lib.py#L468" target="_blank" title="https://github.com/leanprover-community/mathlib-tools/blob/dbc357d2cf8f3edba8394052ede26796548f04fd/mathlibtools/lib.py#L468">https://github.com/leanprover-community/mathlib-tools/blob/dbc357d2cf8f3edba8394052ede26796548f04fd/mathlibtools/lib.py#L468</a></p>
+</blockquote>
+<p>Yes, this is a bit brutal, but it is meant to avoid the weird problems we used to have with <code>leanpkg upgrade</code> where git would sometimes complains things are not a tree or something like this. This also avoids having zombie oleans when lean files are deleted.</p>
+
+<a name="191391395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191391395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191391395">Patrick Massot (Mar 22 2020 at 11:04)</a>:</h4>
+<p>Yesterday and today I found a bit of time for mathlibtools, so I added the <code>get-mathlib-cache</code> command, and also improved troubleshooting capabilities. Did I miss any feature request? (Again, creating GitHub issues for bug reports and feature requests would help a lot). I know I still have the refactor request to drop dependency on <code>leanpkg</code>, but this has pretty low priority for me. If there are no more obvious requests then I'll release a 0.0.4 version on PyPi.</p>
+
+<a name="191391416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191391416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191391416">Patrick Massot (Mar 22 2020 at 11:05)</a>:</h4>
+<p>But before that it would be nice to hear about some real world test of <code>leanproject get-mathlib-cache</code>. In order to test this, you only need to clone the master branch and pip install it.</p>
+
+<a name="191392154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191392154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191392154">Kevin Buzzard (Mar 22 2020 at 11:24)</a>:</h4>
+<p>How is this different to get-cache?</p>
+
+<a name="191392175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191392175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191392175">Patrick Massot (Mar 22 2020 at 11:25)</a>:</h4>
+<p>If you are editing mathlib this is the same thing. In another project this will get you mathlib oleans without changing the mathlib version mentioned in leanpkg.toml.</p>
+
+<a name="191392178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191392178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191392178">Patrick Massot (Mar 22 2020 at 11:25)</a>:</h4>
+<p>(contrasting with upgrade-mathlib that will give you the latest mathlib)</p>
+
+<a name="191392250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191392250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191392250">Kevin Buzzard (Mar 22 2020 at 11:27)</a>:</h4>
+<p>upgrade-mathlib might also change your lean version. Is this correct? I hadn't expected this.</p>
+
+<a name="191392275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191392275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191392275">Kevin Buzzard (Mar 22 2020 at 11:28)</a>:</h4>
+<p>But how is get-mathlib-cache different to get-cache?</p>
+
+<a name="191392401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191392401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191392401">Patrick Massot (Mar 22 2020 at 11:32)</a>:</h4>
+<p>Say you are in the perfectoid spaces project. Then get-cache will try to find cached <em>perfectoid</em> oleans, whereas get-mathlib-cache will  try to find cached <em>mathlib</em> oleans.</p>
+
+<a name="191393482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191393482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191393482">Kevin Buzzard (Mar 22 2020 at 12:01)</a>:</h4>
+<p>Oh --- to do this I just change into target deps mathlib and get cache :-)</p>
+
+<a name="191393489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191393489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191393489">Patrick Massot (Mar 22 2020 at 12:01)</a>:</h4>
+<p>Yes, this also works, but it's arguably less nice.</p>
+
+<a name="191509219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191509219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191509219">Edward Ayers (Mar 23 2020 at 17:35)</a>:</h4>
+<p>Ok so suppose that I have a project and I have a leanpkg.toml and I don't want to upgrade anything I just want to get the oleans for mathlib and build. How do I do that with leanproject?</p>
+
+<a name="191510144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191510144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191510144">Bryan Gin-ge Chen (Mar 23 2020 at 17:42)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="191510178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191510178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191510178">Johan Commelin (Mar 23 2020 at 17:42)</a>:</h4>
+<p>No, <code>leanproject get-mathlib-cache</code></p>
+
+<a name="191510197"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191510197" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191510197">Johan Commelin (Mar 23 2020 at 17:42)</a>:</h4>
+<p>If that is merged already</p>
+
+<a name="191510233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191510233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191510233">Johan Commelin (Mar 23 2020 at 17:43)</a>:</h4>
+<p>Otherwise <code>cd _target/mathlib/ ; leanproject get-cache</code></p>
+
+<a name="191510293"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191510293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191510293">Bryan Gin-ge Chen (Mar 23 2020 at 17:43)</a>:</h4>
+<p>Yes, Johan is right. <code>get-mathlib-cache</code> been merged, <a href="https://github.com/leanprover-community/mathlib-tools#getting-mathlib-oleans" target="_blank" title="https://github.com/leanprover-community/mathlib-tools#getting-mathlib-oleans">here</a> it is in the readme.</p>
+
+<a name="191510778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191510778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191510778">Edward Ayers (Mar 23 2020 at 17:47)</a>:</h4>
+<p>is it available upon calling <code>pip3 install mathlibtools</code>?</p>
+
+<a name="191510806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191510806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191510806">Johan Commelin (Mar 23 2020 at 17:47)</a>:</h4>
+<p>Who knows?? <span aria-label="stuck out tongue wink" class="emoji emoji-1f61c" role="img" title="stuck out tongue wink">:stuck_out_tongue_wink:</span></p>
+
+<a name="191510891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191510891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191510891">Edward Ayers (Mar 23 2020 at 17:48)</a>:</h4>
+<p>I don't think it is</p>
+
+<a name="191510905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191510905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191510905">Johan Commelin (Mar 23 2020 at 17:48)</a>:</h4>
+<p>It certainly will be rather soon</p>
+
+<a name="191510917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191510917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191510917">Edward Ayers (Mar 23 2020 at 17:48)</a>:</h4>
+<p>Ok, I'll wait</p>
+
+<a name="191514032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191514032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191514032">Patrick Massot (Mar 23 2020 at 18:08)</a>:</h4>
+<p>I was waiting for people to test it locally before pushing to PyPi.</p>
+
+<a name="191590065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191590065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191590065">Patrick Massot (Mar 24 2020 at 10:25)</a>:</h4>
+<p>Ok, I can see people won't test it if it's not released. <a href="https://pypi.org/project/mathlibtools/0.0.4/" target="_blank" title="https://pypi.org/project/mathlibtools/0.0.4/">https://pypi.org/project/mathlibtools/0.0.4/</a></p>
+
+<a name="191593368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191593368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191593368">Rob Lewis (Mar 24 2020 at 10:56)</a>:</h4>
+<p>FYI, <code>get-mathlib-cache</code> just worked very nicely for me. Thanks!</p>
+
+<a name="191596497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191596497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191596497">Kevin Buzzard (Mar 24 2020 at 11:27)</a>:</h4>
+<p>Thanks as ever Patrick. I should probably here openly that this tooling has really changed my workflow. Patrick asked <a href="#narrow/stream/113488-general/topic/elaboration.20issue.20challenge/near/191282282" title="#narrow/stream/113488-general/topic/elaboration.20issue.20challenge/near/191282282">some technical elaboration question</a> here, which involved having to use some branch of mathlib; I have a local clone of mathlib, so I used the command line to update mathlib and switch to the branch in question, and then I downloaded the fully compiled oleans in a matter of seconds.</p>
+
+<a name="191596562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191596562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191596562">Kevin Buzzard (Mar 24 2020 at 11:28)</a>:</h4>
+<p>I felt that this was a very clean and effective way of passing a <code>sorry</code> between two people.</p>
+
+<a name="191596866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191596866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191596866">Scott Morrison (Mar 24 2020 at 11:31)</a>:</h4>
+<p>Yes, thank you Patrick, the new <code>leanproject</code> is great. Thanks also to the work Rob and Gabriel have put into speeding up CI, that has been hugely productive as well.</p>
+
+<a name="191597034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191597034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191597034">Kevin Buzzard (Mar 24 2020 at 11:32)</a>:</h4>
+<p>Many thanks to Patrick, Rob, Gabriel, Simon and everyone else who was involved.</p>
+
+<a name="191618387"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191618387" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191618387">Shing Tak Lam (Mar 24 2020 at 14:38)</a>:</h4>
+<p>Hello, when I ran <code>leanproject new derivations</code> it started downloading lean 3.4.2. Is this correct?</p>
+<div class="codehilite"><pre><span></span>$ leanproject new derivations
+&gt; mkdir -p derivations
+&gt; cd derivations
+&gt; mkdir src
+&gt; git init -q
+&gt; git checkout -b lean-3.4.2
+Switched to a new branch &#39;lean-3.4.2&#39;
+configuring derivations 0.1
+Adding mathlib
+Adding mathlib
+info: downloading component &#39;lean&#39;
+</pre></div>
 
 
 {% endraw %}
