@@ -1,0 +1,261 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/49385performanceLeanvsZ3.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html">performance Lean vs Z3</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192065734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192065734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192065734">Miguel Raz Guzmán Macedo (Mar 27 2020 at 19:05)</a>:</h4>
+<p>I just saw that Leonardo de Moura was one of the principal architects of both Z3 and Lean. That is awesome! Are there any benchmarks on Z3 vs Lean performance?</p>
+
+<a name="192065945"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192065945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192065945">Mario Carneiro (Mar 27 2020 at 19:06)</a>:</h4>
+<p>they are not directly comparable</p>
+
+<a name="192066169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192066169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192066169">Miguel Raz Guzmán Macedo (Mar 27 2020 at 19:08)</a>:</h4>
+<p>I understand that Z3 is an SMT solver. Does Lean at some point also not contain some sort of solver?</p>
+
+<a name="192066184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192066184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192066184">Mario Carneiro (Mar 27 2020 at 19:09)</a>:</h4>
+<p>No</p>
+
+<a name="192066238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192066238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192066238">Mario Carneiro (Mar 27 2020 at 19:09)</a>:</h4>
+<p>Lean has a bunch of tactics, some of which may call solvers, but most don't</p>
+
+<a name="192066291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192066291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192066291">Kevin Buzzard (Mar 27 2020 at 19:09)</a>:</h4>
+<p>The solver is this chatroom in Lean</p>
+
+<a name="192066380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192066380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192066380">Kevin Buzzard (Mar 27 2020 at 19:10)</a>:</h4>
+<p>have you got some spare CPU cycles? We're trying to prove some theorems</p>
+
+<a name="192066384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192066384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192066384">Mario Carneiro (Mar 27 2020 at 19:10)</a>:</h4>
+<p>there are some algorithms that may have been borrowed from Z3, for example, <code>cc</code> and <code>eblast</code>, but TBH they aren't used very often</p>
+
+<a name="192066645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192066645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192066645">Miguel Raz Guzmán Macedo (Mar 27 2020 at 19:12)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113488-general/topic/performance.20Lean.20vs.20Z3/near/192066380" title="#narrow/stream/113488-general/topic/performance.20Lean.20vs.20Z3/near/192066380">said</a>:</p>
+<blockquote>
+<p>have you got some spare CPU cycles? We're trying to prove some theorems</p>
+</blockquote>
+<p>Anything related to physics ?</p>
+
+<a name="192066676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192066676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192066676">Mario Carneiro (Mar 27 2020 at 19:12)</a>:</h4>
+<p>what kind of physics?</p>
+
+<a name="192066734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192066734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192066734">Miguel Raz Guzmán Macedo (Mar 27 2020 at 19:13)</a>:</h4>
+<p>Classical mechanics, GR, or PDEs</p>
+
+<a name="192067143"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192067143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192067143">Mario Carneiro (Mar 27 2020 at 19:16)</a>:</h4>
+<p>I think it would be really cool to see GR foundations in lean. We have stuff on manifolds and "holors" (what physicists call tensors), but I don't think we have anything to do with Riemannian manifolds and geodesics</p>
+
+<a name="192069604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192069604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192069604">Miguel Raz Guzmán Macedo (Mar 27 2020 at 19:36)</a>:</h4>
+<p>Well, I've completed the natural number game, and would appreciate unrusting my relativity, so if people know how I could start, I would welcome that.</p>
+
+<a name="192070110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192070110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192070110">Miguel Raz Guzmán Macedo (Mar 27 2020 at 19:41)</a>:</h4>
+<p>Or is there anything done on Lagrangian/Hamiltonian formalisms?</p>
+
+<a name="192071169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192071169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192071169">Andrew Ashworth (Mar 27 2020 at 19:51)</a>:</h4>
+<p>Here's a paper; maybe it's useful? <a href="https://arxiv.org/pdf/1005.0960v2.pdf" title="https://arxiv.org/pdf/1005.0960v2.pdf">https://arxiv.org/pdf/1005.0960v2.pdf</a></p>
+
+<a name="192071430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192071430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192071430">Andrew Ashworth (Mar 27 2020 at 19:53)</a>:</h4>
+<p>It's a synthetic development, which may or may not be interesting to you...</p>
+
+<a name="192072050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192072050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192072050">Andrew Ashworth (Mar 27 2020 at 19:58)</a>:</h4>
+<p>I found it by searching; it was some Harvard student's senior thesis to formalize this in Coq: <a href="https://dash.harvard.edu/handle/1/38811518" title="https://dash.harvard.edu/handle/1/38811518">https://dash.harvard.edu/handle/1/38811518</a></p>
+
+<a name="192072399"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192072399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192072399">Patrick Massot (Mar 27 2020 at 20:01)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="243947">Miguel Raz Guzmán Macedo</span> <a href="#narrow/stream/113488-general/topic/performance.20Lean.20vs.20Z3/near/192069604" title="#narrow/stream/113488-general/topic/performance.20Lean.20vs.20Z3/near/192069604">said</a>:</p>
+<blockquote>
+<p>Well, I've completed the natural number game, and would appreciate unrusting my relativity, so if people know how I could start, I would welcome that.</p>
+</blockquote>
+<p>Going from the properties of addition and multiplication of natural numbers to relativity maybe a slightly too big jump....</p>
+
+<a name="192074903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192074903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192074903">Miguel Raz Guzmán Macedo (Mar 27 2020 at 20:23)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110025">Andrew Ashworth</span> <a href="#narrow/stream/113488-general/topic/performance.20Lean.20vs.20Z3/near/192072050" title="#narrow/stream/113488-general/topic/performance.20Lean.20vs.20Z3/near/192072050">said</a>:</p>
+<blockquote>
+<p>I found it by searching; it was some Harvard student's senior thesis to formalize this in Coq: <a href="https://dash.harvard.edu/handle/1/38811518" title="https://dash.harvard.edu/handle/1/38811518">https://dash.harvard.edu/handle/1/38811518</a></p>
+</blockquote>
+<p>Hey, this includes the Coq code he used. Maybe transcribing it into Lean is just manageable. Would you happen to know a similar effort in Coq to prove the Hamiltonian or Lagrangian formalisms?</p>
+
+<a name="192076224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192076224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192076224">Miguel Raz Guzmán Macedo (Mar 27 2020 at 20:35)</a>:</h4>
+<p>Also, <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> what's the big difference between the performance of proof vs tactic mode in Lean? Does a succesful tactic proof get compiled down to a term proof?</p>
+
+<a name="192077346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192077346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192077346">Mario Carneiro (Mar 27 2020 at 20:45)</a>:</h4>
+<p>Yes, you can use <code>#print</code> to see the resulting term</p>
+
+<a name="192077491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192077491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192077491">Mario Carneiro (Mar 27 2020 at 20:46)</a>:</h4>
+<p>Tactic mode is usually slower than term mode, as tactics have to construct the term. You may be surprised to find that it's not always slower, because term mode also has automation behind it, namely elaboration, and this can also be significantly expensive in some cases.</p>
+
+<a name="192077615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192077615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192077615">Mario Carneiro (Mar 27 2020 at 20:47)</a>:</h4>
+<p>However you have to ask yourself if the speed gain is worth it. Don't get caught in the micro-optimization trap</p>
+
+<a name="192077715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192077715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192077715">Mario Carneiro (Mar 27 2020 at 20:48)</a>:</h4>
+<p>(says the guy who decided to write his own theorem prover because lean was too slow)</p>
+
+<a name="192080938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192080938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192080938">Miguel Raz Guzmán Macedo (Mar 27 2020 at 21:10)</a>:</h4>
+<p>Ha, thanks Mario! You would know if anyone has reimplemented the Lean kernel in Rust right?</p>
+
+<a name="192081082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192081082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192081082">Andrew Ashworth (Mar 27 2020 at 21:12)</a>:</h4>
+<p>I don't think anybody has done that</p>
+
+<a name="192081316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192081316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192081316">Andrew Ashworth (Mar 27 2020 at 21:14)</a>:</h4>
+<p>Step 1: be familiar with the calculus of inductive constructions. Step 2: be familiar with the implementation of functional programming language compilers. Step 3: draw the owl in Rust</p>
+
+<a name="192081475"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192081475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192081475">Mario Carneiro (Mar 27 2020 at 21:16)</a>:</h4>
+<p>Actually it has been done, see <a href="https://github.com/ammkrn/nanoda_lib" title="https://github.com/ammkrn/nanoda_lib">nanoda</a></p>
+
+<a name="192081517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192081517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192081517">Andrew Ashworth (Mar 27 2020 at 21:16)</a>:</h4>
+<p>But you never know. Somebody here a few weeks ago wanted to implement the Lean kernel on an FPGA</p>
+
+<a name="192081565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192081565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192081565">Andrew Ashworth (Mar 27 2020 at 21:16)</a>:</h4>
+<p>is that the kernel or just a type-checker?</p>
+
+<a name="192081574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192081574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192081574">Mario Carneiro (Mar 27 2020 at 21:16)</a>:</h4>
+<p>what's the difference?</p>
+
+<a name="192081768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192081768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192081768">Andrew Ashworth (Mar 27 2020 at 21:18)</a>:</h4>
+<p>Does elaboration, unification, type-class inference not count as part of the kernel? ¯\_(ツ)_/¯</p>
+
+<a name="192081817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192081817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192081817">Mario Carneiro (Mar 27 2020 at 21:19)</a>:</h4>
+<p>I would consider none of that part of the kernel</p>
+
+<a name="192081881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192081881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192081881">Mario Carneiro (Mar 27 2020 at 21:19)</a>:</h4>
+<p>I suppose you could call it part of the type checker front end</p>
+
+<a name="192081888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192081888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192081888">Andrew Ashworth (Mar 27 2020 at 21:19)</a>:</h4>
+<p>I guess my definition is wrong. Is there a type-checker for that?</p>
+
+<a name="192081975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192081975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192081975">Mario Carneiro (Mar 27 2020 at 21:20)</a>:</h4>
+<p>To me type checker and kernel are mostly synonymous. There are no implementations of the lean front end other than lean</p>
+
+<a name="192082010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192082010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192082010">Mario Carneiro (Mar 27 2020 at 21:20)</a>:</h4>
+<p>(which I consider to be a serious trustworthiness hole)</p>
+
+<a name="192082024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192082024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192082024">Mario Carneiro (Mar 27 2020 at 21:21)</a>:</h4>
+<p>but it's hard to do otherwise because lean is so complicated</p>
+
+<a name="192082059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192082059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192082059">Mario Carneiro (Mar 27 2020 at 21:21)</a>:</h4>
+<p>the reason lean is slow has little to do with the implementation and everything to do with what it is being asked to do</p>
+
+<a name="192082122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192082122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192082122">Mario Carneiro (Mar 27 2020 at 21:22)</a>:</h4>
+<p>If you ever try tracing anything you will realize that lean is doing a phenomenal amount of work</p>
+
+<a name="192082267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192082267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192082267">Mario Carneiro (Mar 27 2020 at 21:23)</a>:</h4>
+<p>For typeclass inference in particular I am amazed that lean is able to perform as well as it does considering how much it has to churn through</p>
+
+<a name="192085187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192085187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192085187">Miguel Raz Guzmán Macedo (Mar 27 2020 at 21:57)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110025">Andrew Ashworth</span> <a href="#narrow/stream/113488-general/topic/performance.20Lean.20vs.20Z3/near/192071430" title="#narrow/stream/113488-general/topic/performance.20Lean.20vs.20Z3/near/192071430">said</a>:</p>
+<blockquote>
+<p>It's a synthetic development, which may or may not be interesting to you...</p>
+</blockquote>
+<p>Sorry, what does synthetic mean here?</p>
+
+<a name="192085604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192085604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192085604">Mario Carneiro (Mar 27 2020 at 22:01)</a>:</h4>
+<p>It means that the treatment is syntactic, using axioms for basic rules about relativity etc. rather than defining things as you would in regular mathematics, using e.g. functions on an infinite dimensional complex vector space</p>
+
+<a name="192085754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192085754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192085754">Mario Carneiro (Mar 27 2020 at 22:02)</a>:</h4>
+<p>wait, I got confused whether we are talking about general relativity or quantum mechanics. Well, the point is the same</p>
+
+<a name="192085952"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192085952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192085952">Miguel Raz Guzmán Macedo (Mar 27 2020 at 22:05)</a>:</h4>
+<p>Ah, works for me! Thanks Mario.</p>
+
+<a name="192085984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192085984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192085984">Kevin Buzzard (Mar 27 2020 at 22:05)</a>:</h4>
+<p>You'd better not do both in Lean because they contradict each other, right?</p>
+
+<a name="192086021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192086021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192086021">Mario Carneiro (Mar 27 2020 at 22:05)</a>:</h4>
+<p>No, the relation is akin to models of a formal theory</p>
+
+<a name="192086077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192086077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192086077">Miguel Raz Guzmán Macedo (Mar 27 2020 at 22:06)</a>:</h4>
+<p>I guess that would be more of a reason to try and formalize it - see what breaks up.</p>
+
+<a name="192086093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192086093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192086093">Mario Carneiro (Mar 27 2020 at 22:06)</a>:</h4>
+<p>you should be able to prove that the "semantic" version is an instance of the axioms of the "syntactic" version</p>
+
+<a name="192086201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192086201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192086201">Mario Carneiro (Mar 27 2020 at 22:07)</a>:</h4>
+<p>You only get into trouble if you start making ontological claims like "nothing exists except for points that are described by the syntactic theory" therefore your models are necessarily countable</p>
+
+<a name="192086438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192086438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192086438">Mario Carneiro (Mar 27 2020 at 22:10)</a>:</h4>
+<p>So in some respects, the syntactic / synthetic approach is more general, but the semantic approach has the advantage that you can prove facts by reference to the model itself, there is no constraint on how you conduct a proof</p>
+
+<a name="192118646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192118646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192118646">Patrick Massot (Mar 28 2020 at 11:29)</a>:</h4>
+<p>I think Kevin meant "general relativity and quantum mechanics contradict each other", not "synthetic vs semantic".</p>
+
+<a name="192118792"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192118792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192118792">Mario Carneiro (Mar 28 2020 at 11:34)</a>:</h4>
+<p>Ah, I missed that. Although it would be pretty tricky to actually derive a contradiction since they are so incompatible</p>
+
+<a name="192118876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192118876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192118876">Mario Carneiro (Mar 28 2020 at 11:35)</a>:</h4>
+<p>it would be like proving that the unit circle is disjoint from a lemon</p>
+
+<a name="192119144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192119144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192119144">Patrick Massot (Mar 28 2020 at 11:43)</a>:</h4>
+<blockquote>
+<p>it would be like proving that the unit circle is disjoint from a lemon</p>
+</blockquote>
+<p>I saw this message popping up as an out of context desktop notification, it was pretty weird (and I didn't guess it was answering one of my messages).</p>
+
+<a name="192120010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20Lean%20vs%20Z3/near/192120010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49385performanceLeanvsZ3.html#192120010">Kevin Buzzard (Mar 28 2020 at 12:06)</a>:</h4>
+<p>I think that's undecidable in Lean</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

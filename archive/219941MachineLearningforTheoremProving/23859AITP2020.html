@@ -1,0 +1,48 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/219941MachineLearningforTheoremProving/23859AITP2020.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/index.html">Machine Learning for Theorem Proving</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/23859AITP2020.html">AITP 2020</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192466509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/AITP%202020/near/192466509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/23859AITP2020.html#192466509">Jason Rute (Mar 31 2020 at 23:31)</a>:</h4>
+<p>I noticed the abstracts for <a href="http://aitp-conference.org/2020/" title="http://aitp-conference.org/2020/">AITP 2020</a> got posted recently (not sure when).  I'm really looking forward to reading through them.  I thought I'd also add any comments I have here.  Feel free to add you own as well.</p>
+
+<a name="192466577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/AITP%202020/near/192466577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/23859AITP2020.html#192466577">Jason Rute (Mar 31 2020 at 23:32)</a>:</h4>
+<p>(I also assume there is no other public place on the internet where people talk about AITP 2020, right?)</p>
+
+<a name="192603711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/AITP%202020/near/192603711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/23859AITP2020.html#192603711">Jason Rute (Apr 01 2020 at 23:09)</a>:</h4>
+<p>The first abstract I want to talk about is <a href="http://aitp-conference.org/2020/abstract/paper_7.pdf" title="http://aitp-conference.org/2020/abstract/paper_7.pdf">Reinforcement Learning for Interactive Theorem Proving in HOL4</a> by <span class="user-mention" data-user-id="110187">@Minchao Wu</span>, Michael Norrish, Christian Walder and Amir Dezfouli.  They built a gym environment for HOL4.  I don't think the code or paper is public yet, but the abstract has a lot of details.  The main idea is that they created a Python environment for reinforcement learning of theorem proving in HOL4.  There are a number of points which make it different from HOList and the other projects.  Rather than go through all the details, I'll give a few quick thoughts:</p>
+<ul>
+<li>
+<p>The main thing I found interesting about this is that they set this up as a Gym compatible environment (so that they could use the REINFORCE algorithm).  By Gym compatible I mean Open AI's Gym interface which is a really simple interface.  You have to be able to start an environment, perform a step in that environment, and the read an observation about the state of that environment.  What makes this different from other interactive theorem proving "gyms" that I'm aware of is that it doesn't seem to allow backtracking.  Backtracking (in the form of a tree search) is very important for projects like AlphaGo, solving the Rubik's cube, and HOList.  From what I can tell, they allow for two ways around this:</p>
+<ol>
+<li>They actually do have back-tracking in a sense, since a "state" is not single goal stack (with a local context), but instead a "fringe".  I'm not entirely clear what a fringe is.  They describe a fringe as all unvisited goal stacks, but it isn't clear to me what "visited" means in this context.  Unlike, say, A* search, each goal stack has a very large number of "neighbors" since there are a very large number of tactic applications that can be applied to a goal.  It would be unreasonable to visit all of the neighbors.  So maybe every goal set remains in the fringe, but then I don't know what "unvisited" means.  (Also later they talk about "winning" if the fridge becomes empty, but that also wouldn't make sense since I only need to solve some goal stack, not all of them.)  Another interpretation is that a goal stack is visited when any tactic is applied to it, but then the fringe would only have size 1, right, because each tactic application only creates one new goal stack?  (Clearly I don't understand this well enough.)  Anyway, I think there is some notion of being able to choose which goal stack to explore more.</li>
+<li>The default behavior is to completely ignore the fringe and to just apply your tactic application to the first goal stack in the fringe.  In this case it is basically pure model-free reinforcement learning.  (Also since they are using REINFORCE, it seems they are using this default behavior.)  This however is surprising since I was under the impression that the model-based reinforcement learning used in theorem proving (i.e. using the fact that the agent has access to an accurate simulator of the theorem learning environment) is very important to getting good results in theorem proving.  If that is not the case, then that would be surprising.  (I was just having <a href="#narrow/stream/219941-Machine-Learning.20for.20Theorem.20Proving/topic/HOList/near/192462558" title="#narrow/stream/219941-Machine-Learning.20for.20Theorem.20Proving/topic/HOList/near/192462558">a conversation about this</a> for HOList.)</li>
+</ol>
+</li>
+<li>
+<p>Unlike a lot of theorem proving RL setups which only assign rewards at the end (solved or not), they assign partial negative rewards for picking bad tactics (which fail or don't change the goal) and for running out of time.  This probably helps the agent learn faster.</p>
+</li>
+<li>It is interesting that environments written in Python (like this one) sell it as being easier to use machine learning tools like PyCharm/Tensorflow and environments written in OCaml (like the new <a href="https://arxiv.org/abs/2003.09140" title="https://arxiv.org/abs/2003.09140">TacticToe for Coq</a> paper) sell it as being closer to the theorem prover.  It gets at the following dichotomy.  If we ever hope to use these tools in practice, we need to have them available in the language the theorem prover is written in, but if we want to try things quickly or get machine learning experts involved, then we need to have it in Python environments with clean and well documented APIs.  I think we need both.</li>
+<li>While the environment seems fairly grand, what they have done with it so far seems fairly limited.  I think they have only used it on 10 theorems so far.  Also, I think each theorem is like a whole new world where the agent has to relearn how to prove theorems from scratch.  This is very different from the DeepHOL Zero work where the agent learns stuff from one theorem which it can apply to another.  I hope that this work can be eventually brought to that level.  However, even if that is all that they have planned, I think it will serve as a good Gym environment for Machine Learning researchers to try out theorem proving, but not as competition for say DeepHOL Zero or any of the supervised-learned ML agents, like TacticToe which is currently the state of the art for ML in HOL4.</li>
+</ul>
+
+<a name="192603839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/AITP%202020/near/192603839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/23859AITP2020.html#192603839">Jason Rute (Apr 01 2020 at 23:11)</a>:</h4>
+<p>Also, if anyone can fix this, the name of their project is spelled incorrectly at <a href="http://aitp-conference.org/2020/" title="http://aitp-conference.org/2020/">http://aitp-conference.org/2020/</a> : "leaerning" -&gt; "learning"</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,73 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/23144introattr.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/23144introattr.html">`intro` attr</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192156342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60intro%60%20attr/near/192156342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23144introattr.html#192156342">Yury G. Kudryashov (Mar 29 2020 at 04:44)</a>:</h4>
+<p>What is the meaning of the attribute <code>intro</code>?</p>
+
+<a name="192156683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60intro%60%20attr/near/192156683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23144introattr.html#192156683">Bryan Gin-ge Chen (Mar 29 2020 at 04:57)</a>:</h4>
+<p>Looks like it's defined <a href="https://github.com/leanprover-community/lean/blob/ec1613aef1eee72e601f192b16740629c6d49690/src/library/tactic/backward/backward_lemmas.cpp#L74" title="https://github.com/leanprover-community/lean/blob/ec1613aef1eee72e601f192b16740629c6d49690/src/library/tactic/backward/backward_lemmas.cpp#L74">in "backward_lemmas.cpp"</a> as part of the <a href="https://github.com/leanprover-community/lean/blob/ec1613aef1eee72e601f192b16740629c6d49690/library/init/meta/backward.lean#L30" title="https://github.com/leanprover-community/lean/blob/ec1613aef1eee72e601f192b16740629c6d49690/library/init/meta/backward.lean#L30">backward chaining tactic</a>:</p>
+<div class="codehilite"><pre><span></span>/- (backward_chaining_core t insts max_depth pre_tactic leaf_tactic lemmas): perform backward chaining using
+   the lemmas marked as [intro] and extra_lemmas.
+   The search maximum depth is \c max_depth.
+   Before processing each goal, the tactic pre_tactic is invoked. The possible outcomes are:
+      1) it closes the goal
+      2) it does nothing, and backward_chaining_core tries applicable lemmas.
+      3) it fails, and backward_chaining_core backtracks.
+   Whenever no lemma is applicable, the leaf_tactic is invoked, to try to close the goal.
+   If insts is tt, then type class resolution is used to discharge goals.
+   Remark pre_tactic may also be used to trace the execution of backward_chaining_core -/
+</pre></div>
+
+<a name="192156687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60intro%60%20attr/near/192156687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23144introattr.html#192156687">Bryan Gin-ge Chen (Mar 29 2020 at 04:57)</a>:</h4>
+<p>I've never seen this tactic used before.</p>
+
+<a name="192156735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60intro%60%20attr/near/192156735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23144introattr.html#192156735">Scott Morrison (Mar 29 2020 at 04:59)</a>:</h4>
+<p>It sounds very similar to what we've ended up with with <code>solve_by_elim</code>!</p>
+
+<a name="192156785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60intro%60%20attr/near/192156785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23144introattr.html#192156785">Scott Morrison (Mar 29 2020 at 05:00)</a>:</h4>
+<p>with <code>leaf_tactic</code> --&gt; <code>discharger</code>, <code>pre_tactic</code> --&gt; <code>pre_apply</code></p>
+
+<a name="192156788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60intro%60%20attr/near/192156788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23144introattr.html#192156788">Scott Morrison (Mar 29 2020 at 05:00)</a>:</h4>
+<p><code>solve_by_elim</code> doesn't pull in any attribute by default, but you can call <code>solve_by_elim with attr</code></p>
+
+<a name="192156833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60intro%60%20attr/near/192156833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23144introattr.html#192156833">Yury G. Kudryashov (Mar 29 2020 at 05:02)</a>:</h4>
+<p>I'm reusing (+expanding) some code about <code>exists_unique</code> from core, and there is an <code>@[intro]</code> in the original code. I'll drop it in <code>mathlib</code> version.</p>
+
+<a name="192168489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60intro%60%20attr/near/192168489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23144introattr.html#192168489">Patrick Massot (Mar 29 2020 at 11:00)</a>:</h4>
+<p>Indeed Lean3 has a builtin back-chaining tactic. Unfortunately you can define only one set of lemmas to be used by this tactic, using the intro attribute. See <a href="https://github.com/leanprover/presentations/tree/master/20170116_POPL/backchain" title="https://github.com/leanprover/presentations/tree/master/20170116_POPL/backchain">https://github.com/leanprover/presentations/tree/master/20170116_POPL/backchain</a></p>
+
+<a name="192168517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60intro%60%20attr/near/192168517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23144introattr.html#192168517">Patrick Massot (Mar 29 2020 at 11:00)</a>:</h4>
+<p>Maybe we could fix that in Lean 3.8, if anyone has time and energy, and if it turns out to be more efficient than what <code>tidy</code> and its friends already give us.</p>
+
+<a name="192169002"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60intro%60%20attr/near/192169002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23144introattr.html#192169002">Scott Morrison (Mar 29 2020 at 11:15)</a>:</h4>
+<p>backwards chaining in mathlib is done by solve_by_elim, not by tidy (although tidy does sometimes call solve_by_elim)</p>
+
+<a name="192169613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60intro%60%20attr/near/192169613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23144introattr.html#192169613">Patrick Massot (Mar 29 2020 at 11:30)</a>:</h4>
+<p>This makes <code>solve_by_elim</code> a <code>tidy</code> friend.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

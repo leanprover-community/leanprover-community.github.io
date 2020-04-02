@@ -1,0 +1,296 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/49062optionisamonad.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html">option is a monad</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192572549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192572549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192572549">Kevin Buzzard (Apr 01 2020 at 18:30)</a>:</h4>
+<p>I read in Programming in Lean that option is a monad. I rolled my own <code>option</code> and decided to try and define a term of type <code>monad option</code>. I seem to have to fill in a bunch of fields, I've done half of them, and it's just dawned on me that none of them are proofs :-/ I have <code>map_const</code>, <code>seq_left</code> and <code>seq_right</code> left to do. But I'm not doing the right thing because I'm sure there should be proofs involved. Should I be proving it's a lawful monad?</p>
+
+<a name="192572602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192572602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192572602">Reid Barton (Apr 01 2020 at 18:30)</a>:</h4>
+<p>Yes</p>
+
+<a name="192573048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192573048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192573048">Reid Barton (Apr 01 2020 at 18:33)</a>:</h4>
+<p><code>monad</code> is for programming, and programmers don't need proofs</p>
+
+<a name="192573200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192573200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192573200">Patrick Massot (Apr 01 2020 at 18:34)</a>:</h4>
+<p>Kevin, what you're doing is called Haskell. To become Lean you need the lawfulness.</p>
+
+<a name="192573266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192573266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192573266">Kevin Buzzard (Apr 01 2020 at 18:35)</a>:</h4>
+<p>I was actually experimenting with things which I thought might be worth doing in the tutorial project</p>
+
+<a name="192573289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192573289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192573289">Kevin Buzzard (Apr 01 2020 at 18:35)</a>:</h4>
+<p>but for some reason I thought a monad had about two fields and two proofs</p>
+
+<a name="192573425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192573425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192573425">Kevin Buzzard (Apr 01 2020 at 18:36)</a>:</h4>
+<p>and currently I seem to have to prove <code>map_const_eq</code>, <code>_id_map</code>, <code>bind_pure_comp_eq_map</code>, <code>bind_map_eq_seq</code>, <code>pure_bind</code>, <code>bind_assoc</code> and I also have to guess definitions of <code>map_const</code>, <code>seq_left</code> and <code>seq_right</code></p>
+
+<a name="192573436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192573436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192573436">Kevin Buzzard (Apr 01 2020 at 18:36)</a>:</h4>
+<p>this has got a bit out of hand.</p>
+
+<a name="192573515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192573515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192573515">Reid Barton (Apr 01 2020 at 18:37)</a>:</h4>
+<p>The category_theory monad would look more like what you expect</p>
+
+<a name="192573523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192573523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192573523">Kevin Buzzard (Apr 01 2020 at 18:37)</a>:</h4>
+<p>Furthermore I have no idea what all the notation means in the goals :-) <code>x &gt;&gt;= pure ∘ f = f &lt;$&gt; x</code> ?</p>
+
+<a name="192573526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192573526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192573526">Reid Barton (Apr 01 2020 at 18:37)</a>:</h4>
+<p>but I don't know whether it is suitable for your purposes</p>
+
+<a name="192573550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192573550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192573550">Kevin Buzzard (Apr 01 2020 at 18:37)</a>:</h4>
+<p>My purposes are trying to figure out if I can teach schoolkids what monads are</p>
+
+<a name="192573615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192573615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192573615">Jasmin Blanchette (Apr 01 2020 at 18:38)</a>:</h4>
+<p>At the VU, we just defined our own monad class.</p>
+
+<a name="192573625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192573625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192573625">Jasmin Blanchette (Apr 01 2020 at 18:38)</a>:</h4>
+<p>To avoid all that stuff.</p>
+
+<a name="192573659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192573659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192573659">Jasmin Blanchette (Apr 01 2020 at 18:38)</a>:</h4>
+<p>Two fields, <em>three</em> proofs.</p>
+
+<a name="192573698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192573698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192573698">Patrick Massot (Apr 01 2020 at 18:39)</a>:</h4>
+<p>What's with the burrito?</p>
+
+<a name="192573708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192573708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192573708">Kevin Buzzard (Apr 01 2020 at 18:39)</a>:</h4>
+<p>Is one of them <code>(f &gt;&gt;= λ (_x : α → β), _x &lt;$&gt; x) = f &lt;*&gt; x</code></p>
+
+<a name="192573710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192573710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192573710">Johan Commelin (Apr 01 2020 at 18:39)</a>:</h4>
+<p>Seriously?</p>
+
+<a name="192573726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192573726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192573726">Johan Commelin (Apr 01 2020 at 18:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> Search for monad and burrito</p>
+
+<a name="192573747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192573747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192573747">Johan Commelin (Apr 01 2020 at 18:39)</a>:</h4>
+<p>And brew yourself a cup of coffee.... you'll have a long evening</p>
+
+<a name="192573837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192573837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192573837">Johan Commelin (Apr 01 2020 at 18:40)</a>:</h4>
+<p><a href="https://duckduckgo.com/?t=ffab&amp;q=monad+burrito&amp;atb=v1-1&amp;ia=web" title="https://duckduckgo.com/?t=ffab&amp;q=monad+burrito&amp;atb=v1-1&amp;ia=web">https://duckduckgo.com/?t=ffab&amp;q=monad+burrito&amp;atb=v1-1&amp;ia=web</a></p>
+
+<a name="192573863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192573863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192573863">Johan Commelin (Apr 01 2020 at 18:40)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Does Lean know what a burrito is?</p>
+
+<a name="192573882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192573882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192573882">Reid Barton (Apr 01 2020 at 18:40)</a>:</h4>
+<p>This is the original source: <a href="https://byorgey.wordpress.com/2009/01/12/abstraction-intuition-and-the-monad-tutorial-fallacy/" title="https://byorgey.wordpress.com/2009/01/12/abstraction-intuition-and-the-monad-tutorial-fallacy/">https://byorgey.wordpress.com/2009/01/12/abstraction-intuition-and-the-monad-tutorial-fallacy/</a></p>
+
+<a name="192573887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192573887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192573887">Johan Commelin (Apr 01 2020 at 18:40)</a>:</h4>
+<p>You could try proving that those are monads</p>
+
+<a name="192573924"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192573924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192573924">Kenny Lau (Apr 01 2020 at 18:41)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="112680">Johan Commelin</span> <a href="#narrow/stream/113488-general/topic/option.20is.20a.20monad/near/192573837" title="#narrow/stream/113488-general/topic/option.20is.20a.20monad/near/192573837">said</a>:</p>
+<blockquote>
+<p><a href="https://duckduckgo.com/?t=ffab&amp;q=monad+burrito&amp;atb=v1-1&amp;ia=web" title="https://duckduckgo.com/?t=ffab&amp;q=monad+burrito&amp;atb=v1-1&amp;ia=web">https://duckduckgo.com/?t=ffab&amp;q=monad+burrito&amp;atb=v1-1&amp;ia=web</a></p>
+</blockquote>
+<p>I commend you for using duckduckgo.</p>
+
+<a name="192574240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192574240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192574240">Kevin Buzzard (Apr 01 2020 at 18:43)</a>:</h4>
+<p>Reminds me of <a href="https://twitter.com/agnoster/status/44636629423497217" title="https://twitter.com/agnoster/status/44636629423497217">this</a></p>
+<div class="inline-preview-twitter"><div class="twitter-tweet"><a href="https://twitter.com/agnoster/status/44636629423497217"><img class="twitter-avatar" src="https://pbs.twimg.com/profile_images/433743062221606912/KIL_MiBp_normal.jpeg"></a><p><a href="https://twitter.com/wilshipley" title="https://twitter.com/wilshipley">@wilshipley</a> git gets easier once you get the basic idea that branches are homeomorphic endofunctors mapping submanifolds of a Hilbert space.</p><span>- Isaac Wolkerstorfer (@agnoster)</span></div></div>
+
+<a name="192574827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192574827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192574827">Patrick Massot (Apr 01 2020 at 18:48)</a>:</h4>
+<p>Oh, I remember now. I've met those before, but I forgot.</p>
+
+<a name="192586491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192586491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192586491">Anne Baanen (Apr 01 2020 at 20:13)</a>:</h4>
+<p>Today is the perfect day, and this is the perfect thread, to mention <a href="https://webapps.wesleyan.edu/redirector/emorehouse.web.wesleyan.edu?path=/silliness/burrito_monads.pdf" title="https://webapps.wesleyan.edu/redirector/emorehouse.web.wesleyan.edu?path=/silliness/burrito_monads.pdf">Burritos for the hungry mathematician</a></p>
+
+<a name="192590314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192590314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192590314">Kenny Lau (Apr 01 2020 at 20:43)</a>:</h4>
+<p><a href="https://neoeinstein.github.io/monads-are-not-burritos/" title="https://neoeinstein.github.io/monads-are-not-burritos/">https://neoeinstein.github.io/monads-are-not-burritos/</a></p>
+
+<a name="192633580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192633580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192633580">Kevin Buzzard (Apr 02 2020 at 08:21)</a>:</h4>
+<p>So it is a theorem in Lean, that what Leo de Moura thinks a monad is, is the same as what Scott Morrison thinks a monad is?</p>
+
+<a name="192633704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192633704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192633704">Kevin Buzzard (Apr 02 2020 at 08:23)</a>:</h4>
+<p>Category theory is some weird way for type theory to formally verify programming languages or something.</p>
+
+<a name="192633749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192633749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192633749">Johan Commelin (Apr 02 2020 at 08:23)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113488-general/topic/option.20is.20a.20monad/near/192633580" title="#narrow/stream/113488-general/topic/option.20is.20a.20monad/near/192633580">said</a>:</p>
+<blockquote>
+<p>So it is a theorem in Lean, that what Leo de Moura thinks a monad is, is the same as what Scott Morrison thinks a monad is?</p>
+</blockquote>
+<p>Not sure if this has been done.</p>
+
+<a name="192633865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192633865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192633865">Kevin Buzzard (Apr 02 2020 at 08:25)</a>:</h4>
+<p>Why is the Lean term <code>option.monad</code> a monad, Scott Morrison?</p>
+
+<a name="192634078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192634078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192634078">Scott Morrison (Apr 02 2020 at 08:27)</a>:</h4>
+<p>One answer is <a href="https://github.com/leanprover-community/mathlib/blob/master/src/category_theory/monad/types.lean" title="https://github.com/leanprover-community/mathlib/blob/master/src/category_theory/monad/types.lean">https://github.com/leanprover-community/mathlib/blob/master/src/category_theory/monad/types.lean</a></p>
+
+<a name="192634094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192634094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192634094">Scott Morrison (Apr 02 2020 at 08:27)</a>:</h4>
+<p>Which takes a type-level lawful monad and produces a category theoretic monad.</p>
+
+<a name="192634171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192634171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192634171">Scott Morrison (Apr 02 2020 at 08:28)</a>:</h4>
+<p>But we "just" need to understand why <code>option</code> is an algebra object in the monoidal category of endofunctors of <code>Type</code>.</p>
+
+<a name="192634907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192634907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192634907">Kevin Buzzard (Apr 02 2020 at 08:36)</a>:</h4>
+<p>Oh wow, so <code>monad</code> has this crazy evolution!</p>
+
+<a name="192635082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192635082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192635082">Kevin Buzzard (Apr 02 2020 at 08:39)</a>:</h4>
+<p>Johannes got it into what a computer scientist thought a category was?</p>
+
+<a name="192635598"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192635598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192635598">Scott Morrison (Apr 02 2020 at 08:44)</a>:</h4>
+<p>If you wanted to prove that option was a monad purely in the category theoretic definition, you would start with:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">monad</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">functorial</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">types</span>
+
+<span class="kn">open</span> <span class="n">category_theory</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">Option</span> <span class="o">:=</span> <span class="n">of_type_functor</span> <span class="n">option</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span>
+
+<span class="kn">instance</span> <span class="n">monad_Option</span> <span class="o">:</span> <span class="n">monad</span> <span class="n">Option</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">η</span> <span class="o">:=</span>
+    <span class="c1">-- We need to provide `𝟭 Type ⟶ Option`,</span>
+    <span class="c1">-- i.e. a natural transformation from the identity functor to the Option functor</span>
+    <span class="c1">-- In components, this just means for each type `α` a morphism from `α` to `option α`.</span>
+    <span class="c1">-- I can think of two good options, `some` and `none`.</span>
+    <span class="c1">-- Let&#39;s guess `some` is the right answer!</span>
+    <span class="c1">-- Hopefully the category theoretic automation is good enough we won&#39;t need to check naturality.</span>
+    <span class="o">{</span> <span class="n">app</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">x</span><span class="o">,</span> <span class="n">some</span> <span class="n">x</span><span class="o">,</span> <span class="o">},</span>
+    <span class="c1">-- Indeed, the naturality proof was provided &quot;under the hood&quot;.</span>
+  <span class="n">μ</span> <span class="o">:=</span>
+  <span class="c1">-- Now we need to provide `Option ⋙ Option ⟶ Option`.</span>
+  <span class="o">{</span> <span class="n">app</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">x</span><span class="o">,</span>
+    <span class="k">begin</span>
+      <span class="n">dsimp</span> <span class="o">[</span><span class="n">Option</span><span class="o">]</span> <span class="n">at</span> <span class="n">x</span><span class="o">,</span> <span class="n">dsimp</span> <span class="o">[</span><span class="n">Option</span><span class="o">],</span>
+      <span class="c1">-- There&#39;s only one sensible thing to do:</span>
+      <span class="n">exact</span> <span class="n">x</span><span class="bp">.</span><span class="n">get_or_else</span> <span class="n">none</span><span class="o">,</span>
+    <span class="kn">end</span><span class="o">,</span>
+    <span class="c1">-- Unfortunately, naturality doesn&#39;t happen automatically this time!</span>
+    <span class="n">naturality&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">f</span><span class="o">,</span>
+    <span class="k">begin</span>
+      <span class="n">ext</span><span class="o">,</span> <span class="n">dsimp</span><span class="o">,</span>
+      <span class="n">cases</span> <span class="n">x</span><span class="o">,</span>
+      <span class="c1">-- There appears to be a ridiculous lack of `simp` lemmas about the `option` functor...</span>
+      <span class="n">sorry</span><span class="o">,</span>
+      <span class="n">sorry</span><span class="o">,</span>
+    <span class="kn">end</span><span class="o">},</span>
+  <span class="c1">-- We still need to prove that what we wrote down constituted an algebra in `Type ⥤ Type`:</span>
+  <span class="n">left_unit&#39;</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">right_unit&#39;</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">assoc&#39;</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span> <span class="o">}</span>
+</pre></div>
+
+<a name="192635817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192635817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192635817">Scott Morrison (Apr 02 2020 at 08:46)</a>:</h4>
+<p>I've given up there because people have neglected to prove the obvious simp lemmas about the <code>functor</code> and <code>is_lawful_functor</code> instances they biult for <code>option</code>.</p>
+
+<a name="192635849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192635849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192635849">Scott Morrison (Apr 02 2020 at 08:46)</a>:</h4>
+<p>Maybe I should have just proved it was a functor by hand, and then the <code>monad</code> proof would be worked automatically.</p>
+
+<a name="192636027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192636027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192636027">Kevin Buzzard (Apr 02 2020 at 08:48)</a>:</h4>
+<p>Scott, you look at those proofs and think <em>sigh, I must go and write more automation</em></p>
+
+<a name="192636110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192636110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192636110">Kevin Buzzard (Apr 02 2020 at 08:49)</a>:</h4>
+<p>I think I look at them and say "hey, we are five computer game puzzles away from proving that option is a monad, let's play some computer games"</p>
+
+<a name="192636207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192636207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192636207">Scott Morrison (Apr 02 2020 at 08:50)</a>:</h4>
+<p>Oh, actually the reason those proofs were breaking was that I wrote <code>{ app := λ α x, none, },</code> when I'd said in the comment that we were going to write <code>{ app := λ α x, some x, },</code></p>
+
+<a name="192636275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192636275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192636275">Kevin Buzzard (Apr 02 2020 at 08:50)</a>:</h4>
+<p>Can you post a fixed version?</p>
+
+<a name="192636315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192636315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192636315">Scott Morrison (Apr 02 2020 at 08:51)</a>:</h4>
+<p>Yes. Indeed, if you turn on case bashing then tidy just handles everything:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">monad</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">types</span>
+
+<span class="kn">open</span> <span class="n">category_theory</span>
+
+<span class="c1">-- We turn on case bashing, to case split on `option` hypotheses.</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">tidy</span><span class="o">]</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">case_bash</span>
+
+<span class="n">def</span> <span class="n">Option</span> <span class="o">:=</span> <span class="n">of_type_functor</span> <span class="n">option</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span>
+
+<span class="kn">instance</span> <span class="n">monad_Option</span> <span class="o">:</span> <span class="n">monad</span> <span class="n">Option</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">η</span> <span class="o">:=</span>
+    <span class="c1">-- We need to provide `𝟭 Type ⟶ Option`,</span>
+    <span class="c1">-- i.e. a natural transformation from the identity functor to the Option functor</span>
+    <span class="c1">-- In components, this just means for each type `α` a morphism from `α` to `option α`.</span>
+    <span class="c1">-- I can think of two good options, `some` and `none`.</span>
+    <span class="c1">-- Let&#39;s guess `some` is the right answer!</span>
+    <span class="c1">-- Hopefully the category theoretic automation is good enough we won&#39;t need to check naturality.</span>
+    <span class="o">{</span> <span class="n">app</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">x</span><span class="o">,</span> <span class="n">some</span> <span class="n">x</span><span class="o">,</span> <span class="o">},</span>
+    <span class="c1">-- Indeed, the naturality proof was provided &quot;under the hood&quot;.</span>
+  <span class="n">μ</span> <span class="o">:=</span>
+  <span class="c1">-- Now we need to provide `Option ⋙ Option ⟶ Option`.</span>
+  <span class="o">{</span> <span class="n">app</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="bp">.</span><span class="n">get_or_else</span> <span class="n">none</span><span class="o">,</span> <span class="o">},</span> <span class="o">}</span>
+</pre></div>
+
+<a name="192636443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192636443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192636443">Kevin Buzzard (Apr 02 2020 at 08:52)</a>:</h4>
+<p>Option is a monad!</p>
+
+<a name="192636479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192636479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192636479">Scott Morrison (Apr 02 2020 at 08:52)</a>:</h4>
+<p>in just three lines, plus comments :-)</p>
+
+<a name="192636509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192636509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192636509">Kevin Buzzard (Apr 02 2020 at 08:53)</a>:</h4>
+<p>Now what about the theorem that <code>_root_.monad</code> is a monad?</p>
+
+<a name="192636577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192636577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192636577">Kevin Buzzard (Apr 02 2020 at 08:53)</a>:</h4>
+<p>this is so cool</p>
+
+<a name="192636584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20is%20a%20monad/near/192636584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49062optionisamonad.html#192636584">Kevin Buzzard (Apr 02 2020 at 08:53)</a>:</h4>
+<p>Thanks <span class="user-mention" data-user-id="266440">@Shing Tak Lam</span></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

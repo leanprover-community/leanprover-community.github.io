@@ -616,6 +616,89 @@ state:
 <span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">map_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">R</span><span class="o">),</span> <span class="err">Δ</span> <span class="o">(</span><span class="n">f</span> <span class="bp">*</span> <span class="n">g</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="bp">*</span> <span class="err">Δ</span> <span class="n">g</span> <span class="bp">+</span> <span class="n">g</span> <span class="bp">*</span> <span class="err">Δ</span> <span class="n">f</span> <span class="o">:=</span> <span class="err">Δ</span><span class="bp">.</span><span class="n">map_mul&#39;</span>
 </pre></div>
 
+<a name="192011188"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/2006%20STEP%203%20Question%208/near/192011188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/297362006STEP3Question8.html#192011188">Kevin Buzzard (Mar 27 2020 at 12:46)</a>:</h4>
+<p><span class="user-mention" data-user-id="266440">@Shing Tak Lam</span> now has a <a href="https://github.com/shingtaklam1324/step3-06-q8-lean" title="https://github.com/shingtaklam1324/step3-06-q8-lean">github repo</a> where this question is solved using derivations on a polynomial ring. <span class="user-mention" data-user-id="110031">@Patrick Massot</span> at the time of writing I see that he only has one branch, which is <code>lean-3.4.2</code>. Is this something to do with the tooling? Shing -- did you use <code>leanproject</code> to make this repo?</p>
+
+<a name="192011475"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/2006%20STEP%203%20Question%208/near/192011475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/297362006STEP3Question8.html#192011475">Kevin Buzzard (Mar 27 2020 at 12:50)</a>:</h4>
+<p>the linter doesn't like the <code>simp</code>s above but now I have a much better understanding of what is going on there.</p>
+
+<a name="192012279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/2006%20STEP%203%20Question%208/near/192012279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/297362006STEP3Question8.html#192012279">Shing Tak Lam (Mar 27 2020 at 12:58)</a>:</h4>
+<p>Yes I did use <code>leanproject</code>. Just to check I made a new project.</p>
+<div class="codehilite"><pre><span></span>$ leanproject new test
+&gt; mkdir -p test
+&gt; cd test
+&gt; mkdir src
+&gt; git init -q
+&gt; git checkout -b lean-3.4.2
+Switched to a new branch &#39;lean-3.4.2&#39;
+configuring test 0.1
+Adding mathlib
+</pre></div>
+
+
+<p>I'm kinda confused now as that shouldn't be happening... </p>
+<p>Looking at the repo at <a href="https://github.com/leanprover-community/mathlib-tools/blob/96734b3f6e7b1b6d69f86e18f4fee9c4c3e8bfff/mathlibtools/lib.py#L435" title="https://github.com/leanprover-community/mathlib-tools/blob/96734b3f6e7b1b6d69f86e18f4fee9c4c3e8bfff/mathlibtools/lib.py#L435">https://github.com/leanprover-community/mathlib-tools/blob/96734b3f6e7b1b6d69f86e18f4fee9c4c3e8bfff/mathlibtools/lib.py#L435</a> the branch should be called <code>master</code>.</p>
+
+<a name="192012400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/2006%20STEP%203%20Question%208/near/192012400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/297362006STEP3Question8.html#192012400">Shing Tak Lam (Mar 27 2020 at 12:59)</a>:</h4>
+<p>For what it's worth</p>
+<div class="codehilite"><pre><span></span>$ pip list | grep mathlibtools
+mathlibtools                       0.0.4
+</pre></div>
+
+<a name="192012412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/2006%20STEP%203%20Question%208/near/192012412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/297362006STEP3Question8.html#192012412">Kevin Buzzard (Mar 27 2020 at 12:59)</a>:</h4>
+<p>The tooling is brand new, much better than what we had before, but still contains a few minor glitches. It has already transformed my workflow though.</p>
+
+<a name="192012429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/2006%20STEP%203%20Question%208/near/192012429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/297362006STEP3Question8.html#192012429">Kevin Buzzard (Mar 27 2020 at 12:59)</a>:</h4>
+<p>Yeah, that number is an indication of how new it is :-)</p>
+
+<a name="192017201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/2006%20STEP%203%20Question%208/near/192017201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/297362006STEP3Question8.html#192017201">Patrick Massot (Mar 27 2020 at 13:35)</a>:</h4>
+<p><code>leanproject</code> still uses leanpkg to create new projects. And leanpkg uses the default elan toolchain. We should change that, but that requires finding time to do it.</p>
+
+<a name="192017340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/2006%20STEP%203%20Question%208/near/192017340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/297362006STEP3Question8.html#192017340">Patrick Massot (Mar 27 2020 at 13:36)</a>:</h4>
+<p>Also note that every complain or feature request about leanproject that is expressed here but not in a GitHub issue currently falls into a black hole.</p>
+
+<a name="192023908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/2006%20STEP%203%20Question%208/near/192023908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/297362006STEP3Question8.html#192023908">Shing Tak Lam (Mar 27 2020 at 14:22)</a>:</h4>
+<p>Mhm... I found</p>
+<p><a href="https://github.com/leanprover-community/mathlib-tools/issues/26" title="https://github.com/leanprover-community/mathlib-tools/issues/26">https://github.com/leanprover-community/mathlib-tools/issues/26</a></p>
+<p>and </p>
+<p><a href="https://github.com/leanprover-community/mathlib-tools/commit/5768b8fdf7de059eb8d4d663bd42fc8f9809190c" title="https://github.com/leanprover-community/mathlib-tools/commit/5768b8fdf7de059eb8d4d663bd42fc8f9809190c">https://github.com/leanprover-community/mathlib-tools/commit/5768b8fdf7de059eb8d4d663bd42fc8f9809190c</a></p>
+<p>So this should be fixed...</p>
+
+<a name="192025409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/2006%20STEP%203%20Question%208/near/192025409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/297362006STEP3Question8.html#192025409">Patrick Massot (Mar 27 2020 at 14:32)</a>:</h4>
+<p>The lean-3.4.2 exists in your repository, but the master branch also exist. Did you need to manually merge one branch into the other?</p>
+
+<a name="192026054"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/2006%20STEP%203%20Question%208/near/192026054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/297362006STEP3Question8.html#192026054">Shing Tak Lam (Mar 27 2020 at 14:36)</a>:</h4>
+<p>That was me renaming the branch locally from lean-3.4.2 to master then pushing it.</p>
+
+<a name="192026198"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/2006%20STEP%203%20Question%208/near/192026198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/297362006STEP3Question8.html#192026198">Shing Tak Lam (Mar 27 2020 at 14:37)</a>:</h4>
+<p>lean-3.4.2 now only exists on github but not on my local copy. I can probably delete it.</p>
+
+<a name="192028029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/2006%20STEP%203%20Question%208/near/192028029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/297362006STEP3Question8.html#192028029">Patrick Massot (Mar 27 2020 at 14:50)</a>:</h4>
+<p>I'm sorry I can't reproduce this locally.</p>
+<div class="codehilite"><pre><span></span>$ leanproject new test
+$ git a leanpkg.toml
+$ git commit
+$ git branch
+* master
+</pre></div>
+
+<a name="192028424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/2006%20STEP%203%20Question%208/near/192028424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/297362006STEP3Question8.html#192028424">Shing Tak Lam (Mar 27 2020 at 14:52)</a>:</h4>
+<p>No problem. I have a few ideas on what may have caused this, I'll give it a go tomorrow. If I find anything then I'll report back.</p>
+
 
 {% endraw %}
 

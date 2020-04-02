@@ -1,0 +1,59 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/78483natsqrtinlean.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/78483natsqrtinlean.html">nat.sqrt in lean</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192149761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.sqrt%20in%20lean/near/192149761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78483natsqrtinlean.html#192149761">anas himmi (Mar 29 2020 at 01:03)</a>:</h4>
+<p>hi, i'm trying to understand the nat.sqrt function i know what is does but cant' figure out how the algorithm actually works. can someone explain it to me please? here is the code in the library</p>
+
+<a name="192149803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.sqrt%20in%20lean/near/192149803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78483natsqrtinlean.html#192149803">anas himmi (Mar 29 2020 at 01:04)</a>:</h4>
+<div class="codehilite"><pre><span></span>theorem sqrt_aux_dec {b} (h : b ≠ 0) : shiftr b 2 &lt; b :=
+begin
+  simp [shiftr_eq_div_pow],
+  apply (nat.div_lt_iff_lt_mul&#39; (dec_trivial : 0 &lt; 4)).2,
+  have := nat.mul_lt_mul_of_pos_left
+    (dec_trivial : 1 &lt; 4) (nat.pos_of_ne_zero h),
+  rwa mul_one at this
+end
+
+def sqrt_aux : ℕ → ℕ → ℕ → ℕ
+| b r n := if b0 : b = 0 then r else
+  let b&#39; := shiftr b 2 in
+  have b&#39; &lt; b, from sqrt_aux_dec b0,
+  match (n - (r + b : ℕ) : ℤ) with
+  | (n&#39; : ℕ) := sqrt_aux b&#39; (div2 r + b) n&#39;
+  | _ := sqrt_aux b&#39; (div2 r) n
+  end
+
+/-- `sqrt n` is the square root of a natural number `n`. If `n` is not a
+  perfect square, it returns the largest `k:ℕ` such that `k*k ≤ n`. -/
+def sqrt (n : ℕ) : ℕ :=
+match size n with
+| 0      := 0
+| succ s := sqrt_aux (shiftl 1 (bit0 (div2 s))) 0 n
+end
+</pre></div>
+
+<a name="192149988"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.sqrt%20in%20lean/near/192149988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78483natsqrtinlean.html#192149988">Mario Carneiro (Mar 29 2020 at 01:10)</a>:</h4>
+<p>See <a href="#narrow/stream/113489-new-members/topic/noob.20question%28s%29/near/187073046" title="#narrow/stream/113489-new-members/topic/noob.20question%28s%29/near/187073046">https://leanprover.zulipchat.com/#narrow/stream/113489-new-members/topic/noob.20question%28s%29/near/187073046</a></p>
+
+<a name="192149990"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.sqrt%20in%20lean/near/192149990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78483natsqrtinlean.html#192149990">anas himmi (Mar 29 2020 at 01:10)</a>:</h4>
+<p>thank you!</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

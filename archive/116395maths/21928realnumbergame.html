@@ -1,0 +1,49 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/21928realnumbergame.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/21928realnumbergame.html">real number game</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="191871577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/real%20number%20game/near/191871577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21928realnumbergame.html#191871577">Kevin Buzzard (Mar 26 2020 at 11:41)</a>:</h4>
+<p>People ask me about other games like natural number game, and I've suggested several in the past, but the one which seems to get the most attention is the real number game. Gavin Thomson, a student of David Corfield in Kent, was coming up to London to work with me on it for four months, arriving in May. Of course this is all now very much up in the air. But <span class="user-mention" data-user-id="259186">@Daniel Keys</span> has also expressed an interest. I will try and get David onto Zulip and we'll see if we can coordinate something here. There is already <a href="https://github.com/ImperialCollegeLondon/real-number-game/tree/master" title="https://github.com/ImperialCollegeLondon/real-number-game/tree/master">a public repo</a> but we are nowhere near a release.</p>
+<p>My experience in writing these games is that for each concept you either import it from Lean (if you just want to use it) or write it from scratch. If you write it from scratch you want one file with all the definitions and the coercions and the notation and a basic API for mathematicians all in term mode, and tell the mathematician not to open it. And then you need a file full of theorems, some of which are sorried and where you can supply tactic mode proofs with steps which feel like about the same pace as a book might go if they were explaining the argument carefully. Sometimes this is a challenge to do in Lean, with "basic" maths steps which seem to be tough for beginners to formalise. Is more API needed in this case?</p>
+<p>One thing I wanted to have in the natural number game was more than one sorry to fill in on a page, possibly with the later sorry depending on the first one. I sometimes felt this was a hindrance in NNG.</p>
+<p>Does anyone have any comments on issues they had with the natural number game which we could perhaps avoid in the real number game? I am really hoping to be able to cut down on the number of words used in the tactic descriptions, or at least get them out of the way somehow so you can see the key definition at the top of my waffle, and the key lemma in the middle of it, whilst still being able to code in a small box at the bottom.</p>
+
+<a name="191872169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/real%20number%20game/near/191872169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21928realnumbergame.html#191872169">Jiekai (Mar 26 2020 at 11:48)</a>:</h4>
+<p><code>NNG</code> meaning?</p>
+
+<a name="191872285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/real%20number%20game/near/191872285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21928realnumbergame.html#191872285">Mario Carneiro (Mar 26 2020 at 11:49)</a>:</h4>
+<p>natural number game</p>
+
+<a name="191919069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/real%20number%20game/near/191919069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21928realnumbergame.html#191919069">Daniel Keys (Mar 26 2020 at 17:19)</a>:</h4>
+<p>Doing things from scratch like in the NNG has the advantage of possibly being able to show the players more details. But working with Cauchy sequences or Dedekind cuts does seem quite a bit more far-fetched than Peano's axioms.<br>
+Using <code>mathlib</code>'s capabilities in <code>data.real.basic</code> etc. might hide some foundational stuff but is naturally amenable to teaching the tools built by the community, which is also desirable.<br>
+Could a middle way be better in this case? For example, importing at each level (or as needed) in the game a file that imports, in turn, only the needed tools. Say <code>import</code> from <code>bounds.lean</code> just <code>is_lub</code> and a few other related items when working on results related to the supremum, then list them in the theorems on the left.</p>
+
+<a name="191942603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/real%20number%20game/near/191942603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21928realnumbergame.html#191942603">Gavin Thomson (Mar 26 2020 at 20:14)</a>:</h4>
+<p>Following! thanks for the invite Kevin :) <br>
+So I still want to help but I won't be up to speed for a few weeks at least. :( So I may be a bit clueless until then. I also should admit that I don't have any experience of working with real numbers in lean yet.</p>
+<p>I think the question of how much is built from scratch and how much is imported maybe depends on who the RNG is aimed at?</p>
+<p>I can only speak for my own experience of undergrad analysis, but I think we saw axioms for the reals first and then proceeded along the lines mentioned on the RNG page -- sups and infs, sequences and limits, series.</p>
+<p>I thought the NNG was good for <em>anyone</em> who wanted a first taste of interactive theorem proving, undergrad or professional. But I guess seeing how to build an explicit construction from scratch would be more useful for professionals than students?<br>
+I see Kevin was looking at similar questions ages ago: <a href="https://leanprover-community.github.io/archive/116395maths/43084bounds.html" title="https://leanprover-community.github.io/archive/116395maths/43084bounds.html">https://leanprover-community.github.io/archive/116395maths/43084bounds.html</a></p>
+<p>I agree that a second game could use less text -- my feeling was that the NNG had to give some motivation for tactics that might seem weird without any knowledge of the nuts and bolts of type theory, term rewriting etc. But I think anyone playing RNG should have played NNG.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

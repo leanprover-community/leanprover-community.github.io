@@ -9,7 +9,9 @@ permalink: archive/219941MachineLearningforTheoremProving/index.html
 
 ### Topics:
 
-* [HOList](34292HOList.html) (134 messages, latest: Mar 20 2020 at 15:33)
+* [HOList](34292HOList.html) (151 messages, latest: Apr 02 2020 at 00:06)
+
+* [AITP 2020](23859AITP2020.html) (4 messages, latest: Apr 01 2020 at 23:11)
 
 * [rw_hint](06460rwhint.html) (28 messages, latest: Mar 20 2020 at 13:11)
 

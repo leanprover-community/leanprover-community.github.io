@@ -1,0 +1,116 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/82180divisiononintegers.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/82180divisiononintegers.html">division on integers</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="191892809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/division%20on%20integers/near/191892809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82180divisiononintegers.html#191892809">anas himmi (Mar 26 2020 at 14:33)</a>:</h4>
+<p>how to show that ∀ a b : ℤ, a / b = 0 ↔ a = 0 ∨ b = 0 ? the converse is trivial because of int.zero_div and int.div_zero in the library but i can't prove the implication.</p>
+
+<a name="191893127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/division%20on%20integers/near/191893127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82180divisiononintegers.html#191893127">Mario Carneiro (Mar 26 2020 at 14:35)</a>:</h4>
+<p>it's false</p>
+
+<a name="191893140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/division%20on%20integers/near/191893140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82180divisiononintegers.html#191893140">Mario Carneiro (Mar 26 2020 at 14:35)</a>:</h4>
+<p><code>1 / 2 = 0</code></p>
+
+<a name="191893244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/division%20on%20integers/near/191893244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82180divisiononintegers.html#191893244">anas himmi (Mar 26 2020 at 14:36)</a>:</h4>
+<p>i'm dumb sorry for this</p>
+
+<a name="191895299"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/division%20on%20integers/near/191895299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82180divisiononintegers.html#191895299">Kenny Lau (Mar 26 2020 at 14:51)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">int</span><span class="bp">.</span><span class="n">basic</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">rcases</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">/</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">↔</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">∨</span> <span class="o">(</span><span class="mi">0</span> <span class="bp">≤</span> <span class="n">a</span> <span class="bp">∧</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">abs</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">H</span><span class="o">,</span> <span class="n">by_cases</span> <span class="n">hb</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">,</span> <span class="o">{</span> <span class="n">left</span><span class="o">,</span> <span class="n">exact</span> <span class="n">hb</span> <span class="o">},</span>
+    <span class="n">right</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">h1</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">mod_add_div</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="n">H</span><span class="o">,</span> <span class="n">mul_zero</span><span class="o">,</span> <span class="n">add_zero</span><span class="o">]</span> <span class="n">at</span> <span class="n">h1</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="err">←</span> <span class="n">h1</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="bp">⟨</span><span class="n">int</span><span class="bp">.</span><span class="n">mod_nonneg</span> <span class="n">a</span> <span class="n">hb</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">mod_lt</span> <span class="n">a</span> <span class="n">hb</span><span class="bp">⟩</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">rintro</span> <span class="o">(</span><span class="n">H</span> <span class="bp">|</span> <span class="bp">⟨</span><span class="n">H1</span><span class="o">,</span> <span class="n">H2</span><span class="bp">⟩</span><span class="o">),</span>
+    <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="n">H</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">div_zero</span><span class="o">]</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">exact</span> <span class="n">int</span><span class="bp">.</span><span class="n">div_eq_zero_of_lt_abs</span> <span class="n">H1</span> <span class="n">H2</span> <span class="o">}</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="191895321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/division%20on%20integers/near/191895321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82180divisiononintegers.html#191895321">Kenny Lau (Mar 26 2020 at 14:51)</a>:</h4>
+<p>that was a fun exercise</p>
+
+<a name="191895883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/division%20on%20integers/near/191895883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82180divisiononintegers.html#191895883">Kevin Buzzard (Mar 26 2020 at 14:54)</a>:</h4>
+<p>I think Lean should apologise for having such a silly division. Any kid could tell you <code>1/2</code> is not <code>0</code></p>
+
+<a name="191896003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/division%20on%20integers/near/191896003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82180divisiononintegers.html#191896003">Kevin Buzzard (Mar 26 2020 at 14:55)</a>:</h4>
+<p>That <code>/</code> should just be replaced by the computer scientists' favourite pokemon character emoji or something</p>
+
+<a name="191896035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/division%20on%20integers/near/191896035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82180divisiononintegers.html#191896035">Kevin Buzzard (Mar 26 2020 at 14:55)</a>:</h4>
+<p>That'd warn us</p>
+
+<a name="191896120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/division%20on%20integers/near/191896120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82180divisiononintegers.html#191896120">Gabriel Ebner (Mar 26 2020 at 14:56)</a>:</h4>
+<p>Python uses <code>//</code> for integer "division".</p>
+
+<a name="191897622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/division%20on%20integers/near/191897622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82180divisiononintegers.html#191897622">Andrew Ashworth (Mar 26 2020 at 15:05)</a>:</h4>
+<p>are there any systems that return a <code>[quotient, remainder]</code> tuple for integer division?</p>
+
+<a name="191897875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/division%20on%20integers/near/191897875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82180divisiononintegers.html#191897875">Anne Baanen (Mar 26 2020 at 15:07)</a>:</h4>
+<p>Your computer, probably: <a href="https://www.felixcloutier.com/x86/div" title="https://www.felixcloutier.com/x86/div">the <code>div</code> instruction</a> produces both quotient and remainder</p>
+
+<a name="191897949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/division%20on%20integers/near/191897949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82180divisiononintegers.html#191897949">Gabriel Ebner (Mar 26 2020 at 15:07)</a>:</h4>
+<p>The <code>truncate</code> function in common lisp also returns multiple values: <a href="http://clhs.lisp.se/Body/f_floorc.htm#truncate" title="http://clhs.lisp.se/Body/f_floorc.htm#truncate">http://clhs.lisp.se/Body/f_floorc.htm#truncate</a></p>
+
+<a name="191898165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/division%20on%20integers/near/191898165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82180divisiononintegers.html#191898165">Anne Baanen (Mar 26 2020 at 15:09)</a>:</h4>
+<p>Also <a href="https://forth-standard.org/standard/core/DivMOD" title="https://forth-standard.org/standard/core/DivMOD">/MOD</a> in Forth</p>
+
+<a name="191898196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/division%20on%20integers/near/191898196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82180divisiononintegers.html#191898196">anas himmi (Mar 26 2020 at 15:09)</a>:</h4>
+<p>i didn't know of the by_cases tactic! i love it</p>
+
+<a name="191898443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/division%20on%20integers/near/191898443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82180divisiononintegers.html#191898443">Andrew Ashworth (Mar 26 2020 at 15:10)</a>:</h4>
+<p>I wonder if this is an argument for redefining the type signature of division, and what effects that would have</p>
+
+<a name="191898847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/division%20on%20integers/near/191898847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82180divisiononintegers.html#191898847">Johan Commelin (Mar 26 2020 at 15:13)</a>:</h4>
+<p>Well, not of <code>has_div.div</code>, please</p>
+
+<a name="191898939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/division%20on%20integers/near/191898939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82180divisiononintegers.html#191898939">Johan Commelin (Mar 26 2020 at 15:14)</a>:</h4>
+<p>We could have a <code>has_moddiv</code> class...</p>
+
+<a name="191898966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/division%20on%20integers/near/191898966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82180divisiononintegers.html#191898966">Marc Huisinga (Mar 26 2020 at 15:14)</a>:</h4>
+<p>is it not a common lean pattern to have multiple functions instead of one function that returns a conjunction or takes a disjunction?</p>
+
+<a name="191899184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/division%20on%20integers/near/191899184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82180divisiononintegers.html#191899184">Anne Baanen (Mar 26 2020 at 15:15)</a>:</h4>
+<p>Apart from design patterns, I expect that in practice users would project out either result often enough to make <code>div</code> a useful abbreviation anyway</p>
+
+<a name="191899642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/division%20on%20integers/near/191899642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82180divisiononintegers.html#191899642">Andrew Ashworth (Mar 26 2020 at 15:18)</a>:</h4>
+<p>I am really surprised anyone here knows Forth; <code>FORTH LOVE IF HONK THEN !</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

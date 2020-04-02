@@ -1,0 +1,343 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/67382misunderstandingcoe.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html">misunderstanding coe?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192294908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192294908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192294908">Alex Mathers (Mar 30 2020 at 18:04)</a>:</h4>
+<p>I currently have the following two lines of code</p>
+<div class="codehilite"><pre><span></span><span class="n">instance</span> <span class="p">(</span><span class="n">R</span> <span class="p">:</span> <span class="n">Type</span><span class="o">*</span><span class="p">)</span> <span class="p">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="p">]</span> <span class="p">{</span><span class="n">A</span> <span class="p">:</span> <span class="n">Type</span><span class="o">*</span><span class="p">}</span> <span class="p">[</span><span class="n">comm_ring</span> <span class="n">A</span><span class="p">]</span> <span class="p">[</span><span class="n">algebra</span> <span class="n">R</span> <span class="n">A</span><span class="p">]</span> <span class="p">:</span> <span class="n">has_coe</span> <span class="p">(</span><span class="n">subalgebra</span> <span class="n">R</span> <span class="n">A</span><span class="p">)</span> <span class="p">(</span><span class="nb">set</span> <span class="n">A</span><span class="p">)</span> <span class="p">:</span><span class="o">=</span> <span class="err">⟨</span><span class="n">λ</span> <span class="n">S</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">carrier</span><span class="err">⟩</span>
+<span class="n">instance</span> <span class="p">(</span><span class="n">R</span> <span class="p">:</span> <span class="n">Type</span><span class="o">*</span><span class="p">)</span> <span class="p">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="p">]</span> <span class="p">{</span><span class="n">A</span> <span class="p">:</span> <span class="n">Type</span><span class="o">*</span><span class="p">}</span> <span class="p">[</span><span class="n">comm_ring</span> <span class="n">A</span><span class="p">]</span> <span class="p">[</span><span class="n">algebra</span> <span class="n">R</span> <span class="n">A</span><span class="p">]</span> <span class="p">(</span><span class="n">S</span> <span class="p">:</span> <span class="n">subalgebra</span> <span class="n">R</span> <span class="n">A</span><span class="p">)</span> <span class="p">:</span> <span class="n">is_subring</span> <span class="n">S</span> <span class="p">:</span><span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">subring</span>
+</pre></div>
+
+
+<p>returning the error message</p>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  is_subring S
+term
+  S
+has type
+  subalgebra R A : Type ?
+but is expected to have type
+  set ?m_1 : Type ?
+</pre></div>
+
+
+<p>am I misunderstanding how the coercion should be working?</p>
+
+<a name="192297123"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192297123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192297123">Reid Barton (Mar 30 2020 at 18:20)</a>:</h4>
+<p>It doesn't know yet what <code>S</code> is supposed to be a subring of</p>
+
+<a name="192297574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192297574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192297574">Alex Mathers (Mar 30 2020 at 18:24)</a>:</h4>
+<p>How can I make it explicit? In the definition of <code>is_subring</code> the ambient ring is not explicit, i.e. it looks like</p>
+<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">is_subring</span> <span class="p">{</span><span class="n">R</span> <span class="p">:</span> <span class="n">Type</span><span class="o">*</span><span class="p">}</span> <span class="p">[</span><span class="n">ring</span> <span class="n">R</span><span class="p">]</span> <span class="p">(</span><span class="n">S</span> <span class="p">:</span> <span class="nb">set</span> <span class="n">R</span><span class="p">)</span> <span class="n">extends</span> <span class="n">is_add_subgroup</span> <span class="n">S</span><span class="p">,</span> <span class="n">is_submonoid</span> <span class="n">S</span> <span class="p">:</span> <span class="n">Prop</span><span class="o">.</span>
+</pre></div>
+
+<a name="192297596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192297596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192297596">Reid Barton (Mar 30 2020 at 18:24)</a>:</h4>
+<p>I guess you could claim it should be able to infer it from the definition <code>S.subring</code>, but I think the coercion will not fire soon enough for that to work.</p>
+
+<a name="192297609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192297609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192297609">Reid Barton (Mar 30 2020 at 18:24)</a>:</h4>
+<p>Maybe <code>is_subring (S : set A)</code> for example.</p>
+
+<a name="192297646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192297646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192297646">Alex Mathers (Mar 30 2020 at 18:25)</a>:</h4>
+<p>I see. That fixes it!</p>
+
+<a name="192297649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192297649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192297649">Reid Barton (Mar 30 2020 at 18:25)</a>:</h4>
+<p>Just because you have written this first <code>has_coe</code> instance doesn't mean Lean has to use it.</p>
+
+<a name="192297719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192297719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192297719">Alex Mathers (Mar 30 2020 at 18:25)</a>:</h4>
+<p>is there a simple explanation of what Lean is doing for why it doesn't "use" it?</p>
+
+<a name="192297798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192297798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192297798">Reid Barton (Mar 30 2020 at 18:26)</a>:</h4>
+<p>It isn't doing anything because it has no way to know what the <code>?m_1</code> is in the error message.</p>
+
+<a name="192298090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192298090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192298090">Reid Barton (Mar 30 2020 at 18:28)</a>:</h4>
+<p>For example, someone else could add an <code>instance : has_coe (subalgebra R A) (set R)</code> (never mind that it would be nonsense) and then what do you expect to happen?</p>
+
+<a name="192298176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192298176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192298176">Alex Mathers (Mar 30 2020 at 18:29)</a>:</h4>
+<p>Ah, I see</p>
+
+<a name="192307993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192307993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192307993">Alex Mathers (Mar 30 2020 at 19:46)</a>:</h4>
+<p>I guess this is related to my previous question: my code </p>
+<div class="codehilite"><pre><span></span><span class="n">instance</span> <span class="p">(</span><span class="n">R</span> <span class="p">:</span> <span class="n">Type</span><span class="o">*</span><span class="p">)</span> <span class="p">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="p">]</span> <span class="p">{</span><span class="n">A</span> <span class="p">:</span> <span class="n">Type</span><span class="o">*</span><span class="p">}</span> <span class="p">[</span><span class="n">integral_domain</span> <span class="n">A</span><span class="p">]</span> <span class="p">[</span><span class="n">algebra</span> <span class="n">R</span> <span class="n">A</span><span class="p">]</span> <span class="p">:</span>
+<span class="n">integral_domain</span> <span class="p">(</span><span class="n">integral_closure</span> <span class="n">R</span> <span class="n">A</span><span class="p">)</span> <span class="p">:</span><span class="o">=</span> <span class="n">subring</span><span class="o">.</span><span class="n">domain</span> <span class="p">((</span><span class="n">integral_closure</span> <span class="n">R</span> <span class="n">A</span><span class="p">)</span> <span class="p">:</span> <span class="nb">set</span> <span class="n">A</span><span class="p">)</span>
+</pre></div>
+
+
+<p>is giving the error message </p>
+<div class="codehilite"><pre><span></span>failed to synthesize type class instance for
+R : Type ?,
+_inst_1 : comm_ring R,
+A : Type ?,
+_inst_2 : integral_domain A,
+_inst_3 : algebra R A
+⊢ is_subring (has_coe_t_aux.coe (set A) (has_coe_t_aux.coe (submodule R A) (integral_closure R A)))
+</pre></div>
+
+
+<p>while the code from the previous question is supposed to be giving the instance of <code>(integral_closure R A) : subalgebra R A</code> as a subring of <code>A</code>. How can I "remind" Lean that this does have an instance of <code>is_subring</code>?</p>
+
+<a name="192308616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192308616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192308616">Alex Mathers (Mar 30 2020 at 19:50)</a>:</h4>
+<p>also it seems from the error message that Lean isn't actually using the coercion I set up, rather I guess it's using the sequence of coercions <code>subalgebra R A → submodule R A → set A</code>. Is there a possibility that this is related to my issue?</p>
+
+<a name="192310017"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192310017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192310017">Kevin Buzzard (Mar 30 2020 at 20:01)</a>:</h4>
+<p>What happens if you remove your coercion and then attempt to coerce anyway?</p>
+
+<a name="192310055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192310055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192310055">Kevin Buzzard (Mar 30 2020 at 20:02)</a>:</h4>
+<p>If it still works then you should trust that the people who set it up knew what they were doing and don't add the coercion</p>
+
+<a name="192310129"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192310129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192310129">Alex Mathers (Mar 30 2020 at 20:02)</a>:</h4>
+<p>It has the same error message</p>
+
+<a name="192310150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192310150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192310150">Kevin Buzzard (Mar 30 2020 at 20:02)</a>:</h4>
+<p>Sure</p>
+
+<a name="192310183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192310183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192310183">Kevin Buzzard (Mar 30 2020 at 20:02)</a>:</h4>
+<p>But I'm asking just about whether the coercion succeeds</p>
+
+<a name="192310220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192310220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192310220">Kevin Buzzard (Mar 30 2020 at 20:03)</a>:</h4>
+<p>From subalgebra to set</p>
+
+<a name="192310229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192310229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192310229">Kevin Buzzard (Mar 30 2020 at 20:03)</a>:</h4>
+<p>My guess is that you shouldn't be creating that instance but this is not the answer to your problem</p>
+
+<a name="192310517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192310517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192310517">Kevin Buzzard (Mar 30 2020 at 20:05)</a>:</h4>
+<p>You should also see if the second instance is solved by <code>by apply_instance</code></p>
+
+<a name="192310560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192310560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192310560">Kevin Buzzard (Mar 30 2020 at 20:05)</a>:</h4>
+<p>It would surprise me if there were important coercions which were not there already</p>
+
+<a name="192310692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192310692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192310692">Kevin Buzzard (Mar 30 2020 at 20:06)</a>:</h4>
+<p>The inbuilt coercions might have subtle priorities set, for example</p>
+
+<a name="192310843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192310843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192310843">Kevin Buzzard (Mar 30 2020 at 20:08)</a>:</h4>
+<p>And what happens if you just remove the explicit coercion to set A in your error? Mathlib might have solved all your problems already</p>
+
+<a name="192310877"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192310877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192310877">Kevin Buzzard (Mar 30 2020 at 20:08)</a>:</h4>
+<p>I'll get to a computer and stop guessing in a sec</p>
+
+<a name="192312274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192312274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192312274">Kevin Buzzard (Mar 30 2020 at 20:21)</a>:</h4>
+<p>I'm still working out the imports :-(</p>
+
+<a name="192312357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192312357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192312357">Kevin Buzzard (Mar 30 2020 at 20:22)</a>:</h4>
+<p>I think we should have a bot which just flags all posted code which doesn't actually compile and either kicks the poster or suggests imports and opens which will fix it.</p>
+
+<a name="192312557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192312557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192312557">Kevin Buzzard (Mar 30 2020 at 20:24)</a>:</h4>
+<p>Right. This succeeds</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">algebra</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">subring</span>
+
+<span class="kn">instance</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">A</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">R</span> <span class="n">A</span><span class="o">]</span> <span class="o">:</span>
+<span class="n">has_coe</span> <span class="o">(</span><span class="n">subalgebra</span> <span class="n">R</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">set</span> <span class="n">A</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+
+<p>so don't add a new one.</p>
+
+<a name="192312565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192312565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192312565">Alex Mathers (Mar 30 2020 at 20:24)</a>:</h4>
+<p>sorry for the delay. These imports should be the necessary ones:</p>
+<div class="codehilite"><pre><span></span>import ring_theory.integral_closure
+import ring_theory.localization
+import ring_theory.algebra
+import ring_theory.subring
+</pre></div>
+
+<a name="192312594"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192312594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192312594">Patrick Massot (Mar 30 2020 at 20:24)</a>:</h4>
+<p>A more realistic idea would be to try someone who could write a web page explaining what is a MWE, so that we can paste a link to that web page each it's needed.</p>
+
+<a name="192312660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192312660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192312660">Kevin Buzzard (Mar 30 2020 at 20:25)</a>:</h4>
+<p>So do we not have bundled subrings?</p>
+
+<a name="192312698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192312698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192312698">Kevin Buzzard (Mar 30 2020 at 20:25)</a>:</h4>
+<p>Where are my undergraduates?</p>
+
+<a name="192312851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192312851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192312851">Alex Mathers (Mar 30 2020 at 20:27)</a>:</h4>
+<p>This is the only definition I see on the subring document:</p>
+<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">is_subring</span> <span class="p">(</span><span class="n">S</span> <span class="p">:</span> <span class="nb">set</span> <span class="n">R</span><span class="p">)</span> <span class="n">extends</span> <span class="n">is_add_subgroup</span> <span class="n">S</span><span class="p">,</span> <span class="n">is_submonoid</span> <span class="n">S</span> <span class="p">:</span> <span class="n">Prop</span><span class="o">.</span>
+</pre></div>
+
+<a name="192312872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192312872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192312872">Kevin Buzzard (Mar 30 2020 at 20:27)</a>:</h4>
+<p>Yeah, I think we don't have bundled subrings. Shame. I bet it would be easier with those.</p>
+
+<a name="192312910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192312910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192312910">Kevin Buzzard (Mar 30 2020 at 20:27)</a>:</h4>
+<p>And this doesn't work:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">integral_domain</span> <span class="n">A</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">R</span> <span class="n">A</span><span class="o">]</span> <span class="o">:</span>
+<span class="n">integral_domain</span> <span class="o">(</span><span class="n">integral_closure</span> <span class="n">R</span> <span class="n">A</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+<a name="192313294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192313294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192313294">Alex Mathers (Mar 30 2020 at 20:30)</a>:</h4>
+<p>Unfortunate :/</p>
+
+<a name="192313473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192313473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192313473">Kevin Buzzard (Mar 30 2020 at 20:32)</a>:</h4>
+<p>Did you see the Artin-Tate thread?</p>
+
+<a name="192313493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192313493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192313493">Alex Mathers (Mar 30 2020 at 20:32)</a>:</h4>
+<p>No I didn't</p>
+
+<a name="192313498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192313498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192313498">Kevin Buzzard (Mar 30 2020 at 20:32)</a>:</h4>
+<p>This whole algebra, subring thing drives me nuts</p>
+
+<a name="192313627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192313627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192313627">Alex Mathers (Mar 30 2020 at 20:33)</a>:</h4>
+<p>I saw a conversation about difficulties with "triangles" of rings in commutative algebra, not sure if that's the thread you mean but yeah it seems to be an annoying issue</p>
+
+<a name="192313781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192313781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192313781">Kevin Buzzard (Mar 30 2020 at 20:34)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">integral_closure</span>
+<span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">localization</span>
+<span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">algebra</span>
+<span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">subring</span>
+
+<span class="kn">instance</span> <span class="n">foo</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">A</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">R</span> <span class="n">A</span><span class="o">]</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">subalgebra</span> <span class="n">R</span> <span class="n">A</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">is_subring</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">A</span><span class="o">)</span> <span class="o">:=</span> <span class="n">S</span><span class="bp">.</span><span class="n">subring</span>
+
+<span class="kn">instance</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">integral_domain</span> <span class="n">A</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">R</span> <span class="n">A</span><span class="o">]</span> <span class="o">:</span>
+<span class="n">integral_domain</span> <span class="o">(</span><span class="n">integral_closure</span> <span class="n">R</span> <span class="n">A</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">subring</span><span class="bp">.</span><span class="n">domain</span> <span class="n">A</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">foo</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span>
+</pre></div>
+
+
+<p>works</p>
+
+<a name="192313805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192313805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192313805">Kevin Buzzard (Mar 30 2020 at 20:35)</a>:</h4>
+<p>i.e. I just feed it the things it can't find</p>
+
+<a name="192313872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192313872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192313872">Alex Mathers (Mar 30 2020 at 20:36)</a>:</h4>
+<p>Nice! what purpose does the <code>@</code> character serve?</p>
+
+<a name="192313936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192313936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192313936">Kevin Buzzard (Mar 30 2020 at 20:36)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">integral_domain</span> <span class="n">A</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">R</span> <span class="n">A</span><span class="o">]</span> <span class="o">:</span>
+<span class="n">integral_domain</span> <span class="o">(</span><span class="n">integral_closure</span> <span class="n">R</span> <span class="n">A</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">subring</span><span class="bp">.</span><span class="n">domain</span> <span class="n">A</span> <span class="bp">_</span> <span class="o">(</span><span class="n">integral_closure</span> <span class="n">R</span> <span class="n">A</span><span class="o">)</span> <span class="bp">_</span>
+</pre></div>
+
+
+<p><code>@</code> means "forget <code>{}</code> and <code>[]</code> and just tell me every input"</p>
+
+<a name="192314063"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192314063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192314063">Alex Mathers (Mar 30 2020 at 20:37)</a>:</h4>
+<p>Ohh that makes sense</p>
+
+<a name="192314085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192314085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192314085">Kevin Buzzard (Mar 30 2020 at 20:37)</a>:</h4>
+<p>It's exactly the same problem as before. You want to prove <code>integral_domain (integral_closure R A)</code> and you want to use <code>subring.domain</code>. </p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">subring</span><span class="bp">.</span><span class="n">domain</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">subring.domain :</span>
+<span class="cm">  Π {D : Type u_1} [_inst_3 : integral_domain D] (S : set D) [_inst_4 : is_subring S], integral_domain ↥S</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="192314240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192314240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192314240">Kevin Buzzard (Mar 30 2020 at 20:39)</a>:</h4>
+<p>Lean asks you for <code>S</code> which is in your case some kind of coercion of <code>integral_closure R A</code> to a set, i.e. to a term of type <code>set D</code> for some <code>D</code>, but Lean doesn't have a clue what <code>D</code> is.</p>
+
+<a name="192314311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192314311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192314311">Kevin Buzzard (Mar 30 2020 at 20:39)</a>:</h4>
+<p>If it knew it had to find a coercion to <code>set A</code> it could do it (indeed, my second solution is doing just that).</p>
+
+<a name="192314494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192314494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192314494">Kevin Buzzard (Mar 30 2020 at 20:41)</a>:</h4>
+<p>But until you tell it it's looking for a coercion to <code>set ?m_1</code> and it can't find one for some reason.</p>
+
+<a name="192314665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192314665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192314665">Alex Mathers (Mar 30 2020 at 20:42)</a>:</h4>
+<p>I see. so by using @ you are allowed to enter the first implicit argument A which I guess basically tells Lean that we are meant to consider <code>integral_closure R A</code> as an element of <code>set A</code>, then it finds the previously defined coercion to do this on its own</p>
+
+<a name="192314997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192314997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192314997">Kevin Buzzard (Mar 30 2020 at 20:45)</a>:</h4>
+<p>Exactly. And using my new toy</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">type_context</span><span class="bp">.</span><span class="n">is_def_eq</span> <span class="n">true</span>
+<span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">type_context</span><span class="bp">.</span><span class="n">is_def_eq_detail</span> <span class="n">true</span>
+
+<span class="kn">instance</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">integral_domain</span> <span class="n">A</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">R</span> <span class="n">A</span><span class="o">]</span> <span class="o">:</span>
+<span class="n">integral_domain</span> <span class="o">(</span><span class="n">integral_closure</span> <span class="n">R</span> <span class="n">A</span><span class="o">)</span> <span class="o">:=</span> <span class="n">subring</span><span class="bp">.</span><span class="n">domain</span> <span class="o">(</span><span class="n">integral_closure</span> <span class="n">R</span> <span class="n">A</span><span class="o">)</span> <span class="c1">-- fails</span>
+</pre></div>
+
+
+<p>we can see from the debugging output that indeed the unifier is failing to find the coercion when the metavariable is in place:</p>
+<div class="codehilite"><pre><span></span>[type_context.is_def_eq_detail] [1]: subalgebra R A =?= set ?m_1
+[type_context.is_def_eq_detail] unfold right: set
+[type_context.is_def_eq_detail] [2]: subalgebra R A =?= ?m_1 → Prop
+[type_context.is_def_eq_detail] on failure: subalgebra R A =?= ?m_1 → Prop
+[type_context.is_def_eq] subalgebra R A =?= set ?m_1 ... failed  (approximate mode)
+</pre></div>
+
+<a name="192315262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192315262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192315262">Reid Barton (Mar 30 2020 at 20:47)</a>:</h4>
+<p>Is that failing to find a coercion or simply checking that the two sides are not defeq (without a coercion)?</p>
+
+<a name="192315378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192315378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192315378">Kevin Buzzard (Mar 30 2020 at 20:48)</a>:</h4>
+<p>Oh man, looking at this debugging output it even seems to get so close!</p>
+<div class="codehilite"><pre><span></span>[type_context.is_def_eq_detail] [7]: has_coe_to_sort.coe (has_coe_t_aux.coe (set A) (has_coe_t_aux.coe (submodule R A) (integral_closure R A))) =?= {x // x ∈ ?m_2}
+[type_context.is_def_eq_detail] [8]: (λ (s : set A), {x // x ∈ s}) (has_coe_t_aux.coe (set A) (has_coe_t_aux.coe (submodule R A) (integral_closure R A))) =?= {x // x ∈ ?m_2}
+[type_context.is_def_eq_detail] after whnf_core: {x // x ∈ has_coe_t_aux.coe (set A) (has_coe_t_aux.coe (submodule R A) (integral_closure R A))} =?= {x // x ∈ ?m_2}
+[type_context.is_def_eq_detail] process_assignment ?m_1 := A
+[type_context.is_def_eq_detail] assign: ?m_1 := A
+[type_context.is_def_eq_detail] [9]: x ∈ has_coe_t_aux.coe (set A) (has_coe_t_aux.coe (submodule R A) (integral_closure R A)) =?= x ∈ ?m_2
+[type_context.is_def_eq_detail] process_assignment ?m_1 := has_coe_t_aux.coe (set A) (has_coe_t_aux.coe (submodule R A) (integral_closure R A))
+[type_context.is_def_eq_detail] [10]: set ?m_1 =?= set A
+[type_context.is_def_eq_detail] assign: ?m_1 := has_coe_t_aux.coe (set A) (has_coe_t_aux.coe (submodule R A) (integral_closure R A))
+[type_context.is_def_eq] integral_domain ↥(integral_closure R A) =?= integral_domain ↥?m_2 ... success  (approximate mode)
+</pre></div>
+
+<a name="192315520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192315520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192315520">Kevin Buzzard (Mar 30 2020 at 20:49)</a>:</h4>
+<p>I don't know how to read these logs, I only started looking at them today.</p>
+
+<a name="192315730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/misunderstanding%20coe%3F/near/192315730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67382misunderstandingcoe.html#192315730">Kevin Buzzard (Mar 30 2020 at 20:51)</a>:</h4>
+<p><a href="https://gist.github.com/kbuzzard/b8c86cfd46b5253c4888979078ba1f00" title="https://gist.github.com/kbuzzard/b8c86cfd46b5253c4888979078ba1f00">https://gist.github.com/kbuzzard/b8c86cfd46b5253c4888979078ba1f00</a></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

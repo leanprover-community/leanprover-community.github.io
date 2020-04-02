@@ -1956,6 +1956,64 @@ Adding mathlib
 info: downloading component &#39;lean&#39;
 </pre></div>
 
+<a name="191618757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191618757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191618757">Kevin Buzzard (Mar 24 2020 at 14:41)</a>:</h4>
+<p>That confused me too when it happened -- but I think when it says <code>downloading component 'lean'</code> it might be downloading 3.7.1 or anything -- depending on what it in the toml. I think it is just randomly making a branch in your project called lean-3.4.2 for no obvious reason.</p>
+
+<a name="191618852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191618852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191618852">Shing Tak Lam (Mar 24 2020 at 14:41)</a>:</h4>
+<p>Yeah I see now. It does seem to be downloading 3.7.2</p>
+
+<a name="191618953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191618953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191618953">Kevin Buzzard (Mar 24 2020 at 14:42)</a>:</h4>
+<p>When it's all over, look at the file <code>leanpkg.toml</code> in the root of the project, and also <code>_target/deps/mathlib/leanpkg.toml</code>. They should both say <code>lean_version = "leanprover-community/lean:3.7.2"</code></p>
+
+<a name="191619060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191619060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191619060">Kevin Buzzard (Mar 24 2020 at 14:43)</a>:</h4>
+<p>While you're in <code>_target/deps/mathlib</code> you can go into <code>src/data</code> and see if you have just <code>.lean</code> files, or also a bunch of <code>.olean</code> files. If you have the oleans, you're in good shape.</p>
+
+<a name="191619602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191619602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191619602">Shing Tak Lam (Mar 24 2020 at 14:46)</a>:</h4>
+<p>Alright, thank you.</p>
+
+<a name="191948859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191948859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191948859">Kevin Buzzard (Mar 26 2020 at 21:06)</a>:</h4>
+<div class="codehilite"><pre><span></span>~/tmp$ leanproject get git@github.com:ImperialCollegeLondon/real-number-game.git
+Cloning from git@github.com:ImperialCollegeLondon/real-number-game.git
+configuring real-number-game 0.1
+mathlib: cloning https://github.com/leanprover-community/mathlib to _target/deps/mathlib
+&gt; mkdir -p _target/deps/mathlib
+&gt; git clone https://github.com/leanprover-community/mathlib _target/deps/mathlib
+Cloning into &#39;_target/deps/mathlib&#39;...
+remote: Enumerating objects: 58, done.
+remote: Counting objects: 100% (58/58), done.
+remote: Compressing objects: 100% (49/49), done.
+remote: Total 39653 (delta 19), reused 18 (delta 9), pack-reused 39595
+Receiving objects: 100% (39653/39653), 19.02 MiB | 9.96 MiB/s, done.
+Resolving deltas: 100% (30230/30230), done.
+&gt; git checkout --detach f86abc7781d85564a9fba9f3deafe73453d22e8d    # in directory _target/deps/mathlib
+HEAD is now at f86abc77 fix(*): lower instance priority (#1724)
+Looking for local mathlib oleans
+Looking for remote mathlib oleans
+Trying to download https://oleanstorage.azureedge.net/mathlib/f86abc7781d85564a9fba9f3deafe73453d22e8d.tar.gz to /home/buzzard/.mathlib/f86abc7781d85564a9fba9f3deafe73453d22e8d.tar.gz
+Looking for GitHub mathlib oleans
+Warning: This does not seem to be a git repository. Expect weird things...
+Trying to download https://github.com/leanprover-community/mathlib-nightly/releases/download/nightly-2019-11-23/mathlib-olean-nightly-2019-11-23.tar.gz to /home/buzzard/.mathlib/f86abc7781d85564a9fba9f3deafe73453d22e8d.tar.gz
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████| 21.2M/21.2M [00:01&lt;00:00, 15.0MiB/s]
+Found GitHub mathlib oleans
+~/tmp$
+</pre></div>
+
+
+<p>Why does it say <code>Warning: This does not seem to be a git repository. Expect weird things...</code>?</p>
+
+<a name="191959579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20mathlib%20tools/near/191959579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62589newmathlibtools.html#191959579">Alex J. Best (Mar 26 2020 at 22:58)</a>:</h4>
+<p>After <code>leanproject hooks</code> I get</p>
+<div class="codehilite"><pre><span></span>hint: The &#39;.git/hooks/post-checkout&#39; hook was ignored because it&#39;s not set as executable.
+hint: You can disable this warning with `git config advice.ignoredHook false`.
+</pre></div>
+
 
 {% endraw %}
 

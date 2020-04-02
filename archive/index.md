@@ -8,13 +8,13 @@ permalink: archive/index.html
 
 ## Streams:
 
-* [general](113488general/index.html) (2491 topics)
+* [general](113488general/index.html) (2542 topics)
 
-* [new members](113489newmembers/index.html) (872 topics)
+* [new members](113489newmembers/index.html) (892 topics)
 
-* [maths](116395maths/index.html) (805 topics)
+* [maths](116395maths/index.html) (821 topics)
 
-* [PR reviews](144837PRreviews/index.html) (216 topics)
+* [PR reviews](144837PRreviews/index.html) (219 topics)
 
 * [Lean Together 2019](179818LeanTogether2019/index.html) (31 topics)
 
@@ -22,7 +22,7 @@ permalink: archive/index.html
 
 * [IMO-grand-challenge](208328IMOgrandchallenge/index.html) (15 topics)
 
-* [Is there code for X?](217875IstherecodeforX/index.html) (14 topics)
+* [Is there code for X?](217875IstherecodeforX/index.html) (15 topics)
 
 * [FoMM / Lean Together 2020](218272FoMMLeanTogether2020/index.html) (13 topics)
 
@@ -30,7 +30,7 @@ permalink: archive/index.html
 
 * [Geographic locality](224796Geographiclocality/index.html) (11 topics)
 
-* [Machine Learning for Theorem Proving](219941MachineLearningforTheoremProving/index.html) (10 topics)
+* [Machine Learning for Theorem Proving](219941MachineLearningforTheoremProving/index.html) (11 topics)
 
 * [concrete semantics](187724concretesemantics/index.html) (4 topics)
 

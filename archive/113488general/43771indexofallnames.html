@@ -1,0 +1,53 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/43771indexofallnames.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/43771indexofallnames.html">index of all names</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192218559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/index%20of%20all%20names/near/192218559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43771indexofallnames.html#192218559">Johan Commelin (Mar 30 2020 at 07:18)</a>:</h4>
+<p>Do we have a list of all the declarations made in all of mathlib? I couldn't find an index in the docs. The reason this may be useful is in the hypothetical scenario where you have a lot of declarations in a namespace (say <code>gwz</code>) that you want to move to the root namespace. But you need to avoid name conflicts with names from files that you haven't imported. Such an index would be an easy way to figure out that you need to append <code>'''</code> to <code>mul_div_cancel</code> to make it unique.</p>
+
+<a name="192220436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/index%20of%20all%20names/near/192220436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43771indexofallnames.html#192220436">Rob Lewis (Mar 30 2020 at 07:38)</a>:</h4>
+<p>It's not in the docs right now but it's easy enough to generate the list yourself. In a file with <code>import all</code>,</p>
+<div class="codehilite"><pre><span></span><span class="n">run_cmd</span> <span class="n">do</span> <span class="n">e</span> <span class="err">←</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">get_env</span><span class="o">,</span>
+<span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="err">$</span> <span class="n">list</span><span class="bp">.</span><span class="n">merge_sort</span> <span class="o">(</span><span class="bp">&lt;</span><span class="o">)</span> <span class="err">$</span> <span class="n">e</span><span class="bp">.</span><span class="n">fold</span> <span class="o">[]</span> <span class="err">$</span> <span class="n">list</span><span class="bp">.</span><span class="n">cons</span> <span class="err">∘</span> <span class="n">to_string</span> <span class="err">∘</span> <span class="n">declaration</span><span class="bp">.</span><span class="n">to_name</span>
+</pre></div>
+
+<a name="192220603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/index%20of%20all%20names/near/192220603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43771indexofallnames.html#192220603">Mario Carneiro (Mar 30 2020 at 07:40)</a>:</h4>
+<p>You can even filter the list by which names exist in both <code>gwz</code> and <code>_root_</code> namespace</p>
+
+<a name="192221203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/index%20of%20all%20names/near/192221203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43771indexofallnames.html#192221203">Johan Commelin (Mar 30 2020 at 07:47)</a>:</h4>
+<p>Thanks!</p>
+
+<a name="192221206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/index%20of%20all%20names/near/192221206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43771indexofallnames.html#192221206">Johan Commelin (Mar 30 2020 at 07:47)</a>:</h4>
+<p>Does it make sense to also add an index to the docs?</p>
+
+<a name="192221489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/index%20of%20all%20names/near/192221489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43771indexofallnames.html#192221489">Rob Lewis (Mar 30 2020 at 07:50)</a>:</h4>
+<p>It would be obsolete once there's a better search, no?</p>
+
+<a name="192224001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/index%20of%20all%20names/near/192224001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43771indexofallnames.html#192224001">Johan Commelin (Mar 30 2020 at 08:17)</a>:</h4>
+<p>Well, sometimes one might still want to scroll through an alphabetical list... But I agree that it shouldn't be a central feature. (We can also show some stats, like the amount of defs, structures, and thms/lemmas).</p>
+
+<a name="192326888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/index%20of%20all%20names/near/192326888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43771indexofallnames.html#192326888">Simon Hudon (Mar 30 2020 at 22:44)</a>:</h4>
+<p>We could put such a list in the zip files being uploaded at the end of each build</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

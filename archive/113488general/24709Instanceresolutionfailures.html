@@ -273,6 +273,98 @@ I have not worked with <code>out_param</code>s myself, so I cannot judge judge t
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instance%20resolution%20failures/near/175707773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24709Instanceresolutionfailures.html#175707773">Sebastien Gouezel (Sep 14 2019 at 16:11)</a>:</h4>
 <p>If I remove the <code>out_param</code> from the instance parameter, replacing <code>[out_param $ normed_group E]</code> with <code>[normed_group E]</code>, then it doesn't work any more: I get errors <code>don't know how to synthesize placeholder</code> whenever I mention a <code>smooth_manifold_with_corners</code>.</p>
 
+<a name="191756677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instance%20resolution%20failures/near/191756677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24709Instanceresolutionfailures.html#191756677">Wojciech Nawrocki (Mar 25 2020 at 14:52)</a>:</h4>
+<p>Why does Lean fail to synthesize a typeclass after I name it in a <code>variables</code> block?  That is, given the prelude</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">monad</span>
+<span class="kn">open</span> <span class="n">category_theory</span>
+<span class="n">universes</span> <span class="n">v₁</span> <span class="n">v₂</span> <span class="n">v₃</span> <span class="n">u₁</span> <span class="n">u₂</span> <span class="n">u₃</span> <span class="c1">-- declare the `v`&#39;s first; see `category_theory.category` for an explanation</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">}</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v₁</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="n">include</span> <span class="err">𝒞</span>
+</pre></div>
+
+
+<p>the following fails</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">T</span> <span class="o">:</span> <span class="n">C</span> <span class="err">⥤</span> <span class="n">C</span><span class="o">)</span> <span class="o">[</span><span class="err">𝕋</span> <span class="o">:</span> <span class="n">monad</span><span class="bp">.</span><span class="o">{</span><span class="n">v₁</span><span class="o">}</span> <span class="n">T</span><span class="o">]</span>
+
+<span class="kn">instance</span> <span class="n">forget_right</span> <span class="o">:</span> <span class="n">is_right_adjoint</span> <span class="o">(</span><span class="n">monad</span><span class="bp">.</span><span class="n">forget</span> <span class="n">T</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">left</span> <span class="o">:=</span> <span class="n">monad</span><span class="bp">.</span><span class="n">free</span> <span class="n">T</span>
+<span class="o">,</span> <span class="n">adj</span> <span class="o">:=</span> <span class="n">monad</span><span class="bp">.</span><span class="n">adj</span> <span class="n">T</span> <span class="o">}</span>
+<span class="c">/-</span><span class="cm"> algebras.lean:12:42: error</span>
+<span class="cm">failed to synthesize type class instance for</span>
+<span class="cm">C : Type u₁,</span>
+<span class="cm">𝒞 : category C,</span>
+<span class="cm">T : C ⥤ C</span>
+<span class="cm">⊢ monad T -/</span>
+</pre></div>
+
+
+<p>while this works</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">T</span> <span class="o">:</span> <span class="n">C</span> <span class="err">⥤</span> <span class="n">C</span><span class="o">)</span> <span class="c1">--[monad.{v₁} T]</span>
+<span class="kn">instance</span> <span class="n">forget_right</span> <span class="o">[</span><span class="err">𝕋</span> <span class="o">:</span> <span class="n">monad</span><span class="bp">.</span><span class="o">{</span><span class="n">v₁</span><span class="o">}</span> <span class="n">T</span><span class="o">]</span> <span class="o">:</span> <span class="n">is_right_adjoint</span> <span class="o">(</span><span class="n">monad</span><span class="bp">.</span><span class="n">forget</span> <span class="n">T</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">left</span> <span class="o">:=</span> <span class="n">monad</span><span class="bp">.</span><span class="n">free</span> <span class="n">T</span>
+<span class="o">,</span> <span class="n">adj</span> <span class="o">:=</span> <span class="n">monad</span><span class="bp">.</span><span class="n">adj</span> <span class="n">T</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>as does this</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">T</span> <span class="o">:</span> <span class="n">C</span> <span class="err">⥤</span> <span class="n">C</span><span class="o">)</span> <span class="o">[</span><span class="n">monad</span><span class="bp">.</span><span class="o">{</span><span class="n">v₁</span><span class="o">}</span> <span class="n">T</span><span class="o">]</span>
+<span class="kn">instance</span> <span class="n">forget_right</span> <span class="o">:</span> <span class="n">is_right_adjoint</span> <span class="o">(</span><span class="n">monad</span><span class="bp">.</span><span class="n">forget</span> <span class="n">T</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">left</span> <span class="o">:=</span> <span class="n">monad</span><span class="bp">.</span><span class="n">free</span> <span class="n">T</span>
+<span class="o">,</span> <span class="n">adj</span> <span class="o">:=</span> <span class="n">monad</span><span class="bp">.</span><span class="n">adj</span> <span class="n">T</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>What does adding the name do that breaks inference?</p>
+
+<a name="191758294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instance%20resolution%20failures/near/191758294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24709Instanceresolutionfailures.html#191758294">Reid Barton (Mar 25 2020 at 15:01)</a>:</h4>
+<p>The category theory stuff is a distraction! The auto-inclusion of <code>[]</code> variables only occurs for ones that are not named, I think.</p>
+
+<a name="191759167"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instance%20resolution%20failures/near/191759167" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24709Instanceresolutionfailures.html#191759167">Wojciech Nawrocki (Mar 25 2020 at 15:08)</a>:</h4>
+<p>Do you know why that is? Is it to make sure I don't refer to the particular instance?</p>
+
+<a name="191765882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instance%20resolution%20failures/near/191765882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24709Instanceresolutionfailures.html#191765882">Reid Barton (Mar 25 2020 at 15:43)</a>:</h4>
+<p>It is just a design choice I think. I mean, the default is to not include variables.</p>
+
+<a name="191766054"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instance%20resolution%20failures/near/191766054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24709Instanceresolutionfailures.html#191766054">Reid Barton (Mar 25 2020 at 15:44)</a>:</h4>
+<p>For unnamed <code>[]</code> variables the rule is just always include all those that mention an included variable. It doesn't include them only if they are actually needed or anything like that.</p>
+
+<a name="191767714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instance%20resolution%20failures/near/191767714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24709Instanceresolutionfailures.html#191767714">Wojciech Nawrocki (Mar 25 2020 at 15:53)</a>:</h4>
+<p>Ah right, so that's why we need <code>include 𝒞</code>. Thanks!</p>
+
+<a name="191770363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instance%20resolution%20failures/near/191770363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24709Instanceresolutionfailures.html#191770363">Reid Barton (Mar 25 2020 at 16:07)</a>:</h4>
+<p>The business with 𝒞 is a specific Lean bug related to the fact that <code>category C</code> has a universe variable which doesn't appear in the type of <code>C</code>. Otherwise we wouldn't name 𝒞 either.</p>
+
+<a name="191771066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instance%20resolution%20failures/near/191771066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24709Instanceresolutionfailures.html#191771066">Kevin Buzzard (Mar 25 2020 at 16:11)</a>:</h4>
+<p>Can this bug be fixed in community lean?</p>
+
+<a name="191771130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instance%20resolution%20failures/near/191771130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24709Instanceresolutionfailures.html#191771130">Reid Barton (Mar 25 2020 at 16:12)</a>:</h4>
+<p>I think it should be easy.</p>
+
+<a name="191771262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instance%20resolution%20failures/near/191771262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24709Instanceresolutionfailures.html#191771262">Kevin Buzzard (Mar 25 2020 at 16:12)</a>:</h4>
+<p>Is it already an issue?</p>
+
+<a name="191771286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instance%20resolution%20failures/near/191771286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24709Instanceresolutionfailures.html#191771286">Bryan Gin-ge Chen (Mar 25 2020 at 16:12)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/lean/issues/146" title="https://github.com/leanprover-community/lean/issues/146">lean#146</a></p>
+
+<a name="191771466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instance%20resolution%20failures/near/191771466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24709Instanceresolutionfailures.html#191771466">Kevin Buzzard (Mar 25 2020 at 16:14)</a>:</h4>
+<p>Oh nice, will hopefully be fixed in 3.8</p>
+
+<a name="191771612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instance%20resolution%20failures/near/191771612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24709Instanceresolutionfailures.html#191771612">Reid Barton (Mar 25 2020 at 16:15)</a>:</h4>
+<p>when I looked at this originally (long before the community fork) it seemed that the elaborator basically already had the machinery to do this, it just wasn't being used in this particular case</p>
+
 
 {% endraw %}
 

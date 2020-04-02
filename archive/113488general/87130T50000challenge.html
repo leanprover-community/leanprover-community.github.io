@@ -1135,6 +1135,67 @@ I wonder if it might be possible to build a top-5 old_peak-get_peak_rss() delta,
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/170469864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#170469864">Johan Commelin (Jul 09 2019 at 16:49)</a>:</h4>
 <p>Ok, that is quite a significant speedup</p>
 
+<a name="192139664"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/192139664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#192139664">Kevin Buzzard (Mar 28 2020 at 20:14)</a>:</h4>
+<p>So I thought I'd try the T50000 challenge again. This is the game where you compile mathlib but only let Lean take half as long as the default amount of time before it times out. The first problem we run into is quite interesting. I should say right now that the below would have taken me much longer to put together had it not been for the wonderful new tooling. The last time the file <code>src/set_theory/pgame.lean</code> changed was on Thursday (two days ago) in <a href="https://github.com/leanprover-community/mathlib/issues/2222" title="https://github.com/leanprover-community/mathlib/issues/2222">#2222</a>. After the change:</p>
+<div class="codehilite"><pre><span></span>git checkout 30146a027b6f3e207f95571c0802d647f613b38a
+leanproject get-cache
+rm -f src/set_theory/pgame.olean
+date; lean --make src/set_theory/pgame.lean ; date
+</pre></div>
+
+
+<p><code>pgame.lean</code> takes 11 seconds to compile. Note: this is <em>after</em> the change was made to the file on Thursday.</p>
+<p>Now fast forward to master today:</p>
+<div class="codehilite"><pre><span></span>git checkout master
+leanproject get-cache
+rm -f src/set_theory/pgame.olean
+date; lean --make src/set_theory/pgame.lean ; date
+</pre></div>
+
+
+<p>and the same <code>pgame.lean</code> file now takes more than <em>five minutes</em> to compile (and times out on T50000). What is going on here?</p>
+
+<a name="192142650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/192142650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#192142650">Scott Morrison (Mar 28 2020 at 21:37)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="192143842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/192143842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#192143842">Scott Morrison (Mar 28 2020 at 22:09)</a>:</h4>
+<p>In any case, I think I better investigate... Both <code>solve_by_elim</code> and <code>pgame</code> have my fingerprints on them, so this is probably somehow my fault. :-)</p>
+
+<a name="192145511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/192145511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#192145511">Kevin Buzzard (Mar 28 2020 at 22:54)</a>:</h4>
+<p>Maybe <a href="https://github.com/leanprover-community/mathlib/commit/ad53e0b7d90aa6a3a8fbcab9f9bb2af769f82b19" title="https://github.com/leanprover-community/mathlib/commit/ad53e0b7d90aa6a3a8fbcab9f9bb2af769f82b19">ad53e0b7d90aa6a3a8fbcab9f9bb2af769f82b19</a> is the first bad commit</p>
+
+<a name="192147463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/192147463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#192147463">Scott Morrison (Mar 28 2020 at 23:50)</a>:</h4>
+<p>and in any case, I think this shows that we really need to introduce a -T limit in CI.</p>
+
+<a name="192147596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/192147596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#192147596">Mario Carneiro (Mar 28 2020 at 23:54)</a>:</h4>
+<p>I wonder if it would be possible to hack lean so that it reports the smallest -T value that would have compiled the input successfully? Then we can keep an eye on that number for regressions without blocking the build necessarily</p>
+
+<a name="192147609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/192147609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#192147609">Mario Carneiro (Mar 28 2020 at 23:55)</a>:</h4>
+<p>and we can have some current target, and set -T to something like 20% more than that so that anything that goes too far is rejected immediately</p>
+
+<a name="192148059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/192148059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#192148059">Bryan Gin-ge Chen (Mar 29 2020 at 00:08)</a>:</h4>
+<p>If the profiler were more accurate (<a href="https://github.com/leanprover-community/lean/issues/58" title="https://github.com/leanprover-community/lean/issues/58">lean#58</a>) we could revive the <a href="#narrow/stream/113538-travis/topic/build.20time.20bot" title="#narrow/stream/113538-travis/topic/build.20time.20bot">build time bot</a>.</p>
+
+<a name="192152523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/192152523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#192152523">Scott Morrison (Mar 29 2020 at 02:37)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>, fixed in <a href="https://github.com/leanprover-community/mathlib/issues/2275" title="https://github.com/leanprover-community/mathlib/issues/2275">#2275</a>. This file now compiles with <code>-T6000</code> again.</p>
+
+<a name="192164925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/192164925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#192164925">Kevin Buzzard (Mar 29 2020 at 09:20)</a>:</h4>
+<p>Great work Scott! Signed, the build time bot</p>
+
+<a name="192170353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/192170353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#192170353">Scott Morrison (Mar 29 2020 at 11:49)</a>:</h4>
+<p>I fixed a bunch more in <a href="https://github.com/leanprover-community/mathlib/issues/2281" title="https://github.com/leanprover-community/mathlib/issues/2281">#2281</a>. We're almost there!</p>
+
 
 {% endraw %}
 

@@ -1,0 +1,445 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/64175Ilovethelinter.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html">I love the linter</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="191874900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191874900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191874900">Kevin Buzzard (Mar 26 2020 at 12:15)</a>:</h4>
+<p>I've seen people going on about the linters, but I didn't ever realise it was as simple as just going to the bottom of your file and typing <code>#lint</code>. This should be better known! I've already learnt something new about <code>simp</code> by looking at my first linter output.</p>
+<div class="codehilite"><pre><span></span>: -/
+#print polynomial_derivation.map_C_mul /- Left-hand side simplifies from
+  ⇑d (C k * f)
+to
+  C k * ⇑d f + f * ⇑d (C k)
+using
+  [polynomial_derivation.map_mul]
+Try to change the left-hand side to the simplified term!
+ -/
+</pre></div>
+
+
+<p>I particularly love the emoji in the top line. Here's the set-up:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">polynomial</span>
+
+<span class="kn">structure</span> <span class="n">polynomial_derivation</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">to_fun</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">polynomial</span> <span class="n">R</span><span class="o">)</span> <span class="c1">-- Delta</span>
+<span class="o">(</span><span class="n">map_add&#39;</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">R</span><span class="o">),</span> <span class="n">to_fun</span> <span class="o">(</span><span class="n">f</span> <span class="bp">+</span> <span class="n">g</span><span class="o">)</span> <span class="bp">=</span> <span class="n">to_fun</span> <span class="n">f</span> <span class="bp">+</span> <span class="n">to_fun</span> <span class="n">g</span><span class="o">)</span> <span class="c1">--Delta2</span>
+<span class="o">(</span><span class="n">map_C_mul&#39;</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">R</span><span class="o">),</span> <span class="n">to_fun</span> <span class="o">(</span><span class="n">polynomial</span><span class="bp">.</span><span class="n">C</span> <span class="n">k</span> <span class="bp">*</span> <span class="n">f</span><span class="o">)</span> <span class="bp">=</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">C</span> <span class="n">k</span> <span class="bp">*</span> <span class="n">to_fun</span> <span class="n">f</span><span class="o">)</span> <span class="c1">--Delta3</span>
+<span class="o">(</span><span class="n">map_mul&#39;</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">R</span><span class="o">),</span> <span class="n">to_fun</span> <span class="o">(</span><span class="n">f</span> <span class="bp">*</span> <span class="n">g</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="bp">*</span> <span class="n">to_fun</span> <span class="n">g</span> <span class="bp">+</span> <span class="n">g</span> <span class="bp">*</span> <span class="n">to_fun</span> <span class="n">f</span><span class="o">)</span>
+
+<span class="kn">open</span> <span class="n">polynomial</span>
+
+<span class="kn">namespace</span> <span class="n">polynomial_derivation</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span>
+
+<span class="c">/-</span><span class="cm">- think of a polynomial derivation as a function from R[X] to R[X] -/</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">polynomial_derivation</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">F</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">polynomial</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">polynomial</span> <span class="n">R</span><span class="o">,</span>
+  <span class="n">coe</span> <span class="o">:=</span> <span class="n">to_fun</span> <span class="c1">-- should say `to_fun` once the derivation is defined</span>
+<span class="o">}</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span>
+<span class="kn">theorem</span> <span class="n">map_add</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">polynomial_derivation</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">R</span><span class="o">},</span> <span class="n">d</span> <span class="o">(</span><span class="n">f</span> <span class="bp">+</span> <span class="n">g</span><span class="o">)</span> <span class="bp">=</span> <span class="n">d</span> <span class="n">f</span> <span class="bp">+</span> <span class="n">d</span> <span class="n">g</span> <span class="o">:=</span> <span class="n">d</span><span class="bp">.</span><span class="n">map_add&#39;</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">map_C_mul</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">polynomial_derivation</span> <span class="n">R</span><span class="o">):</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">R</span><span class="o">),</span> <span class="n">d</span> <span class="o">(</span><span class="n">C</span> <span class="n">k</span> <span class="bp">*</span> <span class="n">f</span><span class="o">)</span> <span class="bp">=</span> <span class="n">C</span> <span class="n">k</span> <span class="bp">*</span> <span class="n">d</span> <span class="n">f</span> <span class="o">:=</span> <span class="n">d</span><span class="bp">.</span><span class="n">map_C_mul&#39;</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">map_mul</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">polynomial_derivation</span> <span class="n">R</span><span class="o">):</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">R</span><span class="o">),</span> <span class="n">d</span> <span class="o">(</span><span class="n">f</span> <span class="bp">*</span> <span class="n">g</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="bp">*</span> <span class="n">d</span> <span class="n">g</span> <span class="bp">+</span> <span class="n">g</span> <span class="bp">*</span> <span class="n">d</span> <span class="n">f</span> <span class="o">:=</span> <span class="n">d</span><span class="bp">.</span><span class="n">map_mul&#39;</span>
+</pre></div>
+
+<a name="191875057"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191875057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191875057">Kevin Buzzard (Mar 26 2020 at 12:16)</a>:</h4>
+<p>What did I do wrong?</p>
+
+<a name="191875130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191875130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191875130">Mario Carneiro (Mar 26 2020 at 12:17)</a>:</h4>
+<p><code>map_C_mul</code> is a special case of <code>map_mul</code></p>
+
+<a name="191875281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191875281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191875281">Mario Carneiro (Mar 26 2020 at 12:18)</a>:</h4>
+<p>You could set the priority higher, or you could prove that <code>d (C k) = 0</code> and then you will get the same result without it</p>
+
+<a name="191875343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191875343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191875343">Johan Commelin (Mar 26 2020 at 12:19)</a>:</h4>
+<p>Prove <code>map_C</code>, tag that one as <code>simp</code> and remove <code>simp</code> from <code>map_C_mul</code>.</p>
+
+<a name="191875406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191875406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191875406">Mario Carneiro (Mar 26 2020 at 12:19)</a>:</h4>
+<p>also, shouldn't you be getting a lint for marking those theorems as <code>def</code>?</p>
+
+<a name="191875583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191875583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191875583">Kevin Buzzard (Mar 26 2020 at 12:21)</a>:</h4>
+<p>This is something Shing and I are working on. It's still a WIP but nearly done.</p>
+
+<a name="191875603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191875603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191875603">Kevin Buzzard (Mar 26 2020 at 12:21)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/I.20love.20the.20linter/near/191875130" title="#narrow/stream/113488-general/topic/I.20love.20the.20linter/near/191875130">said</a>:</p>
+<blockquote>
+<p><code>map_C_mul</code> is a special case of <code>map_mul</code></p>
+</blockquote>
+<p>Only in the presence of <code>map_C</code></p>
+
+<a name="191875642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191875642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191875642">Kevin Buzzard (Mar 26 2020 at 12:21)</a>:</h4>
+<p>So have we got the definition of the structure wrong?</p>
+
+<a name="191875827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191875827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191875827">Mario Carneiro (Mar 26 2020 at 12:23)</a>:</h4>
+<p>no, the lhs of <code>map_C_mul</code> is an instantiation of the lhs of <code>map_mul</code></p>
+
+<a name="191875897"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191875897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191875897">Mario Carneiro (Mar 26 2020 at 12:24)</a>:</h4>
+<p>that means that given input <code>d (C k * f)</code> they will race to see which will rewrite first</p>
+
+<a name="191875907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191875907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191875907">Kevin Buzzard (Mar 26 2020 at 12:24)</a>:</h4>
+<p>Yes I understand that, but the right hand side isn't, right?</p>
+
+<a name="191875913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191875913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191875913">Mario Carneiro (Mar 26 2020 at 12:24)</a>:</h4>
+<p>in the absence of <code>map_C</code>, that means it's not confluent</p>
+
+<a name="191875928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191875928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191875928">Kevin Buzzard (Mar 26 2020 at 12:24)</a>:</h4>
+<p>I know who wants to win that race though</p>
+
+<a name="191875953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191875953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191875953">Mario Carneiro (Mar 26 2020 at 12:25)</a>:</h4>
+<p>then set the priority of the winner higher</p>
+
+<a name="191875959"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191875959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191875959">Kevin Buzzard (Mar 26 2020 at 12:25)</a>:</h4>
+<p>I have no real idea what the word confluent means.</p>
+
+<a name="191875983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191875983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191875983">Kevin Buzzard (Mar 26 2020 at 12:25)</a>:</h4>
+<p>Should I be changing priorities of winners, or should be aiming for full confluence compliance?</p>
+
+<a name="191876009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876009">Mario Carneiro (Mar 26 2020 at 12:25)</a>:</h4>
+<p>confluent means that if A rewrites to B and A also rewrites to C, then B and C will eventually reach some common point D</p>
+
+<a name="191876087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876087">Kevin Buzzard (Mar 26 2020 at 12:26)</a>:</h4>
+<p>right -- so that was exactly what didn't happen when we made all the structure fields simp lemmas</p>
+
+<a name="191876127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876127">Mario Carneiro (Mar 26 2020 at 12:26)</a>:</h4>
+<p>You can make it confluent by adding <code>map_C</code> as a simp lemma</p>
+
+<a name="191876149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876149">Kevin Buzzard (Mar 26 2020 at 12:26)</a>:</h4>
+<p>and removing <code>simp</code> from <code>map_C_mul</code> I guess</p>
+
+<a name="191876157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876157">Mario Carneiro (Mar 26 2020 at 12:27)</a>:</h4>
+<p>not even</p>
+
+<a name="191876179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876179">Kevin Buzzard (Mar 26 2020 at 12:27)</a>:</h4>
+<p>Do I or not?</p>
+
+<a name="191876180"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876180">Mario Carneiro (Mar 26 2020 at 12:27)</a>:</h4>
+<p>confluence means that they can diverge but they come back together</p>
+
+<a name="191876243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876243">Mario Carneiro (Mar 26 2020 at 12:27)</a>:</h4>
+<p>if you have "shortcut" simp lemmas this can cause a confluent rewrite system even though there is not a unique path</p>
+
+<a name="191876248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876248">Kevin Buzzard (Mar 26 2020 at 12:28)</a>:</h4>
+<p>Do they come back together? This will be a 50-50 chance depending on whether it's <code>add_zero</code> or <code>zero_add</code> which is definitions, right?</p>
+
+<a name="191876330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876330">Kevin Buzzard (Mar 26 2020 at 12:28)</a>:</h4>
+<p>Oh no, who cares about defeq here</p>
+
+<a name="191876366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876366">Mario Carneiro (Mar 26 2020 at 12:28)</a>:</h4>
+<p><code>d (C k * f) = C k * d f + f * d (C k) = C k * d f + f * 0 = C k * d f + 0 = C k * d f</code></p>
+
+<a name="191876375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876375">Kevin Buzzard (Mar 26 2020 at 12:29)</a>:</h4>
+<p>There is some other relation -- <code>simp_rel</code>, which is I guess related to defeq</p>
+
+<a name="191876413"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876413">Kevin Buzzard (Mar 26 2020 at 12:29)</a>:</h4>
+<p>Right -- I don't care whether it's add_zero or zero_add which is the definitional one, I just need to make sure they are both tagged with <code>@[simp]</code></p>
+
+<a name="191876505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876505">Mario Carneiro (Mar 26 2020 at 12:30)</a>:</h4>
+<p>right, this is not a defeq thing</p>
+
+<a name="191876539"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876539" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876539">Mario Carneiro (Mar 26 2020 at 12:30)</a>:</h4>
+<p>note also that <code>simp_rel</code> is not symmetric like defeq</p>
+
+<a name="191876544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876544">Kevin Buzzard (Mar 26 2020 at 12:30)</a>:</h4>
+<p>But I want to encourage <code>simp</code> to go the short way and not do the calculation you posted.</p>
+
+<a name="191876556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876556">Mario Carneiro (Mar 26 2020 at 12:30)</a>:</h4>
+<p>that's what priority is for</p>
+
+<a name="191876589"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876589">Mario Carneiro (Mar 26 2020 at 12:31)</a>:</h4>
+<p>or you can just throw them in a bag and let them duke it out</p>
+
+<a name="191876598"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876598">Kevin Buzzard (Mar 26 2020 at 12:31)</a>:</h4>
+<p>So where is the AI that analyses my confluent rewriting system and says "I suggest you put the following priorities on these simp lemmas: ..."?</p>
+
+<a name="191876619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876619">Mario Carneiro (Mar 26 2020 at 12:31)</a>:</h4>
+<p>hey, at least we detected the split</p>
+
+<a name="191876691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876691">Kevin Buzzard (Mar 26 2020 at 12:32)</a>:</h4>
+<p>so is this hard? I thought that would be exactly the sort of thing you were good at</p>
+
+<a name="191876696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876696">Mario Carneiro (Mar 26 2020 at 12:32)</a>:</h4>
+<p>figuring out that it's confluent is hard enough (undecidable?)</p>
+
+<a name="191876708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876708">Kevin Buzzard (Mar 26 2020 at 12:32)</a>:</h4>
+<p>I know but the system here is <em>tiny</em></p>
+
+<a name="191876737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876737">Mario Carneiro (Mar 26 2020 at 12:32)</a>:</h4>
+<p>the simp set is massive</p>
+
+<a name="191876743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876743">Kevin Buzzard (Mar 26 2020 at 12:32)</a>:</h4>
+<p>I know I will not be rewriting lists here, polynomials are atoms</p>
+
+<a name="191876761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876761">Kevin Buzzard (Mar 26 2020 at 12:33)</a>:</h4>
+<p>I know to ignore all <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo></mrow><annotation encoding="application/x-tex">\le</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.7719400000000001em;vertical-align:-0.13597em;"></span><span class="mrel">≤</span></span></span></span> simp lemmas</p>
+
+<a name="191876800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876800">Mario Carneiro (Mar 26 2020 at 12:33)</a>:</h4>
+<p>if you analyze the simplified problem, in some cases, you can prove confluence</p>
+
+<a name="191876819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876819">Kevin Buzzard (Mar 26 2020 at 12:33)</a>:</h4>
+<p>I just want them off. I want to say "look, this is about polynomial rings, so you can have all polynomial ring simp lemmas and that's it, no junk about filters"</p>
+
+<a name="191876846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876846">Mario Carneiro (Mar 26 2020 at 12:33)</a>:</h4>
+<p>You can also <code>nolint</code> it and move on with your life</p>
+
+<a name="191876847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876847">Kevin Buzzard (Mar 26 2020 at 12:33)</a>:</h4>
+<p>"I don't care if someone accidentally imported topological spaces"</p>
+
+<a name="191876888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876888">Johan Commelin (Mar 26 2020 at 12:34)</a>:</h4>
+<p>This is the moment where Kenny posts his remark about simpsets.</p>
+
+<a name="191876912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876912">Kevin Buzzard (Mar 26 2020 at 12:34)</a>:</h4>
+<p>I'm all ears. I really felt like I learnt something new about <code>simp</code> today.</p>
+
+<a name="191876942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876942">Mario Carneiro (Mar 26 2020 at 12:34)</a>:</h4>
+<p>the topological spaces lemmas don't apply, but it can be hard to determine that in advance</p>
+
+<a name="191876962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876962">Kevin Buzzard (Mar 26 2020 at 12:35)</a>:</h4>
+<p>Thanks <span class="user-mention" data-user-id="266440">@Shing Tak Lam</span> . He wrote the proofs but I did the simp labelling.</p>
+
+<a name="191876970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191876970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191876970">Mario Carneiro (Mar 26 2020 at 12:35)</a>:</h4>
+<p>What if your polynomial ring also happens to be a topological space?</p>
+
+<a name="191877091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191877091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191877091">Mario Carneiro (Mar 26 2020 at 12:36)</a>:</h4>
+<p>Simp is pretty smart about looking only at the relevant lemmas to apply, but it has the simple job, it has a term already and is rewriting it. Analyzing the simp set as a whole is much harder</p>
+
+<a name="191877135"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191877135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191877135">Mario Carneiro (Mar 26 2020 at 12:36)</a>:</h4>
+<p>and yes, this is an active area of CS research</p>
+
+<a name="191877317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191877317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191877317">Mario Carneiro (Mar 26 2020 at 12:38)</a>:</h4>
+<p>if you want to read a wikipedia article, try <a href="https://en.wikipedia.org/wiki/Knuth%E2%80%93Bendix_completion_algorithm" title="https://en.wikipedia.org/wiki/Knuth%E2%80%93Bendix_completion_algorithm">https://en.wikipedia.org/wiki/Knuth%E2%80%93Bendix_completion_algorithm</a></p>
+
+<a name="191877883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191877883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191877883">Kevin Buzzard (Mar 26 2020 at 12:44)</a>:</h4>
+<p>Where are the docs for <code>#lint</code>? I want to switch all but one of them off.</p>
+
+<a name="191878009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191878009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191878009">Rob Lewis (Mar 26 2020 at 12:45)</a>:</h4>
+<p><a href="https://leanprover-community.github.io/mathlib_docs/commands.html#linting%20commands" title="https://leanprover-community.github.io/mathlib_docs/commands.html#linting%20commands">https://leanprover-community.github.io/mathlib_docs/commands.html#linting%20commands</a></p>
+
+<a name="191878015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191878015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191878015">Rob Lewis (Mar 26 2020 at 12:45)</a>:</h4>
+<p><code>#lint only doc_blame</code></p>
+
+<a name="191878169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191878169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191878169">Kevin Buzzard (Mar 26 2020 at 12:46)</a>:</h4>
+<p>I <span aria-label="heart" class="emoji emoji-2764" role="img" title="heart">:heart:</span> the docs</p>
+
+<a name="191878439"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191878439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191878439">Mario Carneiro (Mar 26 2020 at 12:49)</a>:</h4>
+<p>where's <code>doc_thank</code>?</p>
+
+<a name="191878470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191878470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191878470">Kevin Buzzard (Mar 26 2020 at 12:49)</a>:</h4>
+<p>Yeah I could just link to that</p>
+
+<a name="191878587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191878587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191878587">Kevin Buzzard (Mar 26 2020 at 12:50)</a>:</h4>
+<p>rofl I couldn't find it in the docs because I didn't know <code>#lint</code> was a command :-)</p>
+
+<a name="191878769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191878769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191878769">Mario Carneiro (Mar 26 2020 at 12:52)</a>:</h4>
+<p>I see a feature request: go to definition for user commands</p>
+
+<a name="191878837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191878837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191878837">Mario Carneiro (Mar 26 2020 at 12:53)</a>:</h4>
+<p>also hover with doc string</p>
+
+<a name="191879314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191879314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191879314">Kevin Buzzard (Mar 26 2020 at 12:57)</a>:</h4>
+<p>Yeah, these were the exact two things I tried before I asked here.</p>
+
+<a name="191884523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191884523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191884523">Gabriel Ebner (Mar 26 2020 at 13:34)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/I.20love.20the.20linter/near/191876696" title="#narrow/stream/113488-general/topic/I.20love.20the.20linter/near/191876696">said</a>:</p>
+<blockquote>
+<p>figuring out that it's confluent is hard enough (undecidable?)</p>
+</blockquote>
+<p>By Newman's lemma, confluence follows from local confluence and termination.  Checking termination is undecidable (in general), but if we assume termination then we only need to check for local confluence, which is straightforward.<br>
+I've implemented this linter, but it didn't make it into the maintenance paper.  You can look at the results here: <a href="https://gist.github.com/gebner/6f72773b22b18f6e1d4e4f8532aedfe8" title="https://gist.github.com/gebner/6f72773b22b18f6e1d4e4f8532aedfe8">https://gist.github.com/gebner/6f72773b22b18f6e1d4e4f8532aedfe8</a></p>
+<p>The big issues are:</p>
+<p>1. The implementation is really slow.  It takes 3 hours to run.<br>
+  2. In some cases, it takes even longer.  There is a timeout implemented using <code>try_for</code> (shown as "timeout" in the output).  But the linter framework doesn't work well with linters that fail non-deterministically (as is the case with <code>try_for</code>).<br>
+  3. I'm not sure how useful the results are.  Should all non-confluent pairs be fixed?</p>
+
+<a name="191885131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191885131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191885131">Mario Carneiro (Mar 26 2020 at 13:39)</a>:</h4>
+<p>Not all non-confluent pairs should be fixed. This probably gets even more dicey if we have <code>nolint confluence</code> lemmas and you somehow have to check confluence of everything else</p>
+
+<a name="191885401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191885401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191885401">Mario Carneiro (Mar 26 2020 at 13:41)</a>:</h4>
+<p>I have been working under the assumption that <code>simp</code> is only a best effort rewrite system with no pretensions to confluence, so I never made any serious attempt to keep the overall system confluent or nearly so</p>
+
+<a name="191885678"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191885678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191885678">Mario Carneiro (Mar 26 2020 at 13:42)</a>:</h4>
+<p>and more to the point, as a <code>#lint</code>, fixing a confluence bug is not necessarily a thing you can just do. I would rather have more simplification at the cost of confluence</p>
+
+<a name="191885958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191885958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191885958">Kevin Buzzard (Mar 26 2020 at 13:44)</a>:</h4>
+<p>OK so here is a <a href="https://gist.github.com/kbuzzard/d578a110a5f409c7a4c217e48f077c3a" title="https://gist.github.com/kbuzzard/d578a110a5f409c7a4c217e48f077c3a">development of group theory in Lean</a>. I always felt like at the beginning I was going uphill proving <code>mul_one</code> because the axiom was <code>one_mul</code>. Is this anything to do with confluent rewriting? And how do I figure out what lemmas to tag as <code>simp</code>? I just tried randomly -- as long as they passed the basic criteria (like being an equality rather than an implication, and the right hand side being a bit simpler than the left hand side, and everything being in canonical form) they were in.</p>
+
+<a name="191885971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191885971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191885971">Mario Carneiro (Mar 26 2020 at 13:44)</a>:</h4>
+<blockquote>
+<p>But the linter framework doesn't work well with linters that fail non-deterministically (as is the case with try_for).</p>
+</blockquote>
+<p>But... but... what's all that business about <code>(deterministic) timeout</code> then?</p>
+
+<a name="191886295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191886295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191886295">Gabriel Ebner (Mar 26 2020 at 13:46)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/I.20love.20the.20linter/near/191885678" title="#narrow/stream/113488-general/topic/I.20love.20the.20linter/near/191885678">said</a>:</p>
+<blockquote>
+<p>and more to the point, as a <code>#lint</code>, fixing a confluence bug is not necessarily a thing you can just do.</p>
+</blockquote>
+<p>Most of the time the solution is to add more simp lemmas.  It only becomes a problem if the new simp lemmas then introduce new confluence bugs. <span aria-label="slight smile" class="emoji emoji-1f642" role="img" title="slight smile">:slight_smile:</span></p>
+
+<a name="191886498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191886498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191886498">Kevin Buzzard (Mar 26 2020 at 13:48)</a>:</h4>
+<p>Hey linter</p>
+<div class="codehilite"><pre><span></span>/- UNUSED ARGUMENTS: -/
+#print mygroup.group.inv_eq_of_mul_eq_one /- argument 5: (h : a * b = 1) -/
+</pre></div>
+
+
+<p>what are you talking about?</p>
+
+<a name="191886624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191886624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191886624">Mario Carneiro (Mar 26 2020 at 13:49)</a>:</h4>
+<p>one example of a known non-confluence in <code>simp</code> is the rules around coercion. <code>↑x &lt; ↑y &lt;-&gt; x &lt; y</code>, but also <code>↑(x + y) = ↑x + ↑y</code> so <code>↑(a + b) &lt; ↑c</code> can simplify to either <code>a + b &lt; c</code> or <code>↑a + ↑b &lt; ↑c</code></p>
+
+<a name="191886693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191886693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191886693">Kevin Buzzard (Mar 26 2020 at 13:49)</a>:</h4>
+<p>Oh I see, a sorried proof and it complains that I didn't use the hypotheses.</p>
+
+<a name="191886715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191886715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191886715">Gabriel Ebner (Mar 26 2020 at 13:49)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/I.20love.20the.20linter/near/191885971" title="#narrow/stream/113488-general/topic/I.20love.20the.20linter/near/191885971">said</a>:</p>
+<blockquote>
+<p>But... but... what's all that business about <code>(deterministic) timeout</code> then?</p>
+</blockquote>
+<p>The deterministic part is unfortunately a bit optimistic in my experience.  It just means that the timeout is not affected by how fast your machine is (or how many other programs you have running).  But the timeout still depends on the state of the caches, the result of <code>mk_fresh_name</code>, etc.<br>
+So the linter would probably be deterministic if you run it twice on the same mathlib revision.  But a tiny change could cause the linter to fail on unrelated declarations.</p>
+
+<a name="191886964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191886964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191886964">Gabriel Ebner (Mar 26 2020 at 13:51)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/I.20love.20the.20linter/near/191886624" title="#narrow/stream/113488-general/topic/I.20love.20the.20linter/near/191886624">said</a>:</p>
+<blockquote>
+<p>one example of a known non-confluence in <code>simp</code> is the rules around coercion. <code>↑x &lt; ↑y &lt;-&gt; x &lt; y</code>, but also <code>↑(x + y) = ↑x + ↑y</code> so <code>↑(a + b) &lt; ↑c</code> can simplify to either <code>a + b &lt; c</code> or <code>↑a + ↑b &lt; ↑c</code></p>
+</blockquote>
+<p>That's a good one.  For completion, you'd need to add <code>↑a + ↑b &lt; ↑c &lt;-&gt; a + b &lt; c</code> and <code>↑a + ↑b + ↑c &lt; ↑d &lt;-&gt; a + b + c &lt; d</code> and so on.</p>
+
+<a name="191887566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191887566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191887566">Kevin Buzzard (Mar 26 2020 at 13:55)</a>:</h4>
+<p>let's get started!</p>
+
+<a name="191887601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191887601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191887601">Kevin Buzzard (Mar 26 2020 at 13:55)</a>:</h4>
+<p>how many do you think we'll need in practice?</p>
+
+<a name="191887678"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191887678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191887678">Sebastian Ullrich (Mar 26 2020 at 13:56)</a>:</h4>
+<p>Obviously it's in parentheses because it's not always true. Uh.</p>
+
+<a name="191888027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191888027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191888027">Gabriel Ebner (Mar 26 2020 at 13:58)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113488-general/topic/I.20love.20the.20linter/near/191885958" title="#narrow/stream/113488-general/topic/I.20love.20the.20linter/near/191885958">said</a>:</p>
+<blockquote>
+<p>OK so here is a <a href="https://gist.github.com/kbuzzard/d578a110a5f409c7a4c217e48f077c3a" title="https://gist.github.com/kbuzzard/d578a110a5f409c7a4c217e48f077c3a">development of group theory in Lean</a>. [...] Is this anything to do with confluent rewriting?</p>
+</blockquote>
+<p>Yes. In term rewriting systems, <em>completion</em> refers to the process of taking a set of equations (such as your group axioms) and producing a confluent and terminating set of rewrite rules (lemmas tagged as simp) with the property that every equation following from the group axioms is provable by simp.  (For groups this works, and you can also do this automatically.)<br>
+There is a paper by Kaliszyk and Sternagel where they try to automatically derive a simp set in this way for all equations in the HOL light library: <a href="https://easychair.org/publications/paper/h6b" title="https://easychair.org/publications/paper/h6b">https://easychair.org/publications/paper/h6b</a></p>
+
+<a name="191888379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191888379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191888379">Kevin Buzzard (Mar 26 2020 at 14:00)</a>:</h4>
+<p>So <code>simp</code>-labelling is an art? No wonder I'm no good at it. I had assumed it was a science.</p>
+
+<a name="191888557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191888557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191888557">Mario Carneiro (Mar 26 2020 at 14:02)</a>:</h4>
+<p>there is a reasonably objective success metric, and an algorithm that will work in a large number of practical cases, but sometimes you have to be clever. In that sense it's like theorem proving</p>
+
+<a name="191888571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191888571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191888571">Kevin Buzzard (Mar 26 2020 at 14:02)</a>:</h4>
+<p>Why did I feel like I was going uphill until I'd proved <code>mul_one</code> and <code>mul_right_inv</code>, and then everything became trivial?</p>
+
+<a name="191902178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191902178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191902178">Patrick Massot (Mar 26 2020 at 15:34)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> , I strongly suggests your should read <a href="https://lean-forward.github.io/mathlib-maintenance/paper.pdf" title="https://lean-forward.github.io/mathlib-maintenance/paper.pdf">this paper</a>.</p>
+
+<a name="191907866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20love%20the%20linter/near/191907866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64175Ilovethelinter.html#191907866">Kevin Buzzard (Mar 26 2020 at 16:06)</a>:</h4>
+<p>Thanks Patrick. Hey, they complain about <code>list.length_singleton</code> on p8. This feels a bit like the difference between <code>{x}</code> and <code>{y | y = x}</code>. <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  was talking about redefining <code>{x}</code> but perhaps <code>[x]</code> is a bit different because I can only think of <code>cons x nil</code> for the definition.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

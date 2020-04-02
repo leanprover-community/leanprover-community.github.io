@@ -1,0 +1,117 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/66145Needhelpwithclassinstanceresolution.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/66145Needhelpwithclassinstanceresolution.html">Need help with class instance resolution</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192421345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Need%20help%20with%20class%20instance%20resolution/near/192421345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66145Needhelpwithclassinstanceresolution.html#192421345">Yury G. Kudryashov (Mar 31 2020 at 17:20)</a>:</h4>
+<p>Hi, I'm trying to make <code>algebra</code> work with semirings and semimodules, see <a href="https://github.com/leanprover-community/mathlib/issues/2303" title="https://github.com/leanprover-community/mathlib/issues/2303">#2303</a>. Lean fails to find an instance of <code>algebra R (matrix n R)</code> in <code>lie_algebra.lean</code>. I've enables <code>trace.class_instances</code>, see <a href="https://github.com/leanprover-community/mathlib/pull/2303/checks?check_run_id=549397958" title="https://github.com/leanprover-community/mathlib/pull/2303/checks?check_run_id=549397958">build log</a>. It seems that <code>matrix_algebra</code> fails <code>defeq</code>. Why could this happen?</p>
+
+<a name="192421563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Need%20help%20with%20class%20instance%20resolution/near/192421563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66145Needhelpwithclassinstanceresolution.html#192421563">Kevin Buzzard (Mar 31 2020 at 17:22)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">lie_algebra</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">algebra</span> <span class="n">R</span> <span class="o">(</span><span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- works</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">n</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">algebra</span> <span class="n">R</span> <span class="o">(</span><span class="n">matrix</span> <span class="n">n</span> <span class="n">n</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- fails</span>
+</pre></div>
+
+
+<p>What definition of matrix are you using? (what you posted doesn't typecheck for me)</p>
+
+<a name="192421987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Need%20help%20with%20class%20instance%20resolution/near/192421987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66145Needhelpwithclassinstanceresolution.html#192421987">Yury G. Kudryashov (Mar 31 2020 at 17:26)</a>:</h4>
+<p>I'm talking about the bottom of <a href="https://github.com/leanprover-community/mathlib/blob/algebra-bundled/src/algebra/lie_algebra.lean#L441" title="https://github.com/leanprover-community/mathlib/blob/algebra-bundled/src/algebra/lie_algebra.lean#L441">lie_algebra.lean</a></p>
+
+<a name="192422070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Need%20help%20with%20class%20instance%20resolution/near/192422070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66145Needhelpwithclassinstanceresolution.html#192422070">Kevin Buzzard (Mar 31 2020 at 17:27)</a>:</h4>
+<p><code>matrix n n R</code></p>
+
+<a name="192422109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Need%20help%20with%20class%20instance%20resolution/near/192422109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66145Needhelpwithclassinstanceresolution.html#192422109">Yury G. Kudryashov (Mar 31 2020 at 17:27)</a>:</h4>
+<p>It compiles with <code>master</code> but fails in my branch, probably because of some <code>semiring</code> vs <code>ring</code> or <code>semimodule</code> vs <code>module</code> issues.</p>
+
+<a name="192422216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Need%20help%20with%20class%20instance%20resolution/near/192422216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66145Needhelpwithclassinstanceresolution.html#192422216">Yury G. Kudryashov (Mar 31 2020 at 17:28)</a>:</h4>
+<p>In the build log you can see that it tries to apply <code>matrix_algebra</code> but fails.</p>
+
+<a name="192422455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Need%20help%20with%20class%20instance%20resolution/near/192422455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66145Needhelpwithclassinstanceresolution.html#192422455">Kevin Buzzard (Mar 31 2020 at 17:30)</a>:</h4>
+<p>The above doesn't compile for me on master:</p>
+<div class="codehilite"><pre><span></span>failed to synthesize type class instance for
+R : Type,
+_inst_1 : comm_ring R,
+n : Type,
+_inst_2 : fintype n
+⊢ ring (matrix n n R)
+</pre></div>
+
+<a name="192422638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Need%20help%20with%20class%20instance%20resolution/near/192422638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66145Needhelpwithclassinstanceresolution.html#192422638">Yury G. Kudryashov (Mar 31 2020 at 17:31)</a>:</h4>
+<p>That's interesting.</p>
+
+<a name="192422854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Need%20help%20with%20class%20instance%20resolution/near/192422854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66145Needhelpwithclassinstanceresolution.html#192422854">Kevin Buzzard (Mar 31 2020 at 17:32)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">lie_algebra</span>
+
+<span class="n">def</span> <span class="n">X</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="mi">3</span>
+
+<span class="n">open_locale</span> <span class="n">classical</span>
+
+<span class="n">noncomputable</span> <span class="kn">example</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">n</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">algebra</span> <span class="n">R</span> <span class="o">(</span><span class="n">matrix</span> <span class="n">n</span> <span class="n">n</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+<a name="192422868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Need%20help%20with%20class%20instance%20resolution/near/192422868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66145Needhelpwithclassinstanceresolution.html#192422868">Kevin Buzzard (Mar 31 2020 at 17:32)</a>:</h4>
+<p>Need decidable equality on n</p>
+
+<a name="192422933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Need%20help%20with%20class%20instance%20resolution/near/192422933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66145Needhelpwithclassinstanceresolution.html#192422933">Kevin Buzzard (Mar 31 2020 at 17:33)</a>:</h4>
+<p>(the def to work around open_locale bug)</p>
+
+<a name="192423068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Need%20help%20with%20class%20instance%20resolution/near/192423068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66145Needhelpwithclassinstanceresolution.html#192423068">Yury G. Kudryashov (Mar 31 2020 at 17:34)</a>:</h4>
+<p>Don't we have a decidable equality on <code>fin n</code>? And we have it at the bottom of <code>lie_algebra</code></p>
+
+<a name="192423233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Need%20help%20with%20class%20instance%20resolution/near/192423233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66145Needhelpwithclassinstanceresolution.html#192423233">Yury G. Kudryashov (Mar 31 2020 at 17:35)</a>:</h4>
+<p>You've posted code snippet with <code>fin n</code>, then error for <code>{n : Type*} [fintype n]</code></p>
+
+<a name="192424429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Need%20help%20with%20class%20instance%20resolution/near/192424429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66145Needhelpwithclassinstanceresolution.html#192424429">Kevin Buzzard (Mar 31 2020 at 17:44)</a>:</h4>
+<p>Yes, I was confused by n. I'll fix. Thanks.</p>
+
+<a name="192426294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Need%20help%20with%20class%20instance%20resolution/near/192426294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66145Needhelpwithclassinstanceresolution.html#192426294">Yury G. Kudryashov (Mar 31 2020 at 17:57)</a>:</h4>
+<p>And this doesn't help with the original question: why <code>lie_algebra</code> fails to compile in my branch?</p>
+
+<a name="192428591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Need%20help%20with%20class%20instance%20resolution/near/192428591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66145Needhelpwithclassinstanceresolution.html#192428591">Yury G. Kudryashov (Mar 31 2020 at 18:14)</a>:</h4>
+<p>Probably this issue is similar to what <span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> had when he tried to make <code>linear_map</code>s work with <code>semimodule</code>s</p>
+
+<a name="192437494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Need%20help%20with%20class%20instance%20resolution/near/192437494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66145Needhelpwithclassinstanceresolution.html#192437494">Yury G. Kudryashov (Mar 31 2020 at 19:24)</a>:</h4>
+<p>Ping here...</p>
+
+<a name="192442720"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Need%20help%20with%20class%20instance%20resolution/near/192442720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66145Needhelpwithclassinstanceresolution.html#192442720">Yury G. Kudryashov (Mar 31 2020 at 20:07)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> I'd prefer some hint...</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

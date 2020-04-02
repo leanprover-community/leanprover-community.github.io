@@ -9,6 +9,40 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Hedetniemi](85789Hedetniemi.html) (177 messages, latest: Apr 02 2020 at 08:52)
+
+* [Lifting a finite set to a finset](64487Liftingafinitesettoafinset.html) (8 messages, latest: Apr 01 2020 at 19:41)
+
+* [non-dependent type sheaves](52001nondependenttypesheaves.html) (5 messages, latest: Apr 01 2020 at 09:48)
+
+* [Borel measure space](05619Borelmeasurespace.html) (47 messages, latest: Apr 01 2020 at 08:58)
+
+* [help proving IVT](45506helpprovingIVT.html) (13 messages, latest: Apr 01 2020 at 04:02)
+
+* [lattice with antiautomorphism](46295latticewithantiautomorphism.html) (32 messages, latest: Mar 31 2020 at 13:09)
+
+* [strange rw behaviour with mv_polynomial](71909strangerwbehaviourwithmvpolynomial.html) (77 messages, latest: Mar 30 2020 at 16:19)
+
+* [Ideal lemma](79724Ideallemma.html) (111 messages, latest: Mar 30 2020 at 08:33)
+
+* [Implicit function theorem](85878Implicitfunctiontheorem.html) (17 messages, latest: Mar 30 2020 at 02:06)
+
+* [nat.sqrt in lean](78483natsqrtinlean.html) (4 messages, latest: Mar 29 2020 at 01:10)
+
+* [mv_polynomial questions](07122mvpolynomialquestions.html) (16 messages, latest: Mar 29 2020 at 00:52)
+
+* [Density of orbits of an irrational rotation](30482Densityoforbitsofanirrationalrotation.html) (18 messages, latest: Mar 28 2020 at 01:45)
+
+* [topos](42838topos.html) (57 messages, latest: Mar 27 2020 at 05:24)
+
+* [Speeding up Elaboration](69061SpeedingupElaboration.html) (21 messages, latest: Mar 26 2020 at 22:46)
+
+* [Bourbaki's tau](38676Bourbakistau.html) (14 messages, latest: Mar 26 2020 at 20:16)
+
+* [real number game](21928realnumbergame.html) (5 messages, latest: Mar 26 2020 at 20:14)
+
+* [`metric_space` documentation](86922metricspacedocumentation.html) (1 message, latest: Mar 24 2020 at 20:23)
+
 * [Pigeonhole for arbitrary cardinals?](93106Pigeonholeforarbitrarycardinals.html) (9 messages, latest: Mar 23 2020 at 20:01)
 
 * [colimits in an arbitrary equational theory](74089colimitsinanarbitraryequationaltheory.html) (49 messages, latest: Mar 21 2020 at 22:04)
@@ -22,8 +56,6 @@ permalink: archive/116395maths/index.html
 * [algebra is not scaling for me](49270algebraisnotscalingforme.html) (128 messages, latest: Mar 21 2020 at 15:37)
 
 * [Category exercice](40487Categoryexercice.html) (55 messages, latest: Mar 20 2020 at 17:44)
-
-* [topos](42838topos.html) (54 messages, latest: Mar 18 2020 at 13:32)
 
 * [Homological algebra](88189Homologicalalgebra.html) (5 messages, latest: Mar 18 2020 at 11:41)
 

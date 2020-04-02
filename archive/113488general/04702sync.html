@@ -1,0 +1,72 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/04702sync.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/04702sync.html">sync</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="191640491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sync/near/191640491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04702sync.html#191640491">Kevin Buzzard (Mar 24 2020 at 16:53)</a>:</h4>
+<p>I've never quite understood the <code>sync</code> error. Is it posible to get a Lean file with precisely one error in, which is <code>sync</code>?</p>
+
+<a name="191664026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sync/near/191664026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04702sync.html#191664026">orlando (Mar 24 2020 at 19:57)</a>:</h4>
+<p>Hum i try <span aria-label="grinning face with smiling eyes" class="emoji emoji-1f601" role="img" title="grinning face with smiling eyes">:grinning_face_with_smiling_eyes:</span></p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">category</span><span class="bp">.</span><span class="n">CommRing</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">ring</span>
+<span class="kn">import</span> <span class="n">tactic</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">functor_category</span> <span class="c1">-- this transitively imports</span>
+<span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">ring</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">types</span>
+<span class="n">universes</span> <span class="n">v</span> <span class="n">u</span>
+<span class="c">/-</span><span class="cm">-</span>
+<span class="cm">##  It&#39;s the group functor  Idem,</span>
+<span class="cm">##  e1 × e2 = e1 e2 - (1-e1)(1-e2)</span>
+<span class="cm">-/</span>
+<span class="kn">structure</span> <span class="n">Idem</span><span class="o">(</span> <span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">e</span>  <span class="o">:</span> <span class="n">R</span><span class="o">)</span>
+<span class="o">(</span><span class="n">certif</span> <span class="o">:</span>  <span class="n">e</span> <span class="bp">*</span><span class="n">e</span> <span class="bp">=</span> <span class="n">e</span><span class="o">)</span>
+
+<span class="kn">namespace</span>   <span class="n">Idem</span>
+<span class="kn">section</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">ext</span><span class="o">]</span><span class="kn">lemma</span> <span class="n">ext</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">g1</span> <span class="n">g2</span> <span class="o">:</span> <span class="n">Idem</span> <span class="n">R</span><span class="o">},</span> <span class="n">g1</span><span class="bp">.</span><span class="n">e</span> <span class="bp">=</span> <span class="n">g2</span><span class="bp">.</span><span class="n">e</span> <span class="bp">→</span> <span class="n">g1</span> <span class="bp">=</span> <span class="n">g2</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">g1</span> <span class="n">g2</span><span class="o">,</span>  <span class="c1">--- it&#39;s ok ? just don&#39;t use Bracket ?</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">h1</span> <span class="o">,</span>
+  <span class="n">cases</span> <span class="n">g1</span><span class="o">,</span>                                         <span class="c1">---  difficult i have to analyse !</span>
+  <span class="n">cases</span> <span class="n">g2</span><span class="o">,</span>
+  <span class="n">congr</span> <span class="bp">;</span> <span class="n">try</span> <span class="o">{</span> <span class="n">assumption</span> <span class="o">},</span>
+<span class="kn">end</span>
+
+<span class="n">def</span> <span class="n">one</span>  <span class="o">:</span> <span class="n">Idem</span> <span class="o">(</span><span class="n">R</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span><span class="n">e</span> <span class="o">:=</span> <span class="mi">1</span><span class="o">,</span>  <span class="n">certif</span> <span class="o">:=</span> <span class="n">mul_one</span> <span class="mi">1</span><span class="o">}</span>
+<span class="kn">instance</span>  <span class="o">:</span> <span class="n">has_one</span> <span class="o">(</span><span class="n">Idem</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">one</span><span class="bp">⟩</span>
+<span class="kn">lemma</span> <span class="n">one_e</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">Idem</span><span class="o">(</span><span class="n">R</span><span class="o">))</span><span class="bp">.</span><span class="n">e</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="n">def</span> <span class="n">mul_map&#39;</span> <span class="o">:</span> <span class="n">Idem</span><span class="o">(</span><span class="n">R</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Idem</span> <span class="o">(</span><span class="n">R</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Idem</span><span class="o">(</span><span class="n">R</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">g1</span> <span class="n">g2</span><span class="o">,</span> <span class="k">begin</span>
+<span class="o">{</span> <span class="n">e</span> <span class="o">:=</span> <span class="n">g1</span><span class="bp">.</span><span class="n">e</span> <span class="bp">*</span> <span class="n">g2</span><span class="bp">.</span><span class="n">e</span><span class="bp">-</span><span class="o">(</span><span class="mi">1</span><span class="bp">-</span><span class="n">g1</span><span class="bp">.</span><span class="n">e</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">1</span><span class="bp">-</span><span class="n">g2</span><span class="bp">.</span><span class="n">e</span><span class="o">),</span>   <span class="c1">--- &quot; exact &quot;</span>
+  <span class="n">certif</span> <span class="o">:=</span> <span class="k">begin</span>
+   <span class="n">sorry</span><span class="o">,</span>
+  <span class="kn">end</span><span class="o">},</span>  <span class="c1">-- if i put my mousse here i have sync error !   I forget &quot; exact &quot;  !</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="191664795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sync/near/191664795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04702sync.html#191664795">Kevin Buzzard (Mar 24 2020 at 20:03)</a>:</h4>
+<p>I was hoping to get it as the only error in the Lean Messages window (click on Info View: Display Messages), i.e. have VS Code display 1 error (your code says it has 16 errors in the bottom left hand corner of VS Code)</p>
+
+<a name="191665586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sync/near/191665586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04702sync.html#191665586">orlando (Mar 24 2020 at 20:11)</a>:</h4>
+<p>okay i try to find other exemple <span aria-label="sweat smile" class="emoji emoji-1f605" role="img" title="sweat smile">:sweat_smile:</span></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

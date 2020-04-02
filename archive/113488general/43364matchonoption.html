@@ -1,0 +1,46 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/43364matchonoption.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/43364matchonoption.html">match on option</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192474894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20on%20option/near/192474894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43364matchonoption.html#192474894">Scott Morrison (Apr 01 2020 at 01:37)</a>:</h4>
+<p>if I have <code>o : option A</code>, and write</p>
+<div class="codehilite"><pre><span></span>match o with
+| some a := ...
+| none := ...
+end
+</pre></div>
+
+
+<p>how can I access the fact <code>o.is_none</code> in the second branch?</p>
+
+<a name="192474908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20on%20option/near/192474908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43364matchonoption.html#192474908">Scott Morrison (Apr 01 2020 at 01:37)</a>:</h4>
+<p>Of course I could write an <code>if h : o.is_some then ... else ...</code>, at the cost of slightly less pretty extraction of the <code>some</code>.</p>
+
+<a name="192475000"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20on%20option/near/192475000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43364matchonoption.html#192475000">Mario Carneiro (Apr 01 2020 at 01:39)</a>:</h4>
+<p>you could match on <code>o, o.is_some, rfl : \forall o b, o.is_some = b -&gt; ...</code> with <code>some a, tt, rfl</code> and <code>none, ff, rfl</code></p>
+
+<a name="192475881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20on%20option/near/192475881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43364matchonoption.html#192475881">Bryan Gin-ge Chen (Apr 01 2020 at 01:54)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="192493226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20on%20option/near/192493226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43364matchonoption.html#192493226">Kevin Buzzard (Apr 01 2020 at 07:48)</a>:</h4>
+<p>This match on rfl technique comes up once every couple of months. Examples of this technique should be put in the docs</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

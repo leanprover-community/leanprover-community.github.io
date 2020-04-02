@@ -1,0 +1,62 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/88241otherkindsofinductivetypes.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/88241otherkindsofinductivetypes.html">other kinds of inductive types</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192379136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/other%20kinds%20of%20inductive%20types/near/192379136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88241otherkindsofinductivetypes.html#192379136">Kevin Buzzard (Mar 31 2020 at 12:04)</a>:</h4>
+<p>My impression from hearing people talk about inductive types in Lean v in other languages is that there are some things you can do in one system with inductive types that you can't do with another system. In some sense doesn't this represent a major difference in the systems? Is the idea supposed to be that in theory anything you can do in one of these systems you can do in another one a la Church-Turing or is it more complicated? </p>
+<p>Couldn't you prove false in Coq relatively recently, maybe because of an issue with an inductive type? Could the same thing happen to Lean? Could someone make some insane inductive type involving a dodgy recursion which the kernel buys but whose existence can't be "justified" -- whatever that means? For example, say its existence immediately implied a contradiction. Is the idea that one could just fix up the C++ and nothing would break because all the inductive types in lean and mathlib are sensible, and that stupid inductive type was exploiting some kind of bug and should never have been allowed to exist anyway.</p>
+
+<a name="192381030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/other%20kinds%20of%20inductive%20types/near/192381030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88241otherkindsofinductivetypes.html#192381030">Marc Huisinga (Mar 31 2020 at 12:24)</a>:</h4>
+<p>Church-Turing regards computation (for functions N -&gt; N), it doesn't make any statement about type systems. afaik even when considering computability, things start getting more complicated when you consider other notions of computability (e.g. computability at higher type). specifically, i remember this: <a href="https://cstheory.stackexchange.com/questions/1117/realizability-theory-difference-in-power-between-lambda-calculus-and-turing-mac" title="https://cstheory.stackexchange.com/questions/1117/realizability-theory-difference-in-power-between-lambda-calculus-and-turing-mac">https://cstheory.stackexchange.com/questions/1117/realizability-theory-difference-in-power-between-lambda-calculus-and-turing-mac</a></p>
+<p>my understanding is that lean's inductive types are relatively "primitive", which enables people like mario to prove the relative consistency of lean, while e.g. systems like agda make these primitives much more powerful. this probably leads to a nicer user experience, but it also makes it way more difficult to prove relative consistency (and apparently, sometimes the resulting systems are not actually consistent, given that there are occasionally proofs of false in some other provers, caused not only by an implementation bug). i'm not sure about coq and its extensions. maybe the proof of false used an extension that is not commonly used in coq?</p>
+<p>so the theory of lean is ok, but perhaps the kernel might still be buggy. lean contains this issue by keeping the kernel as small as possible, and in fact there has been no proof of false in lean so far (at least this was the case when i asked sebastian a while back).</p>
+<p>i think that if the theory is okay, and there was a bug in the implementation, you could usually fix it without everything "sensible" (whatever that means) breaking, yes.</p>
+
+<a name="192382378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/other%20kinds%20of%20inductive%20types/near/192382378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88241otherkindsofinductivetypes.html#192382378">Mario Carneiro (Mar 31 2020 at 12:36)</a>:</h4>
+<p>Lean's inductive types are simple-ish, but note that the relative consistency proof needs a bunch of universes over ZFC. The existence of inductive types in isabelle doesn't need this, by comparison</p>
+
+<a name="192382458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/other%20kinds%20of%20inductive%20types/near/192382458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88241otherkindsofinductivetypes.html#192382458">Mario Carneiro (Mar 31 2020 at 12:37)</a>:</h4>
+<p>When I first learned lean, I was gobsmacked that we have these complicated recursion principles, and no proof of existence, it's just taken for granted</p>
+
+<a name="192382595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/other%20kinds%20of%20inductive%20types/near/192382595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88241otherkindsofinductivetypes.html#192382595">Mario Carneiro (Mar 31 2020 at 12:38)</a>:</h4>
+<p>It leads to by far the most complicated axiomatic system in current practical usage, and Coq and Agda go further still</p>
+
+<a name="192383073"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/other%20kinds%20of%20inductive%20types/near/192383073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88241otherkindsofinductivetypes.html#192383073">Mario Carneiro (Mar 31 2020 at 12:42)</a>:</h4>
+<p><a href="https://sympa.inria.fr/sympa/arc/coq-club/2013-12/msg00173.html" title="https://sympa.inria.fr/sympa/arc/coq-club/2013-12/msg00173.html">This coq bug</a> was indeed an issue in the theory, not the implementation, a "dodgy recursion" leading to a proof of inconsistency with classical axioms. It wasn't an outright contradiction, so it lead to a minor existential crisis when the Coq developers weren't sure if they were okay with that or not</p>
+
+<a name="192383375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/other%20kinds%20of%20inductive%20types/near/192383375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88241otherkindsofinductivetypes.html#192383375">Mario Carneiro (Mar 31 2020 at 12:44)</a>:</h4>
+<p>AFAIK there has still never been a proof of false on trust level 0 using the kernel of lean</p>
+
+<a name="192383997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/other%20kinds%20of%20inductive%20types/near/192383997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88241otherkindsofinductivetypes.html#192383997">Marc Huisinga (Mar 31 2020 at 12:49)</a>:</h4>
+<p>were there any proofs of false in agda that weren't just bugs in the implementation? i know that there were plenty of bugs that resulted in a proof of false (cf. <a href="https://github.com/agda/agda/issues?page=1&amp;q=is%3Aissue+label%3Afalse" title="https://github.com/agda/agda/issues?page=1&amp;q=is%3Aissue+label%3Afalse">https://github.com/agda/agda/issues?page=1&amp;q=is%3Aissue+label%3Afalse</a>)</p>
+
+<a name="192385763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/other%20kinds%20of%20inductive%20types/near/192385763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88241otherkindsofinductivetypes.html#192385763">Mario Carneiro (Mar 31 2020 at 13:04)</a>:</h4>
+<p>this question presupposes that there is such a thing as a "theory of agda"</p>
+
+<a name="192385809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/other%20kinds%20of%20inductive%20types/near/192385809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88241otherkindsofinductivetypes.html#192385809">Mario Carneiro (Mar 31 2020 at 13:04)</a>:</h4>
+<p>as far as I know, agda is a type theorist playground. The theory is the implementation</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

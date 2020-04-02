@@ -9,13 +9,61 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [2006 STEP 3 Question 8](297362006STEP3Question8.html) (100 messages, latest: Mar 24 2020 at 13:47)
+* [cleaning up this tactic proof (regarding closures)](12529cleaningupthistacticproofregardingclosures.html) (70 messages, latest: Apr 02 2020 at 07:59)
 
-* [Type theory books?](43323Typetheorybooks.html) (16 messages, latest: Mar 24 2020 at 05:35)
+* [more basics](41001morebasics.html) (276 messages, latest: Apr 02 2020 at 00:11)
+
+* [1/2 > 0](21409120.html) (8 messages, latest: Apr 01 2020 at 16:36)
+
+* [How to Extract](55469HowtoExtract.html) (3 messages, latest: Apr 01 2020 at 15:36)
+
+* [noob question(s)](52075noobquestions.html) (2770 messages, latest: Apr 01 2020 at 09:38)
+
+* [grasshopper problem](88608grasshopperproblem.html) (106 messages, latest: Mar 31 2020 at 20:16)
+
+* [Metric space question](80809Metricspacequestion.html) (71 messages, latest: Mar 31 2020 at 18:42)
+
+* [chained inequalities ?](53977chainedinequalities.html) (55 messages, latest: Mar 31 2020 at 13:52)
+
+* [Tactic writing: forall to lambda](41723Tacticwritingforalltolambda.html) (10 messages, latest: Mar 31 2020 at 02:18)
+
+* [misunderstanding coe?](67382misunderstandingcoe.html) (55 messages, latest: Mar 30 2020 at 20:51)
+
+* [term style equivalent to `use`](30360termstyleequivalenttouse.html) (9 messages, latest: Mar 30 2020 at 00:47)
+
+* [flatten conjunction access](27115flattenconjunctionaccess.html) (16 messages, latest: Mar 29 2020 at 21:54)
+
+* [Dumb question: where did analysis.real go?](74578Dumbquestionwheredidanalysisrealgo.html) (19 messages, latest: Mar 29 2020 at 18:23)
+
+* [(no topic)](79918notopic.html) (28 messages, latest: Mar 29 2020 at 18:16)
+
+* [rewrite tactic failed, lemma lhs is a metavariable](23945rewritetacticfailedlemmalhsisametavariable.html) (14 messages, latest: Mar 29 2020 at 11:44)
+
+* [natural number game questions](52294naturalnumbergamequestions.html) (92 messages, latest: Mar 29 2020 at 10:09)
+
+* [Lift a type to a higher universe](27679Liftatypetoahigheruniverse.html) (5 messages, latest: Mar 28 2020 at 22:23)
+
+* [unnecessary axioms](71874unnecessaryaxioms.html) (8 messages, latest: Mar 28 2020 at 22:20)
+
+* [command line interface](62681commandlineinterface.html) (32 messages, latest: Mar 28 2020 at 12:10)
+
+* [order of a group](30144orderofagroup.html) (18 messages, latest: Mar 28 2020 at 03:12)
+
+* [2006 STEP 3 Question 8](297362006STEP3Question8.html) (114 messages, latest: Mar 27 2020 at 14:52)
+
+* [focusing goals](90773focusinggoals.html) (11 messages, latest: Mar 27 2020 at 13:15)
+
+* [exists.intro with two 'arguments'](22613existsintrowithtwoarguments.html) (22 messages, latest: Mar 27 2020 at 03:58)
+
+* [Type Mismatch with coe to fun](40856TypeMismatchwithcoetofun.html) (6 messages, latest: Mar 26 2020 at 15:59)
+
+* [mathlib installation](38548mathlibinstallation.html) (72 messages, latest: Mar 25 2020 at 23:06)
+
+* [Automorphism](62025Automorphism.html) (8 messages, latest: Mar 25 2020 at 16:33)
+
+* [Type theory books?](43323Typetheorybooks.html) (17 messages, latest: Mar 25 2020 at 05:31)
 
 * [Schnorr Group](54733SchnorrGroup.html) (38 messages, latest: Mar 24 2020 at 01:25)
-
-* [noob question(s)](52075noobquestions.html) (2608 messages, latest: Mar 23 2020 at 23:15)
 
 * [working with sets](94269workingwithsets.html) (20 messages, latest: Mar 23 2020 at 20:51)
 
@@ -28,8 +76,6 @@ permalink: archive/113489newmembers/index.html
 * [Bezout's identity](61086Bezoutsidentity.html) (26 messages, latest: Mar 23 2020 at 02:53)
 
 * [ring morphism from Z](74894ringmorphismfromZ.html) (30 messages, latest: Mar 22 2020 at 23:12)
-
-* [more basics](41001morebasics.html) (264 messages, latest: Mar 22 2020 at 22:12)
 
 * [residue class](96840residueclass.html) (24 messages, latest: Mar 22 2020 at 22:08)
 
@@ -73,8 +119,6 @@ permalink: archive/113489newmembers/index.html
 
 * [TPIL Chapter 7](98392TPILChapter7.html) (45 messages, latest: Mar 19 2020 at 08:31)
 
-* [mathlib installation](38548mathlibinstallation.html) (20 messages, latest: Mar 19 2020 at 07:45)
-
 * [TPIL chaper 8 Ackermann function](60219TPILchaper8Ackermannfunction.html) (21 messages, latest: Mar 17 2020 at 19:32)
 
 * [Splitting the Goal](03011SplittingtheGoal.html) (4 messages, latest: Mar 17 2020 at 16:27)
@@ -104,8 +148,6 @@ permalink: archive/113489newmembers/index.html
 * [Prime Theorem Help](16635PrimeTheoremHelp.html) (16 messages, latest: Mar 13 2020 at 00:44)
 
 * [has_binary_products etc.](25502hasbinaryproductsetc.html) (8 messages, latest: Mar 12 2020 at 15:43)
-
-* [natural number game questions](52294naturalnumbergamequestions.html) (85 messages, latest: Mar 12 2020 at 13:14)
 
 * [naturals nonnegative](44425naturalsnonnegative.html) (6 messages, latest: Mar 11 2020 at 16:18)
 
@@ -1746,8 +1788,6 @@ permalink: archive/113489newmembers/index.html
 * [this is interesting](49953thisisinteresting.html) (4 messages, latest: Feb 27 2018 at 00:00)
 
 * [Kenny Lau](58824KennyLau.html) (1 message, latest: Feb 26 2018 at 23:09)
-
-* [(no topic)](79918notopic.html) (27 messages, latest: Feb 26 2018 at 19:10)
 
 * [Andrew Ashworth](85298AndrewAshworth.html) (15 messages, latest: Feb 26 2018 at 16:21)
 

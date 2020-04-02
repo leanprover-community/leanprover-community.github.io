@@ -1,0 +1,468 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html">strange rw behaviour with mv_polynomial</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192269030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192269030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192269030">Kevin Buzzard (Mar 30 2020 at 15:06)</a>:</h4>
+<p>Shing Tak Lam managed to get <code>rw zero_add</code> to fail on a goal of the form <code>0 + p = p</code> where <code>p : mv_polynomial R S</code>.</p>
+<p>Working with multivariate polynomials rings, and not doing anything particularly fishy as far as I can see (but maybe I'm wrong), he created a zero which was a <code>finsupp.has_zero</code>. The first example below refuses to rewrite, which surprises me because the equality is an equality of <code>mv_polynomial</code>s. The second example rewrites fine, which also surprises me because this time the equality is an equality of finsupps. <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> how do I debug this one?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">mv_polynomial</span>
+
+<span class="kn">open</span> <span class="n">mv_polynomial</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">S</span> <span class="n">R</span><span class="o">)</span>
+
+<span class="c1">-- problematic proof of p = 0 + p with a funny zero which can show up</span>
+<span class="c1">-- if you&#39;re working with mv_polynomials</span>
+
+<span class="c1">-- set_option pp.all true</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">=</span>
+  <span class="c1">-- zero</span>
+  <span class="o">(</span><span class="bp">@</span><span class="n">has_zero</span><span class="bp">.</span><span class="n">zero</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span>
+          <span class="o">(</span><span class="bp">@</span><span class="n">finsupp</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span> <span class="mi">0</span><span class="o">}</span> <span class="o">(</span><span class="bp">@</span><span class="n">finsupp</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span> <span class="mi">0</span><span class="o">}</span> <span class="n">S</span> <span class="n">nat</span> <span class="n">nat</span><span class="bp">.</span><span class="n">has_zero</span><span class="o">)</span> <span class="n">R</span>
+             <span class="o">(</span><span class="bp">@</span><span class="n">mul_zero_class</span><span class="bp">.</span><span class="n">to_has_zero</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">R</span>
+                <span class="o">(</span><span class="bp">@</span><span class="n">semiring</span><span class="bp">.</span><span class="n">to_mul_zero_class</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">R</span>
+                   <span class="o">(</span><span class="bp">@</span><span class="n">comm_semiring</span><span class="bp">.</span><span class="n">to_semiring</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">R</span>
+                      <span class="o">(</span><span class="bp">@</span><span class="n">comm_ring</span><span class="bp">.</span><span class="n">to_comm_semiring</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">R</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">)))))</span>
+          <span class="o">(</span><span class="bp">@</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">has_zero</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span> <span class="mi">0</span><span class="o">}</span> <span class="o">(</span><span class="bp">@</span><span class="n">finsupp</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span> <span class="mi">0</span><span class="o">}</span> <span class="n">S</span> <span class="n">nat</span> <span class="n">nat</span><span class="bp">.</span><span class="n">has_zero</span><span class="o">)</span> <span class="n">R</span>
+             <span class="o">(</span><span class="bp">@</span><span class="n">mul_zero_class</span><span class="bp">.</span><span class="n">to_has_zero</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">R</span>
+                <span class="o">(</span><span class="bp">@</span><span class="n">semiring</span><span class="bp">.</span><span class="n">to_mul_zero_class</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">R</span>
+                   <span class="o">(</span><span class="bp">@</span><span class="n">comm_semiring</span><span class="bp">.</span><span class="n">to_semiring</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">R</span>
+                      <span class="o">(</span><span class="bp">@</span><span class="n">comm_ring</span><span class="bp">.</span><span class="n">to_comm_semiring</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">R</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">))))))</span>
+  <span class="bp">+</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- ⊢ p = 0 + p</span>
+  <span class="c1">-- rw zero_add, -- fails</span>
+  <span class="n">symmetry</span><span class="o">,</span>
+  <span class="c1">-- ⊢ 0 + p = p (GOAL A)</span>
+  <span class="c1">-- rw zero_add, -- still fails</span>
+  <span class="n">exact</span> <span class="n">zero_add</span> <span class="n">p</span> <span class="c1">-- closes goal</span>
+<span class="kn">end</span>
+
+<span class="c1">-- but with 0 + p = p the rewrite works</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="bp">@</span><span class="n">has_zero</span><span class="bp">.</span><span class="n">zero</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span>
+          <span class="o">(</span><span class="bp">@</span><span class="n">finsupp</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span> <span class="mi">0</span><span class="o">}</span> <span class="o">(</span><span class="bp">@</span><span class="n">finsupp</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span> <span class="mi">0</span><span class="o">}</span> <span class="n">S</span> <span class="n">nat</span> <span class="n">nat</span><span class="bp">.</span><span class="n">has_zero</span><span class="o">)</span> <span class="n">R</span>
+             <span class="o">(</span><span class="bp">@</span><span class="n">mul_zero_class</span><span class="bp">.</span><span class="n">to_has_zero</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">R</span>
+                <span class="o">(</span><span class="bp">@</span><span class="n">semiring</span><span class="bp">.</span><span class="n">to_mul_zero_class</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">R</span>
+                   <span class="o">(</span><span class="bp">@</span><span class="n">comm_semiring</span><span class="bp">.</span><span class="n">to_semiring</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">R</span>
+                      <span class="o">(</span><span class="bp">@</span><span class="n">comm_ring</span><span class="bp">.</span><span class="n">to_comm_semiring</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">R</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">)))))</span>
+          <span class="o">(</span><span class="bp">@</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">has_zero</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span> <span class="mi">0</span><span class="o">}</span> <span class="o">(</span><span class="bp">@</span><span class="n">finsupp</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span> <span class="mi">0</span><span class="o">}</span> <span class="n">S</span> <span class="n">nat</span> <span class="n">nat</span><span class="bp">.</span><span class="n">has_zero</span><span class="o">)</span> <span class="n">R</span>
+             <span class="o">(</span><span class="bp">@</span><span class="n">mul_zero_class</span><span class="bp">.</span><span class="n">to_has_zero</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">R</span>
+                <span class="o">(</span><span class="bp">@</span><span class="n">semiring</span><span class="bp">.</span><span class="n">to_mul_zero_class</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">R</span>
+                   <span class="o">(</span><span class="bp">@</span><span class="n">comm_semiring</span><span class="bp">.</span><span class="n">to_semiring</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">R</span>
+                      <span class="o">(</span><span class="bp">@</span><span class="n">comm_ring</span><span class="bp">.</span><span class="n">to_comm_semiring</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">R</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">))))))</span>
+  <span class="bp">+</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- ⊢ 0 + p = p (GOAL B)</span>
+  <span class="n">rw</span> <span class="n">zero_add</span> <span class="c1">-- works</span>
+<span class="kn">end</span>
+
+<span class="c1">-- but this fails! So how did rw find the add_monoid instance?</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">add_monoid</span> <span class="o">(</span><span class="bp">@</span><span class="n">finsupp</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span> <span class="mi">0</span><span class="o">}</span> <span class="o">(</span><span class="bp">@</span><span class="n">finsupp</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span> <span class="mi">0</span><span class="o">}</span> <span class="n">S</span> <span class="n">nat</span> <span class="n">nat</span><span class="bp">.</span><span class="n">has_zero</span><span class="o">)</span> <span class="n">R</span>
+             <span class="o">(</span><span class="bp">@</span><span class="n">mul_zero_class</span><span class="bp">.</span><span class="n">to_has_zero</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">R</span>
+                <span class="o">(</span><span class="bp">@</span><span class="n">semiring</span><span class="bp">.</span><span class="n">to_mul_zero_class</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">R</span>
+                   <span class="o">(</span><span class="bp">@</span><span class="n">comm_semiring</span><span class="bp">.</span><span class="n">to_semiring</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">R</span>
+                      <span class="o">(</span><span class="bp">@</span><span class="n">comm_ring</span><span class="bp">.</span><span class="n">to_comm_semiring</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">R</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">)))))</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+<a name="192269327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192269327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192269327">Kevin Buzzard (Mar 30 2020 at 15:08)</a>:</h4>
+<p>GOAL A is <code>@eq.{1} (@mv_polynomial.{0 0} S R (@comm_ring.to_comm_semiring.{0} R _inst_1))</code> and GOAL B is <code>@eq.{1} (@finsupp.{0 0} (@finsupp.{0 0} S nat nat.has_zero) R ...</code></p>
+
+<a name="192269367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192269367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192269367">Gabriel Ebner (Mar 30 2020 at 15:08)</a>:</h4>
+<p>Is it the same addition?</p>
+
+<a name="192269419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192269419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192269419">Kevin Buzzard (Mar 30 2020 at 15:09)</a>:</h4>
+<p>No</p>
+
+<a name="192269476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192269476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192269476">Kevin Buzzard (Mar 30 2020 at 15:09)</a>:</h4>
+<p>The one where the rewrite fails is mv_polynomial addition, the one that succeeds is finsupp addition.</p>
+
+<a name="192270015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192270015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192270015">Gabriel Ebner (Mar 30 2020 at 15:13)</a>:</h4>
+<p>Try <code>rw zero_add</code> after setting</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">type_context</span><span class="bp">.</span><span class="n">is_def_eq</span> <span class="n">true</span>
+<span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">type_context</span><span class="bp">.</span><span class="n">is_def_eq_detail</span> <span class="n">true</span>
+</pre></div>
+
+<a name="192270172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192270172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192270172">Gabriel Ebner (Mar 30 2020 at 15:14)</a>:</h4>
+<p>You should be able to make sense of the output, it's not very long.</p>
+
+<a name="192270203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192270203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192270203">Kevin Buzzard (Mar 30 2020 at 15:14)</a>:</h4>
+<p>Thanks!</p>
+
+<a name="192270506"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192270506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192270506">Kevin Buzzard (Mar 30 2020 at 15:16)</a>:</h4>
+<p>The problem seems to be this:</p>
+<div class="codehilite"><pre><span></span>[type_context.is_def_eq_detail] [3]: mv_polynomial S R =?= (S →₀ ℕ) →₀ R
+[type_context.is_def_eq_detail] [4]: mv_polynomial =?= finsupp
+[type_context.is_def_eq_detail] on failure: mv_polynomial =?= finsupp
+</pre></div>
+
+
+<p>Lean correctly asks whether the mv_polynomial is the finsupp, and this is true because this is literally the definition of mv_polynomial S R, but Lean fails to spot this.</p>
+
+<a name="192270557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192270557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192270557">Kevin Buzzard (Mar 30 2020 at 15:16)</a>:</h4>
+<p>Oh no wait, I am out of date</p>
+
+<a name="192270582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192270582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192270582">Gabriel Ebner (Mar 30 2020 at 15:17)</a>:</h4>
+<p>Now go to the definition of <code>rewrite_cfg</code> and check what the default value of <code>md</code> is.</p>
+
+<a name="192270626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192270626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192270626">Kevin Buzzard (Mar 30 2020 at 15:17)</a>:</h4>
+<p>As of ten days ago, <code>mv_polynomial</code> is defined to be <code>add_monoid_algebra</code>.</p>
+
+<a name="192270692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192270692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192270692">Kevin Buzzard (Mar 30 2020 at 15:17)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110043">Gabriel Ebner</span> <a href="#narrow/stream/116395-maths/topic/strange.20rw.20behaviour.20with.20mv_polynomial/near/192270582" title="#narrow/stream/116395-maths/topic/strange.20rw.20behaviour.20with.20mv_polynomial/near/192270582">said</a>:</p>
+<blockquote>
+<p>Now go to the definition of <code>rewrite_cfg</code> and check what the default value of <code>md</code> is.</p>
+</blockquote>
+<p>I don't know what this means.</p>
+
+<a name="192270799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192270799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192270799">Gabriel Ebner (Mar 30 2020 at 15:18)</a>:</h4>
+<p>ctrl+p #tactic.rewrite_cfg</p>
+
+<a name="192270852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192270852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192270852">Gabriel Ebner (Mar 30 2020 at 15:18)</a>:</h4>
+<p>It's the default transparency setting for the <code>rw</code> tactic, which explains why Lean doesn't recognize these two types as definitionally equal.</p>
+
+<a name="192271254"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192271254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192271254">Kevin Buzzard (Mar 30 2020 at 15:21)</a>:</h4>
+<p>You mean just look at the definition in core Lean? It's <code>md := reducible</code></p>
+
+<a name="192271298"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192271298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192271298">Kevin Buzzard (Mar 30 2020 at 15:21)</a>:</h4>
+<p>I have no idea what <code>md</code> means</p>
+
+<a name="192271356"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192271356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192271356">Kevin Buzzard (Mar 30 2020 at 15:22)</a>:</h4>
+<p>-- TODO(Leo): improve documentation</p>
+
+<a name="192271392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192271392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192271392">Kevin Buzzard (Mar 30 2020 at 15:22)</a>:</h4>
+<p>Oh I see you just told me what it meant</p>
+
+<a name="192271417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192271417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192271417">Gabriel Ebner (Mar 30 2020 at 15:22)</a>:</h4>
+<p><code>md</code> is the default reducibility setting.  It tells Lean what definitions to unfold when unifying terms.</p>
+
+<a name="192271438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192271438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192271438">Gabriel Ebner (Mar 30 2020 at 15:22)</a>:</h4>
+<p><code>reducible</code> means it will only unfold definitions marked as <code>reducible</code>.</p>
+
+<a name="192271504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192271504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192271504">Kevin Buzzard (Mar 30 2020 at 15:23)</a>:</h4>
+<p>All this <code>X =?= Y</code> trace output is Lean doing unification?</p>
+
+<a name="192271545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192271545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192271545">Gabriel Ebner (Mar 30 2020 at 15:23)</a>:</h4>
+<p><span aria-label="+1" class="emoji emoji-1f44d" role="img" title="+1">:+1:</span></p>
+
+<a name="192271630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192271630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192271630">Patrick Massot (Mar 30 2020 at 15:24)</a>:</h4>
+<p>Yes, <code>=?=</code> (or its fancy unicode version) is the symbol describing a unification problem.</p>
+
+<a name="192271704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192271704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192271704">Kevin Buzzard (Mar 30 2020 at 15:24)</a>:</h4>
+<p><code>example : mv_polynomial S R = ((S →₀ ℕ) →₀ R) := rfl</code> but this isn't good enough</p>
+
+<a name="192271965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192271965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192271965">Gabriel Ebner (Mar 30 2020 at 15:26)</a>:</h4>
+<p>I've posted this another thread today, if you want a "reducible-only" rfl, you can use the following:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">S</span> <span class="n">R</span> <span class="bp">=</span> <span class="o">((</span><span class="n">S</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">reflexivity</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">transparency</span><span class="bp">.</span><span class="kn">reducible</span>
+</pre></div>
+
+<a name="192272171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192272171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192272171">Kevin Buzzard (Mar 30 2020 at 15:27)</a>:</h4>
+<p>and here we expect this to fail, and indeed it does fail.</p>
+
+<a name="192272427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192272427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192272427">Kevin Buzzard (Mar 30 2020 at 15:28)</a>:</h4>
+<p>So perhaps an interesting question is why we ended up with a finsupp zero.</p>
+
+<a name="192273397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192273397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192273397">Kevin Buzzard (Mar 30 2020 at 15:35)</a>:</h4>
+<p>because unless you are telling me to edit core Lean and change this <code>md</code> value, it seems that this is somehow the root of the problem.</p>
+
+<a name="192273430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192273430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192273430">Kevin Buzzard (Mar 30 2020 at 15:35)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">mv_polynomial</span>
+
+<span class="kn">open</span> <span class="n">mv_polynomial</span> <span class="n">finsupp</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">S</span> <span class="n">R</span><span class="o">)</span>
+
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">all</span> <span class="n">true</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">u</span> <span class="o">:</span> <span class="n">S</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">monomial</span> <span class="n">u</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">monomial</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">single_zero</span><span class="o">,</span>
+  <span class="c1">-- ⊢ 0 = 0</span>
+  <span class="c1">-- Lean does not close the goal</span>
+  <span class="n">refl</span> <span class="c1">-- works</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="192273627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192273627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192273627">Gabriel Ebner (Mar 30 2020 at 15:36)</a>:</h4>
+<p>You can set the reducibility as an argument to the <code>rw</code> tactic:</p>
+<div class="codehilite"><pre><span></span><span class="n">rw</span> <span class="n">zero_add</span> <span class="n">at</span> <span class="err">⊢</span> <span class="o">{</span><span class="n">md</span> <span class="o">:=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">transparency</span><span class="bp">.</span><span class="n">semireducible</span><span class="o">},</span>
+</pre></div>
+
+
+<p>But you should probably avoid unfolding <code>mv_polynomial</code> in the first place.</p>
+
+<a name="192273784"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192273784" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192273784">Kevin Buzzard (Mar 30 2020 at 15:37)</a>:</h4>
+<p>Right. Shing wants to prove results about monomials which are defined as <code>finsupp.single</code>s.</p>
+
+<a name="192273985"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192273985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192273985">Kevin Buzzard (Mar 30 2020 at 15:39)</a>:</h4>
+<p>In the proof above I'm showing <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><msup><mi>X</mi><mi>u</mi></msup><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">0X^u=0</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">0</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">u</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> by unfolding the definition of <code>monomial</code> and reducing the question to showing that <code>finsupp.single u 0 = 0</code>, but the equality is still an equality of <code>mv_polynomial</code>s.</p>
+
+<a name="192274004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192274004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192274004">Gabriel Ebner (Mar 30 2020 at 15:39)</a>:</h4>
+<p>I think you're supposed to write <code>coeff 0 (monomial u)</code> instead of <code>monomial u 0</code>.</p>
+
+<a name="192274047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192274047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192274047">Kevin Buzzard (Mar 30 2020 at 15:39)</a>:</h4>
+<p>I think that's something else</p>
+
+<a name="192274145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192274145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192274145">Gabriel Ebner (Mar 30 2020 at 15:40)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">coeff</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">σ</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">σ</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">p</span> <span class="n">m</span>
+</pre></div>
+
+
+<p>It seems like what we want?</p>
+
+<a name="192274163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192274163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192274163">Kevin Buzzard (Mar 30 2020 at 15:40)</a>:</h4>
+<p><code>monomial u r</code> is <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><msup><mi>X</mi><mi>u</mi></msup></mrow><annotation encoding="application/x-tex">rX^u</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">u</span></span></span></span></span></span></span></span></span></span></span></p>
+
+<a name="192274240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192274240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192274240">Kevin Buzzard (Mar 30 2020 at 15:41)</a>:</h4>
+<p><code>monomial u</code> has type <code>R -&gt; mv_polynomial S R</code></p>
+
+<a name="192274247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192274247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192274247">Gabriel Ebner (Mar 30 2020 at 15:41)</a>:</h4>
+<p>Oh yes.</p>
+
+<a name="192274294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192274294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192274294">Kevin Buzzard (Mar 30 2020 at 15:41)</a>:</h4>
+<p>I was surprised about this. There are two definitions of the word monomial on Wikipedia</p>
+
+<a name="192274341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192274341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192274341">Kevin Buzzard (Mar 30 2020 at 15:41)</a>:</h4>
+<p>Lean went with the second one, where <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><msup><mi>X</mi><mi>u</mi></msup></mrow><annotation encoding="application/x-tex">rX^u</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">u</span></span></span></span></span></span></span></span></span></span></span> is a monomial. The other definition only allows <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>X</mi><mi>u</mi></msup></mrow><annotation encoding="application/x-tex">X^u</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">u</span></span></span></span></span></span></span></span></span></span></span></p>
+
+<a name="192274475"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192274475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192274475">Kevin Buzzard (Mar 30 2020 at 15:42)</a>:</h4>
+<p>I have been thinking a lot about monomials over the past few days and I realised that Johannes made a really good decision to go with the second one.</p>
+
+<a name="192274557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192274557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192274557">Kevin Buzzard (Mar 30 2020 at 15:43)</a>:</h4>
+<p>The monomials span <code>mv_polynomial R S</code> as an additive abelian group, which is really helpful for induction principles because multiplication of mv_polynomials is a complete horrorshow, you don't want to prove anything about it directly.</p>
+
+<a name="192274595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192274595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192274595">Gabriel Ebner (Mar 30 2020 at 15:43)</a>:</h4>
+<p>Really?  It seems like the second version needs lots of extra duplicate lemmas, which we don't even have (such as the example you've posted).</p>
+
+<a name="192274710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192274710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192274710">Kevin Buzzard (Mar 30 2020 at 15:44)</a>:</h4>
+<p>The crazy thing is that the monomials of the first kind, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>X</mi><mi>u</mi></msup></mrow><annotation encoding="application/x-tex">X^u</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">u</span></span></span></span></span></span></span></span></span></span></span>, simply don't seem to play a role.</p>
+
+<a name="192274775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192274775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192274775">Kevin Buzzard (Mar 30 2020 at 15:44)</a>:</h4>
+<p>Sure you could prove that <code>C r * monomial_of_first_kind u = monomial u r</code></p>
+
+<a name="192274830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192274830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192274830">Kevin Buzzard (Mar 30 2020 at 15:45)</a>:</h4>
+<p>but you may as well prove <code>C r * monomial u s = monomial u (r * s)</code></p>
+
+<a name="192275195"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192275195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192275195">Kevin Buzzard (Mar 30 2020 at 15:47)</a>:</h4>
+<p>But going back to the original question, it seems that because <code>mv_polynomial</code> is not marked as <code>reducible</code> (are there any plans to mark it reducible? <span class="user-mention" data-user-id="112680">@Johan Commelin</span> ?) one should reprove a few <code>finsupp</code> lemmas about <code>single</code> such as <code>single_zero</code> in the <code>mv_polynomial</code> namespace and call them things like<code>monomial_zero</code>. <span class="user-mention" data-user-id="110044">@Chris Hughes</span> does this sound sane?</p>
+
+<a name="192275395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192275395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192275395">Kevin Buzzard (Mar 30 2020 at 15:48)</a>:</h4>
+<p><span class="user-mention" data-user-id="266440">@Shing Tak Lam</span> if you are planning an <code>mv_polynomial</code> PR then you might want to drop these in, unless someone pops up saying I've misunderstood what's going on.</p>
+
+<a name="192275492"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192275492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192275492">Kevin Buzzard (Mar 30 2020 at 15:49)</a>:</h4>
+<p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> is there any way I can look through a 200 line file with pp.all on and find all occurrences of <code>finsupp</code> in the pp.all output?</p>
+
+<a name="192275551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192275551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192275551">Gabriel Ebner (Mar 30 2020 at 15:49)</a>:</h4>
+<p>Run <code>lean my_file.lean | grep finsupp</code> on the command-line?</p>
+
+<a name="192275557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192275557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192275557">Chris Hughes (Mar 30 2020 at 15:49)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/116395-maths/topic/strange.20rw.20behaviour.20with.20mv_polynomial/near/192274557" title="#narrow/stream/116395-maths/topic/strange.20rw.20behaviour.20with.20mv_polynomial/near/192274557">said</a>:</p>
+<blockquote>
+<p>The monomials span <code>mv_polynomial R S</code> as an additive abelian group, which is really helpful for induction principles because multiplication of mv_polynomials is a complete horrorshow, you don't want to prove anything about it directly.</p>
+</blockquote>
+<p>I don't think this is true unless <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><mi mathvariant="double-struck">Z</mi></mrow><annotation encoding="application/x-tex">R = \mathbb{Z}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68889em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbb">Z</span></span></span></span></span>. They are a basis as an <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span> module though.</p>
+
+<a name="192275649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192275649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192275649">Kevin Buzzard (Mar 30 2020 at 15:50)</a>:</h4>
+<p>Chris, my point is exactly that this is true as an add_comm_group</p>
+
+<a name="192275690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192275690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192275690">Kevin Buzzard (Mar 30 2020 at 15:50)</a>:</h4>
+<p>because a monomial in Lean is defined to be <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><msup><mi>X</mi><mi>u</mi></msup></mrow><annotation encoding="application/x-tex">rX^u</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">u</span></span></span></span></span></span></span></span></span></span></span> not <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>X</mi><mi>u</mi></msup></mrow><annotation encoding="application/x-tex">X^u</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">u</span></span></span></span></span></span></span></span></span></span></span></p>
+
+<a name="192275721"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192275721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192275721">Chris Hughes (Mar 30 2020 at 15:50)</a>:</h4>
+<p>Sorry, I misread</p>
+
+<a name="192275765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192275765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192275765">Kevin Buzzard (Mar 30 2020 at 15:51)</a>:</h4>
+<p>This was really important for Shing when proving that partial derivatives satisfied the Leibniz rule.</p>
+
+<a name="192275780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192275780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192275780">Reid Barton (Mar 30 2020 at 15:51)</a>:</h4>
+<p>Isn't it just a question of whether you want to deal with Z-linear combinations or R-linear combinations?</p>
+
+<a name="192275804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192275804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192275804">Reid Barton (Mar 30 2020 at 15:51)</a>:</h4>
+<p>Neither really involves the multiplication in <code>mv_polynomial</code></p>
+
+<a name="192275807"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192275807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192275807">Chris Hughes (Mar 30 2020 at 15:51)</a>:</h4>
+<p>With the other one, they span as an <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span> module though, which seems to be okay as well.</p>
+
+<a name="192275843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192275843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192275843">Kevin Buzzard (Mar 30 2020 at 15:51)</a>:</h4>
+<p>The R-linear structure is defined by <code>C r * ...</code></p>
+
+<a name="192275913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192275913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192275913">Kevin Buzzard (Mar 30 2020 at 15:52)</a>:</h4>
+<p>and this is mv_polynomial multiplication which is hugely inconvenient to deal with.</p>
+
+<a name="192275917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192275917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192275917">Chris Hughes (Mar 30 2020 at 15:52)</a>:</h4>
+<p>I think there are a bunch of induction principles on polynomials, and you probably want all of them.</p>
+
+<a name="192275936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192275936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192275936">Kevin Buzzard (Mar 30 2020 at 15:52)</a>:</h4>
+<p>For <code>mv_polynomial</code> we only found one!</p>
+
+<a name="192275987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192275987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192275987">Kevin Buzzard (Mar 30 2020 at 15:52)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">recursor</span> <span class="mi">5</span><span class="o">]</span>
+<span class="kn">lemma</span> <span class="n">induction_on</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">σ</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">σ</span> <span class="n">α</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h_C</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">a</span><span class="o">,</span> <span class="n">M</span> <span class="o">(</span><span class="n">C</span> <span class="n">a</span><span class="o">))</span> <span class="o">(</span><span class="n">h_add</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">p</span> <span class="n">q</span><span class="o">,</span> <span class="n">M</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">M</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">M</span> <span class="o">(</span><span class="n">p</span> <span class="bp">+</span> <span class="n">q</span><span class="o">))</span> <span class="o">(</span><span class="n">h_X</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">p</span> <span class="n">n</span><span class="o">,</span> <span class="n">M</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">M</span> <span class="o">(</span><span class="n">p</span> <span class="bp">*</span> <span class="n">X</span> <span class="n">n</span><span class="o">))</span> <span class="o">:</span>
+  <span class="n">M</span> <span class="n">p</span> <span class="o">:=</span>
+</pre></div>
+
+
+<p>is the one in mathlib</p>
+
+<a name="192276057"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192276057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192276057">Kevin Buzzard (Mar 30 2020 at 15:53)</a>:</h4>
+<p>You can't use this to prove Leibniz very easily because one of the inputs is how things behave under multiplication by a variable</p>
+
+<a name="192276248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192276248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192276248">Kevin Buzzard (Mar 30 2020 at 15:54)</a>:</h4>
+<p>So I told Shing to use this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">mv_polynomial</span><span class="bp">.</span><span class="n">induction_on&#39;</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+  <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">S</span> <span class="n">R</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">S</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span>
+    <span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">u</span> <span class="o">:</span> <span class="n">S</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">M</span> <span class="o">(</span><span class="n">monomial</span> <span class="n">u</span> <span class="mi">1</span><span class="o">))</span> <span class="bp">→</span>
+    <span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">S</span> <span class="n">R</span><span class="o">),</span> <span class="n">M</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">M</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">M</span> <span class="o">(</span><span class="n">p</span> <span class="bp">+</span> <span class="n">q</span><span class="o">))</span> <span class="bp">→</span>
+    <span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">S</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">R</span><span class="o">),</span> <span class="n">M</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">M</span> <span class="o">(</span><span class="n">C</span> <span class="n">r</span> <span class="bp">*</span> <span class="n">p</span><span class="o">))</span> <span class="bp">→</span> <span class="n">M</span> <span class="n">p</span> <span class="o">:=</span>
+</pre></div>
+
+
+<p>but even this wasn't good enough because we are still multiplying by <code>C r</code> and even proving Leibniz for the case of <code>C r</code> is awful because mv_polynomial multiplication is hellish.</p>
+
+<a name="192276348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192276348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192276348">Kevin Buzzard (Mar 30 2020 at 15:55)</a>:</h4>
+<p>Here's the definition:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">pderivative</span> <span class="o">(</span><span class="n">var</span> <span class="o">:</span> <span class="n">S</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">S</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">S</span> <span class="n">R</span> <span class="o">:=</span>
+<span class="n">p</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">A</span> <span class="n">B</span><span class="o">,</span> <span class="n">monomial</span> <span class="o">(</span><span class="n">erase</span> <span class="n">var</span> <span class="n">A</span> <span class="bp">+</span> <span class="n">single</span> <span class="n">var</span> <span class="o">(</span><span class="n">A</span> <span class="n">var</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">))</span> <span class="o">(</span><span class="n">B</span> <span class="bp">*</span> <span class="o">(</span><span class="n">A</span> <span class="n">var</span><span class="o">)))</span>
+</pre></div>
+
+
+<p>Proving it's R-linear directly turned out to be much harder than I thought</p>
+
+<a name="192276416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192276416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192276416">Kevin Buzzard (Mar 30 2020 at 15:55)</a>:</h4>
+<p>The insight was to use this induction principle:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">mv_polynomial</span><span class="bp">.</span><span class="n">induction_on&#39;&#39;</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+  <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">S</span> <span class="n">R</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">S</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span>
+    <span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">u</span> <span class="o">:</span> <span class="n">S</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">R</span><span class="o">),</span> <span class="n">M</span> <span class="o">(</span><span class="n">monomial</span> <span class="n">u</span> <span class="n">r</span><span class="o">))</span> <span class="bp">→</span>
+    <span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">S</span> <span class="n">R</span><span class="o">),</span> <span class="n">M</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">M</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">M</span> <span class="o">(</span><span class="n">p</span> <span class="bp">+</span> <span class="n">q</span><span class="o">))</span> <span class="bp">→</span> <span class="n">M</span> <span class="n">p</span>
+</pre></div>
+
+<a name="192276473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192276473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192276473">Chris Hughes (Mar 30 2020 at 15:55)</a>:</h4>
+<p>There is an induction principle on polynomial based on the derivative. If you prove <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><msup><mi>f</mi><mo lspace="0em" mathvariant="normal" rspace="0em">′</mo></msup><mo stretchy="false">)</mo><mtext>  </mtext><mo>⟹</mo><mtext>  </mtext><mi>P</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(f') \implies P(f)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1.001892em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⟹</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mclose">)</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(0)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord">0</span><span class="mclose">)</span></span></span></span>, then you've proved it for all polynomials.</p>
+
+<a name="192276606"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192276606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192276606">Kevin Buzzard (Mar 30 2020 at 15:56)</a>:</h4>
+<p>We don't have that for mv_polynomial yet because there is no derivative of any kind (until the PR hits some time tomorrow)</p>
+
+<a name="192276691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192276691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192276691">Chris Hughes (Mar 30 2020 at 15:57)</a>:</h4>
+<p>It's not there on polynomials yet, but I conjecture it might be useful to prove things about limits of polynomials.</p>
+
+<a name="192276701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192276701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192276701">Kevin Buzzard (Mar 30 2020 at 15:57)</a>:</h4>
+<p><code>pderivative</code> is easily checked to be additive. The third induction principle then reduces Leibniz to checking it for monomials <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><msup><mi>X</mi><mi>u</mi></msup></mrow><annotation encoding="application/x-tex">rX^u</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">u</span></span></span></span></span></span></span></span></span></span></span> and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><msup><mi>X</mi><mi>v</mi></msup></mrow><annotation encoding="application/x-tex">sX^v</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">s</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span></span></span></span></span></span></span></span></p>
+
+<a name="192276762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192276762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192276762">Kevin Buzzard (Mar 30 2020 at 15:57)</a>:</h4>
+<p>and you can check this by hand, apart from the fact that <code>rw add_zero</code> sometimes randomly doesn't work ;-)</p>
+
+<a name="192276865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192276865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192276865">Kevin Buzzard (Mar 30 2020 at 15:58)</a>:</h4>
+<p>This gives you Leibniz and you can then <em>deduce</em> that <code>pderivative</code> is R-linear from it!</p>
+
+<a name="192279365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192279365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192279365">Kevin Buzzard (Mar 30 2020 at 16:17)</a>:</h4>
+<p>Oh look -- unification of finsupp and mv_polynomial sometimes works:</p>
+<div class="codehilite"><pre><span></span>[type_context.is_def_eq_detail] [1]: (S →₀ ℕ) →₀ R =?= mv_polynomial S R
+[type_context.is_def_eq_detail] unfold right: mv_polynomial
+[type_context.is_def_eq_detail] [2]: (S →₀ ℕ) →₀ R =?= add_monoid_algebra R (S →₀ ℕ)
+[type_context.is_def_eq_detail] unfold right: add_monoid_algebra
+[type_context.is_def_eq] (S →₀ ℕ) →₀ R =?= mv_polynomial S R ... success  (approximate mode)
+</pre></div>
+
+<a name="192279579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192279579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192279579">Kevin Buzzard (Mar 30 2020 at 16:18)</a>:</h4>
+<p>But also in the very same trace output</p>
+<div class="codehilite"><pre><span></span>[type_context.is_def_eq_detail] [3]: (S →₀ ℕ) →₀ R =?= mv_polynomial S R
+[type_context.is_def_eq_detail] [4]: finsupp =?= mv_polynomial
+[type_context.is_def_eq_detail] on failure: finsupp =?= mv_polynomial
+</pre></div>
+
+<a name="192279665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20rw%20behaviour%20with%20mv_polynomial/near/192279665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/71909strangerwbehaviourwithmvpolynomial.html#192279665">Kevin Buzzard (Mar 30 2020 at 16:19)</a>:</h4>
+<p>How come Lean sometimes goes for <code>unfold right</code>?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

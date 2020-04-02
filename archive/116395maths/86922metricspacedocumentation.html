@@ -1,0 +1,49 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/86922metricspacedocumentation.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/86922metricspacedocumentation.html">`metric_space` documentation</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="191666976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60metric_space%60%20documentation/near/191666976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86922metricspacedocumentation.html#191666976">Kevin Buzzard (Mar 24 2020 at 20:23)</a>:</h4>
+<p>A smart Imperial undergrad asked me what the heck was going on with <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space" target="_blank" title="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">the docs explaining metric spaces</a> -- why the docstring was incomprehensible and -- even worse -- the definition as viewed in the docs looks like it requires us to supply an <code>edist</code> and various other things too (<code>edist</code> is a field with a default definition, as you can <a href="https://github.com/leanprover-community/mathlib/blob/5437b10a9bee066c83255aa1810e5b85bdfea8cc/src/topology/metric_space/basic.lean#L68" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/5437b10a9bee066c83255aa1810e5b85bdfea8cc/src/topology/metric_space/basic.lean#L68">see from the source code</a>, but this is not visible in the docs).</p>
+<p>All the experts know that the computer scientists have been terrifically clever by adding a whole bunch of optional extra fields with default definitions to make everything defeq in diamonds. This work, which I guess goes back to Johannes Hoelzl, solves a problem which mathematicians are uninterested in but which was a real issue for computer scientists. Had it not been solved we might not be using classes for metric spaces at all. But in my mind the solution is very much an implementation issue which goes into the module docstring for <code>topology.metric_space.basic</code> (as yet unwritten, although I am considering writing it). </p>
+<p>I would like to see the definition of <code>metric_space</code> in the mathlib docs (note: not in mathlib itself, just in the docs) look more like the following:</p>
+<div class="codehilite"><pre><span></span> structure metric_space :
+Type u → Type u
+
+FIELDS:
+    dist : α → α → ℝ
+    dist_self : ∀ (x : α), dist x x = 0
+    eq_of_dist_eq_zero : ∀ {x y : α}, dist x y = 0 → x = y
+    dist_comm : ∀ (x y : α), dist x y = dist y x
+    dist_triangle : ∀ (x y z : α), dist x z ≤ dist x y + dist y z
+
+OPTIONAL FIELDS
+  Click here to open if you are a computer scientist
+
+  Metric space
+
+A metric space struture on a type`α` is a distance function d(x,y)
+associating a non-negative number to each pair of terms of type `α`,
+and satisfying the usual axioms for distance such as the triangle inequality.
+</pre></div>
+
+
+<p>We could move the implementation discussion into the module docstring which in my view would be an improvement, but getting these "optional fields" tagged in some way (and ideally out of the docstring completely) is also something which I think would be useful for our readers.</p>
+<p>My impression is that there will be a generation of people appearing who read the docstrings but, by default, do not look at the code. I would like to make the docs as easy to read as possible and probably it has not escaped some people's notice that many of my most recent PR's to mathlib have been docstring PR's. I think the API documentation project is brilliant, but displaying the extra fields here by default is in my opinion unhelpful and some might even say confusing.</p>
+<div class="codehilite"><pre><span></span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

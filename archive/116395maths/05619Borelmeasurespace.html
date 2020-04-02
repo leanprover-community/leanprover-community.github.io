@@ -1,0 +1,210 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/05619Borelmeasurespace.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html">Borel measure space</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192463190"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192463190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192463190">Yury G. Kudryashov (Mar 31 2020 at 22:50)</a>:</h4>
+<p>It seems that the current setup (<code>measure_space</code> extends <code>measurable_space</code>, <code>borel</code> is an instance turning <code>topological_space</code> into <code>measurable_space</code>) it's hard to say "assume that <code>α</code> is a space with topology and measure, and every open set is measurable".</p>
+
+<a name="192463299"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192463299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192463299">Yury G. Kudryashov (Mar 31 2020 at 22:51)</a>:</h4>
+<p>I mean, <code>[measure_space α] [topological_space α]</code> creates two instances of <code>[measurable_space α]</code>.</p>
+
+<a name="192463418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192463418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192463418">Yury G. Kudryashov (Mar 31 2020 at 22:52)</a>:</h4>
+<p>Probably we should have [borel_measurable α] defined similarly to [order_topology α] but assuming inequality instead of equality.</p>
+
+<a name="192466747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192466747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192466747">Yury G. Kudryashov (Mar 31 2020 at 23:34)</a>:</h4>
+<p>Another issue: for <code>f : real → real</code>, <code>continuous f → measurable f</code> is true if we take Borel sigma-algebra but fails if we add all sets of Lebesgue measure zero.</p>
+
+<a name="192466818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192466818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192466818">Yury G. Kudryashov (Mar 31 2020 at 23:35)</a>:</h4>
+<p>So, which sigma-algebra should be the default one? And how should we handle situations when one wants to deal with Borel in the codomain and Lebesgue in the domain?</p>
+
+<a name="192467329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192467329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192467329">Yury G. Kudryashov (Mar 31 2020 at 23:42)</a>:</h4>
+<p>Of course, we can have a type tag for one of the spaces but this way we'll need to define a lot of instances for the "other" type, and we'll have similar issues with other topological spaces.</p>
+
+<a name="192479175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192479175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192479175">Yury G. Kudryashov (Apr 01 2020 at 03:12)</a>:</h4>
+<p>It seems that now we use Lebesgue measure but Borel σ-algebra.</p>
+
+<a name="192494674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192494674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192494674">Sebastien Gouezel (Apr 01 2020 at 08:03)</a>:</h4>
+<p>I think in 99% of applications people will want measurable maps to mean measurable maps with respect to the Borel sigma algebra, so this should be the default setup. But we should be able to override this. A typeclass <code>opens_measurable α</code> on top of <code>[measure_space α] [topological_space α]</code> as you suggest seems like a good setup. We should also make sure that the <code>measurable_space</code> structure coming from a measure space should have higher prority than the <code>measurable_space</code> structure coming from the topology. Or we could declare the <code>measurable_space</code> structure coming from the topology just as a def, and let the user declare it as an instance when needed (or put it in a locale). What are your thoughts?</p>
+
+<a name="192495273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192495273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192495273">Yury G. Kudryashov (Apr 01 2020 at 08:10)</a>:</h4>
+<p>I'm rewriting with <code>def borel := ...</code>, <code>class borel_space [topological_space α] [measurable_space α] := (measurable_eq : ... = borel α)</code></p>
+
+<a name="192495506"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192495506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192495506">Yury G. Kudryashov (Apr 01 2020 at 08:13)</a>:</h4>
+<p>Now I'm not sure if we need <code>class opens_measurable</code> because it might be a good idea to use some specific predicate like <code>lebesgue.is_measurable</code> (don't remember exact name) in case a user wants to deal with non-Borel <code>is_measurable</code> on a topological space.</p>
+
+<a name="192496343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192496343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192496343">Mario Carneiro (Apr 01 2020 at 08:23)</a>:</h4>
+<p>I'm surprised you say 99% borel, since my impression is that in analysis the lebesgue measure is the only one that matters</p>
+
+<a name="192496470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192496470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192496470">Yury G. Kudryashov (Apr 01 2020 at 08:24)</a>:</h4>
+<p>I think <span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> says that 99% of functions are actually (Borel, Borel) measurable.</p>
+
+<a name="192496513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192496513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192496513">Yury G. Kudryashov (Apr 01 2020 at 08:25)</a>:</h4>
+<p>So that you can actually work with the restriction of Lebesgue measure to the Borel σ-algebra.</p>
+
+<a name="192496538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192496538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192496538">Mario Carneiro (Apr 01 2020 at 08:25)</a>:</h4>
+<p>I will grant that Borel has nicer closure properties</p>
+
+<a name="192496723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192496723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192496723">Yury G. Kudryashov (Apr 01 2020 at 08:27)</a>:</h4>
+<p>Disclaimer: I usually want to iterate maps, so i want the same σ-algebra both in domain and codomain; then Borel is the only choice that guarantees <code>continuous f → measurable f</code>.</p>
+
+<a name="192496886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192496886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192496886">Mario Carneiro (Apr 01 2020 at 08:29)</a>:</h4>
+<p>From a proof engineering perspective, it would be better to have Borel as the default, because the instance that supplies it works on any topological space, while the one for the lebesgue measure only works on <code>real</code> and isn't defeq</p>
+
+<a name="192497084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192497084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192497084">Yury G. Kudryashov (Apr 01 2020 at 08:31)</a>:</h4>
+<p>It seems that we'll have to turn it into a <code>class borel_space [topological_space α] [measurable_space α] := ...</code></p>
+
+<a name="192497164"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192497164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192497164">Mario Carneiro (Apr 01 2020 at 08:32)</a>:</h4>
+<p>I don't follow. Why such a convoluted setup?</p>
+
+<a name="192497180"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192497180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192497180">Yury G. Kudryashov (Apr 01 2020 at 08:32)</a>:</h4>
+<p>Because otherwise I see no way to say "I have <code>topological_space α</code>, <code>measure_space α</code>, and they agree on <code>measurable_space α</code>" in a theorem.</p>
+
+<a name="192497227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192497227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192497227">Yury G. Kudryashov (Apr 01 2020 at 08:33)</a>:</h4>
+<p>It's similar to <code>order_closed_topology</code> / <code>order_topology</code>.</p>
+
+<a name="192497240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192497240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192497240">Mario Carneiro (Apr 01 2020 at 08:33)</a>:</h4>
+<p>If you have a topological space, and the measure space structure is the borel space, then you have that</p>
+
+<a name="192497301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192497301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192497301">Yury G. Kudryashov (Apr 01 2020 at 08:33)</a>:</h4>
+<p>What should I write in <code>example {α : Type*} [topological_space α] [measure_space α] ... : ...</code>?</p>
+
+<a name="192497371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192497371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192497371">Mario Carneiro (Apr 01 2020 at 08:34)</a>:</h4>
+<p>It would just be <code>example {α : Type*} [topological_space α] ... : ...</code></p>
+
+<a name="192497375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192497375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192497375">Yury G. Kudryashov (Apr 01 2020 at 08:34)</a>:</h4>
+<p>Note <code>measure_space</code>, not <code>measurable_space</code></p>
+
+<a name="192497420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192497420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192497420">Mario Carneiro (Apr 01 2020 at 08:34)</a>:</h4>
+<p>It would be <code>example {α : Type*} [topological_space α] [@measure_space α (borel_measure α _inst_1)] ... : ...</code></p>
+
+<a name="192497460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192497460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192497460">Mario Carneiro (Apr 01 2020 at 08:35)</a>:</h4>
+<p>(you don't have to write that, it's the default instance)</p>
+
+<a name="192497478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192497478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192497478">Yury G. Kudryashov (Apr 01 2020 at 08:35)</a>:</h4>
+<p>Also in this case we <code>measure_space</code> extends <code>measurable_space</code></p>
+
+<a name="192497511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192497511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192497511">Yury G. Kudryashov (Apr 01 2020 at 08:35)</a>:</h4>
+<p>Also we won't have to deal with two different <code>measurable_space</code> structures on <code>prod</code>.</p>
+
+<a name="192497571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192497571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192497571">Mario Carneiro (Apr 01 2020 at 08:36)</a>:</h4>
+<p>I see, so how about <code>class borel_measure_space A extends topological_space A, measure_space A := ...</code></p>
+
+<a name="192498312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192498312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192498312">Yury G. Kudryashov (Apr 01 2020 at 08:45)</a>:</h4>
+<p>No, we already have a hierarchy over topological spaces. I don't want to introduce normed measure fields</p>
+
+<a name="192498415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192498415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192498415">Yury G. Kudryashov (Apr 01 2020 at 08:46)</a>:</h4>
+<p>We already use this approach for algebra vs topology and order vs topology, why not use it here?</p>
+
+<a name="192498612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192498612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192498612">Mario Carneiro (Apr 01 2020 at 08:48)</a>:</h4>
+<p>where is the borel measurable space on an arbitrary topological space going to go?</p>
+
+<a name="192498633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192498633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192498633">Yury G. Kudryashov (Apr 01 2020 at 08:48)</a>:</h4>
+<p>Def</p>
+
+<a name="192498692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192498692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192498692">Yury G. Kudryashov (Apr 01 2020 at 08:49)</a>:</h4>
+<p>Like <code>preorder.topology</code></p>
+
+<a name="192498700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192498700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192498700">Mario Carneiro (Apr 01 2020 at 08:49)</a>:</h4>
+<p>so then how is this going to work with an actual <code>borel_space</code>?</p>
+
+<a name="192498852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192498852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192498852">Mario Carneiro (Apr 01 2020 at 08:50)</a>:</h4>
+<p>what data is even in the <code>borel_space</code> structure?</p>
+
+<a name="192498928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192498928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192498928">Yury G. Kudryashov (Apr 01 2020 at 08:51)</a>:</h4>
+<p>Equality between <code>measurable_space</code> instance and <code>borel</code></p>
+
+<a name="192498963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192498963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192498963">Yury G. Kudryashov (Apr 01 2020 at 08:51)</a>:</h4>
+<p>As with <code>order_topology</code></p>
+
+<a name="192499031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192499031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192499031">Mario Carneiro (Apr 01 2020 at 08:52)</a>:</h4>
+<p>is there any example of a measure space that is eq but not defeq to <code>borel</code>?</p>
+
+<a name="192499078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192499078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192499078">Mario Carneiro (Apr 01 2020 at 08:53)</a>:</h4>
+<p>the reason this exists for <code>order_topology</code> is because such examples are common, e.g. the reals</p>
+
+<a name="192499103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192499103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192499103">Yury G. Kudryashov (Apr 01 2020 at 08:53)</a>:</h4>
+<p>Product of two reals?</p>
+
+<a name="192499195"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192499195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192499195">Kevin Buzzard (Apr 01 2020 at 08:54)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="214703">Yury G. Kudryashov</span> <a href="#narrow/stream/116395-maths/topic/Borel.20measure.20space/near/192499103" title="#narrow/stream/116395-maths/topic/Borel.20measure.20space/near/192499103">said</a>:</p>
+<blockquote>
+<p>Product of two reals?</p>
+</blockquote>
+<p>This reminds me of the metric space / topological space thing, where we have the topology inbuilt into the definition of a metric space.</p>
+
+<a name="192499281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192499281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192499281">Yury G. Kudryashov (Apr 01 2020 at 08:55)</a>:</h4>
+<p>I mean, <code>real × real</code> with <code>measurable_space</code> coming from <code>prod.measurable_space</code>, not <code>borel</code>.</p>
+
+<a name="192499308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192499308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192499308">Mario Carneiro (Apr 01 2020 at 08:55)</a>:</h4>
+<p>right, that's what kevin means</p>
+
+<a name="192499437"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192499437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192499437">Mario Carneiro (Apr 01 2020 at 08:56)</a>:</h4>
+<p>I think the difference in this case is that we actually have different measurable spaces floating around, and don't necessarily want to declare that every topological space can only have the canonical measurable space on it (borel)</p>
+
+<a name="192499495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192499495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192499495">Mario Carneiro (Apr 01 2020 at 08:56)</a>:</h4>
+<p>whereas if we have a metric space it is reasonable to ask that it never have a topological structure other than the induced one</p>
+
+<a name="192499636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Borel%20measure%20space/near/192499636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/05619Borelmeasurespace.html#192499636">Sebastien Gouezel (Apr 01 2020 at 08:58)</a>:</h4>
+<p>Yes, for instance on the real line you have two different natural measurable space structures, the Borel one, and the one where you declare that all sets with zero Lebesgue measure are also measurable.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

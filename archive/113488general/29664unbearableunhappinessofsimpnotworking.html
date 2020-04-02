@@ -1,0 +1,387 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/29664unbearableunhappinessofsimpnotworking.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html">unbearable unhappiness of `simp` not working</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192226398"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192226398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192226398">Scott Morrison (Mar 30 2020 at 08:43)</a>:</h4>
+<p>If someone could help me diagnose the following issue, of <code>simp</code> failing to work, I would be very happy. </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">category</span><span class="bp">.</span><span class="n">CommRing</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="n">CommRing</span><span class="o">}</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">R</span> <span class="err">⟶</span> <span class="n">S</span><span class="o">)</span> <span class="o">:</span> <span class="n">i</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="c1">-- succeeds, using `ring_hom.map_zero`</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">S</span><span class="o">]</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→+*</span> <span class="n">S</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">i</span> <span class="n">r</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span> <span class="c1">-- succeeds</span>
+
+<span class="c1">-- I really want this to work!</span>
+<span class="kn">example</span> <span class="o">{</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="n">CommRing</span><span class="o">}</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">R</span> <span class="err">⟶</span> <span class="n">S</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">i</span> <span class="n">r</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span> <span class="c1">-- fails, only uses `h`, leaves unsolved goal `⇑i 0 = 0`</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="n">CommRing</span><span class="o">}</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">R</span> <span class="err">⟶</span> <span class="n">S</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">i</span> <span class="n">r</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">],</span>
+  <span class="n">exact</span> <span class="n">ring_hom</span><span class="bp">.</span><span class="n">map_zero</span> <span class="n">i</span><span class="o">,</span> <span class="c1">-- works, so this is a syntax level problem</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="n">CommRing</span><span class="o">}</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">R</span> <span class="err">⟶</span> <span class="n">S</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">i</span> <span class="n">r</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">],</span>
+  <span class="n">rw</span> <span class="n">ring_hom</span><span class="bp">.</span><span class="n">map_zero</span> <span class="n">i</span><span class="o">,</span> <span class="c1">-- fails, couldn&#39;t find `⇑i 0` in the goal `⇑i 0 = 0`...</span>
+<span class="kn">end</span>
+
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">all</span> <span class="n">true</span>
+<span class="kn">example</span> <span class="o">{</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="n">CommRing</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}}</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">R</span> <span class="err">⟶</span> <span class="n">S</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">i</span> <span class="n">r</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">],</span>
+  <span class="n">rw</span> <span class="n">ring_hom</span><span class="bp">.</span><span class="n">map_zero</span> <span class="n">i</span><span class="o">,</span> <span class="c1">-- fails, error at https://gist.github.com/semorrison/61d25641003cdba43dda1f07246661bb</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="n">CommRing</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}}</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">R</span> <span class="err">⟶</span> <span class="n">S</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">i</span> <span class="n">r</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">],</span>
+  <span class="n">erw</span> <span class="n">ring_hom</span><span class="bp">.</span><span class="n">map_zero</span> <span class="n">i</span><span class="o">,</span> <span class="c1">-- succeeds, but is unbearably sad</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="192227785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192227785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192227785">Gabriel Ebner (Mar 30 2020 at 08:58)</a>:</h4>
+<p>So the issue is once again with having the wrong <del>type class instances</del> types.  This doesn't work either:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="n">CommRing</span><span class="o">}</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">R</span> <span class="err">⟶</span> <span class="n">S</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">i</span> <span class="n">r</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">h</span><span class="o">],</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">ring_hom</span><span class="bp">.</span><span class="n">map_zero</span><span class="o">],</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="192228507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192228507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192228507">Gabriel Ebner (Mar 30 2020 at 09:06)</a>:</h4>
+<p>This doesn't work either:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="n">CommRing</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}}</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">R</span> <span class="err">⟶</span> <span class="n">S</span><span class="o">)</span> <span class="o">:</span> <span class="n">i</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span>
+</pre></div>
+
+<a name="192229945"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192229945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192229945">Gabriel Ebner (Mar 30 2020 at 09:21)</a>:</h4>
+<p>But this works:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="n">CommRing</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}}</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">R</span> <span class="err">⟶</span> <span class="n">S</span><span class="o">)</span> <span class="o">:</span> <span class="n">i</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">R</span><span class="bp">.</span><span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">ring_hom</span><span class="bp">.</span><span class="n">map_zero</span><span class="o">]</span>
+</pre></div>
+
+<a name="192230065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192230065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192230065">Gabriel Ebner (Mar 30 2020 at 09:22)</a>:</h4>
+<p>So the difference is between <code>(0 : R)</code> and <code>(0 : R.α)</code>, for the simp lemma to apply they should be reducibly definitionally equal.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="n">CommRing</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">R</span><span class="bp">.</span><span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">reflexivity</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">transparency</span><span class="bp">.</span><span class="kn">reducible</span> <span class="c1">-- we just need to make this work</span>
+</pre></div>
+
+<a name="192230263"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192230263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192230263">Gabriel Ebner (Mar 30 2020 at 09:24)</a>:</h4>
+<p>Not sure if this is the right solution, but this makes all the <code>simp</code>s work:</p>
+<div class="codehilite"><pre><span></span><span class="n">attribute</span> <span class="o">[</span><span class="kn">reducible</span><span class="o">]</span>
+  <span class="n">SemiRing</span><span class="bp">.</span><span class="n">has_coe_to_sort</span>
+  <span class="n">Ring</span><span class="bp">.</span><span class="n">has_coe_to_sort</span>
+  <span class="n">CommRing</span><span class="bp">.</span><span class="n">has_coe_to_sort</span>
+  <span class="n">category_theory</span><span class="bp">.</span><span class="n">induced_category</span><span class="bp">.</span><span class="n">has_coe_to_sort</span>
+  <span class="n">category_theory</span><span class="bp">.</span><span class="n">bundled</span><span class="bp">.</span><span class="n">has_coe_to_sort</span>
+</pre></div>
+
+<a name="192231266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192231266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192231266">Kevin Buzzard (Mar 30 2020 at 09:33)</a>:</h4>
+<p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> how do you do such efficient <code>simp</code> debugging? <code>simp</code> is one of those areas of Lean where for years I just figured it was magic and left it at that. But there have been some really interesting <code>simp</code> threads recently, and the linter and your paper with Floris and Rob have both given me a much better idea about what <code>simp</code> actually does (I had no idea what a confluent rewriting system was about a week ago). But these posts of yours above are still quite amazing. What tools are you using?</p>
+
+<a name="192232283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192232283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192232283">Gabriel Ebner (Mar 30 2020 at 09:42)</a>:</h4>
+<p>The posts in this thread are roughly the steps I took:</p>
+<ol>
+<li>Original failing example was <code>example {R S : CommRing} (i : R ⟶ S) (r : R) (h : r = 0) : i r = 0 := by simp [h]</code></li>
+<li>If I manually replace <code>r</code> by <code>0</code> then it works.  What happens if I let simp replace it for me <code>... := begin simp only [h], simp end</code>.</li>
+<li>Oh wow, now the goal is <code>⊢ i 0 = 0</code> but simp can't solve it!?!  But simp could solve <code>i 0 = 0</code> previously.  Obviously there must be some difference between these two goals.</li>
+<li>Let's do <code>set_option pp.all true</code> and use good old <code>vimdiff</code>.  So the zeros are different???</li>
+<li>Hypothesis validated! simp can solve <code>i (0 : R.α) = 0</code> but not <code>i (0 : R) = 0</code>.</li>
+<li>Let's check if <code>(0 : R.α) = (0 : R)</code> are reducibly equivalent (i.e., what simp requires for matching).  <code>example : (0 : R.α) = (0 : R) := by reflexivity transparency.reducible</code></li>
+<li>Great, they're not!  Let's do <code>set_option trace.type_context.is_def_eq true</code> and <code>set_option trace.type_context.is_def_eq_detail true</code> and see what it doesn't unfold.  I searched for the last occurrence of "failed", and then marked the offending definitions as reducible.</li>
+</ol>
+
+<a name="192233621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192233621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192233621">Scott Morrison (Mar 30 2020 at 09:53)</a>:</h4>
+<p>Fantastic, thank you. I made it halfway through step 4. :-)</p>
+
+<a name="192233742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192233742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192233742">Scott Morrison (Mar 30 2020 at 09:54)</a>:</h4>
+<p>I observed that the zeroes were different, but also that the <code>ring_hom</code> arguments of <code>coe_fn</code> were different, and despaired of knowing which one to pursue. I suspect that actually the difference there is actually the same difference as the one in the zeroes that you identified.</p>
+
+<a name="192233787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192233787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192233787">Scott Morrison (Mar 30 2020 at 09:55)</a>:</h4>
+<p>I will investigate if that <code>[reducible]</code> attribute breaks things elsewhere.</p>
+
+<a name="192233800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192233800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192233800">Scott Morrison (Mar 30 2020 at 09:55)</a>:</h4>
+<p><span aria-label="fingers crossed" class="emoji emoji-1f91e" role="img" title="fingers crossed">:fingers_crossed:</span></p>
+
+<a name="192234607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192234607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192234607">Kevin Buzzard (Mar 30 2020 at 10:02)</a>:</h4>
+<p>This is great Gabriel -- many thanks for this extra info.</p>
+
+<a name="192426566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192426566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192426566">Reid Barton (Mar 31 2020 at 17:59)</a>:</h4>
+<p>Is it possible to argue that <code>simp</code> ought to behave as though instances are <code>reducible</code> by default? Instance search itself already does this as far as I can tell.</p>
+
+<a name="192426724"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192426724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192426724">Reid Barton (Mar 31 2020 at 18:01)</a>:</h4>
+<p>I was quite confused by <a href="https://github.com/leanprover-community/mathlib/issues/2290" title="https://github.com/leanprover-community/mathlib/issues/2290">#2290</a> until I realized that the original issue was not with typeclass search but with <code>simp</code>.</p>
+
+<a name="192426803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192426803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192426803">Gabriel Ebner (Mar 31 2020 at 18:01)</a>:</h4>
+<p>I think there's some special hack in <code>type_context</code> for this.  Let me look.</p>
+
+<a name="192426986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192426986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192426986">Reid Barton (Mar 31 2020 at 18:03)</a>:</h4>
+<p>If you could confirm my theory about instance search seeing instances as reducible (<a href="#narrow/stream/113488-general/topic/instance.20matching/near/176678244" title="#narrow/stream/113488-general/topic/instance.20matching/near/176678244">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance.20matching/near/176678244</a>) that would also be great</p>
+
+<a name="192427005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192427005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192427005">Reid Barton (Mar 31 2020 at 18:03)</a>:</h4>
+<p>Or perhaps that is what you are referring to.</p>
+
+<a name="192427121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192427121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192427121">Yury G. Kudryashov (Mar 31 2020 at 18:04)</a>:</h4>
+<p>Another example of <code>simp</code> not working: <a href="https://github.com/leanprover-community/mathlib/blob/algebra-bundled/src/ring_theory/algebra.lean#L134" title="https://github.com/leanprover-community/mathlib/blob/algebra-bundled/src/ring_theory/algebra.lean#L134">here</a> <code>rw</code> succeeds while <code>simp</code> fails (it's in the <code>algebra-bundled</code> branch).</p>
+
+<a name="192427406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192427406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192427406">Reid Barton (Mar 31 2020 at 18:06)</a>:</h4>
+<p>Yes, I've seen cases of this as well but this one is probably simpler. Maybe it's worth trying to track down these issues now that it could potentially result in fixing them.</p>
+
+<a name="192428317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192428317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192428317">Gabriel Ebner (Mar 31 2020 at 18:13)</a>:</h4>
+<p>I think there are two things going on:</p>
+<ol>
+<li>type-class resolution indeed has a special feature, unification is done using "instance" transparency.  Instance transparency unfolds instances even if they're not reducible.</li>
+<li>During unification of implicit and instance-implicit arguments, transparency is temporarily upgraded to semireducible: <a href="https://github.com/leanprover-community/lean/blob/9c57e4cd150cf036e6a8a8303a94f854f738994e/src/library/type_context.cpp#L2544-L2557" title="https://github.com/leanprover-community/lean/blob/9c57e4cd150cf036e6a8a8303a94f854f738994e/src/library/type_context.cpp#L2544-L2557">https://github.com/leanprover-community/lean/blob/9c57e4cd150cf036e6a8a8303a94f854f738994e/src/library/type_context.cpp#L2544-L2557</a></li>
+</ol>
+
+<a name="192428582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192428582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192428582">Gabriel Ebner (Mar 31 2020 at 18:14)</a>:</h4>
+<p>I'm not sure what this means for our example here.  The <code>R</code> and <code>R.α</code> terms should only occur in implicit arguments, so they should actually unify even in simp.</p>
+
+<a name="192429031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192429031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192429031">Gabriel Ebner (Mar 31 2020 at 18:18)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110043">Gabriel Ebner</span> <a href="#narrow/stream/113488-general/topic/unbearable.20unhappiness.20of.20.60simp.60.20not.20working/near/192428582" title="#narrow/stream/113488-general/topic/unbearable.20unhappiness.20of.20.60simp.60.20not.20working/near/192428582">said</a>:</p>
+<blockquote>
+<p>The <code>R</code> and <code>R.α</code> terms should only occur in implicit arguments.</p>
+</blockquote>
+<p>No they don't.  Did you know that <code>has_zero.zero</code> has an explicit argument?</p>
+
+<a name="192429236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192429236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192429236">Gabriel Ebner (Mar 31 2020 at 18:19)</a>:</h4>
+<p>I'm not sure if this means we should change <code>has_zero.zero</code> and <code>has_one.one</code>.</p>
+
+<a name="192429328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192429328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192429328">Reid Barton (Mar 31 2020 at 18:20)</a>:</h4>
+<p>is the idea then that the "wrong" (syntactically) form of the type gets chosen when we encounter the type for the first type as an implicit argument (where we could have chosen to reduce the type, but we had no reason to yet) and then later we see the type as an explicit argument to something else and there we're not allowed to match it semireducibly?</p>
+
+<a name="192429365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192429365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192429365">Reid Barton (Mar 31 2020 at 18:20)</a>:</h4>
+<p>This might explain also why <code>simp</code> so often fails to apply things like <code>category.comp_id</code></p>
+
+<a name="192429467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192429467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192429467">Reid Barton (Mar 31 2020 at 18:21)</a>:</h4>
+<p>because the object in question (which might be written in several definitionally equivalent ways, for example as an application of the identity functor) appears as an explicit argument of <code>category.id</code> but not as an explicit argument of anything else</p>
+
+<a name="192429674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192429674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192429674">Reid Barton (Mar 31 2020 at 18:22)</a>:</h4>
+<p>Of course this is especially insidious here where the notation <code>0</code> hides the explicit argument</p>
+
+<a name="192429680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192429680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192429680">Gabriel Ebner (Mar 31 2020 at 18:23)</a>:</h4>
+<p>This is the issue in this thread.  When we first see <code>0</code>, Lean assigns it the "wrong" type and later the simp lemmas don't apply because <code>0</code> has the type as an explicit argument.</p>
+
+<a name="192429854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192429854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192429854">Reid Barton (Mar 31 2020 at 18:24)</a>:</h4>
+<p>and in this case we got lucky because the type that appeared as an explicit argument was something that could be reduced after expanding the definition of an instance?</p>
+
+<a name="192429878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192429878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192429878">Reid Barton (Mar 31 2020 at 18:24)</a>:</h4>
+<p>whereas if the roles had been swapped, even marking the instance as <code>reducible</code> would not help, right?</p>
+
+<a name="192430122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192430122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192430122">Gabriel Ebner (Mar 31 2020 at 18:26)</a>:</h4>
+<p>The order of reduction shouldn't matter.  Lean reduces both sides of the unification problem.</p>
+
+<a name="192430150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192430150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192430150">Reid Barton (Mar 31 2020 at 18:26)</a>:</h4>
+<p>Oh, I see, okay.</p>
+
+<a name="192431059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192431059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192431059">Reid Barton (Mar 31 2020 at 18:33)</a>:</h4>
+<p>But anyways <code>simp</code>'s behavior vis-à-vis 2. above still seems "inconsistent". If it tried to solve the unification problems in a different order, it would succeed.</p>
+
+<a name="192431369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192431369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192431369">Reid Barton (Mar 31 2020 at 18:35)</a>:</h4>
+<p>This issue is a big pain in category theory and it's the reason why we have proofs like <code>simp, dsimp, simp</code> and arguably the reason why we have so many <code>rfl</code>-lemmas and maybe why <code>simps</code> even exists. It's nice to at least know why it happens now.</p>
+
+<a name="192432127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192432127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192432127">Reid Barton (Mar 31 2020 at 18:41)</a>:</h4>
+<p>It's particularly frustrating that <code>simp</code> won't notice that two types are definitionally equal in examples like this where if they weren't definitionally equal then the original expression wouldn't even type check!</p>
+
+<a name="192432357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192432357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192432357">Gabriel Ebner (Mar 31 2020 at 18:43)</a>:</h4>
+<p>I'm not sure if we were talking about the same thing.  If you unify two function applications, then Lean first unifies the explicit arguments with reducible transparency, and then the implicit ones with semireducible transparency.  (It could of course still be that this makes the "wrong" assigment to a metavariable which appears explicitly in another subterm.)</p>
+
+<a name="192432804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192432804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192432804">Reid Barton (Mar 31 2020 at 18:47)</a>:</h4>
+<p>Right, I'm talking about the situation where a metavariable will also appear later in an explicit argument of a subterm.</p>
+
+<a name="192433255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192433255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192433255">Reid Barton (Mar 31 2020 at 18:51)</a>:</h4>
+<p>If we could somehow defer the semireducible-transparency unification in the outer term until after the inner term, then both unifications would succeed</p>
+
+<a name="192502875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192502875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192502875">Scott Morrison (Apr 01 2020 at 09:33)</a>:</h4>
+<p>I think I just encountered another example of this. </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">mv_polynomial</span>
+
+<span class="n">noncomputable</span> <span class="n">theory</span>
+
+<span class="kn">open</span> <span class="n">finsupp</span> <span class="n">mv_polynomial</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span>
+<span class="kn">variable</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+
+<span class="c">/-</span><span class="cm">- `pderivative v p` is the partial derivative of `p` with respect to `v` -/</span>
+<span class="n">def</span> <span class="n">pderivative</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">S</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">S</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">S</span> <span class="n">R</span> <span class="o">:=</span>
+<span class="n">p</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">A</span> <span class="n">B</span><span class="o">,</span> <span class="n">monomial</span> <span class="o">(</span><span class="n">A</span> <span class="bp">-</span> <span class="n">single</span> <span class="n">v</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">B</span> <span class="bp">*</span> <span class="o">(</span><span class="n">A</span> <span class="n">v</span><span class="o">)))</span>
+
+<span class="kn">lemma</span> <span class="n">pderivative_monomial_single</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">R</span><span class="o">}</span> <span class="o">{</span><span class="n">v</span> <span class="o">:</span> <span class="n">S</span><span class="o">}</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">pderivative</span> <span class="n">v</span> <span class="o">(</span><span class="n">monomial</span> <span class="o">(</span><span class="n">single</span> <span class="n">v</span> <span class="n">n</span><span class="o">)</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="n">monomial</span> <span class="o">(</span><span class="n">single</span> <span class="n">v</span> <span class="o">(</span><span class="n">n</span><span class="bp">-</span><span class="mi">1</span><span class="o">))</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">pderivative</span><span class="o">],</span>
+  <span class="n">convert</span> <span class="n">sum_single_index</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">sorry</span><span class="o">,</span> <span class="c1">-- don&#39;t worry about this for now; this is an actual missing simp lemma.</span>
+  <span class="n">simp</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="c">/-</span><span class="cm"> failed to apply `zero_mul`! -/</span> <span class="n">rw</span> <span class="o">[</span><span class="n">zero_mul</span><span class="o">],</span> <span class="n">sorry</span> <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="192503101"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192503101" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192503101">Kevin Buzzard (Apr 01 2020 at 09:36)</a>:</h4>
+<p>When looking at this PR I noticed that some zeros were <code>finsupp</code> zeros and some were <code>mv_polynomial</code> zeros. This stopped <code>zero_add</code> from working at all at some point. Or are you convinced that this is unrelated? It might be (I need to work on my OWLS talk for the next few hours so don't want to investigate right now)</p>
+
+<a name="192503201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192503201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192503201">Kevin Buzzard (Apr 01 2020 at 09:36)</a>:</h4>
+<p><a href="#narrow/stream/116395-maths/topic/strange.20rw.20behaviour.20with.20mv_polynomial/near/192269030" title="#narrow/stream/116395-maths/topic/strange.20rw.20behaviour.20with.20mv_polynomial/near/192269030">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange.20rw.20behaviour.20with.20mv_polynomial/near/192269030</a></p>
+
+<a name="192503403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192503403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192503403">Scott Morrison (Apr 01 2020 at 09:39)</a>:</h4>
+<p>I suspect this is the same issue.</p>
+
+<a name="192504005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192504005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192504005">Gabriel Ebner (Apr 01 2020 at 09:44)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> I think you've hit a completely different issue here.  This works and applies <code>zero_mul</code>:</p>
+<div class="codehilite"><pre><span></span><span class="o">{</span> <span class="n">change</span> <span class="bp">_</span><span class="o">,</span> <span class="n">simp</span><span class="o">,</span> <span class="n">sorry</span> <span class="o">},</span>
+</pre></div>
+
+<a name="192504038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192504038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192504038">Scott Morrison (Apr 01 2020 at 09:45)</a>:</h4>
+<p>what does that even mean? :-)</p>
+
+<a name="192504087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192504087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192504087">Gabriel Ebner (Apr 01 2020 at 09:45)</a>:</h4>
+<p>Try <code>set_option trace.simplify true</code> and behold the output:</p>
+
+<a name="192504108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192504108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192504108">Gabriel Ebner (Apr 01 2020 at 09:45)</a>:</h4>
+<div class="codehilite"><pre><span></span>[simplify] eq: ?m_2 ?m_3 0 = 0
+[simplify] eq: ?m_1 ?m_2 0
+...
+</pre></div>
+
+<a name="192504121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192504121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192504121">Gabriel Ebner (Apr 01 2020 at 09:46)</a>:</h4>
+<p>I think simp is missing an <code>instantiate_mvars</code> here.</p>
+
+<a name="192504187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192504187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192504187">Gabriel Ebner (Apr 01 2020 at 09:46)</a>:</h4>
+<p>The <code>change _</code> tactic is the quickest hack I could think of to instantiate the metavariables in the goal.</p>
+
+<a name="192504469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192504469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192504469">Scott Morrison (Apr 01 2020 at 09:49)</a>:</h4>
+<p>oh!</p>
+
+<a name="192504697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192504697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192504697">Scott Morrison (Apr 01 2020 at 09:51)</a>:</h4>
+<p>What do you mean when you say "I think simp is missing an instantiate_mvars here"?</p>
+
+<a name="192505050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192505050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192505050">Gabriel Ebner (Apr 01 2020 at 09:54)</a>:</h4>
+<p>We've had this problem with other tactics as well, but I can't remember the issue number.  At some point <code>simp</code> does <code>tgt ← target</code> when it should actually do <code>tgt ← target &gt;&gt;= instantiate_mvars</code>.</p>
+
+<a name="192505052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192505052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192505052">Scott Morrison (Apr 01 2020 at 09:54)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110043">Gabriel Ebner</span> <a href="#narrow/stream/113488-general/topic/unbearable.20unhappiness.20of.20.60simp.60.20not.20working/near/192429236" title="#narrow/stream/113488-general/topic/unbearable.20unhappiness.20of.20.60simp.60.20not.20working/near/192429236">said</a>:</p>
+<blockquote>
+<p>I'm not sure if this means we should change <code>has_zero.zero</code> and <code>has_one.one</code>.</p>
+</blockquote>
+<p>Did anyone (<span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> or <span class="user-mention" data-user-id="110032">@Reid Barton</span>) investigate this? I have just been trying a little, but without much success. To make the type argument in <code>has_zero</code> and <code>has_one</code> implicit I used:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">has_zero</span>     <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">zero</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+<span class="kn">structure</span> <span class="n">has_one</span>      <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">one</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">class</span><span class="o">]</span> <span class="n">has_zero</span> <span class="n">has_one</span>
+</pre></div>
+
+
+<p>but it quickly led to woe.  In various places in <code>library/init/algebra/ring.lean</code>, <code>rw mul_zero</code> fails to work at all. (You can still <code>erw mul_zero, refl</code>...)</p>
+
+<a name="192505168"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192505168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192505168">Gabriel Ebner (Apr 01 2020 at 09:55)</a>:</h4>
+<p>With your definition, the typeclass argument is explicit, which is also not good.</p>
+
+<a name="192505255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192505255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192505255">Gabriel Ebner (Apr 01 2020 at 09:56)</a>:</h4>
+<p>This is how you make parameters implicit:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">has_zero</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span> <span class="n">mk</span> <span class="o">{}</span> <span class="bp">::</span> <span class="o">(</span><span class="n">zero</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+</pre></div>
+
+<a name="192505718"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192505718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192505718">Scott Morrison (Apr 01 2020 at 10:00)</a>:</h4>
+<p>okay!</p>
+
+<a name="192505756"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192505756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192505756">Scott Morrison (Apr 01 2020 at 10:00)</a>:</h4>
+<p>I will try that at some point too. For now I'm recompiling with <code>t ← target &gt;&gt;= instantiate_mvars</code> in <code>simp_target</code>.</p>
+
+<a name="192506345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192506345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192506345">Scott Morrison (Apr 01 2020 at 10:06)</a>:</h4>
+<p>Actually, <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span>, was the problem here that <code>convert</code> ought to have called <code>instantiate_mvars</code>itself, before returning all the goals?</p>
+
+<a name="192506364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192506364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192506364">Scott Morrison (Apr 01 2020 at 10:06)</a>:</h4>
+<p>Maybe it's not <code>simp</code>'s job to worry about this.</p>
+
+<a name="192506767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192506767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192506767">Gabriel Ebner (Apr 01 2020 at 10:10)</a>:</h4>
+<p>This is the latest PR I could find related to this issue: <a href="https://github.com/leanprover-community/mathlib/issues/1520" title="https://github.com/leanprover-community/mathlib/issues/1520">#1520</a>  I think the general idea is that we want to fix both tactics.</p>
+
+<a name="192512603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192512603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192512603">Scott Morrison (Apr 01 2020 at 11:16)</a>:</h4>
+<p>Summary: for the issue with <code>mul_zero</code> in <code>mv_polynomial.lean</code>, changing <code>simp</code> to instantiate_mvars in <code>target</code> first worked great, but changing <code>convert</code> did not.</p>
+
+<a name="192517048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192517048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192517048">Scott Morrison (Apr 01 2020 at 12:04)</a>:</h4>
+<p>Do you think it's reasonable to PR <code>t ← target &gt;&gt;= instantiate_mvars</code> to core?</p>
+
+<a name="192517417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unbearable%20unhappiness%20of%20%60simp%60%20not%20working/near/192517417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29664unbearableunhappinessofsimpnotworking.html#192517417">Gabriel Ebner (Apr 01 2020 at 12:08)</a>:</h4>
+<p>Yes, please PR it.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
