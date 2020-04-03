@@ -91,6 +91,7 @@ Don't forget to also follow the instructions on [Lean Projects](https://github.c
   * Elaboration in Lean 2.
 
 ### Papers using Lean
+* Anne Baanen. [*A Lean tactic for normalising ring expressions with exponents*](https://lean-forward.github.io/ring_exp/paper.pdf) IJCAR 2020.
 * Floris van Doorn, Gabriel Ebner, and Robert Y. Lewis. [*Maintaining a Library of Formal Mathematics.*](https://lean-forward.github.io/mathlib-maintenance/paper.pdf)
 * Robert Y. Lewis and Paul-Nicolas Madelaine. [*Normalizing Casts and Coercions.*](https://arxiv.org/abs/2001.10594) arXiv 2020.
 * The mathlib Community. [*The Lean mathematical library.*](https://arxiv.org/abs/1910.09336) CPP 2020.
