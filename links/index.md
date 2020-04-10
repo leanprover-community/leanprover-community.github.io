@@ -28,7 +28,7 @@ Please submit additions and updates via [GitHub](https://github.com/leanprover-c
 * [Kevin Buzzard's natural number game](http://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/) is a online interactive tutorial to Lean.
 * [Theorem Proving in Lean](https://leanprover.github.io/theorem_proving_in_lean/): a textbook to learn Lean with interactive code snippets.
 * [Logic and Proof](https://leanprover.github.io/logic_and_proof/): a textbook that is a first rigorous proving course that teaches Lean at the same time.
-* [Logical Verification in Lean (pdf)](https://github.com/blanchette/logical_verification_2019/raw/master/logical_verification_in_lean.pdf): course notes for a [course](https://lean-forward.github.io/logical-verification/2019/index.html) at VU Amsterdam.
+* [The Hitchhiker's Guide to Logical Verification (pdf)](https://github.com/blanchette/logical_verification_2020/raw/master/hitchhikers_guide.pdf): course notes for a [course](https://lean-forward.github.io/logical-verification/2020/index.html) at VU Amsterdam.
 * [Video tutorial](https://av-media.vu.nl/VUMedia/Play/27894c3a8a4d4768a0421f62e5345a6c1d) of type theory and Lean.
 * [Lean tutorial](https://github.com/leanprover-community/tutorials/blob/master/src/first_proofs.lean): a file with many descriptive comments.
 * Ask questions in the [new members stream](https://leanprover.zulipchat.com/#narrow/stream/113489-new-members) on Zulip.
