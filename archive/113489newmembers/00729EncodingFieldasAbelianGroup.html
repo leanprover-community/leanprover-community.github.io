@@ -114,6 +114,37 @@ The issue here is that in the line <code> @abelian_group {x : A | x ≠ zero} on
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Encoding%20Field%20as%20Abelian%20Group/near/191443424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00729EncodingFieldasAbelianGroup.html#191443424">Kevin Buzzard (Mar 23 2020 at 08:28)</a>:</h4>
 <p>The power of notation in Lean means that you can set up these notations in a far more beautiful way. See for example the definition of a group in <a href="https://github.com/kbuzzard/group-theory-game/blob/master/src/group/definitions.lean" target="_blank" title="https://github.com/kbuzzard/group-theory-game/blob/master/src/group/definitions.lean">the group theory game</a></p>
 
+<a name="193711874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Encoding%20Field%20as%20Abelian%20Group/near/193711874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00729EncodingFieldasAbelianGroup.html#193711874">Mukesh Tiwari (Apr 12 2020 at 12:51)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="112680">Johan Commelin</span> <a href="#narrow/stream/113489-new-members/topic/Encoding.20Field.20as.20Abelian.20Group/near/191441292" title="#narrow/stream/113489-new-members/topic/Encoding.20Field.20as.20Abelian.20Group/near/191441292">said</a>:</p>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="239476">Mukesh Tiwari</span> That second definition is a bit sloppy (it doesn't say anything about distributivity).</p>
+</blockquote>
+<p>You mean this one?  "it is a abelian group with respect to addition, and it is a abelian group with respect to multiplication (except zero)."</p>
+
+<a name="193714204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Encoding%20Field%20as%20Abelian%20Group/near/193714204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00729EncodingFieldasAbelianGroup.html#193714204">Johan Commelin (Apr 12 2020 at 13:57)</a>:</h4>
+<p>Yup, that one</p>
+
+<a name="193714277"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Encoding%20Field%20as%20Abelian%20Group/near/193714277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00729EncodingFieldasAbelianGroup.html#193714277">Kevin Buzzard (Apr 12 2020 at 13:59)</a>:</h4>
+<p><span class="user-mention" data-user-id="239476">@Mukesh Tiwari</span> if you're still thinking about this, why not switch over to the standard Lean way of doing things where you can use notation instead of having to write all this <code>Fmult (Finv x) x = one</code> stuff?</p>
+
+<a name="193714523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Encoding%20Field%20as%20Abelian%20Group/near/193714523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00729EncodingFieldasAbelianGroup.html#193714523">Kevin Buzzard (Apr 12 2020 at 14:05)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">ring&#39;</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">add_comm_group</span> <span class="n">A</span><span class="o">,</span> <span class="n">monoid</span> <span class="n">A</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">add_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">A</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">*</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">z</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">*</span> <span class="n">z</span><span class="o">)</span>
+<span class="o">(</span><span class="n">mul_add</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">A</span><span class="o">,</span> <span class="n">z</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">z</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">z</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span>
+</pre></div>
+
+<a name="193732836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Encoding%20Field%20as%20Abelian%20Group/near/193732836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00729EncodingFieldasAbelianGroup.html#193732836">Mukesh Tiwari (Apr 12 2020 at 22:21)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  <span class="user-mention" data-user-id="112680">@Johan Commelin</span>  Thank you very much.</p>
+
+<a name="193736978"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Encoding%20Field%20as%20Abelian%20Group/near/193736978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00729EncodingFieldasAbelianGroup.html#193736978">Mukesh Tiwari (Apr 13 2020 at 00:27)</a>:</h4>
+<p>I looked at the pdf again, and It says, "the distributive laws hold." (page 13).  I was sloppy when writing the axioms.  Thanks for the catch.</p>
+
 
 {% endraw %}
 

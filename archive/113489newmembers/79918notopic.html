@@ -124,6 +124,115 @@ permalink: archive/113489newmembers/79918notopic.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/192186978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#192186978">Dan Abolafia (Mar 29 2020 at 18:16)</a>:</h4>
 <p>(deleted)</p>
 
+<a name="192866166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/192866166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#192866166">Kevin Buzzard (Apr 03 2020 at 21:28)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="193673777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/193673777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#193673777">Nam (Apr 11 2020 at 18:46)</a>:</h4>
+<p>somehow that line still worked ;).</p>
+
+<a name="193673785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/193673785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#193673785">Kevin Buzzard (Apr 11 2020 at 18:47)</a>:</h4>
+<p>You just changed thread. I am surprised it worked actually!</p>
+
+<a name="193673791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/193673791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#193673791">Nam (Apr 11 2020 at 18:47)</a>:</h4>
+<p>darn. i apologize. this tool needs some time to get used to.</p>
+
+<a name="193674081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/193674081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#193674081">Lukas (Apr 11 2020 at 18:52)</a>:</h4>
+<p>Hello,</p>
+<p>I want to proof the following case:</p>
+<div class="codehilite"><pre><span></span>case mynat.succ
+t b d : mynat,
+dh : t * (d + b) = t * d + t * b
+⊢ t * (succ d + b) = t * succ d + t * b
+</pre></div>
+
+
+<p>my idea is to <code>rw dh</code> to get <code>t * succ d + t * b</code> on the left side. I think it should work because <code>succ d</code> should also be a <code>mynat</code>.</p>
+<p>However I get </p>
+<div class="codehilite"><pre><span></span>tactic failed, there are unsolved goals
+state:
+case mynat.succ
+t b d : mynat,
+dh : t * (d + b) = t * d + t * b
+⊢ t * (succ d + b) = t * succ d + t * b
+</pre></div>
+
+
+<p>Did I missunderstood something or do I have to give an additional hint in the <code>rw</code> step?</p>
+
+<a name="193674098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/193674098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#193674098">Kevin Buzzard (Apr 11 2020 at 18:53)</a>:</h4>
+<p>You definitely can't do <code>rw dh</code></p>
+
+<a name="193674115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/193674115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#193674115">Kevin Buzzard (Apr 11 2020 at 18:53)</a>:</h4>
+<p>If <code>dh : A = B</code> then <code>rw dh</code> will only work when there is something exactly equal to A in the goal</p>
+
+<a name="193674163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/193674163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#193674163">Kevin Buzzard (Apr 11 2020 at 18:54)</a>:</h4>
+<p>i.e. you really need exactly the symbols <code>t * (d + b)</code> in the goal for <code>rw dh</code> to work.</p>
+
+<a name="193674185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/193674185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#193674185">Kevin Buzzard (Apr 11 2020 at 18:55)</a>:</h4>
+<p>If <code>dh</code> said something like <code>∀ d, t * (d + b) = t * d + t * b</code> then you would be OK. But it doesn't.</p>
+
+<a name="193674196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/193674196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#193674196">Kevin Buzzard (Apr 11 2020 at 18:55)</a>:</h4>
+<p><code>dh</code> just says that something is true for that one specific d, not all d.</p>
+
+<a name="193674237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/193674237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#193674237">Lukas (Apr 11 2020 at 18:56)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113489-new-members/topic/(no.20topic)/near/193674163" title="#narrow/stream/113489-new-members/topic/(no.20topic)/near/193674163">said</a>:</p>
+<blockquote>
+<p>i.e. you really need exactly the symbols <code>t * (d + b)</code> in the goal for <code>rw dh</code> to work.</p>
+</blockquote>
+<p>okay thanks,</p>
+<p>can I somehow substitute the <code>succ d</code> into a new variable and then it will work - or is that the wrong direction?</p>
+
+<a name="193674240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/193674240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#193674240">Kevin Buzzard (Apr 11 2020 at 18:56)</a>:</h4>
+<p>If induction was that easy, then you would be able to prove pretty much any statement by induction.</p>
+
+<a name="193674249"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/193674249" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#193674249">Kevin Buzzard (Apr 11 2020 at 18:56)</a>:</h4>
+<p>you have <em>fixed</em> naturals <code>t</code> and <code>b</code> and <code>d</code>, and <code>dh</code> is only a statement about those fixed naturals.</p>
+
+<a name="193674258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/193674258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#193674258">Kevin Buzzard (Apr 11 2020 at 18:56)</a>:</h4>
+<p>Look, here is a proof that for every natural number <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>, we have <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">n=n^2</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>.</p>
+
+<a name="193674262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/193674262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#193674262">Kevin Buzzard (Apr 11 2020 at 18:57)</a>:</h4>
+<p>Let's prove it by induction.</p>
+
+<a name="193674268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/193674268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#193674268">Kevin Buzzard (Apr 11 2020 at 18:57)</a>:</h4>
+<p>The base case is fine -- because <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>=</mo><msup><mn>0</mn><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">0=0^2</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>.</p>
+
+<a name="193674274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/193674274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#193674274">Kevin Buzzard (Apr 11 2020 at 18:57)</a>:</h4>
+<p>Now for the inductive step, let <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span> be any natural at all.</p>
+
+<a name="193674281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/193674281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#193674281">Kevin Buzzard (Apr 11 2020 at 18:58)</a>:</h4>
+<p>Let's assume <code>h : n = n^2</code> and try and deduce <code>succ n = (succ n)^2</code></p>
+
+<a name="193674323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/193674323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#193674323">Kevin Buzzard (Apr 11 2020 at 18:58)</a>:</h4>
+<p>By your way of thinking, n is an arbitrary natural number, so we can let it be <code>succ n</code> and use <code>h</code> to prove what we want to prove.</p>
+
+<a name="193674346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/193674346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#193674346">Kevin Buzzard (Apr 11 2020 at 18:58)</a>:</h4>
+<p>That can't be how induction works though, because what we're trying to prove isn't true.</p>
+
+<a name="193674376"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/193674376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#193674376">Lukas (Apr 11 2020 at 18:59)</a>:</h4>
+<p>okay thanks for the explanation</p>
+
 
 {% endraw %}
 

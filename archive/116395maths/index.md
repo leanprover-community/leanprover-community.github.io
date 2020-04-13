@@ -9,11 +9,79 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Hedetniemi](85789Hedetniemi.html) (177 messages, latest: Apr 02 2020 at 08:52)
+* [lean absurd proof](65544leanabsurdproof.html) (41 messages, latest: Apr 13 2020 at 09:57)
+
+* [category](33727category.html) (139 messages, latest: Apr 12 2020 at 18:31)
+
+* [finset.sUnion](96852finsetsUnion.html) (11 messages, latest: Apr 12 2020 at 05:32)
+
+* [linear algebra over semirings & semimodules](67012linearalgebraoversemiringssemimodules.html) (2 messages, latest: Apr 12 2020 at 03:39)
+
+* [Dependent image](96411Dependentimage.html) (3 messages, latest: Apr 12 2020 at 01:58)
+
+* [Hedetniemi](85789Hedetniemi.html) (316 messages, latest: Apr 11 2020 at 20:00)
+
+* [Polynomials](93880Polynomials.html) (31 messages, latest: Apr 11 2020 at 04:16)
+
+* [coercion from `rat` to a `char_p` field](59651coercionfromrattoacharpfield.html) (7 messages, latest: Apr 09 2020 at 19:12)
+
+* [Ideal lemma](79724Ideallemma.html) (133 messages, latest: Apr 09 2020 at 16:03)
+
+* [mul_left_cancel](46078mulleftcancel.html) (109 messages, latest: Apr 09 2020 at 09:49)
+
+* [Does `classical` break `interval_cases`?](27122Doesclassicalbreakintervalcases.html) (4 messages, latest: Apr 09 2020 at 08:00)
+
+* [quanta on langlands](50460quantaonlanglands.html) (15 messages, latest: Apr 08 2020 at 21:57)
+
+* [squeeze_ring](99634squeezering.html) (18 messages, latest: Apr 08 2020 at 19:16)
+
+* [multiplication is an add_monoid_hom](89707multiplicationisanaddmonoidhom.html) (7 messages, latest: Apr 08 2020 at 17:53)
+
+* [Name?](12449Name.html) (16 messages, latest: Apr 08 2020 at 17:51)
+
+* [real number game](21928realnumbergame.html) (39 messages, latest: Apr 08 2020 at 15:20)
+
+* [direct limits and bundled homs](08118directlimitsandbundledhoms.html) (6 messages, latest: Apr 08 2020 at 07:25)
+
+* [no_zero_divisors definition](73368nozerodivisorsdefinition.html) (29 messages, latest: Apr 07 2020 at 09:39)
+
+* [Missing instance](43184Missinginstance.html) (2 messages, latest: Apr 06 2020 at 19:08)
+
+* [ring is slow with polynomials](61701ringisslowwithpolynomials.html) (41 messages, latest: Apr 06 2020 at 14:34)
+
+* [category over and under](01676categoryoverandunder.html) (53 messages, latest: Apr 06 2020 at 13:16)
+
+* [filter bases](55413filterbases.html) (40 messages, latest: Apr 06 2020 at 12:00)
+
+* [`by ring` is slow](42125byringisslow.html) (6 messages, latest: Apr 06 2020 at 07:43)
+
+* [2 = 2](6470622.html) (27 messages, latest: Apr 06 2020 at 05:23)
+
+* [find a term in a fintype](12850findaterminafintype.html) (13 messages, latest: Apr 05 2020 at 22:56)
+
+* [filter.eventually](23102filtereventually.html) (7 messages, latest: Apr 05 2020 at 16:47)
+
+* [unnecessary suffering in galois insertion](49323unnecessarysufferingingaloisinsertion.html) (5 messages, latest: Apr 05 2020 at 15:13)
+
+* [Infinite sets are nonempty](19240Infinitesetsarenonempty.html) (6 messages, latest: Apr 05 2020 at 09:37)
+
+* [fixing `subst` in core](19639fixingsubstincore.html) (39 messages, latest: Apr 05 2020 at 09:27)
+
+* [Link between sequential and epsilon/delta versions](03635Linkbetweensequentialandepsilondeltaversions.html) (158 messages, latest: Apr 04 2020 at 14:46)
+
+* [Wiedijk's "Benchmark"](37649WiedijksBenchmark.html) (19 messages, latest: Apr 04 2020 at 13:56)
+
+* [Binet's Formula](43811BinetsFormula.html) (4 messages, latest: Apr 04 2020 at 10:01)
+
+* [pderivative](31076pderivative.html) (8 messages, latest: Apr 04 2020 at 05:29)
+
+* [If some inf is a min, then the set is bounded below](70176Ifsomeinfisaminthenthesetisboundedbelow.html) (12 messages, latest: Apr 03 2020 at 23:31)
+
+* [Turn a set { y : Y \| exists x \in A, y = f x } into (f '' A)](50915TurnasetyYexistsxinAyfxintofA.html) (30 messages, latest: Apr 03 2020 at 15:10)
+
+* [non-dependent type sheaves](52001nondependenttypesheaves.html) (11 messages, latest: Apr 02 2020 at 12:12)
 
 * [Lifting a finite set to a finset](64487Liftingafinitesettoafinset.html) (8 messages, latest: Apr 01 2020 at 19:41)
-
-* [non-dependent type sheaves](52001nondependenttypesheaves.html) (5 messages, latest: Apr 01 2020 at 09:48)
 
 * [Borel measure space](05619Borelmeasurespace.html) (47 messages, latest: Apr 01 2020 at 08:58)
 
@@ -22,8 +90,6 @@ permalink: archive/116395maths/index.html
 * [lattice with antiautomorphism](46295latticewithantiautomorphism.html) (32 messages, latest: Mar 31 2020 at 13:09)
 
 * [strange rw behaviour with mv_polynomial](71909strangerwbehaviourwithmvpolynomial.html) (77 messages, latest: Mar 30 2020 at 16:19)
-
-* [Ideal lemma](79724Ideallemma.html) (111 messages, latest: Mar 30 2020 at 08:33)
 
 * [Implicit function theorem](85878Implicitfunctiontheorem.html) (17 messages, latest: Mar 30 2020 at 02:06)
 
@@ -38,8 +104,6 @@ permalink: archive/116395maths/index.html
 * [Speeding up Elaboration](69061SpeedingupElaboration.html) (21 messages, latest: Mar 26 2020 at 22:46)
 
 * [Bourbaki's tau](38676Bourbakistau.html) (14 messages, latest: Mar 26 2020 at 20:16)
-
-* [real number game](21928realnumbergame.html) (5 messages, latest: Mar 26 2020 at 20:14)
 
 * [`metric_space` documentation](86922metricspacedocumentation.html) (1 message, latest: Mar 24 2020 at 20:23)
 
@@ -844,8 +908,6 @@ permalink: archive/116395maths/index.html
 * [bounds](43084bounds.html) (43 messages, latest: Mar 17 2019 at 17:11)
 
 * [topology induced by a linear order](90893topologyinducedbyalinearorder.html) (14 messages, latest: Mar 14 2019 at 21:22)
-
-* [filter bases](55413filterbases.html) (29 messages, latest: Mar 12 2019 at 15:53)
 
 * [uniformity](11415uniformity.html) (5 messages, latest: Mar 12 2019 at 14:40)
 

@@ -2076,6 +2076,930 @@ h2 : R b a
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192608001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192608001">Alex J. Best (Apr 02 2020 at 00:11)</a>:</h4>
 <p><code>rw foo</code>?</p>
 
+<a name="192708454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192708454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192708454">Iocta (Apr 02 2020 at 18:40)</a>:</h4>
+<p>What do I do here?</p>
+<div class="codehilite"><pre><span></span><span class="kn">section</span>
+<span class="kn">parameters</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">A</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span>
+<span class="kn">parameter</span> <span class="o">(</span><span class="n">reflR</span> <span class="o">:</span> <span class="n">reflexive</span> <span class="n">R</span><span class="o">)</span>
+<span class="kn">parameter</span> <span class="o">(</span><span class="n">transR</span> <span class="o">:</span> <span class="n">transitive</span> <span class="n">R</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">S</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">R</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">∧</span> <span class="n">R</span> <span class="n">b</span> <span class="n">a</span>
+
+<span class="n">include</span> <span class="n">reflR</span>
+<span class="n">include</span> <span class="n">transR</span>
+
+<span class="kn">open</span> <span class="n">classical</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">transitive</span> <span class="n">S</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intros</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">h1</span> <span class="n">h2</span><span class="o">,</span>
+
+<span class="kn">end</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+<a name="192711506"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192711506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192711506">Kevin Buzzard (Apr 02 2020 at 19:08)</a>:</h4>
+<p>Do you understand the goal you are trying to prove? <code>unfold S</code> if you don't?</p>
+
+<a name="192711538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192711538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192711538">Kevin Buzzard (Apr 02 2020 at 19:08)</a>:</h4>
+<p>hmm <code>rw [S]</code> seems to work better</p>
+
+<a name="192711638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192711638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192711638">Kevin Buzzard (Apr 02 2020 at 19:09)</a>:</h4>
+<p><code>rw [S] at *,</code> maybe even better. But you probably don't need to do this as far as Lean is concerned -- if you can finish the proof from here then try deleting this line and see if the proof still works.</p>
+
+<a name="192716053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192716053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192716053">Iocta (Apr 02 2020 at 19:44)</a>:</h4>
+<p>Ah ok</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">transitive</span> <span class="n">S</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intros</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">h1</span> <span class="n">h2</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">h1</span> <span class="k">with</span> <span class="n">rab</span> <span class="n">rba</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">h2</span> <span class="k">with</span> <span class="n">rbc</span> <span class="n">rcb</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">transR</span> <span class="n">rab</span> <span class="n">rbc</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">transR</span> <span class="n">rcb</span> <span class="n">rba</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="192716102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192716102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192716102">Iocta (Apr 02 2020 at 19:44)</a>:</h4>
+<p>am I supposed to put <code>{ }</code> somewhere in there for the reasons you mentioned yesterday?</p>
+
+<a name="192716235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192716235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192716235">Reid Barton (Apr 02 2020 at 19:45)</a>:</h4>
+<p>Looks like around each of the last two lines.</p>
+
+<a name="192716338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192716338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192716338">Reid Barton (Apr 02 2020 at 19:46)</a>:</h4>
+<p>After <code>apply and.intro</code> you have two goals, so I usually add</p>
+<div class="codehilite"><pre><span></span>  <span class="o">{</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>to my tactic block immediately</p>
+
+<a name="192716397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192716397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192716397">Reid Barton (Apr 02 2020 at 19:47)</a>:</h4>
+<p>(Actually, I add</p>
+<div class="codehilite"><pre><span></span>  <span class="o">{</span>
+<span class="o">},</span>
+  <span class="o">{</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>then fix up the <code>}</code> when I finish the subgoals.)</p>
+
+<a name="192716550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192716550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192716550">Iocta (Apr 02 2020 at 19:48)</a>:</h4>
+<p>alright</p>
+
+<a name="192716990"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192716990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192716990">Iocta (Apr 02 2020 at 19:52)</a>:</h4>
+<p>there's no autoformatter for lean is there?</p>
+
+<a name="192749006"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192749006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192749006">Daniel Keys (Apr 03 2020 at 01:26)</a>:</h4>
+<p>Actually VS Code does do some general formatting. For example, if you type <code>{</code> it inserts <code>{}</code>; if you then put your cursor in between the braces and press Enter, the closing brace is indented to the same level as its opening counterpart. With a little practice you can adjust your style to it (or the other way around).</p>
+
+<a name="192758728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192758728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192758728">Johan Commelin (Apr 03 2020 at 05:06)</a>:</h4>
+<p><span class="user-mention" data-user-id="253355">@Iocta</span> If you mean, take a file with "bad" formatting style, and automatically turn it into something that stylistically will make mathlib maintainers happy.... no, I'm not aware of such a tool. And I would be very happy to know about it if you find one!</p>
+
+<a name="192856357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192856357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192856357">Iocta (Apr 03 2020 at 19:57)</a>:</h4>
+<p>What's this <code>''</code> notation mean?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">surj_on</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">B</span> <span class="o">:</span> <span class="n">set</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span> <span class="n">B</span> <span class="err">⊆</span> <span class="n">f</span> <span class="err">&#39;&#39;</span> <span class="n">A</span>
+</pre></div>
+
+<a name="192856425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192856425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192856425">Ryan Lahfa (Apr 03 2020 at 19:58)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="253355">Iocta</span> <a href="#narrow/stream/113489-new-members/topic/more.20basics/near/192856357" title="#narrow/stream/113489-new-members/topic/more.20basics/near/192856357">said</a>:</p>
+<blockquote>
+<p>What's this <code>''</code> notation mean?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">surj_on</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">B</span> <span class="o">:</span> <span class="n">set</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span> <span class="n">B</span> <span class="err">⊆</span> <span class="n">f</span> <span class="err">&#39;&#39;</span> <span class="n">A</span>
+</pre></div>
+
+
+</blockquote>
+<p>It means take the image of f over A</p>
+
+<a name="192856445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192856445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192856445">Ryan Lahfa (Apr 03 2020 at 19:58)</a>:</h4>
+<p><code>f '' A := f(A)</code> if you prefer</p>
+
+<a name="192856487"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192856487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192856487">Ryan Lahfa (Apr 03 2020 at 19:58)</a>:</h4>
+<p>You have the same for preimage using a <code>''⁻¹</code> if I'm not wrong.</p>
+
+<a name="192856806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192856806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192856806">Iocta (Apr 03 2020 at 20:01)</a>:</h4>
+<p>Oh I see</p>
+
+<a name="192857357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192857357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192857357">Kevin Buzzard (Apr 03 2020 at 20:06)</a>:</h4>
+<p>You can always put <code>#print notation ''</code> etc to see definition of notation in lean. You can also hover over it, and even jump to the definition of the underlying term</p>
+
+<a name="192857607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192857607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192857607">Iocta (Apr 03 2020 at 20:08)</a>:</h4>
+<p>nice! the online books don't have that hover-info feature but copying into my editor isn't hard</p>
+
+<a name="192895403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192895403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192895403">Iocta (Apr 04 2020 at 07:46)</a>:</h4>
+<p>This feels too manual. Is there a <code>simp_harder</code> or something?</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">nat</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span> <span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">m</span> <span class="n">n</span> <span class="n">k</span><span class="o">,</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">m</span>
+<span class="o">(</span><span class="k">show</span> <span class="mi">0</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span> <span class="k">from</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">zero_mul</span><span class="o">,</span> <span class="n">zero_mul</span><span class="o">,</span> <span class="n">zero_mul</span><span class="o">])</span>
+<span class="o">(</span><span class="k">assume</span> <span class="n">m</span><span class="o">,</span>
+  <span class="o">(</span><span class="k">assume</span> <span class="n">ih</span><span class="o">:</span>  <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span>
+  <span class="o">(</span><span class="k">show</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span>
+  <span class="k">from</span> <span class="k">calc</span>
+  <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span>   <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ_mul</span><span class="o">]</span>
+  <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">k</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">ih</span><span class="o">]</span>
+  <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="o">((</span><span class="n">m</span> <span class="bp">*</span> <span class="n">k</span><span class="o">)</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="n">k</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span>
+  <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">k</span><span class="o">))</span> <span class="bp">+</span> <span class="n">k</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">add_comm</span><span class="o">]</span>
+  <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="n">k</span>  <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">succ_mul</span><span class="o">]</span> <span class="o">)))</span>
+</pre></div>
+
+<a name="192895480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192895480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192895480">Johan Commelin (Apr 04 2020 at 07:48)</a>:</h4>
+<p>Replace all the <code>nat.succ bla</code> with <code>bla + 1</code></p>
+
+<a name="192895484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192895484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192895484">Johan Commelin (Apr 04 2020 at 07:48)</a>:</h4>
+<p>After that <code>by ring</code> should do it.</p>
+
+<a name="192895514"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192895514" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192895514">Johan Commelin (Apr 04 2020 at 07:49)</a>:</h4>
+<p>But I don't know if you have access to <code>ring</code>...</p>
+
+<a name="192895565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192895565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192895565">Johan Commelin (Apr 04 2020 at 07:50)</a>:</h4>
+<p>Also... <code>ring</code> will just use <code>mul_add</code> which is the statement that you are trying to prove.</p>
+
+<a name="192895568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192895568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192895568">Johan Commelin (Apr 04 2020 at 07:50)</a>:</h4>
+<p>So it would be cheating</p>
+
+<a name="192898009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192898009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192898009">Kenny Lau (Apr 04 2020 at 08:59)</a>:</h4>
+<p>induct on <code>k</code></p>
+
+<a name="192898088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192898088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192898088">Kenny Lau (Apr 04 2020 at 09:01)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">nat</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span> <span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">m</span> <span class="n">n</span> <span class="n">k</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">k</span> <span class="n">rfl</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">k</span> <span class="n">ih</span><span class="o">,</span> <span class="k">show</span> <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">k</span> <span class="bp">+</span> <span class="n">m</span><span class="o">),</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">ih</span><span class="o">,</span> <span class="n">add_assoc</span><span class="o">]</span>
+</pre></div>
+
+<a name="192898142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192898142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192898142">Kenny Lau (Apr 04 2020 at 09:02)</a>:</h4>
+<p>here is the official proof in core:</p>
+<div class="codehilite"><pre><span></span><span class="kn">private</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">sort_add</span> <span class="o">:=</span>
+<span class="bp">`</span><span class="o">[</span><span class="n">simp</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">add_assoc</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">add_comm</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">add_left_comm</span><span class="o">]]</span>
+
+<span class="kn">protected</span> <span class="kn">lemma</span> <span class="n">left_distrib</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="n">m</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">n</span> <span class="bp">*</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">k</span>
+<span class="bp">|</span> <span class="mi">0</span>        <span class="n">m</span> <span class="n">k</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">zero_mul</span><span class="o">]</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="n">m</span> <span class="n">k</span> <span class="o">:=</span>
+  <span class="k">begin</span> <span class="n">simp</span> <span class="o">[</span><span class="n">succ_mul</span><span class="o">,</span> <span class="n">left_distrib</span> <span class="n">n</span> <span class="n">m</span> <span class="n">k</span><span class="o">],</span> <span class="n">sort_add</span> <span class="kn">end</span>
+</pre></div>
+
+<a name="192901122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192901122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192901122">Kevin Buzzard (Apr 04 2020 at 10:28)</a>:</h4>
+<p>This is a level in the natural number game and it might be interesting to compare with the tactic mode proof I wrote</p>
+
+<a name="192901141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192901141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192901141">Kevin Buzzard (Apr 04 2020 at 10:29)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> said to me recently that he thought I should exploit more automation in the natural number game but when I wrote the lean code I didn't understand anything about automation</p>
+
+<a name="192920639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192920639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192920639">Iocta (Apr 04 2020 at 18:21)</a>:</h4>
+<p>Since this works,</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">nat</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span> <span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">m</span> <span class="n">n</span> <span class="n">k</span><span class="o">,</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">m</span>
+<span class="o">(</span><span class="k">show</span> <span class="mi">0</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span> <span class="k">from</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">zero_mul</span><span class="o">,</span> <span class="n">zero_mul</span><span class="o">,</span> <span class="n">zero_mul</span><span class="o">])</span>
+<span class="o">(</span><span class="k">assume</span> <span class="n">m</span><span class="o">,</span>
+  <span class="o">(</span><span class="k">assume</span> <span class="n">ih</span><span class="o">:</span>  <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span>
+  <span class="o">(</span><span class="k">show</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span>
+  <span class="k">from</span> <span class="k">calc</span>
+  <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="o">((</span><span class="n">m</span> <span class="bp">*</span> <span class="n">k</span><span class="o">)</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="n">k</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="bp">*</span><span class="o">,</span> <span class="n">succ_mul</span><span class="o">]</span>
+  <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">k</span><span class="o">))</span> <span class="bp">+</span> <span class="n">k</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="bp">*</span><span class="o">,</span> <span class="n">succ_mul</span><span class="o">,</span> <span class="n">ih</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">]</span>
+  <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="n">k</span>  <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">succ_mul</span><span class="o">]</span> <span class="o">)))</span>
+</pre></div>
+
+
+<p>how come I can't delete between the first two <code>=</code> in the <code>calc</code>?</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">nat</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span> <span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">m</span> <span class="n">n</span> <span class="n">k</span><span class="o">,</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">m</span>
+<span class="o">(</span><span class="k">show</span> <span class="mi">0</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span> <span class="k">from</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">zero_mul</span><span class="o">,</span> <span class="n">zero_mul</span><span class="o">,</span> <span class="n">zero_mul</span><span class="o">])</span>
+<span class="o">(</span><span class="k">assume</span> <span class="n">m</span><span class="o">,</span>
+  <span class="o">(</span><span class="k">assume</span> <span class="n">ih</span><span class="o">:</span>  <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span>
+  <span class="o">(</span><span class="k">show</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span>
+  <span class="k">from</span> <span class="k">calc</span>
+  <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">k</span><span class="o">))</span> <span class="bp">+</span> <span class="n">k</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="bp">*</span><span class="o">,</span> <span class="n">succ_mul</span><span class="o">,</span> <span class="n">ih</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">]</span>
+  <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="n">k</span>  <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">succ_mul</span><span class="o">]</span> <span class="o">)))</span>
+</pre></div>
+
+<a name="192920764"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192920764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192920764">Mario Carneiro (Apr 04 2020 at 18:24)</a>:</h4>
+<p>The answer to "why didn't simp work" is almost always visible from the final goal state in the error message, which is where <code>simp</code> got stuck</p>
+<div class="codehilite"><pre><span></span><span class="err">⊢</span> <span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">k</span> <span class="bp">+</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span><span class="o">))</span> <span class="bp">=</span> <span class="n">k</span> <span class="bp">+</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span><span class="o">))</span>
+</pre></div>
+
+<a name="192920772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192920772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192920772">Mario Carneiro (Apr 04 2020 at 18:24)</a>:</h4>
+<p>It needs to reassociate some things to finish, so add <code>add_left_comm</code></p>
+
+<a name="192920821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192920821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192920821">Iocta (Apr 04 2020 at 18:26)</a>:</h4>
+<p>How come it didn't find the path I used?</p>
+
+<a name="192920912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192920912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192920912">Mario Carneiro (Apr 04 2020 at 18:28)</a>:</h4>
+<p>because it found another path first</p>
+
+<a name="192920942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192920942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192920942">Mario Carneiro (Apr 04 2020 at 18:28)</a>:</h4>
+<p><code>simp</code> doesn't explore all paths, it just rewrites with random things from its set</p>
+
+<a name="192920944"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192920944" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192920944">Iocta (Apr 04 2020 at 18:28)</a>:</h4>
+<p>once it makes <em>any</em> progress on one path, it won't try others?</p>
+
+<a name="192920945"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192920945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192920945">Mario Carneiro (Apr 04 2020 at 18:29)</a>:</h4>
+<p>right</p>
+
+<a name="192920954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192920954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192920954">Iocta (Apr 04 2020 at 18:29)</a>:</h4>
+<p>so is there a <code>simp_harder</code>?</p>
+
+<a name="192920955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192920955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192920955">Mario Carneiro (Apr 04 2020 at 18:29)</a>:</h4>
+<p>so it is important that you give <code>simp</code> a confluent system of rewrites</p>
+
+<a name="192921013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192921013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192921013">Mario Carneiro (Apr 04 2020 at 18:30)</a>:</h4>
+<p>the point is that it's not supposed to be a tree search, it's more like a net where all paths lead to the desired result</p>
+
+<a name="192921034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192921034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192921034">Mario Carneiro (Apr 04 2020 at 18:31)</a>:</h4>
+<p>You can use <code>simp_rw</code> to control the order of rewrites</p>
+
+<a name="192921045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192921045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192921045">Mario Carneiro (Apr 04 2020 at 18:31)</a>:</h4>
+<p>or <code>simp [foo, bar]; simp [baz]</code></p>
+
+<a name="192921092"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192921092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192921092">Mario Carneiro (Apr 04 2020 at 18:32)</a>:</h4>
+<p>but if you put all the rewrites in one bag don't expect to get any particular order</p>
+
+<a name="192921164"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192921164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192921164">Iocta (Apr 04 2020 at 18:35)</a>:</h4>
+<p>is <code>tactic.interactive.solve_by_elim</code>the tree-search one?</p>
+
+<a name="192921175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192921175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192921175">Mario Carneiro (Apr 04 2020 at 18:35)</a>:</h4>
+<p>That does implicational theorems, not rewrites</p>
+
+<a name="192921218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192921218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192921218">Mario Carneiro (Apr 04 2020 at 18:36)</a>:</h4>
+<p><code>cc</code> is maybe closer to this</p>
+
+<a name="192921230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192921230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192921230">Mario Carneiro (Apr 04 2020 at 18:36)</a>:</h4>
+<p>But I don't think there is any mechanism that explores all paths in the simp set. The number of paths grows very rapidly</p>
+
+<a name="192921288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192921288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192921288">Kevin Buzzard (Apr 04 2020 at 18:38)</a>:</h4>
+<p>Here's the nng proof fwiw:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">mul_add</span> <span class="o">(</span><span class="n">t</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">)</span> <span class="o">:</span> <span class="n">t</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">t</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">t</span> <span class="bp">*</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">begin</span> <span class="o">[</span><span class="n">nat_num_game</span><span class="o">]</span>
+  <span class="n">induction</span> <span class="n">b</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rewrite</span> <span class="o">[</span><span class="n">add_zero</span><span class="o">,</span> <span class="n">mul_zero</span><span class="o">,</span> <span class="n">add_zero</span><span class="o">],</span>
+  <span class="o">},</span>
+  <span class="o">{</span>
+    <span class="n">rw</span> <span class="n">add_succ</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">mul_succ</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">hd</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">mul_succ</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">add_assoc</span><span class="o">,</span> <span class="c1">-- ;-)</span>
+    <span class="n">refl</span><span class="o">,</span>
+  <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>You don't need the last refl if you remove <code>[nat_num_game]</code></p>
+
+<a name="192921323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192921323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192921323">Iocta (Apr 04 2020 at 18:39)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">k</span><span class="o">))</span> <span class="bp">+</span> <span class="n">k</span> <span class="o">:</span> <span class="k">by</span> <span class="n">cc</span>
+</pre></div>
+
+
+<p>doesn't work</p>
+
+<a name="192921330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192921330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192921330">Mario Carneiro (Apr 04 2020 at 18:39)</a>:</h4>
+<p>Given <code>h : f 0 = f 1</code>, there are 2^n points in the space of all rewrites of <code>[f 0, ..., f 0]</code></p>
+
+<a name="192921395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192921395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192921395">Iocta (Apr 04 2020 at 18:41)</a>:</h4>
+<p>sure. and I guess with practice i'll remember what all the relevant theorems are called so I won't have to think about it</p>
+
+<a name="192921406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192921406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192921406">Mario Carneiro (Apr 04 2020 at 18:41)</a>:</h4>
+<p>Or just be more controlled in your rewrites so it does what you want</p>
+
+<a name="192921451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192921451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192921451">Mario Carneiro (Apr 04 2020 at 18:42)</a>:</h4>
+<p>I don't actually use <code>cc</code>, there is some trick to making it useful</p>
+
+<a name="192921457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192921457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192921457">Mario Carneiro (Apr 04 2020 at 18:42)</a>:</h4>
+<p>you probably have to put all the relevant lemmas in the context</p>
+
+<a name="192921526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192921526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192921526">Iocta (Apr 04 2020 at 18:44)</a>:</h4>
+<p>with <code>include</code> or something?</p>
+
+<a name="192921531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192921531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192921531">Mario Carneiro (Apr 04 2020 at 18:44)</a>:</h4>
+<p>with <code>have</code></p>
+
+<a name="192922235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192922235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192922235">Iocta (Apr 04 2020 at 19:01)</a>:</h4>
+<p>as in <code>have succ_mul, from succ_mul,</code>?</p>
+
+<a name="192922280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192922280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192922280">Kevin Buzzard (Apr 04 2020 at 19:02)</a>:</h4>
+<p>it's <code>have H, from &lt;proof of H&gt;</code></p>
+
+<a name="192922285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192922285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192922285">Mario Carneiro (Apr 04 2020 at 19:02)</a>:</h4>
+<p>or just <code>have := succ_mul</code></p>
+
+<a name="192922433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192922433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192922433">Reid Barton (Apr 04 2020 at 19:06)</a>:</h4>
+<p>I don't think <code>cc</code> will instantiate lemmas, does it?</p>
+
+<a name="192922600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192922600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192922600">Iocta (Apr 04 2020 at 19:11)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">nat</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span> <span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">m</span> <span class="n">n</span> <span class="n">k</span><span class="o">,</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">m</span>
+<span class="o">(</span><span class="k">show</span> <span class="mi">0</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span> <span class="k">from</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">zero_mul</span><span class="o">,</span> <span class="n">zero_mul</span><span class="o">,</span> <span class="n">zero_mul</span><span class="o">])</span>
+<span class="o">(</span><span class="k">assume</span> <span class="n">m</span><span class="o">,</span>
+  <span class="o">(</span><span class="k">assume</span> <span class="n">ih</span><span class="o">:</span>  <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span>
+  <span class="o">(</span><span class="k">show</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span>
+  <span class="k">from</span>
+  <span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_mul</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">add_left_comm</span><span class="o">,</span>
+  <span class="n">cc</span><span class="o">,</span>
+  <span class="kn">end</span><span class="o">)))</span>
+</pre></div>
+
+
+<p>doesn't work</p>
+
+<a name="192922649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192922649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192922649">Kevin Buzzard (Apr 04 2020 at 19:12)</a>:</h4>
+<p>ie</p>
+<div class="codehilite"><pre><span></span>m n k m : ℕ,
+ih : m * (n + k) = m * n + m * k,
+this : ∀ (n m : ℕ), succ n * m = n * m + m,
+this : ∀ (n m k : ℕ), n + (m + k) = m + (n + k)
+⊢ succ m * (n + k) = succ m * n + succ m * k
+</pre></div>
+
+
+<p><code>cc</code> failing</p>
+
+<a name="192922661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192922661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192922661">Iocta (Apr 04 2020 at 19:13)</a>:</h4>
+<p>^</p>
+
+<a name="192922668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192922668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192922668">Kevin Buzzard (Apr 04 2020 at 19:13)</a>:</h4>
+<p>(I don't know anything about <code>cc</code>, I was just posting so people could diagnose)</p>
+
+<a name="192922785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192922785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192922785">Iocta (Apr 04 2020 at 19:16)</a>:</h4>
+<p>for comparison, </p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">nat</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span> <span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">m</span> <span class="n">n</span> <span class="n">k</span><span class="o">,</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">m</span>
+<span class="o">(</span><span class="k">show</span> <span class="mi">0</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span> <span class="k">from</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">zero_mul</span><span class="o">,</span> <span class="n">zero_mul</span><span class="o">,</span> <span class="n">zero_mul</span><span class="o">])</span>
+<span class="o">(</span><span class="k">assume</span> <span class="n">m</span><span class="o">,</span>
+  <span class="o">(</span><span class="k">assume</span> <span class="n">ih</span><span class="o">:</span>  <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span>
+  <span class="o">(</span><span class="k">show</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span>
+  <span class="k">from</span>
+  <span class="k">begin</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">succ_mul</span><span class="o">,</span> <span class="n">ih</span><span class="o">,</span> <span class="n">add_left_comm</span><span class="o">],</span>
+  <span class="kn">end</span><span class="o">)))</span>
+</pre></div>
+
+
+<p>does work</p>
+
+<a name="192922934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192922934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192922934">Iocta (Apr 04 2020 at 19:20)</a>:</h4>
+<p>need another theorem in order to use <code>simp only</code></p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span> <span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">m</span> <span class="n">n</span> <span class="n">k</span><span class="o">,</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">m</span>
+<span class="o">(</span><span class="k">show</span> <span class="mi">0</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span> <span class="k">from</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">zero_mul</span><span class="o">,</span> <span class="n">zero_mul</span><span class="o">,</span> <span class="n">zero_mul</span><span class="o">])</span>
+<span class="o">(</span><span class="k">assume</span> <span class="n">m</span><span class="o">,</span>
+  <span class="o">(</span><span class="k">assume</span> <span class="n">ih</span><span class="o">:</span>  <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span>
+  <span class="o">(</span><span class="k">show</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span>
+  <span class="k">from</span>
+  <span class="k">begin</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ_mul</span><span class="o">,</span> <span class="n">ih</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">add_left_comm</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">add_assoc</span><span class="o">],</span>
+  <span class="kn">end</span><span class="o">)))</span>
+</pre></div>
+
+<a name="192923001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192923001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192923001">Iocta (Apr 04 2020 at 19:22)</a>:</h4>
+<p>but the <code>cc</code> version of that doesn't work either</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">nat</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span> <span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">m</span> <span class="n">n</span> <span class="n">k</span><span class="o">,</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">m</span>
+<span class="o">(</span><span class="k">show</span> <span class="mi">0</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span> <span class="k">from</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">zero_mul</span><span class="o">,</span> <span class="n">zero_mul</span><span class="o">,</span> <span class="n">zero_mul</span><span class="o">])</span>
+<span class="o">(</span><span class="k">assume</span> <span class="n">m</span><span class="o">,</span>
+  <span class="o">(</span><span class="k">assume</span> <span class="n">ih</span><span class="o">:</span>  <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span>
+  <span class="o">(</span><span class="k">show</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span>
+  <span class="k">from</span>
+  <span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_mul</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">add_left_comm</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">add_assoc</span><span class="o">,</span>
+  <span class="n">cc</span><span class="o">,</span>
+  <span class="kn">end</span><span class="o">)))</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="n">m</span> <span class="n">n</span> <span class="n">k</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">ih</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span>
+<span class="n">this</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">succ</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">m</span><span class="o">,</span>
+<span class="n">this</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="n">m</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">),</span>
+<span class="n">this</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="n">m</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span>
+<span class="err">⊢</span> <span class="n">succ</span> <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">succ</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">succ</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span>
+</pre></div>
+
+<a name="192923028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192923028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192923028">Mario Carneiro (Apr 04 2020 at 19:23)</a>:</h4>
+<p>reid says you need to instantiate the lemmas, i.e. <code>have := nat.succ_mul m (n+k)</code> and so on</p>
+
+<a name="192923434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192923434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192923434">Iocta (Apr 04 2020 at 19:34)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">nat</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span> <span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">m</span> <span class="n">n</span> <span class="n">k</span><span class="o">,</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">m</span>
+<span class="o">(</span><span class="k">show</span> <span class="mi">0</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span> <span class="k">from</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">zero_mul</span><span class="o">,</span> <span class="n">zero_mul</span><span class="o">,</span> <span class="n">zero_mul</span><span class="o">])</span>
+<span class="o">(</span><span class="k">assume</span> <span class="n">m</span><span class="o">,</span>
+  <span class="o">(</span><span class="k">assume</span> <span class="n">ih</span><span class="o">:</span>  <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span>
+  <span class="o">(</span><span class="k">show</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span>
+  <span class="k">from</span>
+  <span class="k">begin</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">succ_mul</span><span class="o">,</span> <span class="n">ih</span><span class="o">,</span> <span class="n">add_left_comm</span><span class="o">,</span> <span class="n">add_assoc</span><span class="o">,</span> <span class="n">succ_mul</span><span class="o">,</span> <span class="n">succ_mul</span><span class="o">],</span>
+  <span class="n">cc</span><span class="o">,</span>
+  <span class="kn">end</span><span class="o">)))</span>
+</pre></div>
+
+
+<p>works, deleting <code>cc,</code> makes it fail with </p>
+<div class="codehilite"><pre><span></span><span class="n">m</span> <span class="n">n</span> <span class="n">k</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">ih</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span>
+<span class="err">⊢</span> <span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">k</span> <span class="bp">+</span> <span class="n">k</span><span class="o">))</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">k</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span>
+</pre></div>
+
+<a name="192923600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192923600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192923600">Iocta (Apr 04 2020 at 19:39)</a>:</h4>
+<p>if I'm interpreting that right it did instantiate the lemmas</p>
+
+<a name="192923688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192923688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192923688">Reid Barton (Apr 04 2020 at 19:41)</a>:</h4>
+<p>I have no idea what to make of this</p>
+
+<a name="192923735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192923735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192923735">Reid Barton (Apr 04 2020 at 19:42)</a>:</h4>
+<p>from the proof term, it looks like maybe <code>cc</code> has built-in knowledge that <code>+</code> is commutative and associative</p>
+
+<a name="192923901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192923901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192923901">Iocta (Apr 04 2020 at 19:47)</a>:</h4>
+<p>using <code>rw [add_left_comm, add_assoc]</code> instead of <code>cc</code> works there, so it does seem that way</p>
+
+<a name="192923974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192923974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192923974">Iocta (Apr 04 2020 at 19:48)</a>:</h4>
+<p>I wondered if the lemmas in the <code>rw</code> list above were being pulled into <code>cc</code>'s scope so I tried deleting the last <code>succ_mul</code> </p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">nat</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span> <span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">m</span> <span class="n">n</span> <span class="n">k</span><span class="o">,</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">m</span>
+<span class="o">(</span><span class="k">show</span> <span class="mi">0</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span> <span class="k">from</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">zero_mul</span><span class="o">,</span> <span class="n">zero_mul</span><span class="o">,</span> <span class="n">zero_mul</span><span class="o">])</span>
+<span class="o">(</span><span class="k">assume</span> <span class="n">m</span><span class="o">,</span>
+  <span class="o">(</span><span class="k">assume</span> <span class="n">ih</span><span class="o">:</span>  <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span>
+  <span class="o">(</span><span class="k">show</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span>
+  <span class="k">from</span>
+  <span class="k">begin</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">succ_mul</span><span class="o">,</span> <span class="n">ih</span><span class="o">,</span> <span class="n">add_left_comm</span><span class="o">,</span> <span class="n">add_assoc</span><span class="o">,</span> <span class="n">succ_mul</span><span class="o">],</span>
+  <span class="n">cc</span><span class="o">,</span>
+  <span class="kn">end</span><span class="o">)))</span>
+</pre></div>
+
+
+<p>but no</p>
+<div class="codehilite"><pre><span></span><span class="n">m</span> <span class="n">n</span> <span class="n">k</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">ih</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span>
+<span class="err">⊢</span> <span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">k</span> <span class="bp">+</span> <span class="n">k</span><span class="o">))</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">succ</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span>
+</pre></div>
+
+<a name="192926895"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192926895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192926895">Iocta (Apr 04 2020 at 21:01)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="n">m</span> <span class="o">:</span> <span class="n">nat</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">m</span>
+</pre></div>
+
+
+<p>when I put the cursor over <code>*</code> why does it tell me about <code>has_mul.mul</code> instead of <code>nat.mul</code>?</p>
+
+<a name="192926943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192926943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192926943">Kevin Buzzard (Apr 04 2020 at 21:02)</a>:</h4>
+<p>because <code>*</code> is notation for <code>has_mul.mul</code></p>
+
+<a name="192926973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192926973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192926973">Iocta (Apr 04 2020 at 21:03)</a>:</h4>
+<p>I dunno what answer I was looking for :-P</p>
+
+<a name="192926978"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192926978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192926978">Kevin Buzzard (Apr 04 2020 at 21:03)</a>:</h4>
+<p>:-)</p>
+
+<a name="192927274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192927274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192927274">Iocta (Apr 04 2020 at 21:11)</a>:</h4>
+<p>looks like <a href="https://leanprover.github.io/logic_and_proof/the_real_numbers.html" title="https://leanprover.github.io/logic_and_proof/the_real_numbers.html">Logic and Proof</a> doesn't have "... in Lean" versions for the last few chapters. is that because nobody's gotten around to writing them or because those chapters are too hard to port to Lean or some other reason?</p>
+
+<a name="192927314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192927314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192927314">Kevin Buzzard (Apr 04 2020 at 21:12)</a>:</h4>
+<p>My guess is the former</p>
+
+<a name="192927323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192927323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192927323">Kevin Buzzard (Apr 04 2020 at 21:12)</a>:</h4>
+<p>Actually, they do look hard</p>
+
+<a name="192927336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192927336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192927336">Kevin Buzzard (Apr 04 2020 at 21:13)</a>:</h4>
+<p>Chapter 19 alone would be quite an effort for a beginner.</p>
+
+<a name="192927380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192927380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192927380">Kevin Buzzard (Apr 04 2020 at 21:14)</a>:</h4>
+<p>They could certainly be done in Lean but it would be far more effort than the earlier chapters.</p>
+
+<a name="192929752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192929752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192929752">Iocta (Apr 04 2020 at 22:19)</a>:</h4>
+<p><code>import data.real.basic</code> seems to cause compilation and I'm running out of ram. That's not supposed to happen, right?</p>
+
+<a name="192929811"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192929811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192929811">Bryan Gin-ge Chen (Apr 04 2020 at 22:20)</a>:</h4>
+<p>Are you using <code>leanproject</code> to download mathlib olean files? What version of Lean are you using?</p>
+
+<a name="192929999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192929999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192929999">Iocta (Apr 04 2020 at 22:25)</a>:</h4>
+<p>I was using 3.7.0 with leanproject. I'll try upgrading to 3.7.2.</p>
+
+<a name="192930037"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192930037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192930037">Kevin Buzzard (Apr 04 2020 at 22:26)</a>:</h4>
+<p>Try restarting Lean. There is no 3.7.0. don't upgrade to 3.7.2</p>
+
+<a name="192930044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192930044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192930044">Kevin Buzzard (Apr 04 2020 at 22:26)</a>:</h4>
+<p>Sorry, I take that back. Just use <code>leanproject up</code></p>
+
+<a name="192930525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192930525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192930525">Iocta (Apr 04 2020 at 22:40)</a>:</h4>
+<p>deleted everything and rebuilt, working now</p>
+
+<a name="192930608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192930608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192930608">Bryan Gin-ge Chen (Apr 04 2020 at 22:42)</a>:</h4>
+<p>Lean 3.7.0c and 3.7.1c have some issues that prevent olean files from being loaded properly in Windows. They should all be fixed in 3.7.2c.</p>
+
+<a name="192930690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192930690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192930690">Iocta (Apr 04 2020 at 22:45)</a>:</h4>
+<p>er not quite working</p>
+<div class="codehilite"><pre><span></span>
+</pre></div>
+
+<a name="192930692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192930692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192930692">Iocta (Apr 04 2020 at 22:45)</a>:</h4>
+<p><code>_target/deps/mathlib/src/data/real/basic.lean:240:13: error: unexpected token (lean-checker)</code></p>
+
+<a name="192930736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192930736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192930736">Kevin Buzzard (Apr 04 2020 at 22:46)</a>:</h4>
+<p>Restart Lean? Did you use <code>leanproject up</code>?</p>
+
+<a name="192930742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192930742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192930742">Iocta (Apr 04 2020 at 22:46)</a>:</h4>
+<p>i switched to 3.7.2 and ran <code>leanproject up</code> and restarted lean</p>
+
+<a name="192930749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192930749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192930749">Kevin Buzzard (Apr 04 2020 at 22:46)</a>:</h4>
+<p>leanproject up would have switched for you</p>
+
+<a name="192930757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192930757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192930757">Kevin Buzzard (Apr 04 2020 at 22:47)</a>:</h4>
+<p>Exit VS Code and restart. What errors do you get?</p>
+
+<a name="192930758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192930758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192930758">Iocta (Apr 04 2020 at 22:47)</a>:</h4>
+<p>am i not supposed to have lean installed outside leanproject?</p>
+
+<a name="192930762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192930762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192930762">Kevin Buzzard (Apr 04 2020 at 22:47)</a>:</h4>
+<p>no</p>
+
+<a name="192930802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192930802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192930802">Kevin Buzzard (Apr 04 2020 at 22:48)</a>:</h4>
+<p>You are supposed to let <code>elan</code> do the work of deciding which Lean binary you will be using</p>
+
+<a name="192930811"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192930811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192930811">Kevin Buzzard (Apr 04 2020 at 22:48)</a>:</h4>
+<p>I don't know why people insist on using non-default set-ups. I don't have any source code for any Lean installed on my computer and I never compile it.</p>
+
+<a name="192930819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192930819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192930819">Iocta (Apr 04 2020 at 22:49)</a>:</h4>
+<p>ok but i mean leanproject doesn't provide the lean, right?</p>
+
+<a name="192930821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192930821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192930821">Kevin Buzzard (Apr 04 2020 at 22:49)</a>:</h4>
+<p>elan provides the lean binary</p>
+
+<a name="192930827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192930827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192930827">Kevin Buzzard (Apr 04 2020 at 22:49)</a>:</h4>
+<p>elan and leanproject are designed to work together</p>
+
+<a name="192930875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192930875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192930875">Kevin Buzzard (Apr 04 2020 at 22:50)</a>:</h4>
+<p>anyone who starts telling VS Code where their Lean installation is, or changing their LEAN_PATH or anything like that is asking for trouble</p>
+
+<a name="192930883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192930883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192930883">Kevin Buzzard (Apr 04 2020 at 22:50)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/docs/install/debian_details.md" title="https://github.com/leanprover-community/mathlib/blob/master/docs/install/debian_details.md">https://github.com/leanprover-community/mathlib/blob/master/docs/install/debian_details.md</a></p>
+
+<a name="192930889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192930889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192930889">Kevin Buzzard (Apr 04 2020 at 22:51)</a>:</h4>
+<p>No download of Lean source code required</p>
+
+<a name="192931010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192931010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192931010">Iocta (Apr 04 2020 at 22:54)</a>:</h4>
+<p>using elan with leanproject works for me</p>
+
+<a name="192931306"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192931306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192931306">Kevin Buzzard (Apr 04 2020 at 23:04)</a>:</h4>
+<p>So the error is gone?</p>
+
+<a name="192931333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192931333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192931333">Kevin Buzzard (Apr 04 2020 at 23:05)</a>:</h4>
+<p>When mathlib upgrades to 3.8.0 or whatever, leanproject up will edit your toml and then when you run your project elan will download it automatically</p>
+
+<a name="192932407"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192932407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192932407">Iocta (Apr 04 2020 at 23:41)</a>:</h4>
+<p>yeah the error is gone</p>
+
+<a name="192935215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192935215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192935215">Iocta (Apr 05 2020 at 01:13)</a>:</h4>
+<p>I see my editor is running <code>~/.elan/toolchains/leanprover-community-lean-3.7.2/bin/lean --server -M1024 -T100000 /path/to/project/leanpkg.path</code> I don't see that last argument documented in <code>lean --help</code>, is it doing what it looks like? namely, providing path to a file containing the list of directories where the project source and deps are</p>
+
+<a name="192935602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192935602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192935602">Iocta (Apr 05 2020 at 01:27)</a>:</h4>
+<p>looks like yes</p>
+
+<a name="192938520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192938520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192938520">Iocta (Apr 05 2020 at 03:02)</a>:</h4>
+<p>how do I do this?</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">one</span> <span class="o">:</span> <span class="n">X</span>
+<span class="bp">|</span> <span class="n">two</span> <span class="o">:</span> <span class="n">X</span>
+
+<span class="kn">namespace</span> <span class="n">X</span>
+
+<span class="n">def</span> <span class="n">R</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">one</span> <span class="n">one</span> <span class="o">:=</span> <span class="n">true</span>
+<span class="bp">|</span> <span class="n">one</span> <span class="n">two</span> <span class="o">:=</span> <span class="n">true</span>
+<span class="bp">|</span> <span class="n">two</span> <span class="n">one</span> <span class="o">:=</span> <span class="n">true</span>
+<span class="bp">|</span> <span class="n">two</span> <span class="n">two</span> <span class="o">:=</span> <span class="n">false</span>
+
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">not</span> <span class="o">(</span><span class="n">reflexive</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intro</span> <span class="n">reflR</span><span class="o">,</span>
+<span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="192938713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192938713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192938713">Shing Tak Lam (Apr 05 2020 at 03:09)</a>:</h4>
+<p>You can use <code>reflR</code> to get a term of type <code>R two two</code>, which is false.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">not</span> <span class="o">(</span><span class="n">reflexive</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intro</span> <span class="n">reflR</span><span class="o">,</span>
+<span class="n">exact</span> <span class="o">(</span><span class="n">reflR</span> <span class="n">two</span><span class="o">)</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Also see below, if all you have is <code>intro</code> and <code>exact</code>, you don't need tactic mode.</p>
+
+<a name="192938808"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192938808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192938808">Uranus Testing (Apr 05 2020 at 03:12)</a>:</h4>
+<p>Or even shorter</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">not</span> <span class="o">(</span><span class="n">reflexive</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">r</span><span class="o">,</span> <span class="n">r</span> <span class="n">two</span>
+</pre></div>
+
+<a name="192938862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/192938862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#192938862">Iocta (Apr 05 2020 at 03:14)</a>:</h4>
+<p>Thanks</p>
+
+<a name="193082962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193082962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193082962">Stephanie Zhou (Apr 06 2020 at 18:33)</a>:</h4>
+<p>What's the command for taking the derivative?</p>
+
+<a name="193083211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193083211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193083211">Kenny Lau (Apr 06 2020 at 18:36)</a>:</h4>
+<p>Lean is not an imperative programming language, and you can find derivatives <a href="https://github.com/leanprover-community/mathlib/blob/master/src/analysis/calculus/deriv.lean" title="https://github.com/leanprover-community/mathlib/blob/master/src/analysis/calculus/deriv.lean">here</a></p>
+
+<a name="193083264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193083264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193083264">Kenny Lau (Apr 06 2020 at 18:36)</a>:</h4>
+<p><code>import analysis.calculus.deriv</code></p>
+
+<a name="193083330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193083330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193083330">Kevin Buzzard (Apr 06 2020 at 18:36)</a>:</h4>
+<p>Is derivative in the kind of state where users can use it? For example, can I prove that the derivative of sin(cos(x)) is what the undergraduates think it is?</p>
+
+<a name="193083418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193083418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193083418">Patrick Massot (Apr 06 2020 at 18:37)</a>:</h4>
+<p>Kenny, you should try to get into the habit of posting links to the docs rather than source code.</p>
+
+<a name="193083555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193083555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193083555">Patrick Massot (Apr 06 2020 at 18:39)</a>:</h4>
+<p>as in <a href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/deriv.html" title="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/deriv.html">https://leanprover-community.github.io/mathlib_docs/analysis/calculus/deriv.html</a></p>
+
+<a name="193083582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193083582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193083582">Johan Commelin (Apr 06 2020 at 18:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Yes, <code>by simp</code></p>
+
+<a name="193083739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193083739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193083739">Johan Commelin (Apr 06 2020 at 18:40)</a>:</h4>
+<p><a href="https://leanprover-community.github.io/mathlib_docs/analysis/complex/exponential.html#real.deriv_cos" title="https://leanprover-community.github.io/mathlib_docs/analysis/complex/exponential.html#real.deriv_cos">https://leanprover-community.github.io/mathlib_docs/analysis/complex/exponential.html#real.deriv_cos</a></p>
+
+<a name="193083832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193083832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193083832">Johan Commelin (Apr 06 2020 at 18:41)</a>:</h4>
+<p><a href="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/deriv.html#deriv.comp" title="https://leanprover-community.github.io/mathlib_docs/analysis/calculus/deriv.html#deriv.comp">https://leanprover-community.github.io/mathlib_docs/analysis/calculus/deriv.html#deriv.comp</a></p>
+
+<a name="193083849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193083849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193083849">Kenny Lau (Apr 06 2020 at 18:41)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> ah, I didn't know that they exist</p>
+
+<a name="193083856"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193083856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193083856">Johan Commelin (Apr 06 2020 at 18:41)</a>:</h4>
+<p>Hmm, maybe <code>by simp</code> won't work... because of the composition</p>
+
+<a name="193083866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193083866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193083866">Kenny Lau (Apr 06 2020 at 18:41)</a>:</h4>
+<p>are they automatically generated?</p>
+
+<a name="193083920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193083920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193083920">Kenny Lau (Apr 06 2020 at 18:42)</a>:</h4>
+<p>wow this is very nice</p>
+
+<a name="193083930"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193083930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193083930">Johan Commelin (Apr 06 2020 at 18:42)</a>:</h4>
+<p>Welcome back!</p>
+
+<a name="193083976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193083976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193083976">Ryan Lahfa (Apr 06 2020 at 18:42)</a>:</h4>
+<p>Quick question, what is the state with integration/integrals?</p>
+
+<a name="193084004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193084004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193084004">Johan Commelin (Apr 06 2020 at 18:42)</a>:</h4>
+<p>WIP</p>
+
+<a name="193084013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193084013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193084013">Johan Commelin (Apr 06 2020 at 18:43)</a>:</h4>
+<p>We have a PR on FTC</p>
+
+<a name="193084045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193084045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193084045">Johan Commelin (Apr 06 2020 at 18:43)</a>:</h4>
+<p>There is a very general definition, and a bunch of general API, but it's not complete</p>
+
+<a name="193084054"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193084054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193084054">Ryan Lahfa (Apr 06 2020 at 18:43)</a>:</h4>
+<p>Is it going to be a general integral and we would have Lebesgue, Riemann, Kurzweil-Henstock?</p>
+
+<a name="193084075"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193084075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193084075">Johan Commelin (Apr 06 2020 at 18:43)</a>:</h4>
+<p>Bochner</p>
+
+<a name="193084118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193084118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193084118">Ryan Lahfa (Apr 06 2020 at 18:44)</a>:</h4>
+<p>Every day is a learning experience here</p>
+
+<a name="193084434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193084434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193084434">Yury G. Kudryashov (Apr 06 2020 at 18:46)</a>:</h4>
+<p>More-or-less it's Lebesgue.</p>
+
+<a name="193084499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193084499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193084499">Ryan Lahfa (Apr 06 2020 at 18:47)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="214703">Yury G. Kudryashov</span> <a href="#narrow/stream/113489-new-members/topic/more.20basics/near/193084434" title="#narrow/stream/113489-new-members/topic/more.20basics/near/193084434">said</a>:</p>
+<blockquote>
+<p>More-or-less it's Lebesgue.</p>
+</blockquote>
+<p>Yes, I pulled Wikipedia and makes sense to adopt this one.</p>
+
+<a name="193084546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193084546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193084546">Ryan Lahfa (Apr 06 2020 at 18:47)</a>:</h4>
+<p>(but I think that a Riemann integral tutorial would be nice… :-°)</p>
+
+<a name="193084551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193084551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193084551">Yury G. Kudryashov (Apr 06 2020 at 18:47)</a>:</h4>
+<p>It's already formalized for general measure spaces in <code>measure_theory/</code>.</p>
+
+<a name="193084964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193084964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193084964">Yury G. Kudryashov (Apr 06 2020 at 18:50)</a>:</h4>
+<p>There is a PR that glues it to integrals over intervals but its author <span class="user-mention" data-user-id="127148">@Joe</span> disappeared. I'm going to wait for an update for about a month. If there will be no updates, I'll probably take over this PR.</p>
+
+<a name="193546855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193546855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193546855">Iocta (Apr 10 2020 at 08:05)</a>:</h4>
+<p>is there a way to know which moves preserve provability?</p>
+
+<a name="193546924"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193546924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193546924">Kevin Buzzard (Apr 10 2020 at 08:06)</a>:</h4>
+<p>That's surely undecidable</p>
+
+<a name="193546973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193546973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193546973">Iocta (Apr 10 2020 at 08:07)</a>:</h4>
+<p>we seem to have decided for some of them though</p>
+
+<a name="193546976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193546976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193546976">Kenny Lau (Apr 10 2020 at 08:07)</a>:</h4>
+<p>what is a move?</p>
+
+<a name="193547037"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193547037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193547037">Iocta (Apr 10 2020 at 08:08)</a>:</h4>
+<p>adding anything to a proof</p>
+
+<a name="193547102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193547102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193547102">Mario Carneiro (Apr 10 2020 at 08:09)</a>:</h4>
+<p>I think that for the most part you can determine for each "move" whether it necessarily preserves provability or not</p>
+
+<a name="193547191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193547191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193547191">Mario Carneiro (Apr 10 2020 at 08:10)</a>:</h4>
+<p>Anything reversible preserves provability. <code>intro</code>, <code>revert</code>, <code>have</code>, <code>split</code>, <code>rw</code>, <code>simp</code></p>
+
+<a name="193547229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193547229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193547229">Mario Carneiro (Apr 10 2020 at 08:11)</a>:</h4>
+<p><code>apply</code> is the main source of potentially lossy moves, but it depends on the theorem. <code>clear</code> is also not reversible</p>
+
+<a name="193547350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193547350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193547350">Mario Carneiro (Apr 10 2020 at 08:13)</a>:</h4>
+<p><code>cases</code> preserves provability, but only if you case on a variable. If you case on an expression you might lose information about what term it was unless you use the form <code>cases h : e</code></p>
+
+<a name="193547411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193547411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193547411">Mario Carneiro (Apr 10 2020 at 08:14)</a>:</h4>
+<p><code>induction</code> is also not reversible, since if you do the induction wrong you can get unprovable goals</p>
+
+<a name="193547871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193547871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193547871">Iocta (Apr 10 2020 at 08:21)</a>:</h4>
+<p>I see</p>
+
+<a name="193549371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193549371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193549371">Iocta (Apr 10 2020 at 08:45)</a>:</h4>
+<p>are "target" and "goal" synonymous?</p>
+
+<a name="193550556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/more%20basics/near/193550556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/41001morebasics.html#193550556">Mario Carneiro (Apr 10 2020 at 09:02)</a>:</h4>
+<p>Depends on who you ask. Lean usually uses the term to mean a target expression together with its list of hypotheses</p>
+
 
 {% endraw %}
 

@@ -9,11 +9,13 @@ permalink: archive/219941MachineLearningforTheoremProving/index.html
 
 ### Topics:
 
+* [rw_hint](06460rwhint.html) (35 messages, latest: Apr 08 2020 at 12:46)
+
+* [AITP 2020](23859AITP2020.html) (17 messages, latest: Apr 06 2020 at 14:34)
+
+* [Paper: Tactic Learning and Proving for the Coq Proof Assista](29276PaperTacticLearningandProvingfortheCoqProofAssista.html) (15 messages, latest: Apr 06 2020 at 03:02)
+
 * [HOList](34292HOList.html) (151 messages, latest: Apr 02 2020 at 00:06)
-
-* [AITP 2020](23859AITP2020.html) (4 messages, latest: Apr 01 2020 at 23:11)
-
-* [rw_hint](06460rwhint.html) (28 messages, latest: Mar 20 2020 at 13:11)
 
 * [ML for Lean: How to do it?](97947MLforLeanHowtodoit.html) (99 messages, latest: Feb 23 2020 at 02:40)
 

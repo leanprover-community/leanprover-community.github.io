@@ -42,6 +42,87 @@ permalink: archive/219941MachineLearningforTheoremProving/23859AITP2020.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/AITP%202020/near/192603839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/23859AITP2020.html#192603839">Jason Rute (Apr 01 2020 at 23:11)</a>:</h4>
 <p>Also, if anyone can fix this, the name of their project is spelled incorrectly at <a href="http://aitp-conference.org/2020/" title="http://aitp-conference.org/2020/">http://aitp-conference.org/2020/</a> : "leaerning" -&gt; "learning"</p>
 
+<a name="192638469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/AITP%202020/near/192638469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/23859AITP2020.html#192638469">Minchao Wu (Apr 02 2020 at 09:10)</a>:</h4>
+<p>A fringe is a set of goals (with their corresponding local contexts) that haven’t been proved during a single proof attempt. One starts with the main goal. As one applies tactics, the fringe is expanded with new (sub)goals generated. The main goal is proved when the fringe becomes empty. There is no backtracking because this way is thinking of theorem proving as a single-pass exploration of the tree. The hope is that the “backtracking flavor” should be learned by the policy. In the current setting of environment, one can still implement backtracking by themselves if they wanted to. However, we are working on a new version that would support backtracking in a neater way.</p>
+
+<a name="192655453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/AITP%202020/near/192655453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/23859AITP2020.html#192655453">Jason Rute (Apr 02 2020 at 12:12)</a>:</h4>
+<p>Ok.  I clearly misunderstood.  So a "fringe" is what is called a "goal stack" in HOL4, right?  (Looking back, I misread that sentence.  Although, it is confusing to say that an edge of the tree is a tactic application, since if a node is a single (sub)goal, all the edges coming out of that node are going to be the same tactic application.)</p>
+
+<a name="192656375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/AITP%202020/near/192656375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/23859AITP2020.html#192656375">Jason Rute (Apr 02 2020 at 12:20)</a>:</h4>
+<blockquote>
+<p>There is no backtracking because this way is thinking of theorem proving as a single-pass exploration of the tree.</p>
+</blockquote>
+<p>Is this "single pass exploration" approach viable?  It would be as if AlphaZero was only allowed to play go and chess with a single pass through (no MCTS).  Do you think one can train a state of the art HOL4 theorem prover without a tree search?  (Or maybe I'm misunderstanding the goal of this project.)  However, I do admit that by restricting to model-free reinforcement learning that you are opening up a wide field of prebuilt and tuned algorithms which you can apply (as long as you can handle embedding the formulas since that is nonstandard).</p>
+
+<a name="192656661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/AITP%202020/near/192656661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/23859AITP2020.html#192656661">Jason Rute (Apr 02 2020 at 12:23)</a>:</h4>
+<blockquote>
+<p>In the current setting of environment, one can still implement backtracking by themselves if they wanted to.</p>
+</blockquote>
+<p>Does the gym-like environment have a mechanism to backtrack?  Maybe <code>get_state</code>and <code>set_state</code> methods (which I've seen in other Gym-like environments)?  (Of course the user could program their own HOL4 simulator, but that seems like overkill. <span aria-label="slight smile" class="emoji emoji-1f642" role="img" title="slight smile">:slight_smile:</span>)</p>
+
+<a name="192656868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/AITP%202020/near/192656868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/23859AITP2020.html#192656868">Jason Rute (Apr 02 2020 at 12:25)</a>:</h4>
+<blockquote>
+<p>However, we are working on a new version that would support backtracking in a neater way.</p>
+</blockquote>
+<p>Looking forward to seeing this!  As well any other papers, presentations, code, and most of all, public gym-like APIs that come out of this project!</p>
+
+<a name="192660432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/AITP%202020/near/192660432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/23859AITP2020.html#192660432">Minchao Wu (Apr 02 2020 at 12:53)</a>:</h4>
+<blockquote>
+<p>Is this "single pass exploration" approach viable?  It would be as if AlphaZero was only allowed to play go and chess with a single pass through (no MCTS).  Do you think one can train a state of the art HOL4 theorem prover without a tree search? </p>
+</blockquote>
+<p>I wouldn't say that there is no tree search, but the tree search is the learned policy. If you really want some explicit tree search (say MCTS), you still have the option to add them afterwards by treating them as policy improvement operators.</p>
+<blockquote>
+<p>However, I do admit that by restricting to model-free reinforcement learning that you are opening up a wide field of prebuilt and tuned algorithms which you can apply (as long as you can handle embedding the formulas since that is nonstandard).</p>
+</blockquote>
+<p>I don't see how prebuilt and tuned algorithms can be applied directly here at this stage. The learning of the argument policy is non-standard and would require quite some flexibility from the prebuilt algorithms. We wrote our own training algorithms for the AITP version. </p>
+<blockquote>
+<p>Does the gym-like environment have a mechanism to backtrack? Maybe get_state and set_state methods (which I've seen in other Gym-like environments)?</p>
+</blockquote>
+<p>There is <code>get_state</code> but no <code>set_state</code> in the current AITP version. The one we are working on would make it available.  Some of us still believe that the non-backtracking version would be much easier to understand and train (and shouldn't perform too bad), though.</p>
+
+<a name="192661005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/AITP%202020/near/192661005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/23859AITP2020.html#192661005">Jason Rute (Apr 02 2020 at 12:58)</a>:</h4>
+<blockquote>
+<p>If you really want some explicit tree search (say MCTS), you still have the option to add them</p>
+</blockquote>
+<p>To have MCTS (or any tree search), you need a way to jump between states of the environment.  Do you have that?  If I apply a tactic and later decide I didn't want to do that, can I back up (or say "go to such and such state")?  Most of the Open AI gym environments don't support this functionality, so it isn't obvious that yours does either?  (EDIT: Maybe they support it in that you can make a deep copy of the state, but I don't know that would be possible with an ITP like HOL4 in the backend.)</p>
+
+<a name="192661129"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/AITP%202020/near/192661129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/23859AITP2020.html#192661129">Jason Rute (Apr 02 2020 at 12:59)</a>:</h4>
+<blockquote>
+<p>I don't see how prebuilt and tuned algorithms can be applied directly here at this stage.</p>
+</blockquote>
+<p>That is a good point.  I guess you were saying you used REINFORCE, so I didn't think about it too strongly, but yes, the action space is quite unique.</p>
+
+<a name="192661843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/AITP%202020/near/192661843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/23859AITP2020.html#192661843">Minchao Wu (Apr 02 2020 at 13:05)</a>:</h4>
+<blockquote>
+<p>Most of the Open AI gym environments don't support this functionality, so it isn't obvious that yours does either? </p>
+</blockquote>
+<p>No, at least not at this stage. One would need to do it themselves. The environment can tell you whatever the resulting state is, but the user needs to manage the states themselves.</p>
+
+<a name="192662251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/AITP%202020/near/192662251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/23859AITP2020.html#192662251">Jason Rute (Apr 02 2020 at 13:08)</a>:</h4>
+<p>Can a user save a copy of state and later apply actions to it ? In functional programming terms, I'm trying to figure out if the states are persistent data structures.  If not, I don't see how the user can manage the tree search themselves.  (Although, I guess the user can also just start over and apply the same sequence of tactics again to get back to a previously visited state.)</p>
+
+<a name="192664342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/AITP%202020/near/192664342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/23859AITP2020.html#192664342">Minchao Wu (Apr 02 2020 at 13:24)</a>:</h4>
+<p>For that you just need something like set_states which is not too difficult to implement. Then one can maintain a history of states on their own and call the environment to rollout. But as you said in (), one can always do it with the minimal help from the environment.</p>
+
+<a name="192991365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/AITP%202020/near/192991365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/23859AITP2020.html#192991365">Rongmin Lu (Apr 06 2020 at 03:05)</a>:</h4>
+<p>Thanks for posting this!</p>
+
+<a name="193050620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/219941-Machine%20Learning%20for%20Theorem%20Proving/topic/AITP%202020/near/193050620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/219941MachineLearningforTheoremProving/23859AITP2020.html#193050620">Stanislas Polu (Apr 06 2020 at 14:34)</a>:</h4>
+<p>I found <a href="http://aitp-conference.org/2020/abstract/paper_18.pdf" title="http://aitp-conference.org/2020/abstract/paper_18.pdf">Wu/Jiang/Grosse/Ba's abstract on proving inequalities</a> very interesting. Their generator is straightforward to reproduce and while the proven equalities/inequalities appear still a bit easy (for the k/l values they took at least), the result and study is pragmatic and well covered.</p>
+
 
 {% endraw %}
 

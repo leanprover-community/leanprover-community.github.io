@@ -289,6 +289,34 @@ permalink: archive/113488general/81254grouptactic.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/191568934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#191568934">Scott Morrison (Mar 24 2020 at 05:51)</a>:</h4>
 <p>I'd say PR. :-)</p>
 
+<a name="193165647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/193165647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#193165647">Kevin Buzzard (Apr 07 2020 at 10:20)</a>:</h4>
+<p>So how am I supposed to prove <code>example (G : Type) [group G] (g h : G) : g⁻¹ * h = 1 → g = h := sorry</code> in Lean? What is the philosophy? Does this deserve to be a function? Should it be provable with a tactic? <code>library_search</code> doesn't seem to work.</p>
+
+<a name="193165706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/193165706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#193165706">Johan Commelin (Apr 07 2020 at 10:21)</a>:</h4>
+<p>I guess <code>mul_inv_eq_one</code> is an <code>iff</code> statement... But you need <code>inv_mul_eq_one</code></p>
+
+<a name="193165743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/193165743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#193165743">Kevin Buzzard (Apr 07 2020 at 10:21)</a>:</h4>
+<p>because this is the way it's defined in <code>coset</code></p>
+
+<a name="193165839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/193165839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#193165839">Johan Commelin (Apr 07 2020 at 10:22)</a>:</h4>
+<p><code>src/algebra/group/basic.lean:theorem mul_inv_eq_one : a * b⁻¹ = 1 ↔ a = b :=</code></p>
+
+<a name="193165844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/193165844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#193165844">Kevin Buzzard (Apr 07 2020 at 10:22)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">left_rel</span> <span class="o">[</span><span class="n">group</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">is_subgroup</span> <span class="n">s</span><span class="o">]</span> <span class="o">:</span> <span class="n">setoid</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">x</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">s</span><span class="o">,</span> <span class="bp">...</span>
+
+<span class="n">def</span> <span class="n">quotient</span> <span class="o">[</span><span class="n">group</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">is_subgroup</span> <span class="n">s</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span> <span class="o">:=</span> <span class="n">quotient</span> <span class="o">(</span><span class="n">left_rel</span> <span class="n">s</span><span class="o">)</span>
+</pre></div>
+
+<a name="193165854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60group%60%20tactic/near/193165854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81254grouptactic.html#193165854">Johan Commelin (Apr 07 2020 at 10:22)</a>:</h4>
+<p>I think you want to give this theorem a companion</p>
+
 
 {% endraw %}
 

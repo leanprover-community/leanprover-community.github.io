@@ -674,6 +674,193 @@ num. allocated big nums: 4
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ideal%20lemma/near/192225486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79724Ideallemma.html#192225486">orlando (Mar 30 2020 at 08:33)</a>:</h4>
 <p>Ok, thx Kenny,</p>
 
+<a name="193238019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ideal%20lemma/near/193238019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79724Ideallemma.html#193238019">orlando (Apr 07 2020 at 19:43)</a>:</h4>
+<p>Hello,</p>
+<p>Another problem with Ideal <span aria-label="confused" class="emoji emoji-1f615" role="img" title="confused">:confused:</span>   </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">category</span><span class="bp">.</span><span class="n">CommRing</span>
+<span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">ideals</span>
+<span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">ideal_operations</span>
+<span class="n">universes</span> <span class="n">u</span>
+<span class="n">local</span> <span class="kn">notation</span> <span class="bp">`</span><span class="n">Ring</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">CommRing</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span>
+<span class="n">local</span> <span class="kn">notation</span> <span class="bp">`</span><span class="n">Set</span><span class="bp">`</span> <span class="o">:=</span>  <span class="kt">Type</span> <span class="n">u</span>
+
+<span class="kn">lemma</span> <span class="n">set_image_S_subset_set_image_span_S</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Ring</span> <span class="o">)(</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">A</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="n">f</span> <span class="n">S</span> <span class="err">⊆</span>  <span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="n">f</span> <span class="o">(</span><span class="n">ideal</span><span class="bp">.</span><span class="n">span</span> <span class="n">S</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">apply</span> <span class="n">set</span><span class="bp">.</span><span class="n">image_subset</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">subset_span</span><span class="o">,</span>
+<span class="kn">end</span>
+
+
+<span class="kn">lemma</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">map_span_eq_span_image</span><span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Ring</span> <span class="o">)(</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">A</span><span class="o">):</span>
+    <span class="n">ideal</span><span class="bp">.</span><span class="n">span</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="n">f</span> <span class="n">S</span><span class="o">)</span> <span class="bp">=</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span> <span class="o">(</span><span class="n">ideal</span><span class="bp">.</span><span class="n">span</span> <span class="n">S</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">unfold</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">map</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">le_antisymm</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">span_mono</span> <span class="o">(</span><span class="n">set_image_S_subset_set_image_span_S</span> <span class="n">A</span> <span class="n">B</span> <span class="n">f</span> <span class="n">S</span><span class="o">),</span>
+    <span class="k">have</span> <span class="n">ccl</span> <span class="o">:</span> <span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="n">f</span> <span class="o">(</span><span class="n">ideal</span><span class="bp">.</span><span class="n">span</span> <span class="n">S</span><span class="o">)</span> <span class="err">⊆</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">span</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="n">f</span> <span class="n">S</span><span class="o">),</span>
+        <span class="n">sorry</span><span class="o">,</span> <span class="c1">---- HERE !!!!</span>
+    <span class="n">apply</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">span_le</span><span class="bp">.</span><span class="mi">2</span> <span class="n">ccl</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="193238577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ideal%20lemma/near/193238577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79724Ideallemma.html#193238577">Yury G. Kudryashov (Apr 07 2020 at 19:48)</a>:</h4>
+<p>Here is the proof for <code>submonoid</code>s:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">closure_preimage_le</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→*</span> <span class="n">N</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">N</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">closure</span> <span class="o">(</span><span class="n">f</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="n">s</span><span class="o">)</span> <span class="bp">≤</span> <span class="o">(</span><span class="n">closure</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="n">comap</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="n">closure_le</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span> <span class="n">mem_coe</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span> <span class="n">mem_comap</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span> <span class="n">subset_closure</span> <span class="n">hx</span>
+
+<span class="kn">lemma</span> <span class="n">map_mclosure</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→*</span> <span class="n">N</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">closure</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">closure</span> <span class="o">(</span><span class="n">f</span> <span class="err">&#39;&#39;</span> <span class="n">s</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">le_antisymm</span>
+  <span class="o">(</span><span class="n">map_le_iff_le_comap</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span> <span class="n">le_trans</span> <span class="o">(</span><span class="n">closure_mono</span> <span class="err">$</span> <span class="n">set</span><span class="bp">.</span><span class="n">subset_preimage_image</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">closure_preimage_le</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">closure_le</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span> <span class="n">set</span><span class="bp">.</span><span class="n">image_subset</span> <span class="bp">_</span> <span class="n">subset_closure</span><span class="o">)</span>
+</pre></div>
+
+<a name="193238671"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ideal%20lemma/near/193238671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79724Ideallemma.html#193238671">Yury G. Kudryashov (Apr 07 2020 at 19:49)</a>:</h4>
+<p>I think that something similar can be done for ideals as well.</p>
+
+<a name="193239543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ideal%20lemma/near/193239543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79724Ideallemma.html#193239543">orlando (Apr 07 2020 at 19:56)</a>:</h4>
+<p>ok  i thinck <code> (closure_le.2 $ set.image_subset _ subset_closure) </code>  is the same than my  <code> exact ideal.span_mono (set_image_S_subset_set_image_span_S A B f S), </code> </p>
+<p>So if i understand, i have to deal with <code> comap </code>  ...  ahah Kenny play also with comap at the beginning of the topic  <a href="#narrow/stream/116395-maths/topic/Ideal.20lemma/near/192114748" title="#narrow/stream/116395-maths/topic/Ideal.20lemma/near/192114748">here</a></p>
+
+<a name="193239634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ideal%20lemma/near/193239634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79724Ideallemma.html#193239634">Yury G. Kudryashov (Apr 07 2020 at 19:57)</a>:</h4>
+<p><code>comap</code> is the preimage</p>
+
+<a name="193241873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ideal%20lemma/near/193241873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79724Ideallemma.html#193241873">Kevin Buzzard (Apr 07 2020 at 20:16)</a>:</h4>
+<p><code>map</code> = image = pushforward, <code>comap</code> = pullback = preimage</p>
+
+<a name="193242963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ideal%20lemma/near/193242963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79724Ideallemma.html#193242963">orlando (Apr 07 2020 at 20:27)</a>:</h4>
+<p>Ok perhaps it's not the shortest proof <span aria-label="joy" class="emoji emoji-1f602" role="img" title="joy">:joy:</span></p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">category</span><span class="bp">.</span><span class="n">CommRing</span>
+<span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">ideals</span>
+<span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">ideal_operations</span>
+<span class="n">universes</span> <span class="n">u</span>
+<span class="n">local</span> <span class="kn">notation</span> <span class="bp">`</span><span class="n">Ring</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">CommRing</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span>
+<span class="n">local</span> <span class="kn">notation</span> <span class="bp">`</span><span class="n">Set</span><span class="bp">`</span> <span class="o">:=</span>  <span class="kt">Type</span> <span class="n">u</span>
+<span class="kn">lemma</span> <span class="n">set_image_S_subset_set_image_span_S</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Ring</span> <span class="o">)(</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">A</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="n">f</span> <span class="n">S</span> <span class="err">⊆</span>  <span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="n">f</span> <span class="o">(</span><span class="n">ideal</span><span class="bp">.</span><span class="n">span</span> <span class="n">S</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">apply</span> <span class="n">set</span><span class="bp">.</span><span class="n">image_subset</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">subset_span</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">map_span_eq_span_image</span><span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Ring</span> <span class="o">)(</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">A</span><span class="o">):</span>
+    <span class="n">ideal</span><span class="bp">.</span><span class="n">span</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="n">f</span> <span class="n">S</span><span class="o">)</span> <span class="bp">=</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span> <span class="o">(</span><span class="n">ideal</span><span class="bp">.</span><span class="n">span</span> <span class="n">S</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="c1">-- unfold ideal.map,</span>
+    <span class="n">apply</span> <span class="n">le_antisymm</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">span_mono</span> <span class="o">(</span><span class="n">set_image_S_subset_set_image_span_S</span> <span class="n">A</span> <span class="n">B</span> <span class="n">f</span> <span class="n">S</span><span class="o">),</span>
+    <span class="k">have</span> <span class="n">ccl3</span> <span class="o">:</span> <span class="n">S</span> <span class="bp">≤</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">comap</span> <span class="n">f</span> <span class="o">(</span><span class="n">ideal</span><span class="bp">.</span><span class="n">span</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="n">f</span> <span class="n">S</span><span class="o">)),</span>
+        <span class="n">unfold</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">comap</span><span class="o">,</span>
+        <span class="k">have</span> <span class="n">T</span> <span class="o">:</span> <span class="n">S</span> <span class="err">⊆</span> <span class="err">⇑</span><span class="n">f</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="err">↑</span><span class="o">(</span><span class="n">ideal</span><span class="bp">.</span><span class="n">span</span> <span class="o">(</span><span class="err">⇑</span><span class="n">f</span> <span class="err">&#39;&#39;</span> <span class="n">S</span><span class="o">)),</span>
+            <span class="k">have</span> <span class="n">T&#39;</span> <span class="o">:</span> <span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="n">f</span> <span class="n">S</span> <span class="err">⊆</span> <span class="err">↑</span><span class="o">(</span><span class="n">ideal</span><span class="bp">.</span><span class="n">span</span> <span class="o">(</span><span class="err">⇑</span><span class="n">f</span> <span class="err">&#39;&#39;</span> <span class="n">S</span><span class="o">)),</span>
+                <span class="n">exact</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">subset_span</span><span class="o">,</span>
+            <span class="n">apply</span> <span class="n">set</span><span class="bp">.</span><span class="n">image_subset_iff</span><span class="bp">.</span><span class="mi">1</span> <span class="n">T&#39;</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">T</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">ccl2</span> <span class="o">:</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">span</span> <span class="n">S</span> <span class="bp">≤</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">comap</span> <span class="n">f</span> <span class="o">(</span><span class="n">ideal</span><span class="bp">.</span><span class="n">span</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="n">f</span> <span class="n">S</span><span class="o">)),</span>
+           <span class="n">apply</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">span_le</span><span class="bp">.</span><span class="mi">2</span> <span class="n">ccl3</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">ccl</span> <span class="o">:</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span> <span class="o">(</span><span class="n">ideal</span><span class="bp">.</span><span class="n">span</span> <span class="n">S</span><span class="o">)</span> <span class="bp">≤</span>  <span class="n">ideal</span><span class="bp">.</span><span class="n">span</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="n">f</span> <span class="n">S</span><span class="o">),</span>
+        <span class="n">apply</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">map_le_iff_le_comap</span><span class="bp">.</span><span class="mi">2</span> <span class="n">ccl2</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">ccl</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="193244039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ideal%20lemma/near/193244039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79724Ideallemma.html#193244039">orlando (Apr 07 2020 at 20:35)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">set_image_S_subset_set_image_span_S</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Ring</span> <span class="o">)(</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">A</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="n">f</span> <span class="n">S</span> <span class="err">⊆</span>  <span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="n">f</span> <span class="o">(</span><span class="n">ideal</span><span class="bp">.</span><span class="n">span</span> <span class="n">S</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">apply</span> <span class="n">set</span><span class="bp">.</span><span class="n">image_subset</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">subset_span</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">map_span_eq_span_image</span><span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Ring</span> <span class="o">)(</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">A</span><span class="o">):</span>
+    <span class="n">ideal</span><span class="bp">.</span><span class="n">span</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="n">f</span> <span class="n">S</span><span class="o">)</span> <span class="bp">=</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span> <span class="o">(</span><span class="n">ideal</span><span class="bp">.</span><span class="n">span</span> <span class="n">S</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">apply</span> <span class="n">le_antisymm</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">span_mono</span> <span class="o">(</span><span class="n">set_image_S_subset_set_image_span_S</span> <span class="n">A</span> <span class="n">B</span> <span class="n">f</span> <span class="n">S</span><span class="o">),</span>
+    <span class="n">exact</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">map_le_iff_le_comap</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">ideal</span><span class="bp">.</span><span class="n">span_le</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">image_subset_iff</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">ideal</span><span class="bp">.</span><span class="n">subset_span</span><span class="o">))),</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="193244114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ideal%20lemma/near/193244114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79724Ideallemma.html#193244114">orlando (Apr 07 2020 at 20:36)</a>:</h4>
+<p>shorter <span aria-label="grinning face with smiling eyes" class="emoji emoji-1f601" role="img" title="grinning face with smiling eyes">:grinning_face_with_smiling_eyes:</span></p>
+
+<a name="193244938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ideal%20lemma/near/193244938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79724Ideallemma.html#193244938">Yury G. Kudryashov (Apr 07 2020 at 20:44)</a>:</h4>
+<p>I wonder what is the general statement here. Probably it should involve four <code>galois_insertion</code>s (two closure/coe, image/preimage, and map/comap).</p>
+
+<a name="193246609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ideal%20lemma/near/193246609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79724Ideallemma.html#193246609">Kevin Buzzard (Apr 07 2020 at 20:54)</a>:</h4>
+<p>Hey @orlando it's great that your proofs got shorter -- now can you write them in term mode? That way they will compile quicker</p>
+
+<a name="193246689"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ideal%20lemma/near/193246689" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79724Ideallemma.html#193246689">Patrick Massot (Apr 07 2020 at 20:55)</a>:</h4>
+<p>I'm not sure this is true.</p>
+
+<a name="193246705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ideal%20lemma/near/193246705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79724Ideallemma.html#193246705">Kevin Buzzard (Apr 07 2020 at 20:55)</a>:</h4>
+<p>Opening up tactic mode has a cost, no?</p>
+
+<a name="193247166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ideal%20lemma/near/193247166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79724Ideallemma.html#193247166">Yury G. Kudryashov (Apr 07 2020 at 20:59)</a>:</h4>
+<p>For short proofs this should be true but for longer proofs elaborating parts one after another may help Lean. At least I remember some proofs that were failing in term mode because Lean wanted to elaborate arguments left to right. Rewriting using <code>refine; exact</code> made them work. I suspect that it's possible to make an example where "fails" will be replaced by "slow".</p>
+
+<a name="193247185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ideal%20lemma/near/193247185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79724Ideallemma.html#193247185">orlando (Apr 07 2020 at 20:59)</a>:</h4>
+<p>without Begin end ??? Kevin ?</p>
+
+<a name="193247930"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ideal%20lemma/near/193247930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79724Ideallemma.html#193247930">Yury G. Kudryashov (Apr 07 2020 at 21:05)</a>:</h4>
+<p>BTW, you can use <code>#print</code> to see the term mode proof generated by your tactic mode proof.</p>
+
+<a name="193248009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ideal%20lemma/near/193248009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79724Ideallemma.html#193248009">Yury G. Kudryashov (Apr 07 2020 at 21:05)</a>:</h4>
+<p>It can be much longer than the tactic proof.</p>
+
+<a name="193467032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ideal%20lemma/near/193467032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79724Ideallemma.html#193467032">orlando (Apr 09 2020 at 15:34)</a>:</h4>
+<p>hum another problem i don't know how to do this without the description in term of linear combinaison <span aria-label="confused" class="emoji emoji-1f615" role="img" title="confused">:confused:</span> </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">category</span><span class="bp">.</span><span class="n">CommRing</span>
+<span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">ideals</span>
+<span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">ideal_operations</span>
+<span class="n">local</span> <span class="kn">notation</span> <span class="bp">`</span><span class="n">Ring</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">CommRing</span><span class="bp">.</span>
+<span class="kn">lemma</span> <span class="n">inverse_image_ideal</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">Ring</span><span class="o">)(</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">B</span><span class="o">)</span> <span class="o">:</span>
+    <span class="n">ideal</span><span class="bp">.</span><span class="n">span</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">preimage</span> <span class="n">f</span> <span class="n">S</span><span class="o">)</span> <span class="bp">=</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">comap</span> <span class="n">f</span> <span class="o">(</span><span class="n">ideal</span><span class="bp">.</span><span class="n">span</span> <span class="n">S</span><span class="o">)</span> <span class="o">:=</span>
+    <span class="k">begin</span>
+        <span class="n">apply</span> <span class="n">le_antisymm</span><span class="o">,</span>  <span class="c1">-- double inclusion</span>
+        <span class="n">rw</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">span_le</span><span class="o">,</span>   <span class="c1">-- span S \leq I ↔  S ≤ I</span>
+        <span class="n">apply</span> <span class="n">set</span><span class="bp">.</span><span class="n">preimage_mono</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">subset_span</span><span class="o">,</span>
+        <span class="n">sorry</span><span class="o">,</span>
+    <span class="kn">end</span>
+</pre></div>
+
+<a name="193468172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ideal%20lemma/near/193468172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79724Ideallemma.html#193468172">Kevin Buzzard (Apr 09 2020 at 15:43)</a>:</h4>
+<p>Is this true?</p>
+
+<a name="193468273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ideal%20lemma/near/193468273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79724Ideallemma.html#193468273">Kevin Buzzard (Apr 09 2020 at 15:44)</a>:</h4>
+<p>What about <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>=</mo><mi mathvariant="double-struck">Z</mi></mrow><annotation encoding="application/x-tex">A=\mathbb{Z}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68889em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbb">Z</span></span></span></span></span> and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mo>=</mo><mi mathvariant="double-struck">C</mi></mrow><annotation encoding="application/x-tex">B=\mathbb{C}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68889em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbb">C</span></span></span></span></span> and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo>=</mo><mo stretchy="false">{</mo><mi>π</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">S=\{\pi\}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="mclose">}</span></span></span></span>?</p>
+
+<a name="193468627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ideal%20lemma/near/193468627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79724Ideallemma.html#193468627">Kevin Buzzard (Apr 09 2020 at 15:46)</a>:</h4>
+<p>You have access to "proof using linear combination" with things like <code>submodule.span_induction</code></p>
+
+<a name="193471124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ideal%20lemma/near/193471124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79724Ideallemma.html#193471124">orlando (Apr 09 2020 at 16:03)</a>:</h4>
+<p><span aria-label="face palm" class="emoji emoji-1f926" role="img" title="face palm">:face_palm:</span> <span aria-label="face palm" class="emoji emoji-1f926" role="img" title="face palm">:face_palm:</span></p>
+
 
 {% endraw %}
 

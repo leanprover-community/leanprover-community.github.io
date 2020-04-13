@@ -550,6 +550,174 @@ Below is a MWE of my current problem:</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Metric%20space%20question/near/192432142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80809Metricspacequestion.html#192432142">Alex J. Best (Mar 31 2020 at 18:42)</a>:</h4>
 <p>Well normally its annoying to have to explicitly intro them and name them at the start of the proof, but for induction type proofs, its sometimes needed.</p>
 
+<a name="192918384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Metric%20space%20question/near/192918384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80809Metricspacequestion.html#192918384">Jason KY. (Apr 04 2020 at 17:31)</a>:</h4>
+<p>Hi!<br>
+I'm slightly stuck on trying to manipulate the following intersect</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">metric_space</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">X</span><span class="o">]</span>
+
+<span class="c">/-</span><span class="cm"> Definition of an open ball -/</span>
+<span class="n">def</span> <span class="n">open_ball</span> <span class="o">(</span><span class="n">x₀</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">|</span> <span class="n">dist</span> <span class="n">x₀</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">r</span><span class="o">}</span>
+
+<span class="c">/-</span><span class="cm"> Definition of being open -/</span>
+<span class="n">def</span> <span class="n">is_open&#39;</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">S</span><span class="o">,</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">ε</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">hε</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">ε</span><span class="o">),</span> <span class="n">open_ball</span> <span class="n">s</span> <span class="n">ε</span> <span class="err">⊆</span> <span class="n">S</span>
+
+<span class="c">/-</span><span class="cm"> Definition of being closed -/</span>
+<span class="n">def</span> <span class="n">is_closed&#39;</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="n">is_open&#39;</span> <span class="err">$</span> <span class="bp">-</span><span class="n">S</span>
+
+<span class="c">/-</span><span class="cm"> Definition of closure -/</span>
+<span class="n">def</span> <span class="n">closure&#39;</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="err">⋂</span> <span class="o">(</span><span class="n">T</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">h₀</span> <span class="o">:</span> <span class="n">S</span> <span class="err">⊆</span> <span class="n">T</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">is_closed&#39;</span> <span class="n">T</span><span class="o">),</span> <span class="n">T</span>
+
+<span class="n">attribute</span> <span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">open_ball</span> <span class="n">is_open&#39;</span> <span class="n">is_closed&#39;</span>
+
+<span class="kn">lemma</span> <span class="n">closure_closed</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_closed&#39;</span> <span class="err">$</span> <span class="n">closure&#39;</span> <span class="n">S</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">unfold</span> <span class="n">closure&#39;</span><span class="o">,</span> <span class="c1">-- ⊢ is_closed&#39; (⋂ (T : set X) (h₀ : S ⊆ T) (h₁ : is_closed&#39; T), T)</span>
+    <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I would like to use a lemma I've proved which it that the intersect of closed sets is closed :</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">Inter_closed_is_closed</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">set</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span>
+<span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">I</span><span class="o">,</span> <span class="n">is_closed&#39;</span> <span class="err">$</span> <span class="n">U</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_closed&#39;</span> <span class="err">$</span> <span class="err">⋂</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">I</span><span class="o">,</span> <span class="n">U</span> <span class="n">i</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>How should I go about doing this?</p>
+
+<a name="192918601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Metric%20space%20question/near/192918601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80809Metricspacequestion.html#192918601">Reid Barton (Apr 04 2020 at 17:36)</a>:</h4>
+<p>The statement of your lemma is not good. Compare <code>is_open_bUnion</code>.</p>
+
+<a name="192918787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Metric%20space%20question/near/192918787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80809Metricspacequestion.html#192918787">Jason KY. (Apr 04 2020 at 17:40)</a>:</h4>
+<p>Is the statement bad because of the squiggly brackets or because of the <code>Type*</code>s?</p>
+
+<a name="192918822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Metric%20space%20question/near/192918822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80809Metricspacequestion.html#192918822">Reid Barton (Apr 04 2020 at 17:41)</a>:</h4>
+<p>The <code>Type*</code>s</p>
+
+<a name="192918827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Metric%20space%20question/near/192918827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80809Metricspacequestion.html#192918827">Reid Barton (Apr 04 2020 at 17:41)</a>:</h4>
+<p>You should replace those with an arbitrary type</p>
+
+<a name="192918894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Metric%20space%20question/near/192918894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80809Metricspacequestion.html#192918894">Jason KY. (Apr 04 2020 at 17:42)</a>:</h4>
+<p>Like this?</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">Inter_closed_is_closed</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">set</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span>
+<span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">I</span><span class="o">,</span> <span class="n">is_closed&#39;</span> <span class="err">$</span> <span class="n">U</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_closed&#39;</span> <span class="err">$</span> <span class="err">⋂</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">I</span><span class="o">,</span> <span class="n">U</span> <span class="n">i</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="192919384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Metric%20space%20question/near/192919384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80809Metricspacequestion.html#192919384">Reid Barton (Apr 04 2020 at 17:54)</a>:</h4>
+<p>No, what is <code>set Type</code> for? I think you are confusing <code>Type</code> with the concept of "some type". Study what happens near the start of <code>topology.basic</code>.</p>
+
+<a name="192919480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Metric%20space%20question/near/192919480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80809Metricspacequestion.html#192919480">Jason KY. (Apr 04 2020 at 17:56)</a>:</h4>
+<p>Ah, I see. So it should be like this? </p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+<span class="kn">theorem</span> <span class="n">Inter_closed_is_closed</span> <span class="o">{</span><span class="n">I</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">U</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">X</span><span class="o">}</span>
+<span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">I</span><span class="o">,</span> <span class="n">is_closed&#39;</span> <span class="err">$</span> <span class="n">U</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_closed&#39;</span> <span class="err">$</span> <span class="err">⋂</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">I</span><span class="o">,</span> <span class="n">U</span> <span class="n">i</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="192919499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Metric%20space%20question/near/192919499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80809Metricspacequestion.html#192919499">Reid Barton (Apr 04 2020 at 17:57)</a>:</h4>
+<p>Yes. you might find you need additional lemmas though, I'm not sure.</p>
+
+<a name="192919583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Metric%20space%20question/near/192919583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80809Metricspacequestion.html#192919583">Jason KY. (Apr 04 2020 at 17:58)</a>:</h4>
+<p>I think it works, let me try to finish the proof</p>
+
+<a name="192920206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Metric%20space%20question/near/192920206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80809Metricspacequestion.html#192920206">Jason KY. (Apr 04 2020 at 18:11)</a>:</h4>
+<p>I couldn't get it working :/ But if I change the definition of my closure then it works:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm"> Definition of closure -/</span>
+<span class="n">def</span> <span class="n">closure&#39;&#39;</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="err">⋂</span> <span class="o">(</span><span class="n">T</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">h₀</span> <span class="o">:</span> <span class="n">S</span> <span class="err">⊆</span> <span class="n">T</span> <span class="bp">∧</span> <span class="n">is_closed&#39;</span> <span class="n">T</span><span class="o">),</span> <span class="n">T</span>
+
+<span class="c">/-</span><span class="cm"> The closure of a set is also closed -/</span>
+<span class="kn">lemma</span> <span class="n">closure_closed</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_closed&#39;</span> <span class="err">$</span> <span class="n">closure&#39;&#39;</span> <span class="n">S</span> <span class="o">:=</span>
+<span class="n">Inter_closed_is_closed</span> <span class="err">$</span>
+<span class="k">begin</span>
+    <span class="n">intros</span> <span class="n">T</span> <span class="n">hT</span><span class="o">,</span>
+    <span class="k">from</span> <span class="n">hT</span><span class="bp">.</span><span class="n">right</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>It there a way to change <code>⋂ (T : set X) (h₀ : S ⊆ T) (h₁ : is_closed' T), T</code> to <code> ⋂ (T : set X) (h₀ : S ⊆ T ∧ is_closed' T), T</code>. <br>
+They are the same right?</p>
+
+<a name="192920255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Metric%20space%20question/near/192920255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80809Metricspacequestion.html#192920255">Mario Carneiro (Apr 04 2020 at 18:12)</a>:</h4>
+<p>did you try simp?</p>
+
+<a name="192920260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Metric%20space%20question/near/192920260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80809Metricspacequestion.html#192920260">Mario Carneiro (Apr 04 2020 at 18:12)</a>:</h4>
+<p>that's the sort of thing that <code>simp</code> is likely to know</p>
+
+<a name="192920296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Metric%20space%20question/near/192920296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80809Metricspacequestion.html#192920296">Jason KY. (Apr 04 2020 at 18:13)</a>:</h4>
+<p>Just tried it, doesn't work :/</p>
+
+<a name="192920298"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Metric%20space%20question/near/192920298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80809Metricspacequestion.html#192920298">Mario Carneiro (Apr 04 2020 at 18:13)</a>:</h4>
+<p>The lemma you need is <code>infi_and</code>, not sure if that has a set version but it's defeq to it</p>
+
+<a name="192920369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Metric%20space%20question/near/192920369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80809Metricspacequestion.html#192920369">Jason KY. (Apr 04 2020 at 18:15)</a>:</h4>
+<p>Alright, I'll try it out!</p>
+
+<a name="192920535"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Metric%20space%20question/near/192920535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80809Metricspacequestion.html#192920535">Mario Carneiro (Apr 04 2020 at 18:19)</a>:</h4>
+<p>You should prove the version without the set, because it is more general</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">Inter_closed_is_closed</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">U</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">X</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">is_closed&#39;</span> <span class="err">$</span> <span class="n">U</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_closed&#39;</span> <span class="err">$</span> <span class="err">⋂</span> <span class="n">i</span><span class="o">,</span> <span class="n">U</span> <span class="n">i</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">variable</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+<span class="kn">theorem</span> <span class="n">bInter_closed_is_closed</span> <span class="o">{</span><span class="n">I</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">U</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">X</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">I</span><span class="o">,</span> <span class="n">is_closed&#39;</span> <span class="err">$</span> <span class="n">U</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_closed&#39;</span> <span class="err">$</span> <span class="err">⋂</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">I</span><span class="o">,</span> <span class="n">U</span> <span class="n">i</span> <span class="o">:=</span>
+<span class="n">Inter_closed_is_closed</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">Inter_closed_is_closed</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">h&#39;</span><span class="o">,</span> <span class="n">h</span> <span class="n">i</span> <span class="n">h&#39;</span>
+</pre></div>
+
+<a name="192920619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Metric%20space%20question/near/192920619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80809Metricspacequestion.html#192920619">Mario Carneiro (Apr 04 2020 at 18:20)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">closure&#39;</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="err">⋂</span> <span class="o">(</span><span class="n">T</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">h₀</span> <span class="o">:</span> <span class="n">S</span> <span class="err">⊆</span> <span class="n">T</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">is_closed&#39;</span> <span class="n">T</span><span class="o">),</span> <span class="n">T</span>
+
+<span class="c">/-</span><span class="cm"> The closure of a set is also closed -/</span>
+<span class="kn">lemma</span> <span class="n">closure_closed</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_closed&#39;</span> <span class="err">$</span> <span class="n">closure&#39;</span> <span class="n">S</span> <span class="o">:=</span>
+<span class="n">Inter_closed_is_closed</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">T</span><span class="o">,</span> <span class="n">Inter_closed_is_closed</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">h₁</span><span class="o">,</span>
+<span class="n">Inter_closed_is_closed</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">h₂</span><span class="o">,</span> <span class="n">h₂</span>
+</pre></div>
+
+<a name="192920690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Metric%20space%20question/near/192920690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80809Metricspacequestion.html#192920690">Mario Carneiro (Apr 04 2020 at 18:22)</a>:</h4>
+<p>Note that <code>Inter_closed_is_closed</code> has its own version of <code>{α}</code>, which is actually <code>{α : Sort*}</code>, so that it can also apply when the index type is a prop</p>
+
+<a name="192920701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Metric%20space%20question/near/192920701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80809Metricspacequestion.html#192920701">Mario Carneiro (Apr 04 2020 at 18:22)</a>:</h4>
+<p>if you reuse the variable it will be <code>{α : Type*}</code> which doesn't apply to Prop</p>
+
+<a name="192920778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Metric%20space%20question/near/192920778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80809Metricspacequestion.html#192920778">Jason KY. (Apr 04 2020 at 18:25)</a>:</h4>
+<p>So <code>{α}</code> is just short for <code>{α : Sort*}</code>?</p>
+
+<a name="192920862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Metric%20space%20question/near/192920862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80809Metricspacequestion.html#192920862">Mario Carneiro (Apr 04 2020 at 18:27)</a>:</h4>
+<p>Yes. Note that <code>Sort*</code> is actually <code>Sort _</code>, a metavariable that will be instantiated depending on the rest of the statement. So for example if you use this in the second statement:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">bInter_closed_is_closed</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">I</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">U</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">X</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">I</span><span class="o">,</span> <span class="n">is_closed&#39;</span> <span class="err">$</span> <span class="n">U</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_closed&#39;</span> <span class="err">$</span> <span class="err">⋂</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">I</span><span class="o">,</span> <span class="n">U</span> <span class="n">i</span> <span class="o">:=</span> <span class="bp">...</span>
+</pre></div>
+
+
+<p>then <code>{α}</code> will get type <code>{α : Type u_1}</code> because that's what is needed to make <code>set α</code> typecheck</p>
+
+<a name="192921019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Metric%20space%20question/near/192921019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80809Metricspacequestion.html#192921019">Jason KY. (Apr 04 2020 at 18:30)</a>:</h4>
+<p>Ah, I see. Thank you!</p>
+
 
 {% endraw %}
 

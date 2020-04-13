@@ -9,7 +9,13 @@ permalink: archive/217875IstherecodeforX/index.html
 
 ### Topics:
 
-* [Bolzano-Weirstrass](62970BolzanoWeirstrass.html) (2 messages, latest: Apr 01 2020 at 22:03)
+* [Bolzano-Weirstrass](62970BolzanoWeirstrass.html) (89 messages, latest: Apr 12 2020 at 11:33)
+
+* [fintype (s.to_set)](48416fintypestoset.html) (6 messages, latest: Apr 12 2020 at 10:54)
+
+* [add_left_cancel_monoid](58750addleftcancelmonoid.html) (16 messages, latest: Apr 10 2020 at 07:43)
+
+* [high scores](12240highscores.html) (24 messages, latest: Apr 05 2020 at 12:04)
 
 * [Multiplicative group of integers modulo n](24494Multiplicativegroupofintegersmodulon.html) (12 messages, latest: Mar 15 2020 at 02:54)
 

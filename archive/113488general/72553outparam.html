@@ -315,6 +315,395 @@ permalink: archive/113488general/72553outparam.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/164928400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#164928400">Sebastien Gouezel (May 05 2019 at 17:29)</a>:</h4>
 <p>I am only planning to register the ones with 0, 1 and infinity. And prove the general statement, but not register it as an instance (if necessary, it can be registered locally).</p>
 
+<a name="193281536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193281536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193281536">Yury G. Kudryashov (Apr 08 2020 at 07:05)</a>:</h4>
+<p>What is the purpose of <code>out_param</code>? It says something about output parameters in typeclasses but in <code>has_insert α γ</code> the first parameter is <code>out_param</code>.</p>
+
+<a name="193281595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193281595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193281595">Yury G. Kudryashov (Apr 08 2020 at 07:06)</a>:</h4>
+<p>I'm trying to turn <code>singleton</code> into a typeclass <code>has_singleton</code> + <code>lawful_singleton</code>.</p>
+
+<a name="193281613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193281613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193281613">Yury G. Kudryashov (Apr 08 2020 at 07:06)</a>:</h4>
+<p>So that we can have <code>{a} = {x | x = a}</code></p>
+
+<a name="193282260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193282260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193282260">Yury G. Kudryashov (Apr 08 2020 at 07:15)</a>:</h4>
+<p>It seems that Lean interprets <code>{x}</code> as <code>insert x ∅</code>, not as <code>singleton x</code>.</p>
+
+<a name="193282600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193282600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193282600">Johan Commelin (Apr 08 2020 at 07:19)</a>:</h4>
+<p>Yup, there are plans to change this... but I don't think there's a PR yet. I think Mario has a PR related to this to core lean (about how <code>{x,y, ..., z}</code> is defined</p>
+
+<a name="193282695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193282695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193282695">Kenny Lau (Apr 08 2020 at 07:20)</a>:</h4>
+<p>man, a lot of proofs would break (at least those that I write, because I never use <code>simp</code>)</p>
+
+<a name="193282732"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193282732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193282732">Yury G. Kudryashov (Apr 08 2020 at 07:21)</a>:</h4>
+<p>I thought that it already calls <code>singleton</code>, and we just have to change <code>def singleton</code> in the library. I was wrong, so let's wait for Mario (I don't want to touch C++ lean code).</p>
+
+<a name="193282820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193282820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193282820">Kenny Lau (Apr 08 2020 at 07:22)</a>:</h4>
+<p>core lean doesn't mean C++ lean code</p>
+
+<a name="193282824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193282824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193282824">Yury G. Kudryashov (Apr 08 2020 at 07:22)</a>:</h4>
+<p>If you use <code>singleton</code>, then you probably use <code>mem_singleton_iff</code>. We'll need to change its proof to <code>iff.rfl</code>, then most proofs should work.</p>
+
+<a name="193282837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193282837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193282837">Yury G. Kudryashov (Apr 08 2020 at 07:22)</a>:</h4>
+<p>Parsing of <code>{x, y, ...}</code> happens in C++.</p>
+
+<a name="193282860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193282860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193282860">Yury G. Kudryashov (Apr 08 2020 at 07:23)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/lean/pull/153/files" title="https://github.com/leanprover-community/lean/pull/153/files">https://github.com/leanprover-community/lean/pull/153/files</a></p>
+
+<a name="193282888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193282888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193282888">Kenny Lau (Apr 08 2020 at 07:23)</a>:</h4>
+<p>oh, interesting</p>
+
+<a name="193283346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193283346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193283346">Yury G. Kudryashov (Apr 08 2020 at 07:28)</a>:</h4>
+<p>Even more interesting: <em>parsing</em> of <code>{x}</code> calls <code>singleton</code> but <em>pretty printing</em> relies on <code>singleton x = insert x ∅</code>.</p>
+
+<a name="193283504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193283504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193283504">Yury G. Kudryashov (Apr 08 2020 at 07:30)</a>:</h4>
+<p>So if I redefine <code>singleton x</code>, then <code>{x}</code> in the input will parse as <code>singleton x</code>, then printed as <code>singleton x</code> while <code>insert x ∅</code>  will be printed as <code>{x}</code>.</p>
+
+<a name="193283512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193283512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193283512">Yury G. Kudryashov (Apr 08 2020 at 07:30)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span></p>
+
+<a name="193283574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193283574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193283574">Mario Carneiro (Apr 08 2020 at 07:31)</a>:</h4>
+<p>The C++ change is already done and in the PR queue</p>
+
+<a name="193283584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193283584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193283584">Mario Carneiro (Apr 08 2020 at 07:31)</a>:</h4>
+<p>(it's broken because C++11 but that's another matter)</p>
+
+<a name="193283646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193283646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193283646">Mario Carneiro (Apr 08 2020 at 07:32)</a>:</h4>
+<p>the change you are talking about is entirely in lean</p>
+
+<a name="193283775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193283775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193283775">Mario Carneiro (Apr 08 2020 at 07:34)</a>:</h4>
+<p>I don't know whether it should be okay to have <code>insert x empty</code>get printed as <code>{x}</code> or not. It basically boils down to whether we think we can reliably retain that form for literals</p>
+
+<a name="193283826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193283826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193283826">Yury G. Kudryashov (Apr 08 2020 at 07:34)</a>:</h4>
+<p>It seems that you're changing the parser, not the printer.</p>
+
+<a name="193283836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193283836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193283836">Mario Carneiro (Apr 08 2020 at 07:34)</a>:</h4>
+<p>I would expect things like <code>simp</code> to easily break this (rewriting the inner <code>singleton a</code> to <code>insert a empty</code> in order to have a more uniform layout) and then the printer will give you the messy version</p>
+
+<a name="193283867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193283867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193283867">Mario Carneiro (Apr 08 2020 at 07:35)</a>:</h4>
+<p>The change in the PR is only about parsing</p>
+
+<a name="193283889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193283889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193283889">Mario Carneiro (Apr 08 2020 at 07:35)</a>:</h4>
+<p>Here I'm talking about the printing issue you pointed out</p>
+
+<a name="193283952"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193283952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193283952">Yury G. Kudryashov (Apr 08 2020 at 07:36)</a>:</h4>
+<p>The problem is that <code>singleton x</code> is printed as <code>singleton x</code>, not <code>{x}</code>.</p>
+
+<a name="193283955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193283955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193283955">Jasmin Blanchette (Apr 08 2020 at 07:36)</a>:</h4>
+<p>I'm joining the conversation midway, but printing <code>insert x empty</code> as <code>{x}</code> is what Isabelle does. Likewise, <code>insert x (insert y empty)</code> is printed as <code>{x, y}</code>. It works well in practice.</p>
+
+<a name="193283961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193283961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193283961">Mario Carneiro (Apr 08 2020 at 07:36)</a>:</h4>
+<p>and I should revise my earlier statement - if you want to change the printing behavior that's a C++ change</p>
+
+<a name="193283981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193283981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193283981">Mario Carneiro (Apr 08 2020 at 07:36)</a>:</h4>
+<p><span class="user-mention" data-user-id="121058">@Jasmin Blanchette</span> the issue is the lack of consistency between parser and printer here</p>
+
+<a name="193284008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193284008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193284008">Mario Carneiro (Apr 08 2020 at 07:37)</a>:</h4>
+<p>I would bet the printer is currently "forgiving" and will use the sugared notation for either of <code>insert ... insert singleton</code> and <code>insert ... insert empty</code></p>
+
+<a name="193284023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193284023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193284023">Mario Carneiro (Apr 08 2020 at 07:37)</a>:</h4>
+<p>but the parser can't be round-tripping in this situation</p>
+
+<a name="193284103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193284103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193284103">Yury G. Kudryashov (Apr 08 2020 at 07:38)</a>:</h4>
+<p>No, I tried to redefine <code>singleton</code>, and the printer is not forgiving.</p>
+
+<a name="193284143"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193284143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193284143">Mario Carneiro (Apr 08 2020 at 07:39)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="n">insert</span> <span class="mi">1</span> <span class="o">(</span><span class="n">insert</span> <span class="mi">2</span> <span class="o">(</span><span class="n">insert</span> <span class="mi">3</span> <span class="err">∅</span><span class="o">)):</span><span class="n">set</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="c1">-- {3, 2, 1} : set ℕ</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="n">insert</span> <span class="mi">1</span> <span class="o">(</span><span class="n">insert</span> <span class="mi">2</span> <span class="o">(</span><span class="n">singleton</span> <span class="mi">3</span><span class="o">)):</span><span class="n">set</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="c1">-- {3, 2, 1} : set ℕ</span>
+</pre></div>
+
+<a name="193284159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193284159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193284159">Yury G. Kudryashov (Apr 08 2020 at 07:39)</a>:</h4>
+<p>Did you redefine <code>singleton</code>?</p>
+
+<a name="193284161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193284161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193284161">Mario Carneiro (Apr 08 2020 at 07:39)</a>:</h4>
+<p>no, this is stock lean</p>
+
+<a name="193284212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193284212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193284212">Yury G. Kudryashov (Apr 08 2020 at 07:40)</a>:</h4>
+<p>If you redefine <code>singleton</code>, then it stops working.</p>
+
+<a name="193284510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193284510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193284510">Johan Commelin (Apr 08 2020 at 07:44)</a>:</h4>
+<p>I wouldn't mind if <code>insert x empty</code> doesn't print as <code>{x}</code>. If <code>{x}</code> is meant to be <code>singleton x</code> and that is no longer defeq to <code>insert x empty</code> I think it is actually a feature if the printer doesn't hide that.</p>
+
+<a name="193284540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193284540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193284540">Mario Carneiro (Apr 08 2020 at 07:44)</a>:</h4>
+<p>Here's a MWE subset of core to demonstrate the printing behavior:</p>
+<div class="codehilite"><pre><span></span><span class="n">prelude</span>
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+<span class="n">class</span> <span class="n">has_emptyc</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">emptyc</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+<span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="n">out_param</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span> <span class="o">:=</span> <span class="n">α</span>
+<span class="n">class</span> <span class="n">has_insert</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">out_param</span> <span class="o">(</span><span class="kt">Type</span> <span class="n">u</span><span class="o">))</span> <span class="o">(</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">insert</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">γ</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">)</span>
+<span class="kn">export</span> <span class="n">has_insert</span> <span class="o">(</span><span class="n">insert</span><span class="o">)</span>
+<span class="kn">notation</span> <span class="bp">`</span><span class="err">∅</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">has_emptyc</span><span class="bp">.</span><span class="n">emptyc</span> <span class="bp">_</span>
+<span class="n">def</span> <span class="n">singleton</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">has_emptyc</span> <span class="n">γ</span><span class="o">]</span> <span class="o">[</span><span class="n">has_insert</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">γ</span> <span class="o">:=</span>
+<span class="n">has_insert</span><span class="bp">.</span><span class="n">insert</span> <span class="n">a</span> <span class="o">(</span><span class="n">has_emptyc</span><span class="bp">.</span><span class="n">emptyc</span> <span class="bp">_</span><span class="o">)</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">has_emptyc</span> <span class="n">γ</span><span class="o">]</span> <span class="o">[</span><span class="n">has_insert</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="n">insert</span> <span class="n">a</span> <span class="o">(</span><span class="n">insert</span> <span class="n">b</span> <span class="o">(</span><span class="n">insert</span> <span class="n">c</span> <span class="err">∅</span><span class="o">)):</span><span class="n">γ</span><span class="o">)</span> <span class="c1">-- {c, b, a} : γ</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="n">insert</span> <span class="n">a</span> <span class="o">(</span><span class="n">insert</span> <span class="n">b</span> <span class="o">(</span><span class="n">singleton</span> <span class="n">c</span><span class="o">)):</span><span class="n">γ</span><span class="o">)</span> <span class="c1">-- {c, b, a} : γ</span>
+</pre></div>
+
+<a name="193284577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193284577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193284577">Mario Carneiro (Apr 08 2020 at 07:45)</a>:</h4>
+<p>Changing the definition of <code>singleton</code> doesn't affect parsing or printing:</p>
+<div class="codehilite"><pre><span></span><span class="n">prelude</span>
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+<span class="n">class</span> <span class="n">has_emptyc</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">emptyc</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+<span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="n">out_param</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span> <span class="o">:=</span> <span class="n">α</span>
+<span class="n">class</span> <span class="n">has_insert</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">out_param</span> <span class="o">(</span><span class="kt">Type</span> <span class="n">u</span><span class="o">))</span> <span class="o">(</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">insert</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">γ</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">)</span>
+<span class="kn">export</span> <span class="n">has_insert</span> <span class="o">(</span><span class="n">insert</span><span class="o">)</span>
+<span class="kn">notation</span> <span class="bp">`</span><span class="err">∅</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">has_emptyc</span><span class="bp">.</span><span class="n">emptyc</span> <span class="bp">_</span>
+<span class="n">def</span> <span class="n">singleton</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">has_emptyc</span> <span class="n">γ</span><span class="o">]</span> <span class="o">[</span><span class="n">has_insert</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">γ</span> <span class="o">:=</span>
+<span class="n">has_insert</span><span class="bp">.</span><span class="n">insert</span> <span class="n">a</span> <span class="o">(</span><span class="n">has_insert</span><span class="bp">.</span><span class="n">insert</span> <span class="n">a</span> <span class="o">(</span><span class="n">has_emptyc</span><span class="bp">.</span><span class="n">emptyc</span> <span class="bp">_</span><span class="o">))</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">has_emptyc</span> <span class="n">γ</span><span class="o">]</span> <span class="o">[</span><span class="n">has_insert</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="n">insert</span> <span class="n">a</span> <span class="o">(</span><span class="n">insert</span> <span class="n">b</span> <span class="o">(</span><span class="n">insert</span> <span class="n">c</span> <span class="err">∅</span><span class="o">)):</span><span class="n">γ</span><span class="o">)</span> <span class="c1">-- {c, b, a} : γ</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="n">insert</span> <span class="n">a</span> <span class="o">(</span><span class="n">insert</span> <span class="n">b</span> <span class="o">(</span><span class="n">singleton</span> <span class="n">c</span><span class="o">)):</span><span class="n">γ</span><span class="o">)</span> <span class="c1">-- {c, b, a} : γ</span>
+</pre></div>
+
+<a name="193284925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193284925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193284925">Mario Carneiro (Apr 08 2020 at 07:49)</a>:</h4>
+<p>Using a typeclass version breaks it:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">has_singleton</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">out_param</span> <span class="o">(</span><span class="kt">Type</span> <span class="n">u</span><span class="o">))</span> <span class="o">(</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">singleton</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">singleton</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">has_singleton</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">γ</span> <span class="o">:=</span>
+<span class="n">has_singleton</span><span class="bp">.</span><span class="n">singleton</span> <span class="bp">_</span> <span class="n">a</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">has_emptyc</span> <span class="n">γ</span><span class="o">]</span> <span class="o">[</span><span class="n">has_insert</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="o">[</span><span class="n">has_singleton</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="n">insert</span> <span class="n">a</span> <span class="o">(</span><span class="n">insert</span> <span class="n">b</span> <span class="o">(</span><span class="n">insert</span> <span class="n">c</span> <span class="err">∅</span><span class="o">)):</span><span class="n">γ</span><span class="o">)</span> <span class="c1">-- {c, b, a} : γ</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="n">insert</span> <span class="n">a</span> <span class="o">(</span><span class="n">insert</span> <span class="n">b</span> <span class="o">(</span><span class="n">singleton</span> <span class="n">c</span><span class="o">)):</span><span class="n">γ</span><span class="o">)</span> <span class="c1">-- insert a (insert b (singleton c)) : γ</span>
+</pre></div>
+
+
+<p>but this is clearly because it's counting arguments wrong:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">has_singleton</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">out_param</span> <span class="o">(</span><span class="kt">Type</span> <span class="n">u</span><span class="o">))</span> <span class="o">(</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">singleton</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">singleton</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">has_singleton</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="o">[</span><span class="n">has_singleton</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">γ</span> <span class="o">:=</span>
+<span class="n">has_singleton</span><span class="bp">.</span><span class="n">singleton</span> <span class="bp">_</span> <span class="n">a</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">has_emptyc</span> <span class="n">γ</span><span class="o">]</span> <span class="o">[</span><span class="n">has_insert</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="o">[</span><span class="n">has_singleton</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="n">insert</span> <span class="n">a</span> <span class="o">(</span><span class="n">insert</span> <span class="n">b</span> <span class="o">(</span><span class="n">insert</span> <span class="n">c</span> <span class="err">∅</span><span class="o">)):</span><span class="n">γ</span><span class="o">)</span> <span class="c1">-- {c, b, a} : γ</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="n">insert</span> <span class="n">a</span> <span class="o">(</span><span class="n">insert</span> <span class="n">b</span> <span class="o">(</span><span class="n">singleton</span> <span class="n">c</span><span class="o">)):</span><span class="n">γ</span><span class="o">)</span> <span class="c1">-- {c, b, a} : γ</span>
+</pre></div>
+
+<a name="193285010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193285010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193285010">Mario Carneiro (Apr 08 2020 at 07:50)</a>:</h4>
+<p>it presumably relies on the contents of the singleton to be in argument # 5</p>
+
+<a name="193285050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193285050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193285050">Yury G. Kudryashov (Apr 08 2020 at 07:51)</a>:</h4>
+<p>Thank you! I only tried the typeclass version, and didn't guess that it relies on argument index.</p>
+
+<a name="193285162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193285162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193285162">Yury G. Kudryashov (Apr 08 2020 at 07:52)</a>:</h4>
+<p>Yes, <code>frontends/lean/pp.cpp</code> has <code>is_constant(get_app_fn(e), get_singleton_name()) &amp;&amp; get_app_num_args(e) == 5</code></p>
+
+<a name="193285225"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193285225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193285225">Mario Carneiro (Apr 08 2020 at 07:53)</a>:</h4>
+<p>I can't test it because the other bug gets in the way, but I would expect <code>export has_singleton (singleton)</code> to also break printing, since now the name of the singleton constructor is <code>has_singleton.singleton</code> instead of <code>_root_.singleton</code></p>
+
+<a name="193285356"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193285356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193285356">Yury G. Kudryashov (Apr 08 2020 at 07:55)</a>:</h4>
+<p>Thank you for the explanation. I think that now I know how to do it.</p>
+
+<a name="193285391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193285391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193285391">Yury G. Kudryashov (Apr 08 2020 at 07:55)</a>:</h4>
+<p>BTW, why our notation for <code>sUnion</code> doesn't conflict with the one from stdlib?</p>
+
+<a name="193285491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193285491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193285491">Yury G. Kudryashov (Apr 08 2020 at 07:56)</a>:</h4>
+<p>Ignore.</p>
+
+<a name="193285848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193285848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193285848">Mario Carneiro (Apr 08 2020 at 08:00)</a>:</h4>
+<p>heh, problem solved:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">class</span><span class="o">]</span> <span class="kn">inductive</span> <span class="n">unit</span> <span class="bp">|</span> <span class="n">star</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">unit</span><span class="bp">.</span><span class="n">star</span>
+<span class="n">def</span> <span class="n">singleton</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">has_singleton</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="o">[</span><span class="n">unit</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">γ</span> <span class="o">:=</span>
+<span class="n">has_singleton</span><span class="bp">.</span><span class="n">singleton</span> <span class="bp">_</span> <span class="n">a</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">has_emptyc</span> <span class="n">γ</span><span class="o">]</span> <span class="o">[</span><span class="n">has_insert</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="o">[</span><span class="n">has_singleton</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="n">insert</span> <span class="n">a</span> <span class="o">(</span><span class="n">insert</span> <span class="n">b</span> <span class="o">(</span><span class="n">insert</span> <span class="n">c</span> <span class="err">∅</span><span class="o">)):</span><span class="n">γ</span><span class="o">)</span> <span class="c1">-- {c, b, a} : γ</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="n">insert</span> <span class="n">a</span> <span class="o">(</span><span class="n">insert</span> <span class="n">b</span> <span class="o">(</span><span class="n">singleton</span> <span class="n">c</span><span class="o">)):</span><span class="n">γ</span><span class="o">)</span> <span class="c1">-- {c, b, a} : γ</span>
+</pre></div>
+
+<a name="193285919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193285919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193285919">Johan Commelin (Apr 08 2020 at 08:01)</a>:</h4>
+<p>Isn't it easier to change a <code>5</code> into a <code>4</code>?</p>
+
+<a name="193285933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193285933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193285933">Mario Carneiro (Apr 08 2020 at 08:01)</a>:</h4>
+<p>not from lean</p>
+
+<a name="193285956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193285956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193285956">Johan Commelin (Apr 08 2020 at 08:01)</a>:</h4>
+<p>Sure... but we are changing core Lean anyway</p>
+
+<a name="193285970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193285970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193285970">Mario Carneiro (Apr 08 2020 at 08:01)</a>:</h4>
+<p>I wonder if it is worth making <code>unit</code> a class for implicit dummy args like this</p>
+
+<a name="193286404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193286404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193286404">Mario Carneiro (Apr 08 2020 at 08:06)</a>:</h4>
+<p>more fun with confusing the printer:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">class</span><span class="o">]</span> <span class="kn">inductive</span> <span class="n">unit</span> <span class="bp">|</span> <span class="n">star</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">unit</span><span class="bp">.</span><span class="n">star</span>
+<span class="n">def</span> <span class="n">singleton</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">has_singleton</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">unit</span><span class="o">]</span> <span class="o">:</span> <span class="n">γ</span> <span class="o">:=</span>
+<span class="n">has_singleton</span><span class="bp">.</span><span class="n">singleton</span> <span class="bp">_</span> <span class="n">a</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">has_emptyc</span> <span class="n">γ</span><span class="o">]</span> <span class="o">[</span><span class="n">has_insert</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="o">[</span><span class="n">has_singleton</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="n">insert</span> <span class="n">a</span> <span class="o">(</span><span class="n">insert</span> <span class="n">b</span> <span class="o">(</span><span class="n">insert</span> <span class="n">c</span> <span class="err">∅</span><span class="o">)):</span><span class="n">γ</span><span class="o">)</span> <span class="c1">-- {c, b, a} : γ</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="n">insert</span> <span class="n">a</span> <span class="o">(</span><span class="n">insert</span> <span class="n">b</span> <span class="o">(</span><span class="n">singleton</span> <span class="n">c</span><span class="o">)):</span><span class="n">γ</span><span class="o">)</span> <span class="c1">-- {(), b, a} : γ</span>
+</pre></div>
+
+<a name="193286432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193286432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193286432">Mario Carneiro (Apr 08 2020 at 08:06)</a>:</h4>
+<p>also amusing that lean already knows that <code>unit</code> is printed as <code>()</code></p>
+
+<a name="193286752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193286752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193286752">Kenny Lau (Apr 08 2020 at 08:10)</a>:</h4>
+<p>so the printer has access to definitions of stuffs?</p>
+
+<a name="193286920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193286920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193286920">Mario Carneiro (Apr 08 2020 at 08:12)</a>:</h4>
+<p>Thinking about this a bit more, I think I want the printer to stay the way it is w.r.t. sugaring both kinds of enumerated set. There are already a ton of places where the printer doesn't round trip, for example when there are non-canonical instances, or when you mix <code>succ</code> and <code>bit0</code>/<code>bit1</code></p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero</span> <span class="c1">-- 1 : ℕ</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">has_one</span><span class="bp">.</span><span class="n">one</span> <span class="bp">ℕ</span> <span class="bp">_</span> <span class="c1">-- 1 : ℕ</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero</span><span class="o">)</span> <span class="c1">-- 2 : ℕ</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">(</span><span class="bp">@</span><span class="n">has_one</span><span class="bp">.</span><span class="n">one</span> <span class="bp">ℕ</span> <span class="bp">_</span><span class="o">)</span> <span class="c1">-- nat.succ 1 : ℕ</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">bit1</span> <span class="o">(</span><span class="bp">@</span><span class="n">has_one</span><span class="bp">.</span><span class="n">one</span> <span class="bp">ℕ</span> <span class="bp">_</span><span class="o">)</span> <span class="c1">-- 3 : ℕ</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">bit1</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero</span><span class="o">)</span> <span class="c1">-- 3 : ℕ</span>
+</pre></div>
+
+<a name="193286986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193286986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193286986">Mario Carneiro (Apr 08 2020 at 08:13)</a>:</h4>
+<p>The printer is completely dumbly going over the term thinking it knows what's up, but you can easily mislead it</p>
+
+<a name="193287022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193287022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193287022">Johan Commelin (Apr 08 2020 at 08:13)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> But if we implement the changes then <code>singleton x</code> is not defeq to <code>insert x ∅</code>, right? So <code>{x} = {x}</code> is not provable by <code>rfl</code>...</p>
+
+<a name="193287086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193287086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193287086">Mario Carneiro (Apr 08 2020 at 08:14)</a>:</h4>
+<p>did you think we had that property before?</p>
+
+<a name="193287100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193287100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193287100">Yury G. Kudryashov (Apr 08 2020 at 08:14)</a>:</h4>
+<p>Why not?</p>
+
+<a name="193287149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193287149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193287149">Johan Commelin (Apr 08 2020 at 08:15)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/out_param/near/193287086" title="#narrow/stream/113488-general/topic/out_param/near/193287086">said</a>:</p>
+<blockquote>
+<p>did you think we had that property before?</p>
+</blockquote>
+<p>Maybe not, but this one is going to trip up a lot of people</p>
+
+<a name="193287182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193287182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193287182">Johan Commelin (Apr 08 2020 at 08:15)</a>:</h4>
+<p>Why can't we just make the printer not do fancy things with <code>insert x ∅</code>? And have a <code>simp</code>-lemma that turns it into <code>singleton x</code></p>
+
+<a name="193287185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193287185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193287185">Yury G. Kudryashov (Apr 08 2020 at 08:15)</a>:</h4>
+<p>I think that most people won't meet <code>insert x empty</code></p>
+
+<a name="193287265"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193287265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193287265">Johan Commelin (Apr 08 2020 at 08:16)</a>:</h4>
+<p>Hmmm, that's probably right</p>
+
+<a name="193287443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193287443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193287443">Mario Carneiro (Apr 08 2020 at 08:18)</a>:</h4>
+<p>I think it's fine to say "most people won't meet it" but I would prefer for the failure mode to be confusing printing rather than a 10x blowup of the printed term.</p>
+
+<a name="193287471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193287471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193287471">Mario Carneiro (Apr 08 2020 at 08:19)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">@</span><span class="n">has_one</span><span class="bp">.</span><span class="n">one</span> <span class="bp">ℕ</span> <span class="bp">_</span> <span class="bp">=</span> <span class="bp">@</span><span class="n">has_one</span><span class="bp">.</span><span class="n">one</span> <span class="o">(</span><span class="n">multiplicative</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">_</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- ⊢ 1 = 1</span>
+  <span class="n">exact</span> <span class="n">rfl</span><span class="o">,</span> <span class="c1">-- fail</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="193287542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193287542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193287542">Mario Carneiro (Apr 08 2020 at 08:19)</a>:</h4>
+<p>it's trivially easy to come up with examples along these lines</p>
+
+<a name="193287550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193287550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193287550">Johan Commelin (Apr 08 2020 at 08:19)</a>:</h4>
+<p>Of course</p>
+
+<a name="193287592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193287592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193287592">Mario Carneiro (Apr 08 2020 at 08:20)</a>:</h4>
+<p>the printer should really be viewed as a "best effort" thing</p>
+
+<a name="193287613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193287613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193287613">Mario Carneiro (Apr 08 2020 at 08:20)</a>:</h4>
+<p>at least as long as you aren't using <code>pp.all</code></p>
+
+<a name="193287653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193287653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193287653">Yury G. Kudryashov (Apr 08 2020 at 08:20)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Do you have a Lean built with your <a href="https://github.com/leanprover-community/lean/issues/153" title="https://github.com/leanprover-community/lean/issues/153">lean#153</a> applied?</p>
+
+<a name="193287692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193287692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193287692">Mario Carneiro (Apr 08 2020 at 08:21)</a>:</h4>
+<p>no, why?</p>
+
+<a name="193287709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193287709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193287709">Mario Carneiro (Apr 08 2020 at 08:21)</a>:</h4>
+<p>I have a pretty good idea what will happen</p>
+
+<a name="193287768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193287768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193287768">Yury G. Kudryashov (Apr 08 2020 at 08:22)</a>:</h4>
+<p>I wonder how <code>#check ({0, 1} : set nat)</code> will work.</p>
+
+<a name="193287788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193287788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193287788">Mario Carneiro (Apr 08 2020 at 08:22)</a>:</h4>
+<p>it will produce the term <code>insert 0 (singleton 1)</code></p>
+
+<a name="193287805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193287805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193287805">Yury G. Kudryashov (Apr 08 2020 at 08:22)</a>:</h4>
+<p>And how will it be pretty-printed?</p>
+
+<a name="193287830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193287830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193287830">Yury G. Kudryashov (Apr 08 2020 at 08:23)</a>:</h4>
+<p><code>{0, 1}</code> or <code>{1, 0}</code>?</p>
+
+<a name="193287831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_param/near/193287831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/72553outparam.html#193287831">Mario Carneiro (Apr 08 2020 at 08:23)</a>:</h4>
+<p>Actually, I guess I should have fixed the printer too in that PR since the printer will indeed print <code>{1, 0}</code></p>
+
 
 {% endraw %}
 

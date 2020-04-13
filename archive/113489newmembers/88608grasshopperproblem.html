@@ -613,6 +613,305 @@ but is expected to have type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192443768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192443768">Kevin Buzzard (Mar 31 2020 at 20:16)</a>:</h4>
 <p><span class="user-mention" data-user-id="133339">@Miroslav Olšák</span> this has now been merged so if you update your project with <code>leanproject up</code> then you will have access to <code>finset.card_image_le</code>.</p>
 
+<a name="192649079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192649079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192649079">Miroslav Olšák (Apr 02 2020 at 10:59)</a>:</h4>
+<p>So I have written the "trivial case" of the Grasshopper problem:  <a href="https://github.com/mirefek/my-lean-experiments/blob/master/grasshopper.lean" title="https://github.com/mirefek/my-lean-experiments/blob/master/grasshopper.lean">https://github.com/mirefek/my-lean-experiments/blob/master/grasshopper.lean</a>. Suggestions are welcomed.</p>
+
+<a name="192859017"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192859017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192859017">Miroslav Olšák (Apr 03 2020 at 20:22)</a>:</h4>
+<p>Now, I tried a different IMO problem, and I think I have some issues with "decidability". Universal quantivifacion on arrays seems not to have the <code>decidable</code> type class, while it works with lists... Is there a reason for that, or is it some sort of bug?</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">seq</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">decidable</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">l</span> <span class="err">∈</span> <span class="n">seq</span><span class="o">,</span> <span class="n">true</span><span class="o">)</span>
+<span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- works</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">seq</span> <span class="o">:</span> <span class="n">array</span> <span class="mi">5</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">decidable</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">l</span> <span class="err">∈</span> <span class="n">seq</span><span class="o">,</span> <span class="n">true</span><span class="o">)</span>
+<span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- error</span>
+</pre></div>
+
+
+<p>And by the way, could I just tell Lean that I don't care about decidability because I work in classical logic, so that it will not miss any <code>decidable</code> predicate anywhere?</p>
+
+<a name="192859328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192859328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192859328">Ryan Lahfa (Apr 03 2020 at 20:24)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="133339">Miroslav Olšák</span> <a href="#narrow/stream/113489-new-members/topic/grasshopper.20problem/near/192859017" title="#narrow/stream/113489-new-members/topic/grasshopper.20problem/near/192859017">said</a>:</p>
+<blockquote>
+<p>Now, I tried a different IMO problem, and I think I have some issues with "decidability". Universal quantivifacion on arrays seems not to have the <code>decidable</code> type class, while it works with lists... Is there a reason for that, or is it some sort of bug?</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">seq</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">decidable</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">l</span> <span class="err">∈</span> <span class="n">seq</span><span class="o">,</span> <span class="n">true</span><span class="o">)</span>
+<span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- works</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">seq</span> <span class="o">:</span> <span class="n">array</span> <span class="mi">5</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">decidable</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">l</span> <span class="err">∈</span> <span class="n">seq</span><span class="o">,</span> <span class="n">true</span><span class="o">)</span>
+<span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- error</span>
+</pre></div>
+
+
+<p>And by the way, could I just tell Lean that I don't care about decidability because I work in classical logic, so that it will not miss any <code>decidable</code> predicate anywhere?</p>
+</blockquote>
+<p>What you want is <code>local attribute [instance] classical.prop_decidable</code> I believe in your file.</p>
+
+<a name="192859344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192859344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192859344">Ryan Lahfa (Apr 03 2020 at 20:25)</a>:</h4>
+<p>It'll enable decidability for all propositions.</p>
+
+<a name="192860818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192860818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192860818">Patrick Massot (Apr 03 2020 at 20:38)</a>:</h4>
+<p>The modern way of saying that is <code>open_locale classical</code></p>
+
+<a name="192860862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192860862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192860862">Patrick Massot (Apr 03 2020 at 20:38)</a>:</h4>
+<p>(Beware this cannot be written right after the import because the parser doesn't know <code>open_locale</code> is not the name of a file to import)</p>
+
+<a name="192862626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192862626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192862626">Kevin Buzzard (Apr 03 2020 at 20:54)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="133339">Miroslav Olšák</span> <a href="#narrow/stream/113489-new-members/topic/grasshopper.20problem/near/192649079" title="#narrow/stream/113489-new-members/topic/grasshopper.20problem/near/192649079">said</a>:</p>
+<blockquote>
+<p>So I have written the "trivial case" of the Grasshopper problem:  <a href="https://github.com/mirefek/my-lean-experiments/blob/master/grasshopper.lean" title="https://github.com/mirefek/my-lean-experiments/blob/master/grasshopper.lean">https://github.com/mirefek/my-lean-experiments/blob/master/grasshopper.lean</a>. Suggestions are welcomed.</p>
+</blockquote>
+<p>Your</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">lt_of_le_ne</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≠</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">)</span>
+</pre></div>
+
+
+<p>-- you are thinking about things the wrong way. This is a standard fact, therefore it's in the library, but you are a newcomer so you don't know all the naming conventions. So how do you find it? Answer: <code>:= by library_search</code>, which tells you that this is already there, and is called <code>lt_of_le_of_ne</code> (note the naming convention :-) )</p>
+
+<a name="192862702"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192862702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192862702">Miroslav Olšák (Apr 03 2020 at 20:55)</a>:</h4>
+<p>Can I also get rid of the warnings that I am using classical logic? By the way, <code>open_locale classical</code> works better because it puts the warning only where it actually needs classical. The other option, <code>local attribute [instance] classical.prop_decidable</code>, puts these warnings almost everywhere.</p>
+
+<a name="192862875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192862875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192862875">Kevin Buzzard (Apr 03 2020 at 20:56)</a>:</h4>
+<p>Just put</p>
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="n">theory</span>
+<span class="n">open_locale</span> <span class="n">classical</span>
+</pre></div>
+
+
+<p>at the top of your file and you should never get any warnings about constructive or computable issues.</p>
+
+<a name="192863831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192863831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192863831">Miroslav Olšák (Apr 03 2020 at 21:04)</a>:</h4>
+<p>Oh, library_search is interesting, no idea how it works. It told me that injectivity of subtraction can be proved <code>from λ {b c_1 : ℤ}, (add_right_inj (-c)).mp</code></p>
+
+<a name="192864059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192864059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192864059">Alex J. Best (Apr 03 2020 at 21:07)</a>:</h4>
+<p>Its amazing, definitely my most used non-core tactic. But sometimes the terms are ... interesting</p>
+
+<a name="192864108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192864108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192864108">Alex J. Best (Apr 03 2020 at 21:07)</a>:</h4>
+<p>There is an option to view several suggestions I believe, so that maybe the second or third is better</p>
+
+<a name="192864607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192864607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192864607">Kevin Buzzard (Apr 03 2020 at 21:12)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">finset_rest</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="bp">ℤ</span><span class="o">}</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">}</span> <span class="o">(</span><span class="n">x_in_s</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="n">r</span> <span class="o">:</span> <span class="n">finset</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="n">s</span><span class="bp">.</span><span class="n">val</span> <span class="bp">=</span> <span class="n">x</span><span class="bp">::</span><span class="n">r</span><span class="bp">.</span><span class="n">val</span>
+<span class="o">:=</span>
+</pre></div>
+
+
+<p>My guess is that you should not be proving this lemma. We already have the function you want -- and better, it's not some abstract existence statement, it's concrete. It's called <code>finset.erase s x</code>, and just after its definition there are 19 theorems proved about it. You are breaking the interface by starting to talk about multisets -- as a mathematician you should not really need to look at <code>s.val</code> for <code>s</code> a finset.</p>
+
+<a name="192864660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192864660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192864660">Alex J. Best (Apr 03 2020 at 21:13)</a>:</h4>
+<p>Maybe now this is the <code>suggest</code> tactic instead of an option for library search im thinking of.</p>
+
+<a name="192864885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192864885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192864885">Kevin Buzzard (Apr 03 2020 at 21:15)</a>:</h4>
+<p>Similarly do you really need <code>finset_cons_subset</code>? Why is <code>finset.subset_insert</code> not enough for you? This is the version of the lemma you want within the finset interface.</p>
+
+<a name="192864996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192864996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192864996">Alex J. Best (Apr 03 2020 at 21:16)</a>:</h4>
+<p>Indeed running <code>def aa (a b c :ℤ ) (h : a -b = c -b): a = c := by suggest 50</code> the second result is the one you would probably have wanted <code>sub_right_inj.mp h</code></p>
+
+<a name="192865083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192865083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192865083">Miroslav Olšák (Apr 03 2020 at 21:17)</a>:</h4>
+<p>hm, my <code>prefix_eq_head</code> seems to not be findable by library search even in a more basic form, even though it is kind of dual to existing <code>list.prefix_cons_inj</code></p>
+
+<a name="192865629"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192865629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192865629">Miroslav Olšák (Apr 03 2020 at 21:22)</a>:</h4>
+<p>I cannot really avoid multisets entirely, <code>jumps.1 = jumps_l</code> does not work wthout the <code>.1</code>.<br>
+Using <code>multiset.exists_cons_of_mem</code> was suggested by <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> for the task of being aware that when I order the smaller set to a list, and append the erased element, the result will be an ordering of the original finset.</p>
+
+<a name="192866039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192866039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192866039">Kevin Buzzard (Apr 03 2020 at 21:27)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">theorem</span><span class="w"> </span><span class="n">sum_filter_split</span><span class="w"> </span><span class="p">{</span><span class="n">p</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="err">ℤ</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="nc">Prop</span><span class="p">}</span><span class="w"> </span><span class="p">[</span><span class="n">decidable_pred</span><span class="w"> </span><span class="n">p</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">finset</span><span class="w"> </span><span class="err">ℤ</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"></span>
+<span class="w">  </span><span class="n">s</span><span class="o">.</span><span class="n">card</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">filter</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">card</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">filter</span><span class="w"> </span><span class="p">(</span><span class="err">λ</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="err">¬</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">a</span><span class="p">))</span><span class="o">.</span><span class="n">card</span><span class="w"></span>
+<span class="o">:=</span><span class="w"></span>
+<span class="n">begin</span><span class="w"></span>
+<span class="w">  </span><span class="k">let</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">s</span><span class="o">.</span><span class="n">filter</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="k">let</span><span class="w"> </span><span class="n">s2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">s</span><span class="o">.</span><span class="n">filter</span><span class="w"> </span><span class="p">(</span><span class="err">λ</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="err">¬</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">a</span><span class="p">),</span><span class="w"></span>
+<span class="w">  </span><span class="n">have</span><span class="w"> </span><span class="n">inter_empty</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="err">∩</span><span class="w"> </span><span class="n">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">∅</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">by</span><span class="w"> </span><span class="n">exact</span><span class="w"> </span><span class="n">finset</span><span class="o">.</span><span class="n">filter_inter_filter_neg_eq</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">have</span><span class="w"> </span><span class="n">union_full</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="err">∪</span><span class="w"> </span><span class="n">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">by</span><span class="w"> </span><span class="n">exact</span><span class="w"> </span><span class="n">finset</span><span class="o">.</span><span class="n">filter_union_filter_neg_eq</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">have</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="n">s1</span><span class="w"> </span><span class="err">∪</span><span class="w"> </span><span class="n">s2</span><span class="p">)</span><span class="o">.</span><span class="n">card</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">s1</span><span class="w"> </span><span class="err">∩</span><span class="w"> </span><span class="n">s2</span><span class="p">)</span><span class="o">.</span><span class="n">card</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s1</span><span class="o">.</span><span class="n">card</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">s2</span><span class="o">.</span><span class="n">card</span><span class="p">,</span><span class="w"></span>
+</pre></div>
+
+
+<p>let let have have have. You are thinking forwards. Lean's proofs come out much better if you write them backwards. All the lemmas you need to prove <code>sum_filter_split</code> are already in mathlib.</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">finset</span>
+
+<span class="kn">theorem</span> <span class="n">sum_filter_split</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_pred</span> <span class="n">p</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">s</span><span class="bp">.</span><span class="n">card</span> <span class="bp">=</span> <span class="o">(</span><span class="n">s</span><span class="bp">.</span><span class="n">filter</span> <span class="n">p</span><span class="o">)</span><span class="bp">.</span><span class="n">card</span> <span class="bp">+</span> <span class="o">(</span><span class="n">s</span><span class="bp">.</span><span class="n">filter</span> <span class="o">(</span><span class="bp">λ</span><span class="n">a</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">a</span><span class="o">))</span><span class="bp">.</span><span class="n">card</span>
+<span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">card_union_add_card_inter</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">filter_union_filter_neg_eq</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">filter_inter_filter_neg_eq</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">card_empty</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">add_zero</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="192866216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192866216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192866216">Kevin Buzzard (Apr 03 2020 at 21:29)</a>:</h4>
+<p>Those last two lemmas are tagged with <code>simp</code> so</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">sum_filter_split</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_pred</span> <span class="n">p</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">s</span><span class="bp">.</span><span class="n">card</span> <span class="bp">=</span> <span class="o">(</span><span class="n">s</span><span class="bp">.</span><span class="n">filter</span> <span class="n">p</span><span class="o">)</span><span class="bp">.</span><span class="n">card</span> <span class="bp">+</span> <span class="o">(</span><span class="n">s</span><span class="bp">.</span><span class="n">filter</span> <span class="o">(</span><span class="bp">λ</span><span class="n">a</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">a</span><span class="o">))</span><span class="bp">.</span><span class="n">card</span>
+<span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">card_union_add_card_inter</span><span class="o">,</span> <span class="n">filter_union_filter_neg_eq</span><span class="o">,</span> <span class="n">filter_inter_filter_neg_eq</span><span class="o">],</span>
+  <span class="n">simp</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="192866392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192866392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192866392">Kevin Buzzard (Apr 03 2020 at 21:30)</a>:</h4>
+<p>and then finally</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">sum_filter_split</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_pred</span> <span class="n">p</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">s</span><span class="bp">.</span><span class="n">card</span> <span class="bp">=</span> <span class="o">(</span><span class="n">s</span><span class="bp">.</span><span class="n">filter</span> <span class="n">p</span><span class="o">)</span><span class="bp">.</span><span class="n">card</span> <span class="bp">+</span> <span class="o">(</span><span class="n">s</span><span class="bp">.</span><span class="n">filter</span> <span class="o">(</span><span class="bp">λ</span><span class="n">a</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">a</span><span class="o">))</span><span class="bp">.</span><span class="n">card</span>
+<span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="err">←</span><span class="n">card_union_add_card_inter</span><span class="o">,</span> <span class="n">filter_union_filter_neg_eq</span><span class="o">,</span> <span class="n">filter_inter_filter_neg_eq</span><span class="o">]</span>
+</pre></div>
+
+<a name="192866575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192866575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192866575">Kevin Buzzard (Apr 03 2020 at 21:32)</a>:</h4>
+<p><code>cons_prefix</code> is <code>list.prefix_append</code></p>
+
+<a name="192866763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192866763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192866763">Miroslav Olšák (Apr 03 2020 at 21:34)</a>:</h4>
+<p>How do you do it that you don't write the <code>finset.</code> prefixes? <code>open finset</code>?</p>
+
+<a name="192866940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192866940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192866940">Kevin Buzzard (Apr 03 2020 at 21:36)</a>:</h4>
+<div class="codehilite"><pre><span></span>lemma l_nonneg_sum {l : list ℤ} (h1 : ∀ x ∈ l, (0:ℤ) &lt; x)
+  : l.sum ≥ 0
+</pre></div>
+
+
+<p>The data type with all the juicy lemmas about sums is <code>finset</code>. Do you really need sums of lists? Note that this lemma is suboptimal in the sense that <code>h1</code> should demand <code>0 \le x</code> not <code>0 &lt; x</code>.</p>
+
+<a name="192867038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192867038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192867038">Kevin Buzzard (Apr 03 2020 at 21:37)</a>:</h4>
+<p>Note that we already have <code>finset.sum_nonneg</code>. Given that you don't care about the order of summation it feels to me that you could/should be using multisets or finsets here.</p>
+
+<a name="192867433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192867433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192867433">Miroslav Olšák (Apr 03 2020 at 21:42)</a>:</h4>
+<p>The lemma <code>l_nonneg_sum</code> is carefully chosen to suit <code>pref_nonneg_sum</code>, which I need later. It is mostly about lists, although it originates from a finset at the beginning. And yes, it is something I found rather annoying, I would like Lean to realize it somewhat automatically but I am not sure if it is possible.</p>
+
+<a name="192867440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192867440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192867440">Kevin Buzzard (Apr 03 2020 at 21:42)</a>:</h4>
+<p>And in some sense the most important comment: I <em>definitely</em> would not start formalising <code>grasshopper</code> like that on line 150 or so, and just launching into some huge proof. Look at the development of <code>finset.lean</code>. 99% of the proofs are just a couple of lines long. That's the style you should be aiming for. Those earlier lemmas in your file -- there are sometimes better proofs but at least your proofs are short. If you start writing some huge proof then when you get to the heart of the matter you will find that you have to wait 5 seconds after every keystroke while Lean recompiles your entire lemma again.  </p>
+<p>However this slowdown might not have happened to you yet, and it's a very "mathematician" thing to do -- launch into the proof and just start dealing with the issues as they arise rather than factoring them out -- so if you think it's the best way to get you to a proof then go for it :-)</p>
+
+<a name="192867643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192867643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192867643">Kevin Buzzard (Apr 03 2020 at 21:44)</a>:</h4>
+<p>Your first <code>sorry</code> has as a goal </p>
+<div class="codehilite"><pre><span></span>⊢ ∃ (jumps_l : list ℤ),
+    jumps.val = ↑jumps_l ∧
+      ∀ (jumps_pref : list ℤ), jumps_pref ∈ list.inits jumps_l → list.sum jumps_pref ∉ mines
+</pre></div>
+
+
+<p>I see -- you are using lists to order the finsets. Maybe you do have to work with lists too. But there are a lot of lemmas about lists :-)</p>
+
+<a name="192867661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192867661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192867661">Miroslav Olšák (Apr 03 2020 at 21:45)</a>:</h4>
+<p>You are right, I am running into issues with speed which is annoying and slowing me down.</p>
+
+<a name="192867678"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192867678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192867678">Kevin Buzzard (Apr 03 2020 at 21:45)</a>:</h4>
+<p>It is a very common issue I see at the Xena project.</p>
+
+<a name="192867743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192867743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192867743">Miroslav Olšák (Apr 03 2020 at 21:46)</a>:</h4>
+<p>But you cannot disect every proof into small lemmas.</p>
+
+<a name="192867762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192867762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192867762">Kevin Buzzard (Apr 03 2020 at 21:46)</a>:</h4>
+<p>In some sense this is formally false</p>
+
+<a name="192867772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192867772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192867772">Miroslav Olšák (Apr 03 2020 at 21:46)</a>:</h4>
+<p>Not every proof is "Theory building"</p>
+
+<a name="192867792"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192867792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192867792">Kevin Buzzard (Apr 03 2020 at 21:46)</a>:</h4>
+<p>because every <code>have</code> you write in your proof can be factored out as a sublemma.</p>
+
+<a name="192867815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192867815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192867815">Kevin Buzzard (Apr 03 2020 at 21:47)</a>:</h4>
+<p>I'm not saying the lemmas have to be interesting. They can have names like <code>grasshoper_aux_3</code></p>
+
+<a name="192867818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192867818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192867818">Miroslav Olšák (Apr 03 2020 at 21:47)</a>:</h4>
+<p>But I have to pass all the assumptions to it.</p>
+
+<a name="192867824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192867824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192867824">Kevin Buzzard (Apr 03 2020 at 21:47)</a>:</h4>
+<p>yup</p>
+
+<a name="192867857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192867857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192867857">Kevin Buzzard (Apr 03 2020 at 21:47)</a>:</h4>
+<p>but I have seen students proving the same thing three times because they cannot be bothered to factor out a lemma.</p>
+
+<a name="192867867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192867867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192867867">Miroslav Olšák (Apr 03 2020 at 21:47)</a>:</h4>
+<p>Alright, I can try to do it this way.</p>
+
+<a name="192867878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192867878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192867878">Kevin Buzzard (Apr 03 2020 at 21:47)</a>:</h4>
+<p>In fact you don't have to pass <em>all</em> the assumptions to it, just all the ones you use.</p>
+
+<a name="192867987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192867987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192867987">Kevin Buzzard (Apr 03 2020 at 21:48)</a>:</h4>
+<p>This way it becomes easier to analyse what is going on. People don't like reading large proofs either, they are hard to follow, especially if they don't have any comments like yours don't.</p>
+
+<a name="192867993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192867993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192867993">Kevin Buzzard (Apr 03 2020 at 21:48)</a>:</h4>
+<p>Why not write the maths proof in the comments?</p>
+
+<a name="192868049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192868049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192868049">Kevin Buzzard (Apr 03 2020 at 21:49)</a>:</h4>
+<p>Here is an <a href="https://github.com/ImperialCollegeLondon/M4P33/blob/master/src/for_mathlib/commutative_algebra/Zariski_lemma.lean" title="https://github.com/ImperialCollegeLondon/M4P33/blob/master/src/for_mathlib/commutative_algebra/Zariski_lemma.lean">unfinished proof of Zariski's lemma</a></p>
+
+<a name="192868115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192868115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192868115">Kevin Buzzard (Apr 03 2020 at 21:50)</a>:</h4>
+<p>I am in the middle of writing it, but I am writing comments everywhere so it reads just like a maths proof.</p>
+
+<a name="192869359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192869359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192869359">Miroslav Olšák (Apr 03 2020 at 22:03)</a>:</h4>
+<p>I am used to try to avoid repetition from programming, at least when it seems reasonable. But it still felt better to prove the lemmata inside the proving context since I have access to objects which stay mostly constant during the proof.</p>
+
+<a name="192869514"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192869514" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192869514">Reid Barton (Apr 03 2020 at 22:05)</a>:</h4>
+<p>If you have a lot of objects which stay constant during a big proof then <code>parameters</code> is useful.</p>
+
+<a name="192869541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192869541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192869541">Reid Barton (Apr 03 2020 at 22:05)</a>:</h4>
+<p>You don't see it in mathlib because mathlib mostly doesn't contain big proofs.</p>
+
+<a name="192885647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192885647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192885647">Scott Morrison (Apr 04 2020 at 02:47)</a>:</h4>
+<p>Or just use <code>variables</code>. I prefer that to parameters, mostly. You still have to pass the arguments when calling functions, but you don't need to write the arguments as hypotheses of lemmas (which is the more verbose part, as you'd need to write the types). I think it's a feature that you still need to pass the arguments, as it keeps me from getting confused about what depends on what.</p>
+
+<a name="192885781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192885781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192885781">Reid Barton (Apr 04 2020 at 02:51)</a>:</h4>
+<p>It can easily be like 5x as verbose to pass the arguments though. I guess one thing that could help would be to pack everything into a structure.</p>
+
+<a name="192885833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192885833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192885833">Reid Barton (Apr 04 2020 at 02:52)</a>:</h4>
+<p>I don't know how I would have done something like <a href="https://github.com/rwbarton/lean-homotopy-theory/blob/lean-3.4.2/src/homotopy_theory/topological_spaces/pushout_lemmas.lean#L163" title="https://github.com/rwbarton/lean-homotopy-theory/blob/lean-3.4.2/src/homotopy_theory/topological_spaces/pushout_lemmas.lean#L163">https://github.com/rwbarton/lean-homotopy-theory/blob/lean-3.4.2/src/homotopy_theory/topological_spaces/pushout_lemmas.lean#L163</a> without parameters.</p>
+
+<a name="192886076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/grasshopper%20problem/near/192886076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88608grasshopperproblem.html#192886076">Scott Morrison (Apr 04 2020 at 02:59)</a>:</h4>
+<p>... on the subject of that repository ...?</p>
+
 
 {% endraw %}
 

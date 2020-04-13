@@ -9,21 +9,107 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [cleaning up this tactic proof (regarding closures)](12529cleaningupthistacticproofregardingclosures.html) (70 messages, latest: Apr 02 2020 at 07:59)
+* [Define function from ∀x, ∃y?](53273Definefunctionfromxy.html) (80 messages, latest: Apr 13 2020 at 08:34)
 
-* [more basics](41001morebasics.html) (276 messages, latest: Apr 02 2020 at 00:11)
+* [(2 * k + 1) / 2 = k](952942k12k.html) (5 messages, latest: Apr 13 2020 at 07:42)
+
+* [Feedback on code style](98863Feedbackoncodestyle.html) (9 messages, latest: Apr 13 2020 at 07:34)
+
+* [What's wrong with this notation?](89083Whatswrongwiththisnotation.html) (11 messages, latest: Apr 13 2020 at 07:02)
+
+* [noob question(s)](52075noobquestions.html) (3316 messages, latest: Apr 13 2020 at 06:30)
+
+* [Defeq involving recursors](44490Defeqinvolvingrecursors.html) (32 messages, latest: Apr 13 2020 at 06:06)
+
+* [Type class inference with parameters](64952Typeclassinferencewithparameters.html) (5 messages, latest: Apr 13 2020 at 02:11)
+
+* [Encoding Field as Abelian Group](00729EncodingFieldasAbelianGroup.html) (12 messages, latest: Apr 13 2020 at 00:27)
+
+* [New version of *Logical Verification in Lean* book](91354NewversionofLogicalVerificationinLeanbook.html) (18 messages, latest: Apr 12 2020 at 19:49)
+
+* [nat.strong_rec_on_beta](87935natstrongreconbeta.html) (54 messages, latest: Apr 12 2020 at 17:19)
+
+* [contradiction question](39018contradictionquestion.html) (5 messages, latest: Apr 12 2020 at 14:38)
+
+* [axiom schemas in Lean?](81529axiomschemasinLean.html) (20 messages, latest: Apr 12 2020 at 12:49)
+
+* [dec_trivial in classical](59309dectrivialinclassical.html) (9 messages, latest: Apr 12 2020 at 08:40)
+
+* [new versions coming out too fast?](82936newversionscomingouttoofast.html) (72 messages, latest: Apr 12 2020 at 07:08)
+
+* [Natural Numbers Game](36974NaturalNumbersGame.html) (75 messages, latest: Apr 12 2020 at 06:02)
+
+* [mathlib install](19833mathlibinstall.html) (9 messages, latest: Apr 12 2020 at 03:47)
+
+* [refl for a = b -> a = b?](57531reflforabab.html) (24 messages, latest: Apr 11 2020 at 23:04)
+
+* [advanced addition world level 7](37338advancedadditionworldlevel7.html) (26 messages, latest: Apr 11 2020 at 20:44)
+
+* [(no topic)](79918notopic.html) (49 messages, latest: Apr 11 2020 at 18:59)
+
+* [chained ors](47777chainedors.html) (57 messages, latest: Apr 11 2020 at 18:12)
+
+* [Return of the monolith](90849Returnofthemonolith.html) (24 messages, latest: Apr 11 2020 at 10:02)
+
+* [adding one](60362addingone.html) (10 messages, latest: Apr 11 2020 at 07:59)
+
+* [Rec_on arguments](55373Reconarguments.html) (33 messages, latest: Apr 11 2020 at 04:14)
+
+* [add one more to sum](76311addonemoretosum.html) (9 messages, latest: Apr 10 2020 at 22:48)
+
+* [more basics](41001morebasics.html) (433 messages, latest: Apr 10 2020 at 09:02)
+
+* [Execute tactic block n times](58215Executetacticblockntimes.html) (3 messages, latest: Apr 10 2020 at 07:37)
+
+* [Using one Exists to prove another?](13416UsingoneExiststoproveanother.html) (4 messages, latest: Apr 10 2020 at 05:35)
+
+* [New here](13647Newhere.html) (2 messages, latest: Apr 10 2020 at 04:14)
+
+* [Float division in Lean?](07474FloatdivisioninLean.html) (94 messages, latest: Apr 10 2020 at 02:33)
+
+* [Match on derived expression with equation compiler](10267Matchonderivedexpressionwithequationcompiler.html) (7 messages, latest: Apr 09 2020 at 01:48)
+
+* [triangle inequality](76508triangleinequality.html) (9 messages, latest: Apr 08 2020 at 10:55)
+
+* [Lynn's has_duplicate exercise](78762Lynnshasduplicateexercise.html) (41 messages, latest: Apr 07 2020 at 22:55)
+
+* [bundled subgroups](74089bundledsubgroups.html) (17 messages, latest: Apr 07 2020 at 15:50)
+
+* [chained inequalities ?](53977chainedinequalities.html) (74 messages, latest: Apr 07 2020 at 14:52)
+
+* [WIP: metric spaces tutorial](58306WIPmetricspacestutorial.html) (61 messages, latest: Apr 06 2020 at 23:06)
+
+* [building mathlib](71280buildingmathlib.html) (4 messages, latest: Apr 06 2020 at 21:04)
+
+* [cleaning up this tactic proof (regarding closures)](12529cleaningupthistacticproofregardingclosures.html) (170 messages, latest: Apr 06 2020 at 13:47)
+
+* [arrays](43091arrays.html) (75 messages, latest: Apr 06 2020 at 01:31)
+
+* [lean book](58188leanbook.html) (8 messages, latest: Apr 05 2020 at 23:50)
+
+* [has_neg for X → Y where Y has_neg?](55120hasnegforXYwhereYhasneg.html) (47 messages, latest: Apr 05 2020 at 15:18)
+
+* [Find min of a set of natural numbers](97040Findminofasetofnaturalnumbers.html) (16 messages, latest: Apr 04 2020 at 23:49)
+
+* [Metric space question](80809Metricspacequestion.html) (94 messages, latest: Apr 04 2020 at 18:30)
+
+* [integer subtraction / rational division](66635integersubtractionrationaldivision.html) (123 messages, latest: Apr 04 2020 at 15:36)
+
+* [grasshopper problem](88608grasshopperproblem.html) (157 messages, latest: Apr 04 2020 at 02:59)
+
+* [introduction ilmu](50394introductionilmu.html) (20 messages, latest: Apr 03 2020 at 21:04)
+
+* [Type theory books?](43323Typetheorybooks.html) (21 messages, latest: Apr 03 2020 at 13:42)
+
+* [Getting Started with Lean with prior experience in Coq](90352GettingStartedwithLeanwithpriorexperienceinCoq.html) (16 messages, latest: Apr 03 2020 at 12:50)
+
+* [natural number game questions](52294naturalnumbergamequestions.html) (93 messages, latest: Apr 03 2020 at 12:44)
+
+* [Documentation on superclasses](27669Documentationonsuperclasses.html) (2 messages, latest: Apr 02 2020 at 17:14)
 
 * [1/2 > 0](21409120.html) (8 messages, latest: Apr 01 2020 at 16:36)
 
 * [How to Extract](55469HowtoExtract.html) (3 messages, latest: Apr 01 2020 at 15:36)
-
-* [noob question(s)](52075noobquestions.html) (2770 messages, latest: Apr 01 2020 at 09:38)
-
-* [grasshopper problem](88608grasshopperproblem.html) (106 messages, latest: Mar 31 2020 at 20:16)
-
-* [Metric space question](80809Metricspacequestion.html) (71 messages, latest: Mar 31 2020 at 18:42)
-
-* [chained inequalities ?](53977chainedinequalities.html) (55 messages, latest: Mar 31 2020 at 13:52)
 
 * [Tactic writing: forall to lambda](41723Tacticwritingforalltolambda.html) (10 messages, latest: Mar 31 2020 at 02:18)
 
@@ -35,11 +121,7 @@ permalink: archive/113489newmembers/index.html
 
 * [Dumb question: where did analysis.real go?](74578Dumbquestionwheredidanalysisrealgo.html) (19 messages, latest: Mar 29 2020 at 18:23)
 
-* [(no topic)](79918notopic.html) (28 messages, latest: Mar 29 2020 at 18:16)
-
 * [rewrite tactic failed, lemma lhs is a metavariable](23945rewritetacticfailedlemmalhsisametavariable.html) (14 messages, latest: Mar 29 2020 at 11:44)
-
-* [natural number game questions](52294naturalnumbergamequestions.html) (92 messages, latest: Mar 29 2020 at 10:09)
 
 * [Lift a type to a higher universe](27679Liftatypetoahigheruniverse.html) (5 messages, latest: Mar 28 2020 at 22:23)
 
@@ -61,8 +143,6 @@ permalink: archive/113489newmembers/index.html
 
 * [Automorphism](62025Automorphism.html) (8 messages, latest: Mar 25 2020 at 16:33)
 
-* [Type theory books?](43323Typetheorybooks.html) (17 messages, latest: Mar 25 2020 at 05:31)
-
 * [Schnorr Group](54733SchnorrGroup.html) (38 messages, latest: Mar 24 2020 at 01:25)
 
 * [working with sets](94269workingwithsets.html) (20 messages, latest: Mar 23 2020 at 20:51)
@@ -70,8 +150,6 @@ permalink: archive/113489newmembers/index.html
 * [quot of fintype is fintype?](26328quotoffintypeisfintype.html) (13 messages, latest: Mar 23 2020 at 12:45)
 
 * [Complete lattices and subsets](01455Completelatticesandsubsets.html) (33 messages, latest: Mar 23 2020 at 10:57)
-
-* [Encoding Field as Abelian Group](00729EncodingFieldasAbelianGroup.html) (6 messages, latest: Mar 23 2020 at 08:28)
 
 * [Bezout's identity](61086Bezoutsidentity.html) (26 messages, latest: Mar 23 2020 at 02:53)
 
@@ -134,8 +212,6 @@ permalink: archive/113489newmembers/index.html
 * [How to use equation compiler](06816Howtouseequationcompiler.html) (4 messages, latest: Mar 16 2020 at 22:07)
 
 * [leanpkg issues (no more issue)](08841leanpkgissuesnomoreissue.html) (7 messages, latest: Mar 16 2020 at 19:21)
-
-* [Natural Numbers Game](36974NaturalNumbersGame.html) (30 messages, latest: Mar 15 2020 at 14:08)
 
 * [Inequality World](58926InequalityWorld.html) (111 messages, latest: Mar 15 2020 at 08:14)
 
@@ -260,8 +336,6 @@ permalink: archive/113489newmembers/index.html
 * [Tactic Proof not Responding. Overflow?](17610TacticProofnotRespondingOverflow.html) (71 messages, latest: Feb 17 2020 at 20:09)
 
 * [noncomputable](28696noncomputable.html) (6 messages, latest: Feb 17 2020 at 17:16)
-
-* [Getting Started with Lean with prior experience in Coq](90352GettingStartedwithLeanwithpriorexperienceinCoq.html) (15 messages, latest: Feb 17 2020 at 13:47)
 
 * [Defining a symmetric function](54601Definingasymmetricfunction.html) (17 messages, latest: Feb 17 2020 at 02:38)
 
