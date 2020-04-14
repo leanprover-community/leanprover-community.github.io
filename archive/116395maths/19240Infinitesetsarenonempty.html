@@ -1,0 +1,64 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/19240Infinitesetsarenonempty.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/19240Infinitesetsarenonempty.html">Infinite sets are nonempty</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192927788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Infinite%20sets%20are%20nonempty/near/192927788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19240Infinitesetsarenonempty.html#192927788">Ryan Lahfa (Apr 04 2020 at 21:27)</a>:</h4>
+<p>If I look at this theorem:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">infinite_set_is_not_empty</span> <span class="o">(</span><span class="n">S</span><span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">):</span> <span class="n">set</span><span class="bp">.</span><span class="n">infinite</span> <span class="n">S</span> <span class="bp">→</span> <span class="n">S</span><span class="bp">.</span><span class="n">nonempty</span>
+</pre></div>
+
+
+<p>I'm not sure why it does not exist, maybe it's false but I don't really see why as <code>infinite</code> definition <em>is not</em> finite.</p>
+<p>And I can give this proof in Lean:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>
+
+<span class="kn">lemma</span> <span class="n">infinite_set_is_not_empty</span> <span class="o">(</span><span class="n">S</span><span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">):</span> <span class="n">set</span><span class="bp">.</span><span class="n">infinite</span> <span class="n">S</span> <span class="bp">→</span> <span class="n">S</span><span class="bp">.</span><span class="n">nonempty</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">by_contra</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">set</span><span class="bp">.</span><span class="n">not_nonempty_iff_eq_empty</span> <span class="n">at</span> <span class="n">a</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">a</span><span class="o">,</span>
+<span class="n">exact</span> <span class="n">set</span><span class="bp">.</span><span class="n">finite_empty</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="192927830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Infinite%20sets%20are%20nonempty/near/192927830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19240Infinitesetsarenonempty.html#192927830">Ryan Lahfa (Apr 04 2020 at 21:28)</a>:</h4>
+<p>(under the assumption of decidability, so I guess, <code>noncomputable theory</code> and <code>open_locale classical</code> are needed.)</p>
+
+<a name="192936184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Infinite%20sets%20are%20nonempty/near/192936184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19240Infinitesetsarenonempty.html#192936184">Scott Morrison (Apr 05 2020 at 01:49)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">infinite</span> <span class="n">X</span><span class="o">]</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">X</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+<a name="192936231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Infinite%20sets%20are%20nonempty/near/192936231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19240Infinitesetsarenonempty.html#192936231">Scott Morrison (Apr 05 2020 at 01:50)</a>:</h4>
+<p>This is not a statement about sets, but about types.</p>
+
+<a name="192948943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Infinite%20sets%20are%20nonempty/near/192948943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19240Infinitesetsarenonempty.html#192948943">Kevin Buzzard (Apr 05 2020 at 08:45)</a>:</h4>
+<p>Note that <code>set.nonempty</code> is not a class, but <code>nonempty</code> is.</p>
+
+<a name="192950731"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Infinite%20sets%20are%20nonempty/near/192950731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19240Infinitesetsarenonempty.html#192950731">Ryan Lahfa (Apr 05 2020 at 09:37)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> But this is not really about my example, should I use subtypes to apply it to a subset of X?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

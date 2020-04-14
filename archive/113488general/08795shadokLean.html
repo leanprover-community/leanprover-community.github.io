@@ -1,0 +1,122 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/08795shadokLean.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/08795shadokLean.html">shadok Lean</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193613214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/shadok%20Lean/near/193613214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08795shadokLean.html#193613214">Patrick Massot (Apr 10 2020 at 20:20)</a>:</h4>
+<p>Is it me or Lean being weird?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">ga</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">u</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">},</span> <span class="n">true</span>
+
+<span class="kn">lemma</span> <span class="n">bu</span> <span class="o">:</span> <span class="n">true</span> <span class="bp">→</span> <span class="n">ga</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">trivial</span>
+
+<span class="kn">lemma</span> <span class="n">zo</span> <span class="o">:</span> <span class="n">ga</span> <span class="bp">→</span> <span class="n">true</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">trivial</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">bu</span>     <span class="c1">-- true → ga</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">trivial</span>    <span class="c1">-- true</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">bu</span> <span class="n">trivial</span>  <span class="c1">-- true  ?!?</span>
+
+<span class="kn">lemma</span> <span class="n">meu</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">zo</span><span class="o">,</span>
+  <span class="c1">-- exact bu trivial, -- invalid type ascription, term has type true but is expected to have type ga</span>
+  <span class="n">apply</span> <span class="n">bu</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">trivial</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Note that switching from implicit argument to explicit in the first definition makes everything work as (I) expected.</p>
+
+<a name="193613315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/shadok%20Lean/near/193613315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08795shadokLean.html#193613315">Patrick Massot (Apr 10 2020 at 20:21)</a>:</h4>
+<p>I think this is a job for <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span></p>
+
+<a name="193613361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/shadok%20Lean/near/193613361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08795shadokLean.html#193613361">Gabriel Ebner (Apr 10 2020 at 20:22)</a>:</h4>
+<p>Is this a reducibility problem?  What happens if you put an <code>@[reducible]</code> on <code>ga</code>?</p>
+
+<a name="193613389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/shadok%20Lean/near/193613389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08795shadokLean.html#193613389">Patrick Massot (Apr 10 2020 at 20:22)</a>:</h4>
+<p>It changes nothing</p>
+
+<a name="193613630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/shadok%20Lean/near/193613630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08795shadokLean.html#193613630">Gabriel Ebner (Apr 10 2020 at 20:25)</a>:</h4>
+<p><del>Ah, then it is the typical "stuff is different when there is an expected type":</del></p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="n">bu</span> <span class="n">trivial</span> <span class="o">:</span> <span class="n">ga</span><span class="o">)</span>  <span class="c1">-- invalid type ascription</span>
+</pre></div>
+
+<a name="193614027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/shadok%20Lean/near/193614027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08795shadokLean.html#193614027">Gabriel Ebner (Apr 10 2020 at 20:29)</a>:</h4>
+<p>Actually I'm not really sure what you expected.  The implicit argument in <code>ga</code> is being applied, this is the purpose of implicit arguments.  If you don't want this, use <code>⦃⦄</code>.</p>
+
+<a name="193614049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/shadok%20Lean/near/193614049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08795shadokLean.html#193614049">Patrick Massot (Apr 10 2020 at 20:29)</a>:</h4>
+<p>Isn't this Lean program meant to follow somehow the typing rules lambda calculus?</p>
+
+<a name="193614203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/shadok%20Lean/near/193614203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08795shadokLean.html#193614203">Patrick Massot (Apr 10 2020 at 20:30)</a>:</h4>
+<p>Being applied to what?</p>
+
+<a name="193614207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/shadok%20Lean/near/193614207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08795shadokLean.html#193614207">Gabriel Ebner (Apr 10 2020 at 20:30)</a>:</h4>
+<p>This is the magic of implicit arguments.  The function <code>bu</code> has one explicit argument and one implicit argument, so when you write <code>bu trivial</code>, the implicit argument is added <em>implicitly</em>.</p>
+
+<a name="193614281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/shadok%20Lean/near/193614281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08795shadokLean.html#193614281">Patrick Massot (Apr 10 2020 at 20:31)</a>:</h4>
+<p>But what is it applied to?</p>
+
+<a name="193614297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/shadok%20Lean/near/193614297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08795shadokLean.html#193614297">Patrick Massot (Apr 10 2020 at 20:31)</a>:</h4>
+<p>A meta-variable?</p>
+
+<a name="193614307"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/shadok%20Lean/near/193614307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08795shadokLean.html#193614307">Gabriel Ebner (Apr 10 2020 at 20:31)</a>:</h4>
+<p>Right!</p>
+
+<a name="193614474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/shadok%20Lean/near/193614474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08795shadokLean.html#193614474">Patrick Massot (Apr 10 2020 at 20:32)</a>:</h4>
+<p>This is crazy.</p>
+
+<a name="193614511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/shadok%20Lean/near/193614511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08795shadokLean.html#193614511">Gabriel Ebner (Apr 10 2020 at 20:32)</a>:</h4>
+<p>Regarding <code>⦃⦄</code>: if you look at the definitions of <code>transitive</code>, <code>reflexive</code>, etc., you will see that they also use the strict implicit binders for exactly the reason that you've just noticed.</p>
+
+<a name="193614518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/shadok%20Lean/near/193614518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08795shadokLean.html#193614518">Patrick Massot (Apr 10 2020 at 20:32)</a>:</h4>
+<p>I never really managed to remember what those {{ and }} are meant for.</p>
+
+<a name="193614698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/shadok%20Lean/near/193614698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08795shadokLean.html#193614698">Patrick Massot (Apr 10 2020 at 20:34)</a>:</h4>
+<p>Let me now try on my real problem.</p>
+
+<a name="193614794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/shadok%20Lean/near/193614794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08795shadokLean.html#193614794">Gabriel Ebner (Apr 10 2020 at 20:35)</a>:</h4>
+<p>If you have <code>f : ∀ α {β} γ ⦃δ⦄ ε, ρ</code>, then:</p>
+<div class="codehilite"><pre><span></span>f          becomes    @f
+f a        becomes    @f a _
+f a g      becomes    @f a _ g
+f a g e    becomes    @f a _ g _ e
+</pre></div>
+
+<a name="193614914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/shadok%20Lean/near/193614914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08795shadokLean.html#193614914">Gabriel Ebner (Apr 10 2020 at 20:36)</a>:</h4>
+<p>The difference is whether Lean will eagerly add underscores or not.</p>
+
+<a name="193614982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/shadok%20Lean/near/193614982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08795shadokLean.html#193614982">Patrick Massot (Apr 10 2020 at 20:37)</a>:</h4>
+<p>Thanks Gabriel! It even work in my real use case!</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

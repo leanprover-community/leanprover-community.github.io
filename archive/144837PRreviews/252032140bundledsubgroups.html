@@ -1,0 +1,128 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/144837PRreviews/252032140bundledsubgroups.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/144837PRreviews/index.html">PR reviews</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/144837PRreviews/252032140bundledsubgroups.html">#2140 bundled subgroups</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193103554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232140%20bundled%20subgroups/near/193103554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/252032140bundledsubgroups.html#193103554">Yury G. Kudryashov (Apr 06 2020 at 21:21)</a>:</h4>
+<p><span class="user-mention" data-user-id="243312">@Jason KY.</span> asks whether he should mirror API from <code>monoid_hom</code> namespace in <code>submonoid</code> to <code>subgroup</code>.</p>
+
+<a name="193103927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232140%20bundled%20subgroups/near/193103927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/252032140bundledsubgroups.html#193103927">Jason KY. (Apr 06 2020 at 21:24)</a>:</h4>
+<p>I also have a question regarding <code>gpow_mem</code><br>
+Since I think <code>gpow_mem</code> should be a lemma on integers, should I extend it from the natural numbers or should I just do it by itself?<br>
+This is what I have right now</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">gpow_mem_nat</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">G</span><span class="o">}</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">K</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">x</span> <span class="err">^</span> <span class="n">n</span> <span class="err">∈</span> <span class="n">K</span>
+<span class="bp">|</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="n">K</span><span class="bp">.</span><span class="n">one_mem</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">K</span><span class="bp">.</span><span class="n">mul_mem</span> <span class="n">hx</span> <span class="o">(</span><span class="n">gpow_mem_nat</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">gpow_mem</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">G</span><span class="o">}</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">K</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="n">x</span> <span class="err">^</span> <span class="n">n</span> <span class="err">∈</span> <span class="n">K</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply</span> <span class="n">gpow_mem_nat</span><span class="bp">;</span> <span class="k">from</span> <span class="n">hx</span>
+<span class="bp">|</span> <span class="bp">-</span><span class="o">[</span><span class="mi">1</span><span class="bp">+</span> <span class="n">n</span><span class="o">]</span>        <span class="o">:=</span> <span class="n">K</span><span class="bp">.</span><span class="n">inv_mem</span> <span class="err">$</span> <span class="k">by</span> <span class="n">apply</span> <span class="n">gpow_mem_nat</span><span class="bp">;</span> <span class="k">from</span> <span class="n">hx</span>
+</pre></div>
+
+<a name="193103993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232140%20bundled%20subgroups/near/193103993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/252032140bundledsubgroups.html#193103993">Yury G. Kudryashov (Apr 06 2020 at 21:24)</a>:</h4>
+<p>My opinion:</p>
+<ul>
+<li><code>mrange</code> : yes, becomes <code>range</code>;</li>
+<li><code>restrict</code> : not sure; can we make <code>subgroup → submonoid</code> transparent enough for Lean to unify their coercions to Type?</li>
+<li><code>cod_restrict</code> : same;</li>
+<li><code>eq_mlocus</code> : yes, becomes <code>eq_locus</code>;</li>
+</ul>
+
+<a name="193104041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232140%20bundled%20subgroups/near/193104041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/252032140bundledsubgroups.html#193104041">Yury G. Kudryashov (Apr 06 2020 at 21:25)</a>:</h4>
+<p>You can reuse <code>pow_mem</code></p>
+
+<a name="193104079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232140%20bundled%20subgroups/near/193104079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/252032140bundledsubgroups.html#193104079">Yury G. Kudryashov (Apr 06 2020 at 21:25)</a>:</h4>
+<p>Which is <code>defeq</code> to <code>submonoid.pow_mem</code></p>
+
+<a name="193104280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232140%20bundled%20subgroups/near/193104280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/252032140bundledsubgroups.html#193104280">Yury G. Kudryashov (Apr 06 2020 at 21:27)</a>:</h4>
+<p>Something like (not tested) :</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">pow_mem</span> <span class="o">:</span> <span class="n">x</span><span class="err">∈</span> <span class="n">K</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">x</span><span class="err">^</span><span class="n">n</span> <span class="err">∈</span> <span class="n">K</span> <span class="o">:=</span> <span class="n">K</span><span class="bp">.</span><span class="n">to_submonoid</span><span class="bp">.</span><span class="n">pow_mem</span>
+</pre></div>
+
+
+<p>BTW, your <code>gpow_mem_nat</code> actually uses <code>pow</code>, not <code>gpow</code>.</p>
+
+<a name="193104326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232140%20bundled%20subgroups/near/193104326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/252032140bundledsubgroups.html#193104326">Yury G. Kudryashov (Apr 06 2020 at 21:27)</a>:</h4>
+<p>I mean, it uses <code>has_pow G nat</code>, not <code>has_pow G int</code>.</p>
+
+<a name="193104665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232140%20bundled%20subgroups/near/193104665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/252032140bundledsubgroups.html#193104665">Jason KY. (Apr 06 2020 at 21:30)</a>:</h4>
+<p>I'm not sure what this means. I thought that's what I intended :P</p>
+
+<a name="193105100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232140%20bundled%20subgroups/near/193105100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/252032140bundledsubgroups.html#193105100">Yury G. Kudryashov (Apr 06 2020 at 21:35)</a>:</h4>
+<p>In <code>mathlib</code> <code>gpow</code> is used for lemmas about <code>instance [group G] : has_pow G int</code></p>
+
+<a name="193105204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232140%20bundled%20subgroups/near/193105204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/252032140bundledsubgroups.html#193105204">Yury G. Kudryashov (Apr 06 2020 at 21:36)</a>:</h4>
+<p><code>pow</code> is for <code>instance [monoid M] : has_pow M nat</code>, <code>fpow</code> is for <code>instance [division_ring F] : has_pow F int</code></p>
+
+<a name="193105254"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232140%20bundled%20subgroups/near/193105254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/252032140bundledsubgroups.html#193105254">Yury G. Kudryashov (Apr 06 2020 at 21:36)</a>:</h4>
+<p>We also have <code>rpow</code> and <code>cpow</code> for real and complex.</p>
+
+<a name="193105263"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232140%20bundled%20subgroups/near/193105263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/252032140bundledsubgroups.html#193105263">Jason KY. (Apr 06 2020 at 21:36)</a>:</h4>
+<p>Right, so it should be just <code>pow_mem</code></p>
+
+<a name="193105276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232140%20bundled%20subgroups/near/193105276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/252032140bundledsubgroups.html#193105276">Yury G. Kudryashov (Apr 06 2020 at 21:36)</a>:</h4>
+<p>Yes.</p>
+
+<a name="193105301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232140%20bundled%20subgroups/near/193105301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/252032140bundledsubgroups.html#193105301">Yury G. Kudryashov (Apr 06 2020 at 21:37)</a>:</h4>
+<p>There are too many naming conventions...</p>
+
+<a name="193105346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232140%20bundled%20subgroups/near/193105346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/252032140bundledsubgroups.html#193105346">Jason KY. (Apr 06 2020 at 21:37)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="214703">Yury G. Kudryashov</span> <a href="#narrow/stream/144837-PR-reviews/topic/.232140.20bundled.20subgroups/near/193104280" title="#narrow/stream/144837-PR-reviews/topic/.232140.20bundled.20subgroups/near/193104280">said</a>:</p>
+<blockquote>
+<p>Something like (not tested) :</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">pow_mem</span> <span class="o">:</span> <span class="n">x</span><span class="err">∈</span> <span class="n">K</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">x</span><span class="err">^</span><span class="n">n</span> <span class="err">∈</span> <span class="n">K</span> <span class="o">:=</span> <span class="n">K</span><span class="bp">.</span><span class="n">to_submonoid</span><span class="bp">.</span><span class="n">pow_mem</span>
+</pre></div>
+
+
+<p>BTW, your <code>gpow_mem_nat</code> actually uses <code>pow</code>, not <code>gpow</code>.</p>
+</blockquote>
+<p>Also, it seems <code>to_submonoid</code> isn't defined. I should probably add that?</p>
+
+<a name="193106730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232140%20bundled%20subgroups/near/193106730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/252032140bundledsubgroups.html#193106730">Yury G. Kudryashov (Apr 06 2020 at 21:50)</a>:</h4>
+<p>You should define <code>subgroup</code> using <code>extends submonoid</code>, then only add <code>inv_mem</code>.</p>
+
+<a name="193106742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232140%20bundled%20subgroups/near/193106742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/252032140bundledsubgroups.html#193106742">Yury G. Kudryashov (Apr 06 2020 at 21:50)</a>:</h4>
+<p>Then <code>to_submonoid</code> will be autogenerated.</p>
+
+<a name="193108385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232140%20bundled%20subgroups/near/193108385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/252032140bundledsubgroups.html#193108385">Jason KY. (Apr 06 2020 at 22:06)</a>:</h4>
+<p>Ah, I see!</p>
+
+<a name="193130670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232140%20bundled%20subgroups/near/193130670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/252032140bundledsubgroups.html#193130670">Johan Commelin (Apr 07 2020 at 04:29)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="214703">Yury G. Kudryashov</span> <a href="#narrow/stream/144837-PR-reviews/topic/.232140.20bundled.20subgroups/near/193105204" title="#narrow/stream/144837-PR-reviews/topic/.232140.20bundled.20subgroups/near/193105204">said</a>:</p>
+<blockquote>
+<p><code>fpow</code> is for <code>instance [division_ring F] : has_pow F int</code></p>
+</blockquote>
+<p>Note that this is no longer true... since a couple of hours it assumes <code>[group_with_zero F]</code>. Division rings are the main source of examples, but <code>nnreal := {r : real // 0 ≤ r}</code> is another example.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

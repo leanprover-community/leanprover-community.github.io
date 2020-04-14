@@ -1,0 +1,38 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/44011Debugingsimpset.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/44011Debugingsimpset.html">Debuging `simp` set</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192986529"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Debuging%20%60simp%60%20set/near/192986529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44011Debugingsimpset.html#192986529">Yury G. Kudryashov (Apr 06 2020 at 01:01)</a>:</h4>
+<p>I'm formalizing quaternions, and I have a timeout in <code>simp</code> probably because of some cycle in my <code>simp</code> set. Can I ask Lean to <code>simp</code> for some fixed amount of cycles, then report lemmas it used?</p>
+
+<a name="192987552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Debuging%20%60simp%60%20set/near/192987552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44011Debugingsimpset.html#192987552">Bryan Gin-ge Chen (Apr 06 2020 at 01:26)</a>:</h4>
+<p>Maybe supplying <code>max_steps</code> with <code>simp {max_steps:= 100}</code> will help?</p>
+
+<a name="192987561"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Debuging%20%60simp%60%20set/near/192987561" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44011Debugingsimpset.html#192987561">Bryan Gin-ge Chen (Apr 06 2020 at 01:26)</a>:</h4>
+<p>The default is apparently <code>10000000</code>.</p>
+
+<a name="192987564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Debuging%20%60simp%60%20set/near/192987564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44011Debugingsimpset.html#192987564">Yury G. Kudryashov (Apr 06 2020 at 01:26)</a>:</h4>
+<p>Thank you, I'll try</p>
+
+<a name="193010121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Debuging%20%60simp%60%20set/near/193010121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44011Debugingsimpset.html#193010121">Gabriel Ebner (Apr 06 2020 at 08:33)</a>:</h4>
+<p>The standard way is to enable <code>set_option trace.simplify.rewrite true</code>, this outputs one line per used simp lemma.  You can then use <code>try_for 12345 { simp }</code> to stop simp before it is finished.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,92 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/70698notnotelim.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/70698notnotelim.html">notnotelim</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193000812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notnotelim/near/193000812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70698notnotelim.html#193000812">Phiroc (Apr 06 2020 at 06:54)</a>:</h4>
+<p>Good morning,</p>
+<p>I'm try to translate the following theorem from Agda to Lean :</p>
+<div class="codehilite"><pre><span></span>notnotelim : forall (b : bool) -&gt; not not b = b
+notnotelim : tt = refl
+notnotelim : ff = refl
+
+cf. Verified Functional Programming in Agda, Aarun Stump, p. 22
+</pre></div>
+
+
+<p>Here's my first attempt, which doesn't work:</p>
+<div class="codehilite"><pre><span></span>theorem notnotelim2 (b : bool):
+    ¬¬ b = b :=
+begin
+    induction b,
+    case tt { reflection },
+    case ff { reflection }
+end
+</pre></div>
+
+
+<p>However, this works:</p>
+<div class="codehilite"><pre><span></span>theorem notnotelim (b : bool):
+    ¬¬ b = b :=
+begin
+    induction b,
+    case tt { contradiction },
+    case ff { contradiction }
+end
+</pre></div>
+
+
+<p>I've no idea why.</p>
+<p>In Idris, this works (just as in Agda):</p>
+<div class="codehilite"><pre><span></span>notNotTT : not (not True) = True
+notNotTT = Refl
+</pre></div>
+
+
+<p>I can't figure out how to prove the same theorem, but with a "forall":</p>
+<div class="codehilite"><pre><span></span>theorem notnotelim2 :
+    ∀b: bool, ¬¬ b = b :=
+begin
+    -- proof
+end
+</pre></div>
+
+
+<p>Any help would be much appreciated.</p>
+<p>Many thanks.</p>
+<p>Philip</p>
+
+<a name="193001038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notnotelim/near/193001038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70698notnotelim.html#193001038">Yury G. Kudryashov (Apr 06 2020 at 06:56)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">notnotelim2</span> <span class="o">:</span>
+    <span class="bp">∀</span><span class="n">b</span><span class="o">:</span> <span class="n">bool</span><span class="o">,</span> <span class="n">bnot</span> <span class="o">(</span><span class="n">bnot</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">b</span>
+<span class="bp">|</span> <span class="n">tt</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="n">ff</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+<a name="193001060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notnotelim/near/193001060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70698notnotelim.html#193001060">Yury G. Kudryashov (Apr 06 2020 at 06:57)</a>:</h4>
+<p>Note that <code>not</code> works on <code>Prop</code>s, not on <code>bool</code>s</p>
+
+<a name="193001076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notnotelim/near/193001076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70698notnotelim.html#193001076">Yury G. Kudryashov (Apr 06 2020 at 06:57)</a>:</h4>
+<p><code>bnot</code> works on <code>bool</code>s</p>
+
+<a name="193001279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notnotelim/near/193001279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70698notnotelim.html#193001279">Phiroc (Apr 06 2020 at 06:59)</a>:</h4>
+<p>Many thanks Yury.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

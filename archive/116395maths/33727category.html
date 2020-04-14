@@ -1,0 +1,963 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/33727category.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html">category</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193656389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193656389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193656389">orlando (Apr 11 2020 at 11:50)</a>:</h4>
+<p>Hello, I'm training on category and i have a problem   <span aria-label="sweat smile" class="emoji emoji-1f605" role="img" title="sweat smile">:sweat_smile:</span> </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">comma</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">shapes</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">yoneda</span>
+
+<span class="n">universes</span> <span class="n">v</span> <span class="n">u</span>
+<span class="kn">open</span> <span class="n">category_theory</span>
+<span class="kn">open</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">open</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">category</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">C</span><span class="o">}</span> <span class="o">[</span><span class="n">has_binary_products</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">][</span><span class="n">has_terminal</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>   <span class="c1">---</span>
+<span class="n">include</span> <span class="err">𝒞</span>                        <span class="c1">---- what is ? include ?</span>
+
+
+<span class="bp">/</span>
+<span class="n">The</span> <span class="n">goal</span> <span class="n">is</span> <span class="n">define</span> <span class="n">group</span> <span class="n">obj</span> <span class="k">in</span> <span class="n">a</span> <span class="n">category</span><span class="bp">.</span>
+          <span class="n">reference</span> <span class="o">:</span> <span class="n">Douady</span> <span class="o">:</span> <span class="n">Algebre</span> <span class="n">et</span> <span class="n">th</span><span class="err">é</span><span class="n">ories</span> <span class="n">galoisiennes</span> <span class="n">page</span> <span class="mi">45</span>
+          <span class="n">exemple</span> <span class="o">:</span> <span class="k">in</span> <span class="n">the</span> <span class="n">category</span> <span class="n">of</span> <span class="n">presheaf</span><span class="bp">.</span>
+          <span class="k">in</span> <span class="n">Ring</span> <span class="err">?</span> <span class="n">Idem</span>  <span class="n">Agl</span>  <span class="n">etc</span>
+        <span class="kn">context</span>  <span class="o">:</span> <span class="err">𝒞</span> <span class="n">terminal</span> <span class="bp">+</span> <span class="n">finite</span> <span class="n">product</span> <span class="bp">!</span>
+<span class="bp">-/</span>
+<span class="kn">notation</span> <span class="n">f</span> <span class="bp">`</span> <span class="err">⊗</span> <span class="bp">`</span><span class="o">:</span><span class="mi">20</span> <span class="n">g</span> <span class="o">:</span><span class="mi">20</span> <span class="o">:=</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span> <span class="n">g</span>
+<span class="kn">notation</span>  <span class="bp">`</span><span class="n">T</span><span class="bp">`</span><span class="n">C</span> <span class="o">:</span><span class="mi">20</span> <span class="o">:=</span> <span class="o">(</span><span class="n">terminal</span> <span class="n">C</span><span class="o">)</span>
+<span class="kn">notation</span>   <span class="bp">`</span><span class="n">T</span><span class="bp">`</span><span class="n">X</span> <span class="o">:</span> <span class="mi">20</span> <span class="o">:=</span> <span class="o">(</span><span class="n">terminal</span><span class="bp">.</span><span class="k">from</span> <span class="n">X</span><span class="o">)</span>
+<span class="kn">notation</span> <span class="n">f</span> <span class="bp">`</span> <span class="bp">|</span> <span class="bp">`</span><span class="o">:</span><span class="mi">20</span> <span class="n">g</span> <span class="o">:</span><span class="mi">20</span> <span class="o">:=</span>  <span class="n">prod</span><span class="bp">.</span><span class="n">lift</span> <span class="n">f</span> <span class="n">g</span>
+<span class="kn">structure</span> <span class="n">group_obj</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">][</span><span class="n">has_binary_products</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">][</span><span class="n">has_terminal</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">:=</span>  <span class="c1">-- I don&#39;t understand if i have to write here   {C : Type u}[𝒞 : category.{v} C][has_binary_products.{v} C][has_terminal.{v} C]  ?</span>
+<span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span>
+<span class="o">(</span><span class="n">μ</span> <span class="o">:</span> <span class="n">X</span> <span class="err">⨯</span> <span class="n">X</span> <span class="err">⟶</span> <span class="n">X</span><span class="o">)</span>
+<span class="o">(</span><span class="n">inv</span> <span class="o">:</span> <span class="n">X</span> <span class="err">⟶</span> <span class="n">X</span><span class="o">)</span>
+<span class="o">(</span><span class="n">ε</span> <span class="o">:</span>  <span class="n">T</span> <span class="n">C</span> <span class="err">⟶</span> <span class="n">X</span><span class="o">)</span>
+<span class="o">(</span><span class="n">hyp_one_mul</span>  <span class="o">:</span>  <span class="o">(</span><span class="n">T</span> <span class="n">X</span> <span class="bp">|</span> <span class="mi">𝟙</span> <span class="n">X</span><span class="o">)</span> <span class="err">≫</span> <span class="o">(</span><span class="n">ε</span> <span class="err">⊗</span> <span class="mi">𝟙</span> <span class="n">X</span><span class="o">)</span> <span class="err">≫</span>  <span class="n">μ</span>  <span class="bp">=</span> <span class="mi">𝟙</span> <span class="n">X</span><span class="o">)</span>
+<span class="o">(</span><span class="n">hyp_mul_one</span>  <span class="o">:</span>  <span class="o">(</span><span class="mi">𝟙</span> <span class="n">X</span> <span class="bp">|</span> <span class="n">T</span> <span class="n">X</span><span class="o">)</span> <span class="err">≫</span> <span class="o">(</span> <span class="mi">𝟙</span> <span class="n">X</span> <span class="err">⊗</span> <span class="n">ε</span><span class="o">)</span> <span class="err">≫</span> <span class="n">μ</span>  <span class="bp">=</span> <span class="mi">𝟙</span> <span class="n">X</span><span class="o">)</span>
+<span class="o">(</span><span class="n">hyp_mul_inv</span>  <span class="o">:</span>  <span class="o">(</span><span class="mi">𝟙</span> <span class="n">X</span> <span class="bp">|</span> <span class="n">inv</span><span class="o">)</span> <span class="err">≫</span>  <span class="n">μ</span> <span class="bp">=</span> <span class="o">(</span><span class="n">T</span> <span class="n">X</span><span class="o">)</span> <span class="err">≫</span> <span class="n">ε</span> <span class="o">)</span>
+<span class="o">(</span><span class="n">hyp_assoc</span>    <span class="o">:</span>  <span class="o">(</span><span class="n">μ</span> <span class="err">⊗</span> <span class="mi">𝟙</span> <span class="n">X</span><span class="o">)</span> <span class="err">≫</span> <span class="o">(</span><span class="n">μ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">associator</span> <span class="n">X</span> <span class="n">X</span> <span class="n">X</span><span class="o">)</span><span class="bp">.</span><span class="n">hom</span> <span class="err">≫</span> <span class="o">(</span><span class="mi">𝟙</span> <span class="n">X</span> <span class="err">⊗</span> <span class="n">μ</span><span class="o">)</span>  <span class="err">≫</span> <span class="n">μ</span> <span class="o">)</span>   <span class="c1">-- (a *b) * c = (a * (b * c))</span>
+
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="n">group_obj</span> <span class="n">C</span><span class="o">)</span> <span class="c1">--- ?    I cant  have i variables of type G : group_obj on C ?</span>
+<span class="c1">--  (G : group_obj 𝒞)(Y : C) :      ?    what is the syntax ?  In fact i don&#39;t understand variables with { } [] or () i thinck it&#39;s the -- problem ?</span>
+</pre></div>
+
+<a name="193656418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193656418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193656418">orlando (Apr 11 2020 at 11:51)</a>:</h4>
+<p>the problem is i cant write <code> G :  group_obj </code> or <code> G :  group_obj  C </code> or <code> G :  group_obj 𝒞)</code> the three possibility give me an error :D</p>
+
+<a name="193656505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193656505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193656505">Scott Morrison (Apr 11 2020 at 11:53)</a>:</h4>
+<p>You've made the <code>C</code> argument of <code>group_obj</code> implicit, by putting it in curly braces.</p>
+
+<a name="193656506"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193656506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193656506">Mario Carneiro (Apr 11 2020 at 11:53)</a>:</h4>
+<p>You declared all variables as implicit in <code>group_obj</code>, but lean can't infer <code>C</code></p>
+
+<a name="193656511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193656511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193656511">Scott Morrison (Apr 11 2020 at 11:53)</a>:</h4>
+<p>You want <code>structure group_obj (C : Type u)[𝒞 : category.{v} C]</code></p>
+
+<a name="193656517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193656517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193656517">Scott Morrison (Apr 11 2020 at 11:53)</a>:</h4>
+<p>also, since you've <code>include</code>d 𝒞 above, you're going to end up with two copies of the category argument</p>
+
+<a name="193656559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193656559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193656559">Scott Morrison (Apr 11 2020 at 11:54)</a>:</h4>
+<p>Have you read <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/tutorial/category_theory/intro.lean" title="https://github.com/leanprover-community/mathlib/blob/master/docs/tutorial/category_theory/intro.lean">https://github.com/leanprover-community/mathlib/blob/master/docs/tutorial/category_theory/intro.lean</a> ?</p>
+
+<a name="193656564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193656564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193656564">Scott Morrison (Apr 11 2020 at 11:54)</a>:</h4>
+<p>It will explain how and why we use <code>include</code> here.</p>
+
+<a name="193656573"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193656573" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193656573">Scott Morrison (Apr 11 2020 at 11:55)</a>:</h4>
+<p>Also, a more general note --- really you want to define a group object in any monoidal category</p>
+
+<a name="193656575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193656575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193656575">Scott Morrison (Apr 11 2020 at 11:55)</a>:</h4>
+<p>not just in a category equipped with the monoidal structure coming from binary products.</p>
+
+<a name="193656584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193656584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193656584">Scott Morrison (Apr 11 2020 at 11:55)</a>:</h4>
+<p>I don't promise, but it may actually be _easier_ there.</p>
+
+<a name="193656631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193656631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193656631">Scott Morrison (Apr 11 2020 at 11:56)</a>:</h4>
+<p>(for one, you won't need to define the notation <code>⊗</code>, because it will be there for you already!)</p>
+
+<a name="193656652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193656652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193656652">Kevin Buzzard (Apr 11 2020 at 11:56)</a>:</h4>
+<p>Here's what <code>include</code> does:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span>
+
+<span class="n">include</span> <span class="n">X</span>
+
+<span class="n">def</span> <span class="n">g</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span>
+
+<span class="n">omit</span> <span class="n">X</span>
+
+<span class="n">def</span> <span class="n">h</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">f</span> <span class="c1">-- f : ℕ → ℕ</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">g</span> <span class="c1">-- g : Type → ℕ → ℕ</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">h</span> <span class="c1">-- h : ℕ → ℕ</span>
+</pre></div>
+
+<a name="193656658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193656658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193656658">Scott Morrison (Apr 11 2020 at 11:56)</a>:</h4>
+<p>(and generally, since the API surface area is smaller for monoidal categories than for monoidal-categories-built-in-this-way, there are fewer ways you can do wrong things :-)</p>
+
+<a name="193656680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193656680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193656680">Kevin Buzzard (Apr 11 2020 at 11:57)</a>:</h4>
+<p>All your definitions after the <code>include</code> and before the <code>omit</code>  will include <code>(X : Type)</code>. So if you include <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="script">C</mi></mrow><annotation encoding="application/x-tex">\mathcal{C}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.05834em;">C</span></span></span></span></span> you shouldn't mention it explicitly in your definition.</p>
+
+<a name="193656856"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193656856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193656856">Kevin Buzzard (Apr 11 2020 at 12:01)</a>:</h4>
+<p>My impression is that when defining new structures you should not rely on variables or <code>include</code> at all, and just spell everything out. It is often the case that for new structures you want the brackets to be different anyway; for example when defining group homs you would want <code>def group_hom (G : Type) [group G] (H : Type) [group H] := ...</code> but then the moment you start proving lemmas about group homs you will want <code>(f : group_hom G H)</code> but <code>{G : Type} {H : Type}</code>.</p>
+
+<a name="193656866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193656866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193656866">Scott Morrison (Apr 11 2020 at 12:01)</a>:</h4>
+<p>It's also really confusing for anyone reading your definition.</p>
+
+<a name="193656906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193656906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193656906">Scott Morrison (Apr 11 2020 at 12:02)</a>:</h4>
+<p>Variables are great once you're off and running and proving a million lemmas.</p>
+
+<a name="193656910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193656910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193656910">Scott Morrison (Apr 11 2020 at 12:02)</a>:</h4>
+<p>But for defining new structures and new types, please put the hypotheses inline!</p>
+
+<a name="193656920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193656920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193656920">Kevin Buzzard (Apr 11 2020 at 12:02)</a>:</h4>
+<p>Finally note that in</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">C</span><span class="o">}</span>
+</pre></div>
+
+
+<p>the last <code>variables</code> doesn't do anything. This just means "change the default brackets for variable <code>C</code> to <code>{}</code>" -- but they were already <code>{}</code>.</p>
+
+<a name="193657005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193657005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193657005">orlando (Apr 11 2020 at 12:04)</a>:</h4>
+<p>thx, Kevin Mario and Scott, i read Slowly ! (i use google traductor to understand <span aria-label="grinning" class="emoji emoji-1f600" role="img" title="grinning">:grinning:</span> )</p>
+
+<a name="193657956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193657956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193657956">orlando (Apr 11 2020 at 12:28)</a>:</h4>
+<p>Scott: Ah, I didn't know the concept of a monoidal category! I just looked at the lean file! Thx !</p>
+
+<a name="193657993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193657993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193657993">orlando (Apr 11 2020 at 12:29)</a>:</h4>
+<p>I thinck i understand : </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">comma</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">shapes</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">yoneda</span>
+
+<span class="n">universes</span> <span class="n">v</span> <span class="n">u</span>
+<span class="kn">open</span> <span class="n">category_theory</span>
+<span class="kn">open</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">open</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">category</span>
+
+
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">The goal is define group obj in a category.</span>
+<span class="cm">          reference : Douady : Algebre et théories galoisiennes page 45</span>
+<span class="cm">          exemple : in the category of presheaf.</span>
+<span class="cm">          in Ring ? Idem ?</span>
+<span class="cm">     contexte : 𝒞 a un objet final et a les produit finis !</span>
+<span class="cm">Pour coder μ X × X ⟶ X  We see that has X ⟶ T cospan f f)</span>
+
+<span class="cm">-/</span>
+<span class="kn">notation</span> <span class="n">f</span> <span class="bp">`</span> <span class="err">⊗</span> <span class="bp">`</span><span class="o">:</span><span class="mi">20</span> <span class="n">g</span> <span class="o">:</span><span class="mi">20</span> <span class="o">:=</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span> <span class="n">g</span>
+<span class="kn">notation</span>  <span class="bp">`</span><span class="n">T</span><span class="bp">`</span><span class="n">C</span> <span class="o">:</span><span class="mi">20</span> <span class="o">:=</span> <span class="o">(</span><span class="n">terminal</span> <span class="n">C</span><span class="o">)</span>
+<span class="kn">notation</span>   <span class="bp">`</span><span class="n">T</span><span class="bp">`</span><span class="n">X</span> <span class="o">:</span> <span class="mi">20</span> <span class="o">:=</span> <span class="o">(</span><span class="n">terminal</span><span class="bp">.</span><span class="k">from</span> <span class="n">X</span><span class="o">)</span>
+<span class="kn">notation</span> <span class="n">f</span> <span class="bp">`</span> <span class="bp">|</span> <span class="bp">`</span><span class="o">:</span><span class="mi">20</span> <span class="n">g</span> <span class="o">:</span><span class="mi">20</span> <span class="o">:=</span>  <span class="n">prod</span><span class="bp">.</span><span class="n">lift</span> <span class="n">f</span> <span class="n">g</span>
+<span class="kn">structure</span> <span class="n">group_obj</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">][</span><span class="n">has_binary_products</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">][</span><span class="n">has_terminal</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span>
+<span class="o">(</span><span class="n">μ</span> <span class="o">:</span> <span class="n">X</span> <span class="err">⨯</span> <span class="n">X</span> <span class="err">⟶</span> <span class="n">X</span><span class="o">)</span>
+<span class="o">(</span><span class="n">inv</span> <span class="o">:</span> <span class="n">X</span> <span class="err">⟶</span> <span class="n">X</span><span class="o">)</span>
+<span class="o">(</span><span class="n">ε</span> <span class="o">:</span>  <span class="n">T</span> <span class="n">C</span> <span class="err">⟶</span> <span class="n">X</span><span class="o">)</span>
+<span class="o">(</span><span class="n">hyp_one_mul</span>  <span class="o">:</span>  <span class="o">(</span><span class="n">T</span> <span class="n">X</span> <span class="bp">|</span> <span class="mi">𝟙</span> <span class="n">X</span><span class="o">)</span> <span class="err">≫</span> <span class="o">(</span><span class="n">ε</span> <span class="err">⊗</span> <span class="mi">𝟙</span> <span class="n">X</span><span class="o">)</span> <span class="err">≫</span>  <span class="n">μ</span>  <span class="bp">=</span> <span class="mi">𝟙</span> <span class="n">X</span><span class="o">)</span>
+<span class="o">(</span><span class="n">hyp_mul_one</span>  <span class="o">:</span>  <span class="o">(</span><span class="mi">𝟙</span> <span class="n">X</span> <span class="bp">|</span> <span class="n">T</span> <span class="n">X</span><span class="o">)</span> <span class="err">≫</span> <span class="o">(</span> <span class="mi">𝟙</span> <span class="n">X</span> <span class="err">⊗</span> <span class="n">ε</span><span class="o">)</span> <span class="err">≫</span> <span class="n">μ</span>  <span class="bp">=</span> <span class="mi">𝟙</span> <span class="n">X</span><span class="o">)</span>
+<span class="o">(</span><span class="n">hyp_mul_inv</span>  <span class="o">:</span>  <span class="o">(</span><span class="mi">𝟙</span> <span class="n">X</span> <span class="bp">|</span> <span class="n">inv</span><span class="o">)</span> <span class="err">≫</span>  <span class="n">μ</span> <span class="bp">=</span> <span class="o">(</span><span class="n">T</span> <span class="n">X</span><span class="o">)</span> <span class="err">≫</span> <span class="n">ε</span> <span class="o">)</span>
+<span class="o">(</span><span class="n">hyp_assoc</span>    <span class="o">:</span>  <span class="o">(</span><span class="n">μ</span> <span class="err">⊗</span> <span class="mi">𝟙</span> <span class="n">X</span><span class="o">)</span> <span class="err">≫</span> <span class="o">(</span><span class="n">μ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">associator</span> <span class="n">X</span> <span class="n">X</span> <span class="n">X</span><span class="o">)</span><span class="bp">.</span><span class="n">hom</span> <span class="err">≫</span> <span class="o">(</span><span class="mi">𝟙</span> <span class="n">X</span> <span class="err">⊗</span> <span class="n">μ</span><span class="o">)</span>  <span class="err">≫</span> <span class="n">μ</span> <span class="o">)</span>   <span class="c1">-- (a *b) * c = (a * (b * c))</span>
+
+<span class="c1">-- question 1.</span>
+<span class="c1">-- Let X : C</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="kn">variables</span>  <span class="o">[</span><span class="n">has_binary_products</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">][</span><span class="n">has_terminal</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="n">include</span> <span class="err">𝒞</span>
+<span class="kn">instance</span> <span class="n">coee</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="o">(</span><span class="n">group_obj</span> <span class="n">C</span><span class="o">)</span> <span class="n">C</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">F</span><span class="o">,</span> <span class="n">F</span><span class="bp">.</span><span class="n">X</span><span class="bp">⟩</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="n">group_obj</span> <span class="n">C</span><span class="o">)</span>
+<span class="n">include</span> <span class="n">G</span>
+<span class="n">def</span> <span class="n">Test_1</span>  <span class="o">:=</span> <span class="n">yoneda</span><span class="bp">.</span><span class="n">obj</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">Test_1</span>
+<span class="n">omit</span> <span class="n">G</span>
+<span class="n">def</span> <span class="n">Test_2</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="n">group_obj</span> <span class="n">C</span><span class="o">)</span> <span class="o">:=</span> <span class="n">yoneda</span><span class="bp">.</span><span class="n">obj</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">Test_2</span>
+<span class="kn">theorem</span>  <span class="n">one_eq_two</span>  <span class="o">:</span>  <span class="n">Test_1</span>  <span class="bp">=</span> <span class="n">Test_2</span> <span class="o">:=</span> <span class="n">rfl</span>  <span class="bp">!</span>
+</pre></div>
+
+<a name="193667565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193667565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193667565">orlando (Apr 11 2020 at 16:18)</a>:</h4>
+<p>The exercice is too difficult for the moment  ! It was, to show that  for all group objet G et for all  <code> X : C </code> the set <code>(Yoneda.obj G).obj X) </code> is a group ! </p>
+<p>A question :  is it complicated to show that Yoneda preserve product  ?   <br>
+<span aria-label="laughing" class="emoji emoji-1f606" role="img" title="laughing">:laughing:</span>  </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">comma</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">shapes</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">yoneda</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">opposites</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">types</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">shapes</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">types</span>
+
+<span class="n">universes</span> <span class="n">v</span> <span class="n">u</span>
+<span class="kn">open</span> <span class="n">category_theory</span>
+<span class="kn">open</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">open</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">category</span>
+<span class="kn">open</span> <span class="n">opposite</span>
+<span class="kn">namespace</span> <span class="n">TEST</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="kn">variables</span>  <span class="o">[</span><span class="n">has_binary_products</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">][</span><span class="n">has_terminal</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="n">include</span> <span class="err">𝒞</span>
+<span class="kn">lemma</span> <span class="n">Yoneda_preserve_product</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="n">C</span><span class="o">)(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">:</span>
+     <span class="o">(</span><span class="n">yoneda</span><span class="bp">.</span><span class="n">obj</span> <span class="o">(</span><span class="n">A</span> <span class="err">⨯</span> <span class="n">B</span><span class="o">))</span><span class="bp">.</span><span class="n">obj</span><span class="o">(</span> <span class="n">op</span> <span class="n">Y</span><span class="o">)</span> <span class="err">≅</span>  <span class="o">(</span><span class="n">yoneda</span><span class="bp">.</span><span class="n">obj</span> <span class="n">A</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span><span class="o">(</span><span class="n">op</span> <span class="n">Y</span><span class="o">)</span>  <span class="err">⨯</span> <span class="o">(</span><span class="n">yoneda</span><span class="bp">.</span><span class="n">obj</span> <span class="n">B</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span> <span class="o">(</span><span class="n">op</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span>
+     <span class="k">begin</span>
+          <span class="c1">-- Use unicity of limits ?</span>
+          <span class="c1">-- cone_point_unique_up_to_iso ?</span>
+          <span class="n">sorry</span><span class="o">,</span> <span class="c1">--- i thinck !</span>
+     <span class="kn">end</span>
+<span class="kn">end</span> <span class="n">TEST</span>
+</pre></div>
+
+<a name="193668542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193668542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193668542">Kevin Buzzard (Apr 11 2020 at 16:41)</a>:</h4>
+<p>Try one of Scott's category theory tactics?</p>
+
+<a name="193668544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193668544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193668544">Kevin Buzzard (Apr 11 2020 at 16:41)</a>:</h4>
+<p>Tidy?</p>
+
+<a name="193668547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193668547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193668547">Kevin Buzzard (Apr 11 2020 at 16:41)</a>:</h4>
+<p>Obviously?</p>
+
+<a name="193668601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193668601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193668601">Kevin Buzzard (Apr 11 2020 at 16:42)</a>:</h4>
+<p>Maybe you have to define the map?</p>
+
+<a name="193668692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193668692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193668692">orlando (Apr 11 2020 at 16:44)</a>:</h4>
+<p>Tidy give me : </p>
+<div class="codehilite"><pre><span></span><span class="mi">3</span> <span class="n">goals</span>
+<span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">,</span>
+<span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span> <span class="n">C</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">has_binary_products</span> <span class="n">C</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">has_terminal</span> <span class="n">C</span><span class="o">,</span>
+<span class="n">B</span> <span class="n">A</span> <span class="n">Y</span> <span class="o">:</span> <span class="n">C</span><span class="o">,</span>
+<span class="n">a</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span> <span class="err">⨯</span> <span class="n">B</span><span class="o">,</span>
+<span class="n">j</span> <span class="o">:</span> <span class="n">discrete</span> <span class="n">walking_pair</span>
+<span class="err">⊢</span> <span class="o">(</span><span class="n">pair</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">))</span><span class="bp">.</span><span class="n">obj</span> <span class="n">j</span>
+
+<span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">,</span>
+<span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span> <span class="n">C</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">has_binary_products</span> <span class="n">C</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">has_terminal</span> <span class="n">C</span><span class="o">,</span>
+<span class="n">Y</span> <span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">C</span><span class="o">,</span>
+<span class="n">x</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span> <span class="err">⨯</span> <span class="n">B</span><span class="o">,</span>
+<span class="n">j</span> <span class="o">:</span> <span class="n">discrete</span> <span class="n">walking_pair</span>
+<span class="err">⊢</span> <span class="err">?</span><span class="n">m_1</span> <span class="n">Y</span> <span class="n">A</span> <span class="n">B</span> <span class="bp">⟨λ</span> <span class="o">(</span><span class="n">j</span> <span class="o">:</span> <span class="n">discrete</span> <span class="n">walking_pair</span><span class="o">),</span> <span class="err">?</span><span class="n">m_2</span><span class="o">[</span><span class="n">Y</span><span class="o">,</span> <span class="n">A</span><span class="o">,</span> <span class="n">B</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">j</span><span class="o">],</span> <span class="bp">_⟩</span> <span class="err">≫</span> <span class="n">limit</span><span class="bp">.</span><span class="n">π</span> <span class="o">(</span><span class="n">pair</span> <span class="n">A</span> <span class="n">B</span><span class="o">)</span> <span class="n">j</span> <span class="bp">=</span>
+    <span class="n">x</span> <span class="err">≫</span> <span class="n">limit</span><span class="bp">.</span><span class="n">π</span> <span class="o">(</span><span class="n">pair</span> <span class="n">A</span> <span class="n">B</span><span class="o">)</span> <span class="n">j</span>
+
+<span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">,</span>
+<span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span> <span class="n">C</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">has_binary_products</span> <span class="n">C</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">has_terminal</span> <span class="n">C</span><span class="o">,</span>
+<span class="n">Y</span> <span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">C</span><span class="o">,</span>
+<span class="n">x_val</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">j</span> <span class="o">:</span> <span class="n">discrete</span> <span class="n">walking_pair</span><span class="o">),</span> <span class="o">(</span><span class="n">pair</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">))</span><span class="bp">.</span><span class="n">obj</span> <span class="n">j</span><span class="o">,</span>
+<span class="n">x_property</span> <span class="o">:</span> <span class="n">x_val</span> <span class="err">∈</span> <span class="n">functor</span><span class="bp">.</span><span class="n">sections</span> <span class="o">(</span><span class="n">pair</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)),</span>
+<span class="n">x</span> <span class="o">:</span> <span class="n">discrete</span> <span class="n">walking_pair</span>
+<span class="err">⊢</span> <span class="err">?</span><span class="n">m_2</span><span class="o">[</span><span class="n">Y</span><span class="o">,</span> <span class="n">A</span><span class="o">,</span> <span class="n">B</span><span class="o">,</span> <span class="err">?</span><span class="n">m_1</span> <span class="n">Y</span> <span class="n">A</span> <span class="n">B</span> <span class="bp">⟨</span><span class="n">x_val</span><span class="o">,</span> <span class="n">x_property</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">x</span><span class="o">]</span> <span class="bp">=</span> <span class="n">x_val</span> <span class="n">x</span>
+</pre></div>
+
+<a name="193668816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193668816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193668816">Kevin Buzzard (Apr 11 2020 at 16:47)</a>:</h4>
+<p>I have no idea what these tactics do but maybe they are just for proofs. This is data.</p>
+
+<a name="193668868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193668868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193668868">Kevin Buzzard (Apr 11 2020 at 16:48)</a>:</h4>
+<p>Your <code>lemma</code> is not a lemma, I think?</p>
+
+<a name="193668889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193668889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193668889">Kevin Buzzard (Apr 11 2020 at 16:48)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Yoneda_preserve_product</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="n">C</span><span class="o">)(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">:</span>
+     <span class="o">(</span><span class="n">yoneda</span><span class="bp">.</span><span class="n">obj</span> <span class="o">(</span><span class="n">A</span> <span class="err">⨯</span> <span class="n">B</span><span class="o">))</span><span class="bp">.</span><span class="n">obj</span><span class="o">(</span> <span class="n">op</span> <span class="n">Y</span><span class="o">)</span> <span class="err">≅</span>  <span class="o">(</span><span class="n">yoneda</span><span class="bp">.</span><span class="n">obj</span> <span class="n">A</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span><span class="o">(</span><span class="n">op</span> <span class="n">Y</span><span class="o">)</span>  <span class="err">⨯</span> <span class="o">(</span><span class="n">yoneda</span><span class="bp">.</span><span class="n">obj</span> <span class="n">B</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span> <span class="o">(</span><span class="n">op</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span><span class="bp">!</span> <span class="bp">!</span><span class="o">}</span>
+</pre></div>
+
+<a name="193668890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193668890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193668890">orlando (Apr 11 2020 at 16:48)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  i made a mistake ?</p>
+
+<a name="193668899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193668899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193668899">Kevin Buzzard (Apr 11 2020 at 16:49)</a>:</h4>
+<p>It is in Type, not in Prop</p>
+
+<a name="193669057"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193669057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193669057">Kevin Buzzard (Apr 11 2020 at 16:53)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Yoneda_preserve_product</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="n">C</span><span class="o">)(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">:</span>
+     <span class="o">(</span><span class="n">yoneda</span><span class="bp">.</span><span class="n">obj</span> <span class="o">(</span><span class="n">A</span> <span class="err">⨯</span> <span class="n">B</span><span class="o">))</span><span class="bp">.</span><span class="n">obj</span><span class="o">(</span> <span class="n">op</span> <span class="n">Y</span><span class="o">)</span> <span class="err">≅</span>  <span class="o">(</span><span class="n">yoneda</span><span class="bp">.</span><span class="n">obj</span> <span class="n">A</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span><span class="o">(</span><span class="n">op</span> <span class="n">Y</span><span class="o">)</span>  <span class="err">⨯</span> <span class="o">(</span><span class="n">yoneda</span><span class="bp">.</span><span class="n">obj</span> <span class="n">B</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span> <span class="o">(</span><span class="n">op</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">hom</span> <span class="o">:=</span> <span class="n">prod</span><span class="bp">.</span><span class="n">lift</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">inv</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">hom_inv_id&#39;</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">inv_hom_id&#39;</span> <span class="o">:=</span> <span class="bp">_</span> <span class="o">}</span>
+</pre></div>
+
+<a name="193669307"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193669307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193669307">orlando (Apr 11 2020 at 16:58)</a>:</h4>
+<p>hum !!! i try <span aria-label="slight smile" class="emoji emoji-1f642" role="img" title="slight smile">:slight_smile:</span></p>
+
+<a name="193669419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193669419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193669419">Kevin Buzzard (Apr 11 2020 at 17:01)</a>:</h4>
+<p><code>example (A B Y : C) : (yoneda.obj (A ⨯ B)).obj (op Y) = (Y ⟶ A ⨯ B) := rfl</code></p>
+
+<a name="193669545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193669545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193669545">Kevin Buzzard (Apr 11 2020 at 17:04)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="o">{</span> <span class="n">hom</span> <span class="o">:=</span> <span class="n">prod</span><span class="bp">.</span><span class="n">lift</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">f</span> <span class="err">≫</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">fst</span> <span class="o">:</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span> <span class="err">⨯</span> <span class="n">B</span><span class="o">)</span> <span class="err">⟶</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">))</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">f</span> <span class="err">≫</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">snd</span> <span class="o">:</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span> <span class="err">⨯</span> <span class="n">B</span><span class="o">)</span> <span class="err">⟶</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)),</span>
+</pre></div>
+
+
+<p>Writing category theory Lean for me is about as slow as writing normal Lean was for me in 2017 :-)</p>
+
+<a name="193669552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193669552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193669552">Kevin Buzzard (Apr 11 2020 at 17:04)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="o">{</span> <span class="n">hom</span> <span class="o">:=</span> <span class="n">prod</span><span class="bp">.</span><span class="n">lift</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">f</span> <span class="err">≫</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">fst</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">f</span> <span class="err">≫</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">snd</span><span class="o">),</span>
+</pre></div>
+
+<a name="193669844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193669844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193669844">Kevin Buzzard (Apr 11 2020 at 17:10)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="o">{</span> <span class="n">hom</span> <span class="o">:=</span> <span class="n">prod</span><span class="bp">.</span><span class="n">lift</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">f</span> <span class="err">≫</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">fst</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">f</span> <span class="err">≫</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">snd</span><span class="o">),</span>
+  <span class="n">inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="o">:</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="err">⨯</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">),</span> <span class="o">(</span><span class="n">sorry</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="o">(</span><span class="n">A</span> <span class="err">⨯</span> <span class="n">B</span><span class="o">)),</span>
+  <span class="n">hom_inv_id&#39;</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">inv_hom_id&#39;</span> <span class="o">:=</span> <span class="n">sorry</span> <span class="o">}</span>
+</pre></div>
+
+<a name="193670138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193670138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193670138">orlando (Apr 11 2020 at 17:17)</a>:</h4>
+<p>Kevin, i make the same with my notation <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∣</mo></mrow><annotation encoding="application/x-tex"> \mid </annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∣</span></span></span></span>  </p>
+<div class="codehilite"><pre><span></span><span class="n">exact</span>  <span class="o">{</span> <span class="n">hom</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">φ</span><span class="o">,((</span><span class="n">φ</span> <span class="err">≫</span> <span class="o">(</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">fst</span><span class="o">))</span> <span class="bp">|</span>  <span class="o">(</span><span class="n">φ</span> <span class="err">≫</span> <span class="o">(</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">snd</span><span class="o">)),</span>
+  <span class="n">inv</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">hom_inv_id&#39;</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">inv_hom_id&#39;</span> <span class="o">:=</span> <span class="bp">_</span> <span class="o">}</span>
+</pre></div>
+
+<a name="193670180"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193670180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193670180">orlando (Apr 11 2020 at 17:18)</a>:</h4>
+<p>hum ! not the same !</p>
+
+<a name="193670203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193670203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193670203">orlando (Apr 11 2020 at 17:19)</a>:</h4>
+<p>normaly it's an obvious thing this  Yoneda  preserve product <span aria-label="sweat smile" class="emoji emoji-1f605" role="img" title="sweat smile">:sweat_smile:</span></p>
+
+<a name="193670278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193670278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193670278">Kevin Buzzard (Apr 11 2020 at 17:21)</a>:</h4>
+<p>in 2017 I thought it was obvious that <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msqrt><mn>2</mn></msqrt><mo>∉</mo><mi mathvariant="double-struck">Q</mi></mrow><annotation encoding="application/x-tex">\sqrt{2}\not\in\mathbb{Q}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1.10166em;vertical-align:-0.19444em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.90722em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord">2</span></span></span><span style="top:-2.86722em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg height="1.08em" preserveAspectRatio="xMinYMin slice" viewBox="0 0 400000 1080" width="400em"><path d="M95,702 c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14 c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54 c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10 s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429 c69,-144,104.5,-217.7,106.5,-221 l0 -0 c5.3,-9.3,12,-14,20,-14 H400000v40H845.2724 s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7 c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z M834 80h400000v40h-400000z"></path></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.13278em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel"><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="rlap"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="inner"><span class="mrel"></span></span><span class="fix"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span></span></span><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.85556em;vertical-align:-0.16667em;"></span><span class="mord"><span class="mord mathbb">Q</span></span></span></span></span> <span aria-label="laughing" class="emoji emoji-1f606" role="img" title="laughing">:laughing:</span></p>
+
+<a name="193670406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193670406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193670406">Kevin Buzzard (Apr 11 2020 at 17:24)</a>:</h4>
+<p>I am looking forward to proving the snake lemma <span aria-label="laughing" class="emoji emoji-1f606" role="img" title="laughing">:laughing:</span></p>
+
+<a name="193670678"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193670678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193670678">Kevin Buzzard (Apr 11 2020 at 17:31)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="n">Y</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">((</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="err">⨯</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)</span> <span class="err">⟶</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">))</span> <span class="bp">=</span> <span class="o">((</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="err">⨯</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">))</span> <span class="o">:=</span> <span class="n">rfl</span> <span class="c1">-- fail :-(</span>
+</pre></div>
+
+<a name="193670694"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193670694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193670694">Kevin Buzzard (Apr 11 2020 at 17:31)</a>:</h4>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mi>o</mi><mi>m</mi><mo stretchy="false">(</mo><mi>Y</mi><mo separator="true">,</mo><mi>A</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Hom(Y,A)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mord mathdefault">o</span><span class="mord mathdefault">m</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">A</span><span class="mclose">)</span></span></span></span> has type <code>Type*</code>, right?</p>
+
+<a name="193670781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193670781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193670781">Kevin Buzzard (Apr 11 2020 at 17:33)</a>:</h4>
+<p>I have <code>f : (Y ⟶ A) ⨯ (Y ⟶ B)</code> and I want to apply <code>category_theory.limits.prod.fst</code> to get <code>g : Y ⟶ A</code> but I can't figure out how to do it :-(</p>
+
+<a name="193670789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193670789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193670789">orlando (Apr 11 2020 at 17:33)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">Yoneda_preserve_produc</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="n">C</span><span class="o">)(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">:</span>
+     <span class="o">(</span><span class="n">yoneda</span><span class="bp">.</span><span class="n">obj</span> <span class="o">(</span><span class="n">A</span> <span class="err">⨯</span> <span class="n">B</span><span class="o">))</span><span class="bp">.</span><span class="n">obj</span><span class="o">(</span> <span class="n">op</span> <span class="n">Y</span><span class="o">)</span> <span class="err">≅</span>  <span class="o">(</span><span class="n">yoneda</span><span class="bp">.</span><span class="n">obj</span> <span class="n">A</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span><span class="o">(</span><span class="n">op</span> <span class="n">Y</span><span class="o">)</span>  <span class="err">⨯</span> <span class="o">(</span><span class="n">yoneda</span><span class="bp">.</span><span class="n">obj</span> <span class="n">B</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span> <span class="o">(</span><span class="n">op</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="k">let</span> <span class="n">P</span> <span class="o">:=</span> <span class="n">A</span><span class="err">⨯</span> <span class="n">B</span><span class="o">,</span>
+<span class="k">let</span> <span class="n">Q</span> <span class="o">:=</span> <span class="o">(</span><span class="n">yoneda</span><span class="bp">.</span><span class="n">obj</span> <span class="n">A</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span><span class="o">(</span><span class="n">op</span> <span class="n">Y</span><span class="o">)</span>  <span class="err">⨯</span> <span class="o">(</span><span class="n">yoneda</span><span class="bp">.</span><span class="n">obj</span> <span class="n">B</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span> <span class="o">(</span><span class="n">op</span> <span class="n">Y</span><span class="o">),</span>
+<span class="n">exact</span>  <span class="o">{</span> <span class="n">hom</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">φ</span><span class="o">,</span> <span class="n">φ</span> <span class="err">≫</span> <span class="o">(</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">fst</span><span class="o">))</span> <span class="bp">|</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">φ</span><span class="o">,(</span><span class="n">φ</span> <span class="err">≫</span> <span class="o">(</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">snd</span><span class="o">))),</span>
+  <span class="n">inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="o">,</span> <span class="n">prod</span><span class="bp">.</span><span class="n">lift</span> <span class="o">(</span> <span class="n">f</span><span class="err">≫</span>  <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">fst</span> <span class="o">)</span> <span class="o">(</span><span class="n">f</span><span class="err">≫</span>  <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">snd</span><span class="o">),</span>
+  <span class="n">hom_inv_id&#39;</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">inv_hom_id&#39;</span> <span class="o">:=</span> <span class="bp">_</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="193670797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193670797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193670797">Kevin Buzzard (Apr 11 2020 at 17:33)</a>:</h4>
+<p>Nice!</p>
+
+<a name="193670839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193670839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193670839">orlando (Apr 11 2020 at 17:34)</a>:</h4>
+<p>i no ! there is ia mistake</p>
+
+<a name="193670916"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193670916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193670916">Kevin Buzzard (Apr 11 2020 at 17:36)</a>:</h4>
+<p>In <code>category_theory.types</code> there is this: <code>@[simp] lemma types_hom {α β : Type u} : (α ⟶ β) = (α → β) := rfl</code></p>
+
+<a name="193670925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193670925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193670925">Kevin Buzzard (Apr 11 2020 at 17:36)</a>:</h4>
+<p>So I am a bit surprised that my <code>rfl</code> above is failing</p>
+
+<a name="193670947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193670947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193670947">Kevin Buzzard (Apr 11 2020 at 17:37)</a>:</h4>
+<p>Oh it is a stupid issue with brackets :-/</p>
+
+<a name="193670983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193670983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193670983">Kevin Buzzard (Apr 11 2020 at 17:37)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="n">Y</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">((</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="err">⨯</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)</span> <span class="err">⟶</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">))</span> <span class="bp">=</span> <span class="o">(((</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="err">⨯</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">))</span> <span class="o">:=</span> <span class="n">rfl</span> <span class="c1">-- succeeds</span>
+</pre></div>
+
+<a name="193671033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193671033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193671033">Kevin Buzzard (Apr 11 2020 at 17:38)</a>:</h4>
+<p>I still don't have the confidence with category theory. With Lean in general, when something doesn't work I usually know why. With category theory I am still not sure.</p>
+
+<a name="193671141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193671141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193671141">Kevin Buzzard (Apr 11 2020 at 17:41)</a>:</h4>
+<p>OK now I can do it with <code>@</code> and filling in implicit arguments</p>
+
+<a name="193671187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193671187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193671187">Kevin Buzzard (Apr 11 2020 at 17:42)</a>:</h4>
+<div class="codehilite"><pre><span></span>    <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">lift</span>
+      <span class="o">((</span><span class="bp">@</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">fst</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:</span> <span class="o">((</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="err">⨯</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">))</span> <span class="n">f</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span>
+      <span class="o">((</span><span class="bp">@</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">snd</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:</span> <span class="o">((</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="err">⨯</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">))</span> <span class="n">f</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)),</span>
+</pre></div>
+
+<a name="193671193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193671193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193671193">Kevin Buzzard (Apr 11 2020 at 17:42)</a>:</h4>
+<p>49 minutes so far :-)</p>
+
+<a name="193671218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193671218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193671218">Kevin Buzzard (Apr 11 2020 at 17:43)</a>:</h4>
+<p>gaaargh <code>by obviously</code> doesn't work for the proofs :-/</p>
+
+<a name="193671451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193671451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193671451">Kevin Buzzard (Apr 11 2020 at 17:49)</a>:</h4>
+<div class="codehilite"><pre><span></span>  <span class="n">hom_inv_id&#39;</span> <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">ext</span> <span class="n">f</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="n">j</span><span class="o">,</span>
+    <span class="n">obviously</span><span class="o">,</span>
+  <span class="kn">end</span><span class="o">,</span>
+</pre></div>
+
+<a name="193671454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193671454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193671454">Kevin Buzzard (Apr 11 2020 at 17:49)</a>:</h4>
+<p><code>obviously</code> just killed two goals at once!</p>
+
+<a name="193671640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193671640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193671640">Kevin Buzzard (Apr 11 2020 at 17:54)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Yoneda_preserve_product</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="n">C</span><span class="o">)(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">:</span>
+     <span class="o">(</span><span class="n">yoneda</span><span class="bp">.</span><span class="n">obj</span> <span class="o">(</span><span class="n">A</span> <span class="err">⨯</span> <span class="n">B</span><span class="o">))</span><span class="bp">.</span><span class="n">obj</span> <span class="o">(</span><span class="n">op</span> <span class="n">Y</span><span class="o">)</span> <span class="err">≅</span> <span class="o">(</span><span class="n">yoneda</span><span class="bp">.</span><span class="n">obj</span> <span class="n">A</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span> <span class="o">(</span><span class="n">op</span> <span class="n">Y</span><span class="o">)</span> <span class="err">⨯</span> <span class="o">(</span><span class="n">yoneda</span><span class="bp">.</span><span class="n">obj</span> <span class="n">B</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span> <span class="o">(</span><span class="n">op</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">hom</span> <span class="o">:=</span> <span class="n">prod</span><span class="bp">.</span><span class="n">lift</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">f</span> <span class="err">≫</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">fst</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">f</span> <span class="err">≫</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">snd</span><span class="o">),</span>
+  <span class="n">inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="o">:</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="err">⨯</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">),</span>
+    <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">lift</span>
+      <span class="o">((</span><span class="bp">@</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">fst</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)</span> <span class="bp">_</span> <span class="o">:</span> <span class="o">((</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="err">⨯</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">))</span> <span class="n">f</span><span class="o">)</span>
+      <span class="o">((</span><span class="bp">@</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">snd</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:</span> <span class="o">((</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="err">⨯</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">))</span> <span class="n">f</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)),</span>
+  <span class="n">hom_inv_id&#39;</span> <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">ext</span> <span class="n">f</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="n">j</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="n">refl</span><span class="o">},</span>
+    <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="n">refl</span><span class="o">}</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">inv_hom_id&#39;</span> <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">ext</span> <span class="n">j</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="n">j</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">sorry</span><span class="o">},</span>
+    <span class="o">{</span> <span class="n">sorry</span><span class="o">}</span>
+  <span class="kn">end</span>
+<span class="o">}</span>
+</pre></div>
+
+<a name="193671700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193671700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193671700">Kevin Buzzard (Apr 11 2020 at 17:56)</a>:</h4>
+<p>I think there might be some way of training <code>tidy</code> to solve the first proof.</p>
+
+<a name="193671724"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193671724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193671724">Kenny Lau (Apr 11 2020 at 17:57)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/116395-maths/topic/category/near/193671454" title="#narrow/stream/116395-maths/topic/category/near/193671454">said</a>:</p>
+<blockquote>
+<p><code>obviously</code> just killed two goals at once!</p>
+</blockquote>
+<p>killing two goals with one tactic</p>
+
+<a name="193671833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193671833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193671833">orlando (Apr 11 2020 at 18:00)</a>:</h4>
+<p>it's toooooo complicated <span aria-label="scream" class="emoji emoji-1f631" role="img" title="scream">:scream:</span></p>
+
+<a name="193671895"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193671895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193671895">Kevin Buzzard (Apr 11 2020 at 18:01)</a>:</h4>
+<p>The category theory library is complicated <em>precisely</em> because not enough people use it, and so <span class="user-mention" data-user-id="110087">@Scott Morrison</span> doesn't have enough data about how to make it better. But it will be better one day.</p>
+
+<a name="193672051"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193672051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193672051">Kevin Buzzard (Apr 11 2020 at 18:05)</a>:</h4>
+<p>But we need to make abelian categories, so we can do homological algebra, so people (e.g. me) are going to have to learn how to use it.</p>
+
+<a name="193672948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193672948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193672948">orlando (Apr 11 2020 at 18:26)</a>:</h4>
+<p>for hom </p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">Yoneda_preserve_produc</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="n">C</span><span class="o">)(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">:</span>
+     <span class="o">(</span><span class="n">yoneda</span><span class="bp">.</span><span class="n">obj</span> <span class="o">(</span><span class="n">A</span> <span class="err">⨯</span> <span class="n">B</span><span class="o">))</span><span class="bp">.</span><span class="n">obj</span><span class="o">(</span> <span class="n">op</span> <span class="n">Y</span><span class="o">)</span> <span class="err">≅</span>  <span class="o">(</span><span class="n">yoneda</span><span class="bp">.</span><span class="n">obj</span> <span class="n">A</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span><span class="o">(</span><span class="n">op</span> <span class="n">Y</span><span class="o">)</span>  <span class="err">⨯</span> <span class="o">(</span><span class="n">yoneda</span><span class="bp">.</span><span class="n">obj</span> <span class="n">B</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span> <span class="o">(</span><span class="n">op</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">exact</span>  <span class="o">{</span> <span class="n">hom</span> <span class="o">:=</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">lift</span>
+                    <span class="o">((</span><span class="n">yoneda</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">fst</span><span class="o">))</span><span class="bp">.</span><span class="n">app</span> <span class="o">(</span><span class="n">op</span> <span class="n">Y</span><span class="o">))</span>   <span class="c1">--- app cause it&#39;s natural transformation !</span>
+                    <span class="o">((</span><span class="n">yoneda</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">snd</span><span class="o">))</span><span class="bp">.</span><span class="n">app</span> <span class="o">(</span><span class="n">op</span> <span class="n">Y</span><span class="o">)),</span>
+</pre></div>
+
+<a name="193673459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193673459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193673459">Kevin Buzzard (Apr 11 2020 at 18:39)</a>:</h4>
+<p>This is probably better, because the proof I can't do involves using the universal property of limit</p>
+
+<a name="193675247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675247">Kevin Buzzard (Apr 11 2020 at 19:21)</a>:</h4>
+<p>So I can't do it. My goal is</p>
+<div class="codehilite"><pre><span></span>1 goal
+C : Type u,
+𝒞 : category C,
+_inst_1 : has_binary_products C,
+_inst_2 : has_terminal C,
+Y A B : C,
+x : (yoneda.obj A).obj (op Y) ⨯ (yoneda.obj B).obj (op Y)
+⊢ prod.lift (λ (f : (yoneda.obj (A ⨯ B)).obj (op Y)), f ≫ prod.fst)
+      (λ (f : (yoneda.obj (A ⨯ B)).obj (op Y)), f ≫ prod.snd)
+      (prod.lift (prod.fst x) (prod.snd x)) =
+    x
+</pre></div>
+
+
+<p>and the <code>x</code> is <code>\crossproduct</code> i.e. categorical product, and the <code>prod.lift</code> is the category theory one as well. However these products are occurring in the category <code>Type v</code> so one can check them on components. This is what I don't know how to do using category theory. <span class="user-mention" data-user-id="110032">@Reid Barton</span> ?</p>
+
+<a name="193675292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675292">Kevin Buzzard (Apr 11 2020 at 19:22)</a>:</h4>
+<p><code>(yoneda.obj A).obj (op Y)</code> is just <code>Y \h A</code></p>
+
+<a name="193675450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675450">Reid Barton (Apr 11 2020 at 19:26)</a>:</h4>
+<p>Is the categorical product in <code>Type v</code> the ordinary product? What happens if you do <code>cases x</code>?</p>
+
+<a name="193675455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675455">Reid Barton (Apr 11 2020 at 19:26)</a>:</h4>
+<p>It looks like it must be otherwise I can't make sense out of this goal</p>
+
+<a name="193675480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675480">Kevin Buzzard (Apr 11 2020 at 19:26)</a>:</h4>
+<p>annoyingly, it does something really annoying.</p>
+
+<a name="193675493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675493">Kevin Buzzard (Apr 11 2020 at 19:27)</a>:</h4>
+<div class="codehilite"><pre><span></span>x_val : Π (j : discrete walking_pair), (pair ((yoneda.obj A).obj (op Y)) ((yoneda.obj B).obj (op Y))).obj j,
+x_property : x_val ∈ functor.sections (pair ((yoneda.obj A).obj (op Y)) ((yoneda.obj B).obj (op Y)))
+</pre></div>
+
+<a name="193675495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675495">Reid Barton (Apr 11 2020 at 19:27)</a>:</h4>
+<p>oh</p>
+
+<a name="193675496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675496">Reid Barton (Apr 11 2020 at 19:27)</a>:</h4>
+<p>how did you obtain <code>x</code>?</p>
+
+<a name="193675502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675502">Kevin Buzzard (Apr 11 2020 at 19:27)</a>:</h4>
+<p>The goal was this:</p>
+<div class="codehilite"><pre><span></span>⊢ (prod.lift (λ (f : (yoneda.obj (A ⨯ B)).obj (op Y)), f ≫ prod.fst)
+         (λ (f : (yoneda.obj (A ⨯ B)).obj (op Y)), f ≫ prod.snd) ∘
+       λ (f : (Y ⟶ A) ⨯ (Y ⟶ B)), prod.lift (prod.fst f) (prod.snd f)) =
+    id
+</pre></div>
+
+
+<p>and I went for <code>funext x</code></p>
+
+<a name="193675548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675548">Kevin Buzzard (Apr 11 2020 at 19:28)</a>:</h4>
+<p>I'm trying to prove that some natural map Hom(Y,A) x Hom(Y,B) -&gt; Hom(Y,A) x Hom(Y,B) is id</p>
+
+<a name="193675559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675559">Reid Barton (Apr 11 2020 at 19:29)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/116395-maths/topic/category/near/193675548" title="#narrow/stream/116395-maths/topic/category/near/193675548">said</a>:</p>
+<blockquote>
+<p>I'm trying to prove that some natural map Hom(Y,A) x Hom(Y,B) -&gt; Hom(Y,A) x Hom(Y,B) is id</p>
+</blockquote>
+<p>If you want to prove that two maps into a category-theory product are equal then you should probably use the API for that</p>
+
+<a name="193675562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675562">Kevin Buzzard (Apr 11 2020 at 19:29)</a>:</h4>
+<p>The map is this: first use the universal property to get Hom(Y,A) x Hom(Y,B) -&gt; Hom(Y,A x B) and then use composition with pr1 and pr2 to get a map the other way. Yes, the products other than A x B are in Type v.</p>
+
+<a name="193675587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675587">Reid Barton (Apr 11 2020 at 19:29)</a>:</h4>
+<p>because that's ultimately the only thing that the API gives you</p>
+
+<a name="193675588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675588">Kevin Buzzard (Apr 11 2020 at 19:29)</a>:</h4>
+<p>I thought that was <code>obviously</code></p>
+
+<a name="193675600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675600">Reid Barton (Apr 11 2020 at 19:29)</a>:</h4>
+<p><code>obviously</code> is not the API</p>
+
+<a name="193675601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675601">Kevin Buzzard (Apr 11 2020 at 19:29)</a>:</h4>
+<p>Rotten luck.</p>
+
+<a name="193675651"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675651">Kevin Buzzard (Apr 11 2020 at 19:30)</a>:</h4>
+<p>I tried to chase the definition of prod back but it was just defined as a limit.</p>
+
+<a name="193675682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675682">Reid Barton (Apr 11 2020 at 19:31)</a>:</h4>
+<p>Hmm does the API for this not actually exist...?</p>
+
+<a name="193675738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675738">Reid Barton (Apr 11 2020 at 19:32)</a>:</h4>
+<p>I just mean the uniqueness part of the universal property. Two maps into X x Y agree if their compositions with X x Y -&gt; X and X x Y -&gt; Y both agree. I haven't used the mathlib products ever, I think.</p>
+
+<a name="193675741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675741">Kevin Buzzard (Apr 11 2020 at 19:32)</a>:</h4>
+<p>Right.</p>
+
+<a name="193675743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675743">Reid Barton (Apr 11 2020 at 19:32)</a>:</h4>
+<p>Would that represent progress in your proof?</p>
+
+<a name="193675753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675753">Kevin Buzzard (Apr 11 2020 at 19:33)</a>:</h4>
+<p>I'm hoping it's exactly what I need to finish the proof.</p>
+
+<a name="193675766"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675766">Kevin Buzzard (Apr 11 2020 at 19:33)</a>:</h4>
+<p>It's presumably explicitly there for limits</p>
+
+<a name="193675772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675772">Reid Barton (Apr 11 2020 at 19:33)</a>:</h4>
+<p>You built the map using the universal property, so yeah you know when you compose with the map to Hom(Y, A) that it recovers the map you put in, which is (id composed with) the projection.</p>
+
+<a name="193675824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675824">Kevin Buzzard (Apr 11 2020 at 19:34)</a>:</h4>
+<p>I was trying to formalise the math argument involving checking on components, which is OK because everything is in Type so the category product is actually the product. But I'm now not at all sure how equal these things are.</p>
+
+<a name="193675846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675846">Kevin Buzzard (Apr 11 2020 at 19:34)</a>:</h4>
+<p>And if they're just isomorphic then I will never get anywhere without the universal property.</p>
+
+<a name="193675864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675864">orlando (Apr 11 2020 at 19:35)</a>:</h4>
+<p>Ried i don't see the result you mention  : " two maps into X x Y agree if their compositions with X x Y -&gt; X and X x Y -&gt; Y both agree. "</p>
+
+<a name="193675873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675873">Reid Barton (Apr 11 2020 at 19:35)</a>:</h4>
+<p>So I guess you want to apply <code>limit.hom_ext</code> and then use <code>cases</code> on the objects of <code>walking_pair</code>.</p>
+
+<a name="193675885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675885">Reid Barton (Apr 11 2020 at 19:35)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="270476">orlando</span> <a href="#narrow/stream/116395-maths/topic/category/near/193675864" title="#narrow/stream/116395-maths/topic/category/near/193675864">said</a>:</p>
+<blockquote>
+<p>Ried i don't see the result you mention  : " two maps into X x Y agree if their compositions with X x Y -&gt; X and X x Y -&gt; Y both agree. "</p>
+</blockquote>
+<p>I agree it seems to be missing</p>
+
+<a name="193675891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675891">Reid Barton (Apr 11 2020 at 19:35)</a>:</h4>
+<p>Obviously the library should already provide this for you</p>
+
+<a name="193675932"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675932">Reid Barton (Apr 11 2020 at 19:36)</a>:</h4>
+<p><a href="https://github.com/b-mehta/topos/blob/master/src/binary_products.lean#L29" title="https://github.com/b-mehta/topos/blob/master/src/binary_products.lean#L29">https://github.com/b-mehta/topos/blob/master/src/binary_products.lean#L29</a><br>
+from the topos project</p>
+
+<a name="193675933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675933">Kevin Buzzard (Apr 11 2020 at 19:36)</a>:</h4>
+<p><span class="user-mention" data-user-id="270476">@orlando</span> you found a hole :-)</p>
+
+<a name="193675966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193675966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193675966">Kevin Buzzard (Apr 11 2020 at 19:37)</a>:</h4>
+<p>Good spot Reid :-)</p>
+
+<a name="193676143"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193676143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193676143">Reid Barton (Apr 11 2020 at 19:41)</a>:</h4>
+<p>I even gave the correct proof <span aria-label="innocent" class="emoji emoji-1f607" role="img" title="innocent">:innocent:</span></p>
+
+<a name="193682041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193682041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193682041">Bhavik Mehta (Apr 11 2020 at 22:06)</a>:</h4>
+<p>Ah yeah this is a super useful result! It is pretty much the same thing as <code>apply limit.hom_ext, cases j</code> but it's nice to have a name for it like we did</p>
+
+<a name="193682134"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193682134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193682134">Patrick Massot (Apr 11 2020 at 22:08)</a>:</h4>
+<p>PR!</p>
+
+<a name="193701965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193701965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193701965">orlando (Apr 12 2020 at 08:49)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/116395-maths/topic/category/near/193668868" title="#narrow/stream/116395-maths/topic/category/near/193668868">said</a>:</p>
+<blockquote>
+<p>Your <code>lemma</code> is not a lemma, I think?</p>
+</blockquote>
+<p>Ok <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  I just understood now your remark <span aria-label="joy" class="emoji emoji-1f602" role="img" title="joy">:joy:</span> 12 hours later ! I really slow !!!</p>
+
+<a name="193705052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193705052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193705052">Kevin Buzzard (Apr 12 2020 at 10:18)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">prod</span><span class="bp">.</span><span class="n">lift_fst</span> <span class="o">{</span><span class="n">Y</span> <span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">C</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)</span> <span class="o">:</span> <span class="n">prod</span><span class="bp">.</span><span class="n">lift</span> <span class="n">f</span> <span class="n">g</span> <span class="err">≫</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">fst</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="n">limit</span><span class="bp">.</span><span class="n">lift_π</span> <span class="o">(</span><span class="n">binary_fan</span><span class="bp">.</span><span class="n">mk</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="bp">_</span>
+
+<span class="kn">lemma</span> <span class="n">prod</span><span class="bp">.</span><span class="n">lift_snd</span> <span class="o">{</span><span class="n">Y</span> <span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">C</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)</span> <span class="o">:</span> <span class="n">prod</span><span class="bp">.</span><span class="n">lift</span> <span class="n">f</span> <span class="n">g</span> <span class="err">≫</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">snd</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">:=</span>
+<span class="n">limit</span><span class="bp">.</span><span class="n">lift_π</span> <span class="o">(</span><span class="n">binary_fan</span><span class="bp">.</span><span class="n">mk</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="bp">_</span>
+</pre></div>
+
+<a name="193705212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193705212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193705212">Kevin Buzzard (Apr 12 2020 at 10:23)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">comma</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">shapes</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">yoneda</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">opposites</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">types</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">shapes</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">types</span>
+
+<span class="n">universes</span> <span class="n">v</span> <span class="n">u</span>
+<span class="kn">open</span> <span class="n">category_theory</span>
+<span class="kn">open</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">open</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">category</span>
+<span class="kn">open</span> <span class="n">opposite</span>
+<span class="kn">namespace</span> <span class="n">TEST</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="kn">variables</span>  <span class="o">[</span><span class="n">has_binary_products</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">][</span><span class="n">has_terminal</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="n">include</span> <span class="err">𝒞</span>
+
+<span class="kn">lemma</span> <span class="n">prod</span><span class="bp">.</span><span class="n">hom_ext</span> <span class="o">{</span><span class="n">Y</span> <span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">C</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span> <span class="err">⨯</span> <span class="n">B</span><span class="o">}</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">a</span> <span class="err">≫</span> <span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">fst</span> <span class="bp">=</span> <span class="n">b</span> <span class="err">≫</span> <span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">fst</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">a</span> <span class="err">≫</span> <span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">snd</span> <span class="bp">=</span> <span class="n">b</span> <span class="err">≫</span> <span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">snd</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">limit</span><span class="bp">.</span><span class="n">hom_ext</span><span class="o">,</span>
+  <span class="n">rintros</span> <span class="o">(</span><span class="bp">_</span> <span class="bp">|</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="n">simpa</span><span class="o">,</span>
+  <span class="n">simpa</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">prod</span><span class="bp">.</span><span class="n">lift_fst</span> <span class="o">{</span><span class="n">Y</span> <span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">C</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)</span> <span class="o">:</span> <span class="n">prod</span><span class="bp">.</span><span class="n">lift</span> <span class="n">f</span> <span class="n">g</span> <span class="err">≫</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">fst</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="n">limit</span><span class="bp">.</span><span class="n">lift_π</span> <span class="o">(</span><span class="n">binary_fan</span><span class="bp">.</span><span class="n">mk</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="bp">_</span>
+
+<span class="kn">lemma</span> <span class="n">prod</span><span class="bp">.</span><span class="n">lift_snd</span> <span class="o">{</span><span class="n">Y</span> <span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">C</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)</span> <span class="o">:</span> <span class="n">prod</span><span class="bp">.</span><span class="n">lift</span> <span class="n">f</span> <span class="n">g</span> <span class="err">≫</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">snd</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">:=</span>
+<span class="n">limit</span><span class="bp">.</span><span class="n">lift_π</span> <span class="o">(</span><span class="n">binary_fan</span><span class="bp">.</span><span class="n">mk</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="bp">_</span>
+
+<span class="n">def</span> <span class="n">Yoneda_preserve_product</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="n">C</span><span class="o">)(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">:</span>
+     <span class="o">(</span><span class="n">yoneda</span><span class="bp">.</span><span class="n">obj</span> <span class="o">(</span><span class="n">A</span> <span class="err">⨯</span> <span class="n">B</span><span class="o">))</span><span class="bp">.</span><span class="n">obj</span> <span class="o">(</span><span class="n">op</span> <span class="n">Y</span><span class="o">)</span> <span class="err">≅</span> <span class="o">(</span><span class="n">yoneda</span><span class="bp">.</span><span class="n">obj</span> <span class="n">A</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span> <span class="o">(</span><span class="n">op</span> <span class="n">Y</span><span class="o">)</span> <span class="err">⨯</span> <span class="o">(</span><span class="n">yoneda</span><span class="bp">.</span><span class="n">obj</span> <span class="n">B</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span> <span class="o">(</span><span class="n">op</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">hom</span> <span class="o">:=</span> <span class="n">prod</span><span class="bp">.</span><span class="n">lift</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">f</span> <span class="err">≫</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">fst</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">f</span> <span class="err">≫</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">snd</span><span class="o">),</span>
+  <span class="n">inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="o">:</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="err">⨯</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">),</span>
+    <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">lift</span>
+      <span class="o">((</span><span class="bp">@</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">fst</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)</span> <span class="bp">_</span> <span class="o">:</span> <span class="o">((</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="err">⨯</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">))</span> <span class="n">f</span><span class="o">)</span>
+      <span class="o">((</span><span class="bp">@</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">snd</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:</span> <span class="o">((</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)</span> <span class="err">⨯</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">))</span> <span class="n">f</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)),</span>
+  <span class="n">hom_inv_id&#39;</span> <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">ext</span> <span class="n">f</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="n">j</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="n">refl</span><span class="o">},</span>
+    <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="n">refl</span><span class="o">}</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">inv_hom_id&#39;</span> <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">apply</span> <span class="n">prod</span><span class="bp">.</span><span class="n">hom_ext</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">rw</span> <span class="n">assoc</span><span class="o">,</span> <span class="n">rw</span> <span class="n">prod</span><span class="bp">.</span><span class="n">lift_fst</span><span class="o">,</span> <span class="n">obviously</span><span class="o">},</span>
+    <span class="o">{</span> <span class="n">rw</span> <span class="n">assoc</span><span class="o">,</span> <span class="n">rw</span> <span class="n">prod</span><span class="bp">.</span><span class="n">lift_snd</span><span class="o">,</span> <span class="n">obviously</span><span class="o">}</span>
+  <span class="kn">end</span>
+<span class="o">}</span>
+
+<span class="kn">end</span> <span class="n">TEST</span>
+</pre></div>
+
+
+<p><span aria-label="tada" class="emoji emoji-1f389" role="img" title="tada">:tada:</span></p>
+
+<a name="193705285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193705285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193705285">orlando (Apr 12 2020 at 10:25)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  :  your lemmas is exactly what i need !!!! I was asking me where is the lemma : </p>
+<div class="codehilite"><pre><span></span> <span class="kn">lemma</span> <span class="n">prod</span><span class="bp">.</span><span class="n">first</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="n">X</span> <span class="o">:</span> <span class="n">C</span><span class="o">)(</span><span class="n">f</span> <span class="o">:</span><span class="n">X</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)(</span><span class="n">g</span> <span class="o">:</span> <span class="n">X</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)</span> <span class="o">:</span> <span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">lift</span> <span class="n">f</span> <span class="n">g</span>  <span class="err">≫</span> <span class="n">limits</span><span class="bp">.</span><span class="n">prod</span><span class="bp">.</span><span class="n">fst</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">:=</span> <span class="k">begin</span>
+     <span class="n">obviously</span><span class="o">,</span>
+     <span class="n">sorry</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>If think it's good  !</p>
+
+<a name="193705325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193705325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193705325">Kevin Buzzard (Apr 12 2020 at 10:26)</a>:</h4>
+<p><code>prod.hom_ext</code> and <code>prod.lift_fst</code> and <code>prod.lift_snd</code> were all missing from the API, although no doubt the experts will say not to put in <code>prod.lift_fst</code> because "it is in there already" (as <code>limit.lift_π</code>). I am not so sure though. First, I needed to rewrite with it (which I can't do with limit.lift_\pi) and secondly it might require the user of <code>prod</code> to know about <code>binary_fan.mk</code> which I feel is not something which an end user needs to know about.</p>
+
+<a name="193705499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193705499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193705499">Markus Himmel (Apr 12 2020 at 10:31)</a>:</h4>
+<p><code>erw limit.lift_π</code> would most likely have worked</p>
+
+<a name="193705544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193705544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193705544">Markus Himmel (Apr 12 2020 at 10:32)</a>:</h4>
+<p>But I agree that these lemmas would be a nice addition</p>
+
+<a name="193705618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193705618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193705618">Kevin Buzzard (Apr 12 2020 at 10:35)</a>:</h4>
+<p><code>prod</code> and <code>prod.fst</code> etc are all defined as <code>abbreviation</code>s. It says that <code>erewrite</code> unfolds semireducible definitions. It also unfolds abbreviations?</p>
+
+<a name="193705625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193705625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193705625">Kevin Buzzard (Apr 12 2020 at 10:35)</a>:</h4>
+<p>! even <code>rw</code> works!</p>
+
+<a name="193705690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193705690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193705690">Markus Himmel (Apr 12 2020 at 10:37)</a>:</h4>
+<p>In fact, in your code above, you can leave out the <code>rw prod.lift_fst</code> entirely and obviously will still handle it</p>
+
+<a name="193705733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193705733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193705733">Markus Himmel (Apr 12 2020 at 10:38)</a>:</h4>
+<p>You don't need the <code>rw assoc</code> either</p>
+
+<a name="193705815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193705815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193705815">Kevin Buzzard (Apr 12 2020 at 10:41)</a>:</h4>
+<p>as long as you have about 5 minutes to spare! You're right!</p>
+
+<a name="193707735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193707735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193707735">Scott Morrison (Apr 12 2020 at 10:49)</a>:</h4>
+<p>I think we should add all those lemmas!</p>
+
+<a name="193707786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193707786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193707786">Kevin Buzzard (Apr 12 2020 at 10:50)</a>:</h4>
+<p>I'm making a PR. You want all three?</p>
+
+<a name="193707787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193707787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193707787">Scott Morrison (Apr 12 2020 at 10:50)</a>:</h4>
+<p>Also, we should add more specific instances for <code>has_products</code> and <code>has_binary_products</code> for all the concrete categories (including <code>Type</code>), which give you want you would definitionally expect.</p>
+
+<a name="193707788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193707788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193707788">Scott Morrison (Apr 12 2020 at 10:50)</a>:</h4>
+<p>Yes please!</p>
+
+<a name="193707792"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193707792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193707792">Scott Morrison (Apr 12 2020 at 10:50)</a>:</h4>
+<p>We should check the other special shapes, too.</p>
+
+<a name="193707795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193707795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193707795">Kevin Buzzard (Apr 12 2020 at 10:50)</a>:</h4>
+<p>I never figured out how to convince Lean that X \crossproduct Y was X \times Y if X Y : Type.</p>
+
+<a name="193707797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193707797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193707797">Scott Morrison (Apr 12 2020 at 10:50)</a>:</h4>
+<p>But if however far you get with the initial PR, we can look for those later.</p>
+
+<a name="193707802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193707802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193707802">Scott Morrison (Apr 12 2020 at 10:51)</a>:</h4>
+<p>Well, at the moment it isn't, definitionally.</p>
+
+<a name="193707812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193707812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193707812">Kevin Buzzard (Apr 12 2020 at 10:51)</a>:</h4>
+<p>Indeed, I half-suspect it's not true, or hard, or whatever</p>
+
+<a name="193707820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193707820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193707820">Scott Morrison (Apr 12 2020 at 10:51)</a>:</h4>
+<p>Or rather, it only is up to an <code>equiv</code> at the moment.</p>
+
+<a name="193707822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193707822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193707822">Scott Morrison (Apr 12 2020 at 10:51)</a>:</h4>
+<p>But we can make it definitional.</p>
+
+<a name="193707826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193707826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193707826">Scott Morrison (Apr 12 2020 at 10:51)</a>:</h4>
+<p>(Note that in some ways this is dangerous --- it allows/encourages people to break through the API. :-)</p>
+
+<a name="193707827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193707827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193707827">Kevin Buzzard (Apr 12 2020 at 10:51)</a>:</h4>
+<p>I'm out of my depth here, but it did make me go on a wild goose chase with the question.</p>
+
+<a name="193707865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193707865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193707865">Kevin Buzzard (Apr 12 2020 at 10:52)</a>:</h4>
+<p>I assumed I'd need it; I hadn't realised I could prove what I wanted in a purely arrow-theoretic way</p>
+
+<a name="193707868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193707868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193707868">Markus Himmel (Apr 12 2020 at 10:52)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110087">Scott Morrison</span> <a href="#narrow/stream/116395-maths/topic/category/near/193707792" title="#narrow/stream/116395-maths/topic/category/near/193707792">said</a>:</p>
+<blockquote>
+<p>We should check the other special shapes, too.</p>
+</blockquote>
+<p>The biproducts PR also does not have these lemmas</p>
+
+<a name="193708568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193708568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193708568">Kevin Buzzard (Apr 12 2020 at 11:13)</a>:</h4>
+<div class="codehilite"><pre><span></span>feat(category_theory/limits/shapes/binary_products):
+</pre></div>
+
+
+<p>"2 CHARACTERS OVER 50 IN CURRENT LINE"</p>
+<p>:-/</p>
+
+<a name="193708771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193708771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193708771">Kevin Buzzard (Apr 12 2020 at 11:18)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/issues/2396" title="https://github.com/leanprover-community/mathlib/issues/2396">#2396</a></p>
+
+<a name="193716195"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193716195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193716195">orlando (Apr 12 2020 at 14:53)</a>:</h4>
+<p>hum i don't know if it's somewhere but we have : </p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">prod</span><span class="bp">.</span><span class="n">lift_comp</span><span class="o">{</span><span class="n">Z&#39;</span> <span class="n">Z</span> <span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">C</span><span class="o">}(</span><span class="n">h</span> <span class="o">:</span> <span class="n">Z&#39;</span> <span class="err">⟶</span> <span class="n">Z</span><span class="o">)(</span><span class="n">f</span> <span class="o">:</span> <span class="n">Z</span> <span class="err">⟶</span> <span class="n">A</span><span class="o">)(</span><span class="n">g</span> <span class="o">:</span> <span class="n">Z</span> <span class="err">⟶</span> <span class="n">B</span><span class="o">)</span>  <span class="o">:</span> <span class="o">(</span><span class="n">h</span> <span class="err">≫</span> <span class="o">(</span><span class="n">f</span> <span class="bp">|</span> <span class="n">g</span><span class="o">)</span> <span class="o">)</span> <span class="bp">=</span> <span class="o">((</span><span class="n">h</span> <span class="err">≫</span> <span class="n">f</span><span class="o">)</span> <span class="bp">|</span> <span class="n">h</span> <span class="err">≫</span> <span class="n">g</span><span class="o">)</span> <span class="o">:=</span> <span class="k">begin</span>
+     <span class="n">apply</span> <span class="n">prod</span><span class="bp">.</span><span class="n">hom_ext</span><span class="o">,</span>
+     <span class="n">rw</span> <span class="n">assoc</span><span class="o">,</span>
+     <span class="n">rw</span> <span class="n">prod</span><span class="bp">.</span><span class="n">lift_fst</span><span class="o">,</span>
+     <span class="n">rw</span> <span class="n">prod</span><span class="bp">.</span><span class="n">lift_fst</span><span class="o">,</span>
+     <span class="n">rw</span> <span class="n">prod</span><span class="bp">.</span><span class="n">lift_snd</span><span class="o">,</span>
+     <span class="n">rw</span> <span class="n">assoc</span><span class="o">,</span>
+     <span class="n">rw</span> <span class="n">prod</span><span class="bp">.</span><span class="n">lift_snd</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="193716875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193716875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193716875">Bhavik Mehta (Apr 12 2020 at 15:10)</a>:</h4>
+<p>This isn't there, I think it should be! (and similar on the other side)</p>
+
+<a name="193717891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193717891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193717891">Kevin Buzzard (Apr 12 2020 at 15:39)</a>:</h4>
+<p>I can add this to the PR. The <code>|</code> notation is orlando's I think; it might be worth getting Scott's input on this.</p>
+
+<a name="193724320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category/near/193724320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33727category.html#193724320">Bhavik Mehta (Apr 12 2020 at 18:31)</a>:</h4>
+<p>I would find some sort of notation for prod.lift useful, no strong preference on what it is</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

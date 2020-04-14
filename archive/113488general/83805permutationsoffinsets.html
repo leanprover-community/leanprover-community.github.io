@@ -1,0 +1,217 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/83805permutationsoffinsets.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html">permutations of finsets</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192900441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192900441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192900441">Johan Commelin (Apr 04 2020 at 10:10)</a>:</h4>
+<p>What is the canonical way to solve</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="o">({</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">}</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">X</span><span class="o">)</span> <span class="bp">=</span> <span class="o">{</span><span class="n">y</span><span class="o">,</span> <span class="n">x</span><span class="o">}</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="192901655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192901655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192901655">Chris Hughes (Apr 04 2020 at 10:43)</a>:</h4>
+<p><code>by finish</code> probably works.</p>
+
+<a name="192901659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192901659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192901659">Chris Hughes (Apr 04 2020 at 10:43)</a>:</h4>
+<p>Or <code>finish [finset.ext]</code></p>
+
+<a name="192902127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192902127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192902127">Johan Commelin (Apr 04 2020 at 10:56)</a>:</h4>
+<p>Thanks <span class="user-mention" data-user-id="110044">@Chris Hughes</span></p>
+
+<a name="192902277"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192902277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192902277">Mario Carneiro (Apr 04 2020 at 11:00)</a>:</h4>
+<p>isn't there an <code>insert_comm</code> theorem for this?</p>
+
+<a name="192902363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192902363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192902363">Johan Commelin (Apr 04 2020 at 11:03)</a>:</h4>
+<p>Mario, my next question would be how to prove <code>{a,b,c,d,e} = {d,a,c,e,b}</code>.</p>
+
+<a name="192902638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192902638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192902638">Mario Carneiro (Apr 04 2020 at 11:10)</a>:</h4>
+<p>I feel like <code>simp</code> should be able to use <code>insert_comm</code> to do general AC simplifications just as it does with addition currently (when you give it <code>add_left_comm</code>)</p>
+
+<a name="192902653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192902653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192902653">Mario Carneiro (Apr 04 2020 at 11:11)</a>:</h4>
+<p>In this case <code>finset.ext</code> should be enough since simp definitely knows how to play the game with permuting disjuncts</p>
+
+<a name="192903661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192903661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192903661">Chris Hughes (Apr 04 2020 at 11:39)</a>:</h4>
+<p>You can do <code>simp [finset.ext, or_comm]</code></p>
+
+<a name="192904344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192904344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192904344">Kevin Buzzard (Apr 04 2020 at 11:58)</a>:</h4>
+<p>How come no or_assoc?</p>
+
+<a name="192905545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192905545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192905545">Chris Hughes (Apr 04 2020 at 12:31)</a>:</h4>
+<p>Because there is only one <code>or</code> on each side.</p>
+
+<a name="192922609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192922609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192922609">Johan Commelin (Apr 04 2020 at 19:12)</a>:</h4>
+<p>How about this one</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">({</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">}</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">X</span><span class="o">)</span> <span class="bp">=</span> <span class="o">{</span><span class="n">c</span><span class="o">,</span> <span class="n">d</span><span class="o">})</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">d</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="n">d</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="192922659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192922659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192922659">Johan Commelin (Apr 04 2020 at 19:13)</a>:</h4>
+<p>This are the kind of trivialities that I don't want to think about...</p>
+
+<a name="192922733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192922733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192922733">Kevin Buzzard (Apr 04 2020 at 19:15)</a>:</h4>
+<p>That doesn't even typecheck for me</p>
+
+<a name="192922741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192922741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192922741">Kevin Buzzard (Apr 04 2020 at 19:15)</a>:</h4>
+<div class="codehilite"><pre><span></span>failed to synthesize type class instance for
+X : Type ?,
+a b c d : X
+⊢ has_insert ?m_1 (finset X)
+</pre></div>
+
+<a name="192922879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192922879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192922879">Kevin Buzzard (Apr 04 2020 at 19:19)</a>:</h4>
+<p>I'd knock off a proof for you but I can't get anything to work</p>
+
+<a name="192922944"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192922944" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192922944">Johan Commelin (Apr 04 2020 at 19:21)</a>:</h4>
+<p>Hmm, does <code>import data.finset</code> solve it?</p>
+
+<a name="192922946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192922946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192922946">Kevin Buzzard (Apr 04 2020 at 19:21)</a>:</h4>
+<p>no</p>
+
+<a name="192922947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192922947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192922947">Johan Commelin (Apr 04 2020 at 19:21)</a>:</h4>
+<p>I copy pasted this out of a file where it does typecheck</p>
+
+<a name="192922948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192922948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192922948">Johan Commelin (Apr 04 2020 at 19:21)</a>:</h4>
+<p>Crazy</p>
+
+<a name="192923007"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192923007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192923007">Kevin Buzzard (Apr 04 2020 at 19:22)</a>:</h4>
+<p>What mathlib are you using?</p>
+
+<a name="192923022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192923022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192923022">Kevin Buzzard (Apr 04 2020 at 19:23)</a>:</h4>
+<p>The first example doesn't work for me either. What have I done? I've tried in two projects.</p>
+
+<a name="192923074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192923074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192923074">Kevin Buzzard (Apr 04 2020 at 19:24)</a>:</h4>
+<p>Both mathlibs from April</p>
+
+<a name="192923091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192923091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192923091">Mario Carneiro (Apr 04 2020 at 19:24)</a>:</h4>
+<p>I don't see any reason why that wouldn't work</p>
+
+<a name="192923103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192923103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192923103">Mario Carneiro (Apr 04 2020 at 19:25)</a>:</h4>
+<p>Oh, does <code>@eq (finset X) {a, b} {c, d}</code> work?</p>
+
+<a name="192923116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192923116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192923116">Reid Barton (Apr 04 2020 at 19:25)</a>:</h4>
+<p>decidable equality issue?</p>
+
+<a name="192923230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192923230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192923230">Johan Commelin (Apr 04 2020 at 19:29)</a>:</h4>
+<p>Ha, that might be it. I do have <code>open_locale classical</code> at the top of the file</p>
+
+<a name="192923256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192923256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192923256">Johan Commelin (Apr 04 2020 at 19:29)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+<span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="c">/-</span><span class="cm">!</span>
+<span class="cm">Test</span>
+<span class="cm">-/</span>
+
+<span class="n">open_locale</span> <span class="n">classical</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">({</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">}</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">X</span><span class="o">)</span> <span class="bp">=</span> <span class="o">{</span><span class="n">c</span><span class="o">,</span> <span class="n">d</span><span class="o">})</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">d</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="n">d</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="192923315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192923315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192923315">Johan Commelin (Apr 04 2020 at 19:30)</a>:</h4>
+<p>Of course this result is <em>classical</em>, in every sense of the word...</p>
+
+<a name="192923440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192923440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192923440">Johan Commelin (Apr 04 2020 at 19:35)</a>:</h4>
+<p>Is this something that existing automation should be able to do? <code>finish</code> doesn't...</p>
+
+<a name="192923749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192923749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192923749">Chris Hughes (Apr 04 2020 at 19:43)</a>:</h4>
+<p>This is the best I could do. I think it is something that there should be an algorithm that does it, at least after <code>simp [finset.ext] at h</code>, because it's a first order in the language with no relation or functions other than equality which must be decidable.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">({</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">}</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">X</span><span class="o">)</span> <span class="bp">=</span> <span class="o">{</span><span class="n">c</span><span class="o">,</span> <span class="n">d</span><span class="o">})</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">d</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="n">d</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">finset</span><span class="bp">.</span><span class="n">ext</span><span class="o">]</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">h</span> <span class="n">a</span><span class="o">,</span> <span class="k">have</span> <span class="o">:=</span> <span class="n">h</span> <span class="n">b</span><span class="o">,</span> <span class="k">have</span> <span class="o">:=</span> <span class="n">h</span> <span class="n">c</span><span class="o">,</span> <span class="k">have</span> <span class="o">:=</span> <span class="n">h</span> <span class="n">d</span><span class="o">,</span>
+  <span class="n">by_cases</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">c</span><span class="bp">;</span> <span class="n">by_cases</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">d</span><span class="bp">;</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="bp">*</span><span class="o">,</span> <span class="n">eq_comm</span><span class="o">]</span> <span class="n">at</span> <span class="bp">*;</span> <span class="n">cc</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="192925069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192925069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192925069">Kevin Buzzard (Apr 04 2020 at 20:15)</a>:</h4>
+<p>More generally one could ask</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">d</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="n">d</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span><span class="o">)</span> <span class="bp">↔</span>
+  <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">∨</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">x</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">∨</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">d</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="192928827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192928827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192928827">Jesse Michael Han (Apr 04 2020 at 21:55)</a>:</h4>
+<p>with <code>finish using</code> we can make it even shorter, but it must still be spoon-fed the instantiations:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">({</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">}</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">X</span><span class="o">)</span> <span class="bp">=</span> <span class="o">{</span><span class="n">c</span><span class="o">,</span> <span class="n">d</span><span class="o">})</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">d</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="n">d</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">finish</span> <span class="o">[</span><span class="n">finset</span><span class="bp">.</span><span class="n">ext</span><span class="o">]</span> <span class="kn">using</span> <span class="o">[</span><span class="n">h</span> <span class="n">a</span><span class="o">,</span> <span class="n">h</span> <span class="n">b</span><span class="o">,</span> <span class="n">h</span> <span class="n">c</span><span class="o">,</span> <span class="n">h</span> <span class="n">d</span><span class="o">]</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="192929902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192929902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192929902">Kevin Buzzard (Apr 04 2020 at 22:23)</a>:</h4>
+<p>This is a bit surprising to me because <code>h a</code> doesn't make sense until after <code>finset.ext</code> has been applied to <code>h</code></p>
+
+<a name="192929958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192929958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192929958">Kevin Buzzard (Apr 04 2020 at 22:24)</a>:</h4>
+<p>Aah I see, it applies <code>simp [finset.ext]</code> to all the hypotheses, presumably before reading what happens after <code>using</code></p>
+
+<a name="192959324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192959324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192959324">Michael R Douglas (Apr 05 2020 at 13:20)</a>:</h4>
+<p>Suppose I wanted to generalize this example to a pair of N-element sets.  Is there any way to do it with N a parameter ?</p>
+
+<a name="192959415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192959415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192959415">Kevin Buzzard (Apr 05 2020 at 13:22)</a>:</h4>
+<p>You're in danger of formalising the assertion that if L is a list and P is a permutation, then P L and L give the same multiset, which will be true by definition because multiset is defined as a quotient of list by permutations.</p>
+
+<a name="192959922"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192959922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192959922">Reid Barton (Apr 05 2020 at 13:35)</a>:</h4>
+<p>It's also not true that <code>{a, b, c} = {d, e, f}</code> implies <code> (a = d and b = e and c = f) or [5 other permutations]</code>.</p>
+
+<a name="192960266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/permutations%20of%20finsets/near/192960266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83805permutationsoffinsets.html#192960266">Kevin Buzzard (Apr 05 2020 at 13:45)</a>:</h4>
+<p>because <code>{1,1,2}={1,2,2}</code> if they're finsets</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

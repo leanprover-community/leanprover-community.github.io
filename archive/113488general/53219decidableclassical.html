@@ -1,0 +1,62 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/53219decidableclassical.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/53219decidableclassical.html">decidable & classical</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193395131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidable%20%26%20classical/near/193395131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53219decidableclassical.html#193395131">Yury G. Kudryashov (Apr 09 2020 at 00:24)</a>:</h4>
+<p>Do we have a standard way to deal with different instances of <code>decidable</code>?</p>
+
+<a name="193395154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidable%20%26%20classical/near/193395154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53219decidableclassical.html#193395154">Yury G. Kudryashov (Apr 09 2020 at 00:25)</a>:</h4>
+<p>I can <code>congr; split_ifs; refl</code> but it's not convenient.</p>
+
+<a name="193395238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidable%20%26%20classical/near/193395238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53219decidableclassical.html#193395238">Yury G. Kudryashov (Apr 09 2020 at 00:26)</a>:</h4>
+<p>Note that this problem is present even with <code>open_locale classical</code> because some lemmas generate instances based on <code>classical</code>.</p>
+
+<a name="193395369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidable%20%26%20classical/near/193395369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53219decidableclassical.html#193395369">Yury G. Kudryashov (Apr 09 2020 at 00:28)</a>:</h4>
+<p>E.g., when I do <code>rw</code> inside the argument of <code>ite</code>.</p>
+
+<a name="193395438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidable%20%26%20classical/near/193395438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53219decidableclassical.html#193395438">Yury G. Kudryashov (Apr 09 2020 at 00:30)</a>:</h4>
+<p>Not <code>rw</code> but <code>simp only</code>.</p>
+
+<a name="193395543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidable%20%26%20classical/near/193395543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53219decidableclassical.html#193395543">Simon Hudon (Apr 09 2020 at 00:31)</a>:</h4>
+<p>Why do you have access to multiple equivalent instances of <code>decidable</code>? I think eliminating the redundancy would be best if it's possible</p>
+
+<a name="193396816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidable%20%26%20classical/near/193396816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53219decidableclassical.html#193396816">Yury G. Kudryashov (Apr 09 2020 at 00:54)</a>:</h4>
+<p>It seems that this will be fixed in 3.8.0.</p>
+
+<a name="193396826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidable%20%26%20classical/near/193396826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53219decidableclassical.html#193396826">Yury G. Kudryashov (Apr 09 2020 at 00:55)</a>:</h4>
+<p>I mean, my particular source of redundancy.</p>
+
+<a name="193396843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidable%20%26%20classical/near/193396843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53219decidableclassical.html#193396843">Simon Hudon (Apr 09 2020 at 00:55)</a>:</h4>
+<p>What's the fix?</p>
+
+<a name="193396847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidable%20%26%20classical/near/193396847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53219decidableclassical.html#193396847">Yury G. Kudryashov (Apr 09 2020 at 00:55)</a>:</h4>
+<p>It came from <code>simp</code>lifying condition of <code>ite</code>, and before 3.8.0 the <code>congr</code> lemma inserts some <code>eq.rec</code>.</p>
+
+<a name="193397096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/decidable%20%26%20classical/near/193397096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53219decidableclassical.html#193397096">Yury G. Kudryashov (Apr 09 2020 at 01:01)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/lean/issues/159" title="https://github.com/leanprover-community/lean/issues/159">lean#159</a></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

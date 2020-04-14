@@ -1,0 +1,64 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/76508triangleinequality.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/76508triangleinequality.html">triangle inequality</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193300878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/triangle%20inequality/near/193300878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/76508triangleinequality.html#193300878">Olu Olorode (Apr 08 2020 at 10:42)</a>:</h4>
+<p>Hello all,</p>
+<p>I am trying to prove a version of the triangle inequality for the integers (For a,b integers |a -b| &lt; = |a| + |b|). However, I have run into some trouble. My plan was to define my own version of absolute value for the integers, then carry out a proof by cases where Lean would evaluate the value of the expressions |a - b|, |a|, and |b| to determine the validity of the proof. For example, in the case that (a - b) &gt; 0, a&gt;0, and b&gt;0, then |a - b| = a - b, |a| = a, and |b| = b, so we can conclude that the inequality holds and so on.  However, the most natural way to define absolute value that I have found, say def absVal (a : Z) : Z := if a &lt; 0 then -a else a. Yet, I have no idea to just extract the value of an expression from this definition in the proof rather than getting ite. This is a multipart question. </p>
+<p>What cases tactic is the best to use in this case and if you do not mind can you give me a short example of its use?</p>
+<p>Is there a better way to define absolute value that does not use ite?</p>
+<p>Is there a known statement of the triangle inequality for the real numbers in Lean? A quick google search seems to suggest no, but perhaps I was not looking in the right places.</p>
+<p>If the answer to the above question is no, then how would one apply the triangle inequality in analysis proofs in Lean?</p>
+<p>I would greatly appreciate your assistance.</p>
+
+<a name="193301031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/triangle%20inequality/near/193301031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/76508triangleinequality.html#193301031">Mario Carneiro (Apr 08 2020 at 10:44)</a>:</h4>
+<p><code>split_ifs</code> is great for this</p>
+
+<a name="193301135"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/triangle%20inequality/near/193301135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/76508triangleinequality.html#193301135">Mario Carneiro (Apr 08 2020 at 10:45)</a>:</h4>
+<p>if you have an <code>if</code> expression in the goal it does cases on the condition and rewrites the <code>if</code> away in each subgoal</p>
+
+<a name="193301591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/triangle%20inequality/near/193301591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/76508triangleinequality.html#193301591">Kevin Buzzard (Apr 08 2020 at 10:50)</a>:</h4>
+<p>I think you have to use an ite for the norm but the split_ifs tactic just breaks you into a small number of cases immediately</p>
+
+<a name="193301725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/triangle%20inequality/near/193301725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/76508triangleinequality.html#193301725">Kevin Buzzard (Apr 08 2020 at 10:51)</a>:</h4>
+<p>The triangle inequality for the reals will be in mathlib although it might be heavily disguised, eg there might be some proof that the reals are a seminormed topological semiring and then a proof that all such semirings satisfy the triangle inequality, or something like that</p>
+
+<a name="193301728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/triangle%20inequality/near/193301728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/76508triangleinequality.html#193301728">Shing Tak Lam (Apr 08 2020 at 10:51)</a>:</h4>
+<p>I think with the way the <code>int</code>s are defined as an inductive data type, you can define <code>abs</code> without <code>ite</code> by pattern matching?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">zabs</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">neg_succ_of_nat</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span>
+</pre></div>
+
+<a name="193301859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/triangle%20inequality/near/193301859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/76508triangleinequality.html#193301859">Kevin Buzzard (Apr 08 2020 at 10:52)</a>:</h4>
+<p>And then instead of the split_ifs tactic you have to use the <code>cases</code> tactic</p>
+
+<a name="193301961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/triangle%20inequality/near/193301961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/76508triangleinequality.html#193301961">Scott Morrison (Apr 08 2020 at 10:54)</a>:</h4>
+<p>.... but if you define your function by pattern matching, it's important that you subsequently provide an API for it, so that no one _has_ to prove things using <code>cases</code>.</p>
+
+<a name="193302099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/triangle%20inequality/near/193302099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/76508triangleinequality.html#193302099">Olu Olorode (Apr 08 2020 at 10:55)</a>:</h4>
+<p>Ok, this all seems very promising and answered my questions. Thanks alot!</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

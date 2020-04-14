@@ -1,0 +1,75 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/02124notationcommand.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/02124notationcommand.html">notation command</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193749706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20command/near/193749706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02124notationcommand.html#193749706">Michael Beeson (Apr 13 2020 at 07:01)</a>:</h4>
+<p>I am trying to set up Lean to check proofs in  NF set theory.   All you need to know about it is that it's a first-order <br>
+theory with set membership,  pairing {a , b},  ordered pairs &lt;a, b&gt; etc.   So my questions would apply more or less to <br>
+setting up any first-order theory inside Lean.   I tried to use a notation command to tell the parser how to parse {a , b} and &lt; a, b&gt;  but it didn't <br>
+work, and the manual is a little too terse on the subject.   So, here's my non-working file.  Can anyone tell me how to fix it?</p>
+<p>universe u<br>
+set_option default_priority 100<br>
+reserve infix <code> ∈ </code> : 50<br>
+reserve infix <code> ⊆ </code> : 50<br>
+reserve infix <code> ∪ </code> : 50<br>
+reserve infix <code> ∩ </code> : 50<br>
+notation:  <code>{</code> l:(foldr <code>, </code> (a, b), <code>}</code> ) := 1<br>
+notation:  <code>⟨ </code> l:(foldr <code>, </code> (a, b), <code>⟩ </code> ) := 1<br>
+class nf_model (α : Type u) :=<br>
+variable {α : u}<br>
+section nf_model<br>
+variables nf_model:α <br>
+variables x,y,z,u,v,a,b,R,S:α <br>
+(extensionality: ∀ {M:α }, ∀ a,b,x (x ∈ a ↔ x ∈ b) → a=b))<br>
+(binary_union: ∀ {M : α}, ∀ x (x ∈ a ∪ b ↔ x ∈ a ∨  x ∈ b))<br>
+(intersection: ∀ {M:α},  ∀ x (x ∈ a ∩  b ↔ x ∈ a ∧  x ∈ b))<br>
+(complement: ∀ {M:α},  ∀ x (x ∈ c(a) ↔ ¬ x ∈ a))<br>
+(implication: ∀ {M:α},  ∀ x (x ∈ imp(a,b) ↔ (x ∈ a → x ∈ b)))<br>
+(emptyset: ∀ {M:α},  ∀ x(¬ x ∈ \phi))<br>
+(pairing: ∀ {M:α}, ∀ x y z (x ∈ {a,b} ↔ (x = a ∨  x = b)))<br>
+(ordered_pairs: ∀ {M:α}, ∀ x y (⟨ x, y ⟩ = {x,{x,y}}))<br>
+(Vdef: ∀ {M:α}, ∀ x ( x ∈ V)) <br>
+(relation_definition: ∀ {M:α}, Rel(X) ↔ ∀ z(z ∈ X →  ∃ a,b (z =⟨ a, b⟩ )))<br>
+(Cartesian_product: ∀ {M:α}), ∀ x,y,u (u ∈ x × y ↔ ∃ a,b (a ∈ x ∧ b ∈ y ∧ u = ⟨ a,b \rangle))<br>
+(domain: ∀ {M:α}), ∀ R (Rel(R) → ∀ x(x ∈ dom(R) ↔ ∃ y(⟨ x, y ⟩ ∈ R))))<br>
+(inverse_relation: ∀ {M:α}), ∀ R (Rel(R) → ∀ x,y (⟨ x,y ⟩ ∈ inv(R) ↔ ⟨ y,x ⟩ ∈ R)))<br>
+(join: ∀ {M:α} ∀ R,S (Rel(R) ∧ Rel(S) → ∀ x ( x \in join(R,S) \iff<br>
+                        \exists a,b,c (x = ⟨ a,c ⟩ ∧  ⟨ a,b ⟩  \in R ∧ ⟨  b,c ⟩  \in S))<br>
+(equality_relation: ∀ {M:α} ∀ x( x ∈ eq ↔ ∃ z(x = ⟨ z, z⟩ )))<br>
+(subset_definition: ∀ {M:α} ∀ x,y (x ⊆ y ↔ ∀ z(z ∈ x → z ∈ y)))<br>
+(subset_relation: ∀ {M:α} ∀ x,y (⟨ x, y ⟩ ∈ subset ↔ x ⊆ y))<br>
+(union: ∀ {M:α} ∀ x,y (x ∈ union(y) ↔ ∃ z (z ∈ y ∧ x ∈ z)))<br>
+(singleton_image: ∀ {M:α} ∀ R(Rel(R) → ∀ x,y (⟨ x, y ⟩ ∈ SI(R) ↔ ∃ a,b(x = {a,a}  ∧ y = {b,b} ∧ ⟨ a,b ⟩ ∈ R)))<br>
+end nf_model</p>
+
+<a name="193749877"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20command/near/193749877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02124notationcommand.html#193749877">Reid Barton (Apr 13 2020 at 07:06)</a>:</h4>
+<p>I suggest you start by not trying to use notation. Also, you can enclose Lean code on Zulip between <code> ```lean </code> and <code> ``` </code>.</p>
+
+<a name="193749932"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20command/near/193749932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02124notationcommand.html#193749932">Reid Barton (Apr 13 2020 at 07:08)</a>:</h4>
+<p>There are some other issues, like <code>variable</code> and <code>section</code> can't appear after <code>class ... :=</code> like that.</p>
+
+<a name="193750032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20command/near/193750032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02124notationcommand.html#193750032">Reid Barton (Apr 13 2020 at 07:11)</a>:</h4>
+<p>Mainly though you seem to be missing a specification of what ∈ should mean, like <code>(elem : α -&gt; α -&gt; Prop)</code> or something.</p>
+
+<a name="193750034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20command/near/193750034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02124notationcommand.html#193750034">Reid Barton (Apr 13 2020 at 07:11)</a>:</h4>
+<p>And similarly for <code>{ , }</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

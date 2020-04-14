@@ -1,0 +1,87 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/70176Ifsomeinfisaminthenthesetisboundedbelow.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/70176Ifsomeinfisaminthenthesetisboundedbelow.html">If some inf is a min, then the set is bounded below</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192816737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/If%20some%20inf%20is%20a%20min%2C%20then%20the%20set%20is%20bounded%20below/near/192816737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70176Ifsomeinfisaminthenthesetisboundedbelow.html#192816737">Ryan Lahfa (Apr 03 2020 at 14:58)</a>:</h4>
+<p>I'm looking at this lemma:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">finite</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+<span class="kn">import</span> <span class="n">order</span><span class="bp">.</span><span class="n">conditionally_complete_lattice</span>
+
+<span class="kn">variable</span> <span class="o">{</span><span class="n">X</span><span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+
+<span class="kn">open</span> <span class="n">classical</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">prop_decidable</span>
+
+<span class="kn">lemma</span> <span class="n">inf_mem_then_set_bounded</span> <span class="o">[</span><span class="n">conditionally_complete_linear_order</span> <span class="n">X</span><span class="o">]</span>
+    <span class="o">(</span><span class="n">S</span><span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">):</span> <span class="n">Inf</span> <span class="n">S</span> <span class="err">∈</span> <span class="n">S</span> <span class="bp">→</span> <span class="n">bdd_below</span> <span class="n">S</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>While playing around with the lattices API ; but I'm not sure how to prove the statement.</p>
+<p>I cannot use Inf_ge because it requires bdd_below, so my only option is to say that an Inf which is in the set, is a Min, i.e. is_least S (Inf S) is true.</p>
+<p>So I tried to go for this but it requires Inf S to be in lower_bounds, which appears to be true by def?</p>
+<p>Even if I'm in a conditional complete lattice, I can always wrap it into a complete lattice by adding bottom and top to extend X.<br>
+Using this, I can take Inf of anything, including empty sets, etc. As I have Inf S in S, it fix my problem.</p>
+<p>But I'm unsure how to proceed to promote X into a X' with complete_linear_order over it and bring my assumptions over there, finish my proof, come back to the X world.</p>
+
+<a name="192816941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/If%20some%20inf%20is%20a%20min%2C%20then%20the%20set%20is%20bounded%20below/near/192816941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70176Ifsomeinfisaminthenthesetisboundedbelow.html#192816941">Mario Carneiro (Apr 03 2020 at 15:00)</a>:</h4>
+<p>The theorem is false</p>
+
+<a name="192817099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/If%20some%20inf%20is%20a%20min%2C%20then%20the%20set%20is%20bounded%20below/near/192817099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70176Ifsomeinfisaminthenthesetisboundedbelow.html#192817099">Mario Carneiro (Apr 03 2020 at 15:00)</a>:</h4>
+<p>If the set fails to be bounded below, <code>Inf</code> returns garbage, and that garbage value may happen to lie in the set</p>
+
+<a name="192817131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/If%20some%20inf%20is%20a%20min%2C%20then%20the%20set%20is%20bounded%20below/near/192817131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70176Ifsomeinfisaminthenthesetisboundedbelow.html#192817131">Ryan Lahfa (Apr 03 2020 at 15:00)</a>:</h4>
+<p>Ah, so that's the problem</p>
+
+<a name="192817176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/If%20some%20inf%20is%20a%20min%2C%20then%20the%20set%20is%20bounded%20below/near/192817176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70176Ifsomeinfisaminthenthesetisboundedbelow.html#192817176">Mario Carneiro (Apr 03 2020 at 15:01)</a>:</h4>
+<p>for example if the garbage value is 0, then <code>Inf (-inf, 0] \in  (-inf, 0]</code></p>
+
+<a name="192817188"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/If%20some%20inf%20is%20a%20min%2C%20then%20the%20set%20is%20bounded%20below/near/192817188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70176Ifsomeinfisaminthenthesetisboundedbelow.html#192817188">Ryan Lahfa (Apr 03 2020 at 15:01)</a>:</h4>
+<p>But I don't understand why Inf does not use option-types, wouldn't it make more sense?</p>
+
+<a name="192817283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/If%20some%20inf%20is%20a%20min%2C%20then%20the%20set%20is%20bounded%20below/near/192817283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70176Ifsomeinfisaminthenthesetisboundedbelow.html#192817283">Mario Carneiro (Apr 03 2020 at 15:01)</a>:</h4>
+<p>That would amount to a predicate formulation, and that already exists without any conditionally complete anything</p>
+
+<a name="192817297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/If%20some%20inf%20is%20a%20min%2C%20then%20the%20set%20is%20bounded%20below/near/192817297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70176Ifsomeinfisaminthenthesetisboundedbelow.html#192817297">Mario Carneiro (Apr 03 2020 at 15:01)</a>:</h4>
+<p><code>is_glb</code></p>
+
+<a name="192817356"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/If%20some%20inf%20is%20a%20min%2C%20then%20the%20set%20is%20bounded%20below/near/192817356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70176Ifsomeinfisaminthenthesetisboundedbelow.html#192817356">Ryan Lahfa (Apr 03 2020 at 15:02)</a>:</h4>
+<p>Okay, makes more sense then, I'll use this, thank you!</p>
+
+<a name="192876002"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/If%20some%20inf%20is%20a%20min%2C%20then%20the%20set%20is%20bounded%20below/near/192876002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70176Ifsomeinfisaminthenthesetisboundedbelow.html#192876002">Yury G. Kudryashov (Apr 03 2020 at 23:30)</a>:</h4>
+<p>We want to write <code>Sup s</code> or <code>Inf s</code> before we prove that <code>s</code> has a <code>lub</code>/<code>glb</code>.</p>
+
+<a name="192876031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/If%20some%20inf%20is%20a%20min%2C%20then%20the%20set%20is%20bounded%20below/near/192876031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70176Ifsomeinfisaminthenthesetisboundedbelow.html#192876031">Yury G. Kudryashov (Apr 03 2020 at 23:30)</a>:</h4>
+<p>Once you have <code>is_least</code>, AFAIR we have <code>is_least.bdd_below</code>.</p>
+
+<a name="192876070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/If%20some%20inf%20is%20a%20min%2C%20then%20the%20set%20is%20bounded%20below/near/192876070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70176Ifsomeinfisaminthenthesetisboundedbelow.html#192876070">Yury G. Kudryashov (Apr 03 2020 at 23:31)</a>:</h4>
+<p>And I hope that we have <code>is_least.cInf_eq</code> (or is it <code>is_least.is_glb.cInf_eq</code>?)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,481 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/07474FloatdivisioninLean.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html">Float division in Lean?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193505590"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193505590" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193505590">Vaibhav Karve (Apr 09 2020 at 20:32)</a>:</h4>
+<p>How do I make Lean compute 5/2 = 2.5?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">rat</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="mi">5</span> <span class="bp">/</span> <span class="mi">2</span>  <span class="c1">-- Lean says this is 2 because of integer division</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="mi">5</span><span class="bp">.</span><span class="mi">0</span> <span class="bp">/</span> <span class="mi">2</span>  <span class="c1">-- still 2.</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="o">(</span><span class="mi">5</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span>  <span class="c1">-- Lean says this is 5/2 because of rational division</span>
+</pre></div>
+
+<a name="193506176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193506176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193506176">Kevin Buzzard (Apr 09 2020 at 20:37)</a>:</h4>
+<p>What's your definition of 2.5? Lean's job is not really to compute.</p>
+
+<a name="193506188"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193506188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193506188">Kevin Buzzard (Apr 09 2020 at 20:37)</a>:</h4>
+<p>What is the type of <code>2.5</code>?</p>
+
+<a name="193506391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193506391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193506391">Vaibhav Karve (Apr 09 2020 at 20:39)</a>:</h4>
+<p>"Floating point"? Whatever that means.</p>
+
+<a name="193506496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193506496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193506496">Vaibhav Karve (Apr 09 2020 at 20:40)</a>:</h4>
+<p>I was just expecting that there is an inbuilt floating point type. Just like <code>int</code> is the inbuilt integer type.</p>
+
+<a name="193506529"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193506529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193506529">Kevin Buzzard (Apr 09 2020 at 20:40)</a>:</h4>
+<p>You understand that <code>int</code> is nothing like a C integer, right?</p>
+
+<a name="193506591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193506591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193506591">Alex J. Best (Apr 09 2020 at 20:41)</a>:</h4>
+<p>There are some things in <code>data.fp.basic</code> but its not used particularly much, so I doubt it is advanced as  you'd like!</p>
+
+<a name="193506602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193506602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193506602">Kevin Buzzard (Apr 09 2020 at 20:41)</a>:</h4>
+<p>Can you precisely define which type you are talking about? Because if not then your question is meaningless.</p>
+
+<a name="193506737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193506737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193506737">Rob Lewis (Apr 09 2020 at 20:42)</a>:</h4>
+<p>There's a builtin <code>native.float</code>, but it's a meta type implemented in C++. (This is likely not what you're looking for.)</p>
+
+<a name="193506791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193506791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193506791">Kevin Buzzard (Apr 09 2020 at 20:43)</a>:</h4>
+<p>My point is simply that there are many answers to the question "what does 2.5 mean" and if we don't know precisely what we're talking about then the question is ill-formed.</p>
+
+<a name="193506819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193506819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193506819">Vaibhav Karve (Apr 09 2020 at 20:43)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113489-new-members/topic/Float.20division.20in.20Lean.3F/near/193506529" title="#narrow/stream/113489-new-members/topic/Float.20division.20in.20Lean.3F/near/193506529">said</a>:</p>
+<blockquote>
+<p>You understand that <code>int</code> is nothing like a C integer, right?</p>
+</blockquote>
+<p>No! So far I was under the impression that <code>int</code> is like C (CS) integer and <code>nat</code> more like Peano (math) numbers.<br>
+So I was expecting a similar kind of analogue for <code>floating point</code> and <code>real</code>.</p>
+
+<a name="193506830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193506830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193506830">Rob Lewis (Apr 09 2020 at 20:43)</a>:</h4>
+<p>Lean knows exactly what 2.5 means. It means 5/2 :)</p>
+
+<a name="193506915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193506915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193506915">Alex J. Best (Apr 09 2020 at 20:44)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fp</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="n">def</span> <span class="n">my_cfg</span> <span class="o">:</span> <span class="n">fp</span><span class="bp">.</span><span class="n">float_cfg</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">prec</span> <span class="o">:=</span> <span class="mi">3</span><span class="o">,</span> <span class="n">emax</span> <span class="o">:=</span> <span class="mi">4</span><span class="o">,</span> <span class="n">prec_pos</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">,</span> <span class="n">prec_max</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span> <span class="o">}</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="bp">@</span><span class="n">fp</span><span class="bp">.</span><span class="n">of_rat_dn</span> <span class="n">my_cfg</span> <span class="o">(</span><span class="mi">5</span><span class="bp">/</span> <span class="mi">2</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="c1">--(#2 #0 #2147483646 #1)</span>
+</pre></div>
+
+<a name="193506916"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193506916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193506916">Kevin Buzzard (Apr 09 2020 at 20:44)</a>:</h4>
+<p><code>int</code> is just like <code>nat</code>, it's arbitrary precision and designed for proving, not computing.</p>
+
+<a name="193506949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193506949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193506949">Kevin Buzzard (Apr 09 2020 at 20:44)</a>:</h4>
+<div class="codehilite"><pre><span></span>import data.real.basic
+
+noncomputable def x : ℝ := 2.5
+</pre></div>
+
+
+<p>There's a 2.5, but you're going to have real trouble computing with it ;-)</p>
+
+<a name="193507102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193507102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193507102">Kevin Buzzard (Apr 09 2020 at 20:46)</a>:</h4>
+<p><code>nat</code> is Peano math naturals, i.e. naturals defined by axioms, <code>int</code> is integers defined by axioms, <code>rat</code> is rationals defined by axioms, <code>real</code> is reals defined by axioms. The last one involves a noncomputable construction so <code>#eval</code> and <code>#reduce</code> are unlikely to be able to do anything.</p>
+
+<a name="193507130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193507130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193507130">Vaibhav Karve (Apr 09 2020 at 20:46)</a>:</h4>
+<p>Okay. All these answers make sense to me now.</p>
+<p>Having said that, should Lean have the ability to do floating point calculations for the sake of it? I can do it in Haskell and Python. So I want to do it in Lean too.</p>
+
+<a name="193507153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193507153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193507153">Kevin Buzzard (Apr 09 2020 at 20:47)</a>:</h4>
+<p>Lean is not designed for computing.</p>
+
+<a name="193507176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193507176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193507176">Vaibhav Karve (Apr 09 2020 at 20:47)</a>:</h4>
+<p>Then should we call it a programming language?</p>
+
+<a name="193507178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193507178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193507178">Rob Lewis (Apr 09 2020 at 20:47)</a>:</h4>
+<p>You can do all the fp calculations you want(*) with <code>native.float</code>.</p>
+
+<a name="193507180"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193507180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193507180">Rob Lewis (Apr 09 2020 at 20:47)</a>:</h4>
+<p>You just can't prove anything about them.</p>
+
+<a name="193507192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193507192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193507192">Kevin Buzzard (Apr 09 2020 at 20:47)</a>:</h4>
+<p>The reals are intrinsically noncomputable.</p>
+
+<a name="193507257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193507257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193507257">Filip Szczepański (Apr 09 2020 at 20:48)</a>:</h4>
+<p>You could say Lean is designed for computing proofs</p>
+
+<a name="193507258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193507258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193507258">Kevin Buzzard (Apr 09 2020 at 20:48)</a>:</h4>
+<p>you can prove lots of things  with them but can't compute anything. You can do this though:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="mi">2</span><span class="bp">.</span><span class="mi">5</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">5</span><span class="bp">/</span><span class="mi">2</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span>
+</pre></div>
+
+
+<p>but I didn't compute anything there, I proved a theorem.</p>
+
+<a name="193507279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193507279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193507279">Alex J. Best (Apr 09 2020 at 20:48)</a>:</h4>
+<p>You _can_ program with lean, but the types you use to do so are (often) different to those you prove things about.</p>
+
+<a name="193507283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193507283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193507283">Vaibhav Karve (Apr 09 2020 at 20:48)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110596">Rob Lewis</span> <a href="#narrow/stream/113489-new-members/topic/Float.20division.20in.20Lean.3F/near/193507178" title="#narrow/stream/113489-new-members/topic/Float.20division.20in.20Lean.3F/near/193507178">said</a>:</p>
+<blockquote>
+<p>You can do all the fp calculations you want(*) with <code>native.float</code>.</p>
+</blockquote>
+<p>Got it! I think that is what I wanted. I want the choice to compute. I understand proving things about floating points would be worthless <span aria-label="slight smile" class="emoji emoji-1f642" role="img" title="slight smile">:slight_smile:</span></p>
+
+<a name="193507348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193507348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193507348">Rob Lewis (Apr 09 2020 at 20:49)</a>:</h4>
+<p>It's certainly not worthless, just hard!</p>
+
+<a name="193507351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193507351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193507351">Kevin Buzzard (Apr 09 2020 at 20:49)</a>:</h4>
+<p>Stuff like associativity is true for <code>ℝ</code> but is false for <code>native.float</code> :-)</p>
+
+<a name="193507538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193507538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193507538">Rob Lewis (Apr 09 2020 at 20:50)</a>:</h4>
+<p><a href="https://www.lri.fr/~sboldo/" title="https://www.lri.fr/~sboldo/">Sylvie Boldo</a> and others have done a lot of work in Coq on this.</p>
+
+<a name="193507646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193507646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193507646">Kevin Buzzard (Apr 09 2020 at 20:51)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">buzzard</span><span class="nd">@bob</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">python</span>
+<span class="n">Python</span> <span class="mf">2.7</span><span class="o">.</span><span class="mi">17</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Nov</span>  <span class="mi">7</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">10</span><span class="p">:</span><span class="mo">07</span><span class="p">:</span><span class="mi">09</span><span class="p">)</span>
+<span class="p">[</span><span class="n">GCC</span> <span class="mf">7.4</span><span class="o">.</span><span class="mi">0</span><span class="p">]</span> <span class="n">on</span> <span class="n">linux2</span>
+<span class="n">Type</span> <span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="s2">&quot;copyright&quot;</span><span class="p">,</span> <span class="s2">&quot;credits&quot;</span> <span class="ow">or</span> <span class="s2">&quot;license&quot;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">N</span><span class="o">=</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span><span class="o">**</span><span class="mi">20</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">e</span><span class="o">=</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">M</span><span class="o">=-</span><span class="n">N</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">(</span><span class="n">M</span><span class="o">+</span><span class="n">N</span><span class="p">)</span><span class="o">+</span><span class="n">e</span><span class="o">==</span><span class="n">M</span><span class="o">+</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="n">e</span><span class="p">)</span>
+<span class="bp">False</span>
+<span class="o">&gt;&gt;&gt;</span>
+</pre></div>
+
+<a name="193507795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193507795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193507795">Filip Szczepański (Apr 09 2020 at 20:52)</a>:</h4>
+<p>I remember reading something about a property weaker than associativity that floating point does have</p>
+
+<a name="193507825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193507825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193507825">Kevin Buzzard (Apr 09 2020 at 20:52)</a>:</h4>
+<p>non-associativity</p>
+
+<a name="193507897"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193507897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193507897">Gabriel Ebner (Apr 09 2020 at 20:53)</a>:</h4>
+<p>I think addition and multiplication are commutative, ignoring NaNs for a moment.</p>
+
+<a name="193507919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193507919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193507919">Kevin Buzzard (Apr 09 2020 at 20:53)</a>:</h4>
+<p>You can check this with <code>dec_trivial</code></p>
+
+<a name="193508034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193508034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193508034">Kevin Buzzard (Apr 09 2020 at 20:55)</a>:</h4>
+<p>stackexchange seems to suggest that even <code>a + b == a + b</code> is not 100% guaranteed</p>
+
+<a name="193508062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193508062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193508062">Kevin Buzzard (Apr 09 2020 at 20:55)</a>:</h4>
+<p>Maybe there's some property weaker than equality that floating point does have</p>
+
+<a name="193508116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193508116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193508116">Filip Szczepański (Apr 09 2020 at 20:55)</a>:</h4>
+<p><code>a + b == a + b</code> can be false if a or b are NaN</p>
+
+<a name="193508212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193508212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193508212">Kevin Buzzard (Apr 09 2020 at 20:56)</a>:</h4>
+<div class="codehilite"><pre><span></span>&gt;&gt;&gt; 100*(0.1+0.2)==100*0.1+100*0.2
+False
+</pre></div>
+
+
+<p>rofl it's not even a <code>distrib</code>. How you guys can work with this object is beyond me.</p>
+
+<a name="193508250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193508250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193508250">Kevin Buzzard (Apr 09 2020 at 20:57)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="mi">100</span><span class="o">*</span><span class="mf">0.1</span><span class="o">+</span><span class="mi">100</span><span class="o">*</span><span class="mf">0.2</span>
+<span class="mf">30.0</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">100</span><span class="o">*</span><span class="p">(</span><span class="mf">0.1</span><span class="o">+</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="mf">30.000000000000004</span>
+<span class="o">&gt;&gt;&gt;</span>
+</pre></div>
+
+<a name="193508273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193508273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193508273">Filip Szczepański (Apr 09 2020 at 20:57)</a>:</h4>
+<p>It's good for things that don't need exact results. Definitely not a good fit for a theorem prover though</p>
+
+<a name="193508318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193508318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193508318">Marc Huisinga (Apr 09 2020 at 20:57)</a>:</h4>
+<p>lean4 has a float type: <a href="https://github.com/leanprover/lean4/blob/master/src/Init/Data/Float.lean" title="https://github.com/leanprover/lean4/blob/master/src/Init/Data/Float.lean">https://github.com/leanprover/lean4/blob/master/src/Init/Data/Float.lean</a></p>
+
+<a name="193508363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193508363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193508363">Filip Szczepański (Apr 09 2020 at 20:58)</a>:</h4>
+<p>I just wish I'd remember what the property/equality I saw before was</p>
+
+<a name="193508412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193508412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193508412">Rob Lewis (Apr 09 2020 at 20:58)</a>:</h4>
+<p>It's very interesting to verify error bounds in fp computations though.</p>
+
+<a name="193508536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193508536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193508536">Alex J. Best (Apr 09 2020 at 20:59)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="284527">Filip Szczepański</span> <a href="#narrow/stream/113489-new-members/topic/Float.20division.20in.20Lean.3F/near/193508363" title="#narrow/stream/113489-new-members/topic/Float.20division.20in.20Lean.3F/near/193508363">said</a>:</p>
+<blockquote>
+<p>I just wish I'd remember what the property/equality I saw before was</p>
+</blockquote>
+<p>Hopefully it is <a href="https://en.wikipedia.org/wiki/Power_associativity" title="https://en.wikipedia.org/wiki/Power_associativity">https://en.wikipedia.org/wiki/Power_associativity</a> at least</p>
+
+<a name="193508638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193508638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193508638">Filip Szczepański (Apr 09 2020 at 21:00)</a>:</h4>
+<p>I haven't checked, but I'd actually bet that floating point isn't power associative</p>
+
+<a name="193508891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193508891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193508891">Filip Szczepański (Apr 09 2020 at 21:02)</a>:</h4>
+<p>Yeah, it isn't.</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span>
+<span class="p">(</span><span class="n">pi</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">pi</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span> <span class="o">==</span> <span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">pi</span><span class="o">*</span><span class="n">pi</span><span class="p">))</span>
+</pre></div>
+
+
+<p>This returns false</p>
+
+<a name="193508952"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193508952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193508952">Gabriel Ebner (Apr 09 2020 at 21:03)</a>:</h4>
+<p>Yeah, "in which order should I sum numbers" is like numerics 101.</p>
+
+<a name="193510122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193510122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193510122">Reid Barton (Apr 09 2020 at 21:14)</a>:</h4>
+<p>Add them forwards and then backwards, and average the results. I mean it was good enough for Gauss</p>
+
+<a name="193510234"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193510234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193510234">Vaibhav Karve (Apr 09 2020 at 21:15)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="221921">Marc Huisinga</span> <a href="#narrow/stream/113489-new-members/topic/Float.20division.20in.20Lean.3F/near/193508318" title="#narrow/stream/113489-new-members/topic/Float.20division.20in.20Lean.3F/near/193508318">said</a>:</p>
+<blockquote>
+<p>lean4 has a float type: <a href="https://github.com/leanprover/lean4/blob/master/src/Init/Data/Float.lean" title="https://github.com/leanprover/lean4/blob/master/src/Init/Data/Float.lean">https://github.com/leanprover/lean4/blob/master/src/Init/Data/Float.lean</a></p>
+</blockquote>
+<p>Looks interesting. But still looks like it is meant for proving theorems, not for pure number crunching.</p>
+
+<a name="193510339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193510339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193510339">Rob Lewis (Apr 09 2020 at 21:16)</a>:</h4>
+<p>Quite the opposite. I think that's roughly equivalent to <code>native.float</code> in Lean 3. It's just exposing C++ floats.</p>
+
+<a name="193511417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193511417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193511417">Marc Huisinga (Apr 09 2020 at 21:26)</a>:</h4>
+<p>(i should probably read the topics i reply to so i don't constantly repeat things other people just said <span aria-label="sweat smile" class="emoji emoji-1f605" role="img" title="sweat smile">:sweat_smile:</span>)</p>
+
+<a name="193515772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193515772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193515772">Kevin Buzzard (Apr 09 2020 at 22:08)</a>:</h4>
+<p>I guess all those lean constants in that code just mean "Lean doesn't actually know anything about this function" and then the extern tags must mean "...but if you want me to evaluate it in some way then I'll use this C++ function"</p>
+
+<a name="193515955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193515955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193515955">Kevin Buzzard (Apr 09 2020 at 22:10)</a>:</h4>
+<p>I know this is a very naive question, but can one guarantee that these external function calls will always return the same answer? They don't depend on some other parameters which might change depending on what you're doing?</p>
+
+<a name="193516006"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193516006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193516006">Kevin Buzzard (Apr 09 2020 at 22:11)</a>:</h4>
+<p>Oh -- judging by the commit message these are C floats not C++ floats</p>
+
+<a name="193516174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193516174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193516174">Kevin Buzzard (Apr 09 2020 at 22:13)</a>:</h4>
+<p>So how will that code work? Will I be able to do <code>#eval Float.sin (3.141)</code>?</p>
+
+<a name="193517213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193517213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193517213">Marc Huisinga (Apr 09 2020 at 22:25)</a>:</h4>
+<p>there seems to be a small test file here:<br>
+<a href="https://github.com/leanprover/lean4/blob/master/tests/compiler/float.lean" title="https://github.com/leanprover/lean4/blob/master/tests/compiler/float.lean">https://github.com/leanprover/lean4/blob/master/tests/compiler/float.lean</a></p>
+
+<a name="193517553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193517553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193517553">Kevin Buzzard (Apr 09 2020 at 22:28)</a>:</h4>
+<p>That file was last edited with a commit which removed decidable equality. Could this be because if you use C &lt; to decide &lt; and C = to decide = then you can deduce a contradiction?</p>
+
+<a name="193517774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193517774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193517774">Marc Huisinga (Apr 09 2020 at 22:30)</a>:</h4>
+<p>my guess is that it's because float equality is really badly behaved. after all, nan is not equal to nan</p>
+
+<a name="193518133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193518133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193518133">Marc Huisinga (Apr 09 2020 at 22:35)</a>:</h4>
+<p>ah yes, the commit message confirms it: <a href="https://github.com/leanprover/lean4/commit/705530b62bc23b47c0ba9baa8e199ab376b8fd7b" title="https://github.com/leanprover/lean4/commit/705530b62bc23b47c0ba9baa8e199ab376b8fd7b">https://github.com/leanprover/lean4/commit/705530b62bc23b47c0ba9baa8e199ab376b8fd7b</a></p>
+
+<a name="193518466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193518466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193518466">Reid Barton (Apr 09 2020 at 22:38)</a>:</h4>
+<p>do we know what <code>beq</code> is supposed to mean?</p>
+
+<a name="193518717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193518717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193518717">Marc Huisinga (Apr 09 2020 at 22:41)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110032">Reid Barton</span> <a href="#narrow/stream/113489-new-members/topic/Float.20division.20in.20Lean.3F/near/193518466" title="#narrow/stream/113489-new-members/topic/Float.20division.20in.20Lean.3F/near/193518466">said</a>:</p>
+<blockquote>
+<p>do we know what <code>beq</code> is supposed to mean?</p>
+</blockquote>
+<p><a href="https://github.com/leanprover/lean4/blob/360cebf68002c0c56902cefe658401851e64b59e/src/Init/Core.lean#L346" title="https://github.com/leanprover/lean4/blob/360cebf68002c0c56902cefe658401851e64b59e/src/Init/Core.lean#L346">https://github.com/leanprover/lean4/blob/360cebf68002c0c56902cefe658401851e64b59e/src/Init/Core.lean#L346</a></p>
+
+<a name="193519220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193519220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193519220">Reid Barton (Apr 09 2020 at 22:47)</a>:</h4>
+<p>Ah okay, I guess <code>b</code> means <code>bool</code> here too then (like in <code>band</code> etc.)</p>
+
+<a name="193520173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193520173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193520173">Kevin Buzzard (Apr 09 2020 at 22:59)</a>:</h4>
+<p>Ha ha you computer scientists shouldn't be allowed to use the sacred terms + and = on your silly floats</p>
+
+<a name="193520208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193520208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193520208">Kevin Buzzard (Apr 09 2020 at 22:59)</a>:</h4>
+<p>You should choose your favourite emojis and use those instead to remind us all about what you're really doing with your code</p>
+
+<a name="193520328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193520328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193520328">Kevin Buzzard (Apr 09 2020 at 23:00)</a>:</h4>
+<p>You should switch to the p-adic numbers, the error bounds are far better behaved</p>
+
+<a name="193520407"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193520407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193520407">Kevin Buzzard (Apr 09 2020 at 23:01)</a>:</h4>
+<p>That is one of the funniest commit messages I've ever seen</p>
+
+<a name="193521427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193521427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193521427">Kevin Buzzard (Apr 09 2020 at 23:12)</a>:</h4>
+<p>You should just let NaN be zero like in Lean. It works fine!</p>
+
+<a name="193521503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193521503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193521503">Filip Szczepański (Apr 09 2020 at 23:13)</a>:</h4>
+<p>0/0 = 0 in Lean?</p>
+
+<a name="193521511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193521511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193521511">Kevin Buzzard (Apr 09 2020 at 23:13)</a>:</h4>
+<p>Sure</p>
+
+<a name="193521610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193521610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193521610">Kevin Buzzard (Apr 09 2020 at 23:14)</a>:</h4>
+<p>Mathematicians took an oath never to divide by zero so the computer scientists just defined it to be something convenient</p>
+
+<a name="193521629"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193521629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193521629">Kevin Buzzard (Apr 09 2020 at 23:14)</a>:</h4>
+<p>Actually for all I know 0/0=37</p>
+
+<a name="193521639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193521639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193521639">Kevin Buzzard (Apr 09 2020 at 23:14)</a>:</h4>
+<p>All I know is that it's a number</p>
+
+<a name="193521670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193521670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193521670">Kevin Buzzard (Apr 09 2020 at 23:15)</a>:</h4>
+<p>Because the type of <code>/</code> is a-&gt;a-&gt;a</p>
+
+<a name="193521711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193521711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193521711">Filip Szczepański (Apr 09 2020 at 23:15)</a>:</h4>
+<p>Maybe it should be <code>a-&gt;a-&gt;Maybe a</code></p>
+
+<a name="193521784"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193521784" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193521784">Filip Szczepański (Apr 09 2020 at 23:16)</a>:</h4>
+<p>Or <code>a-&gt;NonZero a-&gt;a</code></p>
+
+<a name="193521785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193521785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193521785">Kevin Buzzard (Apr 09 2020 at 23:16)</a>:</h4>
+<p>That would be a nightmare to work with</p>
+
+<a name="193521795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193521795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193521795">Kevin Buzzard (Apr 09 2020 at 23:16)</a>:</h4>
+<p>Both would</p>
+
+<a name="193521808"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193521808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193521808">Kevin Buzzard (Apr 09 2020 at 23:16)</a>:</h4>
+<p>What we have is the best solution, convenient and simple</p>
+
+<a name="193521852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193521852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193521852">Kevin Buzzard (Apr 09 2020 at 23:17)</a>:</h4>
+<p>The nonzero assumptions are in the theorems not the definition</p>
+
+<a name="193521865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193521865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193521865">Marc Huisinga (Apr 09 2020 at 23:17)</a>:</h4>
+<p>there's that famous javascript WAT talk (<a href="https://www.destroyallsoftware.com/talks/wat" title="https://www.destroyallsoftware.com/talks/wat">https://www.destroyallsoftware.com/talks/wat</a>), i'm sure kevin would be able to hold a talk like this about theorem prover langs</p>
+
+<a name="193522249"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193522249" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193522249">Filip Szczepański (Apr 09 2020 at 23:22)</a>:</h4>
+<p>How does it avoid contradictions like 0=1?</p>
+
+<a name="193522462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193522462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193522462">Bryan Gin-ge Chen (Apr 09 2020 at 23:24)</a>:</h4>
+<p>What's an example derivation of <code>0=1</code> that you have in mind?</p>
+
+<a name="193522885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193522885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193522885">Bryan Gin-ge Chen (Apr 09 2020 at 23:30)</a>:</h4>
+<p>Note that you won't be able to prove anything like:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">/</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">/</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span>  <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="193523127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193523127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193523127">Filip Szczepański (Apr 09 2020 at 23:33)</a>:</h4>
+<p>Right, not with flooring division. I was thinking about rationals</p>
+
+<a name="193523260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193523260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193523260">Bryan Gin-ge Chen (Apr 09 2020 at 23:35)</a>:</h4>
+<p>The same statement with <code>rat</code> is also unprovable without a <code>c ≠ 0</code> hypothesis.</p>
+
+<a name="193526121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193526121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193526121">Mario Carneiro (Apr 10 2020 at 00:18)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113489-new-members/topic/Float.20division.20in.20Lean.3F/near/193521610" title="#narrow/stream/113489-new-members/topic/Float.20division.20in.20Lean.3F/near/193521610">said</a>:</p>
+<blockquote>
+<p>Mathematicians took an oath never to divide by zero so the computer scientists just defined it to be something convenient</p>
+</blockquote>
+<p>I think this is one instance where your conflation of "computer scientists" and "non-number theorists" might be misleading. The actual computer scientists, the ones who write programming languages and computer architectures, have almost universally decreed that x/0 = exception</p>
+
+<a name="193526131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193526131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193526131">Mario Carneiro (Apr 10 2020 at 00:19)</a>:</h4>
+<p>however this plays absolute havoc in a theorem prover</p>
+
+<a name="193526263"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193526263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193526263">Mario Carneiro (Apr 10 2020 at 00:21)</a>:</h4>
+<p>it's even a problem in compilers, where there is abstract semantics of the language and x/y has to be considered a "side effecting" operation, which means that <code>x/y + z/w</code> might not have the same behavior as <code>z/w + x/y</code>, that is, they are not extensionally equal as programs</p>
+
+<a name="193531124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193531124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193531124">Reid Barton (Apr 10 2020 at 01:46)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113489-new-members/topic/Float.20division.20in.20Lean.3F/near/193516174" title="#narrow/stream/113489-new-members/topic/Float.20division.20in.20Lean.3F/near/193516174">said</a>:</p>
+<blockquote>
+<p>So how will that code work? Will I be able to do <code>#eval Float.sin (3.141)</code>?</p>
+</blockquote>
+<p>I tried it but I got <code>result type does not have an instance of type class 'HasRepr' or 'Lean.HasEval'</code></p>
+
+<a name="193531170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193531170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193531170">Reid Barton (Apr 10 2020 at 01:47)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">HasRepr</span> <span class="n">Float</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">repr</span> <span class="o">:=</span> <span class="n">Float</span><span class="bp">.</span><span class="n">toString</span> <span class="o">}</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="o">(</span><span class="n">Float</span><span class="bp">.</span><span class="n">sin</span> <span class="mi">3</span><span class="bp">.</span><span class="mi">14</span><span class="o">)</span>     <span class="c1">-- 0.001593</span>
+</pre></div>
+
+<a name="193531336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193531336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193531336">Mario Carneiro (Apr 10 2020 at 01:51)</a>:</h4>
+<p>What is <code>HasEval</code>?</p>
+
+<a name="193532885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193532885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193532885">Reid Barton (Apr 10 2020 at 02:27)</a>:</h4>
+<p>it looks like mainly a convenience thing</p>
+
+<a name="193532937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193532937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193532937">Reid Barton (Apr 10 2020 at 02:28)</a>:</h4>
+<p><a href="https://github.com/leanprover/lean4/blob/master/src/Init/System/IO.lean#L319" title="https://github.com/leanprover/lean4/blob/master/src/Init/System/IO.lean#L319">https://github.com/leanprover/lean4/blob/master/src/Init/System/IO.lean#L319</a></p>
+
+<a name="193533145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Float%20division%20in%20Lean%3F/near/193533145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07474FloatdivisioninLean.html#193533145">Reid Barton (Apr 10 2020 at 02:33)</a>:</h4>
+<p>so that <code>#eval</code> more or less matches the behavior of the ghci repl for example, where you can give it either a plain expression or an IO action</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,160 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html">avoid typing the same thing 7 times without using let</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193371972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20typing%20the%20same%20thing%207%20times%20without%20using%20let/near/193371972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html#193371972">Kenny Lau (Apr 08 2020 at 20:06)</a>:</h4>
+<p>I've just figured a way to avoid typing the same thing 7 times without using let:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="mi">123456789</span>
+</pre></div>
+
+<a name="193372900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20typing%20the%20same%20thing%207%20times%20without%20using%20let/near/193372900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html#193372900">Reid Barton (Apr 08 2020 at 20:15)</a>:</h4>
+<p>I think <code>have</code> is actually syntax for this</p>
+
+<a name="193373944"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20typing%20the%20same%20thing%207%20times%20without%20using%20let/near/193373944" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html#193373944">Kenny Lau (Apr 08 2020 at 20:25)</a>:</h4>
+<p>but <code>have</code> doesn't remember definition</p>
+
+<a name="193374001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20typing%20the%20same%20thing%207%20times%20without%20using%20let/near/193374001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html#193374001">Kenny Lau (Apr 08 2020 at 20:25)</a>:</h4>
+<p>this is a way to have abbreviations without breaking anything (if you use <code>let</code>, you'll have a hard time working in tactic mode)</p>
+
+<a name="193375666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20typing%20the%20same%20thing%207%20times%20without%20using%20let/near/193375666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html#193375666">Simon Hudon (Apr 08 2020 at 20:39)</a>:</h4>
+<p>What can you do with this that you can't do with a let?</p>
+
+<a name="193376043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20typing%20the%20same%20thing%207%20times%20without%20using%20let/near/193376043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html#193376043">Kenny Lau (Apr 08 2020 at 20:43)</a>:</h4>
+<p>you can substitute this easily using beta reduction, which is automatically performed by many tactics</p>
+
+<a name="193376111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20typing%20the%20same%20thing%207%20times%20without%20using%20let/near/193376111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html#193376111">Kenny Lau (Apr 08 2020 at 20:43)</a>:</h4>
+<p>my personal experience tells me that <code>let</code> is hard to work with</p>
+
+<a name="193376438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20typing%20the%20same%20thing%207%20times%20without%20using%20let/near/193376438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html#193376438">Kevin Buzzard (Apr 08 2020 at 20:47)</a>:</h4>
+<p>If you use <code>let</code> and then go into tactic mode then sometimes your goals come out really kooky.</p>
+
+<a name="193377424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20typing%20the%20same%20thing%207%20times%20without%20using%20let/near/193377424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html#193377424">Ryan Lahfa (Apr 08 2020 at 20:56)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110064">Kenny Lau</span> <a href="#narrow/stream/113488-general/topic/avoid.20typing.20the.20same.20thing.207.20times.20without.20using.20let/near/193373944" title="#narrow/stream/113488-general/topic/avoid.20typing.20the.20same.20thing.207.20times.20without.20using.20let/near/193373944">said</a>:</p>
+<blockquote>
+<p>but <code>have</code> doesn't remember definition</p>
+</blockquote>
+<p><code>set</code> can work too AFAIK</p>
+
+<a name="193377525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20typing%20the%20same%20thing%207%20times%20without%20using%20let/near/193377525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html#193377525">Kenny Lau (Apr 08 2020 at 20:57)</a>:</h4>
+<p>I'm not abbreviating in the middle of a proof. It's in the definition of some data.</p>
+
+<a name="193379462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20typing%20the%20same%20thing%207%20times%20without%20using%20let/near/193379462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html#193379462">Kenny Lau (Apr 08 2020 at 21:13)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110026">Simon Hudon</span> <a href="#narrow/stream/113488-general/topic/avoid.20typing.20the.20same.20thing.207.20times.20without.20using.20let/near/193375666" title="#narrow/stream/113488-general/topic/avoid.20typing.20the.20same.20thing.207.20times.20without.20using.20let/near/193375666">said</a>:</p>
+<blockquote>
+<p>What can you do with this that you can't do with a let?</p>
+</blockquote>
+<p>to be more specific:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="mi">123456789</span>
+
+<span class="n">def</span> <span class="n">test&#39;</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="k">let</span> <span class="n">n</span> <span class="o">:=</span> <span class="mi">123456789</span> <span class="k">in</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">test</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">unfold</span> <span class="n">test</span>    <span class="c1">-- ⊢ 123456789 * 123456789 + 2 * 123456789 + 1 = 0</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">test&#39;</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">unfold</span> <span class="n">test&#39;</span>  <span class="c1">-- ⊢ (let n : ℕ := 123456789 in n * n + 2 * n + 1) = 0</span>
+</pre></div>
+
+<a name="193379653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20typing%20the%20same%20thing%207%20times%20without%20using%20let/near/193379653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html#193379653">Kevin Buzzard (Apr 08 2020 at 21:15)</a>:</h4>
+<p>kooky goal alert</p>
+
+<a name="193379746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20typing%20the%20same%20thing%207%20times%20without%20using%20let/near/193379746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html#193379746">Kenny Lau (Apr 08 2020 at 21:16)</a>:</h4>
+<p>is "kooky" pronounced the same as "cookie"?</p>
+
+<a name="193379995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20typing%20the%20same%20thing%207%20times%20without%20using%20let/near/193379995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html#193379995">Kevin Buzzard (Apr 08 2020 at 21:19)</a>:</h4>
+<p>It's pronounced the way cookie monster says cookie.</p>
+
+<a name="193380083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20typing%20the%20same%20thing%207%20times%20without%20using%20let/near/193380083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html#193380083">Kenny Lau (Apr 08 2020 at 21:20)</a>:</h4>
+<p>but it's almost spelt the same; English is weird</p>
+
+<a name="193383010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20typing%20the%20same%20thing%207%20times%20without%20using%20let/near/193383010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html#193383010">Reid Barton (Apr 08 2020 at 21:51)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test&#39;&#39;</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="k">have</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="mi">123456789</span><span class="o">,</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">test&#39;&#39;</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">unfold</span> <span class="n">test&#39;&#39;</span>  <span class="c1">-- ⊢ 123456789 * 123456789 + 2 * 123456789 + 1 = 0</span>
+</pre></div>
+
+<a name="193383090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20typing%20the%20same%20thing%207%20times%20without%20using%20let/near/193383090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html#193383090">Reid Barton (Apr 08 2020 at 21:52)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test₂</span> <span class="o">:=</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span><span class="n">rfl</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">))</span> <span class="mi">0</span>          <span class="c1">-- invalid type ascription</span>
+
+<span class="n">def</span> <span class="n">test₂&#39;</span> <span class="o">:=</span>
+<span class="k">let</span> <span class="n">n</span> <span class="o">:=</span> <span class="mi">0</span> <span class="k">in</span> <span class="o">(</span><span class="n">rfl</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
+</pre></div>
+
+
+<p>The lambda "forgets" the definition in the same way that <code>have</code> does.</p>
+
+<a name="193383220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20typing%20the%20same%20thing%207%20times%20without%20using%20let/near/193383220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html#193383220">Kenny Lau (Apr 08 2020 at 21:53)</a>:</h4>
+<p>wow. when I use the underscore I don't see <code>123456789</code>:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test&#39;&#39;</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="k">have</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="mi">123456789</span><span class="o">,</span> <span class="bp">_</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">don&#39;t know how to synthesize placeholder</span>
+<span class="cm">context:</span>
+<span class="cm">n : ℕ</span>
+<span class="cm">⊢ ℕ</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="193383344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20typing%20the%20same%20thing%207%20times%20without%20using%20let/near/193383344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html#193383344">Reid Barton (Apr 08 2020 at 21:54)</a>:</h4>
+<p>Inside the body you "don't know" what the value of <code>n</code> is. Outside you do.</p>
+
+<a name="193385294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20typing%20the%20same%20thing%207%20times%20without%20using%20let/near/193385294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html#193385294">Mario Carneiro (Apr 08 2020 at 22:16)</a>:</h4>
+<p>I can confirm Reid's first comment: <code>have</code> is sugar for this expression. <code>let</code> requires additional magic, but morally it is syntax for the result of substituting the variable, which is why you get the defeq inside the body</p>
+
+<a name="193385524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20typing%20the%20same%20thing%207%20times%20without%20using%20let/near/193385524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html#193385524">Mario Carneiro (Apr 08 2020 at 22:19)</a>:</h4>
+<p>Fun fact, <code>have</code> inside tactic mode is neither of these, it is actually performing the substitution. So the result contains no redexes at the end:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="k">have</span> <span class="n">n</span> <span class="o">:=</span> <span class="mi">123456789</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">test</span> <span class="c1">-- 123456789 * 123456789 + 2 * 123456789 + 1</span>
+</pre></div>
+
+<a name="193386123"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20typing%20the%20same%20thing%207%20times%20without%20using%20let/near/193386123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html#193386123">Kevin Buzzard (Apr 08 2020 at 22:26)</a>:</h4>
+<p>What's a redex? This funny <code>(let x = y in z)</code> thing which I sometimes see in goals?</p>
+
+<a name="193386280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20typing%20the%20same%20thing%207%20times%20without%20using%20let/near/193386280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html#193386280">Mario Carneiro (Apr 08 2020 at 22:28)</a>:</h4>
+<p>redex is a shortening for "reducible expression", and it refers to when there is a piece of the term that can be directly simplified by one of the "greek rules". For example <code>1 + 2 = (\lam x, x) 3</code> contains a beta redex, and <code>f = g \circ (\lam x, h x)</code> contains an eta redex</p>
+
+<a name="193386341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20typing%20the%20same%20thing%207%20times%20without%20using%20let/near/193386341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95464avoidtypingthesamething7timeswithoutusinglet.html#193386341">Mario Carneiro (Apr 08 2020 at 22:29)</a>:</h4>
+<p>a let expression is always a redex (a zeta redex, if you care) because there is a rule that simplifies it to <code>z[y/x]</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

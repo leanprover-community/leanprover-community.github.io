@@ -1,0 +1,214 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/217875IstherecodeforX/12240highscores.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/index.html">Is there code for X?</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/12240highscores.html">high scores</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192929117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/217875-Is%20there%20code%20for%20X%3F/topic/high%20scores/near/192929117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/12240highscores.html#192929117">Patrick Massot (Apr 04 2020 at 22:02)</a>:</h4>
+<p>Sébastien, do you know whether the high scores lemma you discussed in Orsay is in mathlib ?</p>
+
+<a name="192947100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/217875-Is%20there%20code%20for%20X%3F/topic/high%20scores/near/192947100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/12240highscores.html#192947100">Sebastien Gouezel (Apr 05 2020 at 07:54)</a>:</h4>
+<p>I don't think it is, at least I never noticed it.</p>
+
+<a name="192947747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/217875-Is%20there%20code%20for%20X%3F/topic/high%20scores/near/192947747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/12240highscores.html#192947747">Sebastien Gouezel (Apr 05 2020 at 08:09)</a>:</h4>
+<p>Using <code>nat.find</code>, it should be pretty straightforward. The Isabelle proof I gave is very clunky as it does everything by hand, using only infs and sups.</p>
+
+<a name="192954042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/217875-Is%20there%20code%20for%20X%3F/topic/high%20scores/near/192954042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/12240highscores.html#192954042">Patrick Massot (Apr 05 2020 at 11:06)</a>:</h4>
+<p>Do we have some form of:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">unbounded_above</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">has_lt</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">exists_gt</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">b</span><span class="o">,</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">)</span>
+</pre></div>
+
+
+<p>This seems needed for the statement of the high scores lemma if we want a rather general sequence target.</p>
+
+<a name="192954062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/217875-Is%20there%20code%20for%20X%3F/topic/high%20scores/near/192954062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/12240highscores.html#192954062">Patrick Massot (Apr 05 2020 at 11:07)</a>:</h4>
+<p>Of course I don't mind using a data carrying version (adding a function taking <code>a</code> and outputting <code>b</code>).</p>
+
+<a name="192955088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/217875-Is%20there%20code%20for%20X%3F/topic/high%20scores/near/192955088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/12240highscores.html#192955088">Mario Carneiro (Apr 05 2020 at 11:37)</a>:</h4>
+<p>there is <code>order.unbounded</code> although it is stated a bit differently</p>
+
+<a name="192955223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/217875-Is%20there%20code%20for%20X%3F/topic/high%20scores/near/192955223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/12240highscores.html#192955223">Patrick Massot (Apr 05 2020 at 11:40)</a>:</h4>
+<p>Where is that?</p>
+
+<a name="192955230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/217875-Is%20there%20code%20for%20X%3F/topic/high%20scores/near/192955230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/12240highscores.html#192955230">Patrick Massot (Apr 05 2020 at 11:41)</a>:</h4>
+<p>I see only <code>def unbounded (r : α → α → Prop) (s : set α) : Prop := ∀ a, ∃ b ∈ s, ¬ r b a</code>. Is that what you mean?</p>
+
+<a name="192955481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/217875-Is%20there%20code%20for%20X%3F/topic/high%20scores/near/192955481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/12240highscores.html#192955481">Patrick Massot (Apr 05 2020 at 11:47)</a>:</h4>
+<p>Maybe this discussion is too abstract. I'd like to read comments about:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">order</span><span class="bp">.</span><span class="n">filter</span>
+
+<span class="kn">open</span> <span class="n">filter</span>
+
+<span class="kn">lemma</span> <span class="n">exists_le_of_tendsto_at_top</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_linear_order</span> <span class="n">α</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">β</span><span class="o">]</span> <span class="o">{</span><span class="n">u</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">tendsto</span> <span class="n">u</span> <span class="n">at_top</span> <span class="n">at_top</span><span class="o">)</span> <span class="o">:</span>
+<span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">a&#39;</span> <span class="bp">≥</span> <span class="n">a</span><span class="o">,</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">u</span> <span class="n">a&#39;</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">tendsto_at_top</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">haveI</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">a</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">mem_at_top_sets</span><span class="bp">.</span><span class="n">mp</span> <span class="o">(</span><span class="n">h</span> <span class="n">b</span><span class="o">)</span> <span class="k">with</span> <span class="n">a&#39;</span> <span class="n">ha&#39;</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">⟨</span><span class="n">max</span> <span class="n">a</span> <span class="n">a&#39;</span><span class="o">,</span> <span class="n">le_max_left</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">ha&#39;</span> <span class="bp">_</span> <span class="err">$</span> <span class="n">le_max_right</span> <span class="bp">_</span> <span class="bp">_⟩</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="n">class</span> <span class="n">unbounded_above</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">has_lt</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">exists_gt</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">b</span><span class="o">,</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="n">linear_ordered_semiring</span><span class="bp">.</span><span class="n">unbounded_above</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">linear_ordered_semiring</span> <span class="n">R</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">unbounded_above</span> <span class="n">R</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">a</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">a</span><span class="bp">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">lt_add_one</span> <span class="n">a</span><span class="bp">⟩⟩</span>
+
+<span class="kn">lemma</span> <span class="n">exists_lt_of_tendsto_at_top</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_linear_order</span> <span class="n">α</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">unbounded_above</span> <span class="n">β</span><span class="o">]</span> <span class="o">{</span><span class="n">u</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">tendsto</span> <span class="n">u</span> <span class="n">at_top</span> <span class="n">at_top</span><span class="o">)</span> <span class="o">:</span>
+<span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">a&#39;</span> <span class="bp">≥</span> <span class="n">a</span><span class="o">,</span> <span class="n">b</span> <span class="bp">&lt;</span> <span class="n">u</span> <span class="n">a&#39;</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">unbounded_above</span><span class="bp">.</span><span class="n">exists_gt</span> <span class="n">b</span> <span class="k">with</span> <span class="n">b&#39;</span> <span class="n">hb&#39;</span><span class="o">,</span>
+  <span class="n">rcases</span> <span class="n">exists_le_of_tendsto_at_top</span> <span class="n">h</span> <span class="n">a</span> <span class="n">b&#39;</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">a&#39;</span><span class="o">,</span> <span class="n">ha&#39;</span><span class="o">,</span> <span class="n">ha&#39;&#39;</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">⟨</span><span class="n">a&#39;</span><span class="o">,</span> <span class="n">ha&#39;</span><span class="o">,</span> <span class="n">lt_of_lt_of_le</span> <span class="n">hb&#39;</span> <span class="n">ha&#39;&#39;</span><span class="bp">⟩</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">high_scores</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_linear_order</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">unbounded_above</span> <span class="n">β</span><span class="o">]</span> <span class="o">{</span><span class="n">u</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">β</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">hu</span> <span class="o">:</span> <span class="n">tendsto</span> <span class="n">u</span> <span class="n">at_top</span> <span class="n">at_top</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">N</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">n</span> <span class="bp">≥</span> <span class="n">N</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">k</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">,</span> <span class="n">u</span> <span class="n">k</span> <span class="bp">&lt;</span> <span class="n">u</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">N</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">A</span> <span class="o">:=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">image</span> <span class="n">u</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">range</span> <span class="err">$</span> <span class="n">N</span><span class="bp">+</span><span class="mi">1</span><span class="o">),</span> <span class="c1">-- A = {u 0, ..., u N}</span>
+  <span class="k">have</span> <span class="n">Ane</span> <span class="o">:</span> <span class="n">A</span><span class="bp">.</span><span class="n">nonempty</span><span class="o">,</span>
+    <span class="k">from</span> <span class="bp">⟨</span><span class="n">u</span> <span class="mi">0</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_image_of_mem</span> <span class="bp">_</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">mem_range</span><span class="bp">.</span><span class="n">mpr</span> <span class="err">$</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero_lt_succ</span> <span class="bp">_</span><span class="o">)</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">M</span> <span class="o">:=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">max&#39;</span> <span class="n">A</span> <span class="n">Ane</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">ex</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">n</span> <span class="bp">≥</span> <span class="n">N</span><span class="o">,</span> <span class="n">M</span> <span class="bp">&lt;</span> <span class="n">u</span> <span class="n">n</span><span class="o">,</span>
+    <span class="k">from</span> <span class="n">exists_lt_of_tendsto_at_top</span> <span class="n">hu</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="k">obtain</span> <span class="bp">⟨</span><span class="n">n</span><span class="o">,</span> <span class="n">hnN</span><span class="o">,</span> <span class="n">hnM</span><span class="o">,</span> <span class="n">hn_min</span><span class="bp">⟩</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">n</span><span class="o">,</span> <span class="n">N</span> <span class="bp">≤</span> <span class="n">n</span> <span class="bp">∧</span> <span class="n">M</span> <span class="bp">&lt;</span> <span class="n">u</span> <span class="n">n</span> <span class="bp">∧</span> <span class="bp">∀</span> <span class="n">k</span><span class="o">,</span> <span class="n">N</span> <span class="bp">≤</span> <span class="n">k</span> <span class="bp">→</span> <span class="n">k</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">u</span> <span class="n">k</span> <span class="bp">≤</span> <span class="n">M</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">use</span> <span class="n">nat</span><span class="bp">.</span><span class="n">find</span> <span class="n">ex</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="err">←</span> <span class="n">and_assoc</span><span class="o">,</span>
+    <span class="n">split</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">nat</span><span class="bp">.</span><span class="n">find_spec</span> <span class="n">ex</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">k</span> <span class="n">hk</span> <span class="n">hk&#39;</span><span class="o">,</span>
+      <span class="n">simpa</span> <span class="o">[</span><span class="n">hk</span><span class="o">]</span> <span class="kn">using</span> <span class="n">nat</span><span class="bp">.</span><span class="n">find_min</span> <span class="n">ex</span> <span class="n">hk&#39;</span> <span class="o">}</span> <span class="o">},</span>
+  <span class="n">use</span> <span class="o">[</span><span class="n">n</span><span class="o">,</span> <span class="n">hnN</span><span class="o">],</span>
+  <span class="n">intros</span> <span class="n">k</span> <span class="n">hk</span><span class="o">,</span>
+  <span class="n">by_cases</span> <span class="n">H</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">≤</span> <span class="n">N</span><span class="o">,</span>
+  <span class="o">{</span> <span class="k">have</span> <span class="o">:</span> <span class="n">u</span> <span class="n">k</span> <span class="err">∈</span> <span class="n">A</span><span class="o">,</span>
+      <span class="k">from</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_image_of_mem</span> <span class="bp">_</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">mem_range</span><span class="bp">.</span><span class="n">mpr</span> <span class="err">$</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_succ_of_le</span> <span class="n">H</span><span class="o">),</span>
+    <span class="k">have</span> <span class="o">:</span> <span class="n">u</span> <span class="n">k</span> <span class="bp">≤</span> <span class="n">M</span><span class="o">,</span>
+      <span class="k">from</span> <span class="n">finset</span><span class="bp">.</span><span class="n">le_max&#39;</span> <span class="n">A</span> <span class="n">Ane</span> <span class="o">(</span><span class="n">u</span> <span class="n">k</span><span class="o">)</span> <span class="n">this</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">lt_of_le_of_lt</span> <span class="n">this</span> <span class="n">hnM</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">push_neg</span> <span class="n">at</span> <span class="n">H</span><span class="o">,</span>
+    <span class="k">calc</span> <span class="n">u</span> <span class="n">k</span> <span class="bp">≤</span> <span class="n">M</span>   <span class="o">:</span> <span class="n">hn_min</span> <span class="n">k</span> <span class="o">(</span><span class="n">le_of_lt</span> <span class="n">H</span><span class="o">)</span> <span class="n">hk</span>
+         <span class="bp">...</span> <span class="bp">&lt;</span> <span class="n">u</span> <span class="n">n</span> <span class="o">:</span> <span class="n">hnM</span> <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="192955531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/217875-Is%20there%20code%20for%20X%3F/topic/high%20scores/near/192955531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/12240highscores.html#192955531">Patrick Massot (Apr 05 2020 at 11:48)</a>:</h4>
+<p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span></p>
+
+<a name="192955534"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/217875-Is%20there%20code%20for%20X%3F/topic/high%20scores/near/192955534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/12240highscores.html#192955534">Sebastien Gouezel (Apr 05 2020 at 11:48)</a>:</h4>
+<p>It's called <code>no_top_order</code></p>
+
+<a name="192955536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/217875-Is%20there%20code%20for%20X%3F/topic/high%20scores/near/192955536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/12240highscores.html#192955536">Patrick Massot (Apr 05 2020 at 11:48)</a>:</h4>
+<p>Ah</p>
+
+<a name="192955550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/217875-Is%20there%20code%20for%20X%3F/topic/high%20scores/near/192955550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/12240highscores.html#192955550">Patrick Massot (Apr 05 2020 at 11:48)</a>:</h4>
+<p>I knew it was bound to exist <span aria-label="wink" class="emoji emoji-1f609" role="img" title="wink">:wink:</span></p>
+
+<a name="192955568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/217875-Is%20there%20code%20for%20X%3F/topic/high%20scores/near/192955568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/12240highscores.html#192955568">Patrick Massot (Apr 05 2020 at 11:49)</a>:</h4>
+<p>The <code>preorder</code> requirement in the definition of <code>no_top_order</code> is ridiculous.</p>
+
+<a name="192955614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/217875-Is%20there%20code%20for%20X%3F/topic/high%20scores/near/192955614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/12240highscores.html#192955614">Mario Carneiro (Apr 05 2020 at 11:50)</a>:</h4>
+<p>that's our weakest well behaved order typeclass</p>
+
+<a name="192955618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/217875-Is%20there%20code%20for%20X%3F/topic/high%20scores/near/192955618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/12240highscores.html#192955618">Patrick Massot (Apr 05 2020 at 11:50)</a>:</h4>
+<p>But <code>has_lt</code> is enough here!</p>
+
+<a name="192955622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/217875-Is%20there%20code%20for%20X%3F/topic/high%20scores/near/192955622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/12240highscores.html#192955622">Mario Carneiro (Apr 05 2020 at 11:50)</a>:</h4>
+<p>if you want less than that you should go for the piecemeal <code>is_irrefl</code> etc typeclasses</p>
+
+<a name="192955623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/217875-Is%20there%20code%20for%20X%3F/topic/high%20scores/near/192955623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/12240highscores.html#192955623">Patrick Massot (Apr 05 2020 at 11:50)</a>:</h4>
+<p><span aria-label="stuck out tongue" class="emoji emoji-1f61d" role="img" title="stuck out tongue">:stuck_out_tongue:</span></p>
+
+<a name="192955653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/217875-Is%20there%20code%20for%20X%3F/topic/high%20scores/near/192955653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/12240highscores.html#192955653">Patrick Massot (Apr 05 2020 at 11:51)</a>:</h4>
+<p>Anyway, let's go back to serious stuff. <code>no_top_order</code> is indeed what I was looking for. Any other observation about that high scores stuff?</p>
+
+<a name="192955744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/217875-Is%20there%20code%20for%20X%3F/topic/high%20scores/near/192955744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/12240highscores.html#192955744">Mario Carneiro (Apr 05 2020 at 11:53)</a>:</h4>
+<p>it occurs to me that the statement of <code>high_scores</code> could be stated using <code>order.unbounded</code>, although I'm not sure if the result is more or less readable</p>
+
+<a name="192955805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/217875-Is%20there%20code%20for%20X%3F/topic/high%20scores/near/192955805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/12240highscores.html#192955805">Patrick Massot (Apr 05 2020 at 11:54)</a>:</h4>
+<p>In my intended use, the sequence target is either nat or real.</p>
+
+<a name="192955978"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/217875-Is%20there%20code%20for%20X%3F/topic/high%20scores/near/192955978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/12240highscores.html#192955978">Sebastien Gouezel (Apr 05 2020 at 11:59)</a>:</h4>
+<p>I think your code is nice. How do you feel it compare to the Isabelle proof wrt to length and readability? For the record, here is the Isabelle code:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">high_scores</span><span class="o">:</span>
+  <span class="n">fixes</span> <span class="n">u</span><span class="bp">::</span><span class="s2">&quot;nat ⇒ real&quot;</span> <span class="n">and</span> <span class="n">i</span><span class="bp">::</span><span class="n">nat</span>
+  <span class="n">assumes</span> <span class="s2">&quot;u ⇢ ∞&quot;</span>
+  <span class="n">shows</span> <span class="s2">&quot;∃n ≥ i. ∀l ≤ n. u l ≤ u n&quot;</span>
+<span class="k">proof</span> <span class="bp">-</span>
+  <span class="n">define</span> <span class="n">M</span> <span class="n">where</span> <span class="s2">&quot;M = Max {u l|l. l &lt; i}&quot;</span>
+  <span class="n">define</span> <span class="n">n</span> <span class="n">where</span> <span class="s2">&quot;n = Inf {m. u m &gt; M}&quot;</span>
+  <span class="k">have</span> <span class="s2">&quot;eventually (λm. u m &gt; M) sequentially&quot;</span>
+    <span class="kn">using</span> <span class="n">assms</span> <span class="k">by</span> <span class="o">(</span><span class="n">simp</span> <span class="n">add</span><span class="o">:</span> <span class="n">filterlim_at_top_dense</span> <span class="n">tendsto_PInfty_eq_at_top</span><span class="o">)</span>
+  <span class="k">then</span> <span class="k">have</span> <span class="s2">&quot;{m. u m &gt; M} ≠ {}&quot;</span> <span class="k">by</span> <span class="n">fastforce</span>
+  <span class="k">then</span> <span class="k">have</span> <span class="s2">&quot;n ∈ {m. u m &gt; M}&quot;</span> <span class="n">unfolding</span> <span class="n">n_def</span> <span class="kn">using</span> <span class="n">Inf_nat_def1</span> <span class="k">by</span> <span class="n">metis</span>
+  <span class="k">then</span> <span class="k">have</span> <span class="s2">&quot;u n &gt; M&quot;</span> <span class="k">by</span> <span class="n">simp</span>
+  <span class="k">have</span> <span class="s2">&quot;n ≥ i&quot;</span>
+  <span class="k">proof</span> <span class="o">(</span><span class="n">rule</span> <span class="n">ccontr</span><span class="o">)</span>
+    <span class="k">assume</span> <span class="s2">&quot; ¬ i ≤ n&quot;</span>
+    <span class="k">then</span> <span class="k">have</span> <span class="bp">*</span><span class="o">:</span> <span class="s2">&quot;n &lt; i&quot;</span> <span class="k">by</span> <span class="n">simp</span>
+    <span class="k">have</span> <span class="s2">&quot;u n ≤ M&quot;</span> <span class="n">unfolding</span> <span class="n">M_def</span> <span class="n">apply</span> <span class="o">(</span><span class="n">rule</span> <span class="n">Max_ge</span><span class="o">)</span> <span class="kn">using</span> <span class="bp">*</span> <span class="k">by</span> <span class="n">auto</span>
+    <span class="k">then</span> <span class="k">show</span> <span class="n">False</span> <span class="kn">using</span> <span class="err">‹</span><span class="n">u</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="n">M</span><span class="err">›</span> <span class="k">by</span> <span class="n">auto</span>
+  <span class="k">qed</span>
+  <span class="n">moreover</span> <span class="k">have</span> <span class="s2">&quot;u l ≤ u n&quot;</span> <span class="k">if</span> <span class="s2">&quot;l ≤ n&quot;</span> <span class="n">for</span> <span class="n">l</span>
+  <span class="k">proof</span> <span class="o">(</span><span class="n">cases</span> <span class="s2">&quot;l = n&quot;</span><span class="o">)</span>
+    <span class="n">case</span> <span class="n">True</span>
+    <span class="k">then</span> <span class="k">show</span> <span class="err">?</span><span class="n">thesis</span> <span class="k">by</span> <span class="n">simp</span>
+  <span class="n">next</span>
+    <span class="n">case</span> <span class="n">False</span>
+    <span class="k">then</span> <span class="k">have</span> <span class="s2">&quot;l &lt; n&quot;</span> <span class="kn">using</span> <span class="err">‹</span><span class="n">l</span> <span class="bp">≤</span> <span class="n">n</span><span class="err">›</span> <span class="k">by</span> <span class="n">auto</span>
+    <span class="k">then</span> <span class="k">have</span> <span class="s2">&quot;l ∉ {m. u m &gt; M}&quot;</span>
+      <span class="n">unfolding</span> <span class="n">n_def</span> <span class="k">by</span> <span class="o">(</span><span class="n">meson</span> <span class="n">bdd_below_def</span> <span class="n">cInf_lower</span> <span class="n">not_le</span> <span class="n">zero_le</span><span class="o">)</span>
+    <span class="k">then</span> <span class="k">show</span> <span class="err">?</span><span class="n">thesis</span> <span class="kn">using</span> <span class="err">‹</span><span class="n">u</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="n">M</span><span class="err">›</span> <span class="k">by</span> <span class="n">auto</span>
+  <span class="k">qed</span>
+  <span class="n">ultimately</span> <span class="k">show</span> <span class="err">?</span><span class="n">thesis</span> <span class="k">by</span> <span class="n">auto</span>
+<span class="k">qed</span>
+</pre></div>
+
+<a name="192956203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/217875-Is%20there%20code%20for%20X%3F/topic/high%20scores/near/192956203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/12240highscores.html#192956203">Patrick Massot (Apr 05 2020 at 12:04)</a>:</h4>
+<p>I think it's pretty comparable. The only painful part in Lean is finding the lemmas. Basically every intermediate assumption should be proved by automation. Some of it already is (by <code>library_search</code>).</p>
+
+<a name="192956213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/217875-Is%20there%20code%20for%20X%3F/topic/high%20scores/near/192956213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/217875IstherecodeforX/12240highscores.html#192956213">Patrick Massot (Apr 05 2020 at 12:04)</a>:</h4>
+<p>I also wish <code>nat.find</code> had a less cryptic name.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

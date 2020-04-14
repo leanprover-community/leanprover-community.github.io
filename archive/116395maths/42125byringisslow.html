@@ -1,0 +1,119 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/42125byringisslow.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/42125byringisslow.html">`by ring` is slow</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193001686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60by%20ring%60%20is%20slow/near/193001686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42125byringisslow.html#193001686">Yury G. Kudryashov (Apr 06 2020 at 07:05)</a>:</h4>
+<p>This file takes &gt;30s to compile on my laptop. Most of this time is spent proving the last <code>instance : ring</code> inside tactic <code>ring</code></p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">ring</span>
+
+<span class="c">/-</span><span class="cm">- Space of quaternions over a type. Implemented as a structure with four fields:</span>
+<span class="cm">`re`, `im_i`, `im_j`, and `im_k`. -/</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">ext</span><span class="o">]</span> <span class="kn">structure</span> <span class="n">quaternion</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">re</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">im_i</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">im_j</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">im_k</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span>
+
+<span class="kn">notation</span> <span class="bp">`</span><span class="n">ℍ</span><span class="o">[</span><span class="bp">`</span> <span class="n">R</span> <span class="bp">`</span><span class="o">]</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">quaternion</span> <span class="n">R</span>
+
+<span class="kn">namespace</span> <span class="n">quaternion</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℍ</span><span class="o">[</span><span class="n">R</span><span class="o">])</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="n">R</span> <span class="n">ℍ</span><span class="o">[</span><span class="n">R</span><span class="o">]</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="bp">⟩⟩</span>
+
+<span class="n">mk_simp_attribute</span> <span class="n">quaternion_projs</span> <span class="s2">&quot;Projections of operations on quaternions&quot;</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">,</span> <span class="n">quaternion_projs</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">coe_re</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℍ</span><span class="o">[</span><span class="n">R</span><span class="o">])</span><span class="bp">.</span><span class="n">re</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">,</span> <span class="n">quaternion_projs</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">coe_im_i</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℍ</span><span class="o">[</span><span class="n">R</span><span class="o">])</span><span class="bp">.</span><span class="n">im_i</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">,</span> <span class="n">quaternion_projs</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">coe_im_j</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℍ</span><span class="o">[</span><span class="n">R</span><span class="o">])</span><span class="bp">.</span><span class="n">im_j</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">,</span> <span class="n">quaternion_projs</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">coe_im_k</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℍ</span><span class="o">[</span><span class="n">R</span><span class="o">])</span><span class="bp">.</span><span class="n">im_k</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simps</span> <span class="n">short_name</span><span class="o">]</span> <span class="kn">instance</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="n">ℍ</span><span class="o">[</span><span class="n">R</span><span class="o">]</span> <span class="o">:=</span> <span class="bp">⟨⟨</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="bp">⟩⟩</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">inhabited</span> <span class="n">ℍ</span><span class="o">[</span><span class="n">R</span><span class="o">]</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">0</span><span class="bp">⟩</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simps</span> <span class="n">short_name</span><span class="o">]</span> <span class="kn">instance</span> <span class="o">:</span> <span class="n">has_one</span> <span class="n">ℍ</span><span class="o">[</span><span class="n">R</span><span class="o">]</span> <span class="o">:=</span> <span class="bp">⟨⟨</span><span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="bp">⟩⟩</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simps</span> <span class="n">short_name</span><span class="o">]</span> <span class="kn">instance</span> <span class="o">:</span> <span class="n">has_add</span> <span class="n">ℍ</span><span class="o">[</span><span class="n">R</span><span class="o">]</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">a</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">a</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span> <span class="n">a</span><span class="bp">.</span><span class="mi">3</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">.</span><span class="mi">3</span><span class="o">,</span> <span class="n">a</span><span class="bp">.</span><span class="mi">4</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">.</span><span class="mi">4</span><span class="bp">⟩⟩</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simps</span> <span class="n">short_name</span><span class="o">]</span> <span class="kn">instance</span> <span class="o">:</span> <span class="n">has_neg</span> <span class="n">ℍ</span><span class="o">[</span><span class="n">R</span><span class="o">]</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">a</span><span class="o">,</span> <span class="bp">⟨-</span><span class="n">a</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="bp">-</span><span class="n">a</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span> <span class="bp">-</span><span class="n">a</span><span class="bp">.</span><span class="mi">3</span><span class="o">,</span> <span class="bp">-</span><span class="n">a</span><span class="bp">.</span><span class="mi">4</span><span class="bp">⟩⟩</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simps</span> <span class="n">short_name</span><span class="o">]</span> <span class="kn">instance</span> <span class="o">:</span> <span class="n">has_mul</span> <span class="n">ℍ</span><span class="o">[</span><span class="n">R</span><span class="o">]</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+  <span class="bp">⟨</span><span class="n">a</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">-</span> <span class="n">a</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">-</span> <span class="n">a</span><span class="bp">.</span><span class="mi">3</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">.</span><span class="mi">3</span> <span class="bp">-</span> <span class="n">a</span><span class="bp">.</span><span class="mi">4</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">.</span><span class="mi">4</span><span class="o">,</span>
+   <span class="n">a</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">+</span> <span class="n">a</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">a</span><span class="bp">.</span><span class="mi">3</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">.</span><span class="mi">4</span> <span class="bp">-</span> <span class="n">a</span><span class="bp">.</span><span class="mi">4</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">.</span><span class="mi">3</span><span class="o">,</span>
+   <span class="n">a</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">.</span><span class="mi">3</span> <span class="bp">-</span> <span class="n">a</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">.</span><span class="mi">4</span> <span class="bp">+</span> <span class="n">a</span><span class="bp">.</span><span class="mi">3</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">a</span><span class="bp">.</span><span class="mi">4</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+   <span class="n">a</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">.</span><span class="mi">4</span> <span class="bp">+</span> <span class="n">a</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">.</span><span class="mi">3</span> <span class="bp">-</span> <span class="n">a</span><span class="bp">.</span><span class="mi">3</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">+</span> <span class="n">a</span><span class="bp">.</span><span class="mi">4</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">.</span><span class="mi">1</span><span class="bp">⟩⟩</span>
+
+<span class="n">attribute</span> <span class="o">[</span><span class="n">quaternion_projs</span><span class="o">]</span>
+  <span class="n">has_zero_re</span> <span class="n">has_zero_im_i</span> <span class="n">has_zero_im_j</span> <span class="n">has_zero_im_k</span>
+  <span class="n">has_one_re</span> <span class="n">has_one_im_i</span> <span class="n">has_one_im_j</span> <span class="n">has_one_im_k</span>
+  <span class="n">has_add_re</span> <span class="n">has_add_im_i</span> <span class="n">has_add_im_j</span> <span class="n">has_add_im_k</span>
+  <span class="n">has_neg_re</span> <span class="n">has_neg_im_i</span> <span class="n">has_neg_im_j</span> <span class="n">has_neg_im_k</span>
+  <span class="n">has_mul_re</span> <span class="n">has_mul_im_i</span> <span class="n">has_mul_im_j</span> <span class="n">has_mul_im_k</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">ring</span> <span class="n">ℍ</span><span class="o">[</span><span class="n">R</span><span class="o">]</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">refine_struct</span> <span class="o">{</span> <span class="n">add</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">+</span><span class="o">),</span> <span class="n">zero</span> <span class="o">:=</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">ℍ</span><span class="o">[</span><span class="n">R</span><span class="o">]),</span> <span class="n">neg</span> <span class="o">:=</span> <span class="n">has_neg</span><span class="bp">.</span><span class="n">neg</span><span class="o">,</span> <span class="n">mul</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">*</span><span class="o">),</span> <span class="n">one</span> <span class="o">:=</span> <span class="mi">1</span> <span class="o">}</span><span class="bp">;</span>
+  <span class="n">intros</span><span class="bp">;</span> <span class="n">ext</span><span class="bp">;</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[]</span> <span class="k">with</span> <span class="n">quaternion_projs</span><span class="bp">;</span> <span class="n">ring</span>
+
+<span class="kn">end</span> <span class="n">quaternion</span>
+</pre></div>
+
+<a name="193002288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60by%20ring%60%20is%20slow/near/193002288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42125byringisslow.html#193002288">Yury G. Kudryashov (Apr 06 2020 at 07:12)</a>:</h4>
+<p>From <code>lean --profile</code> output:</p>
+<div class="codehilite"><pre><span></span>31168ms   100.0%   tactic.seq
+31168ms   100.0%   tactic.istep._lambda_1
+31168ms   100.0%   _interaction
+31168ms   100.0%   tactic.step
+31168ms   100.0%   interaction_monad.monad._lambda_9
+31168ms   100.0%   tactic.istep
+31168ms   100.0%   scope_trace
+31129ms    99.9%   tactic.all_goals
+31129ms    99.9%   _private.757872287.all_goals_core._main._lambda_2
+31129ms    99.9%   all_goals_core
+30764ms    98.7%   interaction_monad_orelse
+30284ms    97.2%   tactic.interactive.ring1._lambda_3
+30284ms    97.2%   tactic.interactive.ring._lambda_1
+30284ms    97.2%   tactic.interactive.ring
+30284ms    97.2%   tactic.interactive.ring1
+30269ms    97.1%   tactic.ring.ring_m.run
+29761ms    95.5%   tactic.ring.lift
+14863ms    47.7%   tactic.mk_mapp
+ 7525ms    24.1%   tactic.norm_num
+ 6749ms    21.7%   tactic.ring.eval_neg._main._lambda_2
+ 5244ms    16.8%   tactic.mk_app
+ 4837ms    15.5%   expr.of_nat._lambda_1
+ 2155ms     6.9%   tactic.mk_instance
+ 2041ms     6.5%   tactic.ring.eval_const_mul._main._lambda_2
+  532ms     1.7%   tactic.interactive.simp_core
+</pre></div>
+
+<a name="193003158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60by%20ring%60%20is%20slow/near/193003158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42125byringisslow.html#193003158">Kenny Lau (Apr 06 2020 at 07:22)</a>:</h4>
+<p>assume each <code>by ring</code> takes 1 s. you have about 30 identities. sounds right.</p>
+
+<a name="193003272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60by%20ring%60%20is%20slow/near/193003272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42125byringisslow.html#193003272">Yury G. Kudryashov (Apr 06 2020 at 07:24)</a>:</h4>
+<p>Why does it take 1s?</p>
+
+<a name="193003827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60by%20ring%60%20is%20slow/near/193003827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42125byringisslow.html#193003827">Kevin Buzzard (Apr 06 2020 at 07:30)</a>:</h4>
+<p>It's a high-powered tactic written in Lean not C++? (but honestly I have no clue about these things) (all I know is <a href="https://xenaproject.wordpress.com/2018/06/13/ab3/" title="https://xenaproject.wordpress.com/2018/06/13/ab3/">this</a>)</p>
+
+<a name="193005014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60by%20ring%60%20is%20slow/near/193005014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42125byringisslow.html#193005014">Anne Baanen (Apr 06 2020 at 07:43)</a>:</h4>
+<p>With <code>ring_exp</code> instead of <code>ring</code>, tactic execution speeds up from 24 seconds to 5 seconds for me. It seems that <code>ring</code> is giving too many implicit arguments to the elaborator, as it spends a lot of time in <code>tactic.mk_mapp</code> and <code>tactic.mk_app</code>. When I was implementing <code>ring_exp</code>, I noticed that <code>ring_exp</code> was quite slow because of the same issue, so I made every argument explicit.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,255 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/50892Leanunfoldsprojections.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html">Lean unfolds projections</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193691110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193691110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193691110">Yury G. Kudryashov (Apr 12 2020 at 02:57)</a>:</h4>
+<p>In the following example in <code>inv_mem'</code> Lean unfolds many projections making <code>simp</code> unusable. Doesn't happen with <code>old_structure_cmd</code>.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">lattice</span>
+
+<span class="kn">namespace</span> <span class="n">hidden</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span>
+
+<span class="kn">structure</span> <span class="n">submonoid</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">carrier</span> <span class="o">:</span> <span class="n">set</span> <span class="n">M</span><span class="o">)</span>
+<span class="o">(</span><span class="n">one_mem&#39;</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">M</span><span class="o">)</span> <span class="err">∈</span> <span class="n">carrier</span><span class="o">)</span>
+<span class="o">(</span><span class="n">mul_mem&#39;</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="err">∈</span> <span class="n">carrier</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="err">∈</span> <span class="n">carrier</span><span class="o">),</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">carrier</span><span class="o">)</span>
+
+<span class="kn">structure</span> <span class="n">subgroup</span> <span class="kn">extends</span> <span class="n">submonoid</span> <span class="n">G</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">inv_mem&#39;</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">carrier</span><span class="o">,</span> <span class="n">x</span><span class="bp">⁻¹</span> <span class="err">∈</span> <span class="n">carrier</span><span class="o">)</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">M</span> <span class="n">G</span><span class="o">}</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="o">(</span><span class="n">subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">set</span> <span class="n">G</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">S</span><span class="o">,</span> <span class="n">S</span><span class="bp">.</span><span class="n">carrier</span><span class="bp">⟩</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_mem</span> <span class="n">G</span> <span class="o">(</span><span class="n">subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">x</span> <span class="n">S</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)</span><span class="bp">⟩</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_Inf</span> <span class="o">(</span><span class="n">subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">S</span><span class="o">,</span> <span class="o">{</span> <span class="n">carrier</span> <span class="o">:=</span> <span class="err">⋂</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">S</span><span class="o">,</span> <span class="err">↑</span><span class="n">s</span><span class="o">,</span>
+  <span class="n">one_mem&#39;</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">trace_state</span><span class="o">,</span> <span class="n">sorry</span> <span class="o">},</span>
+  <span class="n">mul_mem&#39;</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">trace_state</span><span class="o">,</span> <span class="n">sorry</span> <span class="o">},</span>
+  <span class="n">inv_mem&#39;</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">trace_state</span><span class="o">,</span> <span class="n">sorry</span> <span class="o">}</span> <span class="o">}</span><span class="bp">⟩</span>
+
+<span class="kn">end</span> <span class="n">hidden</span>
+</pre></div>
+
+<a name="193694605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193694605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193694605">Scott Morrison (Apr 12 2020 at 04:59)</a>:</h4>
+<p>I've just had a similar issue, and seen similar mysteries earlier. Could you try <code>refine_struct</code> and see what the goals look like there?</p>
+
+<a name="193695450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193695450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193695450">Yury G. Kudryashov (Apr 12 2020 at 05:24)</a>:</h4>
+<p>Better luck with <code>refine_struct</code></p>
+
+<a name="193699576"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193699576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193699576">Yury G. Kudryashov (Apr 12 2020 at 07:40)</a>:</h4>
+<p>But I don't want to define all instances using <code>refine_struct</code>!</p>
+
+<a name="193699586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193699586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193699586">Yury G. Kudryashov (Apr 12 2020 at 07:40)</a>:</h4>
+<p>Who should know how does it work? <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> ? <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> ?</p>
+
+<a name="193699593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193699593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193699593">Mario Carneiro (Apr 12 2020 at 07:41)</a>:</h4>
+<p>Are there any universe metavariables?</p>
+
+<a name="193699632"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193699632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193699632">Yury G. Kudryashov (Apr 12 2020 at 07:42)</a>:</h4>
+<p>No, see MWE above.</p>
+
+<a name="193699647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193699647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193699647">Yury G. Kudryashov (Apr 12 2020 at 07:43)</a>:</h4>
+<p>It has something to do with the new <code>structure</code> cmd.</p>
+
+<a name="193699652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193699652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193699652">Mario Carneiro (Apr 12 2020 at 07:44)</a>:</h4>
+<p>This also happens sometimes when you haven't finished the proof for the first part of the structure</p>
+
+<a name="193699690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193699690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193699690">Yury G. Kudryashov (Apr 12 2020 at 07:44)</a>:</h4>
+<p>Let me try.</p>
+
+<a name="193699693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193699693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193699693">Mario Carneiro (Apr 12 2020 at 07:44)</a>:</h4>
+<p>If you replace the proofs of <code>one_mem'</code> and <code>mul_mem'</code> with <code>sorry</code> then <code>inv_mem'</code> does not unfold to <code>set.mem</code></p>
+
+<a name="193699902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193699902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193699902">Yury G. Kudryashov (Apr 12 2020 at 07:50)</a>:</h4>
+<p>Here it does:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">has_Inf</span> <span class="o">(</span><span class="n">subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">S</span><span class="o">,</span> <span class="o">{</span> <span class="n">carrier</span> <span class="o">:=</span> <span class="err">⋂</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">S</span><span class="o">,</span> <span class="err">↑</span><span class="n">s</span><span class="o">,</span>
+  <span class="n">one_mem&#39;</span> <span class="o">:=</span> <span class="n">mem_bInter</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">s</span> <span class="n">hs</span><span class="o">,</span> <span class="n">s</span><span class="bp">.</span><span class="n">one_mem&#39;</span><span class="o">,</span>
+  <span class="n">mul_mem&#39;</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">mem_bInter_iff</span><span class="o">],</span> <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span> <span class="n">y</span> <span class="n">hy</span> <span class="n">s</span> <span class="n">hs</span><span class="o">,</span> <span class="n">exact</span> <span class="n">s</span><span class="bp">.</span><span class="n">to_submonoid</span><span class="bp">.</span><span class="n">mul_mem&#39;</span> <span class="bp">_</span> <span class="o">(</span><span class="n">hx</span> <span class="bp">_</span> <span class="n">hs</span><span class="o">)</span> <span class="bp">_</span> <span class="o">(</span><span class="n">hy</span> <span class="bp">_</span> <span class="n">hs</span><span class="o">)</span> <span class="o">},</span>
+  <span class="n">inv_mem&#39;</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">trace_state</span><span class="o">,</span> <span class="n">sorry</span> <span class="o">}</span> <span class="o">}</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="193699975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193699975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193699975">Yury G. Kudryashov (Apr 12 2020 at 07:52)</a>:</h4>
+<p>With <code>sorry</code> for <code>one_mem'</code> and <code>mul_mem'</code> it says</p>
+<div class="codehilite"><pre><span></span><span class="mi">29</span><span class="o">:</span><span class="mi">20</span><span class="o">:</span> <span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_3</span> <span class="o">:</span> <span class="n">group</span> <span class="n">G</span><span class="o">,</span>
+<span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">subgroup</span> <span class="n">G</span><span class="o">)</span>
+<span class="err">⊢</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span>
+    <span class="n">x</span> <span class="err">∈</span> <span class="o">{</span><span class="n">carrier</span> <span class="o">:=</span> <span class="err">⋂</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">S</span><span class="o">),</span> <span class="err">↑</span><span class="n">s</span><span class="o">,</span> <span class="n">one_mem&#39;</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span> <span class="n">mul_mem&#39;</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">}</span><span class="bp">.</span><span class="n">carrier</span> <span class="bp">→</span>
+    <span class="n">x</span><span class="bp">⁻¹</span> <span class="err">∈</span> <span class="o">{</span><span class="n">carrier</span> <span class="o">:=</span> <span class="err">⋂</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">S</span><span class="o">),</span> <span class="err">↑</span><span class="n">s</span><span class="o">,</span> <span class="n">one_mem&#39;</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span> <span class="n">mul_mem&#39;</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">}</span><span class="bp">.</span><span class="n">carrier</span>
+</pre></div>
+
+<a name="193700045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700045">Mario Carneiro (Apr 12 2020 at 07:54)</a>:</h4>
+<p>right</p>
+
+<a name="193700047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700047">Mario Carneiro (Apr 12 2020 at 07:54)</a>:</h4>
+<p>that's good, yes?</p>
+
+<a name="193700069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700069">Mario Carneiro (Apr 12 2020 at 07:55)</a>:</h4>
+<p>Understand that when you define a composite structure all in one go, the complete first half of the structure appears in the type of the second half</p>
+
+<a name="193700071"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700071">Yury G. Kudryashov (Apr 12 2020 at 07:55)</a>:</h4>
+<p>But with actual proofs (see above) it's still</p>
+<div class="codehilite"><pre><span></span><span class="mi">29</span><span class="o">:</span><span class="mi">20</span><span class="o">:</span> <span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_3</span> <span class="o">:</span> <span class="n">group</span> <span class="n">G</span><span class="o">,</span>
+<span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">subgroup</span> <span class="n">G</span><span class="o">)</span>
+<span class="err">⊢</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span>
+    <span class="n">set</span><span class="bp">.</span><span class="n">mem</span> <span class="n">x</span> <span class="o">(</span><span class="err">⋂</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">S</span><span class="o">),</span> <span class="err">↑</span><span class="n">s</span><span class="o">)</span> <span class="bp">→</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem</span> <span class="n">x</span><span class="bp">⁻¹</span> <span class="o">(</span><span class="err">⋂</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">S</span><span class="o">),</span> <span class="err">↑</span><span class="n">s</span><span class="o">)</span>
+</pre></div>
+
+<a name="193700121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700121">Yury G. Kudryashov (Apr 12 2020 at 07:56)</a>:</h4>
+<p>I think that Lean tries to get rid of <code>{ carrier := ..., .. }.carrier</code> and unfolds all projections instead.</p>
+
+<a name="193700126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700126">Mario Carneiro (Apr 12 2020 at 07:56)</a>:</h4>
+<p>I think the problem in your example is that the two <code>by</code> are making lean delay elaboration of the first half of the structure when it needs the type of the second half</p>
+
+<a name="193700147"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700147">Mario Carneiro (Apr 12 2020 at 07:57)</a>:</h4>
+<p>If you used term mode for the proof of <code>mul_mem'</code>, you should see the version that doesn't unfold <code>\in</code></p>
+
+<a name="193700411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700411">Mario Carneiro (Apr 12 2020 at 08:02)</a>:</h4>
+<p>This works:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">has_Inf</span> <span class="o">(</span><span class="n">subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">S</span><span class="o">,</span> <span class="o">{</span>
+  <span class="n">carrier</span> <span class="o">:=</span> <span class="err">⋂</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">S</span><span class="o">,</span> <span class="err">↑</span><span class="n">s</span><span class="o">,</span>
+  <span class="n">one_mem&#39;</span> <span class="o">:=</span> <span class="n">mem_bInter</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">s</span> <span class="n">hs</span><span class="o">,</span> <span class="n">s</span><span class="bp">.</span><span class="n">one_mem&#39;</span><span class="o">,</span>
+  <span class="n">mul_mem&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">hx</span> <span class="n">y</span> <span class="n">hy</span><span class="o">,</span> <span class="k">by</span> <span class="o">{</span>
+    <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">mem_bInter_iff</span><span class="o">]</span> <span class="n">at</span> <span class="n">hx</span> <span class="n">hy</span> <span class="err">⊢</span><span class="o">,</span>
+    <span class="n">intros</span> <span class="n">s</span> <span class="n">hs</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">s</span><span class="bp">.</span><span class="n">to_submonoid</span><span class="bp">.</span><span class="n">mul_mem&#39;</span> <span class="bp">_</span> <span class="o">(</span><span class="n">hx</span> <span class="bp">_</span> <span class="n">hs</span><span class="o">)</span> <span class="bp">_</span> <span class="o">(</span><span class="n">hy</span> <span class="bp">_</span> <span class="n">hs</span><span class="o">)</span> <span class="o">},</span>
+  <span class="n">inv_mem&#39;</span> <span class="o">:=</span> <span class="bp">_</span> <span class="o">}</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="193700422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700422">Yury G. Kudryashov (Apr 12 2020 at 08:02)</a>:</h4>
+<p>What's the difference?</p>
+
+<a name="193700423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700423">Kevin Buzzard (Apr 12 2020 at 08:02)</a>:</h4>
+<p>That's a workaround rather than a solution, isn't it?</p>
+
+<a name="193700438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700438">Yury G. Kudryashov (Apr 12 2020 at 08:03)</a>:</h4>
+<p>Introduction of <code>x .. hy</code> before tactic mode?</p>
+
+<a name="193700444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700444">Mario Carneiro (Apr 12 2020 at 08:03)</a>:</h4>
+<p>yes</p>
+
+<a name="193700484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700484">Mario Carneiro (Apr 12 2020 at 08:04)</a>:</h4>
+<p>Yes, this is all a workaround for a bug in lean</p>
+
+<a name="193700488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700488">Kevin Buzzard (Apr 12 2020 at 08:04)</a>:</h4>
+<p>Would another workaround be to roll your own constructor?</p>
+
+<a name="193700492"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700492">Mario Carneiro (Apr 12 2020 at 08:05)</a>:</h4>
+<p>If you defined the structure in two stages it should also work</p>
+
+<a name="193700503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700503">Kevin Buzzard (Apr 12 2020 at 08:05)</a>:</h4>
+<p>But maybe Yury doesn't want to define all instances using the custom constructor either.</p>
+
+<a name="193700515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700515">Mario Carneiro (Apr 12 2020 at 08:05)</a>:</h4>
+<p>that is, define the <code>submonoid</code>, then use that definition to define the <code>subgroup</code></p>
+
+<a name="193700563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700563">Mario Carneiro (Apr 12 2020 at 08:06)</a>:</h4>
+<p>there is usually also a good mathematical reason to not skip steps when defining these structures</p>
+
+<a name="193700566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700566">Mario Carneiro (Apr 12 2020 at 08:07)</a>:</h4>
+<p>for example, in this case presumably <code>submonoid</code> should also <code>has_Inf</code></p>
+
+<a name="193700573"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700573" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700573">Mario Carneiro (Apr 12 2020 at 08:07)</a>:</h4>
+<p>and you could refer to that construction here</p>
+
+<a name="193700698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700698">Yury G. Kudryashov (Apr 12 2020 at 08:10)</a>:</h4>
+<p>In this case I'd loose <code>defeq</code>.</p>
+
+<a name="193700702"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700702">Yury G. Kudryashov (Apr 12 2020 at 08:11)</a>:</h4>
+<p>Because of the way <code>\bigcap</code> works</p>
+
+<a name="193700704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700704">Mario Carneiro (Apr 12 2020 at 08:11)</a>:</h4>
+<p>No</p>
+
+<a name="193700708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700708">Mario Carneiro (Apr 12 2020 at 08:11)</a>:</h4>
+<p>It is the same function you are already defining</p>
+
+<a name="193700751"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700751">Yury G. Kudryashov (Apr 12 2020 at 08:12)</a>:</h4>
+<p>I can say <code>to_submonoid = ⨅ s ∈ S, s.to_submonoid</code> but this will not be <code>defeq</code> to my definition.</p>
+
+<a name="193700757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700757">Yury G. Kudryashov (Apr 12 2020 at 08:13)</a>:</h4>
+<p>Because on the way to <code>carrier</code> we'll have the "set.range" four times instead of twice.</p>
+
+<a name="193700776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700776">Yury G. Kudryashov (Apr 12 2020 at 08:13)</a>:</h4>
+<p>As far as I understand, that's why <code>filter</code>s have to use <code>lattice.copy</code></p>
+
+<a name="193700827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20unfolds%20projections/near/193700827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50892Leanunfoldsprojections.html#193700827">Mario Carneiro (Apr 12 2020 at 08:15)</a>:</h4>
+<p>You can at least do this:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Inf_submonoid</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">subgroup</span> <span class="n">G</span><span class="o">))</span> <span class="o">:</span> <span class="n">submonoid</span> <span class="n">G</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">carrier</span> <span class="o">:=</span> <span class="err">⋂</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">S</span><span class="o">,</span> <span class="err">↑</span><span class="n">s</span><span class="o">,</span>
+  <span class="n">one_mem&#39;</span> <span class="o">:=</span> <span class="n">mem_bInter</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">s</span> <span class="n">hs</span><span class="o">,</span> <span class="n">s</span><span class="bp">.</span><span class="n">one_mem&#39;</span><span class="o">,</span>
+  <span class="n">mul_mem&#39;</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span>
+    <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span> <span class="n">y</span> <span class="n">hy</span><span class="o">,</span>
+    <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">mem_bInter_iff</span><span class="o">]</span> <span class="n">at</span> <span class="n">hx</span> <span class="n">hy</span> <span class="err">⊢</span><span class="o">,</span>
+    <span class="n">intros</span> <span class="n">s</span> <span class="n">hs</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">s</span><span class="bp">.</span><span class="n">mul_mem&#39;</span> <span class="bp">_</span> <span class="o">(</span><span class="n">hx</span> <span class="bp">_</span> <span class="n">hs</span><span class="o">)</span> <span class="bp">_</span> <span class="o">(</span><span class="n">hy</span> <span class="bp">_</span> <span class="n">hs</span><span class="o">)</span> <span class="o">}</span> <span class="o">}</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_Inf</span> <span class="o">(</span><span class="n">subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">S</span><span class="o">,</span> <span class="o">{</span>
+  <span class="n">to_submonoid</span> <span class="o">:=</span> <span class="n">Inf_submonoid</span> <span class="n">S</span><span class="o">,</span>
+  <span class="n">inv_mem&#39;</span> <span class="o">:=</span> <span class="bp">_</span> <span class="o">}</span><span class="bp">⟩</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

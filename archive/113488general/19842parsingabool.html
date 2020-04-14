@@ -1,0 +1,311 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/19842parsingabool.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html">parsing a bool</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193656422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193656422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193656422">Scott Morrison (Apr 11 2020 at 11:51)</a>:</h4>
+<p>I would like to have a tactic argument which could a bool (or perhaps a <code>true</code> or <code>false</code>), or a <code>nat</code>. Can someone show me how to construct the appropriate parser?</p>
+
+<a name="193656557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193656557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193656557">Kenny Lau (Apr 11 2020 at 11:54)</a>:</h4>
+<p>doesn’t <code>iterate</code> parse a (small) nat</p>
+
+<a name="193656567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193656567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193656567">Mario Carneiro (Apr 11 2020 at 11:55)</a>:</h4>
+<p>You could parse an expression and match against the result</p>
+
+<a name="193656676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193656676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193656676">Scott Morrison (Apr 11 2020 at 11:57)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">private</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">bool_or_nat</span> <span class="o">:</span> <span class="n">parser</span> <span class="o">(</span><span class="n">bool</span> <span class="err">⊕</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">sum</span><span class="bp">.</span><span class="n">inr</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">small_nat</span><span class="o">)</span> <span class="bp">&lt;|&gt;</span>
+<span class="o">(</span><span class="n">sum</span><span class="bp">.</span><span class="n">inl</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="o">(</span><span class="n">texpr</span> <span class="bp">&gt;&gt;=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">e</span><span class="o">,</span> <span class="n">of_tactic</span> <span class="err">$</span> <span class="n">to_expr</span> <span class="n">e</span> <span class="bp">&gt;&gt;=</span> <span class="n">eval_expr</span> <span class="n">bool</span><span class="o">)))</span>
+</pre></div>
+
+<a name="193656679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193656679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193656679">Scott Morrison (Apr 11 2020 at 11:57)</a>:</h4>
+<p>is my attempt so far</p>
+
+<a name="193656720"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193656720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193656720">Scott Morrison (Apr 11 2020 at 11:58)</a>:</h4>
+<p>but I get <code>VM does not have code for 'bool.tt'</code></p>
+
+<a name="193656724"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193656724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193656724">Scott Morrison (Apr 11 2020 at 11:58)</a>:</h4>
+<p>(when I try to actually use it; compiles fine)</p>
+
+<a name="193656868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193656868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193656868">Mario Carneiro (Apr 11 2020 at 12:02)</a>:</h4>
+<p><code>eval_expr'</code></p>
+
+<a name="193656915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193656915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193656915">Mario Carneiro (Apr 11 2020 at 12:02)</a>:</h4>
+<p>also <code>of_tactic'</code></p>
+
+<a name="193657080"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193657080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193657080">Scott Morrison (Apr 11 2020 at 12:06)</a>:</h4>
+<p>Can't find <code>of_tactic'</code></p>
+
+<a name="193657093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193657093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193657093">Scott Morrison (Apr 11 2020 at 12:06)</a>:</h4>
+<p>But it looks like it's not needed.</p>
+
+<a name="193657095"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193657095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193657095">Scott Morrison (Apr 11 2020 at 12:06)</a>:</h4>
+<p>Perhaps that's been patched in core already.</p>
+
+<a name="193657098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193657098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193657098">Scott Morrison (Apr 11 2020 at 12:07)</a>:</h4>
+<p><code>eval_expr'</code> does the trick... :-(</p>
+
+<a name="193657119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193657119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193657119">Scott Morrison (Apr 11 2020 at 12:07)</a>:</h4>
+<p>Hmm.. and what if I want to all <code>true</code>?</p>
+
+<a name="193657160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193657160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193657160">Scott Morrison (Apr 11 2020 at 12:08)</a>:</h4>
+<p>(I'm trying to allow something close to <code>set_option pp.all true</code> inside a tactic block.)</p>
+
+<a name="193657355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193657355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193657355">Simon Hudon (Apr 11 2020 at 12:13)</a>:</h4>
+<p>For parsing a <code>bool</code>, it's starting to look pretty complicated. Why not just do <code>tt &lt;$ tk "tt" &lt;|&gt; ff &lt;$ tk "ff"</code>?</p>
+
+<a name="193657407"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193657407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193657407">Mario Carneiro (Apr 11 2020 at 12:14)</a>:</h4>
+<p>because <code>tk</code> only works on keywords</p>
+
+<a name="193657426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193657426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193657426">Mario Carneiro (Apr 11 2020 at 12:15)</a>:</h4>
+<p>and if you declare <code>tt</code> as a keyword then it won't work as the actual expression</p>
+
+<a name="193657537"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193657537" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193657537">Mario Carneiro (Apr 11 2020 at 12:18)</a>:</h4>
+<p>If you parse an expression, use <code>to_expr `(%%e: bool)</code> and then evaluate it, then this will also work on boolean expressions as well as <code>true</code> and <code>false</code> which will be interpreted via <code>to_bool</code></p>
+
+<a name="193657563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193657563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193657563">Mario Carneiro (Apr 11 2020 at 12:19)</a>:</h4>
+<p>If you want a more syntactic interpretation, you can pattern match the pre-expression you get from <code>texpr</code> and just see if it is the constants <code>tt</code>, <code>true</code>, <code>ff</code> or <code>false</code> (or numerals) and dispatch accordingly</p>
+
+<a name="193657618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193657618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193657618">Mario Carneiro (Apr 11 2020 at 12:20)</a>:</h4>
+<p>I do something like this for being able to recognize the non-keyword <code>SOP</code> in <code>ring</code></p>
+
+<a name="193657903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193657903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193657903">Simon Hudon (Apr 11 2020 at 12:27)</a>:</h4>
+<p>That's disappointing. parsing an expressing seems overkill and if you have to parse something after the bool and that it could be read as an expression, it will just mix up the parser</p>
+
+<a name="193657948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193657948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193657948">Scott Morrison (Apr 11 2020 at 12:28)</a>:</h4>
+<p>In fact, the most disappointing thing is that you can't have an interactive tactic called <code>set_option</code> anyway.</p>
+
+<a name="193657957"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193657957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193657957">Scott Morrison (Apr 11 2020 at 12:28)</a>:</h4>
+<p>So this is all a moot point, I think. :-)</p>
+
+<a name="193657967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193657967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193657967">Simon Hudon (Apr 11 2020 at 12:29)</a>:</h4>
+<p>That could be an argument for having a <code>bool</code> parser like <code>small_nat</code></p>
+
+<a name="193657975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193657975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193657975">Mario Carneiro (Apr 11 2020 at 12:29)</a>:</h4>
+<p>What about using the <code>ident</code> parser?</p>
+
+<a name="193657990"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193657990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193657990">Mario Carneiro (Apr 11 2020 at 12:29)</a>:</h4>
+<p>that won't read any more than it has to</p>
+
+<a name="193658065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193658065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193658065">Mario Carneiro (Apr 11 2020 at 12:31)</a>:</h4>
+<p>Actually I think this is the right answer, since <code>true</code> and <code>false</code> are definitely treated as identifiers by the lean parser</p>
+
+<a name="193658146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193658146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193658146">Simon Hudon (Apr 11 2020 at 12:32)</a>:</h4>
+<p>about <code>pp.all</code>, try:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">set_pp_all</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span> <span class="n">do</span>
+<span class="n">opt</span> <span class="err">←</span> <span class="n">get_options</span><span class="o">,</span>
+<span class="n">set_options</span> <span class="o">(</span><span class="n">opt</span><span class="bp">.</span><span class="n">set_bool</span> <span class="bp">`</span><span class="n">pp</span><span class="bp">.</span><span class="n">all</span> <span class="n">tt</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">do</span> <span class="o">{</span> <span class="n">set_pp_all</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="193658257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193658257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193658257">Mario Carneiro (Apr 11 2020 at 12:35)</a>:</h4>
+<p>You can't use <code>set_option</code> because that's a command keyword, but you could use any variation on that like <code>set_opt</code> or <code>option</code></p>
+
+<a name="193658269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193658269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193658269">Reid Barton (Apr 11 2020 at 12:35)</a>:</h4>
+<p><code>let_option</code></p>
+
+<a name="193658310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193658310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193658310">Mario Carneiro (Apr 11 2020 at 12:36)</a>:</h4>
+<p>or even better, <code>with_option { tac }</code></p>
+
+<a name="193658358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193658358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193658358">Mario Carneiro (Apr 11 2020 at 12:37)</a>:</h4>
+<p>Alternatively, you could just declare every option name as an interactive tactic so that <code>pp.all true</code> is a tactic</p>
+
+<a name="193658408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193658408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193658408">Mario Carneiro (Apr 11 2020 at 12:38)</a>:</h4>
+<p>strangely enough, I don't think there are any conflicts that arise this way</p>
+
+<a name="193658448"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193658448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193658448">Mario Carneiro (Apr 11 2020 at 12:40)</a>:</h4>
+<p>You can even generate them with metaprogramming so that boolean options parse a boolean and numeric options parse a nat</p>
+
+<a name="193658567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193658567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193658567">Reid Barton (Apr 11 2020 at 12:42)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/parsing.20a.20bool/near/193658310" title="#narrow/stream/113488-general/topic/parsing.20a.20bool/near/193658310">said</a>:</p>
+<blockquote>
+<p>or even better, <code>with_option { tac }</code></p>
+</blockquote>
+<p>Perhaps whether one wants this scoped syntax depends on whether the <code>set_option</code> tactic is intended to remain in the final version of the proof. For <code>pp</code> options it would probably just be annoying to have to use <code>{}</code> most of the time (if you really want to scope the option, then you can probably achieve it with <code>{}</code> anyways).</p>
+
+<a name="193658732"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193658732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193658732">Mario Carneiro (Apr 11 2020 at 12:46)</a>:</h4>
+<p>another benefit of having options-as-tactics is that you can copy the docstring of the option to the tactic so that you get a nice hover, while <code>set_opt pp.all true</code> wouldn't be able to provide that</p>
+
+<a name="193658749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193658749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193658749">Reid Barton (Apr 11 2020 at 12:47)</a>:</h4>
+<p>If you write <code>pp.all</code> in an interactive tactic does it mean <code>tactic.interactive.pp.all</code>?</p>
+
+<a name="193658757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193658757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193658757">Mario Carneiro (Apr 11 2020 at 12:47)</a>:</h4>
+<p>pretty sure</p>
+
+<a name="193658815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193658815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193658815">Mario Carneiro (Apr 11 2020 at 12:48)</a>:</h4>
+<p>confirmed, it works just like other interactive tactics</p>
+
+<a name="193659084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193659084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193659084">Simon Hudon (Apr 11 2020 at 12:54)</a>:</h4>
+<p>Maybe something like <code>pretty_print all</code> would be more in line with the kind of naming conventions that we follow</p>
+
+<a name="193659344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193659344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193659344">Mario Carneiro (Apr 11 2020 at 13:01)</a>:</h4>
+<p>I think it would be better to stick to the naming convention used by options so that people don't have to learn both</p>
+
+<a name="193659440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193659440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193659440">Mario Carneiro (Apr 11 2020 at 13:03)</a>:</h4>
+<p>I thought there was an API for querying the list of all options, but I can't find one. <code>options.fold</code> only gives you the options that have been set on the current object</p>
+
+<a name="193659469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193659469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193659469">Mario Carneiro (Apr 11 2020 at 13:03)</a>:</h4>
+<p>there is also no way to ask what type an option has, you just use <code>get_string</code> or <code>get_nat</code> and hope you got it right</p>
+
+<a name="193660178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193660178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193660178">Mario Carneiro (Apr 11 2020 at 13:18)</a>:</h4>
+<p>In the absence of an API for this, we can still just make a list of options and their types. Here's a plausible metaprogram for building these option tactics:</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">lean</span>
+<span class="kn">namespace</span> <span class="n">tactic</span>
+<span class="kn">open</span> <span class="n">interactive</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">pbool</span> <span class="o">:</span> <span class="n">parser</span> <span class="n">bool</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">n</span> <span class="err">←</span> <span class="n">ident</span><span class="o">,</span> <span class="k">match</span> <span class="n">n</span> <span class="k">with</span>
+<span class="bp">|</span> <span class="bp">`</span><span class="n">tt</span> <span class="o">:=</span> <span class="n">return</span> <span class="n">tt</span>
+<span class="bp">|</span> <span class="bp">`</span><span class="n">true</span> <span class="o">:=</span> <span class="n">return</span> <span class="n">tt</span>
+<span class="bp">|</span> <span class="bp">`</span><span class="n">ff</span> <span class="o">:=</span> <span class="n">return</span> <span class="n">ff</span>
+<span class="bp">|</span> <span class="bp">`</span><span class="n">false</span> <span class="o">:=</span> <span class="n">return</span> <span class="n">ff</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">failure</span>
+<span class="kn">end</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">set_option_bool</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">name</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">pbool</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">opt</span> <span class="err">←</span> <span class="n">get_options</span><span class="o">,</span> <span class="n">set_options</span> <span class="o">(</span><span class="n">opt</span><span class="bp">.</span><span class="n">set_bool</span> <span class="n">n</span> <span class="n">b</span><span class="o">)</span>
+
+<span class="n">run_cmd</span> <span class="o">[(</span><span class="bp">`</span><span class="n">pp</span><span class="bp">.</span><span class="n">all</span><span class="o">,</span> <span class="bp">``</span><span class="n">set_option_bool</span><span class="o">)]</span><span class="bp">.</span><span class="n">mmap</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">e</span><span class="o">:</span><span class="n">name</span> <span class="bp">×</span> <span class="n">name</span><span class="o">,</span> <span class="n">do</span>
+  <span class="k">let</span> <span class="n">v</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">@</span><span class="n">expr</span><span class="bp">.</span><span class="n">const</span> <span class="n">tt</span> <span class="n">e</span><span class="bp">.</span><span class="mi">2</span> <span class="o">[])</span><span class="bp">.</span><span class="n">app</span> <span class="o">(</span><span class="n">reflect</span> <span class="n">e</span><span class="bp">.</span><span class="mi">1</span><span class="o">),</span>
+  <span class="n">t</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">v</span><span class="o">,</span>
+  <span class="n">tactic</span><span class="bp">.</span><span class="n">add_decl</span> <span class="err">$</span> <span class="n">declaration</span><span class="bp">.</span><span class="n">defn</span>
+    <span class="o">(</span><span class="bp">`</span><span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span> <span class="bp">++</span> <span class="n">e</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span> <span class="o">[]</span> <span class="n">t</span> <span class="n">v</span> <span class="o">(</span><span class="n">reducibility_hints</span><span class="bp">.</span><span class="n">regular</span> <span class="mi">1</span> <span class="n">tt</span><span class="o">)</span> <span class="n">ff</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- ⊢ 0 = 1</span>
+  <span class="n">pp</span><span class="bp">.</span><span class="n">all</span> <span class="n">true</span><span class="o">,</span>
+  <span class="c1">-- ⊢ @eq.{1} nat (@has_zero.zero.{0} nat nat.has_zero) (@has_one.one.{0} nat nat.has_one)</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="193660197"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193660197" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193660197">Kevin Buzzard (Apr 11 2020 at 13:19)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/parsing.20a.20bool/near/193659440" title="#narrow/stream/113488-general/topic/parsing.20a.20bool/near/193659440">said</a>:</p>
+<blockquote>
+<p>I thought there was an API for querying the list of all options, but I can't find one. <code>options.fold</code> only gives you the options that have been set on the current object</p>
+</blockquote>
+<p>Do you mean <code>#help options</code>?</p>
+
+<a name="193660203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193660203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193660203">Mario Carneiro (Apr 11 2020 at 13:19)</a>:</h4>
+<p>yes, but via tactics</p>
+
+<a name="193660260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193660260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193660260">Mario Carneiro (Apr 11 2020 at 13:20)</a>:</h4>
+<p>In fact, everything you can get to via <code>#help</code> should be available to tactics</p>
+
+<a name="193660268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193660268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193660268">Mario Carneiro (Apr 11 2020 at 13:20)</a>:</h4>
+<p>In fact, <code>#help</code> should be a user command</p>
+
+<a name="193660529"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193660529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193660529">Mario Carneiro (Apr 11 2020 at 13:26)</a>:</h4>
+<p>Another possible tactic name is <code>set_option.pp.all</code>; this does not run afoul of the command keyword and puts all the option tactics in one namespace</p>
+
+<a name="193660926"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193660926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193660926">Reid Barton (Apr 11 2020 at 13:37)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113488-general/topic/parsing.20a.20bool/near/193659440" title="#narrow/stream/113488-general/topic/parsing.20a.20bool/near/193659440">said</a>:</p>
+<blockquote>
+<p>I thought there was an API for querying the list of all options, but I can't find one. <code>options.fold</code> only gives you the options that have been set on the current object</p>
+</blockquote>
+<p>But we could add one.</p>
+
+<a name="193660933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193660933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193660933">Reid Barton (Apr 11 2020 at 13:37)</a>:</h4>
+<p>Although at that point maybe it makes more sense to just add a new core tactic</p>
+
+<a name="193660937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193660937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193660937">Reid Barton (Apr 11 2020 at 13:38)</a>:</h4>
+<p>to achieve the originally desired result, I mean</p>
+
+<a name="193661016"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193661016" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193661016">Mario Carneiro (Apr 11 2020 at 13:39)</a>:</h4>
+<p>a new core tactic for what? your two proposals sound the same</p>
+
+<a name="193661979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193661979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193661979">Reid Barton (Apr 11 2020 at 14:02)</a>:</h4>
+<p>A <code>set_option</code> tactic</p>
+
+<a name="193661984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193661984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193661984">Reid Barton (Apr 11 2020 at 14:02)</a>:</h4>
+<p>Versus a method that just returns the list of all options and their arguments</p>
+
+<a name="193662087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193662087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193662087">Mario Carneiro (Apr 11 2020 at 14:05)</a>:</h4>
+<p>there is already a <code>set_option</code> tactic</p>
+
+<a name="193662106"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193662106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193662106">Mario Carneiro (Apr 11 2020 at 14:05)</a>:</h4>
+<p>I used it above</p>
+
+<a name="193662188"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193662188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193662188">Mario Carneiro (Apr 11 2020 at 14:07)</a>:</h4>
+<p>in order to implement the metaprogram though, I need to be able to list all options a la <code>#help options</code>. From there we can create tactics that use <code>set_options</code> to set any individual option as desired</p>
+
+<a name="193662504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20a%20bool/near/193662504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19842parsingabool.html#193662504">Reid Barton (Apr 11 2020 at 14:15)</a>:</h4>
+<p>oh okay, I guess I don't understand what I meant either, then</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,255 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/55120hasnegforXYwhereYhasneg.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html">has_neg for X → Y where Y has_neg?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192918789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192918789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192918789">Ryan Lahfa (Apr 04 2020 at 17:40)</a>:</h4>
+<p>I have some lemma where I want to take the opposite function, but it seems like it does not work, at least for <code>N → R</code>, here's some MWE:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">section</span> <span class="n">negative_sets</span>
+
+<span class="n">def</span> <span class="n">negative_set</span> <span class="o">(</span><span class="n">S</span><span class="o">:</span> <span class="n">set</span> <span class="n">ℝ</span><span class="o">):</span> <span class="n">set</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">|</span> <span class="bp">-</span><span class="n">x</span> <span class="err">∈</span> <span class="n">S</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">cv</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span><span class="o">:</span> <span class="n">ℝ</span><span class="o">):=</span> <span class="bp">∀</span> <span class="n">ε</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">N</span> <span class="bp">≥</span> <span class="mi">0</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">n</span> <span class="bp">≥</span> <span class="n">N</span><span class="o">,</span> <span class="n">abs</span> <span class="o">((</span><span class="n">x</span> <span class="n">n</span><span class="o">)</span> <span class="bp">-</span> <span class="n">l</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">ε</span>
+<span class="n">def</span> <span class="n">accu_point</span> <span class="o">(</span><span class="n">S</span><span class="o">:</span> <span class="n">set</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span><span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="bp">∃</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">),</span> <span class="n">cv</span> <span class="n">x</span> <span class="n">l</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">x</span> <span class="n">n</span> <span class="err">∈</span> <span class="n">S</span><span class="o">)</span>
+
+<span class="c1">-- where is it?</span>
+<span class="c">/-</span><span class="cm">instance seq.neg : has_neg (ℕ → ℝ) := {</span>
+<span class="cm">  neg := λ x, (λ n, - x n)</span>
+<span class="cm">}-/</span>
+
+<span class="n">def</span> <span class="n">negative_set</span><span class="bp">.</span><span class="n">adhere_ens_iff</span> <span class="o">{</span><span class="n">S</span><span class="o">:</span> <span class="n">set</span> <span class="n">ℝ</span><span class="o">}</span> <span class="o">{</span><span class="n">l</span><span class="o">:</span> <span class="n">ℝ</span><span class="o">}:</span>
+  <span class="n">accu_point</span> <span class="n">S</span> <span class="n">l</span> <span class="bp">↔</span> <span class="n">accu_point</span> <span class="o">(</span><span class="n">negative_set</span> <span class="n">S</span><span class="o">)</span> <span class="o">(</span><span class="bp">-</span><span class="n">l</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">adh</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">accu_point</span> <span class="n">at</span> <span class="n">adh</span><span class="o">,</span>
+  <span class="k">obtain</span> <span class="bp">⟨</span> <span class="n">x</span><span class="o">,</span> <span class="n">hx</span> <span class="bp">⟩</span> <span class="o">:=</span> <span class="n">adh</span><span class="o">,</span>
+  <span class="n">use</span> <span class="o">(</span><span class="bp">-</span><span class="n">x</span><span class="o">),</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+
+<span class="kn">end</span> <span class="n">negative_sets</span>
+</pre></div>
+
+
+<p>I can trivially provide the instance, but maybe I'm missing something.</p>
+
+<a name="192918812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192918812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192918812">Ryan Lahfa (Apr 04 2020 at 17:41)</a>:</h4>
+<p>Also, I'm not sure "negative sets" should be something part of mathlib or not. It's somewhat useful, maybe it can be really a lot more useful for convex analysis, but unsure.</p>
+
+<a name="192919336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192919336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192919336">Kevin Buzzard (Apr 04 2020 at 17:53)</a>:</h4>
+<p>I agree that it's useful but unfortunately <code>-S</code> already means "the stuff not in S"</p>
+
+<a name="192919412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192919412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192919412">Ryan Lahfa (Apr 04 2020 at 17:55)</a>:</h4>
+<p>I'm not talking about -X for <code>X: set Y</code> but rather <code>-x</code> for <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>:</mo><mi mathvariant="double-struck">N</mi><mo>→</mo><mi mathvariant="double-struck">R</mi></mrow><annotation encoding="application/x-tex">x : \mathbb{N} \to \mathbb{R}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68889em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbb">N</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68889em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbb">R</span></span></span></span></span></p>
+
+<a name="192919418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192919418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192919418">Reid Barton (Apr 04 2020 at 17:55)</a>:</h4>
+<p>isn't this already a ring?</p>
+
+<a name="192919465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192919465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192919465">Ryan Lahfa (Apr 04 2020 at 17:56)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> How could I check this fact?</p>
+
+<a name="192919483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192919483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192919483">Kevin Buzzard (Apr 04 2020 at 17:57)</a>:</h4>
+<p>you will need the right import. Probably algebra.pi_instances</p>
+
+<a name="192919496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192919496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192919496">Ryan Lahfa (Apr 04 2020 at 17:57)</a>:</h4>
+<p>Indeed, that was it.</p>
+
+<a name="192919591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192919591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192919591">Kevin Buzzard (Apr 04 2020 at 17:58)</a>:</h4>
+<p>I don't know how someone who doesn't know where stuff in mathlib is can find this instance. I think there's a way of importing all of mathlib somehow? Sometimes people write <code>import all</code> but they have to run some script beforehand I think</p>
+
+<a name="192919788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192919788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192919788">Ryan Lahfa (Apr 04 2020 at 18:02)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> If the doc implemented a search based on types, I could have typed <code>has_neg</code> and see all instances of <code>has_neg</code> across mathlib, but search is not that advanced currently.</p>
+
+<a name="192919869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192919869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192919869">Reid Barton (Apr 04 2020 at 18:04)</a>:</h4>
+<p>Usually this won't even help, because nobody actually wrote a <code>has_neg</code> instance, they wrote a <code>ring</code> instance instead.</p>
+
+<a name="192919894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192919894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192919894">Reid Barton (Apr 04 2020 at 18:04)</a>:</h4>
+<p>In the case of pi_instances in particular it probably does work.</p>
+
+<a name="192920084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192920084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192920084">Mario Carneiro (Apr 04 2020 at 18:08)</a>:</h4>
+<p>You can search for all instances of a class using <code>#print instances has_neg</code></p>
+
+<a name="192920086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192920086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192920086">Reid Barton (Apr 04 2020 at 18:08)</a>:</h4>
+<p>In Haskell you have to write out all the instances of parent classes explicitly, which has the side effect that they're easier to index/find.</p>
+
+<a name="192920105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192920105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192920105">Mario Carneiro (Apr 04 2020 at 18:09)</a>:</h4>
+<p>however one of those instances will be <code>add_group.has_neg</code> and you will have to follow that thread to find all the others</p>
+
+<a name="192920177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192920177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192920177">Mario Carneiro (Apr 04 2020 at 18:10)</a>:</h4>
+<p>and if you are wondering "why isn't there a way to print them all out recursively", that's called tracing the type class search</p>
+
+<a name="192920286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192920286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192920286">Reid Barton (Apr 04 2020 at 18:13)</a>:</h4>
+<p>It might be useful to have a way to only follow all the instances coming from <code>extends</code>, though</p>
+
+<a name="192920347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192920347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192920347">Reid Barton (Apr 04 2020 at 18:14)</a>:</h4>
+<p>that should at least be a finite list</p>
+
+<a name="192927893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192927893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192927893">Ryan Lahfa (Apr 04 2020 at 21:30)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113489-new-members/topic/has_neg.20for.20X.20.E2.86.92.20Y.20where.20Y.20has_neg.3F/near/192920177" title="#narrow/stream/113489-new-members/topic/has_neg.20for.20X.20.E2.86.92.20Y.20where.20Y.20has_neg.3F/near/192920177">said</a>:</p>
+<blockquote>
+<p>and if you are wondering "why isn't there a way to print them all out recursively", that's called tracing the type class search</p>
+</blockquote>
+<p>How hard would it be to make Lean output some metadata about typeclasses search (as JSON or whatever makes sense)?</p>
+
+<a name="192927917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192927917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192927917">Kevin Buzzard (Apr 04 2020 at 21:31)</a>:</h4>
+<p>You can just turn the trace on</p>
+
+<a name="192927969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192927969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192927969">Kevin Buzzard (Apr 04 2020 at 21:32)</a>:</h4>
+<p>I can never remember how to do it, it tells you if typeclass inference fails in a certain way. It's not, but it's something like, <code>set_option trace.class_inference true</code></p>
+
+<a name="192927974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192927974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192927974">Kevin Buzzard (Apr 04 2020 at 21:32)</a>:</h4>
+<p><code>set_option trace.class_instances true</code></p>
+
+<a name="192927986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192927986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192927986">Ryan Lahfa (Apr 04 2020 at 21:33)</a>:</h4>
+<p>Oh okay, I was more asking from a documentation standpoint, as we have Ctrl + P + "#" to search for lemmas/etc, I was wondering how hard would it be to have something to search for instances in VSCode</p>
+
+<a name="192928040"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192928040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192928040">Kevin Buzzard (Apr 04 2020 at 21:34)</a>:</h4>
+<p>I am unclear what you're asking. Which instances do you want to search for? Everything <code>apply_instance</code> knows about or the ones used to solve one particular search?</p>
+
+<a name="192928055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192928055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192928055">Kevin Buzzard (Apr 04 2020 at 21:35)</a>:</h4>
+<p><code>#print instances</code> for the former, and turn the trace on for the latter.</p>
+
+<a name="192928096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192928096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192928096">Ryan Lahfa (Apr 04 2020 at 21:36)</a>:</h4>
+<p>If we reconsider the previous context where <code>pi_instances</code> were not imported, i.e. not available in the file.</p>
+<p>Would <code>#print instances</code> or the tracing find them?</p>
+
+<a name="192928104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192928104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192928104">Ryan Lahfa (Apr 04 2020 at 21:36)</a>:</h4>
+<p>My point was basically, it could be interesting to have something which search over all files, including not imported ones. Or to bake this kind of tracing search statically in the mathlib docs.</p>
+
+<a name="192928120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192928120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192928120">Kevin Buzzard (Apr 04 2020 at 21:37)</a>:</h4>
+<p>If you haven't imported a file then for sure <code>#print</code> and traces won't find the instances in that file.</p>
+
+<a name="192928179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192928179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192928179">Bryan Gin-ge Chen (Apr 04 2020 at 21:39)</a>:</h4>
+<p>Below each class definition, the docs show all the instances that are defined in mathlib, e.g. <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_neg" title="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_neg">has_neg</a>; click on "Instances".</p>
+
+<a name="192928228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192928228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192928228">Bryan Gin-ge Chen (Apr 04 2020 at 21:40)</a>:</h4>
+<p>I see <code>pi.has_neg</code> in that list, and clicking on it leads <a href="https://leanprover-community.github.io/mathlib_docs/algebra/pi_instances.html#pi.has_neg" title="https://leanprover-community.github.io/mathlib_docs/algebra/pi_instances.html#pi.has_neg">here</a>.</p>
+
+<a name="192928239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192928239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192928239">Ryan Lahfa (Apr 04 2020 at 21:40)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="123965">Bryan Gin-ge Chen</span> <a href="#narrow/stream/113489-new-members/topic/has_neg.20for.20X.20.E2.86.92.20Y.20where.20Y.20has_neg.3F/near/192928179" title="#narrow/stream/113489-new-members/topic/has_neg.20for.20X.20.E2.86.92.20Y.20where.20Y.20has_neg.3F/near/192928179">said</a>:</p>
+<blockquote>
+<p>Below each class definition, the docs show all the instances that are defined in mathlib, e.g. <a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_neg" title="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#has_neg">has_neg</a>; click on "Instances".</p>
+</blockquote>
+<p>It is just it's not obvious that <code>pi.has_neg</code> is the one I'm looking for.</p>
+
+<a name="192928249"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192928249" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192928249">Kevin Buzzard (Apr 04 2020 at 21:41)</a>:</h4>
+<p>If you know that a function is a pi type then it's more obvious</p>
+
+<a name="192928267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192928267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192928267">Ryan Lahfa (Apr 04 2020 at 21:41)</a>:</h4>
+<p>In this case, right</p>
+
+<a name="192928271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192928271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192928271">Kevin Buzzard (Apr 04 2020 at 21:41)</a>:</h4>
+<p>and I would venture that this is one of the most obscure examples</p>
+
+<a name="192928308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192928308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192928308">Ryan Lahfa (Apr 04 2020 at 21:42)</a>:</h4>
+<p>Hahaha, most likely</p>
+
+<a name="192928312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192928312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192928312">Bryan Gin-ge Chen (Apr 04 2020 at 21:42)</a>:</h4>
+<p>We could probably display the types of those instances. Please open an issue on <a href="https://github.com/leanprover-community/doc-gen/" title="https://github.com/leanprover-community/doc-gen/">doc-gen</a> so we don't forget.</p>
+
+<a name="192928322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192928322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192928322">Kevin Buzzard (Apr 04 2020 at 21:42)</a>:</h4>
+<p>But note no <code>real.has_neg</code></p>
+
+<a name="192928333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192928333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192928333">Ryan Lahfa (Apr 04 2020 at 21:43)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113489-new-members/topic/has_neg.20for.20X.20.E2.86.92.20Y.20where.20Y.20has_neg.3F/near/192928322" title="#narrow/stream/113489-new-members/topic/has_neg.20for.20X.20.E2.86.92.20Y.20where.20Y.20has_neg.3F/near/192928322">said</a>:</p>
+<blockquote>
+<p>But note no <code>real.has_neg</code></p>
+</blockquote>
+<p>It comes from <code>add_group.has_neg</code>, I suppose?</p>
+
+<a name="192928819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192928819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192928819">Kevin Buzzard (Apr 04 2020 at 21:55)</a>:</h4>
+<p>I guess that makes sense</p>
+
+<a name="192949449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192949449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192949449">Kevin Buzzard (Apr 05 2020 at 09:00)</a>:</h4>
+<p>Note that there is <code>rat.has_neg</code> though. What I'm saying is that the results are in some sense random.</p>
+
+<a name="192963233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192963233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192963233">Bryan Gin-ge Chen (Apr 05 2020 at 14:57)</a>:</h4>
+<p><del> Is this a defined-in-core vs defined-in-mathlib thing? </del> No, they're both defined in mathlib.</p>
+
+<a name="192963490"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192963490" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192963490">Reid Barton (Apr 05 2020 at 15:04)</a>:</h4>
+<p>No, it's just optional whether to define (for example) <code>has_neg</code> and <code>ring</code> simultaneously or separately. I wouldn't expect there to be much logic to it.</p>
+
+<a name="192963500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192963500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192963500">Reid Barton (Apr 05 2020 at 15:04)</a>:</h4>
+<p>One reason to define them separately might be that you want to talk about <code>-x</code> and prove lemmas about it before going on to define the ring structure.</p>
+
+<a name="192963516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192963516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192963516">Reid Barton (Apr 05 2020 at 15:05)</a>:</h4>
+<p>I didn't look to see if that is actually the case for <code>rat</code> though.</p>
+
+<a name="192963918"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192963918" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192963918">Bryan Gin-ge Chen (Apr 05 2020 at 15:15)</a>:</h4>
+<p>It looks like in both cases <code>has_neg</code> is defined and used before the <code>ring</code> instance is assembled, however with reals it's done at the level of Cauchy sequences, e.g. there's a <a href="https://github.com/leanprover-community/mathlib/blob/66f30901d1b065a68c4545455c79aba7fb37a71a/src/data/real/cau_seq_completion.lean#L47" title="https://github.com/leanprover-community/mathlib/blob/66f30901d1b065a68c4545455c79aba7fb37a71a/src/data/real/cau_seq_completion.lean#L47"><code>has_neg Cauchy</code></a> instance.</p>
+
+<a name="192964003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192964003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192964003">Ryan Lahfa (Apr 05 2020 at 15:16)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="123965">Bryan Gin-ge Chen</span> <a href="#narrow/stream/113489-new-members/topic/has_neg.20for.20X.20.E2.86.92.20Y.20where.20Y.20has_neg.3F/near/192963918" title="#narrow/stream/113489-new-members/topic/has_neg.20for.20X.20.E2.86.92.20Y.20where.20Y.20has_neg.3F/near/192963918">said</a>:</p>
+<blockquote>
+<p>It looks like in both cases <code>has_neg</code> is defined and used before the <code>ring</code> instance is assembled, however with reals it's done at the level of Cauchy sequences, e.g. there's a <a href="https://github.com/leanprover-community/mathlib/blob/66f30901d1b065a68c4545455c79aba7fb37a71a/src/data/real/cau_seq_completion.lean#L47" title="https://github.com/leanprover-community/mathlib/blob/66f30901d1b065a68c4545455c79aba7fb37a71a/src/data/real/cau_seq_completion.lean#L47"><code>has_neg Cauchy</code></a> instance.</p>
+</blockquote>
+<p>Wouldn't this be derived by quotient properties over rings?</p>
+
+<a name="192964081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/has_neg%20for%20X%20%E2%86%92%20Y%20where%20Y%20has_neg%3F/near/192964081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55120hasnegforXYwhereYhasneg.html#192964081">Bryan Gin-ge Chen (Apr 05 2020 at 15:18)</a>:</h4>
+<p>Yes, it looks like that is how it's defined.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

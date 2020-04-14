@@ -1,0 +1,212 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/19639fixingsubstincore.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html">fixing `subst` in core</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192890416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192890416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192890416">Scott Morrison (Apr 04 2020 at 05:12)</a>:</h4>
+<p>I've sorted out a source of inconvenient <code>eq.rec</code>s that I've been suffering from, and it's very simple, and probably easily fixable in core. (Thanks <span class="user-mention" data-user-id="110032">@Reid Barton</span> for the reminders to track problems to their origin instead of patching things afterwards...)</p>
+<p>In</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">f</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{</span> <span class="n">subst</span> <span class="n">h</span><span class="o">,</span> <span class="n">exact</span> <span class="mi">0</span><span class="o">}</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">f</span>
+</pre></div>
+
+
+<p>we see </p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">f</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">),</span> <span class="n">eq</span><span class="bp">.</span><span class="n">rec</span> <span class="mi">0</span> <span class="n">h</span>
+</pre></div>
+
+
+<p>which is perhaps unsurprising given we used <code>subst</code>. With <code>pp.all</code>, we see </p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">f</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">nat</span><span class="o">),</span> <span class="bp">@</span><span class="n">eq</span><span class="bp">.</span><span class="o">{</span><span class="mi">1</span><span class="o">}</span> <span class="n">nat</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">nat</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">@</span><span class="n">eq</span><span class="bp">.</span><span class="o">{</span><span class="mi">1</span><span class="o">}</span> <span class="n">nat</span> <span class="n">a</span> <span class="n">b</span><span class="o">),</span> <span class="bp">@</span><span class="n">eq</span><span class="bp">.</span><span class="n">rec</span><span class="bp">.</span><span class="o">{</span><span class="mi">1</span> <span class="mi">1</span><span class="o">}</span> <span class="n">nat</span> <span class="n">a</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">nat</span><span class="o">),</span> <span class="n">nat</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">has_zero</span><span class="bp">.</span><span class="n">zero</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">nat</span> <span class="n">nat</span><span class="bp">.</span><span class="n">has_zero</span><span class="o">)</span> <span class="n">b</span> <span class="n">h</span>
+</pre></div>
+
+
+<p>and observe that we're doing <code>eq.rec</code> transport through the family <code>(λ (b : nat), nat)</code>, which in particular is a constant family (the fibre doesn't depend on the base), and so the whole <code>eq.rec</code> term is equal (but not definitionally) to just <code>0</code>. (See <a href="https://github.com/leanprover-community/mathlib/blob/master/src/logic/basic.lean#L427" title="https://github.com/leanprover-community/mathlib/blob/master/src/logic/basic.lean#L427"><code>eq_rec_constant</code></a>.)</p>
+<p>Now, it's possible to clean up after the fact, but painful (and you have to know it's happening).</p>
+<p>Could we just change the behaviour of <code>subst</code>, to detect when the target doesn't even depend on the substitution we're doing (i.e. the <code>eq.rec</code> it wants to generate is through a constant family), and avoiding producing the <code>eq.rec</code>?</p>
+
+<a name="192907392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192907392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192907392">Reid Barton (Apr 04 2020 at 13:23)</a>:</h4>
+<p>Why invoke <code>subst</code> in the first place though? Some automation thing?</p>
+
+<a name="192913495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192913495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192913495">Chris Hughes (Apr 04 2020 at 15:41)</a>:</h4>
+<p>I'm not sure, but I think one way around it might be to only ever use <code>eq.mp</code> for data, and use <code>eq.rec</code> to prove the proof obligation that the two goals are equal after substituting <code>a = b</code>. Then I think you're guaranteed the right definitional equality whenever the two types before and after applying <code>eq.mp</code> are definitionally equal.</p>
+
+<a name="192913976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192913976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192913976">Mario Carneiro (Apr 04 2020 at 15:51)</a>:</h4>
+<p>the definitional behavior of <code>eq.rec</code> and <code>eq.mp</code> are basically the same</p>
+
+<a name="192914240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192914240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192914240">Reid Barton (Apr 04 2020 at 15:57)</a>:</h4>
+<p>I think Chris's point is that if you go through <code>eq.mp</code>, its argument is a proof of (in this case) <code>nat = nat</code> and so it's definitionally equal to <code>rfl</code> however you constructed it.</p>
+
+<a name="192914248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192914248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192914248">Reid Barton (Apr 04 2020 at 15:57)</a>:</h4>
+<p>By definitional proof irrelevance, not by construction</p>
+
+<a name="192914302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192914302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192914302">Chris Hughes (Apr 04 2020 at 15:58)</a>:</h4>
+<p>Say I used <code>funext</code> to prove <code>h : f = g</code>, where <code>f g : nat - &gt; nat</code>. Then <code>eq.rec_on h (fin (g 2))</code> does not reduce, but <code>eq.mp (eq.rec_on h rfl) (fin (g 2))</code> does.</p>
+
+<a name="192914321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192914321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192914321">Chris Hughes (Apr 04 2020 at 15:59)</a>:</h4>
+<p>I'm on my phone</p>
+
+<a name="192914327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192914327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192914327">Kevin Buzzard (Apr 04 2020 at 15:59)</a>:</h4>
+<p>and you're checking things reduce??</p>
+
+<a name="192914441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192914441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192914441">Mario Carneiro (Apr 04 2020 at 16:01)</a>:</h4>
+<p>Oh I see. Yes that should work. But lean doesn't have to guess here, it knows when the sides are defeq and just skip emitting the term</p>
+
+<a name="192914590"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192914590" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192914590">Chris Hughes (Apr 04 2020 at 16:05)</a>:</h4>
+<p>I assumed this is why <code>rw</code> always uses <code>eq.mpr</code>. If indeed it does, I can't check right now.</p>
+
+<a name="192914856"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192914856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192914856">Patrick Massot (Apr 04 2020 at 16:11)</a>:</h4>
+<p>Speaking of fixing core, is there any reason why <code>simp_rw</code> does not become the official <code>rw</code>?</p>
+
+<a name="192916997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192916997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192916997">Mario Carneiro (Apr 04 2020 at 16:58)</a>:</h4>
+<p>I haven't used it. What's the difference?</p>
+
+<a name="192917823"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192917823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192917823">Patrick Massot (Apr 04 2020 at 17:17)</a>:</h4>
+<p><a href="https://leanprover-community.github.io/mathlib_docs/tactics.html#simp_rw" title="https://leanprover-community.github.io/mathlib_docs/tactics.html#simp_rw">https://leanprover-community.github.io/mathlib_docs/tactics.html#simp_rw</a></p>
+
+<a name="192918050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192918050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192918050">Andrew Ashworth (Apr 04 2020 at 17:23)</a>:</h4>
+<p>is this going to make my <code>rw</code> much slower in big proofs?</p>
+
+<a name="192918061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192918061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192918061">Mario Carneiro (Apr 04 2020 at 17:23)</a>:</h4>
+<p>I think that they have different use cases and different behavior</p>
+
+<a name="192918112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192918112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192918112">Mario Carneiro (Apr 04 2020 at 17:24)</a>:</h4>
+<p>In DTT it's not clear whether one mechanism (congr lemmas vs eq.rec) dominates the other</p>
+
+<a name="192918114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192918114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192918114">Kevin Buzzard (Apr 04 2020 at 17:24)</a>:</h4>
+<p>It might even break your big proofs! It might simplify too much I guess?</p>
+
+<a name="192918121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192918121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192918121">Patrick Massot (Apr 04 2020 at 17:24)</a>:</h4>
+<p>I'm only using <code>simp_rw</code> as "rw that works under binders".</p>
+
+<a name="192918134"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192918134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192918134">Kevin Buzzard (Apr 04 2020 at 17:25)</a>:</h4>
+<p>right but in theory it might rewrite under a binder which it didn't do before, if something occurs both inside and outside</p>
+
+<a name="192918219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192918219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192918219">Reid Barton (Apr 04 2020 at 17:27)</a>:</h4>
+<p>You also don't always want to rewrite repeatedly</p>
+
+<a name="192918427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192918427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192918427">Mario Carneiro (Apr 04 2020 at 17:32)</a>:</h4>
+<p>Here is an example where the <code>simp</code> strategy fails and <code>rw</code> works</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">3</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="n">h</span><span class="o">,</span> <span class="n">p</span> <span class="n">h</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">3</span><span class="o">)</span> <span class="bp">=</span> <span class="n">false</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">this</span><span class="o">],</span> <span class="c1">-- fails</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">this</span><span class="o">],</span> <span class="c1">-- works</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="192918449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192918449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192918449">Gabriel Ebner (Apr 04 2020 at 17:33)</a>:</h4>
+<p>Empirically speaking, I would find it interesting to know how many <code>rw</code> invocations in mathlib could be replaced by <code>simp_rw</code>.</p>
+
+<a name="192919320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192919320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192919320">Kevin Buzzard (Apr 04 2020 at 17:52)</a>:</h4>
+<p>I would be interested to know how many <code>erw</code>invocations in the perfectoid project could be replaced with <code>simp_rw</code></p>
+
+<a name="192919393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192919393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192919393">Reid Barton (Apr 04 2020 at 17:54)</a>:</h4>
+<p>Probably none unless I misunderstood the purpose of <code>simp_rw</code></p>
+
+<a name="192919466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192919466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192919466">Kevin Buzzard (Apr 04 2020 at 17:56)</a>:</h4>
+<p>My algorithm for rewriting under binders used to be: (1) try <code>rw</code> and then remember it doesn't work (2) try <code>erw</code> (3) try <code>simp only</code> (4) whine to co-authors</p>
+
+<a name="192919479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192919479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192919479">Reid Barton (Apr 04 2020 at 17:56)</a>:</h4>
+<p><code>erw</code> doesn't rewrite under binders, it rewrites up to definitional equality. I guess if you're lucky enough that might look like rewriting under binders?</p>
+
+<a name="192935137"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192935137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192935137">Scott Morrison (Apr 05 2020 at 01:11)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span>, the <code>subst</code> in question that I'm concerned about is in <a href="https://github.com/leanprover-community/mathlib/blob/master/src/tactic/equiv_rw.lean#L207" title="https://github.com/leanprover-community/mathlib/blob/master/src/tactic/equiv_rw.lean#L207"><code>equiv_rw</code></a>. I agree it may be viable to decide whether or not to actually use <code>subst</code> here, but my point is just that the only <code>eq.rec</code>s this <code>subst</code> is generating that cause problems are unnecessary ones!</p>
+
+<a name="192935213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192935213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192935213">Reid Barton (Apr 05 2020 at 01:13)</a>:</h4>
+<p>I mean, "don't use <code>subst</code> to construct data" seems like a sound general principle, whether or not there are some edge cases where it happens not to do any harm (but doesn't seem to do any good either?)</p>
+
+<a name="192935266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192935266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192935266">Scott Morrison (Apr 05 2020 at 01:14)</a>:</h4>
+<p>Hmmm.... I'm not sure what to replace it with in <code>equiv_rw</code>.</p>
+
+<a name="192935276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192935276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192935276">Scott Morrison (Apr 05 2020 at 01:15)</a>:</h4>
+<p>Leaving that line out (or replacing it with <code>clear</code>) certainly breaks some of things things I want <code>equiv_rw</code> to do.</p>
+
+<a name="192935282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192935282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192935282">Scott Morrison (Apr 05 2020 at 01:15)</a>:</h4>
+<p>But maybe you're saying those things I want it to do, I shouldn't want.</p>
+
+<a name="192936726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192936726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192936726">Scott Morrison (Apr 05 2020 at 02:07)</a>:</h4>
+<p>Okay, perhaps I can avoid <code>subst</code> here after all.</p>
+
+<a name="192947993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192947993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192947993">Gabriel Ebner (Apr 05 2020 at 08:16)</a>:</h4>
+<p>For posterity, here is a stable link that will not change when new commits are pushed to master: <a href="https://github.com/leanprover-community/mathlib/blob/23681c3db3dc30695a97a769641a99511297f784/src/tactic/equiv_rw.lean#L207" title="https://github.com/leanprover-community/mathlib/blob/23681c3db3dc30695a97a769641a99511297f784/src/tactic/equiv_rw.lean#L207">https://github.com/leanprover-community/mathlib/blob/23681c3db3dc30695a97a769641a99511297f784/src/tactic/equiv_rw.lean#L207</a>  (You can press <code>y</code> on the github page to get this link.)</p>
+
+<a name="192949198"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192949198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192949198">Gabriel Ebner (Apr 05 2020 at 08:53)</a>:</h4>
+<p>More productively, I think it is useful to distinguish three cases here:</p>
+<ol>
+<li><code>e : α ≃ β, a : α ⊢ ℕ</code> (<code>a</code> does not occur as a dependency)</li>
+<li><code>e : α ≃ β, a : α, h : 0 &lt; a ⊢ ℕ</code> (<code>a</code> only occurs as a dependency in hypotheses)</li>
+<li><code>e : α ≃ β, a : α ⊢ 0 &lt; a</code> (<code>a</code> occurs in the target)</li>
+</ol>
+<p>For 1, you don't need any <code>eq.rec</code> at all, probably the easiest way to handle it is <code>assert</code>+<code>clear</code>.<br>
+Case 2 should only require <code>eq.rec</code> on the hypotheses, which is probably fine since they're often propositions.  But I don't see any easy way to implement this without introducing a β-redex in the produced term.<br>
+For 3, I don't think there's any way around <code>subst</code> (or another way to produce <code>eq.rec</code>).</p>
+
+<a name="192950284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192950284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192950284">Mario Carneiro (Apr 05 2020 at 09:24)</a>:</h4>
+<p>I'm not sure that you can do case 2 with eq.rec in the hypotheses only, or at least not easily, because there could be dependencies in the hypotheses as well, for example <code>e : α ≃ β, a : α, v : T a, h : v = 0 ⊢ ℕ</code>. For this you would have to tuple the hypotheses up or something, and I'm not convinced the result is better than just revert and eq.rec the goal</p>
+
+<a name="192950350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192950350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192950350">Mario Carneiro (Apr 05 2020 at 09:26)</a>:</h4>
+<p>Plus, this has the potential to compromise one of the things I like most about <code>subst</code>, which is that it works in any situation, cleaning up all sorts of DTT hell</p>
+
+<a name="192950364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192950364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192950364">Mario Carneiro (Apr 05 2020 at 09:27)</a>:</h4>
+<p>I think it is reasonable to detect when <code>subst</code> would have an equivalent effect to <code>clear</code> and do that instead, but otherwise I think having a reliable term being produced is useful</p>
+
+<a name="192950365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fixing%20%60subst%60%20in%20core/near/192950365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19639fixingsubstincore.html#192950365">Gabriel Ebner (Apr 05 2020 at 09:27)</a>:</h4>
+<p>Oh, these changes are not meant for <code>subst</code>.  The <code>subst</code> tactic should really stay as it is.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

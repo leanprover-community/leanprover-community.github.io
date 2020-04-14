@@ -1,0 +1,93 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/52877Enterlambdainconv.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/52877Enterlambdainconv.html">Enter lambda in `conv`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192717651"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Enter%20lambda%20in%20%60conv%60/near/192717651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52877Enterlambdainconv.html#192717651">Yury G. Kudryashov (Apr 02 2020 at 19:57)</a>:</h4>
+<p>I should read <a href="https://leanprover-community.github.io/mathlib_docs/conv.html" title="https://leanprover-community.github.io/mathlib_docs/conv.html">docs</a> before asking questions.</p>
+
+<a name="192718251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Enter%20lambda%20in%20%60conv%60/near/192718251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52877Enterlambdainconv.html#192718251">Yury G. Kudryashov (Apr 02 2020 at 20:02)</a>:</h4>
+<p>Though I still have a question: how hard is it to make <code>conv</code> aware of <code>ext</code>? Now I can call <code>funext</code> to enter a function but it would be nice to be able to call <code>ext</code> to enter anything.</p>
+
+<a name="192718692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Enter%20lambda%20in%20%60conv%60/near/192718692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52877Enterlambdainconv.html#192718692">Mario Carneiro (Apr 02 2020 at 20:05)</a>:</h4>
+<p>Actually, I think <code>congr</code> or <code>to_args</code> or whatever it is called should do this</p>
+
+<a name="192718801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Enter%20lambda%20in%20%60conv%60/near/192718801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52877Enterlambdainconv.html#192718801">Mario Carneiro (Apr 02 2020 at 20:06)</a>:</h4>
+<p><code>ext</code> doesn't make as much sense inside <code>conv</code> since most extensionality lemmas don't have the right form</p>
+
+<a name="192718830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Enter%20lambda%20in%20%60conv%60/near/192718830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52877Enterlambdainconv.html#192718830">Yury G. Kudryashov (Apr 02 2020 at 20:06)</a>:</h4>
+<p><code>congr</code> doesn't.</p>
+
+<a name="192718872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Enter%20lambda%20in%20%60conv%60/near/192718872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52877Enterlambdainconv.html#192718872">Yury G. Kudryashov (Apr 02 2020 at 20:06)</a>:</h4>
+<p><code>funext</code> worked but it doesn't allow me to name the new variable.</p>
+
+<a name="192718897"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Enter%20lambda%20in%20%60conv%60/near/192718897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52877Enterlambdainconv.html#192718897">Mario Carneiro (Apr 02 2020 at 20:06)</a>:</h4>
+<p>that's odd</p>
+
+<a name="192718940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Enter%20lambda%20in%20%60conv%60/near/192718940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52877Enterlambdainconv.html#192718940">Mario Carneiro (Apr 02 2020 at 20:07)</a>:</h4>
+<p><code>intro</code> is also a reasonable synonym here</p>
+
+<a name="192719176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Enter%20lambda%20in%20%60conv%60/near/192719176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52877Enterlambdainconv.html#192719176">Mario Carneiro (Apr 02 2020 at 20:08)</a>:</h4>
+<p>I think the story for navigating terms in <code>conv</code> needs improvement on the whole. <code>to_lhs</code> and <code>to_rhs</code> aren't nearly enough</p>
+
+<a name="192720964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Enter%20lambda%20in%20%60conv%60/near/192720964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52877Enterlambdainconv.html#192720964">Mario Carneiro (Apr 02 2020 at 20:22)</a>:</h4>
+<p>Here are the basic conv tactics I can see a use for. I've tried to borrow names when the tactics have a similar effect, but the underlying theorems are often quite different. It's hard to say which drives the mental model more.</p>
+<ul>
+<li><code>arg i</code>: enter the <code>i</code>-th nondependent argument of an application, <code>intro</code> on binders</li>
+<li><code>args</code>: enter all nondependent arguments of an application</li>
+<li><code>left</code>, <code>to_lhs</code>: synonym for <code>arg n-2</code></li>
+<li><code>right</code>, <code>to_rhs</code>: synonym for <code>arg n-1</code></li>
+<li><code>intro x</code>, <code>ext x</code>, <code>funext x</code>: enter the body of a pi or lambda.</li>
+<li><code>intros</code>: same repetition behavior as <code>intros</code> tactic</li>
+<li><code>apply h</code>: rewrite the entire goal with <code>h</code> by transitivity</li>
+<li><code>rw h</code>: rewrite with <code>h</code> somewhere in the goal</li>
+<li><code>enter [1,3,x,y]</code>:  iterate <code>arg</code> and <code>intro</code> with the given arguments</li>
+<li><code>pattern (_+_)</code>: find the first matching subterm (in top down left right order)</li>
+</ul>
+<p>Many of these already have equivalent functions, but I think we should try to organize the whole set and bikeshed on names until this is as usable as regular tactic mode</p>
+
+<a name="192723220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Enter%20lambda%20in%20%60conv%60/near/192723220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52877Enterlambdainconv.html#192723220">Johan Commelin (Apr 02 2020 at 20:41)</a>:</h4>
+<p>One reason why I don't use <code>conv</code> mode that much is that it seems to me it is often quite slow and not so responsive... do others recognise this?</p>
+
+<a name="192724042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Enter%20lambda%20in%20%60conv%60/near/192724042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52877Enterlambdainconv.html#192724042">Mario Carneiro (Apr 02 2020 at 20:48)</a>:</h4>
+<p>It shouldn't be any slower than any other tactic; what <code>conv</code> does in its most basic mode is extremely simple, essentially just <code>apply eq.mp</code></p>
+
+<a name="192724548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Enter%20lambda%20in%20%60conv%60/near/192724548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52877Enterlambdainconv.html#192724548">Mario Carneiro (Apr 02 2020 at 20:52)</a>:</h4>
+<p>More conv tactics:</p>
+<ul>
+<li><code>convert y</code>: produce a subgoal <code>|- goal = y</code> in regular tactic mode</li>
+<li><code>trans y</code>: produce a tactic subgoal <code>|- goal = y</code> and a conv subgoal <code>| y</code></li>
+<li><code>tactic { tac }</code>: use a regular tactic as a conv tactic (the tactic sees the goal <code>|- goal = ?m1</code>). (This is the identity function under the hood)</li>
+<li><code>done</code>, <code>refl</code>: close the goal by reflexivity (should be optional most of the time)</li>
+</ul>
+
+<a name="192806193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Enter%20lambda%20in%20%60conv%60/near/192806193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52877Enterlambdainconv.html#192806193">Patrick Massot (Apr 03 2020 at 13:50)</a>:</h4>
+<p>Please don't make <code>intro</code> different from <code>intros</code>.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

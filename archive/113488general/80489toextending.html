@@ -1,0 +1,106 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/80489toextending.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/80489toextending.html">to_extending</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193209568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_extending/near/193209568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80489toextending.html#193209568">Patrick Massot (Apr 07 2020 at 15:58)</a>:</h4>
+<p>Suppose I have a structure <code>foo</code>, that is not a class and wouldn't make sense as a class. Then I prove lemmas <code>foo.lem1</code> and <code>foo.lem1</code> about my structure <code>foo</code> and define a function <code>foo.mk_something</code>. Then I define another structure <code>bar</code> extending <code>foo</code>, which is also not a class. In particular Lean creates <code>bar.to_foo</code> for me. But each time I want to apply my lemmas to <code>x : bar</code>, I need to call <code>x.to_foo.lem1</code> or <code>x.to_foo.lem1</code>, and the same with <code>x.to_foo.mk_something</code>.</p>
+<p>It seems totally within reach of meta-programming to write a command <code>port_lemma foo bar</code> that  creates <code>bar.lem1</code>, <code>bar.lem2</code>, <code>bar.mk_something</code>, changing the types of all arguments with type <code>foo</code> and inserting <code>.to_foo</code> everywhere they are used.</p>
+<p>Am I talking non-sense? Does this already exist? Could someone do it for me?</p>
+
+<a name="193209957"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_extending/near/193209957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80489toextending.html#193209957">Kevin Buzzard (Apr 07 2020 at 16:00)</a>:</h4>
+<p>When bundling algebraic structures I have run into this and I've had some pushback from the CS people because <code>x.lem1</code> is the same as <code>x.to_foo.lem1</code> and you are not supposed to duplicate code.</p>
+
+<a name="193210079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_extending/near/193210079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80489toextending.html#193210079">Kevin Buzzard (Apr 07 2020 at 16:01)</a>:</h4>
+<p>If I had it my way we'd have <code>group_hom.map_mul</code> and so on.</p>
+
+<a name="193210086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_extending/near/193210086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80489toextending.html#193210086">Patrick Massot (Apr 07 2020 at 16:01)</a>:</h4>
+<p>Code is not really duplicated if you don't write it.</p>
+
+<a name="193210245"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_extending/near/193210245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80489toextending.html#193210245">Kevin Buzzard (Apr 07 2020 at 16:02)</a>:</h4>
+<p>All the <code>simp</code> tags need transporting over as well.</p>
+
+<a name="193251838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_extending/near/193251838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80489toextending.html#193251838">Mario Carneiro (Apr 07 2020 at 21:39)</a>:</h4>
+<p>I think this exact use case already works without any <code>port_lemma</code> command. That is, if you write <code>x.lem1</code> and <code>x : bar</code> and <code>bar extends foo</code> then the <em>parser</em> will insert a <code>to_foo</code> in there so what the elaborator sees is <code>foo.lem1 (bar.to_foo x)</code></p>
+
+<a name="193311887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_extending/near/193311887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80489toextending.html#193311887">Patrick Massot (Apr 08 2020 at 12:34)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> either you were dreaming or I didn't explain properly:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">foo</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+<span class="o">(</span><span class="n">n_eq</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span><span class="bp">.</span><span class="n">lem1</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">foo</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span><span class="bp">.</span><span class="n">n</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">x</span><span class="bp">.</span><span class="n">n_eq</span> <span class="bp">;</span> <span class="n">norm_num</span>
+
+<span class="kn">structure</span> <span class="n">bar</span> <span class="kn">extends</span> <span class="n">foo</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">bar</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span><span class="bp">.</span><span class="n">n</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">x</span><span class="bp">.</span><span class="n">to_foo</span><span class="bp">.</span><span class="n">lem1</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">bar</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span><span class="bp">.</span><span class="n">n</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">x</span><span class="bp">.</span><span class="n">lem1</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">invalid field notation, &#39;lem1&#39; is not a valid &quot;field&quot; because environment does not contain &#39;bar.lem1&#39;</span>
+<span class="cm">  x</span>
+<span class="cm">which has type</span>
+<span class="cm">  bar</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="193311986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_extending/near/193311986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80489toextending.html#193311986">Mario Carneiro (Apr 08 2020 at 12:35)</a>:</h4>
+<p>I think the magic might be limited to structure members</p>
+
+<a name="193312009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_extending/near/193312009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80489toextending.html#193312009">Patrick Massot (Apr 08 2020 at 12:35)</a>:</h4>
+<p>This is the most painful flaw of the Lean 3 elaborator outside  type class inference.</p>
+
+<a name="193312066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_extending/near/193312066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80489toextending.html#193312066">Patrick Massot (Apr 08 2020 at 12:35)</a>:</h4>
+<p>Without this issue the manifold files in mathlib would be infinitely easier to read and write.</p>
+
+<a name="193312088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_extending/near/193312088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80489toextending.html#193312088">Mario Carneiro (Apr 08 2020 at 12:35)</a>:</h4>
+<p>which is doubly annoying because there is nothing else that makes structure fields distinguishable from other theorems</p>
+
+<a name="193312223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_extending/near/193312223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80489toextending.html#193312223">Mario Carneiro (Apr 08 2020 at 12:36)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">bar</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span><span class="bp">.</span><span class="n">n</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">x</span><span class="bp">.</span><span class="n">to_foo</span><span class="bp">.</span><span class="n">n_eq</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">bar</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span><span class="bp">.</span><span class="n">n</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">x</span><span class="bp">.</span><span class="n">n_eq</span>
+</pre></div>
+
+<a name="193312320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_extending/near/193312320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80489toextending.html#193312320">Patrick Massot (Apr 08 2020 at 12:37)</a>:</h4>
+<p>Yes, I knew this works. But it's very far from being sufficient.</p>
+
+<a name="193312386"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_extending/near/193312386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80489toextending.html#193312386">Patrick Massot (Apr 08 2020 at 12:38)</a>:</h4>
+<p>Hence my question: should we meta-program away this problem?</p>
+
+<a name="193312417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_extending/near/193312417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80489toextending.html#193312417">Patrick Massot (Apr 08 2020 at 12:38)</a>:</h4>
+<p>Or even better: could someone fix the elaborator in Lean 3.8?</p>
+
+<a name="193695510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_extending/near/193695510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80489toextending.html#193695510">Scott Morrison (Apr 12 2020 at 05:26)</a>:</h4>
+<p>Ugh, I just ran into this again too.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

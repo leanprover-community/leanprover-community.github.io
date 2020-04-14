@@ -1,0 +1,105 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/97040Findminofasetofnaturalnumbers.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/97040Findminofasetofnaturalnumbers.html">Find min of a set of natural numbers</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192928608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Find%20min%20of%20a%20set%20of%20natural%20numbers/near/192928608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97040Findminofasetofnaturalnumbers.html#192928608">Ryan Lahfa (Apr 04 2020 at 21:50)</a>:</h4>
+<p>I'm trying to understand the <code>nat.find_xxx</code> API and as far as I understand it, it looks like rather some helpers which prove the induction over natural numbers.</p>
+<p>I have some set of natural numbers which is infinite, nonempty and I'd like to take the smallest element, I could reuse the Inf/is_least machinery but I think there must be more elementary things to do?</p>
+<p>Namely, I'm interested in this (mis-formulated?) lemma:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>
+
+<span class="kn">lemma</span> <span class="n">smallest_element</span> <span class="o">(</span><span class="n">S</span><span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span><span class="o">):</span> <span class="n">S</span><span class="bp">.</span><span class="n">nonempty</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">,</span> <span class="n">m</span> <span class="err">\</span><span class="n">notin</span> <span class="n">S</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="192928615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Find%20min%20of%20a%20set%20of%20natural%20numbers/near/192928615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97040Findminofasetofnaturalnumbers.html#192928615">Ryan Lahfa (Apr 04 2020 at 21:50)</a>:</h4>
+<p>(I cannot use <code>finset.min</code> because of the infinite condition.)</p>
+
+<a name="192928733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Find%20min%20of%20a%20set%20of%20natural%20numbers/near/192928733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97040Findminofasetofnaturalnumbers.html#192928733">Ryan Lahfa (Apr 04 2020 at 21:53)</a>:</h4>
+<p>And I answer myself…</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">smallest_element</span> <span class="o">(</span><span class="n">S</span><span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span><span class="o">):</span> <span class="n">S</span><span class="bp">.</span><span class="n">nonempty</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">,</span> <span class="n">m</span> <span class="err">∉</span> <span class="n">S</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">use</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">find</span> <span class="n">H</span><span class="o">),</span>
+  <span class="n">intro</span> <span class="n">m</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">find_min</span> <span class="n">H</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>seems to work just fine.</p>
+<p>But I wonder if there is a more canonical way.</p>
+
+<a name="192931192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Find%20min%20of%20a%20set%20of%20natural%20numbers/near/192931192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97040Findminofasetofnaturalnumbers.html#192931192">Daniel Keys (Apr 04 2020 at 23:00)</a>:</h4>
+<p>Well-ordered principle: every non-empty subset of the natural numbers has a least element.</p>
+
+<a name="192931253"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Find%20min%20of%20a%20set%20of%20natural%20numbers/near/192931253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97040Findminofasetofnaturalnumbers.html#192931253">Daniel Keys (Apr 04 2020 at 23:02)</a>:</h4>
+<p>Mathematical induction is true if and only if ℕ is well-ordered.</p>
+
+<a name="192931570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Find%20min%20of%20a%20set%20of%20natural%20numbers/near/192931570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97040Findminofasetofnaturalnumbers.html#192931570">Ryan Lahfa (Apr 04 2020 at 23:12)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="259186">Daniel Keys</span> <a href="#narrow/stream/113489-new-members/topic/Find.20min.20of.20a.20set.20of.20natural.20numbers/near/192931192" title="#narrow/stream/113489-new-members/topic/Find.20min.20of.20a.20set.20of.20natural.20numbers/near/192931192">said</a>:</p>
+<blockquote>
+<p>Well-ordered principle: every non-empty subset of the natural numbers has a least element.</p>
+</blockquote>
+<p>Is there a direct theorem using <code>is_least</code>?</p>
+
+<a name="192932457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Find%20min%20of%20a%20set%20of%20natural%20numbers/near/192932457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97040Findminofasetofnaturalnumbers.html#192932457">Daniel Keys (Apr 04 2020 at 23:42)</a>:</h4>
+<p>Not sure what you mean here,  but it seems to me that your <code>smallest_element</code> lemma restates an axiom:</p>
+<div class="codehilite"><pre><span></span><span class="kn">axiom</span> <span class="n">well_ordered</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">S</span><span class="bp">.</span><span class="n">nonempty</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">m</span> <span class="err">∈</span> <span class="n">S</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">n</span> <span class="err">∈</span> <span class="n">S</span><span class="o">,</span> <span class="n">m</span> <span class="bp">≤</span> <span class="n">n</span>
+</pre></div>
+
+<a name="192932481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Find%20min%20of%20a%20set%20of%20natural%20numbers/near/192932481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97040Findminofasetofnaturalnumbers.html#192932481">Kevin Buzzard (Apr 04 2020 at 23:43)</a>:</h4>
+<p>That's not an axiom in Lean</p>
+
+<a name="192932482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Find%20min%20of%20a%20set%20of%20natural%20numbers/near/192932482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97040Findminofasetofnaturalnumbers.html#192932482">Kevin Buzzard (Apr 04 2020 at 23:43)</a>:</h4>
+<p>that's a theorem</p>
+
+<a name="192932530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Find%20min%20of%20a%20set%20of%20natural%20numbers/near/192932530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97040Findminofasetofnaturalnumbers.html#192932530">Daniel Keys (Apr 04 2020 at 23:44)</a>:</h4>
+<p>Good point. I didn't mean it was in Lean.</p>
+
+<a name="192932536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Find%20min%20of%20a%20set%20of%20natural%20numbers/near/192932536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97040Findminofasetofnaturalnumbers.html#192932536">Kevin Buzzard (Apr 04 2020 at 23:45)</a>:</h4>
+<p>The question is how to do all of this stuff in Lean.</p>
+
+<a name="192932588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Find%20min%20of%20a%20set%20of%20natural%20numbers/near/192932588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97040Findminofasetofnaturalnumbers.html#192932588">Daniel Keys (Apr 04 2020 at 23:46)</a>:</h4>
+<p>Isn't this hidden somewhere in Lean - i.e. by the definition of the naturals as an inductive type?</p>
+
+<a name="192932591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Find%20min%20of%20a%20set%20of%20natural%20numbers/near/192932591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97040Findminofasetofnaturalnumbers.html#192932591">Kevin Buzzard (Apr 04 2020 at 23:46)</a>:</h4>
+<p>Sure</p>
+
+<a name="192932595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Find%20min%20of%20a%20set%20of%20natural%20numbers/near/192932595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97040Findminofasetofnaturalnumbers.html#192932595">Kevin Buzzard (Apr 04 2020 at 23:46)</a>:</h4>
+<p>The question is where is it hidden and what is the canonical way to get it out.</p>
+
+<a name="192932604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Find%20min%20of%20a%20set%20of%20natural%20numbers/near/192932604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97040Findminofasetofnaturalnumbers.html#192932604">Kevin Buzzard (Apr 04 2020 at 23:47)</a>:</h4>
+<p>&lt; is not some predicate which is canonically associated to nat; &lt; has a definition which probably uses +</p>
+
+<a name="192932659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Find%20min%20of%20a%20set%20of%20natural%20numbers/near/192932659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97040Findminofasetofnaturalnumbers.html#192932659">Daniel Keys (Apr 04 2020 at 23:49)</a>:</h4>
+<p>(deleted)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

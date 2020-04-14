@@ -1,0 +1,81 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/04764eliminatorsintermmode.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/04764eliminatorsintermmode.html">eliminators in term mode</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193363166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eliminators%20in%20term%20mode/near/193363166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04764eliminatorsintermmode.html#193363166">Kevin Buzzard (Apr 08 2020 at 18:53)</a>:</h4>
+<p>Is there some black magic I can do to make list.rec work for me in term mode without the <code>@</code>? Why are there problems here? The tactic mode proof indicates that I've given all the information required for Lean to take things from here. No doubt I could add some type annotations -- but my point is that in the tactic mode proof these are not necessary, so why isn't there some @elab_as_eliminator stuff doing the same work for me in term mode?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="c1">-- this works fine</span>
+<span class="kn">theorem</span> <span class="n">prod_map_hom</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">γ</span><span class="o">]</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→*</span> <span class="n">γ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">L</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">g</span> <span class="err">∘</span> <span class="n">f</span><span class="o">))</span><span class="bp">.</span><span class="n">prod</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">((</span><span class="n">L</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span><span class="o">)</span><span class="bp">.</span><span class="n">prod</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">L</span> <span class="k">with</span> <span class="n">b</span> <span class="n">L</span> <span class="n">hL</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">g</span><span class="bp">.</span><span class="n">map_one</span><span class="bp">.</span><span class="n">symm</span><span class="o">},</span>
+  <span class="o">{</span> <span class="n">simp</span> <span class="o">[</span><span class="n">g</span><span class="bp">.</span><span class="n">map_mul</span><span class="o">,</span> <span class="n">hL</span><span class="o">]}</span>
+<span class="kn">end</span>
+
+<span class="c1">-- this works fine</span>
+<span class="kn">theorem</span> <span class="n">prod_map_hom&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">γ</span><span class="o">]</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→*</span> <span class="n">γ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">L</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">g</span> <span class="err">∘</span> <span class="n">f</span><span class="o">))</span><span class="bp">.</span><span class="n">prod</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">((</span><span class="n">L</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span><span class="o">)</span><span class="bp">.</span><span class="n">prod</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">@</span><span class="n">list</span><span class="bp">.</span><span class="n">rec</span> <span class="bp">_</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">L</span><span class="o">,</span> <span class="o">(</span><span class="n">L</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">g</span> <span class="err">∘</span> <span class="n">f</span><span class="o">))</span><span class="bp">.</span><span class="n">prod</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">((</span><span class="n">L</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span><span class="o">)</span><span class="bp">.</span><span class="n">prod</span><span class="o">))</span>
+  <span class="n">g</span><span class="bp">.</span><span class="n">map_one</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">IH</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">g</span><span class="bp">.</span><span class="n">map_mul</span><span class="o">,</span> <span class="n">IH</span><span class="o">])</span> <span class="n">L</span>
+
+<span class="c1">-- this doesn&#39;t work</span>
+<span class="kn">theorem</span> <span class="n">prod_map_hom&#39;&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">γ</span><span class="o">]</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→*</span> <span class="n">γ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">L</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">g</span> <span class="err">∘</span> <span class="n">f</span><span class="o">))</span><span class="bp">.</span><span class="n">prod</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">((</span><span class="n">L</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span><span class="o">)</span><span class="bp">.</span><span class="n">prod</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">L</span><span class="bp">.</span><span class="n">rec</span> <span class="n">g</span><span class="bp">.</span><span class="n">map_one</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">IH</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">g</span><span class="bp">.</span><span class="n">map_mul</span><span class="o">,</span> <span class="n">IH</span><span class="o">])</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">type mismatch at application</span>
+<span class="cm">  list.rec _</span>
+<span class="cm">term</span>
+<span class="cm">  eq.symm (monoid_hom.map_one g)</span>
+<span class="cm">has type</span>
+<span class="cm">  1 = ⇑g 1 : Prop</span>
+<span class="cm">but is expected to have type</span>
+<span class="cm">  ?m_1 list.nil : Sort ?</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="193384614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eliminators%20in%20term%20mode/near/193384614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04764eliminatorsintermmode.html#193384614">Mario Carneiro (Apr 08 2020 at 22:09)</a>:</h4>
+<p>the black magic is so not skip the last argument</p>
+
+<a name="193384624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eliminators%20in%20term%20mode/near/193384624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04764eliminatorsintermmode.html#193384624">Mario Carneiro (Apr 08 2020 at 22:09)</a>:</h4>
+<p>even if the result looks like an eta redex</p>
+
+<a name="193384665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eliminators%20in%20term%20mode/near/193384665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04764eliminatorsintermmode.html#193384665">Reid Barton (Apr 08 2020 at 22:10)</a>:</h4>
+<p>But it's there in <code>L.rec</code> right?</p>
+
+<a name="193384762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eliminators%20in%20term%20mode/near/193384762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04764eliminatorsintermmode.html#193384762">Mario Carneiro (Apr 08 2020 at 22:10)</a>:</h4>
+<p>oh and also don't use projection notation</p>
+
+<a name="193384774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eliminators%20in%20term%20mode/near/193384774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04764eliminatorsintermmode.html#193384774">Mario Carneiro (Apr 08 2020 at 22:10)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">prod_map_hom&#39;&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">γ</span><span class="o">]</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→*</span> <span class="n">γ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">L</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">g</span> <span class="err">∘</span> <span class="n">f</span><span class="o">))</span><span class="bp">.</span><span class="n">prod</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">((</span><span class="n">L</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span><span class="o">)</span><span class="bp">.</span><span class="n">prod</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">list</span><span class="bp">.</span><span class="n">rec</span> <span class="n">g</span><span class="bp">.</span><span class="n">map_one</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">IH</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">g</span><span class="bp">.</span><span class="n">map_mul</span><span class="o">,</span> <span class="n">IH</span><span class="o">])</span> <span class="n">L</span>
+</pre></div>
+
+<a name="193384831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eliminators%20in%20term%20mode/near/193384831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04764eliminatorsintermmode.html#193384831">Mario Carneiro (Apr 08 2020 at 22:11)</a>:</h4>
+<p>projection notation doesn't work on the built in recursors <code>rec</code>, <code>rec_on</code> and <code>cases_on</code> for some reason</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

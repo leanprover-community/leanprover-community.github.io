@@ -1,0 +1,140 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/50425Implementationofcategoryfoldtolist.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/50425Implementationofcategoryfoldtolist.html">Implementation of category.fold.to_list</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="192787638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implementation%20of%20category.fold.to_list/near/192787638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50425Implementationofcategoryfoldtolist.html#192787638">Jannis Limperg (Apr 03 2020 at 11:02)</a>:</h4>
+<p>In <code>category.fold</code>, <code>to_list</code> is defined as</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">to_list</span> <span class="o">:</span> <span class="n">t</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">list</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="n">list</span><span class="bp">.</span><span class="n">reverse</span> <span class="err">∘</span> <span class="n">foldl</span> <span class="o">(</span><span class="n">flip</span> <span class="n">list</span><span class="bp">.</span><span class="n">cons</span><span class="o">)</span> <span class="o">[]</span>
+</pre></div>
+
+
+<p>where <code>t</code> is an arbitrary <code>traversable</code>. However, I would have expected <code>foldr list.cons []</code> instead. Is there a reason to prefer the first implementation? (<span class="user-mention" data-user-id="110026">@Simon Hudon</span>  I believe this is your area of expertise.)</p>
+
+<a name="192787956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implementation%20of%20category.fold.to_list/near/192787956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50425Implementationofcategoryfoldtolist.html#192787956">Marc Huisinga (Apr 03 2020 at 11:06)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="192788399"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implementation%20of%20category.fold.to_list/near/192788399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50425Implementationofcategoryfoldtolist.html#192788399">Marc Huisinga (Apr 03 2020 at 11:12)</a>:</h4>
+<p>actually, scratch that, sorry.</p>
+
+<a name="192809229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implementation%20of%20category.fold.to_list/near/192809229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50425Implementationofcategoryfoldtolist.html#192809229">Reid Barton (Apr 03 2020 at 14:12)</a>:</h4>
+<p>My guess is this one runs in fixed stack space in a strict language</p>
+
+<a name="192809309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implementation%20of%20category.fold.to_list/near/192809309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50425Implementationofcategoryfoldtolist.html#192809309">Reid Barton (Apr 03 2020 at 14:12)</a>:</h4>
+<p>now I see it's approximately what Marc wrote and then deleted, so maybe I am wrong too <span aria-label="upside down" class="emoji emoji-1f643" role="img" title="upside down">:upside_down:</span></p>
+
+<a name="192818574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implementation%20of%20category.fold.to_list/near/192818574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50425Implementationofcategoryfoldtolist.html#192818574">Simon Hudon (Apr 03 2020 at 15:10)</a>:</h4>
+<p>That was actually my reason. Why did <span class="user-mention" data-user-id="221921">@Marc Huisinga</span> abandon the explanation?</p>
+
+<a name="192822709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implementation%20of%20category.fold.to_list/near/192822709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50425Implementationofcategoryfoldtolist.html#192822709">Marc Huisinga (Apr 03 2020 at 15:38)</a>:</h4>
+<p>i realized that both <code>foldl</code> and <code>foldr</code> use <code>fold_map</code>, which uses <code>traverse</code>, for which e.g. the list implementation is already not tail recursive if i'm not mistaken. at that point i decided that i probably don't understand the code well enough to comment.</p>
+
+<a name="192868094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implementation%20of%20category.fold.to_list/near/192868094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50425Implementationofcategoryfoldtolist.html#192868094">Simon Hudon (Apr 03 2020 at 21:50)</a>:</h4>
+<p>Yes you're right <code>list.traverse</code> is not tail recursive. For the instances of <code>traverse</code> that are tail recursive, we're better off using <code>foldl</code>. Otherwise, I don't think there's a downside.</p>
+
+<a name="192875204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implementation%20of%20category.fold.to_list/near/192875204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50425Implementationofcategoryfoldtolist.html#192875204">Marc Huisinga (Apr 03 2020 at 23:18)</a>:</h4>
+<p>when <code>traverse</code> is tail recursive, why would <code>foldr</code> not be? (i.e. why would it be better to use <code>foldl</code>?)</p>
+
+<a name="193041891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implementation%20of%20category.fold.to_list/near/193041891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50425Implementationofcategoryfoldtolist.html#193041891">Jannis Limperg (Apr 06 2020 at 13:33)</a>:</h4>
+<p>Two follow-up questions:</p>
+<ol>
+<li>Would it be a good idea to move <code>foldr</code>, <code>foldl</code>, <code>length</code> etc. into the <code>traversable</code> type class? Haskell seems to do this quite liberally. Upside: efficiency gains (some asymptotic); downside: some more proof obligations in the <code>lawful</code> classes.</li>
+<li>Assuming that the <code>foldl</code> implementation of <code>length</code> runs in constant stack space, I imagine it still performs two traversals instead of one. Is that generally the right tradeoff in Lean (i.e. accepting an O(n) penalty to avoid non-tail recursion)?</li>
+</ol>
+
+<a name="193042601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implementation%20of%20category.fold.to_list/near/193042601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50425Implementationofcategoryfoldtolist.html#193042601">Gabriel Ebner (Apr 06 2020 at 13:39)</a>:</h4>
+<p>Lean 3 doesn't do any tail-call optimization as far as I can tell, so there isn't really a stack space advantage.</p>
+
+<a name="193051967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implementation%20of%20category.fold.to_list/near/193051967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50425Implementationofcategoryfoldtolist.html#193051967">Jannis Limperg (Apr 06 2020 at 14:43)</a>:</h4>
+<p>So concretely, if we take <code>foldl</code> and <code>foldr</code> on lists:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">def</span> <span class="n">foldl</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">list</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="n">a</span> <span class="o">[]</span>       <span class="o">:=</span> <span class="n">a</span>
+<span class="bp">|</span> <span class="n">a</span> <span class="o">(</span><span class="n">b</span> <span class="bp">::</span> <span class="n">l</span><span class="o">)</span> <span class="o">:=</span> <span class="n">foldl</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="n">l</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">def</span> <span class="n">foldr</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span>
+<span class="bp">|</span> <span class="o">[]</span>       <span class="o">:=</span> <span class="n">b</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">a</span> <span class="bp">::</span> <span class="n">l</span><span class="o">)</span> <span class="o">:=</span> <span class="n">f</span> <span class="n">a</span> <span class="o">(</span><span class="n">foldr</span> <span class="n">l</span><span class="o">)</span>
+</pre></div>
+
+
+<p>These would both use O(n) stack space and should therefore be roughly equally fast (or slow)?</p>
+
+<a name="193052848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implementation%20of%20category.fold.to_list/near/193052848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50425Implementationofcategoryfoldtolist.html#193052848">Gabriel Ebner (Apr 06 2020 at 14:48)</a>:</h4>
+<p>Yup, both use O(n) stack space and I would expect the performance to be similar.  If you call <code>trace_call_stack</code>, then you can convince yourself that both have linear stack usage:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">def</span> <span class="n">foldl</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">list</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="n">a</span> <span class="o">[]</span>       <span class="o">:=</span> <span class="n">a</span>
+<span class="bp">|</span> <span class="n">a</span> <span class="o">(</span><span class="n">b</span> <span class="bp">::</span> <span class="n">l</span><span class="o">)</span> <span class="o">:=</span> <span class="n">foldl</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="n">l</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">def</span> <span class="n">foldr</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span>
+<span class="bp">|</span> <span class="o">[]</span>       <span class="o">:=</span> <span class="n">b</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">a</span> <span class="bp">::</span> <span class="n">l</span><span class="o">)</span> <span class="o">:=</span> <span class="n">f</span> <span class="n">a</span> <span class="o">(</span><span class="n">foldr</span> <span class="n">l</span><span class="o">)</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">foldl</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="k">if</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">9</span> <span class="k">then</span> <span class="n">trace_call_stack</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span><span class="o">)</span> <span class="mi">0</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">range</span> <span class="mi">10</span><span class="o">)</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">foldr</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="k">if</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">9</span> <span class="k">then</span> <span class="n">trace_call_stack</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span><span class="o">)</span> <span class="mi">0</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">range</span> <span class="mi">10</span><span class="o">)</span>
+</pre></div>
+
+<a name="193066555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implementation%20of%20category.fold.to_list/near/193066555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50425Implementationofcategoryfoldtolist.html#193066555">Simon Hudon (Apr 06 2020 at 16:26)</a>:</h4>
+<p>That's true. Somehow, my spidy sense is still telling me that it's wrong to use <code>foldr</code> here because the language is eager. But it doesn't make a difference</p>
+
+<a name="193066675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implementation%20of%20category.fold.to_list/near/193066675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50425Implementationofcategoryfoldtolist.html#193066675">Reid Barton (Apr 06 2020 at 16:27)</a>:</h4>
+<p>presumably it will make a difference in Lean 4?</p>
+
+<a name="193066758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implementation%20of%20category.fold.to_list/near/193066758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50425Implementationofcategoryfoldtolist.html#193066758">Simon Hudon (Apr 06 2020 at 16:28)</a>:</h4>
+<p>It will</p>
+
+<a name="193066798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implementation%20of%20category.fold.to_list/near/193066798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50425Implementationofcategoryfoldtolist.html#193066798">Simon Hudon (Apr 06 2020 at 16:28)</a>:</h4>
+<p>With borrow inference, I think Lean 4 can now do tail call elimination</p>
+
+<a name="193066847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implementation%20of%20category.fold.to_list/near/193066847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50425Implementationofcategoryfoldtolist.html#193066847">Mario Carneiro (Apr 06 2020 at 16:29)</a>:</h4>
+<p>Why can't lean 3 do TCO?</p>
+
+<a name="193066882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implementation%20of%20category.fold.to_list/near/193066882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50425Implementationofcategoryfoldtolist.html#193066882">Mario Carneiro (Apr 06 2020 at 16:29)</a>:</h4>
+<p>I mean, there isn't anything stopping us from implementing it</p>
+
+<a name="193067055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implementation%20of%20category.fold.to_list/near/193067055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50425Implementationofcategoryfoldtolist.html#193067055">Simon Hudon (Apr 06 2020 at 16:30)</a>:</h4>
+<p>As far as I can tell, it's because of the scoping of reference counting variables. Functions need to return to the calling context so that that one can decrease the ref count of its variables before it returns</p>
+
+<a name="193074719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implementation%20of%20category.fold.to_list/near/193074719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50425Implementationofcategoryfoldtolist.html#193074719">Mario Carneiro (Apr 06 2020 at 17:31)</a>:</h4>
+<p>If you are doing a tail call, then you do that refcounting cleanup at the site of the tail-call (causing any variables that have refcount 1 to be dropped unless the caller is taking ownership)</p>
+
+<a name="193074888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implementation%20of%20category.fold.to_list/near/193074888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50425Implementationofcategoryfoldtolist.html#193074888">Simon Hudon (Apr 06 2020 at 17:33)</a>:</h4>
+<p>Yes, that sounds like the right way to do it</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,328 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/10013theoremoreqvff1.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html">theorem or_eqv_ff1</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193073287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193073287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193073287">Phiroc (Apr 06 2020 at 17:21)</a>:</h4>
+<p>Hello,<br>
+I am having trouble implementing the following theorems in *Verified Functional<br>
+Programming in Agda*:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- p. 28</span>
+<span class="kn">theorem</span> <span class="n">or_eqv_ff1</span> <span class="o">:</span>
+    <span class="bp">∀</span><span class="o">{</span><span class="n">b1</span> <span class="n">b2</span><span class="o">},</span> <span class="n">b1</span> <span class="bp">∨</span> <span class="n">b2</span> <span class="bp">=</span> <span class="n">ff</span> <span class="bp">→</span> <span class="n">b1</span> <span class="bp">=</span> <span class="n">ff</span>
+<span class="bp">|</span> <span class="n">ff</span> <span class="n">p</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="n">tt</span> <span class="o">:=</span> <span class="n">absurd</span>
+
+<span class="c1">-- p. 31</span>
+<span class="kn">theorem</span> <span class="n">or_eqv_ff1&#39;</span> <span class="o">:</span>
+    <span class="bp">∀</span><span class="o">{</span><span class="n">b1</span> <span class="n">b2</span><span class="o">},</span> <span class="n">b1</span> <span class="bp">∨</span> <span class="n">b2</span> <span class="bp">=</span> <span class="n">ff</span> <span class="bp">→</span> <span class="n">b1</span> <span class="bp">=</span> <span class="n">ff</span>
+<span class="bp">|</span> <span class="n">ff</span> <span class="n">p</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="n">tt</span> <span class="n">p</span> <span class="o">:=</span> <span class="n">p</span>
+</pre></div>
+
+
+<p>I think the implications are causing a problem, but am not sure.<br>
+Could someone please help?</p>
+<p>Thanks.</p>
+<p>Phiroc</p>
+
+<a name="193073885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193073885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193073885">Reid Barton (Apr 06 2020 at 17:25)</a>:</h4>
+<p>I think there are some syntactic issues and maybe also some deeper semantic issues.</p>
+
+<a name="193073901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193073901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193073901">Reid Barton (Apr 06 2020 at 17:25)</a>:</h4>
+<p>What do the proofs look like in Agda?</p>
+
+<a name="193074035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193074035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193074035">Reid Barton (Apr 06 2020 at 17:26)</a>:</h4>
+<p>For starters, each of your functions has three arguments (<code>b1</code>, <code>b2</code> and the proof that <code>b1 ∨ b2 = ff</code>) but you only match two things.</p>
+
+<a name="193074606"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193074606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193074606">Reid Barton (Apr 06 2020 at 17:30)</a>:</h4>
+<p>Then, <code>∨</code> means "or" of <code>Prop</code>s, not <code>bool</code>s. Actually I don't know how Lean is intepreting your theorem statement.</p>
+
+<a name="193074726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193074726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193074726">Phiroc (Apr 06 2020 at 17:31)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="nf">||≡ff1</span> <span class="ow">:</span> <span class="ow">∀</span> <span class="o">{</span>b1 b2<span class="o">}</span> <span class="ow">→</span> b1 <span class="ow">||</span> b2 ≡ ff <span class="ow">→</span> b1 ≡ ff
+<span class="ow">||</span>≡ff1 <span class="o">{</span>ff<span class="o">}</span> p <span class="ow">=</span> refl
+<span class="ow">||</span>≡ff1 <span class="o">{</span>tt<span class="o">}</span> <span class="o">()</span>
+
+<span class="nf">||≡ff1</span> <span class="ow">:</span> <span class="ow">∀</span> <span class="o">{</span>b1 b2<span class="o">}</span> <span class="ow">→</span> b1 <span class="ow">||</span> b2 ≡ ff <span class="ow">→</span> b1 ≡ ff
+<span class="ow">||</span>≡ff1 <span class="o">{</span>ff<span class="o">}</span> p <span class="ow">=</span> refl
+<span class="ow">||</span>≡ff1 <span class="o">{</span>tt<span class="o">}</span> p <span class="ow">=</span> p
+</pre></div>
+
+<a name="193074912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193074912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193074912">Johan Commelin (Apr 06 2020 at 17:33)</a>:</h4>
+<p>Logical operations are prefixed with <code>b</code>, so it's <code>bnot</code>, <code>bor</code>, <code>band</code>...</p>
+
+<a name="193074926"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193074926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193074926">Reid Barton (Apr 06 2020 at 17:33)</a>:</h4>
+<p>So I think in Agda you don't write implicit arguments (like <code>b2</code>) on the left side of an equation unless you choose to, in Lean you do.</p>
+
+<a name="193074955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193074955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193074955">Johan Commelin (Apr 06 2020 at 17:33)</a>:</h4>
+<p>It's too bad they aren't in the <code>bool</code> namespace... because then you could've written <code>p.or q</code></p>
+
+<a name="193074959"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193074959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193074959">Reid Barton (Apr 06 2020 at 17:33)</a>:</h4>
+<p>In Agda <code>{ff}</code> is matching <code>b1</code> and there is nothing for <code>b2</code></p>
+
+<a name="193075065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193075065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193075065">Phiroc (Apr 06 2020 at 17:34)</a>:</h4>
+<p>I think <em>p</em> matches <em>b2</em></p>
+
+<a name="193075113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193075113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193075113">Reid Barton (Apr 06 2020 at 17:34)</a>:</h4>
+<p>It doesn't, else how could the very last line <code>... p = p</code> type check?</p>
+
+<a name="193075342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193075342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193075342">Phiroc (Apr 06 2020 at 17:36)</a>:</h4>
+<p>The book says:</p>
+<blockquote>
+<p>This is the same as the earlier proof, but for the second clause of the definition, wehave<br>
+an actual defining equation that just returns the proof p of the impossible assumption.<br>
+The type of p is definitionally equal to tt ≡ ff, which is what we have for the desired<br>
+result with b1 instantiated to tt.</p>
+</blockquote>
+
+<a name="193075698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193075698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193075698">Phiroc (Apr 06 2020 at 17:39)</a>:</h4>
+<p>Regarding the first version of the theorem, the book says:</p>
+<blockquote>
+<p>After this, we have a variable p corresponding to the sole explicit argument of this<br>
+proof, namely, the proof of our assumption. We actually do not need to use this<br>
+variable on the right-hand side in this case, because if we are in the case where b1<br>
+is ff, then our desired result is definitionally equal to just ff ≡ ff. So this equation<br>
+has just refl on the right-hand side, to prove that trivial equation ff ≡ ff.</p>
+</blockquote>
+
+<a name="193076086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193076086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193076086">Reid Barton (Apr 06 2020 at 17:41)</a>:</h4>
+<p>Right, <code>p</code> is the proof. Not <code>b2</code>.</p>
+
+<a name="193076659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193076659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193076659">Phiroc (Apr 06 2020 at 17:45)</a>:</h4>
+<p>Can you do pattern matching which includes proofs, in Lean, e.g. <em>ff p</em> above?</p>
+
+<a name="193076771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193076771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193076771">Kevin Buzzard (Apr 06 2020 at 17:46)</a>:</h4>
+<p>sure</p>
+
+<a name="193077122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193077122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193077122">Reid Barton (Apr 06 2020 at 17:49)</a>:</h4>
+<p>The first problem that we're discussing is that in Lean you have to match <code>b2</code> explicitly and you haven't done it.</p>
+
+<a name="193077170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193077170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193077170">Phiroc (Apr 06 2020 at 17:49)</a>:</h4>
+<p>Here's Lean's rant about the first theorem:</p>
+<blockquote>
+<p>bool-thms.lean:55:7: error<br>
+invalid function application in pattern, it cannot be reduced to a constructor (possible solution, mark term as inaccessible using '.( )')<br>
+ ↥ff<br>
+bool-thms.lean:55:7: error<br>
+equation type mismatch, term<br>
+ rfl<br>
+has type<br>
+?m_2 = ?m_2<br>
+but is expected to have type<br>
+↥ff ∨ p = ff → ↥ff = ↥ff</p>
+</blockquote>
+
+<a name="193077444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193077444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193077444">Phiroc (Apr 06 2020 at 17:51)</a>:</h4>
+<p>This doesn't work either:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">or_eqv_ff1</span> <span class="o">:</span>
+    <span class="bp">∀</span><span class="o">{</span><span class="n">b1</span> <span class="n">b2</span><span class="o">},</span> <span class="n">b1</span> <span class="bp">∨</span> <span class="n">b2</span> <span class="bp">=</span> <span class="n">ff</span> <span class="bp">→</span> <span class="n">b1</span> <span class="bp">=</span> <span class="n">ff</span>
+<span class="bp">|</span> <span class="n">ff</span> <span class="n">tt</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+<a name="193077501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193077501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193077501">Reid Barton (Apr 06 2020 at 17:52)</a>:</h4>
+<p>Okay so in fact Lean had a totally different interpretation of your statement.<br>
+The equivalent of Agda's <code>||</code> is Lean's <code>bor</code> as Johan wrote earlier. Not ∨.</p>
+
+<a name="193077511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193077511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193077511">Kevin Buzzard (Apr 06 2020 at 17:52)</a>:</h4>
+<p><code>rfl</code> proofs <code>X = X</code> and you want to prove <code>X -&gt; X</code></p>
+
+<a name="193077562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193077562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193077562">Kevin Buzzard (Apr 06 2020 at 17:52)</a>:</h4>
+<p>But you are not using the correct "or" operator for bool so nothing will work</p>
+
+<a name="193077595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193077595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193077595">Phiroc (Apr 06 2020 at 17:52)</a>:</h4>
+<p>I'll try <em>bor</em>.</p>
+
+<a name="193077601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193077601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193077601">Kevin Buzzard (Apr 06 2020 at 17:52)</a>:</h4>
+<p>you're using the or which works on Propositions, not on booleans.</p>
+
+<a name="193077707"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193077707" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193077707">Bryan Gin-ge Chen (Apr 06 2020 at 17:53)</a>:</h4>
+<p>You should be able to use <code>||</code> for <code>bor</code> since <a href="https://github.com/leanprover-community/lean/blob/ec1613aef1eee72e601f192b16740629c6d49690/library/init/data/bool/basic.lean#L30" title="https://github.com/leanprover-community/lean/blob/ec1613aef1eee72e601f192b16740629c6d49690/library/init/data/bool/basic.lean#L30">it's declared as notation in the core library</a>.</p>
+
+<a name="193077943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193077943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193077943">Reid Barton (Apr 06 2020 at 17:55)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="282193">Phiroc</span> <a href="#narrow/stream/113488-general/topic/theorem.20or_eqv_ff1/near/193077444" title="#narrow/stream/113488-general/topic/theorem.20or_eqv_ff1/near/193077444">said</a>:</p>
+<blockquote>
+<p>This doesn't work either:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">or_eqv_ff1</span> <span class="o">:</span>
+    <span class="bp">∀</span><span class="o">{</span><span class="n">b1</span> <span class="n">b2</span><span class="o">},</span> <span class="n">b1</span> <span class="bp">∨</span> <span class="n">b2</span> <span class="bp">=</span> <span class="n">ff</span> <span class="bp">→</span> <span class="n">b1</span> <span class="bp">=</span> <span class="n">ff</span>
+<span class="bp">|</span> <span class="n">ff</span> <span class="n">tt</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+
+</blockquote>
+<p>Now you are matching <code>b2</code>, but you still have to match the third argument too <span aria-label="slight smile" class="emoji emoji-1f642" role="img" title="slight smile">:slight_smile:</span></p>
+
+<a name="193078041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193078041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193078041">Reid Barton (Apr 06 2020 at 17:56)</a>:</h4>
+<p>I'm not sure how many of verified functional programming, Agda, and Lean are new to you, but if it's more than one, what you are trying to do sounds very difficult.</p>
+
+<a name="193078089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193078089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193078089">Reid Barton (Apr 06 2020 at 17:56)</a>:</h4>
+<p>I mean reading the book and translating it into Lean generally, not proving <code>or_eqv_ff1</code> in particular.</p>
+
+<a name="193078201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193078201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193078201">Phiroc (Apr 06 2020 at 17:57)</a>:</h4>
+<p>I managed to make the first pattern-match work!</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">or_eqv_ff1</span> <span class="o">:</span>
+    <span class="bp">∀</span><span class="o">{</span><span class="n">b1</span> <span class="n">b2</span><span class="o">},</span> <span class="n">bor</span> <span class="n">b1</span> <span class="n">b2</span> <span class="bp">=</span> <span class="n">ff</span> <span class="bp">→</span> <span class="n">b1</span> <span class="bp">=</span> <span class="n">ff</span>
+<span class="bp">|</span> <span class="n">ff</span> <span class="n">tt</span> <span class="n">p</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+<a name="193078320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193078320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193078320">Reid Barton (Apr 06 2020 at 17:58)</a>:</h4>
+<p>By "match", I didn't necessarily mean you have to split into two cases for <code>tt</code> and <code>ff</code>--you can put a variable <code>b2</code> there, or <code>_</code>.</p>
+
+<a name="193078342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193078342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193078342">Mario Carneiro (Apr 06 2020 at 17:58)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">or_eqv_ff1</span> <span class="o">:</span>
+    <span class="bp">∀</span><span class="o">{</span><span class="n">b1</span> <span class="n">b2</span><span class="o">},</span> <span class="n">b1</span> <span class="bp">||</span> <span class="n">b2</span> <span class="bp">=</span> <span class="n">ff</span> <span class="bp">→</span> <span class="n">b1</span> <span class="bp">=</span> <span class="n">ff</span>
+<span class="bp">|</span> <span class="n">ff</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+<a name="193078439"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193078439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193078439">Mario Carneiro (Apr 06 2020 at 17:59)</a>:</h4>
+<p>I think you don't have to match on the second argument because in lean it's defined by cases only on the first argument</p>
+
+<a name="193078473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193078473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193078473">Phiroc (Apr 06 2020 at 17:59)</a>:</h4>
+<p>Why do you need <em>p</em> (the third parameter)?</p>
+
+<a name="193078516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193078516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193078516">Kevin Buzzard (Apr 06 2020 at 17:59)</a>:</h4>
+<p>because you're making a function with three inputs</p>
+
+<a name="193078615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193078615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193078615">Reid Barton (Apr 06 2020 at 18:00)</a>:</h4>
+<p>Try <code>#check or_eqv_ff1</code> now that you proved it (or at least came close enough)</p>
+
+<a name="193078735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193078735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193078735">Mario Carneiro (Apr 06 2020 at 18:01)</a>:</h4>
+<p>You could write this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">or_eqv_ff1</span> <span class="o">:</span>
+    <span class="bp">∀</span><span class="o">{</span><span class="n">b1</span> <span class="n">b2</span><span class="o">},</span> <span class="n">b1</span> <span class="bp">||</span> <span class="n">b2</span> <span class="bp">=</span> <span class="n">ff</span> <span class="bp">→</span> <span class="n">b1</span> <span class="bp">=</span> <span class="n">ff</span>
+<span class="bp">|</span> <span class="n">ff</span> <span class="bp">_</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">rfl</span>
+</pre></div>
+
+
+<p>but now lean complains that the match is nonexhaustive. What's happening is that lean is actually matching on the third argument (the proof) in all the impossible cases to prove they are impossible, and if you take it out of the match then lean requires branches for both <code>ff</code> and <code>tt</code></p>
+
+<a name="193078772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193078772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193078772">Phiroc (Apr 06 2020 at 18:01)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">or_eqv_ff1</span> <span class="o">:</span>
+    <span class="bp">∀</span><span class="o">{</span><span class="n">b1</span> <span class="n">b2</span><span class="o">},</span> <span class="n">bor</span> <span class="n">b1</span> <span class="n">b2</span> <span class="bp">=</span> <span class="n">ff</span> <span class="bp">→</span> <span class="n">b1</span> <span class="bp">=</span> <span class="n">ff</span>
+<span class="bp">|</span> <span class="n">ff</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="n">absurd</span>
+</pre></div>
+
+<a name="193078817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193078817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193078817">Phiroc (Apr 06 2020 at 18:01)</a>:</h4>
+<p>... but it doesn't check :-(</p>
+
+<a name="193078904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193078904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193078904">Kevin Buzzard (Apr 06 2020 at 18:02)</a>:</h4>
+<p>Did you read the error?</p>
+
+<a name="193078957"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193078957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193078957">Mario Carneiro (Apr 06 2020 at 18:02)</a>:</h4>
+<p>You can explicitly prove the absurd cases like this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">or_eqv_ff1</span> <span class="o">:</span>
+    <span class="bp">∀</span><span class="o">{</span><span class="n">b1</span> <span class="n">b2</span><span class="o">},</span> <span class="n">b1</span> <span class="bp">||</span> <span class="n">b2</span> <span class="bp">=</span> <span class="n">ff</span> <span class="bp">→</span> <span class="n">b1</span> <span class="bp">=</span> <span class="n">ff</span>
+<span class="bp">|</span> <span class="n">ff</span> <span class="bp">_</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="n">tt</span> <span class="bp">_</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">false</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">bool</span><span class="bp">.</span><span class="n">ff_ne_tt</span> <span class="n">h</span><span class="bp">.</span><span class="n">symm</span><span class="o">)</span>
+</pre></div>
+
+<a name="193079014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193079014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193079014">Mario Carneiro (Apr 06 2020 at 18:03)</a>:</h4>
+<p><code>| absurd</code> is not valid syntax</p>
+
+<a name="193079015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193079015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193079015">Kevin Buzzard (Apr 06 2020 at 18:03)</a>:</h4>
+<p><code>absurd</code> here means "let b1 be absurd"</p>
+
+<a name="193079064"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193079064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193079064">Kevin Buzzard (Apr 06 2020 at 18:03)</a>:</h4>
+<p>I think you have bitten off more than you can chew. Do you know about pattern matching in general?</p>
+
+<a name="193079075"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193079075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193079075">Reid Barton (Apr 06 2020 at 18:03)</a>:</h4>
+<p>If you want to write Lean then I think it will be much easier to start with a book that teaches Lean.</p>
+
+<a name="193079219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193079219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193079219">Kevin Buzzard (Apr 06 2020 at 18:04)</a>:</h4>
+<p><a href="https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html" title="https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html">https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html</a></p>
+
+<a name="193079230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193079230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193079230">Phiroc (Apr 06 2020 at 18:04)</a>:</h4>
+<p>I've done a bit of Idris programming.</p>
+
+<a name="193079258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193079258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193079258">Kevin Buzzard (Apr 06 2020 at 18:05)</a>:</h4>
+<p>Why don't you read a Lean book? Then all the proofs in the book will work</p>
+
+<a name="193079271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193079271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193079271">Reid Barton (Apr 06 2020 at 18:05)</a>:</h4>
+<p>If you want to <em>read</em> these languages then you can get by with knowledge from a similar language but writing is a different matter.</p>
+
+<a name="193079298"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193079298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193079298">Kevin Buzzard (Apr 06 2020 at 18:05)</a>:</h4>
+<p><a href="https://github.com/blanchette/logical_verification_2020/raw/master/hitchhikers_guide.pdf" title="https://github.com/blanchette/logical_verification_2020/raw/master/hitchhikers_guide.pdf">https://github.com/blanchette/logical_verification_2020/raw/master/hitchhikers_guide.pdf</a></p>
+
+<a name="193079357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193079357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193079357">Mario Carneiro (Apr 06 2020 at 18:06)</a>:</h4>
+<p>that link isn't working for me btw, did Jasmin break it with a recent update?</p>
+
+<a name="193079478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193079478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193079478">Kevin Buzzard (Apr 06 2020 at 18:06)</a>:</h4>
+<p>wgetting it works fine for me</p>
+
+<a name="193079536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193079536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193079536">Johan Commelin (Apr 06 2020 at 18:07)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> you are probably using a fancy browser... You should browse the web RMS style <span aria-label="stuck out tongue wink" class="emoji emoji-1f61c" role="img" title="stuck out tongue wink">:stuck_out_tongue_wink:</span></p>
+
+<a name="193079674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193079674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193079674">Phiroc (Apr 06 2020 at 18:08)</a>:</h4>
+<p>I'll go throught the books. Many thanks.</p>
+
+<a name="193079798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/theorem%20or_eqv_ff1/near/193079798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10013theoremoreqvff1.html#193079798">Kevin Buzzard (Apr 06 2020 at 18:09)</a>:</h4>
+<p>Ask if you don't follow something in the books. Theorem Proving In Lean is an excellent place to start for someone with a computer science background.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,580 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/58306WIPmetricspacestutorial.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html">WIP: metric spaces tutorial</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193080308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193080308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193080308">Kevin Buzzard (Apr 06 2020 at 18:13)</a>:</h4>
+<p>I've spent a few hours today trying to knock a metric spaces tutorial into shape because <span class="user-mention" data-user-id="262143">@Ryan Lahfa</span> , <span class="user-mention" data-user-id="243312">@Jason KY.</span>  and <span class="user-mention" data-user-id="252241">@Kevin Doran</span> were all independently formalising stuff like this. But I ran into trouble when I got to open sets because to manipulate open sets you need to be able to manipulate sets. So I think we need to roll back a bit and do a basic tutorial about working with sets. Here's how far I got with metric spaces (but as I say we need another tutorial first I think).</p>
+<div class="codehilite"><pre><span></span><span class="c1">--import data.set</span>
+<span class="c1">--import data.set.finite</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+<span class="c1">--import data.finset</span>
+<span class="c1">--import order.conditionally_complete_lattice</span>
+<span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">opens</span> <span class="c1">-- remove when finished checking types of things.</span>
+<span class="c1">-- note: we don&#39;t import topology.metric_space.basic, which is</span>
+<span class="c1">-- mathlib&#39;s version of metric spaces</span>
+
+<span class="c">/-</span><span class="cm">! -/</span>
+<span class="c1">--open_locale classical</span>
+
+<span class="kn">open</span> <span class="n">set</span>
+
+
+<span class="c">/-</span><span class="cm">- A metric space is a set/type X equipped with a real-valued distance function</span>
+<span class="cm">    satisfying the usual axioms -/</span>
+<span class="n">class</span> <span class="n">metric_space</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">dist</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span>
+<span class="o">(</span><span class="n">dist_self</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span> <span class="n">dist</span> <span class="n">x</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
+<span class="o">(</span><span class="n">eq_of_dist_eq_zero</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">X</span><span class="o">},</span> <span class="n">dist</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span>
+<span class="o">(</span><span class="n">dist_comm</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span> <span class="n">dist</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">dist</span> <span class="n">y</span> <span class="n">x</span><span class="o">)</span>
+<span class="o">(</span><span class="n">dist_triangle</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span> <span class="n">dist</span> <span class="n">x</span> <span class="n">z</span> <span class="bp">≤</span> <span class="n">dist</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">+</span> <span class="n">dist</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span>
+
+<span class="c1">-- Exercise: compare with the definition in all the maths books.</span>
+<span class="c1">-- Did we leave something out?</span>
+
+<span class="c1">-- theorems that we are about to prove about metric spaces go in the metric space namespace</span>
+<span class="kn">namespace</span> <span class="n">metric_space</span>
+
+<span class="c1">-- let X be a metric space</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">X</span><span class="o">]</span>
+
+<span class="c">/-</span><span class="cm">! # Learning to use `linarith`</span>
+
+<span class="cm">We left out the axiom that ∀ x y : X, dist x y ≥ 0 in our metric space,</span>
+<span class="cm">because it can be deduced from the triangle inequality and symmetry!</span>
+<span class="cm">Let&#39;s prove it now, using `linarith`. The `linarith` tactic proves</span>
+<span class="cm">many &quot;obvious&quot; results involving inequalities as long as the expressions</span>
+<span class="cm">involved have degree 1. It looks at the hypotheses and tries to prove</span>
+<span class="cm">the goal. For example if `h : 0 ≤ a + a` is a hypothesis, and the goal</span>
+<span class="cm">is `⊢ 0 ≤ a`, then `linarith` will close the goal.</span>
+
+<span class="cm">Other useful tactics :</span>
+
+<span class="cm">`have h := dist_triangle x y x` will create a new hypothesis `h`.</span>
+
+<span class="cm">`push_neg` will move `¬` as far to the right as it can, and possibly</span>
+<span class="cm">remove it. For example if `h : ¬ (a ≤ b)` then `push_neg at h` will change `h` to `b &lt; a`.</span>
+
+<span class="cm">`by_contra h` will create a hypothesis `h` saying that the goal is false, and</span>
+<span class="cm">will replace the goal with `false`. Note that `linarith` can even prove a goal `false` if</span>
+<span class="cm">the hypotheses are contradictory.</span>
+
+<span class="cm">Let&#39;s prove some basic things about distances using `linarith`.</span>
+
+<span class="cm">-/</span>
+
+<span class="kn">theorem</span> <span class="n">dist_nonneg</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">X</span><span class="o">),</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">dist</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">--replace with sorry in tutorial</span>
+  <span class="n">intros</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">dist_triangle</span> <span class="n">x</span> <span class="n">y</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">dist_self</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">dist_comm</span> <span class="n">y</span> <span class="n">x</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">linarith</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">theorem</span> <span class="n">dist_le_zero</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">X</span><span class="o">}</span> <span class="o">:</span> <span class="n">dist</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">≤</span> <span class="mi">0</span> <span class="bp">↔</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">--replace with sorry in tutorial</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">h2</span> <span class="o">:=</span> <span class="n">dist_nonneg</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">eq_of_dist_eq_zero</span><span class="o">,</span>
+    <span class="n">linarith</span><span class="o">,</span>
+  <span class="o">},</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">dist_self</span><span class="o">,</span>
+  <span class="o">}</span>
+<span class="kn">end</span>
+
+<span class="kn">theorem</span> <span class="n">dist_pos</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">X</span><span class="o">}</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">dist</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">↔</span> <span class="n">x</span> <span class="bp">≠</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">--replace with sorry in tutorial</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">intro</span> <span class="n">hxy</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="err">←</span><span class="n">dist_le_zero</span> <span class="n">at</span> <span class="n">hxy</span><span class="o">,</span>
+    <span class="n">linarith</span><span class="o">,</span>
+  <span class="o">},</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">by_contra</span> <span class="n">h2</span><span class="o">,</span>
+    <span class="n">push_neg</span> <span class="n">at</span> <span class="n">h2</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">dist_le_zero</span> <span class="n">at</span> <span class="n">h2</span><span class="o">,</span>
+    <span class="n">contradiction</span><span class="o">,</span>
+
+  <span class="o">}</span>
+<span class="kn">end</span>
+
+<span class="c">/-</span><span class="cm">! ### Open balls</span>
+
+<span class="cm">We define `ball x ε` to be the open ball centre `x` and radius `ε`. Note that we do not</span>
+<span class="cm">require `ε &gt; 0`! That hypothesis shows up later in the theorems, not in the definition.</span>
+
+
+<span class="cm">-/</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">X</span><span class="o">}</span> <span class="o">{</span><span class="n">ε</span> <span class="n">ε₁</span> <span class="n">ε₂</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">}</span>
+
+<span class="c">/-</span><span class="cm">- `ball x ε` is the set of all points `y` with `dist y x &lt; ε` -/</span>
+<span class="n">def</span> <span class="n">ball</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">ε</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span> <span class="o">:=</span> <span class="o">{</span><span class="n">y</span> <span class="bp">|</span> <span class="n">dist</span> <span class="n">y</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">ε</span><span class="o">}</span>
+
+<span class="c1">-- Let&#39;s tag this lemma with the `simp` tag, so the `simp` tactic will use it.</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">mem_ball</span> <span class="o">:</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">ball</span> <span class="n">x</span> <span class="n">ε</span> <span class="bp">↔</span> <span class="n">dist</span> <span class="n">y</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">ε</span> <span class="o">:=</span> <span class="n">iff</span><span class="bp">.</span><span class="n">rfl</span> <span class="c1">-- true by definition</span>
+
+<span class="c1">-- Now we get this proof for free:</span>
+<span class="kn">theorem</span> <span class="n">mem_ball_comm</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">ball</span> <span class="n">y</span> <span class="n">ε</span> <span class="bp">↔</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">ball</span> <span class="n">x</span> <span class="n">ε</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">dist_comm</span><span class="o">]</span>
+<span class="kn">end</span>
+
+<span class="c1">-- Let&#39;s tag `dist_self` with the `simp` tag too:</span>
+
+<span class="n">attribute</span> <span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">dist_self</span>
+
+<span class="c1">-- Can you find a proof of this? And then can you find a one-line proof using `simp`?</span>
+<span class="kn">theorem</span> <span class="n">mem_ball_self</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">ε</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">ball</span> <span class="n">x</span> <span class="n">ε</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">--replace with sorry</span>
+  <span class="n">rw</span> <span class="n">mem_ball</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">dist_self</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">h</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="c">/-</span><span class="cm"> Top tip: `rw mem_ball at hy ⊢` will rewrite `mem_ball` at both the hypothesis `hy` and the goal.</span>
+<span class="cm">  Get `⊢` in VS Code with `\|-`</span>
+
+<span class="cm">-/</span>
+<span class="kn">theorem</span> <span class="n">ball_mono</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">ε₁</span> <span class="bp">≤</span> <span class="n">ε₂</span><span class="o">)</span> <span class="o">:</span> <span class="n">ball</span> <span class="n">x</span> <span class="n">ε₁</span> <span class="err">⊆</span> <span class="n">ball</span> <span class="n">x</span> <span class="n">ε₂</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- delete me</span>
+  <span class="n">intros</span> <span class="n">y</span> <span class="n">hy</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">mem_ball</span> <span class="n">at</span> <span class="n">hy</span> <span class="err">⊢</span><span class="o">,</span>
+  <span class="n">linarith</span><span class="o">,</span>
+<span class="kn">end</span>
+
+
+<span class="c">/-</span><span class="cm">! # Open sets.</span>
+
+<span class="cm">A subset of a metric space is open if for every element `s` in the subset, there&#39;s some open</span>
+<span class="cm">ball `ball s ε`, with ε &gt; 0, entirely contained with `S`.</span>
+<span class="cm">-/</span>
+
+<span class="c">/-</span><span class="cm">- A subset U of a metric space is open if every s ∈ U there&#39;s an open ball centre s within U -/</span>
+<span class="n">def</span> <span class="n">is_open</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">U</span><span class="o">,</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">ε</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">hε</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">ε</span><span class="o">),</span> <span class="n">ball</span> <span class="n">s</span> <span class="n">ε</span> <span class="err">⊆</span> <span class="n">U</span>
+
+<span class="c1">-- Note that `is_open` is a Proposition. Things like `is_open_Union` below are proofs.</span>
+
+<span class="c1">-- Let&#39;s start with two easy facts about open sets -- the empty set and the whole space is open.</span>
+<span class="kn">theorem</span> <span class="n">is_open_empty</span> <span class="o">:</span> <span class="n">is_open</span> <span class="o">(</span><span class="err">∅</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">hx</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">hx</span><span class="o">,</span><span class="c1">-- too hard for a beginner. Need to get a contradiction from `h : x ∈ ∅`</span>
+<span class="kn">end</span>
+
+<span class="kn">theorem</span> <span class="n">is_open_univ</span> <span class="o">:</span> <span class="n">is_open</span> <span class="o">(</span><span class="n">univ</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">hx</span><span class="o">,</span>
+  <span class="n">use</span> <span class="mi">37</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span>
+    <span class="n">norm_num</span><span class="o">,</span>
+  <span class="c1">-- need subset_univ</span>
+  <span class="n">simp</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="c1">-- An arbitrary union of open sets is open. The union is indexed over an auxiliary type ι</span>
+
+<span class="c1">-- TODO: I don&#39;t think this is any good, people need to know about set.subset.trans,</span>
+<span class="c1">-- set.subset.Union etc. Should do something on sets first?</span>
+
+<span class="kn">theorem</span> <span class="n">is_open_Union</span> <span class="o">(</span><span class="n">ι</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">ι</span><span class="o">),</span> <span class="n">is_open</span> <span class="o">(</span><span class="n">f</span> <span class="n">i</span><span class="o">))</span> <span class="o">:</span>
+  <span class="n">is_open</span> <span class="o">(</span><span class="err">⋃</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">ι</span><span class="o">),</span> <span class="n">f</span> <span class="n">i</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">hx</span><span class="o">,</span>
+  <span class="n">rcases</span> <span class="n">hx</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">U</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">hxU</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">hf</span> <span class="n">i</span> <span class="n">x</span> <span class="n">hxU</span><span class="o">,</span>
+  <span class="n">rcases</span> <span class="n">h</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">ε</span><span class="o">,</span> <span class="n">hε</span><span class="o">,</span> <span class="n">hxε</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">use</span> <span class="n">ε</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span> <span class="n">use</span> <span class="n">hε</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">set</span><span class="bp">.</span><span class="n">subset</span><span class="bp">.</span><span class="n">trans</span> <span class="n">hxε</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">set</span><span class="bp">.</span><span class="n">subset_Union</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">theorem</span> <span class="n">is_open_inter</span> <span class="o">{</span><span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">}</span>  <span class="o">(</span><span class="n">hU</span> <span class="o">:</span> <span class="n">is_open</span> <span class="n">U</span><span class="o">)</span> <span class="o">(</span><span class="n">hV</span> <span class="o">:</span> <span class="n">is_open</span> <span class="n">V</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_open</span> <span class="o">(</span><span class="n">U</span> <span class="err">∩</span> <span class="n">V</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+
+
+
+<span class="c">/-</span><span class="cm"> A subset S of a metric space is closed if its complement is open -/</span>
+<span class="n">def</span> <span class="n">is_closed</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="n">is_open</span> <span class="o">(</span><span class="bp">-</span><span class="n">S</span><span class="o">)</span>
+
+<span class="kn">end</span> <span class="n">metric_space</span>
+
+<span class="bp">#</span><span class="kn">exit</span>
+
+<span class="c1">-- the lemmas from 274 to 300:</span>
+<span class="kn">theorem</span> <span class="n">closed_ball_subset_closed_ball</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">ε₁</span> <span class="n">ε₂</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">}</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">ε₁</span> <span class="bp">≤</span> <span class="n">ε₂</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">closed_ball</span> <span class="n">x</span> <span class="n">ε₁</span> <span class="err">⊆</span> <span class="n">closed_ball</span> <span class="n">x</span> <span class="n">ε₂</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">y</span> <span class="o">(</span><span class="n">yx</span> <span class="o">:</span> <span class="bp">_</span> <span class="bp">≤</span> <span class="n">ε₁</span><span class="o">),</span> <span class="n">le_trans</span> <span class="n">yx</span> <span class="n">h</span>
+
+<span class="kn">theorem</span> <span class="n">ball_disjoint</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">ε₁</span> <span class="bp">+</span> <span class="n">ε₂</span> <span class="bp">≤</span> <span class="n">dist</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">ball</span> <span class="n">x</span> <span class="n">ε₁</span> <span class="err">∩</span> <span class="n">ball</span> <span class="n">y</span> <span class="n">ε₂</span> <span class="bp">=</span> <span class="err">∅</span> <span class="o">:=</span>
+<span class="n">eq_empty_iff_forall_not_mem</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">z</span> <span class="bp">⟨</span><span class="n">h₁</span><span class="o">,</span> <span class="n">h₂</span><span class="bp">⟩</span><span class="o">,</span>
+<span class="n">not_lt_of_le</span> <span class="o">(</span><span class="n">dist_triangle_left</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">lt_of_lt_of_le</span> <span class="o">(</span><span class="n">add_lt_add</span> <span class="n">h₁</span> <span class="n">h₂</span><span class="o">)</span> <span class="n">h</span><span class="o">)</span>
+
+<span class="kn">theorem</span> <span class="n">ball_disjoint_same</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">ε</span> <span class="bp">≤</span> <span class="n">dist</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:</span> <span class="n">ball</span> <span class="n">x</span> <span class="n">ε</span> <span class="err">∩</span> <span class="n">ball</span> <span class="n">y</span> <span class="n">ε</span> <span class="bp">=</span> <span class="err">∅</span> <span class="o">:=</span>
+<span class="n">ball_disjoint</span> <span class="err">$</span> <span class="k">by</span> <span class="n">rwa</span> <span class="o">[</span><span class="err">←</span> <span class="n">two_mul</span><span class="o">,</span> <span class="err">←</span> <span class="n">le_div_iff&#39;</span> <span class="n">two_pos</span><span class="o">]</span>
+
+<span class="kn">theorem</span> <span class="n">ball_subset</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">dist</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">ε₂</span> <span class="bp">-</span> <span class="n">ε₁</span><span class="o">)</span> <span class="o">:</span> <span class="n">ball</span> <span class="n">x</span> <span class="n">ε₁</span> <span class="err">⊆</span> <span class="n">ball</span> <span class="n">y</span> <span class="n">ε₂</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">z</span> <span class="n">zx</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">add_sub_cancel&#39;_right</span> <span class="n">ε₁</span> <span class="n">ε₂</span><span class="bp">;</span> <span class="n">exact</span>
+<span class="n">lt_of_le_of_lt</span> <span class="o">(</span><span class="n">dist_triangle</span> <span class="n">z</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="o">(</span><span class="n">add_lt_add_of_lt_of_le</span> <span class="n">zx</span> <span class="n">h</span><span class="o">)</span>
+
+<span class="kn">theorem</span> <span class="n">ball_half_subset</span> <span class="o">(</span><span class="n">y</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">ball</span> <span class="n">x</span> <span class="o">(</span><span class="n">ε</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">))</span> <span class="o">:</span> <span class="n">ball</span> <span class="n">y</span> <span class="o">(</span><span class="n">ε</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">)</span> <span class="err">⊆</span> <span class="n">ball</span> <span class="n">x</span> <span class="n">ε</span> <span class="o">:=</span>
+<span class="n">ball_subset</span> <span class="err">$</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">sub_self_div_two</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">le_of_lt</span> <span class="n">h</span>
+
+<span class="kn">theorem</span> <span class="n">exists_ball_subset_ball</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">ball</span> <span class="n">x</span> <span class="n">ε</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">ε&#39;</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="n">ball</span> <span class="n">y</span> <span class="n">ε&#39;</span> <span class="err">⊆</span> <span class="n">ball</span> <span class="n">x</span> <span class="n">ε</span> <span class="o">:=</span>
+<span class="bp">⟨_</span><span class="o">,</span> <span class="n">sub_pos</span><span class="bp">.</span><span class="mi">2</span> <span class="n">h</span><span class="o">,</span> <span class="n">ball_subset</span> <span class="err">$</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">sub_sub_self</span><span class="bp">⟩</span>
+
+<span class="kn">theorem</span> <span class="n">ball_eq_empty_iff_nonpos</span> <span class="o">:</span> <span class="n">ε</span> <span class="bp">≤</span> <span class="mi">0</span> <span class="bp">↔</span> <span class="n">ball</span> <span class="n">x</span> <span class="n">ε</span> <span class="bp">=</span> <span class="err">∅</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">eq_empty_iff_forall_not_mem</span><span class="bp">.</span><span class="n">trans</span>
+<span class="bp">⟨λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">le_of_not_gt</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">ε0</span><span class="o">,</span> <span class="n">h</span> <span class="bp">_</span> <span class="err">$</span> <span class="n">mem_ball_self</span> <span class="n">ε0</span><span class="o">,</span>
+ <span class="bp">λ</span> <span class="n">ε0</span> <span class="n">y</span> <span class="n">h</span><span class="o">,</span> <span class="n">not_lt_of_le</span> <span class="n">ε0</span> <span class="err">$</span> <span class="n">pos_of_mem_ball</span> <span class="n">h</span><span class="bp">⟩</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">ball_zero</span> <span class="o">:</span> <span class="n">ball</span> <span class="n">x</span> <span class="mi">0</span> <span class="bp">=</span> <span class="err">∅</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">metric</span><span class="bp">.</span><span class="n">ball_eq_empty_iff_nonpos</span><span class="o">]</span>
+
+<span class="c1">--</span>
+
+<span class="c1">-- Do we want this?</span>
+<span class="kn">theorem</span> <span class="n">eq_of_forall_dist_le</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">ε</span><span class="o">,</span> <span class="n">ε</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">dist</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">ε</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="n">eq_of_dist_eq_zero</span> <span class="o">(</span><span class="n">eq_of_le_of_forall_le_of_dense</span> <span class="n">dist_nonneg</span> <span class="n">h</span><span class="o">)</span>
+
+<span class="c">/-</span><span class="cm">- The triangle (polygon) inequality for sequences of points; `finset.range` version. -/</span>
+<span class="kn">lemma</span> <span class="n">dist_le_range_sum_dist</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">dist</span> <span class="o">(</span><span class="n">f</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="o">)</span> <span class="bp">≤</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">dist</span> <span class="o">(</span><span class="n">f</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">i</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)))</span> <span class="o">:=</span>
+<span class="n">finset</span><span class="bp">.</span><span class="n">Ico</span><span class="bp">.</span><span class="n">zero_bot</span> <span class="n">n</span> <span class="bp">▸</span> <span class="n">dist_le_Ico_sum_dist</span> <span class="n">f</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">zero_le</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="c1">-- From mathlib</span>
+<span class="n">https</span><span class="o">:</span><span class="bp">//</span><span class="n">github</span><span class="bp">.</span><span class="n">com</span><span class="bp">/</span><span class="n">leanprover</span><span class="bp">-</span><span class="n">community</span><span class="bp">/</span><span class="n">mathlib</span><span class="bp">/</span><span class="n">blob</span><span class="bp">/</span><span class="mi">17632202</span><span class="n">cdf9682cea972e86437d32ac20c91b06</span><span class="bp">/</span><span class="n">src</span><span class="bp">/</span><span class="n">topology</span><span class="bp">/</span><span class="n">basic</span><span class="bp">.</span><span class="n">lean</span><span class="bp">#</span><span class="n">L262</span><span class="bp">-</span><span class="n">L319</span>
+
+<span class="n">def</span> <span class="n">closure</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span> <span class="o">:=</span> <span class="err">⋂₀</span> <span class="o">{</span><span class="n">t</span> <span class="bp">|</span> <span class="n">is_closed</span> <span class="n">t</span> <span class="bp">∧</span> <span class="n">s</span> <span class="err">⊆</span> <span class="n">t</span><span class="o">}</span>
+</pre></div>
+
+<a name="193080526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193080526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193080526">Kevin Buzzard (Apr 06 2020 at 18:15)</a>:</h4>
+<p>My plan was to prove that closure was a Galois insertion. This comes out quite nicely.</p>
+
+<a name="193080643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193080643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193080643">Ryan Lahfa (Apr 06 2020 at 18:16)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Wow! Didn't know about the  ⊢ trick!</p>
+<p>But definitely, a set tutorial would be awesome, I do some stuff which might not be considered optimal by Lean seniors :)</p>
+
+<a name="193080708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193080708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193080708">Kevin Buzzard (Apr 06 2020 at 18:16)</a>:</h4>
+<p>But others might want to try other things. Perhaps one should do a series of three things: first a basic thing on sets, and then something on open and closed sets including def of metric space, and then a third one on basic stuff with limits of sequences perhaps, or stick to the real numbers or whatever.</p>
+
+<a name="193080890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193080890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193080890">Ryan Lahfa (Apr 06 2020 at 18:18)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193080708" title="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193080708">said</a>:</p>
+<blockquote>
+<p>But others might want to try other things. Perhaps one should do a series of three things: first a basic thing on sets, and then something on open and closed sets including def of metric space, and then a third one on basic stuff with limits of sequences perhaps, or stick to the real numbers or whatever.</p>
+</blockquote>
+<p>Proving Bolzano-Weierstrass as a final result would quite awesome I think, it's one of the most powerful &amp; non-trivial theorems you first learn as an undergraduate in real analysis (in France, at least AFAIK).<br>
+(well, there is also Heine theorem on uniform continuity over closed bounded intervals, i.e. compacts)</p>
+
+<a name="193081030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193081030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193081030">Ryan Lahfa (Apr 06 2020 at 18:19)</a>:</h4>
+<p>But that would require sticking to real numbers, and this is still possible to revisit the result in a 4th section if even necessary</p>
+
+<a name="193081240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193081240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193081240">Ryan Lahfa (Apr 06 2020 at 18:20)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Could we help you to write the tutorial?</p>
+
+<a name="193082776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193082776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193082776">Kevin Buzzard (Apr 06 2020 at 18:32)</a>:</h4>
+<p>Sure, that's why I posted here.</p>
+
+<a name="193082890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193082890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193082890">Kevin Buzzard (Apr 06 2020 at 18:33)</a>:</h4>
+<p>Ideally we would push them all to the tutorial project. Building up to something like BW would be very cool and of course it's possible to do in Lean, but a beginner wouldn't be able to do it without some help.</p>
+
+<a name="193083121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193083121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193083121">Patrick Massot (Apr 06 2020 at 18:35)</a>:</h4>
+<p>You can push to branch in the tutorial repository (if you don't have enough access we can investigate).</p>
+
+<a name="193083194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193083194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193083194">Kevin Buzzard (Apr 06 2020 at 18:35)</a>:</h4>
+<p>oh so it's like mathlib for someone like me?</p>
+
+<a name="193083328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193083328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193083328">Patrick Massot (Apr 06 2020 at 18:36)</a>:</h4>
+<p>As I wrote yesterday, I plan do to the same thing with my first year course, which focuses entirely on real numbers. So I think you should keep it at metric space level, with special emphasis on:</p>
+<ul>
+<li>using structures and classes</li>
+<li>setting up a theory, including simp lemmas</li>
+</ul>
+<p>neither of those points are covered in my first year stuff.</p>
+
+<a name="193083382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193083382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193083382">Kevin Buzzard (Apr 06 2020 at 18:37)</a>:</h4>
+<p>OK. What about handling sets in general, e.g. subset_union or whatever?</p>
+
+<a name="193083432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193083432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193083432">Patrick Massot (Apr 06 2020 at 18:38)</a>:</h4>
+<p>I don't have any of that.</p>
+
+<a name="193083503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193083503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193083503">Kevin Buzzard (Apr 06 2020 at 18:38)</a>:</h4>
+<p>OK so for now I'll think about basic stuff with subsets, and then general metric spaces.</p>
+
+<a name="193083509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193083509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193083509">Patrick Massot (Apr 06 2020 at 18:38)</a>:</h4>
+<p>My part will be about handling logical connective and various kinds of reasonning</p>
+
+<a name="193083827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193083827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193083827">Ryan Lahfa (Apr 06 2020 at 18:41)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193083503" title="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193083503">said</a>:</p>
+<blockquote>
+<p>OK so for now I'll think about basic stuff with subsets, and then general metric spaces.</p>
+</blockquote>
+<p>It might be hard to do, but a classical final boss of set theory is Cantor-Bernstein-Schröder, it requires some help though for a beginner</p>
+
+<a name="193083857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193083857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193083857">Ryan Lahfa (Apr 06 2020 at 18:41)</a>:</h4>
+<p>(but it'd need to introduce injective, surjective, bijective stuff… Unsure if it is wise.)</p>
+
+<a name="193085176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193085176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193085176">Patrick Massot (Apr 06 2020 at 18:52)</a>:</h4>
+<p>I'm not sure that would teach much Lean at that point.</p>
+
+<a name="193085411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193085411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193085411">Ryan Lahfa (Apr 06 2020 at 18:54)</a>:</h4>
+<p>Well, there is also mathlib API to learn too</p>
+
+<a name="193085519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193085519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193085519">Ryan Lahfa (Apr 06 2020 at 18:54)</a>:</h4>
+<p>Documentation is pretty great (there are few pain points) so I'm not sure if that's necessary at all</p>
+
+<a name="193086457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193086457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193086457">Kevin Buzzard (Apr 06 2020 at 19:01)</a>:</h4>
+<p>If we're doing open sets then we need to show the users how to prove the axioms for a topology, and these proofs seem to rely on a basic understanding of how to manipulate sets</p>
+
+<a name="193086967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193086967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193086967">Patrick Massot (Apr 06 2020 at 19:05)</a>:</h4>
+<p>Yes, sure. I was specifically referring to Cantor-Bernstein.</p>
+
+<a name="193087510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193087510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193087510">Ryan Lahfa (Apr 06 2020 at 19:10)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110031">Patrick Massot</span> <a href="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193086967" title="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193086967">said</a>:</p>
+<blockquote>
+<p>Yes, sure. I was specifically referring to Cantor-Bernstein.</p>
+</blockquote>
+<p>BTW, is Cantor Bernstein in mathlib?</p>
+
+<a name="193087617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193087617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193087617">Ryan Lahfa (Apr 06 2020 at 19:10)</a>:</h4>
+<p>(docs would benefit if we could search by alternative names of big theorems or look for a theorem and get its generalization, I should open an issue)</p>
+
+<a name="193087853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193087853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193087853">Patrick Massot (Apr 06 2020 at 19:13)</a>:</h4>
+<p>Did you really search?</p>
+
+<a name="193087869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193087869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193087869">Patrick Massot (Apr 06 2020 at 19:13)</a>:</h4>
+<p>There is a file name giving you a hint...</p>
+
+<a name="193087909"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193087909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193087909">Johan Commelin (Apr 06 2020 at 19:13)</a>:</h4>
+<p><span class="user-mention" data-user-id="262143">@Ryan Lahfa</span> PRs that add alternative names to docstrings are very welcome! (And they will usually get merged before you can reload your page <span aria-label="wink" class="emoji emoji-1f609" role="img" title="wink">:wink:</span>)</p>
+
+<a name="193088033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193088033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193088033">Ryan Lahfa (Apr 06 2020 at 19:14)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110031">Patrick Massot</span> <a href="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193087853" title="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193087853">said</a>:</p>
+<blockquote>
+<p>Did you really search?</p>
+</blockquote>
+<p>I definitely searched for "Cantor" and "Cantor-Bernstein", but I should have searched for something else, I suppose, in <code>set_theory</code> and <code>cardinals</code> (?)</p>
+
+<a name="193088069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193088069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193088069">Ryan Lahfa (Apr 06 2020 at 19:15)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="112680">Johan Commelin</span> <a href="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193087909" title="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193087909">said</a>:</p>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="262143">Ryan Lahfa</span> PRs that add alternative names to docstrings are very welcome! (And they will usually get merged before you can reload your page <span aria-label="wink" class="emoji emoji-1f609" role="img" title="wink">:wink:</span>)</p>
+</blockquote>
+<p>Sounds something I can do :)</p>
+
+<a name="193088140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193088140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193088140">Patrick Massot (Apr 06 2020 at 19:16)</a>:</h4>
+<p><a href="https://leanprover-community.github.io/mathlib_docs/set_theory/schroeder_bernstein.html" title="https://leanprover-community.github.io/mathlib_docs/set_theory/schroeder_bernstein.html">https://leanprover-community.github.io/mathlib_docs/set_theory/schroeder_bernstein.html</a></p>
+
+<a name="193088182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193088182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193088182">Ryan Lahfa (Apr 06 2020 at 19:16)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="262143">Ryan Lahfa</span> <a href="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193088033" title="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193088033">said</a>:</p>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="110031">Patrick Massot</span> <a href="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193087853" title="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193087853">said</a>:</p>
+<blockquote>
+<p>Did you really search?</p>
+</blockquote>
+<p>I definitely searched for "Cantor" and "Cantor-Bernstein", but I should have searched for something else, I suppose, in <code>set_theory</code> and <code>cardinals</code> (?)</p>
+</blockquote>
+<p>→ schroeder_bernstein :D — I should have searched for bernstein I guess ; in France, we call it Cantor-Bernstein</p>
+
+<a name="193088370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193088370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193088370">Ryan Lahfa (Apr 06 2020 at 19:18)</a>:</h4>
+<p>If I wanted to see where is Banach-Tarski-Hausdorff paradox, where would I expect to find it?</p>
+
+<a name="193089567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193089567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193089567">Johan Commelin (Apr 06 2020 at 19:29)</a>:</h4>
+<p>I don't think it's there yet. But I guess it would be somewhere in <code>measure_theory/</code></p>
+
+<a name="193089773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193089773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193089773">Patrick Massot (Apr 06 2020 at 19:31)</a>:</h4>
+<p>That could be a fun project for you.</p>
+
+<a name="193090710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193090710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193090710">Ryan Lahfa (Apr 06 2020 at 19:38)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110031">Patrick Massot</span> <a href="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193089773" title="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193089773">said</a>:</p>
+<blockquote>
+<p>That could be a fun project for you.</p>
+</blockquote>
+<p>Definitely :-)</p>
+
+<a name="193092690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193092690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193092690">David Wärn (Apr 06 2020 at 19:55)</a>:</h4>
+<p>Is there something like the Vitali set to show that not every set of reals is measurable?</p>
+
+<a name="193094772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193094772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193094772">Kevin Buzzard (Apr 06 2020 at 20:11)</a>:</h4>
+<p>Highly unlikely</p>
+
+<a name="193094804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193094804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193094804">Kevin Buzzard (Apr 06 2020 at 20:11)</a>:</h4>
+<p>They're not into examples in mathlib</p>
+
+<a name="193095295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193095295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193095295">Yury G. Kudryashov (Apr 06 2020 at 20:15)</a>:</h4>
+<p><code>git grep -i Vitali</code></p>
+
+<a name="193095499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193095499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193095499">Yury G. Kudryashov (Apr 06 2020 at 20:16)</a>:</h4>
+<p>It is in <code>measure_theory/lebesgue_measure</code> but it is in a comment, so possibly it doesn't work with current <code>mathlib</code>.</p>
+
+<a name="193095516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193095516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193095516">Yury G. Kudryashov (Apr 06 2020 at 20:17)</a>:</h4>
+<p>You can move it to <code>examples</code> and PR</p>
+
+<a name="193095565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193095565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193095565">Yury G. Kudryashov (Apr 06 2020 at 20:17)</a>:</h4>
+<p>Then move it back if you'll need it for some proof.</p>
+
+<a name="193097518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193097518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193097518">Ryan Lahfa (Apr 06 2020 at 20:31)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="112680">Johan Commelin</span> <a href="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193089567" title="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193089567">said</a>:</p>
+<blockquote>
+<p>I don't think it's there yet. But I guess it would be somewhere in <code>measure_theory/</code></p>
+</blockquote>
+<p>I will need some <code>isometry</code> stuff, I see <code>metric_space/isometry</code>, but, is there any notion of orientation (direct/indirect) isometries?<br>
+I tried to grep for direct in the file but no result.</p>
+
+<a name="193098536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193098536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193098536">Johan Commelin (Apr 06 2020 at 20:39)</a>:</h4>
+<p>I don't know anything about this kind of maths</p>
+
+<a name="193098626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193098626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193098626">Johan Commelin (Apr 06 2020 at 20:40)</a>:</h4>
+<p>What is a direct/indirect isometry?</p>
+
+<a name="193099310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193099310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193099310">Ryan Lahfa (Apr 06 2020 at 20:45)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="112680">Johan Commelin</span> <a href="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193098626" title="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193098626">said</a>:</p>
+<blockquote>
+<p>What is a direct/indirect isometry?</p>
+</blockquote>
+<p>Oh, sorry, if <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f : A \to B</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span></span></span></span> is an isometry between euclidean affine spaces, we say that <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span></span></span></span> is direct when the linear part of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span></span></span></span> is of determinant 1, IIRC.</p>
+<p>Basically, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span></span></span></span> preserves the orientation of the space.</p>
+
+<a name="193099367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193099367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193099367">Johan Commelin (Apr 06 2020 at 20:45)</a>:</h4>
+<p>Aah, ok. In that case I knew the concept <span aria-label="lol" class="emoji emoji-1f606" role="img" title="lol">:lol:</span></p>
+
+<a name="193099579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193099579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193099579">Yury G. Kudryashov (Apr 06 2020 at 20:47)</a>:</h4>
+<p>Probably you'll need to define <code>SO(n)</code></p>
+
+<a name="193099656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193099656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193099656">Yury G. Kudryashov (Apr 06 2020 at 20:48)</a>:</h4>
+<p>We have <code>SL(n)</code> in <code>linear_algebra/special_linear_group</code></p>
+
+<a name="193100283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193100283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193100283">Ryan Lahfa (Apr 06 2020 at 20:53)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="112680">Johan Commelin</span> <a href="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193099367" title="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193099367">said</a>:</p>
+<blockquote>
+<p>Aah, ok. In that case I knew the concept <span aria-label="lol" class="emoji emoji-1f606" role="img" title="lol">:lol:</span></p>
+</blockquote>
+<p>I attempted the dangerous game of direct (without pun) translation from French to English :D</p>
+
+<a name="193100328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193100328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193100328">Ryan Lahfa (Apr 06 2020 at 20:53)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="214703">Yury G. Kudryashov</span> <a href="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193099579" title="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193099579">said</a>:</p>
+<blockquote>
+<p>Probably you'll need to define <code>SO(n)</code></p>
+</blockquote>
+<p>Yes, I'll definitely need <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi mathvariant="normal">S</mi><mi mathvariant="normal">O</mi></mrow><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">\mathrm{SO}_n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathrm">S</span><span class="mord mathrm">O</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></p>
+
+<a name="193101546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193101546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193101546">Yury G. Kudryashov (Apr 06 2020 at 21:03)</a>:</h4>
+<p>Then you'll deal with <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>O</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">SO_n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>, not <code>isometry</code>.</p>
+
+<a name="193102200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193102200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193102200">Ryan Lahfa (Apr 06 2020 at 21:09)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="214703">Yury G. Kudryashov</span> <a href="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193101546" title="#narrow/stream/113489-new-members/topic/WIP.3A.20metric.20spaces.20tutorial/near/193101546">said</a>:</p>
+<blockquote>
+<p>Then you'll deal with <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>O</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">SO_n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>, not <code>isometry</code>.</p>
+</blockquote>
+<p>Definitely, but I need to glue <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>O</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">SO_n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> and isometry, right? At least, I just need to know that an element of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>O</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">O_n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> is an isometry.</p>
+
+<a name="193102279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193102279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193102279">Yury G. Kudryashov (Apr 06 2020 at 21:09)</a>:</h4>
+<p>Yes, but you don't have to define "orientation preserving" for isometries.</p>
+
+<a name="193102459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193102459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193102459">Ryan Lahfa (Apr 06 2020 at 21:11)</a>:</h4>
+<p>Agreed</p>
+
+<a name="193102462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193102462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193102462">Yury G. Kudryashov (Apr 06 2020 at 21:11)</a>:</h4>
+<p>BTW, you'll need to redefine <code>euclidean_space</code>. Right now it is define somewhere in <code>geometry/</code> to help defining manifolds, and it has <code>sup</code>-norm instead of an <code>inner_product_space</code> structure.</p>
+
+<a name="193102891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193102891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193102891">Yury G. Kudryashov (Apr 06 2020 at 21:15)</a>:</h4>
+<p>Something like <code>instance [fintype n] : has_inner (n → real) := ⟨λ a b, finset.univ.sum (λ i, a i * b i)⟩</code>.</p>
+
+<a name="193103154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193103154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193103154">Ryan Lahfa (Apr 06 2020 at 21:17)</a>:</h4>
+<p>Makes sense</p>
+
+<a name="193111287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193111287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193111287">Kevin Doran (Apr 06 2020 at 22:35)</a>:</h4>
+<p>As a token learner, I just thought I'd mention that a set tutorial would be much appreciated; I quickly ran into trouble trying to use sets of sets and I didn't find it obvious how to work with them by looking at mathlib etc.</p>
+
+<a name="193113962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WIP%3A%20metric%20spaces%20tutorial/near/193113962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58306WIPmetricspacestutorial.html#193113962">Kevin Buzzard (Apr 06 2020 at 23:06)</a>:</h4>
+<p>I pushed some stuff onto a branch of the tutorial project. I need to do other things tomorrow/Wed but hopefully I'll get back to it Thurs. Feel free to help out with some examples or exercises. I thought it was worth figuring out exactly which tactics are needed to prove the set stuff, because the moment we're into metric spaces we're using <code>linarith</code> etc.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

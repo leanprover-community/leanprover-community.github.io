@@ -1,0 +1,51 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/64952Typeclassinferencewithparameters.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/64952Typeclassinferencewithparameters.html">Type class inference with parameters</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193734864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20class%20inference%20with%20parameters/near/193734864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64952Typeclassinferencewithparameters.html#193734864">Alastair Horn (Apr 12 2020 at 23:19)</a>:</h4>
+<p>Lean doesn't seem to be able to infer types when parameters are involved, so while trying to implement my own version of the integers mod n, I'm having to specify all type classes explicitly. Is there a fix/workaround?<br>
+Here's a (ridiculous) example of the kind of stuff that causes problems:</p>
+<div class="codehilite"><pre><span></span><span class="kn">section</span> <span class="n">test</span>
+
+<span class="kn">parameter</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span>
+
+<span class="n">def</span> <span class="n">inv_wrt_n</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">n</span>
+
+<span class="kn">instance</span><span class="o">:</span> <span class="n">has_inv</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">inv_wrt_n</span><span class="bp">⟩</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">n</span><span class="bp">⁻¹</span> <span class="c1">-- Fails</span>
+
+<span class="kn">end</span> <span class="n">test</span>
+</pre></div>
+
+<a name="193738641"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20class%20inference%20with%20parameters/near/193738641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64952Typeclassinferencewithparameters.html#193738641">Scott Morrison (Apr 13 2020 at 01:21)</a>:</h4>
+<p>Sorry, I don't have much experience with parameters (mostly because I decided long ago I didn't like them, hiding too much, and prefer to use variables).  So my suggestion would be to learn to love <code>variables</code> instead!</p>
+
+<a name="193739585"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20class%20inference%20with%20parameters/near/193739585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64952Typeclassinferencewithparameters.html#193739585">Reid Barton (Apr 13 2020 at 01:53)</a>:</h4>
+<p>I think you'll encounter other serious problems with this approach anyways, unless you only planned to ever use this instance within the scope of the parameter.</p>
+
+<a name="193740144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20class%20inference%20with%20parameters/near/193740144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64952Typeclassinferencewithparameters.html#193740144">Alastair Horn (Apr 13 2020 at 02:08)</a>:</h4>
+<p>Okay I'll go back to variables, thanks for the advice</p>
+
+<a name="193740204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20class%20inference%20with%20parameters/near/193740204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64952Typeclassinferencewithparameters.html#193740204">Reid Barton (Apr 13 2020 at 02:11)</a>:</h4>
+<p><code>variables</code> will make the problems clearer. How do you expect to ever specify <code>n</code>?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
