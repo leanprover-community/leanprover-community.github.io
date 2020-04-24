@@ -1,0 +1,1356 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html">Finishing off induction for pigeonhole</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="194752166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194752166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194752166">Adeeb K (Apr 21 2020 at 01:15)</a>:</h4>
+<p>Hello everyone!  I am working on implementing the pigeonhole principle in lean for a school project.  I have the following formulation for a finite subset of n elements: </p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">finite_subset</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="err">Σ&#39;</span> <span class="n">k</span><span class="o">,</span> <span class="n">k</span> <span class="bp">&lt;</span> <span class="n">n</span>
+</pre></div>
+
+
+<p>From this, I have a definition that lifts finite subsets of m elements to any finite subset of more elements: </p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">lift_finite</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">finite_subset</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">finite_subset</span> <span class="n">n</span>
+    <span class="o">:=</span> <span class="bp">λ</span> <span class="n">k</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">k</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">lt</span><span class="bp">.</span><span class="n">trans</span> <span class="n">k</span><span class="bp">.</span><span class="mi">2</span> <span class="n">p</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>and finally a small lemma:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">succ_greater_than_nat</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="n">n</span>
+</pre></div>
+
+
+<p>My formulation for pigeonhole is the following:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">pigeonhole_principle</span>
+    <span class="o">(</span><span class="n">n</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">finite_subset</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">finite_subset</span> <span class="n">m</span><span class="o">)</span>
+<span class="o">:</span> <span class="o">(</span><span class="n">n</span> <span class="bp">&gt;</span> <span class="n">m</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">¬</span><span class="o">(</span><span class="n">injective</span> <span class="n">f</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I proceeded by induction and was able to prove the base case but am stuck on the next step.  I have this:</p>
+<div class="codehilite"><pre><span></span><span class="n">intros</span> <span class="n">n_gt_m</span> <span class="n">f_injective</span><span class="o">,</span>
+<span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+<span class="bp">...</span>  <span class="c1">--base case, done</span>
+<span class="k">let</span> <span class="n">g</span> <span class="o">:=</span> <span class="n">f</span> <span class="err">∘</span> <span class="o">(</span><span class="n">lift_finite</span> <span class="n">d</span> <span class="o">(</span><span class="n">d</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">succ_greater_than_nat</span> <span class="n">d</span><span class="o">)),</span>
+<span class="k">let</span> <span class="n">hd&#39;</span> <span class="o">:=</span> <span class="n">hd</span> <span class="n">g</span><span class="o">,</span>
+</pre></div>
+
+
+<p>It is enough to show that <code>d &gt; m</code> to get that <code>g</code> cannot be injective, but I have that <code>d + 1 &gt; m</code>, which means that <code>d ≥ m</code>, which is where I'm stuck.  Does anybody have any idea how to proceed?  Thank you!</p>
+
+<a name="194752595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194752595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194752595">Adeeb K (Apr 21 2020 at 01:24)</a>:</h4>
+<p>Oh shoot, I forgot to send the corresponding lean goal at the last line:</p>
+<div class="codehilite"><pre><span></span><span class="n">m</span> <span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">,</span>
+<span class="n">hd</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">finite_subset</span> <span class="n">d</span> <span class="bp">→</span> <span class="n">finite_subset</span> <span class="n">m</span><span class="o">),</span> <span class="n">d</span> <span class="bp">&gt;</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">injective</span> <span class="n">f</span> <span class="bp">→</span> <span class="n">false</span><span class="o">,</span>
+<span class="n">f</span> <span class="o">:</span> <span class="n">finite_subset</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">d</span><span class="o">)</span> <span class="bp">→</span> <span class="n">finite_subset</span> <span class="n">m</span><span class="o">,</span>
+<span class="n">n_gt_m</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">d</span> <span class="bp">&gt;</span> <span class="n">m</span>
+<span class="n">f_injective</span><span class="o">:</span> <span class="n">injective</span> <span class="n">f</span>
+<span class="n">g</span><span class="o">:</span> <span class="n">finite_subset</span> <span class="n">d</span> <span class="bp">→</span> <span class="n">finite_subset</span> <span class="n">m</span>
+<span class="n">hd&#39;</span> <span class="o">:</span> <span class="n">d</span> <span class="bp">&gt;</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">injective</span> <span class="n">g</span> <span class="bp">→</span> <span class="n">false</span> <span class="o">:=</span> <span class="n">hd</span> <span class="n">g</span>
+</pre></div>
+
+<a name="194752942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194752942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194752942">Bryan Gin-ge Chen (Apr 21 2020 at 01:32)</a>:</h4>
+<p>It'll be easier for us to help you if you include something we can directly copy+paste into our editors (a "minimum working example" or MWE).</p>
+
+<a name="194753138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194753138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194753138">Adeeb K (Apr 21 2020 at 01:37)</a>:</h4>
+<p>Sure! </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="n">def</span> <span class="n">injective</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span>
+    <span class="o">:=</span> <span class="bp">∀</span> <span class="n">x₁</span> <span class="n">x₂</span><span class="o">,</span> <span class="n">f</span> <span class="n">x₁</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x₂</span> <span class="bp">→</span> <span class="n">x₁</span> <span class="bp">=</span> <span class="n">x₂</span>
+
+<span class="n">def</span> <span class="n">range</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span>
+    <span class="o">:=</span> <span class="o">{</span> <span class="n">y</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">}</span>
+
+<span class="c">/-</span><span class="cm">-</span>
+<span class="cm">Type of pairs (k,p) where k</span>
+<span class="cm">is a natural number and p is a witness to the proof that k &lt; n.</span>
+<span class="cm">-/</span>
+<span class="n">def</span> <span class="n">finite_subset</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="err">Σ&#39;</span> <span class="n">k</span><span class="o">,</span> <span class="n">k</span> <span class="bp">&lt;</span> <span class="n">n</span>
+
+<span class="n">def</span> <span class="n">lift_finite</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">finite_subset</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">finite_subset</span> <span class="n">n</span>
+    <span class="o">:=</span> <span class="bp">λ</span> <span class="n">k</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">k</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">lt</span><span class="bp">.</span><span class="n">trans</span> <span class="n">k</span><span class="bp">.</span><span class="mi">2</span> <span class="n">p</span><span class="bp">⟩</span>
+
+<span class="kn">lemma</span> <span class="n">pred_exists</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">exists</span> <span class="n">k</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">n</span>
+<span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+<span class="o">{</span><span class="n">linarith</span><span class="o">,},</span>
+<span class="o">{</span>
+    <span class="n">existsi</span> <span class="n">d</span><span class="o">,</span>
+  <span class="n">refl</span><span class="o">}</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">succ_greater_than_nat</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="n">n</span>
+<span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">rw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_eq_add_one</span><span class="o">,</span>
+<span class="n">linarith</span><span class="o">,</span>
+<span class="kn">end</span>
+
+
+<span class="c">/-</span><span class="cm">-</span>
+<span class="cm">Pigeonhole principle, induction on n</span>
+<span class="cm">-/</span>
+<span class="kn">theorem</span> <span class="n">pigeonhole_principle</span>
+    <span class="o">(</span><span class="n">n</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">finite_subset</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">finite_subset</span> <span class="n">m</span><span class="o">)</span>
+<span class="o">:</span> <span class="o">(</span><span class="n">n</span> <span class="bp">&gt;</span> <span class="n">m</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">¬</span><span class="o">(</span><span class="n">injective</span> <span class="n">f</span><span class="o">)</span>
+<span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">intros</span> <span class="n">n_gt_m</span> <span class="n">f_injective</span><span class="o">,</span>
+
+    <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+
+    <span class="n">linarith</span><span class="o">,</span> <span class="c1">-- case d=0</span>
+
+    <span class="k">let</span> <span class="n">g</span> <span class="o">:=</span> <span class="n">f</span> <span class="err">∘</span> <span class="o">(</span><span class="n">lift_finite</span> <span class="n">d</span> <span class="o">(</span><span class="n">d</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">succ_greater_than_nat</span> <span class="n">d</span><span class="o">)),</span>
+
+    <span class="k">let</span> <span class="n">hd&#39;</span> <span class="o">:=</span> <span class="n">hd</span> <span class="n">g</span><span class="o">,</span>
+    <span class="c">/-</span><span class="cm"></span>
+<span class="cm">    induction m with d hd,</span>
+<span class="cm">    {</span>
+<span class="cm">         cases pred_exists n n_gt_m with k hk,</span>
+<span class="cm">         let n_gt_k := succ_greater_than_nat k,</span>
+<span class="cm">         rw hk at n_gt_k,</span>
+<span class="cm">         let fk := f ⟨k, n_gt_k⟩,</span>
+<span class="cm">         let fk2 := fk.2,</span>
+<span class="cm">         linarith,</span>
+<span class="cm">    },</span>
+<span class="cm">    {</span>
+<span class="cm">        let n_gt_d : n&gt;d :=</span>
+<span class="cm">        begin</span>
+<span class="cm">            exact lt.trans (succ_greater_than_nat d)  n_gt_m,</span>
+<span class="cm">        end,</span>
+<span class="cm">        sorry</span>
+<span class="cm">    },</span>
+
+<span class="cm">    -/</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="194754044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194754044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194754044">Mario Carneiro (Apr 21 2020 at 01:55)</a>:</h4>
+<p>By the way, <code>finite_subset</code> already exists in lean, by the name <code>fin</code></p>
+
+<a name="194754082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194754082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194754082">Mario Carneiro (Apr 21 2020 at 01:56)</a>:</h4>
+<p>similarly with <code>function.injective</code> and <code>set.range</code></p>
+
+<a name="194754163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194754163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194754163">Mario Carneiro (Apr 21 2020 at 01:58)</a>:</h4>
+<p><code>succ_greater_than_nat</code> is <code>nat.lt_succ_self</code></p>
+
+<a name="194754205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194754205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194754205">Adeeb K (Apr 21 2020 at 01:59)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> thanks, got it!</p>
+
+<a name="194754207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194754207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194754207">Mario Carneiro (Apr 21 2020 at 01:59)</a>:</h4>
+<p><code>lift_finite</code> is <code>fin.cast_le</code> (with a different precondition)</p>
+
+<a name="194754270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194754270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194754270">Mario Carneiro (Apr 21 2020 at 02:01)</a>:</h4>
+<p><code>pred_exists</code> is <code>nat.exists_eq_succ_of_ne_zero</code> although the precondition is slightly different</p>
+
+<a name="194754444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194754444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194754444">Adeeb K (Apr 21 2020 at 02:05)</a>:</h4>
+<p>thanks again haha!<br>
+I guess I have a long ways to go to being acquainted with the libraries.<br>
+Is there any library function that would help me resolve my issue with <code>d</code> in the induction step?  I can't tell if the problem thus far has to do with a lack of vocabulary of a deeper error into the formulation of the proof</p>
+
+<a name="194754447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194754447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194754447">Mario Carneiro (Apr 21 2020 at 02:05)</a>:</h4>
+<p>Unfortunately I'm not a lint but a decent approximation is <code>by library_search</code>, which will find theorems from the library by type</p>
+
+<a name="194754499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194754499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194754499">Adeeb K (Apr 21 2020 at 02:06)</a>:</h4>
+<p>oh nice, that's really useful</p>
+
+<a name="194754534"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194754534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194754534">Adeeb K (Apr 21 2020 at 02:07)</a>:</h4>
+<p>wait, could you give me an example of using <code>library_search</code>?</p>
+
+<a name="194754543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194754543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194754543">Mario Carneiro (Apr 21 2020 at 02:08)</a>:</h4>
+<p>What is the role of your commented out block? If I uncomment it I get an error about <code>n</code> not found</p>
+
+<a name="194754594"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194754594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194754594">Mario Carneiro (Apr 21 2020 at 02:09)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="kn">lemma</span> <span class="n">pred_exists</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span> <span class="n">n</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">exists</span> <span class="n">k</span><span class="o">,</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">k</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">library_search</span>
+</pre></div>
+
+<a name="194754803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194754803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194754803">Adeeb K (Apr 21 2020 at 02:14)</a>:</h4>
+<p>It was my original attempt at induction on m, but I got stuck with that, so I switch to induction on n</p>
+
+<a name="194754809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194754809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194754809">Mario Carneiro (Apr 21 2020 at 02:14)</a>:</h4>
+<p>In your setup you tried to prove <code>d &gt; m</code> from <code>d + 1 &gt; m</code>, which isn't going to work. You can't always rely on the inductive hypothesis because then there would be nothing to the proof. Without thinking too hard about the theorem itself, here you should probably split into cases: either <code>d &gt; m</code> or <code>d = m</code>. In the first case, you can use the inductive hypothesis. In the second case there is something to prove</p>
+
+<a name="194754904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194754904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194754904">Adeeb K (Apr 21 2020 at 02:17)</a>:</h4>
+<p>I'm not sure how to split into cases from what I have</p>
+
+<a name="194754916"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194754916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194754916">Adeeb K (Apr 21 2020 at 02:17)</a>:</h4>
+<p>I mean, I see <em>why</em>, but I'm at a loss at how to do it given my existing work</p>
+
+<a name="194755038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194755038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194755038">Mario Carneiro (Apr 21 2020 at 02:19)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">pigeonhole_principle</span> <span class="o">(</span><span class="n">n</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">finite_subset</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">finite_subset</span> <span class="n">m</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">n</span> <span class="bp">&gt;</span> <span class="n">m</span> <span class="bp">→</span> <span class="bp">¬</span> <span class="n">injective</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">n_gt_m</span> <span class="n">f_injective</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">linarith</span><span class="o">,</span> <span class="c">/-</span><span class="cm"> case d=0 -/</span> <span class="o">},</span>
+  <span class="k">let</span> <span class="n">g</span> <span class="o">:=</span> <span class="n">f</span> <span class="err">∘</span> <span class="o">(</span><span class="n">lift_finite</span> <span class="n">d</span> <span class="o">(</span><span class="n">d</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">succ_greater_than_nat</span> <span class="n">d</span><span class="o">)),</span>
+  <span class="k">let</span> <span class="n">hd&#39;</span> <span class="o">:=</span> <span class="n">hd</span> <span class="n">g</span><span class="o">,</span>
+  <span class="n">rcases</span> <span class="n">lt_or_eq_of_le</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">lt_succ_iff</span><span class="bp">.</span><span class="mi">1</span> <span class="n">n_gt_m</span><span class="o">)</span> <span class="k">with</span> <span class="n">h</span> <span class="bp">|</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">apply</span> <span class="n">hd&#39;</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">sorry</span> <span class="c">/-</span><span class="cm"> injective g -/</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">sorry</span> <span class="c">/-</span><span class="cm"> prove f : finite_subset (nat.succ m) → finite_subset m is not injective -/</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="194755115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194755115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194755115">Mario Carneiro (Apr 21 2020 at 02:21)</a>:</h4>
+<p>here <code>lt_or_eq_of_le (nat.lt_succ_iff.1 n_gt_m) </code> is a proof that <code>d &gt; m \/ d = m</code>, and <code>rcases</code> does the case split and replaces <code>d</code> with <code>m</code> in the second branch</p>
+
+<a name="194755170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194755170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194755170">Adeeb K (Apr 21 2020 at 02:22)</a>:</h4>
+<p>Also, so <code>d &gt; m</code> means that <code>d + 1 &gt; m</code> by transitivity, so I'm done<br>
+for <code>d = m</code>, I'm not sure how to proceed, but my idea is this: there is a clear identity injection from <code>finite_subset d</code> to<code> finite_subset m</code> when <code>d = m</code>.  Suppose towards contradiction there is an injection from <code>finite_subset (d + 1)</code> to <code>finite_subset m</code>.  We replace <code>d</code> with <code>m</code>, meaning there is an injection from <code>finite_subset (m + 1)</code> to <code>finite_subset m</code>...and I'm stuck from there</p>
+
+<a name="194755184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194755184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194755184">Mario Carneiro (Apr 21 2020 at 02:23)</a>:</h4>
+<p>you don't want to prove <code>d + 1 &gt; m</code> from <code>d &gt; m</code>, the proof is going the other way around</p>
+
+<a name="194755190"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194755190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194755190">Mario Carneiro (Apr 21 2020 at 02:23)</a>:</h4>
+<p>you need <code>d &gt; m</code> and you have <code>d + 1 &gt; m</code></p>
+
+<a name="194755250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194755250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194755250">Adeeb K (Apr 21 2020 at 02:24)</a>:</h4>
+<p>ah I see</p>
+
+<a name="194755271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194755271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194755271">Mario Carneiro (Apr 21 2020 at 02:25)</a>:</h4>
+<p>As for proving that there is no injection from m+1 to m, this is indeed the core of the proof, and here you have to step back from the code and ask what the maths proof is</p>
+
+<a name="194755343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194755343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194755343">Adeeb K (Apr 21 2020 at 02:27)</a>:</h4>
+<p>what do you mean with rcases replaces d with m in the second branch?</p>
+
+<a name="194755347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194755347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194755347">Mario Carneiro (Apr 21 2020 at 02:27)</a>:</h4>
+<p>you will notice in the second branch that <code>d</code> does not exist anymore</p>
+
+<a name="194755356"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194755356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194755356">Mario Carneiro (Apr 21 2020 at 02:27)</a>:</h4>
+<p>and everywhere there used to be <code>d</code> there is now an <code>m</code></p>
+
+<a name="194755425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194755425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194755425">Mario Carneiro (Apr 21 2020 at 02:28)</a>:</h4>
+<p>which is why <code>f</code> is an injection from <code>m+1</code> to <code>m</code> instead of <code>d+1</code> to <code>m</code></p>
+
+<a name="194755440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194755440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194755440">Adeeb K (Apr 21 2020 at 02:29)</a>:</h4>
+<p>I see, but I'm still having a hard time understanding this all.  What is the </p>
+<div class="codehilite"><pre><span></span><span class="k">with</span> <span class="n">h</span> <span class="bp">|</span> <span class="n">rfl</span>
+</pre></div>
+
+<a name="194755495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194755495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194755495">Bryan Gin-ge Chen (Apr 21 2020 at 02:30)</a>:</h4>
+<p>You can read more about <code>rcases</code> (and most other tactics) in the mathlib docs <a href="https://leanprover-community.github.io/mathlib_docs/tactics.html#rcases" title="https://leanprover-community.github.io/mathlib_docs/tactics.html#rcases">here</a>.</p>
+
+<a name="194755503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194755503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194755503">Mario Carneiro (Apr 21 2020 at 02:30)</a>:</h4>
+<p>that's a pattern, that describes what kind of case split to do. the <code>|</code> means to do a split on the or, producing an assumption on the left that is being named <code>h</code>, and on the right the <code>rfl</code> means "case split on the equality", doing the replacement of <code>d</code> for <code>m</code> that I mentioned</p>
+
+<a name="194755558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194755558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194755558">Adeeb K (Apr 21 2020 at 02:32)</a>:</h4>
+<p>I see.  I'll have to take some time to get comfortable with that, but that makes enough sense</p>
+
+<a name="194755586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194755586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194755586">Adeeb K (Apr 21 2020 at 02:33)</a>:</h4>
+<p>what does </p>
+<div class="codehilite"><pre><span></span><span class="n">apply</span> <span class="n">hd&#39;</span> <span class="n">h</span>
+</pre></div>
+
+
+<p>do here?</p>
+
+<a name="194755640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194755640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194755640">Mario Carneiro (Apr 21 2020 at 02:34)</a>:</h4>
+<p><code>hd' h</code> is a proof of <code>injection g -&gt; false</code>, so since the goal is <code>false</code>, <code>apply hd' h</code> changes the goal to <code>injection g</code></p>
+
+<a name="194755687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194755687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194755687">Adeeb K (Apr 21 2020 at 02:35)</a>:</h4>
+<p>ah, so my goal here is to show that g is injective?</p>
+
+<a name="194755694"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194755694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194755694">Mario Carneiro (Apr 21 2020 at 02:35)</a>:</h4>
+<p>yes, and that should be easy enough</p>
+
+<a name="194755756"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194755756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194755756">Mario Carneiro (Apr 21 2020 at 02:36)</a>:</h4>
+<p>In fact, if you use <code>function.injective</code> and <code>fin.cast_le</code> you will find the theorem already exists :)</p>
+
+<a name="194755790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194755790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194755790">Adeeb K (Apr 21 2020 at 02:38)</a>:</h4>
+<p>what if I want to put it in terms of what I've already written though? (just as an exercise in being comfortable with using my own definitions haha)</p>
+
+<a name="194755857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194755857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194755857">Mario Carneiro (Apr 21 2020 at 02:38)</a>:</h4>
+<p>It's still an easy proof. Go ahead and try it</p>
+
+<a name="194755939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194755939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194755939">Adeeb K (Apr 21 2020 at 02:40)</a>:</h4>
+<p>I'm just sort of confused having all of the hypotheses in front of me.  I have that <code>f</code> is injective, and that already takes <code>finite_subset (d + 1)</code> to <code>finite_subset m</code></p>
+
+<a name="194755973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194755973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194755973">Adeeb K (Apr 21 2020 at 02:41)</a>:</h4>
+<p>I'm not sure what tactics I'd use to introduce two variables <code>x1</code> and <code>x2</code> and show that if <code>g x1 = g x2</code>, then <code>x1 = x2</code></p>
+
+<a name="194755977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194755977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194755977">Mario Carneiro (Apr 21 2020 at 02:42)</a>:</h4>
+<p>None of that matters</p>
+
+<a name="194756017"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194756017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194756017">Mario Carneiro (Apr 21 2020 at 02:42)</a>:</h4>
+<p>You can prove that <code>g</code> is injective without anything about <code>f</code></p>
+
+<a name="194756029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194756029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194756029">Mario Carneiro (Apr 21 2020 at 02:42)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">lift_finite_injective</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">injective</span> <span class="o">(</span><span class="n">lift_finite</span> <span class="n">m</span> <span class="n">n</span> <span class="n">p</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="194756049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194756049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194756049">Mario Carneiro (Apr 21 2020 at 02:43)</a>:</h4>
+<p>when proving a forall statement, the tactic to introduce variables is <code>intro</code> or <code>intros</code></p>
+
+<a name="194756214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194756214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194756214">Adeeb K (Apr 21 2020 at 02:46)</a>:</h4>
+<p>okay, so here into this new theorem, I'd introduce x1 and x2 right?  the arguments are two naturals m, n, and a proof that m &lt; n.</p>
+
+<a name="194756237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194756237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194756237">Adeeb K (Apr 21 2020 at 02:47)</a>:</h4>
+<p>so I let <code>f := lift_finite m n p</code></p>
+
+<a name="194756282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194756282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194756282">Adeeb K (Apr 21 2020 at 02:48)</a>:</h4>
+<p>and I have to introduce the proposition that <code>f x1 = f x2</code>?</p>
+
+<a name="194756397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194756397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194756397">Adeeb K (Apr 21 2020 at 02:51)</a>:</h4>
+<p>okay, this is what I have so far:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">lift_finite_injective</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">injective</span> <span class="o">(</span><span class="n">lift_finite</span> <span class="n">m</span> <span class="n">n</span> <span class="n">p</span><span class="o">)</span>
+<span class="o">:=</span> <span class="k">begin</span>
+
+<span class="n">introv</span> <span class="n">x1</span> <span class="n">f</span><span class="o">,</span>
+<span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="194759760"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194759760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194759760">Mario Carneiro (Apr 21 2020 at 04:24)</a>:</h4>
+<p>Does anyone know why the first argument in the <code>introv</code> application here is <code>x1</code> rather than the equality argument? That seems to go against the documentation of <code>introv</code></p>
+
+<a name="194759769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194759769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194759769">Mario Carneiro (Apr 21 2020 at 04:25)</a>:</h4>
+<p>If you unfold <code>injective</code> first it works correctly</p>
+
+<a name="194759890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194759890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194759890">Adeeb K (Apr 21 2020 at 04:28)</a>:</h4>
+<p>my current plan is this:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm"> pf sketch</span>
+
+<span class="cm">--  suppose f x1 = f x2 = &lt; k, pf: k &lt; n &gt;</span>
+
+<span class="cm">--  we know x1 = &lt; l , pf: k &lt; m &gt; and x2 = &lt; j , pf: j &lt; m &gt;</span>
+
+<span class="cm">--  note that (f x1).1 = (f x2).1 = k</span>
+
+<span class="cm">--  furthermore, k &lt; m &lt; n</span>
+
+<span class="cm">--  then x1 = &lt; k, pf: k &lt; m &gt; = x2</span>
+
+<span class="cm">--  done</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="194759892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194759892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194759892">Adeeb K (Apr 21 2020 at 04:28)</a>:</h4>
+<p>I'm just not sure how to translate that into tactics</p>
+
+<a name="194760069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194760069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194760069">Mario Carneiro (Apr 21 2020 at 04:34)</a>:</h4>
+<p>you can do this with just <code>cases</code> and <code>refl</code></p>
+
+<a name="194760080"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194760080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194760080">Mario Carneiro (Apr 21 2020 at 04:34)</a>:</h4>
+<p>to do this step <code>--  we know x1 = &lt; l , pf: k &lt; m &gt; and x2 = &lt; j , pf: j &lt; m &gt;</code> use <code>cases x1</code></p>
+
+<a name="194760142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194760142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194760142">Adeeb K (Apr 21 2020 at 04:36)</a>:</h4>
+<p>okay, so I do <code>cases x1</code> and <code>cases x2</code>?</p>
+
+<a name="194760174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194760174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194760174">Adeeb K (Apr 21 2020 at 04:37)</a>:</h4>
+<p>how do I note that <code>x1_fst = (f x1).1</code>?</p>
+
+<a name="194760229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194760229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194760229">Mario Carneiro (Apr 21 2020 at 04:38)</a>:</h4>
+<p>that's true by definition (it won't be <code>x1</code> after the cases, it will be <code>&lt;x1_fst, x1_snd&gt;</code>)</p>
+
+<a name="194760232"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194760232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194760232">Mario Carneiro (Apr 21 2020 at 04:38)</a>:</h4>
+<p>so you don't have to say anything</p>
+
+<a name="194760469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194760469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194760469">Adeeb K (Apr 21 2020 at 04:45)</a>:</h4>
+<p>oh so then how can I conclude that <code>x1_fst = x2_fst</code>?  I see that clearly <code>x1_fst =  (f x1).1 = (f x2).2 = x2_fst</code> but I'm not sure how to type it out</p>
+
+<a name="194760541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194760541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194760541">Mario Carneiro (Apr 21 2020 at 04:47)</a>:</h4>
+<p>the easiest way is actually cases on the equality you have</p>
+
+<a name="194760547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194760547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194760547">Mario Carneiro (Apr 21 2020 at 04:47)</a>:</h4>
+<p>which is in fact <code>&lt;x1_fst, ...&gt; = &lt;x2_fst, ...&gt;</code></p>
+
+<a name="194760878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194760878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194760878">Adeeb K (Apr 21 2020 at 04:57)</a>:</h4>
+<p>what do you mean with cases here?</p>
+
+<a name="194760934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194760934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194760934">Mario Carneiro (Apr 21 2020 at 04:58)</a>:</h4>
+<p><code>cases f</code></p>
+
+<a name="194760952"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194760952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194760952">Mario Carneiro (Apr 21 2020 at 04:59)</a>:</h4>
+<p>the fact that you can do "case analysis" on an equality is one of the more mind bending things you can do in type theory but it's super useful</p>
+
+<a name="194760956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194760956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194760956">Adeeb K (Apr 21 2020 at 04:59)</a>:</h4>
+<p>ahhhh I see I see</p>
+
+<a name="194761089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194761089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194761089">Adeeb K (Apr 21 2020 at 05:02)</a>:</h4>
+<p>so now I have <code>&lt; x1_fst, x1_snd&gt; = &lt;x1_fst, x2_snd&gt;</code>, and I want to make it so that I have a match</p>
+
+<a name="194761102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194761102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194761102">Adeeb K (Apr 21 2020 at 05:02)</a>:</h4>
+<p>would I apply a <code>rw</code> or <code>apply</code> tactic here?</p>
+
+<a name="194761176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194761176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194761176">Johan Commelin (Apr 21 2020 at 05:05)</a>:</h4>
+<p><span class="user-mention" data-user-id="283719">@Adeeb K</span> I haven't been following along... Is that your goal or a hypothesis?</p>
+
+<a name="194761227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194761227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194761227">Adeeb K (Apr 21 2020 at 05:06)</a>:</h4>
+<p>I think I got it - I just applied a simple <code>refl</code> and it finished off the proof.  Seems I need practice applying the basics.  That...and reading more through the HoTT book.</p>
+
+<a name="194761249"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194761249" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194761249">Johan Commelin (Apr 21 2020 at 05:06)</a>:</h4>
+<p>Have you played the natural number game?</p>
+
+<a name="194761261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194761261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194761261">Johan Commelin (Apr 21 2020 at 05:07)</a>:</h4>
+<p>It's a great way of practicing the simple tactics</p>
+
+<a name="194761264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194761264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194761264">Adeeb K (Apr 21 2020 at 05:07)</a>:</h4>
+<p>only up to the third world</p>
+
+<a name="194761624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194761624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194761624">Adeeb K (Apr 21 2020 at 05:16)</a>:</h4>
+<p>now I'm showing composition of injective functions is injective.  Not sure how to unpack that, but I'll try it with cases</p>
+
+<a name="194761801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194761801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194761801">Adeeb K (Apr 21 2020 at 05:21)</a>:</h4>
+<p>wait, so I still have stuff to finish for pigeonhole</p>
+
+<a name="194761846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194761846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194761846">Adeeb K (Apr 21 2020 at 05:22)</a>:</h4>
+<p>what tactic / proof is there to show that <code>(g ∘ f) x = g (f x)</code>?</p>
+
+<a name="194761849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194761849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194761849">Kenny Lau (Apr 21 2020 at 05:22)</a>:</h4>
+<p><code>refl</code></p>
+
+<a name="194761852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194761852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194761852">Adeeb K (Apr 21 2020 at 05:22)</a>:</h4>
+<p>no but like</p>
+
+<a name="194761857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194761857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194761857">Adeeb K (Apr 21 2020 at 05:23)</a>:</h4>
+<p>Right now I have:<br>
+<code>(g ∘ f) x1 = (g ∘ f) x2</code></p>
+
+<a name="194761863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194761863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194761863">Kenny Lau (Apr 21 2020 at 05:23)</a>:</h4>
+<p><code>change g (f x1) = g (f x2)</code></p>
+
+<a name="194761865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194761865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194761865">Adeeb K (Apr 21 2020 at 05:23)</a>:</h4>
+<p>How do I rewrite this as:<br>
+<code>g (f x1) = g (f x2)</code>?</p>
+
+<a name="194761866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194761866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194761866">Adeeb K (Apr 21 2020 at 05:23)</a>:</h4>
+<p>lemme try that</p>
+
+<a name="194761903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194761903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194761903">Johan Commelin (Apr 21 2020 at 05:24)</a>:</h4>
+<p>Kenny answers before you write your question.... C'est la vie.</p>
+
+<a name="194761918"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194761918" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194761918">Adeeb K (Apr 21 2020 at 05:24)</a>:</h4>
+<p>I'm getting an error</p>
+
+<a name="194761920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194761920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194761920">Adeeb K (Apr 21 2020 at 05:24)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">tactic</span><span class="bp">.</span><span class="n">change</span> <span class="n">failed</span><span class="o">,</span> <span class="n">given</span> <span class="n">type</span>
+  <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">x₂</span><span class="o">)</span>
+<span class="n">is</span> <span class="n">not</span> <span class="n">definitionally</span> <span class="n">equal</span> <span class="n">to</span>
+  <span class="n">x</span> <span class="bp">=</span> <span class="n">x₂</span>
+</pre></div>
+
+<a name="194761927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194761927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194761927">Johan Commelin (Apr 21 2020 at 05:24)</a>:</h4>
+<p><code>change</code> allows you to change your goal to anything that is equal to the old goal <em>by definition</em>.</p>
+
+<a name="194761933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194761933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194761933">Johan Commelin (Apr 21 2020 at 05:25)</a>:</h4>
+<p>Aah but those two are certainly not the same goals</p>
+
+<a name="194761942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194761942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194761942">Johan Commelin (Apr 21 2020 at 05:25)</a>:</h4>
+<p>You need something like <code>g \circ f</code> is injective to do that</p>
+
+<a name="194761953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194761953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194761953">Kenny Lau (Apr 21 2020 at 05:25)</a>:</h4>
+<p><code>change g (f x1) = g (f x2) at H</code></p>
+
+<a name="194762003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762003">Adeeb K (Apr 21 2020 at 05:26)</a>:</h4>
+<p>ah nice that worked!</p>
+
+<a name="194762032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762032">Adeeb K (Apr 21 2020 at 05:27)</a>:</h4>
+<p>okay so now I want to use the injectivity of <code>g</code> to say <code>f x1 = f x2</code></p>
+
+<a name="194762052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762052">Johan Commelin (Apr 21 2020 at 05:28)</a>:</h4>
+<p><code>apply hg</code></p>
+
+<a name="194762078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762078">Johan Commelin (Apr 21 2020 at 05:28)</a>:</h4>
+<p>Where <code>hg : injective g</code></p>
+
+<a name="194762092"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762092">Adeeb K (Apr 21 2020 at 05:28)</a>:</h4>
+<p>error:</p>
+<div class="codehilite"><pre><span></span><span class="n">invalid</span> <span class="n">apply</span> <span class="n">tactic</span><span class="o">,</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">unify</span>
+  <span class="n">x</span> <span class="bp">=</span> <span class="n">x₂</span>
+<span class="k">with</span>
+  <span class="err">?</span><span class="n">m_1</span> <span class="bp">=</span> <span class="err">?</span><span class="n">m_2</span>
+</pre></div>
+
+<a name="194762096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762096">Johan Commelin (Apr 21 2020 at 05:29)</a>:</h4>
+<p>Aah, right, same problem again...</p>
+
+<a name="194762107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762107">Adeeb K (Apr 21 2020 at 05:29)</a>:</h4>
+<p>wait</p>
+
+<a name="194762108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762108">Adeeb K (Apr 21 2020 at 05:29)</a>:</h4>
+<p>one sec</p>
+
+<a name="194762111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762111">Johan Commelin (Apr 21 2020 at 05:29)</a>:</h4>
+<p><code>have foo : f x1 = f x2 := hg H</code></p>
+
+<a name="194762158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762158">Adeeb K (Apr 21 2020 at 05:30)</a>:</h4>
+<p>I got it</p>
+
+<a name="194762163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762163">Adeeb K (Apr 21 2020 at 05:30)</a>:</h4>
+<p>I applied injectivity in reverse order and got it</p>
+
+<a name="194762166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762166">Adeeb K (Apr 21 2020 at 05:30)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">p3</span> <span class="o">:</span> <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">x₂</span><span class="o">)</span>
+<span class="err">⊢</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x₂</span>
+</pre></div>
+
+<a name="194762176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762176">Adeeb K (Apr 21 2020 at 05:31)</a>:</h4>
+<p>I did <code>apply p1</code> which is injective <code>f</code></p>
+
+<a name="194762194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762194">Adeeb K (Apr 21 2020 at 05:31)</a>:</h4>
+<p>Then I got </p>
+<div class="codehilite"><pre><span></span><span class="n">p3</span> <span class="o">:</span> <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">x₂</span><span class="o">)</span>
+<span class="err">⊢</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x₂</span>
+</pre></div>
+
+<a name="194762200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762200">Adeeb K (Apr 21 2020 at 05:31)</a>:</h4>
+<p>then <code>apply p2</code>  which is <code>injective g</code></p>
+
+<a name="194762208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762208">Adeeb K (Apr 21 2020 at 05:31)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">p3</span> <span class="o">:</span> <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">x₂</span><span class="o">)</span>
+<span class="err">⊢</span> <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">x₂</span><span class="o">)</span>
+</pre></div>
+
+<a name="194762252"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762252">Adeeb K (Apr 21 2020 at 05:32)</a>:</h4>
+<p>to which I finally just applied <code>p3</code> and got my desired result for the lemma</p>
+
+<a name="194762260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762260">Adeeb K (Apr 21 2020 at 05:32)</a>:</h4>
+<p>with this, the first part of the induction step for pigeonhole is done</p>
+
+<a name="194762562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762562">Adeeb K (Apr 21 2020 at 05:39)</a>:</h4>
+<p>so uh</p>
+
+<a name="194762610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762610">Adeeb K (Apr 21 2020 at 05:40)</a>:</h4>
+<p>suppose I have </p>
+<div class="codehilite"><pre><span></span><span class="n">g</span> <span class="o">:=</span>  <span class="n">f</span> <span class="err">∘</span> <span class="n">lift</span><span class="o">,</span>
+<span class="n">inj</span> <span class="o">:</span> <span class="n">injective</span> <span class="o">(</span><span class="n">f</span> <span class="err">∘</span> <span class="n">lift</span><span class="o">)</span>
+</pre></div>
+
+<a name="194762619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762619">Adeeb K (Apr 21 2020 at 05:41)</a>:</h4>
+<p>how do I conclude</p>
+<div class="codehilite"><pre><span></span><span class="n">inj</span> <span class="o">:</span> <span class="n">injective</span> <span class="o">(</span><span class="n">g</span><span class="o">)</span>
+</pre></div>
+
+
+<p>?</p>
+
+<a name="194762670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762670">Mario Carneiro (Apr 21 2020 at 05:42)</a>:</h4>
+<p>I think you want <code>inj : injective (f ∘ lift)</code>?</p>
+
+<a name="194762677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762677">Mario Carneiro (Apr 21 2020 at 05:42)</a>:</h4>
+<p>If so, then <code>inj : injective g</code> and you don't have to say anything</p>
+
+<a name="194762688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762688">Adeeb K (Apr 21 2020 at 05:42)</a>:</h4>
+<p>really?  right now I'm not sure if I have that</p>
+
+<a name="194762700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762700">Mario Carneiro (Apr 21 2020 at 05:43)</a>:</h4>
+<p>those two are the same to lean</p>
+
+<a name="194762705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762705">Adeeb K (Apr 21 2020 at 05:43)</a>:</h4>
+<p>how do I conclude injective g then?  refl?</p>
+
+<a name="194762708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762708">Mario Carneiro (Apr 21 2020 at 05:43)</a>:</h4>
+<p>just pretend it says <code>injective g</code> already</p>
+
+<a name="194762712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762712">Mario Carneiro (Apr 21 2020 at 05:43)</a>:</h4>
+<p>if your goal is <code>injective g</code>, then <code>exact inj</code> will work</p>
+
+<a name="194762764"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762764">Adeeb K (Apr 21 2020 at 05:44)</a>:</h4>
+<p>ah, yeah it worked</p>
+
+<a name="194762766"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762766">Adeeb K (Apr 21 2020 at 05:44)</a>:</h4>
+<p>now the nontrivial case lol</p>
+
+<a name="194762767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194762767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194762767">Adeeb K (Apr 21 2020 at 05:45)</a>:</h4>
+<p>where <code>d = m</code></p>
+
+<a name="194764225"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194764225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194764225">Adeeb K (Apr 21 2020 at 06:18)</a>:</h4>
+<p>I'm not exactly sure how to start this part of the proof</p>
+
+<a name="194765228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194765228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194765228">Adeeb K (Apr 21 2020 at 06:37)</a>:</h4>
+<p>basically, all classical proofs to show that there's no injection from a set of m + 1 elements to one of m elements I recall end up using the contrapositive</p>
+
+<a name="194765313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194765313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194765313">Adeeb K (Apr 21 2020 at 06:38)</a>:</h4>
+<p>well, not all</p>
+
+<a name="194765402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194765402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194765402">Johan Commelin (Apr 21 2020 at 06:40)</a>:</h4>
+<p>So... formalise a classical proof...</p>
+
+<a name="194766093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194766093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194766093">Adeeb K (Apr 21 2020 at 06:52)</a>:</h4>
+<p>I'm not sure how that'd help me here</p>
+
+<a name="194766117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194766117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194766117">Johan Commelin (Apr 21 2020 at 06:52)</a>:</h4>
+<p>Why not? What are you trying to do?</p>
+
+<a name="194766249"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194766249" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194766249">Adeeb K (Apr 21 2020 at 06:55)</a>:</h4>
+<p>suppose towards contradiction that there exists such an injective functionL: call it f<br>
+let M be the set of m + 1 elements and N be the set of m elements.  We see that |f(M)| = m +1 but |N| = m<br>
+it is not possible for f to be injective, since each f(x) \in N for x \in M, but there are fewer possible values for f(x) than there are x</p>
+
+<a name="194766261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194766261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194766261">Adeeb K (Apr 21 2020 at 06:55)</a>:</h4>
+<p>So I feel like I'm going in circles restating what I'm out to prove in the first place</p>
+
+<a name="194766436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194766436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194766436">Johan Commelin (Apr 21 2020 at 06:58)</a>:</h4>
+<p>Can you post a copy-pasteble chunk of code (include <code>import</code> and <code>variables</code> statements)? AKA an MWE</p>
+
+<a name="194766873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194766873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194766873">Adeeb K (Apr 21 2020 at 07:05)</a>:</h4>
+<p>yeah sure</p>
+
+<a name="194766915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194766915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194766915">Adeeb K (Apr 21 2020 at 07:05)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+
+<span class="n">def</span> <span class="n">injective</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span>
+    <span class="o">:=</span> <span class="bp">∀</span> <span class="n">x₁</span> <span class="n">x₂</span><span class="o">,</span> <span class="n">f</span> <span class="n">x₁</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x₂</span> <span class="bp">→</span> <span class="n">x₁</span> <span class="bp">=</span> <span class="n">x₂</span>
+
+
+<span class="n">def</span> <span class="n">range</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span>
+    <span class="o">:=</span> <span class="o">{</span> <span class="n">y</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">}</span>
+
+
+<span class="c">/-</span><span class="cm">-</span>
+<span class="cm">Type of pairs (k,p) where k</span>
+<span class="cm">is a natural number and p is a witness to the proof that k &lt; n.</span>
+<span class="cm">-/</span>
+<span class="n">def</span> <span class="n">finite_subset</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="err">Σ&#39;</span> <span class="n">k</span><span class="o">,</span> <span class="n">k</span> <span class="bp">&lt;</span> <span class="n">n</span>
+
+
+<span class="n">def</span> <span class="n">lift_finite</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">finite_subset</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">finite_subset</span> <span class="n">n</span>
+    <span class="o">:=</span> <span class="bp">λ</span> <span class="n">k</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">k</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">lt</span><span class="bp">.</span><span class="n">trans</span> <span class="n">k</span><span class="bp">.</span><span class="mi">2</span> <span class="n">p</span><span class="bp">⟩</span>
+
+
+<span class="kn">lemma</span> <span class="n">pred_exists</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">exists</span> <span class="n">k</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">n</span>
+<span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+<span class="o">{</span><span class="n">linarith</span><span class="o">,},</span>
+<span class="o">{</span>
+    <span class="n">existsi</span> <span class="n">d</span><span class="o">,</span>
+  <span class="n">refl</span>
+<span class="o">}</span>
+<span class="kn">end</span>
+
+
+<span class="kn">lemma</span> <span class="n">succ_greater_than_nat</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="n">n</span>
+<span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">rw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_eq_add_one</span><span class="o">,</span>
+<span class="n">linarith</span>
+<span class="kn">end</span>
+
+
+<span class="c">/-</span><span class="cm">-</span>
+<span class="cm">The lifting function is injective</span>
+<span class="cm">-/</span>
+<span class="kn">theorem</span> <span class="n">lift_finite_injective</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">injective</span> <span class="o">(</span><span class="n">lift_finite</span> <span class="n">m</span> <span class="n">n</span> <span class="n">p</span><span class="o">)</span>
+<span class="o">:=</span> <span class="k">begin</span>
+
+
+<span class="c">/-</span><span class="cm"> pf sketch</span>
+
+<span class="cm">--  suppose f x1 = f x2 = &lt; k, pf: k &lt; n &gt;</span>
+
+<span class="cm">--  we know x1 = &lt; l , pf: k &lt; m &gt; and x2 = &lt; j , pf: j &lt; m &gt;</span>
+
+<span class="cm">--  note that (f x1).1 = (f x2).1 = k</span>
+
+<span class="cm">--  furthermore, k &lt; m &lt; n</span>
+
+<span class="cm">--  then x1 = &lt; k, pf: k &lt; m &gt; = x2</span>
+
+<span class="cm">--  done</span>
+<span class="cm">-/</span>
+
+<span class="n">introv</span> <span class="n">x</span> <span class="n">p2</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">x</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">x₂</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">p2</span><span class="o">,</span>
+<span class="n">refl</span>
+<span class="kn">end</span>
+
+
+<span class="kn">theorem</span> <span class="n">comp_inj_is_inj</span>
+<span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="n">Z</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span> <span class="n">Z</span><span class="o">)</span>
+<span class="o">(</span><span class="n">p1</span> <span class="o">:</span> <span class="n">injective</span> <span class="n">f</span><span class="o">)</span>
+<span class="o">(</span><span class="n">p2</span> <span class="o">:</span> <span class="n">injective</span> <span class="n">g</span><span class="o">)</span>
+<span class="o">:</span>  <span class="n">injective</span> <span class="o">(</span><span class="n">g</span> <span class="err">∘</span> <span class="n">f</span><span class="o">)</span>
+<span class="o">:=</span> <span class="k">begin</span>
+
+<span class="n">introv</span> <span class="n">x</span> <span class="n">p3</span><span class="o">,</span>
+<span class="n">change</span> <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">x₂</span><span class="o">)</span> <span class="n">at</span> <span class="n">p3</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">p1</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">p2</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">p3</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="c">/-</span><span class="cm">-</span>
+<span class="cm">Pigeonhole principle, induction on n</span>
+<span class="cm">-/</span>
+<span class="kn">theorem</span> <span class="n">pigeonhole_principle</span>
+    <span class="o">(</span><span class="n">n</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">finite_subset</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">finite_subset</span> <span class="n">m</span><span class="o">)</span>
+<span class="o">:</span> <span class="o">(</span><span class="n">n</span> <span class="bp">&gt;</span> <span class="n">m</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">¬</span><span class="o">(</span><span class="n">injective</span> <span class="n">f</span><span class="o">)</span>
+<span class="o">:=</span> <span class="k">begin</span>
+
+  <span class="n">intros</span> <span class="n">n_gt_m</span> <span class="n">f_injective</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">linarith</span><span class="o">,</span> <span class="c">/-</span><span class="cm"> case d = 0 -/</span> <span class="o">},</span>
+
+  <span class="k">let</span> <span class="n">succ_for_lift</span> <span class="o">:=</span> <span class="o">(</span><span class="n">succ_greater_than_nat</span> <span class="n">d</span><span class="o">),</span>
+  <span class="k">let</span> <span class="n">lift</span> <span class="o">:=</span> <span class="o">(</span><span class="n">lift_finite</span> <span class="n">d</span> <span class="o">(</span><span class="n">d</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">succ_for_lift</span><span class="o">),</span>
+  <span class="k">let</span> <span class="n">g</span> <span class="o">:=</span> <span class="n">f</span> <span class="err">∘</span> <span class="n">lift</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">hd&#39;</span> <span class="o">:=</span> <span class="n">hd</span> <span class="n">g</span><span class="o">,</span>
+
+  <span class="n">rcases</span> <span class="n">lt_or_eq_of_le</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">lt_succ_iff</span><span class="bp">.</span><span class="mi">1</span> <span class="n">n_gt_m</span><span class="o">)</span> <span class="k">with</span> <span class="n">h</span> <span class="bp">|</span> <span class="n">rfl</span><span class="o">,</span>
+
+  <span class="o">{</span>   <span class="c">/-</span><span class="cm"> case where d &gt; m -/</span>
+      <span class="c">/-</span><span class="cm"> prove injective g -/</span>
+    <span class="n">apply</span> <span class="n">hd&#39;</span> <span class="n">h</span><span class="o">,</span>
+    <span class="k">let</span> <span class="n">lift_injective</span> <span class="o">:=</span> <span class="o">(</span><span class="n">lift_finite_injective</span> <span class="n">d</span> <span class="o">(</span><span class="n">d</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">succ_for_lift</span><span class="o">),</span>
+    <span class="k">let</span> <span class="n">g_injective</span> <span class="o">:=</span> <span class="n">comp_inj_is_inj</span> <span class="n">lift</span> <span class="n">f</span> <span class="n">lift_injective</span> <span class="n">f_injective</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">g_injective</span><span class="o">,</span>
+  <span class="o">},</span>
+
+  <span class="o">{</span>   <span class="c">/-</span><span class="cm"> case where d = m -/</span>
+      <span class="c">/-</span><span class="cm"> prove f : finite_subset (nat.succ m) → finite_subset m is not injective -/</span>
+
+    <span class="n">sorry</span>
+  <span class="o">}</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+<a name="194766999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194766999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194766999">Kenny Lau (Apr 21 2020 at 07:06)</a>:</h4>
+<p>first come up with a math proof</p>
+
+<a name="194767007"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194767007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194767007">Kenny Lau (Apr 21 2020 at 07:06)</a>:</h4>
+<p>then formalize it</p>
+
+<a name="194767205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194767205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194767205">Adeeb K (Apr 21 2020 at 07:09)</a>:</h4>
+<p>alright<br>
+It's pretty late where I am, so I'll be heading to bed for now.  Thank you everyone for your help!</p>
+
+<a name="194767215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194767215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194767215">Adeeb K (Apr 21 2020 at 07:09)</a>:</h4>
+<p>I'll be back in a few hours probably</p>
+
+<a name="194769807"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194769807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194769807">Patrick Stevens (Apr 21 2020 at 07:44)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="283719">Adeeb K</span> <a href="#narrow/stream/113489-new-members/topic/Finishing.20off.20induction.20for.20pigeonhole/near/194765228" title="#narrow/stream/113489-new-members/topic/Finishing.20off.20induction.20for.20pigeonhole/near/194765228">said</a>:</p>
+<blockquote>
+<p>basically, all classical proofs to show that there's no injection from a set of m + 1 elements to one of m elements I recall end up using the contrapositive</p>
+</blockquote>
+<p>I wrote a constructive one in Agda a while back. Hint for the maths proof: if you have an injection f: [m+1] -&gt; [m], consider that f sends 1 somewhere, and note that you must use induction because it's a constructively-true thing about the natural numbers. State the inductive hypothesis, and try to use it.</p>
+
+<a name="194838939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194838939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194838939">Adeeb K (Apr 21 2020 at 17:54)</a>:</h4>
+<p>I see</p>
+
+<a name="194839051"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194839051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194839051">Adeeb K (Apr 21 2020 at 17:55)</a>:</h4>
+<p>I am already using induction here, and this is the second case that I'm handling<br>
+I'll send what I currently have</p>
+
+<a name="194839169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194839169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194839169">Adeeb K (Apr 21 2020 at 17:56)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+
+<span class="n">def</span> <span class="n">injective</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span>
+    <span class="o">:=</span> <span class="bp">∀</span> <span class="n">x₁</span> <span class="n">x₂</span><span class="o">,</span> <span class="n">f</span> <span class="n">x₁</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x₂</span> <span class="bp">→</span> <span class="n">x₁</span> <span class="bp">=</span> <span class="n">x₂</span>
+
+
+<span class="n">def</span> <span class="n">range</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span>
+    <span class="o">:=</span> <span class="o">{</span> <span class="n">y</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">}</span>
+
+
+<span class="c">/-</span><span class="cm">-</span>
+<span class="cm">Type of pairs (k,p) where k</span>
+<span class="cm">is a natural number and p is a witness to the proof that k &lt; n.</span>
+<span class="cm">-/</span>
+<span class="n">def</span> <span class="n">finite_subset</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="err">Σ&#39;</span> <span class="n">k</span><span class="o">,</span> <span class="n">k</span> <span class="bp">&lt;</span> <span class="n">n</span>
+
+
+<span class="n">def</span> <span class="n">lift_finite</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">finite_subset</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">finite_subset</span> <span class="n">n</span>
+    <span class="o">:=</span> <span class="bp">λ</span> <span class="n">k</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">k</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">lt</span><span class="bp">.</span><span class="n">trans</span> <span class="n">k</span><span class="bp">.</span><span class="mi">2</span> <span class="n">p</span><span class="bp">⟩</span>
+
+
+<span class="kn">lemma</span> <span class="n">pred_exists</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">exists</span> <span class="n">k</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">n</span>
+<span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+<span class="o">{</span><span class="n">linarith</span><span class="o">,},</span>
+<span class="o">{</span>
+    <span class="n">existsi</span> <span class="n">d</span><span class="o">,</span>
+  <span class="n">refl</span>
+<span class="o">}</span>
+<span class="kn">end</span>
+
+
+<span class="kn">lemma</span> <span class="n">succ_greater_than_nat</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="n">n</span>
+<span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">rw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_eq_add_one</span><span class="o">,</span>
+<span class="n">linarith</span>
+<span class="kn">end</span>
+
+
+<span class="c">/-</span><span class="cm">-</span>
+<span class="cm">The lifting function is injective</span>
+<span class="cm">-/</span>
+<span class="kn">theorem</span> <span class="n">lift_finite_injective</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">injective</span> <span class="o">(</span><span class="n">lift_finite</span> <span class="n">m</span> <span class="n">n</span> <span class="n">p</span><span class="o">)</span>
+<span class="o">:=</span> <span class="k">begin</span>
+
+
+<span class="c">/-</span><span class="cm"> pf sketch</span>
+
+<span class="cm">--  suppose f x1 = f x2 = &lt; k, pf: k &lt; n &gt;</span>
+
+<span class="cm">--  we know x1 = &lt; l , pf: k &lt; m &gt; and x2 = &lt; j , pf: j &lt; m &gt;</span>
+
+<span class="cm">--  note that (f x1).1 = (f x2).1 = k</span>
+
+<span class="cm">--  furthermore, k &lt; m &lt; n</span>
+
+<span class="cm">--  then x1 = &lt; k, pf: k &lt; m &gt; = x2</span>
+
+<span class="cm">--  done</span>
+<span class="cm">-/</span>
+
+<span class="n">introv</span> <span class="n">x</span> <span class="n">p2</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">x</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">x₂</span><span class="o">,</span>
+<span class="n">cases</span> <span class="n">p2</span><span class="o">,</span>
+<span class="n">refl</span>
+<span class="kn">end</span>
+
+
+<span class="kn">theorem</span> <span class="n">comp_inj_is_inj</span>
+<span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="n">Z</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span> <span class="n">Z</span><span class="o">)</span>
+<span class="o">(</span><span class="n">p1</span> <span class="o">:</span> <span class="n">injective</span> <span class="n">f</span><span class="o">)</span>
+<span class="o">(</span><span class="n">p2</span> <span class="o">:</span> <span class="n">injective</span> <span class="n">g</span><span class="o">)</span>
+<span class="o">:</span>  <span class="n">injective</span> <span class="o">(</span><span class="n">g</span> <span class="err">∘</span> <span class="n">f</span><span class="o">)</span>
+<span class="o">:=</span> <span class="k">begin</span>
+
+<span class="n">introv</span> <span class="n">x</span> <span class="n">p3</span><span class="o">,</span>
+<span class="n">change</span> <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">x₂</span><span class="o">)</span> <span class="n">at</span> <span class="n">p3</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">p1</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">p2</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">p3</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="c">/-</span><span class="cm">-</span>
+<span class="cm">Pigeonhole principle, induction on n</span>
+<span class="cm">-/</span>
+<span class="kn">theorem</span> <span class="n">pigeonhole_principle</span>
+    <span class="o">(</span><span class="n">n</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">finite_subset</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">finite_subset</span> <span class="n">m</span><span class="o">)</span>
+<span class="o">:</span> <span class="o">(</span><span class="n">n</span> <span class="bp">&gt;</span> <span class="n">m</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">¬</span><span class="o">(</span><span class="n">injective</span> <span class="n">f</span><span class="o">)</span>
+<span class="o">:=</span> <span class="k">begin</span>
+
+  <span class="n">intros</span> <span class="n">n_gt_m</span> <span class="n">f_injective</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">linarith</span><span class="o">,</span> <span class="c">/-</span><span class="cm"> case d = 0 -/</span> <span class="o">},</span>
+
+  <span class="k">let</span> <span class="n">succ_for_lift</span> <span class="o">:=</span> <span class="o">(</span><span class="n">succ_greater_than_nat</span> <span class="n">d</span><span class="o">),</span>
+  <span class="k">let</span> <span class="n">lift</span> <span class="o">:=</span> <span class="o">(</span><span class="n">lift_finite</span> <span class="n">d</span> <span class="o">(</span><span class="n">d</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">succ_for_lift</span><span class="o">),</span>
+  <span class="k">let</span> <span class="n">g</span> <span class="o">:=</span> <span class="n">f</span> <span class="err">∘</span> <span class="n">lift</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">hd&#39;</span> <span class="o">:=</span> <span class="n">hd</span> <span class="n">g</span><span class="o">,</span>
+
+  <span class="n">rcases</span> <span class="n">lt_or_eq_of_le</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">lt_succ_iff</span><span class="bp">.</span><span class="mi">1</span> <span class="n">n_gt_m</span><span class="o">)</span> <span class="k">with</span> <span class="n">h</span> <span class="bp">|</span> <span class="n">rfl</span><span class="o">,</span>
+
+  <span class="o">{</span>   <span class="c">/-</span><span class="cm"> case where d &gt; m -/</span>
+      <span class="c">/-</span><span class="cm"> prove injective g -/</span>
+    <span class="n">apply</span> <span class="n">hd&#39;</span> <span class="n">h</span><span class="o">,</span>
+    <span class="k">let</span> <span class="n">lift_injective</span> <span class="o">:=</span> <span class="o">(</span><span class="n">lift_finite_injective</span> <span class="n">d</span> <span class="o">(</span><span class="n">d</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">succ_for_lift</span><span class="o">),</span>
+    <span class="k">let</span> <span class="n">g_injective</span> <span class="o">:=</span> <span class="n">comp_inj_is_inj</span> <span class="n">lift</span> <span class="n">f</span> <span class="n">lift_injective</span> <span class="n">f_injective</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">g_injective</span><span class="o">,</span>
+  <span class="o">},</span>
+
+  <span class="o">{</span>   <span class="c">/-</span><span class="cm"> case where d = m -/</span>
+      <span class="c">/-</span><span class="cm"> prove f : finite_subset (nat.succ m) → finite_subset m is not injective -/</span>
+
+    <span class="n">sorry</span>
+  <span class="o">}</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+<a name="194840735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194840735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194840735">Adeeb K (Apr 21 2020 at 18:08)</a>:</h4>
+<p>So going off <span class="user-mention" data-user-id="117987">@Patrick Stevens</span> 's advice, I have <code>injective f : [m + 1] → [m]</code>.  I have set up finite sets <code>finite_subset m</code> to be all pairs <code>&lt;k, pf: k &lt; m&gt;</code>.  We consider <code>f([m + 1])</code>.  Since <code>f</code> is injective, we know that for distinct <code>x1, x2 : finite_subset (m + 1)``, if </code>f x1 = f x2<code> then </code>x1 = x2```.</p>
+
+<a name="194841094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194841094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194841094">Adeeb K (Apr 21 2020 at 18:11)</a>:</h4>
+<p>We consider the image of <code>f</code>.  By my current inductive hypothesis, I have </p>
+<div class="codehilite"><pre><span></span><span class="n">hd</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">finite_subset</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">finite_subset</span> <span class="n">m</span><span class="o">),</span> <span class="n">m</span> <span class="bp">&gt;</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">injective</span> <span class="n">f</span> <span class="bp">→</span> <span class="n">false</span><span class="o">,</span>
+</pre></div>
+
+<a name="194841442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194841442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194841442">Adeeb K (Apr 21 2020 at 18:14)</a>:</h4>
+<p>I'm not sure if I should consider the image or the pre-image here.</p>
+
+<a name="194841485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194841485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194841485">Kenny Lau (Apr 21 2020 at 18:14)</a>:</h4>
+<p><code>m &gt; m</code> is false</p>
+
+<a name="194841544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194841544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194841544">Adeeb K (Apr 21 2020 at 18:15)</a>:</h4>
+<p>I realize that much, so what does that give me?</p>
+
+<a name="194841566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194841566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194841566">Reid Barton (Apr 21 2020 at 18:15)</a>:</h4>
+<p>Nothing</p>
+
+<a name="194841660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194841660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194841660">Kenny Lau (Apr 21 2020 at 18:16)</a>:</h4>
+<p>you should write down a maths proof first</p>
+
+<a name="194841736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194841736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194841736">Adeeb K (Apr 21 2020 at 18:17)</a>:</h4>
+<p>I'm just figuring out how to word a constructive proof for pigeonhole</p>
+
+<a name="194841987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194841987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194841987">Kenny Lau (Apr 21 2020 at 18:19)</a>:</h4>
+<p>it doesn't need to be constructive</p>
+
+<a name="194841993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194841993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194841993">Kenny Lau (Apr 21 2020 at 18:19)</a>:</h4>
+<p>you just need to make sure that it isn't circular</p>
+
+<a name="194842124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194842124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194842124">Adeeb K (Apr 21 2020 at 18:20)</a>:</h4>
+<p>Alright, makes sense</p>
+
+<a name="194842941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194842941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194842941">Adeeb K (Apr 21 2020 at 18:26)</a>:</h4>
+<p>quick question</p>
+
+<a name="194842977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194842977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194842977">Kenny Lau (Apr 21 2020 at 18:26)</a>:</h4>
+<p>quick answer</p>
+
+<a name="194843018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194843018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194843018">Adeeb K (Apr 21 2020 at 18:27)</a>:</h4>
+<p>just something I forgot to ask last night: is there a function in the library that lets me say a natural number is either 0 or not?</p>
+
+<a name="194843055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194843055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194843055">Kenny Lau (Apr 21 2020 at 18:27)</a>:</h4>
+<p><code>cases n</code></p>
+
+<a name="194843183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194843183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194843183">Adeeb K (Apr 21 2020 at 18:28)</a>:</h4>
+<p>gotcha thanks</p>
+
+<a name="194843323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194843323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194843323">Kenny Lau (Apr 21 2020 at 18:29)</a>:</h4>
+<p>how about you write down a maths proof first before touching Lean</p>
+
+<a name="194843414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194843414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194843414">Adeeb K (Apr 21 2020 at 18:29)</a>:</h4>
+<p>yeah I'm on that right now - this was just something I forgot</p>
+
+<a name="194844162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194844162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194844162">Kenny Lau (Apr 21 2020 at 18:35)</a>:</h4>
+<div class="message_inline_image"><a href="/user_uploads/3121/l1lqyc60x8AVwFzmadFwDRpM/2020-04-22-1.png" title="/user_uploads/3121/l1lqyc60x8AVwFzmadFwDRpM/2020-04-22-1.png"><img src="/user_uploads/3121/l1lqyc60x8AVwFzmadFwDRpM/2020-04-22-1.png"></a></div>
+
+<a name="194844169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194844169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194844169">Kenny Lau (Apr 21 2020 at 18:35)</a>:</h4>
+<p>see i answered before you asked</p>
+
+<a name="194844274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194844274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194844274">Kenny Lau (Apr 21 2020 at 18:35)</a>:</h4>
+<p>from your point of view you'd probably say that i answered after you asked</p>
+
+<a name="194844345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194844345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194844345">Kenny Lau (Apr 21 2020 at 18:36)</a>:</h4>
+<p>this has been a demonstration of the relativity of simultaneity in Einstein's theory of relativity</p>
+
+<a name="194844414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194844414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194844414">Kenny Lau (Apr 21 2020 at 18:36)</a>:</h4>
+<p>whaddup I'm Kenny I'm (age removed) and I'm a physicist</p>
+
+<a name="194844481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194844481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194844481">Kenny Lau (Apr 21 2020 at 18:37)</a>:</h4>
+<p>(nobody will get this reference)</p>
+
+<a name="194847516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194847516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194847516">Adeeb K (Apr 21 2020 at 19:03)</a>:</h4>
+<p>Okay I believe I have something</p>
+
+<a name="194847633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194847633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194847633">Adeeb K (Apr 21 2020 at 19:04)</a>:</h4>
+<p>We want to show that there exists no injection <code>f : [m + 1] → [m]</code>, where <code>[m]</code> here denotes the set <code>{0, 1, ..., m - 1}</code>.</p>
+
+<a name="194847893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194847893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194847893">Adeeb K (Apr 21 2020 at 19:06)</a>:</h4>
+<p>we proceed by induction.  The base case <code>m = 0</code>  is clear since if we suppose not, we end up with <code>f(0) = f(1) = 0</code>, which is a contradiction.</p>
+
+<a name="194847950"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194847950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194847950">Kenny Lau (Apr 21 2020 at 19:07)</a>:</h4>
+<p>[0] is empty, not {0}</p>
+
+<a name="194847987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194847987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194847987">Kevin Buzzard (Apr 21 2020 at 19:07)</a>:</h4>
+<p>The case m=0 is clear because there are no functions [1]-&gt;[0], injective or not</p>
+
+<a name="194848414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194848414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194848414">Adeeb K (Apr 21 2020 at 19:11)</a>:</h4>
+<p>Now, we know that there is no injective <code>f : [m] → [m - 1]</code> and want to show this for <code>f : [m + 1] → [m], where [m]</code>.  Suppose not, to which we assume there exists such <code>f</code>.  We know that <code>f(m) = k</code> for some <code>k &lt; m</code>.  Then we consider the restriction of <code>f</code> to <code>[m]</code>.  By injectivity we know that if for any <code>j</code> in <code>{0, ..., m}</code>, <code>f j = f k → j = k</code>.  So when we restrict <code>f</code>, the image of the function lives in <code>[m - 1]</code>.  However, by our inductive hypothesis, there is no injective function that maps <code>[m]</code> to <code>[m - 1]</code>.  Contradiction.</p>
+
+<a name="194848836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194848836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194848836">Adeeb K (Apr 21 2020 at 19:14)</a>:</h4>
+<p>I see a small problem.</p>
+
+<a name="194849020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194849020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194849020">Adeeb K (Apr 21 2020 at 19:16)</a>:</h4>
+<p>I know that <code>f(m) = k</code>, but I don't know if <code>k = m - 1</code>, which means I know that the restriction of <code>f</code> to <code>[m]</code> must necessarily map to a set of only <code>m - 1</code> elements, but they may not all 'live' in <code>[m - 1]</code> unless I relabel them.</p>
+
+<a name="194849802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194849802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194849802">Adeeb K (Apr 21 2020 at 19:23)</a>:</h4>
+<p>So, does this suggest I can't use the idea of restrictions?</p>
+
+<a name="194849830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194849830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194849830">Kenny Lau (Apr 21 2020 at 19:23)</a>:</h4>
+<p>this suggests you relabel them</p>
+
+<a name="194849836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194849836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194849836">Adeeb K (Apr 21 2020 at 19:23)</a>:</h4>
+<p>That's the first thing that came to mind to use an inductive hypothesis</p>
+
+<a name="194849840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194849840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194849840">Adeeb K (Apr 21 2020 at 19:23)</a>:</h4>
+<p>oh</p>
+
+<a name="194849961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194849961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194849961">Adeeb K (Apr 21 2020 at 19:25)</a>:</h4>
+<p>I'm not exactly sure how to do that.  How do I know a priori that I have a collection of size m - 1 if I only have that they are type <code>finite_subset (m + 1)</code>?</p>
+
+<a name="194850089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194850089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194850089">Adeeb K (Apr 21 2020 at 19:26)</a>:</h4>
+<p>I have some vague idea that relabelling itself is an injective function</p>
+
+<a name="194850218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194850218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194850218">Adeeb K (Apr 21 2020 at 19:27)</a>:</h4>
+<p>if we have some number <code>k</code> that sits in <code>{0, 1, ..., m}</code>, then my relabelling function would basically this: <br>
+for all <code>j &lt; k</code>,  <code>j</code> maps to <code>j + 1</code>.  Otherwise, if <code>j &gt; k</code>, then <code>j</code> maps to <code>j</code>.</p>
+
+<a name="194850268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194850268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194850268">Adeeb K (Apr 21 2020 at 19:28)</a>:</h4>
+<p>wait shoot that's backwards</p>
+
+<a name="194850315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194850315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194850315">Adeeb K (Apr 21 2020 at 19:28)</a>:</h4>
+<p>it should be:<br>
+for all <code>j &gt; k</code>, <code>j</code> maps to <code>j - 1</code>.  Otherwise, if <code>j &lt; k</code>, then it is mapped to itself.</p>
+
+<a name="194850421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194850421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194850421">Adeeb K (Apr 21 2020 at 19:29)</a>:</h4>
+<p>call this function <code>relabel</code>.  We can show it is injective.</p>
+
+<a name="194850693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194850693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194850693">Adeeb K (Apr 21 2020 at 19:31)</a>:</h4>
+<p>and so when we restrict <code>f</code> to <code>[m]</code>,  and relabel, we should have an injective function <code>relabel ∘ f : [m] → [m - 1]</code></p>
+
+<a name="194850745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194850745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194850745">Adeeb K (Apr 21 2020 at 19:32)</a>:</h4>
+<p>which is a contradiction.  Is there anything I missed?</p>
+
+<a name="194850991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194850991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194850991">Kenny Lau (Apr 21 2020 at 19:34)</a>:</h4>
+<p><code>relabel</code> itself isn't injective (let's say you send <code>k</code> to <code>k</code>)</p>
+
+<a name="194851000"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194851000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194851000">Kenny Lau (Apr 21 2020 at 19:34)</a>:</h4>
+<p>but <code>relabel \o f</code> is injective</p>
+
+<a name="194851018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194851018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194851018">Kenny Lau (Apr 21 2020 at 19:34)</a>:</h4>
+<p>other than that, LGTM</p>
+
+<a name="194851048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194851048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194851048">Kenny Lau (Apr 21 2020 at 19:34)</a>:</h4>
+<p>oh and you implicitly restricted <code>f</code> to <code>[m]</code> I guess</p>
+
+<a name="194851076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194851076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194851076">Adeeb K (Apr 21 2020 at 19:35)</a>:</h4>
+<p>yeah I'm not exactly sure how to carry out restriction</p>
+
+<a name="194851119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194851119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194851119">Kenny Lau (Apr 21 2020 at 19:35)</a>:</h4>
+<p>compose it with <code>[m] -&gt; [m+1]</code></p>
+
+<a name="194851130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194851130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194851130">Kenny Lau (Apr 21 2020 at 19:35)</a>:</h4>
+<p><code>relabel o f o lift</code></p>
+
+<a name="194851180"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194851180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194851180">Adeeb K (Apr 21 2020 at 19:36)</a>:</h4>
+<p>I see I see</p>
+
+<a name="194851244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194851244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194851244">Adeeb K (Apr 21 2020 at 19:36)</a>:</h4>
+<p>wait, so then what does relabel's function signature become?</p>
+
+<a name="194851263"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194851263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194851263">Kenny Lau (Apr 21 2020 at 19:36)</a>:</h4>
+<p><code>relabel : [m] -&gt; [m-1]</code></p>
+
+<a name="194851280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194851280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194851280">Kenny Lau (Apr 21 2020 at 19:36)</a>:</h4>
+<p><code>f: [m+1] -&gt; [m]</code></p>
+
+<a name="194851287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194851287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194851287">Kenny Lau (Apr 21 2020 at 19:36)</a>:</h4>
+<p><code>lift: [m] -&gt; [m+1]</code></p>
+
+<a name="194851318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194851318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194851318">Adeeb K (Apr 21 2020 at 19:37)</a>:</h4>
+<p>ah so this is exactly why I can't say <code>relabel</code> is injective, but <code>relabel</code> composed with an injective function is in fact injective?</p>
+
+<a name="194851489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194851489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194851489">Kenny Lau (Apr 21 2020 at 19:38)</a>:</h4>
+<p>no, it's because <code>f o lift</code> misses <code>k</code> that <code>relabel k o f o lift</code> is injective</p>
+
+<a name="194851584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194851584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194851584">Adeeb K (Apr 21 2020 at 19:39)</a>:</h4>
+<p>ah gotcha</p>
+
+<a name="194851660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194851660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194851660">Adeeb K (Apr 21 2020 at 19:40)</a>:</h4>
+<p>...stupid question, but how would I define this in lean?</p>
+
+<a name="194851685"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194851685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194851685">Adeeb K (Apr 21 2020 at 19:41)</a>:</h4>
+<p>relabel, that is.  I'm not sure how to give cases for j &lt; k and j &gt; k.</p>
+
+<a name="194851692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194851692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194851692">Kenny Lau (Apr 21 2020 at 19:41)</a>:</h4>
+<p>don't forget k</p>
+
+<a name="194851703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194851703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194851703">Kenny Lau (Apr 21 2020 at 19:41)</a>:</h4>
+<p><code>if j \le k then j else j-1</code></p>
+
+<a name="194851807"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194851807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194851807">Adeeb K (Apr 21 2020 at 19:42)</a>:</h4>
+<p>ah gotcha gotcha.</p>
+
+<a name="194852270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194852270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194852270">Adeeb K (Apr 21 2020 at 19:47)</a>:</h4>
+<p>I'm getting some errors</p>
+
+<a name="194852283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194852283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194852283">Adeeb K (Apr 21 2020 at 19:47)</a>:</h4>
+<p>here's what I have for relabel so far</p>
+
+<a name="194852291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194852291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194852291">Adeeb K (Apr 21 2020 at 19:47)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">relabel_finite_set</span>
+<span class="o">(</span><span class="n">m</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+<span class="o">(</span><span class="n">p</span><span class="o">:</span> <span class="n">k</span> <span class="bp">&lt;</span> <span class="n">m</span><span class="o">)</span>
+<span class="o">:</span> <span class="n">finite_subset</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">finite_subset</span> <span class="o">(</span><span class="n">m</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span>
+<span class="o">:=</span> <span class="bp">λ</span> <span class="n">j</span><span class="o">,</span> <span class="k">if</span> <span class="n">j</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">≤</span> <span class="n">k</span> <span class="k">then</span> <span class="bp">⟨</span><span class="n">j</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">lt</span><span class="bp">.</span><span class="n">trans</span> <span class="n">j</span><span class="bp">.</span><span class="mi">1</span> <span class="n">p</span><span class="bp">⟩</span> <span class="k">else</span> <span class="bp">⟨</span><span class="n">j</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">,</span> <span class="n">lt</span><span class="bp">.</span><span class="n">trans</span> <span class="n">j</span><span class="bp">.</span><span class="mi">1</span> <span class="n">p</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="194852311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194852311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194852311">Adeeb K (Apr 21 2020 at 19:47)</a>:</h4>
+<p>but I have this error in both tuples:</p>
+<div class="codehilite"><pre><span></span><span class="n">type</span> <span class="n">mismatch</span> <span class="n">at</span> <span class="n">application</span>
+  <span class="n">lt</span><span class="bp">.</span><span class="n">trans</span> <span class="n">j</span><span class="bp">.</span><span class="n">fst</span>
+<span class="n">term</span>
+  <span class="n">j</span><span class="bp">.</span><span class="n">fst</span>
+<span class="n">has</span> <span class="n">type</span>
+  <span class="bp">ℕ</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="n">j</span><span class="bp">.</span><span class="n">fst</span> <span class="bp">&lt;</span> <span class="err">?</span><span class="n">m_1</span> <span class="o">:</span> <span class="kt">Prop</span>
+</pre></div>
+
+<a name="194852410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194852410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194852410">Kenny Lau (Apr 21 2020 at 19:48)</a>:</h4>
+<p>read the error</p>
+
+<a name="194852417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194852417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194852417">Kevin Buzzard (Apr 21 2020 at 19:48)</a>:</h4>
+<p>Looks like lean wanted j.2</p>
+
+<a name="194852470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194852470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194852470">Kevin Buzzard (Apr 21 2020 at 19:49)</a>:</h4>
+<p>Or maybe it's called j.is_lt or something</p>
+
+<a name="194852487"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194852487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194852487">Adeeb K (Apr 21 2020 at 19:49)</a>:</h4>
+<p>I have this then:</p>
+<div class="codehilite"><pre><span></span><span class="n">type</span> <span class="n">mismatch</span> <span class="n">at</span> <span class="n">application</span>
+  <span class="n">lt</span><span class="bp">.</span><span class="n">trans</span> <span class="n">j</span><span class="bp">.</span><span class="n">snd</span> <span class="n">p</span>
+<span class="n">term</span>
+  <span class="n">p</span>
+<span class="n">has</span> <span class="n">type</span>
+  <span class="n">k</span> <span class="bp">&lt;</span> <span class="n">m</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">m</span> <span class="bp">-</span> <span class="mi">1</span>
+</pre></div>
+
+<a name="194852506"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194852506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194852506">Kevin Buzzard (Apr 21 2020 at 19:49)</a>:</h4>
+<p>It's going to be hard to come up with something of that type</p>
+
+<a name="194852532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194852532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194852532">Kenny Lau (Apr 21 2020 at 19:49)</a>:</h4>
+<p><code>if H : j.1 \le k</code></p>
+
+<a name="194852629"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194852629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194852629">Adeeb K (Apr 21 2020 at 19:50)</a>:</h4>
+<p>how would I compose that with <code>p</code> to get <code>j &lt; m - 1</code>?</p>
+
+<a name="194853033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Finishing%20off%20induction%20for%20pigeonhole/near/194853033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67385Finishingoffinductionforpigeonhole.html#194853033">Adeeb K (Apr 21 2020 at 19:54)</a>:</h4>
+<p>I'm not sure how to use <code>H</code> here</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -1,0 +1,46 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/68708universeenlargement.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/68708universeenlargement.html">universe enlargement</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="194927638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20enlargement/near/194927638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68708universeenlargement.html#194927638">Reid Barton (Apr 22 2020 at 13:12)</a>:</h4>
+<p>Suppose I have a universe-polymorphic proposition <code>P.{u} : Prop</code> and a proof of <code>P.{u0}</code> <em>as a term</em> (either in the empty context, or, ideally, in a context which only contains variables whose types are <code>Type v</code> for <code>v &lt;= u0</code>). Is it then true that I can also prove <code>P.{u1}</code>, for any <code>u1 &gt;= u0</code>?</p>
+
+<a name="194927663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20enlargement/near/194927663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68708universeenlargement.html#194927663">Reid Barton (Apr 22 2020 at 13:12)</a>:</h4>
+<p>Is this something I could prove just by inducting over the proof term?</p>
+
+<a name="194927727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20enlargement/near/194927727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68708universeenlargement.html#194927727">Reid Barton (Apr 22 2020 at 13:12)</a>:</h4>
+<p>Obviously it depends on my axioms, since for example I could consistently assume that <code>Type 0</code> has no inaccessibles, which I can prove is false in <code>Type 1</code>. I mean using the usual axioms of Lean.</p>
+
+<a name="194934891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20enlargement/near/194934891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68708universeenlargement.html#194934891">Mario Carneiro (Apr 22 2020 at 14:01)</a>:</h4>
+<p>Let <code>P.{u} = |Type u| &lt; |Type 1|</code> and <code>u0 = 0</code></p>
+
+<a name="194935110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20enlargement/near/194935110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68708universeenlargement.html#194935110">Mario Carneiro (Apr 22 2020 at 14:03)</a>:</h4>
+<p>You need only the usual axioms to prove that <code>P.{0}</code> is true and <code>P.{1}</code> is false</p>
+
+<a name="194936548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20enlargement/near/194936548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68708universeenlargement.html#194936548">Reid Barton (Apr 22 2020 at 14:12)</a>:</h4>
+<p>Hmm, right. I need to find a better way to express what I mean.</p>
+
+<a name="194937351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20enlargement/near/194937351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68708universeenlargement.html#194937351">Mario Carneiro (Apr 22 2020 at 14:17)</a>:</h4>
+<p>One true thing is that there is a model of lean where the universes are any increasing countable sequence of inaccessibles, not necessarily the minimal one, which suggests that it is possible to convert any proof using universes <code>Type 0, ..., Type k</code> into one using <code>Type u_0, ..., Type u_k</code> where <code>u_0 &lt; ... &lt; u_k</code>. However this is not so easy because of the existence of the universe successor function: <code>Type 0</code> has type <code>Type 1</code> but <code>Type u_0</code> does not have type <code>Type u_1</code>. So this doesn't work without modification</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

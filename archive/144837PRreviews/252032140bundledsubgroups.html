@@ -122,6 +122,34 @@ This is what I have right now</p>
 </blockquote>
 <p>Note that this is no longer true... since a couple of hours it assumes <code>[group_with_zero F]</code>. Division rings are the main source of examples, but <code>nnreal := {r : real // 0 ≤ r}</code> is another example.</p>
 
+<a name="193878113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232140%20bundled%20subgroups/near/193878113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/252032140bundledsubgroups.html#193878113">Jason KY. (Apr 14 2020 at 10:37)</a>:</h4>
+<p>I'm have mirrored <code>closure_preimage_le</code> from <code>submonoid.lean</code> to a version with groups</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">to_additive</span><span class="o">]</span>
+<span class="kn">lemma</span> <span class="n">closure_preimage_le</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">→*</span> <span class="n">N</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">N</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">closure</span> <span class="o">(</span><span class="n">f</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="n">s</span><span class="o">)</span> <span class="bp">≤</span> <span class="o">(</span><span class="n">closure</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="n">comap</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">closure_le</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">mem_coe</span><span class="o">,</span> <span class="n">mem_comap</span><span class="o">]</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">subset_closure</span> <span class="n">hx</span>
+</pre></div>
+
+
+<p>However, as the name <code>closure_preimage_le</code> is already taken in <code>monoid_hom</code>, what should I change the name of this lemma to?</p>
+
+<a name="193878584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232140%20bundled%20subgroups/near/193878584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/252032140bundledsubgroups.html#193878584">Kevin Buzzard (Apr 14 2020 at 10:42)</a>:</h4>
+<p>This is a statement about both <code>comap</code> and <code>closure</code>. I guess <code>comap</code> lives in <code>monoid_hom</code> or <code>group_hom</code> depending on what you are comapping, <del>but <code>closure</code> probably lives in <code>monoid</code> or <code>group</code></del>(apparently this is not true), <del>so you could just put it in <code>group</code>, but you'd better have some independent voices saying that this is an acceptable idea (I am still not very good at namespaces), and also there will be the issue of having to then move monoid_hom.closure_preimage_le to monoid, which might break things</del>. Alternatively you could just call it gclosure_preimage_le, or closure_preimage_le'. Those are some suggestions anyway, but I don't really know what is best.</p>
+
+<a name="193878795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232140%20bundled%20subgroups/near/193878795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/252032140bundledsubgroups.html#193878795">Kevin Buzzard (Apr 14 2020 at 10:43)</a>:</h4>
+<p>Note that the lemma after <code>closure_preimage_le</code> in <code>submonoid.lean</code> is <code>map_mclosure</code>, so perhaps another alternative is to rename closure_preimage_le to mclosure_preimage_le.</p>
+
+<a name="193880237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232140%20bundled%20subgroups/near/193880237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/252032140bundledsubgroups.html#193880237">Jason KY. (Apr 14 2020 at 11:01)</a>:</h4>
+<p>Okay, I'll keep it at<code>gclosure_preimage_le</code> for now then. But I do feel that changing <code>closure_preimage_le</code> to <code>mclosure_preimage_le</code> would be more natural.</p>
+
+<a name="193933493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%232140%20bundled%20subgroups/near/193933493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/252032140bundledsubgroups.html#193933493">Yury G. Kudryashov (Apr 14 2020 at 17:47)</a>:</h4>
+<p>I tried to prepend <code>m</code> to names that will have <code>group</code> counterparts but missed this one.</p>
+
 
 {% endraw %}
 

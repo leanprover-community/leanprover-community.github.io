@@ -1,0 +1,98 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/52804metavariablewar.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/52804metavariablewar.html">meta-variable war?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193785391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta-variable%20war%3F/near/193785391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52804metavariablewar.html#193785391">Patrick Massot (Apr 13 2020 at 15:47)</a>:</h4>
+<p>The following proof works:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">k</span><span class="o">,</span> <span class="n">n</span> <span class="bp">≠</span> <span class="mi">2</span><span class="bp">*</span><span class="n">k</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span> <span class="bp">∃</span> <span class="n">k</span><span class="o">,</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">2</span><span class="bp">*</span><span class="n">k</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">h_exist</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">h_exist</span> <span class="k">with</span> <span class="n">k</span> <span class="n">hk</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">hk</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>But if you switch lines 2 and 3 then it no longer works. It seems cases somehow messes up the meta-variables created by apply. Does anyone understand what happens here? (by the way, the above <em>is</em> a MWE, no import required).</p>
+
+<a name="193786805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta-variable%20war%3F/near/193786805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52804metavariablewar.html#193786805">Rob Lewis (Apr 13 2020 at 16:00)</a>:</h4>
+<p>Maybe this is one of those situations where term mode is clearer than tactic mode!</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">k</span><span class="o">,</span> <span class="n">n</span> <span class="bp">≠</span> <span class="mi">2</span><span class="bp">*</span><span class="n">k</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span> <span class="bp">∃</span> <span class="n">k</span><span class="o">,</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">2</span><span class="bp">*</span><span class="n">k</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">h_exist</span><span class="o">,</span> <span class="n">h</span> <span class="bp">_</span> <span class="o">(</span><span class="n">exists</span><span class="bp">.</span><span class="n">elim</span> <span class="n">h_exist</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">k</span> <span class="n">hk</span><span class="o">,</span> <span class="n">hk</span><span class="o">))</span>
+</pre></div>
+
+
+<p>This is the term you're trying to construct in your failing proof. What goes in the placeholder after <code>h</code>?</p>
+
+<a name="193787014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta-variable%20war%3F/near/193787014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52804metavariablewar.html#193787014">Reid Barton (Apr 13 2020 at 16:01)</a>:</h4>
+<p>As a general principle, it's better to use <code>cases</code> on this ∃ while your goal is a proposition</p>
+
+<a name="193787374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta-variable%20war%3F/near/193787374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52804metavariablewar.html#193787374">Patrick Massot (Apr 13 2020 at 16:04)</a>:</h4>
+<p>Reid, the goal is a proposition in both cases.</p>
+
+<a name="193787714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta-variable%20war%3F/near/193787714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52804metavariablewar.html#193787714">Patrick Massot (Apr 13 2020 at 16:07)</a>:</h4>
+<p>Rob, if I start the proof with <code>refine λ h_exist, h _ (exists.elim h_exist (λ k hk, hk)),</code> then Lean doesn't give me a chance to fill the hole.</p>
+
+<a name="193788087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta-variable%20war%3F/near/193788087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52804metavariablewar.html#193788087">Rob Lewis (Apr 13 2020 at 16:10)</a>:</h4>
+<p>Because that's not a good proof. Nothing can fill that hole. <code>h</code> needs a <code>k</code> and a proof of something that depends on <code>k</code>. But you've constructed that proof first, for a <code>k</code> that's out of scope at the moment you apply <code>h</code>.</p>
+
+<a name="193788815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta-variable%20war%3F/near/193788815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52804metavariablewar.html#193788815">Patrick Massot (Apr 13 2020 at 16:16)</a>:</h4>
+<p>Hmm</p>
+
+<a name="193789185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta-variable%20war%3F/near/193789185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52804metavariablewar.html#193789185">Kevin Buzzard (Apr 13 2020 at 16:19)</a>:</h4>
+<p>Whenever I see those <code>[_]</code> brackets in the goal I know I'm doomed. You can get them by applying <code>delta</code> too many times as well.</p>
+
+<a name="193789226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta-variable%20war%3F/near/193789226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52804metavariablewar.html#193789226">Rob Lewis (Apr 13 2020 at 16:19)</a>:</h4>
+<p>Note that you can do this if you "destruct" the existential using <code>classical.some</code>.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">k</span><span class="o">,</span> <span class="n">n</span> <span class="bp">≠</span> <span class="mi">2</span><span class="bp">*</span><span class="n">k</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span> <span class="bp">∃</span> <span class="n">k</span><span class="o">,</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">2</span><span class="bp">*</span><span class="n">k</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">h_exist</span><span class="o">,</span> <span class="n">h</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="n">h_exist</span><span class="o">)</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="n">h_exist</span><span class="o">)</span>
+</pre></div>
+
+<a name="193789338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta-variable%20war%3F/near/193789338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52804metavariablewar.html#193789338">Rob Lewis (Apr 13 2020 at 16:20)</a>:</h4>
+<p>Because now the witness is <code>classical.some h_exist</code> which is in scope when you apply <code>h</code>.</p>
+
+<a name="193789652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta-variable%20war%3F/near/193789652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52804metavariablewar.html#193789652">Kevin Buzzard (Apr 13 2020 at 16:24)</a>:</h4>
+<p>Tactic mode illustration of the problem:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">k</span><span class="o">,</span> <span class="n">n</span> <span class="bp">≠</span> <span class="mi">2</span><span class="bp">*</span><span class="n">k</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span> <span class="bp">∃</span> <span class="n">k</span><span class="o">,</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">2</span><span class="bp">*</span><span class="n">k</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">h_exist</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">h_exist</span> <span class="k">with</span> <span class="n">k</span> <span class="n">hk</span><span class="o">,</span>
+  <span class="n">swap</span><span class="o">,</span>
+  <span class="c1">-- use k, -- there is no k!</span>
+  <span class="c1">-- cases h_exist, -- recursor can only eliminate into prop</span>
+  <span class="n">use</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="n">h_exist</span><span class="o">,</span>
+  <span class="n">convert</span> <span class="n">hk</span><span class="o">,</span>
+  <span class="c1">-- now h_exist has gone!</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

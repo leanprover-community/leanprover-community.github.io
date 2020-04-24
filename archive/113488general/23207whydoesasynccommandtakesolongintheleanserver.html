@@ -1,0 +1,49 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/23207whydoesasynccommandtakesolongintheleanserver.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/23207whydoesasynccommandtakesolongintheleanserver.html">why does a sync command take so long in the lean server</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="195131227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20a%20sync%20command%20take%20so%20long%20in%20the%20lean%20server/near/195131227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23207whydoesasynccommandtakesolongintheleanserver.html#195131227">Jason Rute (Apr 23 2020 at 23:21)</a>:</h4>
+<p>In the lean server, if you send a sync command, e.g. even a one line file, and wait for the server to finish syncing (i.e. wait for a a current tasks response with no tasks), it will take about 0.2 seconds.  Why?  That seems really long in computer time.  Is it intentional?</p>
+
+<a name="195132285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20a%20sync%20command%20take%20so%20long%20in%20the%20lean%20server/near/195132285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23207whydoesasynccommandtakesolongintheleanserver.html#195132285">Jason Rute (Apr 23 2020 at 23:38)</a>:</h4>
+<p>To be more specific, if you send, say,</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span><span class="nt">&quot;command&quot;</span><span class="p">:</span> <span class="s2">&quot;sync&quot;</span><span class="p">,</span> <span class="nt">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;#eval 1&quot;</span><span class="p">,</span> <span class="nt">&quot;file_name&quot;</span><span class="p">:</span> <span class="s2">&quot;/test.lean&quot;</span><span class="p">,</span> <span class="nt">&quot;seq_num&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">}</span>
+</pre></div>
+
+
+<p>then the time it takes to get back</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="s2">&quot;file invalidated&quot;</span><span class="p">,</span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="s2">&quot;ok&quot;</span><span class="p">,</span><span class="nt">&quot;seq_num&quot;</span><span class="p">:</span><span class="mi">100</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;is_running&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="s2">&quot;current_tasks&quot;</span><span class="p">,</span><span class="nt">&quot;tasks&quot;</span><span class="p">:[]}</span>
+</pre></div>
+
+
+<p>is about .2 seconds.  (This is assuming you have already warmed up the server by sending it many requests.)</p>
+
+<a name="195135827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20a%20sync%20command%20take%20so%20long%20in%20the%20lean%20server/near/195135827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23207whydoesasynccommandtakesolongintheleanserver.html#195135827">Jason Rute (Apr 24 2020 at 00:33)</a>:</h4>
+<p>Ok, <a href="https://github.com/leanprover-community/lean/blob/c4c131ee30dc132e4dec003c82a60c8275f8b4ae/src/shell/server.cpp#L255" title="https://github.com/leanprover-community/lean/blob/c4c131ee30dc132e4dec003c82a60c8275f8b4ae/src/shell/server.cpp#L255">it looks like it is intentional</a>.</p>
+
+<a name="195139092"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20a%20sync%20command%20take%20so%20long%20in%20the%20lean%20server/near/195139092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23207whydoesasynccommandtakesolongintheleanserver.html#195139092">Kenny Lau (Apr 24 2020 at 01:44)</a>:</h4>
+<p>looks like I'm not the only one making "XXX is slow" threads :P</p>
+
+<a name="195155198"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20a%20sync%20command%20take%20so%20long%20in%20the%20lean%20server/near/195155198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23207whydoesasynccommandtakesolongintheleanserver.html#195155198">Gabriel Ebner (Apr 24 2020 at 07:42)</a>:</h4>
+<p>The intention behind that delay was to limit the number of messages from the server to the client.  With the delay, you get at most 5 messages per second.  If you'd send a message every time the server has done something, then there'd be a lot more messages.  In the editors, these messages just update the progress bar on the side so there's no need to be super fast.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

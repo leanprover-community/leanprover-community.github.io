@@ -9,6 +9,82 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [zero locus of an ideal](69866zerolocusofanideal.html) (9 messages, latest: Apr 24 2020 at 07:17)
+
+* [Natural Numbers Game](36974NaturalNumbersGame.html) (106 messages, latest: Apr 24 2020 at 01:45)
+
+* [Multiplication in Pattern Matching](10255MultiplicationinPatternMatching.html) (19 messages, latest: Apr 24 2020 at 01:42)
+
+* [leanproject issues](25716leanprojectissues.html) (3 messages, latest: Apr 24 2020 at 00:02)
+
+* [lean code formatter](93296leancodeformatter.html) (4 messages, latest: Apr 23 2020 at 19:15)
+
+* [Multiplying by 2](38892Multiplyingby2.html) (20 messages, latest: Apr 23 2020 at 16:00)
+
+* [What is going on?](73921Whatisgoingon.html) (21 messages, latest: Apr 23 2020 at 11:32)
+
+* [Representation Theory](30735RepresentationTheory.html) (278 messages, latest: Apr 23 2020 at 10:57)
+
+* [noob question(s)](52075noobquestions.html) (4412 messages, latest: Apr 23 2020 at 02:15)
+
+* [permutation](23641permutation.html) (6 messages, latest: Apr 22 2020 at 18:25)
+
+* [problem with old_structure_cmd](33776problemwitholdstructurecmd.html) (17 messages, latest: Apr 22 2020 at 15:40)
+
+* [why doesn't this work?](36519whydoesntthiswork.html) (9 messages, latest: Apr 22 2020 at 13:52)
+
+* [exhausting finite possibilities](75299exhaustingfinitepossibilities.html) (5 messages, latest: Apr 22 2020 at 09:12)
+
+* [more casting issues](93369morecastingissues.html) (6 messages, latest: Apr 22 2020 at 00:56)
+
+* [Finishing off induction for pigeonhole](67385Finishingoffinductionforpigeonhole.html) (218 messages, latest: Apr 21 2020 at 19:54)
+
+* [\[decideable_pred p\]](49765decideablepredp.html) (3 messages, latest: Apr 21 2020 at 17:08)
+
+* [more basics](41001morebasics.html) (438 messages, latest: Apr 21 2020 at 14:26)
+
+* [Linking / Using mathlib and tactics](84129LinkingUsingmathlibandtactics.html) (10 messages, latest: Apr 21 2020 at 00:48)
+
+* [List is forced up a universe?](09442Listisforcedupauniverse.html) (53 messages, latest: Apr 20 2020 at 10:57)
+
+* [Universal algebra](57192Universalalgebra.html) (19 messages, latest: Apr 20 2020 at 10:44)
+
+* [gcd_domain](71558gcddomain.html) (29 messages, latest: Apr 20 2020 at 01:10)
+
+* [triangle inequality](76508triangleinequality.html) (15 messages, latest: Apr 19 2020 at 16:30)
+
+* [Some olympiad formalisations](42175Someolympiadformalisations.html) (7 messages, latest: Apr 19 2020 at 15:47)
+
+* [Installing mathlib](63351Installingmathlib.html) (176 messages, latest: Apr 19 2020 at 10:10)
+
+* [rw not working with nat.fib](20730rwnotworkingwithnatfib.html) (10 messages, latest: Apr 19 2020 at 07:20)
+
+* [Simp not working inside a predicate](51418Simpnotworkinginsideapredicate.html) (8 messages, latest: Apr 18 2020 at 23:17)
+
+* [Computability](64071Computability.html) (17 messages, latest: Apr 18 2020 at 09:11)
+
+* [¬ (p ↔ ¬ p)](87498pp.html) (29 messages, latest: Apr 17 2020 at 00:59)
+
+* [CoCalc functionality](91055CoCalcfunctionality.html) (67 messages, latest: Apr 16 2020 at 08:10)
+
+* [changing indices](79935changingindices.html) (3 messages, latest: Apr 15 2020 at 17:57)
+
+* [syntax in term mode](71740syntaxintermmode.html) (9 messages, latest: Apr 15 2020 at 16:12)
+
+* [Float division in Lean?](07474FloatdivisioninLean.html) (99 messages, latest: Apr 15 2020 at 03:13)
+
+* [Mutually recursive inductive types](74230Mutuallyrecursiveinductivetypes.html) (22 messages, latest: Apr 15 2020 at 01:45)
+
+* [adding one inside a function](77325addingoneinsideafunction.html) (16 messages, latest: Apr 14 2020 at 22:44)
+
+* [Cyclotomic Fields and Class Group](82628CyclotomicFieldsandClassGroup.html) (4 messages, latest: Apr 14 2020 at 19:22)
+
+* [construct a term from a nonempty type](06576constructatermfromanonemptytype.html) (40 messages, latest: Apr 14 2020 at 17:49)
+
+* [Differences between (...), {...} and \[...\]](68007Differencesbetweenand.html) (9 messages, latest: Apr 14 2020 at 13:27)
+
+* [Type class inference with parameters](64952Typeclassinferencewithparameters.html) (21 messages, latest: Apr 13 2020 at 11:40)
+
 * [Define function from ∀x, ∃y?](53273Definefunctionfromxy.html) (80 messages, latest: Apr 13 2020 at 08:34)
 
 * [(2 * k + 1) / 2 = k](952942k12k.html) (5 messages, latest: Apr 13 2020 at 07:42)
@@ -17,11 +93,7 @@ permalink: archive/113489newmembers/index.html
 
 * [What's wrong with this notation?](89083Whatswrongwiththisnotation.html) (11 messages, latest: Apr 13 2020 at 07:02)
 
-* [noob question(s)](52075noobquestions.html) (3316 messages, latest: Apr 13 2020 at 06:30)
-
 * [Defeq involving recursors](44490Defeqinvolvingrecursors.html) (32 messages, latest: Apr 13 2020 at 06:06)
-
-* [Type class inference with parameters](64952Typeclassinferencewithparameters.html) (5 messages, latest: Apr 13 2020 at 02:11)
 
 * [Encoding Field as Abelian Group](00729EncodingFieldasAbelianGroup.html) (12 messages, latest: Apr 13 2020 at 00:27)
 
@@ -36,8 +108,6 @@ permalink: archive/113489newmembers/index.html
 * [dec_trivial in classical](59309dectrivialinclassical.html) (9 messages, latest: Apr 12 2020 at 08:40)
 
 * [new versions coming out too fast?](82936newversionscomingouttoofast.html) (72 messages, latest: Apr 12 2020 at 07:08)
-
-* [Natural Numbers Game](36974NaturalNumbersGame.html) (75 messages, latest: Apr 12 2020 at 06:02)
 
 * [mathlib install](19833mathlibinstall.html) (9 messages, latest: Apr 12 2020 at 03:47)
 
@@ -57,19 +127,13 @@ permalink: archive/113489newmembers/index.html
 
 * [add one more to sum](76311addonemoretosum.html) (9 messages, latest: Apr 10 2020 at 22:48)
 
-* [more basics](41001morebasics.html) (433 messages, latest: Apr 10 2020 at 09:02)
-
 * [Execute tactic block n times](58215Executetacticblockntimes.html) (3 messages, latest: Apr 10 2020 at 07:37)
 
 * [Using one Exists to prove another?](13416UsingoneExiststoproveanother.html) (4 messages, latest: Apr 10 2020 at 05:35)
 
 * [New here](13647Newhere.html) (2 messages, latest: Apr 10 2020 at 04:14)
 
-* [Float division in Lean?](07474FloatdivisioninLean.html) (94 messages, latest: Apr 10 2020 at 02:33)
-
 * [Match on derived expression with equation compiler](10267Matchonderivedexpressionwithequationcompiler.html) (7 messages, latest: Apr 09 2020 at 01:48)
-
-* [triangle inequality](76508triangleinequality.html) (9 messages, latest: Apr 08 2020 at 10:55)
 
 * [Lynn's has_duplicate exercise](78762Lynnshasduplicateexercise.html) (41 messages, latest: Apr 07 2020 at 22:55)
 
@@ -168,8 +232,6 @@ permalink: archive/113489newmembers/index.html
 * [On the side of logic](81703Onthesideoflogic.html) (64 messages, latest: Mar 22 2020 at 17:23)
 
 * [Sizeof for types in Prop](05829SizeoffortypesinProp.html) (37 messages, latest: Mar 22 2020 at 15:56)
-
-* [Representation Theory](30735RepresentationTheory.html) (228 messages, latest: Mar 22 2020 at 02:08)
 
 * [tactics](22316tactics.html) (23 messages, latest: Mar 22 2020 at 00:01)
 
@@ -1077,8 +1139,6 @@ permalink: archive/113489newmembers/index.html
 
 * [proving em from dne](93827provingemfromdne.html) (15 messages, latest: Jun 06 2019 at 21:00)
 
-* [computability](27079computability.html) (4 messages, latest: Jun 06 2019 at 09:14)
-
 * [gluing functions](66720gluingfunctions.html) (54 messages, latest: Jun 05 2019 at 22:48)
 
 * [working with sets of vectors](92728workingwithsetsofvectors.html) (50 messages, latest: Jun 05 2019 at 18:53)
@@ -1148,8 +1208,6 @@ permalink: archive/113489newmembers/index.html
 * [Revert](68025Revert.html) (10 messages, latest: Apr 19 2019 at 14:22)
 
 * [import foo-bar](90306importfoobar.html) (3 messages, latest: Apr 18 2019 at 12:40)
-
-* [Installing mathlib](63351Installingmathlib.html) (77 messages, latest: Apr 17 2019 at 18:42)
 
 * [Documentation: citations/bibliography](19310Documentationcitationsbibliography.html) (47 messages, latest: Apr 16 2019 at 19:54)
 

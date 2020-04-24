@@ -1,0 +1,140 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/93280modifyingleancorelibrarycode.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/93280modifyingleancorelibrarycode.html">modifying lean core library code</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="194522009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20lean%20core%20library%20code/near/194522009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93280modifyingleancorelibrarycode.html#194522009">Jason Rute (Apr 18 2020 at 02:45)</a>:</h4>
+<p>So I'm playing around with proof recording of sorts.  I've written my own hacked versions of the <code>rw</code>, <code>rwa</code>, <code>erw</code>  tactics that trace certain information.  I'd like to try it out on the whole lean and mathlib libraries, but I am not sure how to do two things:</p>
+<ol>
+<li>How do I safely modify the lean library code (in this case  <code>interactive.lean</code>) without breaking my stable lean distribution?  (I also assume I need to recompile the .lean files, but I assume I do that with <code>lean --make</code>.)</li>
+<li>Is there a convenient way to have Lean run all files in the lean library and mathlib (so that I can get the trace information from my proof recording hack)?</li>
+</ol>
+
+<a name="194522122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20lean%20core%20library%20code/near/194522122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93280modifyingleancorelibrarycode.html#194522122">Jason Rute (Apr 18 2020 at 02:48)</a>:</h4>
+<p>By "the Lean library", I mean the files in <code>~/.elan/toolchains/3.4.2/lib/lean/library/init</code>.</p>
+
+<a name="194523744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20lean%20core%20library%20code/near/194523744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93280modifyingleancorelibrarycode.html#194523744">Scott Morrison (Apr 18 2020 at 03:33)</a>:</h4>
+<p>For point 2., there is a script <code>scripts/mk_all.sh</code> (and a corresponding script <code>scripts/rm_all.sh</code>) that will create <code>src/all.lean</code>, which imports all of mathlib.</p>
+
+<a name="194523810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20lean%20core%20library%20code/near/194523810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93280modifyingleancorelibrarycode.html#194523810">Scott Morrison (Apr 18 2020 at 03:34)</a>:</h4>
+<p>I'd be happy to hear the answer to 1. as well. I used to know how to hack core Lean comfortably, but seem to have lost that skill, and my current process involves deleting my <code>~/.elan</code> directory and reinstalling when I'm done. :-(</p>
+
+<a name="194526621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20lean%20core%20library%20code/near/194526621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93280modifyingleancorelibrarycode.html#194526621">Johan Commelin (Apr 18 2020 at 05:07)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> Does this help? (Quote from a PM)<br>
+<span class="user-mention silent" data-user-id="110043">Gabriel Ebner</span> <a href="#narrow/pm-with/110043,112680-pm/near/193894802" title="#narrow/pm-with/110043,112680-pm/near/193894802">said</a>:</p>
+<blockquote>
+<p>If you build lean locally, then you can just set the <code>lean.executable</code> configuration option in vscode to use the freshly built lean.<br>
+Another option for such a small change is to <code>elan default nightly &amp;&amp; elan update</code> and then open the <code>lean/library</code> directory in vscode.</p>
+</blockquote>
+
+<a name="194530469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20lean%20core%20library%20code/near/194530469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93280modifyingleancorelibrarycode.html#194530469">Bryan Gin-ge Chen (Apr 18 2020 at 07:10)</a>:</h4>
+<p>For 1, here's how I'd do it. It might be more complicated than necessary, so I'd also appreciate hearing about better ways. First, I'd clone the community Lean repo and then make your modifications there. Build Lean following the directions <a href="https://github.com/leanprover-community/lean/blob/master/doc/make/index.md#generic-build-instructions" title="https://github.com/leanprover-community/lean/blob/master/doc/make/index.md#generic-build-instructions">here</a> and it will create some binaries in <code>bin/</code> which use your modified library in <code>library/</code>.</p>
+<p>You can then create a local toolchain from your copy of the lean repo with <code>elan</code>: see <code>elan toolchain help link</code>. </p>
+<p>Then you can set it as an override in a copy of mathlib using <code>elan override</code>.</p>
+
+<a name="194531722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20lean%20core%20library%20code/near/194531722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93280modifyingleancorelibrarycode.html#194531722">Gabriel Ebner (Apr 18 2020 at 07:48)</a>:</h4>
+<p>The <code>elan override</code> is how I do it as well.  You should also set the elan override in the lean directory as well.</p>
+
+<a name="194566455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20lean%20core%20library%20code/near/194566455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93280modifyingleancorelibrarycode.html#194566455">Jason Rute (Apr 18 2020 at 22:18)</a>:</h4>
+<p>So I have to recompile the C++ code to make this work?</p>
+
+<a name="194567745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20lean%20core%20library%20code/near/194567745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93280modifyingleancorelibrarycode.html#194567745">Bryan Gin-ge Chen (Apr 18 2020 at 22:53)</a>:</h4>
+<p>Yeah, unfortunately I don't know another way, though to be honest I haven't tried very hard to find alternatives yet. It seems like there ought to be a way to specify a path to the core library...</p>
+
+<a name="194571633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20lean%20core%20library%20code/near/194571633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93280modifyingleancorelibrarycode.html#194571633">Jason Rute (Apr 19 2020 at 00:43)</a>:</h4>
+<p>Ok.  I found one way to do this without compiling C++ binaries.  <del>(Note:  I may have even found a better way, but let's record this way first since I know it works.) (<strong>Edit: See below for cleaner solution.</strong>)</del></p>
+<ol>
+<li>Go to <code>~/.elan/toolchains/</code> and find the lean toolchain you want to modify.</li>
+<li>
+<p>Copy it to another location: <code>cp ~/.elan/toolchains/&lt;toolchain&gt;  &lt;path/to/where/lean/copy/will/be/stored&gt;</code>.<br>
+2a.  If you want version control, you can set up git for that new directory, just the <code>library</code> directory, or replace the <code>library</code> directory with a symbolic link to another library directory.</p>
+</li>
+<li>
+<p>Link this new location as a new toolchain in <code>elan</code>: <code>elan toolchain link &lt;my_new_toolchain_name&gt; &lt;path/to/lean/copy&gt;</code>.</p>
+</li>
+<li>
+<p>Go to the project directory and override which lean to use: <code>elan override set &lt;my_new_toolchain_name&gt;</code>.<br>
+4b. (I don't know if it matters, but if using <code>leanpkg</code>, <em>maybe</em> you need/want to change the lean version in <code>leanpkg.toml</code>.)</p>
+</li>
+<li>
+<p>In vs-code preferences for the lean plugin, change the lean executable path to <code>~/.elan/toolchains/&lt;my_new_toolchain_name&gt;/bin/lean</code> <strong>but only for the workspace, not the user</strong>.</p>
+</li>
+<li>Modify the core library files in your copied lean directory without fear of breaking anything outside of that directory.  (You will have to do <code>lean --make</code>, etc, but I think you folks know more about that than I do.)</li>
+<li>Test on the command line by doing <code>lean --path</code> (and checking that your path is to the copy of the lean library).  (Not sure how to test the vs code directly, but you can tell when a change you made to a core file is being used when another file imports it that core file.)</li>
+</ol>
+
+<a name="194600783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20lean%20core%20library%20code/near/194600783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93280modifyingleancorelibrarycode.html#194600783">Sebastian Ullrich (Apr 19 2020 at 14:38)</a>:</h4>
+<p>Step 4 should already cover step 5</p>
+
+<a name="194600945"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20lean%20core%20library%20code/near/194600945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93280modifyingleancorelibrarycode.html#194600945">Bryan Gin-ge Chen (Apr 19 2020 at 14:42)</a>:</h4>
+<p>Yes, if you're using elan there's very rarely any reason to change the executable path setting in vscode-lean (hence the discussion <a href="#narrow/stream/113489-new-members/topic/Installing.20mathlib/near/194570418" title="#narrow/stream/113489-new-members/topic/Installing.20mathlib/near/194570418">here</a>).</p>
+
+<a name="194601911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20lean%20core%20library%20code/near/194601911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93280modifyingleancorelibrarycode.html#194601911">Jason Rute (Apr 19 2020 at 15:03)</a>:</h4>
+<p>Good to know.</p>
+
+<a name="194602928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20lean%20core%20library%20code/near/194602928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93280modifyingleancorelibrarycode.html#194602928">Jason Rute (Apr 19 2020 at 15:25)</a>:</h4>
+<p>Ok, <strong>I have a <del>much cleaner and easier</del> hacky solution.</strong>  Assuming your project was created with <code>leanpkg</code> (or probably the newer <code>leanproject</code>) and has a <code>leanpkg.path</code> file, then modify that file replacing <code>builtin_path</code> with <code>path &lt;path/of/replacement/lean/core/library&gt;</code>.  Then do <code>lean --path</code> to make sure that new path has taken hold.  It works great!</p>
+
+<a name="194603009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20lean%20core%20library%20code/near/194603009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93280modifyingleancorelibrarycode.html#194603009">Jason Rute (Apr 19 2020 at 15:26)</a>:</h4>
+<p>(When I upgrade to <code>leanproject</code>, I'll double check that this solution still works.)</p>
+
+<a name="194603093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20lean%20core%20library%20code/near/194603093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93280modifyingleancorelibrarycode.html#194603093">Jason Rute (Apr 19 2020 at 15:29)</a>:</h4>
+<p>You still have to do some variation of steps 1 and 2 above to make a copy of the core library.</p>
+
+<a name="194610729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20lean%20core%20library%20code/near/194610729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93280modifyingleancorelibrarycode.html#194610729">Bryan Gin-ge Chen (Apr 19 2020 at 18:11)</a>:</h4>
+<p>Ah, of course. That makes sense. I'm not 100% sure, but I believe <code>leanpkg.path</code> may get overwritten when using leanpkg and leanproject to upgrade dependencies, so you may have to watch out there.</p>
+
+<a name="194610869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20lean%20core%20library%20code/near/194610869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93280modifyingleancorelibrarycode.html#194610869">Jason Rute (Apr 19 2020 at 18:14)</a>:</h4>
+<p>Good point.</p>
+
+<a name="194658664"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20lean%20core%20library%20code/near/194658664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93280modifyingleancorelibrarycode.html#194658664">Patrick Massot (Apr 20 2020 at 10:47)</a>:</h4>
+<p>Currently leanproject still uses leanpkg under the hood (because I don't have enough time/motivation to get rid of it). In particular it calls leanpkg configure that creates leanpkg.path. So yes, it will be overwritten if you try to update mathlib.</p>
+
+<a name="194658755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20lean%20core%20library%20code/near/194658755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93280modifyingleancorelibrarycode.html#194658755">Patrick Massot (Apr 20 2020 at 10:48)</a>:</h4>
+<p>But there is no problem "fixing" this. It only costs time. So, if you really need this, you need to either tell me you really really need it, or open a PR.</p>
+
+<a name="194663909"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20lean%20core%20library%20code/near/194663909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93280modifyingleancorelibrarycode.html#194663909">Sebastian Ullrich (Apr 20 2020 at 11:51)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="115715">Jason Rute</span> <a href="#narrow/stream/113488-general/topic/modifying.20lean.20core.20library.20code/near/194602928" title="#narrow/stream/113488-general/topic/modifying.20lean.20core.20library.20code/near/194602928">said</a>:</p>
+<blockquote>
+<p>Ok, <strong>I have a much cleaner and easier solution.</strong>  Assuming your project was created with <code>leanpkg</code> (or probably the newer <code>leanproject</code>) and has a <code>leanpkg.path</code> file, then modify that file replacing <code>builtin_path</code> with <code>path &lt;path/of/replacement/lean/core/library&gt;</code>.  Then do <code>lean --path</code> to make sure that new path has taken hold.  It works great!</p>
+</blockquote>
+<p>So your <code>elan toolchain + elan override</code> commands are replaced with editing <code>leanpkg.path</code>? That does sound marginally easier, but as pointed out it's definitely less clean. I would still recommend an override. It's the highest-priority source of the desired Lean version for elan.</p>
+
+<a name="194666375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modifying%20lean%20core%20library%20code/near/194666375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93280modifyingleancorelibrarycode.html#194666375">Jason Rute (Apr 20 2020 at 12:19)</a>:</h4>
+<p>Good to know.  What I'm doing now isn't really core Lean development, but core Lean hacking.  <span aria-label="grinning face with smiling eyes" class="emoji emoji-1f601" role="img" title="grinning face with smiling eyes">:grinning_face_with_smiling_eyes:</span>  So I'm comfortable with the consequences.  Either way, I've found two ways to modify the core lean code without breaking Lean for other projects and without having to recompile the C++ code.  If anyone asks, you all recommend the former approach, which makes sense.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

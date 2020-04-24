@@ -1,0 +1,102 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/77325addingoneinsideafunction.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/77325addingoneinsideafunction.html">adding one inside a function</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193955715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/adding%20one%20inside%20a%20function/near/193955715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77325addingoneinsideafunction.html#193955715">Alex Kontorovich (Apr 14 2020 at 20:53)</a>:</h4>
+<p>More noob questions. Please help to make this work? (tried library_search, simp, hint, cc, suggest...) Thank you!</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">z</span> <span class="o">(</span><span class="n">F</span><span class="o">:</span><span class="bp">ℕ→</span><span class="n">ℝ</span><span class="o">)(</span><span class="n">G</span><span class="o">:</span><span class="bp">ℕ→</span><span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">fg</span><span class="o">:</span> <span class="bp">∀</span> <span class="n">k</span><span class="o">,</span> <span class="n">G</span><span class="o">(</span><span class="n">k</span><span class="o">)</span><span class="bp">=</span> <span class="n">F</span> <span class="o">(</span><span class="n">k</span><span class="bp">+</span><span class="n">i</span><span class="o">))</span>
+<span class="o">:</span> <span class="bp">∀</span> <span class="n">k</span><span class="o">,</span> <span class="o">(</span><span class="n">F</span><span class="o">(</span><span class="n">k</span> <span class="bp">+</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">i</span><span class="o">)</span><span class="bp">=</span> <span class="n">G</span> <span class="o">(</span><span class="n">k</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span>
+<span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">intros</span> <span class="n">k</span><span class="o">,</span>
+    <span class="n">sorry</span><span class="o">,</span>
+<span class="kn">end</span><span class="o">,</span>
+</pre></div>
+
+<a name="193956329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/adding%20one%20inside%20a%20function/near/193956329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77325addingoneinsideafunction.html#193956329">Johan Commelin (Apr 14 2020 at 20:58)</a>:</h4>
+<p>Try <code>symmetry</code> and then <code>convert fg (k+1) using 1</code></p>
+
+<a name="193956448"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/adding%20one%20inside%20a%20function/near/193956448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77325addingoneinsideafunction.html#193956448">Johan Commelin (Apr 14 2020 at 20:59)</a>:</h4>
+<p>Or maybe better <code>symmetry</code>, <code>rw show k + nat.succ i = (k+1) + i</code>,</p>
+
+<a name="193956601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/adding%20one%20inside%20a%20function/near/193956601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77325addingoneinsideafunction.html#193956601">Johan Commelin (Apr 14 2020 at 21:00)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">suffices</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">+</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">i</span> <span class="bp">=</span> <span class="o">(</span><span class="n">k</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">+</span> <span class="n">i</span><span class="o">,</span>
+<span class="o">{</span> <span class="n">sorry</span> <span class="o">},</span>
+<span class="n">rw</span> <span class="n">this</span><span class="o">,</span>
+<span class="n">symmetry</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">fg</span>
+</pre></div>
+
+<a name="193956691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/adding%20one%20inside%20a%20function/near/193956691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77325addingoneinsideafunction.html#193956691">Patrick Massot (Apr 14 2020 at 21:01)</a>:</h4>
+<p>Why suffices?</p>
+
+<a name="193956701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/adding%20one%20inside%20a%20function/near/193956701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77325addingoneinsideafunction.html#193956701">Patrick Massot (Apr 14 2020 at 21:01)</a>:</h4>
+<p>Don't you mean have?</p>
+
+<a name="193956725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/adding%20one%20inside%20a%20function/near/193956725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77325addingoneinsideafunction.html#193956725">Patrick Massot (Apr 14 2020 at 21:01)</a>:</h4>
+<p>And probably <code>rw fg</code> can replace the last two lines.</p>
+
+<a name="193956848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/adding%20one%20inside%20a%20function/near/193956848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77325addingoneinsideafunction.html#193956848">Patrick Massot (Apr 14 2020 at 21:02)</a>:</h4>
+<p>I say <code>λ k, by rw [show k + nat.succ i = (k+1) + i, by ring, fg]</code></p>
+
+<a name="193956889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/adding%20one%20inside%20a%20function/near/193956889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77325addingoneinsideafunction.html#193956889">Patrick Massot (Apr 14 2020 at 21:03)</a>:</h4>
+<p>(But I can see comma haters coming)</p>
+
+<a name="193956996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/adding%20one%20inside%20a%20function/near/193956996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77325addingoneinsideafunction.html#193956996">Kenny Lau (Apr 14 2020 at 21:04)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">lemma</span> <span class="n">z</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">fg</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">k</span><span class="o">,</span> <span class="n">G</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">F</span> <span class="o">(</span><span class="n">k</span><span class="bp">+</span><span class="n">i</span><span class="o">))</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">F</span> <span class="o">(</span><span class="n">k</span> <span class="bp">+</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="n">G</span> <span class="o">(</span><span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="n">fg</span><span class="bp">;</span> <span class="n">congr&#39;</span> <span class="mi">1</span><span class="bp">;</span> <span class="n">omega</span>
+</pre></div>
+
+<a name="193957086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/adding%20one%20inside%20a%20function/near/193957086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77325addingoneinsideafunction.html#193957086">Sebastien Gouezel (Apr 14 2020 at 21:05)</a>:</h4>
+<p>The new mathlib style is</p>
+<div class="codehilite"><pre><span></span><span class="k">by</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">fg</span><span class="o">,</span> <span class="n">congr&#39;</span> <span class="mi">1</span><span class="o">,</span> <span class="n">omega</span> <span class="o">}</span>
+</pre></div>
+
+<a name="193957095"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/adding%20one%20inside%20a%20function/near/193957095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77325addingoneinsideafunction.html#193957095">Kenny Lau (Apr 14 2020 at 21:05)</a>:</h4>
+<p>oh I didn't know that</p>
+
+<a name="193957137"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/adding%20one%20inside%20a%20function/near/193957137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77325addingoneinsideafunction.html#193957137">Patrick Massot (Apr 14 2020 at 21:05)</a>:</h4>
+<p>Kenny cheated by moving <code>k</code> left of the colon</p>
+
+<a name="193957244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/adding%20one%20inside%20a%20function/near/193957244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77325addingoneinsideafunction.html#193957244">Patrick Massot (Apr 14 2020 at 21:06)</a>:</h4>
+<p>And <code>ring</code> is shorter than <code>omega</code>, I'm very disappointed by Kenny's golf.</p>
+
+<a name="193966088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/adding%20one%20inside%20a%20function/near/193966088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77325addingoneinsideafunction.html#193966088">Kevin Buzzard (Apr 14 2020 at 22:43)</a>:</h4>
+<p>That's great to hear that that's the new mathlib style, I had independently come up with it, I know it costs some extra bytes with the brackets but it was getting silly with all the semicolons</p>
+
+<a name="193966184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/adding%20one%20inside%20a%20function/near/193966184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/77325addingoneinsideafunction.html#193966184">Reid Barton (Apr 14 2020 at 22:44)</a>:</h4>
+<p>At least they're not some unicode brackets, so they only cost 1 byte each.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

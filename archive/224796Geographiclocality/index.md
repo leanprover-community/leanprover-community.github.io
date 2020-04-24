@@ -9,11 +9,23 @@ permalink: archive/224796Geographiclocality/index.html
 
 ### Topics:
 
-* [Colorado](50772Colorado.html) (3 messages, latest: Apr 13 2020 at 02:26)
+* [Pittsburgh, PA](85738PittsburghPA.html) (3 messages, latest: Apr 14 2020 at 20:06)
+
+* [Sydney, AU](91455SydneyAU.html) (3 messages, latest: Apr 14 2020 at 12:06)
+
+* [Home, Earth](54538HomeEarth.html) (5 messages, latest: Apr 14 2020 at 10:54)
+
+* [San Francisco Bay Area, USA](28421SanFranciscoBayAreaUSA.html) (5 messages, latest: Apr 14 2020 at 05:03)
+
+* [Burlington, VT](69467BurlingtonVT.html) (1 message, latest: Apr 14 2020 at 04:10)
+
+* [Colorado](50772Colorado.html) (6 messages, latest: Apr 13 2020 at 21:51)
+
+* [Dublin, Ireland](85034DublinIreland.html) (6 messages, latest: Apr 13 2020 at 19:39)
+
+* [Warwickshire, UK](07392WarwickshireUK.html) (1 message, latest: Apr 13 2020 at 17:07)
 
 * [Long Island, USA](93185LongIslandUSA.html) (2 messages, latest: Apr 12 2020 at 22:38)
-
-* [Home, Earth](54538HomeEarth.html) (4 messages, latest: Apr 12 2020 at 22:18)
 
 * [Oxford, UK](84127OxfordUK.html) (1 message, latest: Apr 12 2020 at 21:55)
 
@@ -22,8 +34,6 @@ permalink: archive/224796Geographiclocality/index.html
 * [Gothenburg, Sweden](00424GothenburgSweden.html) (5 messages, latest: Apr 12 2020 at 20:41)
 
 * [Delft, The Netherlands](94453DelftTheNetherlands.html) (1 message, latest: Apr 12 2020 at 19:59)
-
-* [San Francisco Bay Area, USA](28421SanFranciscoBayAreaUSA.html) (4 messages, latest: Apr 12 2020 at 17:49)
 
 * [Grenoble France](41694GrenobleFrance.html) (1 message, latest: Apr 12 2020 at 17:40)
 
@@ -42,10 +52,6 @@ permalink: archive/224796Geographiclocality/index.html
 * [Bonn, DE](08611BonnDE.html) (2 messages, latest: Apr 12 2020 at 15:04)
 
 * [Charlottesville, VA USA](77346CharlottesvilleVAUSA.html) (1 message, latest: Apr 12 2020 at 14:22)
-
-* [Dublin, Ireland](85034DublinIreland.html) (3 messages, latest: Apr 12 2020 at 14:09)
-
-* [Pittsburgh, PA](85738PittsburghPA.html) (2 messages, latest: Apr 12 2020 at 13:45)
 
 * [Rio de Janeiro, BR](76764RiodeJaneiroBR.html) (5 messages, latest: Apr 12 2020 at 13:41)
 

@@ -101,6 +101,47 @@ permalink: archive/116395maths/38055bundlingnormalsubgroups.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20normal%20subgroups/near/172596887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38055bundlingnormalsubgroups.html#172596887">Kevin Buzzard (Aug 06 2019 at 15:04)</a>:</h4>
 <p>Fair point</p>
 
+<a name="194549633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20normal%20subgroups/near/194549633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38055bundlingnormalsubgroups.html#194549633">Kevin Buzzard (Apr 18 2020 at 15:19)</a>:</h4>
+<p>OK, now <a href="https://github.com/leanprover-community/mathlib/issues/2140" title="https://github.com/leanprover-community/mathlib/issues/2140">#2140</a> is close to hitting mathlib (hopefully -- any reviews welcome) we need to make a decision on normal subgroups. There are two possibilities: (1) bundling (i.e. a new type <code>normal_subgroup G</code>) (2) a predicate <code>is_normal</code> on <code>subgroup G</code> which isn't a class (3) a predicate <code>is_normal</code> on subgroup G` which is a class.</p>
+<p>Mario asked "when do you need normality anyway?" and my initial answer was "teaching" but now it's "research" -- we use quotient groups in the perfectoid project, and currently we're quotienting out by an unbundled normal subgroup. I'd like to get started on this but I don't know what to do. Mario suggested quotienting out by general subsets (defined to be quotienting out by the normal closure) and because I don't actually need normal subgroups per se, but rather quotient groups, this would also be good for me. </p>
+<p>I am completely happy if the answer is "make a random choice and see how it works out" but what I want to avoid is me refactoring <code>group_theory/quotient_group.lean</code> and then in the PR process someone saying "you should have done it another way". </p>
+<p>In fact maybe this is not even the right question! I don't even care about normal subgroups. I care about quotient groups. Currently the set-up is </p>
+<div class="codehilite"><pre><span></span><span class="n">quotient_group</span><span class="bp">.</span><span class="n">quotient</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_1</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">group</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">is_subgroup</span> <span class="n">s</span><span class="o">],</span> <span class="kt">Type</span> <span class="n">u_1</span>
+</pre></div>
+
+
+<p>(this is just the type of cosets) and then an instance of type</p>
+<div class="codehilite"><pre><span></span><span class="bp">Π</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_1</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">normal_subgroup</span> <span class="n">N</span><span class="o">],</span> <span class="n">group</span> <span class="o">(</span><span class="n">quotient</span> <span class="n">N</span><span class="o">)</span>
+</pre></div>
+
+
+<p>My question is simple: should I PR some more lemmas about quotient groups, or should I take the opportunity to refactor quotient groups in some way? If so, how? I would like to come to a firm decision before starting the PR.</p>
+
+<a name="194549697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20normal%20subgroups/near/194549697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38055bundlingnormalsubgroups.html#194549697">Reid Barton (Apr 18 2020 at 15:20)</a>:</h4>
+<p>You should randomly choose (1)</p>
+
+<a name="194549713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20normal%20subgroups/near/194549713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38055bundlingnormalsubgroups.html#194549713">Reid Barton (Apr 18 2020 at 15:21)</a>:</h4>
+<p>But it sounds like this is what you have already?</p>
+
+<a name="194549715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20normal%20subgroups/near/194549715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38055bundlingnormalsubgroups.html#194549715">Reid Barton (Apr 18 2020 at 15:21)</a>:</h4>
+<p>Oh wait, no I misread.</p>
+
+<a name="194549892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20normal%20subgroups/near/194549892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38055bundlingnormalsubgroups.html#194549892">Reid Barton (Apr 18 2020 at 15:25)</a>:</h4>
+<p>In perfectoid spaces, are you taking quotients of abelian groups?</p>
+
+<a name="194549960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20normal%20subgroups/near/194549960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38055bundlingnormalsubgroups.html#194549960">Kevin Buzzard (Apr 18 2020 at 15:26)</a>:</h4>
+<p>Yes</p>
+
+<a name="194549977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20normal%20subgroups/near/194549977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38055bundlingnormalsubgroups.html#194549977">Kevin Buzzard (Apr 18 2020 at 15:27)</a>:</h4>
+<p>but I decided not to mention this because I thought it would muddy the water.</p>
+
 
 {% endraw %}
 

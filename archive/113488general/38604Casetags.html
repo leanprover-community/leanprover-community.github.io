@@ -1,0 +1,120 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/38604Casetags.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/38604Casetags.html">Case tags</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="194832958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Case%20tags/near/194832958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38604Casetags.html#194832958">Jannis Limperg (Apr 21 2020 at 17:08)</a>:</h4>
+<p>I'm currently trying to understand how case tags work, and they are rather more complicated than expected. There seem to be two ways to tag a goal as a 'case', <code>_case.n</code> (where <code>n</code> is a natural number; what's this for?) and <code>_case_simple</code>. Both seem to be in use. When the <code>case</code> tactic tries to find a case that matches the name given by the user, it inspects the term constructed so far <a href="https://github.com/leanprover-community/lean/blob/c59125c188468fb83ca95353376e1ce953b57a5e/library/init/meta/interactive.lean#L629" title="https://github.com/leanprover-community/lean/blob/c59125c188468fb83ca95353376e1ce953b57a5e/library/init/meta/interactive.lean#L629">in some unholy fashion</a> -- but only for <code>_case_simple</code> tags. Does anyone know why all this is necessary? I would have expected <code>case</code> to just look for a goal with a matching name.</p>
+
+<a name="194857600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Case%20tags/near/194857600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38604Casetags.html#194857600">Sebastian Ullrich (Apr 21 2020 at 20:32)</a>:</h4>
+<p>The "interesting" code is from my original implementation of <code>case</code>, before Leo added any tag management. As the comment at the use site of <code>find_case</code> explains, it is not being used for actually locating the goal anymore. I don't know/remember much about the tags themselves.</p>
+
+<a name="194937444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Case%20tags/near/194937444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38604Casetags.html#194937444">Jannis Limperg (Apr 22 2020 at 14:18)</a>:</h4>
+<p>Thanks, that helps a lot! Perhaps a refactoring to remove <code>_case_simple</code> is in order.</p>
+
+<a name="194949985"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Case%20tags/near/194949985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38604Casetags.html#194949985">Jannis Limperg (Apr 22 2020 at 15:40)</a>:</h4>
+<p>I think I broadly understand what's happening now. Documenting it here (for myself if noone else):</p>
+<ul>
+<li>A tag is a list of names.</li>
+<li><code>induction</code> and <code>cases</code> (and variants) tag each goal they generate with the tag <code>['_case_simple, cname]</code> where <code>cname</code> is the name of the constructor (fully qualified).</li>
+<li><code>with_cases t</code> runs the tactic <code>t</code>. Then, for any new goal <code>g</code> produced by <code>t</code>, it reverts any hypotheses of <code>g</code> that did not occur in the original goal. Finally, <code>g</code>'s tag gets prefixed with <code>'_case.n</code> where <code>n</code> is the number of hypotheses that were reverted.</li>
+<li><code>case name : x, y, ...</code> first finds a goal whose tag matches <code>name</code>. It then proceeds according to whether the goal's tag starts with <code>'_case.n</code> or <code>'_case_simple</code>.<ul>
+<li>For <code>'_case.n</code>, it introduces <code>n</code> arguments, using the names <code>x, y, ...</code> (if available).</li>
+<li>For <code>'_case_simple</code>, it determines the number of arguments of the constructor which generated this case. (This is what the linked <code>find_case</code> does, as far as I can tell.) It then renames these arguments to <code>x, y, ...</code> (if available).</li>
+</ul>
+</li>
+</ul>
+
+<a name="194950171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Case%20tags/near/194950171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38604Casetags.html#194950171">Bryan Gin-ge Chen (Apr 22 2020 at 15:41)</a>:</h4>
+<p>A PR to add this info in the form of doc strings to leanprover-community/lean would be greatly appreciated!</p>
+
+<a name="194951189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Case%20tags/near/194951189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38604Casetags.html#194951189">Jannis Limperg (Apr 22 2020 at 15:49)</a>:</h4>
+<p>Can do, but at the moment I want to redesign the whole thing anyway. Besides being ugly, the <code>find_case</code> hack leads to such tight coupling between <code>induction</code>/<code>cases</code> and <code>case</code> that I can't use case tags with an alternative induction tactic that I'm working on.</p>
+
+<a name="195007477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Case%20tags/near/195007477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38604Casetags.html#195007477">Jannis Limperg (Apr 23 2020 at 00:31)</a>:</h4>
+<p>New design:</p>
+<ul>
+<li>A case tag has the form <code>['_case, cname_0, ... cname_m, '_arg.x_0, ..., '_arg.x_n, '_end_case]</code> where the <code>cname_i</code> are names associated with the case (usually just one constructor name) and the <code>x_i</code> are the unique names of those local hypotheses which were added for the case.</li>
+<li><code>cases</code>, <code>induction</code> and friends, when called on a goal with tag <code>t</code>, generate one goal per constructor and prepend an appropriate case tag to <code>t</code>.</li>
+<li><code>case c : x y z... { t }</code> searches all goals for one whose tag includes a case tag for <code>c</code>. (The search remains fuzzy, so <code>case zero</code> finds a goal tagged <code>nat.zero</code>.) If it finds exactly one such goal, it renames the <code>_arg</code> hypotheses to <code>x, y, z, ...</code> (if present) and runs <code>t</code> on the goal.</li>
+<li>Some other tactics can also set tags if tags are enabled. As far as I can tell, these are always 'simple' tags, meaning the tag is just one or more names which are associated with the case. For example, <code>apply</code> can set tags for generated subgoals if the arguments that generate these subgoals are named in the applied lemma.</li>
+<li><code>with_cases t</code> runs <code>t</code> with tags enabled. For each new goal <code>g</code>, it then generates a case tag <code>['_case, cname_i, ..., '_arg.x_i, ..., '_end_case]</code> where<ul>
+<li>the <code>cname_i</code> are the associated names of any case tags or simple tags of <code>g</code>;</li>
+<li>the <code>_arg.x_i</code> are those hypotheses of <code>g</code> that did not appear in the original goal.<br>
+This ensures that <code>with_cases</code> can be used both with <code>cases</code>/<code>induction</code> (though there isn't really any reason to do so any more) and with tactics like <code>apply</code> that generate simple tags. The latter is used occasionally in core, to apply custom induction principles.</li>
+</ul>
+</li>
+</ul>
+<p>This design should cover all current uses of case tags. It doesn't require any C++ changes. It is backwards-incompatible for people setting tags manually, but as far as I can see, there is only direct  use of <code>set_tag</code> in all of Github (the <code>wlog</code> tactic in mathlib, which I can fix).</p>
+<p>Any concerns?</p>
+
+<a name="195008268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Case%20tags/near/195008268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38604Casetags.html#195008268">Mario Carneiro (Apr 23 2020 at 00:42)</a>:</h4>
+<p>I don't like all this layered information in a <code>list name</code>. Why not just use an <code>expr</code>?</p>
+
+<a name="195012742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Case%20tags/near/195012742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38604Casetags.html#195012742">Jannis Limperg (Apr 23 2020 at 02:19)</a>:</h4>
+<p>I'd also prefer more structured data. However, that would require changes to the C++ (tags are part of the tactic state), which I'd rather avoid.</p>
+
+<a name="195016054"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Case%20tags/near/195016054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38604Casetags.html#195016054">Mario Carneiro (Apr 23 2020 at 03:48)</a>:</h4>
+<p>I don't think the C++ needs to do much? Just associate an expr to the goal instead of a list name. I don't think these tags are used much on the C++ side</p>
+
+<a name="195136533"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Case%20tags/near/195136533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38604Casetags.html#195136533">Jannis Limperg (Apr 24 2020 at 00:47)</a>:</h4>
+<p>An <code>expr</code> would be doable, yes. However, I don't understand what this would buy us. We'd still need to define which <code>expr</code>s are valid tags and what their semantics are, right? Could you maybe elaborate on the design you were thinking of?</p>
+
+<a name="195137132"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Case%20tags/near/195137132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38604Casetags.html#195137132">Mario Carneiro (Apr 24 2020 at 00:58)</a>:</h4>
+<p>It leaves the door open for other uses of tags, like in <code>refine_struct</code>, without constraining the form of the metadata</p>
+
+<a name="195137186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Case%20tags/near/195137186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38604Casetags.html#195137186">Mario Carneiro (Apr 24 2020 at 01:00)</a>:</h4>
+<p>Yes, for case tags we would still need roughly the same structure, although I think the way it is currently done is a bit idiosyncratic. What should case tags for <code>rcases</code> look like, for instance?</p>
+
+<a name="195137376"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Case%20tags/near/195137376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38604Casetags.html#195137376">Mario Carneiro (Apr 24 2020 at 01:02)</a>:</h4>
+<p>Also, the hypotheses pointing to unique names need to be organized in a way so that they can be updated without regard for the surrounding data structure, for things like <code>revert</code></p>
+
+<a name="195139425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Case%20tags/near/195139425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38604Casetags.html#195139425">Jannis Limperg (Apr 24 2020 at 01:53)</a>:</h4>
+<p>I agree that it would be nice to have more flexibility in the metadata, to support other uses of tags. However, there needs to be some structure to the data because Lean needs to know how to print a tag. How about this: a tag is a <code>list (name x list name x expr)</code>. The first component identifies what kind of tag this is, e.g. <code>_case</code> or <code>_field</code>. The second component gives names that should be displayed in the goal state (<code>['c, 'd]</code> becomes "case c, d"). The third component is arbitrary metadata. This certainly covers all current uses and imposes only minimal structure. The printing is still a bit restrictive, but I don't immediately see a way around that.</p>
+<p>To support <code>rcases</code>, one would need to identify cases by a sequence of names (rather than one name): <code>sum.inj/sum.inr</code> could be one case if we split a nested sum. However, I'm not sure that this is worth the extra complexity.</p>
+<p>I'm afraid I don't understand your remark about the unique names. How should <code>revert</code> interact with them?</p>
+
+<a name="195140015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Case%20tags/near/195140015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38604Casetags.html#195140015">Mario Carneiro (Apr 24 2020 at 02:07)</a>:</h4>
+<p>There are lots of tactics that use revert/intro to "rewrite in hypotheses", such as <code>rw at h</code>. This changes the unique name of the hypothesis, and the case tag needs to be updated to match. Even <code>cases</code> itself can cause this behavior, which causes some problems in <code>rcases</code> when it loses track of which hypotheses need to be case split. The information about names needs to be stored in such a way that it can be updated by tactics that don't care if it's a case tag or otherwise</p>
+
+<a name="195140070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Case%20tags/near/195140070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38604Casetags.html#195140070">Mario Carneiro (Apr 24 2020 at 02:08)</a>:</h4>
+<p>Why are there multiple constructor tags on a case tag if not for this?</p>
+
+<a name="195140116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Case%20tags/near/195140116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38604Casetags.html#195140116">Mario Carneiro (Apr 24 2020 at 02:09)</a>:</h4>
+<p>I think you can store the <code>_case</code>/<code>_field</code> marker in the head of the <code>expr</code></p>
+
+<a name="195140168"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Case%20tags/near/195140168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38604Casetags.html#195140168">Mario Carneiro (Apr 24 2020 at 02:10)</a>:</h4>
+<p>I don't know what the top level <code>list</code> is for in your design</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

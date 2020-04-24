@@ -45,6 +45,98 @@ Here's a (ridiculous) example of the kind of stuff that causes problems:</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20class%20inference%20with%20parameters/near/193740204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64952Typeclassinferencewithparameters.html#193740204">Reid Barton (Apr 13 2020 at 02:11)</a>:</h4>
 <p><code>variables</code> will make the problems clearer. How do you expect to ever specify <code>n</code>?</p>
 
+<a name="193761878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20class%20inference%20with%20parameters/near/193761878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64952Typeclassinferencewithparameters.html#193761878">Alastair Horn (Apr 13 2020 at 11:02)</a>:</h4>
+<p>But I want to create a quotient that depends on a value n - the integers mod n</p>
+
+<a name="193761906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20class%20inference%20with%20parameters/near/193761906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64952Typeclassinferencewithparameters.html#193761906">Alastair Horn (Apr 13 2020 at 11:03)</a>:</h4>
+<p>But type class resolution won't work with variables either because the instance depends on n</p>
+
+<a name="193761922"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20class%20inference%20with%20parameters/near/193761922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64952Typeclassinferencewithparameters.html#193761922">Alastair Horn (Apr 13 2020 at 11:03)</a>:</h4>
+<p>Is there a way to feed lean my specific setoid?</p>
+
+<a name="193761968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20class%20inference%20with%20parameters/near/193761968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64952Typeclassinferencewithparameters.html#193761968">Mario Carneiro (Apr 13 2020 at 11:04)</a>:</h4>
+<p>You can put the <code>n</code> in the type</p>
+
+<a name="193762008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20class%20inference%20with%20parameters/near/193762008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64952Typeclassinferencewithparameters.html#193762008">Mario Carneiro (Apr 13 2020 at 11:04)</a>:</h4>
+<p>If you have an instance <code>instance (n : nat) : setoid (mytype n)</code> there are no problems</p>
+
+<a name="193762018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20class%20inference%20with%20parameters/near/193762018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64952Typeclassinferencewithparameters.html#193762018">Mario Carneiro (Apr 13 2020 at 11:05)</a>:</h4>
+<p>(also, setoids often don't need to be instances)</p>
+
+<a name="193762020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20class%20inference%20with%20parameters/near/193762020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64952Typeclassinferencewithparameters.html#193762020">Kevin Buzzard (Apr 13 2020 at 11:05)</a>:</h4>
+<p>Or you can not use type class resolution. Mathlib has a whole collection of primed quotient stuff where the equivalence relation is found via unification.</p>
+
+<a name="193762104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20class%20inference%20with%20parameters/near/193762104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64952Typeclassinferencewithparameters.html#193762104">Kevin Buzzard (Apr 13 2020 at 11:06)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">quotient</span><span class="bp">.</span><span class="n">eq</span>
+<span class="c1">-- quotient.eq : ∀ {α : Sort u_1} [r : setoid α] {x y : α}, ⟦x⟧ = ⟦y⟧ ↔ x ≈ y</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">quotient</span><span class="bp">.</span><span class="n">eq&#39;</span>
+<span class="c1">-- quotient.eq&#39; : ∀ {α : Sort u_1} {s₁ : setoid α} {a b : α}, quotient.mk&#39; a = quotient.mk&#39; b ↔ setoid.r a b</span>
+</pre></div>
+
+<a name="193762118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20class%20inference%20with%20parameters/near/193762118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64952Typeclassinferencewithparameters.html#193762118">Kevin Buzzard (Apr 13 2020 at 11:06)</a>:</h4>
+<p>Note <code>[setoid]</code> v <code>{setoid}</code></p>
+
+<a name="193762670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20class%20inference%20with%20parameters/near/193762670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64952Typeclassinferencewithparameters.html#193762670">Kevin Buzzard (Apr 13 2020 at 11:15)</a>:</h4>
+<p>You lose notation this way though, as you can see from the example.</p>
+
+<a name="193763495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20class%20inference%20with%20parameters/near/193763495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64952Typeclassinferencewithparameters.html#193763495">Alastair Horn (Apr 13 2020 at 11:28)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> but if I'm trying to get type class resolution for <code>setoid int</code> (although I'm actually using <code>setoid myint</code>, as I'm using my own implementation of integers) I can't put n in the type</p>
+
+<a name="193763526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20class%20inference%20with%20parameters/near/193763526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64952Typeclassinferencewithparameters.html#193763526">Alastair Horn (Apr 13 2020 at 11:29)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> that, or explicitly stating everything might be the only way</p>
+
+<a name="193763538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20class%20inference%20with%20parameters/near/193763538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64952Typeclassinferencewithparameters.html#193763538">Alastair Horn (Apr 13 2020 at 11:29)</a>:</h4>
+<p>But it's not ideal</p>
+
+<a name="193763548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20class%20inference%20with%20parameters/near/193763548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64952Typeclassinferencewithparameters.html#193763548">Kevin Buzzard (Apr 13 2020 at 11:30)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">int</span><span class="bp">.</span><span class="n">modeq</span>
+
+<span class="kn">section</span>
+
+<span class="kn">parameter</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">modeq</span> <span class="n">n</span>
+
+<span class="kn">open</span> <span class="n">int</span><span class="bp">.</span><span class="n">modeq</span> <span class="n">quotient</span>
+
+<span class="n">def</span> <span class="n">s</span> <span class="o">:</span> <span class="n">setoid</span> <span class="bp">ℤ</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">r</span> <span class="o">:=</span> <span class="n">r</span><span class="o">,</span>
+  <span class="n">iseqv</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">int</span><span class="bp">.</span><span class="n">modeq</span><span class="bp">.</span><span class="n">refl</span><span class="o">,</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">modeq</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">modeq</span><span class="bp">.</span><span class="n">trans</span><span class="bp">⟩</span> <span class="o">}</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">add_semigroup</span> <span class="o">(</span><span class="n">quotient</span> <span class="n">s</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">add</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">q</span> <span class="n">r</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">lift_on₂&#39;</span> <span class="n">q</span> <span class="n">r</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">mk&#39;</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">))</span>
+  <span class="k">begin</span>
+    <span class="n">intros</span> <span class="n">a₁</span> <span class="n">b₁</span> <span class="n">a₂</span> <span class="n">b₂</span> <span class="n">ha</span> <span class="n">hb</span><span class="o">,</span>
+    <span class="k">show</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">mk&#39;</span> <span class="o">(</span><span class="n">a₁</span> <span class="bp">+</span> <span class="n">b₁</span><span class="o">)</span> <span class="bp">=</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">mk&#39;</span> <span class="o">(</span><span class="n">a₂</span> <span class="bp">+</span> <span class="n">b₂</span><span class="o">),</span>
+    <span class="n">sorry</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">add_assoc</span> <span class="o">:=</span> <span class="n">sorry</span> <span class="o">}</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+<a name="193763667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20class%20inference%20with%20parameters/near/193763667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64952Typeclassinferencewithparameters.html#193763667">Mario Carneiro (Apr 13 2020 at 11:32)</a>:</h4>
+<p><span class="user-mention" data-user-id="274262">@Alastair Horn</span> You can, you can define <code>foo n := int</code> and then put the typeclass on <code>foo n</code></p>
+
+<a name="193764173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20class%20inference%20with%20parameters/near/193764173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64952Typeclassinferencewithparameters.html#193764173">Alastair Horn (Apr 13 2020 at 11:40)</a>:</h4>
+<p>Okay that seems to get rid of the errors somehow <span aria-label="joy" class="emoji emoji-1f602" role="img" title="joy">:joy:</span>. I'll see how far I get with that and fall back on Kevin's method otherwise. Thanks</p>
+
 
 {% endraw %}
 

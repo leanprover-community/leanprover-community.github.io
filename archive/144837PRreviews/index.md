@@ -9,6 +9,16 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#2480 bilinear forms](250232480bilinearforms.html) (188 messages, latest: Apr 24 2020 at 10:25)
+
+* [#2511 refactor zmod](814372511refactorzmod.html) (45 messages, latest: Apr 24 2020 at 05:20)
+
+* [#2228 Inverse function thm](400932228Inversefunctionthm.html) (2 messages, latest: Apr 23 2020 at 20:29)
+
+* [#2471 nth_rewrite](589412471nthrewrite.html) (1 message, latest: Apr 22 2020 at 07:35)
+
+* [#2140 bundled subgroups](252032140bundledsubgroups.html) (24 messages, latest: Apr 14 2020 at 17:47)
+
 * [#2382 is_eq_or_iff](800882382iseqoriff.html) (13 messages, latest: Apr 10 2020 at 23:34)
 
 * [#2303 refactor algebra](028322303refactoralgebra.html) (3 messages, latest: Apr 09 2020 at 13:55)
@@ -17,13 +27,9 @@ permalink: archive/144837PRreviews/index.html
 
 * [#2332](923982332.html) (29 messages, latest: Apr 08 2020 at 07:39)
 
-* [#2140 bundled subgroups](252032140bundledsubgroups.html) (19 messages, latest: Apr 07 2020 at 04:29)
-
 * [#2242 group with zero](757992242groupwithzero.html) (14 messages, latest: Mar 31 2020 at 08:37)
 
 * [#2264 deploy_docs fix](411022264deploydocsfix.html) (4 messages, latest: Mar 28 2020 at 17:41)
-
-* [#2228 Inverse function thm](400932228Inversefunctionthm.html) (1 message, latest: Mar 28 2020 at 01:27)
 
 * [#2106 bump lean](271372106bumplean.html) (2 messages, latest: Mar 18 2020 at 17:24)
 

@@ -1,0 +1,74 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/23641permutation.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/23641permutation.html">permutation</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="194891898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/permutation/near/194891898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23641permutation.html#194891898">Nam (Apr 22 2020 at 06:18)</a>:</h4>
+<p>this lemma about permutation reads very simple, but i have a hard time proving it. could someone give me a hint?</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">permuted</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">-&gt;</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">-&gt;</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">nil</span> <span class="o">{}</span> <span class="o">:</span> <span class="n">permuted</span> <span class="o">[]</span> <span class="o">[]</span>
+<span class="bp">|</span> <span class="n">skip</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">{</span><span class="n">l</span> <span class="n">l&#39;</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">permuted</span> <span class="n">l</span> <span class="n">l&#39;</span> <span class="bp">-&gt;</span> <span class="n">permuted</span> <span class="o">(</span><span class="n">x</span><span class="bp">::</span><span class="n">l</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span><span class="bp">::</span><span class="n">l&#39;</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">swap</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">{</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">permuted</span> <span class="o">(</span><span class="n">y</span><span class="bp">::</span><span class="n">x</span><span class="bp">::</span><span class="n">l</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span><span class="bp">::</span><span class="n">y</span><span class="bp">::</span><span class="n">l</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">trans</span> <span class="o">{</span><span class="n">l</span> <span class="n">l&#39;</span> <span class="n">l&#39;&#39;</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">permuted</span> <span class="n">l</span> <span class="n">l&#39;</span> <span class="bp">-&gt;</span> <span class="n">permuted</span> <span class="n">l&#39;</span> <span class="n">l&#39;&#39;</span> <span class="bp">-&gt;</span> <span class="n">permuted</span> <span class="n">l</span> <span class="n">l&#39;&#39;</span>
+
+<span class="kn">lemma</span> <span class="n">cons_to_a_permutation</span>
+    <span class="o">{</span><span class="n">pre</span> <span class="n">suf</span> <span class="n">tail</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">{</span><span class="n">head</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span>
+    <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">permuted</span> <span class="n">tail</span> <span class="o">(</span><span class="n">pre</span> <span class="bp">++</span> <span class="n">suf</span><span class="o">))</span>
+    <span class="o">:</span> <span class="n">permuted</span> <span class="o">(</span><span class="n">head</span> <span class="bp">::</span> <span class="n">tail</span><span class="o">)</span> <span class="o">(</span><span class="n">pre</span> <span class="bp">++</span> <span class="n">head</span> <span class="bp">::</span> <span class="n">suf</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="194892639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/permutation/near/194892639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23641permutation.html#194892639">Mario Carneiro (Apr 22 2020 at 06:34)</a>:</h4>
+<p>Have you looked at <code>data.list.perm</code>?</p>
+
+<a name="194892742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/permutation/near/194892742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23641permutation.html#194892742">Mario Carneiro (Apr 22 2020 at 06:37)</a>:</h4>
+<p>Try this:</p>
+
+<a name="194892751"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/permutation/near/194892751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23641permutation.html#194892751">Mario Carneiro (Apr 22 2020 at 06:37)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">permuted_middle</span>
+    <span class="o">{</span><span class="n">pre</span> <span class="n">suf</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">{</span><span class="n">head</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span>
+    <span class="o">:</span> <span class="n">permuted</span> <span class="o">(</span><span class="n">head</span> <span class="bp">::</span> <span class="n">pre</span> <span class="bp">++</span> <span class="n">suf</span><span class="o">)</span> <span class="o">(</span><span class="n">pre</span> <span class="bp">++</span> <span class="n">head</span> <span class="bp">::</span> <span class="n">suf</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">pre</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">sorry</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">sorry</span> <span class="o">},</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">cons_to_a_permutation</span>
+    <span class="o">{</span><span class="n">pre</span> <span class="n">suf</span> <span class="n">tail</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">{</span><span class="n">head</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span>
+    <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">permuted</span> <span class="n">tail</span> <span class="o">(</span><span class="n">pre</span> <span class="bp">++</span> <span class="n">suf</span><span class="o">))</span>
+    <span class="o">:</span> <span class="n">permuted</span> <span class="o">(</span><span class="n">head</span> <span class="bp">::</span> <span class="n">tail</span><span class="o">)</span> <span class="o">(</span><span class="n">pre</span> <span class="bp">++</span> <span class="n">head</span> <span class="bp">::</span> <span class="n">suf</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">permuted</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">permuted</span><span class="bp">.</span><span class="n">skip</span> <span class="n">h</span><span class="o">)</span> <span class="n">permuted_middle</span>
+</pre></div>
+
+<a name="194899779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/permutation/near/194899779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23641permutation.html#194899779">Kevin Buzzard (Apr 22 2020 at 08:16)</a>:</h4>
+<p>Mario worked all this stuff out already. It's more delicate than you think</p>
+
+<a name="194972043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/permutation/near/194972043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23641permutation.html#194972043">Nam (Apr 22 2020 at 18:25)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110049">Mario Carneiro</span> <a href="#narrow/stream/113489-new-members/topic/permutation/near/194892639" title="#narrow/stream/113489-new-members/topic/permutation/near/194892639">said</a>:</p>
+<blockquote>
+<p>Have you looked at <code>data.list.perm</code>?</p>
+</blockquote>
+<p>I did not. Thanks a lot, Mario! <code>perm_cons_app_cons</code> looks like what I need.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

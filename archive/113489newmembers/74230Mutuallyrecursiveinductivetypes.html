@@ -1,0 +1,153 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/74230Mutuallyrecursiveinductivetypes.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/74230Mutuallyrecursiveinductivetypes.html">Mutually recursive inductive types</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="193912235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutually%20recursive%20inductive%20types/near/193912235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74230Mutuallyrecursiveinductivetypes.html#193912235">Sam Stites (Apr 14 2020 at 15:11)</a>:</h4>
+<p>Hi all, <br>
+I'm trying to use Lean to do some language design and experimentation.</p>
+<p>I'm just starting with an untyped lambda calculus which looks a little like:</p>
+<div class="codehilite"><pre><span></span><span class="kn">constants</span> <span class="o">(</span><span class="n">real</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+
+<span class="kn">structure</span> <span class="n">var</span> <span class="o">:=</span> <span class="o">(</span><span class="n">Var</span> <span class="o">:</span> <span class="n">string</span><span class="o">)</span>
+<span class="kn">structure</span> <span class="n">fn</span>  <span class="o">:=</span> <span class="o">(</span><span class="n">Fn</span> <span class="o">:</span> <span class="n">string</span><span class="o">)</span>
+
+<span class="kn">inductive</span> <span class="n">primval</span> <span class="o">:</span> <span class="kt">Type</span>
+  <span class="bp">|</span> <span class="n">Real</span> <span class="o">:</span> <span class="n">real</span> <span class="bp">→</span> <span class="n">primval</span>
+  <span class="bp">|</span> <span class="n">Bool</span> <span class="o">:</span> <span class="n">bool</span> <span class="bp">→</span> <span class="n">primval</span>
+  <span class="bp">|</span> <span class="n">MyList</span> <span class="o">:</span> <span class="n">list</span> <span class="n">myexpr</span> <span class="bp">→</span> <span class="n">primval</span>
+
+<span class="kn">inductive</span> <span class="n">primop</span> <span class="o">:</span> <span class="kt">Type</span>
+  <span class="bp">|</span> <span class="n">Op</span> <span class="o">:</span> <span class="n">string</span> <span class="bp">→</span> <span class="n">primop</span>
+
+  <span class="c1">-- number ops</span>
+  <span class="bp">|</span> <span class="n">Mul</span> <span class="o">:</span> <span class="n">primop</span>
+  <span class="bp">|</span> <span class="n">Sub</span> <span class="o">:</span> <span class="n">primop</span>
+  <span class="bp">|</span> <span class="n">Div</span> <span class="o">:</span> <span class="n">primop</span>
+  <span class="bp">|</span> <span class="n">Add</span> <span class="o">:</span> <span class="n">primop</span>
+  <span class="bp">|</span> <span class="n">GT</span> <span class="o">:</span> <span class="n">primop</span>
+  <span class="bp">|</span> <span class="n">LT</span>  <span class="o">:</span> <span class="n">primop</span>
+
+  <span class="c1">-- bool ops</span>
+  <span class="bp">|</span> <span class="n">Or</span>  <span class="o">:</span> <span class="n">primop</span>
+  <span class="bp">|</span> <span class="n">And</span>  <span class="o">:</span> <span class="n">primop</span>
+
+<span class="kn">inductive</span> <span class="n">myexpr</span> <span class="o">:</span> <span class="kt">Type</span>
+  <span class="bp">|</span> <span class="n">Primval</span> <span class="o">:</span> <span class="n">primval</span> <span class="bp">→</span> <span class="n">myexpr</span>
+  <span class="bp">|</span> <span class="n">Primop</span> <span class="o">:</span> <span class="n">primop</span> <span class="bp">→</span> <span class="n">myexpr</span>
+  <span class="bp">|</span> <span class="n">Let</span> <span class="o">:</span> <span class="n">var</span> <span class="bp">→</span> <span class="n">myexpr</span> <span class="bp">→</span> <span class="n">myexpr</span> <span class="bp">→</span> <span class="n">myexpr</span>
+  <span class="bp">|</span> <span class="n">V</span> <span class="o">:</span> <span class="n">var</span> <span class="bp">→</span> <span class="n">myexpr</span>
+  <span class="bp">|</span> <span class="n">F</span> <span class="o">:</span> <span class="n">fn</span> <span class="bp">→</span> <span class="n">myexpr</span>
+  <span class="bp">|</span> <span class="n">If</span> <span class="o">(</span><span class="n">pred</span> <span class="o">:</span> <span class="n">myexpr</span><span class="o">)</span> <span class="o">:</span> <span class="n">myexpr</span> <span class="bp">→</span> <span class="n">myexpr</span> <span class="bp">→</span> <span class="n">myexpr</span>
+  <span class="bp">|</span> <span class="n">Lambda</span> <span class="o">(</span><span class="n">vs</span> <span class="o">:</span> <span class="n">list</span> <span class="n">var</span><span class="o">)</span> <span class="o">(</span><span class="n">body</span> <span class="o">:</span> <span class="n">myexpr</span><span class="o">)</span>
+  <span class="bp">|</span> <span class="n">App</span> <span class="o">(</span><span class="n">op</span> <span class="o">:</span> <span class="n">myexpr</span><span class="o">)</span> <span class="o">(</span><span class="n">args</span> <span class="o">:</span> <span class="n">list</span> <span class="n">myexpr</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Unfortunately,  <code>MyList : list myexpr → primval</code> doesn't have <code>myexpr</code> in scope -- I guess lean doesn't hoist definitions?</p>
+<p>How would you go about doing this? Alternatively, is a resource on writing embedded DSLs in lean?</p>
+<p>Oh, also, where is <code>real</code>?</p>
+
+<a name="193913252"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutually%20recursive%20inductive%20types/near/193913252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74230Mutuallyrecursiveinductivetypes.html#193913252">Kenny Lau (Apr 14 2020 at 15:18)</a>:</h4>
+<div class="codehilite"><pre><span></span>```lean
+[code goes here]
+```
+</pre></div>
+
+<a name="193913275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutually%20recursive%20inductive%20types/near/193913275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74230Mutuallyrecursiveinductivetypes.html#193913275">Kenny Lau (Apr 14 2020 at 15:18)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+</pre></div>
+
+<a name="193913421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutually%20recursive%20inductive%20types/near/193913421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74230Mutuallyrecursiveinductivetypes.html#193913421">Kenny Lau (Apr 14 2020 at 15:19)</a>:</h4>
+<p>you can have mutual inductive types</p>
+
+<a name="193913526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutually%20recursive%20inductive%20types/near/193913526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74230Mutuallyrecursiveinductivetypes.html#193913526">Reid Barton (Apr 14 2020 at 15:20)</a>:</h4>
+<p>In this case, though, the path of least resistance is most likely to "inline" <code>primval</code> into <code>myexpr</code>, given that you use it only once</p>
+
+<a name="193913608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutually%20recursive%20inductive%20types/near/193913608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74230Mutuallyrecursiveinductivetypes.html#193913608">Reid Barton (Apr 14 2020 at 15:20)</a>:</h4>
+<p>(A list of any-values-whatsoever isn't so "primitive" anyways, is it?)</p>
+
+<a name="193913768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutually%20recursive%20inductive%20types/near/193913768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74230Mutuallyrecursiveinductivetypes.html#193913768">Sam Stites (Apr 14 2020 at 15:21)</a>:</h4>
+<p>Thanks <span class="user-mention" data-user-id="110064">@Kenny Lau</span>! Am I doing something wrong here, then? This example fails to compile.</p>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> I can't inline as I'm aiming for something slightly more complex.</p>
+
+<a name="193913881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutually%20recursive%20inductive%20types/near/193913881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74230Mutuallyrecursiveinductivetypes.html#193913881">Reid Barton (Apr 14 2020 at 15:22)</a>:</h4>
+<p>Check the section of TPIL on mutual inductive types</p>
+
+<a name="193913924"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutually%20recursive%20inductive%20types/near/193913924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74230Mutuallyrecursiveinductivetypes.html#193913924">Kevin Buzzard (Apr 14 2020 at 15:22)</a>:</h4>
+<p><a href="https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#mutual-recursion" title="https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#mutual-recursion">https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#mutual-recursion</a></p>
+
+<a name="193913950"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutually%20recursive%20inductive%20types/near/193913950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74230Mutuallyrecursiveinductivetypes.html#193913950">Reid Barton (Apr 14 2020 at 15:23)</a>:</h4>
+<p>they have their own syntax, and they are handled by translation into an indexed inductive type so they are less pleasant to handle</p>
+
+<a name="193914008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutually%20recursive%20inductive%20types/near/193914008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74230Mutuallyrecursiveinductivetypes.html#193914008">Kevin Buzzard (Apr 14 2020 at 15:23)</a>:</h4>
+<p>and <a href="https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html#mutual-and-nested-inductive-types" title="https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html#mutual-and-nested-inductive-types">https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html#mutual-and-nested-inductive-types</a></p>
+
+<a name="193914038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutually%20recursive%20inductive%20types/near/193914038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74230Mutuallyrecursiveinductivetypes.html#193914038">Sam Stites (Apr 14 2020 at 15:23)</a>:</h4>
+<p>Perfect! Thank you!</p>
+
+<a name="193914153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutually%20recursive%20inductive%20types/near/193914153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74230Mutuallyrecursiveinductivetypes.html#193914153">Reid Barton (Apr 14 2020 at 15:24)</a>:</h4>
+<p>don't say you weren't warned <span aria-label="smiling devil" class="emoji emoji-1f608" role="img" title="smiling devil">:smiling_devil:</span></p>
+
+<a name="193914301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutually%20recursive%20inductive%20types/near/193914301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74230Mutuallyrecursiveinductivetypes.html#193914301">Jannis Limperg (Apr 14 2020 at 15:25)</a>:</h4>
+<p>Not long ago, I asked <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span>  a question about some mutual inductives and his answer was something along the lines of, "don't ever use them, they don't work". In that spirit: Has anyone actually used mutual inductives successfully?</p>
+
+<a name="193914334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutually%20recursive%20inductive%20types/near/193914334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74230Mutuallyrecursiveinductivetypes.html#193914334">Reid Barton (Apr 14 2020 at 15:25)</a>:</h4>
+<p>(At a high level, the situation is: the Lean <em>kernel</em> does not support mutually inductive types; so either you have to use <code>mutual</code> or manage the translation yourself, each with its own downsides)</p>
+
+<a name="193914478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutually%20recursive%20inductive%20types/near/193914478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74230Mutuallyrecursiveinductivetypes.html#193914478">Reid Barton (Apr 14 2020 at 15:26)</a>:</h4>
+<p>Apparently there is exactly one use in mathlib, in a file I've never looked at</p>
+
+<a name="193914546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutually%20recursive%20inductive%20types/near/193914546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74230Mutuallyrecursiveinductivetypes.html#193914546">Reid Barton (Apr 14 2020 at 15:27)</a>:</h4>
+<p>oh but they are mutually inductive Props, which probably makes life simpler</p>
+
+<a name="193915224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutually%20recursive%20inductive%20types/near/193915224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74230Mutuallyrecursiveinductivetypes.html#193915224">Reid Barton (Apr 14 2020 at 15:32)</a>:</h4>
+<p>Maybe they are usable if you only care about programming and not proving?</p>
+
+<a name="193915304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutually%20recursive%20inductive%20types/near/193915304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74230Mutuallyrecursiveinductivetypes.html#193915304">Reid Barton (Apr 14 2020 at 15:33)</a>:</h4>
+<p>Heh, these search results are also representative I think: <a href="https://github.com/flypitch/flypitch/search?q=mutual&amp;unscoped_q=mutual" title="https://github.com/flypitch/flypitch/search?q=mutual&amp;unscoped_q=mutual">https://github.com/flypitch/flypitch/search?q=mutual&amp;unscoped_q=mutual</a></p>
+
+<a name="193915479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutually%20recursive%20inductive%20types/near/193915479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74230Mutuallyrecursiveinductivetypes.html#193915479">Sam Stites (Apr 14 2020 at 15:33)</a>:</h4>
+<p>Ultimately, I'm hoping to formally verify some DSLs so hopefully these don't fall apart too fast</p>
+
+<a name="193915501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutually%20recursive%20inductive%20types/near/193915501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74230Mutuallyrecursiveinductivetypes.html#193915501">Reid Barton (Apr 14 2020 at 15:33)</a>:</h4>
+<p>One use in a subdirectory <code>old/</code>, and a comment in the real code explaining that they are not convenient</p>
+
+<a name="193976759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutually%20recursive%20inductive%20types/near/193976759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/74230Mutuallyrecursiveinductivetypes.html#193976759">Scott Morrison (Apr 15 2020 at 01:45)</a>:</h4>
+<p>Every attempt I've made to use them has worked at first, and them quickly led to despair (usually the definitional equations not being usable for some reason), and me asking the experts here "how do I write this without mutual inductives"?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

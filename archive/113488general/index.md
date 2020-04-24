@@ -9,15 +9,159 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [class instance unification fails](58388classinstanceunificationfails.html) (11 messages, latest: Apr 24 2020 at 09:41)
+
+* [why does a sync command take so long in the lean server](23207whydoesasynccommandtakesolongintheleanserver.html) (5 messages, latest: Apr 24 2020 at 07:42)
+
+* [lean-client-python](52892leanclientpython.html) (38 messages, latest: Apr 24 2020 at 02:59)
+
+* [unnecessary imports](24191unnecessaryimports.html) (47 messages, latest: Apr 24 2020 at 02:28)
+
+* [Case tags](38604Casetags.html) (19 messages, latest: Apr 24 2020 at 02:10)
+
+* [Invitation to join the Codewars Lean community, Round 2](07293InvitationtojointheCodewarsLeancommunityRound2.html) (117 messages, latest: Apr 23 2020 at 20:03)
+
+* [import order](05528importorder.html) (5 messages, latest: Apr 23 2020 at 17:33)
+
+* [How does one prove unit ≠ bool](41343Howdoesoneproveunitbool.html) (11 messages, latest: Apr 23 2020 at 14:03)
+
+* [hammers](38734hammers.html) (32 messages, latest: Apr 23 2020 at 12:12)
+
+* [PRing to mathlib from forks](46270PRingtomathlibfromforks.html) (7 messages, latest: Apr 23 2020 at 11:24)
+
+* [`precedence` command](67502precedencecommand.html) (3 messages, latest: Apr 23 2020 at 00:05)
+
+* [`variables` introduction rules](95783variablesintroductionrules.html) (4 messages, latest: Apr 22 2020 at 21:16)
+
+* [Show the objects for an equality of morphisms](86440Showtheobjectsforanequalityofmorphisms.html) (11 messages, latest: Apr 22 2020 at 17:22)
+
+* [universe enlargement](68708universeenlargement.html) (7 messages, latest: Apr 22 2020 at 14:17)
+
+* [universe inequalities](23071universeinequalities.html) (15 messages, latest: Apr 22 2020 at 14:16)
+
+* [typeclass for has_coe_to_fun is slow?](60444typeclassforhascoetofunisslow.html) (31 messages, latest: Apr 22 2020 at 11:50)
+
+* [autogenerating `*_hom` and `sub*`](58450autogeneratinghomandsub.html) (37 messages, latest: Apr 21 2020 at 23:52)
+
+* [Proposal: `fix x` for `assume x`](02039Proposalfixxforassumex.html) (121 messages, latest: Apr 21 2020 at 16:20)
+
+* [de Bruijn factor of Lean?](87111deBruijnfactorofLean.html) (6 messages, latest: Apr 21 2020 at 15:21)
+
+* [Custom highlighting](58802Customhighlighting.html) (6 messages, latest: Apr 21 2020 at 12:47)
+
+* [hole? golf!](93105holegolf.html) (22 messages, latest: Apr 21 2020 at 12:29)
+
+* [video tutorials](06175videotutorials.html) (29 messages, latest: Apr 21 2020 at 08:22)
+
+* [Linter rejects automatic instance](42875Linterrejectsautomaticinstance.html) (9 messages, latest: Apr 21 2020 at 08:18)
+
+* [What's the deal with `open`](67188Whatsthedealwithopen.html) (19 messages, latest: Apr 21 2020 at 07:54)
+
+* [tooltips on keywords](37748tooltipsonkeywords.html) (1 message, latest: Apr 21 2020 at 06:56)
+
+* [Try this!](50265Trythis.html) (19 messages, latest: Apr 21 2020 at 02:54)
+
+* [Backtracking](69669Backtracking.html) (36 messages, latest: Apr 21 2020 at 01:23)
+
+* [Lean unfolds projections](50892Leanunfoldsprojections.html) (47 messages, latest: Apr 21 2020 at 00:23)
+
+* [community web editor broken?](95179communitywebeditorbroken.html) (7 messages, latest: Apr 20 2020 at 22:12)
+
+* [get target or hyp type](63804gettargetorhyptype.html) (33 messages, latest: Apr 20 2020 at 14:28)
+
+* [modifying lean core library code](93280modifyingleancorelibrarycode.html) (22 messages, latest: Apr 20 2020 at 12:19)
+
+* [coe_to_fun notation](40398coetofunnotation.html) (2 messages, latest: Apr 20 2020 at 11:41)
+
+* [help with the `delta_instance` derive handler](69250helpwiththedeltainstancederivehandler.html) (33 messages, latest: Apr 20 2020 at 03:20)
+
+* [subst.eq](07094substeq.html) (228 messages, latest: Apr 19 2020 at 07:06)
+
+* [filename tactic](34586filenametactic.html) (27 messages, latest: Apr 19 2020 at 03:06)
+
+* ["save status" in natural number game](74825savestatusinnaturalnumbergame.html) (46 messages, latest: Apr 19 2020 at 00:45)
+
+* [CoCalc injectivity](99896CoCalcinjectivity.html) (5 messages, latest: Apr 18 2020 at 20:41)
+
+* [calculating fibonacci numbers](47010calculatingfibonaccinumbers.html) (81 messages, latest: Apr 18 2020 at 20:37)
+
+* [Link to leanprover-community website from GitHub?](97195LinktoleanprovercommunitywebsitefromGitHub.html) (7 messages, latest: Apr 18 2020 at 19:05)
+
+* [cool assertion violation](42715coolassertionviolation.html) (21 messages, latest: Apr 18 2020 at 13:38)
+
+* [noob tactic question(s)](53187noobtacticquestions.html) (20 messages, latest: Apr 18 2020 at 05:37)
+
+* [trace a failed tidy](86800traceafailedtidy.html) (7 messages, latest: Apr 18 2020 at 00:10)
+
+* [reading the library](35921readingthelibrary.html) (7 messages, latest: Apr 17 2020 at 16:58)
+
+* [CPP '21](88398CPP21.html) (5 messages, latest: Apr 17 2020 at 15:17)
+
+* [duplicate goals](25938duplicategoals.html) (22 messages, latest: Apr 17 2020 at 00:58)
+
+* [How to debug instance looping](97222Howtodebuginstancelooping.html) (5 messages, latest: Apr 16 2020 at 23:58)
+
+* [Lean in the wild](43625Leaninthewild.html) (450 messages, latest: Apr 16 2020 at 23:29)
+
+* [create an element of product](61892createanelementofproduct.html) (39 messages, latest: Apr 16 2020 at 22:10)
+
+* [error with leanproject new](94088errorwithleanprojectnew.html) (10 messages, latest: Apr 16 2020 at 17:27)
+
+* [norm_cast](53959normcast.html) (18 messages, latest: Apr 16 2020 at 15:55)
+
+* [writing tactics: manipulating names](79783writingtacticsmanipulatingnames.html) (5 messages, latest: Apr 16 2020 at 13:24)
+
+* [Updated `ring_exp` paper](31996Updatedringexppaper.html) (11 messages, latest: Apr 16 2020 at 11:29)
+
+* [apply bug?](39332applybug.html) (41 messages, latest: Apr 16 2020 at 10:53)
+
+* [Name](86722Name.html) (1 message, latest: Apr 16 2020 at 07:00)
+
+* [Intuitionistic Type Theory Proofs](51062IntuitionisticTypeTheoryProofs.html) (11 messages, latest: Apr 16 2020 at 05:22)
+
+* [write access to the repository](40898writeaccesstotherepository.html) (13 messages, latest: Apr 16 2020 at 00:54)
+
+* [spike in active users today](02307spikeinactiveuserstoday.html) (3 messages, latest: Apr 15 2020 at 21:45)
+
+* [delate lambda in tatic state](90750delatelambdaintaticstate.html) (63 messages, latest: Apr 15 2020 at 19:34)
+
+* [classical tactic and linear orders](33221classicaltacticandlinearorders.html) (13 messages, latest: Apr 15 2020 at 15:59)
+
+* [destructuring `suffices`](27500destructuringsuffices.html) (68 messages, latest: Apr 15 2020 at 15:11)
+
+* [Why doesn't unfold propagate tags?](51142Whydoesntunfoldpropagatetags.html) (10 messages, latest: Apr 15 2020 at 01:42)
+
+* [Check whether a constructor argument is named or anonymous](71531Checkwhetheraconstructorargumentisnamedoranonymous.html) (3 messages, latest: Apr 14 2020 at 13:11)
+
+* [d_array.mmap](03996darraymmap.html) (46 messages, latest: Apr 14 2020 at 12:18)
+
+* [Zulip archive](08343Zuliparchive.html) (12 messages, latest: Apr 14 2020 at 12:17)
+
+* [bors](55031bors.html) (35 messages, latest: Apr 14 2020 at 09:39)
+
+* [set notation](35641setnotation.html) (6 messages, latest: Apr 13 2020 at 21:17)
+
+* [PR commit messages](42436PRcommitmessages.html) (4 messages, latest: Apr 13 2020 at 20:29)
+
+* [blank parts of manual](45318blankpartsofmanual.html) (8 messages, latest: Apr 13 2020 at 19:54)
+
+* [Bundled Group morphisms](79150BundledGroupmorphisms.html) (18 messages, latest: Apr 13 2020 at 19:52)
+
+* [sin = cos timeout](47764sincostimeout.html) (24 messages, latest: Apr 13 2020 at 19:15)
+
+* [meta-variable war?](52804metavariablewar.html) (11 messages, latest: Apr 13 2020 at 16:24)
+
+* [Invitation to join the Codewars Lean community, Round 1](41756InvitationtojointheCodewarsLeancommunityRound1.html) (141 messages, latest: Apr 13 2020 at 14:25)
+
+* [idea for a small project](31116ideaforasmallproject.html) (2 messages, latest: Apr 13 2020 at 13:28)
+
+* [Haskell is inconsistent???](07903Haskellisinconsistent.html) (5 messages, latest: Apr 13 2020 at 13:24)
+
+* [linter doc_blame with old_structure_cmd](45443linterdocblamewitholdstructurecmd.html) (26 messages, latest: Apr 13 2020 at 11:40)
+
 * [VScode extension](56578VScodeextension.html) (502 messages, latest: Apr 13 2020 at 09:56)
 
 * [Tactic for nonlinear integer arithmetic](04670Tacticfornonlinearintegerarithmetic.html) (9 messages, latest: Apr 13 2020 at 09:55)
-
-* [Why doesn't unfold propagate tags?](51142Whydoesntunfoldpropagatetags.html) (7 messages, latest: Apr 13 2020 at 09:50)
-
-* [idea for a small project](31116ideaforasmallproject.html) (1 message, latest: Apr 13 2020 at 09:44)
-
-* [video tutorials](06175videotutorials.html) (26 messages, latest: Apr 13 2020 at 08:37)
 
 * [obtain with \|](44950obtainwith.html) (15 messages, latest: Apr 13 2020 at 07:49)
 
@@ -27,11 +171,7 @@ permalink: archive/113488general/index.html
 
 * [automatic help for diagnosing `erw`](48329automatichelpfordiagnosingerw.html) (3 messages, latest: Apr 13 2020 at 00:55)
 
-* [Invitation to join the Codewars Lean community, Round 1](41756InvitationtojointheCodewarsLeancommunityRound1.html) (135 messages, latest: Apr 12 2020 at 23:10)
-
 * [streams](55584streams.html) (47 messages, latest: Apr 12 2020 at 20:40)
-
-* [bors](55031bors.html) (14 messages, latest: Apr 12 2020 at 20:27)
 
 * [new VS code freeze button](77836newVScodefreezebutton.html) (31 messages, latest: Apr 12 2020 at 15:37)
 
@@ -50,8 +190,6 @@ permalink: archive/113488general/index.html
 * [norm_num is slow](28269normnumisslow.html) (18 messages, latest: Apr 12 2020 at 09:07)
 
 * [what does parsing mean?](63060whatdoesparsingmean.html) (10 messages, latest: Apr 12 2020 at 08:56)
-
-* [Lean unfolds projections](50892Leanunfoldsprojections.html) (41 messages, latest: Apr 12 2020 at 08:15)
 
 * [dependent type hell resolved by heq_of_eq_mp](24961dependenttypehellresolvedbyheqofeqmp.html) (2 messages, latest: Apr 12 2020 at 07:02)
 
@@ -109,8 +247,6 @@ permalink: archive/113488general/index.html
 
 * [antiquotations in `\[ ... \] tactics?](49031antiquotationsintactics.html) (4 messages, latest: Apr 09 2020 at 06:29)
 
-* ["save status" in natural number game](74825savestatusinnaturalnumbergame.html) (36 messages, latest: Apr 09 2020 at 05:22)
-
 * [github mathlib repo tag q](66312githubmathlibrepotagq.html) (6 messages, latest: Apr 09 2020 at 02:05)
 
 * [decidable & classical](53219decidableclassical.html) (11 messages, latest: Apr 09 2020 at 01:01)
@@ -125,8 +261,6 @@ permalink: archive/113488general/index.html
 
 * [double cases](23243doublecases.html) (4 messages, latest: Apr 08 2020 at 18:34)
 
-* [Lean in the wild](43625Leaninthewild.html) (449 messages, latest: Apr 08 2020 at 16:02)
-
 * [Type is uncountable](36063Typeisuncountable.html) (11 messages, latest: Apr 08 2020 at 15:45)
 
 * [refine_struct cases](61581refinestructcases.html) (10 messages, latest: Apr 08 2020 at 14:52)
@@ -140,8 +274,6 @@ permalink: archive/113488general/index.html
 * [rw single instance in goal](68827rwsingleinstanceingoal.html) (6 messages, latest: Apr 08 2020 at 06:42)
 
 * [slow polynomial](85706slowpolynomial.html) (15 messages, latest: Apr 08 2020 at 04:43)
-
-* [autogenerating `*_hom` and `sub*`](58450autogeneratinghomandsub.html) (35 messages, latest: Apr 08 2020 at 01:49)
 
 * [work_on_goals?](79700workongoals.html) (10 messages, latest: Apr 08 2020 at 01:03)
 
@@ -272,8 +404,6 @@ permalink: archive/113488general/index.html
 * [Resolving goals containing existential quantifiers](18767Resolvinggoalscontainingexistentialquantifiers.html) (5 messages, latest: Mar 29 2020 at 01:02)
 
 * [help with lean IR](15873helpwithleanIR.html) (13 messages, latest: Mar 28 2020 at 17:26)
-
-* [PRing to mathlib from forks](46270PRingtomathlibfromforks.html) (3 messages, latest: Mar 28 2020 at 14:45)
 
 * [building bindings to lean](13600buildingbindingstolean.html) (13 messages, latest: Mar 28 2020 at 12:54)
 
@@ -409,8 +539,6 @@ permalink: archive/113488general/index.html
 
 * [advice on making PRs from experimental branches](46974adviceonmakingPRsfromexperimentalbranches.html) (35 messages, latest: Mar 11 2020 at 09:05)
 
-* [write access to the repository](40898writeaccesstotherepository.html) (7 messages, latest: Mar 11 2020 at 05:18)
-
 * [Lean '' is released!](69265Leanisreleased.html) (13 messages, latest: Mar 10 2020 at 10:19)
 
 * [recursive def with match](48433recursivedefwithmatch.html) (25 messages, latest: Mar 10 2020 at 01:45)
@@ -418,8 +546,6 @@ permalink: archive/113488general/index.html
 * [universe issues in category theory](56638universeissuesincategorytheory.html) (79 messages, latest: Mar 09 2020 at 16:49)
 
 * [mini demo type theory](67344minidemotypetheory.html) (6 messages, latest: Mar 09 2020 at 12:39)
-
-* [Zulip archive](08343Zuliparchive.html) (9 messages, latest: Mar 08 2020 at 20:28)
 
 * [After finishing Natural Number Game](44588AfterfinishingNaturalNumberGame.html) (46 messages, latest: Mar 08 2020 at 17:58)
 
@@ -580,8 +706,6 @@ permalink: archive/113488general/index.html
 * [update-mathlib update](59285updatemathlibupdate.html) (14 messages, latest: Feb 20 2020 at 21:02)
 
 * [Is web editor good-enough for IDE plugin?](16485IswebeditorgoodenoughforIDEplugin.html) (7 messages, latest: Feb 20 2020 at 20:29)
-
-* [Set notation](69785Setnotation.html) (1 message, latest: Feb 20 2020 at 17:00)
 
 * [Add lemma to root namespace without leaving a namespace](42706Addlemmatorootnamespacewithoutleavinganamespace.html) (6 messages, latest: Feb 20 2020 at 08:01)
 
@@ -916,8 +1040,6 @@ permalink: archive/113488general/index.html
 * [Issues on windows for new users](99400Issuesonwindowsfornewusers.html) (4 messages, latest: Dec 05 2019 at 22:35)
 
 * [leanpkg new my_project fails](32472leanpkgnewmyprojectfails.html) (23 messages, latest: Dec 05 2019 at 18:34)
-
-* [norm_cast](53959normcast.html) (13 messages, latest: Dec 05 2019 at 11:25)
 
 * [Which function causes dependency on an axiom?](98598Whichfunctioncausesdependencyonanaxiom.html) (2 messages, latest: Dec 05 2019 at 10:36)
 
@@ -2426,8 +2548,6 @@ permalink: archive/113488general/index.html
 * [why is quot an axiom?](48906whyisquotanaxiom.html) (29 messages, latest: Feb 16 2019 at 07:27)
 
 * [type class inference issues](65508typeclassinferenceissues.html) (3 messages, latest: Feb 15 2019 at 22:08)
-
-* [duplicate goals](25938duplicategoals.html) (17 messages, latest: Feb 15 2019 at 15:04)
 
 * [unification hints](21856unificationhints.html) (23 messages, latest: Feb 15 2019 at 14:48)
 

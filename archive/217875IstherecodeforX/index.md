@@ -9,6 +9,24 @@ permalink: archive/217875IstherecodeforX/index.html
 
 ### Topics:
 
+* [enumerating a fintype](76672enumeratingafintype.html) (6 messages, latest: Apr 23 2020 at 05:21)
+
+* [last n elements of a list](09202lastnelementsofalist.html) (10 messages, latest: Apr 21 2020 at 09:35)
+
+* [continuous functions commute with limits?](89432continuousfunctionscommutewithlimits.html) (15 messages, latest: Apr 19 2020 at 19:25)
+
+* [list.is_palindrome](11729listispalindrome.html) (6 messages, latest: Apr 19 2020 at 00:11)
+
+* [Density of Q in R](95824DensityofQinR.html) (8 messages, latest: Apr 17 2020 at 13:11)
+
+* [nat.eq_div_of_mul_eq](74336nateqdivofmuleq.html) (44 messages, latest: Apr 16 2020 at 14:24)
+
+* [undergraduate calculus](75336undergraduatecalculus.html) (81 messages, latest: Apr 15 2020 at 12:18)
+
+* [algebra R (monoid_algebra R G)](39070algebraRmonoidalgebraRG.html) (21 messages, latest: Apr 15 2020 at 01:40)
+
+* [definite and indefinite integrals on the reals](39801definiteandindefiniteintegralsonthereals.html) (7 messages, latest: Apr 14 2020 at 19:18)
+
 * [Bolzano-Weirstrass](62970BolzanoWeirstrass.html) (89 messages, latest: Apr 12 2020 at 11:33)
 
 * [fintype (s.to_set)](48416fintypestoset.html) (6 messages, latest: Apr 12 2020 at 10:54)

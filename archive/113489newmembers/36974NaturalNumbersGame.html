@@ -448,6 +448,160 @@ the file is called "not used" though.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/193696674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#193696674">Kevin Buzzard (Apr 12 2020 at 06:02)</a>:</h4>
 <p>They're defeq in nng</p>
 
+<a name="195112491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195112491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195112491">Sam Raleigh (Apr 23 2020 at 20:03)</a>:</h4>
+<p>Hello there,</p>
+<p>I was making my way through level 6 of inequality when I stumbled on something that has me a bit confused. I was able to finish the level, but the following code that I used to do so bothers me.</p>
+<div class="codehilite"><pre><span></span>  <span class="n">cases</span> <span class="n">hab</span> <span class="k">with</span> <span class="n">c</span> <span class="n">uhab</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">hba</span> <span class="k">with</span> <span class="n">d</span> <span class="n">uhba</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">uhab</span> <span class="n">at</span> <span class="n">uhba</span><span class="o">,</span>
+  <span class="n">symmetry</span> <span class="n">at</span> <span class="n">uhba</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">add_assoc</span> <span class="n">at</span> <span class="n">uhba</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">eq_zero_of_add_right_eq_self</span> <span class="n">a</span> <span class="o">(</span><span class="n">c</span> <span class="bp">+</span> <span class="n">d</span><span class="o">),</span>
+  <span class="k">have</span> <span class="n">h1</span> <span class="o">:=</span> <span class="n">h</span> <span class="n">uhba</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h2</span> <span class="o">:=</span> <span class="n">add_right_eq_zero</span> <span class="n">h1</span><span class="o">,</span> <span class="c1">--why does this work???</span>
+  <span class="n">rw</span> <span class="n">h2</span> <span class="n">at</span> <span class="n">uhab</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">uhab</span><span class="o">,</span>
+  <span class="n">ring</span><span class="o">,</span>
+</pre></div>
+
+
+<p>I apologize in advance for my uninformative variable names. Why is it that <code>have h := eq_zero_of_add_right_eq_self </code> expects an expression of the form (a b : mynat), but <code>have h2 := add_right_eq_zero</code> expects a proposition? More specifically, why can't I write <code>have h := eq_zero_of_add_right_eq_self uhba</code> without lean whining like I did with <code>have h2 := add_right_eq_zero h1</code>?</p>
+
+<a name="195112662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195112662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195112662">Kevin Buzzard (Apr 23 2020 at 20:05)</a>:</h4>
+<p>What is the statement of the theorem you're proving?</p>
+
+<a name="195112734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195112734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195112734">Sam Raleigh (Apr 23 2020 at 20:05)</a>:</h4>
+<p><code>theorem le_antisymm (a b : mynat) (hab : a ≤ b) (hba : b ≤ a) : a = b :=</code></p>
+
+<a name="195113139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195113139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195113139">Sam Raleigh (Apr 23 2020 at 20:09)</a>:</h4>
+<p>If my understanding of what I learned in proposition world is correct, lean treats implications like <code>eq_zero_of_add_right_eq_self</code> as functions from proofs to proofs, so why can't I write <code>have h := eq_zero_of_add_right_eq_self uhba</code> and obtain <code>h := c + d = 0</code> as a result?</p>
+
+<a name="195113290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195113290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195113290">Kevin Buzzard (Apr 23 2020 at 20:10)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">mynat</span><span class="bp">.</span><span class="n">eq_zero_of_add_right_eq_self</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">),</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">0</span>
+</pre></div>
+
+<a name="195113367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195113367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195113367">Kevin Buzzard (Apr 23 2020 at 20:11)</a>:</h4>
+<p>so</p>
+<div class="codehilite"><pre><span></span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="o">(</span><span class="n">c</span> <span class="bp">+</span> <span class="n">d</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">d</span> <span class="bp">=</span> <span class="mi">0</span>
+</pre></div>
+
+<a name="195113442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195113442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195113442">Kevin Buzzard (Apr 23 2020 at 20:11)</a>:</h4>
+<p>Aah! But</p>
+<div class="codehilite"><pre><span></span><span class="n">mynat</span><span class="bp">.</span><span class="n">add_right_eq_zero</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">},</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">0</span>
+</pre></div>
+
+<a name="195113492"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195113492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195113492">Sam Raleigh (Apr 23 2020 at 20:12)</a>:</h4>
+<p>exactly!</p>
+
+<a name="195113515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195113515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195113515">Kevin Buzzard (Apr 23 2020 at 20:12)</a>:</h4>
+<p>The brackets are different. Does this answer your question? I guess the difference between the () and {} brackets aren't explained in the game.</p>
+
+<a name="195113603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195113603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195113603">Sam Raleigh (Apr 23 2020 at 20:13)</a>:</h4>
+<p>Ah I see! I don't recall the difference ever being explained in game, and I've completed everything except what's left of inequality world and power world</p>
+
+<a name="195113615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195113615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195113615">Kevin Buzzard (Apr 23 2020 at 20:13)</a>:</h4>
+<p>It's because the idiot who designed this stupid game decided to make the numeral inputs explicit in the definition of <code>eq_zero_of_add_right_eq_self</code></p>
+
+<a name="195113723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195113723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195113723">Sam Raleigh (Apr 23 2020 at 20:14)</a>:</h4>
+<p>what is the difference between {} and () then?</p>
+
+<a name="195113780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195113780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195113780">Kevin Buzzard (Apr 23 2020 at 20:15)</a>:</h4>
+<p>With () brackets, Lean expects you to tell it the input. With {} brackets Lean decides it will guess from the context.</p>
+
+<a name="195113949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195113949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195113949">Kevin Buzzard (Apr 23 2020 at 20:16)</a>:</h4>
+<p>It seems to me that in my model solutions, I never use <code>eq_zero_of_add_right_eq_self</code> at all, so I could just change the brackets and it wouldn't break anything.</p>
+
+<a name="195113968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195113968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195113968">Sam Raleigh (Apr 23 2020 at 20:16)</a>:</h4>
+<p>Ah thanks, this clarifies a lot of confusion I've had throughout the game so far. I couldn't figure out why different theorems were so inconsistent in what they expected as input.</p>
+
+<a name="195114026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195114026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195114026">Kevin Buzzard (Apr 23 2020 at 20:17)</a>:</h4>
+<p>I tried to make it so that the inputs were always "the things which the user would guess" because I wanted to avoid having to explain the different kinds of brackets.</p>
+
+<a name="195114230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195114230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195114230">Kevin Buzzard (Apr 23 2020 at 20:19)</a>:</h4>
+<p>I was going to take a look at the natural number game tomorrow, there are some other issues which people pointed out recently. Probably tomorrow evening there will be a new version where this issue works better.</p>
+
+<a name="195114328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195114328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195114328">Kevin Buzzard (Apr 23 2020 at 20:20)</a>:</h4>
+<p>Thanks for the comment :-)</p>
+
+<a name="195114482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195114482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195114482">Sam Raleigh (Apr 23 2020 at 20:22)</a>:</h4>
+<p>Thanks! Also thanks in general for creating this game. I've learned more about lean in the two days I've been playing it than in the two weeks I spent trying to decipher the resources on the github. You've created something really neat</p>
+
+<a name="195114571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195114571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195114571">Kevin Buzzard (Apr 23 2020 at 20:22)</a>:</h4>
+<p>We're working on a sequel: <a href="https://github.com/ImperialCollegeLondon/real-number-game" title="https://github.com/ImperialCollegeLondon/real-number-game">https://github.com/ImperialCollegeLondon/real-number-game</a></p>
+
+<a name="195114594"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195114594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195114594">Sam Raleigh (Apr 23 2020 at 20:22)</a>:</h4>
+<p>: O</p>
+
+<a name="195114599"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195114599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195114599">Kevin Buzzard (Apr 23 2020 at 20:22)</a>:</h4>
+<p>I was going to take a good look at that tomorrow too -- my co-author has been doing everything</p>
+
+<a name="195124015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195124015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195124015">Sam Raleigh (Apr 23 2020 at 21:52)</a>:</h4>
+<p>Level 15 of inequality world says, "By default, the definition of a &lt; b in Lean, once ≤ is defined, is this: <code>a &lt; b := a ≤ b ∧ ¬ (b ≤ a)</code>". Why doesn't lean simply define a &lt; b as <code>a &lt; b := ¬ (b ≤ a)</code>? Is it for the convenience of easily obtaining  a ≤ b from a &lt; b?</p>
+
+<a name="195126900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195126900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195126900">orlando (Apr 23 2020 at 22:23)</a>:</h4>
+<p>I think it is because all relation <code>≤ </code> are not total !  For example,   the relation <code>  ⊆  </code> on subset of a set <code> X </code>.  If we take  <code> X = { 0,1}</code>  and the relation  <code>  ⊆  </code>on the subset of  <code>X</code> we  have   <code>¬  {1} ≤ {0} </code> and you don't want to tell that <code> {0} &lt; {1} </code> ! It's ok for the relation where all element are comparable.</p>
+
+<a name="195133403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195133403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195133403">Aniruddh Agarwal (Apr 23 2020 at 23:53)</a>:</h4>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> <a href="#narrow/stream/113489-new-members/topic/Natural.20Numbers.20Game/near/195114571" title="#narrow/stream/113489-new-members/topic/Natural.20Numbers.20Game/near/195114571">said</a>:</p>
+<blockquote>
+<p>We're working on a sequel: <a href="https://github.com/ImperialCollegeLondon/real-number-game" title="https://github.com/ImperialCollegeLondon/real-number-game">https://github.com/ImperialCollegeLondon/real-number-game</a></p>
+</blockquote>
+<p>Do you know when this will be ready? Using Lean to gamify undergrad math is a fantastic idea</p>
+
+<a name="195135060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195135060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195135060">Sam Raleigh (Apr 24 2020 at 00:19)</a>:</h4>
+<p>Level 7 of inequality world says "Note that you can do things like have h2 := add_right_eq_zero _ _ h1 if h1 : a + c = 0."  What exactly do the underscores do here? The level doesn't give any more details beyond that note, and this is my first time seeing them in the game.</p>
+
+<a name="195135336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195135336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195135336">Alex J. Best (Apr 24 2020 at 00:23)</a>:</h4>
+<p>The underscores mean that Lean should try and infer those arguments, in this case add_right_eq_zero has type</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">add_right_eq_zero</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">0</span>
+</pre></div>
+
+
+<p>but we can see that if we apply add_right_eq_zero with <code>a c h1</code> as arguments where <code>h1</code> has type <code>a+c = 0</code> then the first two arguments (<code>a</code> and <code>c</code>) aren't strictly needed, theres only one possible thing they can be given the type of <code>h1</code>  for everything to make sense, so the underscores tell lean to work out those arguments automatically.</p>
+
+<a name="195135440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195135440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195135440">Alex J. Best (Apr 24 2020 at 00:25)</a>:</h4>
+<p>In this case theres not a huge amount of savings (you only have to type one character anyway), generally it saves us from having to retype long complicated terms sometimes,  which can also improve readability, or from having to remember which way round arguments go. And it can make it easier to change variable names later or copy lines to different contexts.</p>
+
+<a name="195135819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195135819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195135819">Alex J. Best (Apr 24 2020 at 00:33)</a>:</h4>
+<p>But I think this is a bit confusing actually, as in the latest version of the natural number game the arguments for add_right_eq_zero are always implicit (this was changed only recently) so depending on which version is live for you it may be that you never needed to type <code>add_right_eq_zero a c h1</code>.</p>
+
+<a name="195135904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195135904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195135904">Alex J. Best (Apr 24 2020 at 00:34)</a>:</h4>
+<p>Looks like this is PR <a href="https://github.com/ImperialCollegeLondon/natural_number_game/pull/69/" title="https://github.com/ImperialCollegeLondon/natural_number_game/pull/69/">https://github.com/ImperialCollegeLondon/natural_number_game/pull/69/</a></p>
+
+<a name="195139111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Natural%20Numbers%20Game/near/195139111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/36974NaturalNumbersGame.html#195139111">Sam Raleigh (Apr 24 2020 at 01:45)</a>:</h4>
+<p>Thanks!</p>
+
 
 {% endraw %}
 

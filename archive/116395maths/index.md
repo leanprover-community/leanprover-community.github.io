@@ -9,9 +9,31 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [lean absurd proof](65544leanabsurdproof.html) (41 messages, latest: Apr 13 2020 at 09:57)
+* [finite sum](61365finitesum.html) (20 messages, latest: Apr 24 2020 at 07:12)
 
-* [category](33727category.html) (139 messages, latest: Apr 12 2020 at 18:31)
+* [Hedetniemi](85789Hedetniemi.html) (322 messages, latest: Apr 23 2020 at 18:45)
+
+* [absurd](93954absurd.html) (5 messages, latest: Apr 22 2020 at 19:44)
+
+* [how to find where the instance are define ?](08998howtofindwheretheinstancearedefine.html) (9 messages, latest: Apr 22 2020 at 17:16)
+
+* [NBG](36056NBG.html) (11 messages, latest: Apr 20 2020 at 12:15)
+
+* [Algebraic closure Roadmap](47612AlgebraicclosureRoadmap.html) (6 messages, latest: Apr 20 2020 at 11:27)
+
+* [bundling normal subgroups](38055bundlingnormalsubgroups.html) (27 messages, latest: Apr 18 2020 at 15:27)
+
+* [linear equiv constructor](65388linearequivconstructor.html) (25 messages, latest: Apr 18 2020 at 00:03)
+
+* [quickest way to kill "trivial mod N"?](01942quickestwaytokilltrivialmodN.html) (44 messages, latest: Apr 15 2020 at 21:15)
+
+* [Lebesgue number lemma](64898Lebesguenumberlemma.html) (49 messages, latest: Apr 15 2020 at 14:09)
+
+* [notations for uniform spaces](64998notationsforuniformspaces.html) (59 messages, latest: Apr 15 2020 at 11:25)
+
+* [category](33727category.html) (195 messages, latest: Apr 15 2020 at 08:18)
+
+* [lean absurd proof](65544leanabsurdproof.html) (41 messages, latest: Apr 13 2020 at 09:57)
 
 * [finset.sUnion](96852finsetsUnion.html) (11 messages, latest: Apr 12 2020 at 05:32)
 
@@ -19,9 +41,7 @@ permalink: archive/116395maths/index.html
 
 * [Dependent image](96411Dependentimage.html) (3 messages, latest: Apr 12 2020 at 01:58)
 
-* [Hedetniemi](85789Hedetniemi.html) (316 messages, latest: Apr 11 2020 at 20:00)
-
-* [Polynomials](93880Polynomials.html) (31 messages, latest: Apr 11 2020 at 04:16)
+* [Polynomials](93880Polynomials.html) (47 messages, latest: Apr 11 2020 at 04:16)
 
 * [coercion from `rat` to a `char_p` field](59651coercionfromrattoacharpfield.html) (7 messages, latest: Apr 09 2020 at 19:12)
 
@@ -319,8 +339,6 @@ permalink: archive/116395maths/index.html
 
 * [set.not_mem_Inter_iff](22431setnotmemInteriff.html) (9 messages, latest: Jan 13 2020 at 23:06)
 
-* [Algebraic closure Roadmap](47612AlgebraicclosureRoadmap.html) (3 messages, latest: Jan 13 2020 at 00:09)
-
 * [Future projects as Wiki?](55533FutureprojectsasWiki.html) (1 message, latest: Jan 12 2020 at 22:27)
 
 * [formalising def of alg closed fields](80165formalisingdefofalgclosedfields.html) (5 messages, latest: Jan 12 2020 at 20:19)
@@ -408,8 +426,6 @@ permalink: archive/116395maths/index.html
 * [Span of finite set is sequentially closed](63081Spanoffinitesetissequentiallyclosed.html) (97 messages, latest: Dec 04 2019 at 08:59)
 
 * [Structure Theorem](31046StructureTheorem.html) (15 messages, latest: Dec 01 2019 at 20:59)
-
-* [polynomials](62584polynomials.html) (16 messages, latest: Dec 01 2019 at 20:20)
 
 * [summing from 0 to n-1](85268summingfrom0ton1.html) (32 messages, latest: Nov 30 2019 at 12:26)
 
@@ -620,8 +636,6 @@ permalink: archive/116395maths/index.html
 * [IMO2019](14898IMO2019.html) (69 messages, latest: Aug 06 2019 at 19:32)
 
 * [instance \[semiring α\] : semiring (with_zero α)](17166instancesemiringsemiringwithzero.html) (33 messages, latest: Aug 06 2019 at 17:27)
-
-* [bundling normal subgroups](38055bundlingnormalsubgroups.html) (20 messages, latest: Aug 06 2019 at 15:04)
 
 * [number fields in lean?](68407numberfieldsinlean.html) (24 messages, latest: Aug 02 2019 at 09:57)
 
