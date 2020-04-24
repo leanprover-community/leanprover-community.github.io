@@ -1,7 +1,7 @@
 ---
 layout: archive
 title: Lean Prover Zulip Chat Archive
-permalink: archive/198800BigProof2019/index.html
+permalink: 198800BigProof2019/index.html
 ---
 
 The archive URL format has changed. Please find this page at:

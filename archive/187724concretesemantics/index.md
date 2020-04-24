@@ -1,7 +1,7 @@
 ---
 layout: archive
 title: Lean Prover Zulip Chat Archive
-permalink: archive/187724concretesemantics/index.html
+permalink: 187724concretesemantics/index.html
 ---
 
 The archive URL format has changed. Please find this page at:

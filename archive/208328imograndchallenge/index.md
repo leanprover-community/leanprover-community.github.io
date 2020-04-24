@@ -1,7 +1,7 @@
 ---
 layout: archive
 title: Lean Prover Zulip Chat Archive
-permalink: archive/208328IMOgrandchallenge/index.html
+permalink: 208328IMOgrandchallenge/index.html
 ---
 
 The archive URL format has changed. Please find this page at:

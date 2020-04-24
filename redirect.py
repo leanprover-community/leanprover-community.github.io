@@ -81,7 +81,7 @@ def write_stream_index(streams):
 
 # writes the Jekyll header info for the index page for a given stream.
 def write_topic_index_header(outfile, stream_name, stream):
-    permalink = 'permalink: {1}/{0}/index.html'.format(
+    permalink = 'permalink: {0}/index.html'.format(
         sanitize_stream(stream_name, stream['id']), html_root
     )
     strm = '## Stream: [{0}]({1}/index.html)'.format(
@@ -116,7 +116,7 @@ def write_topic_index(stream_name, stream):
 
 # formats the header for a topic page.
 def write_topic_header(outfile, stream_name, stream_id, topic_name):
-    permalink = 'permalink: {0}/{1}/{2}.html'.format(
+    permalink = 'permalink: {1}/{2}.html'.format(
         html_root,
         sanitize_stream(stream_name, stream_id),
         sanitize_topic(topic_name)

@@ -1,7 +1,7 @@
 ---
 layout: archive
 title: Lean Prover Zulip Chat Archive
-permalink: archive/218272FoMMLeanTogether2020/index.html
+permalink: 218272FoMMLeanTogether2020/index.html
 ---
 
 The archive URL format has changed. Please find this page at:
