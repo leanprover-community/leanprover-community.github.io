@@ -4,47 +4,6 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/71531Checkwhetheraconstructorargumentisnamedoranonymous.html
 ---
 
-<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
-<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/71531Checkwhetheraconstructorargumentisnamedoranonymous.html">Check whether a constructor argument is named or anonymous</a></h3>
+The archive URL format has changed. Please find this page at:<br><br>
 
-<hr>
-
-<base href="https://leanprover.zulipchat.com">
-
-{% raw %}
-<a name="193842700"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Check%20whether%20a%20constructor%20argument%20is%20named%20or%20anonymous/near/193842700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71531Checkwhetheraconstructorargumentisnamedoranonymous.html#193842700">Jannis Limperg (Apr 14 2020 at 01:37)</a>:</h4>
-<p>For a tactic I'm writing, I need to know whether each argument of a given constructor is named or not. However, it seems that leaving an argument unnamed and naming it <code>a</code> produce the same result:</p>
-<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">I</span> <span class="o">:</span> <span class="kt">Type</span>
-<span class="bp">|</span> <span class="n">intro</span> <span class="o">:</span> <span class="n">unit</span> <span class="bp">→</span> <span class="n">I</span>
-
-<span class="kn">inductive</span> <span class="n">J</span> <span class="o">:</span> <span class="kt">Type</span>
-<span class="bp">|</span> <span class="n">intro</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">unit</span><span class="o">)</span> <span class="o">:</span> <span class="n">J</span>
-
-<span class="kn">namespace</span> <span class="n">tactic</span>
-
-<span class="n">meta</span> <span class="n">def</span> <span class="kn">check</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span> <span class="n">do</span>
-<span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">pi</span> <span class="n">n</span>  <span class="n">b</span>  <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="bp">`</span><span class="o">(</span><span class="n">I</span><span class="bp">.</span><span class="n">intro</span><span class="o">),</span>
-<span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">pi</span> <span class="n">n&#39;</span> <span class="n">b&#39;</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="bp">`</span><span class="o">(</span><span class="n">J</span><span class="bp">.</span><span class="n">intro</span><span class="o">),</span>
-<span class="n">trace</span> <span class="o">(</span><span class="n">n</span> <span class="bp">=</span> <span class="n">n&#39;</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">b&#39;</span> <span class="o">:</span> <span class="n">bool</span><span class="o">)</span>
-
-<span class="kn">end</span> <span class="n">tactic</span>
-
-<span class="n">run_cmd</span> <span class="n">tactic</span><span class="bp">.</span><span class="kn">check</span>
-</pre></div>
-
-
-<p>It seems like the elaborator makes up a name for the unnamed argument of <code>I.intro</code>. Any suggestions for how I could deal with this?</p>
-
-<a name="193849078"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Check%20whether%20a%20constructor%20argument%20is%20named%20or%20anonymous/near/193849078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71531Checkwhetheraconstructorargumentisnamedoranonymous.html#193849078">Simon Hudon (Apr 14 2020 at 04:18)</a>:</h4>
-<p>In kernel terms, named / unnamed is not a meaningful distinction. You can however distinguish between dependent and non-dependent. In <code>(expr.pi n _ d b) ← infer_type </code>(I.intro),<code>, you can check </code>b.has_var<code>to see if the variable named by </code>n<code> is referenced in </code>b`. If it is, you have a dependent product, otherwise, it's a simple function arrow / implication.</p>
-
-<a name="193893999"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Check%20whether%20a%20constructor%20argument%20is%20named%20or%20anonymous/near/193893999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71531Checkwhetheraconstructorargumentisnamedoranonymous.html#193893999">Jannis Limperg (Apr 14 2020 at 13:11)</a>:</h4>
-<p>I feared that would be the answer. Dependent/non-dependent is unfortunately not fine enough for my application. Might have to hack around this. Thanks for the explanation though!</p>
-
-
-{% endraw %}
-
-{% include archive_update.html %}
+<a href="https://leanprover-community.github.io/archive/stream/113488-general/topic/Check.20whether.20a.20constructor.20argument.20is.20named.20or.20anonymous.html">https://leanprover-community.github.io/archive/stream/113488-general/topic/Check.20whether.20a.20constructor.20argument.20is.20named.20or.20anonymous.html</a>

@@ -4,52 +4,6 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/79935changingindices.html
 ---
 
-<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
-<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/79935changingindices.html">changing indices</a></h3>
+The archive URL format has changed. Please find this page at:<br><br>
 
-<hr>
-
-<base href="https://leanprover.zulipchat.com">
-
-{% raw %}
-<a name="194066809"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/changing%20indices/near/194066809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79935changingindices.html#194066809">Alex Kontorovich (Apr 15 2020 at 17:44)</a>:</h4>
-<p>Hi, I'm trying to change indices in summation:</p>
-<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">diff_sums</span> <span class="o">(</span><span class="n">F</span><span class="o">:</span><span class="bp">ℕ→</span><span class="err">\</span><span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">j</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">j</span><span class="bp">≥</span> <span class="n">i</span><span class="o">)</span> <span class="bp">→</span>  <span class="o">(</span>
-  <span class="o">((</span><span class="n">range</span> <span class="n">j</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="n">F</span><span class="o">)</span> <span class="bp">-</span> <span class="o">((</span><span class="n">range</span> <span class="n">i</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="n">F</span><span class="o">))</span> <span class="bp">=</span>
-  <span class="o">(</span><span class="n">range</span> <span class="o">(</span><span class="n">j</span><span class="bp">-</span><span class="n">i</span><span class="o">))</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">k</span> <span class="o">,</span> <span class="n">F</span><span class="o">(</span><span class="n">k</span><span class="bp">+</span><span class="n">i</span><span class="o">))</span>
-  <span class="o">:=</span> <span class="n">sorry</span>
-</pre></div>
-
-
-<p>I see that this kind of thing has been done already, e.g., "sum_range_def" in:<br>
-<a href="https://github.com/leanprover/lean2/blob/master/library/data/nat/bigops.lean" title="https://github.com/leanprover/lean2/blob/master/library/data/nat/bigops.lean">https://github.com/leanprover/lean2/blob/master/library/data/nat/bigops.lean</a></p>
-<p>But I'm not able to call sum_range_def (though I am able to call "sum_range_succ" which I think is defined in the same file?)</p>
-<p>Help please? Thanks!</p>
-
-<a name="194067768"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/changing%20indices/near/194067768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79935changingindices.html#194067768">Alex J. Best (Apr 15 2020 at 17:51)</a>:</h4>
-<p>That repo is from <code>lean2</code> (the old version of lean) so possibly that particular lemma is not in lean 3 (with the same name).<br>
-I think the lemma <code>sum_Ico_eq_sub</code> in algebra/big_operators.lean does half of what you want.</p>
-
-<a name="194203933"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/changing%20indices/near/194203933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79935changingindices.html#194203933">Alex J. Best (Apr 15 2020 at 17:57)</a>:</h4>
-<p>So with some minor modifications to your statement this works</p>
-<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">diff_sums</span> <span class="o">(</span><span class="n">F</span><span class="o">:</span><span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">j</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">i</span> <span class="bp">≤</span> <span class="n">j</span><span class="o">)</span> <span class="bp">→</span>  <span class="o">(</span>
-  <span class="o">((</span><span class="n">range</span> <span class="n">j</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="n">F</span><span class="o">)</span> <span class="bp">-</span> <span class="o">((</span><span class="n">range</span> <span class="n">i</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="n">F</span><span class="o">))</span> <span class="bp">=</span>
-  <span class="o">(</span><span class="n">range</span> <span class="o">(</span><span class="n">j</span><span class="bp">-</span><span class="n">i</span><span class="o">))</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">k</span> <span class="o">,</span> <span class="n">F</span><span class="o">(</span><span class="n">i</span><span class="bp">+</span><span class="n">k</span><span class="o">))</span>
-  <span class="o">:=</span> <span class="k">begin</span>
-  <span class="n">intros</span><span class="o">,</span>
-  <span class="n">rw</span> <span class="err">←</span> <span class="n">sum_Ico_eq_sub</span><span class="o">,</span>
-  <span class="n">exact</span> <span class="o">(</span><span class="n">sum_Ico_eq_sum_range</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">),</span>
-  <span class="n">assumption</span><span class="o">,</span>
-  <span class="kn">end</span>
-</pre></div>
-
-
-<p>I changed <code>j \ge i</code>to be <code>i \le j</code> as all lemmas in mathlib are stated with a less than rather than a greater than where possible (so it is best to basically never use greater than, and swap the sides in all statements). And I changed <code>k + i</code> to <code>i + k</code> to match the library version (not necessary but makes the proof one line shorter)</p>
-
-
-{% endraw %}
-
-{% include archive_update.html %}
+<a href="https://leanprover-community.github.io/archive/stream/113489-new-members/topic/changing.20indices.html">https://leanprover-community.github.io/archive/stream/113489-new-members/topic/changing.20indices.html</a>
